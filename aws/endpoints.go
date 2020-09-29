@@ -1,34 +1,8 @@
 package aws
 
-// EndpointResolver resolves an endpoint for a service endpoint id and region.
-type EndpointResolver interface {
-	ResolveEndpoint(service, region string) (Endpoint, error)
-}
-
-// EndpointResolverFunc is a helper utility that wraps a function so it satisfies the
-// Resolver interface. This is useful when you want to add additional endpoint
-// resolving logic, or stub out specific endpoints with custom values.
-type EndpointResolverFunc func(service, region string) (Endpoint, error)
-
-// ResolveEndpoint calls EndpointResolverFunc returning the endpoint, or error.
-func (fn EndpointResolverFunc) ResolveEndpoint(service, region string) (Endpoint, error) {
-	return fn(service, region)
-}
-
-// ResolveWithEndpoint allows a static Resolved Endpoint to be used as an endpoint resolver
-type ResolveWithEndpoint Endpoint
-
-// ResolveWithEndpointURL allows a static URL to be used as a endpoint resolver.
-func ResolveWithEndpointURL(url string) ResolveWithEndpoint {
-	return ResolveWithEndpoint(Endpoint{URL: url})
-}
-
-// ResolveEndpoint returns the static endpoint.
-func (v ResolveWithEndpoint) ResolveEndpoint(service, region string) (Endpoint, error) {
-	e := Endpoint(v)
-	e.SigningRegion = region
-	return e, nil
-}
+import (
+	"fmt"
+)
 
 // Endpoint represents the endpoint a service client should make requests to.
 type Endpoint struct {
@@ -45,11 +19,40 @@ type Endpoint struct {
 	// The region that should be used for signing the request to the endpoint.
 	SigningRegion string
 
-	// States that the signing name for this endpoint was derived from metadata
-	// passed in, but was not explicitly modeled.
-	SigningNameDerived bool
-
-	// The signing method that should be used for signign the requests to the
+	// The signing method that should be used for signing the requests to the
 	// endpoint.
 	SigningMethod string
+}
+
+// EndpointNotFoundError is a sentinel error to indicate that the EndpointResolver implementation was unable
+// to resolve an endpoint for the given service and region. Resolvers should use this to indicate that
+// a client should fallback and attempt to use it's default resolver to resolve the endpoint.
+type EndpointNotFoundError struct {
+	Err error
+}
+
+// Error is the error message.
+func (e *EndpointNotFoundError) Error() string {
+	return fmt.Sprintf("endpoint not found, %v", e.Err)
+}
+
+// Unwrap returns the underlying error.
+func (e *EndpointNotFoundError) Unwrap() error {
+	return e.Err
+}
+
+// EndpointResolver is an endpoint resolver that can be used to provide or override an endpoint for the given
+// service and region. Clients will attempt to use the EndpointResolver first to resolve an endpoint if available.
+// If the EndpointResolver returns an EndpointNotFoundError error, clients will fallback to attempting to resolve the endpoint
+// using their default endpoint resolver.
+type EndpointResolver interface {
+	ResolveEndpoint(service, region string) (Endpoint, error)
+}
+
+// EndpointResolverFunc wraps a function to satisfy the EndpointResolver interface.
+type EndpointResolverFunc func(service, region string) (Endpoint, error)
+
+// ResolveEndpoint calls the wrapped function and returns the results
+func (e EndpointResolverFunc) ResolveEndpoint(service, region string) (Endpoint, error) {
+	return e(service, region)
 }

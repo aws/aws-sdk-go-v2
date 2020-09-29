@@ -1,0 +1,3863 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.mturk#AcceptQualificationRequest": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#AcceptQualificationRequestRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#AcceptQualificationRequestResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>AcceptQualificationRequest</code> operation approves a Worker's request for a Qualification.\n        </p>\n        <p>\n            Only the owner of the Qualification type can grant a Qualification request for that\ttype.\n        </p>\n        <p>\n            A successful request for the <code>AcceptQualificationRequest</code> operation\n            returns with no errors and an empty body.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#AcceptQualificationRequestRequest": {
+      "type": "structure",
+      "members": {
+        "IntegerValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The value of the Qualification. You can omit this value if you are using the\n            presence or absence of the Qualification as the basis for a HIT requirement.\n        </p>"
+          }
+        },
+        "QualificationRequestId": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification request, as returned by the <code>GetQualificationRequests</code> operation.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#AcceptQualificationRequestResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#ApproveAssignment": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ApproveAssignmentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ApproveAssignmentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>ApproveAssignment</code> operation approves the results of a completed assignment.\n        </p>\n        <p>\n            Approving an assignment initiates two payments from the Requester's Amazon.com account\n        </p>\n        <ul>\n            <li>\n                <p>\n                    The Worker who submitted the results is paid the reward specified in the HIT.\n                </p>\n            </li>\n            <li>\n                <p>\n                    Amazon Mechanical Turk fees are debited.\n                </p>\n            </li>\n         </ul>\n        <p>\n            If the Requester's account does not have adequate funds for these payments,\n            the call to ApproveAssignment returns an exception, and the approval is not processed.\n            You can include an optional feedback message with the approval,\n            which the Worker can see in the Status section of the web site.\n        </p>\n        <p>\n            You can also call this operation for assignments that were previous rejected\n            and approve them by explicitly overriding the previous rejection.\n            This only works on rejected assignments that were submitted within the previous 30 days\n            and only if the assignment's related HIT has not been deleted.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#ApproveAssignmentRequest": {
+      "type": "structure",
+      "members": {
+        "OverrideRejection": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A flag indicating that an assignment should be approved even if it was previously rejected. Defaults to <code>False</code>.\n        </p>"
+          }
+        },
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the assignment. The assignment must correspond to a HIT created by the Requester.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RequesterFeedback": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A message for the Worker, which the Worker can see in the Status section of the web site.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ApproveAssignmentResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#Assignment": {
+      "type": "structure",
+      "members": {
+        "Deadline": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time of the deadline for the assignment. This\n            value is derived from the deadline specification for the HIT and the\n            date and time the Worker accepted the HIT.</p>"
+          }
+        },
+        "AutoApprovalTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> If results have been submitted, AutoApprovalTime is the date\n            and time the results of the assignment results are considered\n            Approved automatically if they have not already been explicitly\n            approved or rejected by the Requester. This value is derived from the\n            auto-approval delay specified by the Requester in the HIT. This value\n            is omitted from the assignment if the Worker has not yet submitted\n            results.</p>"
+          }
+        },
+        "AssignmentStatus": {
+          "target": "com.amazonaws.mturk#AssignmentStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> The status of the assignment.</p>"
+          }
+        },
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> A unique identifier for the assignment.</p>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the HIT.</p>"
+          }
+        },
+        "AcceptTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time the Worker accepted the assignment.</p>"
+          }
+        },
+        "ApprovalTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> If the Worker has submitted results and the Requester has\n            approved the results, ApprovalTime is the date and time the Requester\n            approved the results. This value is omitted from the assignment if\n            the Requester has not yet approved the results.</p>"
+          }
+        },
+        "RequesterFeedback": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The feedback string included with the call to the\n            ApproveAssignment operation or the RejectAssignment operation, if the\n            Requester approved or rejected the assignment and specified feedback.</p>"
+          }
+        },
+        "SubmitTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> If the Worker has submitted results, SubmitTime is the date\n            and time the assignment was submitted. This value is omitted from the\n            assignment if the Worker has not yet submitted results.</p>"
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Worker who accepted the HIT.</p>"
+          }
+        },
+        "Answer": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The Worker's answers submitted for the HIT contained in a\n            QuestionFormAnswers document, if the Worker provides an answer. If\n            the Worker does not provide any answers, Answer may contain a\n            QuestionFormAnswers document, or Answer may be empty.</p>"
+          }
+        },
+        "RejectionTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> If the Worker has submitted results and the Requester has\n            rejected the results, RejectionTime is the date and time the\n            Requester rejected the results.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The Assignment data structure represents a single assignment\n            of a HIT to a Worker. The assignment tracks the Worker's efforts to\n            complete the HIT, and contains the results for later retrieval.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#AssignmentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#Assignment"
+      }
+    },
+    "com.amazonaws.mturk#AssignmentStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Submitted",
+            "name": "Submitted"
+          },
+          {
+            "value": "Approved",
+            "name": "Approved"
+          },
+          {
+            "value": "Rejected",
+            "name": "Rejected"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#AssignmentStatusList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#AssignmentStatus"
+      }
+    },
+    "com.amazonaws.mturk#AssociateQualificationWithWorker": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#AssociateQualificationWithWorkerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#AssociateQualificationWithWorkerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>AssociateQualificationWithWorker</code> operation gives a Worker a\n            Qualification. <code>AssociateQualificationWithWorker</code> does not require that the Worker\n            submit a Qualification request. It gives the Qualification directly to the Worker.\n        </p>\n\n        <p>\n            You can only assign a Qualification of a Qualification type that you created (using\n            the <code>CreateQualificationType</code> operation).\n        </p>\n\n        <note>\n            <p>\n                Note: <code>AssociateQualificationWithWorker</code> does not affect any pending Qualification\n                requests for the Qualification by the Worker. If you assign a Qualification to a\n                Worker, then later grant a Qualification request made by the Worker, the granting of\n                the request may modify the Qualification score. To resolve a pending Qualification\n                request without affecting the Qualification the Worker already has, reject the\n                request with the <code>RejectQualificationRequest</code> operation.\n            </p>\n        </note>"
+      }
+    },
+    "com.amazonaws.mturk#AssociateQualificationWithWorkerRequest": {
+      "type": "structure",
+      "members": {
+        "IntegerValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of the Qualification to assign.</p>"
+          }
+        },
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification type to use for the assigned Qualification.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the Worker to whom the Qualification is being assigned.\n            Worker IDs are included with submitted HIT assignments and Qualification requests.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "SendNotification": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Specifies whether to send a notification email message to the Worker\n            saying that the qualification was assigned to the Worker.\n            Note: this is true by default.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#AssociateQualificationWithWorkerResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#BonusPayment": {
+      "type": "structure",
+      "members": {
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Reason text given when the bonus was granted, if any.</p>"
+          }
+        },
+        "GrantTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time of when the bonus was granted.</p>"
+          }
+        },
+        "BonusAmount": {
+          "target": "com.amazonaws.mturk#CurrencyAmount"
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker to whom the bonus was paid.</p>"
+          }
+        },
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the assignment associated with this bonus payment.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An object representing a Bonus payment paid to a Worker.</p>"
+      }
+    },
+    "com.amazonaws.mturk#BonusPaymentList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#BonusPayment"
+      }
+    },
+    "com.amazonaws.mturk#Boolean": {
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.mturk#Comparator": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "LessThan",
+            "name": "LessThan"
+          },
+          {
+            "value": "LessThanOrEqualTo",
+            "name": "LessThanOrEqualTo"
+          },
+          {
+            "value": "GreaterThan",
+            "name": "GreaterThan"
+          },
+          {
+            "value": "GreaterThanOrEqualTo",
+            "name": "GreaterThanOrEqualTo"
+          },
+          {
+            "value": "EqualTo",
+            "name": "EqualTo"
+          },
+          {
+            "value": "NotEqualTo",
+            "name": "NotEqualTo"
+          },
+          {
+            "value": "Exists",
+            "name": "Exists"
+          },
+          {
+            "value": "DoesNotExist",
+            "name": "DoesNotExist"
+          },
+          {
+            "value": "In",
+            "name": "In"
+          },
+          {
+            "value": "NotIn",
+            "name": "NotIn"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#CountryParameters": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 2,
+          "max": 2
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateAdditionalAssignmentsForHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateAdditionalAssignmentsForHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateAdditionalAssignmentsForHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>CreateAdditionalAssignmentsForHIT</code>\n            operation increases the maximum number of assignments of an existing HIT.\n        </p>\n        <p>\n            To extend the maximum number of assignments, specify the number of additional assignments.</p>\n        <note>\n            <ul>\n               <li>\n                    <p>HITs created with fewer than 10 assignments cannot be extended to have 10 or more assignments. Attempting to add assignments in a way that brings the total number of assignments for a HIT from fewer than 10 assignments to 10 or more\n                        assignments will result in an\n                        <code>AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease</code>\n                        exception.</p>\n                </li>\n               <li>\n                    <p>HITs that were created before July 22, 2015 cannot be extended. Attempting to extend HITs that were created before July 22, 2015 will result in an\n                        <code>AWS.MechanicalTurk.HITTooOldForExtension</code>\n                        exception.\n                    </p>\n                </li>\n            </ul>\n        </note>"
+      }
+    },
+    "com.amazonaws.mturk#CreateAdditionalAssignmentsForHITRequest": {
+      "type": "structure",
+      "members": {
+        "NumberOfAdditionalAssignments": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of additional assignments to request for this HIT.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT to extend.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UniqueRequestToken": {
+          "target": "com.amazonaws.mturk#IdempotencyToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A unique identifier for this request, which allows you to retry the call on error\n            without extending the HIT multiple times.\n            This is useful in cases such as network timeouts where it is unclear whether or not\n            the call succeeded on the server. If the extend HIT already exists in the system\n            from a previous call using the same <code>UniqueRequestToken</code>,\n            subsequent calls will return an error with a message containing the request ID.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateAdditionalAssignmentsForHITResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#CreateHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>CreateHIT</code> operation creates a new Human Intelligence Task (HIT).\n            The new HIT is made available for Workers to find and accept on the Amazon Mechanical\n            Turk website. </p>\n        <p>\n            This operation allows you to specify a new HIT by passing in values for the properties of the HIT, such as its title, reward amount and number of assignments. When you pass these values to <code>CreateHIT</code>, a new HIT is created for you, with a new <code>HITTypeID</code>. The HITTypeID can be used to create additional HITs in the future without needing to specify common parameters such as the title, description and reward amount each time.</p>\n        <p> An alternative way to create HITs is to first generate a HITTypeID using the <code>CreateHITType</code> operation and then call the <code>CreateHITWithHITType</code> operation. This is the recommended best practice for Requesters who are creating large numbers of HITs.\n        </p>\n\n        <p>CreateHIT also supports several ways to provide question data: by providing a value\n            for the <code>Question</code> parameter that fully specifies the contents of the HIT, or by providing\n            a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>.\n        </p>\n\n        <note>\n            <p> If a HIT is created with 10 or more maximum assignments, there is an additional fee. For more information, see\n            <a href=\"https://requester.mturk.com/pricing\">Amazon Mechanical Turk Pricing</a>.</p>\n        </note>"
+      }
+    },
+    "com.amazonaws.mturk#CreateHITRequest": {
+      "type": "structure",
+      "members": {
+        "HITLayoutId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The HITLayoutId allows you to use a pre-existing HIT design with placeholder values\n            and create an additional HIT by providing those values as HITLayoutParameters.\n        </p>\n        <p>\n            Constraints: Either a Question parameter or a HITLayoutId parameter must be provided.\n        </p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A general description of the HIT. A description includes detailed information about the kind of task\n            the HIT contains. On the Amazon Mechanical Turk web site, the HIT description appears in the expanded\n            view of search results, and in the HIT and assignment screens. A good description gives the user enough\n            information to evaluate the HIT before accepting it.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Reward": {
+          "target": "com.amazonaws.mturk#CurrencyAmount",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The amount of money the Requester will pay a Worker for successfully completing the HIT.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QualificationRequirements": {
+          "target": "com.amazonaws.mturk#QualificationRequirementList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Conditions that a Worker's Qualifications must meet in order\n            to accept the HIT. A HIT can have between zero and ten\n            Qualification requirements. All requirements must be met in\n            order for a Worker to accept the HIT. Additionally, other\n            actions can be restricted using the <code>ActionsGuarded</code>\n            field on each <code>QualificationRequirement</code> structure.\n        </p>"
+          }
+        },
+        "LifetimeInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            An amount of time, in seconds, after which the HIT is no longer available for users to accept.\n            After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches,\n            even if not all of the assignments for the HIT have been accepted.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AssignmentDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The amount of time, in seconds, that a Worker has to complete the HIT after accepting it.\n            If a Worker does not complete the assignment within the specified duration,\n            the assignment is considered abandoned. If the HIT is still active\n            (that is, its lifetime has not elapsed), the assignment becomes available\n            for other users to find and accept.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Title": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains.\n            On the Amazon Mechanical Turk web site, the HIT title appears in search results,\n            and everywhere the HIT is mentioned.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UniqueRequestToken": {
+          "target": "com.amazonaws.mturk#IdempotencyToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A unique identifier for this request which allows you to retry the call\n            on error without creating duplicate HITs.\n            This is useful in cases such as network timeouts where it is unclear whether or not\n            the call succeeded on the server.\n            If the HIT already exists in the system from a previous call using the same UniqueRequestToken,\n            subsequent calls will return a AWS.MechanicalTurk.HitAlreadyExists error\n            with a message containing the HITId.\n        </p>\n        <note>\n            <p>\n                Note: It is your responsibility to ensure uniqueness of the token.\n                The unique token expires after 24 hours. Subsequent calls using the same\n                UniqueRequestToken made after the 24 hour limit could create duplicate HITs.\n            </p>\n        </note>"
+          }
+        },
+        "AutoApprovalDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The number of seconds after an assignment for the HIT has been submitted,\n            after which the assignment is considered Approved automatically\n            unless the Requester explicitly rejects it.\n        </p>"
+          }
+        },
+        "Question": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The data the person completing the HIT uses to produce the results.\n        </p>\n        <p>\n            Constraints: Must be a QuestionForm data structure, an ExternalQuestion data structure,\n            or an HTMLQuestion data structure. The XML question data must not be larger than\n            64 kilobytes (65,535 bytes) in size, including whitespace.\n        </p>\n        <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>"
+          }
+        },
+        "HITReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The HIT-level Review Policy applies to the HIT.\n            You can specify for Mechanical Turk to take various actions based on the policy.\n        </p>"
+          }
+        },
+        "AssignmentReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The Assignment-level Review Policy applies to the assignments under the HIT.\n            You can specify for Mechanical Turk to take various actions based on the policy.\n        </p>"
+          }
+        },
+        "RequesterAnnotation": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            An arbitrary data field.\n            The RequesterAnnotation parameter lets your application attach arbitrary data\n            to the HIT for tracking purposes.\n            For example, this parameter could be an identifier internal to the Requester's application\n            that corresponds with the HIT.\n        </p>\n        <p>\n            The RequesterAnnotation parameter for a HIT is only visible to the Requester who created the HIT.\n            It is not shown to the Worker, or any other Requester.\n        </p>\n        <p>\n            The RequesterAnnotation parameter may be different for each HIT you submit.\n            It does not affect how your HITs are grouped.\n        </p>"
+          }
+        },
+        "HITLayoutParameters": {
+          "target": "com.amazonaws.mturk#HITLayoutParameterList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            If the HITLayoutId is provided, any placeholder values must be filled in with values\n            using the HITLayoutParameter structure. For more information, see HITLayout.\n        </p>"
+          }
+        },
+        "MaxAssignments": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The number of times the HIT can be accepted and completed before the HIT becomes unavailable.\n        </p>"
+          }
+        },
+        "Keywords": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            One or more words or phrases that describe the HIT, separated by commas.\n            These words are used in searches to find HITs.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateHITResponse": {
+      "type": "structure",
+      "members": {
+        "HIT": {
+          "target": "com.amazonaws.mturk#HIT",
+          "traits": {
+            "smithy.api#documentation": "<p> Contains the newly created HIT data. For a description of\n            the HIT data structure as it appears in responses, see the HIT Data\n            Structure documentation.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateHITType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateHITTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateHITTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>CreateHITType</code> operation creates a new HIT type. This operation\n            allows you to define a standard set of HIT properties to use when creating HITs.\n            If you register a HIT type with values that match an existing HIT type, the HIT type\n            ID of the existing type will be returned.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#CreateHITTypeRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A general description of the HIT. A description includes detailed information about the kind of task\n            the HIT contains. On the Amazon Mechanical Turk web site, the HIT description appears in the expanded\n            view of search results, and in the HIT and assignment screens. A good description gives the user enough\n            information to evaluate the HIT before accepting it.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QualificationRequirements": {
+          "target": "com.amazonaws.mturk#QualificationRequirementList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Conditions that a Worker's Qualifications must meet in order\n            to accept the HIT. A HIT can have between zero and ten\n            Qualification requirements. All requirements must be met in\n            order for a Worker to accept the HIT. Additionally, other\n            actions can be restricted using the <code>ActionsGuarded</code>\n            field on each <code>QualificationRequirement</code> structure.\n        </p>"
+          }
+        },
+        "AssignmentDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The amount of time, in seconds, that a Worker has to complete the HIT after accepting it.\n            If a Worker does not complete the assignment within the specified duration,\n            the assignment is considered abandoned. If the HIT is still active\n            (that is, its lifetime has not elapsed), the assignment becomes available\n            for other users to find and accept.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Keywords": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            One or more words or phrases that describe the HIT, separated by commas.\n            These words are used in searches to find HITs.\n        </p>"
+          }
+        },
+        "Title": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The title of the HIT. A title should be short and descriptive about the kind of task the HIT contains.\n            On the Amazon Mechanical Turk web site, the HIT title appears in search results,\n            and everywhere the HIT is mentioned.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Reward": {
+          "target": "com.amazonaws.mturk#CurrencyAmount",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The amount of money the Requester will pay a Worker for successfully completing the HIT.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AutoApprovalDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The number of seconds after an assignment for the HIT has been submitted,\n            after which the assignment is considered Approved automatically\n            unless the Requester explicitly rejects it.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateHITTypeResponse": {
+      "type": "structure",
+      "members": {
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the newly registered HIT type.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateHITWithHITType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateHITWithHITTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateHITWithHITTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>CreateHITWithHITType</code> operation creates a new Human Intelligence Task (HIT)\n            using an existing HITTypeID generated by the <code>CreateHITType</code> operation.\n        </p>\n        <p>\n            This is an alternative way to create HITs from the <code>CreateHIT</code> operation.\n            This is the recommended best practice for Requesters who are creating large numbers of HITs.\n        </p>\n        <p>CreateHITWithHITType also supports several ways to provide question data:\n            by providing a value for the <code>Question</code> parameter that fully specifies the contents of the HIT,\n            or by providing a <code>HitLayoutId</code> and associated <code>HitLayoutParameters</code>.\n        </p>\n        <note>\n            <p>\n                If a HIT is created with 10 or more maximum assignments, there is an additional fee.\n                For more information, see <a href=\"https://requester.mturk.com/pricing\">Amazon Mechanical Turk Pricing</a>.\n            </p>\n        </note>"
+      }
+    },
+    "com.amazonaws.mturk#CreateHITWithHITTypeRequest": {
+      "type": "structure",
+      "members": {
+        "AssignmentReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The Assignment-level Review Policy applies to the assignments under the HIT.\n            You can specify for Mechanical Turk to take various actions based on the policy.\n        </p>"
+          }
+        },
+        "HITLayoutParameters": {
+          "target": "com.amazonaws.mturk#HITLayoutParameterList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            If the HITLayoutId is provided, any placeholder values must be filled in with values\n            using the HITLayoutParameter structure. For more information, see HITLayout.\n        </p>"
+          }
+        },
+        "MaxAssignments": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The number of times the HIT can be accepted and completed before the HIT becomes unavailable.\n        </p>"
+          }
+        },
+        "UniqueRequestToken": {
+          "target": "com.amazonaws.mturk#IdempotencyToken",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A unique identifier for this request which allows you to retry the call\n            on error without creating duplicate HITs.\n            This is useful in cases such as network timeouts where it is unclear whether or not\n            the call succeeded on the server.\n            If the HIT already exists in the system from a previous call using the same UniqueRequestToken,\n            subsequent calls will return a AWS.MechanicalTurk.HitAlreadyExists error\n            with a message containing the HITId.\n        </p>\n        <note>\n            <p>\n                Note: It is your responsibility to ensure uniqueness of the token.\n                The unique token expires after 24 hours. Subsequent calls using the same\n                UniqueRequestToken made after the 24 hour limit could create duplicate HITs.\n            </p>\n        </note>"
+          }
+        },
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The HIT type ID you want to create this HIT with.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RequesterAnnotation": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            An arbitrary data field.\n            The RequesterAnnotation parameter lets your application attach arbitrary data\n            to the HIT for tracking purposes.\n            For example, this parameter could be an identifier internal to the Requester's application\n            that corresponds with the HIT.\n        </p>\n        <p>\n            The RequesterAnnotation parameter for a HIT is only visible to the Requester who created the HIT.\n            It is not shown to the Worker, or any other Requester.\n        </p>\n        <p>\n            The RequesterAnnotation parameter may be different for each HIT you submit.\n            It does not affect how your HITs are grouped.\n        </p>"
+          }
+        },
+        "Question": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The data the person completing the HIT uses to produce the results.\n        </p>\n        <p>\n            Constraints: Must be a QuestionForm data structure, an ExternalQuestion data structure,\n            or an HTMLQuestion data structure. The XML question data must not be larger than\n            64 kilobytes (65,535 bytes) in size, including whitespace.\n        </p>\n        <p>Either a Question parameter or a HITLayoutId parameter must be provided.</p>"
+          }
+        },
+        "HITLayoutId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The HITLayoutId allows you to use a pre-existing HIT design with placeholder values\n            and create an additional HIT by providing those values as HITLayoutParameters.\n        </p>\n        <p>\n            Constraints: Either a Question parameter or a HITLayoutId parameter must be provided.\n        </p>"
+          }
+        },
+        "HITReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The HIT-level Review Policy applies to the HIT.\n            You can specify for Mechanical Turk to take various actions based on the policy.\n        </p>"
+          }
+        },
+        "LifetimeInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            An amount of time, in seconds, after which the HIT is no longer available for users to accept.\n            After the lifetime of the HIT elapses, the HIT no longer appears in HIT searches,\n            even if not all of the assignments for the HIT have been accepted.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateHITWithHITTypeResponse": {
+      "type": "structure",
+      "members": {
+        "HIT": {
+          "target": "com.amazonaws.mturk#HIT",
+          "traits": {
+            "smithy.api#documentation": "<p> Contains the newly created HIT data. For a description of\n            the HIT data structure as it appears in responses, see the HIT Data\n            Structure documentation.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>CreateQualificationType</code>\n            operation creates a new Qualification type, which is represented by a\n            <code>QualificationType</code>\n            data structure.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#CreateQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A long description for the Qualification type. On the Amazon\n            Mechanical Turk website, the long description is displayed when a\n            Worker examines a Qualification type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AnswerKey": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The answers to the Qualification test specified in the Test\n            parameter, in the form of an AnswerKey data structure.</p>\n        <p>Constraints: Must not be longer than 65535 bytes.</p>\n        <p>Constraints: None. If not specified, you must process\n            Qualification requests manually.</p>"
+          }
+        },
+        "QualificationTypeStatus": {
+          "target": "com.amazonaws.mturk#QualificationTypeStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The initial status of the Qualification type.</p>\n        <p>Constraints: Valid values are: Active | Inactive</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Test": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The questions for the Qualification test a Worker must answer\n            correctly to obtain a Qualification of this type. If this parameter\n            is specified,\n            <code>TestDurationInSeconds</code>\n            must also be specified.\n        </p>\n        <p>Constraints: Must not be longer than 65535 bytes. Must be a\n            QuestionForm data structure. This parameter cannot be specified if\n            AutoGranted is true.</p>\n        <p>Constraints: None. If not specified, the Worker may request\n            the Qualification without answering any questions.</p>"
+          }
+        },
+        "TestDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of seconds the Worker has to complete the\n            Qualification test, starting from the time the Worker requests the\n            Qualification.</p>"
+          }
+        },
+        "AutoGrantedValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The Qualification value to use for automatically granted\n            Qualifications. This parameter is used only if the AutoGranted\n            parameter is true.</p>"
+          }
+        },
+        "RetryDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of seconds that a Worker must wait after\n            requesting a Qualification of the Qualification type before the\n            worker can retry the Qualification request.</p>\n        <p>Constraints: None. If not specified, retries are disabled and\n            Workers can request a Qualification of this type only once, even if\n            the Worker has not been granted the Qualification. It is not possible\n            to disable retries for a Qualification type after it has been created\n            with retries enabled. If you want to disable retries, you must delete\n            existing retry-enabled Qualification type and then create a new\n            Qualification type with retries disabled.</p>"
+          }
+        },
+        "Keywords": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>One or more words or phrases that describe the Qualification\n            type, separated by commas. The keywords of a type make the type\n            easier to find during a search.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The name you give to the Qualification type. The type name\n            is used to represent the Qualification to Workers, and to find the\n            type using a Qualification type search. It must be unique across all\n            of your Qualification types.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AutoGranted": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether requests for the Qualification type are\n            granted immediately, without prompting the Worker with a\n            Qualification test.</p>\n        <p>Constraints: If the Test parameter is specified, this\n            parameter cannot be true.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateQualificationTypeResponse": {
+      "type": "structure",
+      "members": {
+        "QualificationType": {
+          "target": "com.amazonaws.mturk#QualificationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The created Qualification type, returned as a\n            QualificationType data structure.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateWorkerBlock": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#CreateWorkerBlockRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#CreateWorkerBlockResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>CreateWorkerBlock</code> operation allows you to prevent a Worker from working on your HITs. For example, you can block a Worker who is producing poor quality work. You can block up to 100,000 Workers.</p>"
+      }
+    },
+    "com.amazonaws.mturk#CreateWorkerBlockRequest": {
+      "type": "structure",
+      "members": {
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message explaining the reason for blocking the Worker. This parameter enables you to keep track of your Workers. The Worker does not see this message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker to block.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#CreateWorkerBlockResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#CurrencyAmount": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>A string representing a currency amount.</p>",
+        "smithy.api#pattern": "^[0-9]+(\\.)?[0-9]{0,2}$"
+      }
+    },
+    "com.amazonaws.mturk#CustomerId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^A[A-Z0-9]+$"
+      }
+    },
+    "com.amazonaws.mturk#CustomerIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#CustomerId"
+      }
+    },
+    "com.amazonaws.mturk#DeleteHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#DeleteHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#DeleteHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>DeleteHIT</code> operation is used to delete HIT that is no longer needed.\n            Only the Requester who created the HIT can delete it.\n        </p>\n        <p>\n            You can only dispose of HITs that are in the <code>Reviewable</code> state,\n            with all of their submitted assignments already either approved or rejected.\n            If you call the DeleteHIT operation on a HIT that is not in the <code>Reviewable</code> state\n            (for example, that has not expired, or still has active assignments),\n            or on a HIT that is Reviewable but without all of its submitted assignments\n            already approved or rejected, the service will return an error.\n        </p>\n        <note>\n            <ul>\n               <li>\n                    <p>\n                        HITs are automatically disposed of after 120 days.\n                    </p>\n                </li>\n               <li>\n                    <p>\n                        After you dispose of a HIT, you can no longer approve the HIT's rejected assignments.\n                    </p>\n                </li>\n               <li>\n                    <p>\n                        Disposed HITs are not returned in results for the ListHITs operation.\n                    </p>\n                </li>\n               <li>\n                    <p>\n                        Disposing HITs can improve the performance of operations such as ListReviewableHITs and ListHITs.\n                    </p>\n                </li>\n            </ul>\n        </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#DeleteHITRequest": {
+      "type": "structure",
+      "members": {
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT to be deleted.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#DeleteHITResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#DeleteQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#DeleteQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#DeleteQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>DeleteQualificationType</code>\n            deletes a Qualification type and deletes any HIT types that are\n            associated with the Qualification type.\n        </p>\n        <p>This operation does not revoke Qualifications already assigned\n            to Workers because the Qualifications might be needed for active HITs.\n            If there are any pending requests for the Qualification type, Amazon\n            Mechanical Turk rejects those requests. After you delete a\n            Qualification type, you can no longer use it to create HITs or HIT\n            types.</p>\n        <note>\n            <p>DeleteQualificationType must wait for all the HITs that use\n                the deleted Qualification type to be deleted before completing. It\n                may take up to 48 hours before DeleteQualificationType completes and\n                the unique name of the Qualification type is available for reuse with\n                CreateQualificationType.</p>\n        </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#DeleteQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the QualificationType to dispose.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#DeleteQualificationTypeResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#DeleteWorkerBlock": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#DeleteWorkerBlockRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#DeleteWorkerBlockResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>DeleteWorkerBlock</code> operation allows you to reinstate a blocked Worker to work on your HITs. This operation reverses the effects of the CreateWorkerBlock operation. You need the Worker ID to use this operation. If the Worker ID is missing or invalid, this operation fails and returns the message “WorkerId is invalid.” If the specified Worker is not blocked, this operation returns successfully.</p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#DeleteWorkerBlockRequest": {
+      "type": "structure",
+      "members": {
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message that explains the reason for unblocking the Worker. The Worker does not see this message.</p>"
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker to unblock.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#DeleteWorkerBlockResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#DisassociateQualificationFromWorker": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#DisassociateQualificationFromWorkerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#DisassociateQualificationFromWorkerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The \t<code>DisassociateQualificationFromWorker</code>\n            revokes a previously granted Qualification from a user.\n        </p>\n        <p>\n            You can provide a text message explaining why the Qualification was\n            revoked. The user who had the Qualification can see this message.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#DisassociateQualificationFromWorkerRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification type of the Qualification to be revoked.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker who possesses the Qualification to be revoked.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A text message that explains why the Qualification was revoked. The user who had the Qualification sees this message.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#DisassociateQualificationFromWorkerResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#EntityId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[A-Z0-9]+$"
+      }
+    },
+    "com.amazonaws.mturk#EventType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AssignmentAccepted",
+            "name": "AssignmentAccepted"
+          },
+          {
+            "value": "AssignmentAbandoned",
+            "name": "AssignmentAbandoned"
+          },
+          {
+            "value": "AssignmentReturned",
+            "name": "AssignmentReturned"
+          },
+          {
+            "value": "AssignmentSubmitted",
+            "name": "AssignmentSubmitted"
+          },
+          {
+            "value": "AssignmentRejected",
+            "name": "AssignmentRejected"
+          },
+          {
+            "value": "AssignmentApproved",
+            "name": "AssignmentApproved"
+          },
+          {
+            "value": "HITCreated",
+            "name": "HITCreated"
+          },
+          {
+            "value": "HITExpired",
+            "name": "HITExpired"
+          },
+          {
+            "value": "HITReviewable",
+            "name": "HITReviewable"
+          },
+          {
+            "value": "HITExtended",
+            "name": "HITExtended"
+          },
+          {
+            "value": "HITDisposed",
+            "name": "HITDisposed"
+          },
+          {
+            "value": "Ping",
+            "name": "Ping"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#EventTypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#EventType"
+      }
+    },
+    "com.amazonaws.mturk#ExceptionMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.mturk#GetAccountBalance": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetAccountBalanceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetAccountBalanceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>GetAccountBalance</code> operation retrieves the amount of money in your Amazon Mechanical Turk account.</p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetAccountBalanceRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#GetAccountBalanceResponse": {
+      "type": "structure",
+      "members": {
+        "OnHoldBalance": {
+          "target": "com.amazonaws.mturk#CurrencyAmount"
+        },
+        "AvailableBalance": {
+          "target": "com.amazonaws.mturk#CurrencyAmount"
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetAssignment": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetAssignmentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetAssignmentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>GetAssignment</code> operation retrieves the details of the specified Assignment.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetAssignmentRequest": {
+      "type": "structure",
+      "members": {
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Assignment to be retrieved.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetAssignmentResponse": {
+      "type": "structure",
+      "members": {
+        "HIT": {
+          "target": "com.amazonaws.mturk#HIT",
+          "traits": {
+            "smithy.api#documentation": "<p> The HIT associated with this assignment. The response\n            includes one HIT element.</p>"
+          }
+        },
+        "Assignment": {
+          "target": "com.amazonaws.mturk#Assignment",
+          "traits": {
+            "smithy.api#documentation": "<p> The assignment. The response includes one Assignment\n            element.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetFileUploadURL": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetFileUploadURLRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetFileUploadURLResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>GetFileUploadURL</code>\n            operation generates and returns a temporary URL. You use the\n            temporary URL to retrieve a file uploaded by a Worker as an answer to\n            a FileUploadAnswer question for a HIT. The temporary URL is generated\n            the instant the GetFileUploadURL operation is called, and is valid\n            for 60 seconds. You can get a temporary file upload URL any time\n            until the HIT is disposed. After the HIT is disposed, any uploaded\n            files are deleted, and cannot be retrieved.\n            \n            Pending Deprecation on December 12, 2017. The Answer Specification  \n            structure will no longer  support the <code>FileUploadAnswer</code>\n            element to be used for the QuestionForm data structure. \n            Instead, we recommend that Requesters who want to create HITs asking \n            Workers to upload files to use Amazon S3.\n            \n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetFileUploadURLRequest": {
+      "type": "structure",
+      "members": {
+        "QuestionIdentifier": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the question with a FileUploadAnswer, as\n            specified in the QuestionForm of the HIT.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the assignment that contains the question with a\n            FileUploadAnswer.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetFileUploadURLResponse": {
+      "type": "structure",
+      "members": {
+        "FileUploadURL": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A temporary URL for the file that the Worker uploaded for\n            the answer.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>GetHIT</code> operation retrieves the details of the specified HIT.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetHITRequest": {
+      "type": "structure",
+      "members": {
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT to be retrieved.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetHITResponse": {
+      "type": "structure",
+      "members": {
+        "HIT": {
+          "target": "com.amazonaws.mturk#HIT",
+          "traits": {
+            "smithy.api#documentation": "<p> Contains the requested HIT data.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationScore": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetQualificationScoreRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetQualificationScoreResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>GetQualificationScore</code>\n            operation returns the value of a Worker's Qualification for a given\n            Qualification type.\n        </p>\n        <p>\n            To get a Worker's Qualification, you must know the Worker's ID. The\n            Worker's ID is included in the assignment data returned by the\n            <code>ListAssignmentsForHIT</code>\n            operation.\n        </p>\n        <p>Only the owner of a Qualification type can query the value of\n            a Worker's Qualification of that type.</p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationScoreRequest": {
+      "type": "structure",
+      "members": {
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker whose Qualification is being updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the QualificationType.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationScoreResponse": {
+      "type": "structure",
+      "members": {
+        "Qualification": {
+          "target": "com.amazonaws.mturk#Qualification",
+          "traits": {
+            "smithy.api#documentation": "<p> The Qualification data structure of the Qualification\n            assigned to a user, including the Qualification type and the value\n            (score).\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#GetQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#GetQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>GetQualificationType</code>operation retrieves information about a Qualification type using its ID.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the QualificationType.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#GetQualificationTypeResponse": {
+      "type": "structure",
+      "members": {
+        "QualificationType": {
+          "target": "com.amazonaws.mturk#QualificationType",
+          "traits": {
+            "smithy.api#documentation": "<p> The returned Qualification Type</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#HIT": {
+      "type": "structure",
+      "members": {
+        "MaxAssignments": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of times the HIT can be accepted and completed\n            before the HIT becomes unavailable.\n        </p>"
+          }
+        },
+        "HITStatus": {
+          "target": "com.amazonaws.mturk#HITStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the HIT and its assignments. Valid Values are\n            Assignable | Unassignable | Reviewable | Reviewing | Disposed.\n        </p>"
+          }
+        },
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT type of this HIT</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time the HIT was created.</p>"
+          }
+        },
+        "AssignmentDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p> The length of time, in seconds, that a Worker has to\n            complete the HIT after accepting it.</p>"
+          }
+        },
+        "Expiration": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the HIT expires.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A general description of the HIT.</p>"
+          }
+        },
+        "HITGroupId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the HIT Group of this HIT.</p>"
+          }
+        },
+        "Keywords": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> One or more words or phrases that describe the HIT,\n            separated by commas. Search terms similar to the keywords of a HIT\n            are more likely to have the HIT in the search results.</p>"
+          }
+        },
+        "RequesterAnnotation": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> An arbitrary data field the Requester who created the HIT\n            can use. This field is visible only to the creator of the HIT.</p>"
+          }
+        },
+        "NumberOfAssignmentsCompleted": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of assignments for this HIT that have been\n            approved or rejected.</p>"
+          }
+        },
+        "NumberOfAssignmentsAvailable": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of assignments for this HIT that are available\n            for Workers to accept.</p>"
+          }
+        },
+        "NumberOfAssignmentsPending": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of assignments for this HIT that are being\n            previewed or have been accepted by Workers, but have not yet been\n            submitted, returned, or abandoned.</p>"
+          }
+        },
+        "HITLayoutId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the HIT Layout of this HIT.</p>"
+          }
+        },
+        "QualificationRequirements": {
+          "target": "com.amazonaws.mturk#QualificationRequirementList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Conditions that a Worker's Qualifications must meet in order\n            to accept the HIT. A HIT can have between zero and ten\n            Qualification requirements. All requirements must be met in\n            order for a Worker to accept the HIT. Additionally, other\n            actions can be restricted using the <code>ActionsGuarded</code>\n            field on each <code>QualificationRequirement</code> structure.\n        </p>"
+          }
+        },
+        "AutoApprovalDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time, in seconds, after the Worker submits an\n            assignment for the HIT that the results are automatically approved by\n            Amazon Mechanical Turk. This is the amount of time the Requester has\n            to reject an assignment submitted by a Worker before the assignment\n            is auto-approved and the Worker is paid.\n        </p>"
+          }
+        },
+        "Reward": {
+          "target": "com.amazonaws.mturk#CurrencyAmount"
+        },
+        "Question": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The data the Worker completing the HIT uses produce the\n            results. This is either either a QuestionForm, HTMLQuestion or an\n            ExternalQuestion data structure.</p>"
+          }
+        },
+        "HITReviewStatus": {
+          "target": "com.amazonaws.mturk#HITReviewStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> Indicates the review status of the HIT. Valid Values are\n            NotReviewed | MarkedForReview | ReviewedAppropriate |\n            ReviewedInappropriate.</p>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> A unique identifier for the HIT.</p>"
+          }
+        },
+        "Title": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The title of the HIT.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The HIT data structure represents a single HIT, including\n            all the information necessary for a Worker to accept and complete the\n            HIT.</p>"
+      }
+    },
+    "com.amazonaws.mturk#HITAccessActions": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Accept",
+            "name": "Accept"
+          },
+          {
+            "value": "PreviewAndAccept",
+            "name": "PreviewAndAccept"
+          },
+          {
+            "value": "DiscoverPreviewAndAccept",
+            "name": "DiscoverPreviewAndAccept"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#HITLayoutParameter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the parameter in the HITLayout.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The value substituted for the parameter referenced in the\n            HITLayout.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The HITLayoutParameter data structure defines parameter\n            values used with a HITLayout. A HITLayout is a reusable Amazon\n            Mechanical Turk project template used to provide Human Intelligence\n            Task (HIT) question data for CreateHIT.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#HITLayoutParameterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#HITLayoutParameter"
+      }
+    },
+    "com.amazonaws.mturk#HITList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#HIT"
+      }
+    },
+    "com.amazonaws.mturk#HITReviewStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NotReviewed",
+            "name": "NotReviewed"
+          },
+          {
+            "value": "MarkedForReview",
+            "name": "MarkedForReview"
+          },
+          {
+            "value": "ReviewedAppropriate",
+            "name": "ReviewedAppropriate"
+          },
+          {
+            "value": "ReviewedInappropriate",
+            "name": "ReviewedInappropriate"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#HITStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Assignable",
+            "name": "Assignable"
+          },
+          {
+            "value": "Unassignable",
+            "name": "Unassignable"
+          },
+          {
+            "value": "Reviewable",
+            "name": "Reviewable"
+          },
+          {
+            "value": "Reviewing",
+            "name": "Reviewing"
+          },
+          {
+            "value": "Disposed",
+            "name": "Disposed"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#IdempotencyToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.mturk#Integer": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.mturk#IntegerList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#Integer"
+      }
+    },
+    "com.amazonaws.mturk#ListAssignmentsForHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListAssignmentsForHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListAssignmentsForHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>ListAssignmentsForHIT</code>\n            operation retrieves completed assignments for a HIT. You can use this\n            operation to retrieve the results for a HIT.\n        </p>\n        <p> You can get assignments for a HIT at any time, even if the\n            HIT is not yet Reviewable. If a HIT requested multiple assignments,\n            and has received some results but has not yet become Reviewable, you\n            can still retrieve the partial results with this operation.\n        </p>\n        <p> Use the AssignmentStatus parameter to control which set of\n            assignments for a HIT are returned. The ListAssignmentsForHIT\n            operation\n            can return submitted assignments awaiting approval, or it can return\n            assignments that have already been approved or rejected. You can set\n            AssignmentStatus=Approved,Rejected to get assignments that have\n            already been approved and rejected together in one result set.\n        </p>\n        <p> Only the Requester who created the HIT can retrieve the\n            assignments for that HIT.\n        </p>\n        <p> Results are sorted and divided into numbered pages and the\n            operation returns a single page of results. You can use the\n            parameters\n            of the operation to control sorting and pagination.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListAssignmentsForHITRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize"
+        },
+        "AssignmentStatuses": {
+          "target": "com.amazonaws.mturk#AssignmentStatusList",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the assignments to return: Submitted | Approved\n            | Rejected</p>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListAssignmentsForHITResponse": {
+      "type": "structure",
+      "members": {
+        "Assignments": {
+          "target": "com.amazonaws.mturk#AssignmentList",
+          "traits": {
+            "smithy.api#documentation": "<p> The collection of Assignment data structures returned by\n            this call.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of assignments on the page in the filtered\n            results list, equivalent to the number of assignments returned by\n            this call.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListBonusPayments": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListBonusPaymentsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListBonusPaymentsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>ListBonusPayments</code>\n            operation retrieves the amounts of bonuses you have paid to Workers\n            for a given HIT or assignment.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListBonusPaymentsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token</p>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the HIT associated with the bonus payments to\n            retrieve. If not specified, all bonus payments for all assignments\n            for the given HIT are returned. Either the HITId parameter or the\n            AssignmentId parameter must be specified</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize"
+        },
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the assignment associated with the bonus payments\n            to retrieve. If specified, only bonus payments for the given\n            assignment are returned. Either the HITId parameter or the\n            AssignmentId parameter must be specified</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListBonusPaymentsResponse": {
+      "type": "structure",
+      "members": {
+        "BonusPayments": {
+          "target": "com.amazonaws.mturk#BonusPaymentList",
+          "traits": {
+            "smithy.api#documentation": "<p>A successful request to the ListBonusPayments operation\n            returns a list of BonusPayment objects.\n        </p>"
+          }
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of bonus payments on this page in the filtered\n            results list, equivalent to the number of bonus payments being\n            returned by this call.\n        </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListHITsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListHITsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>ListHITs</code>\n            operation returns all of a Requester's HITs. The operation returns\n            HITs of any status, except for HITs that have been deleted of with\n            the DeleteHIT operation or that have been auto-deleted.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITsForQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListHITsForQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListHITsForQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>ListHITsForQualificationType</code> operation returns the HITs that use\n            the given Qualification type for a Qualification requirement.\n            The operation returns HITs of any status, except for HITs that have been deleted\n            with the <code>DeleteHIT</code> operation or that have been auto-deleted.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITsForQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the Qualification type to use when querying HITs.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination Token</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITsForQualificationTypeResponse": {
+      "type": "structure",
+      "members": {
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of HITs on this page in the filtered results\n            list, equivalent to the number of HITs being returned by this call.\t</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "HITs": {
+          "target": "com.amazonaws.mturk#HITList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize"
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListHITsResponse": {
+      "type": "structure",
+      "members": {
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of HITs on this page in the filtered results list,\n            equivalent to the number of HITs being returned by this call.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "HITs": {
+          "target": "com.amazonaws.mturk#HITList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationRequests": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListQualificationRequestsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListQualificationRequestsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>ListQualificationRequests</code>\n            operation retrieves requests for Qualifications of a particular\n            Qualification type. The owner of the Qualification type calls this\n            operation to poll for pending requests, and accepts them using the\n            AcceptQualification operation.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationRequestsRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the QualificationType.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p> The maximum number of results to return in a single call.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationRequestsResponse": {
+      "type": "structure",
+      "members": {
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of Qualification requests on this page in the filtered results list,\n            equivalent to the number of Qualification requests being returned by this call.</p>"
+          }
+        },
+        "QualificationRequests": {
+          "target": "com.amazonaws.mturk#QualificationRequestList",
+          "traits": {
+            "smithy.api#documentation": "<p>The Qualification request. The response includes one\n            QualificationRequest element\n            for each Qualification request returned\n            by the query.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationTypes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListQualificationTypesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListQualificationTypesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>ListQualificationTypes</code>\n            operation returns a list of Qualification types, filtered by\n            an optional search term.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationTypesRequest": {
+      "type": "structure",
+      "members": {
+        "MustBeRequestable": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies that only Qualification types that a user can\n            request through the Amazon Mechanical Turk web site, such as by\n            taking a Qualification test, are returned as results of the search.\n            Some Qualification types, such as those assigned automatically by the\n            system, cannot be requested directly by users. If false, all\n            Qualification types, including those managed by the system, are\n            considered. Valid values are True | False.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p> The maximum number of results to return in a single call.\n        </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "MustBeOwnedByCaller": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p> Specifies that only Qualification types that the Requester\n            created are returned. If false, the operation returns all\n            Qualification types.\n        </p>"
+          }
+        },
+        "Query": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A text query against all of the searchable attributes of\n            Qualification types.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListQualificationTypesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "QualificationTypes": {
+          "target": "com.amazonaws.mturk#QualificationTypeList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of QualificationType elements returned by the\n            query.\n        </p>"
+          }
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of Qualification types on this page in the\n            filtered results list, equivalent to the number of types this\n            operation returns.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewPolicyResultsForHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListReviewPolicyResultsForHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListReviewPolicyResultsForHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>ListReviewPolicyResultsForHIT</code> operation retrieves the computed results\n            and the actions taken in the course of executing your Review Policies for a given HIT.\n            For information about how to specify Review Policies when you call CreateHIT,\n            see Review Policies. The ListReviewPolicyResultsForHIT operation can return results for both\n            Assignment-level and HIT-level review results.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewPolicyResultsForHITRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p>Limit the number of results returned.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token</p>"
+          }
+        },
+        "RetrieveResults": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Specify if the operation should retrieve a list of the results computed by the Review Policies.\n        </p>"
+          }
+        },
+        "PolicyLevels": {
+          "target": "com.amazonaws.mturk#ReviewPolicyLevelList",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The Policy Level(s) to retrieve review results for - HIT or Assignment.\n            If omitted, the default behavior is to retrieve all data for both policy levels.\n            For a list of all the described policies, see Review Policies.\n        </p>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier of the HIT to retrieve review results for.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RetrieveActions": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Specify if the operation should retrieve a list of the actions taken executing\n            the Review Policies and their outcomes.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewPolicyResultsForHITResponse": {
+      "type": "structure",
+      "members": {
+        "HITReviewReport": {
+          "target": "com.amazonaws.mturk#ReviewReport",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains both ReviewResult and ReviewAction elements for a particular HIT.\n        </p>"
+          }
+        },
+        "HITReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the HIT-level Review Policy. This contains only\n            the PolicyName element.</p>"
+          }
+        },
+        "AssignmentReviewPolicy": {
+          "target": "com.amazonaws.mturk#ReviewPolicy",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the Assignment-level Review Policy. This\n            contains only the PolicyName element.\n        </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The HITId of the HIT for which results have been returned.</p>"
+          }
+        },
+        "AssignmentReviewReport": {
+          "target": "com.amazonaws.mturk#ReviewReport",
+          "traits": {
+            "smithy.api#documentation": "<p> Contains both ReviewResult and ReviewAction elements for an\n            Assignment.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewableHITs": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListReviewableHITsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListReviewableHITsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>ListReviewableHITs</code> operation retrieves the HITs with Status equal to\n            Reviewable or Status equal to Reviewing that belong to the Requester calling the operation.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewableHITsRequest": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "target": "com.amazonaws.mturk#ReviewableHITStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Can be either <code>Reviewable</code> or <code>Reviewing</code>.\n            Reviewable is the default value.\n        </p>"
+          }
+        },
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the HIT type of the HITs to consider for the query.\n            If not specified, all HITs for the Reviewer are considered\n        </p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination Token</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListReviewableHITsResponse": {
+      "type": "structure",
+      "members": {
+        "HITs": {
+          "target": "com.amazonaws.mturk#HITList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of HIT elements returned by the query.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of HITs on this page in the filtered results\n            list, equivalent to the number of HITs being returned by this call.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkerBlocks": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListWorkerBlocksRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListWorkerBlocksResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>ListWorkersBlocks</code> operation retrieves a list of Workers who are blocked from working on your HITs.</p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkerBlocksRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize"
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination token</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkerBlocksResponse": {
+      "type": "structure",
+      "members": {
+        "WorkerBlocks": {
+          "target": "com.amazonaws.mturk#WorkerBlockList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of WorkerBlocks, containing the collection of\n            Worker IDs and reasons for blocking.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of assignments on the page in the filtered\n            results list, equivalent to the number of assignments returned by\n            this call.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkersWithQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#ListWorkersWithQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#ListWorkersWithQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>ListWorkersWithQualificationType</code> operation returns all of the Workers\n            that have been associated with a given Qualification type.\n        </p>",
+        "smithy.api#idempotent": {},
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkersWithQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification type of the Qualifications to\n            return.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Pagination Token</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.mturk#ResultSize",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Limit the number of results returned.\n        </p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.mturk#QualificationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The status of the Qualifications to return.\n            Can be <code>Granted | Revoked</code>.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#ListWorkersWithQualificationTypeResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.mturk#PaginationToken"
+        },
+        "NumResults": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The number of Qualifications on this page in the filtered\n            results list, equivalent to the number of Qualifications being\n            returned by this call.</p>"
+          }
+        },
+        "Qualifications": {
+          "target": "com.amazonaws.mturk#QualificationList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of Qualification elements returned by this call.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#Locale": {
+      "type": "structure",
+      "members": {
+        "Country": {
+          "target": "com.amazonaws.mturk#CountryParameters",
+          "traits": {
+            "smithy.api#documentation": "<p> The country of the locale. Must be a valid ISO 3166 country\n            code. For example, the code US refers to the United States of\n            America.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Subdivision": {
+          "target": "com.amazonaws.mturk#CountryParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>The state or subdivision of the locale. A valid ISO 3166-2\n            subdivision code. For example, the code WA refers to the state of\n            Washington.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Locale data structure represents a geographical region or location.</p>"
+      }
+    },
+    "com.amazonaws.mturk#LocaleList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#Locale"
+      }
+    },
+    "com.amazonaws.mturk#Long": {
+      "type": "long",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.mturk#MTurkRequesterServiceV20170117": {
+      "type": "service",
+      "version": "2017-01-17",
+      "operations": [
+        {
+          "target": "com.amazonaws.mturk#AcceptQualificationRequest"
+        },
+        {
+          "target": "com.amazonaws.mturk#ApproveAssignment"
+        },
+        {
+          "target": "com.amazonaws.mturk#AssociateQualificationWithWorker"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateAdditionalAssignmentsForHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateHITType"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateHITWithHITType"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateQualificationType"
+        },
+        {
+          "target": "com.amazonaws.mturk#CreateWorkerBlock"
+        },
+        {
+          "target": "com.amazonaws.mturk#DeleteHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#DeleteQualificationType"
+        },
+        {
+          "target": "com.amazonaws.mturk#DeleteWorkerBlock"
+        },
+        {
+          "target": "com.amazonaws.mturk#DisassociateQualificationFromWorker"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetAccountBalance"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetAssignment"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetFileUploadURL"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetQualificationScore"
+        },
+        {
+          "target": "com.amazonaws.mturk#GetQualificationType"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListAssignmentsForHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListBonusPayments"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListHITs"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListHITsForQualificationType"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListQualificationRequests"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListQualificationTypes"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListReviewableHITs"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListReviewPolicyResultsForHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListWorkerBlocks"
+        },
+        {
+          "target": "com.amazonaws.mturk#ListWorkersWithQualificationType"
+        },
+        {
+          "target": "com.amazonaws.mturk#NotifyWorkers"
+        },
+        {
+          "target": "com.amazonaws.mturk#RejectAssignment"
+        },
+        {
+          "target": "com.amazonaws.mturk#RejectQualificationRequest"
+        },
+        {
+          "target": "com.amazonaws.mturk#SendBonus"
+        },
+        {
+          "target": "com.amazonaws.mturk#SendTestEventNotification"
+        },
+        {
+          "target": "com.amazonaws.mturk#UpdateExpirationForHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#UpdateHITReviewStatus"
+        },
+        {
+          "target": "com.amazonaws.mturk#UpdateHITTypeOfHIT"
+        },
+        {
+          "target": "com.amazonaws.mturk#UpdateNotificationSettings"
+        },
+        {
+          "target": "com.amazonaws.mturk#UpdateQualificationType"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "MTurk",
+          "arnNamespace": "mturk-requester",
+          "cloudFormationName": "MTurk",
+          "cloudTrailEventSource": "V20170117.requester.mturk.services.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "mturk-requester"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<fullname>Amazon Mechanical Turk API Reference</fullname>",
+        "smithy.api#title": "Amazon Mechanical Turk",
+        "smithy.api#xmlNamespace": {
+          "uri": "http://requester.mturk.com/2017-01-17/"
+        }
+      }
+    },
+    "com.amazonaws.mturk#NotificationSpecification": {
+      "type": "structure",
+      "members": {
+        "EventTypes": {
+          "target": "com.amazonaws.mturk#EventTypeList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of events that should cause notifications to be\n            sent. Valid Values: AssignmentAccepted | AssignmentAbandoned |\n            AssignmentReturned | AssignmentSubmitted | AssignmentRejected |\n            AssignmentApproved | HITCreated | HITExtended | HITDisposed |\n            HITReviewable | HITExpired | Ping. The Ping event is only valid for\n            the SendTestEventNotification operation.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Transport": {
+          "target": "com.amazonaws.mturk#NotificationTransport",
+          "traits": {
+            "smithy.api#documentation": "<p> The method Amazon Mechanical Turk uses to send the\n            notification. Valid Values: Email | SQS | SNS.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Destination": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The target for notification messages. The Destination’s format is determined by the specified Transport:\n        </p>\n        <ul>\n            <li>\n                <p>When Transport is Email, the Destination is your email address.</p>\n            </li>\n            <li>\n                <p>When Transport is SQS, the Destination is your queue URL.</p>\n            </li>\n            <li>\n                <p>When Transport is SNS, the Destination is the ARN of your topic.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "Version": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the Notification API to use. Valid value is\n            2006-05-05.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The NotificationSpecification data structure describes a HIT\n            event notification for a HIT type.</p>"
+      }
+    },
+    "com.amazonaws.mturk#NotificationTransport": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Email",
+            "name": "Email"
+          },
+          {
+            "value": "SQS",
+            "name": "SQS"
+          },
+          {
+            "value": "SNS",
+            "name": "SNS"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#NotifyWorkersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#NotifyWorkersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>NotifyWorkers</code>\n            operation sends an email to one or more Workers that you specify with\n            the Worker ID. You can specify up to 100 Worker IDs to send the same\n            message with a single call to the NotifyWorkers operation. The\n            NotifyWorkers operation will send a notification email to a Worker\n            only if you have previously approved or rejected work from the\n            Worker.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkersFailureCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SoftFailure",
+            "name": "SoftFailure"
+          },
+          {
+            "value": "HardFailure",
+            "name": "HardFailure"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkersFailureStatus": {
+      "type": "structure",
+      "members": {
+        "NotifyWorkersFailureMessage": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A message detailing the reason the Worker could not be\n            notified.\n        </p>"
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Worker.</p>"
+          }
+        },
+        "NotifyWorkersFailureCode": {
+          "target": "com.amazonaws.mturk#NotifyWorkersFailureCode",
+          "traits": {
+            "smithy.api#documentation": "<p> Encoded value for the failure type.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> When MTurk encounters an issue with notifying the Workers\n            you specified, it returns back this object with failure details.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkersFailureStatusList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#NotifyWorkersFailureStatus"
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkersRequest": {
+      "type": "structure",
+      "members": {
+        "WorkerIds": {
+          "target": "com.amazonaws.mturk#CustomerIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of Worker IDs you wish to notify. You\n            can notify upto\n            100 Workers at a time.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MessageText": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The text of the email message to send. Can include up to\n            4,096 characters</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Subject": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The subject line of the email message to send. Can include up\n            to 200 characters.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#NotifyWorkersResponse": {
+      "type": "structure",
+      "members": {
+        "NotifyWorkersFailureStatuses": {
+          "target": "com.amazonaws.mturk#NotifyWorkersFailureStatusList",
+          "traits": {
+            "smithy.api#documentation": "<p> When MTurk sends notifications to the list of Workers, it\n            returns back any failures it encounters in this list of\n            NotifyWorkersFailureStatus objects.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Mechanical Turk\n            returns a pagination token in the response. You can use this pagination token\n            to retrieve the next set of results.\n        </p>",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.mturk#ParameterMapEntry": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "target": "com.amazonaws.mturk#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of answers to the question specified in the\n            MapEntry Key element. The Worker must match all values in order for\n            the answer to be scored correctly.\n        </p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The QuestionID from the HIT that is used to identify which\n            question requires Mechanical Turk to score as part of the\n            ScoreMyKnownAnswers/2011-09-01 Review Policy.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> This data structure is the data type for the AnswerKey\n            parameter of the ScoreMyKnownAnswers/2011-09-01 Review Policy.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#ParameterMapEntryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#ParameterMapEntry"
+      }
+    },
+    "com.amazonaws.mturk#PolicyParameter": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> Name of the parameter from the list of Review Polices.\n        </p>"
+          }
+        },
+        "Values": {
+          "target": "com.amazonaws.mturk#StringList",
+          "traits": {
+            "smithy.api#documentation": "<p> The list of values of the Parameter</p>"
+          }
+        },
+        "MapEntries": {
+          "target": "com.amazonaws.mturk#ParameterMapEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p> List of ParameterMapEntry objects.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Name of the parameter from the Review policy.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#PolicyParameterList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#PolicyParameter"
+      }
+    },
+    "com.amazonaws.mturk#Qualification": {
+      "type": "structure",
+      "members": {
+        "IntegerValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The value (score) of the Qualification, if the Qualification\n            has an integer value.</p>"
+          }
+        },
+        "LocaleValue": {
+          "target": "com.amazonaws.mturk#Locale"
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Worker who possesses the Qualification.\n        </p>"
+          }
+        },
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Qualification type for the Qualification.</p>"
+          }
+        },
+        "GrantTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time the Qualification was granted to the\n            Worker. If the Worker's Qualification was revoked, and then\n            re-granted based on a new Qualification request, GrantTime is the\n            date and time of the last call to the AcceptQualificationRequest\n            operation.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.mturk#QualificationStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> The status of the Qualification. Valid values are Granted |\n            Revoked.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Qualification data structure represents a Qualification\n            assigned to a user, including the Qualification type and the value\n            (score).</p>"
+      }
+    },
+    "com.amazonaws.mturk#QualificationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#Qualification"
+      }
+    },
+    "com.amazonaws.mturk#QualificationRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Qualification type the Worker is requesting,\n            as returned by the CreateQualificationType operation.\n        </p>"
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Worker requesting the Qualification.</p>"
+          }
+        },
+        "QualificationRequestId": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification request, a unique identifier\n            generated when the request was submitted.\n\n        </p>"
+          }
+        },
+        "SubmitTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the Qualification request had a status of\n            Submitted. This is either the time the Worker submitted answers for a\n            Qualification test, or the time the Worker requested the\n            Qualification if the Qualification type does not have a test.\n        </p>"
+          }
+        },
+        "Answer": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The Worker's answers for the Qualification type's test\n            contained in a QuestionFormAnswers document, if the type has a test\n            and the Worker has submitted answers. If the Worker does not provide\n            any answers, Answer may be empty.\n        </p>"
+          }
+        },
+        "Test": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The contents of the Qualification test that was presented to\n            the Worker, if the type has a test and the Worker has submitted\n            answers. This value is identical to the QuestionForm associated with\n            the Qualification type at the time the Worker requests the\n            Qualification.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The QualificationRequest data structure represents a request\n            a Worker has made for a Qualification.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#QualificationRequestList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#QualificationRequest"
+      }
+    },
+    "com.amazonaws.mturk#QualificationRequirement": {
+      "type": "structure",
+      "members": {
+        "ActionsGuarded": {
+          "target": "com.amazonaws.mturk#HITAccessActions",
+          "traits": {
+            "smithy.api#documentation": "<p> Setting this attribute prevents Workers whose Qualifications do not meet\n            this QualificationRequirement from taking the specified action. Valid arguments include\n            \"Accept\" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results),\n            \"PreviewAndAccept\" (Worker cannot accept or preview the HIT, but can see the HIT in their search results),\n            and \"DiscoverPreviewAndAccept\" (Worker cannot accept, preview, or see the HIT in their search results). It's possible for you to create a HIT with multiple\n            QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case,\n            the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding\n            the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept.\n            For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do\n            not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the\n            HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the\n            <code>RequiredToPreview</code> field.\n        </p>"
+          }
+        },
+        "RequiredToPreview": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#deprecated": {},
+            "smithy.api#documentation": "<p> DEPRECATED: Use the <code>ActionsGuarded</code> field instead.\n            If RequiredToPreview is true, the question data for the HIT will not be shown\n            when a Worker whose Qualifications do not meet this requirement tries\n            to preview the HIT. That is, a Worker's Qualifications must meet all\n            of the requirements for which RequiredToPreview is true in order to\n            preview the HIT. If a Worker meets all of the requirements where\n            RequiredToPreview is true (or if there are no such requirements), but\n            does not meet all of the requirements for the HIT, the Worker will be\n            allowed to preview the HIT's question data, but will not be allowed\n            to accept and complete the HIT. The default is false. This should not\n            be used in combination with the <code>ActionsGuarded</code> field.\n        </p>"
+          }
+        },
+        "LocaleValues": {
+          "target": "com.amazonaws.mturk#LocaleList",
+          "traits": {
+            "smithy.api#documentation": "<p> The locale value to compare against the Qualification's\n            value. The local value must be a valid ISO 3166 country code or\n            supports ISO 3166-2 subdivisions. LocaleValue can only be used with a\n            Worker_Locale QualificationType ID. LocaleValue can only be used with\n            the EqualTo, NotEqualTo, In, and NotIn comparators. You must only use\n            a single LocaleValue element when using the EqualTo or NotEqualTo\n            comparators. When performing a set comparison by using the In or the\n            NotIn comparator, you can use up to 30 LocaleValue elements in a\n            QualificationRequirement data structure.\n        </p>"
+          }
+        },
+        "IntegerValues": {
+          "target": "com.amazonaws.mturk#IntegerList",
+          "traits": {
+            "smithy.api#documentation": "<p> The integer value to compare against the Qualification's\n            value. IntegerValue must not be present if Comparator is Exists or\n            DoesNotExist. IntegerValue can only be used if the Qualification type\n            has an integer value; it cannot be used with the Worker_Locale\n            QualificationType ID. When performing a set comparison by using the\n            In or the NotIn comparator, you can use up to 15 IntegerValue\n            elements in a QualificationRequirement data structure.\n        </p>"
+          }
+        },
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Qualification type for the requirement.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Comparator": {
+          "target": "com.amazonaws.mturk#Comparator",
+          "traits": {
+            "smithy.api#documentation": "<p>The kind of comparison to make against a Qualification's\n            value. You can compare a Qualification's value to an IntegerValue to\n            see if it is LessThan, LessThanOrEqualTo, GreaterThan,\n            GreaterThanOrEqualTo, EqualTo, or NotEqualTo the IntegerValue. You\n            can compare it to a LocaleValue to see if it is EqualTo, or\n            NotEqualTo the LocaleValue. You can check to see if the value is In\n            or NotIn a set of IntegerValue\n            or LocaleValue values. Lastly, a\n            Qualification requirement can also\n            test if a Qualification Exists or\n            DoesNotExist in the user's profile,\n            regardless of its value.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The QualificationRequirement data structure describes a Qualification that a Worker must have\n            before the Worker is allowed to accept a HIT.\n            A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or\n            see the HIT in search results.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#QualificationRequirementList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#QualificationRequirement"
+      }
+    },
+    "com.amazonaws.mturk#QualificationStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Granted",
+            "name": "Granted"
+          },
+          {
+            "value": "Revoked",
+            "name": "Revoked"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#QualificationType": {
+      "type": "structure",
+      "members": {
+        "Test": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The questions for a Qualification test associated with this\n            Qualification type that a user can take to obtain a Qualification of\n            this type. This parameter must be specified if AnswerKey is present.\n            A Qualification type cannot have both a specified Test parameter and\n            an AutoGranted value of true.\n        </p>"
+          }
+        },
+        "RetryDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p> The amount of time, in seconds, Workers must wait after\n            taking the Qualification test before they can take it again. Workers\n            can take a Qualification test multiple times if they were not granted\n            the Qualification from a previous attempt, or if the test offers a\n            gradient score and they want a better score. If not specified,\n            retries are disabled and Workers can request a Qualification only\n            once.\n        </p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The name of the Qualification type. The type name is used to\n            identify the type, and to find the type using a Qualification type\n            search.\n        </p>"
+          }
+        },
+        "Keywords": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> One or more words or phrases that describe theQualification\n            type, separated by commas. The Keywords make the type easier to find\n            using a search.\n        </p>"
+          }
+        },
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> A unique identifier for the Qualification type. A\n            Qualification type is given a Qualification type ID when you call the\n            CreateQualificationType operation.\n        </p>"
+          }
+        },
+        "AutoGranted": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies that requests for the Qualification type are\n            granted immediately, without prompting the Worker with a\n            Qualification test. Valid values are True | False.</p>"
+          }
+        },
+        "CreationTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date and time the Qualification type was created.\n        </p>"
+          }
+        },
+        "TestDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p> The amount of time, in seconds, given to a Worker to\n            complete the Qualification test, beginning from the time the Worker\n            requests the Qualification.\n        </p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A long description for the Qualification type.\n        </p>"
+          }
+        },
+        "AutoGrantedValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p> The Qualification integer value to use for automatically\n            granted Qualifications, if AutoGranted is true. This is 1 by default.\n        </p>"
+          }
+        },
+        "QualificationTypeStatus": {
+          "target": "com.amazonaws.mturk#QualificationTypeStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> The status of the Qualification type. A Qualification type's\n            status determines if users can apply to receive a Qualification of\n            this type, and if HITs can be created with requirements based on this\n            type. Valid values are Active | Inactive.\n        </p>"
+          }
+        },
+        "IsRequestable": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p> Specifies whether the Qualification type is one that a user\n            can request through the Amazon Mechanical Turk web site, such as by\n            taking a Qualification test. This value is False for Qualifications\n            assigned automatically by the system. Valid values are True | False.\n        </p>"
+          }
+        },
+        "AnswerKey": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The answers to the Qualification test specified in the Test\n            parameter.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The QualificationType data structure represents a\n            Qualification type, a description of a property of a Worker that must\n            match the requirements of a HIT for the Worker to be able to accept\n            the HIT. The type also describes how a Worker can obtain a\n            Qualification of that type, such as through a Qualification test.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#QualificationTypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#QualificationType"
+      }
+    },
+    "com.amazonaws.mturk#QualificationTypeStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Active",
+            "name": "Active"
+          },
+          {
+            "value": "Inactive",
+            "name": "Inactive"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#RejectAssignment": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#RejectAssignmentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#RejectAssignmentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>RejectAssignment</code> operation rejects the results of a completed assignment.\n        </p>\n        <p>\n            You can include an optional feedback message with the rejection,\n            which the Worker can see in the Status section of the web site.\n            When you include a feedback message with the rejection,\n            it helps the Worker understand why the assignment was rejected,\n            and can improve the quality of the results the Worker submits in the future.\n        </p>\n        <p>\n            Only the Requester who created the HIT can reject an assignment for the HIT.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#RejectAssignmentRequest": {
+      "type": "structure",
+      "members": {
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the assignment. The assignment must correspond to a HIT created by the Requester.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RequesterFeedback": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            A message for the Worker, which the Worker can see in the Status section of the web site.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#RejectAssignmentResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#RejectQualificationRequest": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#RejectQualificationRequestRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#RejectQualificationRequestResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>RejectQualificationRequest</code>\n            operation rejects a user's request for a Qualification.\n        </p>\n        <p> You can provide a text message explaining why the request was\n            rejected. The Worker who made the request can see this message.</p>"
+      }
+    },
+    "com.amazonaws.mturk#RejectQualificationRequestRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationRequestId": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the Qualification request, as returned by the\n            <code>ListQualificationRequests</code>\n            operation.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A text message explaining why the request was rejected, to be\n            shown to the Worker who made the request.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#RejectQualificationRequestResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#RequestError": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.mturk#ExceptionMessage"
+        },
+        "TurkErrorCode": {
+          "target": "com.amazonaws.mturk#TurkErrorCode"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Your request is invalid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.mturk#ResultSize": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 100
+        }
+      }
+    },
+    "com.amazonaws.mturk#ReviewActionDetail": {
+      "type": "structure",
+      "members": {
+        "ActionId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The unique identifier for the action.</p>"
+          }
+        },
+        "CompleteTime": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p> The date when the action was completed.</p>"
+          }
+        },
+        "ActionName": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The nature of the action itself. The Review Policy is\n            responsible for examining the HIT and Assignments, emitting results,\n            and deciding which other actions will be necessary. </p>"
+          }
+        },
+        "Result": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A description of the outcome of the review.</p>"
+          }
+        },
+        "TargetId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> The specific HITId or AssignmentID targeted by the action.</p>"
+          }
+        },
+        "TargetType": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The type of object in TargetId.</p>"
+          }
+        },
+        "ErrorCode": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> Present only when the Results have a FAILED Status.</p>"
+          }
+        },
+        "Status": {
+          "target": "com.amazonaws.mturk#ReviewActionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p> The current disposition of the action: INTENDED, SUCCEEDED,\n            FAILED, or CANCELLED.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Both the AssignmentReviewReport and the HITReviewReport\n            elements contains the ReviewActionDetail data structure. This\n            structure is returned multiple times for each action specified in the\n            Review Policy.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#ReviewActionDetailList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#ReviewActionDetail"
+      }
+    },
+    "com.amazonaws.mturk#ReviewActionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Intended",
+            "name": "Intended"
+          },
+          {
+            "value": "Succeeded",
+            "name": "Succeeded"
+          },
+          {
+            "value": "Failed",
+            "name": "Failed"
+          },
+          {
+            "value": "Cancelled",
+            "name": "Cancelled"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#ReviewPolicy": {
+      "type": "structure",
+      "members": {
+        "Parameters": {
+          "target": "com.amazonaws.mturk#PolicyParameterList",
+          "traits": {
+            "smithy.api#documentation": "<p>Name of the parameter from the Review policy.</p>"
+          }
+        },
+        "PolicyName": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> Name of a Review Policy: SimplePlurality/2011-09-01 or\n            ScoreMyKnownAnswers/2011-09-01\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> HIT Review Policy data structures represent HIT review\n            policies, which you specify when you create a HIT.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#ReviewPolicyLevel": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Assignment",
+            "name": "Assignment"
+          },
+          {
+            "value": "HIT",
+            "name": "HIT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#ReviewPolicyLevelList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#ReviewPolicyLevel"
+      }
+    },
+    "com.amazonaws.mturk#ReviewReport": {
+      "type": "structure",
+      "members": {
+        "ReviewActions": {
+          "target": "com.amazonaws.mturk#ReviewActionDetailList",
+          "traits": {
+            "smithy.api#documentation": "<p> A list of ReviewAction objects for each action specified in\n            the Review Policy.\n        </p>"
+          }
+        },
+        "ReviewResults": {
+          "target": "com.amazonaws.mturk#ReviewResultDetailList",
+          "traits": {
+            "smithy.api#documentation": "<p> A list of ReviewResults objects for each action specified in\n            the Review Policy.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> Contains both ReviewResult and ReviewAction elements for a\n            particular HIT.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#ReviewResultDetail": {
+      "type": "structure",
+      "members": {
+        "QuestionId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> Specifies the QuestionId the result is describing. Depending\n            on whether the TargetType is a HIT or Assignment this results could\n            specify multiple values. If TargetType is HIT and QuestionId is\n            absent, then the result describes results of the HIT, including the\n            HIT agreement score. If ObjectType is Assignment and QuestionId is\n            absent, then the result describes the Worker's performance on the\n            HIT.\n        </p>"
+          }
+        },
+        "ActionId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p> A unique identifier of the Review action result.\n        </p>"
+          }
+        },
+        "Key": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> Key identifies the particular piece of reviewed information.\n        </p>"
+          }
+        },
+        "SubjectId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The HITID or AssignmentId about which this result was taken.\n            Note that HIT-level Review Policies will often emit results about\n            both the HIT itself and its Assignments, while Assignment-level\n            review policies generally only emit results about the Assignment\n            itself.\n        </p>"
+          }
+        },
+        "SubjectType": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The type of the object from the SubjectId field.</p>"
+          }
+        },
+        "Value": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> The values of Key provided by the review policies you have\n            selected.\n        </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> This data structure is returned multiple times for each\n            result specified in the Review Policy.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#ReviewResultDetailList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#ReviewResultDetail"
+      }
+    },
+    "com.amazonaws.mturk#ReviewableHITStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Reviewable",
+            "name": "Reviewable"
+          },
+          {
+            "value": "Reviewing",
+            "name": "Reviewing"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.mturk#SendBonus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#SendBonusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#SendBonusResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>SendBonus</code>\n            operation issues a payment of money from your account to a Worker.\n            This payment happens separately from the reward you pay to the Worker\n            when you approve the Worker's assignment. The SendBonus operation\n            requires the Worker's ID and the assignment ID as parameters to\n            initiate payment of the bonus. You must include a message that\n            explains the reason for the bonus payment, as the Worker may not be\n            expecting the payment. Amazon Mechanical Turk collects a fee for\n            bonus payments, similar to the HIT listing fee. This operation fails\n            if your account does not have enough funds to pay for both the bonus\n            and the fees.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#SendBonusRequest": {
+      "type": "structure",
+      "members": {
+        "AssignmentId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the assignment for which this bonus is paid.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message that explains the reason for the bonus payment. The\n            Worker receiving the bonus can see this message.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Worker being paid the bonus.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "BonusAmount": {
+          "target": "com.amazonaws.mturk#CurrencyAmount",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The Bonus amount is a US Dollar amount specified using a string (for example, \"5\" represents $5.00 USD and\n            \"101.42\" represents $101.42 USD). Do not include currency symbols or currency codes.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "UniqueRequestToken": {
+          "target": "com.amazonaws.mturk#IdempotencyToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for this request, which allows you to\n            retry the call on error without granting multiple bonuses. This is\n            useful in cases such as network timeouts where it is unclear whether\n            or not the call succeeded on the server. If the bonus already exists\n            in the system from a previous call using the same UniqueRequestToken,\n            subsequent calls will return an error with a message containing the\n            request ID.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#SendBonusResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#SendTestEventNotification": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#SendTestEventNotificationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#SendTestEventNotificationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>SendTestEventNotification</code> operation causes Amazon Mechanical Turk to send\n            a notification message as if a HIT event occurred, according to the provided\n            notification specification. This allows you to test notifications without\n            setting up notifications for a real HIT type and trying to trigger them using the website.\n            When you call this operation, the service attempts to send the test notification immediately.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#SendTestEventNotificationRequest": {
+      "type": "structure",
+      "members": {
+        "Notification": {
+          "target": "com.amazonaws.mturk#NotificationSpecification",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The notification specification to test. This value is identical to the value\n            you would provide to the UpdateNotificationSettings operation when you establish\n            the notification specification for a HIT type.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "TestEventType": {
+          "target": "com.amazonaws.mturk#EventType",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The event to simulate to test the notification specification.\n            This event is included in the test message even if the notification specification\n            does not include the event type.\n            The notification specification does not filter out the test event.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#SendTestEventNotificationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#ServiceFault": {
+      "type": "structure",
+      "members": {
+        "TurkErrorCode": {
+          "target": "com.amazonaws.mturk#TurkErrorCode"
+        },
+        "Message": {
+          "target": "com.amazonaws.mturk#ExceptionMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Amazon Mechanical Turk is temporarily unable to process your request. Try your call again.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.mturk#String": {
+      "type": "string"
+    },
+    "com.amazonaws.mturk#StringList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#String"
+      }
+    },
+    "com.amazonaws.mturk#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.mturk#TurkErrorCode": {
+      "type": "string"
+    },
+    "com.amazonaws.mturk#UpdateExpirationForHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#UpdateExpirationForHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#UpdateExpirationForHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>UpdateExpirationForHIT</code> operation allows you update the expiration time of a HIT.\n            If you update it to a time in the past, the HIT will be immediately expired.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#UpdateExpirationForHITRequest": {
+      "type": "structure",
+      "members": {
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The HIT to update.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ExpireAt": {
+          "target": "com.amazonaws.mturk#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The date and time at which you want the HIT to expire\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#UpdateExpirationForHITResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#UpdateHITReviewStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#UpdateHITReviewStatusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#UpdateHITReviewStatusResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>UpdateHITReviewStatus</code> operation updates the status of a HIT.\n            If the status is Reviewable, this operation can update the status to Reviewing,\n            or it can revert a Reviewing HIT back to the Reviewable status.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#UpdateHITReviewStatusRequest": {
+      "type": "structure",
+      "members": {
+        "Revert": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Specifies how to update the HIT status. Default is <code>False</code>.\n        </p>\n        <ul>\n            <li>\n                <p>\n                    Setting this to false will only transition a HIT from <code>Reviewable</code> to <code>Reviewing</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    Setting this to true will only transition a HIT from <code>Reviewing</code> to <code>Reviewable</code>\n                </p>\n            </li>\n         </ul>"
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the HIT to update.\n        </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#UpdateHITReviewStatusResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#UpdateHITTypeOfHIT": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#UpdateHITTypeOfHITRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#UpdateHITTypeOfHITResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>UpdateHITTypeOfHIT</code>\n            operation allows you to change the HITType properties of a HIT. This\n            operation disassociates the HIT from its old HITType properties and\n            associates it with the new HITType properties. The HIT takes on the\n            properties of the new HITType in place of the old ones.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#UpdateHITTypeOfHITRequest": {
+      "type": "structure",
+      "members": {
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the new HIT type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "HITId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The HIT to update.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#UpdateHITTypeOfHITResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#UpdateNotificationSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#UpdateNotificationSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#UpdateNotificationSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The <code>UpdateNotificationSettings</code> operation creates, updates,\n            disables or re-enables notifications for a HIT type.\n            If you call the UpdateNotificationSettings operation for a HIT type that already has a\n            notification specification, the operation replaces the old specification with a new one.\n            You can call the UpdateNotificationSettings operation to enable or disable notifications\n            for the HIT type, without having to modify the notification specification itself by providing\n            updates to the Active status without specifying a new notification specification.\n            To change the Active status of a HIT type's notifications,\n            the HIT type must already have a notification specification,\n            or one must be provided in the same call to <code>UpdateNotificationSettings</code>.\n        </p>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.mturk#UpdateNotificationSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "Active": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            Specifies whether notifications are sent for HITs of this HIT type,\n            according to the notification specification.\n            You must specify either the Notification parameter or the Active parameter\n            for the call to UpdateNotificationSettings to succeed.\n        </p>"
+          }
+        },
+        "HITTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The ID of the HIT type whose notification specification is being updated.\n        </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Notification": {
+          "target": "com.amazonaws.mturk#NotificationSpecification",
+          "traits": {
+            "smithy.api#documentation": "<p>\n            The notification specification for the HIT type.\n        </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#UpdateNotificationSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.mturk#UpdateQualificationType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.mturk#UpdateQualificationTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.mturk#UpdateQualificationTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.mturk#RequestError"
+        },
+        {
+          "target": "com.amazonaws.mturk#ServiceFault"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>\n            The\n            <code>UpdateQualificationType</code>\n            operation modifies the attributes of an existing Qualification type,\n            which is represented by a QualificationType data structure. Only the\n            owner of a Qualification type can modify its attributes.\n        </p>\n        <p> Most attributes of a Qualification type can be changed after\n            the type has been created. However, the Name and Keywords fields\n            cannot be modified. The RetryDelayInSeconds parameter can be modified\n            or added to change the delay or to enable retries, but\n            RetryDelayInSeconds cannot be used to disable retries. </p>\n        <p> You can use this operation to update the test for a\n            Qualification type. The test is updated based on the values specified\n            for the Test, TestDurationInSeconds and AnswerKey parameters. All\n            three parameters specify the updated test. If you are updating the\n            test for a type, you must specify the Test and TestDurationInSeconds\n            parameters. The AnswerKey parameter is optional; omitting it specifies\n            that the updated test does not have an answer key. </p>\n        <p> If you omit the Test parameter, the test for the\n            Qualification type is unchanged. There is no way to remove a test from\n            a Qualification type that has one. If the type already has a test, you\n            cannot update it to be AutoGranted. If the Qualification type does not\n            have a test and one is provided by an update, the type will henceforth\n            have a test. </p>\n        <p> If you want to update the test duration or answer key for an\n            existing test without changing the questions, you must specify a Test\n            parameter with the original questions, along with the updated values. </p>\n        <p> If you provide an updated Test but no AnswerKey, the new test\n            will not have an answer key. Requests for such Qualifications must be\n            granted manually. </p>\n        <p> You can also update the AutoGranted and AutoGrantedValue\n            attributes of the Qualification type.</p>"
+      }
+    },
+    "com.amazonaws.mturk#UpdateQualificationTypeRequest": {
+      "type": "structure",
+      "members": {
+        "QualificationTypeId": {
+          "target": "com.amazonaws.mturk#EntityId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the Qualification type to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RetryDelayInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The amount of time, in seconds, that Workers must wait\n            after requesting a Qualification of the specified Qualification type\n            before they can retry the Qualification request. It is not possible to\n            disable retries for a Qualification type after it has been created with\n            retries enabled. If you want to disable retries, you must dispose of\n            the existing retry-enabled Qualification type using\n            DisposeQualificationType and then create a new Qualification type with\n            retries disabled using CreateQualificationType.</p>"
+          }
+        },
+        "AutoGranted": {
+          "target": "com.amazonaws.mturk#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies whether requests for the Qualification type are granted immediately, without prompting the Worker with a Qualification test.</p>\n        <p>Constraints: If the Test parameter is specified, this parameter cannot be true.</p>"
+          }
+        },
+        "AnswerKey": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The answers to the Qualification test specified in the Test parameter, in the form of an AnswerKey data structure.</p>"
+          }
+        },
+        "TestDurationInSeconds": {
+          "target": "com.amazonaws.mturk#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of seconds the Worker has to complete the Qualification test, starting from the time the Worker requests the Qualification.</p>"
+          }
+        },
+        "QualificationTypeStatus": {
+          "target": "com.amazonaws.mturk#QualificationTypeStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The new status of the Qualification type - Active | Inactive</p>"
+          }
+        },
+        "AutoGrantedValue": {
+          "target": "com.amazonaws.mturk#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The Qualification value to use for automatically granted Qualifications. This parameter is used only if the AutoGranted parameter is true.</p>"
+          }
+        },
+        "Test": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The questions for the Qualification test a Worker must answer correctly to obtain a Qualification of this type. If this parameter is specified, <code>TestDurationInSeconds</code> must also be specified.</p>\n        <p>Constraints: Must not be longer than 65535 bytes. Must be a QuestionForm data structure. This parameter cannot be specified if AutoGranted is true.</p>\n        <p>Constraints: None. If not specified, the Worker may request the Qualification without answering any questions.</p>"
+          }
+        },
+        "Description": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The new description of the Qualification type.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#UpdateQualificationTypeResponse": {
+      "type": "structure",
+      "members": {
+        "QualificationType": {
+          "target": "com.amazonaws.mturk#QualificationType",
+          "traits": {
+            "smithy.api#documentation": "<p> Contains a QualificationType data structure.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.mturk#WorkerBlock": {
+      "type": "structure",
+      "members": {
+        "Reason": {
+          "target": "com.amazonaws.mturk#String",
+          "traits": {
+            "smithy.api#documentation": "<p> A message explaining the reason the Worker was blocked.\n        </p>"
+          }
+        },
+        "WorkerId": {
+          "target": "com.amazonaws.mturk#CustomerId",
+          "traits": {
+            "smithy.api#documentation": "<p> The ID of the Worker who accepted the HIT.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p> The WorkerBlock data structure represents a Worker who has\n            been blocked. It has two elements: the WorkerId and the Reason for\n            the block.\n        </p>"
+      }
+    },
+    "com.amazonaws.mturk#WorkerBlockList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.mturk#WorkerBlock"
+      }
+    }
+  }
+}

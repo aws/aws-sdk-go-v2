@@ -1,0 +1,201 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.personalizeevents#AmazonPersonalizeEvents": {
+      "type": "service",
+      "version": "2018-03-22",
+      "operations": [
+        {
+          "target": "com.amazonaws.personalizeevents#PutEvents"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "Personalize Events",
+          "arnNamespace": "personalize",
+          "cloudFormationName": "PersonalizeEvents",
+          "cloudTrailEventSource": "events.personalize.services.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "personalize"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#title": "Amazon Personalize Events"
+      }
+    },
+    "com.amazonaws.personalizeevents#Date": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.personalizeevents#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.personalizeevents#Event": {
+      "type": "structure",
+      "members": {
+        "eventType": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of event. This property corresponds to the <code>EVENT_TYPE</code>\n      field of the Interactions schema.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "properties": {
+          "target": "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON",
+          "traits": {
+            "smithy.api#documentation": "<p>A string map of event-specific data that you might choose to record. For example, if a\n      user rates a movie on your site, you might send the movie ID and rating, and the number of\n      movie ratings made by the user.</p>\n         <p>Each item in the map consists of a key-value pair. For example,</p>\n         <p>\n            <code>{\"itemId\": \"movie1\"}</code>\n         </p>\n         <p>\n            <code>{\"itemId\": \"movie2\", \"eventValue\": \"4.5\"}</code>\n         </p>\n         <p>\n            <code>{\"itemId\": \"movie3\", \"eventValue\": \"3\", \"numberOfRatings\": \"12\"}</code>\n         </p>\n         <p>The keys use camel case names that match the fields in the Interactions\n      schema. The <code>itemId</code> and <code>eventValue</code> keys correspond to the\n      <code>ITEM_ID</code> and <code>EVENT_VALUE</code> fields.\n      In the above example, the <code>eventType</code> might be 'MovieRating' with\n      <code>eventValue</code> being the rating. The <code>numberOfRatings</code> would match the\n      'NUMBER_OF_RATINGS' field defined in the Interactions schema.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "sentAt": {
+          "target": "com.amazonaws.personalizeevents#Date",
+          "traits": {
+            "smithy.api#documentation": "<p>The timestamp on the client side when the event occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "eventId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>An ID associated with the event. If an event ID is not provided, Amazon Personalize generates\n      a unique ID for the event. An event ID is not used as an input to the model. Amazon Personalize uses\n      the event ID to distinquish unique events. Any subsequent events after the first with the\n      same event ID are not used in model training.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents user interaction event information sent using the\n      <code>PutEvents</code> API.</p>"
+      }
+    },
+    "com.amazonaws.personalizeevents#EventList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.personalizeevents#Event"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#InvalidInputException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.personalizeevents#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provide a valid value for the field or parameter.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.personalizeevents#PutEvents": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.personalizeevents#PutEventsRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.personalizeevents#InvalidInputException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Records user interaction event data.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/events",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#PutEventsRequest": {
+      "type": "structure",
+      "members": {
+        "eventList": {
+          "target": "com.amazonaws.personalizeevents#EventList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of event data from the session.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "userId": {
+          "target": "com.amazonaws.personalizeevents#UserId",
+          "traits": {
+            "smithy.api#documentation": "<p>The user associated with the event.</p>"
+          }
+        },
+        "trackingId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>The tracking ID for the event.\n      The ID is generated by a call to the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html\">CreateEventTracker</a> API.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "sessionId": {
+          "target": "com.amazonaws.personalizeevents#StringType",
+          "traits": {
+            "smithy.api#documentation": "<p>The session ID associated with the user's visit.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#StringType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.personalizeevents#SynthesizedJsonEventPropertiesJSON": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        },
+        "smithy.api#mediaType": "application/json"
+      }
+    },
+    "com.amazonaws.personalizeevents#UserId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    }
+  }
+}

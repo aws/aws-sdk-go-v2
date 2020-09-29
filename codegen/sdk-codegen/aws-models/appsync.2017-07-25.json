@@ -1,0 +1,4781 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.appsync#AWSDeepdishControlPlaneService": {
+      "type": "service",
+      "version": "2017-07-25",
+      "operations": [
+        {
+          "target": "com.amazonaws.appsync#CreateApiCache"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateApiKey"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateDataSource"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateFunction"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateGraphqlApi"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateResolver"
+        },
+        {
+          "target": "com.amazonaws.appsync#CreateType"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteApiCache"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteApiKey"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteDataSource"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteFunction"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteGraphqlApi"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteResolver"
+        },
+        {
+          "target": "com.amazonaws.appsync#DeleteType"
+        },
+        {
+          "target": "com.amazonaws.appsync#FlushApiCache"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetApiCache"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetDataSource"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetFunction"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetGraphqlApi"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetIntrospectionSchema"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetResolver"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetSchemaCreationStatus"
+        },
+        {
+          "target": "com.amazonaws.appsync#GetType"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListApiKeys"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListDataSources"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListFunctions"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListGraphqlApis"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListResolvers"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListResolversByFunction"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.appsync#ListTypes"
+        },
+        {
+          "target": "com.amazonaws.appsync#StartSchemaCreation"
+        },
+        {
+          "target": "com.amazonaws.appsync#TagResource"
+        },
+        {
+          "target": "com.amazonaws.appsync#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateApiCache"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateApiKey"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateDataSource"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateFunction"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateGraphqlApi"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateResolver"
+        },
+        {
+          "target": "com.amazonaws.appsync#UpdateType"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "AppSync",
+          "arnNamespace": "appsync",
+          "cloudFormationName": "AppSync",
+          "cloudTrailEventSource": "controlplane.deepdish.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "appsync"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>AWS AppSync provides API actions for creating and interacting with data sources using\n         GraphQL from your application.</p>",
+        "smithy.api#title": "AWS AppSync",
+        "smithy.api#xmlNamespace": {
+          "uri": "http://appsync.amazonaws.com"
+        }
+      }
+    },
+    "com.amazonaws.appsync#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You do not have access to perform this operation on this resource.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.appsync#AdditionalAuthenticationProvider": {
+      "type": "structure",
+      "members": {
+        "userPoolConfig": {
+          "target": "com.amazonaws.appsync#CognitoUserPoolConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+          }
+        },
+        "openIDConnectConfig": {
+          "target": "com.amazonaws.appsync#OpenIDConnectConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The OpenID Connect configuration.</p>"
+          }
+        },
+        "authenticationType": {
+          "target": "com.amazonaws.appsync#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an additional authentication provider.</p>"
+      }
+    },
+    "com.amazonaws.appsync#AdditionalAuthenticationProviders": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#AdditionalAuthenticationProvider"
+      }
+    },
+    "com.amazonaws.appsync#ApiCache": {
+      "type": "structure",
+      "members": {
+        "apiCachingBehavior": {
+          "target": "com.amazonaws.appsync#ApiCachingBehavior",
+          "traits": {
+            "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resovlers\n               that you specify are cached.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.appsync#ApiCacheStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The cache instance status.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AVAILABLE</b>: The instance is available for\n               use.</p>\n            </li>\n            <li>\n               <p>\n                  <b>CREATING</b>: The instance is currently\n               creating.</p>\n            </li>\n            <li>\n               <p>\n                  <b>DELETING</b>: The instance is currently\n               deleting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>MODIFYING</b>: The instance is currently\n               modifying.</p>\n            </li>\n            <li>\n               <p>\n                  <b>FAILED</b>: The instance has failed\n               creation.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.appsync#ApiCacheType",
+          "traits": {
+            "smithy.api#documentation": "<p>The cache instance type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>T2_SMALL</b>: A t2.small instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>T2_MEDIUM</b>: A t2.medium instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_LARGE</b>: A r4.large instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_XLARGE</b>: A r4.xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_2XLARGE</b>: A r4.2xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_4XLARGE</b>: A r4.4xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_8XLARGE</b>: A r4.8xlarge instance\n               type.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "ttl": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>TTL in seconds for cache entries.</p>\n         <p>Valid values are between 1 and 3600 seconds.</p>"
+          }
+        },
+        "transitEncryptionEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Transit encryption flag when connecting to cache. This setting cannot be updated after\n         creation.</p>"
+          }
+        },
+        "atRestEncryptionEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>At rest encryption flag for cache. This setting cannot be updated after creation.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>ApiCache</code> object.</p>"
+      }
+    },
+    "com.amazonaws.appsync#ApiCacheStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AVAILABLE",
+            "name": "AVAILABLE"
+          },
+          {
+            "value": "CREATING",
+            "name": "CREATING"
+          },
+          {
+            "value": "DELETING",
+            "name": "DELETING"
+          },
+          {
+            "value": "MODIFYING",
+            "name": "MODIFYING"
+          },
+          {
+            "value": "FAILED",
+            "name": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#ApiCacheType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "T2_SMALL",
+            "name": "T2_SMALL"
+          },
+          {
+            "value": "T2_MEDIUM",
+            "name": "T2_MEDIUM"
+          },
+          {
+            "value": "R4_LARGE",
+            "name": "R4_LARGE"
+          },
+          {
+            "value": "R4_XLARGE",
+            "name": "R4_XLARGE"
+          },
+          {
+            "value": "R4_2XLARGE",
+            "name": "R4_2XLARGE"
+          },
+          {
+            "value": "R4_4XLARGE",
+            "name": "R4_4XLARGE"
+          },
+          {
+            "value": "R4_8XLARGE",
+            "name": "R4_8XLARGE"
+          },
+          {
+            "value": "SMALL",
+            "name": "SMALL"
+          },
+          {
+            "value": "MEDIUM",
+            "name": "MEDIUM"
+          },
+          {
+            "value": "LARGE",
+            "name": "LARGE"
+          },
+          {
+            "value": "XLARGE",
+            "name": "XLARGE"
+          },
+          {
+            "value": "LARGE_2X",
+            "name": "LARGE_2X"
+          },
+          {
+            "value": "LARGE_4X",
+            "name": "LARGE_4X"
+          },
+          {
+            "value": "LARGE_8X",
+            "name": "LARGE_8X"
+          },
+          {
+            "value": "LARGE_12X",
+            "name": "LARGE_12X"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#ApiCachingBehavior": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "FULL_REQUEST_CACHING",
+            "name": "FULL_REQUEST_CACHING"
+          },
+          {
+            "value": "PER_RESOLVER_CACHING",
+            "name": "PER_RESOLVER_CACHING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#ApiKey": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API key ID.</p>"
+          }
+        },
+        "expires": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time after which the API key expires. The date is represented as seconds since the\n         epoch, rounded down to the nearest hour.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the purpose of the API key.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an API key.</p>\n         <p>Customers invoke AWS AppSync GraphQL API operations with API keys as an identity\n         mechanism. There are two key versions:</p>\n         <p>\n            <b>da1</b>: This version was introduced at launch in November\n         2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB\n         TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that\n         date.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time in milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time in\n               milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> is not available for this key version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug\n               where keys are not automatically deleted because DynamoDB expects the TTL to be\n               stored in seconds. As a one-time action, we will delete these keys from the table\n               after February 21, 2018.</p>\n            </li>\n         </ul>\n         <p>\n            <b>da2</b>: This version was introduced in February 2018 when\n         AppSync added support to extend key expiration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time in seconds and accepts a\n               user-provided expiration time in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> returns the expiration time in seconds and accepts a\n               user-provided expiration time in seconds. Key expiration can only be updated while\n               the key has not expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as seconds.</p>\n            </li>\n         </ul>"
+      }
+    },
+    "com.amazonaws.appsync#ApiKeyLimitExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The API key exceeded a limit. Try your request again.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.appsync#ApiKeyValidityOutOfBoundsException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The API key expiration must be set to a value between 1 and 365 days from creation (for\n            <code>CreateApiKey</code>) or from update (for <code>UpdateApiKey</code>).</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.appsync#ApiKeys": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#ApiKey"
+      }
+    },
+    "com.amazonaws.appsync#ApiLimitExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The GraphQL API exceeded a limit. Try your request again.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.appsync#AuthenticationType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "API_KEY",
+            "name": "API_KEY"
+          },
+          {
+            "value": "AWS_IAM",
+            "name": "AWS_IAM"
+          },
+          {
+            "value": "AMAZON_COGNITO_USER_POOLS",
+            "name": "AMAZON_COGNITO_USER_POOLS"
+          },
+          {
+            "value": "OPENID_CONNECT",
+            "name": "OPENID_CONNECT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#AuthorizationConfig": {
+      "type": "structure",
+      "members": {
+        "authorizationType": {
+          "target": "com.amazonaws.appsync#AuthorizationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authorization type required by the HTTP endpoint.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AWS_IAM</b>: The authorization type is\n               Sigv4.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "awsIamConfig": {
+          "target": "com.amazonaws.appsync#AwsIamConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS IAM settings.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The authorization config in case the HTTP endpoint requires authorization.</p>"
+      }
+    },
+    "com.amazonaws.appsync#AuthorizationType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS_IAM",
+            "name": "AWS_IAM"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#AwsIamConfig": {
+      "type": "structure",
+      "members": {
+        "signingRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The signing region for AWS IAM authorization.</p>"
+          }
+        },
+        "signingServiceName": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The signing service name for AWS IAM authorization.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The AWS IAM configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#BadRequestException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request is not well formed. For example, a value is invalid or a required field is\n         missing. Check the field values, and then try again. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.appsync#Blob": {
+      "type": "blob"
+    },
+    "com.amazonaws.appsync#Boolean": {
+      "type": "boolean"
+    },
+    "com.amazonaws.appsync#BooleanValue": {
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.appsync#CachingConfig": {
+      "type": "structure",
+      "members": {
+        "ttl": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The TTL in seconds for a resolver that has caching enabled.</p>\n         <p>Valid values are between 1 and 3600 seconds.</p>"
+          }
+        },
+        "cachingKeys": {
+          "target": "com.amazonaws.appsync#CachingKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>The caching keys for a resolver that has caching enabled.</p>\n         <p>Valid values are entries from the <code>$context.arguments</code>,\n            <code>$context.source</code>, and <code>$context.identity</code> maps.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The caching configuration for a resolver that has caching enabled.</p>"
+      }
+    },
+    "com.amazonaws.appsync#CachingKeys": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#String"
+      }
+    },
+    "com.amazonaws.appsync#CognitoUserPoolConfig": {
+      "type": "structure",
+      "members": {
+        "appIdClientRegex": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID.</p>"
+          }
+        },
+        "awsRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Region in which the user pool was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "userPoolId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The user pool ID.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#ConcurrentModificationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Another modification is in progress at this time and it must complete before you can\n         make your change. </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.appsync#ConflictDetectionType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "VERSION",
+            "name": "VERSION"
+          },
+          {
+            "value": "NONE",
+            "name": "NONE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#ConflictHandlerType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "OPTIMISTIC_CONCURRENCY",
+            "name": "OPTIMISTIC_CONCURRENCY"
+          },
+          {
+            "value": "LAMBDA",
+            "name": "LAMBDA"
+          },
+          {
+            "value": "AUTOMERGE",
+            "name": "AUTOMERGE"
+          },
+          {
+            "value": "NONE",
+            "name": "NONE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#CreateApiCache": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateApiCacheRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateApiCacheResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a cache for the GraphQL API.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/ApiCaches",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateApiCacheRequest": {
+      "type": "structure",
+      "members": {
+        "apiCachingBehavior": {
+          "target": "com.amazonaws.appsync#ApiCachingBehavior",
+          "traits": {
+            "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resovlers\n               that you specify are cached.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.appsync#ApiCacheType",
+          "traits": {
+            "smithy.api#documentation": "<p>The cache instance type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>T2_SMALL</b>: A t2.small instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>T2_MEDIUM</b>: A t2.medium instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_LARGE</b>: A r4.large instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_XLARGE</b>: A r4.xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_2XLARGE</b>: A r4.2xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_4XLARGE</b>: A r4.4xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_8XLARGE</b>: A r4.8xlarge instance\n               type.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "atRestEncryptionEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>At rest encryption flag for cache. This setting cannot be updated after creation.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API Id.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "transitEncryptionEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Transit encryption flag when connecting to cache. This setting cannot be updated after\n         creation.</p>"
+          }
+        },
+        "ttl": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>TTL in seconds for cache entries.</p>\n         <p>Valid values are between 1 and 3600 seconds.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the input of a <code>CreateApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#CreateApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "target": "com.amazonaws.appsync#ApiCache",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ApiCache</code> object.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the output of a <code>CreateApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#CreateApiKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateApiKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateApiKeyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ApiKeyLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ApiKeyValidityOutOfBoundsException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a unique key that you can distribute to clients who are executing your\n         API.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/apikeys",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateApiKeyRequest": {
+      "type": "structure",
+      "members": {
+        "expires": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time from creation time after which the API key expires. The date is represented as\n         seconds since the epoch, rounded down to the nearest hour. The default value for this\n         parameter is 7 days from creation time. For more information, see .</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the purpose of the API key.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for your GraphQL API.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateApiKeyResponse": {
+      "type": "structure",
+      "members": {
+        "apiKey": {
+          "target": "com.amazonaws.appsync#ApiKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The API key.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateDataSource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateDataSourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateDataSourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a <code>DataSource</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/datasources",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateDataSourceRequest": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.appsync#DataSourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the <code>DataSource</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "relationalDatabaseConfig": {
+          "target": "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Relational database settings.</p>"
+          }
+        },
+        "lambdaConfig": {
+          "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS Lambda settings.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the <code>DataSource</code>.</p>"
+          }
+        },
+        "dynamodbConfig": {
+          "target": "com.amazonaws.appsync#DynamodbDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon DynamoDB settings.</p>"
+          }
+        },
+        "serviceRoleArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
+          }
+        },
+        "httpConfig": {
+          "target": "com.amazonaws.appsync#HttpDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP endpoint settings.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID for the GraphQL API for the <code>DataSource</code>.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>A user-supplied name for the <code>DataSource</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "elasticsearchConfig": {
+          "target": "com.amazonaws.appsync#ElasticsearchDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon Elasticsearch Service settings.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateDataSourceResponse": {
+      "type": "structure",
+      "members": {
+        "dataSource": {
+          "target": "com.amazonaws.appsync#DataSource",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DataSource</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateFunction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateFunctionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateFunctionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a <code>Function</code> object.</p>\n         <p>A function is a reusable entity. Multiple functions can be used to compose the resolver\n         logic.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/functions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateFunctionRequest": {
+      "type": "structure",
+      "members": {
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> response mapping template. </p>"
+          }
+        },
+        "functionVersion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code>\n            <code>DataSource</code> name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> name. The function name does not have to be unique.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> description.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> request mapping template. Functions support only the\n         2018-05-29 version of the request mapping template.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateFunctionResponse": {
+      "type": "structure",
+      "members": {
+        "functionConfiguration": {
+          "target": "com.amazonaws.appsync#FunctionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateGraphqlApi": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateGraphqlApiRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateGraphqlApiResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ApiLimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a <code>GraphqlApi</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateGraphqlApiRequest": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.appsync#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>TagMap</code> object.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A user-supplied name for the <code>GraphqlApi</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "logConfig": {
+          "target": "com.amazonaws.appsync#LogConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch Logs configuration.</p>"
+          }
+        },
+        "authenticationType": {
+          "target": "com.amazonaws.appsync#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "xrayEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag indicating whether to enable X-Ray tracing for the\n         <code>GraphqlApi</code>.</p>"
+          }
+        },
+        "userPoolConfig": {
+          "target": "com.amazonaws.appsync#UserPoolConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+          }
+        },
+        "openIDConnectConfig": {
+          "target": "com.amazonaws.appsync#OpenIDConnectConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The OpenID Connect configuration.</p>"
+          }
+        },
+        "additionalAuthenticationProviders": {
+          "target": "com.amazonaws.appsync#AdditionalAuthenticationProviders",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code>\n         API.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateGraphqlApiResponse": {
+      "type": "structure",
+      "members": {
+        "graphqlApi": {
+          "target": "com.amazonaws.appsync#GraphqlApi",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateResolver": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateResolverRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateResolverResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a <code>Resolver</code> object.</p>\n         <p>A resolver converts incoming requests into a format that a data source can understand\n         and converts the data source's responses into GraphQL.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/types/{typeName}/resolvers",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateResolverRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the GraphQL API for which the resolver is being created.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data source for which the resolver is being created.</p>"
+          }
+        },
+        "fieldName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the field to attach the resolver to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The mapping template to be used for responses from the data source.</p>"
+          }
+        },
+        "cachingConfig": {
+          "target": "com.amazonaws.appsync#CachingConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+          }
+        },
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The mapping template to be used for requests.</p>\n         <p>A resolver uses a request mapping template to convert a GraphQL expression into a format\n         that a data source can understand. Mapping templates are written in Apache Velocity\n         Template Language (VTL).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the <code>Type</code>.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "kind": {
+          "target": "com.amazonaws.appsync#ResolverKind",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is\n               the default resolver type. A UNIT resolver enables you to execute a GraphQL query\n               against a single data source.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE\n               resolver enables you to execute a series of <code>Function</code> in a serial manner.\n               You can use a pipeline resolver to execute a GraphQL query against multiple data\n               sources.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "pipelineConfig": {
+          "target": "com.amazonaws.appsync#PipelineConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>PipelineConfig</code>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateResolverResponse": {
+      "type": "structure",
+      "members": {
+        "resolver": {
+          "target": "com.amazonaws.appsync#Resolver",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Resolver</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#CreateTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#CreateTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a <code>Type</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/types",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateTypeRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appsync#TypeDefinitionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The type format: SDL or JSON.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type definition, in GraphQL Schema Definition Language (SDL) format.</p>\n         <p>For more information, see the <a href=\"http://graphql.org/learn/schema/\">GraphQL SDL\n            documentation</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#CreateTypeResponse": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.appsync#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Type</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DataSource": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.appsync#DataSourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon\n               DynamoDB table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an\n               Amazon Elasticsearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an AWS Lambda\n               function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. This type is\n               used when you wish to invoke a GraphQL operation without connecting to a data source,\n               such as performing data transformation with resolvers or triggering a subscription to\n               be invoked from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP\n               endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a\n               relational database.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "relationalDatabaseConfig": {
+          "target": "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Relational database settings.</p>"
+          }
+        },
+        "elasticsearchConfig": {
+          "target": "com.amazonaws.appsync#ElasticsearchDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon Elasticsearch Service settings.</p>"
+          }
+        },
+        "lambdaConfig": {
+          "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS Lambda settings.</p>"
+          }
+        },
+        "serviceRoleArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The description of the data source.</p>"
+          }
+        },
+        "dynamodbConfig": {
+          "target": "com.amazonaws.appsync#DynamodbDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon DynamoDB settings.</p>"
+          }
+        },
+        "httpConfig": {
+          "target": "com.amazonaws.appsync#HttpDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>HTTP endpoint settings.</p>"
+          }
+        },
+        "dataSourceArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The data source ARN.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data source.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a data source.</p>"
+      }
+    },
+    "com.amazonaws.appsync#DataSourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS_LAMBDA",
+            "name": "AWS_LAMBDA"
+          },
+          {
+            "value": "AMAZON_DYNAMODB",
+            "name": "AMAZON_DYNAMODB"
+          },
+          {
+            "value": "AMAZON_ELASTICSEARCH",
+            "name": "AMAZON_ELASTICSEARCH"
+          },
+          {
+            "value": "NONE",
+            "name": "NONE"
+          },
+          {
+            "value": "HTTP",
+            "name": "HTTP"
+          },
+          {
+            "value": "RELATIONAL_DATABASE",
+            "name": "RELATIONAL_DATABASE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#DataSources": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#DataSource"
+      }
+    },
+    "com.amazonaws.appsync#DefaultAction": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ALLOW",
+            "name": "ALLOW"
+          },
+          {
+            "value": "DENY",
+            "name": "DENY"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiCache": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteApiCacheRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteApiCacheResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an <code>ApiCache</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/ApiCaches",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiCacheRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the input of a <code>DeleteApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiCacheResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the output of a <code>DeleteApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteApiKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteApiKeyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an API key.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/apikeys/{id}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiKeyRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the API key.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteApiKeyResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeleteDataSource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteDataSourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteDataSourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a <code>DataSource</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/datasources/{name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteDataSourceRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data source.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteDataSourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeleteFunction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteFunctionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteFunctionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a <code>Function</code>.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/functions/{functionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteFunctionRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "functionId": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteFunctionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeleteGraphqlApi": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteGraphqlApiRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteGraphqlApiResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a <code>GraphqlApi</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteGraphqlApiRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteGraphqlApiResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeleteResolver": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteResolverRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteResolverResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a <code>Resolver</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteResolverRequest": {
+      "type": "structure",
+      "members": {
+        "fieldName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver field name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the resolver type.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteResolverResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeleteType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#DeleteTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#DeleteTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a <code>Type</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/types/{typeName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteTypeRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#DeleteTypeResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#DeltaSyncConfig": {
+      "type": "structure",
+      "members": {
+        "deltaSyncTableName": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Delta Sync table name.</p>"
+          }
+        },
+        "baseTableTTL": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of minutes an Item is stored in the datasource.</p>"
+          }
+        },
+        "deltaSyncTableTTL": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of minutes a Delta Sync log entry is stored in the Delta Sync table.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a Delta Sync configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#DynamodbDataSourceConfig": {
+      "type": "structure",
+      "members": {
+        "awsRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Region.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "useCallerCredentials": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set to TRUE to use Amazon Cognito credentials with this data source.</p>"
+          }
+        },
+        "versioned": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set to TRUE to use Conflict Detection and Resolution with this data source.</p>"
+          }
+        },
+        "deltaSyncConfig": {
+          "target": "com.amazonaws.appsync#DeltaSyncConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DeltaSyncConfig</code> for a versioned datasource.</p>"
+          }
+        },
+        "tableName": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The table name.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an Amazon DynamoDB data source configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#ElasticsearchDataSourceConfig": {
+      "type": "structure",
+      "members": {
+        "endpoint": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The endpoint.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "awsRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Region.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an Elasticsearch data source configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.appsync#FieldLogLevel": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "NONE",
+            "name": "NONE"
+          },
+          {
+            "value": "ERROR",
+            "name": "ERROR"
+          },
+          {
+            "value": "ALL",
+            "name": "ALL"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#FlushApiCache": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#FlushApiCacheRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#FlushApiCacheResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Flushes an <code>ApiCache</code> object.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/apis/{apiId}/FlushCache",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#FlushApiCacheRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the input of a <code>FlushApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#FlushApiCacheResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the output of a <code>FlushApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#FunctionConfiguration": {
+      "type": "structure",
+      "members": {
+        "functionId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique ID representing the <code>Function</code> object.</p>"
+          }
+        },
+        "functionVersion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The version of the request mapping template. Currently only the 2018-05-29 version of\n         the template is supported.</p>"
+          }
+        },
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> response mapping template.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the <code>Function</code> object.</p>"
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the <code>DataSource</code>.</p>"
+          }
+        },
+        "functionArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the <code>Function</code> object.</p>"
+          }
+        },
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> request mapping template. Functions support only the\n         2018-05-29 version of the request mapping template.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> description.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A function is a reusable entity. Multiple functions can be used to compose the resolver\n         logic.</p>"
+      }
+    },
+    "com.amazonaws.appsync#Functions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#FunctionConfiguration"
+      }
+    },
+    "com.amazonaws.appsync#FunctionsIds": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#String"
+      }
+    },
+    "com.amazonaws.appsync#GetApiCache": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetApiCacheRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetApiCacheResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves an <code>ApiCache</code> object.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/ApiCaches",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetApiCacheRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the input of a <code>GetApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#GetApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "target": "com.amazonaws.appsync#ApiCache",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ApiCache</code> object.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the output of a <code>GetApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#GetDataSource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetDataSourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetDataSourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a <code>DataSource</code> object.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/datasources/{name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetDataSourceRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the data source.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetDataSourceResponse": {
+      "type": "structure",
+      "members": {
+        "dataSource": {
+          "target": "com.amazonaws.appsync#DataSource",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DataSource</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetFunction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetFunctionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetFunctionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Get a <code>Function</code>.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/functions/{functionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetFunctionRequest": {
+      "type": "structure",
+      "members": {
+        "functionId": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetFunctionResponse": {
+      "type": "structure",
+      "members": {
+        "functionConfiguration": {
+          "target": "com.amazonaws.appsync#FunctionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetGraphqlApi": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetGraphqlApiRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetGraphqlApiResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a <code>GraphqlApi</code> object.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetGraphqlApiRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID for the GraphQL API.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetGraphqlApiResponse": {
+      "type": "structure",
+      "members": {
+        "graphqlApi": {
+          "target": "com.amazonaws.appsync#GraphqlApi",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetIntrospectionSchema": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetIntrospectionSchemaRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetIntrospectionSchemaResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#GraphQLSchemaException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the introspection schema for a GraphQL API.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/schema",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetIntrospectionSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "includeDirectives": {
+          "target": "com.amazonaws.appsync#BooleanValue",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag that specifies whether the schema introspection should contain directives.</p>",
+            "smithy.api#httpQuery": "includeDirectives"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appsync#OutputType",
+          "traits": {
+            "smithy.api#documentation": "<p>The schema format: SDL or JSON.</p>",
+            "smithy.api#httpQuery": "format",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetIntrospectionSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "schema": {
+          "target": "com.amazonaws.appsync#Blob",
+          "traits": {
+            "smithy.api#documentation": "<p>The schema, in GraphQL Schema Definition Language (SDL) format.</p>\n         <p>For more information, see the <a href=\"http://graphql.org/learn/schema/\">GraphQL SDL\n            documentation</a>.</p>",
+            "smithy.api#httpPayload": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetResolver": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetResolverRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetResolverResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a <code>Resolver</code> object.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetResolverRequest": {
+      "type": "structure",
+      "members": {
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "fieldName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver field name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetResolverResponse": {
+      "type": "structure",
+      "members": {
+        "resolver": {
+          "target": "com.amazonaws.appsync#Resolver",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Resolver</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetSchemaCreationStatus": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetSchemaCreationStatusRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetSchemaCreationStatusResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the current status of a schema creation operation.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/schemacreation",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetSchemaCreationStatusRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetSchemaCreationStatusResponse": {
+      "type": "structure",
+      "members": {
+        "details": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Detailed information about the status of the schema creation operation.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.appsync#SchemaStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When\n         the schema is in the ACTIVE state, you can add data.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#GetTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#GetTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a <code>Type</code> object.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/types/{typeName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetTypeRequest": {
+      "type": "structure",
+      "members": {
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appsync#TypeDefinitionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The type format: SDL or JSON.</p>",
+            "smithy.api#httpQuery": "format",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GetTypeResponse": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.appsync#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Type</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#GraphQLSchemaException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The GraphQL schema is not valid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.appsync#GraphqlApi": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.appsync#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags.</p>"
+          }
+        },
+        "xrayEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag representing whether X-Ray tracing is enabled for this\n         <code>GraphqlApi</code>.</p>"
+          }
+        },
+        "logConfig": {
+          "target": "com.amazonaws.appsync#LogConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch Logs configuration.</p>"
+          }
+        },
+        "authenticationType": {
+          "target": "com.amazonaws.appsync#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The authentication type.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The API name.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN.</p>"
+          }
+        },
+        "uris": {
+          "target": "com.amazonaws.appsync#MapOfStringToString",
+          "traits": {
+            "smithy.api#documentation": "<p>The URIs.</p>"
+          }
+        },
+        "userPoolConfig": {
+          "target": "com.amazonaws.appsync#UserPoolConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>"
+          }
+        },
+        "openIDConnectConfig": {
+          "target": "com.amazonaws.appsync#OpenIDConnectConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The OpenID Connect configuration.</p>"
+          }
+        },
+        "additionalAuthenticationProviders": {
+          "target": "com.amazonaws.appsync#AdditionalAuthenticationProviders",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code>\n         API.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a GraphQL API.</p>"
+      }
+    },
+    "com.amazonaws.appsync#GraphqlApis": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#GraphqlApi"
+      }
+    },
+    "com.amazonaws.appsync#HttpDataSourceConfig": {
+      "type": "structure",
+      "members": {
+        "endpoint": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The HTTP URL endpoint. You can either specify the domain name or IP, and port\n         combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS\n         AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS\n         endpoints.</p>"
+          }
+        },
+        "authorizationConfig": {
+          "target": "com.amazonaws.appsync#AuthorizationConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The authorization config in case the HTTP endpoint requires authorization.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an HTTP data source configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#InternalFailureException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An internal AWS AppSync error occurred. Try your request again.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500
+      }
+    },
+    "com.amazonaws.appsync#LambdaConflictHandlerConfig": {
+      "type": "structure",
+      "members": {
+        "lambdaConflictHandlerArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Arn for the Lambda function to use as the Conflict Handler.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>LambdaConflictHandlerConfig</code> object when configuring LAMBDA as the\n         Conflict Handler.</p>"
+      }
+    },
+    "com.amazonaws.appsync#LambdaDataSourceConfig": {
+      "type": "structure",
+      "members": {
+        "lambdaFunctionArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN for the Lambda function.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an AWS Lambda data source configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#LimitExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request exceeded a limit. Try your request again.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429
+      }
+    },
+    "com.amazonaws.appsync#ListApiKeys": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListApiKeysRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListApiKeysResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the API keys for a given API.</p>\n         <note>\n            <p>API keys are deleted automatically sometime after they expire. However, they may\n            still be included in the response until they have actually been deleted. You can safely\n            call <code>DeleteApiKey</code> to manually delete a key before it's automatically\n            deleted.</p>\n         </note>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/apikeys",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListApiKeysRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListApiKeysResponse": {
+      "type": "structure",
+      "members": {
+        "apiKeys": {
+          "target": "com.amazonaws.appsync#ApiKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ApiKey</code> objects.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier to be passed in the next request to this operation to return the next set\n         of items in the list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListDataSources": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListDataSourcesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListDataSourcesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the data sources for a given API.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/datasources",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListDataSourcesRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListDataSourcesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier to be passed in the next request to this operation to return the next set\n         of items in the list.</p>"
+          }
+        },
+        "dataSources": {
+          "target": "com.amazonaws.appsync#DataSources",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>DataSource</code> objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListFunctions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListFunctionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListFunctionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>List multiple functions.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/functions",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListFunctionsRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListFunctionsResponse": {
+      "type": "structure",
+      "members": {
+        "functions": {
+          "target": "com.amazonaws.appsync#Functions",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of <code>Function</code> objects.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListGraphqlApis": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListGraphqlApisRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListGraphqlApisResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists your GraphQL APIs.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListGraphqlApisRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListGraphqlApisResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier to be passed in the next request to this operation to return the next set\n         of items in the list.</p>"
+          }
+        },
+        "graphqlApis": {
+          "target": "com.amazonaws.appsync#GraphqlApis",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code> objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolvers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListResolversRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListResolversResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the resolvers for a given API and type.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/types/{typeName}/resolvers",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolversByFunction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListResolversByFunctionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListResolversByFunctionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>List the resolvers that are associated with a specific function.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/functions/{functionId}/resolvers",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolversByFunctionRequest": {
+      "type": "structure",
+      "members": {
+        "functionId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The Function ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which you can\n         use to return the next set of items in the list.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolversByFunctionResponse": {
+      "type": "structure",
+      "members": {
+        "resolvers": {
+          "target": "com.amazonaws.appsync#Resolvers",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of resolvers.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that can be used to return the next set of items in the list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolversRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListResolversResponse": {
+      "type": "structure",
+      "members": {
+        "resolvers": {
+          "target": "com.amazonaws.appsync#Resolvers",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Resolver</code> objects.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier to be passed in the next request to this operation to return the next set\n         of items in the list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the tags for a resource.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.appsync#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.appsync#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>TagMap</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTypes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#ListTypesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#ListTypesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the types for a given API.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/apis/{apiId}/types",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTypesRequest": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.appsync#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results you want the request to return.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appsync#TypeDefinitionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The type format: SDL or JSON.</p>",
+            "smithy.api#httpQuery": "format",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list. </p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#ListTypesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.appsync#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier to be passed in the next request to this operation to return the next set\n         of items in the list.</p>"
+          }
+        },
+        "types": {
+          "target": "com.amazonaws.appsync#TypeList",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Type</code> objects.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#LogConfig": {
+      "type": "structure",
+      "members": {
+        "fieldLogLevel": {
+          "target": "com.amazonaws.appsync#FieldLogLevel",
+          "traits": {
+            "smithy.api#documentation": "<p>The field logging level. Values can be NONE, ERROR, or ALL. </p>\n         <ul>\n            <li>\n               <p>\n                  <b>NONE</b>: No field-level logs are\n               captured.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ERROR</b>: Logs the following information only for\n               the fields that are in error:</p>\n               <ul>\n                  <li>\n                     <p>The error section in the server response.</p>\n                  </li>\n                  <li>\n                     <p>Field-level errors.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that got resolved for error\n                     fields.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <b>ALL</b>: The following information is logged for\n               all fields in the query:</p>\n               <ul>\n                  <li>\n                     <p>Field-level tracing information.</p>\n                  </li>\n                  <li>\n                     <p>The generated request/response functions that got resolved for each\n                     field.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "excludeVerboseContent": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Set to TRUE to exclude sections that contain information such as headers, context, and\n         evaluated mapping templates, regardless of logging level.</p>"
+          }
+        },
+        "cloudWatchLogsRoleArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in\n         your account. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The CloudWatch Logs configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#Long": {
+      "type": "long"
+    },
+    "com.amazonaws.appsync#MapOfStringToString": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.appsync#String"
+      },
+      "value": {
+        "target": "com.amazonaws.appsync#String"
+      }
+    },
+    "com.amazonaws.appsync#MappingTemplate": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 65536
+        }
+      }
+    },
+    "com.amazonaws.appsync#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 25
+        }
+      }
+    },
+    "com.amazonaws.appsync#NotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource specified in the request was not found. Check the resource, and then try\n         again.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.appsync#OpenIDConnectConfig": {
+      "type": "structure",
+      "members": {
+        "authTTL": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of milliseconds a token is valid after being authenticated.</p>"
+          }
+        },
+        "iatTTL": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The number of milliseconds a token is valid after being issued to a user.</p>"
+          }
+        },
+        "clientId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The client identifier of the Relying party at the OpenID identity provider. This\n         identifier is typically obtained when the Relying party is registered with the OpenID\n         identity provider. You can specify a regular expression so the AWS AppSync can validate\n         against multiple client identifiers at a time.</p>"
+          }
+        },
+        "issuer": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The issuer for the OpenID Connect configuration. The issuer returned by discovery must\n         exactly match the value of <code>iss</code> in the ID token.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an OpenID Connect configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#OutputType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SDL",
+            "name": "SDL"
+          },
+          {
+            "value": "JSON",
+            "name": "JSON"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 65536
+        },
+        "smithy.api#pattern": "[\\\\S]+"
+      }
+    },
+    "com.amazonaws.appsync#PipelineConfig": {
+      "type": "structure",
+      "members": {
+        "functions": {
+          "target": "com.amazonaws.appsync#FunctionsIds",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of <code>Function</code> objects.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The pipeline configuration for a resolver of kind <code>PIPELINE</code>.</p>"
+      }
+    },
+    "com.amazonaws.appsync#RdsHttpEndpointConfig": {
+      "type": "structure",
+      "members": {
+        "databaseName": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Logical database name.</p>"
+          }
+        },
+        "awsRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS Region for RDS HTTP endpoint.</p>"
+          }
+        },
+        "dbClusterIdentifier": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon RDS cluster ARN.</p>"
+          }
+        },
+        "schema": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>Logical schema name.</p>"
+          }
+        },
+        "awsSecretStoreArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>AWS secret store ARN for database credentials.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The Amazon RDS HTTP endpoint configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig": {
+      "type": "structure",
+      "members": {
+        "rdsHttpEndpointConfig": {
+          "target": "com.amazonaws.appsync#RdsHttpEndpointConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>Amazon RDS HTTP endpoint settings.</p>"
+          }
+        },
+        "relationalDatabaseSourceType": {
+          "target": "com.amazonaws.appsync#RelationalDatabaseSourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Source type for the relational database.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>RDS_HTTP_ENDPOINT</b>: The relational database\n               source type is an Amazon RDS HTTP endpoint.</p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a relational database data source configuration.</p>"
+      }
+    },
+    "com.amazonaws.appsync#RelationalDatabaseSourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "RDS_HTTP_ENDPOINT",
+            "name": "RDS_HTTP_ENDPOINT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#Resolver": {
+      "type": "structure",
+      "members": {
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver type name.</p>"
+          }
+        },
+        "cachingConfig": {
+          "target": "com.amazonaws.appsync#CachingConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver data source name.</p>"
+          }
+        },
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The response mapping template.</p>"
+          }
+        },
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The request mapping template.</p>"
+          }
+        },
+        "fieldName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver field name.</p>"
+          }
+        },
+        "resolverArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver ARN.</p>"
+          }
+        },
+        "pipelineConfig": {
+          "target": "com.amazonaws.appsync#PipelineConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>PipelineConfig</code>.</p>"
+          }
+        },
+        "kind": {
+          "target": "com.amazonaws.appsync#ResolverKind",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is\n               the default resolver type. A UNIT resolver enables you to execute a GraphQL query\n               against a single data source.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE\n               resolver enables you to execute a series of <code>Function</code> in a serial manner.\n               You can use a pipeline resolver to execute a GraphQL query against multiple data\n               sources.</p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a resolver.</p>"
+      }
+    },
+    "com.amazonaws.appsync#ResolverKind": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "UNIT",
+            "name": "UNIT"
+          },
+          {
+            "value": "PIPELINE",
+            "name": "PIPELINE"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#Resolvers": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#Resolver"
+      }
+    },
+    "com.amazonaws.appsync#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 70,
+          "max": 75
+        },
+        "smithy.api#pattern": "^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\\d{12}:apis/[0-9A-Za-z_-]{26}$"
+      }
+    },
+    "com.amazonaws.appsync#ResourceName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 65536
+        },
+        "smithy.api#pattern": "[_A-Za-z][_0-9A-Za-z]*"
+      }
+    },
+    "com.amazonaws.appsync#SchemaStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PROCESSING",
+            "name": "Processing"
+          },
+          {
+            "value": "ACTIVE",
+            "name": "Active"
+          },
+          {
+            "value": "DELETING",
+            "name": "Deleting"
+          },
+          {
+            "value": "FAILED",
+            "name": "Failed"
+          },
+          {
+            "value": "SUCCESS",
+            "name": "Success"
+          },
+          {
+            "value": "NOT_APPLICABLE",
+            "name": "NotApplicable"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#StartSchemaCreation": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#StartSchemaCreationRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#StartSchemaCreationResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds a new schema to your GraphQL API.</p>\n         <p>This operation is asynchronous. Use  to\n         determine when it has completed.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/schemacreation",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#StartSchemaCreationRequest": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.appsync#Blob",
+          "traits": {
+            "smithy.api#documentation": "<p>The schema definition, in GraphQL schema language format.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#StartSchemaCreationResponse": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.appsync#SchemaStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When\n         the schema is in the ACTIVE state, you can add data.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#String": {
+      "type": "string"
+    },
+    "com.amazonaws.appsync#SyncConfig": {
+      "type": "structure",
+      "members": {
+        "conflictHandler": {
+          "target": "com.amazonaws.appsync#ConflictHandlerType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Conflict Resolution strategy to perform in the event of a conflict.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>OPTIMISTIC_CONCURRENCY</b>: Resolve conflicts by\n               rejecting mutations when versions do not match the latest version at the\n               server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AUTOMERGE</b>: Resolve conflicts with the\n               Automerge conflict resolution strategy.</p>\n            </li>\n            <li>\n               <p>\n                  <b>LAMBDA</b>: Resolve conflicts with a Lambda\n               function supplied in the LambdaConflictHandlerConfig.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "lambdaConflictHandlerConfig": {
+          "target": "com.amazonaws.appsync#LambdaConflictHandlerConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>LambdaConflictHandlerConfig</code> when configuring LAMBDA as the Conflict\n         Handler.</p>"
+          }
+        },
+        "conflictDetection": {
+          "target": "com.amazonaws.appsync#ConflictDetectionType",
+          "traits": {
+            "smithy.api#documentation": "<p>The Conflict Detection strategy to use.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>VERSION</b>: Detect conflicts based on object\n               versions for this resolver.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: Do not detect conflicts when executing\n               this resolver.</p>\n            </li>\n         </ul>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a Sync configuration for a resolver.</p>\n         <p>Contains information on which Conflict Detection as well as Resolution strategy should\n         be performed when the resolver is invoked.</p>"
+      }
+    },
+    "com.amazonaws.appsync#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The key for the tag.</p>",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        },
+        "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+      }
+    },
+    "com.amazonaws.appsync#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#TagKey"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.appsync#TagMap": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.appsync#TagKey"
+      },
+      "value": {
+        "target": "com.amazonaws.appsync#TagValue"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code>\n         objects.</p>",
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.appsync#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Tags a resource with user-supplied tags.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.appsync#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.appsync#TagMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>TagMap</code> object.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#documentation": "<p>The value for the tag.</p>",
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.appsync#Type": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type definition.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type description.</p>"
+          }
+        },
+        "format": {
+          "target": "com.amazonaws.appsync#TypeDefinitionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The type format: SDL or JSON.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The type name.</p>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type ARN.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a type.</p>"
+      }
+    },
+    "com.amazonaws.appsync#TypeDefinitionFormat": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SDL",
+            "name": "SDL"
+          },
+          {
+            "value": "JSON",
+            "name": "JSON"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.appsync#TypeList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.appsync#Type"
+      }
+    },
+    "com.amazonaws.appsync#UnauthorizedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.appsync#String"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You are not authorized to perform this operation.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 401
+      }
+    },
+    "com.amazonaws.appsync#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Untags a resource.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "tagKeys": {
+          "target": "com.amazonaws.appsync#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of <code>TagKey</code> objects.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.appsync#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.appsync#UpdateApiCache": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateApiCacheRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateApiCacheResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the cache for the GraphQL API.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/ApiCaches/update",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateApiCacheRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API Id.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.appsync#ApiCacheType",
+          "traits": {
+            "smithy.api#documentation": "<p>The cache instance type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>T2_SMALL</b>: A t2.small instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>T2_MEDIUM</b>: A t2.medium instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_LARGE</b>: A r4.large instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_XLARGE</b>: A r4.xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_2XLARGE</b>: A r4.2xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_4XLARGE</b>: A r4.4xlarge instance\n               type.</p>\n            </li>\n            <li>\n               <p>\n                  <b>R4_8XLARGE</b>: A r4.8xlarge instance\n               type.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "apiCachingBehavior": {
+          "target": "com.amazonaws.appsync#ApiCachingBehavior",
+          "traits": {
+            "smithy.api#documentation": "<p>Caching behavior.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>FULL_REQUEST_CACHING</b>: All requests are fully\n               cached.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PER_RESOLVER_CACHING</b>: Individual resovlers\n               that you specify are cached.</p>\n            </li>\n         </ul>",
+            "smithy.api#required": {}
+          }
+        },
+        "ttl": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>TTL in seconds for cache entries.</p>\n         <p>Valid values are between 1 and 3600 seconds.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the input of a <code>UpdateApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#UpdateApiCacheResponse": {
+      "type": "structure",
+      "members": {
+        "apiCache": {
+          "target": "com.amazonaws.appsync#ApiCache",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>ApiCache</code> object.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Represents the output of a <code>UpdateApiCache</code> operation.</p>"
+      }
+    },
+    "com.amazonaws.appsync#UpdateApiKey": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateApiKeyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateApiKeyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ApiKeyValidityOutOfBoundsException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#LimitExceededException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an API key.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/apikeys/{id}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateApiKeyRequest": {
+      "type": "structure",
+      "members": {
+        "expires": {
+          "target": "com.amazonaws.appsync#Long",
+          "traits": {
+            "smithy.api#documentation": "<p>The time from update time after which the API key expires. The date is represented as\n         seconds since the epoch. For more information, see .</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID for the GraphQL API.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A description of the purpose of the API key.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API key ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateApiKeyResponse": {
+      "type": "structure",
+      "members": {
+        "apiKey": {
+          "target": "com.amazonaws.appsync#ApiKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The API key.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateDataSource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateDataSourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateDataSourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a <code>DataSource</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/datasources/{name}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateDataSourceRequest": {
+      "type": "structure",
+      "members": {
+        "dynamodbConfig": {
+          "target": "com.amazonaws.appsync#DynamodbDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new Amazon DynamoDB configuration.</p>"
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "relationalDatabaseConfig": {
+          "target": "com.amazonaws.appsync#RelationalDatabaseDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new relational database configuration.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.appsync#DataSourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The new data source type.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "lambdaConfig": {
+          "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new AWS Lambda configuration.</p>"
+          }
+        },
+        "serviceRoleArn": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The new service role ARN for the data source.</p>"
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The new description for the data source.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new name for the data source.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "httpConfig": {
+          "target": "com.amazonaws.appsync#HttpDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new HTTP endpoint configuration.</p>"
+          }
+        },
+        "elasticsearchConfig": {
+          "target": "com.amazonaws.appsync#ElasticsearchDataSourceConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new Elasticsearch Service configuration.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateDataSourceResponse": {
+      "type": "structure",
+      "members": {
+        "dataSource": {
+          "target": "com.amazonaws.appsync#DataSource",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>DataSource</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateFunction": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateFunctionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateFunctionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a <code>Function</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/functions/{functionId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateFunctionRequest": {
+      "type": "structure",
+      "members": {
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The GraphQL API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "description": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> description.</p>"
+          }
+        },
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> request mapping template. Functions support only the\n         2018-05-29 version of the request mapping template.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code>\n            <code>DataSource</code> name.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "functionId": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The function ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> request mapping template. </p>"
+          }
+        },
+        "functionVersion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateFunctionResponse": {
+      "type": "structure",
+      "members": {
+        "functionConfiguration": {
+          "target": "com.amazonaws.appsync#FunctionConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>Function</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateGraphqlApi": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateGraphqlApiRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateGraphqlApiResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a <code>GraphqlApi</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateGraphqlApiRequest": {
+      "type": "structure",
+      "members": {
+        "logConfig": {
+          "target": "com.amazonaws.appsync#LogConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon CloudWatch Logs configuration for the <code>GraphqlApi</code> object.</p>"
+          }
+        },
+        "additionalAuthenticationProviders": {
+          "target": "com.amazonaws.appsync#AdditionalAuthenticationProviders",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code>\n         API.</p>"
+          }
+        },
+        "xrayEnabled": {
+          "target": "com.amazonaws.appsync#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A flag indicating whether to enable X-Ray tracing for the\n         <code>GraphqlApi</code>.</p>"
+          }
+        },
+        "userPoolConfig": {
+          "target": "com.amazonaws.appsync#UserPoolConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The new Amazon Cognito user pool configuration for the <code>GraphqlApi</code>\n         object.</p>"
+          }
+        },
+        "authenticationType": {
+          "target": "com.amazonaws.appsync#AuthenticationType",
+          "traits": {
+            "smithy.api#documentation": "<p>The new authentication type for the <code>GraphqlApi</code> object.</p>"
+          }
+        },
+        "openIDConnectConfig": {
+          "target": "com.amazonaws.appsync#OpenIDConnectConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The OpenID Connect configuration for the <code>GraphqlApi</code> object.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The new name for the <code>GraphqlApi</code> object.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateGraphqlApiResponse": {
+      "type": "structure",
+      "members": {
+        "graphqlApi": {
+          "target": "com.amazonaws.appsync#GraphqlApi",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>GraphqlApi</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateResolver": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateResolverRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateResolverResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a <code>Resolver</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateResolverRequest": {
+      "type": "structure",
+      "members": {
+        "requestMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The new request mapping template.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "kind": {
+          "target": "com.amazonaws.appsync#ResolverKind",
+          "traits": {
+            "smithy.api#documentation": "<p>The resolver type.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>UNIT</b>: A UNIT resolver type. A UNIT resolver is\n               the default resolver type. A UNIT resolver enables you to execute a GraphQL query\n               against a single data source.</p>\n            </li>\n            <li>\n               <p>\n                  <b>PIPELINE</b>: A PIPELINE resolver type. A PIPELINE\n               resolver enables you to execute a series of <code>Function</code> in a serial manner.\n               You can use a pipeline resolver to execute a GraphQL query against multiple data\n               sources.</p>\n            </li>\n         </ul>"
+          }
+        },
+        "dataSourceName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new data source name.</p>"
+          }
+        },
+        "pipelineConfig": {
+          "target": "com.amazonaws.appsync#PipelineConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>PipelineConfig</code>.</p>"
+          }
+        },
+        "syncConfig": {
+          "target": "com.amazonaws.appsync#SyncConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>SyncConfig</code> for a resolver attached to a versioned datasource.</p>"
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "responseMappingTemplate": {
+          "target": "com.amazonaws.appsync#MappingTemplate",
+          "traits": {
+            "smithy.api#documentation": "<p>The new response mapping template.</p>"
+          }
+        },
+        "cachingConfig": {
+          "target": "com.amazonaws.appsync#CachingConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The caching configuration for the resolver.</p>"
+          }
+        },
+        "fieldName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new field name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateResolverResponse": {
+      "type": "structure",
+      "members": {
+        "resolver": {
+          "target": "com.amazonaws.appsync#Resolver",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>Resolver</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateType": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.appsync#UpdateTypeRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.appsync#UpdateTypeResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.appsync#BadRequestException"
+        },
+        {
+          "target": "com.amazonaws.appsync#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.appsync#InternalFailureException"
+        },
+        {
+          "target": "com.amazonaws.appsync#NotFoundException"
+        },
+        {
+          "target": "com.amazonaws.appsync#UnauthorizedException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a <code>Type</code> object.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/apis/{apiId}/types/{typeName}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateTypeRequest": {
+      "type": "structure",
+      "members": {
+        "format": {
+          "target": "com.amazonaws.appsync#TypeDefinitionFormat",
+          "traits": {
+            "smithy.api#documentation": "<p>The new type format: SDL or JSON.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "typeName": {
+          "target": "com.amazonaws.appsync#ResourceName",
+          "traits": {
+            "smithy.api#documentation": "<p>The new type name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "apiId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The API ID.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The new definition.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UpdateTypeResponse": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.appsync#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The updated <code>Type</code> object.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.appsync#UserPoolConfig": {
+      "type": "structure",
+      "members": {
+        "appIdClientRegex": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client\n         ID.</p>"
+          }
+        },
+        "awsRegion": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS Region in which the user pool was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "defaultAction": {
+          "target": "com.amazonaws.appsync#DefaultAction",
+          "traits": {
+            "smithy.api#documentation": "<p>The action that you want your GraphQL API to take when a request that uses Amazon\n         Cognito user pool authentication doesn't match the Amazon Cognito user pool\n         configuration.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "userPoolId": {
+          "target": "com.amazonaws.appsync#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The user pool ID.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
+      }
+    }
+  }
+}

@@ -1,0 +1,1636 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.lakeformation#AWSLakeFormation": {
+      "type": "service",
+      "version": "2017-03-31",
+      "operations": [
+        {
+          "target": "com.amazonaws.lakeformation#BatchGrantPermissions"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#BatchRevokePermissions"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#DeregisterResource"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#DescribeResource"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#GetDataLakeSettings"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#GetEffectivePermissionsForPath"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#GrantPermissions"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#ListPermissions"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#ListResources"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#PutDataLakeSettings"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#RegisterResource"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#RevokePermissions"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#UpdateResource"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "LakeFormation",
+          "arnNamespace": "lakeformation",
+          "cloudFormationName": "LakeFormation",
+          "cloudTrailEventSource": "lakeformation.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "lakeformation"
+        },
+        "aws.protocols#awsJson1_1": {},
+        "smithy.api#documentation": "<fullname>AWS Lake Formation</fullname>\n         <p>Defines the public endpoint for the AWS Lake Formation service.</p>",
+        "smithy.api#title": "AWS Lake Formation"
+      }
+    },
+    "com.amazonaws.lakeformation#AlreadyExistsException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A resource to be created or added already exists.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchGrantPermissions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#BatchGrantPermissionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#BatchGrantPermissionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Batch operation to grant permissions to the principal.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchGrantPermissionsRequest": {
+      "type": "structure",
+      "members": {
+        "Entries": {
+          "target": "com.amazonaws.lakeformation#BatchPermissionsRequestEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of up to 20 entries for resource permissions to be granted by batch operation to the principal.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#BatchGrantPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "target": "com.amazonaws.lakeformation#BatchPermissionsFailureList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of failures to grant permissions to the resources.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#BatchPermissionsFailureEntry": {
+      "type": "structure",
+      "members": {
+        "RequestEntry": {
+          "target": "com.amazonaws.lakeformation#BatchPermissionsRequestEntry",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier for an entry of the batch request.</p>"
+          }
+        },
+        "Error": {
+          "target": "com.amazonaws.lakeformation#ErrorDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>An error message that applies to the failure of the entry.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A list of failures when performing a batch grant or batch revoke operation.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchPermissionsFailureList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#BatchPermissionsFailureEntry"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchPermissionsRequestEntry": {
+      "type": "structure",
+      "members": {
+        "PermissionsWithGrantOption": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates if the option to pass permissions is granted.</p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal to be granted a permission.</p>"
+          }
+        },
+        "Id": {
+          "target": "com.amazonaws.lakeformation#Identifier",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the batch permissions request entry.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Resource": {
+          "target": "com.amazonaws.lakeformation#Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource to which the principal is to be granted a permission.</p>"
+          }
+        },
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions to be granted.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A permission to a resource granted by batch operation to the principal.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchPermissionsRequestEntryList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#BatchPermissionsRequestEntry"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchRevokePermissions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#BatchRevokePermissionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#BatchRevokePermissionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Batch operation to revoke permissions from the principal.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#BatchRevokePermissionsRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        },
+        "Entries": {
+          "target": "com.amazonaws.lakeformation#BatchPermissionsRequestEntryList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of up to 20 entries for resource permissions to be revoked by batch operation to the principal.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#BatchRevokePermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "target": "com.amazonaws.lakeformation#BatchPermissionsFailureList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of failures to revoke permissions to the resources.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#CatalogIdString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+      }
+    },
+    "com.amazonaws.lakeformation#CatalogResource": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for the catalog object.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#ColumnNames": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#NameString"
+      }
+    },
+    "com.amazonaws.lakeformation#ColumnWildcard": {
+      "type": "structure",
+      "members": {
+        "ExcludedColumnNames": {
+          "target": "com.amazonaws.lakeformation#ColumnNames",
+          "traits": {
+            "smithy.api#documentation": "<p>Excludes column names. Any column with this name will be excluded.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A wildcard object, consisting of an optional list of excluded column names or indexes.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#ComparisonOperator": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "EQ",
+            "name": "EQ"
+          },
+          {
+            "value": "NE",
+            "name": "NE"
+          },
+          {
+            "value": "LE",
+            "name": "LE"
+          },
+          {
+            "value": "LT",
+            "name": "LT"
+          },
+          {
+            "value": "GE",
+            "name": "GE"
+          },
+          {
+            "value": "GT",
+            "name": "GT"
+          },
+          {
+            "value": "CONTAINS",
+            "name": "CONTAINS"
+          },
+          {
+            "value": "NOT_CONTAINS",
+            "name": "NOT_CONTAINS"
+          },
+          {
+            "value": "BEGINS_WITH",
+            "name": "BEGINS_WITH"
+          },
+          {
+            "value": "IN",
+            "name": "IN"
+          },
+          {
+            "value": "BETWEEN",
+            "name": "BETWEEN"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.lakeformation#ConcurrentModificationException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Two processes are trying to modify a resource simultaneously.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.lakeformation#DataLakePrincipal": {
+      "type": "structure",
+      "members": {
+        "DataLakePrincipalIdentifier": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipalString",
+          "traits": {
+            "smithy.api#documentation": "<p>An identifier for the AWS Lake Formation principal.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The AWS Lake Formation principal. Supported principals are IAM users or IAM roles.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DataLakePrincipalList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#DataLakePrincipal"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#DataLakePrincipalString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#DataLakeResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "CATALOG",
+            "name": "CATALOG"
+          },
+          {
+            "value": "DATABASE",
+            "name": "DATABASE"
+          },
+          {
+            "value": "TABLE",
+            "name": "TABLE"
+          },
+          {
+            "value": "DATA_LOCATION",
+            "name": "DATA_LOCATION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.lakeformation#DataLakeSettings": {
+      "type": "structure",
+      "members": {
+        "CreateTableDefaultPermissions": {
+          "target": "com.amazonaws.lakeformation#PrincipalPermissionsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure representing a list of up to three principal permissions entries for default create table permissions.</p>"
+          }
+        },
+        "CreateDatabaseDefaultPermissions": {
+          "target": "com.amazonaws.lakeformation#PrincipalPermissionsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure representing a list of up to three principal permissions entries for default create database permissions.</p>"
+          }
+        },
+        "DataLakeAdmins": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of AWS Lake Formation principals. Supported principals are IAM users or IAM roles.</p>"
+          }
+        },
+        "TrustedResourceOwners": {
+          "target": "com.amazonaws.lakeformation#TrustedResourceOwners",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the resource-owning account IDs that the caller's account can use to share their user access details (user ARNs). The user ARNs can be logged in the resource owner's AWS CloudTrail log.</p>\n\t\n\t        <p>You may want to specify this property when you are in a high-trust boundary, such as the same team or company. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators and lists of principal permission entries for default create database and default create table permissions.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DataLocationResource": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog where the location is registered with AWS Lake Formation. By default, it is the account ID of the caller.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the data location resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for a data location object where permissions are granted or revoked. </p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DatabaseResource": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database resource. Unique to the Data Catalog.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, it is the account ID of the caller.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for the database object.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DeregisterResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#DeregisterResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#DeregisterResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deregisters the resource as managed by the Data Catalog.</p>\n\t\n         <p>When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DeregisterResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to deregister.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#DeregisterResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.lakeformation#DescribeResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#DescribeResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#DescribeResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the current data access role for the given resource registered in AWS Lake Formation.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#DescribeResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource ARN.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#DescribeResourceResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceInfo": {
+          "target": "com.amazonaws.lakeformation#ResourceInfo",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure containing information about an AWS Lake Formation resource.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#DescriptionString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 2048
+        },
+        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+      }
+    },
+    "com.amazonaws.lakeformation#EntityNotFoundException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A specified entity does not exist</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.lakeformation#ErrorDetail": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The code associated with this error.</p>"
+          }
+        },
+        "ErrorMessage": {
+          "target": "com.amazonaws.lakeformation#DescriptionString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the error.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an error.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#FieldNameString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "RESOURCE_ARN",
+            "name": "RESOURCE_ARN"
+          },
+          {
+            "value": "ROLE_ARN",
+            "name": "ROLE_ARN"
+          },
+          {
+            "value": "LAST_MODIFIED",
+            "name": "LAST_MODIFIED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.lakeformation#FilterCondition": {
+      "type": "structure",
+      "members": {
+        "Field": {
+          "target": "com.amazonaws.lakeformation#FieldNameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The field to filter in the filter condition.</p>"
+          }
+        },
+        "ComparisonOperator": {
+          "target": "com.amazonaws.lakeformation#ComparisonOperator",
+          "traits": {
+            "smithy.api#documentation": "<p>The comparison operator used in the filter condition.</p>"
+          }
+        },
+        "StringValueList": {
+          "target": "com.amazonaws.lakeformation#StringValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>A string with values used in evaluating the filter condition.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>This structure describes the filtering of columns in a table based on a filter condition.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#FilterConditionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#FilterCondition"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 20
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GetDataLakeSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#GetDataLakeSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#GetDataLakeSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the list of the data lake administrators of a Lake Formation-managed data lake. </p>"
+      }
+    },
+    "com.amazonaws.lakeformation#GetDataLakeSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GetDataLakeSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "DataLakeSettings": {
+          "target": "com.amazonaws.lakeformation#DataLakeSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GetEffectivePermissionsForPath": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#GetEffectivePermissionsForPathRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#GetEffectivePermissionsForPathResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the Lake Formation permissions for a specified table or database resource located\n      at a path in Amazon S3. <code>GetEffectivePermissionsForPath</code> will not return databases and tables if the catalog is encrypted.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GetEffectivePermissionsForPathRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want to get permissions.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.lakeformation#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GetEffectivePermissionsForPathResponse": {
+      "type": "structure",
+      "members": {
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PrincipalResourcePermissionsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of the permissions for the specified table or database resource located at the path in Amazon S3.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GrantPermissions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#GrantPermissionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#GrantPermissionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>\n\t        <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#GrantPermissionsRequest": {
+      "type": "structure",
+      "members": {
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions granted to the principal on the resource. AWS Lake Formation defines privileges to grant and revoke access to metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. AWS Lake Formation requires that each principal be authorized to perform a specific task on AWS Lake Formation resources. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal to be granted the permissions on the resource. Supported principals are IAM users or IAM roles, and they are defined by their principal type and their ARN.</p>\n\t        <p>Note that if you define a resource with a particular ARN, then later delete, and recreate a resource with that same ARN, the resource maintains the permissions already granted. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PermissionsWithGrantOption": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates a list of the granted permissions that the principal may pass to other users. These permissions may only be a subset of the permissions granted in the <code>Privileges</code>.</p>"
+          }
+        },
+        "Resource": {
+          "target": "com.amazonaws.lakeformation#Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource to which permissions are to be granted. Resources in AWS Lake Formation are the Data Catalog, databases, and tables.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#GrantPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.lakeformation#IAMRoleArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "arn:aws:iam::[0-9]*:role/.*"
+      }
+    },
+    "com.amazonaws.lakeformation#Identifier": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#InternalServiceException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An internal service error occurred.</p>",
+        "smithy.api#error": "server"
+      }
+    },
+    "com.amazonaws.lakeformation#InvalidInputException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The input provided was not valid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.lakeformation#LastModifiedTimestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.lakeformation#ListPermissions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#ListPermissionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#ListPermissionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER.</p>\n\t        <p>This operation returns only those permissions that have been explicitly granted.</p>\n\t        <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#ListPermissionsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+          }
+        },
+        "ResourceType": {
+          "target": "com.amazonaws.lakeformation#DataLakeResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies a resource type to filter the permissions returned.</p>"
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies a principal to filter the permissions returned.</p>"
+          }
+        },
+        "MaxResults": {
+          "target": "com.amazonaws.lakeformation#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+          }
+        },
+        "Resource": {
+          "target": "com.amazonaws.lakeformation#Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>A resource where you will get a list of the principal permissions.</p>\n         <p>This operation does not support getting privileges on a table with columns. Instead, call this operation on the table, and the operation returns the table and the table w columns.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#ListPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+          }
+        },
+        "PrincipalResourcePermissions": {
+          "target": "com.amazonaws.lakeformation#PrincipalResourcePermissionsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of principals and their permissions on the resource for the specified principal and resource types.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#ListResources": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#ListResourcesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#ListResourcesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the resources registered to be managed by the Data Catalog.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "NextToken",
+          "outputToken": "NextToken",
+          "pageSize": "MaxResults"
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#ListResourcesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "target": "com.amazonaws.lakeformation#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of resource results.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve these resources.</p>"
+          }
+        },
+        "FilterConditionList": {
+          "target": "com.amazonaws.lakeformation#FilterConditionList",
+          "traits": {
+            "smithy.api#documentation": "<p>Any applicable row-level and/or column-level filtering conditions for the resources.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#ListResourcesResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceInfoList": {
+          "target": "com.amazonaws.lakeformation#ResourceInfoList",
+          "traits": {
+            "smithy.api#documentation": "<p>A summary of the data lake resources.</p>"
+          }
+        },
+        "NextToken": {
+          "target": "com.amazonaws.lakeformation#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A continuation token, if this is not the first call to retrieve these resources.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#MessageString": {
+      "type": "string"
+    },
+    "com.amazonaws.lakeformation#NameString": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+      }
+    },
+    "com.amazonaws.lakeformation#NullableBoolean": {
+      "type": "boolean",
+      "traits": {
+        "smithy.api#box": {}
+      }
+    },
+    "com.amazonaws.lakeformation#OperationTimeoutException": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "target": "com.amazonaws.lakeformation#MessageString",
+          "traits": {
+            "smithy.api#documentation": "<p>A message describing the problem.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The operation timed out.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.lakeformation#PageSize": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#Permission": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ALL",
+            "name": "ALL"
+          },
+          {
+            "value": "SELECT",
+            "name": "SELECT"
+          },
+          {
+            "value": "ALTER",
+            "name": "ALTER"
+          },
+          {
+            "value": "DROP",
+            "name": "DROP"
+          },
+          {
+            "value": "DELETE",
+            "name": "DELETE"
+          },
+          {
+            "value": "INSERT",
+            "name": "INSERT"
+          },
+          {
+            "value": "DESCRIBE",
+            "name": "DESCRIBE"
+          },
+          {
+            "value": "CREATE_DATABASE",
+            "name": "CREATE_DATABASE"
+          },
+          {
+            "value": "CREATE_TABLE",
+            "name": "CREATE_TABLE"
+          },
+          {
+            "value": "DATA_LOCATION_ACCESS",
+            "name": "DATA_LOCATION_ACCESS"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.lakeformation#PermissionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#Permission"
+      }
+    },
+    "com.amazonaws.lakeformation#PrincipalPermissions": {
+      "type": "structure",
+      "members": {
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions that are granted to the principal.</p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal who is granted permissions.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Permissions granted to a principal.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#PrincipalPermissionsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#PrincipalPermissions"
+      }
+    },
+    "com.amazonaws.lakeformation#PrincipalResourcePermissions": {
+      "type": "structure",
+      "members": {
+        "Resource": {
+          "target": "com.amazonaws.lakeformation#Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource where permissions are to be granted or revoked.</p>"
+          }
+        },
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions to be granted or revoked on the resource.</p>"
+          }
+        },
+        "PermissionsWithGrantOption": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether to grant the ability to grant permissions (as a subset of permissions granted).</p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>The Data Lake principal to be granted or revoked permissions.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The permissions granted or revoked on a resource.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#PrincipalResourcePermissionsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#PrincipalResourcePermissions"
+      }
+    },
+    "com.amazonaws.lakeformation#PutDataLakeSettings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#PutDataLakeSettingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#PutDataLakeSettingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Sets the list of data lake administrators who have admin privileges on all resources managed by Lake Formation. For more information on admin privileges, see <a href=\"https://docs.aws.amazon.com/lake-formation/latest/dg/lake-formation-permissions.html\">Granting Lake Formation Permissions</a>.</p>\n\t\n\t        <p>This API replaces the current list of data lake admins with the new list being passed. To add an admin, fetch the current list and add the new admin to that list and pass that list in this API.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#PutDataLakeSettingsRequest": {
+      "type": "structure",
+      "members": {
+        "DataLakeSettings": {
+          "target": "com.amazonaws.lakeformation#DataLakeSettings",
+          "traits": {
+            "smithy.api#documentation": "<p>A structure representing a list of AWS Lake Formation principals designated as data lake administrators.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#PutDataLakeSettingsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.lakeformation#RegisterResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#RegisterResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#RegisterResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#AlreadyExistsException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Registers the resource as managed by the Data Catalog.</p>\n\t\n\t        <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p>\n\n         <p>The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.</p>\n\n         <p>\n            <code>ResourceArn = arn:aws:s3:::my-bucket\nUseServiceLinkedRole = true</code>\n         </p>\n\t\n\t        <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p>\n\t\n         <p>\n            <code>arn:aws:iam::12345:role/my-data-access-role</code>\n         </p>"
+      }
+    },
+    "com.amazonaws.lakeformation#RegisterResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to register.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.lakeformation#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the role that registers the resource.</p>"
+          }
+        },
+        "UseServiceLinkedRole": {
+          "target": "com.amazonaws.lakeformation#NullableBoolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Designates an AWS Identity and Access Management (IAM) service-linked role by registering this role with the Data Catalog. A service-linked role is a unique type of IAM role that is linked directly to Lake Formation.</p>\n \n         <p>For more information, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html\">Using Service-Linked Roles for Lake Formation</a>.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#RegisterResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.lakeformation#Resource": {
+      "type": "structure",
+      "members": {
+        "TableWithColumns": {
+          "target": "com.amazonaws.lakeformation#TableWithColumnsResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The table with columns for the resource. A principal with permissions to this resource can select metadata from the columns of a table in the Data Catalog and the underlying data in Amazon S3.</p>"
+          }
+        },
+        "DataLocation": {
+          "target": "com.amazonaws.lakeformation#DataLocationResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The location of an Amazon S3 path where permissions are granted or revoked. </p>"
+          }
+        },
+        "Table": {
+          "target": "com.amazonaws.lakeformation#TableResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The table for the resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. </p>"
+          }
+        },
+        "Database": {
+          "target": "com.amazonaws.lakeformation#DatabaseResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The database for the resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database permissions to a principal. </p>"
+          }
+        },
+        "Catalog": {
+          "target": "com.amazonaws.lakeformation#CatalogResource",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for the resource.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#ResourceArnString": {
+      "type": "string"
+    },
+    "com.amazonaws.lakeformation#ResourceInfo": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "target": "com.amazonaws.lakeformation#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The IAM role that registered a resource.</p>"
+          }
+        },
+        "LastModified": {
+          "target": "com.amazonaws.lakeformation#LastModifiedTimestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the resource was last modified.</p>"
+          }
+        },
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure containing information about an AWS Lake Formation resource.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#ResourceInfoList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#ResourceInfo"
+      }
+    },
+    "com.amazonaws.lakeformation#RevokePermissions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#RevokePermissionsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#RevokePermissionsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#ConcurrentModificationException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#RevokePermissionsRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+          }
+        },
+        "Principal": {
+          "target": "com.amazonaws.lakeformation#DataLakePrincipal",
+          "traits": {
+            "smithy.api#documentation": "<p>The principal to be revoked permissions on the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "PermissionsWithGrantOption": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates a list of permissions for which to revoke the grant option allowing the principal to pass permissions to other principals.</p>"
+          }
+        },
+        "Permissions": {
+          "target": "com.amazonaws.lakeformation#PermissionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The permissions revoked to the principal on the resource. For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security\n      and Access Control to Metadata and Data</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Resource": {
+          "target": "com.amazonaws.lakeformation#Resource",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource to which permissions are to be revoked.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#RevokePermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.lakeformation#StringValue": {
+      "type": "string"
+    },
+    "com.amazonaws.lakeformation#StringValueList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#StringValue"
+      }
+    },
+    "com.amazonaws.lakeformation#TableResource": {
+      "type": "structure",
+      "members": {
+        "TableWildcard": {
+          "target": "com.amazonaws.lakeformation#TableWildcard",
+          "traits": {
+            "smithy.api#documentation": "<p>A wildcard object representing every table under a database.</p>\n\n         <p>At least one of <code>TableResource$Name</code> or <code>TableResource$TableWildcard</code> is required.</p>"
+          }
+        },
+        "DatabaseName": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database for the table. Unique to a Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table.</p>"
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, it is the account ID of the caller.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for the table object. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. </p>"
+      }
+    },
+    "com.amazonaws.lakeformation#TableWildcard": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>A wildcard object representing every table under a database.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#TableWithColumnsResource": {
+      "type": "structure",
+      "members": {
+        "DatabaseName": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the database for the table with columns resource. Unique to the Data Catalog. A database is a set of associated table definitions organized into a logical group. You can Grant and Revoke database privileges to a principal. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ColumnNames": {
+          "target": "com.amazonaws.lakeformation#ColumnNames",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of column names for the table. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.</p>"
+          }
+        },
+        "ColumnWildcard": {
+          "target": "com.amazonaws.lakeformation#ColumnWildcard",
+          "traits": {
+            "smithy.api#documentation": "<p>A wildcard specified by a <code>ColumnWildcard</code> object. At least one of <code>ColumnNames</code> or <code>ColumnWildcard</code> is required.</p>"
+          }
+        },
+        "Name": {
+          "target": "com.amazonaws.lakeformation#NameString",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the table resource. A table is a metadata definition that represents your data. You can Grant and Revoke table privileges to a principal. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "CatalogId": {
+          "target": "com.amazonaws.lakeformation#CatalogIdString",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, it is the account ID of the caller.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p>\n\t        <p>This object must take a value for at least one of <code>ColumnsNames</code>, <code>ColumnsIndexes</code>, or <code>ColumnsWildcard</code>.</p>"
+      }
+    },
+    "com.amazonaws.lakeformation#Token": {
+      "type": "string"
+    },
+    "com.amazonaws.lakeformation#TrustedResourceOwners": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.lakeformation#CatalogIdString"
+      }
+    },
+    "com.amazonaws.lakeformation#UpdateResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.lakeformation#UpdateResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.lakeformation#UpdateResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.lakeformation#EntityNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InternalServiceException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#InvalidInputException"
+        },
+        {
+          "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. </p>"
+      }
+    },
+    "com.amazonaws.lakeformation#UpdateResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "target": "com.amazonaws.lakeformation#ResourceArnString",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource ARN.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "RoleArn": {
+          "target": "com.amazonaws.lakeformation#IAMRoleArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The new role to use for the given resource registered in AWS Lake Formation.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.lakeformation#UpdateResourceResponse": {
+      "type": "structure",
+      "members": {}
+    }
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "ID": "release-3",
+  "SchemaVersion": 1,
+  "VersionBumps": {
+    "core/a": {
+      "From": "v1.0.0",
+      "To": "v1.0.1"
+    },
+    "core/b/v2": {
+      "From": "v2.0.0",
+      "To": "v2.1.0"
+    },
+    "service/a": {
+      "From": "v1.0.0",
+      "To": "v1.1.0"
+    },
+    "service/b": {
+      "From": "v1.5.0",
+      "To": "v1.6.0"
+    }
+  },
+  "Changes": [
+    {
+      "ID": "core-a-feature-1593193458080809000",
+      "SchemaVersion": 1,
+      "Module": "core/a",
+      "Type": "feature",
+      "Description": "this is a test"
+    },
+    {
+      "ID": "core-b-v2-feature-1593193458080809000",
+      "SchemaVersion": 1,
+      "Module": "core/b/v2",
+      "Type": "feature",
+      "Description": "this is a test"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "feature",
+      "Description": "this is a test"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "feature",
+      "Description": "this is another feature"
+    },
+    {
+      "ID": "service-a-feature-1593193458080838000",
+      "SchemaVersion": 1,
+      "Module": "service/a",
+      "Type": "bugfix",
+      "Description": "this is a bug fix"
+    },
+    {
+      "ID": "service-b-feature-1234",
+      "SchemaVersion": 1,
+      "Module": "service/b",
+      "Type": "feature",
+      "Description": "this is a feature"
+    },
+    {
+      "ID": "service-wildcard-feature-1234",
+      "SchemaVersion": 1,
+      "Module": "service/...",
+      "Type": "feature",
+      "Description": "this is a wildcard feature",
+      "AffectedModules": [
+        "service/a",
+        "service/b"
+      ]
+    }
+  ]
+}

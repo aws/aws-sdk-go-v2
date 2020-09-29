@@ -6,7 +6,7 @@ phases:
       - echo Build started on `date`
       - export GOPATH=/go
       - export SDK_CODEBUILD_ROOT=`pwd`
-      - make get-deps-verify ci-test
+      - make ci-test-no-generate
   post_build:
     commands:
       - echo Build completed on `date`

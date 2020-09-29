@@ -1,0 +1,1825 @@
+{
+  "smithy": "1.0",
+  "shapes": {
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#ActionGroup": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "agentPermissions",
+            "name": "AGENT_PERMISSIONS",
+            "documentation": "Permission group type for Agent APIs - ConfigureAgent, PostAgentProfile"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#AgentConfiguration": {
+      "type": "structure",
+      "members": {
+        "agentParameters": {
+          "target": "com.amazonaws.codeguruprofiler#AgentParameters"
+        },
+        "periodInSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#required": {}
+          }
+        },
+        "shouldProfile": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p/>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#AgentOrchestrationConfig": {
+      "type": "structure",
+      "members": {
+        "profilingEnabled": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p/>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#AgentParameterField": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "SamplingIntervalInMilliseconds",
+            "name": "SAMPLING_INTERVAL_IN_MILLISECONDS",
+            "documentation": "Sampling interval in milliseconds used to sample profiles."
+          },
+          {
+            "value": "ReportingIntervalInMilliseconds",
+            "name": "REPORTING_INTERVAL_IN_MILLISECONDS",
+            "documentation": "Reporting interval in milliseconds used to report profiles."
+          },
+          {
+            "value": "MinimumTimeForReportingInMilliseconds",
+            "name": "MINIMUM_TIME_FOR_REPORTING_IN_MILLISECONDS",
+            "documentation": "Minimum time in milliseconds between sending reports."
+          },
+          {
+            "value": "MemoryUsageLimitPercent",
+            "name": "MEMORY_USAGE_LIMIT_PERCENT",
+            "documentation": "Percentage of memory to be used by CodeGuru profiler. Minimum of 30MB is required for the agent."
+          },
+          {
+            "value": "MaxStackDepth",
+            "name": "MAX_STACK_DEPTH",
+            "documentation": "Maximum stack depth to be captured by the CodeGuru Profiler."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler#AgentParameters": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.codeguruprofiler#AgentParameterField"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.submit#AgentProfile": {
+      "type": "blob"
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#AggregatedProfile": {
+      "type": "blob"
+    },
+    "com.amazonaws.codeguruprofiler#AggregatedProfileTime": {
+      "type": "structure",
+      "members": {
+        "period": {
+          "target": "com.amazonaws.codeguruprofiler#AggregationPeriod",
+          "traits": {
+            "smithy.api#documentation": "<p>The time period.</p>"
+          }
+        },
+        "start": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the time range of the latest available aggregated profile.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#AggregationPeriod": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "PT5M",
+            "name": "PT5M",
+            "documentation": "Period of five minutes."
+          },
+          {
+            "value": "PT1H",
+            "name": "PT1H",
+            "documentation": "Period of one hour."
+          },
+          {
+            "value": "P1D",
+            "name": "P1D",
+            "documentation": "Period of one day."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ClientToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[\\w-]+$"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ComputePlatform": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "Default",
+            "name": "DEFAULT",
+            "documentation": "Compute platform meant to used for all usecases (like EC2, Fargate, physical servers etc.) but AWS Lambda."
+          },
+          {
+            "value": "AWSLambda",
+            "name": "AWSLAMBDA",
+            "documentation": "Compute platform meant to used for AWS Lambda."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p/>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/profilingGroups/{profilingGroupName}/configureAgent",
+          "code": 200
+        },
+        "smithy.api#tags": ["dataplane"]
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgentRequest": {
+      "type": "structure",
+      "members": {
+        "fleetInstanceId": {
+          "target": "com.amazonaws.codeguruprofiler.agentconfiguration#FleetInstanceId",
+          "traits": {
+            "smithy.api#documentation": "<p/>"
+          }
+        },
+        "metadata": {
+          "target": "com.amazonaws.codeguruprofiler.agentconfiguration#Metadata"
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the configureAgentRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgentResponse": {
+      "type": "structure",
+      "members": {
+        "configuration": {
+          "target": "com.amazonaws.codeguruprofiler.agentconfiguration#AgentConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the configureAgentResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The requested operation would cause a conflict with the current state \n        of a service resource associated with the request. Resolve the conflict \n        before retrying this request.\n      </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a profiling group.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/profilingGroups",
+          "code": 201
+        },
+        "smithy.api#idempotent": {},
+        "smithy.api#suppress": ["HttpMethodSemantics"]
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "agentOrchestrationConfig": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#AgentOrchestrationConfig",
+          "traits": {
+            "smithy.api#documentation": "<p>The agent orchestration configuration.</p>"
+          }
+        },
+        "clientToken": {
+          "target": "com.amazonaws.codeguruprofiler#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>\n         <p>This parameter specifies a unique \n        identifier for the new profiling group that helps ensure idempotency.</p>",
+            "smithy.api#httpQuery": "clientToken",
+            "smithy.api#idempotencyToken": {},
+            "smithy.api#required": {}
+          }
+        },
+        "computePlatform": {
+          "target": "com.amazonaws.codeguruprofiler#ComputePlatform"
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the createProfiliingGroupRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "profilingGroup": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the new profiling group</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the createProfilingGroupResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#DataMatrix": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#DataMatrixRow"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#DataMatrixRow": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#Double"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a profiling group.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/profilingGroups/{profilingGroupName}",
+          "code": 204
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The profiling group name to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the deleteProfilingGroupRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroupResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the deleteProfilingGroupResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a profiling group.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/profilingGroups/{profilingGroupName}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The profiling group name.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the describeProfilingGroupRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "profilingGroup": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about a profiling group.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the describeProfilingGroupResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#FleetInstanceId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[\\w-.:/]+$"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#FrameMetric": {
+      "type": "structure",
+      "members": {
+        "frameName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "threadStates": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#ThreadStates",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.codeguruprofiler#MetricType",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#FrameMetrics": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#FrameMetric"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicy": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicyRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicyResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the profiling group policy.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/profilingGroups/{profilingGroupName}/policy",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicyRequest": {
+      "type": "structure",
+      "members": {
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the getPolicyRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "policy": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource-based policy attached to the <code>ProfilingGroup</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "revisionId": {
+          "target": "com.amazonaws.codeguruprofiler#RevisionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the getPolicyResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#GetProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.retrieve#GetProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.retrieve#GetProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Gets the aggregated profile of a profiling group for the specified time range.\n        If the requested time range does not align with the available aggregated profiles, it is expanded to \n        attain alignment. If aggregated profiles are available only for part of the period requested, the \n        profile is returned from the earliest available to the latest within the requested time range.\n      </p>\n         <p>For example, if the requested time range is from 00:00 to 00:20 and the available profiles are \n        from 00:15 to 00:25, the returned profile will be from 00:15 to 00:20.\n      </p>\n         <p>You must specify exactly two of the following parameters:\n        <code>startTime</code>, <code>period</code>, and <code>endTime</code>.\n      </p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/profilingGroups/{profilingGroupName}/profile",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#GetProfileRequest": {
+      "type": "structure",
+      "members": {
+        "accept": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The format of the profile to return. You can choose <code>application/json</code>\n        or the default <code>application/x-amzn-ion</code>.\n        </p>",
+            "smithy.api#httpHeader": "Accept"
+          }
+        },
+        "endTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p/>\n         <p>You must specify exactly two of the following parameters:\n        <code>startTime</code>, <code>period</code>, and <code>endTime</code>.\n      </p>",
+            "smithy.api#httpQuery": "endTime"
+          }
+        },
+        "maxDepth": {
+          "target": "com.amazonaws.codeguruprofiler.retrieve#MaxDepth",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum depth of the graph.</p>",
+            "smithy.api#httpQuery": "maxDepth"
+          }
+        },
+        "period": {
+          "target": "com.amazonaws.codeguruprofiler#Period",
+          "traits": {
+            "smithy.api#documentation": "<p>The period of the profile to get. The time range\n        must be in the past and not longer than one week.\n      </p>\n         <p>You must specify exactly two of the following parameters:\n        <code>startTime</code>, <code>period</code>, and <code>endTime</code>.\n      </p>",
+            "smithy.api#httpQuery": "period"
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group to get.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the profile to get.</p>\n         <p>You must specify exactly two of the following parameters:\n        <code>startTime</code>, <code>period</code>, and <code>endTime</code>.\n      </p>",
+            "smithy.api#httpQuery": "startTime"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the getProfileRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#GetProfileResponse": {
+      "type": "structure",
+      "members": {
+        "contentEncoding": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The content encoding of the profile.</p>",
+            "smithy.api#httpHeader": "Content-Encoding"
+          }
+        },
+        "contentType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The content type of the profile in the payload. It is\n        either <code>application/json</code> or the default \n        <code>application/x-amzn-ion</code>.</p>",
+            "smithy.api#httpHeader": "Content-Type",
+            "smithy.api#required": {}
+          }
+        },
+        "profile": {
+          "target": "com.amazonaws.codeguruprofiler.retrieve#AggregatedProfile",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about the profile.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the getProfileResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The server encountered an internal error and is unable to complete the request.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#ListOfTimestamps": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler#Timestamp"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimes": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>List the start times of the available aggregated profiles of a profiling group \n        for an aggregation period within the specified time range.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/profilingGroups/{profilingGroupName}/profileTimes",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "profileTimes",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimesRequest": {
+      "type": "structure",
+      "members": {
+        "endTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The end time of the time range from which to list the profiles.</p>",
+            "smithy.api#httpQuery": "endTime",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.codeguruprofiler#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of profile time results returned by <code>ListProfileTimes</code> \n         in paginated output. When this parameter is used, <code>ListProfileTimes</code> only returns \n         <code>maxResults</code> results in a single page with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListProfileTimes</code> request with the returned \n         <code>nextToken</code> value. \n      </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codeguruprofiler#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListProfileTimes</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve \n         the next items in a list and not for other programmatic purposes.</p>\n         </note>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "orderBy": {
+          "target": "com.amazonaws.codeguruprofiler#OrderBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The order (ascending or descending by start time of the profile) to\n        use when listing profiles. Defaults to <code>TIMESTAMP_DESCENDING</code>.\n      </p>",
+            "smithy.api#httpQuery": "orderBy"
+          }
+        },
+        "period": {
+          "target": "com.amazonaws.codeguruprofiler#AggregationPeriod",
+          "traits": {
+            "smithy.api#documentation": "<p>The aggregation period.</p>",
+            "smithy.api#httpQuery": "period",
+            "smithy.api#required": {}
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the time range from which to list the profiles.</p>",
+            "smithy.api#httpQuery": "startTime",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the listProfileTimesRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimesResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.codeguruprofiler#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListProfileTimes</code> request. \n         When the results of a <code>ListProfileTimes</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+          }
+        },
+        "profileTimes": {
+          "target": "com.amazonaws.codeguruprofiler.retrieve#ProfileTimes",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of start times of the available profiles for the aggregation \n        period in the specified time range.\n      </p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the listProfileTimesResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroups": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroupsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroupsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists profiling groups.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/profilingGroups",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "includeDescription": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>A Boolean value indicating whether to include a description.</p>",
+            "smithy.api#httpQuery": "includeDescription"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.codeguruprofiler#MaxResults",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of profiling groups results returned by <code>ListProfilingGroups</code> \n         in paginated output. When this parameter is used, <code>ListProfilingGroups</code> only returns \n         <code>maxResults</code> results in a single page along with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListProfilingGroups</code> request with the returned \n         <code>nextToken</code> value. \n      </p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.codeguruprofiler#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListProfilingGroups</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve \n         the next items in a list and not for other programmatic purposes.</p>\n         </note>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the listProfilingGroupsRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.codeguruprofiler#PaginationToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListProfilingGroups</code> request. \n         When the results of a <code>ListProfilingGroups</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+          }
+        },
+        "profilingGroupNames": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupNames",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about profiling group names.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "profilingGroups": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescriptions",
+          "traits": {
+            "smithy.api#documentation": "<p>Information about profiling groups.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the listProfilingGroupsResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#MaxDepth": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 10000
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler#MaxResults": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#box": {},
+        "smithy.api#range": {
+          "min": 1,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#Metadata": {
+      "type": "map",
+      "key": {
+        "target": "com.amazonaws.codeguruprofiler.agentconfiguration#MetadataField"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.agentconfiguration#MetadataField": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ComputePlatform",
+            "name": "COMPUTE_PLATFORM",
+            "documentation": "Compute platform on which agent is running."
+          },
+          {
+            "value": "AgentId",
+            "name": "AGENT_ID",
+            "documentation": "Unique identifier for the agent instance."
+          },
+          {
+            "value": "AwsRequestId",
+            "name": "AWS_REQUEST_ID",
+            "documentation": "AWS requestId of the Lambda invocation."
+          },
+          {
+            "value": "ExecutionEnvironment",
+            "name": "EXECUTION_ENVIRONMENT",
+            "documentation": "Execution environment on which Lambda function is running."
+          },
+          {
+            "value": "LambdaFunctionArn",
+            "name": "LAMBDA_FUNCTION_ARN",
+            "documentation": "Function ARN that's used to invoke the Lambda function."
+          },
+          {
+            "value": "LambdaMemoryLimitInMB",
+            "name": "LAMBDA_MEMORY_LIMIT_IN_MB",
+            "documentation": "Memory allocated for the Lambda function."
+          },
+          {
+            "value": "LambdaRemainingTimeInMilliseconds",
+            "name": "LAMBDA_REMAINING_TIME_IN_MILLISECONDS",
+            "documentation": "Time in milliseconds left before the execution times out."
+          },
+          {
+            "value": "LambdaTimeGapBetweenInvokesInMilliseconds",
+            "name": "LAMBDA_TIME_GAP_BETWEEN_INVOKES_IN_MILLISECONDS",
+            "documentation": "Time in milliseconds between two invocations of the Lambda function."
+          },
+          {
+            "value": "LambdaPreviousExecutionTimeInMilliseconds",
+            "name": "LAMBDA_PREVIOUS_EXECUTION_TIME_IN_MILLISECONDS",
+            "documentation": "Time in milliseconds for the previous Lambda invocation."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler#MetricType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AGGREGATED_RELATIVE_TOTAL_TIME",
+            "name": "AGGREGATED_RELATIVE_TOTAL_TIME",
+            "documentation": "Metric value aggregated for all instances of a frame name in a profile relative to the root frame."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler#OrderBy": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "TimestampDescending",
+            "name": "TIMESTAMP_DESCENDING",
+            "documentation": "Order by timestamp in descending order."
+          },
+          {
+            "value": "TimestampAscending",
+            "name": "TIMESTAMP_ASCENDING",
+            "documentation": "Order by timestamp in ascending order."
+          }
+        ]
+      }
+    },
+    "com.amazonaws.codeguruprofiler#PaginationToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        },
+        "smithy.api#pattern": "^[\\w-]+$"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#Period": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 64
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.submit#PostAgentProfile": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.submit#PostAgentProfileRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.submit#PostAgentProfileResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p/>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/profilingGroups/{profilingGroupName}/agentProfile",
+          "code": 204
+        },
+        "smithy.api#tags": ["dataplane"]
+      }
+    },
+    "com.amazonaws.codeguruprofiler.submit#PostAgentProfileRequest": {
+      "type": "structure",
+      "members": {
+        "agentProfile": {
+          "target": "com.amazonaws.codeguruprofiler.submit#AgentProfile",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        },
+        "contentType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpHeader": "Content-Type",
+            "smithy.api#required": {}
+          }
+        },
+        "profileToken": {
+          "target": "com.amazonaws.codeguruprofiler#ClientToken",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpQuery": "profileToken",
+            "smithy.api#idempotencyToken": {}
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the postAgentProfileRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.submit#PostAgentProfileResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the postAgentProfileResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#Principal": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#Principals": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#Principal"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 50
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#ProfileTime": {
+      "type": "structure",
+      "members": {
+        "start": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The start time of the profile.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the profile time.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.retrieve#ProfileTimes": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler.retrieve#ProfileTime"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ProfilingGroup": {
+      "type": "resource",
+      "identifiers": {
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName"
+        }
+      },
+      "put": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#CreateProfilingGroup"
+      },
+      "read": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DescribeProfilingGroup"
+      },
+      "update": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroup"
+      },
+      "delete": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#DeleteProfilingGroup"
+      },
+      "list": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#ListProfilingGroups"
+      },
+      "operations": [
+        {
+          "target": "com.amazonaws.codeguruprofiler.agentconfiguration#ConfigureAgent"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#GetPolicy"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermission"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermission"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.retrieve#GetProfile"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.retrieve#ListProfileTimes"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.submit#PostAgentProfile"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeries"
+        }
+      ],
+      "traits": {
+        "aws.api#arn": {
+          "template": "profilingGroup/{profilingGroupName}",
+          "absolute": false,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupArn": {
+      "type": "string",
+      "traits": {
+        "aws.api#arnReference": {
+          "type": "AWS::SkySail::ProfilingGroup",
+          "service": "com.amazonaws.codeguruprofiler#CodeGuruProfiler",
+          "resource": "com.amazonaws.codeguruprofiler#ProfilingGroup"
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescription": {
+      "type": "structure",
+      "members": {
+        "agentOrchestrationConfig": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#AgentOrchestrationConfig",
+          "traits": {
+            "smithy.api#documentation": "<p/>"
+          }
+        },
+        "arn": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) identifying the profiling group.</p>"
+          }
+        },
+        "computePlatform": {
+          "target": "com.amazonaws.codeguruprofiler#ComputePlatform"
+        },
+        "createdAt": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the profiling group was created.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>"
+          }
+        },
+        "profilingStatus": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the profiling group.</p>"
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the profiling group was last updated.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The description of a profiling group.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescriptions": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescription"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ProfilingGroupName": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[\\w-]+$"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupNames": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingStatus": {
+      "type": "structure",
+      "members": {
+        "latestAgentOrchestratedAt": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the latest agent was orchestrated.</p>"
+          }
+        },
+        "latestAgentProfileReportedAt": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the latest agent was reported..</p>"
+          }
+        },
+        "latestAggregatedProfile": {
+          "target": "com.amazonaws.codeguruprofiler#AggregatedProfileTime",
+          "traits": {
+            "smithy.api#documentation": "<p>The latest aggregated profile</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Information about the profiling status.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermission": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermissionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermissionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Provides permission to the principals. This overwrites the existing permissions, and\n            is not additive.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/profilingGroups/{profilingGroupName}/policy/{actionGroup}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermissionRequest": {
+      "type": "structure",
+      "members": {
+        "actionGroup": {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#ActionGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of actions that the users and roles can perform on the profiling\n            group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "principals": {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#Principals",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of role and user ARNs or the accountId that needs access (wildcards are not\n            allowed).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "revisionId": {
+          "target": "com.amazonaws.codeguruprofiler#RevisionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy. This is required, if a\n            policy exists for the profiling group. This is not required when creating the policy for\n            the first time.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the putPermissionRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#PutPermissionResponse": {
+      "type": "structure",
+      "members": {
+        "policy": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource-based policy.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "revisionId": {
+          "target": "com.amazonaws.codeguruprofiler#RevisionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the putPermissionResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermission": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermissionRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermissionResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes statement for the provided action group from the policy.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/profilingGroups/{profilingGroupName}/policy/{actionGroup}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermissionRequest": {
+      "type": "structure",
+      "members": {
+        "actionGroup": {
+          "target": "com.amazonaws.codeguruprofiler.resourcebasedauthz#ActionGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of actions that the users and roles can perform on the profiling\n            group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "revisionId": {
+          "target": "com.amazonaws.codeguruprofiler#RevisionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>",
+            "smithy.api#httpQuery": "revisionId",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the removePermissionRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.resourcebasedauthz#RemovePermissionResponse": {
+      "type": "structure",
+      "members": {
+        "policy": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource-based policy.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "revisionId": {
+          "target": "com.amazonaws.codeguruprofiler#RevisionId",
+          "traits": {
+            "smithy.api#documentation": "<p>A unique identifier for the current revision of the policy.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the removePermissionResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The resource specified in the request does not exist.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeries": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeriesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeriesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/profilingGroups/{profilingGroupName}/timeseries",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeriesRequest": {
+      "type": "structure",
+      "members": {
+        "endTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#httpQuery": "endTime"
+          }
+        },
+        "frameMetrics": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#FrameMetrics"
+        },
+        "period": {
+          "target": "com.amazonaws.codeguruprofiler#Period",
+          "traits": {
+            "smithy.api#httpQuery": "period"
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#httpQuery": "startTime"
+          }
+        },
+        "targetResolution": {
+          "target": "com.amazonaws.codeguruprofiler#AggregationPeriod",
+          "traits": {
+            "smithy.api#httpQuery": "targetResolution"
+          }
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#RetrieveTimeSeriesResponse": {
+      "type": "structure",
+      "members": {
+        "data": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#DataMatrix",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "endTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "endTimes": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#ListOfTimestamps",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "frameMetrics": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#FrameMetrics",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resolution": {
+          "target": "com.amazonaws.codeguruprofiler#AggregationPeriod",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "startTime": {
+          "target": "com.amazonaws.codeguruprofiler#Timestamp",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "unprocessedEndTimes": {
+          "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#UnprocessedEndTimeMap",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.codeguruprofiler#RevisionId": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You have exceeded your service quota. To perform the requested action, \n        remove some of the relevant resources, or use <a href=\"https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html\">Service Quotas</a> to request a \n        service quota increase. \n      </p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler#CodeGuruProfiler": {
+      "type": "service",
+      "version": "2019-07-18",
+      "resources": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroup"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "CodeGuruProfiler",
+          "arnNamespace": "codeguru-profiler",
+          "cloudFormationName": "CodeGuruProfiler",
+          "cloudTrailEventSource": "codeguru-profiler.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "codeguruprofiler"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Profiler API operations.</p>",
+        "smithy.api#title": "Amazon CodeGuru Profiler"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#ThreadStates": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler#Timestamp": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.timeseriesmetrics#UnprocessedEndTimeMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "com.amazonaws.codeguruprofiler.timeseriesmetrics#ListOfTimestamps"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroup": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroupRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroupResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.codeguruprofiler#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.codeguruprofiler#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates a profiling group.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/profilingGroups/{profilingGroupName}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroupRequest": {
+      "type": "structure",
+      "members": {
+        "agentOrchestrationConfig": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#AgentOrchestrationConfig",
+          "traits": {
+            "smithy.api#documentation": "<p/>",
+            "smithy.api#required": {}
+          }
+        },
+        "profilingGroupName": {
+          "target": "com.amazonaws.codeguruprofiler#ProfilingGroupName",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the profiling group to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the updateProfilingGroupRequest.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler.profilinggroup#UpdateProfilingGroupResponse": {
+      "type": "structure",
+      "members": {
+        "profilingGroup": {
+          "target": "com.amazonaws.codeguruprofiler.profilinggroup#ProfilingGroupDescription",
+          "traits": {
+            "smithy.api#documentation": "<p>Updated information about the profiling group.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The structure representing the updateProfilingGroupResponse.</p>"
+      }
+    },
+    "com.amazonaws.codeguruprofiler#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The parameter is not valid.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    }
+  }
+}

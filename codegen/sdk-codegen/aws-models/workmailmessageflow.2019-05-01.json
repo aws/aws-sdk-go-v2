@@ -1,0 +1,136 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.workmailmessageflow#GetRawMessageContent": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.workmailmessageflow#GetRawMessageContentRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.workmailmessageflow#GetRawMessageContentResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.workmailmessageflow#ResourceNotFoundException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves the raw content of an in-transit email message, in MIME format. </p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/messages/{messageId}",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.workmailmessageflow#GetRawMessageContentRequest": {
+      "type": "structure",
+      "members": {
+        "messageId": {
+          "target": "com.amazonaws.workmailmessageflow#messageIdType",
+          "traits": {
+            "smithy.api#documentation": "<p>The identifier of the email message to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.workmailmessageflow#GetRawMessageContentResponse": {
+      "type": "structure",
+      "members": {
+        "messageContent": {
+          "target": "com.amazonaws.workmailmessageflow#messageContentBlob",
+          "traits": {
+            "smithy.api#documentation": "<p>The raw content of the email message, in MIME format.</p>",
+            "smithy.api#httpPayload": {},
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.workmailmessageflow#GiraffeMessageInTransitService": {
+      "type": "service",
+      "version": "2019-05-01",
+      "operations": [
+        {
+          "target": "com.amazonaws.workmailmessageflow#GetRawMessageContent"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "WorkMailMessageFlow",
+          "arnNamespace": "workmailmessageflow",
+          "cloudFormationName": "WorkMailMessageFlow",
+          "cloudTrailEventSource": "service.workmailmessageflow.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "workmailmessageflow"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#documentation": "<p>The WorkMail Message Flow API provides access to email messages as they are\n      being\n      sent and received by\n      a\n      WorkMail organization.</p>",
+        "smithy.api#title": "Amazon WorkMail Message Flow"
+      }
+    },
+    "com.amazonaws.workmailmessageflow#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.workmailmessageflow#errorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The requested email message is not found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.workmailmessageflow#errorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.workmailmessageflow#messageContentBlob": {
+      "type": "blob",
+      "traits": {
+        "smithy.api#streaming": {}
+      }
+    },
+    "com.amazonaws.workmailmessageflow#messageIdType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 120
+        },
+        "smithy.api#pattern": "[a-z0-9\\-]*"
+      }
+    }
+  }
+}

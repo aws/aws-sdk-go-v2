@@ -1,129 +1,210 @@
-LINTIGNOREDOT='internal/awstesting/integration.+should not use dot imports'
-LINTIGNOREDOC='service/[^/]+/(api|service|waiters)\.go:.+(comment on exported|should have comment or be unexported)'
-LINTIGNORECONST='service/[^/]+/(api|service|waiters)\.go:.+(type|struct field|const|func) ([^ ]+) should be ([^ ]+)'
-LINTIGNORESTUTTER='service/[^/]+/(api|service)\.go:.+(and that stutters)'
-LINTIGNOREINFLECT='service/[^/]+/(api|errors|service)\.go:.+(method|const) .+ should be '
-LINTIGNOREINFLECTS3UPLOAD='service/s3/s3manager/upload\.go:.+struct field SSEKMSKeyId should be '
-LINTIGNOREDEPS='vendor/.+\.go'
-LINTIGNOREPKGCOMMENT='service/[^/]+/doc_custom.go:.+package comment should be of the form'
-LINTIGNOREENDPOINTS='aws/endpoints/defaults.go:.+(method|const) .+ should be '
+# Lint rules to ignore
 LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should be the last type'
-LINTIGNOREPROTO="service/smithyprototype/.+\.go:.+don't use underscores in Go names"
-UNIT_TEST_TAGS="example codegen awsinclude"
-ALL_TAGS="example codegen awsinclude integration perftest sdktool"
+
+UNIT_TEST_TAGS=
+BUILD_TAGS=-tags "example,codegen,integration,ec2env"
 
 # SDK's Core and client packages that are compatable with Go 1.9+.
-SDK_CORE_PKGS=./aws/... ./private/... ./internal/...
+SDK_CORE_PKGS=./aws/... ./internal/...
 SDK_CLIENT_PKGS=./service/...
 SDK_COMPA_PKGS=${SDK_CORE_PKGS} ${SDK_CLIENT_PKGS}
 
 # SDK additional packages that are used for development of the SDK.
-SDK_EXAMPLES_PKGS=./example/...
-SDK_MODELS_PKGS=./models/...
-SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS} ${SDK_MODELS_PKGS}
+SDK_EXAMPLES_PKGS=
+SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 
+RUN_NONE=-run '^$$'
+RUN_INTEG=-run '^TestInteg_'
 
 all: generate unit
 
 ###################
 # Code Generation #
 ###################
-generate: cleanup-models gen-test gen-endpoints gen-services gen-external-asserts
+generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-.
 
-gen-test: gen-protocol-test gen-codegen-test
+smithy-generate:
+	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
-#gen-codegen-test:
-#	@echo "Generating SDK API tests"
-#	go generate ./private/model/api/codegentest/service
+gen-config-asserts:
+	@echo "Generating SDK config package implementor assertions"
+	cd config && go generate
 
-gen-services:
-	@echo "Generating SDK clients"
-	go generate ./service
+gen-repo-mod-replace:
+	@echo "Generating go.mod replace for repo modules"
+	cd internal/repotools/cmd/makerelative && go run ./
 
-gen-protocol-test:
-	@echo "Generating SDK protocol tests"
-	go generate ./private/protocol/...
+gen-mod-replace-local:
+	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
 
-gen-endpoints:
-	@echo "Generating SDK endpoints"
-	go generate ./models/endpoints
+tidy-modules-%:
+	@# tidy command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "tidy-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. build-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) -c 8 \
+		"go mod tidy"
 
-gen-codegen-test:
-	@echo "Generating SDK API tests"
-	go generate ./private/model/api/codegentest/service
 
-gen-external-asserts:
-	@echo "Generating SDK external package implementor assertions"
-	go generate ./aws/external
+################
+# Unit Testing #
+################
 
-cleanup-models:
-	@echo "Cleaning up stale model versions"
-	@./cleanup_models.sh
+# TODO replace the command with the unit-modules-. once protocol tests pass
 
-###################
-# Unit/CI Testing #
-###################
-build:
-	go build -o /dev/null -tags ${ALL_TAGS} ${SDK_ALL_PKGS}
+unit: lint unit-modules-aws unit-modules-service unit-modules-config unit-modules-credentials unit-modules-ec2imds
+unit-race: lint unit-race-modules-aws unit-race-modules-service unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds
 
-unit: verify build
-	@echo "go test SDK and vendor packages"
-	@go test -tags ${UNIT_TEST_TAGS} ${SDK_ALL_PKGS}
+unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
+unit-race-test: test-race-modules-aws test-race-modules-service test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds
 
-unit-with-race-cover: verify build
-	@echo "go test SDK and vendor packages"
-	@go test -tags ${UNIT_TEST_TAGS} -race -cpu=1,2,4 ${SDK_ALL_PKGS}
+unit-race-modules-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-race-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
-ci-test: generate unit-with-race-cover ci-test-generate-validate
+
+unit-modules-%:
+	@# unit command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "unit-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. unit-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) \
+		"go vet ${BUILD_TAGS} --all ./..." \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
+
+build: build-modules-.
+
+build-modules-%:
+	@# build command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "build-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. build-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) -c 4 \
+		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
+
+test: test-modules-.
+
+test-race-modules-%:
+	@# Test command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "test-race-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. test-race-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
+
+test-modules-%:
+	@# Test command that uses the pattern to define the root path that the
+	@# module testing will start from. Strips off the "test-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. test-modules-internal_protocoltest
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) -c 4 \
+		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
+
+##############
+# CI Testing #
+##############
+ci-test: generate unit-race ci-test-generate-validate
+ci-test-no-generate: unit-race
 
 ci-test-generate-validate:
 	@echo "CI test validate no generated code changes"
 	git update-index --assume-unchanged go.mod go.sum
 	git add . -A
 	gitstatus=`git diff --cached --ignore-space-change`; \
-	git update-index --no-assume-unchanged go.mod go.sum
 	echo "$$gitstatus"; \
-	if [ "$$gitstatus" != "" ]; then echo "$$gitstatus"; exit 1; fi
+	if [ "$$gitstatus" != "" ] && [ "$$gitstatus" != "skipping validation" ]; then echo "$$gitstatus"; exit 1; fi
+	git update-index --no-assume-unchanged go.mod go.sum
 
 #######################
 # Integration Testing #
 #######################
-integration: core-integ client-integ
+integration: integ-modules-service
 
-core-integ:
-	@echo "Integration Testing SDK core"
-	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ${SDK_CORE_PKGS}
-
-client-integ:
-	@echo "Integration Testing SDK clients"
-	AWS_REGION="" go test -count=1 -tags "integration" -v -run '^TestInteg_' ./service/...
-
-s3crypto-integ:
-	@echo "Integration Testing S3 Cyrpto utility"
-	AWS_REGION="" go test -count=1 -tags "s3crypto_integ integration" -v -run '^TestInteg_' ./service/s3/s3crypto
+integ-modules-%:
+	@# integration command that uses the pattern to define the root path that
+	@# the module testing will start from. Strips off the "integ-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. test-modules-service_dynamodb
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) \
+		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
 	@echo "Cleaning up SDK integraiton resources"
 	go run -tags "integration" ./internal/awstesting/cmd/bucket_cleanup/main.go "aws-sdk-go-integration"
 
+##############
+# Benchmarks #
+##############
+bench: bench-modules-.
+
+bench-modules-%:
+	@# benchmark command that uses the pattern to define the root path that
+	@# the module testing will start from. Strips off the "bench-modules-" and
+	@# replaces all "_" with "/".
+	@#
+	@# e.g. bench-modules-service_dynamodb
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) \
+		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
+
+##################
+# Linting/Verify #
+##################
+verify: lint vet sdkv1check
+
+lint:
+	@echo "go lint SDK and vendor packages"
+	@lint=`golint ./...`; \
+	dolint=`echo "$$lint" | grep -E -v \
+	-e ${LINTIGNORESINGLEFIGHT}`; \
+	echo "$$dolint"; \
+	if [ "$$dolint" != "" ]; then exit 1; fi
+
+vet: vet-modules-.
+
+vet-modules-%:
+	cd ./internal/repotools/cmd/eachmodule \
+		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) -c 4 \
+		"go vet ${BUILD_TAGS} --all ./..."
+
+sdkv1check:
+	@echo "Checking for usage of AWS SDK for Go v1"
+	@sdkv1usage=`go list -test -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ range $$_, $$name := .TestImports }} *: {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end}}''' ./... | sort -u | grep '''/aws-sdk-go/'''`; \
+	echo "$$sdkv1usage"; \
+	if [ "$$sdkv1usage" != "" ]; then exit 1; fi
+
 ###################
 # Sandbox Testing #
 ###################
-sandbox-tests: sandbox-test-go1.12 sandbox-test-go1.13 sandbox-test-gotip
+sandbox-tests: sandbox-test-go1.15 sandbox-test-gotip
 
-sandbox-build-go1.13:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.13 -t "aws-sdk-go-v2-1.13" .
-sandbox-go1.13: sandbox-build-go1.13
-	docker run -i -t aws-sdk-go-v2-1.13 bash
-sandbox-test-go1.13: sandbox-build-go1.13
-	docker run -t aws-sdk-go-v2-1.13
-
-sandbox-build-go1.12:
-	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.12 -t "aws-sdk-go-v2-1.12" .
-sandbox-go1.12: sandbox-build-go1.12
-	docker run -i -t aws-sdk-go-v2-1.12 bash
-sandbox-test-go1.12: sandbox-build-go1.12
-	docker run -t aws-sdk-go-v2-1.12
+sandbox-build-go1.15:
+	docker build -f ./internal/awstesting/sandbox/Dockerfile.test.go1.15 -t "aws-sdk-go-v2-1.15" .
+sandbox-go1.15: sandbox-build-go1.15
+	docker run -i -t aws-sdk-go-v2-1.15 bash
+sandbox-test-go1.15: sandbox-build-go1.15
+	docker run -t aws-sdk-go-v2-1.15
 
 sandbox-build-gotip:
 	@echo "Run make update-aws-golang-tip, if this test fails because missing aws-golang:tip container"
@@ -135,74 +216,3 @@ sandbox-test-gotip: sandbox-build-gotip
 
 update-aws-golang-tip:
 	docker build --no-cache=true -f ./internal/awstesting/sandbox/Dockerfile.golang-tip -t "aws-golang:tip" .
-
-##################
-# Linting/Verify #
-##################
-verify: lint vet sdkv1check
-
-lint:
-	@echo "go lint SDK and vendor packages"
-	@lint=`golint ./...`; \
-	dolint=`echo "$$lint" | grep -E -v \
-	-e ${LINTIGNOREDOC} \
-	-e ${LINTIGNORECONST} \
-	-e ${LINTIGNORESTUTTER} \
-	-e ${LINTIGNOREINFLECT} \
-	-e ${LINTIGNOREDEPS} \
-	-e ${LINTIGNOREINFLECTS3UPLOAD} \
-	-e ${LINTIGNOREPKGCOMMENT} \
-	-e ${LINTIGNOREENDPOINTS} \
-	-e ${LINTIGNORESINGLEFIGHT} \
-	-e ${LINTIGNOREPROTO}`; \
-	echo "$$dolint"; \
-	if [ "$$dolint" != "" ]; then exit 1; fi
-
-vet:
-	go vet -tags "example codegen awsinclude integration" --all ${SDK_ALL_PKGS}
-
-sdkv1check:
-	@echo "Checking for usage of AWS SDK for Go v1"
-	@sdkv1usage=`go list -test -f '''{{ if not .Standard }}{{ range $$_, $$name := .Imports }} * {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ range $$_, $$name := .TestImports }} *: {{ $$.ImportPath }} -> {{ $$name }}{{ print "\n" }}{{ end }}{{ end}}''' ./... | sort -u | grep '''/aws-sdk-go/'''`; \
-	echo "$$sdkv1usage"; \
-	if [ "$$sdkv1usage" != "" ]; then exit 1; fi
-
-################
-# Dependencies #
-################
-get-deps: get-deps-tests get-deps-x-tests get-deps-codegen get-deps-verify
-	go get github.com/jmespath/go-jmespath
-
-get-deps-tests:
-	@echo "go get SDK testing dependencies"
-	go get golang.org/x/net/html
-	go get github.com/google/go-cmp
-
-get-deps-x-tests:
-	@echo "go get SDK testing golang.org/x dependencies"
-	go get golang.org/x/net/http2
-
-get-deps-codegen: get-deps-x-tests
-	@echo "go get SDK codegen dependencies"
-	go get golang.org/x/net/html
-
-get-deps-verify:
-	@echo "go get SDK verification utilities"
-	go get golang.org/x/lint/golint
-
-##############
-# Benchmarks #
-##############
-bench:
-	@echo "go bench SDK packages"
-	@go test -run NONE -bench . -benchmem -tags 'bench' ${SDK_ALL_PKGS}
-
-bench-protocol:
-	@echo "go bench SDK protocol marshallers"
-	@go test -run NONE -bench . -benchmem -tags 'bench' ./private/protocol/...
-
-#############
-# Utilities #
-#############
-api_info:
-	@go run private/model/cli/api-info/api-info.go

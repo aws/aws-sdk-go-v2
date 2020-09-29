@@ -1,0 +1,2506 @@
+{
+  "smithy": "1.0",
+  "shapes": {
+    "com.amazonaws.accessanalyzer#AccessAnalyzer": {
+      "type": "service",
+      "version": "2019-11-01",
+      "operations": [
+        {
+          "target": "com.amazonaws.accessanalyzer#GetAnalyzedResource"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#GetFinding"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ListAnalyzedResources"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ListFindings"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#StartResourceScan"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#TagResource"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#UpdateFindings"
+        }
+      ],
+      "resources": [
+        {
+          "target": "com.amazonaws.accessanalyzer#Analyzer"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "AccessAnalyzer",
+          "arnNamespace": "access-analyzer",
+          "cloudFormationName": "AccessAnalyzer",
+          "cloudTrailEventSource": "access-analyzer.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "access-analyzer"
+        },
+        "aws.protocols#restJson1": {},
+        "smithy.api#cors": {},
+        "smithy.api#documentation": "<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify\n         any policies that grant access to an external principal. It does this by using logic-based\n         reasoning to analyze resource-based policies in your AWS environment. An external principal\n         can be another AWS account, a root user, an IAM user or role, a federated user, an AWS\n         service, or an anonymous user. This guide describes the AWS IAM Access Analyzer operations that you can\n         call programmatically. For general information about Access Analyzer, see the <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer section of the IAM User Guide</a>.</p>\n         <p>To start using Access Analyzer, you first need to create an analyzer.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "pageSize": "maxResults"
+        },
+        "smithy.api#title": "Access Analyzer"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AccessDeniedException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 403
+      }
+    },
+    "com.amazonaws.accessanalyzer#ActionList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzedResource": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.accessanalyzer#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource that was analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.accessanalyzer#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource that was analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "analyzedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the resource was analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "isPublic": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the policy that generated the finding grants public access to the\n         resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "actions": {
+          "target": "com.amazonaws.accessanalyzer#ActionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The actions that an external principal is granted permission to use by the policy that\n         generated the finding.</p>"
+          }
+        },
+        "sharedVia": {
+          "target": "com.amazonaws.accessanalyzer#SharedViaList",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.accessanalyzer#FindingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the finding generated from the analyzed resource.</p>"
+          }
+        },
+        "resourceOwnerAccount": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An error message.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the analyzed resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzedResourceSummary": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.accessanalyzer#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzed resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceOwnerAccount": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.accessanalyzer#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of resource that was analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains the ARN of the analyzed resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzedResourcesList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#AnalyzedResourceSummary"
+      }
+    },
+    "com.amazonaws.accessanalyzer#Analyzer": {
+      "type": "resource",
+      "identifiers": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name"
+        }
+      },
+      "put": {
+        "target": "com.amazonaws.accessanalyzer#CreateAnalyzer"
+      },
+      "read": {
+        "target": "com.amazonaws.accessanalyzer#GetAnalyzer"
+      },
+      "delete": {
+        "target": "com.amazonaws.accessanalyzer#DeleteAnalyzer"
+      },
+      "list": {
+        "target": "com.amazonaws.accessanalyzer#ListAnalyzers"
+      },
+      "resources": [
+        {
+          "target": "com.amazonaws.accessanalyzer#ArchiveRule"
+        }
+      ],
+      "traits": {
+        "aws.api#arn": {
+          "template": "analyzer/{analyzerName}",
+          "absolute": false,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzerArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "^[^:]*:[^:]*:[^:]*:[^:]*:[^:]*:analyzer/.{1,255}$"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzerStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE"
+          },
+          {
+            "value": "CREATING"
+          },
+          {
+            "value": "DISABLED"
+          },
+          {
+            "value": "FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzerSummary": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.accessanalyzer#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of analyzer, which corresponds to the zone of trust chosen for the\n         analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>A timestamp for the time at which the analyzer was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "lastResourceAnalyzed": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource that was most recently analyzed by the analyzer.</p>"
+          }
+        },
+        "lastResourceAnalyzedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the most recently analyzed resource was analyzed.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.accessanalyzer#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags added to the analyzer.</p>"
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors supported resources\n         and generates new findings. The analyzer is <code>Disabled</code> when a user action, such as removing\n         trusted access for IAM Access Analyzer from AWS Organizations, causes the analyzer to stop\n         generating new findings. The status is <code>Creating</code> when the analyzer creation is in progress\n         and <code>Failed</code> when the analyzer creation has failed. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "statusReason": {
+          "target": "com.amazonaws.accessanalyzer#StatusReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>statusReason</code> provides more details about the current status of the analyzer. For example, if the\n         creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer\n         with organization as the type, this failure can be due to an issue with creating the\n         service-linked roles required in the member accounts of the AWS organization.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about the analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#AnalyzersList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#AnalyzerSummary"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ArchiveRule": {
+      "type": "resource",
+      "identifiers": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name"
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name"
+        }
+      },
+      "put": {
+        "target": "com.amazonaws.accessanalyzer#CreateArchiveRule"
+      },
+      "read": {
+        "target": "com.amazonaws.accessanalyzer#GetArchiveRule"
+      },
+      "update": {
+        "target": "com.amazonaws.accessanalyzer#UpdateArchiveRule"
+      },
+      "delete": {
+        "target": "com.amazonaws.accessanalyzer#DeleteArchiveRule"
+      },
+      "list": {
+        "target": "com.amazonaws.accessanalyzer#ListArchiveRules"
+      },
+      "traits": {
+        "aws.api#arn": {
+          "template": "analyzer/{analyzerName}/archive-rule/{ruleName}",
+          "absolute": false,
+          "noAccount": false,
+          "noRegion": false
+        }
+      }
+    },
+    "com.amazonaws.accessanalyzer#ArchiveRuleSummary": {
+      "type": "structure",
+      "members": {
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the archive rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "filter": {
+          "target": "com.amazonaws.accessanalyzer#FilterCriteriaMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A filter used to define the archive rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the archive rule was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the archive rule was last updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about an archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ArchiveRulesList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#ArchiveRuleSummary"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ConditionKeyMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ConflictException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A conflict exception error.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 409
+      }
+    },
+    "com.amazonaws.accessanalyzer#CreateAnalyzer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#CreateAnalyzerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#CreateAnalyzerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an analyzer for your account.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/analyzer",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#CreateAnalyzerRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer to create.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.accessanalyzer#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of analyzer to create. Only ACCOUNT analyzers are supported. You can create\n         only one analyzer per account per Region.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "archiveRules": {
+          "target": "com.amazonaws.accessanalyzer#InlineArchiveRulesList",
+          "traits": {
+            "smithy.api#documentation": "<p>Specifies the archive rules to add for the analyzer. Archive rules automatically archive\n         findings that meet the criteria you define for the rule.</p>"
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.accessanalyzer#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to apply to the analyzer.</p>"
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#CreateAnalyzerResponse": {
+      "type": "structure",
+      "members": {
+        "arn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer that was created by the request.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request to create an analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#CreateArchiveRule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#CreateArchiveRuleRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ConflictException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ServiceQuotaExceededException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         findings that meet the criteria you define when you create the rule.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/analyzer/{analyzerName}/archive-rule",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#CreateArchiveRuleRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the created analyzer.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule to create.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "filter": {
+          "target": "com.amazonaws.accessanalyzer#FilterCriteriaMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The criteria for the rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#Criterion": {
+      "type": "structure",
+      "members": {
+        "eq": {
+          "target": "com.amazonaws.accessanalyzer#ValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>An \"equals\" operator to match for the filter used to create the rule.</p>"
+          }
+        },
+        "neq": {
+          "target": "com.amazonaws.accessanalyzer#ValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>A \"not equals\" operator to match for the filter used to create the rule.</p>"
+          }
+        },
+        "contains": {
+          "target": "com.amazonaws.accessanalyzer#ValueList",
+          "traits": {
+            "smithy.api#documentation": "<p>A \"contains\" operator to match for the filter used to create the rule.</p>"
+          }
+        },
+        "exists": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>An \"exists\" operator to match for the filter used to create the rule. </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The criteria to use in the filter that defines the archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#DeleteAnalyzer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#DeleteAnalyzerRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, Access Analyzer is disabled\n         for the account in the current or specific Region. All findings that were generated by the\n         analyzer are deleted. You cannot undo this action.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/analyzer/{analyzerName}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#DeleteAnalyzerRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#httpQuery": "clientToken",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#DeleteArchiveRule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#DeleteArchiveRuleRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes the specified archive rule.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#DeleteArchiveRuleRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer that associated with the archive rule to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule to delete.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#httpQuery": "clientToken",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FilterCriteriaMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "com.amazonaws.accessanalyzer#Criterion"
+      }
+    },
+    "com.amazonaws.accessanalyzer#Finding": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.accessanalyzer#FindingId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "principal": {
+          "target": "com.amazonaws.accessanalyzer#PrincipalMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The external principal that access to a resource within the zone of trust.</p>"
+          }
+        },
+        "action": {
+          "target": "com.amazonaws.accessanalyzer#ActionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The action in the analyzed policy statement that an external principal has permission to\n         use.</p>"
+          }
+        },
+        "resource": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource that an external principal has access to.</p>"
+          }
+        },
+        "isPublic": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the policy that generated the finding allows public access to the\n         resource.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.accessanalyzer#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource reported in the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "condition": {
+          "target": "com.amazonaws.accessanalyzer#ConditionKeyMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The condition in the analyzed policy statement that resulted in a finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was generated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "analyzedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the resource was analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.accessanalyzer#FindingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceOwnerAccount": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>An error.</p>"
+          }
+        },
+        "sources": {
+          "target": "com.amazonaws.accessanalyzer#FindingSourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about a finding.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingId": {
+      "type": "string"
+    },
+    "com.amazonaws.accessanalyzer#FindingIdList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#FindingId"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingSource": {
+      "type": "structure",
+      "members": {
+        "type": {
+          "target": "com.amazonaws.accessanalyzer#FindingSourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates the type of access that generated the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "detail": {
+          "target": "com.amazonaws.accessanalyzer#FindingSourceDetail",
+          "traits": {
+            "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The source of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingSourceDetail": {
+      "type": "structure",
+      "members": {
+        "accessPointArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the access point that generated the finding.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Includes details about how the access that generated the finding is granted. This is populated for Amazon S3 bucket findings.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingSourceList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#FindingSource"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingSourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "POLICY"
+          },
+          {
+            "value": "BUCKET_ACL"
+          },
+          {
+            "value": "S3_ACCESS_POINT"
+          },
+          {
+            "value": "KMS_GRANT"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE"
+          },
+          {
+            "value": "ARCHIVED"
+          },
+          {
+            "value": "RESOLVED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingStatusUpdate": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE"
+          },
+          {
+            "value": "ARCHIVED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingSummary": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "target": "com.amazonaws.accessanalyzer#FindingId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "principal": {
+          "target": "com.amazonaws.accessanalyzer#PrincipalMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The external principal that has access to a resource within the zone of trust.</p>"
+          }
+        },
+        "action": {
+          "target": "com.amazonaws.accessanalyzer#ActionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The action in the analyzed policy statement that an external principal has permission to\n         use.</p>"
+          }
+        },
+        "resource": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource that the external principal has access to.</p>"
+          }
+        },
+        "isPublic": {
+          "target": "smithy.api#Boolean",
+          "traits": {
+            "smithy.api#documentation": "<p>Indicates whether the finding reports a resource that has a policy that allows public\n         access.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.accessanalyzer#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource that the external principal has access to.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "condition": {
+          "target": "com.amazonaws.accessanalyzer#ConditionKeyMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The condition in the analyzed policy statement that resulted in a finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "createdAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "analyzedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the resource-based policy that generated the finding was\n         analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updatedAt": {
+          "target": "com.amazonaws.accessanalyzer#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The time at which the finding was most recently updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.accessanalyzer#FindingStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The status of the finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceOwnerAccount": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The error that resulted in an Error finding.</p>"
+          }
+        },
+        "sources": {
+          "target": "com.amazonaws.accessanalyzer#FindingSourceList",
+          "traits": {
+            "smithy.api#documentation": "<p>The sources of the finding. This indicates how the access that generated the finding is granted. It is populated for Amazon S3 bucket findings.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about a finding.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#FindingsList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#FindingSummary"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzedResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#GetAnalyzedResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#GetAnalyzedResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves information about a resource that was analyzed.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/analyzed-resource",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzedResourceRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer to retrieve information from.</p>",
+            "smithy.api#httpQuery": "analyzerArn",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.accessanalyzer#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to retrieve information about.</p>",
+            "smithy.api#httpQuery": "resourceArn",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves an analyzed resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzedResourceResponse": {
+      "type": "structure",
+      "members": {
+        "resource": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzedResource",
+          "traits": {
+            "smithy.api#documentation": "<p>An <code>AnalyedResource</code> object that contains information that Access Analyzer\n         found when it analyzed the resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzer": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#GetAnalyzerRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#GetAnalyzerResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves information about the specified analyzer.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/analyzer/{analyzerName}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzerRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer retrieved.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves an analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetAnalyzerResponse": {
+      "type": "structure",
+      "members": {
+        "analyzer": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerSummary",
+          "traits": {
+            "smithy.api#documentation": "<p>An <code>AnalyzerSummary</code> object that contains information about the\n         analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetArchiveRule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#GetArchiveRuleRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#GetArchiveRuleResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetArchiveRuleRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer to retrieve rules from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves an archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetArchiveRuleResponse": {
+      "type": "structure",
+      "members": {
+        "archiveRule": {
+          "target": "com.amazonaws.accessanalyzer#ArchiveRuleSummary",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetFinding": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#GetFindingRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#GetFindingResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves information about the specified finding.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/finding/{id}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetFindingRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer that generated the finding.</p>",
+            "smithy.api#httpQuery": "analyzerArn",
+            "smithy.api#required": {}
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.accessanalyzer#FindingId",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the finding to retrieve.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a finding.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#GetFindingResponse": {
+      "type": "structure",
+      "members": {
+        "finding": {
+          "target": "com.amazonaws.accessanalyzer#Finding",
+          "traits": {
+            "smithy.api#documentation": "<p>A <code>finding</code> object that contains finding details.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#InlineArchiveRule": {
+      "type": "structure",
+      "members": {
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "filter": {
+          "target": "com.amazonaws.accessanalyzer#FilterCriteriaMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The condition and values for a criterion.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>An criterion statement in an archive rule. Each archive rule may have multiple\n         criteria.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#InlineArchiveRulesList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#InlineArchiveRule"
+      }
+    },
+    "com.amazonaws.accessanalyzer#InternalServerException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "retryAfterSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The seconds to wait to retry.</p>",
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Internal server error.</p>",
+        "smithy.api#error": "server",
+        "smithy.api#httpError": 500,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzedResources": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ListAnalyzedResourcesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#ListAnalyzedResourcesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of resources of the specified type that have been analyzed by the\n         specified analyzer..</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/analyzed-resource",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "analyzedResources"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzedResourcesRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer to retrieve a list of analyzed resources from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.accessanalyzer#ResourceType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of resource.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of resources that have been analyzed.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzedResourcesResponse": {
+      "type": "structure",
+      "members": {
+        "analyzedResources": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzedResourcesList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of resources that were analyzed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzers": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ListAnalyzersRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#ListAnalyzersResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of analyzers.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/analyzer",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "analyzers"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzersRequest": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.accessanalyzer#Type",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of analyzer.</p>",
+            "smithy.api#httpQuery": "type"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of analyzers.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListAnalyzersResponse": {
+      "type": "structure",
+      "members": {
+        "analyzers": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzersList",
+          "traits": {
+            "smithy.api#documentation": "<p>The analyzers retrieved.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListArchiveRules": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ListArchiveRulesRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#ListArchiveRulesResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of archive rules created for the specified analyzer.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/analyzer/{analyzerName}/archive-rule",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "archiveRules"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListArchiveRulesRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer to retrieve rules from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>",
+            "smithy.api#httpQuery": "nextToken"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the request.</p>",
+            "smithy.api#httpQuery": "maxResults"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of archive rules created for the specified analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListArchiveRulesResponse": {
+      "type": "structure",
+      "members": {
+        "archiveRules": {
+          "target": "com.amazonaws.accessanalyzer#ArchiveRulesList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of archive rules created for the specified analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListFindings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ListFindingsRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#ListFindingsResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/finding",
+          "code": 200
+        },
+        "smithy.api#paginated": {
+          "items": "findings"
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListFindingsRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer to retrieve findings from.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "filter": {
+          "target": "com.amazonaws.accessanalyzer#FilterCriteriaMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A filter to match for the findings to return.</p>"
+          }
+        },
+        "sort": {
+          "target": "com.amazonaws.accessanalyzer#SortCriteria",
+          "traits": {
+            "smithy.api#documentation": "<p>The sort order for the findings returned.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListFindingsResponse": {
+      "type": "structure",
+      "members": {
+        "findings": {
+          "target": "com.amazonaws.accessanalyzer#FindingsList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of findings retrieved from the analyzer that match the filter criteria specified,\n         if any.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.accessanalyzer#Token",
+          "traits": {
+            "smithy.api#documentation": "<p>A token used for pagination of results returned.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#ListTagsForResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of tags applied to the specified resource.</p>",
+        "smithy.api#http": {
+          "method": "GET",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#readonly": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to retrieve tags from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Retrieves a list of tags applied to the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.accessanalyzer#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags that are applied to the specified resource.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#Name": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 255
+        },
+        "smithy.api#pattern": "^[A-Za-z][A-Za-z0-9_.-]*$"
+      }
+    },
+    "com.amazonaws.accessanalyzer#OrderBy": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ASC"
+          },
+          {
+            "value": "DESC"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#PrincipalMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ReasonCode": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS_SERVICE_ACCESS_DISABLED"
+          },
+          {
+            "value": "DELEGATED_ADMINISTRATOR_DEREGISTERED"
+          },
+          {
+            "value": "ORGANIZATION_DELETED"
+          },
+          {
+            "value": "SERVICE_LINKED_ROLE_CREATION_FAILED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#ResourceArn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ResourceNotFoundException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ID of the resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified resource could not be found.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.accessanalyzer#ResourceType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "AWS::S3::Bucket"
+          },
+          {
+            "value": "AWS::IAM::Role"
+          },
+          {
+            "value": "AWS::SQS::Queue"
+          },
+          {
+            "value": "AWS::Lambda::Function"
+          },
+          {
+            "value": "AWS::Lambda::LayerVersion"
+          },
+          {
+            "value": "AWS::KMS::Key"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#ServiceQuotaExceededException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "resourceId": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource ID.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The resource type.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Service quote met error.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 402
+      }
+    },
+    "com.amazonaws.accessanalyzer#SharedViaList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#SortCriteria": {
+      "type": "structure",
+      "members": {
+        "attributeName": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the attribute to sort on.</p>"
+          }
+        },
+        "orderBy": {
+          "target": "com.amazonaws.accessanalyzer#OrderBy",
+          "traits": {
+            "smithy.api#documentation": "<p>The sort order, ascending or descending.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The criteria used to sort.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#StartResourceScan": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#StartResourceScanRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Immediately starts a scan of the policies applied to the specified resource.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/resource/scan",
+          "code": 200
+        }
+      }
+    },
+    "com.amazonaws.accessanalyzer#StartResourceScanRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer to use to scan the policies applied to the specified\n         resource.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.accessanalyzer#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to scan.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Starts a scan of the policies applied to the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#StatusReason": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "target": "com.amazonaws.accessanalyzer#ReasonCode",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason code for the current status of the analyzer.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Provides more details about the current status of the analyzer. For example, if the\n         creation for the analyzer fails, a <code>Failed</code> status is displayed. For an analyzer\n         with organization as the type, this failure can be due to an issue with creating the\n         service-linked roles required in the member accounts of the AWS organization.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#TagKeys": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#TagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#TagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Adds a tag to the specified resource.</p>",
+        "smithy.api#http": {
+          "method": "POST",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to add the tag to.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tags": {
+          "target": "com.amazonaws.accessanalyzer#TagsMap",
+          "traits": {
+            "smithy.api#documentation": "<p>The tags to add to the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Adds a tag to the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#TagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#TagsMap": {
+      "type": "map",
+      "key": {
+        "target": "smithy.api#String"
+      },
+      "value": {
+        "target": "smithy.api#String"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ThrottlingException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "retryAfterSeconds": {
+          "target": "smithy.api#Integer",
+          "traits": {
+            "smithy.api#documentation": "<p>The seconds to wait to retry.</p>",
+            "smithy.api#httpHeader": "Retry-After"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Throttling limit exceeded error.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 429,
+        "smithy.api#retryable": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#Timestamp": {
+      "type": "timestamp",
+      "traits": {
+        "smithy.api#timestampFormat": "date-time"
+      }
+    },
+    "com.amazonaws.accessanalyzer#Token": {
+      "type": "string"
+    },
+    "com.amazonaws.accessanalyzer#Type": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACCOUNT"
+          },
+          {
+            "value": "ORGANIZATION"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#UntagResourceRequest"
+      },
+      "output": {
+        "target": "com.amazonaws.accessanalyzer#UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a tag from the specified resource.</p>",
+        "smithy.api#http": {
+          "method": "DELETE",
+          "uri": "/tags/{resourceArn}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource to remove the tag from.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.accessanalyzer#TagKeys",
+          "traits": {
+            "smithy.api#documentation": "<p>The key for the tag to add.</p>",
+            "smithy.api#httpQuery": "tagKeys",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Removes a tag from the specified resource.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#UntagResourceResponse": {
+      "type": "structure",
+      "members": {},
+      "traits": {
+        "smithy.api#documentation": "<p>The response to the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#UpdateArchiveRule": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#UpdateArchiveRuleRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the criteria and values for the specified archive rule.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#UpdateArchiveRuleRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the analyzer to update the archive rules for.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "ruleName": {
+          "target": "com.amazonaws.accessanalyzer#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the rule to update.</p>",
+            "smithy.api#httpLabel": {},
+            "smithy.api#required": {}
+          }
+        },
+        "filter": {
+          "target": "com.amazonaws.accessanalyzer#FilterCriteriaMap",
+          "traits": {
+            "smithy.api#documentation": "<p>A filter to match for the rules to update. Only rules that match the filter are\n         updated.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the specified archive rule.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#UpdateFindings": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.accessanalyzer#UpdateFindingsRequest"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.accessanalyzer#AccessDeniedException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#InternalServerException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ResourceNotFoundException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ThrottlingException"
+        },
+        {
+          "target": "com.amazonaws.accessanalyzer#ValidationException"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates the status for the specified findings.</p>",
+        "smithy.api#http": {
+          "method": "PUT",
+          "uri": "/finding",
+          "code": 200
+        },
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.accessanalyzer#UpdateFindingsRequest": {
+      "type": "structure",
+      "members": {
+        "analyzerArn": {
+          "target": "com.amazonaws.accessanalyzer#AnalyzerArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the analyzer that generated the findings to update.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.accessanalyzer#FindingStatusUpdate",
+          "traits": {
+            "smithy.api#documentation": "<p>The state represents the action to take to update the finding Status. Use\n            <code>ARCHIVE</code> to change an Active finding to an Archived finding. Use\n            <code>ACTIVE</code> to change an Archived finding to an Active finding.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "ids": {
+          "target": "com.amazonaws.accessanalyzer#FindingIdList",
+          "traits": {
+            "smithy.api#documentation": "<p>The IDs of the findings to update.</p>"
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.accessanalyzer#ResourceArn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the resource identified in the finding.</p>"
+          }
+        },
+        "clientToken": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A client token.</p>",
+            "smithy.api#idempotencyToken": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Updates findings with the new values provided in the request.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ValidationException": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        },
+        "reason": {
+          "target": "com.amazonaws.accessanalyzer#ValidationExceptionReason",
+          "traits": {
+            "smithy.api#documentation": "<p>The reason for the exception.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "fieldList": {
+          "target": "com.amazonaws.accessanalyzer#ValidationExceptionFieldList",
+          "traits": {
+            "smithy.api#documentation": "<p>A list of fields that didn't validate.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Validation exception error.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.accessanalyzer#ValidationExceptionField": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the validation exception.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "message": {
+          "target": "smithy.api#String",
+          "traits": {
+            "smithy.api#documentation": "<p>A message about the validation exception.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains information about a validation exception.</p>"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ValidationExceptionFieldList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.accessanalyzer#ValidationExceptionField"
+      }
+    },
+    "com.amazonaws.accessanalyzer#ValidationExceptionReason": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "unknownOperation",
+            "name": "UNKNOWN_OPERATION"
+          },
+          {
+            "value": "cannotParse",
+            "name": "CANNOT_PARSE"
+          },
+          {
+            "value": "fieldValidationFailed",
+            "name": "FIELD_VALIDATION_FAILED"
+          },
+          {
+            "value": "other",
+            "name": "OTHER"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.accessanalyzer#ValueList": {
+      "type": "list",
+      "member": {
+        "target": "smithy.api#String"
+      },
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 20
+        }
+      }
+    }
+  }
+}

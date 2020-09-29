@@ -3,8 +3,8 @@ package awsutil_test
 import (
 	"testing"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/awsutil"
+	"github.com/awslabs/smithy-go/ptr"
 )
 
 type testStruct struct {
@@ -22,7 +22,7 @@ func TestStringValue(t *testing.T) {
 		"general": {
 			Value: testStruct{
 				Field1: "abc123",
-				Field2: aws.String("abc123"),
+				Field2: ptr.String("abc123"),
 				Field3: []byte("don't show me"),
 				Value: []string{
 					"first",

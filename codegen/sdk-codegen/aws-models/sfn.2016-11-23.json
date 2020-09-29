@@ -1,0 +1,3248 @@
+{
+  "smithy": "1.0",
+  "metadata": {
+    "suppressions": [
+      {
+        "id": "HttpMethodSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpResponseCodeSemantics",
+        "namespace": "*"
+      },
+      {
+        "id": "PaginatedTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpHeaderTrait",
+        "namespace": "*"
+      },
+      {
+        "id": "HttpUriConflict",
+        "namespace": "*"
+      },
+      {
+        "id": "Service",
+        "namespace": "*"
+      }
+    ]
+  },
+  "shapes": {
+    "com.amazonaws.sfn#AWSStepFunctions": {
+      "type": "service",
+      "version": "2016-11-23",
+      "operations": [
+        {
+          "target": "com.amazonaws.sfn#CreateActivity"
+        },
+        {
+          "target": "com.amazonaws.sfn#CreateStateMachine"
+        },
+        {
+          "target": "com.amazonaws.sfn#DeleteActivity"
+        },
+        {
+          "target": "com.amazonaws.sfn#DeleteStateMachine"
+        },
+        {
+          "target": "com.amazonaws.sfn#DescribeActivity"
+        },
+        {
+          "target": "com.amazonaws.sfn#DescribeExecution"
+        },
+        {
+          "target": "com.amazonaws.sfn#DescribeStateMachine"
+        },
+        {
+          "target": "com.amazonaws.sfn#DescribeStateMachineForExecution"
+        },
+        {
+          "target": "com.amazonaws.sfn#GetActivityTask"
+        },
+        {
+          "target": "com.amazonaws.sfn#GetExecutionHistory"
+        },
+        {
+          "target": "com.amazonaws.sfn#ListActivities"
+        },
+        {
+          "target": "com.amazonaws.sfn#ListExecutions"
+        },
+        {
+          "target": "com.amazonaws.sfn#ListStateMachines"
+        },
+        {
+          "target": "com.amazonaws.sfn#ListTagsForResource"
+        },
+        {
+          "target": "com.amazonaws.sfn#SendTaskFailure"
+        },
+        {
+          "target": "com.amazonaws.sfn#SendTaskHeartbeat"
+        },
+        {
+          "target": "com.amazonaws.sfn#SendTaskSuccess"
+        },
+        {
+          "target": "com.amazonaws.sfn#StartExecution"
+        },
+        {
+          "target": "com.amazonaws.sfn#StopExecution"
+        },
+        {
+          "target": "com.amazonaws.sfn#TagResource"
+        },
+        {
+          "target": "com.amazonaws.sfn#UntagResource"
+        },
+        {
+          "target": "com.amazonaws.sfn#UpdateStateMachine"
+        }
+      ],
+      "traits": {
+        "aws.api#service": {
+          "sdkId": "SFN",
+          "arnNamespace": "states",
+          "cloudFormationName": "StepFunctions",
+          "cloudTrailEventSource": "model.v2.service.swf.amazonaws.com"
+        },
+        "aws.auth#sigv4": {
+          "name": "states"
+        },
+        "aws.protocols#awsJson1_0": {},
+        "smithy.api#documentation": "<fullname>AWS Step Functions</fullname>\n         <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications\n      and microservices using visual workflows.</p>\n         <p>You can use Step Functions to build applications from individual components, each of which performs\n      a discrete function, or <i>task</i>, allowing you to scale and change\n      applications quickly. Step Functions provides a console that helps visualize the components of your\n      application as a series of steps. Step Functions automatically triggers and tracks each step, and\n      retries steps when there are errors, so your application executes predictably and in the right\n      order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any\n      issues.</p>\n         <p>Step Functions manages operations and underlying infrastructure to ensure your application is\n      available at any scale. You can run tasks on AWS, your own servers, or any system that has\n      access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API.\n      For more information about Step Functions, see the <i>\n               <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">AWS Step Functions Developer Guide</a>\n            </i>.</p>",
+        "smithy.api#title": "AWS Step Functions",
+        "smithy.api#xmlNamespace": {
+          "uri": "http://swf.amazonaws.com/doc/2015-07-20/"
+        }
+      }
+    },
+    "com.amazonaws.sfn#ActivityDoesNotExist": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified activity does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#ActivityFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity that failed during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityLimitExceeded": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The maximum number of activities has been reached. Existing activities must be deleted\n      before a new activity can be created.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#ActivityList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#ActivityListItem"
+      }
+    },
+    "com.amazonaws.sfn#ActivityListItem": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the activity.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the activity is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the activity.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityScheduleFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity schedule failure that occurred during an\n      execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityScheduledEventDetails": {
+      "type": "structure",
+      "members": {
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data input to the activity task.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduled activity.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "timeoutInSeconds": {
+          "target": "com.amazonaws.sfn#TimeoutInSeconds",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The maximum allowed duration of the activity task.</p>"
+          }
+        },
+        "heartbeatInSeconds": {
+          "target": "com.amazonaws.sfn#TimeoutInSeconds",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The maximum allowed duration between two heartbeats for the activity task.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity scheduled during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityStartedEventDetails": {
+      "type": "structure",
+      "members": {
+        "workerName": {
+          "target": "com.amazonaws.sfn#Identity",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the worker that the task is assigned to. These names are provided by the\n      workers when calling <a>GetActivityTask</a>.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the start of an activity during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivitySucceededEventDetails": {
+      "type": "structure",
+      "members": {
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data output by the activity task.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity that successfully terminated during an\n      execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityTimedOutEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the timeout.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an activity timeout that occurred during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ActivityWorkerLimitExceeded": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The maximum number of workers concurrently polling for activity tasks has been\n      reached.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#Arn": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.sfn#CloudWatchLogsLogGroup": {
+      "type": "structure",
+      "members": {
+        "logGroupArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN\n      must end with <code>:*</code>\n         </p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>"
+      }
+    },
+    "com.amazonaws.sfn#ConnectorParameters": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 32768
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#CreateActivity": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#CreateActivityInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#CreateActivityOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ActivityLimitExceeded"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidName"
+        },
+        {
+          "target": "com.amazonaws.sfn#TooManyTags"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates an activity. An activity is a task that you write in any programming language and\n      host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the\n        <code>GetActivityTask</code> API action and respond using <code>SendTask*</code> API\n      actions. This function lets Step Functions know the existence of your activity and returns an\n      identifier for use in a state machine and when polling from the activity.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <note>\n            <p>\n               <code>CreateActivity</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateActivity</code>'s idempotency\n        check is based on the activity <code>name</code>. If a following request has different\n          <code>tags</code> values, Step Functions will ignore these differences and treat it as an\n        idempotent request of the previous. In this case, <code>tags</code> will not be updated,\n        even if they are different.</p>\n         </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.sfn#CreateActivityInput": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.sfn#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tags to add to a resource.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, \n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#CreateActivityOutput": {
+      "type": "structure",
+      "members": {
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the created activity.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the activity is created.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#CreateStateMachine": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#CreateStateMachineInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#CreateStateMachineOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidDefinition"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidLoggingConfiguration"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidName"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineAlreadyExists"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDeleting"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineLimitExceeded"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineTypeNotSupported"
+        },
+        {
+          "target": "com.amazonaws.sfn#TooManyTags"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do\n      work (<code>Task</code> states), determine to which states to transition next\n        (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states),\n      and so on. State machines are specified using a JSON-based, structured language. For more\n      information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States\n        Language</a> in the AWS Step Functions User Guide.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <note>\n            <p>\n               <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a\n        duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency\n        check is based on the state machine <code>name</code>, <code>definition</code>,\n          <code>type</code>, and <code>LoggingConfiguration</code>. If a following request has a\n        different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and\n        treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and\n          <code>tags</code> will not be updated, even if they are different.</p>\n         </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.sfn#CreateStateMachineInput": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.sfn#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>Tags to be added when creating a state machine.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.sfn#StateMachineType",
+          "traits": {
+            "smithy.api#documentation": "<p>Determines whether a Standard or Express state machine is created. The default is\n        <code>STANDARD</code>. You cannot update the <code>type</code> of a state machine once it\n      has been created.</p>"
+          }
+        },
+        "loggingConfiguration": {
+          "target": "com.amazonaws.sfn#LoggingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines what execution history events are logged and where they are logged.</p>\n         <note>\n            <p>By default, the <code>level</code> is set to <code>OFF</code>. For more information see\n          <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html\">Log\n          Levels</a> in the AWS Step Functions User Guide.</p>\n         </note>"
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state machine. </p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to use for this state machine.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.sfn#Definition",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#CreateStateMachineOutput": {
+      "type": "structure",
+      "members": {
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the state machine is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the created state machine.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#Definition": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1048576
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#DeleteActivity": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DeleteActivityInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DeleteActivityOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes an activity.</p>"
+      }
+    },
+    "com.amazonaws.sfn#DeleteActivityInput": {
+      "type": "structure",
+      "members": {
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the activity to delete.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DeleteActivityOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#DeleteStateMachine": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DeleteStateMachineInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DeleteStateMachineOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's\n      status to <code>DELETING</code> and begins the deletion process. </p>\n         <note>\n            <p>For <code>EXPRESS</code>state machines, the deletion will happen eventually (usually\n        less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code>\n        API is called.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.sfn#DeleteStateMachineInput": {
+      "type": "structure",
+      "members": {
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to delete.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DeleteStateMachineOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#DescribeActivity": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DescribeActivityInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DescribeActivityOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ActivityDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an activity.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.sfn#DescribeActivityInput": {
+      "type": "structure",
+      "members": {
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the activity to describe.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeActivityOutput": {
+      "type": "structure",
+      "members": {
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the activity is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the activity.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the activity.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DescribeExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DescribeExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ExecutionDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes an execution.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+      }
+    },
+    "com.amazonaws.sfn#DescribeExecutionInput": {
+      "type": "structure",
+      "members": {
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution to describe.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.sfn#ExecutionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "stopDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>If the execution has already ended, the date the execution stopped.</p>"
+          }
+        },
+        "startDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the execution is started.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the execution.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
+          }
+        },
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON output data of the execution.</p>\n         <note>\n            <p>This field is set only if the execution succeeds. If the execution fails, this field is\n        null.</p>\n         </note>"
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the executed stated machine.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that contains the JSON input data of the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachine": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DescribeStateMachineInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DescribeStateMachineOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes a state machine.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachineForExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#DescribeStateMachineForExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#DescribeStateMachineForExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ExecutionDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Describes the state machine associated with a specific execution.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachineForExecutionInput": {
+      "type": "structure",
+      "members": {
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution you want state machine information for.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachineForExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "loggingConfiguration": {
+          "target": "com.amazonaws.sfn#LoggingConfiguration"
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine associated with the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role of the State Machine for the execution. </p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state machine associated with the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "definition": {
+          "target": "com.amazonaws.sfn#Definition",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "updateDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the state machine associated with an execution was updated. For a newly\n      created state machine, this is the creation date.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachineInput": {
+      "type": "structure",
+      "members": {
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to describe.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#DescribeStateMachineOutput": {
+      "type": "structure",
+      "members": {
+        "roleArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used when creating this state machine. (The IAM role\n      maintains security by granting Step Functions access to AWS resources.)</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "loggingConfiguration": {
+          "target": "com.amazonaws.sfn#LoggingConfiguration"
+        },
+        "definition": {
+          "target": "com.amazonaws.sfn#Definition",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the state machine is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.sfn#StateMachineType",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>type</code> of the state machine (<code>STANDARD</code> or\n      <code>EXPRESS</code>).</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state machine.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "status": {
+          "target": "com.amazonaws.sfn#StateMachineStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the state machine.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ErrorMessage": {
+      "type": "string"
+    },
+    "com.amazonaws.sfn#EventId": {
+      "type": "long"
+    },
+    "com.amazonaws.sfn#ExecutionAbortedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an abort of an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionAlreadyExists": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The execution has the same <code>name</code> as another execution (but a different\n        <code>input</code>).</p>\n         <note>\n            <p>Executions with the same <code>name</code> and <code>input</code> are considered\n        idempotent.</p>\n         </note>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionDoesNotExist": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified execution does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an execution failure event.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionLimitExceeded": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The maximum number of running executions has been reached. Running executions must end or\n      be stopped before a new execution can be started.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#ExecutionListItem"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionListItem": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "target": "com.amazonaws.sfn#ExecutionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>The current status of the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the execution.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "startDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the execution started.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "stopDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>If the execution already ended, the date the execution stopped.</p>"
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the executed state machine.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionStartedEventDetails": {
+      "type": "structure",
+      "members": {
+        "roleArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.</p>"
+          }
+        },
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data input to the execution.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the start of the execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "RUNNING"
+          },
+          {
+            "value": "SUCCEEDED"
+          },
+          {
+            "value": "FAILED"
+          },
+          {
+            "value": "TIMED_OUT"
+          },
+          {
+            "value": "ABORTED"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.sfn#ExecutionSucceededEventDetails": {
+      "type": "structure",
+      "members": {
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data output by the execution.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the successful termination of the execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ExecutionTimedOutEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the timeout.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the execution timeout that occurred during the execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#GetActivityTask": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#GetActivityTaskInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#GetActivityTaskOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ActivityDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#ActivityWorkerLimitExceeded"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Used by workers to retrieve a task (with the specified activity ARN) which has been\n      scheduled for execution by a running state machine. This initiates a long poll, where the\n      service holds the HTTP connection open and responds as soon as a task becomes available (i.e.\n      an execution of a task of this type is needed.) The maximum time the service holds on to the\n      request before responding is 60 seconds. If no task is available within 60 seconds, the poll\n      returns a <code>taskToken</code> with a null string.</p>\n         <important>\n            <p>Workers should set their client side socket timeout to at least 65 seconds (5 seconds\n        higher than the maximum time the service may hold the poll request).</p>\n            <p>Polling with <code>GetActivityTask</code> can cause latency in some implementations. See\n          <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/bp-activity-pollers.html\">Avoid\n          Latency When Polling for Activity Tasks</a> in the Step Functions Developer Guide.</p>\n         </important>"
+      }
+    },
+    "com.amazonaws.sfn#GetActivityTaskInput": {
+      "type": "structure",
+      "members": {
+        "activityArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the activity to retrieve tasks from (assigned when you create the task\n      using <a>CreateActivity</a>.)</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "workerName": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>You can provide an arbitrary name in order to identify the worker that the task is\n      assigned to. This name is used when it is logged in the execution history.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#GetActivityTaskOutput": {
+      "type": "structure",
+      "members": {
+        "taskToken": {
+          "target": "com.amazonaws.sfn#TaskToken",
+          "traits": {
+            "smithy.api#documentation": "<p>A token that identifies the scheduled task. This token must be copied and included in\n      subsequent calls to <a>SendTaskHeartbeat</a>, <a>SendTaskSuccess</a> or\n        <a>SendTaskFailure</a> in order to report the progress or completion of the\n      task.</p>"
+          }
+        },
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveDataJobInput",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that contains the JSON input data for the task.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#GetExecutionHistory": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#GetExecutionHistoryInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#GetExecutionHistoryOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ExecutionDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Returns the history of the specified execution as a list of events. By default, the\n      results are returned in ascending order of the <code>timeStamp</code> of the events. Use the\n        <code>reverseOrder</code> parameter to get the latest events first.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "events",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.sfn#GetExecutionHistoryInput": {
+      "type": "structure",
+      "members": {
+        "maxResults": {
+          "target": "com.amazonaws.sfn#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "reverseOrder": {
+          "target": "com.amazonaws.sfn#ReverseOrder",
+          "traits": {
+            "smithy.api#documentation": "<p>Lists events in descending order of their <code>timeStamp</code>.</p>"
+          }
+        },
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#GetExecutionHistoryOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "events": {
+          "target": "com.amazonaws.sfn#HistoryEventList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of events that occurred in the execution.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#HistoryEvent": {
+      "type": "structure",
+      "members": {
+        "activityScheduleFailedEventDetails": {
+          "target": "com.amazonaws.sfn#ActivityScheduleFailedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about an activity schedule event that failed during an execution.</p>"
+          }
+        },
+        "executionSucceededEventDetails": {
+          "target": "com.amazonaws.sfn#ExecutionSucceededEventDetails"
+        },
+        "taskSucceededEventDetails": {
+          "target": "com.amazonaws.sfn#TaskSucceededEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that succeeded.</p>"
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.sfn#HistoryEventType",
+          "traits": {
+            "smithy.api#documentation": "<p>The type of the event.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "lambdaFunctionSucceededEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionSucceededEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a lambda function that terminated successfully during an\n      execution.</p>"
+          }
+        },
+        "lambdaFunctionTimedOutEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionTimedOutEventDetails"
+        },
+        "stateEnteredEventDetails": {
+          "target": "com.amazonaws.sfn#StateEnteredEventDetails"
+        },
+        "stateExitedEventDetails": {
+          "target": "com.amazonaws.sfn#StateExitedEventDetails"
+        },
+        "executionTimedOutEventDetails": {
+          "target": "com.amazonaws.sfn#ExecutionTimedOutEventDetails"
+        },
+        "timestamp": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the event occurred.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "activitySucceededEventDetails": {
+          "target": "com.amazonaws.sfn#ActivitySucceededEventDetails"
+        },
+        "taskFailedEventDetails": {
+          "target": "com.amazonaws.sfn#TaskFailedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about the failure of a task.</p>"
+          }
+        },
+        "activityTimedOutEventDetails": {
+          "target": "com.amazonaws.sfn#ActivityTimedOutEventDetails"
+        },
+        "mapIterationFailedEventDetails": {
+          "target": "com.amazonaws.sfn#MapIterationEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about an iteration of a Map state that failed.</p>"
+          }
+        },
+        "mapIterationSucceededEventDetails": {
+          "target": "com.amazonaws.sfn#MapIterationEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about an iteration of a Map state that succeeded.</p>"
+          }
+        },
+        "taskSubmittedEventDetails": {
+          "target": "com.amazonaws.sfn#TaskSubmittedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a submitted task.</p>"
+          }
+        },
+        "activityScheduledEventDetails": {
+          "target": "com.amazonaws.sfn#ActivityScheduledEventDetails"
+        },
+        "taskStartFailedEventDetails": {
+          "target": "com.amazonaws.sfn#TaskStartFailedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that failed to start.</p>"
+          }
+        },
+        "lambdaFunctionScheduleFailedEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionScheduleFailedEventDetails"
+        },
+        "mapIterationAbortedEventDetails": {
+          "target": "com.amazonaws.sfn#MapIterationEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about an iteration of a Map state that was aborted.</p>"
+          }
+        },
+        "id": {
+          "target": "com.amazonaws.sfn#EventId",
+          "traits": {
+            "smithy.api#documentation": "<p>The id of the event. Events are numbered sequentially, starting at one.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "lambdaFunctionStartFailedEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionStartFailedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a lambda function that failed to start during an execution.</p>"
+          }
+        },
+        "executionStartedEventDetails": {
+          "target": "com.amazonaws.sfn#ExecutionStartedEventDetails"
+        },
+        "lambdaFunctionScheduledEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionScheduledEventDetails"
+        },
+        "executionFailedEventDetails": {
+          "target": "com.amazonaws.sfn#ExecutionFailedEventDetails"
+        },
+        "activityFailedEventDetails": {
+          "target": "com.amazonaws.sfn#ActivityFailedEventDetails"
+        },
+        "executionAbortedEventDetails": {
+          "target": "com.amazonaws.sfn#ExecutionAbortedEventDetails"
+        },
+        "taskSubmitFailedEventDetails": {
+          "target": "com.amazonaws.sfn#TaskSubmitFailedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that where the submit failed.</p>"
+          }
+        },
+        "taskTimedOutEventDetails": {
+          "target": "com.amazonaws.sfn#TaskTimedOutEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that timed out.</p>"
+          }
+        },
+        "lambdaFunctionFailedEventDetails": {
+          "target": "com.amazonaws.sfn#LambdaFunctionFailedEventDetails"
+        },
+        "mapStateStartedEventDetails": {
+          "target": "com.amazonaws.sfn#MapStateStartedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about Map state that was started.</p>"
+          }
+        },
+        "taskScheduledEventDetails": {
+          "target": "com.amazonaws.sfn#TaskScheduledEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that was scheduled.</p>"
+          }
+        },
+        "previousEventId": {
+          "target": "com.amazonaws.sfn#EventId",
+          "traits": {
+            "smithy.api#documentation": "<p>The id of the previous event.</p>"
+          }
+        },
+        "taskStartedEventDetails": {
+          "target": "com.amazonaws.sfn#TaskStartedEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about a task that was started.</p>"
+          }
+        },
+        "mapIterationStartedEventDetails": {
+          "target": "com.amazonaws.sfn#MapIterationEventDetails",
+          "traits": {
+            "smithy.api#documentation": "<p>Contains details about an iteration of a Map state that was started.</p>"
+          }
+        },
+        "activityStartedEventDetails": {
+          "target": "com.amazonaws.sfn#ActivityStartedEventDetails"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the events of an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#HistoryEventList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#HistoryEvent"
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the events that occurred during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#HistoryEventType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ActivityFailed"
+          },
+          {
+            "value": "ActivityScheduled"
+          },
+          {
+            "value": "ActivityScheduleFailed"
+          },
+          {
+            "value": "ActivityStarted"
+          },
+          {
+            "value": "ActivitySucceeded"
+          },
+          {
+            "value": "ActivityTimedOut"
+          },
+          {
+            "value": "ChoiceStateEntered"
+          },
+          {
+            "value": "ChoiceStateExited"
+          },
+          {
+            "value": "ExecutionAborted"
+          },
+          {
+            "value": "ExecutionFailed"
+          },
+          {
+            "value": "ExecutionStarted"
+          },
+          {
+            "value": "ExecutionSucceeded"
+          },
+          {
+            "value": "ExecutionTimedOut"
+          },
+          {
+            "value": "FailStateEntered"
+          },
+          {
+            "value": "LambdaFunctionFailed"
+          },
+          {
+            "value": "LambdaFunctionScheduled"
+          },
+          {
+            "value": "LambdaFunctionScheduleFailed"
+          },
+          {
+            "value": "LambdaFunctionStarted"
+          },
+          {
+            "value": "LambdaFunctionStartFailed"
+          },
+          {
+            "value": "LambdaFunctionSucceeded"
+          },
+          {
+            "value": "LambdaFunctionTimedOut"
+          },
+          {
+            "value": "MapIterationAborted"
+          },
+          {
+            "value": "MapIterationFailed"
+          },
+          {
+            "value": "MapIterationStarted"
+          },
+          {
+            "value": "MapIterationSucceeded"
+          },
+          {
+            "value": "MapStateAborted"
+          },
+          {
+            "value": "MapStateEntered"
+          },
+          {
+            "value": "MapStateExited"
+          },
+          {
+            "value": "MapStateFailed"
+          },
+          {
+            "value": "MapStateStarted"
+          },
+          {
+            "value": "MapStateSucceeded"
+          },
+          {
+            "value": "ParallelStateAborted"
+          },
+          {
+            "value": "ParallelStateEntered"
+          },
+          {
+            "value": "ParallelStateExited"
+          },
+          {
+            "value": "ParallelStateFailed"
+          },
+          {
+            "value": "ParallelStateStarted"
+          },
+          {
+            "value": "ParallelStateSucceeded"
+          },
+          {
+            "value": "PassStateEntered"
+          },
+          {
+            "value": "PassStateExited"
+          },
+          {
+            "value": "SucceedStateEntered"
+          },
+          {
+            "value": "SucceedStateExited"
+          },
+          {
+            "value": "TaskFailed"
+          },
+          {
+            "value": "TaskScheduled"
+          },
+          {
+            "value": "TaskStarted"
+          },
+          {
+            "value": "TaskStartFailed"
+          },
+          {
+            "value": "TaskStateAborted"
+          },
+          {
+            "value": "TaskStateEntered"
+          },
+          {
+            "value": "TaskStateExited"
+          },
+          {
+            "value": "TaskSubmitFailed"
+          },
+          {
+            "value": "TaskSubmitted"
+          },
+          {
+            "value": "TaskSucceeded"
+          },
+          {
+            "value": "TaskTimedOut"
+          },
+          {
+            "value": "WaitStateAborted"
+          },
+          {
+            "value": "WaitStateEntered"
+          },
+          {
+            "value": "WaitStateExited"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.sfn#Identity": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.sfn#IncludeExecutionData": {
+      "type": "boolean"
+    },
+    "com.amazonaws.sfn#InvalidArn": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided Amazon Resource Name (ARN) is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidDefinition": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided Amazon States Language definition is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidExecutionInput": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided JSON input data is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidLoggingConfiguration": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidName": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided name is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidOutput": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided JSON output data is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#InvalidToken": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The provided token is invalid.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a lambda function that failed during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionScheduleFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a failed lambda function schedule event that occurred during an\n      execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionScheduledEventDetails": {
+      "type": "structure",
+      "members": {
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data input to the lambda function.</p>"
+          }
+        },
+        "timeoutInSeconds": {
+          "target": "com.amazonaws.sfn#TimeoutInSeconds",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The maximum allowed duration of the lambda function.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the scheduled lambda function.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a lambda function scheduled during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionStartFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a lambda function that failed to start during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionSucceededEventDetails": {
+      "type": "structure",
+      "members": {
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data output by the lambda function.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a lambda function that successfully terminated during an\n      execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#LambdaFunctionTimedOutEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the timeout.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a lambda function timeout that occurred during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ListActivities": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#ListActivitiesInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#ListActivitiesOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the existing activities.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "activities",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListActivitiesInput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.sfn#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListActivitiesOutput": {
+      "type": "structure",
+      "members": {
+        "activities": {
+          "target": "com.amazonaws.sfn#ActivityList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of activities.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListExecutions": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#ListExecutionsInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#ListExecutionsOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineTypeNotSupported"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the executions of a state machine that meet the filtering criteria. Results are\n      sorted by time, with the most recent execution first.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "executions",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListExecutionsInput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#ListExecutionsPageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.sfn#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+          }
+        },
+        "statusFilter": {
+          "target": "com.amazonaws.sfn#ExecutionStatus",
+          "traits": {
+            "smithy.api#documentation": "<p>If specified, only list the executions whose current execution status matches the given\n      filter.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListExecutionsOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#ListExecutionsPageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "executions": {
+          "target": "com.amazonaws.sfn#ExecutionList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of matching executions.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListExecutionsPageToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 3096
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListStateMachines": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#ListStateMachinesInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#ListStateMachinesOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Lists the existing state machines.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>",
+        "smithy.api#paginated": {
+          "inputToken": "nextToken",
+          "outputToken": "nextToken",
+          "items": "stateMachines",
+          "pageSize": "maxResults"
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListStateMachinesInput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "maxResults": {
+          "target": "com.amazonaws.sfn#PageSize",
+          "traits": {
+            "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListStateMachinesOutput": {
+      "type": "structure",
+      "members": {
+        "nextToken": {
+          "target": "com.amazonaws.sfn#PageToken",
+          "traits": {
+            "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+          }
+        },
+        "stateMachines": {
+          "target": "com.amazonaws.sfn#StateMachineList",
+          "traits": {
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListTagsForResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#ListTagsForResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#ResourceNotFound"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>List tags for a given resource.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+      }
+    },
+    "com.amazonaws.sfn#ListTagsForResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Step Functions state machine or activity.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.sfn#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of tags associated with the resource.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#LogDestination": {
+      "type": "structure",
+      "members": {
+        "cloudWatchLogsLogGroup": {
+          "target": "com.amazonaws.sfn#CloudWatchLogsLogGroup",
+          "traits": {
+            "smithy.api#documentation": "<p>An object describing a CloudWatch log group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html\">AWS::Logs::LogGroup</a> in the AWS CloudFormation User Guide.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>"
+      }
+    },
+    "com.amazonaws.sfn#LogDestinationList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#LogDestination"
+      }
+    },
+    "com.amazonaws.sfn#LogLevel": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ALL"
+          },
+          {
+            "value": "ERROR"
+          },
+          {
+            "value": "FATAL"
+          },
+          {
+            "value": "OFF"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.sfn#LoggingConfiguration": {
+      "type": "structure",
+      "members": {
+        "includeExecutionData": {
+          "target": "com.amazonaws.sfn#IncludeExecutionData",
+          "traits": {
+            "smithy.api#documentation": "<p>Determines whether execution data is included in your log. When set to <code>FALSE</code>,\n      data is excluded.</p>"
+          }
+        },
+        "destinations": {
+          "target": "com.amazonaws.sfn#LogDestinationList",
+          "traits": {
+            "smithy.api#documentation": "<p>An array of objects that describes where your execution history events will be logged.\n      Limited to size 1. Required, if your log level is not set to <code>OFF</code>.</p>"
+          }
+        },
+        "level": {
+          "target": "com.amazonaws.sfn#LogLevel",
+          "traits": {
+            "smithy.api#documentation": "<p>Defines which category of execution history events are logged.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs\n      options.</p>"
+      }
+    },
+    "com.amazonaws.sfn#MapIterationEventDetails": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the iteration’s parent Map state.</p>"
+          }
+        },
+        "index": {
+          "target": "com.amazonaws.sfn#UnsignedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The index of the array belonging to the Map state iteration.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an iteration of a Map state.</p>"
+      }
+    },
+    "com.amazonaws.sfn#MapStateStartedEventDetails": {
+      "type": "structure",
+      "members": {
+        "length": {
+          "target": "com.amazonaws.sfn#UnsignedInteger",
+          "traits": {
+            "smithy.api#documentation": "<p>The size of the array for Map state iterations.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Details about a Map state that was started.</p>"
+      }
+    },
+    "com.amazonaws.sfn#MissingRequiredParameter": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Request is missing a required parameter. This error occurs if both <code>definition</code>\n      and <code>roleArn</code> are not specified.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#Name": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 80
+        }
+      }
+    },
+    "com.amazonaws.sfn#PageSize": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0,
+          "max": 1000
+        }
+      }
+    },
+    "com.amazonaws.sfn#PageToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.sfn#ResourceNotFound": {
+      "type": "structure",
+      "members": {
+        "resourceName": {
+          "target": "com.amazonaws.sfn#Arn"
+        },
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Could not find the referenced resource. Only state machine and activity ARNs are\n      supported.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 404
+      }
+    },
+    "com.amazonaws.sfn#ReverseOrder": {
+      "type": "boolean"
+    },
+    "com.amazonaws.sfn#SendTaskFailure": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#SendTaskFailureInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#SendTaskFailureOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskTimedOut"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern to report that the task identified by the <code>taskToken</code> failed.</p>"
+      }
+    },
+    "com.amazonaws.sfn#SendTaskFailureInput": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "taskToken": {
+          "target": "com.amazonaws.sfn#TaskToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when\n      tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a\n      workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#SendTaskFailureOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#SendTaskHeartbeat": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#SendTaskHeartbeatInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#SendTaskHeartbeatOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskTimedOut"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern to report to Step Functions that the task represented by the specified\n        <code>taskToken</code> is still making progress. This action resets the\n        <code>Heartbeat</code> clock. The <code>Heartbeat</code> threshold is specified in the state\n      machine's Amazon States Language definition (<code>HeartbeatSeconds</code>). This action does not in itself\n      create an event in the execution history. However, if the task times out, the execution\n      history contains an <code>ActivityTimedOut</code> entry for activities, or a\n        <code>TaskTimedOut</code> entry for for tasks using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-sync\">job run</a> or\n        <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern.</p>\n         <note>\n            <p>The <code>Timeout</code> of a task, defined in the state machine's Amazon States Language definition, is\n        its maximum allowed duration, regardless of the number of <a>SendTaskHeartbeat</a> requests received. Use <code>HeartbeatSeconds</code> to configure the timeout interval\n        for heartbeats.</p>\n         </note>"
+      }
+    },
+    "com.amazonaws.sfn#SendTaskHeartbeatInput": {
+      "type": "structure",
+      "members": {
+        "taskToken": {
+          "target": "com.amazonaws.sfn#TaskToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when\n      tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a\n      workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#SendTaskHeartbeatOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#SendTaskSuccess": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#SendTaskSuccessInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#SendTaskSuccessOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidOutput"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidToken"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#TaskTimedOut"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Used by activity workers and task states using the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/connect-to-resource.html#connect-wait-token\">callback</a>\n      pattern to report that the task identified by the <code>taskToken</code> completed\n      successfully.</p>"
+      }
+    },
+    "com.amazonaws.sfn#SendTaskSuccessInput": {
+      "type": "structure",
+      "members": {
+        "taskToken": {
+          "target": "com.amazonaws.sfn#TaskToken",
+          "traits": {
+            "smithy.api#documentation": "<p>The token that represents this task. Task tokens are generated by Step Functions when\n      tasks are assigned to a worker, or in the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-contextobject.html\">context object</a> when a\n      workflow enters a task state. See <a>GetActivityTaskOutput$taskToken</a>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON output of the task.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#SendTaskSuccessOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#SensitiveCause": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 32768
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#SensitiveData": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 32768
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#SensitiveDataJobInput": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 65536
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#SensitiveError": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        },
+        "smithy.api#sensitive": {}
+      }
+    },
+    "com.amazonaws.sfn#StartExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#StartExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#StartExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ExecutionAlreadyExists"
+        },
+        {
+          "target": "com.amazonaws.sfn#ExecutionLimitExceeded"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidExecutionInput"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidName"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDeleting"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Starts a state machine execution.</p>\n         <note>\n            <p>\n               <code>StartExecution</code> is idempotent. If <code>StartExecution</code> is called with\n        the same name and input as a running execution, the call will succeed and return the same\n        response as the original request. If the execution is closed or if the input is different,\n        it will return a 400 <code>ExecutionAlreadyExists</code> error. Names can be reused after 90\n        days. </p>\n         </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.sfn#StartExecutionInput": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, \n    see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions\">\n    Limits Related to State Machine Executions</a> in the <i>AWS Step Functions Developer Guide</i>.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>"
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine to execute.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that contains the JSON input data for the execution, for example:</p>\n         <p>\n            <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code>\n         </p>\n         <note>\n            <p>If you don't include any JSON input data, you still must include the two braces, for\n        example: <code>\"input\": \"{}\"</code>\n            </p>\n         </note>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#StartExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "startDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the execution is started.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#StateEnteredEventDetails": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "input": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The string that contains the JSON input data for the state.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a state entered during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#StateExitedEventDetails": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state.</p>\n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON output data of the state.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about an exit from a state during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineAlreadyExists": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>A state machine with the same name but a different definition or role ARN already\n      exists.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineDeleting": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified state machine is being deleted.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineDoesNotExist": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The specified state machine does not exist.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineLimitExceeded": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>The maximum number of state machines has been reached. Existing state machines must be\n      deleted before a new state machine can be created.</p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#StateMachineListItem"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineListItem": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The name of the state machine.</p> \n         <p>A name must <i>not</i> contain:</p>\n         <ul>\n            <li>\n               <p>white space</p>\n            </li>\n            <li>\n               <p>brackets <code>< > { } [ ]</code>\n               </p>\n            </li>\n            <li>\n               <p>wildcard characters <code>? *</code>\n               </p>\n            </li>\n            <li>\n               <p>special characters <code>\" # % \\ ^ | ~ ` $ & , ; : /</code>\n               </p>\n            </li>\n            <li>\n               <p>control characters (<code>U+0000-001F</code>, <code>U+007F-009F</code>)</p>\n            </li>\n         </ul>\n         <p>To enable logging with CloudWatch Logs, the name should only contain  0-9, A-Z, a-z, - and _.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "creationDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the state machine is created.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "type": {
+          "target": "com.amazonaws.sfn#StateMachineType",
+          "traits": {
+            "smithy.api#documentation": "<p></p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the state machine.</p>"
+      }
+    },
+    "com.amazonaws.sfn#StateMachineStatus": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "ACTIVE"
+          },
+          {
+            "value": "DELETING"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.sfn#StateMachineType": {
+      "type": "string",
+      "traits": {
+        "smithy.api#enum": [
+          {
+            "value": "STANDARD"
+          },
+          {
+            "value": "EXPRESS"
+          }
+        ]
+      }
+    },
+    "com.amazonaws.sfn#StateMachineTypeNotSupported": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p></p>",
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#StopExecution": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#StopExecutionInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#StopExecutionOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#ExecutionDoesNotExist"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Stops an execution.</p> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+      }
+    },
+    "com.amazonaws.sfn#StopExecutionInput": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "executionArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution to stop.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#StopExecutionOutput": {
+      "type": "structure",
+      "members": {
+        "stopDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date the execution is stopped.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#Tag": {
+      "type": "structure",
+      "members": {
+        "key": {
+          "target": "com.amazonaws.sfn#TagKey",
+          "traits": {
+            "smithy.api#documentation": "<p>The key of a tag.</p>"
+          }
+        },
+        "value": {
+          "target": "com.amazonaws.sfn#TagValue",
+          "traits": {
+            "smithy.api#documentation": "<p>The value of a tag.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Tags are key-value pairs that can be associated with Step Functions state machines and\n      activities.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TagKey": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 128
+        }
+      }
+    },
+    "com.amazonaws.sfn#TagKeyList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#TagKey"
+      }
+    },
+    "com.amazonaws.sfn#TagList": {
+      "type": "list",
+      "member": {
+        "target": "com.amazonaws.sfn#Tag"
+      }
+    },
+    "com.amazonaws.sfn#TagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#TagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#TagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#ResourceNotFound"
+        },
+        {
+          "target": "com.amazonaws.sfn#TooManyTags"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Add a tag to a Step Functions resource.</p> \n         <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using\n      Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User\n        Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM\n          Tags</a>.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TagResourceInput": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "target": "com.amazonaws.sfn#TagList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tags to add to a resource.</p> \n         <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Step Functions state machine or activity.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#TagValue": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 0,
+          "max": 256
+        }
+      }
+    },
+    "com.amazonaws.sfn#TaskDoesNotExist": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#TaskFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a task failure event.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskScheduledEventDetails": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "region": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The region of the scheduled task</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "timeoutInSeconds": {
+          "target": "com.amazonaws.sfn#TimeoutInSeconds",
+          "traits": {
+            "smithy.api#box": {},
+            "smithy.api#documentation": "<p>The maximum allowed duration of the task.</p>"
+          }
+        },
+        "parameters": {
+          "target": "com.amazonaws.sfn#ConnectorParameters",
+          "traits": {
+            "smithy.api#documentation": "<p>The JSON data passed to the resource referenced in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a task scheduled during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskStartFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a task that failed to start during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskStartedEventDetails": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the start of a task during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskSubmitFailedEventDetails": {
+      "type": "structure",
+      "members": {
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a task that failed to submit during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskSubmittedEventDetails": {
+      "type": "structure",
+      "members": {
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The response from a resource when a task has started.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a task submitted to a resource .</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskSucceededEventDetails": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "output": {
+          "target": "com.amazonaws.sfn#SensitiveData",
+          "traits": {
+            "smithy.api#documentation": "<p>The full JSON response from a resource when a task has succeeded. This response becomes\n      the output of the related task.</p>"
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about the successful completion of a task state.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskTimedOut": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        }
+      },
+      "traits": {
+        "smithy.api#error": "client"
+      }
+    },
+    "com.amazonaws.sfn#TaskTimedOutEventDetails": {
+      "type": "structure",
+      "members": {
+        "error": {
+          "target": "com.amazonaws.sfn#SensitiveError",
+          "traits": {
+            "smithy.api#documentation": "<p>The error code of the failure.</p>"
+          }
+        },
+        "resource": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The service name of the resource in a task state.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "cause": {
+          "target": "com.amazonaws.sfn#SensitiveCause",
+          "traits": {
+            "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+          }
+        },
+        "resourceType": {
+          "target": "com.amazonaws.sfn#Name",
+          "traits": {
+            "smithy.api#documentation": "<p>The action of the resource called by a task state.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>Contains details about a resource timeout that occurred during an execution.</p>"
+      }
+    },
+    "com.amazonaws.sfn#TaskToken": {
+      "type": "string",
+      "traits": {
+        "smithy.api#length": {
+          "min": 1,
+          "max": 1024
+        }
+      }
+    },
+    "com.amazonaws.sfn#TimeoutInSeconds": {
+      "type": "long"
+    },
+    "com.amazonaws.sfn#Timestamp": {
+      "type": "timestamp"
+    },
+    "com.amazonaws.sfn#TooManyTags": {
+      "type": "structure",
+      "members": {
+        "message": {
+          "target": "com.amazonaws.sfn#ErrorMessage"
+        },
+        "resourceName": {
+          "target": "com.amazonaws.sfn#Arn"
+        }
+      },
+      "traits": {
+        "smithy.api#documentation": "<p>You've exceeded the number of tags allowed for a resource. See the <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/limits.html\"> Limits Topic</a> in the\n      AWS Step Functions Developer Guide.</p>",
+        "smithy.api#error": "client",
+        "smithy.api#httpError": 400
+      }
+    },
+    "com.amazonaws.sfn#UnsignedInteger": {
+      "type": "integer",
+      "traits": {
+        "smithy.api#range": {
+          "min": 0
+        }
+      }
+    },
+    "com.amazonaws.sfn#UntagResource": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#UntagResourceInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#ResourceNotFound"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Remove a tag from a Step Functions resource</p>"
+      }
+    },
+    "com.amazonaws.sfn#UntagResourceInput": {
+      "type": "structure",
+      "members": {
+        "resourceArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the Step Functions state machine or activity.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "tagKeys": {
+          "target": "com.amazonaws.sfn#TagKeyList",
+          "traits": {
+            "smithy.api#documentation": "<p>The list of tags to remove from the resource.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "com.amazonaws.sfn#UpdateStateMachine": {
+      "type": "operation",
+      "input": {
+        "target": "com.amazonaws.sfn#UpdateStateMachineInput"
+      },
+      "output": {
+        "target": "com.amazonaws.sfn#UpdateStateMachineOutput"
+      },
+      "errors": [
+        {
+          "target": "com.amazonaws.sfn#InvalidArn"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidDefinition"
+        },
+        {
+          "target": "com.amazonaws.sfn#InvalidLoggingConfiguration"
+        },
+        {
+          "target": "com.amazonaws.sfn#MissingRequiredParameter"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDeleting"
+        },
+        {
+          "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+        }
+      ],
+      "traits": {
+        "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds will use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after\n        calling <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
+        "smithy.api#idempotent": {}
+      }
+    },
+    "com.amazonaws.sfn#UpdateStateMachineInput": {
+      "type": "structure",
+      "members": {
+        "definition": {
+          "target": "com.amazonaws.sfn#Definition",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. See <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a>.</p>"
+          }
+        },
+        "loggingConfiguration": {
+          "target": "com.amazonaws.sfn#LoggingConfiguration",
+          "traits": {
+            "smithy.api#documentation": "<p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs\n      options.</p>"
+          }
+        },
+        "stateMachineArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine.</p>",
+            "smithy.api#required": {}
+          }
+        },
+        "roleArn": {
+          "target": "com.amazonaws.sfn#Arn",
+          "traits": {
+            "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role of the state machine.</p>"
+          }
+        }
+      }
+    },
+    "com.amazonaws.sfn#UpdateStateMachineOutput": {
+      "type": "structure",
+      "members": {
+        "updateDate": {
+          "target": "com.amazonaws.sfn#Timestamp",
+          "traits": {
+            "smithy.api#documentation": "<p>The date and time the state machine was updated.</p>",
+            "smithy.api#required": {}
+          }
+        }
+      }
+    }
+  }
+}
