@@ -60,11 +60,11 @@ tidy-modules-%:
 
 # TODO replace the command with the unit-modules-. once protocol tests pass
 
-unit: lint unit-modules-aws unit-modules-service unit-modules-config unit-modules-credentials unit-modules-ec2imds
-unit-race: lint unit-race-modules-aws unit-race-modules-service unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds
+unit: lint unit-modules-aws unit-modules-config unit-modules-credentials unit-modules-ec2imds unit-modules-service 
+unit-race: lint unit-race-modules-aws unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds unit-race-modules-service
 
-unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
-unit-race-test: test-race-modules-aws test-race-modules-service test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds
+unit-test: test-modules-aws test-modules-config test-modules-credentials test-modules-ec2imds test-modules-service
+unit-race-test: test-race-modules-aws test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds test-race-modules-service
 
 unit-race-modules-%:
 	@# unit command that uses the pattern to define the root path that the
