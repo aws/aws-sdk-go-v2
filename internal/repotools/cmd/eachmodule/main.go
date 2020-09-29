@@ -15,14 +15,18 @@ import (
 )
 
 var (
-	atOnce       int
-	rootPath     string
-	pathRelRoot  bool
-	skipRootPath bool
-	skipPaths    string
+	atOnce             int
+	rootPath           string
+	pathRelRoot        bool
+	skipRootPath       bool
+	skipPaths          string
+	skipEmptyRootPaths bool
 )
 
 func init() {
+	flag.BoolVar(&skipEmptyRootPaths, "skip-empty-root", true,
+		"Directs to skip the root path if empty.")
+
 	flag.BoolVar(&skipRootPath, "skip-root", false,
 		"Directs to skip the `root path` and only run commands on discovered submodules.")
 
@@ -149,7 +153,13 @@ func run() (err error) {
 		}()
 	}
 
-	// TODO if root path isn't present add it.
+	// Special case to skip root path when path if they don't contain go files.
+	if skipEmptyRootPaths {
+		matches, err := filepath.Glob(filepath.Join(rootPath, "*.go"))
+		if err != nil || len(matches) == 0 {
+			skipRootPath = true
+		}
+	}
 
 	modulePaths := boots.Modules()
 	if skipRootPath {
