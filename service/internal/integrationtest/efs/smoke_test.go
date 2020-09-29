@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/efs"
 	"github.com/awslabs/smithy-go"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeFileSystems(t *testing.T) {

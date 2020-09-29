@@ -10,7 +10,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling"
 	"github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeScalableTargets(t *testing.T) {

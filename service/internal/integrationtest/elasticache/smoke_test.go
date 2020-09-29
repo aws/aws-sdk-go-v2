@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/elasticache"
 	"github.com/awslabs/smithy-go"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeEvents(t *testing.T) {
@@ -43,7 +43,7 @@ func TestInteg_01_DescribeCacheClusters(t *testing.T) {
 
 	client := elasticache.NewFromConfig(cfg)
 	params := &elasticache.DescribeCacheClustersInput{
-	CacheClusterId: aws.String("fake_cluster"),
+		CacheClusterId: aws.String("fake_cluster"),
 	}
 	_, err = client.DescribeCacheClusters(ctx, params)
 	if err == nil {

@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeReportDefinitions(t *testing.T) {

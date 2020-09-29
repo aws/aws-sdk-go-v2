@@ -12,7 +12,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	"github.com/awslabs/smithy-go"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 )
 
 func TestInteg_00_DescribeRegions(t *testing.T) {

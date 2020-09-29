@@ -1,4 +1,4 @@
-module github.com/aws/aws-sdk-go-v2/internal/integrationtest
+module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v0.24.1-0.20200924224914-965b6782bf3d

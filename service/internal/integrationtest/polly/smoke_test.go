@@ -1,13 +1,13 @@
 // +build integration
 
-package polly 
+package polly
 
 import (
 	"context"
 	"testing"
 	"time"
 
-	"github.com/aws/aws-sdk-go-v2/internal/integrationtest"
+	"github.com/aws/aws-sdk-go-v2/service/internal/integrationtest"
 	"github.com/aws/aws-sdk-go-v2/service/polly"
 )
 
