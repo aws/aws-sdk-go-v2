@@ -35,6 +35,8 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/internal/accept-encoding", null, Versions.INTERNAL_ACCEPTENCODING, "acceptencodingcust");
     public static final GoDependency KINESIS_CUSTOMIZATION = aws(
             "service/kinesis/internal/customizations", "kinesiscust");
+    public static final GoDependency MACHINE_LEARNING_CUSTOMIZATION = aws(
+            "service/machinelearning/internal/customizations", "mlcust");
 
     private AwsCustomGoDependency() {
         super();

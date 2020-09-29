@@ -4,9 +4,11 @@ package machinelearning
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	mlcust "github.com/aws/aws-sdk-go-v2/service/machinelearning/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -35,6 +37,7 @@ func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...fu
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
 	addOpPredictValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opPredict(options.Region), middleware.Before)
+	mlcust.AddPredictEndpointMiddleware(stack, getPredictEndpoint)
 	addRequestIDRetrieverMiddleware(stack)
 	addResponseErrorMiddleware(stack)
 
@@ -104,4 +107,12 @@ func newServiceMetadataMiddleware_opPredict(region string) awsmiddleware.Registe
 		SigningName:   "machinelearning",
 		OperationName: "Predict",
 	}
+}
+
+func getPredictEndpoint(input interface{}) (*string, error) {
+	in, ok := input.(*PredictInput)
+	if !ok {
+		return nil, &smithy.SerializationError{Err: fmt.Errorf("expected *PredictInput, but was %T", input)}
+	}
+	return in.PredictEndpoint, nil
 }
