@@ -47,18 +47,53 @@ func TestNewChanges(t *testing.T) {
 		modules     []string
 		changeType  ChangeType
 		description string
+		minVersion  string
 		wantErr     bool
 	}{
-		"valid feature 1 module":      {[]string{"a"}, FeatureChangeType, "this is a description", false},
-		"valid feature 2 modules":     {[]string{"a", "b"}, FeatureChangeType, "this is a description", false},
-		"valid bugfix 2 modules":      {[]string{"a", "b"}, BugFixChangeType, "this is a description", false},
-		"invalid missing description": {[]string{"a", "b"}, BugFixChangeType, "", true},
-		"invalid missing modules":     {[]string{}, FeatureChangeType, "this is a description", true},
+		"valid feature 1 module": {
+			modules:     []string{"a"},
+			changeType:  FeatureChangeType,
+			description: "this is a description",
+		},
+		"valid feature 2 modules": {
+			modules:     []string{"a", "b"},
+			changeType:  FeatureChangeType,
+			description: "this is a description",
+		},
+		"valid bugfix 2 modules": {
+			modules:     []string{"a", "b"},
+			changeType:  BugFixChangeType,
+			description: "this is a description",
+		},
+		"valid module with min version": {
+			modules:     []string{"a"},
+			changeType:  FeatureChangeType,
+			description: "this is a description",
+			minVersion:  "v0.2.0",
+		},
+		"invalid module with min version": {
+			modules:     []string{"a/v2"},
+			changeType:  FeatureChangeType,
+			description: "this is a description",
+			minVersion:  "v0.2.0",
+			wantErr:     true,
+		},
+		"invalid missing description": {
+			modules:    []string{"a", "b"},
+			changeType: BugFixChangeType,
+			wantErr:    true,
+		},
+		"invalid missing modules": {
+			modules:     []string{},
+			changeType:  FeatureChangeType,
+			description: "this is a description",
+			wantErr:     true,
+		},
 	}
 
 	for name, tt := range changeTests {
 		t.Run(name, func(t *testing.T) {
-			changes, err := NewChanges(tt.modules, tt.changeType, tt.description)
+			changes, err := NewChanges(tt.modules, tt.changeType, tt.description, tt.minVersion)
 			if err != nil && !tt.wantErr {
 				t.Errorf("expected nil err, got %v", err)
 			} else if err == nil {
@@ -77,6 +112,7 @@ func TestNewChanges(t *testing.T) {
 						Module:        c.Module,
 						Type:          tt.changeType,
 						Description:   tt.description,
+						MinVersion:    tt.minVersion,
 					}
 
 					if diff := cmp.Diff(want, c); diff != "" {

@@ -82,7 +82,7 @@ func (m *Metadata) AddChanges(changes []Change) error {
 }
 
 func (m *Metadata) addDependencyUpdateChange(modules []string) error {
-	change, err := NewWildcardChange("/...", DependencyChangeType, dependencyUpdateMessage, modules)
+	change, err := NewWildcardChange("/...", DependencyChangeType, dependencyUpdateMessage, modules, "")
 	if err != nil {
 		return err
 	}

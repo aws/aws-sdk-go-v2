@@ -222,7 +222,7 @@ func addCmd(metadata *changes.Metadata, module string, changeType changes.Change
 	var err error
 
 	if changeType != "" && description != "" {
-		newChanges, err = changes.NewChanges([]string{module}, changeType, description)
+		newChanges, err = changes.NewChanges([]string{module}, changeType, description, "")
 		if err != nil {
 			return fmt.Errorf("failed to create change: %v", err)
 		}

@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"sort"
 	"strings"
 	"time"
+
+	"golang.org/x/mod/semver"
+	"gopkg.in/yaml.v2"
 )
 
 // ChangeType describes the type of change made to a Go module.
@@ -136,6 +138,7 @@ type changeTemplate struct {
 	Modules         []string
 	Type            ChangeType
 	Description     string
+	MinVersion      string   `yaml:"min_version,omitempty"`
 	AffectedModules []string `yaml:"affected_modules,omitempty"`
 }
 
@@ -146,6 +149,7 @@ type Change struct {
 	Module        string     // Module is a shortened Go module path for the module affected by this Change. Module is the path from the root of the repository to the module.
 	Type          ChangeType // Type indicates what category of Change was made. Type may be either "feature" or "bugfix".
 	Description   string     // Description is a human readable description of this Change meant to be included in a CHANGELOG.
+	MinVersion    string     // MinVersion is a semver tag that the module should be minimally bumped to.
 
 	// AffectedModules is a list of modules affected by this Change. AffectedModules is only non-nil when the Change's
 	// Module has a wildcard, in which case AffectedModules contains all modules matching the wildcard Module that the
@@ -155,21 +159,34 @@ type Change struct {
 
 // NewChanges returns a Change slice containing a Change with the given type and description for each of the specified
 // modules.
-func NewChanges(modules []string, changeType ChangeType, description string) ([]Change, error) {
+func NewChanges(modules []string, changeType ChangeType, description string, minVersion string) ([]Change, error) {
 	if len(modules) == 0 || changeType == "" || description == "" {
 		return nil, errors.New("missing module, type, or description")
 	}
 
+	if len(minVersion) > 0 {
+		if !semver.IsValid(minVersion) {
+			return nil, fmt.Errorf("invalid minimum version string provided")
+		}
+	}
+
 	changes := make([]Change, 0, len(modules))
 
-	for _, module := range modules {
-		module = shortenModPath(module)
+	for _, modulePath := range modules {
+		if len(minVersion) > 0 {
+			if err := validateModulePathSemVer(modulePath, minVersion); err != nil {
+				return nil, err
+			}
+		}
+
+		modulePath = shortenModPath(modulePath)
 
 		changes = append(changes, Change{
-			ID:            generateID(module, changeType),
+			ID:            generateID(modulePath, changeType),
 			SchemaVersion: SchemaVersion,
-			Module:        module,
+			Module:        modulePath,
 			Type:          changeType,
+			MinVersion:    minVersion,
 			Description:   cleanDescription(description),
 		})
 	}
@@ -184,20 +201,33 @@ func NewChanges(modules []string, changeType ChangeType, description string) ([]
 }
 
 // NewWildcardChange creates a wildcard Change.
-func NewWildcardChange(module string, changeType ChangeType, description string, affectedModules []string) (Change, error) {
-	module = shortenModPath(module)
+func NewWildcardChange(modulePath string, changeType ChangeType, description string, affectedModules []string, minVersion string) (Change, error) {
+	modulePath = shortenModPath(modulePath)
+
+	if len(minVersion) > 0 {
+		if !semver.IsValid(minVersion) {
+			return Change{}, fmt.Errorf("invalid minimum version string provided")
+		}
+
+		for _, am := range affectedModules {
+			if err := validateModulePathSemVer(am, minVersion); err != nil {
+				return Change{}, err
+			}
+		}
+	}
 
 	change := Change{
-		ID:              generateID(module, changeType),
+		ID:              generateID(modulePath, changeType),
 		SchemaVersion:   SchemaVersion,
-		Module:          module,
+		Module:          modulePath,
 		Type:            changeType,
 		Description:     cleanDescription(description),
+		MinVersion:      minVersion,
 		AffectedModules: affectedModules,
 	}
 
 	if !change.isWildcard() {
-		return Change{}, fmt.Errorf("module %s is not a wildcard", module)
+		return Change{}, fmt.Errorf("module %s is not a wildcard", modulePath)
 	}
 
 	return change, nil
@@ -279,7 +309,7 @@ func TemplateToChanges(filledTemplate []byte) ([]Change, error) {
 			return nil, fmt.Errorf("expected wildcard template to have only one module, got %d", len(template.Modules))
 		}
 
-		change, err := NewWildcardChange(template.Modules[0], template.Type, template.Description, template.AffectedModules)
+		change, err := NewWildcardChange(template.Modules[0], template.Type, template.Description, template.AffectedModules, template.MinVersion)
 		if err != nil {
 			return nil, err
 		}
@@ -287,7 +317,7 @@ func TemplateToChanges(filledTemplate []byte) ([]Change, error) {
 		return []Change{change}, nil
 	}
 
-	return NewChanges(template.Modules, template.Type, template.Description)
+	return NewChanges(template.Modules, template.Type, template.Description, template.MinVersion)
 }
 
 // ChangeToTemplate returns a Change template populated with the given Change's data.

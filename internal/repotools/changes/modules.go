@@ -189,10 +189,31 @@ func formatPseudoVersion(commitHash, taggedVersion string) (string, error) {
 		return fmt.Sprintf("%s%s.0.%s", taggedVersion, pre, commitHash), nil
 	}
 
-	taggedVersion, err := nextVersion(taggedVersion, PatchBump)
+	taggedVersion, err := nextVersion(taggedVersion, PatchBump, "")
 	if err != nil {
 		return "", fmt.Errorf("couldn't make pseudo-version: %v", err)
 	}
 
 	return fmt.Sprintf("%s-0.%s", taggedVersion, commitHash), nil
+}
+
+func pathMajorVersion(modulePath string) (major string, err error) {
+	_, pathMajor, ok := module.SplitPathVersion(modulePath)
+	if !ok {
+		return "", fmt.Errorf("module path %s contains invalid version componenet", modulePath)
+	}
+	pathMajor = strings.TrimLeft(pathMajor, "/")
+	return pathMajor, nil
+}
+
+func validateModulePathSemVer(modulePath, version string) error {
+	pathMajor, err := pathMajorVersion(modulePath)
+	if err != nil {
+		return err
+	}
+	major := semver.Major(version)
+	if (len(pathMajor) == 0 && !(major == "v0" || major == "v1")) || (len(pathMajor) > 0 && pathMajor != major) {
+		return fmt.Errorf("%s module path does not match with minimum version string: %s", modulePath, version)
+	}
+	return nil
 }
