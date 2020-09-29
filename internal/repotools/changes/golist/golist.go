@@ -91,6 +91,10 @@ func (c Client) Packages(mod string) ([]string, error) {
 	}
 
 	err = filepath.Walk(c.path(mod), func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+
 		if !info.IsDir() {
 			return nil
 		}
