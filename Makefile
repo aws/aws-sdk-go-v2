@@ -4,6 +4,12 @@ LINTIGNORESINGLEFIGHT='internal/sync/singleflight/singleflight.go:.+error should
 UNIT_TEST_TAGS=
 BUILD_TAGS=-tags "example,codegen,integration,ec2env"
 
+EACHMODULE_FAILFAST ?= true
+EACHMODULE_FAILFAST_FLAG=-fail-fast=${EACHMODULE_FAILFAST}
+
+EACHMODULE_CONCURRENCY ?= 1
+EACHMODULE_CONCURRENCY_FLAG=-c ${EACHMODULE_CONCURRENCY}
+
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./internal/...
 SDK_CLIENT_PKGS=./service/...
@@ -44,7 +50,7 @@ tidy-modules-%:
 	@#
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) -c 8 \
+		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go mod tidy"
 
 
@@ -54,11 +60,11 @@ tidy-modules-%:
 
 # TODO replace the command with the unit-modules-. once protocol tests pass
 
-unit: lint unit-modules-aws unit-modules-service unit-modules-config unit-modules-credentials unit-modules-ec2imds
-unit-race: lint unit-race-modules-aws unit-race-modules-service unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds
+unit: lint unit-modules-aws unit-modules-config unit-modules-credentials unit-modules-ec2imds unit-modules-service 
+unit-race: lint unit-race-modules-aws unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds unit-race-modules-service
 
-unit-test: test-modules-aws test-modules-service test-modules-config test-modules-credentials test-modules-ec2imds
-unit-race-test: test-race-modules-aws test-race-modules-service test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds
+unit-test: test-modules-aws test-modules-config test-modules-credentials test-modules-ec2imds test-modules-service
+unit-race-test: test-race-modules-aws test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds test-race-modules-service
 
 unit-race-modules-%:
 	@# unit command that uses the pattern to define the root path that the
@@ -67,7 +73,7 @@ unit-race-modules-%:
 	@#
 	@# e.g. unit-race-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
@@ -80,7 +86,7 @@ unit-modules-%:
 	@#
 	@# e.g. unit-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
@@ -94,7 +100,7 @@ build-modules-%:
 	@#
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 test: test-modules-.
@@ -106,7 +112,7 @@ test-race-modules-%:
 	@#
 	@# e.g. test-race-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 test-modules-%:
@@ -116,7 +122,7 @@ test-modules-%:
 	@#
 	@# e.g. test-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
 ##############
@@ -146,7 +152,7 @@ integ-modules-%:
 	@#
 	@# e.g. test-modules-service_dynamodb
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
@@ -165,7 +171,7 @@ bench-modules-%:
 	@#
 	@# e.g. bench-modules-service_dynamodb
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) \
+		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 ##################
@@ -185,7 +191,7 @@ vet: vet-modules-.
 
 vet-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) -c 4 \
+		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go vet ${BUILD_TAGS} --all ./..."
 
 sdkv1check:

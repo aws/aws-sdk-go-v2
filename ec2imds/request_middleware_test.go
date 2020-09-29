@@ -228,11 +228,16 @@ func TestRequestGetToken(t *testing.T) {
 					newSecureAPIHandler(t,
 						[]string{"tokenA", "tokenB", "tokenC"},
 						1,
-						&successAPIResponseHandler{t: t,
-							path:   "/latest/foo",
-							method: "GET",
-							body:   []byte("hello"),
-						},
+						http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+							h := &successAPIResponseHandler{t: t,
+								path:   "/latest/foo",
+								method: "GET",
+								body:   []byte("hello"),
+							}
+
+							time.Sleep(100 * time.Millisecond)
+							h.ServeHTTP(w, r)
+						}),
 					))
 			},
 			ExpectContent: []byte("hello"),

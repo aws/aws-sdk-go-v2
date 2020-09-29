@@ -16,6 +16,10 @@ script:
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
 
+env:
+  - EACHMODULE_CONCURRENCY=4
+    #- EACHMODULE_FAILFAST=false
+
 matrix:
   allow_failures:
       - go: tip

@@ -51,6 +51,6 @@ func JoinWorkingDirectory(dir string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("failed to get working directory, %w", err)
 	}
-	return filepath.Join(wd, dir), nil
 
+	return filepath.Join(wd, dir), nil
 }
