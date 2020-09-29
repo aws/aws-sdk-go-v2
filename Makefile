@@ -22,12 +22,14 @@ SDK_ALL_PKGS=${SDK_COMPA_PKGS} ${SDK_EXAMPLES_PKGS}
 RUN_NONE=-run '^$$'
 RUN_INTEG=-run '^TestInteg_'
 
+LICENSE_FILE=$(shell pwd)/LICENSE.txt
+
 all: generate unit
 
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-.
+generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-. add-module-license-files
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -52,6 +54,11 @@ tidy-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
 		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} \
 		"go mod tidy"
+
+add-module-license-files:
+	cd internal/repotools/cmd/eachmodule && \
+    	go run . -skip-root \
+            "cp $(LICENSE_FILE) ."
 
 
 ################
