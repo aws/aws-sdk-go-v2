@@ -1,6 +1,10 @@
 package changes
 
-import "fmt"
+import (
+	"fmt"
+
+	"golang.org/x/mod/semver"
+)
 
 // VersionSelector is a function that decides what version of a Go module should be passed to code generation.
 type VersionSelector func(r *Repository, module string) (string, VersionIncrement, error)
@@ -31,11 +35,17 @@ func (v *VersionSelector) String() string {
 // ReleaseVersionSelector will properly version modules that are not present in the versions.json file by checking git
 // tags for an existing version, or by providing a default version suitable for the module's major version.
 func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrement, error) {
-	incr := versionIncrement(r.Metadata.GetChanges(module))
+	moduleChanges := r.Metadata.GetChanges(module)
+
+	incr := versionIncrement(moduleChanges)
+	minTargetVersion, err := minVersionTarget(module, moduleChanges)
+	if err != nil {
+		return "", NoBump, err
+	}
 
 	currentVersion := r.Metadata.CurrentVersions.ModuleVersions[module].Version
 	if currentVersion != "" {
-		v, err := nextVersion(currentVersion, incr)
+		v, err := nextVersion(currentVersion, incr, minTargetVersion)
 		return v, incr, err
 	}
 
@@ -45,13 +55,46 @@ func ReleaseVersionSelector(r *Repository, module string) (string, VersionIncrem
 	}
 	if v == "" {
 		// there aren't version git tags for this module
+		if len(minTargetVersion) > 0 {
+			return minTargetVersion, NewModule, nil
+		}
 		v, err = defaultVersion(module)
 		return v, NewModule, err
 	}
 
 	// the module isn't in versions.json, but does have git tags
-	v, err = nextVersion(v, incr)
+	v, err = nextVersion(v, incr, minTargetVersion)
 	return v, incr, err
+}
+
+func minVersionTarget(modulePath string, changes []Change) (v string, err error) {
+	for _, change := range changes {
+		if len(change.MinVersion) == 0 {
+			continue
+		}
+
+		if !semver.IsValid(change.MinVersion) {
+			return "", fmt.Errorf("invalid minimum version %s found in %s", change.MinVersion, change.ID)
+		}
+
+		if len(semver.Prerelease(change.MinVersion)) > 0 || len(semver.Build(change.MinVersion)) > 0 {
+			return "", fmt.Errorf("minimum version %s contains a pre-release or build tag in %s", change.MinVersion, change.ID)
+		}
+
+		if len(v) == 0 || (len(v) > 0 && semver.Compare(v, change.MinVersion) == -1) {
+			v = change.MinVersion
+		}
+	}
+
+	if len(v) == 0 {
+		return "", nil
+	}
+
+	if err := validateModulePathSemVer(modulePath, v); err != nil {
+		return "", err
+	}
+
+	return v, nil
 }
 
 // TaggedVersionSelector returns the greatest version of module tagged in the git repository.

@@ -73,7 +73,7 @@ func (v *VersionEnclosure) bump(module string, incr VersionIncrement) (VersionBu
 
 	ver := v.ModuleVersions[module]
 	oldVer := ver.Version
-	nextVer, err := nextVersion(oldVer, incr)
+	nextVer, err := nextVersion(oldVer, incr, "")
 	if err != nil {
 		return VersionBump{}, fmt.Errorf("couldn't bump module %s's version: %v", module, err)
 	}
@@ -127,7 +127,7 @@ func versionIncrement(changes []Change) VersionIncrement {
 	return maxBump
 }
 
-func nextVersion(version string, bumpType VersionIncrement) (string, error) {
+func nextVersion(version string, bumpType VersionIncrement, minTargetVersion string) (string, error) {
 	if !semver.IsValid(version) {
 		return "", fmt.Errorf("version %s is not valid", version)
 	}
@@ -173,7 +173,13 @@ func nextVersion(version string, bumpType VersionIncrement) (string, error) {
 		patch = 0
 	}
 
-	return fmt.Sprintf("v%d.%d.%d", major, minor, patch), nil
+	next := fmt.Sprintf("v%d.%d.%d", major, minor, patch)
+
+	if len(minTargetVersion) > 0 && semver.Compare(next, minTargetVersion) == -1 {
+		next = minTargetVersion
+	}
+
+	return next, nil
 }
 
 func tagRepo(git git.VcsClient, releaseID, mod, version string) error {

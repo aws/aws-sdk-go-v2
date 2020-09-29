@@ -233,24 +233,101 @@ func TestNextVersion(t *testing.T) {
 	var testCases = map[string]struct {
 		version     string
 		incr        VersionIncrement
+		minVersion  string
 		wantVersion string
 		wantErr     string
 	}{
-		"none":        {"v1.0.0", NoBump, "v1.0.0", ""},
-		"patch":       {"v1.0.0", PatchBump, "v1.0.1", ""},
-		"minor":       {"v1.0.0", MinorBump, "v1.1.0", ""},
-		"major":       {"v0.0.4", MajorBump, "v1.0.0", ""},
-		"v2 none":     {"v2.2.2", NoBump, "v2.2.2", ""},
-		"v2 patch":    {"v2.2.2", PatchBump, "v2.2.3", ""},
-		"v2 minor":    {"v2.2.2", MinorBump, "v2.3.0", ""},
-		"prerelease":  {"v1.0.0-pre", NoBump, "", "has a prerelease or build component"},
-		"bad major":   {"v4.0.0", MajorBump, "", "major increment can only be applied to v0"},
-		"bad version": {"vx.y.z", MajorBump, "", "version vx.y.z is not valid"},
+		"none": {
+			version:     "v1.0.0",
+			incr:        NoBump,
+			wantVersion: "v1.0.0",
+		},
+		"patch": {
+			version:     "v1.0.0",
+			incr:        PatchBump,
+			wantVersion: "v1.0.1",
+		},
+		"minor": {
+			version:     "v1.0.0",
+			incr:        MinorBump,
+			wantVersion: "v1.1.0",
+		},
+		"major": {
+			version:     "v0.0.4",
+			incr:        MajorBump,
+			wantVersion: "v1.0.0",
+		},
+		"v2 none": {
+			version:     "v2.2.2",
+			incr:        NoBump,
+			wantVersion: "v2.2.2",
+		},
+		"v2 patch": {
+			version:     "v2.2.2",
+			incr:        PatchBump,
+			wantVersion: "v2.2.3",
+		},
+		"v2 minor": {
+			version:     "v2.2.2",
+			incr:        MinorBump,
+			wantVersion: "v2.3.0",
+		},
+		"prerelease": {
+			version: "v1.0.0-pre",
+			incr:    NoBump,
+			wantErr: "has a prerelease or build component",
+		},
+		"bad major": {
+			version: "v4.0.0",
+			incr:    MajorBump,
+			wantErr: "major increment can only be applied to v0",
+		},
+		"bad version": {
+			version: "vx.y.z",
+			incr:    MajorBump,
+			wantErr: "version vx.y.z is not valid",
+		},
+		"min version < calculated patch": {
+			version:     "v1.2.3",
+			incr:        PatchBump,
+			minVersion:  "v1.2.2",
+			wantVersion: "v1.2.4",
+		},
+		"min version > calculated patch": {
+			version:     "v1.2.3",
+			incr:        PatchBump,
+			minVersion:  "v1.3.0",
+			wantVersion: "v1.3.0",
+		},
+		"min version < calculated minor": {
+			version:     "v1.2.3",
+			incr:        MinorBump,
+			minVersion:  "v1.2.5",
+			wantVersion: "v1.3.0",
+		},
+		"min version > calculated minor": {
+			version:     "v1.2.3",
+			incr:        MinorBump,
+			minVersion:  "v1.5.0",
+			wantVersion: "v1.5.0",
+		},
+		"min version < calculated major": {
+			version:     "v0.2.3",
+			incr:        MajorBump,
+			minVersion:  "v0.5.0",
+			wantVersion: "v1.0.0",
+		},
+		"min version > calculated major": {
+			version:     "v0.2.3",
+			incr:        MajorBump,
+			minVersion:  "v1.5.0",
+			wantVersion: "v1.5.0",
+		},
 	}
 
 	for id, tt := range testCases {
 		t.Run(id, func(t *testing.T) {
-			gotVersion, err := nextVersion(tt.version, tt.incr)
+			gotVersion, err := nextVersion(tt.version, tt.incr, tt.minVersion)
 			if tt.wantErr != "" {
 				if err == nil {
 					t.Fatalf("expected err to contain %s, got nil err", tt.wantErr)
