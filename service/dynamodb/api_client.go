@@ -11,6 +11,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
 	ddbcust "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations"
+	acceptencodingcust "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding"
 	"github.com/awslabs/smithy-go/middleware"
 	smithyrand "github.com/awslabs/smithy-go/rand"
 	"net/http"
@@ -234,5 +235,5 @@ func addValidateResponseChecksum(stack *middleware.Stack, options Options) {
 }
 
 func addAcceptEncodingGzip(stack *middleware.Stack, options Options) {
-	ddbcust.AddAcceptEncodingGzip(stack, ddbcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
+	acceptencodingcust.AddAcceptEncodingGzip(stack, acceptencodingcust.AddAcceptEncodingGzipOptions{Enable: options.EnableAcceptEncodingGzip})
 }
