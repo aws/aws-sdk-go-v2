@@ -62,10 +62,6 @@ func TestClient_InlineDocument_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "InlineDocumentInput" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#InlineDocument")
-			}
-
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
