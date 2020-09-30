@@ -53,16 +53,18 @@ public class AwsGoDependency {
      *
      * @param moduleImportPath the module path within aws sdk to be added as go mod dependency.
      * @param relativePath the relative path which will be used as import path relative to aws sdk path.
+     * @param version the version of the aws module dependency to be imported
      * @param alias the go import alias.
      * @return GoDependency
      */
     protected static GoDependency awsModuleDep(
          String moduleImportPath,
          String relativePath,
+         String version,
          String alias
     ) {
         moduleImportPath = AWS_SOURCE_PATH+ "/" + moduleImportPath;
-        return module(moduleImportPath, relativePath, Versions.AWS_SDK, alias);
+        return module(moduleImportPath, relativePath, version, alias);
     }
 
     protected static GoDependency module(
@@ -79,6 +81,6 @@ public class AwsGoDependency {
     }
 
     private static final class Versions {
-        private static final String AWS_SDK = "v0.0.0-20200928200900-9b4f334f82b2";
+        private static final String AWS_SDK = "v0.25.0";
     }
 }
