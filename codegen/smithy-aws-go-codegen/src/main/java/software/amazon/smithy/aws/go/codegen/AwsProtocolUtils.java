@@ -30,6 +30,7 @@ import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestRespons
 import software.amazon.smithy.go.codegen.integration.HttpProtocolUnitTestResponseGenerator;
 import software.amazon.smithy.go.codegen.integration.IdempotencyTokenMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.utils.SetUtils;
 
 /**
@@ -101,12 +102,41 @@ final class AwsProtocolUtils {
                 })
                 .build());
 
+        Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
+                // REST-JSON Documents
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocument"))
+                        .build(),
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
+                        .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocumentAsPayload"))
+                        .build(),
+
+                // JSON RPC Documents
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
+                        .operation(ShapeId.from("aws.protocoltests.json#PutAndGetInlineDocuments"))
+                        .build()
+                ));
+
+        Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
+                // REST-XML opinionated test - prefix headers as empty vs nil map
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
+                        .operation(ShapeId.from("aws.protocoltests.restxml#HttpPrefixHeaders"))
+                        .testName("HttpPrefixHeadersAreNotPresent")
+                        .build()
+        ));
+
         new HttpProtocolTestGenerator(context,
                 (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator
                         .Builder()
+                        .addSkipTests(inputSkipTests)
                         .addClientConfigValues(inputConfigValues),
                 (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator
                         .Builder()
+                        .addSkipTests(outputSkipTests)
                         .addClientConfigValues(configValues),
                 (HttpProtocolUnitTestResponseErrorGenerator.Builder) new HttpProtocolUnitTestResponseErrorGenerator
                         .Builder()
@@ -155,7 +185,7 @@ final class AwsProtocolUtils {
      * Decodes JSON into {@code shape} with type {@code interface{}} using the encoding/json decoder
      * referenced by {@code decoder}.
      *
-     * @param writer GoWriter to write code to
+     * @param writer            GoWriter to write code to
      * @param errorReturnExtras extra parameters to return if an error occurs
      */
     public static void decodeJsonIntoInterface(GoWriter writer, String errorReturnExtras) {
@@ -170,6 +200,7 @@ final class AwsProtocolUtils {
 
     /**
      * Wraps the Go error {@code err} in a {@code DeserializationError} with a snapshot
+     *
      * @param writer
      */
     private static void wrapAsDeserializationError(GoWriter writer) {

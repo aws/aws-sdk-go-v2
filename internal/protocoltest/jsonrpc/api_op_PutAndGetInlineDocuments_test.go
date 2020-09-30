@@ -19,6 +19,8 @@ import (
 )
 
 func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
+	t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#PutAndGetInlineDocuments")
+
 	cases := map[string]struct {
 		Params        *PutAndGetInlineDocumentsInput
 		ExpectMethod  string

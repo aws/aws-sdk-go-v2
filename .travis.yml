@@ -28,11 +28,16 @@ matrix:
     - language: go
       os: windows
       go: 1.15.x
+      env:
+        - EACHMODULE_CONCURRENCY=4
+        - EACHMODULE_SKIP="internal\repotools\changes"
       script:
         - make vet build unit-test
 
     - language: java
       jdk: openjdk8
+      env:
+        - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
@@ -44,6 +49,8 @@ matrix:
 
     - language: java
       jdk: openjdk11
+      env:
+        - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go

@@ -21,6 +21,8 @@ import (
 )
 
 func TestClient_InlineDocument_awsRestjson1Serialize(t *testing.T) {
+	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#InlineDocument")
+
 	cases := map[string]struct {
 		Params        *InlineDocumentInput
 		ExpectMethod  string

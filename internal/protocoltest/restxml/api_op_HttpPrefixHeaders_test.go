@@ -178,6 +178,10 @@ func TestClient_HttpPrefixHeaders_awsRestxmlDeserialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "HttpPrefixHeadersAreNotPresent" {
+				t.Skip("disabled test aws.protocoltests.restxml#RestXml aws.protocoltests.restxml#HttpPrefixHeaders")
+			}
+
 			url := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
