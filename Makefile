@@ -32,7 +32,7 @@ all: generate unit
 generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-. add-module-license-files
 
 smithy-generate:
-	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
+	cd codegen && ./gradlew clean build -Plog-tests
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"

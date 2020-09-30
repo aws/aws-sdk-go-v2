@@ -19,6 +19,8 @@ import (
 )
 
 func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
+	t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#PutAndGetInlineDocuments")
+
 	cases := map[string]struct {
 		Params        *PutAndGetInlineDocumentsInput
 		ExpectMethod  string
@@ -56,6 +58,10 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "PutAndGetInlineDocumentsInput" {
+				t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#PutAndGetInlineDocuments")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())

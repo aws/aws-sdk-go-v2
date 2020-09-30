@@ -20,6 +20,8 @@ import (
 )
 
 func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
+	t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#InlineDocumentAsPayload")
+
 	cases := map[string]struct {
 		Params        *InlineDocumentAsPayloadInput
 		ExpectMethod  string
@@ -54,6 +56,10 @@ func TestClient_InlineDocumentAsPayload_awsRestjson1Serialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
+			if name == "InlineDocumentAsPayloadInput" {
+				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#InlineDocumentAsPayload")
+			}
+
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
