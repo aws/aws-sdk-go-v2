@@ -37,6 +37,8 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/kinesis/internal/customizations", "kinesiscust");
     public static final GoDependency MACHINE_LEARNING_CUSTOMIZATION = aws(
             "service/machinelearning/internal/customizations", "mlcust");
+    public static final GoDependency ROUTE53_CUSTOMIZATION = aws(
+            "service/route53/internal/customizations", "route53cust");
 
     private AwsCustomGoDependency() {
         super();

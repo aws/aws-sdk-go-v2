@@ -7,6 +7,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	route53cust "github.com/aws/aws-sdk-go-v2/service/route53/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	smithy "github.com/awslabs/smithy-go"
 	"github.com/awslabs/smithy-go/middleware"
@@ -60,6 +61,7 @@ func (c *Client) CreateReusableDelegationSet(ctx context.Context, params *Create
 	addClientUserAgent(stack)
 	smithyhttp.AddErrorCloseResponseBodyMiddleware(stack)
 	smithyhttp.AddCloseResponseBodyMiddleware(stack)
+	route53cust.AddSanitizeURLMiddleware(stack)
 	addOpCreateReusableDelegationSetValidationMiddleware(stack)
 	stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReusableDelegationSet(options.Region), middleware.Before)
 	addRequestIDRetrieverMiddleware(stack)
