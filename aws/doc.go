@@ -54,3 +54,6 @@
 // configure the SDK to use the custom HTTP Client by setting the HTTPClient
 // value of the SDK's Config type when creating a Session or service client.
 package aws
+
+//go:generate go run -tags codegen generate.go
+//go:generate gofmt -w -s .
