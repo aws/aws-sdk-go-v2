@@ -36,6 +36,8 @@ matrix:
 
     - language: java
       jdk: openjdk8
+      env:
+        - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
@@ -47,6 +49,8 @@ matrix:
 
     - language: java
       jdk: openjdk11
+      env:
+        - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/awslabs/smithy-go /tmp/smithy-go
