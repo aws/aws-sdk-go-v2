@@ -13,7 +13,7 @@ type Value struct {
 	// The value's key, which will form the prefix for complex types.
 	key string
 	// Whether the value should be flattened or not if it's a flattenable type.
-	flat bool
+	flat       bool
 	queryValue httpbinding.QueryValue
 }
 

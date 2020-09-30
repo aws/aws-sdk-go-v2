@@ -8,10 +8,10 @@ import (
 )
 
 func TestEncode(t *testing.T) {
-	cases := map[string]struct{
+	cases := map[string]struct {
 		Encode func(*Encoder) error
 		Expect []byte
-	} {
+	}{
 		"object": {
 			Encode: func(e *Encoder) error {
 				e.Object().Key("foo").String("bar")
@@ -102,7 +102,7 @@ type stringWriter struct {
 	writer *bytes.Buffer
 }
 
-func (w stringWriter) Write(v []byte) (int, error)  {
+func (w stringWriter) Write(v []byte) (int, error) {
 	return 0, fmt.Errorf("the WriteString method should be used when available")
 }
 
