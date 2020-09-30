@@ -49,6 +49,7 @@ func (c *Client) DeleteBucketAnalyticsConfiguration(ctx context.Context, params 
 	addResponseErrorMiddleware(stack)
 	addMetadataRetrieverMiddleware(stack)
 	v4.AddContentSHA256HeaderMiddleware(stack)
+	disableAcceptEncodingGzip(stack)
 
 	for _, fn := range options.APIOptions {
 		if err := fn(stack); err != nil {

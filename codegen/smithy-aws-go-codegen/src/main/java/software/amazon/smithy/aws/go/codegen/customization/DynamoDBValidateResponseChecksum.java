@@ -82,9 +82,9 @@ public class DynamoDBValidateResponseChecksum implements GoIntegration {
         writer.openBlock("func $L(stack *middleware.Stack, options Options) {", "}", GZIP_ADDER, () -> {
             writer.write("$T(stack, $T{Enable: options.$L})",
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER,
-                            AwsCustomGoDependency.DYNAMODB_CUSTOMIZATION).build(),
+                            AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION).build(),
                     SymbolUtils.createValueSymbolBuilder(GZIP_INTERNAL_ADDER + "Options",
-                            AwsCustomGoDependency.DYNAMODB_CUSTOMIZATION).build(),
+                            AwsCustomGoDependency.ACCEPT_ENCODING_CUSTOMIZATION).build(),
                     GZIP_CLIENT_OPTION
             );
         });

@@ -29,10 +29,18 @@ public final class AwsCustomGoDependency extends AwsGoDependency {
             "service/apigateway/internal/customizations", "agcust");
     public static final GoDependency GLACIER_CUSTOMIZATION = aws(
             "service/glacier/internal/customizations", "glaciercust");
+
     public static final GoDependency S3_SHARED_CUSTOMIZATION = awsModuleDep(
-            "service/internal/s3shared", null, "s3shared");
+            "service/internal/s3shared", null, Versions.INTERNAL_S3SHARED, "s3shared");
+    public static final GoDependency ACCEPT_ENCODING_CUSTOMIZATION = awsModuleDep(
+            "service/internal/accept-encoding", null, Versions.INTERNAL_ACCEPTENCODING, "acceptencodingcust");
 
     private AwsCustomGoDependency() {
         super();
+    }
+
+    private static final class Versions {
+        private static final String INTERNAL_S3SHARED = "v0.1.0";
+        private static final String INTERNAL_ACCEPTENCODING = "v0.0.0-20200930084954-897dfb99530c";
     }
 }

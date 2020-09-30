@@ -1,4 +1,4 @@
-package customizations
+package acceptencoding
 
 import (
 	"bytes"
@@ -42,7 +42,7 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 			}
 
 			if c.Enable {
-				id = (*AcceptEncodingGzipMiddleware)(nil).ID()
+				id = (*EnableGzipMiddleware)(nil).ID()
 				if m, ok := stack.Finalize.Get(id); !ok || m == nil {
 					t.Fatalf("expect %s to be present.", id)
 				}
@@ -53,7 +53,7 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 				}
 				return
 			}
-			id = (*AcceptEncodingGzipMiddleware)(nil).ID()
+			id = (*EnableGzipMiddleware)(nil).ID()
 			if m, ok := stack.Finalize.Get(id); ok || m != nil {
 				t.Fatalf("expect %s not to be present.", id)
 			}
@@ -67,7 +67,7 @@ func TestAddAcceptEncodingGzip(t *testing.T) {
 }
 
 func TestAcceptEncodingGzipMiddleware(t *testing.T) {
-	m := &AcceptEncodingGzipMiddleware{}
+	m := &EnableGzipMiddleware{}
 
 	_, _, err := m.HandleFinalize(context.Background(),
 		middleware.FinalizeInput{
@@ -195,4 +195,21 @@ func (*stubOpDeserializer) HandleDeserialize(
 	output middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	return next.HandleDeserialize(ctx, input)
+}
+
+type wasClosedReadCloser struct {
+	io.Reader
+	closed bool
+}
+
+func (c *wasClosedReadCloser) WasClosed() bool {
+	return c.closed
+}
+
+func (c *wasClosedReadCloser) Close() error {
+	c.closed = true
+	if v, ok := c.Reader.(io.Closer); ok {
+		return v.Close()
+	}
+	return nil
 }
