@@ -31,7 +31,7 @@ public class KinesisCustomizations implements GoIntegration {
                         .operationPredicate(KinesisCustomizations::isGetRecords)
                         .registerMiddleware(MiddlewareRegistrar.builder()
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(READ_TIMEOUT_ADDER,
-                                        AwsGoDependency.AWS_CORE).build())
+                                        AwsGoDependency.AWS_HTTP_TRANSPORT).build())
                                 .functionArguments(ListUtils.of(
                                         SymbolUtils.createValueSymbolBuilder(READ_TIMEOUT_DURATION,
                                                 AwsCustomGoDependency.KINESIS_CUSTOMIZATION).build()))
