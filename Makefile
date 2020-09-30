@@ -65,13 +65,11 @@ add-module-license-files:
 # Unit Testing #
 ################
 
-# TODO replace the command with the unit-modules-. once protocol tests pass
+unit: lint unit-modules-. 
+unit-race: lint unit-race-modules-.
 
-unit: lint unit-modules-aws unit-modules-config unit-modules-credentials unit-modules-ec2imds unit-modules-service 
-unit-race: lint unit-race-modules-aws unit-race-modules-config unit-race-modules-credentials unit-race-modules-ec2imds unit-race-modules-service
-
-unit-test: test-modules-aws test-modules-config test-modules-credentials test-modules-ec2imds test-modules-service
-unit-race-test: test-race-modules-aws test-race-modules-config test-race-modules-credentials test-race-modules-ec2imds test-race-modules-service
+unit-test: test-modules-.
+unit-race-test: test-race-modules-.
 
 unit-race-modules-%:
 	@# unit command that uses the pattern to define the root path that the
