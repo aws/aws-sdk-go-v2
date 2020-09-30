@@ -29,7 +29,7 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-. add-module-license-files
+generate: smithy-generate gen-config-asserts gen-repo-mod-replace tidy-modules-. add-module-license-files gen-aws-ptrs
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -44,6 +44,9 @@ gen-repo-mod-replace:
 
 gen-mod-replace-local:
 	./mod_replace_local_submodules.sh `pwd` `pwd` `pwd`/../smithy-go
+
+gen-aws-ptrs:
+	cd aws && go generate
 
 tidy-modules-%:
 	@# tidy command that uses the pattern to define the root path that the

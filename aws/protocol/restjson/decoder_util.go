@@ -84,8 +84,6 @@ func SanitizeErrorCode(errorCode string) string {
 	return errorCode
 }
 
-
-
 // GetSmithyGenericAPIError returns smithy generic api error and an error interface.
 // Takes in json decoder, and error Code string as args. The function retrieves error message
 // and error code from the decoder body. If errorCode of length greater than 0 is passed in as
