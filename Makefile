@@ -13,6 +13,8 @@ EACHMODULE_CONCURRENCY_FLAG=-c ${EACHMODULE_CONCURRENCY}
 EACHMODULE_SKIP ?=
 EACHMODULE_SKIP_FLAG=-skip="${EACHMODULE_SKIP}"
 
+EACHMODULE_FLAGS=${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG}
+
 # SDK's Core and client packages that are compatable with Go 1.9+.
 SDK_CORE_PKGS=./aws/... ./internal/...
 SDK_CLIENT_PKGS=./service/...
@@ -55,7 +57,7 @@ tidy-modules-%:
 	@#
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst tidy-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go mod tidy"
 
 add-module-license-files:
@@ -81,7 +83,7 @@ unit-race-modules-%:
 	@#
 	@# e.g. unit-race-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst unit-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
@@ -94,7 +96,7 @@ unit-modules-%:
 	@#
 	@# e.g. unit-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst unit-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..." \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..." \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
@@ -108,7 +110,7 @@ build-modules-%:
 	@#
 	@# e.g. build-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst build-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 test: test-modules-.
@@ -120,7 +122,7 @@ test-race-modules-%:
 	@#
 	@# e.g. test-race-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst test-race-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} -race -cpu=4 ./..."
 
 test-modules-%:
@@ -130,7 +132,7 @@ test-modules-%:
 	@#
 	@# e.g. test-modules-internal_protocoltest
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst test-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=1m ${UNIT_TEST_TAGS} ./..."
 
 ##############
@@ -160,7 +162,7 @@ integ-modules-%:
 	@#
 	@# e.g. test-modules-service_dynamodb
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst integ-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=10m -tags "integration" -v ${RUN_INTEG} -count 1 ./..."
 
 cleanup-integ-buckets:
@@ -179,7 +181,7 @@ bench-modules-%:
 	@#
 	@# e.g. bench-modules-service_dynamodb
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
 
 ##################
@@ -199,7 +201,7 @@ vet: vet-modules-.
 
 vet-modules-%:
 	cd ./internal/repotools/cmd/eachmodule \
-		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) ${EACHMODULE_CONCURRENCY_FLAG} ${EACHMODULE_FAILFAST_FLAG} ${EACHMODULE_SKIP_FLAG} \
+		&& go run . -p $(subst _,/,$(subst vet-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go vet ${BUILD_TAGS} --all ./..."
 
 sdkv1check:
