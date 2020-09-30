@@ -117,16 +117,8 @@ final class AwsProtocolUtils {
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
                         .operation(ShapeId.from("aws.protocoltests.json#PutAndGetInlineDocuments"))
-                        .build(),
-
-                // REST-XML opinionated test - prefix headers as empty vs nil map
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
-                        .operation(ShapeId.from("aws.protocoltests.restxml#HttpPrefixHeaders"))
-                        .testName("HttpPrefixHeadersAreNotPresent")
                         .build()
-        ));
-
+                ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
                 // REST-XML opinionated test - prefix headers as empty vs nil map

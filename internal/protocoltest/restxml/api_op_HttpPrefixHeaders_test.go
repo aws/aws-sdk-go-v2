@@ -74,10 +74,6 @@ func TestClient_HttpPrefixHeaders_awsRestxmlSerialize(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "HttpPrefixHeadersAreNotPresent" {
-				t.Skip("disabled test aws.protocoltests.restxml#RestXml aws.protocoltests.restxml#HttpPrefixHeaders")
-			}
-
 			var actualReq *http.Request
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				actualReq = r.Clone(r.Context())
