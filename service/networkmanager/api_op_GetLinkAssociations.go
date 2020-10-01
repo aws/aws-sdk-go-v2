@@ -58,11 +58,10 @@ func (c *Client) GetLinkAssociations(ctx context.Context, params *GetLinkAssocia
 
 type GetLinkAssociationsInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
-	// The maximum number of results to return.
-	MaxResults *int32
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
 
 	// The ID of the device.
 	DeviceId *string
@@ -70,10 +69,11 @@ type GetLinkAssociationsInput struct {
 	// The ID of the link.
 	LinkId *string
 
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type GetLinkAssociationsOutput struct {

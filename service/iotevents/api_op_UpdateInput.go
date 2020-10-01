@@ -57,6 +57,11 @@ func (c *Client) UpdateInput(ctx context.Context, params *UpdateInputInput, optF
 
 type UpdateInputInput struct {
 
+	// The definition of the input.
+	//
+	// This member is required.
+	InputDefinition *types.InputDefinition
+
 	// The name of the input you want to update.
 	//
 	// This member is required.
@@ -64,11 +69,6 @@ type UpdateInputInput struct {
 
 	// A brief description of the input.
 	InputDescription *string
-
-	// The definition of the input.
-	//
-	// This member is required.
-	InputDefinition *types.InputDefinition
 }
 
 type UpdateInputOutput struct {

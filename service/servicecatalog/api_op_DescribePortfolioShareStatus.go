@@ -74,11 +74,11 @@ type DescribePortfolioShareStatusOutput struct {
 	// The portfolio identifier.
 	PortfolioId *string
 
-	// Information about the portfolio share operation.
-	ShareDetails *types.ShareDetails
-
 	// The token for the portfolio share operation. For example, share-6v24abcdefghi.
 	PortfolioShareToken *string
+
+	// Information about the portfolio share operation.
+	ShareDetails *types.ShareDetails
 
 	// Status of the portfolio share operation.
 	Status types.ShareStatus

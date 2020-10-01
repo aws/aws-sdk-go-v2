@@ -59,11 +59,11 @@ type ListThingGroupsInput struct {
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// A filter that limits the results to those with the specified name prefix.
 	NamePrefixFilter *string
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 
 	// A filter that limits the results to those with the specified parent group.
 	ParentGroup *string

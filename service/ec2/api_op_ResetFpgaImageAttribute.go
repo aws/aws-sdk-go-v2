@@ -58,12 +58,6 @@ func (c *Client) ResetFpgaImageAttribute(ctx context.Context, params *ResetFpgaI
 
 type ResetFpgaImageAttributeInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the AFI.
 	//
 	// This member is required.
@@ -71,6 +65,12 @@ type ResetFpgaImageAttributeInput struct {
 
 	// The attribute.
 	Attribute types.ResetFpgaImageAttributeName
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ResetFpgaImageAttributeOutput struct {

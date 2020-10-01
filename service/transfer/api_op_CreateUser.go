@@ -63,6 +63,16 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
+	// The IAM role that controls your users' access to your Amazon S3 bucket. The
+	// policies attached to this role will determine the level of access you want to
+	// provide your users when transferring files into and out of your Amazon S3 bucket
+	// or buckets. The IAM role should also contain a trust relationship that allows
+	// the file transfer protocol-enabled server to access your resources when
+	// servicing your users' transfer requests.
+	//
+	// This member is required.
+	Role *string
+
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// instance. This is the specific server that you added your user to.
 	//
@@ -78,37 +88,10 @@ type CreateUserInput struct {
 	// This member is required.
 	UserName *string
 
-	// Key-value pairs that can be used to group and search for users. Tags are
-	// metadata attached to users for any purpose.
-	Tags []*types.Tag
-
-	// The IAM role that controls your users' access to your Amazon S3 bucket. The
-	// policies attached to this role will determine the level of access you want to
-	// provide your users when transferring files into and out of your Amazon S3 bucket
-	// or buckets. The IAM role should also contain a trust relationship that allows
-	// the file transfer protocol-enabled server to access your resources when
-	// servicing your users' transfer requests.
-	//
-	// This member is required.
-	Role *string
-
-	// A scope-down policy for your user so you can use the same IAM role across
-	// multiple users. This policy scopes down user access to portions of their Amazon
-	// S3 bucket. Variables that you can use inside this policy include
-	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
-	// <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a
-	// JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
-	// policy as a JSON blob and pass it in the <code>Policy</code> argument.</p>
-	// <p>For an example of a scope-down policy, see <a
-	// href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
-	// a scope-down policy</a>.</p> <p>For more information, see <a
-	// href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>
-	// in the <i>AWS Security Token Service API Reference</i>.</p> </note>
-	Policy *string
-
-	// The public portion of the Secure Shell (SSH) key used to authenticate the user
-	// to the file transfer protocol-enabled server.
-	SshPublicKeyBody *string
+	// The landing directory (folder) for a user when they log in to the file transfer
+	// protocol-enabled server using the client.  <p>An example is <i>
+	// <code>your-Amazon-S3-bucket-name>/home/username</code> </i>.</p>
+	HomeDirectory *string
 
 	// Logical directory mappings that specify what Amazon S3 paths and keys should be
 	// visible to your user and how you want to make them visible. You will need to
@@ -131,11 +114,6 @@ type CreateUserInput struct {
 	// folder.</p> </note>
 	HomeDirectoryMappings []*types.HomeDirectoryMapEntry
 
-	// The landing directory (folder) for a user when they log in to the file transfer
-	// protocol-enabled server using the client.  <p>An example is <i>
-	// <code>your-Amazon-S3-bucket-name>/home/username</code> </i>.</p>
-	HomeDirectory *string
-
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the file transfer protocol-enabled server. If you set it to
 	// PATH, the user will see the absolute Amazon S3 bucket paths as is in their file
@@ -143,21 +121,43 @@ type CreateUserInput struct {
 	// mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths
 	// visible to your users.
 	HomeDirectoryType types.HomeDirectoryType
+
+	// A scope-down policy for your user so you can use the same IAM role across
+	// multiple users. This policy scopes down user access to portions of their Amazon
+	// S3 bucket. Variables that you can use inside this policy include
+	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+	// <note> <p>For scope-down policies, AWS Transfer Family stores the policy as a
+	// JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
+	// policy as a JSON blob and pass it in the <code>Policy</code> argument.</p>
+	// <p>For an example of a scope-down policy, see <a
+	// href="https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down">Creating
+	// a scope-down policy</a>.</p> <p>For more information, see <a
+	// href="https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html">AssumeRole</a>
+	// in the <i>AWS Security Token Service API Reference</i>.</p> </note>
+	Policy *string
+
+	// The public portion of the Secure Shell (SSH) key used to authenticate the user
+	// to the file transfer protocol-enabled server.
+	SshPublicKeyBody *string
+
+	// Key-value pairs that can be used to group and search for users. Tags are
+	// metadata attached to users for any purpose.
+	Tags []*types.Tag
 }
 
 type CreateUserOutput struct {
-
-	// A unique string that identifies a user account associated with a file transfer
-	// protocol-enabled server.
-	//
-	// This member is required.
-	UserName *string
 
 	// The ID of the file transfer protocol-enabled server that the user is attached
 	// to.
 	//
 	// This member is required.
 	ServerId *string
+
+	// A unique string that identifies a user account associated with a file transfer
+	// protocol-enabled server.
+	//
+	// This member is required.
+	UserName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

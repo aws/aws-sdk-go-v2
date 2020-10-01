@@ -63,11 +63,13 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 // Represents the input to DescribeDBClusters ().
 type DescribeDBClustersInput struct {
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
+	// The user-provided cluster identifier. If this parameter is specified,
+	// information from only the specific cluster is returned. This parameter isn't
+	// case sensitive. Constraints:
+	//
+	//     * If provided, must match an existing
+	// DBClusterIdentifier.
+	DBClusterIdentifier *string
 
 	// A filter that specifies one or more clusters to describe. Supported filters:
 	//
@@ -77,18 +79,16 @@ type DescribeDBClustersInput struct {
 	// by these ARNs.
 	Filters []*types.Filter
 
-	// The user-provided cluster identifier. If this parameter is specified,
-	// information from only the specific cluster is returned. This parameter isn't
-	// case sensitive. Constraints:
-	//
-	//     * If provided, must match an existing
-	// DBClusterIdentifier.
-	DBClusterIdentifier *string
-
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
 }
 
 // Represents the output of DescribeDBClusters ().

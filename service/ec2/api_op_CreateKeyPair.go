@@ -66,9 +66,6 @@ func (c *Client) CreateKeyPair(ctx context.Context, params *CreateKeyPairInput, 
 
 type CreateKeyPairInput struct {
 
-	// The tags to apply to the new key pair.
-	TagSpecifications []*types.TagSpecification
-
 	// A unique name for the key pair. Constraints: Up to 255 ASCII characters
 	//
 	// This member is required.
@@ -79,6 +76,9 @@ type CreateKeyPairInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The tags to apply to the new key pair.
+	TagSpecifications []*types.TagSpecification
 }
 
 // Describes a key pair.
@@ -87,11 +87,11 @@ type CreateKeyPairOutput struct {
 	// The SHA-1 digest of the DER encoded private key.
 	KeyFingerprint *string
 
-	// The name of the key pair.
-	KeyName *string
-
 	// An unencrypted PEM encoded RSA private key.
 	KeyMaterial *string
+
+	// The name of the key pair.
+	KeyName *string
 
 	// The ID of the key pair.
 	KeyPairId *string

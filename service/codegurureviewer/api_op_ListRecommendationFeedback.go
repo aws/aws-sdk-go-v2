@@ -60,8 +60,24 @@ func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRec
 
 type ListRecommendationFeedbackInput struct {
 
+	// The Amazon Resource Name (ARN) of the CodeReview
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
+	//
+	// This member is required.
+	CodeReviewArn *string
+
 	// The maximum number of results that are returned per call. The default is 100.
 	MaxResults *int32
+
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged.
+	NextToken *string
+
+	// Used to query the recommendation feedback for a given recommendation.
+	RecommendationIds []*string
 
 	// An AWS user's account ID or Amazon Resource Name (ARN). Use this ID to query the
 	// recommendation feedback for a code review from that user. The UserId is an IAM
@@ -70,34 +86,18 @@ type ListRecommendationFeedbackInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
 	UserIds []*string
-
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
-	//
-	// This member is required.
-	CodeReviewArn *string
-
-	// Used to query the recommendation feedback for a given recommendation.
-	RecommendationIds []*string
-
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page. Keep all other arguments
-	// unchanged.
-	NextToken *string
 }
 
 type ListRecommendationFeedbackOutput struct {
 
-	// Recommendation feedback summaries corresponding to the code review ARN.
-	RecommendationFeedbackSummaries []*types.RecommendationFeedbackSummary
-
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
 	// unchanged.
 	NextToken *string
+
+	// Recommendation feedback summaries corresponding to the code review ARN.
+	RecommendationFeedbackSummaries []*types.RecommendationFeedbackSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

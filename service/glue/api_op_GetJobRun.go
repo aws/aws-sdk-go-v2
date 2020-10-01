@@ -57,15 +57,15 @@ func (c *Client) GetJobRun(ctx context.Context, params *GetJobRunInput, optFns .
 
 type GetJobRunInput struct {
 
-	// The ID of the job run.
-	//
-	// This member is required.
-	RunId *string
-
 	// Name of the job definition being run.
 	//
 	// This member is required.
 	JobName *string
+
+	// The ID of the job run.
+	//
+	// This member is required.
+	RunId *string
 
 	// True if a list of predecessor runs should be returned.
 	PredecessorsIncluded *bool

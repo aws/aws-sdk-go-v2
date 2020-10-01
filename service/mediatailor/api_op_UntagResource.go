@@ -57,17 +57,17 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// A comma-separated list of the tag keys to remove from the playback
-	// configuration.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The Amazon Resource Name (ARN) for the playback configuration. You can get this
 	// from the response to any playback configuration request.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// A comma-separated list of the tag keys to remove from the playback
+	// configuration.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type UntagResourceOutput struct {

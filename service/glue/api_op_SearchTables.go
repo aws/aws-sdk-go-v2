@@ -64,9 +64,8 @@ func (c *Client) SearchTables(ctx context.Context, params *SearchTablesInput, op
 
 type SearchTablesInput struct {
 
-	// A list of criteria for sorting the results by a field name, in an ascending or
-	// descending order.
-	SortCriteria []*types.SortCriterion
+	// A unique identifier, consisting of  account_id .
+	CatalogId *string
 
 	// A list of key-value pairs, and a comparator used to filter the search results.
 	// Returns all entities matching the predicate.  <p>The <code>Comparator</code>
@@ -82,8 +81,11 @@ type SearchTablesInput struct {
 	// returned.</p>
 	Filters []*types.PropertyPredicate
 
-	// A unique identifier, consisting of  account_id .
-	CatalogId *string
+	// The maximum number of tables to return in a single response.
+	MaxResults *int32
+
+	// A continuation token, included if this is a continuation call.
+	NextToken *string
 
 	// Allows you to specify that you want to search the tables shared with your
 	// account. The allowable values are FOREIGN or ALL.  <ul> <li> <p>If set to
@@ -92,15 +94,13 @@ type SearchTablesInput struct {
 	// your account, as well as the tables in yor local account. </p> </li> </ul>
 	ResourceShareType types.ResourceShareType
 
-	// The maximum number of tables to return in a single response.
-	MaxResults *int32
-
-	// A continuation token, included if this is a continuation call.
-	NextToken *string
-
 	// A string used for a text search. Specifying a value in quotes filters based on
 	// an exact match to the value.
 	SearchText *string
+
+	// A list of criteria for sorting the results by a field name, in an ascending or
+	// descending order.
+	SortCriteria []*types.SortCriterion
 }
 
 type SearchTablesOutput struct {

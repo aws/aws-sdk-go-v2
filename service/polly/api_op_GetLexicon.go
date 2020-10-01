@@ -67,13 +67,13 @@ type GetLexiconInput struct {
 
 type GetLexiconOutput struct {
 
+	// Lexicon object that provides name and the string content of the lexicon.
+	Lexicon *types.Lexicon
+
 	// Metadata of the lexicon, including phonetic alphabetic used, language code,
 	// lexicon ARN, number of lexemes defined in the lexicon, and size of lexicon in
 	// bytes.
 	LexiconAttributes *types.LexiconAttributes
-
-	// Lexicon object that provides name and the string content of the lexicon.
-	Lexicon *types.Lexicon
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

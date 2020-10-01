@@ -57,27 +57,27 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 
 type ListDomainsInput struct {
 
-	// The pagination token used to retrieve the next page of results for this
-	// operation. If this value is null, it retrieves the first page.
-	NextToken *string
-
-	// The maximum number of results to be included in the next page.
-	MaxResults *int32
-
 	// The ARN of the fleet.
 	//
 	// This member is required.
 	FleetArn *string
+
+	// The maximum number of results to be included in the next page.
+	MaxResults *int32
+
+	// The pagination token used to retrieve the next page of results for this
+	// operation. If this value is null, it retrieves the first page.
+	NextToken *string
 }
 
 type ListDomainsOutput struct {
 
+	// Information about the domains.
+	Domains []*types.DomainSummary
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
-
-	// Information about the domains.
-	Domains []*types.DomainSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

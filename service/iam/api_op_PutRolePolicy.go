@@ -74,22 +74,6 @@ func (c *Client) PutRolePolicy(ctx context.Context, params *PutRolePolicyInput, 
 
 type PutRolePolicyInput struct {
 
-	// The name of the policy document. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
-	// upper and lowercase alphanumeric characters with no spaces. You can also include
-	// any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	PolicyName *string
-
-	// The name of the role to associate the policy with. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	RoleName *string
-
 	// The policy document. You must provide policies in JSON format in IAM. However,
 	// for AWS CloudFormation templates formatted in YAML, you can provide the policy
 	// in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON
@@ -109,6 +93,22 @@ type PutRolePolicyInput struct {
 	//
 	// This member is required.
 	PolicyDocument *string
+
+	// The name of the policy document. This parameter allows (through its regex
+	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
+	// upper and lowercase alphanumeric characters with no spaces. You can also include
+	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	PolicyName *string
+
+	// The name of the role to associate the policy with. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	RoleName *string
 }
 
 type PutRolePolicyOutput struct {

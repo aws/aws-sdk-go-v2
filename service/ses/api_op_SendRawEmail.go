@@ -124,22 +124,6 @@ func (c *Client) SendRawEmail(ctx context.Context, params *SendRawEmailInput, op
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-raw.html).
 type SendRawEmailInput struct {
 
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to send for the email address specified in the Source parameter. For
-	// example, if the owner of example.com (which has ARN
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
-	// that authorizes you to send from user@example.com, then you would specify the
-	// SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// Source to be user@example.com. Instead of using this parameter, you can use the
-	// X-header X-SES-SOURCE-ARN in the raw message of the email. If you use both the
-	// SourceArn parameter and the corresponding X-header, Amazon SES uses the value of
-	// the SourceArn parameter. For information about when to use this parameter, see
-	// the description of SendRawEmail in this guide, or see the Amazon SES Developer
-	// Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
-	SourceArn *string
-
 	// The raw email message itself. The message has to meet the following criteria:
 	//
 	//
@@ -173,6 +157,14 @@ type SendRawEmailInput struct {
 	// This member is required.
 	RawMessage *types.RawMessage
 
+	// The name of the configuration set to use when you send an email using
+	// SendRawEmail.
+	ConfigurationSetName *string
+
+	// A list of destinations for the message, consisting of To:, CC:, and BCC:
+	// addresses.
+	Destinations []*string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to specify a particular "From" address in the header of the raw email.
@@ -184,9 +176,21 @@ type SendRawEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
 	FromArn *string
 
-	// A list of destinations for the message, consisting of To:, CC:, and BCC:
-	// addresses.
-	Destinations []*string
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to use the email address specified in the ReturnPath parameter. For example,
+	// if the owner of example.com (which has ARN
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
+	// that authorizes you to use feedback@example.com, then you would specify the
+	// ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and
+	// the ReturnPath to be feedback@example.com. Instead of using this parameter, you
+	// can use the X-header X-SES-RETURN-PATH-ARN in the raw message of the email. If
+	// you use both the ReturnPathArn parameter and the corresponding X-header, Amazon
+	// SES uses the value of the ReturnPathArn parameter. For information about when to
+	// use this parameter, see the description of SendRawEmail in this guide, or see
+	// the Amazon SES Developer Guide
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	ReturnPathArn *string
 
 	// The identity's email address. If you do not provide a value for this parameter,
 	// you must specify a "From" address in the raw text of the message. (You can also
@@ -208,30 +212,26 @@ type SendRawEmailInput struct {
 	// message.</p>
 	Source *string
 
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to send for the email address specified in the Source parameter. For
+	// example, if the owner of example.com (which has ARN
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
+	// that authorizes you to send from user@example.com, then you would specify the
+	// SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+	// Source to be user@example.com. Instead of using this parameter, you can use the
+	// X-header X-SES-SOURCE-ARN in the raw message of the email. If you use both the
+	// SourceArn parameter and the corresponding X-header, Amazon SES uses the value of
+	// the SourceArn parameter. For information about when to use this parameter, see
+	// the description of SendRawEmail in this guide, or see the Amazon SES Developer
+	// Guide
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
+	SourceArn *string
+
 	// A list of tags, in the form of name/value pairs, to apply to an email that you
 	// send using SendRawEmail. Tags correspond to characteristics of the email that
 	// you define, so that you can publish email sending events.
 	Tags []*types.MessageTag
-
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to use the email address specified in the ReturnPath parameter. For example,
-	// if the owner of example.com (which has ARN
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
-	// that authorizes you to use feedback@example.com, then you would specify the
-	// ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and
-	// the ReturnPath to be feedback@example.com. Instead of using this parameter, you
-	// can use the X-header X-SES-RETURN-PATH-ARN in the raw message of the email. If
-	// you use both the ReturnPathArn parameter and the corresponding X-header, Amazon
-	// SES uses the value of the ReturnPathArn parameter. For information about when to
-	// use this parameter, see the description of SendRawEmail in this guide, or see
-	// the Amazon SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html).
-	ReturnPathArn *string
-
-	// The name of the configuration set to use when you send an email using
-	// SendRawEmail.
-	ConfigurationSetName *string
 }
 
 // Represents a unique message ID.

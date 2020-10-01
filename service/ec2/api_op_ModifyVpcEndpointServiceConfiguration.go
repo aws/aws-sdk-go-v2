@@ -63,6 +63,15 @@ func (c *Client) ModifyVpcEndpointServiceConfiguration(ctx context.Context, para
 
 type ModifyVpcEndpointServiceConfigurationInput struct {
 
+	// The ID of the service.
+	//
+	// This member is required.
+	ServiceId *string
+
+	// Indicates whether requests to create an endpoint to your service must be
+	// accepted.
+	AcceptanceRequired *bool
+
 	// The Amazon Resource Names (ARNs) of Network Load Balancers to add to your
 	// service configuration.
 	AddNetworkLoadBalancerArns []*string
@@ -73,21 +82,12 @@ type ModifyVpcEndpointServiceConfigurationInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your
-	// service configuration.
-	RemoveNetworkLoadBalancerArns []*string
-
-	// The ID of the service.
-	//
-	// This member is required.
-	ServiceId *string
-
 	// The private DNS name to assign to the endpoint service.
 	PrivateDnsName *string
 
-	// Indicates whether requests to create an endpoint to your service must be
-	// accepted.
-	AcceptanceRequired *bool
+	// The Amazon Resource Names (ARNs) of Network Load Balancers to remove from your
+	// service configuration.
+	RemoveNetworkLoadBalancerArns []*string
 
 	// Removes the private DNS name of the endpoint service.
 	RemovePrivateDnsName *bool

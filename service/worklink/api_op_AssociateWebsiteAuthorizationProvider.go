@@ -58,6 +58,11 @@ func (c *Client) AssociateWebsiteAuthorizationProvider(ctx context.Context, para
 
 type AssociateWebsiteAuthorizationProviderInput struct {
 
+	// The authorization provider type.
+	//
+	// This member is required.
+	AuthorizationProviderType types.AuthorizationProviderType
+
 	// The ARN of the fleet.
 	//
 	// This member is required.
@@ -66,11 +71,6 @@ type AssociateWebsiteAuthorizationProviderInput struct {
 	// The domain name of the authorization provider. This applies only to SAML-based
 	// authorization providers.
 	DomainName *string
-
-	// The authorization provider type.
-	//
-	// This member is required.
-	AuthorizationProviderType types.AuthorizationProviderType
 }
 
 type AssociateWebsiteAuthorizationProviderOutput struct {

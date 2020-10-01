@@ -69,6 +69,12 @@ type ListRoleTagsInput struct {
 	// This member is required.
 	RoleName *string
 
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
 	// (Optional) Use this only when paginating results to indicate the maximum number
 	// of items that you want in the response. If additional items exist beyond the
 	// maximum that you specify, the IsTruncated response element is true. If you do
@@ -77,15 +83,16 @@ type ListRoleTagsInput struct {
 	// response element returns true, and Marker contains a value to include in the
 	// subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
 }
 
 type ListRoleTagsOutput struct {
+
+	// The list of tags currently that is attached to the role. Each tag consists of a
+	// key name and an associated value. If no tags are attached to the specified role,
+	// the response contains an empty list.
+	//
+	// This member is required.
+	Tags []*types.Tag
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can use the Marker request parameter to make a subsequent
@@ -97,13 +104,6 @@ type ListRoleTagsOutput struct {
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
-
-	// The list of tags currently that is attached to the role. Each tag consists of a
-	// key name and an associated value. If no tags are attached to the specified role,
-	// the response contains an empty list.
-	//
-	// This member is required.
-	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

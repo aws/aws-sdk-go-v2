@@ -57,15 +57,15 @@ func (c *Client) GetBundles(ctx context.Context, params *GetBundlesInput, optFns
 
 type GetBundlesInput struct {
 
+	// A Boolean value that indicates whether to include inactive bundle results in
+	// your request.
+	IncludeInactive *bool
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetBundles request. If your results are
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
-
-	// A Boolean value that indicates whether to include inactive bundle results in
-	// your request.
-	IncludeInactive *bool
 }
 
 type GetBundlesOutput struct {

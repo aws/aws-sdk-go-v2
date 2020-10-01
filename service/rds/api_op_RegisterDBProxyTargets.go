@@ -57,12 +57,6 @@ func (c *Client) RegisterDBProxyTargets(ctx context.Context, params *RegisterDBP
 
 type RegisterDBProxyTargetsInput struct {
 
-	// One or more DB instance identifiers.
-	DBInstanceIdentifiers []*string
-
-	// The identifier of the DBProxyTargetGroup.
-	TargetGroupName *string
-
 	// The identifier of the DBProxy that is associated with the DBProxyTargetGroup.
 	//
 	// This member is required.
@@ -70,6 +64,12 @@ type RegisterDBProxyTargetsInput struct {
 
 	// One or more DB cluster identifiers.
 	DBClusterIdentifiers []*string
+
+	// One or more DB instance identifiers.
+	DBInstanceIdentifiers []*string
+
+	// The identifier of the DBProxyTargetGroup.
+	TargetGroupName *string
 }
 
 type RegisterDBProxyTargetsOutput struct {

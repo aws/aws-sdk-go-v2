@@ -56,11 +56,6 @@ func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInp
 
 type CreateComponentInput struct {
 
-	// The list of resource ARNs that belong to the component.
-	//
-	// This member is required.
-	ResourceList []*string
-
 	// The name of the component.
 	//
 	// This member is required.
@@ -70,6 +65,11 @@ type CreateComponentInput struct {
 	//
 	// This member is required.
 	ResourceGroupName *string
+
+	// The list of resource ARNs that belong to the component.
+	//
+	// This member is required.
+	ResourceList []*string
 }
 
 type CreateComponentOutput struct {

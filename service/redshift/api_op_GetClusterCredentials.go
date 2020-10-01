@@ -78,57 +78,6 @@ func (c *Client) GetClusterCredentials(ctx context.Context, params *GetClusterCr
 // The request parameters to get cluster credentials.
 type GetClusterCredentialsInput struct {
 
-	// A list of the names of existing database groups that the user named in DbUser
-	// will join for the current session, in addition to any group memberships for an
-	// existing user. If not specified, a new user is added only to PUBLIC. Database
-	// group name constraints
-	//
-	//     * Must be 1 to 64 alphanumeric characters or
-	// hyphens
-	//
-	//     * Must contain only lowercase letters, numbers, underscore, plus
-	// sign, period (dot), at symbol (@), or hyphen.
-	//
-	//     * First character must be a
-	// letter.
-	//
-	//     * Must not contain a colon ( : ) or slash ( / ).
-	//
-	//     * Cannot be a
-	// reserved word. A list of reserved words can be found in Reserved Words
-	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
-	// Redshift Database Developer Guide.
-	DbGroups []*string
-
-	// The number of seconds until the returned temporary password expires. Constraint:
-	// minimum 900, maximum 3600. Default: 900
-	DurationSeconds *int32
-
-	// Create a database user with the name specified for the user named in DbUser if
-	// one does not exist.
-	AutoCreate *bool
-
-	// The name of a database that DbUser is authorized to log on to. If DbName is not
-	// specified, DbUser can log on to any existing database. Constraints:
-	//
-	//     * Must
-	// be 1 to 64 alphanumeric characters or hyphens
-	//
-	//     * Must contain only lowercase
-	// letters, numbers, underscore, plus sign, period (dot), at symbol (@), or
-	// hyphen.
-	//
-	//     * First character must be a letter.
-	//
-	//     * Must not contain a colon
-	// ( : ) or slash ( / ).
-	//
-	//     * Cannot be a reserved word. A list of reserved words
-	// can be found in Reserved Words
-	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
-	// Redshift Database Developer Guide.
-	DbName *string
-
 	// The unique identifier of the cluster that contains the database for which your
 	// are requesting credentials. This parameter is case sensitive.
 	//
@@ -164,6 +113,57 @@ type GetClusterCredentialsInput struct {
 	//
 	// This member is required.
 	DbUser *string
+
+	// Create a database user with the name specified for the user named in DbUser if
+	// one does not exist.
+	AutoCreate *bool
+
+	// A list of the names of existing database groups that the user named in DbUser
+	// will join for the current session, in addition to any group memberships for an
+	// existing user. If not specified, a new user is added only to PUBLIC. Database
+	// group name constraints
+	//
+	//     * Must be 1 to 64 alphanumeric characters or
+	// hyphens
+	//
+	//     * Must contain only lowercase letters, numbers, underscore, plus
+	// sign, period (dot), at symbol (@), or hyphen.
+	//
+	//     * First character must be a
+	// letter.
+	//
+	//     * Must not contain a colon ( : ) or slash ( / ).
+	//
+	//     * Cannot be a
+	// reserved word. A list of reserved words can be found in Reserved Words
+	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
+	// Redshift Database Developer Guide.
+	DbGroups []*string
+
+	// The name of a database that DbUser is authorized to log on to. If DbName is not
+	// specified, DbUser can log on to any existing database. Constraints:
+	//
+	//     * Must
+	// be 1 to 64 alphanumeric characters or hyphens
+	//
+	//     * Must contain only lowercase
+	// letters, numbers, underscore, plus sign, period (dot), at symbol (@), or
+	// hyphen.
+	//
+	//     * First character must be a letter.
+	//
+	//     * Must not contain a colon
+	// ( : ) or slash ( / ).
+	//
+	//     * Cannot be a reserved word. A list of reserved words
+	// can be found in Reserved Words
+	// (http://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the Amazon
+	// Redshift Database Developer Guide.
+	DbName *string
+
+	// The number of seconds until the returned temporary password expires. Constraint:
+	// minimum 900, maximum 3600. Default: 900
+	DurationSeconds *int32
 }
 
 // Temporary credentials with authorization to log on to an Amazon Redshift

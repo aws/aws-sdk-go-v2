@@ -60,12 +60,12 @@ type DescribeDRTAccessInput struct {
 
 type DescribeDRTAccessOutput struct {
 
+	// The list of Amazon S3 buckets accessed by the DRT.
+	LogBucketList []*string
+
 	// The Amazon Resource Name (ARN) of the role the DRT used to access your AWS
 	// account.
 	RoleArn *string
-
-	// The list of Amazon S3 buckets accessed by the DRT.
-	LogBucketList []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

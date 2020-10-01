@@ -65,6 +65,12 @@ type GetCapacityReservationUsageInput struct {
 	// This member is required.
 	CapacityReservationId *string
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
 	// nextToken value. This value can be between 5 and 500. If maxResults is given a
@@ -74,24 +80,26 @@ type GetCapacityReservationUsageInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 }
 
 type GetCapacityReservationUsageOutput struct {
 
-	// The number of instances for which the Capacity Reservation reserves capacity.
-	TotalInstanceCount *int32
+	// The remaining capacity. Indicates the number of instances that can be launched
+	// in the Capacity Reservation.
+	AvailableInstanceCount *int32
 
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
 
 	// The type of instance for which the Capacity Reservation reserves capacity.
 	InstanceType *string
+
+	// Information about the Capacity Reservation usage.
+	InstanceUsages []*types.InstanceUsage
+
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
+	NextToken *string
 
 	// The current state of the Capacity Reservation. A Capacity Reservation can be in
 	// one of the following states:
@@ -116,16 +124,8 @@ type GetCapacityReservationUsageOutput struct {
 	// limit constraints. Failed requests are retained for 60 minutes.
 	State types.CapacityReservationState
 
-	// The remaining capacity. Indicates the number of instances that can be launched
-	// in the Capacity Reservation.
-	AvailableInstanceCount *int32
-
-	// Information about the Capacity Reservation usage.
-	InstanceUsages []*types.InstanceUsage
-
-	// The token to use to retrieve the next page of results. This value is null when
-	// there are no more results to return.
-	NextToken *string
+	// The number of instances for which the Capacity Reservation reserves capacity.
+	TotalInstanceCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

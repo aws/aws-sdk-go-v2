@@ -58,15 +58,15 @@ func (c *Client) ResetPersonalPIN(ctx context.Context, params *ResetPersonalPINI
 
 type ResetPersonalPINInput struct {
 
-	// The user ID.
-	//
-	// This member is required.
-	UserId *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The user ID.
+	//
+	// This member is required.
+	UserId *string
 }
 
 type ResetPersonalPINOutput struct {

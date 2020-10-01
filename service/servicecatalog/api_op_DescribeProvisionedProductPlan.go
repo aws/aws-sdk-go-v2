@@ -57,9 +57,10 @@ func (c *Client) DescribeProvisionedProductPlan(ctx context.Context, params *Des
 
 type DescribeProvisionedProductPlanInput struct {
 
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
+	// The plan identifier.
+	//
+	// This member is required.
+	PlanId *string
 
 	// The language code.
 	//
@@ -74,24 +75,23 @@ type DescribeProvisionedProductPlanInput struct {
 	// The maximum number of items to return with this call.
 	PageSize *int32
 
-	// The plan identifier.
-	//
-	// This member is required.
-	PlanId *string
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type DescribeProvisionedProductPlanOutput struct {
 
-	// Information about the resource changes that will occur when the plan is
-	// executed.
-	ResourceChanges []*types.ResourceChange
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
+	NextPageToken *string
 
 	// Information about the plan.
 	ProvisionedProductPlanDetails *types.ProvisionedProductPlanDetails
 
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string
+	// Information about the resource changes that will occur when the plan is
+	// executed.
+	ResourceChanges []*types.ResourceChange
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

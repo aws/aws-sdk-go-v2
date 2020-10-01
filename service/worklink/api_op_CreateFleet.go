@@ -63,15 +63,15 @@ type CreateFleetInput struct {
 	// This member is required.
 	FleetName *string
 
-	// The tags to add to the resource. A tag is a key-value pair.
-	Tags map[string]*string
-
 	// The fleet name to display.
 	DisplayName *string
 
 	// The option to optimize for better performance by routing traffic through the
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
+
+	// The tags to add to the resource. A tag is a key-value pair.
+	Tags map[string]*string
 }
 
 type CreateFleetOutput struct {

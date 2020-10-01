@@ -84,9 +84,6 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 	// assigned a tag with a specific key, regardless of the tag value.
 	Filters []*types.Filter
 
-	// The IDs of one or more services.
-	ServiceIds []*string
-
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
@@ -95,6 +92,9 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	// The IDs of one or more services.
+	ServiceIds []*string
 }
 
 type DescribeVpcEndpointServiceConfigurationsOutput struct {

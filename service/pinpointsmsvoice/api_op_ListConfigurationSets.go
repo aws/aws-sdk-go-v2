@@ -56,12 +56,12 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 
 type ListConfigurationSetsInput struct {
 
-	// Used to specify the number of items that should be returned in the response.
-	PageSize *string
-
 	// A token returned from a previous call to the API that indicates the position in
 	// the list of results.
 	NextToken *string
+
+	// Used to specify the number of items that should be returned in the response.
+	PageSize *string
 }
 
 // An object that contains information about the configuration sets for your

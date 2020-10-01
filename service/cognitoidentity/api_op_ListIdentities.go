@@ -59,23 +59,23 @@ func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput
 // Input to the ListIdentities action.
 type ListIdentitiesInput struct {
 
-	// A pagination token.
-	NextToken *string
+	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
+	IdentityPoolId *string
 
 	// The maximum number of identities to return.
 	//
 	// This member is required.
 	MaxResults *int32
 
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// This member is required.
-	IdentityPoolId *string
-
 	// An optional boolean parameter that allows you to hide disabled identities. If
 	// omitted, the ListIdentities API will include disabled identities in the
 	// response.
 	HideDisabled *bool
+
+	// A pagination token.
+	NextToken *string
 }
 
 // The response to a ListIdentities request.
@@ -84,11 +84,11 @@ type ListIdentitiesOutput struct {
 	// An object containing a set of identities and associated mappings.
 	Identities []*types.IdentityDescription
 
-	// A pagination token.
-	NextToken *string
-
 	// An identity pool ID in the format REGION:GUID.
 	IdentityPoolId *string
+
+	// A pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

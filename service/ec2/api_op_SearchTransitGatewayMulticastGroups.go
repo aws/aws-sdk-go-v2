@@ -57,21 +57,11 @@ func (c *Client) SearchTransitGatewayMulticastGroups(ctx context.Context, params
 
 type SearchTransitGatewayMulticastGroupsInput struct {
 
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
-	// The token for the next page of results.
-	NextToken *string
 
 	// One or more filters. The possible values are:
 	//
@@ -105,16 +95,26 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 	//     *
 	// transit-gateway-attachment-id - The id of the transit gateway attachment.
 	Filters []*types.Filter
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainId *string
 }
 
 type SearchTransitGatewayMulticastGroupsOutput struct {
 
+	// Information about the transit gateway multicast group.
+	MulticastGroups []*types.TransitGatewayMulticastGroup
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// Information about the transit gateway multicast group.
-	MulticastGroups []*types.TransitGatewayMulticastGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

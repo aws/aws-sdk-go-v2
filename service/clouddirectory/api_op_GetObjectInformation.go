@@ -57,6 +57,11 @@ func (c *Client) GetObjectInformation(ctx context.Context, params *GetObjectInfo
 
 type GetObjectInformationInput struct {
 
+	// The ARN of the directory being retrieved.
+	//
+	// This member is required.
+	DirectoryArn *string
+
 	// A reference to the object.
 	//
 	// This member is required.
@@ -64,22 +69,17 @@ type GetObjectInformationInput struct {
 
 	// The consistency level at which to retrieve the object information.
 	ConsistencyLevel types.ConsistencyLevel
-
-	// The ARN of the directory being retrieved.
-	//
-	// This member is required.
-	DirectoryArn *string
 }
 
 type GetObjectInformationOutput struct {
+
+	// The ObjectIdentifier of the specified object.
+	ObjectIdentifier *string
 
 	// The facets attached to the specified object. Although the response does not
 	// include minor version information, the most recently applied minor version of
 	// each Facet is in effect. See GetAppliedSchemaVersion () for details.
 	SchemaFacets []*types.SchemaFacet
-
-	// The ObjectIdentifier of the specified object.
-	ObjectIdentifier *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -75,15 +75,15 @@ func (c *Client) RegisterInstancesWithLoadBalancer(ctx context.Context, params *
 // Contains the parameters for RegisterInstancesWithLoadBalancer.
 type RegisterInstancesWithLoadBalancerInput struct {
 
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
-
 	// The IDs of the instances.
 	//
 	// This member is required.
 	Instances []*types.Instance
+
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
 }
 
 // Contains the output of RegisterInstancesWithLoadBalancer.

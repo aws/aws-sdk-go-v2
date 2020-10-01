@@ -68,17 +68,17 @@ type UpdateRegistryInput struct {
 
 type UpdateRegistryOutput struct {
 
-	// The name of the registry.
-	RegistryName *string
-
-	// Tags associated with the registry.
-	Tags map[string]*string
-
 	// The description of the registry.
 	Description *string
 
 	// The ARN of the registry.
 	RegistryArn *string
+
+	// The name of the registry.
+	RegistryName *string
+
+	// Tags associated with the registry.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

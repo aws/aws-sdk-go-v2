@@ -10,13 +10,10 @@ import (
 // IoT SiteWise Monitor resource.
 type AccessPolicySummary struct {
 
-	// The AWS IoT SiteWise Monitor resource (a portal or project).
+	// The ID of the access policy.
 	//
 	// This member is required.
-	Resource *Resource
-
-	// The date the access policy was last updated, in Unix epoch time.
-	LastUpdateDate *time.Time
+	Id *string
 
 	// The AWS SSO identity (a user or group).
 	//
@@ -29,28 +26,31 @@ type AccessPolicySummary struct {
 	// This member is required.
 	Permission Permission
 
-	// The ID of the access policy.
+	// The AWS IoT SiteWise Monitor resource (a portal or project).
 	//
 	// This member is required.
-	Id *string
+	Resource *Resource
 
 	// The date the access policy was created, in Unix epoch time.
 	CreationDate *time.Time
+
+	// The date the access policy was last updated, in Unix epoch time.
+	LastUpdateDate *time.Time
 }
 
 // Contains aggregated asset property values (for example, average, minimum, and
 // maximum).
 type AggregatedValue struct {
 
-	// The value of the aggregates.
-	//
-	// This member is required.
-	Value *Aggregates
-
 	// The date the aggregating computations occurred, in Unix epoch time.
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	// The value of the aggregates.
+	//
+	// This member is required.
+	Value *Aggregates
 
 	// The quality of the aggregated data.
 	Quality Quality
@@ -59,27 +59,32 @@ type AggregatedValue struct {
 // Contains the (pre-calculated) aggregate values for an asset property.
 type Aggregates struct {
 
-	// The sum of the time series over a time interval window.
-	Sum *float64
-
 	// The average (mean) value of the time series over a time interval window.
 	Average *float64
-
-	// The maximum value of the time series over a time interval window.
-	Maximum *float64
 
 	// The count of data points in the time series over a time interval window.
 	Count *float64
 
-	// The standard deviation of the time series over a time interval window.
-	StandardDeviation *float64
+	// The maximum value of the time series over a time interval window.
+	Maximum *float64
 
 	// The minimum value of the time series over a time interval window.
 	Minimum *float64
+
+	// The standard deviation of the time series over a time interval window.
+	StandardDeviation *float64
+
+	// The sum of the time series over a time interval window.
+	Sum *float64
 }
 
 // Contains error details for the requested associate project asset action.
 type AssetErrorDetails struct {
+
+	// The ID of the asset.
+	//
+	// This member is required.
+	AssetId *string
 
 	// The error code.
 	//
@@ -90,11 +95,6 @@ type AssetErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
-
-	// The ID of the asset.
-	//
-	// This member is required.
-	AssetId *string
 }
 
 // Describes an asset hierarchy that contains a hierarchy's name and ID.
@@ -123,9 +123,6 @@ type AssetModelHierarchy struct {
 	// This member is required.
 	ChildAssetModelId *string
 
-	// The ID of the asset model hierarchy. This ID is a hierarchyId.
-	Id *string
-
 	// The name of the asset model hierarchy that you specify by using the
 	// CreateAssetModel
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModel.html)
@@ -135,6 +132,9 @@ type AssetModelHierarchy struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The ID of the asset model hierarchy. This ID is a hierarchyId.
+	Id *string
 }
 
 // Contains an asset model hierarchy used in asset model creation. An asset model
@@ -159,11 +159,10 @@ type AssetModelHierarchyDefinition struct {
 // Contains information about an asset model property.
 type AssetModelProperty struct {
 
-	// The ID of the asset model property.
-	Id *string
-
-	// The unit of the asset model property, such as Newtons or RPM.
-	Unit *string
+	// The data type of the asset model property.
+	//
+	// This member is required.
+	DataType PropertyDataType
 
 	// The name of the asset model property.
 	//
@@ -175,21 +174,16 @@ type AssetModelProperty struct {
 	// This member is required.
 	Type *PropertyType
 
-	// The data type of the asset model property.
-	//
-	// This member is required.
-	DataType PropertyDataType
+	// The ID of the asset model property.
+	Id *string
+
+	// The unit of the asset model property, such as Newtons or RPM.
+	Unit *string
 }
 
 // Contains an asset model property definition. This property definition is applied
 // to all assets created from the asset model.
 type AssetModelPropertyDefinition struct {
-
-	// The property definition type (see PropertyType). You can only specify one type
-	// in a property definition.
-	//
-	// This member is required.
-	Type *PropertyType
 
 	// The data type of the property definition.
 	//
@@ -200,6 +194,12 @@ type AssetModelPropertyDefinition struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The property definition type (see PropertyType). You can only specify one type
+	// in a property definition.
+	//
+	// This member is required.
+	Type *PropertyType
 
 	// The unit of the property definition, such as Newtons or RPM.
 	Unit *string
@@ -223,11 +223,6 @@ type AssetModelStatus struct {
 // Contains a summary of an asset model.
 type AssetModelSummary struct {
 
-	// The date the asset model was created, in Unix epoch time.
-	//
-	// This member is required.
-	CreationDate *time.Time
-
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the asset model, which has the following format.
@@ -236,54 +231,44 @@ type AssetModelSummary struct {
 	// This member is required.
 	Arn *string
 
-	// The ID of the asset model (used with AWS IoT SiteWise APIs).
+	// The date the asset model was created, in Unix epoch time.
 	//
 	// This member is required.
-	Id *string
-
-	// The name of the asset model.
-	//
-	// This member is required.
-	Name *string
+	CreationDate *time.Time
 
 	// The asset model description.
 	//
 	// This member is required.
 	Description *string
 
-	// The current status of the asset model.
+	// The ID of the asset model (used with AWS IoT SiteWise APIs).
 	//
 	// This member is required.
-	Status *AssetModelStatus
+	Id *string
 
 	// The date the asset model was last updated, in Unix epoch time.
 	//
 	// This member is required.
 	LastUpdateDate *time.Time
+
+	// The name of the asset model.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the asset model.
+	//
+	// This member is required.
+	Status *AssetModelStatus
 }
 
 // Contains asset property information.
 type AssetProperty struct {
 
-	// The asset property's notification topic and state. For more information, see
-	// UpdateAssetProperty
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-	Notification *PropertyNotification
-
 	// The data type of the asset property.
 	//
 	// This member is required.
 	DataType PropertyDataType
-
-	// The unit (such as Newtons or RPM) of the asset property.
-	Unit *string
-
-	// The property alias that identifies the property, such as an OPC-UA server data
-	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
-	// information, see Mapping Industrial Data Streams to Asset Properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the AWS IoT SiteWise User Guide.
-	Alias *string
 
 	// The ID of the asset property.
 	//
@@ -294,20 +279,35 @@ type AssetProperty struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The property alias that identifies the property, such as an OPC-UA server data
+	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
+	// information, see Mapping Industrial Data Streams to Asset Properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
+	// in the AWS IoT SiteWise User Guide.
+	Alias *string
+
+	// The asset property's notification topic and state. For more information, see
+	// UpdateAssetProperty
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
+	Notification *PropertyNotification
+
+	// The unit (such as Newtons or RPM) of the asset property.
+	Unit *string
 }
 
 // Contains asset property value information.
 type AssetPropertyValue struct {
 
-	// The value of the asset property (see Variant).
-	//
-	// This member is required.
-	Value *Variant
-
 	// The timestamp of the asset property value.
 	//
 	// This member is required.
 	Timestamp *TimeInNanos
+
+	// The value of the asset property (see Variant).
+	//
+	// This member is required.
+	Value *Variant
 
 	// The quality of the asset property value.
 	Quality Quality
@@ -319,33 +319,17 @@ type AssetPropertyValue struct {
 // in the AWS IoT SiteWise User Guide.
 type AssetStatus struct {
 
-	// Contains associated error information, if any.
-	Error *ErrorDetails
-
 	// The current status of the asset.
 	//
 	// This member is required.
 	State AssetState
+
+	// Contains associated error information, if any.
+	Error *ErrorDetails
 }
 
 // Contains a summary of an asset.
 type AssetSummary struct {
-
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
-	// specifies allowed parent/child asset relationships.
-	//
-	// This member is required.
-	Hierarchies []*AssetHierarchy
-
-	// The ID of the asset.
-	//
-	// This member is required.
-	Id *string
-
-	// The name of the asset.
-	//
-	// This member is required.
-	Name *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -354,63 +338,16 @@ type AssetSummary struct {
 	//
 	// This member is required.
 	Arn *string
-
-	// The date the asset was created, in Unix epoch time.
-	//
-	// This member is required.
-	CreationDate *time.Time
-
-	// The current status of the asset.
-	//
-	// This member is required.
-	Status *AssetStatus
 
 	// The ID of the asset model used to create this asset.
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// The date the asset was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	LastUpdateDate *time.Time
-}
-
-// Contains a summary of an associated asset.
-type AssociatedAssetsSummary struct {
-
 	// The date the asset was created, in Unix epoch time.
 	//
 	// This member is required.
 	CreationDate *time.Time
-
-	// The ID of the asset model used to create the asset.
-	//
-	// This member is required.
-	AssetModelId *string
-
-	// The name of the asset.
-	//
-	// This member is required.
-	Name *string
-
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
-	//
-	// This member is required.
-	Arn *string
-
-	// The date the asset was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	LastUpdateDate *time.Time
-
-	// The current status of the asset.
-	//
-	// This member is required.
-	Status *AssetStatus
 
 	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
 	// specifies allowed parent/child asset relationships.
@@ -422,6 +359,69 @@ type AssociatedAssetsSummary struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The date the asset was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	LastUpdateDate *time.Time
+
+	// The name of the asset.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the asset.
+	//
+	// This member is required.
+	Status *AssetStatus
+}
+
+// Contains a summary of an associated asset.
+type AssociatedAssetsSummary struct {
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the asset, which has the following format.
+	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the asset model used to create the asset.
+	//
+	// This member is required.
+	AssetModelId *string
+
+	// The date the asset was created, in Unix epoch time.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// specifies allowed parent/child asset relationships.
+	//
+	// This member is required.
+	Hierarchies []*AssetHierarchy
+
+	// The ID of the asset.
+	//
+	// This member is required.
+	Id *string
+
+	// The date the asset was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	LastUpdateDate *time.Time
+
+	// The name of the asset.
+	//
+	// This member is required.
+	Name *string
+
+	// The current status of the asset.
+	//
+	// This member is required.
+	Status *AssetStatus
 }
 
 // Contains an asset attribute property. For more information, see Attributes
@@ -441,11 +441,6 @@ type Attribute struct {
 // Contains error information from updating a batch of asset property values.
 type BatchPutAssetPropertyError struct {
 
-	// A list of timestamps for each error, if any.
-	//
-	// This member is required.
-	Timestamps []*TimeInNanos
-
 	// The error code.
 	//
 	// This member is required.
@@ -455,6 +450,11 @@ type BatchPutAssetPropertyError struct {
 	//
 	// This member is required.
 	ErrorMessage *string
+
+	// A list of timestamps for each error, if any.
+	//
+	// This member is required.
+	Timestamps []*TimeInNanos
 }
 
 // Contains error information for asset property value entries that are associated
@@ -463,15 +463,15 @@ type BatchPutAssetPropertyError struct {
 // API.
 type BatchPutAssetPropertyErrorEntry struct {
 
-	// The list of update property value errors.
-	//
-	// This member is required.
-	Errors []*BatchPutAssetPropertyError
-
 	// The ID of the failed entry.
 	//
 	// This member is required.
 	EntryId *string
+
+	// The list of update property value errors.
+	//
+	// This member is required.
+	Errors []*BatchPutAssetPropertyError
 }
 
 // Contains a dashboard summary.
@@ -482,19 +482,19 @@ type DashboardSummary struct {
 	// This member is required.
 	Id *string
 
-	// The date the dashboard was created, in Unix epoch time.
-	CreationDate *time.Time
-
-	// The date the dashboard was last updated, in Unix epoch time.
-	LastUpdateDate *time.Time
-
-	// The dashboard's description.
-	Description *string
-
 	// The name of the dashboard
 	//
 	// This member is required.
 	Name *string
+
+	// The date the dashboard was created, in Unix epoch time.
+	CreationDate *time.Time
+
+	// The dashboard's description.
+	Description *string
+
+	// The date the dashboard was last updated, in Unix epoch time.
+	LastUpdateDate *time.Time
 }
 
 // Contains the details of an AWS IoT SiteWise error.
@@ -514,15 +514,15 @@ type ErrorDetails struct {
 // Contains expression variable information.
 type ExpressionVariable struct {
 
-	// The variable that identifies an asset property from which to use values.
-	//
-	// This member is required.
-	Value *VariableValue
-
 	// The friendly name of the variable to be used in the expression.
 	//
 	// This member is required.
 	Name *string
+
+	// The variable that identifies an asset property from which to use values.
+	//
+	// This member is required.
+	Value *VariableValue
 }
 
 // Contains a summary of a gateway capability configuration.
@@ -564,20 +564,25 @@ type GatewayPlatform struct {
 // Contains a summary of a gateway.
 type GatewaySummary struct {
 
-	// The date the gateway was last updated, in Unix epoch time.
+	// The date the gateway was created, in Unix epoch time.
 	//
 	// This member is required.
-	LastUpdateDate *time.Time
+	CreationDate *time.Time
+
+	// The ID of the gateway device.
+	//
+	// This member is required.
+	GatewayId *string
 
 	// The name of the asset.
 	//
 	// This member is required.
 	GatewayName *string
 
-	// The date the gateway was created, in Unix epoch time.
+	// The date the gateway was last updated, in Unix epoch time.
 	//
 	// This member is required.
-	CreationDate *time.Time
+	LastUpdateDate *time.Time
 
 	// A list of gateway capability summaries that each contain a namespace and status.
 	// Each gateway capability defines data sources for the gateway. To retrieve a
@@ -585,11 +590,6 @@ type GatewaySummary struct {
 	// DescribeGatewayCapabilityConfiguration
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
 	GatewayCapabilitySummaries []*GatewayCapabilitySummary
-
-	// The ID of the gateway device.
-	//
-	// This member is required.
-	GatewayId *string
 }
 
 // Contains details for a gateway that runs on AWS IoT Greengrass. To create a
@@ -645,11 +645,11 @@ type Identity struct {
 // this option to keep an existing image.
 type Image struct {
 
-	// The ID of an existing image. Specify this parameter to keep an existing image.
-	Id *string
-
 	// Contains an image file.
 	File *ImageFile
+
+	// The ID of an existing image. Specify this parameter to keep an existing image.
+	Id *string
 }
 
 // Contains an image file.
@@ -670,16 +670,16 @@ type ImageFile struct {
 // Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.
 type ImageLocation struct {
 
+	// The ID of the image.
+	//
+	// This member is required.
+	Id *string
+
 	// The URL where the image is available. The URL is valid for 15 minutes so that
 	// you can view and download the image
 	//
 	// This member is required.
 	Url *string
-
-	// The ID of the image.
-	//
-	// This member is required.
-	Id *string
 }
 
 // Contains logging options.
@@ -710,17 +710,6 @@ type Measurement struct {
 // in the AWS IoT SiteWise User Guide.
 type Metric struct {
 
-	// The window (time interval) over which AWS IoT SiteWise computes the metric's
-	// aggregation expression. AWS IoT SiteWise computes one data point per window.
-	//
-	// This member is required.
-	Window *MetricWindow
-
-	// The list of variables used in the expression.
-	//
-	// This member is required.
-	Variables []*ExpressionVariable
-
 	// The mathematical expression that defines the metric aggregation function. You
 	// can specify up to 10 variables per expression. You can specify up to 10
 	// functions per expression. For more information, see Quotas
@@ -729,6 +718,17 @@ type Metric struct {
 	//
 	// This member is required.
 	Expression *string
+
+	// The list of variables used in the expression.
+	//
+	// This member is required.
+	Variables []*ExpressionVariable
+
+	// The window (time interval) over which AWS IoT SiteWise computes the metric's
+	// aggregation expression. AWS IoT SiteWise computes one data point per window.
+	//
+	// This member is required.
+	Window *MetricWindow
 }
 
 // Contains a time interval window used for data aggregate computations (for
@@ -742,11 +742,11 @@ type MetricWindow struct {
 // Contains AWS IoT SiteWise Monitor error details.
 type MonitorErrorDetails struct {
 
-	// The error message.
-	Message *string
-
 	// The error code.
 	Code MonitorErrorCode
+
+	// The error message.
+	Message *string
 }
 
 // Identifies an AWS IoT SiteWise Monitor portal.
@@ -761,17 +761,35 @@ type PortalResource struct {
 // Contains information about the current status of a portal.
 type PortalStatus struct {
 
-	// Contains associated error information, if any.
-	Error *MonitorErrorDetails
-
 	// The current state of the portal.
 	//
 	// This member is required.
 	State PortalState
+
+	// Contains associated error information, if any.
+	Error *MonitorErrorDetails
 }
 
 // Contains a portal summary.
 type PortalSummary struct {
+
+	// The ID of the portal.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the portal.
+	//
+	// This member is required.
+	Name *string
+
+	// The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
+	//
+	// This member is required.
+	StartUrl *string
+
+	// The date the portal was created, in Unix epoch time.
+	CreationDate *time.Time
 
 	// The portal's description.
 	Description *string
@@ -787,24 +805,6 @@ type PortalSummary struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the AWS IoT SiteWise User Guide.
 	RoleArn *string
-
-	// The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
-	//
-	// This member is required.
-	StartUrl *string
-
-	// The name of the portal.
-	//
-	// This member is required.
-	Name *string
-
-	// The ID of the portal.
-	//
-	// This member is required.
-	Id *string
-
-	// The date the portal was created, in Unix epoch time.
-	CreationDate *time.Time
 }
 
 // Identifies a specific AWS IoT SiteWise Monitor project.
@@ -819,28 +819,43 @@ type ProjectResource struct {
 // Contains project summary information.
 type ProjectSummary struct {
 
-	// The project's description.
-	Description *string
-
-	// The date the project was last updated, in Unix epoch time.
-	LastUpdateDate *time.Time
-
 	// The ID of the project.
 	//
 	// This member is required.
 	Id *string
 
-	// The date the project was created, in Unix epoch time.
-	CreationDate *time.Time
-
 	// The name of the project.
 	//
 	// This member is required.
 	Name *string
+
+	// The date the project was created, in Unix epoch time.
+	CreationDate *time.Time
+
+	// The project's description.
+	Description *string
+
+	// The date the project was last updated, in Unix epoch time.
+	LastUpdateDate *time.Time
 }
 
 // Contains asset property information.
 type Property struct {
+
+	// The property data type.
+	//
+	// This member is required.
+	DataType PropertyDataType
+
+	// The ID of the asset property.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the property.
+	//
+	// This member is required.
+	Name *string
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
@@ -849,31 +864,16 @@ type Property struct {
 	// in the AWS IoT SiteWise User Guide.
 	Alias *string
 
-	// The property data type.
-	//
-	// This member is required.
-	DataType PropertyDataType
-
 	// The asset property's notification topic and state. For more information, see
 	// UpdateAssetProperty
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
 	Notification *PropertyNotification
 
-	// The unit (such as Newtons or RPM) of the asset property.
-	Unit *string
-
-	// The ID of the asset property.
-	//
-	// This member is required.
-	Id *string
-
 	// The property type (see PropertyType). A property contains one type.
 	Type *PropertyType
 
-	// The name of the property.
-	//
-	// This member is required.
-	Name *string
+	// The unit (such as Newtons or RPM) of the asset property.
+	Unit *string
 }
 
 // Contains asset property value notification information. When the notification
@@ -899,6 +899,12 @@ type PropertyNotification struct {
 // transform.
 type PropertyType struct {
 
+	// Specifies an asset attribute property. An attribute generally contains static
+	// information, such as the serial number of an IIoT
+	// (https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications) wind
+	// turbine.
+	Attribute *Attribute
+
 	// Specifies an asset measurement property. A measurement represents a device's raw
 	// sensor data stream, such as timestamped temperature values or timestamped power
 	// values.
@@ -909,12 +915,6 @@ type PropertyType struct {
 	// interval and output a single data point, such as to calculate the average hourly
 	// temperature.
 	Metric *Metric
-
-	// Specifies an asset attribute property. An attribute generally contains static
-	// information, such as the serial number of an IIoT
-	// (https://en.wikipedia.org/wiki/Internet_of_things#Industrial_applications) wind
-	// turbine.
-	Attribute *Attribute
 
 	// Specifies an asset transform property. A transform contains a mathematical
 	// expression that maps a property's data points from one form to another, such as
@@ -928,8 +928,20 @@ type PropertyType struct {
 // API.
 type PutAssetPropertyValueEntry struct {
 
-	// The ID of the asset property for this entry.
-	PropertyId *string
+	// The user specified ID for the entry. You can use this ID to identify which
+	// entries failed.
+	//
+	// This member is required.
+	EntryId *string
+
+	// The list of property values to upload. You can specify up to 10 propertyValues
+	// array elements.
+	//
+	// This member is required.
+	PropertyValues []*AssetPropertyValue
+
+	// The ID of the asset to update.
+	AssetId *string
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
@@ -938,20 +950,8 @@ type PutAssetPropertyValueEntry struct {
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The list of property values to upload. You can specify up to 10 propertyValues
-	// array elements.
-	//
-	// This member is required.
-	PropertyValues []*AssetPropertyValue
-
-	// The user specified ID for the entry. You can use this ID to identify which
-	// entries failed.
-	//
-	// This member is required.
-	EntryId *string
-
-	// The ID of the asset to update.
-	AssetId *string
+	// The ID of the asset property for this entry.
+	PropertyId *string
 }
 
 // Contains an AWS IoT SiteWise Monitor resource ID for a portal or project.
@@ -967,14 +967,14 @@ type Resource struct {
 // Contains a timestamp with optional nanosecond granularity.
 type TimeInNanos struct {
 
-	// The nanosecond offset from timeInSeconds.
-	OffsetInNanos *int32
-
 	// The timestamp date, in seconds, in the Unix epoch format. Fractional nanosecond
 	// data is provided by offsetInNanos.
 	//
 	// This member is required.
 	TimeInSeconds *int64
+
+	// The nanosecond offset from timeInSeconds.
+	OffsetInNanos *int32
 }
 
 // Contains an asset transform property. A transform is a one-to-one mapping of a
@@ -1052,15 +1052,15 @@ type VariableValue struct {
 // Contains an asset property value (of a single type only).
 type Variant struct {
 
-	// Asset property data of type string (sequence of characters).
-	StringValue *string
-
 	// Asset property data of type Boolean (true or false).
 	BooleanValue *bool
+
+	// Asset property data of type double (floating point number).
+	DoubleValue *float64
 
 	// Asset property data of type integer (whole number).
 	IntegerValue *int32
 
-	// Asset property data of type double (floating point number).
-	DoubleValue *float64
+	// Asset property data of type string (sequence of characters).
+	StringValue *string
 }

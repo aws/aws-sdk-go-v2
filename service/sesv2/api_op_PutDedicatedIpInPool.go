@@ -61,18 +61,18 @@ func (c *Client) PutDedicatedIpInPool(ctx context.Context, params *PutDedicatedI
 // A request to move a dedicated IP address to a dedicated IP pool.
 type PutDedicatedIpInPoolInput struct {
 
+	// The name of the IP pool that you want to add the dedicated IP address to. You
+	// have to specify an IP pool that already exists.
+	//
+	// This member is required.
+	DestinationPoolName *string
+
 	// The IP address that you want to move to the dedicated IP pool. The value you
 	// specify has to be a dedicated IP address that's associated with your AWS
 	// account.
 	//
 	// This member is required.
 	Ip *string
-
-	// The name of the IP pool that you want to add the dedicated IP address to. You
-	// have to specify an IP pool that already exists.
-	//
-	// This member is required.
-	DestinationPoolName *string
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

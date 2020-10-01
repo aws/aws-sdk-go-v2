@@ -57,14 +57,6 @@ func (c *Client) UpdateUpload(ctx context.Context, params *UpdateUploadInput, op
 
 type UpdateUploadInput struct {
 
-	// Set to true if the YAML file has changed and must be updated. Otherwise, set to
-	// false.
-	EditContent *bool
-
-	// The upload's test spec file name. The name must not contain any forward slashes
-	// (/). The test spec file name must end with the .yaml or .yml file extension.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the uploaded test spec.
 	//
 	// This member is required.
@@ -72,6 +64,14 @@ type UpdateUploadInput struct {
 
 	// The upload's content type (for example, application/x-yaml).
 	ContentType *string
+
+	// Set to true if the YAML file has changed and must be updated. Otherwise, set to
+	// false.
+	EditContent *bool
+
+	// The upload's test spec file name. The name must not contain any forward slashes
+	// (/). The test spec file name must end with the .yaml or .yml file extension.
+	Name *string
 }
 
 type UpdateUploadOutput struct {

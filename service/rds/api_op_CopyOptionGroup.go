@@ -58,34 +58,6 @@ func (c *Client) CopyOptionGroup(ctx context.Context, params *CopyOptionGroupInp
 //
 type CopyOptionGroupInput struct {
 
-	// The identifier for the copied option group. Constraints:
-	//
-	//     * Can't be null,
-	// empty, or blank
-	//
-	//     * Must contain from 1 to 255 letters, numbers, or hyphens
-	//
-	//
-	// * First character must be a letter
-	//
-	//     * Can't end with a hyphen or contain two
-	// consecutive hyphens
-	//
-	// Example: my-option-group
-	//
-	// This member is required.
-	TargetOptionGroupIdentifier *string
-
-	// The description for the copied option group.
-	//
-	// This member is required.
-	TargetOptionGroupDescription *string
-
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
-	Tags []*types.Tag
-
 	// The identifier or ARN for the source option group. For information about
 	// creating an ARN, see  Constructing an ARN for Amazon RDS
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
@@ -104,6 +76,34 @@ type CopyOptionGroupInput struct {
 	//
 	// This member is required.
 	SourceOptionGroupIdentifier *string
+
+	// The description for the copied option group.
+	//
+	// This member is required.
+	TargetOptionGroupDescription *string
+
+	// The identifier for the copied option group. Constraints:
+	//
+	//     * Can't be null,
+	// empty, or blank
+	//
+	//     * Must contain from 1 to 255 letters, numbers, or hyphens
+	//
+	//
+	// * First character must be a letter
+	//
+	//     * Can't end with a hyphen or contain two
+	// consecutive hyphens
+	//
+	// Example: my-option-group
+	//
+	// This member is required.
+	TargetOptionGroupIdentifier *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	Tags []*types.Tag
 }
 
 type CopyOptionGroupOutput struct {

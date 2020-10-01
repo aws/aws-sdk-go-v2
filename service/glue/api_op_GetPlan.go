@@ -62,19 +62,19 @@ type GetPlanInput struct {
 	// This member is required.
 	Mapping []*types.MappingEntry
 
-	// The programming language of the code to perform the mapping.
-	Language types.Language
-
-	// The target tables.
-	Sinks []*types.CatalogEntry
-
 	// The source table.
 	//
 	// This member is required.
 	Source *types.CatalogEntry
 
+	// The programming language of the code to perform the mapping.
+	Language types.Language
+
 	// The parameters for the mapping.
 	Location *types.Location
+
+	// The target tables.
+	Sinks []*types.CatalogEntry
 }
 
 type GetPlanOutput struct {

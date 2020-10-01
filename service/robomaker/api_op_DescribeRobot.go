@@ -66,14 +66,20 @@ type DescribeRobotInput struct {
 
 type DescribeRobotOutput struct {
 
+	// The target architecture of the robot application.
+	Architecture types.Architecture
+
+	// The Amazon Resource Name (ARN) of the robot.
+	Arn *string
+
 	// The time, in milliseconds since the epoch, when the robot was created.
 	CreatedAt *time.Time
 
-	// The status of the fleet.
-	Status types.RobotStatus
+	// The Amazon Resource Name (ARN) of the fleet.
+	FleetArn *string
 
-	// The list of all tags added to the specified robot.
-	Tags map[string]*string
+	// The Greengrass group id.
+	GreengrassGroupId *string
 
 	// The Amazon Resource Name (ARN) of the last deployment job.
 	LastDeploymentJob *string
@@ -81,20 +87,14 @@ type DescribeRobotOutput struct {
 	// The time of the last deployment job.
 	LastDeploymentTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the fleet.
-	FleetArn *string
-
 	// The name of the robot.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the robot.
-	Arn *string
+	// The status of the fleet.
+	Status types.RobotStatus
 
-	// The target architecture of the robot application.
-	Architecture types.Architecture
-
-	// The Greengrass group id.
-	GreengrassGroupId *string
+	// The list of all tags added to the specified robot.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

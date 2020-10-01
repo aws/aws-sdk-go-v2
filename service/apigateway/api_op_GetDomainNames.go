@@ -58,20 +58,20 @@ func (c *Client) GetDomainNames(ctx context.Context, params *GetDomainNamesInput
 // Request to describe a collection of DomainName () resources.
 type GetDomainNamesInput struct {
 
-	// The current pagination position in the paged result set.
-	Position *string
-
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
 	Name *string
 
-	Title *string
+	// The current pagination position in the paged result set.
+	Position *string
 
 	Template *bool
 
 	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection of DomainName () resources. Use Client-Side Certificate

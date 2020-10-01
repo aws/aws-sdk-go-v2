@@ -57,12 +57,6 @@ func (c *Client) ListDashboardVersions(ctx context.Context, params *ListDashboar
 
 type ListDashboardVersionsInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *int32
-
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
-
 	// The ID of the AWS account that contains the dashboard that you're listing
 	// versions for.
 	//
@@ -73,6 +67,12 @@ type ListDashboardVersionsInput struct {
 	//
 	// This member is required.
 	DashboardId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListDashboardVersionsOutput struct {

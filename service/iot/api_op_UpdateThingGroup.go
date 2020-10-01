@@ -62,14 +62,14 @@ type UpdateThingGroupInput struct {
 	// This member is required.
 	ThingGroupName *string
 
-	// The expected version of the thing group. If this does not match the version of
-	// the thing group being updated, the update will fail.
-	ExpectedVersion *int64
-
 	// The thing group properties.
 	//
 	// This member is required.
 	ThingGroupProperties *types.ThingGroupProperties
+
+	// The expected version of the thing group. If this does not match the version of
+	// the thing group being updated, the update will fail.
+	ExpectedVersion *int64
 }
 
 type UpdateThingGroupOutput struct {

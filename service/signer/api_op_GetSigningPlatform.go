@@ -65,6 +65,16 @@ type GetSigningPlatformInput struct {
 
 type GetSigningPlatformOutput struct {
 
+	// The category type of the target signing platform.
+	Category types.Category
+
+	// The display name of the target signing platform.
+	DisplayName *string
+
+	// The maximum size (in MB) of the payload that can be signed by the target
+	// platform.
+	MaxSizeInMB *int32
+
 	// A list of partner entities that use the target signing platform.
 	Partner *string
 
@@ -74,21 +84,11 @@ type GetSigningPlatformOutput struct {
 	// A list of configurations applied to the target platform at signing.
 	SigningConfiguration *types.SigningConfiguration
 
-	// The category type of the target signing platform.
-	Category types.Category
-
 	// The format of the target platform's signing image.
 	SigningImageFormat *types.SigningImageFormat
 
-	// The maximum size (in MB) of the payload that can be signed by the target
-	// platform.
-	MaxSizeInMB *int32
-
 	// The validation template that is used by the target signing platform.
 	Target *string
-
-	// The display name of the target signing platform.
-	DisplayName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,17 +57,17 @@ func (c *Client) UpdateRecommenderConfiguration(ctx context.Context, params *Upd
 
 type UpdateRecommenderConfigurationInput struct {
 
-	// Specifies Amazon Pinpoint configuration settings for retrieving and processing
-	// recommendation data from a recommender model.
-	//
-	// This member is required.
-	UpdateRecommenderConfiguration *types.UpdateRecommenderConfigurationShape
-
 	// The unique identifier for the recommender model configuration. This identifier
 	// is displayed as the Recommender ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	RecommenderId *string
+
+	// Specifies Amazon Pinpoint configuration settings for retrieving and processing
+	// recommendation data from a recommender model.
+	//
+	// This member is required.
+	UpdateRecommenderConfiguration *types.UpdateRecommenderConfigurationShape
 }
 
 type UpdateRecommenderConfigurationOutput struct {

@@ -60,6 +60,11 @@ func (c *Client) DescribeUpdate(ctx context.Context, params *DescribeUpdateInput
 
 type DescribeUpdateInput struct {
 
+	// The name of the Amazon EKS cluster associated with the update.
+	//
+	// This member is required.
+	Name *string
+
 	// The ID of the update to describe.
 	//
 	// This member is required.
@@ -67,11 +72,6 @@ type DescribeUpdateInput struct {
 
 	// The name of the Amazon EKS node group associated with the update.
 	NodegroupName *string
-
-	// The name of the Amazon EKS cluster associated with the update.
-	//
-	// This member is required.
-	Name *string
 }
 
 type DescribeUpdateOutput struct {

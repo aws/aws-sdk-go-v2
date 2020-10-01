@@ -57,15 +57,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Returns a list of tags for a specific resource type.
-	//
-	// This member is required.
-	ResourceType types.ResourceTypeForTagging
-
 	// The resource ID for which you want to see a list of tags.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// Returns a list of tags for a specific resource type.
+	//
+	// This member is required.
+	ResourceType types.ResourceTypeForTagging
 }
 
 type ListTagsForResourceOutput struct {

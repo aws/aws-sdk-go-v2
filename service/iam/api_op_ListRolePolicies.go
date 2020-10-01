@@ -63,12 +63,6 @@ func (c *Client) ListRolePolicies(ctx context.Context, params *ListRolePoliciesI
 
 type ListRolePoliciesInput struct {
 
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
-
 	// The name of the role to list policies for. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
@@ -76,6 +70,12 @@ type ListRolePoliciesInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
@@ -95,10 +95,6 @@ type ListRolePoliciesOutput struct {
 	// This member is required.
 	PolicyNames []*string
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
-
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -106,6 +102,10 @@ type ListRolePoliciesOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

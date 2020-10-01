@@ -66,12 +66,12 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
+	// The elements from this collection.
+	Items []*types.Application
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
-
-	// The elements from this collection.
-	Items []*types.Application
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

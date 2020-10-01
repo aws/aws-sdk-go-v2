@@ -59,6 +59,11 @@ func (c *Client) DescribeAgents(ctx context.Context, params *DescribeAgentsInput
 
 type DescribeAgentsInput struct {
 
+	// The agent or the Connector IDs for which you want information. If you specify no
+	// IDs, the system returns information about all agents/Connectors associated with
+	// your AWS user account.
+	AgentIds []*string
+
 	// You can filter the request using various logical operators and a key-value
 	// format. For example: {"key": "collectionStatus", "value": "STARTED"}
 	Filters []*types.Filter
@@ -72,11 +77,6 @@ type DescribeAgentsInput struct {
 	// DescribeAgentsRequest$maxResults to 10, you received a set of 10 results along
 	// with a token. Use that token in this query to get the next set of 10.
 	NextToken *string
-
-	// The agent or the Connector IDs for which you want information. If you specify no
-	// IDs, the system returns information about all agents/Connectors associated with
-	// your AWS user account.
-	AgentIds []*string
 }
 
 type DescribeAgentsOutput struct {

@@ -61,14 +61,14 @@ func (c *Client) GetOrganizationConfigRuleDetailedStatus(ctx context.Context, pa
 
 type GetOrganizationConfigRuleDetailedStatusInput struct {
 
-	// A StatusDetailFilters object.
-	Filters *types.StatusDetailFilters
-
 	// The name of organization config rule for which you want status details for
 	// member accounts.
 	//
 	// This member is required.
 	OrganizationConfigRuleName *string
+
+	// A StatusDetailFilters object.
+	Filters *types.StatusDetailFilters
 
 	// The maximum number of OrganizationConfigRuleDetailedStatus returned on each
 	// page. If you do not specify a number, AWS Config uses the default. The default

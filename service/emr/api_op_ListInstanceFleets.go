@@ -59,13 +59,13 @@ func (c *Client) ListInstanceFleets(ctx context.Context, params *ListInstanceFle
 
 type ListInstanceFleetsInput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
 	// The unique identifier of the cluster.
 	//
 	// This member is required.
 	ClusterId *string
+
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
 }
 
 type ListInstanceFleetsOutput struct {

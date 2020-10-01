@@ -72,11 +72,6 @@ type AddApplicationVpcConfigurationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Description of the VPC to add to the application.
-	//
-	// This member is required.
-	VpcConfiguration *types.VpcConfiguration
-
 	// The version of the application to which you want to add the input processing
 	// configuration. You can use the DescribeApplication () operation to get the
 	// current application version. If the version specified is not the current
@@ -84,9 +79,17 @@ type AddApplicationVpcConfigurationInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	// Description of the VPC to add to the application.
+	//
+	// This member is required.
+	VpcConfiguration *types.VpcConfiguration
 }
 
 type AddApplicationVpcConfigurationOutput struct {
+
+	// The ARN of the application.
+	ApplicationARN *string
 
 	// Provides the current application version. Kinesis Data Analytics updates the
 	// ApplicationVersionId each time you update the application.
@@ -94,9 +97,6 @@ type AddApplicationVpcConfigurationOutput struct {
 
 	// The parameters of the new VPC configuration.
 	VpcConfigurationDescription *types.VpcConfigurationDescription
-
-	// The ARN of the application.
-	ApplicationARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

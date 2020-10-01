@@ -65,11 +65,11 @@ type BatchGetVariableInput struct {
 
 type BatchGetVariableOutput struct {
 
-	// The returned variables.
-	Variables []*types.Variable
-
 	// The errors from the request.
 	Errors []*types.BatchGetVariableError
+
+	// The returned variables.
+	Variables []*types.Variable
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

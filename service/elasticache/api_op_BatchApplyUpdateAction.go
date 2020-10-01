@@ -59,25 +59,25 @@ func (c *Client) BatchApplyUpdateAction(ctx context.Context, params *BatchApplyU
 
 type BatchApplyUpdateActionInput struct {
 
-	// The replication group IDs
-	ReplicationGroupIds []*string
-
-	// The cache cluster IDs
-	CacheClusterIds []*string
-
 	// The unique ID of the service update
 	//
 	// This member is required.
 	ServiceUpdateName *string
+
+	// The cache cluster IDs
+	CacheClusterIds []*string
+
+	// The replication group IDs
+	ReplicationGroupIds []*string
 }
 
 type BatchApplyUpdateActionOutput struct {
 
-	// Update actions that haven't been processed successfully
-	UnprocessedUpdateActions []*types.UnprocessedUpdateAction
-
 	// Update actions that have been processed successfully
 	ProcessedUpdateActions []*types.ProcessedUpdateAction
+
+	// Update actions that haven't been processed successfully
+	UnprocessedUpdateActions []*types.UnprocessedUpdateAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

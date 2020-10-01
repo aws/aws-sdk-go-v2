@@ -58,19 +58,22 @@ func (c *Client) GetStage(ctx context.Context, params *GetStageInput, optFns ...
 
 type GetStageInput struct {
 
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
+
 	// The stage name. Stage names can only contain alphanumeric characters, hyphens,
 	// and underscores. Maximum length is 128 characters.
 	//
 	// This member is required.
 	StageName *string
-
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
 }
 
 type GetStageOutput struct {
+
+	// Settings for logging access in this stage.
+	AccessLogSettings *types.AccessLogSettings
 
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
@@ -81,11 +84,9 @@ type GetStageOutput struct {
 	// default value is false.
 	AutoDeploy *bool
 
-	// The timestamp when the stage was last updated.
-	LastUpdatedDate *time.Time
-
-	// The description of the stage.
-	Description *string
+	// The identifier of a client certificate for a Stage. Supported only for WebSocket
+	// APIs.
+	ClientCertificateId *string
 
 	// The timestamp when the stage was created.
 	CreatedDate *time.Time
@@ -97,19 +98,18 @@ type GetStageOutput struct {
 	// updated if autoDeploy is enabled.
 	DeploymentId *string
 
+	// The description of the stage.
+	Description *string
+
 	// Describes the status of the last deployment of a stage. Supported only for
 	// stages with autoDeploy enabled.
 	LastDeploymentStatusMessage *string
 
-	// Settings for logging access in this stage.
-	AccessLogSettings *types.AccessLogSettings
+	// The timestamp when the stage was last updated.
+	LastUpdatedDate *time.Time
 
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
-
-	// The identifier of a client certificate for a Stage. Supported only for WebSocket
-	// APIs.
-	ClientCertificateId *string
+	// Route settings for the stage, by routeKey.
+	RouteSettings map[string]*types.RouteSettings
 
 	// The name of the stage.
 	StageName *string
@@ -119,8 +119,8 @@ type GetStageOutput struct {
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]*string
 
-	// Route settings for the stage, by routeKey.
-	RouteSettings map[string]*types.RouteSettings
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

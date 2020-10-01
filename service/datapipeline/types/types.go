@@ -7,16 +7,16 @@ package types
 // object (RefValue) but not as both.
 type Field struct {
 
+	// The field identifier.
+	//
+	// This member is required.
+	Key *string
+
 	// The field value, expressed as the identifier of another object.
 	RefValue *string
 
 	// The field value, expressed as a String.
 	StringValue *string
-
-	// The field identifier.
-	//
-	// This member is required.
-	Key *string
 }
 
 // Identity information for the EC2 instance that is hosting the task runner. You
@@ -104,15 +104,15 @@ type ParameterAttribute struct {
 // Contains information about a parameter object.
 type ParameterObject struct {
 
-	// The ID of the parameter object.
-	//
-	// This member is required.
-	Id *string
-
 	// The attributes of the parameter object.
 	//
 	// This member is required.
 	Attributes []*ParameterAttribute
+
+	// The ID of the parameter object.
+	//
+	// This member is required.
+	Id *string
 }
 
 // A value or list of parameter values.
@@ -132,15 +132,6 @@ type ParameterValue struct {
 // Contains pipeline metadata.
 type PipelineDescription struct {
 
-	// The pipeline identifier that was assigned by AWS Data Pipeline. This is a string
-	// of the form df-297EG78HU43EEXAMPLE.
-	//
-	// This member is required.
-	PipelineId *string
-
-	// Description of the pipeline.
-	Description *string
-
 	// A list of read-only fields that contain metadata about the pipeline: @userId,
 	// @accountId, and @pipelineState.
 	//
@@ -151,6 +142,15 @@ type PipelineDescription struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The pipeline identifier that was assigned by AWS Data Pipeline. This is a string
+	// of the form df-297EG78HU43EEXAMPLE.
+	//
+	// This member is required.
+	PipelineId *string
+
+	// Description of the pipeline.
+	Description *string
 
 	// A list of tags to associated with a pipeline. Tags let you control access to
 	// pipelines. For more information, see Controlling User Access to Pipelines
@@ -175,15 +175,15 @@ type PipelineIdName struct {
 // pipeline defines the pipeline.
 type PipelineObject struct {
 
-	// The ID of the object.
-	//
-	// This member is required.
-	Id *string
-
 	// Key-value pairs that define the properties of the object.
 	//
 	// This member is required.
 	Fields []*Field
+
+	// The ID of the object.
+	//
+	// This member is required.
+	Id *string
 
 	// The name of the object.
 	//
@@ -221,14 +221,6 @@ type Selector struct {
 // in the AWS Data Pipeline Developer Guide.
 type Tag struct {
 
-	// The optional value portion of a tag defined by a user. For more information, see
-	// Controlling User Access to Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
-	//
-	// This member is required.
-	Value *string
-
 	// The key name of a tag defined by a user. For more information, see Controlling
 	// User Access to Pipelines
 	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
@@ -236,6 +228,14 @@ type Tag struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The optional value portion of a tag defined by a user. For more information, see
+	// Controlling User Access to Pipelines
+	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// in the AWS Data Pipeline Developer Guide.
+	//
+	// This member is required.
+	Value *string
 }
 
 // Contains information about a pipeline task that is assigned to a task runner.
@@ -249,12 +249,12 @@ type TaskObject struct {
 	// output of the task.
 	Objects map[string]*PipelineObject
 
+	// The ID of the pipeline that provided the task.
+	PipelineId *string
+
 	// An internal identifier for the task. This ID is passed to the SetTaskStatus ()
 	// and ReportTaskProgress () actions.
 	TaskId *string
-
-	// The ID of the pipeline that provided the task.
-	PipelineId *string
 }
 
 // Defines a validation error. Validation errors prevent pipeline activation. The

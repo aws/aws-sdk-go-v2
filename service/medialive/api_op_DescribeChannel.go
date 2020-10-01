@@ -70,50 +70,50 @@ type DescribeChannelOutput struct {
 	// The unique arn of the channel.
 	Arn *string
 
-	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
-	RoleArn *string
+	// The class for this channel. STANDARD for a channel with two pipelines or
+	// SINGLE_PIPELINE for a channel with one pipeline.
+	ChannelClass types.ChannelClass
 
 	// A list of destinations of the channel. For UDP outputs, there is one destination
 	// per output. For other types (HLS, for example), there is one destination per
 	// packager.
 	Destinations []*types.OutputDestination
 
-	// Placeholder documentation for InputSpecification
-	InputSpecification *types.InputSpecification
-
-	// Runtime details for the pipelines of a running channel.
-	PipelineDetails []*types.PipelineDetail
-
 	// The endpoints where outgoing connections initiate from
 	EgressEndpoints []*types.ChannelEgressEndpoint
-
-	// A collection of key-value pairs.
-	Tags map[string]*string
-
-	// The class for this channel. STANDARD for a channel with two pipelines or
-	// SINGLE_PIPELINE for a channel with one pipeline.
-	ChannelClass types.ChannelClass
-
-	// The number of currently healthy pipelines.
-	PipelinesRunningCount *int32
-
-	// The unique id of the channel.
-	Id *string
-
-	// Placeholder documentation for ChannelState
-	State types.ChannelState
-
-	// The name of the channel. (user-mutable)
-	Name *string
-
-	// The log level being written to CloudWatch Logs.
-	LogLevel types.LogLevel
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
 
+	// The unique id of the channel.
+	Id *string
+
 	// List of input attachments for channel.
 	InputAttachments []*types.InputAttachment
+
+	// Placeholder documentation for InputSpecification
+	InputSpecification *types.InputSpecification
+
+	// The log level being written to CloudWatch Logs.
+	LogLevel types.LogLevel
+
+	// The name of the channel. (user-mutable)
+	Name *string
+
+	// Runtime details for the pipelines of a running channel.
+	PipelineDetails []*types.PipelineDetail
+
+	// The number of currently healthy pipelines.
+	PipelinesRunningCount *int32
+
+	// The Amazon Resource Name (ARN) of the role assumed when running the Channel.
+	RoleArn *string
+
+	// Placeholder documentation for ChannelState
+	State types.ChannelState
+
+	// A collection of key-value pairs.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

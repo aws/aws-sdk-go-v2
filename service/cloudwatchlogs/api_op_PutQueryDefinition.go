@@ -54,13 +54,13 @@ func (c *Client) PutQueryDefinition(ctx context.Context, params *PutQueryDefinit
 }
 
 type PutQueryDefinitionInput struct {
-	LogGroupNames []*string
-
-	QueryDefinitionId *string
-
 	Name *string
 
 	QueryString *string
+
+	LogGroupNames []*string
+
+	QueryDefinitionId *string
 }
 
 type PutQueryDefinitionOutput struct {

@@ -63,15 +63,15 @@ type GetTableMetadataInput struct {
 	// This member is required.
 	CatalogName *string
 
-	// The name of the table for which metadata is returned.
-	//
-	// This member is required.
-	TableName *string
-
 	// The name of the database that contains the table metadata to return.
 	//
 	// This member is required.
 	DatabaseName *string
+
+	// The name of the table for which metadata is returned.
+	//
+	// This member is required.
+	TableName *string
 }
 
 type GetTableMetadataOutput struct {

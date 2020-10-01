@@ -103,24 +103,10 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	// later.</p> </li> </ul>
 	CacheNodeType *string
 
-	// The offering type filter value. Use this parameter to show only the available
-	// offerings matching the specified offering type. Valid Values: "Light
-	// Utilization"|"Medium Utilization"|"Heavy Utilization"
-	OfferingType *string
-
-	// The offering identifier filter value. Use this parameter to show only the
-	// available offering that matches the specified reservation identifier. Example:
-	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
-	ReservedCacheNodesOfferingId *string
-
 	// Duration filter value, specified in years or seconds. Use this parameter to show
 	// only reservations for a given duration. Valid Values: 1 | 3 | 31536000 |
 	// 94608000
 	Duration *string
-
-	// The product description filter value. Use this parameter to show only the
-	// available offerings matching the specified product description.
-	ProductDescription *string
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
@@ -133,6 +119,20 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
 	// <p>Constraints: minimum 20; maximum 100.</p>
 	MaxRecords *int32
+
+	// The offering type filter value. Use this parameter to show only the available
+	// offerings matching the specified offering type. Valid Values: "Light
+	// Utilization"|"Medium Utilization"|"Heavy Utilization"
+	OfferingType *string
+
+	// The product description filter value. Use this parameter to show only the
+	// available offerings matching the specified product description.
+	ProductDescription *string
+
+	// The offering identifier filter value. Use this parameter to show only the
+	// available offering that matches the specified reservation identifier. Example:
+	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	ReservedCacheNodesOfferingId *string
 }
 
 // Represents the output of a DescribeReservedCacheNodesOfferings operation.

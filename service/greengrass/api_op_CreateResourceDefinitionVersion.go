@@ -57,13 +57,13 @@ func (c *Client) CreateResourceDefinitionVersion(ctx context.Context, params *Cr
 
 type CreateResourceDefinitionVersionInput struct {
 
-	// A client token used to correlate requests and responses.
-	AmznClientToken *string
-
 	// The ID of the resource definition.
 	//
 	// This member is required.
 	ResourceDefinitionId *string
+
+	// A client token used to correlate requests and responses.
+	AmznClientToken *string
 
 	// A list of resources.
 	Resources []*types.Resource

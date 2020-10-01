@@ -60,14 +60,6 @@ func (c *Client) ListTaskDefinitionFamilies(ctx context.Context, params *ListTas
 
 type ListTaskDefinitionFamiliesInput struct {
 
-	// The nextToken value returned from a ListTaskDefinitionFamilies request
-	// indicating that more results are available to fulfill the request and further
-	// calls will be needed. If maxResults was provided, it is possible the number of
-	// results to be fewer than maxResults. This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
-	// other programmatic purposes.
-	NextToken *string
-
 	// The familyPrefix is a string that is used to filter the results of
 	// ListTaskDefinitionFamilies. If you specify a familyPrefix, only task definition
 	// family names that begin with the familyPrefix string are returned.
@@ -83,6 +75,14 @@ type ListTaskDefinitionFamiliesInput struct {
 	// value if applicable.
 	MaxResults *int32
 
+	// The nextToken value returned from a ListTaskDefinitionFamilies request
+	// indicating that more results are available to fulfill the request and further
+	// calls will be needed. If maxResults was provided, it is possible the number of
+	// results to be fewer than maxResults. This token should be treated as an opaque
+	// identifier that is only used to retrieve the next items in a list and not for
+	// other programmatic purposes.
+	NextToken *string
+
 	// The task definition family status with which to filter the
 	// ListTaskDefinitionFamilies results. By default, both ACTIVE and INACTIVE task
 	// definition families are listed. If this parameter is set to ACTIVE, only task
@@ -96,15 +96,15 @@ type ListTaskDefinitionFamiliesInput struct {
 
 type ListTaskDefinitionFamiliesOutput struct {
 
+	// The list of task definition family names that match the
+	// ListTaskDefinitionFamilies request.
+	Families []*string
+
 	// The nextToken value to include in a future ListTaskDefinitionFamilies request.
 	// When the results of a ListTaskDefinitionFamilies request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// The list of task definition family names that match the
-	// ListTaskDefinitionFamilies request.
-	Families []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

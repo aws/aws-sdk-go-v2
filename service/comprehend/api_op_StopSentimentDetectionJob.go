@@ -71,12 +71,12 @@ type StopSentimentDetectionJobInput struct {
 
 type StopSentimentDetectionJobOutput struct {
 
+	// The identifier of the sentiment detection job to stop.
+	JobId *string
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopSentimentDetectionJob operation.
 	JobStatus types.JobStatus
-
-	// The identifier of the sentiment detection job to stop.
-	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

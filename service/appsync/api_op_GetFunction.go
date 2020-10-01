@@ -57,15 +57,15 @@ func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optF
 
 type GetFunctionInput struct {
 
-	// The Function ID.
-	//
-	// This member is required.
-	FunctionId *string
-
 	// The GraphQL API ID.
 	//
 	// This member is required.
 	ApiId *string
+
+	// The Function ID.
+	//
+	// This member is required.
+	FunctionId *string
 }
 
 type GetFunctionOutput struct {

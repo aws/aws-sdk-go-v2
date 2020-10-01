@@ -61,8 +61,11 @@ func (c *Client) UpdateGatewayInformation(ctx context.Context, params *UpdateGat
 
 type UpdateGatewayInformationInput struct {
 
-	// The name you configured for your gateway.
-	GatewayName *string
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
+	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
+	GatewayARN *string
 
 	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that you want
 	// to use to monitor and log events in the gateway.  <p>For more information, see
@@ -71,11 +74,8 @@ type UpdateGatewayInformationInput struct {
 	// is Amazon CloudWatch logs?</a>.</p>
 	CloudWatchLogGroupARN *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// This member is required.
-	GatewayARN *string
+	// The name you configured for your gateway.
+	GatewayName *string
 
 	// A value that indicates the time zone of the gateway.
 	GatewayTimezone *string
@@ -85,12 +85,12 @@ type UpdateGatewayInformationInput struct {
 // updated.
 type UpdateGatewayInformationOutput struct {
 
-	// The name you configured for your gateway.
-	GatewayName *string
-
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
+	// The name you configured for your gateway.
+	GatewayName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

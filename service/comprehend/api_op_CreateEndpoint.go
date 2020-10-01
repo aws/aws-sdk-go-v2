@@ -60,12 +60,6 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
-	// This is the descriptive suffix that becomes part of the EndpointArn used for all
-	// subsequent requests to this resource.
-	//
-	// This member is required.
-	EndpointName *string
-
 	// The desired number of inference units to be used by the model using this
 	// endpoint. Each inference unit represents of a throughput of 100 characters per
 	// second.
@@ -73,16 +67,22 @@ type CreateEndpointInput struct {
 	// This member is required.
 	DesiredInferenceUnits *int32
 
-	// An idempotency token provided by the customer. If this token matches a previous
-	// endpoint creation request, Amazon Comprehend will not return a
-	// ResourceInUseException.
-	ClientRequestToken *string
+	// This is the descriptive suffix that becomes part of the EndpointArn used for all
+	// subsequent requests to this resource.
+	//
+	// This member is required.
+	EndpointName *string
 
 	// The Amazon Resource Number (ARN) of the model to which the endpoint will be
 	// attached.
 	//
 	// This member is required.
 	ModelArn *string
+
+	// An idempotency token provided by the customer. If this token matches a previous
+	// endpoint creation request, Amazon Comprehend will not return a
+	// ResourceInUseException.
+	ClientRequestToken *string
 
 	// Tags associated with the endpoint being created. A tag is a key-value pair that
 	// adds metadata to the endpoint. For example, a tag with "Sales" as the key might

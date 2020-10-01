@@ -64,10 +64,6 @@ func (c *Client) AssignIpv6Addresses(ctx context.Context, params *AssignIpv6Addr
 
 type AssignIpv6AddressesInput struct {
 
-	// One or more specific IPv6 addresses to be assigned to the network interface. You
-	// can't use this option if you're specifying a number of IPv6 addresses.
-	Ipv6Addresses []*string
-
 	// The ID of the network interface.
 	//
 	// This member is required.
@@ -77,15 +73,19 @@ type AssignIpv6AddressesInput struct {
 	// automatically selects the IPv6 addresses from the subnet range. You can't use
 	// this option if specifying specific IPv6 addresses.
 	Ipv6AddressCount *int32
+
+	// One or more specific IPv6 addresses to be assigned to the network interface. You
+	// can't use this option if you're specifying a number of IPv6 addresses.
+	Ipv6Addresses []*string
 }
 
 type AssignIpv6AddressesOutput struct {
 
-	// The ID of the network interface.
-	NetworkInterfaceId *string
-
 	// The IPv6 addresses assigned to the network interface.
 	AssignedIpv6Addresses []*string
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

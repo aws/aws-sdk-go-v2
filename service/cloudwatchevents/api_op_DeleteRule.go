@@ -63,14 +63,14 @@ func (c *Client) DeleteRule(ctx context.Context, params *DeleteRuleInput, optFns
 
 type DeleteRuleInput struct {
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
-	EventBusName *string
-
 	// The name of the rule.
 	//
 	// This member is required.
 	Name *string
+
+	// The event bus associated with the rule. If you omit this, the default event bus
+	// is used.
+	EventBusName *string
 
 	// If this is a managed rule, created by an AWS service on your behalf, you must
 	// specify Force as True to delete the rule. This parameter is ignored for rules

@@ -57,15 +57,15 @@ func (c *Client) CreateTagOption(ctx context.Context, params *CreateTagOptionInp
 
 type CreateTagOptionInput struct {
 
-	// The TagOption value.
-	//
-	// This member is required.
-	Value *string
-
 	// The TagOption key.
 	//
 	// This member is required.
 	Key *string
+
+	// The TagOption value.
+	//
+	// This member is required.
+	Value *string
 }
 
 type CreateTagOptionOutput struct {

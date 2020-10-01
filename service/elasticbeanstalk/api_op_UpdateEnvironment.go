@@ -66,25 +66,24 @@ func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmen
 // Request to update an environment.
 type UpdateEnvironmentInput struct {
 
-	// A list of custom user-defined configuration options to remove from the
-	// configuration set for this environment.
-	OptionsToRemove []*types.OptionSpecification
-
-	// If this parameter is specified, AWS Elastic Beanstalk deploys this configuration
-	// template to the environment. If no such configuration template is found, AWS
-	// Elastic Beanstalk returns an InvalidParameterValue error.
-	TemplateName *string
-
-	// If specified, AWS Elastic Beanstalk updates the configuration set associated
-	// with the running environment and sets the specified configuration options to the
-	// requested value.
-	OptionSettings []*types.ConfigurationOptionSetting
-
 	// The name of the application with which the environment is associated.
 	ApplicationName *string
 
-	// The ARN of the platform, if used.
-	PlatformArn *string
+	// If this parameter is specified, AWS Elastic Beanstalk updates the description of
+	// this environment.
+	Description *string
+
+	// The ID of the environment to update. If no environment with this ID exists, AWS
+	// Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must
+	// specify either this or an EnvironmentName, or both. If you do not specify
+	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	EnvironmentId *string
+
+	// The name of the environment to update. If no environment with this name exists,
+	// AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You
+	// must specify either this or an EnvironmentId, or both. If you do not specify
+	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	EnvironmentName *string
 
 	// The name of the group to which the target environment belongs. Specify a group
 	// name only if the environment's name is specified in an environment manifest and
@@ -94,103 +93,77 @@ type UpdateEnvironmentInput struct {
 	// for details.
 	GroupName *string
 
-	// If this parameter is specified, AWS Elastic Beanstalk deploys the named
-	// application version to the environment. If no such application version is found,
-	// returns an InvalidParameterValue error.
-	VersionLabel *string
+	// If specified, AWS Elastic Beanstalk updates the configuration set associated
+	// with the running environment and sets the specified configuration options to the
+	// requested value.
+	OptionSettings []*types.ConfigurationOptionSetting
 
-	// The name of the environment to update. If no environment with this name exists,
-	// AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You
-	// must specify either this or an EnvironmentId, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
-	EnvironmentName *string
+	// A list of custom user-defined configuration options to remove from the
+	// configuration set for this environment.
+	OptionsToRemove []*types.OptionSpecification
 
-	// The ID of the environment to update. If no environment with this ID exists, AWS
-	// Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must
-	// specify either this or an EnvironmentName, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
-	EnvironmentId *string
+	// The ARN of the platform, if used.
+	PlatformArn *string
+
+	// This specifies the platform version that the environment will run after the
+	// environment is updated.
+	SolutionStackName *string
+
+	// If this parameter is specified, AWS Elastic Beanstalk deploys this configuration
+	// template to the environment. If no such configuration template is found, AWS
+	// Elastic Beanstalk returns an InvalidParameterValue error.
+	TemplateName *string
 
 	// This specifies the tier to use to update the environment. Condition: At this
 	// time, if you change the tier version, name, or type, AWS Elastic Beanstalk
 	// returns InvalidParameterValue error.
 	Tier *types.EnvironmentTier
 
-	// If this parameter is specified, AWS Elastic Beanstalk updates the description of
-	// this environment.
-	Description *string
-
-	// This specifies the platform version that the environment will run after the
-	// environment is updated.
-	SolutionStackName *string
+	// If this parameter is specified, AWS Elastic Beanstalk deploys the named
+	// application version to the environment. If no such application version is found,
+	// returns an InvalidParameterValue error.
+	VersionLabel *string
 }
 
 // Describes the properties of an environment.
 type UpdateEnvironmentOutput struct {
-
-	// A list of links to other environments in the same group.
-	EnvironmentLinks []*types.EnvironmentLink
-
-	// Returns the health status of the application running in your environment. For
-	// more information, see Health Colors and Statuses
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
-	HealthStatus types.EnvironmentHealthStatus
-
-	// For load-balanced, autoscaling environments, the URL to the LoadBalancer. For
-	// single-instance environments, the IP address of the instance.
-	EndpointURL *string
-
-	// The ARN of the platform version.
-	PlatformArn *string
-
-	// The ID of this environment.
-	EnvironmentId *string
-
-	// The name of the application associated with this environment.
-	ApplicationName *string
 
 	// Indicates if there is an in-progress environment configuration update or
 	// application version deployment that you can cancel. true: There is an update in
 	// progress. false: There are no updates currently in progress.
 	AbortableOperationInProgress *bool
 
-	// The creation date for this environment.
-	DateCreated *time.Time
-
-	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see Operations roles
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
-	// in the AWS Elastic Beanstalk Developer Guide.
-	OperationsRole *string
-
-	// Describes the current tier of this environment.
-	Tier *types.EnvironmentTier
+	// The name of the application associated with this environment.
+	ApplicationName *string
 
 	// The URL to the CNAME for this environment.
 	CNAME *string
 
+	// The creation date for this environment.
+	DateCreated *time.Time
+
+	// The last modified date for this environment.
+	DateUpdated *time.Time
+
 	// Describes this environment.
 	Description *string
 
-	// The name of the SolutionStack deployed with this environment.
-	SolutionStackName *string
-
-	// The current operational status of the environment:  <ul> <li> <p>
-	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
-	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
-	// its configuration settings or application version.</p> </li> <li> <p>
-	// <code>Ready</code>: Environment is available to have an action performed on it,
-	// such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>:
-	// Environment is in the shut-down process.</p> </li> <li> <p>
-	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
-	Status types.EnvironmentStatus
+	// For load-balanced, autoscaling environments, the URL to the LoadBalancer. For
+	// single-instance environments, the IP address of the instance.
+	EndpointURL *string
 
 	// The environment's Amazon Resource Name (ARN), which can be used in other API
 	// requests that require an ARN.
 	EnvironmentArn *string
 
-	// The last modified date for this environment.
-	DateUpdated *time.Time
+	// The ID of this environment.
+	EnvironmentId *string
+
+	// A list of links to other environments in the same group.
+	EnvironmentLinks []*types.EnvironmentLink
+
+	// The name of this environment.
+	EnvironmentName *string
 
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
@@ -213,18 +186,45 @@ type UpdateEnvironmentOutput struct {
 	// Default: Grey
 	Health types.EnvironmentHealth
 
-	// The application version deployed in this environment.
-	VersionLabel *string
+	// Returns the health status of the application running in your environment. For
+	// more information, see Health Colors and Statuses
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html).
+	HealthStatus types.EnvironmentHealthStatus
 
-	// The name of this environment.
-	EnvironmentName *string
+	// The Amazon Resource Name (ARN) of the environment's operations role. For more
+	// information, see Operations roles
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
+	// in the AWS Elastic Beanstalk Developer Guide.
+	OperationsRole *string
+
+	// The ARN of the platform version.
+	PlatformArn *string
 
 	// The description of the AWS resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
 
+	// The name of the SolutionStack deployed with this environment.
+	SolutionStackName *string
+
+	// The current operational status of the environment:  <ul> <li> <p>
+	// <code>Launching</code>: Environment is in the process of initial deployment.</p>
+	// </li> <li> <p> <code>Updating</code>: Environment is in the process of updating
+	// its configuration settings or application version.</p> </li> <li> <p>
+	// <code>Ready</code>: Environment is available to have an action performed on it,
+	// such as update or terminate.</p> </li> <li> <p> <code>Terminating</code>:
+	// Environment is in the shut-down process.</p> </li> <li> <p>
+	// <code>Terminated</code>: Environment is not running.</p> </li> </ul>
+	Status types.EnvironmentStatus
+
 	// The name of the configuration template used to originally launch this
 	// environment.
 	TemplateName *string
+
+	// Describes the current tier of this environment.
+	Tier *types.EnvironmentTier
+
+	// The application version deployed in this environment.
+	VersionLabel *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -42,33 +42,30 @@ type BrokerInstanceOption struct {
 	// The list of available az.
 	AvailabilityZones []*AvailabilityZone
 
-	// The broker's storage type.
-	StorageType BrokerStorageType
-
-	// The list of supported engine versions.
-	SupportedEngineVersions []*string
+	// The type of broker engine.
+	EngineType EngineType
 
 	// The type of broker instance.
 	HostInstanceType *string
 
+	// The broker's storage type.
+	StorageType BrokerStorageType
+
 	// The list of supported deployment modes.
 	SupportedDeploymentModes []DeploymentMode
 
-	// The type of broker engine.
-	EngineType EngineType
+	// The list of supported engine versions.
+	SupportedEngineVersions []*string
 }
 
 // The Amazon Resource Name (ARN) of the broker.
 type BrokerSummary struct {
 
+	// The Amazon Resource Name (ARN) of the broker.
+	BrokerArn *string
+
 	// The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
-
-	// The time when the broker was created.
-	Created *time.Time
-
-	// The broker's instance type.
-	HostInstanceType *string
 
 	// The name of the broker. This value must be unique in your AWS account, 1-50
 	// characters long, must contain only letters, numbers, dashes, and underscores,
@@ -79,18 +76,45 @@ type BrokerSummary struct {
 	// The status of the broker.
 	BrokerState BrokerState
 
-	// The Amazon Resource Name (ARN) of the broker.
-	BrokerArn *string
+	// The time when the broker was created.
+	Created *time.Time
 
 	// Required. The deployment mode of the broker.
 	DeploymentMode DeploymentMode
+
+	// The broker's instance type.
+	HostInstanceType *string
 }
 
 // Returns information about all configurations.
 type Configuration struct {
 
+	// Required. The ARN of the configuration.
+	Arn *string
+
+	// The authentication strategy associated with the configuration.
+	AuthenticationStrategy AuthenticationStrategy
+
 	// Required. The date and time of the configuration revision.
 	Created *time.Time
+
+	// Required. The description of the configuration.
+	Description *string
+
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
+	// ACTIVEMQ.
+	EngineType EngineType
+
+	// Required. The version of the broker engine. For a list of supported engine
+	// versions, see
+	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	EngineVersion *string
+
+	// Required. The unique ID that Amazon MQ generates for the configuration.
+	Id *string
+
+	// Required. The latest revision of the configuration.
+	LatestRevision *ConfigurationRevision
 
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
@@ -99,30 +123,6 @@ type Configuration struct {
 
 	// The list of all tags associated with this configuration.
 	Tags map[string]*string
-
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
-	EngineType EngineType
-
-	// Required. The unique ID that Amazon MQ generates for the configuration.
-	Id *string
-
-	// Required. The latest revision of the configuration.
-	LatestRevision *ConfigurationRevision
-
-	// Required. The ARN of the configuration.
-	Arn *string
-
-	// The authentication strategy associated with the configuration.
-	AuthenticationStrategy AuthenticationStrategy
-
-	// Required. The version of the broker engine. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
-	EngineVersion *string
-
-	// Required. The description of the configuration.
-	Description *string
 }
 
 // A list of information about the configuration.
@@ -138,14 +138,14 @@ type ConfigurationId struct {
 // Returns information about the specified configuration revision.
 type ConfigurationRevision struct {
 
-	// Required. The revision number of the configuration.
-	Revision *int32
+	// Required. The date and time of the configuration revision.
+	Created *time.Time
 
 	// The description of the configuration revision.
 	Description *string
 
-	// Required. The date and time of the configuration revision.
-	Created *time.Time
+	// Required. The revision number of the configuration.
+	Revision *int32
 }
 
 // Broker configuration information
@@ -186,17 +186,11 @@ type EngineVersion struct {
 // to the broker.
 type LdapServerMetadataInput struct {
 
-	// Service account username.
-	ServiceAccountUsername *string
+	// Fully qualified domain name of the LDAP server. Optional failover server.
+	Hosts []*string
 
-	// Service account password.
-	ServiceAccountPassword *string
-
-	// Specifies the name of the LDAP attribute for the user group membership.
-	UserRoleName *string
-
-	// Fully qualified name of the directory where you want to search for users.
-	UserBase *string
+	// Fully qualified name of the directory to search for a user’s groups.
+	RoleBase *string
 
 	// Specifies the LDAP attribute that identifies the group name attribute in the
 	// object returned from the group membership query.
@@ -209,18 +203,24 @@ type LdapServerMetadataInput struct {
 	// entire sub-tree.
 	RoleSearchSubtree *bool
 
-	// Fully qualified domain name of the LDAP server. Optional failover server.
-	Hosts []*string
+	// Service account password.
+	ServiceAccountPassword *string
 
-	// Fully qualified name of the directory to search for a user’s groups.
-	RoleBase *string
+	// Service account username.
+	ServiceAccountUsername *string
+
+	// Fully qualified name of the directory where you want to search for users.
+	UserBase *string
+
+	// Specifies the name of the LDAP attribute for the user group membership.
+	UserRoleName *string
+
+	// The search criteria for users.
+	UserSearchMatching *string
 
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire sub-tree.
 	UserSearchSubtree *bool
-
-	// The search criteria for users.
-	UserSearchMatching *string
 }
 
 // The metadata of the LDAP server used to authenticate and authorize connections
@@ -230,24 +230,28 @@ type LdapServerMetadataOutput struct {
 	// Fully qualified domain name of the LDAP server. Optional failover server.
 	Hosts []*string
 
-	// The directory search scope for the role. If set to true, scope is to search the
-	// entire sub-tree.
-	RoleSearchSubtree *bool
+	// Fully qualified name of the directory to search for a user’s groups.
+	RoleBase *string
 
-	// Fully qualified name of the directory where you want to search for users.
-	UserBase *string
+	// Specifies the LDAP attribute that identifies the group name attribute in the
+	// object returned from the group membership query.
+	RoleName *string
 
 	// The search criteria for groups.
 	RoleSearchMatching *string
 
-	// Specifies the name of the LDAP attribute for the user group membership.
-	UserRoleName *string
-
-	// Fully qualified name of the directory to search for a user’s groups.
-	RoleBase *string
+	// The directory search scope for the role. If set to true, scope is to search the
+	// entire sub-tree.
+	RoleSearchSubtree *bool
 
 	// Service account username.
 	ServiceAccountUsername *string
+
+	// Fully qualified name of the directory where you want to search for users.
+	UserBase *string
+
+	// Specifies the name of the LDAP attribute for the user group membership.
+	UserRoleName *string
 
 	// The search criteria for users.
 	UserSearchMatching *string
@@ -255,43 +259,39 @@ type LdapServerMetadataOutput struct {
 	// The directory search scope for the user. If set to true, scope is to search the
 	// entire sub-tree.
 	UserSearchSubtree *bool
-
-	// Specifies the LDAP attribute that identifies the group name attribute in the
-	// object returned from the group membership query.
-	RoleName *string
 }
 
 // The list of information about logs to be enabled for the specified broker.
 type Logs struct {
 
-	// Enables general logging.
-	General *bool
-
 	// Enables audit logging. Every user management action made using JMX or the
 	// ActiveMQ Web Console is logged.
 	Audit *bool
+
+	// Enables general logging.
+	General *bool
 }
 
 // The list of information about logs currently enabled and pending to be deployed
 // for the specified broker.
 type LogsSummary struct {
 
-	// Enables general logging.
-	General *bool
-
-	// The list of information about logs pending to be deployed for the specified
-	// broker.
-	Pending *PendingLogs
-
-	// The location of the CloudWatch Logs log group where general logs are sent.
-	GeneralLogGroup *string
+	// Enables audit logging. Every user management action made using JMX or the
+	// ActiveMQ Web Console is logged.
+	Audit *bool
 
 	// The location of the CloudWatch Logs log group where audit logs are sent.
 	AuditLogGroup *string
 
-	// Enables audit logging. Every user management action made using JMX or the
-	// ActiveMQ Web Console is logged.
-	Audit *bool
+	// Enables general logging.
+	General *bool
+
+	// The location of the CloudWatch Logs log group where general logs are sent.
+	GeneralLogGroup *string
+
+	// The list of information about logs pending to be deployed for the specified
+	// broker.
+	Pending *PendingLogs
 }
 
 // The list of information about logs to be enabled for the specified broker.
@@ -309,11 +309,11 @@ type PendingLogs struct {
 // configuration.
 type SanitizationWarning struct {
 
-	// The name of the XML element that has been sanitized.
-	ElementName *string
-
 	// The name of the XML attribute that has been sanitized.
 	AttributeName *string
+
+	// The name of the XML element that has been sanitized.
+	ElementName *string
 
 	// Required. The reason for which the XML elements or attributes were sanitized.
 	Reason SanitizationWarningReason
@@ -322,32 +322,29 @@ type SanitizationWarning struct {
 // An ActiveMQ user associated with the broker.
 type User struct {
 
+	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+	ConsoleAccess *bool
+
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []*string
 
-	// Required. The username of the ActiveMQ user. This value can contain only
-	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
-	// This value must be 2-100 characters long.
-	Username *string
-
-	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess *bool
-
 	// Required. The password of the ActiveMQ user. This value must be at least 12
 	// characters long, must contain at least 4 unique characters, and must not contain
 	// commas.
 	Password *string
+
+	// Required. The username of the ActiveMQ user. This value can contain only
+	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
+	// This value must be 2-100 characters long.
+	Username *string
 }
 
 // Returns information about the status of the changes pending for the ActiveMQ
 // user.
 type UserPendingChanges struct {
 
-	// Required. The type of change pending for the ActiveMQ user.
-	PendingChange ChangeType
-
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
 	ConsoleAccess *bool
 
@@ -355,6 +352,9 @@ type UserPendingChanges struct {
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []*string
+
+	// Required. The type of change pending for the ActiveMQ user.
+	PendingChange ChangeType
 }
 
 // Returns a list of all ActiveMQ users.

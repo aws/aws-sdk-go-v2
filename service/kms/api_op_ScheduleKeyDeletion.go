@@ -102,13 +102,13 @@ type ScheduleKeyDeletionInput struct {
 
 type ScheduleKeyDeletionOutput struct {
 
+	// The date and time after which AWS KMS deletes the customer master key (CMK).
+	DeletionDate *time.Time
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK whose deletion is scheduled.
 	KeyId *string
-
-	// The date and time after which AWS KMS deletes the customer master key (CMK).
-	DeletionDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

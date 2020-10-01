@@ -77,19 +77,6 @@ type CreateDataSourceFromRDSInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The compute statistics for a DataSource. The statistics are generated from the
-	// observation data referenced by a DataSource. Amazon ML uses the statistics
-	// internally during MLModel training. This parameter must be set to true if the
-	// DataSource needs to be used for MLModel training.
-	ComputeStatistics *bool
-
-	// The role that Amazon ML assumes on behalf of the user to create and activate a
-	// data pipeline in the user's account and copy data using the SelectSqlQuery query
-	// from Amazon RDS to Amazon S3.
-	//
-	// This member is required.
-	RoleARN *string
-
 	// The data specification of an Amazon RDS DataSource:
 	//
 	//     * DatabaseInformation
@@ -142,6 +129,19 @@ type CreateDataSourceFromRDSInput struct {
 	//
 	// This member is required.
 	RDSData *types.RDSDataSpec
+
+	// The role that Amazon ML assumes on behalf of the user to create and activate a
+	// data pipeline in the user's account and copy data using the SelectSqlQuery query
+	// from Amazon RDS to Amazon S3.
+	//
+	// This member is required.
+	RoleARN *string
+
+	// The compute statistics for a DataSource. The statistics are generated from the
+	// observation data referenced by a DataSource. Amazon ML uses the statistics
+	// internally during MLModel training. This parameter must be set to true if the
+	// DataSource needs to be used for MLModel training.
+	ComputeStatistics *bool
 
 	// A user-supplied name or description of the DataSource.
 	DataSourceName *string

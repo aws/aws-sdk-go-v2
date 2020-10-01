@@ -69,12 +69,6 @@ func (c *Client) DisassociateClientVpnTargetNetwork(ctx context.Context, params 
 
 type DisassociateClientVpnTargetNetworkInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the target network association.
 	//
 	// This member is required.
@@ -84,6 +78,12 @@ type DisassociateClientVpnTargetNetworkInput struct {
 	//
 	// This member is required.
 	ClientVpnEndpointId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type DisassociateClientVpnTargetNetworkOutput struct {

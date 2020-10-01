@@ -71,23 +71,23 @@ type GetOperationDetailInput struct {
 // The GetOperationDetail response includes the following elements.
 type GetOperationDetailOutput struct {
 
-	// Detailed information on the status including possible errors.
-	Message *string
-
-	// The type of operation that was requested.
-	Type types.OperationType
-
 	// The name of a domain.
 	DomainName *string
 
-	// The date when the request was submitted.
-	SubmittedDate *time.Time
+	// Detailed information on the status including possible errors.
+	Message *string
 
 	// The identifier for the operation.
 	OperationId *string
 
 	// The current status of the requested operation in the system.
 	Status types.OperationStatus
+
+	// The date when the request was submitted.
+	SubmittedDate *time.Time
+
+	// The type of operation that was requested.
+	Type types.OperationType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

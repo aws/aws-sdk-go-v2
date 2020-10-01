@@ -71,12 +71,12 @@ type GetCustomVerificationEmailTemplateInput struct {
 // The content of the custom verification email template.
 type GetCustomVerificationEmailTemplateOutput struct {
 
-	// The email address that the custom verification email is sent from.
-	FromEmailAddress *string
-
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is not successfully verified.
 	FailureRedirectionURL *string
+
+	// The email address that the custom verification email is sent from.
+	FromEmailAddress *string
 
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is successfully verified.
@@ -85,11 +85,11 @@ type GetCustomVerificationEmailTemplateOutput struct {
 	// The content of the custom verification email.
 	TemplateContent *string
 
-	// The subject line of the custom verification email.
-	TemplateSubject *string
-
 	// The name of the custom verification email template.
 	TemplateName *string
+
+	// The subject line of the custom verification email.
+	TemplateSubject *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

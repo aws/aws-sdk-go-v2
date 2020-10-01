@@ -57,20 +57,23 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
+	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
+	BrokerId *string
+
 	// The username of the ActiveMQ user. This value can contain only alphanumeric
 	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value must
 	// be 2-100 characters long.
 	//
 	// This member is required.
 	Username *string
-
-	// The unique ID that Amazon MQ generates for the broker.
-	//
-	// This member is required.
-	BrokerId *string
 }
 
 type DescribeUserOutput struct {
+
+	// Required. The unique ID that Amazon MQ generates for the broker.
+	BrokerId *string
 
 	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
 	ConsoleAccess *bool
@@ -80,16 +83,13 @@ type DescribeUserOutput struct {
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []*string
 
+	// The status of the changes pending for the ActiveMQ user.
+	Pending *types.UserPendingChanges
+
 	// Required. The username of the ActiveMQ user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 2-100 characters long.
 	Username *string
-
-	// Required. The unique ID that Amazon MQ generates for the broker.
-	BrokerId *string
-
-	// The status of the changes pending for the ActiveMQ user.
-	Pending *types.UserPendingChanges
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,13 +60,13 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 // Represents the input of a ListStreams operation.
 type ListStreamsInput struct {
 
-	// The maximum number of streams to return. The upper limit is 100.
-	Limit *int32
-
 	// The ARN (Amazon Resource Name) of the first item that this operation will
 	// evaluate. Use the value that was returned for LastEvaluatedStreamArn in the
 	// previous operation.
 	ExclusiveStartStreamArn *string
+
+	// The maximum number of streams to return. The upper limit is 100.
+	Limit *int32
 
 	// If this parameter is provided, then only the streams associated with this table
 	// name are returned.

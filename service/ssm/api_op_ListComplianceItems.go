@@ -59,24 +59,24 @@ func (c *Client) ListComplianceItems(ctx context.Context, params *ListCompliance
 
 type ListComplianceItemsInput struct {
 
+	// One or more compliance filters. Use a filter to return a more specific list of
+	// results.
+	Filters []*types.ComplianceStringFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// A token to start the list. Use this token to get the next set of results.
+	NextToken *string
 
 	// The ID for the resources from which to get compliance information. Currently,
 	// you can only specify one resource ID.
 	ResourceIds []*string
 
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string
-
 	// The type of resource from which to get compliance information. Currently, the
 	// only supported resource type is ManagedInstance.
 	ResourceTypes []*string
-
-	// One or more compliance filters. Use a filter to return a more specific list of
-	// results.
-	Filters []*types.ComplianceStringFilter
 }
 
 type ListComplianceItemsOutput struct {

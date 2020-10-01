@@ -56,24 +56,24 @@ func (c *Client) ListSkills(ctx context.Context, params *ListSkillsInput, optFns
 
 type ListSkillsInput struct {
 
-	// The ARN of the skill group for which to list enabled skills.
-	SkillGroupArn *string
-
-	// Whether the skill is publicly available or is a private skill.
-	SkillType types.SkillTypeFilter
-
 	// Whether the skill is enabled under the user's account.
 	EnablementType types.EnablementTypeFilter
+
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
 
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
-	MaxResults *int32
+	// The ARN of the skill group for which to list enabled skills.
+	SkillGroupArn *string
+
+	// Whether the skill is publicly available or is a private skill.
+	SkillType types.SkillTypeFilter
 }
 
 type ListSkillsOutput struct {

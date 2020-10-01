@@ -82,18 +82,11 @@ func (c *Client) CreateCompilationJob(ctx context.Context, params *CreateCompila
 
 type CreateCompilationJobInput struct {
 
-	// Provides information about the output location for the compiled model and the
-	// target device the model runs on.
+	// A name for the model compilation job. The name must be unique within the AWS
+	// Region and within your AWS account.
 	//
 	// This member is required.
-	OutputConfig *types.OutputConfig
-
-	// Specifies a limit to how long a model compilation job can run. When the job
-	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this API
-	// to cap model training costs.
-	//
-	// This member is required.
-	StoppingCondition *types.StoppingCondition
+	CompilationJobName *string
 
 	// Provides information about the location of input model artifacts, the name and
 	// shape of the expected data inputs, and the framework in which the model was
@@ -101,6 +94,12 @@ type CreateCompilationJobInput struct {
 	//
 	// This member is required.
 	InputConfig *types.InputConfig
+
+	// Provides information about the output location for the compiled model and the
+	// target device the model runs on.
+	//
+	// This member is required.
+	OutputConfig *types.OutputConfig
 
 	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to
 	// perform tasks on your behalf. During model compilation, Amazon SageMaker needs
@@ -125,11 +124,12 @@ type CreateCompilationJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// A name for the model compilation job. The name must be unique within the AWS
-	// Region and within your AWS account.
+	// Specifies a limit to how long a model compilation job can run. When the job
+	// reaches the time limit, Amazon SageMaker ends the compilation job. Use this API
+	// to cap model training costs.
 	//
 	// This member is required.
-	CompilationJobName *string
+	StoppingCondition *types.StoppingCondition
 }
 
 type CreateCompilationJobOutput struct {

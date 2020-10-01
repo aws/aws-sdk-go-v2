@@ -62,19 +62,6 @@ type UpdateDevEndpointInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// The list of public keys to be deleted from the DevEndpoint.
-	DeletePublicKeys []*string
-
-	// The list of argument keys to be deleted from the map of arguments used to
-	// configure the DevEndpoint.
-	DeleteArguments []*string
-
-	// The list of public keys for the DevEndpoint to use.
-	AddPublicKeys []*string
-
-	// The public key for the DevEndpoint to use.
-	PublicKey *string
-
 	// The map of arguments to add the map of arguments used to configure the
 	// DevEndpoint.  <p>Valid arguments are:</p> <ul> <li> <p>
 	// <code>"--enable-glue-datacatalog": ""</code> </p> </li> <li> <p>
@@ -86,8 +73,21 @@ type UpdateDevEndpointInput struct {
 	// defaults to Python 2.</p>
 	AddArguments map[string]*string
 
+	// The list of public keys for the DevEndpoint to use.
+	AddPublicKeys []*string
+
 	// Custom Python or Java libraries to be loaded in the DevEndpoint.
 	CustomLibraries *types.DevEndpointCustomLibraries
+
+	// The list of argument keys to be deleted from the map of arguments used to
+	// configure the DevEndpoint.
+	DeleteArguments []*string
+
+	// The list of public keys to be deleted from the DevEndpoint.
+	DeletePublicKeys []*string
+
+	// The public key for the DevEndpoint to use.
+	PublicKey *string
 
 	// True if the list of custom libraries to be loaded in the development endpoint
 	// needs to be updated, or False if otherwise.

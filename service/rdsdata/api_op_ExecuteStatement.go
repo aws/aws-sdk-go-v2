@@ -62,6 +62,21 @@ func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementI
 // against a database.
 type ExecuteStatementInput struct {
 
+	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The name or ARN of the secret that enables access to the DB cluster.
+	//
+	// This member is required.
+	SecretArn *string
+
+	// The SQL statement to run.
+	//
+	// This member is required.
+	Sql *string
+
 	// A value that indicates whether to continue running the statement after the call
 	// times out. By default, the statement stops running when the call times out. For
 	// DDL statements, we recommend continuing to run the statement after the call
@@ -78,27 +93,12 @@ type ExecuteStatementInput struct {
 	// The parameters for the SQL statement. Array parameters are not supported.
 	Parameters []*types.SqlParameter
 
-	// The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// Options that control how the result set is returned.
 	ResultSetOptions *types.ResultSetOptions
 
 	// The name of the database schema. Currently, the schema parameter isn't
 	// supported.
 	Schema *string
-
-	// The name or ARN of the secret that enables access to the DB cluster.
-	//
-	// This member is required.
-	SecretArn *string
-
-	// The SQL statement to run.
-	//
-	// This member is required.
-	Sql *string
 
 	// The identifier of a transaction that was started by using the BeginTransaction
 	// operation. Specify the transaction ID of the transaction that you want to

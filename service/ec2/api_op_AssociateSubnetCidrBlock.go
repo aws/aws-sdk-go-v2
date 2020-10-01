@@ -72,11 +72,11 @@ type AssociateSubnetCidrBlockInput struct {
 
 type AssociateSubnetCidrBlockOutput struct {
 
-	// The ID of the subnet.
-	SubnetId *string
-
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.SubnetIpv6CidrBlockAssociation
+
+	// The ID of the subnet.
+	SubnetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

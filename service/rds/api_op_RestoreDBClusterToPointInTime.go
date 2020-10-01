@@ -71,6 +71,39 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 //
 type RestoreDBClusterToPointInTimeInput struct {
 
+	// The name of the new DB cluster to be created. Constraints:
+	//
+	//     * Must contain
+	// from 1 to 63 letters, numbers, or hyphens
+	//
+	//     * First character must be a
+	// letter
+	//
+	//     * Can't end with a hyphen or contain two consecutive hyphens
+	//
+	// This member is required.
+	DBClusterIdentifier *string
+
+	// The identifier of the source DB cluster from which to restore. Constraints:
+	//
+	//
+	// * Must match the identifier of an existing DBCluster.
+	//
+	// This member is required.
+	SourceDBClusterIdentifier *string
+
+	// The target backtrack window, in seconds. To disable backtracking, set this value
+	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
+	// Default: 0 Constraints:
+	//
+	//     * If specified, this value must be set to a number
+	// from 0 to 259,200 (72 hours).
+	BacktrackWindow *int64
+
+	// A value that indicates whether to copy all tags from the restored DB cluster to
+	// snapshots of the restored DB cluster. The default is not to copy them.
+	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default DB cluster parameter group for the
 	// specified engine is used. Constraints:
@@ -87,75 +120,27 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// with a hyphen or contain two consecutive hyphens.
 	DBClusterParameterGroupName *string
 
-	// The name of the option group for the new DB cluster.
-	OptionGroupName *string
+	// The DB subnet group name to use for the new DB cluster. Constraints: If
+	// supplied, must match the name of an existing DBSubnetGroup. Example:
+	// mySubnetgroup
+	DBSubnetGroupName *string
 
-	// The name of the new DB cluster to be created. Constraints:
-	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens
-	//
-	//     * First character must be a
-	// letter
-	//
-	//     * Can't end with a hyphen or contain two consecutive hyphens
-	//
-	// This member is required.
-	DBClusterIdentifier *string
+	// A value that indicates whether the DB cluster has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled.
+	DeletionProtection *bool
 
-	// The type of restore to be performed. You can specify one of the following
-	// values:
-	//
-	//     * full-copy - The new DB cluster is restored as a full copy of the
-	// source DB cluster.
-	//
-	//     * copy-on-write - The new DB cluster is restored as a
-	// clone of the source DB cluster.
-	//
-	// Constraints: You can't specify copy-on-write if
-	// the engine version of the source DB cluster is earlier than 1.11. If you don't
-	// specify a RestoreType value, then the new DB cluster is restored as a full copy
-	// of the source DB cluster.
-	RestoreType *string
+	// Specify the Active Directory directory ID to restore the DB cluster in. The
+	// domain must be created prior to this operation. For Amazon Aurora DB clusters,
+	// Amazon RDS can use Kerberos Authentication to authenticate users that connect to
+	// the DB cluster. For more information, see Kerberos Authentication
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
+	// in the Amazon Aurora User Guide.
+	Domain *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
-	Tags []*types.Tag
-
-	// The date and time to restore the DB cluster to. Valid Values: Value must be a
-	// time in Universal Coordinated Time (UTC) format Constraints:
-	//
-	//     * Must be
-	// before the latest restorable time for the DB instance
-	//
-	//     * Must be specified
-	// if UseLatestRestorableTime parameter isn't provided
-	//
-	//     * Can't be specified if
-	// the UseLatestRestorableTime parameter is enabled
-	//
-	//     * Can't be specified if
-	// the RestoreType parameter is copy-on-write
-	//
-	// Example: 2015-03-07T23:45:00Z
-	RestoreToTime *time.Time
-
-	// The port number on which the new DB cluster accepts connections. Constraints: A
-	// value from 1150-65535. Default: The default port for the engine.
-	Port *int32
-
-	// A value that indicates whether to copy all tags from the restored DB cluster to
-	// snapshots of the restored DB cluster. The default is not to copy them.
-	CopyTagsToSnapshot *bool
-
-	// The identifier of the source DB cluster from which to restore. Constraints:
-	//
-	//
-	// * Must match the identifier of an existing DBCluster.
-	//
-	// This member is required.
-	SourceDBClusterIdentifier *string
+	// Specify the name of the IAM role to be used when making API calls to the
+	// Directory Service.
+	DomainIAMRoleName *string
 
 	// The list of logs that the restored DB cluster is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
@@ -170,45 +155,6 @@ type RestoreDBClusterToPointInTimeInput struct {
 	// href="https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.IAMDBAuth.html">
 	// IAM Database Authentication</a> in the <i>Amazon Aurora User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
-
-	// Specify the Active Directory directory ID to restore the DB cluster in. The
-	// domain must be created prior to this operation. For Amazon Aurora DB clusters,
-	// Amazon RDS can use Kerberos Authentication to authenticate users that connect to
-	// the DB cluster. For more information, see Kerberos Authentication
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html)
-	// in the Amazon Aurora User Guide.
-	Domain *string
-
-	// A value that indicates whether to restore the DB cluster to the latest
-	// restorable backup time. By default, the DB cluster isn't restored to the latest
-	// restorable backup time. Constraints: Can't be specified if RestoreToTime
-	// parameter is provided.
-	UseLatestRestorableTime *bool
-
-	// The target backtrack window, in seconds. To disable backtracking, set this value
-	// to 0. Currently, Backtrack is only supported for Aurora MySQL DB clusters.
-	// Default: 0 Constraints:
-	//
-	//     * If specified, this value must be set to a number
-	// from 0 to 259,200 (72 hours).
-	BacktrackWindow *int64
-
-	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
-	DomainIAMRoleName *string
-
-	// The DB subnet group name to use for the new DB cluster. Constraints: If
-	// supplied, must match the name of an existing DBSubnetGroup. Example:
-	// mySubnetgroup
-	DBSubnetGroupName *string
-
-	// A value that indicates whether the DB cluster has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled.
-	DeletionProtection *bool
-
-	// A list of VPC security groups that the new DB cluster belongs to.
-	VpcSecurityGroupIds []*string
 
 	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from an
 	// encrypted DB cluster. The KMS key identifier is the Amazon Resource Name (ARN)
@@ -231,6 +177,60 @@ type RestoreDBClusterToPointInTimeInput struct {
 	//     <p>If <code>DBClusterIdentifier</code> refers
 	// to a DB cluster that isn't encrypted, then the restore request is rejected.</p>
 	KmsKeyId *string
+
+	// The name of the option group for the new DB cluster.
+	OptionGroupName *string
+
+	// The port number on which the new DB cluster accepts connections. Constraints: A
+	// value from 1150-65535. Default: The default port for the engine.
+	Port *int32
+
+	// The date and time to restore the DB cluster to. Valid Values: Value must be a
+	// time in Universal Coordinated Time (UTC) format Constraints:
+	//
+	//     * Must be
+	// before the latest restorable time for the DB instance
+	//
+	//     * Must be specified
+	// if UseLatestRestorableTime parameter isn't provided
+	//
+	//     * Can't be specified if
+	// the UseLatestRestorableTime parameter is enabled
+	//
+	//     * Can't be specified if
+	// the RestoreType parameter is copy-on-write
+	//
+	// Example: 2015-03-07T23:45:00Z
+	RestoreToTime *time.Time
+
+	// The type of restore to be performed. You can specify one of the following
+	// values:
+	//
+	//     * full-copy - The new DB cluster is restored as a full copy of the
+	// source DB cluster.
+	//
+	//     * copy-on-write - The new DB cluster is restored as a
+	// clone of the source DB cluster.
+	//
+	// Constraints: You can't specify copy-on-write if
+	// the engine version of the source DB cluster is earlier than 1.11. If you don't
+	// specify a RestoreType value, then the new DB cluster is restored as a full copy
+	// of the source DB cluster.
+	RestoreType *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	Tags []*types.Tag
+
+	// A value that indicates whether to restore the DB cluster to the latest
+	// restorable backup time. By default, the DB cluster isn't restored to the latest
+	// restorable backup time. Constraints: Can't be specified if RestoreToTime
+	// parameter is provided.
+	UseLatestRestorableTime *bool
+
+	// A list of VPC security groups that the new DB cluster belongs to.
+	VpcSecurityGroupIds []*string
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {

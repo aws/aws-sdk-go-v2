@@ -62,9 +62,6 @@ type DeleteAnomalyDetectorInput struct {
 	// This member is required.
 	MetricName *string
 
-	// The metric dimensions associated with the anomaly detection model to delete.
-	Dimensions []*types.Dimension
-
 	// The namespace associated with the anomaly detection model to delete.
 	//
 	// This member is required.
@@ -74,6 +71,9 @@ type DeleteAnomalyDetectorInput struct {
 	//
 	// This member is required.
 	Stat *string
+
+	// The metric dimensions associated with the anomaly detection model to delete.
+	Dimensions []*types.Dimension
 }
 
 type DeleteAnomalyDetectorOutput struct {

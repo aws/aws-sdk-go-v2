@@ -56,15 +56,15 @@ func (c *Client) AssociateFleet(ctx context.Context, params *AssociateFleetInput
 
 type AssociateFleetInput struct {
 
-	// The name of the stack.
-	//
-	// This member is required.
-	StackName *string
-
 	// The name of the fleet.
 	//
 	// This member is required.
 	FleetName *string
+
+	// The name of the stack.
+	//
+	// This member is required.
+	StackName *string
 }
 
 type AssociateFleetOutput struct {

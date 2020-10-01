@@ -71,8 +71,8 @@ type CreateDeviceDefinitionVersionInput struct {
 
 type CreateDeviceDefinitionVersionOutput struct {
 
-	// The ID of the version.
-	Version *string
+	// The ARN of the version.
+	Arn *string
 
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
@@ -80,8 +80,8 @@ type CreateDeviceDefinitionVersionOutput struct {
 	// The ID of the parent definition that the version is associated with.
 	Id *string
 
-	// The ARN of the version.
-	Arn *string
+	// The ID of the version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

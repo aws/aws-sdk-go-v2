@@ -112,18 +112,24 @@ type DetectLabelsInput struct {
 	// This member is required.
 	Image *types.Image
 
+	// Maximum number of labels you want the service to return in the response. The
+	// service returns the specified number of highest confidence labels.
+	MaxLabels *int32
+
 	// Specifies the minimum confidence level for the labels to return. Amazon
 	// Rekognition doesn't return any labels with confidence lower than this specified
 	// value. If MinConfidence is not specified, the operation returns labels with a
 	// confidence values greater than or equal to 55 percent.
 	MinConfidence *float32
-
-	// Maximum number of labels you want the service to return in the response. The
-	// service returns the specified number of highest confidence labels.
-	MaxLabels *int32
 }
 
 type DetectLabelsOutput struct {
+
+	// Version number of the label detection model that was used to detect labels.
+	LabelModelVersion *string
+
+	// An array of labels for the real-world objects detected.
+	Labels []*types.Label
 
 	// The value of OrientationCorrection is always null. If the input image is in
 	// .jpeg format, it might contain exchangeable image file format (Exif) metadata
@@ -136,12 +142,6 @@ type DetectLabelsOutput struct {
 	// information in the image Exif metadata. The bounding box coordinates aren't
 	// translated and represent the object locations before the image is rotated.
 	OrientationCorrection types.OrientationCorrection
-
-	// Version number of the label detection model that was used to detect labels.
-	LabelModelVersion *string
-
-	// An array of labels for the real-world objects detected.
-	Labels []*types.Label
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

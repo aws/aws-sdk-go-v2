@@ -63,17 +63,17 @@ func (c *Client) SignalResource(ctx context.Context, params *SignalResourceInput
 // The input for the SignalResource () action.
 type SignalResourceInput struct {
 
-	// The stack name or unique stack ID that includes the resource that you want to
-	// signal.
-	//
-	// This member is required.
-	StackName *string
-
 	// The logical ID of the resource that you want to signal. The logical ID is the
 	// name of the resource that given in the template.
 	//
 	// This member is required.
 	LogicalResourceId *string
+
+	// The stack name or unique stack ID that includes the resource that you want to
+	// signal.
+	//
+	// This member is required.
+	StackName *string
 
 	// The status of the signal, which is either success or failure. A failure signal
 	// causes AWS CloudFormation to immediately fail the stack creation or update.

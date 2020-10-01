@@ -87,9 +87,6 @@ type ModifyVpcPeeringConnectionOptionsInput struct {
 	// This member is required.
 	VpcPeeringConnectionId *string
 
-	// The VPC peering connection options for the requester VPC.
-	RequesterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
-
 	// The VPC peering connection options for the accepter VPC.
 	AccepterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
 
@@ -98,6 +95,9 @@ type ModifyVpcPeeringConnectionOptionsInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The VPC peering connection options for the requester VPC.
+	RequesterPeeringConnectionOptions *types.PeeringConnectionOptionsRequest
 }
 
 type ModifyVpcPeeringConnectionOptionsOutput struct {

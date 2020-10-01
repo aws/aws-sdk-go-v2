@@ -60,8 +60,10 @@ func (c *Client) CreateImagePipeline(ctx context.Context, params *CreateImagePip
 
 type CreateImagePipelineInput struct {
 
-	// The tags of the image pipeline.
-	Tags map[string]*string
+	// The idempotency token used to make this request idempotent.
+	//
+	// This member is required.
+	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the image recipe that will be used to
 	// configure images created by this image pipeline.
@@ -69,34 +71,11 @@ type CreateImagePipelineInput struct {
 	// This member is required.
 	ImageRecipeArn *string
 
-	// The status of the image pipeline.
-	Status types.PipelineStatus
-
-	// The idempotency token used to make this request idempotent.
-	//
-	// This member is required.
-	ClientToken *string
-
-	// The schedule of the image pipeline.
-	Schedule *types.Schedule
-
-	// The image test configuration of the image pipeline.
-	ImageTestsConfiguration *types.ImageTestsConfiguration
-
 	// The Amazon Resource Name (ARN) of the infrastructure configuration that will be
 	// used to build images created by this image pipeline.
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
-
-	// Collects additional information about the image being created, including the
-	// operating system (OS) version and package list. This information is used to
-	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
-	EnhancedImageMetadataEnabled *bool
-
-	// The Amazon Resource Name (ARN) of the distribution configuration that will be
-	// used to configure and distribute images created by this image pipeline.
-	DistributionConfigurationArn *string
 
 	// The name of the image pipeline.
 	//
@@ -105,6 +84,27 @@ type CreateImagePipelineInput struct {
 
 	// The description of the image pipeline.
 	Description *string
+
+	// The Amazon Resource Name (ARN) of the distribution configuration that will be
+	// used to configure and distribute images created by this image pipeline.
+	DistributionConfigurationArn *string
+
+	// Collects additional information about the image being created, including the
+	// operating system (OS) version and package list. This information is used to
+	// enhance the overall experience of using EC2 Image Builder. Enabled by default.
+	EnhancedImageMetadataEnabled *bool
+
+	// The image test configuration of the image pipeline.
+	ImageTestsConfiguration *types.ImageTestsConfiguration
+
+	// The schedule of the image pipeline.
+	Schedule *types.Schedule
+
+	// The status of the image pipeline.
+	Status types.PipelineStatus
+
+	// The tags of the image pipeline.
+	Tags map[string]*string
 }
 
 type CreateImagePipelineOutput struct {

@@ -63,21 +63,16 @@ type CreateDomainConfigurationInput struct {
 	// This member is required.
 	DomainConfigurationName *string
 
+	// An object that specifies the authorization service for a domain.
+	AuthorizerConfig *types.AuthorizerConfig
+
 	// The name of the domain.
 	DomainName *string
-
-	// The certificate used to validate the server certificate and prove domain name
-	// ownership. This certificate must be signed by a public certificate authority.
-	// This value is not required for AWS-managed domains.
-	ValidationCertificateArn *string
 
 	// The ARNs of the certificates that AWS IoT passes to the device during the TLS
 	// handshake. Currently you can specify only one certificate ARN. This value is not
 	// required for AWS-managed domains.
 	ServerCertificateArns []*string
-
-	// An object that specifies the authorization service for a domain.
-	AuthorizerConfig *types.AuthorizerConfig
 
 	// The type of service delivered by the endpoint. AWS IoT Core currently supports
 	// only the DATA service type.
@@ -88,15 +83,20 @@ type CreateDomainConfigurationInput struct {
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []*types.Tag
+
+	// The certificate used to validate the server certificate and prove domain name
+	// ownership. This certificate must be signed by a public certificate authority.
+	// This value is not required for AWS-managed domains.
+	ValidationCertificateArn *string
 }
 
 type CreateDomainConfigurationOutput struct {
 
-	// The name of the domain configuration.
-	DomainConfigurationName *string
-
 	// The ARN of the domain configuration.
 	DomainConfigurationArn *string
+
+	// The name of the domain configuration.
+	DomainConfigurationName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

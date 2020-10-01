@@ -58,17 +58,17 @@ func (c *Client) ModifyVpcEndpointConnectionNotification(ctx context.Context, pa
 
 type ModifyVpcEndpointConnectionNotificationInput struct {
 
-	// The ARN for the SNS topic for the notification.
-	ConnectionNotificationArn *string
+	// The ID of the notification.
+	//
+	// This member is required.
+	ConnectionNotificationId *string
 
 	// One or more events for the endpoint. Valid values are Accept, Connect, Delete,
 	// and Reject.
 	ConnectionEvents []*string
 
-	// The ID of the notification.
-	//
-	// This member is required.
-	ConnectionNotificationId *string
+	// The ARN for the SNS topic for the notification.
+	ConnectionNotificationArn *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

@@ -58,6 +58,11 @@ func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns
 
 type UpdateLinkInput struct {
 
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
+
 	// The ID of the link.
 	//
 	// This member is required.
@@ -66,19 +71,14 @@ type UpdateLinkInput struct {
 	// The upload and download speed in Mbps.
 	Bandwidth *types.Bandwidth
 
-	// The type of the link. Length Constraints: Maximum length of 128 characters.
-	Type *string
-
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
+	// A description of the link. Length Constraints: Maximum length of 256 characters.
+	Description *string
 
 	// The provider of the link. Length Constraints: Maximum length of 128 characters.
 	Provider *string
 
-	// A description of the link. Length Constraints: Maximum length of 256 characters.
-	Description *string
+	// The type of the link. Length Constraints: Maximum length of 128 characters.
+	Type *string
 }
 
 type UpdateLinkOutput struct {

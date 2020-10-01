@@ -63,11 +63,11 @@ type ListTargetsForSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListTargetsForSecurityProfileOutput struct {

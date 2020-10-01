@@ -57,19 +57,19 @@ func (c *Client) UpdateInsight(ctx context.Context, params *UpdateInsightInput, 
 
 type UpdateInsightInput struct {
 
-	// The updated GroupBy attribute that defines this insight.
-	GroupByAttribute *string
-
 	// The ARN of the insight that you want to update.
 	//
 	// This member is required.
 	InsightArn *string
 
-	// The updated name for the insight.
-	Name *string
-
 	// The updated filters that define this insight.
 	Filters *types.AwsSecurityFindingFilters
+
+	// The updated GroupBy attribute that defines this insight.
+	GroupByAttribute *string
+
+	// The updated name for the insight.
+	Name *string
 }
 
 type UpdateInsightOutput struct {

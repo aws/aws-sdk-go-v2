@@ -86,13 +86,13 @@ type GetConfigOutput struct {
 	// This member is required.
 	ConfigId *string
 
-	// Type of a Config.
-	ConfigType types.ConfigCapabilityType
-
 	// Name of a Config.
 	//
 	// This member is required.
 	Name *string
+
+	// Type of a Config.
+	ConfigType types.ConfigCapabilityType
 
 	// Tags assigned to a Config.
 	Tags map[string]*string

@@ -78,6 +78,12 @@ type CreatePrivateDnsNamespaceInput struct {
 	// This member is required.
 	Vpc *string
 
+	// A unique string that identifies the request and that allows failed
+	// CreatePrivateDnsNamespace requests to be retried without the risk of executing
+	// the operation twice. CreatorRequestId can be any unique string, for example, a
+	// date/time stamp.
+	CreatorRequestId *string
+
 	// A description for the namespace.
 	Description *string
 
@@ -85,12 +91,6 @@ type CreatePrivateDnsNamespaceInput struct {
 	// value, both of which you define. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags []*types.Tag
-
-	// A unique string that identifies the request and that allows failed
-	// CreatePrivateDnsNamespace requests to be retried without the risk of executing
-	// the operation twice. CreatorRequestId can be any unique string, for example, a
-	// date/time stamp.
-	CreatorRequestId *string
 }
 
 type CreatePrivateDnsNamespaceOutput struct {

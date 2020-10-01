@@ -48,6 +48,9 @@ type AvailabilityZone struct {
 // Provides details about an auto scaling group.
 type AwsAutoScalingAutoScalingGroupDetails struct {
 
+	// The datetime when the auto scaling group was created.
+	CreatedTime *string
+
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before it
 	// checks the health status of an EC2 instance that has come into service.
 	HealthCheckGracePeriod *int32
@@ -55,25 +58,15 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 	// The service to use for the health checks.
 	HealthCheckType *string
 
-	// The list of load balancers associated with the group.
-	LoadBalancerNames []*string
-
-	// The datetime when the auto scaling group was created.
-	CreatedTime *string
-
 	// The name of the launch configuration.
 	LaunchConfigurationName *string
+
+	// The list of load balancers associated with the group.
+	LoadBalancerNames []*string
 }
 
 // A distribution configuration.
 type AwsCloudFrontDistributionDetails struct {
-
-	// The date and time that the distribution was last modified.
-	LastModifiedTime *string
-
-	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
-	// with this distribution.
-	WebAclId *string
 
 	// The domain name corresponding to the distribution.
 	DomainName *string
@@ -81,8 +74,8 @@ type AwsCloudFrontDistributionDetails struct {
 	// The entity tag is a hash of the object.
 	ETag *string
 
-	// Indicates the current status of the distribution.
-	Status *string
+	// The date and time that the distribution was last modified.
+	LastModifiedTime *string
 
 	// A complex type that controls whether access logs are written for the
 	// distribution.
@@ -90,24 +83,31 @@ type AwsCloudFrontDistributionDetails struct {
 
 	// A complex type that contains information about origins for this distribution.
 	Origins *AwsCloudFrontDistributionOrigins
+
+	// Indicates the current status of the distribution.
+	Status *string
+
+	// A unique identifier that specifies the AWS WAF web ACL, if any, to associate
+	// with this distribution.
+	WebAclId *string
 }
 
 // A complex type that controls whether access logs are written for the
 // distribution.
 type AwsCloudFrontDistributionLogging struct {
 
+	// The Amazon S3 bucket to store the access logs in.
+	Bucket *string
+
 	// With this field, you can enable or disable the selected distribution.
 	Enabled *bool
-
-	// An optional string that you want CloudFront to use as a prefix to the access log
-	// filenames for this distribution.
-	Prefix *string
 
 	// Specifies whether you want CloudFront to include cookies in access logs.
 	IncludeCookies *bool
 
-	// The Amazon S3 bucket to store the access logs in.
-	Bucket *string
+	// An optional string that you want CloudFront to use as a prefix to the access log
+	// filenames for this distribution.
+	Prefix *string
 }
 
 // A complex type that describes the Amazon S3 bucket, HTTP server (for example, a
@@ -115,12 +115,12 @@ type AwsCloudFrontDistributionLogging struct {
 // gets your files.
 type AwsCloudFrontDistributionOriginItem struct {
 
-	// A unique identifier for the origin or origin group.
-	Id *string
-
 	// Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want
 	// CloudFront to get objects for this origin.
 	DomainName *string
+
+	// A unique identifier for the origin or origin group.
+	Id *string
 
 	// An optional element that causes CloudFront to request your content from a
 	// directory in your Amazon S3 bucket or your custom origin.
@@ -138,24 +138,24 @@ type AwsCloudFrontDistributionOrigins struct {
 // Information about an AWS CodeBuild project.
 type AwsCodeBuildProjectDetails struct {
 
+	// The AWS Key Management Service (AWS KMS) customer master key (CMK) used to
+	// encrypt the build output artifacts. You can specify either the Amazon Resource
+	// Name (ARN) of the CMK or, if available, the CMK alias (using the format
+	// alias/alias-name).
+	EncryptionKey *string
+
 	// Information about the build environment for this build project.
 	Environment *AwsCodeBuildProjectEnvironment
 
 	// The name of the build project.
 	Name *string
 
-	// Information about the build input source code for this build project.
-	Source *AwsCodeBuildProjectSource
-
 	// The ARN of the IAM role that enables AWS CodeBuild to interact with dependent
 	// AWS services on behalf of the AWS account.
 	ServiceRole *string
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) used to
-	// encrypt the build output artifacts. You can specify either the Amazon Resource
-	// Name (ARN) of the CMK or, if available, the CMK alias (using the format
-	// alias/alias-name).
-	EncryptionKey *string
+	// Information about the build input source code for this build project.
+	Source *AwsCodeBuildProjectSource
 
 	// Information about the VPC configuration that AWS CodeBuild accesses.
 	VpcConfig *AwsCodeBuildProjectVpcConfig
@@ -166,9 +166,6 @@ type AwsCodeBuildProjectEnvironment struct {
 
 	// The certificate to use with this build project.
 	Certificate *string
-
-	// The credentials for access to a private registry.
-	RegistryCredential *AwsCodeBuildProjectEnvironmentRegistryCredential
 
 	// The type of credentials AWS CodeBuild uses to pull images in your build. Valid
 	// values:
@@ -184,6 +181,9 @@ type AwsCodeBuildProjectEnvironment struct {
 	// registry image, you must use SERVICE_ROLE credentials. When you use an AWS
 	// CodeBuild curated image, you must use CODEBUILD credentials.
 	ImagePullCredentialsType *string
+
+	// The credentials for access to a private registry.
+	RegistryCredential *AwsCodeBuildProjectEnvironmentRegistryCredential
 
 	// The type of build environment to use for related builds. The environment type
 	// ARM_CONTAINER is available only in Regions US East (N. Virginia), US East
@@ -206,18 +206,24 @@ type AwsCodeBuildProjectEnvironment struct {
 // The credentials for access to a private registry.
 type AwsCodeBuildProjectEnvironmentRegistryCredential struct {
 
-	// The service that created the credentials to access a private Docker registry.
-	// The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
-	CredentialProvider *string
-
 	// The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets
 	// Manager. The credential can use the name of the credentials only if they exist
 	// in your current AWS Region.
 	Credential *string
+
+	// The service that created the credentials to access a private Docker registry.
+	// The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
+	CredentialProvider *string
 }
 
 // Information about the build input source code for this build project.
 type AwsCodeBuildProjectSource struct {
+
+	// Information about the Git clone depth for the build project.
+	GitCloneDepth *int32
+
+	// Whether to ignore SSL warnings while connecting to the project source code.
+	InsecureSsl *bool
 
 	// Information about the location of the source code to be built. Valid values
 	// include:
@@ -251,9 +257,6 @@ type AwsCodeBuildProjectSource struct {
 	// clone URL to the repository that contains the source and the build spec file.
 	Location *string
 
-	// Information about the Git clone depth for the build project.
-	GitCloneDepth *int32
-
 	// The type of repository that contains the source code to be built. Valid values
 	// are:
 	//
@@ -277,19 +280,16 @@ type AwsCodeBuildProjectSource struct {
 	//
 	// * S3 - The source code is in an S3 input bucket.
 	Type *string
-
-	// Whether to ignore SSL warnings while connecting to the project source code.
-	InsecureSsl *bool
 }
 
 // Information about the VPC configuration that AWS CodeBuild accesses.
 type AwsCodeBuildProjectVpcConfig struct {
 
-	// A list of one or more subnet IDs in your Amazon VPC.
-	Subnets []*string
-
 	// A list of one or more security group IDs in your Amazon VPC.
 	SecurityGroupIds []*string
+
+	// A list of one or more subnet IDs in your Amazon VPC.
+	Subnets []*string
 
 	// The ID of the VPC.
 	VpcId *string
@@ -298,42 +298,36 @@ type AwsCodeBuildProjectVpcConfig struct {
 // The details of an Amazon EC2 instance.
 type AwsEc2InstanceDetails struct {
 
-	// The date/time the instance was launched.
-	LaunchedAt *string
-
-	// The instance type of the instance.
-	Type *string
-
-	// The IPv6 addresses associated with the instance.
-	IpV6Addresses []*string
+	// The IAM profile ARN of the instance.
+	IamInstanceProfileArn *string
 
 	// The Amazon Machine Image (AMI) ID of the instance.
 	ImageId *string
 
-	// The identifier of the VPC that the instance was launched in.
-	VpcId *string
-
 	// The IPv4 addresses associated with the instance.
 	IpV4Addresses []*string
+
+	// The IPv6 addresses associated with the instance.
+	IpV6Addresses []*string
 
 	// The key name associated with the instance.
 	KeyName *string
 
-	// The IAM profile ARN of the instance.
-	IamInstanceProfileArn *string
+	// The date/time the instance was launched.
+	LaunchedAt *string
 
 	// The identifier of the subnet that the instance was launched in.
 	SubnetId *string
+
+	// The instance type of the instance.
+	Type *string
+
+	// The identifier of the VPC that the instance was launched in.
+	VpcId *string
 }
 
 // Information about the network interface attachment.
 type AwsEc2NetworkInterfaceAttachment struct {
-
-	// The attachment state. Valid values: attaching | attached | detaching | detached
-	Status *string
-
-	// The AWS account ID of the owner of the instance.
-	InstanceOwnerId *string
 
 	// The timestamp indicating when the attachment initiated.
 	AttachTime *string
@@ -350,6 +344,12 @@ type AwsEc2NetworkInterfaceAttachment struct {
 
 	// The ID of the instance.
 	InstanceId *string
+
+	// The AWS account ID of the owner of the instance.
+	InstanceOwnerId *string
+
+	// The attachment state. Valid values: attaching | attached | detaching | detached
+	Status *string
 }
 
 // Details about the network interface
@@ -361,61 +361,47 @@ type AwsEc2NetworkInterfaceDetails struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// Indicates whether traffic to or from the instance is validated.
-	SourceDestCheck *bool
-
 	// Security groups for the network interface.
 	SecurityGroups []*AwsEc2NetworkInterfaceSecurityGroup
+
+	// Indicates whether traffic to or from the instance is validated.
+	SourceDestCheck *bool
 }
 
 // A security group associated with the network interface.
 type AwsEc2NetworkInterfaceSecurityGroup struct {
 
-	// The name of the security group.
-	GroupName *string
-
 	// The ID of the security group.
 	GroupId *string
+
+	// The name of the security group.
+	GroupName *string
 }
 
 // Details about an EC2 security group.
 type AwsEc2SecurityGroupDetails struct {
 
-	// The inbound rules associated with the security group.
-	IpPermissions []*AwsEc2SecurityGroupIpPermission
-
-	// The AWS account ID of the owner of the security group.
-	OwnerId *string
+	// The ID of the security group.
+	GroupId *string
 
 	// The name of the security group.
 	GroupName *string
 
-	// [VPC only] The ID of the VPC for the security group.
-	VpcId *string
-
-	// The ID of the security group.
-	GroupId *string
+	// The inbound rules associated with the security group.
+	IpPermissions []*AwsEc2SecurityGroupIpPermission
 
 	// [VPC only] The outbound rules associated with the security group.
 	IpPermissionsEgress []*AwsEc2SecurityGroupIpPermission
+
+	// The AWS account ID of the owner of the security group.
+	OwnerId *string
+
+	// [VPC only] The ID of the VPC for the security group.
+	VpcId *string
 }
 
 // An IP permission for an EC2 security group.
 type AwsEc2SecurityGroupIpPermission struct {
-
-	// [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is
-	// the AWS service to access through a VPC endpoint from instances associated with
-	// the security group.
-	PrefixListIds []*AwsEc2SecurityGroupPrefixListId
-
-	// The IPv6 ranges.
-	Ipv6Ranges []*AwsEc2SecurityGroupIpv6Range
-
-	// The security group and AWS account ID pairs.
-	UserIdGroupPairs []*AwsEc2SecurityGroupUserIdGroupPair
-
-	// The IPv4 ranges.
-	IpRanges []*AwsEc2SecurityGroupIpRange
 
 	// The start of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6
 	// type number. A value of -1 indicates all ICMP/ICMPv6 types. If you specify all
@@ -430,10 +416,24 @@ type AwsEc2SecurityGroupIpPermission struct {
 	// the port range, traffic for all types and codes is allowed.
 	IpProtocol *string
 
+	// The IPv4 ranges.
+	IpRanges []*AwsEc2SecurityGroupIpRange
+
+	// The IPv6 ranges.
+	Ipv6Ranges []*AwsEc2SecurityGroupIpv6Range
+
+	// [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is
+	// the AWS service to access through a VPC endpoint from instances associated with
+	// the security group.
+	PrefixListIds []*AwsEc2SecurityGroupPrefixListId
+
 	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	// A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6
 	// types, you must specify all codes.
 	ToPort *int32
+
+	// The security group and AWS account ID pairs.
+	UserIdGroupPairs []*AwsEc2SecurityGroupUserIdGroupPair
 }
 
 // A range of IPv4 addresses.
@@ -464,17 +464,14 @@ type AwsEc2SecurityGroupPrefixListId struct {
 // A relationship between a security group and a user.
 type AwsEc2SecurityGroupUserIdGroupPair struct {
 
-	// The status of a VPC peering connection, if applicable.
-	PeeringStatus *string
-
-	// The ID of the VPC for the referenced security group, if applicable.
-	VpcId *string
-
 	// The ID of the security group.
 	GroupId *string
 
-	// The ID of the VPC peering connection, if applicable.
-	VpcPeeringConnectionId *string
+	// The name of the security group.
+	GroupName *string
+
+	// The status of a VPC peering connection, if applicable.
+	PeeringStatus *string
 
 	// The ID of an AWS account. For a referenced security group in another VPC, the
 	// account ID of the referenced security group is returned in the response. If the
@@ -483,24 +480,27 @@ type AwsEc2SecurityGroupUserIdGroupPair struct {
 	// another AWS.
 	UserId *string
 
-	// The name of the security group.
-	GroupName *string
+	// The ID of the VPC for the referenced security group, if applicable.
+	VpcId *string
+
+	// The ID of the VPC peering connection, if applicable.
+	VpcPeeringConnectionId *string
 }
 
 // An attachment to an AWS EC2 volume.
 type AwsEc2VolumeAttachment struct {
-
-	// The identifier of the EC2 instance.
-	InstanceId *string
-
-	// The attachment state of the volume.
-	Status *string
 
 	// The datetime when the attachment initiated.
 	AttachTime *string
 
 	// Whether the EBS volume is deleted when the EC2 instance is terminated.
 	DeleteOnTermination *bool
+
+	// The identifier of the EC2 instance.
+	InstanceId *string
+
+	// The attachment state of the volume.
+	Status *string
 }
 
 // Details about an EC2 volume.
@@ -509,50 +509,55 @@ type AwsEc2VolumeDetails struct {
 	// The volume attachments.
 	Attachments []*AwsEc2VolumeAttachment
 
-	// The snapshot from which the volume was created.
-	SnapshotId *string
+	// The datetime when the volume was created.
+	CreateTime *string
+
+	// Whether the volume is encrypted.
+	Encrypted *bool
 
 	// The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK)
 	// that was used to protect the volume encryption key for the volume.
 	KmsKeyId *string
 
-	// The volume state.
-	Status *string
-
-	// Whether the volume is encrypted.
-	Encrypted *bool
-
-	// The datetime when the volume was created.
-	CreateTime *string
-
 	// The size of the volume, in GiBs.
 	Size *int32
+
+	// The snapshot from which the volume was created.
+	SnapshotId *string
+
+	// The volume state.
+	Status *string
 }
 
 // Details about an EC2 VPC.
 type AwsEc2VpcDetails struct {
+
+	// Information about the IPv4 CIDR blocks associated with the VPC.
+	CidrBlockAssociationSet []*CidrBlockAssociation
 
 	// The identifier of the set of Dynamic Host Configuration Protocol (DHCP) options
 	// that are associated with the VPC. If the default options are associated with the
 	// VPC, then this is default.
 	DhcpOptionsId *string
 
-	// Information about the IPv4 CIDR blocks associated with the VPC.
-	CidrBlockAssociationSet []*CidrBlockAssociation
+	// Information about the IPv6 CIDR blocks associated with the VPC.
+	Ipv6CidrBlockAssociationSet []*Ipv6CidrBlockAssociation
 
 	// The current state of the VPC.
 	State *string
-
-	// Information about the IPv6 CIDR blocks associated with the VPC.
-	Ipv6CidrBlockAssociationSet []*Ipv6CidrBlockAssociation
 }
 
 // Information about an Elasticsearch domain.
 type AwsElasticsearchDomainDetails struct {
 
-	// Domain-specific endpoint used to submit index, search, and data upload requests
-	// to an Amazon ES domain. The endpoint is a service URL.
-	Endpoint *string
+	// IAM policy document specifying the access policies for the new Amazon ES domain.
+	AccessPolicies *string
+
+	// Additional options for the domain endpoint.
+	DomainEndpointOptions *AwsElasticsearchDomainDomainEndpointOptions
+
+	// Unique identifier for an Amazon ES domain.
+	DomainId *string
 
 	// Name of an Amazon ES domain. Domain names are unique across all domains owned by
 	// the same account within an AWS Region. Domain names must start with a lowercase
@@ -560,26 +565,21 @@ type AwsElasticsearchDomainDetails struct {
 	// (lowercase only), 0-9, and – (hyphen).
 	DomainName *string
 
-	// Details about the configuration for node-to-node encryption.
-	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions
-
-	// Unique identifier for an Amazon ES domain.
-	DomainId *string
+	// Elasticsearch version.
+	ElasticsearchVersion *string
 
 	// Details about the configuration for encryption at rest.
 	EncryptionAtRestOptions *AwsElasticsearchDomainEncryptionAtRestOptions
 
-	// IAM policy document specifying the access policies for the new Amazon ES domain.
-	AccessPolicies *string
-
-	// Elasticsearch version.
-	ElasticsearchVersion *string
-
-	// Additional options for the domain endpoint.
-	DomainEndpointOptions *AwsElasticsearchDomainDomainEndpointOptions
+	// Domain-specific endpoint used to submit index, search, and data upload requests
+	// to an Amazon ES domain. The endpoint is a service URL.
+	Endpoint *string
 
 	// The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
 	Endpoints map[string]*string
+
+	// Details about the configuration for node-to-node encryption.
+	NodeToNodeEncryptionOptions *AwsElasticsearchDomainNodeToNodeEncryptionOptions
 
 	// Information that Amazon ES derives based on VPCOptions for the domain.
 	VPCOptions *AwsElasticsearchDomainVPCOptions
@@ -605,11 +605,11 @@ type AwsElasticsearchDomainDomainEndpointOptions struct {
 // Details about the configuration for encryption at rest.
 type AwsElasticsearchDomainEncryptionAtRestOptions struct {
 
-	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
-	KmsKeyId *string
-
 	// Whether encryption at rest is enabled.
 	Enabled *bool
+
+	// The KMS key ID. Takes the form 1a2a3a4-1a2a-3a4a-5a6a-1a2a3a4a5a6a.
+	KmsKeyId *string
 }
 
 // Details about the configuration for node-to-node encryption.
@@ -625,42 +625,27 @@ type AwsElasticsearchDomainVPCOptions struct {
 	// The list of Availability Zones associated with the VPC subnets.
 	AvailabilityZones []*string
 
+	// The list of security group IDs associated with the VPC endpoints for the domain.
+	SecurityGroupIds []*string
+
 	// A list of subnet IDs associated with the VPC endpoints for the domain.
 	SubnetIds []*string
 
 	// ID for the VPC.
 	VPCId *string
-
-	// The list of security group IDs associated with the VPC endpoints for the domain.
-	SecurityGroupIds []*string
 }
 
 // Information about a load balancer.
 type AwsElbv2LoadBalancerDetails struct {
 
-	// The state of the load balancer.
-	State *LoadBalancerState
+	// The Availability Zones for the load balancer.
+	AvailabilityZones []*AvailabilityZone
 
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
 
-	// The ID of the VPC for the load balancer.
-	VpcId *string
-
-	// The Availability Zones for the load balancer.
-	AvailabilityZones []*AvailabilityZone
-
-	// The nodes of an Internet-facing load balancer have public IP addresses.
-	Scheme *string
-
-	// The IDs of the security groups for the load balancer.
-	SecurityGroups []*string
-
 	// The date and time the load balancer was created.
 	CreatedTime *string
-
-	// The type of load balancer.
-	Type *string
 
 	// The public DNS name of the load balancer.
 	DNSName *string
@@ -669,10 +654,31 @@ type AwsElbv2LoadBalancerDetails struct {
 	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
 	// addresses).
 	IpAddressType *string
+
+	// The nodes of an Internet-facing load balancer have public IP addresses.
+	Scheme *string
+
+	// The IDs of the security groups for the load balancer.
+	SecurityGroups []*string
+
+	// The state of the load balancer.
+	State *LoadBalancerState
+
+	// The type of load balancer.
+	Type *string
+
+	// The ID of the VPC for the load balancer.
+	VpcId *string
 }
 
 // IAM access key details related to a finding.
 type AwsIamAccessKeyDetails struct {
+
+	// The creation date/time of the IAM access key related to a finding.
+	CreatedAt *string
+
+	// The ID of the principal associated with an access key.
+	PrincipalId *string
 
 	// The name of the principal.
 	PrincipalName *string
@@ -680,19 +686,13 @@ type AwsIamAccessKeyDetails struct {
 	// The type of principal associated with an access key.
 	PrincipalType *string
 
+	// The status of the IAM access key related to a finding.
+	Status AwsIamAccessKeyStatus
+
 	// The user associated with the IAM access key related to a finding. The UserName
 	// parameter has been replaced with the PrincipalName parameter because access keys
 	// can also be assigned to principals that are not IAM users.
 	UserName *string
-
-	// The creation date/time of the IAM access key related to a finding.
-	CreatedAt *string
-
-	// The status of the IAM access key related to a finding.
-	Status AwsIamAccessKeyStatus
-
-	// The ID of the principal associated with an access key.
-	PrincipalId *string
 }
 
 // Contains information about an IAM role, including all of the role's policies.
@@ -704,12 +704,12 @@ type AwsIamRoleDetails struct {
 	// The date and time, in ISO 8601 date-time format, when the role was created.
 	CreateDate *string
 
-	// The path to the role.
-	Path *string
-
 	// The maximum session duration (in seconds) that you want to set for the specified
 	// role.
 	MaxSessionDuration *int32
+
+	// The path to the role.
+	Path *string
 
 	// The stable and unique string identifying the role.
 	RoleId *string
@@ -721,18 +721,11 @@ type AwsIamRoleDetails struct {
 // Contains metadata about a customer master key (CMK).
 type AwsKmsKeyDetails struct {
 
-	// The date and time when the CMK was created.
-	CreationDate *float64
-
-	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
-	// created the key material. When this value is EXTERNAL, the key material was
-	// imported from your existing key management infrastructure or the CMK lacks key
-	// material. When this value is AWS_CLOUDHSM, the key material was created in the
-	// AWS CloudHSM cluster associated with a custom key store.
-	Origin *string
-
 	// The twelve-digit account ID of the AWS account that owns the CMK.
 	AWSAccountId *string
+
+	// The date and time when the CMK was created.
+	CreationDate *float64
 
 	// The globally unique identifier for the CMK.
 	KeyId *string
@@ -743,6 +736,13 @@ type AwsKmsKeyDetails struct {
 
 	// The state of the CMK.
 	KeyState *string
+
+	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
+	// created the key material. When this value is EXTERNAL, the key material was
+	// imported from your existing key management infrastructure or the CMK lacks key
+	// material. When this value is AWS_CLOUDHSM, the key material was created in the
+	// AWS CloudHSM cluster associated with a custom key store.
+	Origin *string
 }
 
 // The code for the Lambda function. You can specify either an object in Amazon S3,
@@ -756,12 +756,12 @@ type AwsLambdaFunctionCode struct {
 	// The Amazon S3 key of the deployment package.
 	S3Key *string
 
+	// For versioned objects, the version of the deployment package object to use.
+	S3ObjectVersion *string
+
 	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
 	// clients handle the encoding for you.
 	ZipFile *string
-
-	// For versioned objects, the version of the deployment package object to use.
-	S3ObjectVersion *string
 }
 
 // The dead-letter queue for failed asynchronous invocations.
@@ -774,71 +774,71 @@ type AwsLambdaFunctionDeadLetterConfig struct {
 // Details about a function's configuration.
 type AwsLambdaFunctionDetails struct {
 
-	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed CMK.
-	KmsKeyArn *string
-
-	// For Lambda@Edge functions, the ARN of the master function.
-	MasterArn *string
-
-	// The name of the function.
-	FunctionName *string
-
-	// The amount of time that Lambda allows a function to run before stopping it.
-	Timeout *int32
-
-	// The function's networking configuration.
-	VpcConfig *AwsLambdaFunctionVpcConfig
-
-	// The runtime environment for the Lambda function.
-	Runtime *string
-
-	// The function's environment variables.
-	Environment *AwsLambdaFunctionEnvironment
-
-	// The function's execution role.
-	Role *string
-
-	// The function's layers.
-	Layers []*AwsLambdaFunctionLayer
-
-	// The function's AWS X-Ray tracing configuration.
-	TracingConfig *AwsLambdaFunctionTracingConfig
-
-	// The memory that's allocated to the function.
-	MemorySize *int32
-
-	// The version of the Lambda function.
-	Version *string
-
-	// The function's dead letter queue.
-	DeadLetterConfig *AwsLambdaFunctionDeadLetterConfig
-
 	// An AwsLambdaFunctionCode object.
 	Code *AwsLambdaFunctionCode
 
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
 
+	// The function's dead letter queue.
+	DeadLetterConfig *AwsLambdaFunctionDeadLetterConfig
+
+	// The function's environment variables.
+	Environment *AwsLambdaFunctionEnvironment
+
+	// The name of the function.
+	FunctionName *string
+
 	// The function that Lambda calls to begin executing your function.
 	Handler *string
 
-	// The latest updated revision of the function or alias.
-	RevisionId *string
+	// The KMS key that's used to encrypt the function's environment variables. This
+	// key is only returned if you've configured a customer managed CMK.
+	KmsKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
 	LastModified *string
+
+	// The function's layers.
+	Layers []*AwsLambdaFunctionLayer
+
+	// For Lambda@Edge functions, the ARN of the master function.
+	MasterArn *string
+
+	// The memory that's allocated to the function.
+	MemorySize *int32
+
+	// The latest updated revision of the function or alias.
+	RevisionId *string
+
+	// The function's execution role.
+	Role *string
+
+	// The runtime environment for the Lambda function.
+	Runtime *string
+
+	// The amount of time that Lambda allows a function to run before stopping it.
+	Timeout *int32
+
+	// The function's AWS X-Ray tracing configuration.
+	TracingConfig *AwsLambdaFunctionTracingConfig
+
+	// The version of the Lambda function.
+	Version *string
+
+	// The function's networking configuration.
+	VpcConfig *AwsLambdaFunctionVpcConfig
 }
 
 // A function's environment variable settings.
 type AwsLambdaFunctionEnvironment struct {
 
-	// Environment variable key-value pairs.
-	Variables map[string]*string
-
 	// An AwsLambdaFunctionEnvironmentError object.
 	Error *AwsLambdaFunctionEnvironmentError
+
+	// Environment variable key-value pairs.
+	Variables map[string]*string
 }
 
 // Error messages for environment variables that couldn't be applied.
@@ -854,11 +854,11 @@ type AwsLambdaFunctionEnvironmentError struct {
 // An AWS Lambda layer.
 type AwsLambdaFunctionLayer struct {
 
-	// The size of the layer archive in bytes.
-	CodeSize *int32
-
 	// The Amazon Resource Name (ARN) of the function layer.
 	Arn *string
+
+	// The size of the layer archive in bytes.
+	CodeSize *int32
 }
 
 // The function's AWS X-Ray tracing configuration.
@@ -885,17 +885,17 @@ type AwsLambdaFunctionVpcConfig struct {
 // Details about a Lambda layer version.
 type AwsLambdaLayerVersionDetails struct {
 
-	// The version number.
-	Version *int64
+	// The layer's compatible runtimes. Maximum number of five items. Valid values:
+	// nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 |
+	// python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided
+	CompatibleRuntimes []*string
 
 	// The date that the version was created, in ISO 8601 format. For example,
 	// 2018-11-27T15:10:45.123+0000.
 	CreatedDate *string
 
-	// The layer's compatible runtimes. Maximum number of five items. Valid values:
-	// nodejs10.x | nodejs12.x | java8 | java11 | python2.7 | python3.6 | python3.7 |
-	// python3.8 | dotnetcore1.0 | dotnetcore2.1 | go1.x | ruby2.5 | provided
-	CompatibleRuntimes []*string
+	// The version number.
+	Version *int64
 }
 
 // An AWS Identity and Access Management (IAM) role associated with the DB
@@ -928,13 +928,23 @@ type AwsRdsDbInstanceAssociatedRole struct {
 // Contains the details of an Amazon RDS DB instance.
 type AwsRdsDbInstanceDetails struct {
 
-	// Specifies the connection endpoint.
-	Endpoint *AwsRdsDbInstanceEndpoint
+	// The AWS Identity and Access Management (IAM) roles associated with the DB
+	// instance.
+	AssociatedRoles []*AwsRdsDbInstanceAssociatedRole
 
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
-	DbiResourceId *string
+	// The identifier of the CA certificate for this DB instance.
+	CACertificateIdentifier *string
+
+	// If the DB instance is a member of a DB cluster, contains the name of the DB
+	// cluster that the DB instance is a member of.
+	DBClusterIdentifier *string
+
+	// Contains the name of the compute and memory capacity class of the DB instance.
+	DBInstanceClass *string
+
+	// Contains a user-supplied database identifier. This identifier is the unique key
+	// that identifies a DB instance.
+	DBInstanceIdentifier *string
 
 	// The meaning of this parameter differs according to the database engine you use.
 	// MySQL, MariaDB, SQL Server, PostgreSQL Contains the name of the initial database
@@ -944,23 +954,27 @@ type AwsRdsDbInstanceDetails struct {
 	// Not shown when the returned parameters do not apply to an Oracle DB instance.
 	DBName *string
 
-	// The identifier of the CA certificate for this DB instance.
-	CACertificateIdentifier *string
-
 	// Specifies the port that the DB instance listens on. If the DB instance is part
 	// of a DB cluster, this can be a different port than the DB cluster port.
 	DbInstancePort *int32
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// instance.
-	KmsKeyId *string
-
-	// A list of VPC security groups that the DB instance belongs to.
-	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
+	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
+	// instance is accessed.
+	DbiResourceId *string
 
 	// Indicates whether the DB instance has deletion protection enabled. When deletion
 	// protection is enabled, the database cannot be deleted.
 	DeletionProtection *bool
+
+	// Specifies the connection endpoint.
+	Endpoint *AwsRdsDbInstanceEndpoint
+
+	// Provides the name of the database engine to use for this DB instance.
+	Engine *string
+
+	// Indicates the database engine version.
+	EngineVersion *string
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false. IAM database authentication can be
@@ -975,42 +989,28 @@ type AwsRdsDbInstanceDetails struct {
 	// Aurora 5.6 or higher
 	IAMDatabaseAuthenticationEnabled *bool
 
-	// Specifies whether the DB instance is encrypted.
-	StorageEncrypted *bool
-
-	// If the DB instance is a member of a DB cluster, contains the name of the DB
-	// cluster that the DB instance is a member of.
-	DBClusterIdentifier *string
-
-	// Contains the name of the compute and memory capacity class of the DB instance.
-	DBInstanceClass *string
-
-	// Provides the name of the database engine to use for this DB instance.
-	Engine *string
-
-	// The ARN from the key store with which the instance is associated for TDE
-	// encryption.
-	TdeCredentialArn *string
-
 	// Provides the date and time the DB instance was created.
 	InstanceCreateTime *string
 
-	// Contains a user-supplied database identifier. This identifier is the unique key
-	// that identifies a DB instance.
-	DBInstanceIdentifier *string
-
-	// The AWS Identity and Access Management (IAM) roles associated with the DB
+	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
 	// instance.
-	AssociatedRoles []*AwsRdsDbInstanceAssociatedRole
-
-	// Indicates the database engine version.
-	EngineVersion *string
+	KmsKeyId *string
 
 	// Specifies the accessibility options for the DB instance. A value of true
 	// specifies an Internet-facing instance with a publicly resolvable DNS name, which
 	// resolves to a public IP address. A value of false specifies an internal instance
 	// with a DNS name that resolves to a private IP address.
 	PubliclyAccessible *bool
+
+	// Specifies whether the DB instance is encrypted.
+	StorageEncrypted *bool
+
+	// The ARN from the key store with which the instance is associated for TDE
+	// encryption.
+	TdeCredentialArn *string
+
+	// A list of VPC security groups that the DB instance belongs to.
+	VpcSecurityGroups []*AwsRdsDbInstanceVpcSecurityGroup
 }
 
 // Specifies the connection endpoint.
@@ -1019,28 +1019,28 @@ type AwsRdsDbInstanceEndpoint struct {
 	// Specifies the DNS address of the DB instance.
 	Address *string
 
-	// Specifies the port that the database engine is listening on.
-	Port *int32
-
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
+
+	// Specifies the port that the database engine is listening on.
+	Port *int32
 }
 
 // A VPC security groups that the DB instance belongs to.
 type AwsRdsDbInstanceVpcSecurityGroup struct {
 
-	// The name of the VPC security group.
-	VpcSecurityGroupId *string
-
 	// The status of the VPC security group.
 	Status *string
+
+	// The name of the VPC security group.
+	VpcSecurityGroupId *string
 }
 
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 
-	// The encryption rules that are applied to the S3 bucket.
-	ServerSideEncryptionConfiguration *AwsS3BucketServerSideEncryptionConfiguration
+	// The date and time when the S3 bucket was created.
+	CreatedAt *string
 
 	// The canonical user ID of the owner of the S3 bucket.
 	OwnerId *string
@@ -1048,19 +1048,19 @@ type AwsS3BucketDetails struct {
 	// The display name of the owner of the S3 bucket.
 	OwnerName *string
 
-	// The date and time when the S3 bucket was created.
-	CreatedAt *string
+	// The encryption rules that are applied to the S3 bucket.
+	ServerSideEncryptionConfiguration *AwsS3BucketServerSideEncryptionConfiguration
 }
 
 // Specifies the default server-side encryption to apply to new objects in the
 // bucket.
 type AwsS3BucketServerSideEncryptionByDefault struct {
 
-	// Server-side encryption algorithm to use for the default encryption.
-	SSEAlgorithm *string
-
 	// AWS KMS customer master key (CMK) ID to use for the default encryption.
 	KMSMasterKeyID *string
+
+	// Server-side encryption algorithm to use for the default encryption.
+	SSEAlgorithm *string
 }
 
 // The encryption configuration for the S3 bucket.
@@ -1082,26 +1082,26 @@ type AwsS3BucketServerSideEncryptionRule struct {
 // Details about an Amazon S3 object.
 type AwsS3ObjectDetails struct {
 
-	// If the object is stored using server-side encryption, the value of the
-	// server-side encryption algorithm used when storing this object in Amazon S3.
-	ServerSideEncryption *string
-
-	// The identifier of the AWS Key Management Service (AWS KMS) symmetric customer
-	// managed customer master key (CMK) that was used for the object.
-	SSEKMSKeyId *string
-
-	// The version of the object.
-	VersionId *string
-
-	// The date and time when the object was last modified.
-	LastModified *string
+	// A standard MIME type describing the format of the object data.
+	ContentType *string
 
 	// The opaque identifier assigned by a web server to a specific version of a
 	// resource found at a URL.
 	ETag *string
 
-	// A standard MIME type describing the format of the object data.
-	ContentType *string
+	// The date and time when the object was last modified.
+	LastModified *string
+
+	// The identifier of the AWS Key Management Service (AWS KMS) symmetric customer
+	// managed customer master key (CMK) that was used for the object.
+	SSEKMSKeyId *string
+
+	// If the object is stored using server-side encryption, the value of the
+	// server-side encryption algorithm used when storing this object in Amazon S3.
+	ServerSideEncryption *string
+
+	// The version of the object.
+	VersionId *string
 }
 
 // Provides consistent format for the contents of the Security Hub-aggregated
@@ -1112,12 +1112,33 @@ type AwsS3ObjectDetails struct {
 // solutions and standards checks.
 type AwsSecurityFinding struct {
 
-	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. Valid namespace values are: Software and Configuration
-	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+	// The AWS account ID that a finding is generated in.
 	//
 	// This member is required.
-	Types []*string
+	AwsAccountId *string
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider created the potential security issue that a finding captured.
+	//
+	// This member is required.
+	CreatedAt *string
+
+	// A finding's description. In this release, Description is a required property.
+	//
+	// This member is required.
+	Description *string
+
+	// The identifier for the solution-specific component (a discrete unit of logic)
+	// that generated a finding. In various security-findings providers' solutions,
+	// this generator can be called a rule, a check, a detector, a plugin, etc.
+	//
+	// This member is required.
+	GeneratorId *string
+
+	// The security findings provider-specific identifier for a finding.
+	//
+	// This member is required.
+	Id *string
 
 	// The ARN generated by Security Hub that uniquely identifies a product that
 	// generates findings. This can be the ARN for a third-party product that is
@@ -1126,111 +1147,33 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	ProductArn *string
 
-	// A URL that links to a page about the current finding in the security-findings
-	// provider's solution.
-	SourceUrl *string
-
-	// Threat intelligence details related to a finding.
-	ThreatIntelIndicators []*ThreatIntelIndicator
-
-	// A finding's description. In this release, Description is a required property.
-	//
-	// This member is required.
-	Description *string
-
-	// Provides a list of vulnerabilities associated with the findings.
-	Vulnerabilities []*Vulnerability
-
-	// The level of importance assigned to the resources associated with the finding. A
-	// score of 0 means that the underlying resources have no criticality, and a score
-	// of 100 is reserved for the most critical resources.
-	Criticality *int32
-
-	// Indicates the veracity of a finding.
-	VerificationState VerificationState
-
 	// A set of resource data types that describe the resources that the finding refers
 	// to.
 	//
 	// This member is required.
 	Resources []*Resource
 
-	// The details of network-related information about a finding.
-	Network *Network
-
-	// A list of malware related to a finding.
-	Malware []*Malware
-
-	// Provides information about a network path that is relevant to a finding. Each
-	// entry under NetworkPath represents a component of that path.
-	NetworkPath []*NetworkPathComponent
-
-	// Provides information about the status of the investigation into a finding.
-	Workflow *Workflow
-
-	// The details of process-related information about a finding.
-	Process *ProcessDetails
-
-	// A list of related findings.
-	RelatedFindings []*RelatedFinding
-
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider first observed the potential security issue that a finding captured.
-	FirstObservedAt *string
+	// The schema version that a finding is formatted for.
+	//
+	// This member is required.
+	SchemaVersion *string
 
 	// A finding's severity.
 	//
 	// This member is required.
 	Severity *Severity
 
-	// The schema version that a finding is formatted for.
-	//
-	// This member is required.
-	SchemaVersion *string
-
-	// The record state of a finding.
-	RecordState RecordState
-
-	// A data type where security-findings providers can include additional
-	// solution-specific details that aren't part of the defined AwsSecurityFinding
-	// format.
-	ProductFields map[string]*string
-
-	// A data type that describes the remediation options for a finding.
-	Remediation *Remediation
-
 	// A finding's title. In this release, Title is a required property.
 	//
 	// This member is required.
 	Title *string
 
-	// A finding's confidence. Confidence is defined as the likelihood that a finding
-	// accurately identifies the behavior or issue that it was intended to identify.
-	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
-	// percent confidence and 100 means 100 percent confidence.
-	Confidence *int32
-
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider most recently observed the potential security issue that a finding
-	// captured.
-	LastObservedAt *string
-
-	// The AWS account ID that a finding is generated in.
+	// One or more finding types in the format of namespace/category/classifier that
+	// classify a finding. Valid namespace values are: Software and Configuration
+	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
 	//
 	// This member is required.
-	AwsAccountId *string
-
-	// The security findings provider-specific identifier for a finding.
-	//
-	// This member is required.
-	Id *string
-
-	// A list of name/value string pairs associated with the finding. These are custom,
-	// user-defined fields added to a finding.
-	UserDefinedFields map[string]*string
-
-	// The workflow state of a finding.
-	WorkflowState WorkflowState
+	Types []*string
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider last updated the finding record.
@@ -1243,21 +1186,78 @@ type AwsSecurityFinding struct {
 	// AWS Foundations. Contains security standard-related finding details.
 	Compliance *Compliance
 
+	// A finding's confidence. Confidence is defined as the likelihood that a finding
+	// accurately identifies the behavior or issue that it was intended to identify.
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
+	// percent confidence and 100 means 100 percent confidence.
+	Confidence *int32
+
+	// The level of importance assigned to the resources associated with the finding. A
+	// score of 0 means that the underlying resources have no criticality, and a score
+	// of 100 is reserved for the most critical resources.
+	Criticality *int32
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider first observed the potential security issue that a finding captured.
+	FirstObservedAt *string
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider most recently observed the potential security issue that a finding
+	// captured.
+	LastObservedAt *string
+
+	// A list of malware related to a finding.
+	Malware []*Malware
+
+	// The details of network-related information about a finding.
+	Network *Network
+
+	// Provides information about a network path that is relevant to a finding. Each
+	// entry under NetworkPath represents a component of that path.
+	NetworkPath []*NetworkPathComponent
+
 	// A user-defined note added to a finding.
 	Note *Note
 
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider created the potential security issue that a finding captured.
-	//
-	// This member is required.
-	CreatedAt *string
+	// The details of process-related information about a finding.
+	Process *ProcessDetails
 
-	// The identifier for the solution-specific component (a discrete unit of logic)
-	// that generated a finding. In various security-findings providers' solutions,
-	// this generator can be called a rule, a check, a detector, a plugin, etc.
-	//
-	// This member is required.
-	GeneratorId *string
+	// A data type where security-findings providers can include additional
+	// solution-specific details that aren't part of the defined AwsSecurityFinding
+	// format.
+	ProductFields map[string]*string
+
+	// The record state of a finding.
+	RecordState RecordState
+
+	// A list of related findings.
+	RelatedFindings []*RelatedFinding
+
+	// A data type that describes the remediation options for a finding.
+	Remediation *Remediation
+
+	// A URL that links to a page about the current finding in the security-findings
+	// provider's solution.
+	SourceUrl *string
+
+	// Threat intelligence details related to a finding.
+	ThreatIntelIndicators []*ThreatIntelIndicator
+
+	// A list of name/value string pairs associated with the finding. These are custom,
+	// user-defined fields added to a finding.
+	UserDefinedFields map[string]*string
+
+	// Indicates the veracity of a finding.
+	VerificationState VerificationState
+
+	// Provides a list of vulnerabilities associated with the findings.
+	Vulnerabilities []*Vulnerability
+
+	// Provides information about the status of the investigation into a finding.
+	Workflow *Workflow
+
+	// The workflow state of a finding.
+	WorkflowState WorkflowState
 }
 
 // A collection of attributes that are applied to all active Security
@@ -1265,26 +1265,88 @@ type AwsSecurityFinding struct {
 // included in this insight.
 type AwsSecurityFindingFilters struct {
 
-	// The path to the process executable.
-	ProcessPath []*StringFilter
+	// The AWS account ID that a finding is generated in.
+	AwsAccountId []*StringFilter
+
+	// The name of the findings provider (company) that owns the solution (product)
+	// that generates findings.
+	CompanyName []*StringFilter
+
+	// Exclusive to findings that are generated as the result of a check run against a
+	// specific rule in a supported standard, such as CIS AWS Foundations. Contains
+	// security standard-related finding details.
+	ComplianceStatus []*StringFilter
+
+	// A finding's confidence. Confidence is defined as the likelihood that a finding
+	// accurately identifies the behavior or issue that it was intended to identify.
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
+	// percent confidence and 100 means 100 percent confidence.
+	Confidence []*NumberFilter
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider captured the potential security issue that a finding captured.
+	CreatedAt []*DateFilter
+
+	// The level of importance assigned to the resources associated with the finding. A
+	// score of 0 means that the underlying resources have no criticality, and a score
+	// of 100 is reserved for the most critical resources.
+	Criticality []*NumberFilter
+
+	// A finding's description.
+	Description []*StringFilter
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider first observed the potential security issue that a finding captured.
+	FirstObservedAt []*DateFilter
+
+	// The identifier for the solution-specific component (a discrete unit of logic)
+	// that generated a finding. In various security-findings providers' solutions,
+	// this generator can be called a rule, a check, a detector, a plugin, etc.
+	GeneratorId []*StringFilter
+
+	// The security findings provider-specific identifier for a finding.
+	Id []*StringFilter
+
+	// A keyword for a finding.
+	Keyword []*KeywordFilter
+
+	// An ISO8601-formatted timestamp that indicates when the security-findings
+	// provider most recently observed the potential security issue that a finding
+	// captured.
+	LastObservedAt []*DateFilter
+
+	// The name of the malware that was observed.
+	MalwareName []*StringFilter
+
+	// The filesystem path of the malware that was observed.
+	MalwarePath []*StringFilter
+
+	// The state of the malware that was observed.
+	MalwareState []*StringFilter
+
+	// The type of the malware that was observed.
+	MalwareType []*StringFilter
+
+	// The destination domain of network-related information about a finding.
+	NetworkDestinationDomain []*StringFilter
+
+	// The destination IPv4 address of network-related information about a finding.
+	NetworkDestinationIpV4 []*IpFilter
+
+	// The destination IPv6 address of network-related information about a finding.
+	NetworkDestinationIpV6 []*IpFilter
+
+	// The destination port of network-related information about a finding.
+	NetworkDestinationPort []*NumberFilter
+
+	// Indicates the direction of network traffic associated with a finding.
+	NetworkDirection []*StringFilter
 
 	// The protocol of network-related information about a finding.
 	NetworkProtocol []*StringFilter
 
-	// The IPv4 addresses associated with the instance.
-	ResourceAwsEc2InstanceIpV4Addresses []*IpFilter
-
-	// The canonical AWS partition name that the Region is assigned to.
-	ResourcePartition []*StringFilter
-
-	// The creation date/time of the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyCreatedAt []*DateFilter
-
-	// The solution-generated identifier for a related finding.
-	RelatedFindingsId []*StringFilter
-
-	// Specifies the type of the resource that details are provided for.
-	ResourceType []*StringFilter
+	// The source domain of network-related information about a finding.
+	NetworkSourceDomain []*StringFilter
 
 	// The source IPv4 address of network-related information about a finding.
 	NetworkSourceIpV4 []*IpFilter
@@ -1292,118 +1354,192 @@ type AwsSecurityFindingFilters struct {
 	// The source IPv6 address of network-related information about a finding.
 	NetworkSourceIpV6 []*IpFilter
 
-	// The principal that created a note.
-	NoteUpdatedBy []*StringFilter
-
-	// Indicates the direction of network traffic associated with a finding.
-	NetworkDirection []*StringFilter
-
-	// The identifier of the VPC that the instance was launched in.
-	ResourceAwsEc2InstanceVpcId []*StringFilter
+	// The source media access control (MAC) address of network-related information
+	// about a finding.
+	NetworkSourceMac []*StringFilter
 
 	// The source port of network-related information about a finding.
 	NetworkSourcePort []*NumberFilter
 
-	// The type of a threat intelligence indicator.
-	ThreatIntelIndicatorType []*StringFilter
-
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider first observed the potential security issue that a finding captured.
-	FirstObservedAt []*DateFilter
-
-	// The value of a threat intelligence indicator.
-	ThreatIntelIndicatorValue []*StringFilter
-
-	// The normalized severity of a finding.
-	SeverityNormalized []*NumberFilter
-
-	// The date/time that the container was started.
-	ResourceContainerLaunchedAt []*DateFilter
-
-	// The display name of the owner of the S3 bucket.
-	ResourceAwsS3BucketOwnerName []*StringFilter
-
-	// The date/time that the process was launched.
-	ProcessLaunchedAt []*DateFilter
-
-	// The security findings provider-specific identifier for a finding.
-	Id []*StringFilter
-
-	// The user associated with the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyUserName []*StringFilter
-
-	// The level of importance assigned to the resources associated with the finding. A
-	// score of 0 means that the underlying resources have no criticality, and a score
-	// of 100 is reserved for the most critical resources.
-	Criticality []*NumberFilter
-
-	// The destination port of network-related information about a finding.
-	NetworkDestinationPort []*NumberFilter
-
-	// A list of AWS tags associated with a resource at the time the finding was
-	// processed.
-	ResourceTags []*MapFilter
-
-	// The IAM profile ARN of the instance.
-	ResourceAwsEc2InstanceIamInstanceProfileArn []*StringFilter
-
-	// The destination IPv6 address of network-related information about a finding.
-	NetworkDestinationIpV6 []*IpFilter
+	// The text of a note.
+	NoteText []*StringFilter
 
 	// The timestamp of when the note was updated.
 	NoteUpdatedAt []*DateFilter
 
-	// The identifier of the image related to a finding.
-	ResourceContainerImageId []*StringFilter
+	// The principal that created a note.
+	NoteUpdatedBy []*StringFilter
 
-	// The destination IPv4 address of network-related information about a finding.
-	NetworkDestinationIpV4 []*IpFilter
+	// The date/time that the process was launched.
+	ProcessLaunchedAt []*DateFilter
 
-	// The type of the malware that was observed.
-	MalwareType []*StringFilter
+	// The name of the process.
+	ProcessName []*StringFilter
 
 	// The parent process ID.
 	ProcessParentPid []*NumberFilter
 
-	// The source of the threat intelligence.
-	ThreatIntelIndicatorSource []*StringFilter
+	// The path to the process executable.
+	ProcessPath []*StringFilter
+
+	// The process ID.
+	ProcessPid []*NumberFilter
+
+	// The date/time that the process was terminated.
+	ProcessTerminatedAt []*DateFilter
+
+	// The ARN generated by Security Hub that uniquely identifies a third-party company
+	// (security findings provider) after this provider's product (solution that
+	// generates findings) is registered with Security Hub.
+	ProductArn []*StringFilter
+
+	// A data type where security-findings providers can include additional
+	// solution-specific details that aren't part of the defined AwsSecurityFinding
+	// format.
+	ProductFields []*MapFilter
+
+	// The name of the solution (product) that generates findings.
+	ProductName []*StringFilter
+
+	// The recommendation of what to do about the issue described in a finding.
+	RecommendationText []*StringFilter
+
+	// The updated record state for the finding.
+	RecordState []*StringFilter
+
+	// The solution-generated identifier for a related finding.
+	RelatedFindingsId []*StringFilter
+
+	// The ARN of the solution that generated a related finding.
+	RelatedFindingsProductArn []*StringFilter
+
+	// The IAM profile ARN of the instance.
+	ResourceAwsEc2InstanceIamInstanceProfileArn []*StringFilter
+
+	// The Amazon Machine Image (AMI) ID of the instance.
+	ResourceAwsEc2InstanceImageId []*StringFilter
+
+	// The IPv4 addresses associated with the instance.
+	ResourceAwsEc2InstanceIpV4Addresses []*IpFilter
+
+	// The IPv6 addresses associated with the instance.
+	ResourceAwsEc2InstanceIpV6Addresses []*IpFilter
+
+	// The key name associated with the instance.
+	ResourceAwsEc2InstanceKeyName []*StringFilter
 
 	// The date and time the instance was launched.
 	ResourceAwsEc2InstanceLaunchedAt []*DateFilter
 
-	// The recommendation of what to do about the issue described in a finding.
-	RecommendationText []*StringFilter
+	// The identifier of the subnet that the instance was launched in.
+	ResourceAwsEc2InstanceSubnetId []*StringFilter
+
+	// The instance type of the instance.
+	ResourceAwsEc2InstanceType []*StringFilter
+
+	// The identifier of the VPC that the instance was launched in.
+	ResourceAwsEc2InstanceVpcId []*StringFilter
+
+	// The creation date/time of the IAM access key related to a finding.
+	ResourceAwsIamAccessKeyCreatedAt []*DateFilter
+
+	// The status of the IAM access key related to a finding.
+	ResourceAwsIamAccessKeyStatus []*StringFilter
+
+	// The user associated with the IAM access key related to a finding.
+	ResourceAwsIamAccessKeyUserName []*StringFilter
+
+	// The canonical user ID of the owner of the S3 bucket.
+	ResourceAwsS3BucketOwnerId []*StringFilter
+
+	// The display name of the owner of the S3 bucket.
+	ResourceAwsS3BucketOwnerName []*StringFilter
+
+	// The identifier of the image related to a finding.
+	ResourceContainerImageId []*StringFilter
+
+	// The name of the image related to a finding.
+	ResourceContainerImageName []*StringFilter
+
+	// The date/time that the container was started.
+	ResourceContainerLaunchedAt []*DateFilter
+
+	// The name of the container related to a finding.
+	ResourceContainerName []*StringFilter
 
 	// The details of a resource that doesn't have a specific subfield for the resource
 	// type defined.
 	ResourceDetailsOther []*MapFilter
 
-	// Exclusive to findings that are generated as the result of a check run against a
-	// specific rule in a supported standard, such as CIS AWS Foundations. Contains
-	// security standard-related finding details.
-	ComplianceStatus []*StringFilter
+	// The canonical identifier for the given resource type.
+	ResourceId []*StringFilter
 
-	// The date/time that the process was terminated.
-	ProcessTerminatedAt []*DateFilter
+	// The canonical AWS partition name that the Region is assigned to.
+	ResourcePartition []*StringFilter
 
-	// The instance type of the instance.
-	ResourceAwsEc2InstanceType []*StringFilter
+	// The canonical AWS external Region name where this resource is located.
+	ResourceRegion []*StringFilter
+
+	// A list of AWS tags associated with a resource at the time the finding was
+	// processed.
+	ResourceTags []*MapFilter
+
+	// Specifies the type of the resource that details are provided for.
+	ResourceType []*StringFilter
+
+	// The label of a finding's severity.
+	SeverityLabel []*StringFilter
+
+	// The normalized severity of a finding.
+	SeverityNormalized []*NumberFilter
+
+	// The native severity as defined by the security-findings provider's solution that
+	// generated the finding.
+	SeverityProduct []*NumberFilter
+
+	// A URL that links to a page about the current finding in the security-findings
+	// provider's solution.
+	SourceUrl []*StringFilter
+
+	// The category of a threat intelligence indicator.
+	ThreatIntelIndicatorCategory []*StringFilter
+
+	// The date/time of the last observation of a threat intelligence indicator.
+	ThreatIntelIndicatorLastObservedAt []*DateFilter
+
+	// The source of the threat intelligence.
+	ThreatIntelIndicatorSource []*StringFilter
+
+	// The URL for more details from the source of the threat intelligence.
+	ThreatIntelIndicatorSourceUrl []*StringFilter
+
+	// The type of a threat intelligence indicator.
+	ThreatIntelIndicatorType []*StringFilter
+
+	// The value of a threat intelligence indicator.
+	ThreatIntelIndicatorValue []*StringFilter
+
+	// A finding's title.
+	Title []*StringFilter
+
+	// A finding type in the format of namespace/category/classifier that classifies a
+	// finding.
+	Type []*StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider captured the potential security issue that a finding captured.
-	CreatedAt []*DateFilter
+	// provider last updated the finding record.
+	UpdatedAt []*DateFilter
 
-	// The process ID.
-	ProcessPid []*NumberFilter
+	// A list of name/value string pairs associated with the finding. These are custom,
+	// user-defined fields added to a finding.
+	UserDefinedFields []*MapFilter
 
-	// The state of the malware that was observed.
-	MalwareState []*StringFilter
+	// The veracity of a finding.
+	VerificationState []*StringFilter
 
-	// The filesystem path of the malware that was observed.
-	MalwarePath []*StringFilter
-
-	// The name of the image related to a finding.
-	ResourceContainerImageName []*StringFilter
+	// The workflow state of a finding. Note that this field is deprecated. To search
+	// for a finding based on its workflow status, use WorkflowStatus.
+	WorkflowState []*StringFilter
 
 	// The status of the investigation into a finding. Allowed values are the
 	// following.
@@ -1421,142 +1557,6 @@ type AwsSecurityFindingFilters struct {
 	//     * RESOLVED - The finding
 	// was reviewed and remediated and is now considered resolved.
 	WorkflowStatus []*StringFilter
-
-	// The AWS account ID that a finding is generated in.
-	AwsAccountId []*StringFilter
-
-	// The label of a finding's severity.
-	SeverityLabel []*StringFilter
-
-	// The ARN of the solution that generated a related finding.
-	RelatedFindingsProductArn []*StringFilter
-
-	// A finding's title.
-	Title []*StringFilter
-
-	// The category of a threat intelligence indicator.
-	ThreatIntelIndicatorCategory []*StringFilter
-
-	// The canonical identifier for the given resource type.
-	ResourceId []*StringFilter
-
-	// The identifier of the subnet that the instance was launched in.
-	ResourceAwsEc2InstanceSubnetId []*StringFilter
-
-	// A data type where security-findings providers can include additional
-	// solution-specific details that aren't part of the defined AwsSecurityFinding
-	// format.
-	ProductFields []*MapFilter
-
-	// The updated record state for the finding.
-	RecordState []*StringFilter
-
-	// The Amazon Machine Image (AMI) ID of the instance.
-	ResourceAwsEc2InstanceImageId []*StringFilter
-
-	// The name of the findings provider (company) that owns the solution (product)
-	// that generates findings.
-	CompanyName []*StringFilter
-
-	// The native severity as defined by the security-findings provider's solution that
-	// generated the finding.
-	SeverityProduct []*NumberFilter
-
-	// The status of the IAM access key related to a finding.
-	ResourceAwsIamAccessKeyStatus []*StringFilter
-
-	// The ARN generated by Security Hub that uniquely identifies a third-party company
-	// (security findings provider) after this provider's product (solution that
-	// generates findings) is registered with Security Hub.
-	ProductArn []*StringFilter
-
-	// The canonical AWS external Region name where this resource is located.
-	ResourceRegion []*StringFilter
-
-	// The date/time of the last observation of a threat intelligence indicator.
-	ThreatIntelIndicatorLastObservedAt []*DateFilter
-
-	// A list of name/value string pairs associated with the finding. These are custom,
-	// user-defined fields added to a finding.
-	UserDefinedFields []*MapFilter
-
-	// A finding's description.
-	Description []*StringFilter
-
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider most recently observed the potential security issue that a finding
-	// captured.
-	LastObservedAt []*DateFilter
-
-	// The name of the malware that was observed.
-	MalwareName []*StringFilter
-
-	// The URL for more details from the source of the threat intelligence.
-	ThreatIntelIndicatorSourceUrl []*StringFilter
-
-	// A finding type in the format of namespace/category/classifier that classifies a
-	// finding.
-	Type []*StringFilter
-
-	// The key name associated with the instance.
-	ResourceAwsEc2InstanceKeyName []*StringFilter
-
-	// The name of the container related to a finding.
-	ResourceContainerName []*StringFilter
-
-	// The IPv6 addresses associated with the instance.
-	ResourceAwsEc2InstanceIpV6Addresses []*IpFilter
-
-	// A URL that links to a page about the current finding in the security-findings
-	// provider's solution.
-	SourceUrl []*StringFilter
-
-	// The source domain of network-related information about a finding.
-	NetworkSourceDomain []*StringFilter
-
-	// The veracity of a finding.
-	VerificationState []*StringFilter
-
-	// An ISO8601-formatted timestamp that indicates when the security-findings
-	// provider last updated the finding record.
-	UpdatedAt []*DateFilter
-
-	// The destination domain of network-related information about a finding.
-	NetworkDestinationDomain []*StringFilter
-
-	// The workflow state of a finding. Note that this field is deprecated. To search
-	// for a finding based on its workflow status, use WorkflowStatus.
-	WorkflowState []*StringFilter
-
-	// A finding's confidence. Confidence is defined as the likelihood that a finding
-	// accurately identifies the behavior or issue that it was intended to identify.
-	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
-	// percent confidence and 100 means 100 percent confidence.
-	Confidence []*NumberFilter
-
-	// The name of the process.
-	ProcessName []*StringFilter
-
-	// The source media access control (MAC) address of network-related information
-	// about a finding.
-	NetworkSourceMac []*StringFilter
-
-	// The name of the solution (product) that generates findings.
-	ProductName []*StringFilter
-
-	// The identifier for the solution-specific component (a discrete unit of logic)
-	// that generated a finding. In various security-findings providers' solutions,
-	// this generator can be called a rule, a check, a detector, a plugin, etc.
-	GeneratorId []*StringFilter
-
-	// The canonical user ID of the owner of the S3 bucket.
-	ResourceAwsS3BucketOwnerId []*StringFilter
-
-	// The text of a note.
-	NoteText []*StringFilter
-
-	// A keyword for a finding.
-	Keyword []*KeywordFilter
 }
 
 // Identifies a finding to update using BatchUpdateFindings.
@@ -1582,15 +1582,15 @@ type AwsSnsTopicDetails struct {
 	// CMK.
 	KmsMasterKeyId *string
 
+	// The subscription's owner.
+	Owner *string
+
 	// Subscription is an embedded property that describes the subscription endpoints
 	// of an Amazon SNS topic.
 	Subscription []*AwsSnsTopicSubscription
 
 	// The name of the topic.
 	TopicName *string
-
-	// The subscription's owner.
-	Owner *string
 }
 
 // A wrapper type for the attributes of an Amazon SNS subscription.
@@ -1606,13 +1606,6 @@ type AwsSnsTopicSubscription struct {
 // Data about a queue.
 type AwsSqsQueueDetails struct {
 
-	// The name of the new queue.
-	QueueName *string
-
-	// The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom
-	// CMK.
-	KmsMasterKeyId *string
-
 	// The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS
 	// moves messages after the value of maxReceiveCount is exceeded.
 	DeadLetterTargetArn *string
@@ -1620,13 +1613,20 @@ type AwsSqsQueueDetails struct {
 	// The length of time, in seconds, for which Amazon SQS can reuse a data key to
 	// encrypt or decrypt messages before calling AWS KMS again.
 	KmsDataKeyReusePeriodSeconds *int32
+
+	// The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom
+	// CMK.
+	KmsMasterKeyId *string
+
+	// The name of the new queue.
+	QueueName *string
 }
 
 // Details about a WAF WebACL.
 type AwsWafWebAclDetails struct {
 
-	// A unique identifier for a WebACL.
-	WebAclId *string
+	// The action to perform if none of the rules contained in the WebACL match.
+	DefaultAction *string
 
 	// A friendly name or description of the WebACL. You can't change the name of a
 	// WebACL after you create it.
@@ -1636,12 +1636,19 @@ type AwsWafWebAclDetails struct {
 	// rule, and the ID of the rule.
 	Rules []*AwsWafWebAclRule
 
-	// The action to perform if none of the rules contained in the WebACL match.
-	DefaultAction *string
+	// A unique identifier for a WebACL.
+	WebAclId *string
 }
 
 // Details for a rule in a WAF WebACL.
 type AwsWafWebAclRule struct {
+
+	// Specifies the action that CloudFront or AWS WAF takes when a web request matches
+	// the conditions in the rule.
+	Action *WafAction
+
+	// Rules to exclude from a rule group.
+	ExcludedRules []*WafExcludedRule
 
 	// Use the OverrideAction to test your RuleGroup. Any rule in a RuleGroup can
 	// potentially block a request. If you set the OverrideAction to None, the
@@ -1655,10 +1662,6 @@ type AwsWafWebAclRule struct {
 	// requests, ActivatedRule|Action is used instead of ActivatedRule|OverrideAction.
 	OverrideAction *WafOverrideAction
 
-	// Specifies the action that CloudFront or AWS WAF takes when a web request matches
-	// the conditions in the rule.
-	Action *WafAction
-
 	// Specifies the order in which the rules in a WebACL are evaluated. Rules with a
 	// lower value for Priority are evaluated before rules with a higher value. The
 	// value must be a unique integer. If you add multiple rules to a WebACL, the
@@ -1671,29 +1674,26 @@ type AwsWafWebAclRule struct {
 	// The rule type. Valid values: REGULAR | RATE_BASED | GROUP The default is
 	// REGULAR.
 	Type *string
-
-	// Rules to exclude from a rule group.
-	ExcludedRules []*WafExcludedRule
 }
 
 // A finding from a BatchUpdateFindings request that Security Hub was unable to
 // update.
 type BatchUpdateFindingsUnprocessedFinding struct {
 
-	// The identifier of the finding that was not updated.
+	// The code associated with the error.
 	//
 	// This member is required.
-	FindingIdentifier *AwsSecurityFindingIdentifier
+	ErrorCode *string
 
 	// The message associated with the error.
 	//
 	// This member is required.
 	ErrorMessage *string
 
-	// The code associated with the error.
+	// The identifier of the finding that was not updated.
 	//
 	// This member is required.
-	ErrorCode *string
+	FindingIdentifier *AwsSecurityFindingIdentifier
 }
 
 // An IPv4 CIDR block association.
@@ -1712,6 +1712,11 @@ type CidrBlockAssociation struct {
 // Contains finding details that are specific to control-based findings. Only
 // returned for findings generated from controls.
 type Compliance struct {
+
+	// For a control, the industry or regulatory framework requirements that are
+	// related to the control. The check for that control is aligned with these
+	// requirements.
+	RelatedRequirements []*string
 
 	// The result of a standards check. The valid values for Status are as follows.
 	//
@@ -1732,11 +1737,6 @@ type Compliance struct {
 	// finding.
 	Status ComplianceStatus
 
-	// For a control, the industry or regulatory framework requirements that are
-	// related to the control. The check for that control is aligned with these
-	// requirements.
-	RelatedRequirements []*string
-
 	// For findings generated from controls, a list of reasons behind the value of
 	// Status. For the list of status reason codes and their meanings, see
 	// Standards-related information in the ASFF
@@ -1748,43 +1748,43 @@ type Compliance struct {
 // Container details related to a finding.
 type ContainerDetails struct {
 
-	// The name of the container related to a finding.
-	Name *string
-
 	// The identifier of the image related to a finding.
 	ImageId *string
+
+	// The name of the image related to a finding.
+	ImageName *string
 
 	// The date and time when the container started.
 	LaunchedAt *string
 
-	// The name of the image related to a finding.
-	ImageName *string
+	// The name of the container related to a finding.
+	Name *string
 }
 
 // CVSS scores from the advisory related to the vulnerability.
 type Cvss struct {
-
-	// The version of CVSS for the CVSS score.
-	Version *string
 
 	// The base CVSS score.
 	BaseScore *float64
 
 	// The base scoring vector for the CVSS score.
 	BaseVector *string
+
+	// The version of CVSS for the CVSS score.
+	Version *string
 }
 
 // A date filter for querying findings.
 type DateFilter struct {
 
-	// A start date for the date filter.
-	Start *string
+	// A date range for the date filter.
+	DateRange *DateRange
 
 	// An end date for the date filter.
 	End *string
 
-	// A date range for the date filter.
-	DateRange *DateRange
+	// A start date for the date filter.
+	Start *string
 }
 
 // A date range for the date filter.
@@ -1801,15 +1801,15 @@ type DateRange struct {
 // provides the error.
 type ImportFindingsError struct {
 
-	// The message of the error returned by the BatchImportFindings operation.
-	//
-	// This member is required.
-	ErrorMessage *string
-
 	// The code of the error returned by the BatchImportFindings operation.
 	//
 	// This member is required.
 	ErrorCode *string
+
+	// The message of the error returned by the BatchImportFindings operation.
+	//
+	// This member is required.
+	ErrorMessage *string
 
 	// The identifier of the finding that could not be updated.
 	//
@@ -1819,16 +1819,6 @@ type ImportFindingsError struct {
 
 // Contains information about a Security Hub insight.
 type Insight struct {
-
-	// The name of a Security Hub insight.
-	//
-	// This member is required.
-	Name *string
-
-	// The ARN of a Security Hub insight.
-	//
-	// This member is required.
-	InsightArn *string
 
 	// One or more attributes used to filter the findings included in the insight. The
 	// insight only includes findings that match the criteria defined in the filters.
@@ -1843,10 +1833,26 @@ type Insight struct {
 	//
 	// This member is required.
 	GroupByAttribute *string
+
+	// The ARN of a Security Hub insight.
+	//
+	// This member is required.
+	InsightArn *string
+
+	// The name of a Security Hub insight.
+	//
+	// This member is required.
+	Name *string
 }
 
 // The insight results returned by the GetInsightResults operation.
 type InsightResults struct {
+
+	// The attribute that the findings are grouped by for the insight whose results are
+	// returned by the GetInsightResults operation.
+	//
+	// This member is required.
+	GroupByAttribute *string
 
 	// The ARN of the insight whose results are returned by the GetInsightResults
 	// operation.
@@ -1858,27 +1864,21 @@ type InsightResults struct {
 	//
 	// This member is required.
 	ResultValues []*InsightResultValue
-
-	// The attribute that the findings are grouped by for the insight whose results are
-	// returned by the GetInsightResults operation.
-	//
-	// This member is required.
-	GroupByAttribute *string
 }
 
 // The insight result values returned by the GetInsightResults operation.
 type InsightResultValue struct {
+
+	// The number of findings returned for each GroupByAttributeValue.
+	//
+	// This member is required.
+	Count *int32
 
 	// The value of the attribute that the findings are grouped by for the insight
 	// whose results are returned by the GetInsightResults operation.
 	//
 	// This member is required.
 	GroupByAttributeValue *string
-
-	// The number of findings returned for each GroupByAttributeValue.
-	//
-	// This member is required.
-	Count *int32
 }
 
 // Details about an invitation.
@@ -1888,14 +1888,14 @@ type Invitation struct {
 	// from.
 	AccountId *string
 
-	// The current status of the association between the member and master accounts.
-	MemberStatus *string
-
 	// The ID of the invitation sent to the member account.
 	InvitationId *string
 
 	// The timestamp of when the invitation was sent.
 	InvitedAt *time.Time
+
+	// The current status of the association between the member and master accounts.
+	MemberStatus *string
 }
 
 // The IP filter for querying findings.
@@ -1940,26 +1940,23 @@ type LoadBalancerState struct {
 // A list of malware related to a finding.
 type Malware struct {
 
-	// The file system path of the malware that was observed.
-	Path *string
-
-	// The type of the malware that was observed.
-	Type MalwareType
-
 	// The name of the malware that was observed.
 	//
 	// This member is required.
 	Name *string
 
+	// The file system path of the malware that was observed.
+	Path *string
+
 	// The state of the malware that was observed.
 	State MalwareState
+
+	// The type of the malware that was observed.
+	Type MalwareType
 }
 
 // The map filter for querying findings.
 type MapFilter struct {
-
-	// The value for the key in the map filter.
-	Value *string
 
 	// The condition to apply to a key value when querying for findings with a map
 	// filter.
@@ -1967,18 +1964,27 @@ type MapFilter struct {
 
 	// The key of the map filter.
 	Key *string
+
+	// The value for the key in the map filter.
+	Value *string
 }
 
 // The details about a member account.
 type Member struct {
 
-	// The AWS account ID of the Security Hub master account associated with this
-	// member account.
-	MasterId *string
+	// The AWS account ID of the member account.
+	AccountId *string
+
+	// The email address of the member account.
+	Email *string
 
 	// A timestamp for the date and time when the invitation was sent to the member
 	// account.
 	InvitedAt *time.Time
+
+	// The AWS account ID of the Security Hub master account associated with this
+	// member account.
+	MasterId *string
 
 	// The status of the relationship between the member account and its master
 	// account.
@@ -1986,37 +1992,28 @@ type Member struct {
 
 	// The timestamp for the date and time when the member account was updated.
 	UpdatedAt *time.Time
-
-	// The email address of the member account.
-	Email *string
-
-	// The AWS account ID of the member account.
-	AccountId *string
 }
 
 // The details of network-related information about a finding.
 type Network struct {
 
-	// The source port of network-related information about a finding.
-	SourcePort *int32
-
-	// The destination IPv6 address of network-related information about a finding.
-	DestinationIpV6 *string
-
-	// The source IPv6 address of network-related information about a finding.
-	SourceIpV6 *string
+	// The destination domain of network-related information about a finding.
+	DestinationDomain *string
 
 	// The destination IPv4 address of network-related information about a finding.
 	DestinationIpV4 *string
 
+	// The destination IPv6 address of network-related information about a finding.
+	DestinationIpV6 *string
+
 	// The destination port of network-related information about a finding.
 	DestinationPort *int32
 
-	// The range of open ports that is present on the network.
-	OpenPortRange *PortRange
-
 	// The direction of network traffic associated with a finding.
 	Direction NetworkDirection
+
+	// The range of open ports that is present on the network.
+	OpenPortRange *PortRange
 
 	// The protocol of network-related information about a finding.
 	Protocol *string
@@ -2027,23 +2024,26 @@ type Network struct {
 	// The source IPv4 address of network-related information about a finding.
 	SourceIpV4 *string
 
+	// The source IPv6 address of network-related information about a finding.
+	SourceIpV6 *string
+
 	// The source media access control (MAC) address of network-related information
 	// about a finding.
 	SourceMac *string
 
-	// The destination domain of network-related information about a finding.
-	DestinationDomain *string
+	// The source port of network-related information about a finding.
+	SourcePort *int32
 }
 
 // Details about a network path component that occurs before or after the current
 // component.
 type NetworkHeader struct {
 
-	// The protocol used for the component.
-	Protocol *string
-
 	// Information about the destination of the component.
 	Destination *NetworkPathComponentDetails
+
+	// The protocol used for the component.
+	Protocol *string
 
 	// Information about the origin of the component.
 	Source *NetworkPathComponentDetails
@@ -2052,11 +2052,11 @@ type NetworkHeader struct {
 // Information about a network path component.
 type NetworkPathComponent struct {
 
-	// The type of component.
-	ComponentType *string
-
 	// The identifier of a component in the network path.
 	ComponentId *string
+
+	// The type of component.
+	ComponentType *string
 
 	// Information about the component that comes after the current component in the
 	// network path.
@@ -2070,11 +2070,11 @@ type NetworkPathComponent struct {
 // Information about the destination of the next component in the network path.
 type NetworkPathComponentDetails struct {
 
-	// A list of port ranges for the destination.
-	PortRanges []*PortRange
-
 	// The IP addresses of the destination.
 	Address []*string
+
+	// A list of port ranges for the destination.
+	PortRanges []*PortRange
 }
 
 // A user-defined note added to a finding.
@@ -2099,27 +2099,27 @@ type Note struct {
 // The updated note.
 type NoteUpdate struct {
 
-	// The principal that updated the note.
-	//
-	// This member is required.
-	UpdatedBy *string
-
 	// The updated note text.
 	//
 	// This member is required.
 	Text *string
+
+	// The principal that updated the note.
+	//
+	// This member is required.
+	UpdatedBy *string
 }
 
 // A number filter for querying findings.
 type NumberFilter struct {
 
-	// The greater-than-equal condition to be applied to a single field when querying
-	// for findings.
-	Gte *float64
-
 	// The equal-to condition to be applied to a single field when querying for
 	// findings.
 	Eq *float64
+
+	// The greater-than-equal condition to be applied to a single field when querying
+	// for findings.
+	Gte *float64
 
 	// The less-than-equal condition to be applied to a single field when querying for
 	// findings.
@@ -2129,62 +2129,37 @@ type NumberFilter struct {
 // A range of ports.
 type PortRange struct {
 
-	// The last port in the port range.
-	End *int32
-
 	// The first port in the port range.
 	Begin *int32
+
+	// The last port in the port range.
+	End *int32
 }
 
 // The details of process-related information about a finding.
 type ProcessDetails struct {
 
-	// The process ID.
-	Pid *int32
-
 	// The date/time that the process was launched.
 	LaunchedAt *string
+
+	// The name of the process.
+	Name *string
 
 	// The parent process ID.
 	ParentPid *int32
 
-	// The date and time when the process was terminated.
-	TerminatedAt *string
-
 	// The path to the process executable.
 	Path *string
 
-	// The name of the process.
-	Name *string
+	// The process ID.
+	Pid *int32
+
+	// The date and time when the process was terminated.
+	TerminatedAt *string
 }
 
 // Contains details about a product.
 type Product struct {
-
-	// The name of the product.
-	ProductName *string
-
-	// A description of the product.
-	Description *string
-
-	// The resource policy associated with the product.
-	ProductSubscriptionResourcePolicy *string
-
-	// The URL for the page that contains more information about the product.
-	MarketplaceUrl *string
-
-	// The name of the company that provides the product.
-	CompanyName *string
-
-	// The types of integration that the product supports. Available values are the
-	// following.
-	//
-	//     * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration
-	// sends findings to Security Hub.
-	//
-	//     * RECEIVE_FINDINGS_FROM_SECURITY_HUB -
-	// Indicates that the integration receives findings from Security Hub.
-	IntegrationTypes []IntegrationType
 
 	// The ARN assigned to the product.
 	//
@@ -2196,6 +2171,31 @@ type Product struct {
 
 	// The categories assigned to the product.
 	Categories []*string
+
+	// The name of the company that provides the product.
+	CompanyName *string
+
+	// A description of the product.
+	Description *string
+
+	// The types of integration that the product supports. Available values are the
+	// following.
+	//
+	//     * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration
+	// sends findings to Security Hub.
+	//
+	//     * RECEIVE_FINDINGS_FROM_SECURITY_HUB -
+	// Indicates that the integration receives findings from Security Hub.
+	IntegrationTypes []IntegrationType
+
+	// The URL for the page that contains more information about the product.
+	MarketplaceUrl *string
+
+	// The name of the product.
+	ProductName *string
+
+	// The resource policy associated with the product.
+	ProductSubscriptionResourcePolicy *string
 }
 
 // A recommendation on how to remediate the issue identified in a finding.
@@ -2213,15 +2213,15 @@ type Recommendation struct {
 // Details about a related finding.
 type RelatedFinding struct {
 
-	// The ARN of the product that generated a related finding.
-	//
-	// This member is required.
-	ProductArn *string
-
 	// The product-generated identifier for a related finding.
 	//
 	// This member is required.
 	Id *string
+
+	// The ARN of the product that generated a related finding.
+	//
+	// This member is required.
+	ProductArn *string
 }
 
 // Details about the remediation steps for a finding.
@@ -2235,8 +2235,10 @@ type Remediation struct {
 // A resource related to a finding.
 type Resource struct {
 
-	// The canonical AWS external Region name where this resource is located.
-	Region *string
+	// The canonical identifier for the given resource type.
+	//
+	// This member is required.
+	Id *string
 
 	// The type of the resource that details are provided for. If possible, set Type to
 	// one of the supported resource types. For example, if the resource is an EC2
@@ -2246,20 +2248,18 @@ type Resource struct {
 	// This member is required.
 	Type *string
 
-	// A list of AWS tags associated with a resource at the time the finding was
-	// processed.
-	Tags map[string]*string
-
 	// Additional details about the resource related to a finding.
 	Details *ResourceDetails
 
 	// The canonical AWS partition name that the Region is assigned to.
 	Partition Partition
 
-	// The canonical identifier for the given resource type.
-	//
-	// This member is required.
-	Id *string
+	// The canonical AWS external Region name where this resource is located.
+	Region *string
+
+	// A list of AWS tags associated with a resource at the time the finding was
+	// processed.
+	Tags map[string]*string
 }
 
 // Additional details about a resource related to a finding. To provide the
@@ -2271,71 +2271,71 @@ type Resource struct {
 // the selected type does not have a corresponding object.
 type ResourceDetails struct {
 
-	// Details about an Amazon S3 object related to a finding.
-	AwsS3Object *AwsS3ObjectDetails
-
-	// Details about an SNS topic.
-	AwsSnsTopic *AwsSnsTopicDetails
-
-	// Details for an AWS CodeBuild project.
-	AwsCodeBuildProject *AwsCodeBuildProjectDetails
-
-	// Details about a container resource related to a finding.
-	Container *ContainerDetails
-
-	// Details about an Amazon EC2 instance related to a finding.
-	AwsEc2Instance *AwsEc2InstanceDetails
-
-	// Details for an EC2 VPC.
-	AwsEc2Vpc *AwsEc2VpcDetails
-
-	// Details about a KMS key.
-	AwsKmsKey *AwsKmsKeyDetails
-
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
 
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails
 
-	// Details about a Lambda function.
-	AwsLambdaFunction *AwsLambdaFunctionDetails
+	// Details for an AWS CodeBuild project.
+	AwsCodeBuildProject *AwsCodeBuildProjectDetails
 
-	// Details about an Amazon S3 bucket related to a finding.
-	AwsS3Bucket *AwsS3BucketDetails
+	// Details about an Amazon EC2 instance related to a finding.
+	AwsEc2Instance *AwsEc2InstanceDetails
 
 	// Details for an Amazon EC2 network interface.
 	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails
 
-	// Details about an SQS queue.
-	AwsSqsQueue *AwsSqsQueueDetails
-
 	// Details for an EC2 security group.
 	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails
-
-	// Details about an IAM role.
-	AwsIamRole *AwsIamRoleDetails
-
-	// Details for an Elasticsearch domain.
-	AwsElasticsearchDomain *AwsElasticsearchDomainDetails
-
-	// Details for an Amazon RDS database instance.
-	AwsRdsDbInstance *AwsRdsDbInstanceDetails
 
 	// Details for an EC2 volume.
 	AwsEc2Volume *AwsEc2VolumeDetails
 
+	// Details for an EC2 VPC.
+	AwsEc2Vpc *AwsEc2VpcDetails
+
+	// Details for an Elasticsearch domain.
+	AwsElasticsearchDomain *AwsElasticsearchDomainDetails
+
 	// Details about a load balancer.
 	AwsElbv2LoadBalancer *AwsElbv2LoadBalancerDetails
-
-	// Details for a Lambda layer version.
-	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
 
 	// Details about an IAM access key related to a finding.
 	AwsIamAccessKey *AwsIamAccessKeyDetails
 
+	// Details about an IAM role.
+	AwsIamRole *AwsIamRoleDetails
+
+	// Details about a KMS key.
+	AwsKmsKey *AwsKmsKeyDetails
+
+	// Details about a Lambda function.
+	AwsLambdaFunction *AwsLambdaFunctionDetails
+
+	// Details for a Lambda layer version.
+	AwsLambdaLayerVersion *AwsLambdaLayerVersionDetails
+
+	// Details for an Amazon RDS database instance.
+	AwsRdsDbInstance *AwsRdsDbInstanceDetails
+
+	// Details about an Amazon S3 bucket related to a finding.
+	AwsS3Bucket *AwsS3BucketDetails
+
+	// Details about an Amazon S3 object related to a finding.
+	AwsS3Object *AwsS3ObjectDetails
+
+	// Details about an SNS topic.
+	AwsSnsTopic *AwsSnsTopicDetails
+
+	// Details about an SQS queue.
+	AwsSqsQueue *AwsSqsQueueDetails
+
 	// Details for a WAF WebACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
+
+	// Details about a container resource related to a finding.
+	Container *ContainerDetails
 
 	// Details about a resource that are not available in a type-specific details
 	// object. Use the Other object in the following cases.
@@ -2354,11 +2354,11 @@ type ResourceDetails struct {
 // Details about the account that was not processed.
 type Result struct {
 
-	// The reason that the account was not processed.
-	ProcessingResult *string
-
 	// An AWS account ID of the account that was not processed.
 	AccountId *string
+
+	// The reason that the account was not processed.
+	ProcessingResult *string
 }
 
 // The severity of the finding. The finding provider can provide the initial
@@ -2369,31 +2369,6 @@ type Result struct {
 // attribute is populated, then the finding is invalid. Label is the preferred
 // attribute.
 type Severity struct {
-
-	// The native severity from the finding product that generated the finding.
-	Original *string
-
-	// Deprecated. The normalized severity of a finding. This attribute is being
-	// deprecated. Instead of providing Normalized, provide Label. If you provide Label
-	// and do not provide Normalized, then Normalized is set automatically as
-	// follows.
-	//
-	//     * INFORMATIONAL - 0
-	//
-	//     * LOW - 1
-	//
-	//     * MEDIUM - 40
-	//
-	//     * HIGH
-	// - 70
-	//
-	//     * CRITICAL - 90
-	Normalized *int32
-
-	// Deprecated. This attribute is being deprecated. Instead of providing Product,
-	// provide Original. The native severity as defined by the AWS service or
-	// integrated partner product that generated the finding.
-	Product *float64
 
 	// The severity value of the finding. The allowed values are the following.
 	//
@@ -2426,26 +2401,35 @@ type Severity struct {
 	//
 	//     * 90–100 - CRITICAL
 	Label SeverityLabel
+
+	// Deprecated. The normalized severity of a finding. This attribute is being
+	// deprecated. Instead of providing Normalized, provide Label. If you provide Label
+	// and do not provide Normalized, then Normalized is set automatically as
+	// follows.
+	//
+	//     * INFORMATIONAL - 0
+	//
+	//     * LOW - 1
+	//
+	//     * MEDIUM - 40
+	//
+	//     * HIGH
+	// - 70
+	//
+	//     * CRITICAL - 90
+	Normalized *int32
+
+	// The native severity from the finding product that generated the finding.
+	Original *string
+
+	// Deprecated. This attribute is being deprecated. Instead of providing Product,
+	// provide Original. The native severity as defined by the AWS service or
+	// integrated partner product that generated the finding.
+	Product *float64
 }
 
 // Updates to the severity information for a finding.
 type SeverityUpdate struct {
-
-	// The normalized severity for the finding. This attribute is to be deprecated in
-	// favor of Label. If you provide Normalized and do not provide Label, Label is set
-	// automatically as follows.
-	//
-	//     * 0 - INFORMATIONAL
-	//
-	//     * 1–39 - LOW
-	//
-	//     *
-	// 40–69 - MEDIUM
-	//
-	//     * 70–89 - HIGH
-	//
-	//     * 90–100 - CRITICAL
-	Normalized *int32
 
 	// The severity value of the finding. The allowed values are the following.
 	//
@@ -2464,6 +2448,22 @@ type SeverityUpdate struct {
 	// CRITICAL - The issue must be remediated immediately to avoid it escalating.
 	Label SeverityLabel
 
+	// The normalized severity for the finding. This attribute is to be deprecated in
+	// favor of Label. If you provide Normalized and do not provide Label, Label is set
+	// automatically as follows.
+	//
+	//     * 0 - INFORMATIONAL
+	//
+	//     * 1–39 - LOW
+	//
+	//     *
+	// 40–69 - MEDIUM
+	//
+	//     * 70–89 - HIGH
+	//
+	//     * 90–100 - CRITICAL
+	Normalized *int32
+
 	// The native severity as defined by the AWS service or integrated partner product
 	// that generated the finding.
 	Product *float64
@@ -2472,20 +2472,20 @@ type SeverityUpdate struct {
 // Information about a software package.
 type SoftwarePackage struct {
 
-	// The name of the software package.
-	Name *string
-
-	// The version of the software package.
-	Version *string
-
-	// The release of the software package.
-	Release *string
+	// The architecture used for the software package.
+	Architecture *string
 
 	// The epoch of the software package.
 	Epoch *string
 
-	// The architecture used for the software package.
-	Architecture *string
+	// The name of the software package.
+	Name *string
+
+	// The release of the software package.
+	Release *string
+
+	// The version of the software package.
+	Version *string
 }
 
 // A collection of finding attributes used to sort findings.
@@ -2501,8 +2501,8 @@ type SortCriterion struct {
 // Provides information about a specific standard.
 type Standard struct {
 
-	// The ARN of a standard.
-	StandardsArn *string
+	// A description of the standard.
+	Description *string
 
 	// Whether the standard is enabled by default. When Security Hub is enabled from
 	// the console, if a standard is enabled by default, the check box for that
@@ -2511,89 +2511,89 @@ type Standard struct {
 	// EnableDefaultStandards is set to false.
 	EnabledByDefault *bool
 
-	// A description of the standard.
-	Description *string
-
 	// The name of the standard.
 	Name *string
+
+	// The ARN of a standard.
+	StandardsArn *string
 }
 
 // Details for an individual security standard control.
 type StandardsControl struct {
 
-	// A link to remediation information for the control in the Security Hub user
-	// documentation.
-	RemediationUrl *string
+	// The identifier of the security standard control.
+	ControlId *string
 
 	// The current status of the security standard control. Indicates whether the
 	// control is enabled or disabled. Security Hub does not check against disabled
 	// controls.
 	ControlStatus ControlStatus
 
-	// The list of requirements that are related to this control.
-	RelatedRequirements []*string
-
-	// The identifier of the security standard control.
-	ControlId *string
+	// The date and time that the status of the security standard control was most
+	// recently updated.
+	ControlStatusUpdatedAt *time.Time
 
 	// The longer description of the security standard control. Provides information
 	// about what the control is checking for.
 	Description *string
 
-	// The title of the security standard control.
-	Title *string
-
 	// The reason provided for the most recent change in status for the control.
 	DisabledReason *string
+
+	// The list of requirements that are related to this control.
+	RelatedRequirements []*string
+
+	// A link to remediation information for the control in the Security Hub user
+	// documentation.
+	RemediationUrl *string
 
 	// The severity of findings generated from this security standard control. The
 	// finding severity is based on an assessment of how easy it would be to compromise
 	// AWS resources if the issue is detected.
 	SeverityRating SeverityRating
 
-	// The date and time that the status of the security standard control was most
-	// recently updated.
-	ControlStatusUpdatedAt *time.Time
-
 	// The ARN of the security standard control.
 	StandardsControlArn *string
+
+	// The title of the security standard control.
+	Title *string
 }
 
 // A resource that represents your subscription to a supported standard.
 type StandardsSubscription struct {
-
-	// The status of the standards subscription.
-	//
-	// This member is required.
-	StandardsStatus StandardsStatus
 
 	// The ARN of a standard.
 	//
 	// This member is required.
 	StandardsArn *string
 
+	// A key-value pair of input for the standard.
+	//
+	// This member is required.
+	StandardsInput map[string]*string
+
+	// The status of the standards subscription.
+	//
+	// This member is required.
+	StandardsStatus StandardsStatus
+
 	// The ARN of a resource that represents your subscription to a supported standard.
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string
-
-	// A key-value pair of input for the standard.
-	//
-	// This member is required.
-	StandardsInput map[string]*string
 }
 
 // The standard that you want to enable.
 type StandardsSubscriptionRequest struct {
-
-	// A key-value pair of input for the standard.
-	StandardsInput map[string]*string
 
 	// The ARN of the standard that you want to enable. To view the list of available
 	// standards and their ARNs, use the DescribeStandards () operation.
 	//
 	// This member is required.
 	StandardsArn *string
+
+	// A key-value pair of input for the standard.
+	StandardsInput map[string]*string
 }
 
 // Provides additional context for the value of Compliance.Status.
@@ -2624,8 +2624,15 @@ type StringFilter struct {
 // Details about the threat intelligence related to a finding.
 type ThreatIntelIndicator struct {
 
-	// The value of a threat intelligence indicator.
-	Value *string
+	// The category of a threat intelligence indicator.
+	Category ThreatIntelIndicatorCategory
+
+	// The date and time when the most recent instance of a threat intelligence
+	// indicator was observed.
+	LastObservedAt *string
+
+	// The source of the threat intelligence indicator.
+	Source *string
 
 	// The URL to the page or site where you can get more information about the threat
 	// intelligence indicator.
@@ -2634,60 +2641,53 @@ type ThreatIntelIndicator struct {
 	// The type of threat intelligence indicator.
 	Type ThreatIntelIndicatorType
 
-	// The category of a threat intelligence indicator.
-	Category ThreatIntelIndicatorCategory
-
-	// The source of the threat intelligence indicator.
-	Source *string
-
-	// The date and time when the most recent instance of a threat intelligence
-	// indicator was observed.
-	LastObservedAt *string
+	// The value of a threat intelligence indicator.
+	Value *string
 }
 
 // A vulnerability associated with a finding.
 type Vulnerability struct {
-
-	// List of vulnerabilities that are related to this vulnerability.
-	RelatedVulnerabilities []*string
-
-	// CVSS scores from the advisory related to the vulnerability.
-	Cvss []*Cvss
-
-	// Information about the vendor that generates the vulnerability report.
-	Vendor *VulnerabilityVendor
-
-	// List of software packages that have the vulnerability.
-	VulnerablePackages []*SoftwarePackage
 
 	// The identifier of the vulnerability.
 	//
 	// This member is required.
 	Id *string
 
+	// CVSS scores from the advisory related to the vulnerability.
+	Cvss []*Cvss
+
 	// A list of URLs that provide additional information about the vulnerability.
 	ReferenceUrls []*string
+
+	// List of vulnerabilities that are related to this vulnerability.
+	RelatedVulnerabilities []*string
+
+	// Information about the vendor that generates the vulnerability report.
+	Vendor *VulnerabilityVendor
+
+	// List of software packages that have the vulnerability.
+	VulnerablePackages []*SoftwarePackage
 }
 
 // A vendor that generates a vulnerability report.
 type VulnerabilityVendor struct {
 
-	// The datetime when the vulnerability advisory was created.
-	VendorCreatedAt *string
-
-	// The datetime when the vulnerability advisory was last updated.
-	VendorUpdatedAt *string
-
-	// The severity that the vendor assigned to the vulnerability.
-	VendorSeverity *string
-
-	// The URL of the vulnerability advisory.
-	Url *string
-
 	// The name of the vendor.
 	//
 	// This member is required.
 	Name *string
+
+	// The URL of the vulnerability advisory.
+	Url *string
+
+	// The datetime when the vulnerability advisory was created.
+	VendorCreatedAt *string
+
+	// The severity that the vendor assigned to the vulnerability.
+	VendorSeverity *string
+
+	// The datetime when the vulnerability advisory was last updated.
+	VendorUpdatedAt *string
 }
 
 // Details about the action that CloudFront or AWS WAF takes when a web request

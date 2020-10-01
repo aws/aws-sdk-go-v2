@@ -68,21 +68,17 @@ type DeleteInstallationMediaInput struct {
 // customer provided license, such as Microsoft SQL Server.
 type DeleteInstallationMediaOutput struct {
 
-	// The status of the installation medium.
-	Status *string
-
-	// The engine version of the DB engine.
-	EngineVersion *string
-
 	// The custom Availability Zone (AZ) that contains the installation media.
 	CustomAvailabilityZoneId *string
 
-	// The path to the installation medium for the operating system associated with the
-	// DB engine.
-	OSInstallationMediaPath *string
-
 	// The DB engine.
 	Engine *string
+
+	// The path to the installation medium for the DB engine.
+	EngineInstallationMediaPath *string
+
+	// The engine version of the DB engine.
+	EngineVersion *string
 
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *types.InstallationMediaFailureCause
@@ -90,8 +86,12 @@ type DeleteInstallationMediaOutput struct {
 	// The installation medium ID.
 	InstallationMediaId *string
 
-	// The path to the installation medium for the DB engine.
-	EngineInstallationMediaPath *string
+	// The path to the installation medium for the operating system associated with the
+	// DB engine.
+	OSInstallationMediaPath *string
+
+	// The status of the installation medium.
+	Status *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

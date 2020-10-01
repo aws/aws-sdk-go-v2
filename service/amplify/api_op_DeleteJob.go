@@ -58,20 +58,20 @@ func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns .
 // The request structure for the delete job request.
 type DeleteJobInput struct {
 
-	// The unique ID for the job.
+	// The unique ID for an Amplify app.
 	//
 	// This member is required.
-	JobId *string
+	AppId *string
 
 	// The name for the branch, for the job.
 	//
 	// This member is required.
 	BranchName *string
 
-	// The unique ID for an Amplify app.
+	// The unique ID for the job.
 	//
 	// This member is required.
-	AppId *string
+	JobId *string
 }
 
 // The result structure for the delete job request.

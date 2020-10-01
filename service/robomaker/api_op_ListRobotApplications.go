@@ -70,26 +70,26 @@ type ListRobotApplicationsInput struct {
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
-	// The version qualifier of the robot application.
-	VersionQualifier *string
-
 	// The nextToken value returned from a previous paginated ListRobotApplications
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
+
+	// The version qualifier of the robot application.
+	VersionQualifier *string
 }
 
 type ListRobotApplicationsOutput struct {
-
-	// A list of robot application summaries that meet the criteria of the request.
-	RobotApplicationSummaries []*types.RobotApplicationSummary
 
 	// The nextToken value to include in a future ListRobotApplications request. When
 	// the results of a ListRobotApplications request exceed maxResults, this value can
 	// be used to retrieve the next page of results. This value is null when there are
 	// no more results to return.
 	NextToken *string
+
+	// A list of robot application summaries that meet the criteria of the request.
+	RobotApplicationSummaries []*types.RobotApplicationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -101,10 +101,39 @@ type AdminInitiateAuthInput struct {
 	// This member is required.
 	AuthFlow types.AuthFlowType
 
+	// The app client ID.
+	//
+	// This member is required.
+	ClientId *string
+
 	// The ID of the Amazon Cognito user pool.
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The analytics metadata for collecting Amazon Pinpoint metrics for
+	// AdminInitiateAuth calls.
+	AnalyticsMetadata *types.AnalyticsMetadataType
+
+	// The authentication parameters. These are inputs corresponding to the AuthFlow
+	// that you are invoking. The required values depend on the value of AuthFlow:
+	//
+	//
+	// * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
+	// (required if the app client is configured with a client secret), DEVICE_KEY
+	//
+	//
+	// * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
+	// (required if the app client is configured with a client secret), DEVICE_KEY
+	//
+	//
+	// * For ADMIN_NO_SRP_AUTH: USERNAME (required), SECRET_HASH (if app client is
+	// configured with client secret), PASSWORD (required), DEVICE_KEY
+	//
+	//     * For
+	// CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured with
+	// client secret), DEVICE_KEY
+	AuthParameters map[string]*string
 
 	// A map of custom key-value pairs that you can provide as input for certain custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -146,39 +175,10 @@ type AdminInitiateAuthInput struct {
 	// </li> </ul> </note>
 	ClientMetadata map[string]*string
 
-	// The analytics metadata for collecting Amazon Pinpoint metrics for
-	// AdminInitiateAuth calls.
-	AnalyticsMetadata *types.AnalyticsMetadataType
-
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	ContextData *types.ContextDataType
-
-	// The authentication parameters. These are inputs corresponding to the AuthFlow
-	// that you are invoking. The required values depend on the value of AuthFlow:
-	//
-	//
-	// * For USER_SRP_AUTH: USERNAME (required), SRP_A (required), SECRET_HASH
-	// (required if the app client is configured with a client secret), DEVICE_KEY
-	//
-	//
-	// * For REFRESH_TOKEN_AUTH/REFRESH_TOKEN: REFRESH_TOKEN (required), SECRET_HASH
-	// (required if the app client is configured with a client secret), DEVICE_KEY
-	//
-	//
-	// * For ADMIN_NO_SRP_AUTH: USERNAME (required), SECRET_HASH (if app client is
-	// configured with client secret), PASSWORD (required), DEVICE_KEY
-	//
-	//     * For
-	// CUSTOM_AUTH: USERNAME (required), SECRET_HASH (if app client is configured with
-	// client secret), DEVICE_KEY
-	AuthParameters map[string]*string
-
-	// The app client ID.
-	//
-	// This member is required.
-	ClientId *string
 }
 
 // Initiates the authentication response, as an administrator.
@@ -231,13 +231,6 @@ type AdminInitiateAuthOutput struct {
 	// and any other required attributes.
 	ChallengeName types.ChallengeNameType
 
-	// The session which should be passed both ways in challenge-response calls to the
-	// service. If AdminInitiateAuth or AdminRespondToAuthChallenge API call determines
-	// that the caller needs to go through another challenge, they return a session
-	// with other challenge parameters. This session should be passed as it is to the
-	// next AdminRespondToAuthChallenge API call.
-	Session *string
-
 	// The challenge parameters. These are returned to you in the AdminInitiateAuth
 	// response if you need to pass another challenge. The responses in this parameter
 	// should be used to compute inputs to the next call (AdminRespondToAuthChallenge).
@@ -247,6 +240,13 @@ type AdminInitiateAuthOutput struct {
 	// call to AdminInitiateAuth. This is because, in the AdminRespondToAuthChallenge
 	// API ChallengeResponses, the USERNAME attribute cannot be an alias.
 	ChallengeParameters map[string]*string
+
+	// The session which should be passed both ways in challenge-response calls to the
+	// service. If AdminInitiateAuth or AdminRespondToAuthChallenge API call determines
+	// that the caller needs to go through another challenge, they return a session
+	// with other challenge parameters. This session should be passed as it is to the
+	// next AdminRespondToAuthChallenge API call.
+	Session *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

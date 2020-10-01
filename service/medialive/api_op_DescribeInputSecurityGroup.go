@@ -70,11 +70,8 @@ type DescribeInputSecurityGroupOutput struct {
 	// Unique ARN of Input Security Group
 	Arn *string
 
-	// Whitelist rules and their sync status
-	WhitelistRules []*types.InputWhitelistRule
-
-	// A collection of key-value pairs.
-	Tags map[string]*string
+	// The Id of the Input Security Group
+	Id *string
 
 	// The list of inputs currently using this Input Security Group.
 	Inputs []*string
@@ -82,8 +79,11 @@ type DescribeInputSecurityGroupOutput struct {
 	// The current state of the Input Security Group.
 	State types.InputSecurityGroupState
 
-	// The Id of the Input Security Group
-	Id *string
+	// A collection of key-value pairs.
+	Tags map[string]*string
+
+	// Whitelist rules and their sync status
+	WhitelistRules []*types.InputWhitelistRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

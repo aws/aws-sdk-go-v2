@@ -65,24 +65,24 @@ type ListSigningProfilesInput struct {
 	// Designates whether to include profiles with the status of CANCELED.
 	IncludeCanceled *bool
 
+	// The maximum number of profiles to be returned.
+	MaxResults *int32
+
 	// Value for specifying the next set of paginated results to return. After you
 	// receive a response with truncated results, use this parameter in a subsequent
 	// request. Set it to the value of nextToken from the response that you just
 	// received.
 	NextToken *string
-
-	// The maximum number of profiles to be returned.
-	MaxResults *int32
 }
 
 type ListSigningProfilesOutput struct {
 
+	// Value for specifying the next set of paginated results to return.
+	NextToken *string
+
 	// A list of profiles that are available in the AWS account. This includes profiles
 	// with the status of CANCELED if the includeCanceled parameter is set to true.
 	Profiles []*types.SigningProfile
-
-	// Value for specifying the next set of paginated results to return.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,16 @@ func (c *Client) UnsubscribeFromDataset(ctx context.Context, params *Unsubscribe
 // A request to UnsubscribeFromDataset.
 type UnsubscribeFromDatasetInput struct {
 
+	// The name of the dataset from which to unsubcribe.
+	//
+	// This member is required.
+	DatasetName *string
+
+	// The unique ID generated for this device by Cognito.
+	//
+	// This member is required.
+	DeviceId *string
+
 	// Unique ID for this identity.
 	//
 	// This member is required.
@@ -69,16 +79,6 @@ type UnsubscribeFromDatasetInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
-
-	// The unique ID generated for this device by Cognito.
-	//
-	// This member is required.
-	DeviceId *string
-
-	// The name of the dataset from which to unsubcribe.
-	//
-	// This member is required.
-	DatasetName *string
 }
 
 // Response to an UnsubscribeFromDataset request.

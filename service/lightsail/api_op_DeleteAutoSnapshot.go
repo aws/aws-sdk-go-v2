@@ -59,18 +59,18 @@ func (c *Client) DeleteAutoSnapshot(ctx context.Context, params *DeleteAutoSnaps
 
 type DeleteAutoSnapshotInput struct {
 
-	// The name of the source instance or disk from which to delete the automatic
-	// snapshot.
-	//
-	// This member is required.
-	ResourceName *string
-
 	// The date of the automatic snapshot to delete in YYYY-MM-DD format. Use the get
 	// auto snapshots operation to get the available automatic snapshots for a
 	// resource.
 	//
 	// This member is required.
 	Date *string
+
+	// The name of the source instance or disk from which to delete the automatic
+	// snapshot.
+	//
+	// This member is required.
+	ResourceName *string
 }
 
 type DeleteAutoSnapshotOutput struct {

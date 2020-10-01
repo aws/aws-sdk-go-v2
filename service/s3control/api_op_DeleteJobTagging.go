@@ -74,15 +74,15 @@ func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingI
 
 type DeleteJobTaggingInput struct {
 
-	// The ID for the S3 Batch Operations job whose tags you want to delete.
-	//
-	// This member is required.
-	JobId *string
-
 	// The AWS account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The ID for the S3 Batch Operations job whose tags you want to delete.
+	//
+	// This member is required.
+	JobId *string
 }
 
 type DeleteJobTaggingOutput struct {

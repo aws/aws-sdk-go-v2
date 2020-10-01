@@ -58,6 +58,11 @@ func (c *Client) DeleteProduct(ctx context.Context, params *DeleteProductInput, 
 
 type DeleteProductInput struct {
 
+	// The product identifier.
+	//
+	// This member is required.
+	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -67,11 +72,6 @@ type DeleteProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The product identifier.
-	//
-	// This member is required.
-	Id *string
 }
 
 type DeleteProductOutput struct {

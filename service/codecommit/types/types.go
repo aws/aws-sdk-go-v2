@@ -9,37 +9,37 @@ import (
 // Returns information about a specific approval on a pull request.
 type Approval struct {
 
-	// The Amazon Resource Name (ARN) of the user.
-	UserArn *string
-
 	// The state of the approval, APPROVE or REVOKE. REVOKE states are not stored.
 	ApprovalState ApprovalState
+
+	// The Amazon Resource Name (ARN) of the user.
+	UserArn *string
 }
 
 // Returns information about an approval rule.
 type ApprovalRule struct {
 
+	// The content of the approval rule.
+	ApprovalRuleContent *string
+
+	// The system-generated ID of the approval rule.
+	ApprovalRuleId *string
+
+	// The name of the approval rule.
+	ApprovalRuleName *string
+
 	// The date the approval rule was created, in timestamp format.
 	CreationDate *time.Time
 
-	// The approval rule template used to create the rule.
-	OriginApprovalRuleTemplate *OriginApprovalRuleTemplate
+	// The date the approval rule was most recently changed, in timestamp format.
+	LastModifiedDate *time.Time
 
 	// The Amazon Resource Name (ARN) of the user who made the most recent changes to
 	// the approval rule.
 	LastModifiedUser *string
 
-	// The date the approval rule was most recently changed, in timestamp format.
-	LastModifiedDate *time.Time
-
-	// The name of the approval rule.
-	ApprovalRuleName *string
-
-	// The system-generated ID of the approval rule.
-	ApprovalRuleId *string
-
-	// The content of the approval rule.
-	ApprovalRuleContent *string
+	// The approval rule template used to create the rule.
+	OriginApprovalRuleTemplate *OriginApprovalRuleTemplate
 
 	// The SHA-256 hash signature for the content of the approval rule.
 	RuleContentSha256 *string
@@ -62,11 +62,11 @@ type ApprovalRuleEventMetadata struct {
 // request.
 type ApprovalRuleOverriddenEventMetadata struct {
 
-	// The revision ID of the pull request when the override event occurred.
-	RevisionId *string
-
 	// The status of the override event.
 	OverrideStatus OverrideStatus
+
+	// The revision ID of the pull request when the override event occurred.
+	RevisionId *string
 }
 
 // Returns information about an approval rule template.
@@ -78,48 +78,48 @@ type ApprovalRuleTemplate struct {
 	// The description of the approval rule template.
 	ApprovalRuleTemplateDescription *string
 
-	// The Amazon Resource Name (ARN) of the user who made the most recent changes to
-	// the approval rule template.
-	LastModifiedUser *string
-
-	// The date the approval rule template was created, in timestamp format.
-	CreationDate *time.Time
-
-	// The SHA-256 hash signature for the content of the approval rule template.
-	RuleContentSha256 *string
-
 	// The system-generated ID of the approval rule template.
 	ApprovalRuleTemplateId *string
 
 	// The name of the approval rule template.
 	ApprovalRuleTemplateName *string
 
+	// The date the approval rule template was created, in timestamp format.
+	CreationDate *time.Time
+
 	// The date the approval rule template was most recently changed, in timestamp
 	// format.
 	LastModifiedDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the user who made the most recent changes to
+	// the approval rule template.
+	LastModifiedUser *string
+
+	// The SHA-256 hash signature for the content of the approval rule template.
+	RuleContentSha256 *string
 }
 
 // Returns information about a change in the approval state for a pull request.
 type ApprovalStateChangedEventMetadata struct {
 
-	// The revision ID of the pull request when the approval state changed.
-	RevisionId *string
-
 	// The approval status for the pull request.
 	ApprovalStatus ApprovalState
+
+	// The revision ID of the pull request when the approval state changed.
+	RevisionId *string
 }
 
 // Returns information about errors in a
 // BatchAssociateApprovalRuleTemplateWithRepositories operation.
 type BatchAssociateApprovalRuleTemplateWithRepositoriesError struct {
 
-	// An error message that provides details about why the repository name was not
-	// found or not valid.
-	ErrorMessage *string
-
 	// An error code that specifies whether the repository name was not valid or not
 	// found.
 	ErrorCode *string
+
+	// An error message that provides details about why the repository name was not
+	// found or not valid.
+	ErrorMessage *string
 
 	// The name of the repository where the association was not made.
 	RepositoryName *string
@@ -178,9 +178,6 @@ type BatchGetCommitsError struct {
 // Returns information about a specific Git blob object.
 type BlobMetadata struct {
 
-	// The path to the blob and associated file name, if any.
-	Path *string
-
 	// The full ID of the blob.
 	BlobId *string
 
@@ -196,6 +193,9 @@ type BlobMetadata struct {
 	//
 	//     * 120000 indicates a symlink
 	Mode *string
+
+	// The path to the blob and associated file name, if any.
+	Path *string
 }
 
 // Returns information about a branch.
@@ -211,14 +211,12 @@ type BranchInfo struct {
 // Returns information about a specific comment.
 type Comment struct {
 
-	// A Boolean value indicating whether the comment has been deleted.
-	Deleted *bool
-
 	// The Amazon Resource Name (ARN) of the person who posted the comment.
 	AuthorArn *string
 
-	// The content of the comment.
-	Content *string
+	// The emoji reactions to a comment, if any, submitted by the user whose
+	// credentials are associated with the call to the API.
+	CallerReactions []*string
 
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
@@ -226,33 +224,37 @@ type Comment struct {
 	// information about the initial request that used that token.
 	ClientRequestToken *string
 
+	// The system-generated comment ID.
+	CommentId *string
+
+	// The content of the comment.
+	Content *string
+
+	// The date and time the comment was created, in timestamp format.
+	CreationDate *time.Time
+
+	// A Boolean value indicating whether the comment has been deleted.
+	Deleted *bool
+
+	// The ID of the comment for which this comment is a reply, if any.
+	InReplyTo *string
+
 	// The date and time the comment was most recently modified, in timestamp format.
 	LastModifiedDate *time.Time
 
 	// A string to integer map that represents the number of individual users who have
 	// responded to a comment with the specified reactions.
 	ReactionCounts map[string]*int32
-
-	// The ID of the comment for which this comment is a reply, if any.
-	InReplyTo *string
-
-	// The system-generated comment ID.
-	CommentId *string
-
-	// The date and time the comment was created, in timestamp format.
-	CreationDate *time.Time
-
-	// The emoji reactions to a comment, if any, submitted by the user whose
-	// credentials are associated with the call to the API.
-	CallerReactions []*string
 }
 
 // Returns information about comments on the comparison between two commits.
 type CommentsForComparedCommit struct {
 
-	// An array of comment objects. Each comment object contains information about a
-	// comment on the comparison between commits.
-	Comments []*Comment
+	// The full blob ID of the commit used to establish the after of the comparison.
+	AfterBlobId *string
+
+	// The full commit ID of the commit used to establish the after of the comparison.
+	AfterCommitId *string
 
 	// The full blob ID of the commit used to establish the before of the comparison.
 	BeforeBlobId *string
@@ -260,19 +262,17 @@ type CommentsForComparedCommit struct {
 	// The full commit ID of the commit used to establish the before of the comparison.
 	BeforeCommitId *string
 
-	// The name of the repository that contains the compared commits.
-	RepositoryName *string
+	// An array of comment objects. Each comment object contains information about a
+	// comment on the comparison between commits.
+	Comments []*Comment
 
 	// Location information about the comment on the comparison, including the file
 	// name, line number, and whether the version of the file where the comment was
 	// made is BEFORE or AFTER.
 	Location *Location
 
-	// The full blob ID of the commit used to establish the after of the comparison.
-	AfterBlobId *string
-
-	// The full commit ID of the commit used to establish the after of the comparison.
-	AfterCommitId *string
+	// The name of the repository that contains the compared commits.
+	RepositoryName *string
 }
 
 // Returns information about comments on a pull request.
@@ -281,14 +281,13 @@ type CommentsForPullRequest struct {
 	// The full blob ID of the file on which you want to comment on the source commit.
 	AfterBlobId *string
 
-	// Location information about the comment on the pull request, including the file
-	// name, line number, and whether the version of the file where the comment was
-	// made is BEFORE (destination branch) or AFTER (source branch).
-	Location *Location
-
 	// The full commit ID of the commit that was the tip of the source branch at the
 	// time the comment was made.
 	AfterCommitId *string
+
+	// The full blob ID of the file on which you want to comment on the destination
+	// commit.
+	BeforeBlobId *string
 
 	// The full commit ID of the commit that was the tip of the destination branch when
 	// the pull request was created. This commit is superceded by the after commit in
@@ -296,19 +295,20 @@ type CommentsForPullRequest struct {
 	// branch.
 	BeforeCommitId *string
 
-	// The full blob ID of the file on which you want to comment on the destination
-	// commit.
-	BeforeBlobId *string
+	// An array of comment objects. Each comment object contains information about a
+	// comment on the pull request.
+	Comments []*Comment
+
+	// Location information about the comment on the pull request, including the file
+	// name, line number, and whether the version of the file where the comment was
+	// made is BEFORE (destination branch) or AFTER (source branch).
+	Location *Location
 
 	// The system-generated ID of the pull request.
 	PullRequestId *string
 
 	// The name of the repository that contains the pull request.
 	RepositoryName *string
-
-	// An array of comment objects. Each comment object contains information about a
-	// comment on the pull request.
-	Comments []*Comment
 }
 
 // Returns information about a specific commit.
@@ -317,20 +317,13 @@ type Commit struct {
 	// Any other data associated with the specified commit.
 	AdditionalData *string
 
-	// A list of parent commits for the specified commit. Each parent commit ID is the
-	// full commit ID.
-	Parents []*string
-
-	// The full SHA ID of the specified commit.
-	CommitId *string
-
 	// Information about the author of the specified commit. Information includes the
 	// date in timestamp format with GMT offset, the name of the author, and the email
 	// address for the author, as configured in Git.
 	Author *UserInfo
 
-	// The commit message associated with the specified commit.
-	Message *string
+	// The full SHA ID of the specified commit.
+	CommitId *string
 
 	// Information about the person who committed the specified commit, also known as
 	// the committer. Information includes the date in timestamp format with GMT
@@ -340,6 +333,13 @@ type Commit struct {
 	// (http://git-scm.com/book/ch2-3.html) in Pro Git by Scott Chacon and Ben Straub.
 	Committer *UserInfo
 
+	// The commit message associated with the specified commit.
+	Message *string
+
+	// A list of parent commits for the specified commit. Each parent commit ID is the
+	// full commit ID.
+	Parents []*string
+
 	// Tree information for the specified commit.
 	TreeId *string
 }
@@ -347,27 +347,29 @@ type Commit struct {
 // Information about conflicts in a merge operation.
 type Conflict struct {
 
+	// Metadata about a conflict in a merge operation.
+	ConflictMetadata *ConflictMetadata
+
 	// A list of hunks that contain the differences between files or lines causing the
 	// conflict.
 	MergeHunks []*MergeHunk
-
-	// Metadata about a conflict in a merge operation.
-	ConflictMetadata *ConflictMetadata
 }
 
 // Information about the metadata for a conflict in a merge operation.
 type ConflictMetadata struct {
 
+	// A boolean value indicating whether there are conflicts in the content of a file.
+	ContentConflict *bool
+
 	// A boolean value indicating whether there are conflicts in the file mode of a
 	// file.
 	FileModeConflict *bool
 
-	// Whether an add, modify, or delete operation caused the conflict between the
-	// source and destination of the merge.
-	MergeOperations *MergeOperations
-
 	// The file modes of the file in the source, destination, and base of the merge.
 	FileModes *FileModes
+
+	// The path of the file that contains conflicts.
+	FilePath *string
 
 	// The file sizes of the file in the source, destination, and base of the merge.
 	FileSizes *FileSizes
@@ -376,14 +378,9 @@ type ConflictMetadata struct {
 	// in the source, destination, and base of the merge.
 	IsBinaryFile *IsBinaryFile
 
-	// Information about any object type conflicts in a merge operation.
-	ObjectTypes *ObjectTypes
-
-	// A boolean value indicating whether there are conflicts in the content of a file.
-	ContentConflict *bool
-
-	// The path of the file that contains conflicts.
-	FilePath *string
+	// Whether an add, modify, or delete operation caused the conflict between the
+	// source and destination of the merge.
+	MergeOperations *MergeOperations
 
 	// The number of conflicts, including both hunk conflicts and metadata conflicts.
 	NumberOfConflicts *int32
@@ -391,6 +388,9 @@ type ConflictMetadata struct {
 	// A boolean value (true or false) indicating whether there are conflicts between
 	// the branches in the object type of a file, folder, or submodule.
 	ObjectTypeConflict *bool
+
+	// Information about any object type conflicts in a merge operation.
+	ObjectTypes *ObjectTypes
 }
 
 // If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
@@ -419,17 +419,17 @@ type DeleteFileEntry struct {
 // Returns information about a set of differences for a commit specifier.
 type Difference struct {
 
-	// Whether the change type of the difference is an addition (A), deletion (D), or
-	// modification (M).
-	ChangeType ChangeTypeEnum
+	// Information about an afterBlob data type object, including the ID, the file mode
+	// permission code, and the path.
+	AfterBlob *BlobMetadata
 
 	// Information about a beforeBlob data type object, including the ID, the file mode
 	// permission code, and the path.
 	BeforeBlob *BlobMetadata
 
-	// Information about an afterBlob data type object, including the ID, the file mode
-	// permission code, and the path.
-	AfterBlob *BlobMetadata
+	// Whether the change type of the difference is an addition (A), deletion (D), or
+	// modification (M).
+	ChangeType ChangeTypeEnum
 }
 
 // Returns information about the approval rules applied to a pull request and
@@ -439,15 +439,15 @@ type Evaluation struct {
 	// The names of the approval rules that have not had their conditions met.
 	ApprovalRulesNotSatisfied []*string
 
-	// Whether the approval rule requirements for the pull request have been overridden
-	// and no longer need to be met.
-	Overridden *bool
-
 	// The names of the approval rules that have had their conditions met.
 	ApprovalRulesSatisfied []*string
 
 	// Whether the state of the pull request is approved.
 	Approved *bool
+
+	// Whether the approval rule requirements for the pull request have been overridden
+	// and no longer need to be met.
+	Overridden *bool
 }
 
 // Returns information about a file in a repository.
@@ -470,12 +470,12 @@ type File struct {
 // A file to be added, updated, or deleted as part of a commit.
 type FileMetadata struct {
 
-	// The blob ID that contains the file information.
-	BlobId *string
-
 	// The full path to the file to be added or updated, including the name of the
 	// file.
 	AbsolutePath *string
+
+	// The blob ID that contains the file information.
+	BlobId *string
 
 	// The extrapolated file mode permissions for the file. Valid values include
 	// EXECUTABLE and NORMAL.
@@ -498,11 +498,11 @@ type FileModes struct {
 // Information about the size of files in a merge or pull request.
 type FileSizes struct {
 
-	// The size of a file in the destination of a merge or pull request.
-	Destination *int64
-
 	// The size of a file in the base of a merge or pull request.
 	Base *int64
+
+	// The size of a file in the destination of a merge or pull request.
+	Destination *int64
 
 	// The size of a file in the source of a merge or pull request.
 	Source *int64
@@ -511,6 +511,9 @@ type FileSizes struct {
 // Returns information about a folder in a repository.
 type Folder struct {
 
+	// The fully qualified path of the folder in the repository.
+	AbsolutePath *string
+
 	// The relative path of the specified folder from the folder where the query
 	// originated.
 	RelativePath *string
@@ -518,9 +521,6 @@ type Folder struct {
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// folder.
 	TreeId *string
-
-	// The fully qualified path of the folder in the repository.
-	AbsolutePath *string
 }
 
 // Information about whether a file is binary or textual in a merge or pull request
@@ -531,13 +531,13 @@ type IsBinaryFile struct {
 	// request.
 	Base *bool
 
-	// The binary or non-binary status of file in the source of a merge or pull
-	// request.
-	Source *bool
-
 	// The binary or non-binary status of a file in the destination of a merge or pull
 	// request.
 	Destination *bool
+
+	// The binary or non-binary status of file in the source of a merge or pull
+	// request.
+	Source *bool
 }
 
 // Returns information about the location of a change or comment in the comparison
@@ -548,12 +548,12 @@ type Location struct {
 	// if any.
 	FilePath *string
 
+	// The position of a change in a compared file, in line number format.
+	FilePosition *int64
+
 	// In a comparison of commits or a pull request, whether the change is in the
 	// before or after of that comparison.
 	RelativeFileVersion RelativeFileVersionEnum
-
-	// The position of a change in a compared file, in line number format.
-	FilePosition *int64
 }
 
 // Information about merge hunks in a merge or pull request operation.
@@ -562,8 +562,8 @@ type MergeHunk struct {
 	// Information about the merge hunk in the base of a merge or pull request.
 	Base *MergeHunkDetail
 
-	// Information about the merge hunk in the source of a merge or pull request.
-	Source *MergeHunkDetail
+	// Information about the merge hunk in the destination of a merge or pull request.
+	Destination *MergeHunkDetail
 
 	// A Boolean value indicating whether a combination of hunks contains a conflict.
 	// Conflicts occur when the same file or the same lines in a file were modified in
@@ -573,8 +573,8 @@ type MergeHunk struct {
 	// to true.
 	IsConflict *bool
 
-	// Information about the merge hunk in the destination of a merge or pull request.
-	Destination *MergeHunkDetail
+	// Information about the merge hunk in the source of a merge or pull request.
+	Source *MergeHunkDetail
 }
 
 // Information about the details of a merge hunk that contains a conflict in a
@@ -596,17 +596,17 @@ type MergeHunkDetail struct {
 // and a destination reference in a pull request.
 type MergeMetadata struct {
 
-	// The merge strategy used in the merge.
-	MergeOption MergeOptionTypeEnum
-
-	// The Amazon Resource Name (ARN) of the user who merged the branches.
-	MergedBy *string
-
 	// A Boolean value indicating whether the merge has been made.
 	IsMerged *bool
 
 	// The commit ID for the merge commit, if any.
 	MergeCommitId *string
+
+	// The merge strategy used in the merge.
+	MergeOption MergeOptionTypeEnum
+
+	// The Amazon Resource Name (ARN) of the user who merged the branches.
+	MergedBy *string
 }
 
 // Information about the file operation conflicts in a merge operation.
@@ -623,33 +623,35 @@ type MergeOperations struct {
 // Information about the type of an object in a merge operation.
 type ObjectTypes struct {
 
+	// The type of the object in the base commit of the merge.
+	Base ObjectTypeEnum
+
 	// The type of the object in the destination branch.
 	Destination ObjectTypeEnum
 
 	// The type of the object in the source branch.
 	Source ObjectTypeEnum
-
-	// The type of the object in the base commit of the merge.
-	Base ObjectTypeEnum
 }
 
 // Returns information about the template that created the approval rule for a pull
 // request.
 type OriginApprovalRuleTemplate struct {
 
-	// The name of the template that created the approval rule.
-	ApprovalRuleTemplateName *string
-
 	// The ID of the template that created the approval rule.
 	ApprovalRuleTemplateId *string
+
+	// The name of the template that created the approval rule.
+	ApprovalRuleTemplateName *string
 }
 
 // Returns information about a pull request.
 type PullRequest struct {
 
-	// The user-defined description of the pull request. This description can be used
-	// to clarify what should be reviewed and other details of the request.
-	Description *string
+	// The approval rules applied to the pull request.
+	ApprovalRules []*ApprovalRule
+
+	// The Amazon Resource Name (ARN) of the user who created the pull request.
+	AuthorArn *string
 
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request is
@@ -657,12 +659,12 @@ type PullRequest struct {
 	// information about the initial request that used that token.
 	ClientRequestToken *string
 
-	// The Amazon Resource Name (ARN) of the user who created the pull request.
-	AuthorArn *string
+	// The date and time the pull request was originally created, in timestamp format.
+	CreationDate *time.Time
 
-	// The status of the pull request. Pull request status can only change from OPEN to
-	// CLOSED.
-	PullRequestStatus PullRequestStatusEnum
+	// The user-defined description of the pull request. This description can be used
+	// to clarify what should be reviewed and other details of the request.
+	Description *string
 
 	// The day and time of the last user or system activity on the pull request, in
 	// timestamp format.
@@ -671,15 +673,9 @@ type PullRequest struct {
 	// The system-generated ID of the pull request.
 	PullRequestId *string
 
-	// The date and time the pull request was originally created, in timestamp format.
-	CreationDate *time.Time
-
-	// The approval rules applied to the pull request.
-	ApprovalRules []*ApprovalRule
-
-	// The user-defined title of the pull request. This title is displayed in the list
-	// of pull requests to other repository users.
-	Title *string
+	// The status of the pull request. Pull request status can only change from OPEN to
+	// CLOSED.
+	PullRequestStatus PullRequestStatusEnum
 
 	// The targets of the pull request, including the source branch and destination
 	// branch for the pull request.
@@ -687,11 +683,19 @@ type PullRequest struct {
 
 	// The system-generated revision ID for the pull request.
 	RevisionId *string
+
+	// The user-defined title of the pull request. This title is displayed in the list
+	// of pull requests to other repository users.
+	Title *string
 }
 
 // Metadata about the pull request that is used when comparing the pull request
 // source with its destination.
 type PullRequestCreatedEventMetadata struct {
+
+	// The commit ID of the tip of the branch specified as the destination branch when
+	// the pull request was created.
+	DestinationCommitId *string
 
 	// The commit ID of the most recent commit that the source branch and the
 	// destination branch have in common.
@@ -700,10 +704,6 @@ type PullRequestCreatedEventMetadata struct {
 	// The name of the repository where the pull request was created.
 	RepositoryName *string
 
-	// The commit ID of the tip of the branch specified as the destination branch when
-	// the pull request was created.
-	DestinationCommitId *string
-
 	// The commit ID on the source branch used when the pull request was created.
 	SourceCommitId *string
 }
@@ -711,42 +711,42 @@ type PullRequestCreatedEventMetadata struct {
 // Returns information about a pull request event.
 type PullRequestEvent struct {
 
-	// Information about the change in status for the pull request event.
-	PullRequestStatusChangedEventMetadata *PullRequestStatusChangedEventMetadata
+	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
+	// Examples include updating the pull request with more commits or changing the
+	// status of a pull request.
+	ActorArn *string
+
+	// Information about a pull request event.
+	ApprovalRuleEventMetadata *ApprovalRuleEventMetadata
 
 	// Information about an approval rule override event for a pull request.
 	ApprovalRuleOverriddenEventMetadata *ApprovalRuleOverriddenEventMetadata
+
+	// Information about an approval state change for a pull request.
+	ApprovalStateChangedEventMetadata *ApprovalStateChangedEventMetadata
+
+	// The day and time of the pull request event, in timestamp format.
+	EventDate *time.Time
+
+	// Information about the source and destination branches for the pull request.
+	PullRequestCreatedEventMetadata *PullRequestCreatedEventMetadata
 
 	// The type of the pull request event (for example, a status change event
 	// (PULL_REQUEST_STATUS_CHANGED) or update event
 	// (PULL_REQUEST_SOURCE_REFERENCE_UPDATED)).
 	PullRequestEventType PullRequestEventType
 
-	// Information about the source and destination branches for the pull request.
-	PullRequestCreatedEventMetadata *PullRequestCreatedEventMetadata
+	// The system-generated ID of the pull request.
+	PullRequestId *string
+
+	// Information about the change in mergability state for the pull request event.
+	PullRequestMergedStateChangedEventMetadata *PullRequestMergedStateChangedEventMetadata
 
 	// Information about the updated source branch for the pull request event.
 	PullRequestSourceReferenceUpdatedEventMetadata *PullRequestSourceReferenceUpdatedEventMetadata
 
-	// Information about an approval state change for a pull request.
-	ApprovalStateChangedEventMetadata *ApprovalStateChangedEventMetadata
-
-	// Information about a pull request event.
-	ApprovalRuleEventMetadata *ApprovalRuleEventMetadata
-
-	// The system-generated ID of the pull request.
-	PullRequestId *string
-
-	// The day and time of the pull request event, in timestamp format.
-	EventDate *time.Time
-
-	// The Amazon Resource Name (ARN) of the user whose actions resulted in the event.
-	// Examples include updating the pull request with more commits or changing the
-	// status of a pull request.
-	ActorArn *string
-
-	// Information about the change in mergability state for the pull request event.
-	PullRequestMergedStateChangedEventMetadata *PullRequestMergedStateChangedEventMetadata
+	// Information about the change in status for the pull request event.
+	PullRequestStatusChangedEventMetadata *PullRequestStatusChangedEventMetadata
 }
 
 // Returns information about the change in the merge state for a pull request
@@ -756,23 +756,23 @@ type PullRequestMergedStateChangedEventMetadata struct {
 	// The name of the branch that the pull request is merged into.
 	DestinationReference *string
 
-	// The name of the repository where the pull request was created.
-	RepositoryName *string
-
 	// Information about the merge state change event.
 	MergeMetadata *MergeMetadata
+
+	// The name of the repository where the pull request was created.
+	RepositoryName *string
 }
 
 // Information about an update to the source branch of a pull request.
 type PullRequestSourceReferenceUpdatedEventMetadata struct {
 
-	// The full commit ID of the commit in the destination branch that was the tip of
-	// the branch at the time the pull request was updated.
-	BeforeCommitId *string
-
 	// The full commit ID of the commit in the source branch that was the tip of the
 	// branch at the time the pull request was updated.
 	AfterCommitId *string
+
+	// The full commit ID of the commit in the destination branch that was the tip of
+	// the branch at the time the pull request was updated.
+	BeforeCommitId *string
 
 	// The commit ID of the most recent commit that the source branch and the
 	// destination branch have in common.
@@ -792,17 +792,25 @@ type PullRequestStatusChangedEventMetadata struct {
 // Returns information about a pull request target.
 type PullRequestTarget struct {
 
-	// The name of the repository that contains the pull request source and destination
-	// branches.
-	RepositoryName *string
+	// The full commit ID that is the tip of the destination branch. This is the commit
+	// where the pull request was or will be merged.
+	DestinationCommit *string
 
 	// The branch of the repository where the pull request changes are merged. Also
 	// known as the destination branch.
 	DestinationReference *string
 
-	// The full commit ID that is the tip of the destination branch. This is the commit
-	// where the pull request was or will be merged.
-	DestinationCommit *string
+	// The commit ID of the most recent commit that the source branch and the
+	// destination branch have in common.
+	MergeBase *string
+
+	// Returns metadata about the state of the merge, including whether the merge has
+	// been made.
+	MergeMetadata *MergeMetadata
+
+	// The name of the repository that contains the pull request source and destination
+	// branches.
+	RepositoryName *string
 
 	// The full commit ID of the tip of the source branch used to create the pull
 	// request. If the pull request branch is updated by a push while the pull request
@@ -812,26 +820,10 @@ type PullRequestTarget struct {
 	// The branch of the repository that contains the changes for the pull request.
 	// Also known as the source branch.
 	SourceReference *string
-
-	// Returns metadata about the state of the merge, including whether the merge has
-	// been made.
-	MergeMetadata *MergeMetadata
-
-	// The commit ID of the most recent commit that the source branch and the
-	// destination branch have in common.
-	MergeBase *string
 }
 
 // Information about a file added or updated as part of a commit.
 type PutFileEntry struct {
-
-	// The name and full path of the file that contains the changes you want to make as
-	// part of the commit, if you are not providing the file content directly.
-	SourceFile *SourceFileSpecifier
-
-	// The extrapolated file mode permissions for the file. Valid values include
-	// EXECUTABLE and NORMAL.
-	FileMode FileModeTypeEnum
 
 	// The full path to the file in the repository, including the name of the file.
 	//
@@ -840,10 +832,21 @@ type PutFileEntry struct {
 
 	// The content of the file, if a source file is not specified.
 	FileContent []byte
+
+	// The extrapolated file mode permissions for the file. Valid values include
+	// EXECUTABLE and NORMAL.
+	FileMode FileModeTypeEnum
+
+	// The name and full path of the file that contains the changes you want to make as
+	// part of the commit, if you are not providing the file content directly.
+	SourceFile *SourceFileSpecifier
 }
 
 // Information about the reaction values provided by users on a comment.
 type ReactionForComment struct {
+
+	// The reaction for a specified comment.
+	Reaction *ReactionValueFormats
 
 	// The Amazon Resource Names (ARNs) of users who have provided reactions to the
 	// comment.
@@ -853,9 +856,6 @@ type ReactionForComment struct {
 	// have been subsequently deleted from IAM. While these IAM users or roles no
 	// longer exist, the reactions might still appear in total reaction counts.
 	ReactionsFromDeletedUsersCount *int32
-
-	// The reaction for a specified comment.
-	Reaction *ReactionValueFormats
 }
 
 // Information about the values for reactions to a comment. AWS CodeCommit supports
@@ -866,23 +866,17 @@ type ReactionValueFormats struct {
 	// slightly differently on different operating systems.
 	Emoji *string
 
-	// The Unicode codepoint for the reaction.
-	Unicode *string
-
 	// The emoji short code for the reaction. Short codes are interpreted slightly
 	// differently on different operating systems.
 	ShortCode *string
+
+	// The Unicode codepoint for the reaction.
+	Unicode *string
 }
 
 // Information about a replacement content entry in the conflict of a merge or pull
 // request operation.
 type ReplaceContentEntry struct {
-
-	// The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
-	Content []byte
-
-	// The file mode to apply during conflict resoltion.
-	FileMode FileModeTypeEnum
 
 	// The path of the conflicting file.
 	//
@@ -893,13 +887,37 @@ type ReplaceContentEntry struct {
 	//
 	// This member is required.
 	ReplacementType ReplacementTypeEnum
+
+	// The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
+	Content []byte
+
+	// The file mode to apply during conflict resoltion.
+	FileMode FileModeTypeEnum
 }
 
 // Information about a repository.
 type RepositoryMetadata struct {
 
+	// The ID of the AWS account associated with the repository.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the repository.
+	Arn *string
+
 	// The URL to use for cloning the repository over HTTPS.
 	CloneUrlHttp *string
+
+	// The URL to use for cloning the repository over SSH.
+	CloneUrlSsh *string
+
+	// The date and time the repository was created, in timestamp format.
+	CreationDate *time.Time
+
+	// The repository's default branch name.
+	DefaultBranch *string
+
+	// The date and time the repository was last modified, in timestamp format.
+	LastModifiedDate *time.Time
 
 	// A comment or description about the repository.
 	RepositoryDescription *string
@@ -907,26 +925,8 @@ type RepositoryMetadata struct {
 	// The ID of the repository.
 	RepositoryId *string
 
-	// The date and time the repository was last modified, in timestamp format.
-	LastModifiedDate *time.Time
-
-	// The URL to use for cloning the repository over SSH.
-	CloneUrlSsh *string
-
-	// The ID of the AWS account associated with the repository.
-	AccountId *string
-
-	// The repository's default branch name.
-	DefaultBranch *string
-
 	// The repository's name.
 	RepositoryName *string
-
-	// The date and time the repository was created, in timestamp format.
-	CreationDate *time.Time
-
-	// The Amazon Resource Name (ARN) of the repository.
-	Arn *string
 }
 
 // Information about a repository name and ID.
@@ -942,25 +942,11 @@ type RepositoryNameIdPair struct {
 // Information about a trigger for a repository.
 type RepositoryTrigger struct {
 
-	// Any custom data associated with the trigger to be included in the information
-	// sent to the target of the trigger.
-	CustomData *string
-
 	// The ARN of the resource that is the target for a trigger (for example, the ARN
 	// of a topic in Amazon SNS).
 	//
 	// This member is required.
 	DestinationArn *string
-
-	// The branches to be included in the trigger configuration. If you specify an
-	// empty array, the trigger applies to all branches. Although no content is
-	// required in the array, you must include the array itself.
-	Branches []*string
-
-	// The name of the trigger.
-	//
-	// This member is required.
-	Name *string
 
 	// The repository events that cause the trigger to run actions in another service,
 	// such as sending a notification through Amazon SNS.  </p> <note> <p>The valid
@@ -968,6 +954,20 @@ type RepositoryTrigger struct {
 	//
 	// This member is required.
 	Events []RepositoryTriggerEventEnum
+
+	// The name of the trigger.
+	//
+	// This member is required.
+	Name *string
+
+	// The branches to be included in the trigger configuration. If you specify an
+	// empty array, the trigger applies to all branches. Although no content is
+	// required in the array, you must include the array itself.
+	Branches []*string
+
+	// Any custom data associated with the trigger to be included in the information
+	// sent to the target of the trigger.
+	CustomData *string
 }
 
 // A trigger failed to run.
@@ -997,13 +997,13 @@ type SetFileModeEntry struct {
 // Information about a source file that is part of changes made in a commit.
 type SourceFileSpecifier struct {
 
-	// Whether to remove the source file from the parent commit.
-	IsMove *bool
-
 	// The full path to the file, including the name of the file.
 	//
 	// This member is required.
 	FilePath *string
+
+	// Whether to remove the source file from the parent commit.
+	IsMove *bool
 }
 
 // Returns information about a submodule reference in a repository folder.
@@ -1013,44 +1013,44 @@ type SubModule struct {
 	// submodule.
 	AbsolutePath *string
 
-	// The relative path of the submodule from the folder where the query originated.
-	RelativePath *string
-
 	// The commit ID that contains the reference to the submodule.
 	CommitId *string
+
+	// The relative path of the submodule from the folder where the query originated.
+	RelativePath *string
 }
 
 // Returns information about a symbolic link in a repository folder.
 type SymbolicLink struct {
 
+	// The fully qualified path to the folder that contains the symbolic link.
+	AbsolutePath *string
+
 	// The blob ID that contains the information about the symbolic link.
 	BlobId *string
-
-	// The relative path of the symbolic link from the folder where the query
-	// originated.
-	RelativePath *string
 
 	// The file mode permissions of the blob that cotains information about the
 	// symbolic link.
 	FileMode FileModeTypeEnum
 
-	// The fully qualified path to the folder that contains the symbolic link.
-	AbsolutePath *string
+	// The relative path of the symbolic link from the folder where the query
+	// originated.
+	RelativePath *string
 }
 
 // Returns information about a target for a pull request.
 type Target struct {
+
+	// The name of the repository that contains the pull request.
+	//
+	// This member is required.
+	RepositoryName *string
 
 	// The branch of the repository that contains the changes for the pull request.
 	// Also known as the source branch.
 	//
 	// This member is required.
 	SourceReference *string
-
-	// The name of the repository that contains the pull request.
-	//
-	// This member is required.
-	RepositoryName *string
 
 	// The branch of the repository where the pull request changes are merged. Also
 	// known as the destination branch.
@@ -1060,13 +1060,13 @@ type Target struct {
 // Information about the user who made a specified commit.
 type UserInfo struct {
 
-	// The name of the user who made the specified commit.
-	Name *string
-
 	// The date when the specified commit was commited, in timestamp format with GMT
 	// offset.
 	Date *string
 
 	// The email address associated with the user who made the commit, if any.
 	Email *string
+
+	// The name of the user who made the specified commit.
+	Name *string
 }

@@ -66,12 +66,6 @@ type DescribeCertificatesInput struct {
 	// CertificateIdentifier.
 	CertificateIdentifier *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
-
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
 
@@ -79,6 +73,12 @@ type DescribeCertificatesInput struct {
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
 }
 
 // Data returned by the DescribeCertificates action.

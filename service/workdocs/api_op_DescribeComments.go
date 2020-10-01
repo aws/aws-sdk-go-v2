@@ -57,13 +57,6 @@ func (c *Client) DescribeComments(ctx context.Context, params *DescribeCommentsI
 
 type DescribeCommentsInput struct {
 
-	// The maximum number of items to return.
-	Limit *int32
-
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// The ID of the document.
 	//
 	// This member is required.
@@ -74,6 +67,13 @@ type DescribeCommentsInput struct {
 	// This member is required.
 	VersionId *string
 
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
+
+	// The maximum number of items to return.
+	Limit *int32
+
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
 	Marker *string
@@ -81,12 +81,12 @@ type DescribeCommentsInput struct {
 
 type DescribeCommentsOutput struct {
 
+	// The list of comments for the specified document version.
+	Comments []*types.Comment
+
 	// The marker for the next set of results. This marker was received from a previous
 	// call.
 	Marker *string
-
-	// The list of comments for the specified document version.
-	Comments []*types.Comment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

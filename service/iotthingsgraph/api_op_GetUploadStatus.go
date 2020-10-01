@@ -67,23 +67,15 @@ type GetUploadStatusInput struct {
 
 type GetUploadStatusOutput struct {
 
-	// The ARN of the upload.
-	NamespaceArn *string
-
-	// The reason for an upload failure.
-	FailureReason []*string
+	// The date at which the upload was created.
+	//
+	// This member is required.
+	CreatedDate *time.Time
 
 	// The ID of the upload.
 	//
 	// This member is required.
 	UploadId *string
-
-	// The name of the upload's namespace.
-	NamespaceName *string
-
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64
 
 	// The status of the upload. The initial status is IN_PROGRESS. The response show
 	// all validation failures if the upload fails.
@@ -91,10 +83,18 @@ type GetUploadStatusOutput struct {
 	// This member is required.
 	UploadStatus types.UploadStatus
 
-	// The date at which the upload was created.
-	//
-	// This member is required.
-	CreatedDate *time.Time
+	// The reason for an upload failure.
+	FailureReason []*string
+
+	// The ARN of the upload.
+	NamespaceArn *string
+
+	// The name of the upload's namespace.
+	NamespaceName *string
+
+	// The version of the user's namespace. Defaults to the latest version of the
+	// user's namespace.
+	NamespaceVersion *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

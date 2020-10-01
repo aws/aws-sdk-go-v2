@@ -56,22 +56,22 @@ func (c *Client) ListDeploymentStrategies(ctx context.Context, params *ListDeplo
 
 type ListDeploymentStrategiesInput struct {
 
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string
-
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// A token to start the list. Use this token to get the next set of results.
+	NextToken *string
 }
 
 type ListDeploymentStrategiesOutput struct {
 
+	// The elements from this collection.
+	Items []*types.DeploymentStrategy
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
-
-	// The elements from this collection.
-	Items []*types.DeploymentStrategy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

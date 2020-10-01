@@ -58,18 +58,19 @@ func (c *Client) GetClientCertificate(ctx context.Context, params *GetClientCert
 
 // A request to get information about the current ClientCertificate () resource.
 type GetClientCertificateInput struct {
-	Name *string
-
-	Title *string
-
-	Template *bool
 
 	// [Required] The identifier of the ClientCertificate () resource to be described.
 	//
 	// This member is required.
 	ClientCertificateId *string
 
+	Name *string
+
+	Template *bool
+
 	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -80,8 +81,17 @@ type GetClientCertificateInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type GetClientCertificateOutput struct {
 
+	// The identifier of the client certificate.
+	ClientCertificateId *string
+
 	// The timestamp when the client certificate was created.
 	CreatedDate *time.Time
+
+	// The description of the client certificate.
+	Description *string
+
+	// The timestamp when the client certificate will expire.
+	ExpirationDate *time.Time
 
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
@@ -89,15 +99,6 @@ type GetClientCertificateOutput struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The timestamp when the client certificate will expire.
-	ExpirationDate *time.Time
-
-	// The description of the client certificate.
-	Description *string
-
-	// The identifier of the client certificate.
-	ClientCertificateId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

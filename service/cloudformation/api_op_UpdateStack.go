@@ -69,97 +69,6 @@ type UpdateStackInput struct {
 	// This member is required.
 	StackName *string
 
-	// Location of a file containing the temporary overriding stack policy. The URL
-	// must point to a policy (max size: 16KB) located in an S3 bucket in the same
-	// Region as the stack. You can specify either the StackPolicyDuringUpdateBody or
-	// the StackPolicyDuringUpdateURL parameter, but not both. If you want to update
-	// protected resources, specify a temporary overriding stack policy during this
-	// update. If you do not specify a stack policy, the current policy that is
-	// associated with the stack will be used.
-	StackPolicyDuringUpdateURL *string
-
-	// Structure containing a new stack policy body. You can specify either the
-	// StackPolicyBody or the StackPolicyURL parameter, but not both. You might update
-	// the stack policy, for example, in order to protect a new resource that you
-	// created during a stack update. If you do not specify a stack policy, the current
-	// policy that is associated with the stack is unchanged.
-	StackPolicyBody *string
-
-	// Structure containing the template body with a minimum length of 1 byte and a
-	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide.) Conditional: You must specify only one of
-	// the following parameters: TemplateBody, TemplateURL, or set the
-	// UsePreviousTemplate to true.
-	TemplateBody *string
-
-	// The template resource types that you have permissions to work with for this
-	// update stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
-	// Custom::MyCustomInstance. If the list of resource types doesn't include a
-	// resource that you're updating, the stack update fails. By default, AWS
-	// CloudFormation grants permissions to all resource types. AWS Identity and Access
-	// Management (IAM) uses this parameter for AWS CloudFormation-specific condition
-	// keys in IAM policies. For more information, see Controlling Access with AWS
-	// Identity and Access Management
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
-	ResourceTypes []*string
-
-	// The rollback triggers for AWS CloudFormation to monitor during stack creation
-	// and updating operations, and for the specified monitoring period afterwards.
-	RollbackConfiguration *types.RollbackConfiguration
-
-	// Reuse the existing template that is associated with the stack that you are
-	// updating. Conditional: You must specify only one of the following parameters:
-	// TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
-	UsePreviousTemplate *bool
-
-	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
-	// role that AWS CloudFormation assumes to update the stack. AWS CloudFormation
-	// uses the role's credentials to make calls on your behalf. AWS CloudFormation
-	// always uses this role for all future operations on the stack. As long as users
-	// have permission to operate on the stack, AWS CloudFormation uses this role even
-	// if the users don't have permission to pass it. Ensure that the role grants least
-	// privilege. If you don't specify a value, AWS CloudFormation uses the role that
-	// was previously associated with the stack. If no role is available, AWS
-	// CloudFormation uses a temporary session that is generated from your user
-	// credentials.
-	RoleARN *string
-
-	// Structure containing the temporary overriding stack policy body. You can specify
-	// either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL
-	// parameter, but not both. If you want to update protected resources, specify a
-	// temporary overriding stack policy during this update. If you do not specify a
-	// stack policy, the current policy that is associated with the stack will be used.
-	StackPolicyDuringUpdateBody *string
-
-	// A list of Parameter structures that specify input parameters for the stack. For
-	// more information, see the Parameter
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
-	// data type.
-	Parameters []*types.Parameter
-
-	// Location of a file containing the updated stack policy. The URL must point to a
-	// policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.
-	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
-	// not both. You might update the stack policy, for example, in order to protect a
-	// new resource that you created during a stack update. If you do not specify a
-	// stack policy, the current policy that is associated with the stack is unchanged.
-	StackPolicyURL *string
-
-	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that AWS
-	// CloudFormation associates with the stack. Specify an empty list to remove all
-	// notification topics.
-	NotificationARNs []*string
-
-	// Location of file containing the template body. The URL must point to a template
-	// that is located in an Amazon S3 bucket. For more information, go to Template
-	// Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
-	// the following parameters: TemplateBody, TemplateURL, or set the
-	// UsePreviousTemplate to true.
-	TemplateURL *string
-
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to update the stack.
 	//
@@ -258,12 +167,103 @@ type UpdateStackInput struct {
 	// format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
 	ClientRequestToken *string
 
+	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that AWS
+	// CloudFormation associates with the stack. Specify an empty list to remove all
+	// notification topics.
+	NotificationARNs []*string
+
+	// A list of Parameter structures that specify input parameters for the stack. For
+	// more information, see the Parameter
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
+	// data type.
+	Parameters []*types.Parameter
+
+	// The template resource types that you have permissions to work with for this
+	// update stack action, such as AWS::EC2::Instance, AWS::EC2::*, or
+	// Custom::MyCustomInstance. If the list of resource types doesn't include a
+	// resource that you're updating, the stack update fails. By default, AWS
+	// CloudFormation grants permissions to all resource types. AWS Identity and Access
+	// Management (IAM) uses this parameter for AWS CloudFormation-specific condition
+	// keys in IAM policies. For more information, see Controlling Access with AWS
+	// Identity and Access Management
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html).
+	ResourceTypes []*string
+
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that AWS CloudFormation assumes to update the stack. AWS CloudFormation
+	// uses the role's credentials to make calls on your behalf. AWS CloudFormation
+	// always uses this role for all future operations on the stack. As long as users
+	// have permission to operate on the stack, AWS CloudFormation uses this role even
+	// if the users don't have permission to pass it. Ensure that the role grants least
+	// privilege. If you don't specify a value, AWS CloudFormation uses the role that
+	// was previously associated with the stack. If no role is available, AWS
+	// CloudFormation uses a temporary session that is generated from your user
+	// credentials.
+	RoleARN *string
+
+	// The rollback triggers for AWS CloudFormation to monitor during stack creation
+	// and updating operations, and for the specified monitoring period afterwards.
+	RollbackConfiguration *types.RollbackConfiguration
+
+	// Structure containing a new stack policy body. You can specify either the
+	// StackPolicyBody or the StackPolicyURL parameter, but not both. You might update
+	// the stack policy, for example, in order to protect a new resource that you
+	// created during a stack update. If you do not specify a stack policy, the current
+	// policy that is associated with the stack is unchanged.
+	StackPolicyBody *string
+
+	// Structure containing the temporary overriding stack policy body. You can specify
+	// either the StackPolicyDuringUpdateBody or the StackPolicyDuringUpdateURL
+	// parameter, but not both. If you want to update protected resources, specify a
+	// temporary overriding stack policy during this update. If you do not specify a
+	// stack policy, the current policy that is associated with the stack will be used.
+	StackPolicyDuringUpdateBody *string
+
+	// Location of a file containing the temporary overriding stack policy. The URL
+	// must point to a policy (max size: 16KB) located in an S3 bucket in the same
+	// Region as the stack. You can specify either the StackPolicyDuringUpdateBody or
+	// the StackPolicyDuringUpdateURL parameter, but not both. If you want to update
+	// protected resources, specify a temporary overriding stack policy during this
+	// update. If you do not specify a stack policy, the current policy that is
+	// associated with the stack will be used.
+	StackPolicyDuringUpdateURL *string
+
+	// Location of a file containing the updated stack policy. The URL must point to a
+	// policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.
+	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
+	// not both. You might update the stack policy, for example, in order to protect a
+	// new resource that you created during a stack update. If you do not specify a
+	// stack policy, the current policy that is associated with the stack is unchanged.
+	StackPolicyURL *string
+
 	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
 	// these tags to supported resources in the stack. You can specify a maximum number
 	// of 50 tags. If you don't specify this parameter, AWS CloudFormation doesn't
 	// modify the stack's tags. If you specify an empty value, AWS CloudFormation
 	// removes all associated tags.
 	Tags []*types.Tag
+
+	// Structure containing the template body with a minimum length of 1 byte and a
+	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// in the AWS CloudFormation User Guide.) Conditional: You must specify only one of
+	// the following parameters: TemplateBody, TemplateURL, or set the
+	// UsePreviousTemplate to true.
+	TemplateBody *string
+
+	// Location of file containing the template body. The URL must point to a template
+	// that is located in an Amazon S3 bucket. For more information, go to Template
+	// Anatomy
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
+	// the following parameters: TemplateBody, TemplateURL, or set the
+	// UsePreviousTemplate to true.
+	TemplateURL *string
+
+	// Reuse the existing template that is associated with the stack that you are
+	// updating. Conditional: You must specify only one of the following parameters:
+	// TemplateBody, TemplateURL, or set the UsePreviousTemplate to true.
+	UsePreviousTemplate *bool
 }
 
 // The output for an UpdateStack () action.

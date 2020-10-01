@@ -61,17 +61,16 @@ func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput
 
 type DescribeImagesInput struct {
 
-	// The AWS account ID associated with the registry that contains the repository in
-	// which to describe images. If you do not specify a registry, the default registry
-	// is assumed.
-	RegistryId *string
+	// The repository that contains the images to describe.
+	//
+	// This member is required.
+	RepositoryName *string
 
-	// The nextToken value returned from a previous paginated DescribeImages request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This value is null when there are no more results to return.
-	// This option cannot be used when you specify images with imageIds.
-	NextToken *string
+	// The filter key and value with which to filter your DescribeImages results.
+	Filter *types.DescribeImagesFilter
+
+	// The list of image IDs for the requested repository.
+	ImageIds []*types.ImageIdentifier
 
 	// The maximum number of repository results returned by DescribeImages in paginated
 	// output. When this parameter is used, DescribeImages only returns maxResults
@@ -83,16 +82,17 @@ type DescribeImagesInput struct {
 	// images with imageIds.
 	MaxResults *int32
 
-	// The filter key and value with which to filter your DescribeImages results.
-	Filter *types.DescribeImagesFilter
+	// The nextToken value returned from a previous paginated DescribeImages request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This value is null when there are no more results to return.
+	// This option cannot be used when you specify images with imageIds.
+	NextToken *string
 
-	// The repository that contains the images to describe.
-	//
-	// This member is required.
-	RepositoryName *string
-
-	// The list of image IDs for the requested repository.
-	ImageIds []*types.ImageIdentifier
+	// The AWS account ID associated with the registry that contains the repository in
+	// which to describe images. If you do not specify a registry, the default registry
+	// is assumed.
+	RegistryId *string
 }
 
 type DescribeImagesOutput struct {

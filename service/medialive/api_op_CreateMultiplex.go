@@ -70,6 +70,11 @@ type CreateMultiplexInput struct {
 	// This member is required.
 	MultiplexSettings *types.MultiplexSettings
 
+	// Name of multiplex.
+	//
+	// This member is required.
+	Name *string
+
 	// Unique request ID. This prevents retries from creating multiple resources.
 	//
 	// This member is required.
@@ -77,11 +82,6 @@ type CreateMultiplexInput struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]*string
-
-	// Name of multiplex.
-	//
-	// This member is required.
-	Name *string
 }
 
 // Placeholder documentation for CreateMultiplexResponse

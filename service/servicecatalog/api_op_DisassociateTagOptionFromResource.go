@@ -56,15 +56,15 @@ func (c *Client) DisassociateTagOptionFromResource(ctx context.Context, params *
 
 type DisassociateTagOptionFromResourceInput struct {
 
-	// The TagOption identifier.
-	//
-	// This member is required.
-	TagOptionId *string
-
 	// The resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The TagOption identifier.
+	//
+	// This member is required.
+	TagOptionId *string
 }
 
 type DisassociateTagOptionFromResourceOutput struct {

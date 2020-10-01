@@ -57,13 +57,8 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 
 type ListMembersInput struct {
 
-	// Specifies which member accounts to include in the response based on their
-	// relationship status with the master account. The default value is TRUE. If
-	// OnlyAssociated is set to TRUE, the response includes member accounts whose
-	// relationship status with the master is set to ENABLED or DISABLED. If
-	// OnlyAssociated is set to FALSE, the response includes all existing member
-	// accounts.
-	OnlyAssociated *bool
+	// The maximum number of items to return in the response.
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the ListMembers
 	// operation, set the value of this parameter to NULL. For subsequent calls to the
@@ -71,8 +66,13 @@ type ListMembersInput struct {
 	// value returned from the previous response.
 	NextToken *string
 
-	// The maximum number of items to return in the response.
-	MaxResults *int32
+	// Specifies which member accounts to include in the response based on their
+	// relationship status with the master account. The default value is TRUE. If
+	// OnlyAssociated is set to TRUE, the response includes member accounts whose
+	// relationship status with the master is set to ENABLED or DISABLED. If
+	// OnlyAssociated is set to FALSE, the response includes all existing member
+	// accounts.
+	OnlyAssociated *bool
 }
 
 type ListMembersOutput struct {

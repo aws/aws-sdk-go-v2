@@ -57,13 +57,12 @@ func (c *Client) ListSimulationJobs(ctx context.Context, params *ListSimulationJ
 
 type ListSimulationJobsInput struct {
 
-	// The nextToken value returned from a previous paginated ListSimulationJobs
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This token should be treated as an opaque
-	// identifier that is only used to retrieve the next items in a list and not for
-	// other programmatic purposes.
-	NextToken *string
+	// Optional filters to limit results. The filter names status and
+	// simulationApplicationName and robotApplicationName are supported. When
+	// filtering, you must use the complete value of the filtered item. You can use up
+	// to three filters, but they must be for the same named item. For example, if you
+	// are looking for items with the status Preparing or the status Running.
+	Filters []*types.Filter
 
 	// When this parameter is used, ListSimulationJobs only returns maxResults results
 	// in a single page along with a nextToken response element. The remaining results
@@ -73,12 +72,13 @@ type ListSimulationJobsInput struct {
 	// nextToken value if applicable.
 	MaxResults *int32
 
-	// Optional filters to limit results. The filter names status and
-	// simulationApplicationName and robotApplicationName are supported. When
-	// filtering, you must use the complete value of the filtered item. You can use up
-	// to three filters, but they must be for the same named item. For example, if you
-	// are looking for items with the status Preparing or the status Running.
-	Filters []*types.Filter
+	// The nextToken value returned from a previous paginated ListSimulationJobs
+	// request where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value. This token should be treated as an opaque
+	// identifier that is only used to retrieve the next items in a list and not for
+	// other programmatic purposes.
+	NextToken *string
 }
 
 type ListSimulationJobsOutput struct {

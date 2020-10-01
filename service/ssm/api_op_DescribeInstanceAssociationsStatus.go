@@ -62,13 +62,13 @@ type DescribeInstanceAssociationsStatusInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeInstanceAssociationsStatusOutput struct {

@@ -72,14 +72,33 @@ func (c *Client) CreateConfigurationTemplate(ctx context.Context, params *Create
 // Request to create a configuration template.
 type CreateConfigurationTemplateInput struct {
 
-	// Specifies the tags applied to the configuration template.
-	Tags []*types.Tag
-
 	// The name of the Elastic Beanstalk application to associate with this
 	// configuration template.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// The name of the configuration template. Constraint: This name must be unique per
+	// application.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// An optional description for this configuration.
+	Description *string
+
+	// The ID of an environment whose settings you want to use to create the
+	// configuration template. You must specify EnvironmentId if you don't specify
+	// PlatformArn, SolutionStackName, or SourceConfiguration.
+	EnvironmentId *string
+
+	// Option values for the Elastic Beanstalk configuration, such as the instance
+	// type. If specified, these values override the values obtained from the solution
+	// stack or the source configuration template. For a complete list of Elastic
+	// Beanstalk configuration options, see Option Values
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in
+	// the AWS Elastic Beanstalk Developer Guide.
+	OptionSettings []*types.ConfigurationOptionSetting
 
 	// The Amazon Resource Name (ARN) of the custom platform. For more information, see
 	// Custom Platforms
@@ -88,24 +107,6 @@ type CreateConfigurationTemplateInput struct {
 	// <code>PlatformArn</code>, then don't specify <code>SolutionStackName</code>.</p>
 	// </note>
 	PlatformArn *string
-
-	// The ID of an environment whose settings you want to use to create the
-	// configuration template. You must specify EnvironmentId if you don't specify
-	// PlatformArn, SolutionStackName, or SourceConfiguration.
-	EnvironmentId *string
-
-	// An optional description for this configuration.
-	Description *string
-
-	// An Elastic Beanstalk configuration template to base this one on. If specified,
-	// Elastic Beanstalk uses the configuration values from the specified configuration
-	// template to create a new configuration. Values specified in OptionSettings
-	// override any values obtained from the SourceConfiguration. You must specify
-	// SourceConfiguration if you don't specify PlatformArn, EnvironmentId, or
-	// SolutionStackName. Constraint: If both solution stack name and source
-	// configuration are specified, the solution stack of the source configuration
-	// template must match the specified solution stack name.
-	SourceConfiguration *types.SourceConfiguration
 
 	// The name of an Elastic Beanstalk solution stack (platform version) that this
 	// configuration uses. For example, 64bit Amazon Linux 2013.09 running Tomcat 7
@@ -121,19 +122,18 @@ type CreateConfigurationTemplateInput struct {
 	// API to obtain a list of available solution stacks.
 	SolutionStackName *string
 
-	// The name of the configuration template. Constraint: This name must be unique per
-	// application.
-	//
-	// This member is required.
-	TemplateName *string
+	// An Elastic Beanstalk configuration template to base this one on. If specified,
+	// Elastic Beanstalk uses the configuration values from the specified configuration
+	// template to create a new configuration. Values specified in OptionSettings
+	// override any values obtained from the SourceConfiguration. You must specify
+	// SourceConfiguration if you don't specify PlatformArn, EnvironmentId, or
+	// SolutionStackName. Constraint: If both solution stack name and source
+	// configuration are specified, the solution stack of the source configuration
+	// template must match the specified solution stack name.
+	SourceConfiguration *types.SourceConfiguration
 
-	// Option values for the Elastic Beanstalk configuration, such as the instance
-	// type. If specified, these values override the values obtained from the solution
-	// stack or the source configuration template. For a complete list of Elastic
-	// Beanstalk configuration options, see Option Values
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/command-options.html) in
-	// the AWS Elastic Beanstalk Developer Guide.
-	OptionSettings []*types.ConfigurationOptionSetting
+	// Specifies the tags applied to the configuration template.
+	Tags []*types.Tag
 }
 
 // Describes the settings for a configuration set.
@@ -142,26 +142,11 @@ type CreateConfigurationTemplateOutput struct {
 	// The name of the application associated with this configuration set.
 	ApplicationName *string
 
-	// If not null, the name of the environment for this configuration set.
-	EnvironmentName *string
-
-	// The ARN of the platform version.
-	PlatformArn *string
-
-	// The date (in UTC time) when this configuration set was last modified.
-	DateUpdated *time.Time
-
 	// The date (in UTC time) when this configuration set was created.
 	DateCreated *time.Time
 
-	// The name of the solution stack this configuration set uses.
-	SolutionStackName *string
-
-	// Describes this configuration set.
-	Description *string
-
-	// A list of the configuration options and their values in this configuration set.
-	OptionSettings []*types.ConfigurationOptionSetting
+	// The date (in UTC time) when this configuration set was last modified.
+	DateUpdated *time.Time
 
 	// If this configuration set is associated with an environment, the
 	// DeploymentStatus parameter indicates the deployment status of this configuration
@@ -180,6 +165,21 @@ type CreateConfigurationTemplateOutput struct {
 	//     * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
+
+	// Describes this configuration set.
+	Description *string
+
+	// If not null, the name of the environment for this configuration set.
+	EnvironmentName *string
+
+	// A list of the configuration options and their values in this configuration set.
+	OptionSettings []*types.ConfigurationOptionSetting
+
+	// The ARN of the platform version.
+	PlatformArn *string
+
+	// The name of the solution stack this configuration set uses.
+	SolutionStackName *string
 
 	// If not null, the name of the configuration template for this configuration set.
 	TemplateName *string

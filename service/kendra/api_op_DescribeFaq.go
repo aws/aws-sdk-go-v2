@@ -71,23 +71,21 @@ type DescribeFaqInput struct {
 
 type DescribeFaqOutput struct {
 
-	// The identifier of the FAQ.
-	Id *string
+	// The date and time that the FAQ was created.
+	CreatedAt *time.Time
 
 	// The description of the FAQ that you provided when it was created.
 	Description *string
 
-	// Information required to find a specific file in an Amazon S3 bucket.
-	S3Path *types.S3Path
+	// If the Status field is FAILED, the ErrorMessage field contains the reason why
+	// the FAQ failed.
+	ErrorMessage *string
 
-	// The date and time that the FAQ was created.
-	CreatedAt *time.Time
+	// The identifier of the FAQ.
+	Id *string
 
 	// The identifier of the index that contains the FAQ.
 	IndexId *string
-
-	// The status of the FAQ. It is ready to use when the status is ACTIVE.
-	Status types.FaqStatus
 
 	// The name that you gave the FAQ when it was created.
 	Name *string
@@ -96,9 +94,11 @@ type DescribeFaqOutput struct {
 	// containing the input files for the FAQ.
 	RoleArn *string
 
-	// If the Status field is FAILED, the ErrorMessage field contains the reason why
-	// the FAQ failed.
-	ErrorMessage *string
+	// Information required to find a specific file in an Amazon S3 bucket.
+	S3Path *types.S3Path
+
+	// The status of the FAQ. It is ready to use when the status is ACTIVE.
+	Status types.FaqStatus
 
 	// The date and time that the FAQ was last updated.
 	UpdatedAt *time.Time

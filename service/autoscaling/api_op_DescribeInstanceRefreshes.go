@@ -87,6 +87,9 @@ type DescribeInstanceRefreshesInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
+	// One or more instance refresh IDs.
+	InstanceRefreshIds []*string
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
@@ -94,21 +97,18 @@ type DescribeInstanceRefreshesInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
-
-	// One or more instance refresh IDs.
-	InstanceRefreshIds []*string
 }
 
 type DescribeInstanceRefreshesOutput struct {
+
+	// The instance refreshes for the specified group.
+	InstanceRefreshes []*types.InstanceRefresh
 
 	// A string that indicates that the response contains more items than can be
 	// returned in a single response. To receive additional items, specify this string
 	// for the NextToken value when requesting the next set of items. This value is
 	// null when there are no more items to return.
 	NextToken *string
-
-	// The instance refreshes for the specified group.
-	InstanceRefreshes []*types.InstanceRefresh
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

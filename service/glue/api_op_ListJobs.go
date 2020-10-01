@@ -60,14 +60,14 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
+	// The maximum size of a list to return.
+	MaxResults *int32
+
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]*string
-
-	// The maximum size of a list to return.
-	MaxResults *int32
 }
 
 type ListJobsOutput struct {

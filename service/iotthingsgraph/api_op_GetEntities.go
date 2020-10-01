@@ -81,15 +81,15 @@ func (c *Client) GetEntities(ctx context.Context, params *GetEntitiesInput, optF
 
 type GetEntitiesInput struct {
 
-	// The version of the user's namespace. Defaults to the latest version of the
-	// user's namespace.
-	NamespaceVersion *int64
-
 	// An array of entity IDs. The IDs should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	Ids []*string
+
+	// The version of the user's namespace. Defaults to the latest version of the
+	// user's namespace.
+	NamespaceVersion *int64
 }
 
 type GetEntitiesOutput struct {

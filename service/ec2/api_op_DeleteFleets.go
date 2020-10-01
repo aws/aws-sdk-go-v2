@@ -82,11 +82,11 @@ type DeleteFleetsInput struct {
 
 type DeleteFleetsOutput struct {
 
-	// Information about the EC2 Fleets that are not successfully deleted.
-	UnsuccessfulFleetDeletions []*types.DeleteFleetErrorItem
-
 	// Information about the EC2 Fleets that are successfully deleted.
 	SuccessfulFleetDeletions []*types.DeleteFleetSuccessItem
+
+	// Information about the EC2 Fleets that are not successfully deleted.
+	UnsuccessfulFleetDeletions []*types.DeleteFleetErrorItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,10 +56,10 @@ func (c *Client) UpdateMailboxQuota(ctx context.Context, params *UpdateMailboxQu
 
 type UpdateMailboxQuotaInput struct {
 
-	// The identifer for the user for whom to update the mailbox quota.
+	// The updated mailbox quota, in MB, for the specified user.
 	//
 	// This member is required.
-	UserId *string
+	MailboxQuota *int32
 
 	// The identifier for the organization that contains the user for whom to update
 	// the mailbox quota.
@@ -67,10 +67,10 @@ type UpdateMailboxQuotaInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The updated mailbox quota, in MB, for the specified user.
+	// The identifer for the user for whom to update the mailbox quota.
 	//
 	// This member is required.
-	MailboxQuota *int32
+	UserId *string
 }
 
 type UpdateMailboxQuotaOutput struct {

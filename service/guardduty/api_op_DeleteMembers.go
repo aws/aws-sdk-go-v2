@@ -58,16 +58,16 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 
 type DeleteMembersInput struct {
 
+	// A list of account IDs of the GuardDuty member accounts that you want to delete.
+	//
+	// This member is required.
+	AccountIds []*string
+
 	// The unique ID of the detector of the GuardDuty account whose members you want to
 	// delete.
 	//
 	// This member is required.
 	DetectorId *string
-
-	// A list of account IDs of the GuardDuty member accounts that you want to delete.
-	//
-	// This member is required.
-	AccountIds []*string
 }
 
 type DeleteMembersOutput struct {

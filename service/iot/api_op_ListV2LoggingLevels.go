@@ -56,12 +56,12 @@ func (c *Client) ListV2LoggingLevels(ctx context.Context, params *ListV2LoggingL
 
 type ListV2LoggingLevelsInput struct {
 
+	// The maximum number of results to return at one time.
+	MaxResults *int32
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
-
-	// The maximum number of results to return at one time.
-	MaxResults *int32
 
 	// The type of resource for which you are configuring logging. Must be THING_Group.
 	TargetType types.LogTargetType

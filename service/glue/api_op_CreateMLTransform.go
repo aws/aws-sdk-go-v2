@@ -67,9 +67,21 @@ func (c *Client) CreateMLTransform(ctx context.Context, params *CreateMLTransfor
 
 type CreateMLTransformInput struct {
 
-	// The maximum number of times to retry a task for this transform after a task run
-	// fails.
-	MaxRetries *int32
+	// A list of AWS Glue table definitions used by the transform.
+	//
+	// This member is required.
+	InputRecordTables []*types.GlueTable
+
+	// The unique name that you give the transform when you create it.
+	//
+	// This member is required.
+	Name *string
+
+	// The algorithmic parameters that are specific to the transform type used.
+	// Conditionally dependent on the transform type.
+	//
+	// This member is required.
+	Parameters *types.TransformParameters
 
 	// The name or Amazon Resource Name (ARN) of the IAM role with the required
 	// permissions. The required permissions include both AWS Glue service role
@@ -84,6 +96,60 @@ type CreateMLTransformInput struct {
 	//
 	// This member is required.
 	Role *string
+
+	// A description of the machine learning transform that is being defined. The
+	// default is an empty string.
+	Description *string
+
+	// This value determines which version of AWS Glue this machine learning transform
+	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
+	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
+	// AWS Glue Versions
+	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
+	// in the developer guide.
+	GlueVersion *string
+
+	// The number of AWS Glue data processing units (DPUs) that are allocated to task
+	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
+	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
+	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
+	// pricing page (https://aws.amazon.com/glue/pricing/).  <p>
+	// <code>MaxCapacity</code> is a mutually exclusive option with
+	// <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If
+	// either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then
+	// <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If
+	// <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or
+	// <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code>
+	// is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>
+	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
+	// both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is
+	// set to a value other than <code>Standard</code>, the <code>MaxCapacity</code>
+	// field is set automatically and becomes read-only.</p> <p>When the
+	// <code>WorkerType</code> field is set to a value other than
+	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
+	// and becomes read-only.</p>
+	MaxCapacity *float64
+
+	// The maximum number of times to retry a task for this transform after a task run
+	// fails.
+	MaxRetries *int32
+
+	// The number of workers of a defined workerType that are allocated when this task
+	// runs.  <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code>
+	// is required (and vice versa).</p>
+	NumberOfWorkers *int32
+
+	// The tags to use with this machine learning transform. You may use tags to limit
+	// access to the machine learning transform. For more information about tags in AWS
+	// Glue, see AWS Tags in AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
+	// guide.
+	Tags map[string]*string
+
+	// The timeout of the task run for this transform in minutes. This is the maximum
+	// time that a task run for this transform can consume resources before it is
+	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+	Timeout *int32
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
@@ -109,72 +175,6 @@ type CreateMLTransformInput struct {
 	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
 	// both be at least 1.</p> </li> </ul>
 	WorkerType types.WorkerType
-
-	// A description of the machine learning transform that is being defined. The
-	// default is an empty string.
-	Description *string
-
-	// The algorithmic parameters that are specific to the transform type used.
-	// Conditionally dependent on the transform type.
-	//
-	// This member is required.
-	Parameters *types.TransformParameters
-
-	// The number of workers of a defined workerType that are allocated when this task
-	// runs.  <p>If <code>WorkerType</code> is set, then <code>NumberOfWorkers</code>
-	// is required (and vice versa).</p>
-	NumberOfWorkers *int32
-
-	// A list of AWS Glue table definitions used by the transform.
-	//
-	// This member is required.
-	InputRecordTables []*types.GlueTable
-
-	// The number of AWS Glue data processing units (DPUs) that are allocated to task
-	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
-	// A DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the AWS Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/).  <p>
-	// <code>MaxCapacity</code> is a mutually exclusive option with
-	// <code>NumberOfWorkers</code> and <code>WorkerType</code>.</p> <ul> <li> <p>If
-	// either <code>NumberOfWorkers</code> or <code>WorkerType</code> is set, then
-	// <code>MaxCapacity</code> cannot be set.</p> </li> <li> <p>If
-	// <code>MaxCapacity</code> is set then neither <code>NumberOfWorkers</code> or
-	// <code>WorkerType</code> can be set.</p> </li> <li> <p>If <code>WorkerType</code>
-	// is set, then <code>NumberOfWorkers</code> is required (and vice versa).</p>
-	// </li> <li> <p> <code>MaxCapacity</code> and <code>NumberOfWorkers</code> must
-	// both be at least 1.</p> </li> </ul> <p>When the <code>WorkerType</code> field is
-	// set to a value other than <code>Standard</code>, the <code>MaxCapacity</code>
-	// field is set automatically and becomes read-only.</p> <p>When the
-	// <code>WorkerType</code> field is set to a value other than
-	// <code>Standard</code>, the <code>MaxCapacity</code> field is set automatically
-	// and becomes read-only.</p>
-	MaxCapacity *float64
-
-	// The tags to use with this machine learning transform. You may use tags to limit
-	// access to the machine learning transform. For more information about tags in AWS
-	// Glue, see AWS Tags in AWS Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
-	// guide.
-	Tags map[string]*string
-
-	// The unique name that you give the transform when you create it.
-	//
-	// This member is required.
-	Name *string
-
-	// The timeout of the task run for this transform in minutes. This is the maximum
-	// time that a task run for this transform can consume resources before it is
-	// terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
-	Timeout *int32
-
-	// This value determines which version of AWS Glue this machine learning transform
-	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
-	// not set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// AWS Glue Versions
-	// (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
-	// in the developer guide.
-	GlueVersion *string
 }
 
 type CreateMLTransformOutput struct {

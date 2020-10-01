@@ -61,6 +61,10 @@ type SetTypeDefaultVersionInput struct {
 	// information. Conditional: You must specify either TypeName and Type, or Arn.
 	Arn *string
 
+	// The kind of type. Conditional: You must specify either TypeName and Type, or
+	// Arn.
+	Type types.RegistryType
+
 	// The name of the type. Conditional: You must specify either TypeName and Type, or
 	// Arn.
 	TypeName *string
@@ -69,10 +73,6 @@ type SetTypeDefaultVersionInput struct {
 	// of the Amazon Resource Name (ARN) assigned to the type version when it is
 	// registered.
 	VersionId *string
-
-	// The kind of type. Conditional: You must specify either TypeName and Type, or
-	// Arn.
-	Type types.RegistryType
 }
 
 type SetTypeDefaultVersionOutput struct {

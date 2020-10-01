@@ -58,15 +58,15 @@ func (c *Client) DescribeComponent(ctx context.Context, params *DescribeComponen
 
 type DescribeComponentInput struct {
 
-	// The name of the resource group.
-	//
-	// This member is required.
-	ResourceGroupName *string
-
 	// The name of the component.
 	//
 	// This member is required.
 	ComponentName *string
+
+	// The name of the resource group.
+	//
+	// This member is required.
+	ResourceGroupName *string
 }
 
 type DescribeComponentOutput struct {

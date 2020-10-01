@@ -54,15 +54,15 @@ func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput
 // Represents the request to change a user password.
 type ChangePasswordInput struct {
 
-	// The old password.
-	//
-	// This member is required.
-	PreviousPassword *string
-
 	// The access token.
 	//
 	// This member is required.
 	AccessToken *string
+
+	// The old password.
+	//
+	// This member is required.
+	PreviousPassword *string
 
 	// The new password.
 	//

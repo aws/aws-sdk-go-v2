@@ -64,23 +64,23 @@ type DescribeSubscribersForNotificationInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The notification whose subscribers you want to list.
-	//
-	// This member is required.
-	Notification *types.Notification
-
 	// The name of the budget whose subscribers you want descriptions of.
 	//
 	// This member is required.
 	BudgetName *string
 
-	// The pagination token that you include in your request to indicate the next set
-	// of results that you want to retrieve.
-	NextToken *string
+	// The notification whose subscribers you want to list.
+	//
+	// This member is required.
+	Notification *types.Notification
 
 	// An optional integer that represents how many entries a paginated response
 	// contains. The maximum is 100.
 	MaxResults *int32
+
+	// The pagination token that you include in your request to indicate the next set
+	// of results that you want to retrieve.
+	NextToken *string
 }
 
 // Response of DescribeSubscribersForNotification

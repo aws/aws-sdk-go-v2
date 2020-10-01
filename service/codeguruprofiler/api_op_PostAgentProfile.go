@@ -67,12 +67,12 @@ type PostAgentProfileInput struct {
 	ContentType *string
 
 	//
-	ProfileToken *string
-
-	//
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	//
+	ProfileToken *string
 }
 
 // The structure representing the postAgentProfileResponse.

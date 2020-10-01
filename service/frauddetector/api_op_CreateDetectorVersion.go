@@ -57,22 +57,24 @@ func (c *Client) CreateDetectorVersion(ctx context.Context, params *CreateDetect
 
 type CreateDetectorVersionInput struct {
 
+	// The ID of the detector under which you want to create a new version.
+	//
+	// This member is required.
+	DetectorId *string
+
+	// The rules to include in the detector version.
+	//
+	// This member is required.
+	Rules []*types.Rule
+
 	// The description of the detector version.
 	Description *string
-
-	// A collection of key and value pairs.
-	Tags []*types.Tag
 
 	// The Amazon Sagemaker model endpoints to include in the detector version.
 	ExternalModelEndpoints []*string
 
 	// The model versions to include in the detector version.
 	ModelVersions []*types.ModelVersion
-
-	// The ID of the detector under which you want to create a new version.
-	//
-	// This member is required.
-	DetectorId *string
 
 	// The rule execution mode for the rules included in the detector version. You can
 	// define and edit the rule mode at the detector version level, when it is in draft
@@ -83,22 +85,20 @@ type CreateDetectorVersionInput struct {
 	// for all matched rules. The default behavior is FIRST_MATCHED.
 	RuleExecutionMode types.RuleExecutionMode
 
-	// The rules to include in the detector version.
-	//
-	// This member is required.
-	Rules []*types.Rule
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 }
 
 type CreateDetectorVersionOutput struct {
-
-	// The status of the detector version.
-	Status types.DetectorVersionStatus
 
 	// The ID for the created version's parent detector.
 	DetectorId *string
 
 	// The ID for the created detector.
 	DetectorVersionId *string
+
+	// The status of the detector version.
+	Status types.DetectorVersionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

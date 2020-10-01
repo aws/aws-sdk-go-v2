@@ -57,15 +57,15 @@ func (c *Client) UpdateRuleMetadata(ctx context.Context, params *UpdateRuleMetad
 
 type UpdateRuleMetadataInput struct {
 
-	// The rule to update.
-	//
-	// This member is required.
-	Rule *types.Rule
-
 	// The rule description.
 	//
 	// This member is required.
 	Description *string
+
+	// The rule to update.
+	//
+	// This member is required.
+	Rule *types.Rule
 }
 
 type UpdateRuleMetadataOutput struct {

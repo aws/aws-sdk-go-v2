@@ -81,16 +81,6 @@ func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscript
 
 type PutSubscriptionFilterInput struct {
 
-	// The name of the log group.
-	//
-	// This member is required.
-	LogGroupName *string
-
-	// The ARN of an IAM role that grants CloudWatch Logs permissions to deliver
-	// ingested log events to the destination stream. You don't need to provide the ARN
-	// when you are working with a logical destination for cross-account delivery.
-	RoleArn *string
-
 	// The ARN of the destination to deliver matching log events to. Currently, the
 	// supported destinations are:
 	//
@@ -120,16 +110,26 @@ type PutSubscriptionFilterInput struct {
 	// This member is required.
 	FilterName *string
 
+	// A filter pattern for subscribing to a filtered stream of log events.
+	//
+	// This member is required.
+	FilterPattern *string
+
+	// The name of the log group.
+	//
+	// This member is required.
+	LogGroupName *string
+
 	// The method used to distribute log data to the destination. By default log data
 	// is grouped by log stream, but the grouping can be set to random for a more even
 	// distribution. This property is only applicable when the destination is an Amazon
 	// Kinesis stream.
 	Distribution types.Distribution
 
-	// A filter pattern for subscribing to a filtered stream of log events.
-	//
-	// This member is required.
-	FilterPattern *string
+	// The ARN of an IAM role that grants CloudWatch Logs permissions to deliver
+	// ingested log events to the destination stream. You don't need to provide the ARN
+	// when you are working with a logical destination for cross-account delivery.
+	RoleArn *string
 }
 
 type PutSubscriptionFilterOutput struct {

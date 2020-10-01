@@ -57,32 +57,32 @@ func (c *Client) ListComponentBuildVersions(ctx context.Context, params *ListCom
 
 type ListComponentBuildVersionsInput struct {
 
+	// The component version Amazon Resource Name (ARN) whose versions you want to
+	// list.
+	//
+	// This member is required.
+	ComponentVersionArn *string
+
 	// The maximum items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
-
-	// The component version Amazon Resource Name (ARN) whose versions you want to
-	// list.
-	//
-	// This member is required.
-	ComponentVersionArn *string
 }
 
 type ListComponentBuildVersionsOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
+	// The list of component summaries for the specified semantic version.
+	ComponentSummaryList []*types.ComponentSummary
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// The list of component summaries for the specified semantic version.
-	ComponentSummaryList []*types.ComponentSummary
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

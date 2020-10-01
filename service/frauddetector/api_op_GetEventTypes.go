@@ -64,20 +64,20 @@ type GetEventTypesInput struct {
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
 
-	// The next token for the subsequent request.
-	NextToken *string
-
 	// The name.
 	Name *string
+
+	// The next token for the subsequent request.
+	NextToken *string
 }
 
 type GetEventTypesOutput struct {
 
-	// The next page token.
-	NextToken *string
-
 	// An array of event types.
 	EventTypes []*types.EventType
+
+	// The next page token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

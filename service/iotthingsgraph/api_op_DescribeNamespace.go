@@ -62,20 +62,20 @@ type DescribeNamespaceInput struct {
 
 type DescribeNamespaceOutput struct {
 
-	// The version of the public namespace that the latest version is tracking.
-	TrackingNamespaceVersion *int64
-
-	// The name of the public namespace that the latest namespace version is tracking.
-	TrackingNamespaceName *string
-
-	// The version of the user's namespace to describe.
-	NamespaceVersion *int64
+	// The ARN of the namespace.
+	NamespaceArn *string
 
 	// The name of the namespace.
 	NamespaceName *string
 
-	// The ARN of the namespace.
-	NamespaceArn *string
+	// The version of the user's namespace to describe.
+	NamespaceVersion *int64
+
+	// The name of the public namespace that the latest namespace version is tracking.
+	TrackingNamespaceName *string
+
+	// The version of the public namespace that the latest version is tracking.
+	TrackingNamespaceVersion *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

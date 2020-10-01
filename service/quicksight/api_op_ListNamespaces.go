@@ -77,11 +77,11 @@ type ListNamespacesOutput struct {
 	// status, and identity store.
 	Namespaces []*types.NamespaceInfoV2
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

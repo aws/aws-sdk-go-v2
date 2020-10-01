@@ -64,13 +64,13 @@ type ConfirmDeviceInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The device name.
-	DeviceName *string
-
 	// The device key.
 	//
 	// This member is required.
 	DeviceKey *string
+
+	// The device name.
+	DeviceName *string
 
 	// The configuration of the device secret verifier.
 	DeviceSecretVerifierConfig *types.DeviceSecretVerifierConfigType

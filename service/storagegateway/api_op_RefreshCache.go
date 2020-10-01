@@ -106,12 +106,12 @@ type RefreshCacheInput struct {
 // RefreshCacheOutput
 type RefreshCacheOutput struct {
 
+	// The Amazon Resource Name (ARN) of the file share.
+	FileShareARN *string
+
 	// The randomly generated ID of the notification that was sent. This ID is in UUID
 	// format.
 	NotificationId *string
-
-	// The Amazon Resource Name (ARN) of the file share.
-	FileShareARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

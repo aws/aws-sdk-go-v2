@@ -57,16 +57,16 @@ func (c *Client) UpdateEvaluation(ctx context.Context, params *UpdateEvaluationI
 
 type UpdateEvaluationInput struct {
 
+	// The ID assigned to the Evaluation during creation.
+	//
+	// This member is required.
+	EvaluationId *string
+
 	// A new user-supplied name or description of the Evaluation that will replace the
 	// current content.
 	//
 	// This member is required.
 	EvaluationName *string
-
-	// The ID assigned to the Evaluation during creation.
-	//
-	// This member is required.
-	EvaluationId *string
 }
 
 // Represents the output of an UpdateEvaluation operation. You can see the updated

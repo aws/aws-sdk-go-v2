@@ -58,16 +58,16 @@ func (c *Client) DeleteNatGateway(ctx context.Context, params *DeleteNatGatewayI
 
 type DeleteNatGatewayInput struct {
 
+	// The ID of the NAT gateway.
+	//
+	// This member is required.
+	NatGatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the NAT gateway.
-	//
-	// This member is required.
-	NatGatewayId *string
 }
 
 type DeleteNatGatewayOutput struct {

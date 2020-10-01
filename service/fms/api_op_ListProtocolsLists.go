@@ -79,14 +79,14 @@ type ListProtocolsListsInput struct {
 
 type ListProtocolsListsOutput struct {
 
-	// An array of ProtocolsListDataSummary objects.
-	ProtocolsLists []*types.ProtocolsListDataSummary
-
 	// If you specify a value for MaxResults in your list request, and you have more
 	// objects than the maximum, AWS Firewall Manager returns this token in the
 	// response. You can use this token in subsequent requests to retrieve the next
 	// batch of objects.
 	NextToken *string
+
+	// An array of ProtocolsListDataSummary objects.
+	ProtocolsLists []*types.ProtocolsListDataSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

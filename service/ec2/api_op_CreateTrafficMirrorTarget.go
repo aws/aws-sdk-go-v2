@@ -64,9 +64,13 @@ func (c *Client) CreateTrafficMirrorTarget(ctx context.Context, params *CreateTr
 
 type CreateTrafficMirrorTargetInput struct {
 
-	// The Amazon Resource Name (ARN) of the Network Load Balancer that is associated
-	// with the target.
-	NetworkLoadBalancerArn *string
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
+
+	// The description of the Traffic Mirror target.
+	Description *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -74,19 +78,15 @@ type CreateTrafficMirrorTargetInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The description of the Traffic Mirror target.
-	Description *string
+	// The network interface ID that is associated with the target.
+	NetworkInterfaceId *string
+
+	// The Amazon Resource Name (ARN) of the Network Load Balancer that is associated
+	// with the target.
+	NetworkLoadBalancerArn *string
 
 	// The tags to assign to the Traffic Mirror target.
 	TagSpecifications []*types.TagSpecification
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
-
-	// The network interface ID that is associated with the target.
-	NetworkInterfaceId *string
 }
 
 type CreateTrafficMirrorTargetOutput struct {

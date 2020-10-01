@@ -62,8 +62,10 @@ func (c *Client) CancelConversionTask(ctx context.Context, params *CancelConvers
 
 type CancelConversionTaskInput struct {
 
-	// The reason for canceling the conversion task.
-	ReasonMessage *string
+	// The ID of the conversion task.
+	//
+	// This member is required.
+	ConversionTaskId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -71,10 +73,8 @@ type CancelConversionTaskInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the conversion task.
-	//
-	// This member is required.
-	ConversionTaskId *string
+	// The reason for canceling the conversion task.
+	ReasonMessage *string
 }
 
 type CancelConversionTaskOutput struct {

@@ -57,19 +57,16 @@ func (c *Client) ReplaceTransitGatewayRoute(ctx context.Context, params *Replace
 
 type ReplaceTransitGatewayRouteInput struct {
 
-	// The ID of the attachment.
-	TransitGatewayAttachmentId *string
-
-	// The ID of the route table.
-	//
-	// This member is required.
-	TransitGatewayRouteTableId *string
-
 	// The CIDR range used for the destination match. Routing decisions are based on
 	// the most specific match.
 	//
 	// This member is required.
 	DestinationCidrBlock *string
+
+	// The ID of the route table.
+	//
+	// This member is required.
+	TransitGatewayRouteTableId *string
 
 	// Indicates whether traffic matching this route is to be dropped.
 	Blackhole *bool
@@ -79,6 +76,9 @@ type ReplaceTransitGatewayRouteInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The ID of the attachment.
+	TransitGatewayAttachmentId *string
 }
 
 type ReplaceTransitGatewayRouteOutput struct {

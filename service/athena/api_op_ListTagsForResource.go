@@ -57,14 +57,14 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The maximum number of results to be returned per request that lists the tags for
-	// the resource.
-	MaxResults *int32
-
 	// Lists the tags for the resource with the specified ARN.
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// The maximum number of results to be returned per request that lists the tags for
+	// the resource.
+	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no additional
 	// results for this request, where the request lists the tags for the resource with

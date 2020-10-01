@@ -60,14 +60,14 @@ func (c *Client) GetOutcomes(ctx context.Context, params *GetOutcomesInput, optF
 
 type GetOutcomesInput struct {
 
+	// The maximum number of objects to return for the request.
+	MaxResults *int32
+
 	// The name of the outcome or outcomes to get.
 	Name *string
 
 	// The next page token for the request.
 	NextToken *string
-
-	// The maximum number of objects to return for the request.
-	MaxResults *int32
 }
 
 type GetOutcomesOutput struct {

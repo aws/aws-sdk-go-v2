@@ -56,13 +56,13 @@ func (c *Client) ListNamedShadowsForThing(ctx context.Context, params *ListNamed
 
 type ListNamedShadowsForThingInput struct {
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// The name of the thing.
 	//
 	// This member is required.
 	ThingName *string
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 
 	// The result page size.
 	PageSize *int32

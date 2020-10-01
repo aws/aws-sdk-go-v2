@@ -60,15 +60,15 @@ func (c *Client) ReplaceIamInstanceProfileAssociation(ctx context.Context, param
 
 type ReplaceIamInstanceProfileAssociationInput struct {
 
-	// The IAM instance profile.
-	//
-	// This member is required.
-	IamInstanceProfile *types.IamInstanceProfileSpecification
-
 	// The ID of the existing IAM instance profile association.
 	//
 	// This member is required.
 	AssociationId *string
+
+	// The IAM instance profile.
+	//
+	// This member is required.
+	IamInstanceProfile *types.IamInstanceProfileSpecification
 }
 
 type ReplaceIamInstanceProfileAssociationOutput struct {

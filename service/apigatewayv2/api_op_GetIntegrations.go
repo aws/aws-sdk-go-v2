@@ -62,22 +62,22 @@ type GetIntegrationsInput struct {
 	// This member is required.
 	ApiId *string
 
+	// The maximum number of elements to be returned for this resource.
+	MaxResults *string
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
-
-	// The maximum number of elements to be returned for this resource.
-	MaxResults *string
 }
 
 type GetIntegrationsOutput struct {
 
+	// The elements from this collection.
+	Items []*types.Integration
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
-
-	// The elements from this collection.
-	Items []*types.Integration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

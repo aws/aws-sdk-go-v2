@@ -66,26 +66,20 @@ func (c *Client) CreateHsmConfiguration(ctx context.Context, params *CreateHsmCo
 //
 type CreateHsmConfigurationInput struct {
 
-	// The IP address that the Amazon Redshift cluster must use to access the HSM.
-	//
-	// This member is required.
-	HsmIpAddress *string
-
-	// The HSMs public certificate file. When using Cloud HSM, the file name is
-	// server.pem.
-	//
-	// This member is required.
-	HsmServerPublicCertificate *string
-
 	// A text description of the HSM configuration to be created.
 	//
 	// This member is required.
 	Description *string
 
-	// The password required to access the HSM partition.
+	// The identifier to be assigned to the new Amazon Redshift HSM configuration.
 	//
 	// This member is required.
-	HsmPartitionPassword *string
+	HsmConfigurationIdentifier *string
+
+	// The IP address that the Amazon Redshift cluster must use to access the HSM.
+	//
+	// This member is required.
+	HsmIpAddress *string
 
 	// The name of the partition in the HSM where the Amazon Redshift clusters will
 	// store their database encryption keys.
@@ -93,13 +87,19 @@ type CreateHsmConfigurationInput struct {
 	// This member is required.
 	HsmPartitionName *string
 
-	// A list of tag instances.
-	Tags []*types.Tag
-
-	// The identifier to be assigned to the new Amazon Redshift HSM configuration.
+	// The password required to access the HSM partition.
 	//
 	// This member is required.
-	HsmConfigurationIdentifier *string
+	HsmPartitionPassword *string
+
+	// The HSMs public certificate file. When using Cloud HSM, the file name is
+	// server.pem.
+	//
+	// This member is required.
+	HsmServerPublicCertificate *string
+
+	// A list of tag instances.
+	Tags []*types.Tag
 }
 
 type CreateHsmConfigurationOutput struct {

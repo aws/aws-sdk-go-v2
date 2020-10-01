@@ -57,6 +57,11 @@ func (c *Client) ListThemeVersions(ctx context.Context, params *ListThemeVersion
 
 type ListThemeVersionsInput struct {
 
+	// The ID of the AWS account that contains the themes that you're listing.
+	//
+	// This member is required.
+	AwsAccountId *string
+
 	// The ID for the theme.
 	//
 	// This member is required.
@@ -65,25 +70,20 @@ type ListThemeVersionsInput struct {
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 
-	// The ID of the AWS account that contains the themes that you're listing.
-	//
-	// This member is required.
-	AwsAccountId *string
-
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 }
 
 type ListThemeVersionsOutput struct {
 
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// A structure containing a list of all the versions of the specified theme.
 	ThemeVersionSummaryList []*types.ThemeVersionSummary
-
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

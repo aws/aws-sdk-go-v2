@@ -60,21 +60,6 @@ func (c *Client) PurchaseHostReservation(ctx context.Context, params *PurchaseHo
 
 type PurchaseHostReservationInput struct {
 
-	// The tags to apply to the Dedicated Host Reservation during purchase.
-	TagSpecifications []*types.TagSpecification
-
-	// The specified limit is checked against the total upfront cost of the reservation
-	// (calculated as the offering's upfront cost multiplied by the host count). If the
-	// total upfront cost is greater than the specified price limit, the request fails.
-	// This is used to ensure that the purchase does not exceed the expected upfront
-	// cost of the purchase. At this time, the only supported currency is USD. For
-	// example, to indicate a limit price of USD 100, specify 100.00.
-	LimitPrice *string
-
-	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
-	// amounts are specified. At this time, the only supported currency is USD.
-	CurrencyCode types.CurrencyCodeValues
-
 	// The IDs of the Dedicated Hosts with which the reservation will be associated.
 	//
 	// This member is required.
@@ -89,9 +74,29 @@ type PurchaseHostReservationInput struct {
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
+	// The currency in which the totalUpfrontPrice, LimitPrice, and totalHourlyPrice
+	// amounts are specified. At this time, the only supported currency is USD.
+	CurrencyCode types.CurrencyCodeValues
+
+	// The specified limit is checked against the total upfront cost of the reservation
+	// (calculated as the offering's upfront cost multiplied by the host count). If the
+	// total upfront cost is greater than the specified price limit, the request fails.
+	// This is used to ensure that the purchase does not exceed the expected upfront
+	// cost of the purchase. At this time, the only supported currency is USD. For
+	// example, to indicate a limit price of USD 100, specify 100.00.
+	LimitPrice *string
+
+	// The tags to apply to the Dedicated Host Reservation during purchase.
+	TagSpecifications []*types.TagSpecification
 }
 
 type PurchaseHostReservationOutput struct {
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
 
 	// The currency in which the totalUpfrontPrice and totalHourlyPrice amounts are
 	// specified. At this time, the only supported currency is USD.
@@ -100,16 +105,11 @@ type PurchaseHostReservationOutput struct {
 	// Describes the details of the purchase.
 	Purchase []*types.Purchase
 
-	// The total amount charged to your account when you purchase the reservation.
-	TotalUpfrontPrice *string
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
-
 	// The total hourly price of the reservation calculated per hour.
 	TotalHourlyPrice *string
+
+	// The total amount charged to your account when you purchase the reservation.
+	TotalUpfrontPrice *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

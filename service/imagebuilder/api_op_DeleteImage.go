@@ -64,11 +64,11 @@ type DeleteImageInput struct {
 
 type DeleteImageOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the image that was deleted.
 	ImageBuildVersionArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

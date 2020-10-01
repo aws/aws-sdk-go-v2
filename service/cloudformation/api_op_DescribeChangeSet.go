@@ -69,37 +69,31 @@ type DescribeChangeSetInput struct {
 	// This member is required.
 	ChangeSetName *string
 
-	// If you specified the name of a change set, specify the stack name or ID (ARN) of
-	// the change set you want to describe.
-	StackName *string
-
 	// A string (provided by the DescribeChangeSet () response output) that identifies
 	// the next page of information that you want to retrieve.
 	NextToken *string
+
+	// If you specified the name of a change set, specify the stack name or ID (ARN) of
+	// the change set you want to describe.
+	StackName *string
 }
 
 // The output for the DescribeChangeSet () action.
 type DescribeChangeSetOutput struct {
 
-	// A list of Parameter structures that describes the input parameters and their
-	// values used to create the change set. For more information, see the Parameter
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
-	// data type.
-	Parameters []*types.Parameter
+	// If you execute the change set, the list of capabilities that were explicitly
+	// acknowledged when the change set was created.
+	Capabilities []types.Capability
+
+	// The ARN of the change set.
+	ChangeSetId *string
+
+	// The name of the change set.
+	ChangeSetName *string
 
 	// A list of Change structures that describes the resources AWS CloudFormation
 	// changes if you execute the change set.
 	Changes []*types.Change
-
-	// The current status of the change set, such as CREATE_IN_PROGRESS,
-	// CREATE_COMPLETE, or FAILED.
-	Status types.ChangeSetStatus
-
-	// The name of the stack that is associated with the change set.
-	StackName *string
-
-	// The ARN of the stack that is associated with the change set.
-	StackId *string
 
 	// The start time when the change set was created, in UTC.
 	CreationTime *time.Time
@@ -107,23 +101,11 @@ type DescribeChangeSetOutput struct {
 	// Information about the change set.
 	Description *string
 
-	// If you execute the change set, the list of capabilities that were explicitly
-	// acknowledged when the change set was created.
-	Capabilities []types.Capability
-
-	// If you execute the change set, the tags that will be associated with the stack.
-	Tags []*types.Tag
-
-	// The rollback triggers for AWS CloudFormation to monitor during stack creation
-	// and updating operations, and for the specified monitoring period afterwards.
-	RollbackConfiguration *types.RollbackConfiguration
-
-	// The name of the change set.
-	ChangeSetName *string
-
-	// A description of the change set's status. For example, if your attempt to create
-	// a change set failed, AWS CloudFormation shows the error message.
-	StatusReason *string
+	// If the change set execution status is AVAILABLE, you can execute the change set.
+	// If you can’t execute the change set, the status indicates why. For example, a
+	// change set might be in an UNAVAILABLE state because AWS CloudFormation is still
+	// creating it or in an OBSOLETE state because the stack was already updated.
+	ExecutionStatus types.ExecutionStatus
 
 	// If the output exceeds 1 MB, a string that identifies the next page of changes.
 	// If there is no additional page, this value is null.
@@ -133,14 +115,32 @@ type DescribeChangeSetOutput struct {
 	// be associated with the stack if you execute the change set.
 	NotificationARNs []*string
 
-	// The ARN of the change set.
-	ChangeSetId *string
+	// A list of Parameter structures that describes the input parameters and their
+	// values used to create the change set. For more information, see the Parameter
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_Parameter.html)
+	// data type.
+	Parameters []*types.Parameter
 
-	// If the change set execution status is AVAILABLE, you can execute the change set.
-	// If you can’t execute the change set, the status indicates why. For example, a
-	// change set might be in an UNAVAILABLE state because AWS CloudFormation is still
-	// creating it or in an OBSOLETE state because the stack was already updated.
-	ExecutionStatus types.ExecutionStatus
+	// The rollback triggers for AWS CloudFormation to monitor during stack creation
+	// and updating operations, and for the specified monitoring period afterwards.
+	RollbackConfiguration *types.RollbackConfiguration
+
+	// The ARN of the stack that is associated with the change set.
+	StackId *string
+
+	// The name of the stack that is associated with the change set.
+	StackName *string
+
+	// The current status of the change set, such as CREATE_IN_PROGRESS,
+	// CREATE_COMPLETE, or FAILED.
+	Status types.ChangeSetStatus
+
+	// A description of the change set's status. For example, if your attempt to create
+	// a change set failed, AWS CloudFormation shows the error message.
+	StatusReason *string
+
+	// If you execute the change set, the tags that will be associated with the stack.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

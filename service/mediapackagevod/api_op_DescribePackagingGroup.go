@@ -65,20 +65,20 @@ type DescribePackagingGroupInput struct {
 
 type DescribePackagingGroupOutput struct {
 
+	// The ARN of the PackagingGroup.
+	Arn *string
+
 	// CDN Authorization credentials
 	Authorization *types.Authorization
-
-	// A collection of tags associated with a resource
-	Tags map[string]*string
 
 	// The fully qualified domain name for Assets in the PackagingGroup.
 	DomainName *string
 
-	// The ARN of the PackagingGroup.
-	Arn *string
-
 	// The ID of the PackagingGroup.
 	Id *string
+
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

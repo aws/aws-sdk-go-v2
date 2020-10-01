@@ -56,6 +56,11 @@ func (c *Client) RedactRoomMessage(ctx context.Context, params *RedactRoomMessag
 
 type RedactRoomMessageInput struct {
 
+	// The Amazon Chime account ID.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The message ID.
 	//
 	// This member is required.
@@ -65,11 +70,6 @@ type RedactRoomMessageInput struct {
 	//
 	// This member is required.
 	RoomId *string
-
-	// The Amazon Chime account ID.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type RedactRoomMessageOutput struct {

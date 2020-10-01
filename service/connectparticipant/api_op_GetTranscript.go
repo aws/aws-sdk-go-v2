@@ -58,30 +58,30 @@ func (c *Client) GetTranscript(ctx context.Context, params *GetTranscriptInput, 
 
 type GetTranscriptInput struct {
 
-	// The sort order for the records. Default: DESCENDING.
-	SortOrder types.SortKey
-
-	// The contactId from the current contact chain for which transcript is needed.
-	ContactId *string
-
-	// A filtering option for where to start.
-	StartPosition *types.StartPosition
-
 	// The authentication token associated with the participant's connection.
 	//
 	// This member is required.
 	ConnectionToken *string
 
-	// The pagination token. Use the value returned previously in the next subsequent
-	// request to retrieve the next set of results.
-	NextToken *string
+	// The contactId from the current contact chain for which transcript is needed.
+	ContactId *string
 
 	// The maximum number of results to return in the page. Default: 10.
 	MaxResults *int32
 
+	// The pagination token. Use the value returned previously in the next subsequent
+	// request to retrieve the next set of results.
+	NextToken *string
+
 	// The direction from StartPosition from which to retrieve message. Default:
 	// BACKWARD when no StartPosition is provided, FORWARD with StartPosition.
 	ScanDirection types.ScanDirection
+
+	// The sort order for the records. Default: DESCENDING.
+	SortOrder types.SortKey
+
+	// A filtering option for where to start.
+	StartPosition *types.StartPosition
 }
 
 type GetTranscriptOutput struct {
@@ -89,12 +89,12 @@ type GetTranscriptOutput struct {
 	// The initial contact ID for the contact.
 	InitialContactId *string
 
-	// The list of messages in the session.
-	Transcript []*types.Item
-
 	// The pagination token. Use the value returned previously in the next subsequent
 	// request to retrieve the next set of results.
 	NextToken *string
+
+	// The list of messages in the session.
+	Transcript []*types.Item
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

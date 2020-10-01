@@ -58,9 +58,10 @@ func (c *Client) DeleteFile(ctx context.Context, params *DeleteFileInput, optFns
 
 type DeleteFileInput struct {
 
-	// The email address for the commit that deletes the file. If no email address is
-	// specified, the email address is left blank.
-	Email *string
+	// The name of the branch where the commit that deletes the file is made.
+	//
+	// This member is required.
+	BranchName *string
 
 	// The fully qualified path to the file that to be deleted, including the full name
 	// and extension of that file. For example, /examples/file.md is a fully qualified
@@ -68,6 +69,13 @@ type DeleteFileInput struct {
 	//
 	// This member is required.
 	FilePath *string
+
+	// The ID of the commit that is the tip of the branch where you want to create the
+	// commit that deletes the file. This must be the HEAD commit for the branch. The
+	// commit that deletes the file is created from this commit ID.
+	//
+	// This member is required.
+	ParentCommitId *string
 
 	// The name of the repository that contains the file to delete.
 	//
@@ -79,21 +87,9 @@ type DeleteFileInput struct {
 	// used.
 	CommitMessage *string
 
-	// The name of the author of the commit that deletes the file. If no name is
-	// specified, the user's ARN is used as the author name and committer name.
-	Name *string
-
-	// The name of the branch where the commit that deletes the file is made.
-	//
-	// This member is required.
-	BranchName *string
-
-	// The ID of the commit that is the tip of the branch where you want to create the
-	// commit that deletes the file. This must be the HEAD commit for the branch. The
-	// commit that deletes the file is created from this commit ID.
-	//
-	// This member is required.
-	ParentCommitId *string
+	// The email address for the commit that deletes the file. If no email address is
+	// specified, the email address is left blank.
+	Email *string
 
 	// If a file is the only object in the folder or directory, specifies whether to
 	// delete the folder or directory that contains the file. By default, empty folders
@@ -102,6 +98,10 @@ type DeleteFileInput struct {
 	// and dir3 are empty, deleting the last file in dir4 also deletes the empty
 	// folders dir4, dir3, and dir2.
 	KeepEmptyFolders *bool
+
+	// The name of the author of the commit that deletes the file. If no name is
+	// specified, the user's ARN is used as the author name and committer name.
+	Name *string
 }
 
 type DeleteFileOutput struct {

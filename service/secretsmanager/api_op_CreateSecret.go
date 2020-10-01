@@ -142,35 +142,6 @@ type CreateSecretInput struct {
 	// This member is required.
 	Name *string
 
-	// (Optional) Specifies text data that you want to encrypt and store in this new
-	// version of the secret. Either SecretString or SecretBinary must have a value,
-	// but not both. They cannot both be empty. If you create a secret by using the
-	// Secrets Manager console then Secrets Manager puts the protected secret text in
-	// only the SecretString parameter. The Secrets Manager console stores the
-	// information as a JSON structure of key/value pairs that the Lambda rotation
-	// function knows how to parse. For storing multiple values, we recommend that you
-	// use a JSON text string argument and specify key/value pairs. For information on
-	// how to format a JSON parameter for the various command line tool environments,
-	// see Using JSON for Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For example:
-	// {"username":"bob","password":"abc123xyz456"} If your command-line tool or SDK
-	// requires quotation marks around the parameter, you should use single quotes to
-	// avoid confusion with the double quotes required in the JSON text.
-	SecretString *string
-
-	// (Optional) Specifies a user-provided description of the secret.
-	Description *string
-
-	// (Optional) Specifies binary data that you want to encrypt and store in the new
-	// version of the secret. To use this parameter in the command-line tools, we
-	// recommend that you store your binary data in a file and then use the appropriate
-	// technique for your tool to pass the contents of the file as a parameter. Either
-	// SecretString or SecretBinary must have a value, but not both. They cannot both
-	// be empty. This parameter is not available using the Secrets Manager console. It
-	// can be accessed only by using the AWS CLI or one of the AWS SDKs.
-	SecretBinary []byte
-
 	// (Optional) If you include SecretString or SecretBinary, then an initial version
 	// is created as part of the secret, and this parameter specifies a unique
 	// identifier for the new version. If you use the AWS CLI or one of the AWS SDK to
@@ -202,6 +173,9 @@ type CreateSecretInput struct {
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
 
+	// (Optional) Specifies a user-provided description of the secret.
+	Description *string
+
 	// (Optional) Specifies the ARN, Key ID, or alias of the AWS KMS customer master
 	// key (CMK) to be used to encrypt the SecretString or SecretBinary values in the
 	// versions stored in this secret. You can specify any of the supported ways to
@@ -216,6 +190,32 @@ type CreateSecretInput struct {
 	// resides in a different account, then you must create a custom CMK and specify
 	// the ARN in this field.
 	KmsKeyId *string
+
+	// (Optional) Specifies binary data that you want to encrypt and store in the new
+	// version of the secret. To use this parameter in the command-line tools, we
+	// recommend that you store your binary data in a file and then use the appropriate
+	// technique for your tool to pass the contents of the file as a parameter. Either
+	// SecretString or SecretBinary must have a value, but not both. They cannot both
+	// be empty. This parameter is not available using the Secrets Manager console. It
+	// can be accessed only by using the AWS CLI or one of the AWS SDKs.
+	SecretBinary []byte
+
+	// (Optional) Specifies text data that you want to encrypt and store in this new
+	// version of the secret. Either SecretString or SecretBinary must have a value,
+	// but not both. They cannot both be empty. If you create a secret by using the
+	// Secrets Manager console then Secrets Manager puts the protected secret text in
+	// only the SecretString parameter. The Secrets Manager console stores the
+	// information as a JSON structure of key/value pairs that the Lambda rotation
+	// function knows how to parse. For storing multiple values, we recommend that you
+	// use a JSON text string argument and specify key/value pairs. For information on
+	// how to format a JSON parameter for the various command line tool environments,
+	// see Using JSON for Parameters
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
+	// in the AWS CLI User Guide. For example:
+	// {"username":"bob","password":"abc123xyz456"} If your command-line tool or SDK
+	// requires quotation marks around the parameter, you should use single quotes to
+	// avoid confusion with the double quotes required in the JSON text.
+	SecretString *string
 
 	// (Optional) Specifies a list of user-defined tags that are attached to the
 	// secret. Each tag is a "Key" and "Value" pair of strings. This operation only
@@ -268,13 +268,6 @@ type CreateSecretInput struct {
 
 type CreateSecretOutput struct {
 
-	// The friendly name of the secret that you just created.
-	Name *string
-
-	// The unique identifier associated with the version of the secret you just
-	// created.
-	VersionId *string
-
 	// The Amazon Resource Name (ARN) of the secret that you just created. Secrets
 	// Manager automatically adds several random characters to the name at the end of
 	// the ARN when you initially create a secret. This affects only the ARN and not
@@ -283,6 +276,13 @@ type CreateSecretOutput struct {
 	// to the old secret don't automatically get access to the new secret because the
 	// ARNs are different.
 	ARN *string
+
+	// The friendly name of the secret that you just created.
+	Name *string
+
+	// The unique identifier associated with the version of the secret you just
+	// created.
+	VersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

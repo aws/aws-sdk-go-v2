@@ -123,48 +123,6 @@ func (c *Client) UpdateSecret(ctx context.Context, params *UpdateSecretInput, op
 
 type UpdateSecretInput struct {
 
-	// (Optional) Specifies updated binary data that you want to encrypt and store in
-	// the new version of the secret. To use this parameter in the command-line tools,
-	// we recommend that you store your binary data in a file and then use the
-	// appropriate technique for your tool to pass the contents of the file as a
-	// parameter. Either SecretBinary or SecretString must have a value, but not both.
-	// They cannot both be empty. This parameter is not accessible using the Secrets
-	// Manager console.
-	SecretBinary []byte
-
-	// (Optional) Specifies updated text data that you want to encrypt and store in
-	// this new version of the secret. Either SecretBinary or SecretString must have a
-	// value, but not both. They cannot both be empty. If you create this secret by
-	// using the Secrets Manager console then Secrets Manager puts the protected secret
-	// text in only the SecretString parameter. The Secrets Manager console stores the
-	// information as a JSON structure of key/value pairs that the default Lambda
-	// rotation function knows how to parse. For storing multiple values, we recommend
-	// that you use a JSON text string argument and specify key/value pairs. For
-	// information on how to format a JSON parameter for the various command line tool
-	// environments, see Using JSON for Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For example:
-	// [{"username":"bob"},{"password":"abc123xyz456"}] If your command-line tool or
-	// SDK requires quotation marks around the parameter, you should use single quotes
-	// to avoid confusion with the double quotes required in the JSON text. You can
-	// also 'escape' the double quote character in the embedded JSON text by prefacing
-	// each with a backslash. For example, the following string is surrounded by
-	// double-quotes. All of the embedded double quotes are escaped:
-	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
-	SecretString *string
-
-	// (Optional) Specifies an updated ARN or alias of the AWS KMS customer master key
-	// (CMK) to be used to encrypt the protected text in new versions of this secret.
-	// You can only use the account's default CMK to encrypt and decrypt if you call
-	// this operation using credentials from the same account that owns the secret. If
-	// the secret is in a different account, then you must create a custom CMK and
-	// provide the ARN of that CMK in this field. The user making the call must have
-	// permissions to both the secret and the CMK in their respective accounts.
-	KmsKeyId *string
-
-	// (Optional) Specifies an updated user-provided description of the secret.
-	Description *string
-
 	// Specifies the secret that you want to modify or to which you want to add a new
 	// version. You can specify either the Amazon Resource Name (ARN) or the friendly
 	// name of the secret. If you specify an ARN, we generally recommend that you
@@ -217,6 +175,48 @@ type UpdateSecretInput struct {
 	// This
 	// value becomes the VersionId of the new version.
 	ClientRequestToken *string
+
+	// (Optional) Specifies an updated user-provided description of the secret.
+	Description *string
+
+	// (Optional) Specifies an updated ARN or alias of the AWS KMS customer master key
+	// (CMK) to be used to encrypt the protected text in new versions of this secret.
+	// You can only use the account's default CMK to encrypt and decrypt if you call
+	// this operation using credentials from the same account that owns the secret. If
+	// the secret is in a different account, then you must create a custom CMK and
+	// provide the ARN of that CMK in this field. The user making the call must have
+	// permissions to both the secret and the CMK in their respective accounts.
+	KmsKeyId *string
+
+	// (Optional) Specifies updated binary data that you want to encrypt and store in
+	// the new version of the secret. To use this parameter in the command-line tools,
+	// we recommend that you store your binary data in a file and then use the
+	// appropriate technique for your tool to pass the contents of the file as a
+	// parameter. Either SecretBinary or SecretString must have a value, but not both.
+	// They cannot both be empty. This parameter is not accessible using the Secrets
+	// Manager console.
+	SecretBinary []byte
+
+	// (Optional) Specifies updated text data that you want to encrypt and store in
+	// this new version of the secret. Either SecretBinary or SecretString must have a
+	// value, but not both. They cannot both be empty. If you create this secret by
+	// using the Secrets Manager console then Secrets Manager puts the protected secret
+	// text in only the SecretString parameter. The Secrets Manager console stores the
+	// information as a JSON structure of key/value pairs that the default Lambda
+	// rotation function knows how to parse. For storing multiple values, we recommend
+	// that you use a JSON text string argument and specify key/value pairs. For
+	// information on how to format a JSON parameter for the various command line tool
+	// environments, see Using JSON for Parameters
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
+	// in the AWS CLI User Guide. For example:
+	// [{"username":"bob"},{"password":"abc123xyz456"}] If your command-line tool or
+	// SDK requires quotation marks around the parameter, you should use single quotes
+	// to avoid confusion with the double quotes required in the JSON text. You can
+	// also 'escape' the double quote character in the embedded JSON text by prefacing
+	// each with a backslash. For example, the following string is surrounded by
+	// double-quotes. All of the embedded double quotes are escaped:
+	// "[{\"username\":\"bob\"},{\"password\":\"abc123xyz456\"}]"
+	SecretString *string
 }
 
 type UpdateSecretOutput struct {
@@ -229,12 +229,12 @@ type UpdateSecretOutput struct {
 	// automatically get access to the new secret because the ARNs are different.
 	ARN *string
 
+	// The friendly name of the secret that was updated.
+	Name *string
+
 	// If a new version of the secret was created by this operation, then VersionId
 	// contains the unique identifier of the new version.
 	VersionId *string
-
-	// The friendly name of the secret that was updated.
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

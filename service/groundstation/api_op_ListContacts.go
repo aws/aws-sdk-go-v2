@@ -64,6 +64,16 @@ type ListContactsInput struct {
 	// This member is required.
 	EndTime *time.Time
 
+	// Start time of a contact.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Status of a contact reservation.
+	//
+	// This member is required.
+	StatusList []types.ContactStatus
+
 	// Name of a ground station.
 	GroundStation *string
 
@@ -79,16 +89,6 @@ type ListContactsInput struct {
 
 	// ARN of a satellite.
 	SatelliteArn *string
-
-	// Start time of a contact.
-	//
-	// This member is required.
-	StartTime *time.Time
-
-	// Status of a contact reservation.
-	//
-	// This member is required.
-	StatusList []types.ContactStatus
 }
 
 //

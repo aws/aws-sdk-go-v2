@@ -67,11 +67,11 @@ type GetStreamingDistributionConfigInput struct {
 // The returned result of the corresponding request.
 type GetStreamingDistributionConfigOutput struct {
 
-	// The streaming distribution's configuration information.
-	StreamingDistributionConfig *types.StreamingDistributionConfig
-
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string
+
+	// The streaming distribution's configuration information.
+	StreamingDistributionConfig *types.StreamingDistributionConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

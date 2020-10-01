@@ -68,12 +68,12 @@ type RegisterCertificateWithoutCAInput struct {
 
 type RegisterCertificateWithoutCAOutput struct {
 
+	// The Amazon Resource Name (ARN) of the registered certificate.
+	CertificateArn *string
+
 	// The ID of the registered certificate. (The last part of the certificate ARN
 	// contains the certificate ID.
 	CertificateId *string
-
-	// The Amazon Resource Name (ARN) of the registered certificate.
-	CertificateArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

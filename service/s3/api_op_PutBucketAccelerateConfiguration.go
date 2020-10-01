@@ -84,15 +84,15 @@ func (c *Client) PutBucketAccelerateConfiguration(ctx context.Context, params *P
 
 type PutBucketAccelerateConfigurationInput struct {
 
-	// Name of the bucket for which the accelerate configuration is set.
-	//
-	// This member is required.
-	Bucket *string
-
 	// Container for setting the transfer acceleration state.
 	//
 	// This member is required.
 	AccelerateConfiguration *types.AccelerateConfiguration
+
+	// Name of the bucket for which the accelerate configuration is set.
+	//
+	// This member is required.
+	Bucket *string
 }
 
 type PutBucketAccelerateConfigurationOutput struct {

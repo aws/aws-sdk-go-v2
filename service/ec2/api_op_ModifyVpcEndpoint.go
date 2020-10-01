@@ -61,29 +61,20 @@ func (c *Client) ModifyVpcEndpoint(ctx context.Context, params *ModifyVpcEndpoin
 // Contains the parameters for ModifyVpcEndpoint.
 type ModifyVpcEndpointInput struct {
 
-	// (Gateway endpoint) One or more route table IDs to disassociate from the
-	// endpoint.
-	RemoveRouteTableIds []*string
-
-	// (Interface endpoint) Indicates whether a private hosted zone is associated with
-	// the VPC.
-	PrivateDnsEnabled *bool
-
 	// The ID of the endpoint.
 	//
 	// This member is required.
 	VpcEndpointId *string
 
-	// (Gateway endpoint) Specify true to reset the policy document to the default
-	// policy. The default policy allows full access to the service.
-	ResetPolicy *bool
+	// (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
+	AddRouteTableIds []*string
+
+	// (Interface endpoint) One or more security group IDs to associate with the
+	// network interface.
+	AddSecurityGroupIds []*string
 
 	// (Interface endpoint) One or more subnet IDs in which to serve the endpoint.
 	AddSubnetIds []*string
-
-	// A policy to attach to the endpoint that controls access to the service. The
-	// policy must be in valid JSON format.
-	PolicyDocument *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -91,19 +82,28 @@ type ModifyVpcEndpointInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// (Interface endpoint) One or more security group IDs to associate with the
-	// network interface.
-	AddSecurityGroupIds []*string
+	// A policy to attach to the endpoint that controls access to the service. The
+	// policy must be in valid JSON format.
+	PolicyDocument *string
+
+	// (Interface endpoint) Indicates whether a private hosted zone is associated with
+	// the VPC.
+	PrivateDnsEnabled *bool
+
+	// (Gateway endpoint) One or more route table IDs to disassociate from the
+	// endpoint.
+	RemoveRouteTableIds []*string
 
 	// (Interface endpoint) One or more security group IDs to disassociate from the
 	// network interface.
 	RemoveSecurityGroupIds []*string
 
-	// (Gateway endpoint) One or more route tables IDs to associate with the endpoint.
-	AddRouteTableIds []*string
-
 	// (Interface endpoint) One or more subnets IDs in which to remove the endpoint.
 	RemoveSubnetIds []*string
+
+	// (Gateway endpoint) Specify true to reset the policy document to the default
+	// policy. The default policy allows full access to the service.
+	ResetPolicy *bool
 }
 
 type ModifyVpcEndpointOutput struct {

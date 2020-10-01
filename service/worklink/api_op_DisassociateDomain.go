@@ -57,15 +57,15 @@ func (c *Client) DisassociateDomain(ctx context.Context, params *DisassociateDom
 
 type DisassociateDomainInput struct {
 
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
-
 	// The name of the domain.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
 }
 
 type DisassociateDomainOutput struct {

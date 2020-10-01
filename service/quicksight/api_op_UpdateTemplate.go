@@ -58,6 +58,11 @@ func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput
 
 type UpdateTemplateInput struct {
 
+	// The ID of the AWS account that contains the template that you're updating.
+	//
+	// This member is required.
+	AwsAccountId *string
+
 	// The entity that you are using as a source when you update the template. In
 	// SourceEntity, you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
@@ -71,43 +76,38 @@ type UpdateTemplateInput struct {
 	// This member is required.
 	SourceEntity *types.TemplateSourceEntity
 
-	// A description of the current template version that is being updated. Every time
-	// you call UpdateTemplate, you create a new version of the template. Each version
-	// of the template maintains a description of the version in the VersionDescription
-	// field.
-	VersionDescription *string
-
 	// The ID for the template.
 	//
 	// This member is required.
 	TemplateId *string
 
-	// The ID of the AWS account that contains the template that you're updating.
-	//
-	// This member is required.
-	AwsAccountId *string
-
 	// The name for the template.
 	Name *string
+
+	// A description of the current template version that is being updated. Every time
+	// you call UpdateTemplate, you create a new version of the template. Each version
+	// of the template maintains a description of the version in the VersionDescription
+	// field.
+	VersionDescription *string
 }
 
 type UpdateTemplateOutput struct {
 
-	// The creation status of the template.
-	CreationStatus types.ResourceStatus
-
 	// The Amazon Resource Name (ARN) for the template.
 	Arn *string
 
-	// The ARN for the template, including the version information of the first
-	// version.
-	VersionArn *string
+	// The creation status of the template.
+	CreationStatus types.ResourceStatus
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The ID for the template.
 	TemplateId *string
+
+	// The ARN for the template, including the version information of the first
+	// version.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,15 +59,15 @@ func (c *Client) EnableRadius(ctx context.Context, params *EnableRadiusInput, op
 // Contains the inputs for the EnableRadius () operation.
 type EnableRadiusInput struct {
 
-	// A RadiusSettings () object that contains information about the RADIUS server.
-	//
-	// This member is required.
-	RadiusSettings *types.RadiusSettings
-
 	// The identifier of the directory for which to enable MFA.
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// A RadiusSettings () object that contains information about the RADIUS server.
+	//
+	// This member is required.
+	RadiusSettings *types.RadiusSettings
 }
 
 // Contains the results of the EnableRadius () operation.

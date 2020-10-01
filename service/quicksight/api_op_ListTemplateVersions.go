@@ -58,6 +58,11 @@ func (c *Client) ListTemplateVersions(ctx context.Context, params *ListTemplateV
 
 type ListTemplateVersionsInput struct {
 
+	// The ID of the AWS account that contains the templates that you're listing.
+	//
+	// This member is required.
+	AwsAccountId *string
+
 	// The ID for the template.
 	//
 	// This member is required.
@@ -66,25 +71,20 @@ type ListTemplateVersionsInput struct {
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
 
-	// The ID of the AWS account that contains the templates that you're listing.
-	//
-	// This member is required.
-	AwsAccountId *string
-
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 }
 
 type ListTemplateVersionsOutput struct {
 
-	// A structure containing a list of all the versions of the specified template.
-	TemplateVersionSummaryList []*types.TemplateVersionSummary
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
+	// A structure containing a list of all the versions of the specified template.
+	TemplateVersionSummaryList []*types.TemplateVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

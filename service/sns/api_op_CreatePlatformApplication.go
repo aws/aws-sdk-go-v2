@@ -91,19 +91,19 @@ type CreatePlatformApplicationInput struct {
 	// This member is required.
 	Attributes map[string]*string
 
-	// The following platforms are supported: ADM (Amazon Device Messaging), APNS
-	// (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase Cloud
-	// Messaging).
-	//
-	// This member is required.
-	Platform *string
-
 	// Application names must be made up of only uppercase and lowercase ASCII letters,
 	// numbers, underscores, hyphens, and periods, and must be between 1 and 256
 	// characters long.
 	//
 	// This member is required.
 	Name *string
+
+	// The following platforms are supported: ADM (Amazon Device Messaging), APNS
+	// (Apple Push Notification Service), APNS_SANDBOX, and GCM (Firebase Cloud
+	// Messaging).
+	//
+	// This member is required.
+	Platform *string
 }
 
 // Response from CreatePlatformApplication action.

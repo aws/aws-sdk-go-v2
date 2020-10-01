@@ -68,9 +68,14 @@ type UpdateJobExecutionInput struct {
 	// This member is required.
 	Status types.JobExecutionStatus
 
-	// Optional. A collection of name/value pairs that describe the status of the job
-	// execution. If not specified, the statusDetails are unchanged.
-	StatusDetails map[string]*string
+	// The name of the thing associated with the device.
+	//
+	// This member is required.
+	ThingName *string
+
+	// Optional. A number that identifies a particular job execution on a particular
+	// device.
+	ExecutionNumber *int64
 
 	// Optional. The expected current version of the job execution. Each time you
 	// update the job execution, its version is incremented. If the version of the job
@@ -81,13 +86,17 @@ type UpdateJobExecutionInput struct {
 	// status data.)
 	ExpectedVersion *int64
 
+	// Optional. When set to true, the response contains the job document. The default
+	// is false.
+	IncludeJobDocument *bool
+
 	// Optional. When included and set to true, the response contains the
 	// JobExecutionState data. The default is false.
 	IncludeJobExecutionState *bool
 
-	// Optional. When set to true, the response contains the job document. The default
-	// is false.
-	IncludeJobDocument *bool
+	// Optional. A collection of name/value pairs that describe the status of the job
+	// execution. If not specified, the statusDetails are unchanged.
+	StatusDetails map[string]*string
 
 	// Specifies the amount of time this device has to finish execution of this job. If
 	// the job execution status is not set to a terminal state before this timer
@@ -98,15 +107,6 @@ type UpdateJobExecutionInput struct {
 	// timeout which may have been specified when the job was created (CreateJob using
 	// field timeoutConfig).
 	StepTimeoutInMinutes *int64
-
-	// Optional. A number that identifies a particular job execution on a particular
-	// device.
-	ExecutionNumber *int64
-
-	// The name of the thing associated with the device.
-	//
-	// This member is required.
-	ThingName *string
 }
 
 type UpdateJobExecutionOutput struct {

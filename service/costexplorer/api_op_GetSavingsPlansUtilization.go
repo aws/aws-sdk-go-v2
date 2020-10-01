@@ -61,10 +61,12 @@ func (c *Client) GetSavingsPlansUtilization(ctx context.Context, params *GetSavi
 
 type GetSavingsPlansUtilizationInput struct {
 
-	// The granularity of the Amazon Web Services utillization data for your Savings
-	// Plans. The GetSavingsPlansUtilization operation supports only DAILY and MONTHLY
-	// granularities.
-	Granularity types.Granularity
+	// The time period that you want the usage and costs for. The Start date must be
+	// within 13 months. The End date must be after the Start date, and before the
+	// current date. Future dates can't be used as an End date.
+	//
+	// This member is required.
+	TimePeriod *types.DateInterval
 
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
@@ -89,25 +91,23 @@ type GetSavingsPlansUtilizationInput struct {
 	// object as the other operations, but only AND is supported among each dimension.
 	Filter *types.Expression
 
-	// The time period that you want the usage and costs for. The Start date must be
-	// within 13 months. The End date must be after the Start date, and before the
-	// current date. Future dates can't be used as an End date.
-	//
-	// This member is required.
-	TimePeriod *types.DateInterval
+	// The granularity of the Amazon Web Services utillization data for your Savings
+	// Plans. The GetSavingsPlansUtilization operation supports only DAILY and MONTHLY
+	// granularities.
+	Granularity types.Granularity
 }
 
 type GetSavingsPlansUtilizationOutput struct {
-
-	// The amount of cost/commitment you used your Savings Plans. This allows you to
-	// specify date ranges.
-	SavingsPlansUtilizationsByTime []*types.SavingsPlansUtilizationByTime
 
 	// The total amount of cost/commitment that you used your Savings Plans, regardless
 	// of date ranges.
 	//
 	// This member is required.
 	Total *types.SavingsPlansUtilizationAggregates
+
+	// The amount of cost/commitment you used your Savings Plans. This allows you to
+	// specify date ranges.
+	SavingsPlansUtilizationsByTime []*types.SavingsPlansUtilizationByTime
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

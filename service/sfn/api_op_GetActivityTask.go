@@ -80,13 +80,13 @@ type GetActivityTaskInput struct {
 
 type GetActivityTaskOutput struct {
 
+	// The string that contains the JSON input data for the task.
+	Input *string
+
 	// A token that identifies the scheduled task. This token must be copied and
 	// included in subsequent calls to SendTaskHeartbeat (), SendTaskSuccess () or
 	// SendTaskFailure () in order to report the progress or completion of the task.
 	TaskToken *string
-
-	// The string that contains the JSON input data for the task.
-	Input *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

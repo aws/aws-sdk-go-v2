@@ -59,13 +59,13 @@ func (c *Client) DescribeStandardsControls(ctx context.Context, params *Describe
 
 type DescribeStandardsControlsInput struct {
 
-	// The maximum number of security standard controls to return.
-	MaxResults *int32
-
 	// The ARN of a resource that represents your subscription to a supported standard.
 	//
 	// This member is required.
 	StandardsSubscriptionArn *string
+
+	// The maximum number of security standard controls to return.
+	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
 	// DescribeStandardsControls operation, set the value of this parameter to NULL.

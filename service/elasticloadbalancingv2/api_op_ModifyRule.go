@@ -66,11 +66,6 @@ type ModifyRuleInput struct {
 	// This member is required.
 	RuleArn *string
 
-	// The conditions. Each rule can include zero or one of the following conditions:
-	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
-	// of the following conditions: http-header and query-string.
-	Conditions []*types.RuleCondition
-
 	// The actions. Each rule must include exactly one of the following types of
 	// actions: forward, fixed-response, or redirect, and it must be the last action to
 	// be performed. If the action type is forward, you specify one or more target
@@ -85,6 +80,11 @@ type ModifyRuleInput struct {
 	// Balancer] If the action type is fixed-response, you drop specified client
 	// requests and return a custom HTTP response.
 	Actions []*types.Action
+
+	// The conditions. Each rule can include zero or one of the following conditions:
+	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
+	// of the following conditions: http-header and query-string.
+	Conditions []*types.RuleCondition
 }
 
 type ModifyRuleOutput struct {

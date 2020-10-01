@@ -89,14 +89,14 @@ func (c *Client) GetClip(ctx context.Context, params *GetClipInput, optFns ...fu
 
 type GetClipInput struct {
 
-	// The Amazon Resource Name (ARN) of the stream for which to retrieve the media
-	// clip. You must specify either the StreamName or the StreamARN.
-	StreamARN *string
-
 	// The time range of the requested clip and the source of the timestamps.
 	//
 	// This member is required.
 	ClipFragmentSelector *types.ClipFragmentSelector
+
+	// The Amazon Resource Name (ARN) of the stream for which to retrieve the media
+	// clip. You must specify either the StreamName or the StreamARN.
+	StreamARN *string
 
 	// The name of the stream for which to retrieve the media clip. You must specify
 	// either the StreamName or the StreamARN.
@@ -105,14 +105,14 @@ type GetClipInput struct {
 
 type GetClipOutput struct {
 
+	// The content type of the media in the requested clip.
+	ContentType *string
+
 	// Traditional MP4 file that contains the media clip from the specified video
 	// stream. The output will contain the first 100 MB or the first 200 fragments from
 	// the specified start timestamp. For more information, see Kinesis Video Streams
 	// Limits ().
 	Payload io.ReadCloser
-
-	// The content type of the media in the requested clip.
-	ContentType *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

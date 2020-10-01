@@ -61,12 +61,12 @@ type GetUsageStatisticsInput struct {
 	// join the conditions specified by the objects.
 	FilterBy []*types.UsageStatisticsFilter
 
+	// The maximum number of items to include in each page of the response.
+	MaxResults *int32
+
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
-
-	// The maximum number of items to include in each page of the response.
-	MaxResults *int32
 
 	// The criteria to use to sort the query results.
 	SortBy *types.UsageStatisticsSortBy
@@ -74,13 +74,13 @@ type GetUsageStatisticsInput struct {
 
 type GetUsageStatisticsOutput struct {
 
-	// An array of objects that contains the results of the query. Each object contains
-	// the data for an account that meets the filter criteria specified in the request.
-	Records []*types.UsageRecord
-
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
+
+	// An array of objects that contains the results of the query. Each object contains
+	// the data for an account that meets the filter criteria specified in the request.
+	Records []*types.UsageRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

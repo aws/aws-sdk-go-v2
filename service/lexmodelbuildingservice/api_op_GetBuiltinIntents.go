@@ -57,16 +57,16 @@ func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntent
 
 type GetBuiltinIntentsInput struct {
 
-	// A pagination token that fetches the next page of intents. If this API call is
-	// truncated, Amazon Lex returns a pagination token in the response. To fetch the
-	// next page of intents, use the pagination token in the next request.
-	NextToken *string
-
 	// A list of locales that the intent supports.
 	Locale types.Locale
 
 	// The maximum number of intents to return in the response. The default is 10.
 	MaxResults *int32
+
+	// A pagination token that fetches the next page of intents. If this API call is
+	// truncated, Amazon Lex returns a pagination token in the response. To fetch the
+	// next page of intents, use the pagination token in the next request.
+	NextToken *string
 
 	// Substring to match in built-in intent signatures. An intent will be returned if
 	// any part of its signature matches the substring. For example, "xyz" matches both

@@ -59,15 +59,15 @@ func (c *Client) DeleteTagsForDomain(ctx context.Context, params *DeleteTagsForD
 // The DeleteTagsForDomainRequest includes the following elements.
 type DeleteTagsForDomainInput struct {
 
-	// A list of tag keys to delete.
-	//
-	// This member is required.
-	TagsToDelete []*string
-
 	// The domain for which you want to delete one or more tags.
 	//
 	// This member is required.
 	DomainName *string
+
+	// A list of tag keys to delete.
+	//
+	// This member is required.
+	TagsToDelete []*string
 }
 
 type DeleteTagsForDomainOutput struct {

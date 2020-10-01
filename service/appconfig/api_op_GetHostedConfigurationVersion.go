@@ -56,15 +56,15 @@ func (c *Client) GetHostedConfigurationVersion(ctx context.Context, params *GetH
 
 type GetHostedConfigurationVersionInput struct {
 
-	// The configuration profile ID.
-	//
-	// This member is required.
-	ConfigurationProfileId *string
-
 	// The application ID.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The configuration profile ID.
+	//
+	// This member is required.
+	ConfigurationProfileId *string
 
 	// The version.
 	//
@@ -74,6 +74,15 @@ type GetHostedConfigurationVersionInput struct {
 
 type GetHostedConfigurationVersionOutput struct {
 
+	// The application ID.
+	ApplicationId *string
+
+	// The configuration profile ID.
+	ConfigurationProfileId *string
+
+	// The content of the configuration or the configuration data.
+	Content []byte
+
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
 	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
@@ -82,17 +91,8 @@ type GetHostedConfigurationVersionOutput struct {
 	// A description of the configuration.
 	Description *string
 
-	// The configuration profile ID.
-	ConfigurationProfileId *string
-
 	// The configuration version.
 	VersionNumber *int32
-
-	// The application ID.
-	ApplicationId *string
-
-	// The content of the configuration or the configuration data.
-	Content []byte
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

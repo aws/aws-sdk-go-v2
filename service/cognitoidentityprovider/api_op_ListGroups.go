@@ -58,10 +58,6 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
-	NextToken *string
-
 	// The user pool ID for the user pool.
 	//
 	// This member is required.
@@ -69,6 +65,10 @@ type ListGroupsInput struct {
 
 	// The limit of the request to list groups.
 	Limit *int32
+
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
+	NextToken *string
 }
 
 type ListGroupsOutput struct {

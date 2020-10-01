@@ -58,14 +58,6 @@ func (c *Client) PutCodeBinding(ctx context.Context, params *PutCodeBindingInput
 
 type PutCodeBindingInput struct {
 
-	// Specifying this limits the results to only this schema version.
-	SchemaVersion *string
-
-	// The name of the schema.
-	//
-	// This member is required.
-	SchemaName *string
-
 	// The language of the code binding.
 	//
 	// This member is required.
@@ -75,6 +67,14 @@ type PutCodeBindingInput struct {
 	//
 	// This member is required.
 	RegistryName *string
+
+	// The name of the schema.
+	//
+	// This member is required.
+	SchemaName *string
+
+	// Specifying this limits the results to only this schema version.
+	SchemaVersion *string
 }
 
 type PutCodeBindingOutput struct {

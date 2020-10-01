@@ -57,11 +57,11 @@ func (c *Client) ListVoiceConnectorGroups(ctx context.Context, params *ListVoice
 
 type ListVoiceConnectorGroupsInput struct {
 
-	// The token to use to retrieve the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string
 }
 
 type ListVoiceConnectorGroupsOutput struct {

@@ -57,17 +57,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Key-value pairs that are used to help organize your resources. You can assign
-	// your own metadata to the resources you create.
-	//
-	// This member is required.
-	Tags map[string]*string
-
 	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
 	// type of the tagged resource.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// Key-value pairs that are used to help organize your resources. You can assign
+	// your own metadata to the resources you create.
+	//
+	// This member is required.
+	Tags map[string]*string
 }
 
 type TagResourceOutput struct {

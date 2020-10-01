@@ -65,13 +65,6 @@ func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput
 
 type ListExecutionsInput struct {
 
-	// If nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 24 hours. Using an expired
-	// pagination token will return an HTTP 400 InvalidToken error.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
 	//
 	// This member is required.
@@ -84,13 +77,6 @@ type ListExecutionsInput struct {
 	// maximum.
 	MaxResults *int32
 
-	// If specified, only list the executions whose current execution status matches
-	// the given filter.
-	StatusFilter types.ExecutionStatus
-}
-
-type ListExecutionsOutput struct {
-
 	// If nextToken is returned, there are more results available. The value of
 	// nextToken is a unique pagination token for each page. Make the call again using
 	// the returned token to retrieve the next page. Keep all other arguments
@@ -98,10 +84,24 @@ type ListExecutionsOutput struct {
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
+	// If specified, only list the executions whose current execution status matches
+	// the given filter.
+	StatusFilter types.ExecutionStatus
+}
+
+type ListExecutionsOutput struct {
+
 	// The list of matching executions.
 	//
 	// This member is required.
 	Executions []*types.ExecutionListItem
+
+	// If nextToken is returned, there are more results available. The value of
+	// nextToken is a unique pagination token for each page. Make the call again using
+	// the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 24 hours. Using an expired
+	// pagination token will return an HTTP 400 InvalidToken error.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

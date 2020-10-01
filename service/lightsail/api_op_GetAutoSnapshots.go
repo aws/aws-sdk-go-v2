@@ -72,11 +72,11 @@ type GetAutoSnapshotsOutput struct {
 	// the specified source instance or disk.
 	AutoSnapshots []*types.AutoSnapshotDetails
 
-	// The resource type (e.g., Instance or Disk).
-	ResourceType types.ResourceType
-
 	// The name of the source instance or disk for the automatic snapshots.
 	ResourceName *string
+
+	// The resource type (e.g., Instance or Disk).
+	ResourceType types.ResourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

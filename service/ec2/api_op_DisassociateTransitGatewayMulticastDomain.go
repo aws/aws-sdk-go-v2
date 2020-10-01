@@ -62,14 +62,14 @@ type DisassociateTransitGatewayMulticastDomainInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
+	// The IDs of the subnets;
+	SubnetIds []*string
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
 
-	// The IDs of the subnets;
-	SubnetIds []*string
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainId *string
 }
 
 type DisassociateTransitGatewayMulticastDomainOutput struct {

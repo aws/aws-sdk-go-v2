@@ -103,14 +103,14 @@ func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFlee
 // Represents the input for a request action.
 type DescribeFleetCapacityInput struct {
 
+	// A unique identifier for a fleet(s) to retrieve capacity information for. You can
+	// use either the fleet ID or ARN value.
+	FleetIds []*string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
-
-	// A unique identifier for a fleet(s) to retrieve capacity information for. You can
-	// use either the fleet ID or ARN value.
-	FleetIds []*string
 
 	// Token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the

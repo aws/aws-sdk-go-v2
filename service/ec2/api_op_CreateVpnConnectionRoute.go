@@ -62,15 +62,15 @@ func (c *Client) CreateVpnConnectionRoute(ctx context.Context, params *CreateVpn
 // Contains the parameters for CreateVpnConnectionRoute.
 type CreateVpnConnectionRouteInput struct {
 
-	// The ID of the VPN connection.
-	//
-	// This member is required.
-	VpnConnectionId *string
-
 	// The CIDR block associated with the local subnet of the customer network.
 	//
 	// This member is required.
 	DestinationCidrBlock *string
+
+	// The ID of the VPN connection.
+	//
+	// This member is required.
+	VpnConnectionId *string
 }
 
 type CreateVpnConnectionRouteOutput struct {

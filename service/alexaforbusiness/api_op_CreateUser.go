@@ -64,20 +64,20 @@ type CreateUserInput struct {
 	// This member is required.
 	UserId *string
 
-	// The tags for the user.
-	Tags []*types.Tag
-
 	// A unique, user-specified identifier for this request that ensures idempotency.
 	ClientRequestToken *string
-
-	// The first name for the user.
-	FirstName *string
 
 	// The email address for the user.
 	Email *string
 
+	// The first name for the user.
+	FirstName *string
+
 	// The last name for the user.
 	LastName *string
+
+	// The tags for the user.
+	Tags []*types.Tag
 }
 
 type CreateUserOutput struct {

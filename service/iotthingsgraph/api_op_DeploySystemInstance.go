@@ -74,14 +74,14 @@ type DeploySystemInstanceInput struct {
 
 type DeploySystemInstanceOutput struct {
 
-	// The ID of the Greengrass deployment used to deploy the system instance.
-	GreengrassDeploymentId *string
-
 	// An object that contains summary information about a system instance that was
 	// deployed.
 	//
 	// This member is required.
 	Summary *types.SystemInstanceSummary
+
+	// The ID of the Greengrass deployment used to deploy the system instance.
+	GreengrassDeploymentId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

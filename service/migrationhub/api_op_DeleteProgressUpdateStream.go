@@ -80,14 +80,14 @@ func (c *Client) DeleteProgressUpdateStream(ctx context.Context, params *DeleteP
 
 type DeleteProgressUpdateStreamInput struct {
 
-	// Optional boolean flag to indicate whether any effect should take place. Used to
-	// test if the caller has permission to make the call.
-	DryRun *bool
-
 	// The name of the ProgressUpdateStream. Do not store personal data in this field.
 	//
 	// This member is required.
 	ProgressUpdateStreamName *string
+
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
+	DryRun *bool
 }
 
 type DeleteProgressUpdateStreamOutput struct {

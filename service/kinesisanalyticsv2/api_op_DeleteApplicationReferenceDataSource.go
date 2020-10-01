@@ -59,14 +59,6 @@ func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, param
 
 type DeleteApplicationReferenceDataSourceInput struct {
 
-	// The ID of the reference data source. When you add a reference data source to
-	// your application using the AddApplicationReferenceDataSource (), Kinesis Data
-	// Analytics assigns an ID. You can use the DescribeApplication () operation to get
-	// the reference ID.
-	//
-	// This member is required.
-	ReferenceId *string
-
 	// The name of an existing application.
 	//
 	// This member is required.
@@ -78,15 +70,23 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	// The ID of the reference data source. When you add a reference data source to
+	// your application using the AddApplicationReferenceDataSource (), Kinesis Data
+	// Analytics assigns an ID. You can use the DescribeApplication () operation to get
+	// the reference ID.
+	//
+	// This member is required.
+	ReferenceId *string
 }
 
 type DeleteApplicationReferenceDataSourceOutput struct {
 
-	// The updated version ID of the application.
-	ApplicationVersionId *int64
-
 	// The application Amazon Resource Name (ARN).
 	ApplicationARN *string
+
+	// The updated version ID of the application.
+	ApplicationVersionId *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

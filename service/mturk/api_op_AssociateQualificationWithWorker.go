@@ -67,9 +67,6 @@ func (c *Client) AssociateQualificationWithWorker(ctx context.Context, params *A
 
 type AssociateQualificationWithWorkerInput struct {
 
-	// The value of the Qualification to assign.
-	IntegerValue *int32
-
 	// The ID of the Qualification type to use for the assigned Qualification.
 	//
 	// This member is required.
@@ -80,6 +77,9 @@ type AssociateQualificationWithWorkerInput struct {
 	//
 	// This member is required.
 	WorkerId *string
+
+	// The value of the Qualification to assign.
+	IntegerValue *int32
 
 	// Specifies whether to send a notification email message to the Worker saying that
 	// the qualification was assigned to the Worker. Note: this is true by default.

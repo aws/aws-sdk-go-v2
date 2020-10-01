@@ -57,19 +57,20 @@ func (c *Client) CreateRequestValidator(ctx context.Context, params *CreateReque
 
 // Creates a RequestValidator () of a given RestApi ().
 type CreateRequestValidatorInput struct {
-	Template *bool
-
-	Title *string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
-	TemplateSkipList []*string
-
 	// The name of the to-be-created RequestValidator ().
 	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 
 	// A Boolean flag to indicate whether to validate request body according to the
 	// configured model schema for the method (true) or not (false).
@@ -93,6 +94,9 @@ type CreateRequestValidatorOutput struct {
 	// The identifier of this RequestValidator ().
 	Id *string
 
+	// The name of this RequestValidator ()
+	Name *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
@@ -100,9 +104,6 @@ type CreateRequestValidatorOutput struct {
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
-
-	// The name of this RequestValidator ()
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

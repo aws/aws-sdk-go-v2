@@ -64,9 +64,6 @@ type DescribeRegistryInput struct {
 
 type DescribeRegistryOutput struct {
 
-	// Tags associated with the registry.
-	Tags map[string]*string
-
 	// The description of the registry.
 	Description *string
 
@@ -75,6 +72,9 @@ type DescribeRegistryOutput struct {
 
 	// The name of the registry.
 	RegistryName *string
+
+	// Tags associated with the registry.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

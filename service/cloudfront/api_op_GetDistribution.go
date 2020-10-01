@@ -68,12 +68,12 @@ type GetDistributionInput struct {
 // The returned result of the corresponding request.
 type GetDistributionOutput struct {
 
+	// The distribution's information.
+	Distribution *types.Distribution
+
 	// The current version of the distribution's information. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
-
-	// The distribution's information.
-	Distribution *types.Distribution
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

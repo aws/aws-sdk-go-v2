@@ -72,13 +72,13 @@ type ListCrawlersInput struct {
 
 type ListCrawlersOutput struct {
 
-	// A continuation token, if the returned list does not contain the last metric
-	// available.
-	NextToken *string
-
 	// The names of all crawlers in the account, or the crawlers with the specified
 	// tags.
 	CrawlerNames []*string
+
+	// A continuation token, if the returned list does not contain the last metric
+	// available.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

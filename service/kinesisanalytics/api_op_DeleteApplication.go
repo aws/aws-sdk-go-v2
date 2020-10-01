@@ -65,15 +65,15 @@ func (c *Client) DeleteApplication(ctx context.Context, params *DeleteApplicatio
 //
 type DeleteApplicationInput struct {
 
-	// You can use the DescribeApplication operation to get this value.
-	//
-	// This member is required.
-	CreateTimestamp *time.Time
-
 	// Name of the Amazon Kinesis Analytics application to delete.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// You can use the DescribeApplication operation to get this value.
+	//
+	// This member is required.
+	CreateTimestamp *time.Time
 }
 
 //

@@ -57,6 +57,30 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 
 type DescribeDBEngineVersionsInput struct {
 
+	// The name of a specific DB parameter group family to return details for.
+	// Constraints:
+	//
+	//     * If supplied, must match an existing DBParameterGroupFamily.
+	DBParameterGroupFamily *string
+
+	// Indicates that only the default version of the specified engine or engine and
+	// major version combination is returned.
+	DefaultOnly *bool
+
+	// The database engine to return.
+	Engine *string
+
+	// The database engine version to return. Example: 5.1.49
+	EngineVersion *string
+
+	// Not currently supported.
+	Filters []*types.Filter
+
+	// If this parameter is specified and the requested engine supports the
+	// CharacterSetName parameter for CreateDBInstance, the response includes a list of
+	// supported character sets for each engine version.
+	ListSupportedCharacterSets *bool
+
 	// If this parameter is specified and the requested engine supports the TimeZone
 	// parameter for CreateDBInstance, the response includes a list of supported time
 	// zones for each engine version.
@@ -67,46 +91,22 @@ type DescribeDBEngineVersionsInput struct {
 	// value specified by MaxRecords.
 	Marker *string
 
-	// The database engine to return.
-	Engine *string
-
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
 	// the response so that the following results can be retrieved. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
-
-	// The name of a specific DB parameter group family to return details for.
-	// Constraints:
-	//
-	//     * If supplied, must match an existing DBParameterGroupFamily.
-	DBParameterGroupFamily *string
-
-	// Not currently supported.
-	Filters []*types.Filter
-
-	// The database engine version to return. Example: 5.1.49
-	EngineVersion *string
-
-	// Indicates that only the default version of the specified engine or engine and
-	// major version combination is returned.
-	DefaultOnly *bool
-
-	// If this parameter is specified and the requested engine supports the
-	// CharacterSetName parameter for CreateDBInstance, the response includes a list of
-	// supported character sets for each engine version.
-	ListSupportedCharacterSets *bool
 }
 
 type DescribeDBEngineVersionsOutput struct {
+
+	// A list of DBEngineVersion elements.
+	DBEngineVersions []*types.DBEngineVersion
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
-
-	// A list of DBEngineVersion elements.
-	DBEngineVersions []*types.DBEngineVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

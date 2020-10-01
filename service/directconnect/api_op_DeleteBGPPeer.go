@@ -58,18 +58,18 @@ func (c *Client) DeleteBGPPeer(ctx context.Context, params *DeleteBGPPeerInput, 
 
 type DeleteBGPPeerInput struct {
 
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration.
 	Asn *int32
 
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string
-
 	// The ID of the BGP peer.
 	BgpPeerId *string
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
+
+	// The ID of the virtual interface.
+	VirtualInterfaceId *string
 }
 
 type DeleteBGPPeerOutput struct {

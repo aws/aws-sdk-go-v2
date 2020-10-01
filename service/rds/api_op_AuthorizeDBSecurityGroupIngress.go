@@ -69,30 +69,30 @@ func (c *Client) AuthorizeDBSecurityGroupIngress(ctx context.Context, params *Au
 //
 type AuthorizeDBSecurityGroupIngressInput struct {
 
-	// AWS account number of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName parameter. The AWS access key ID isn't an acceptable value.
-	// For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
-	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
-	// must be provided.
-	EC2SecurityGroupOwnerId *string
+	// The name of the DB security group to add authorization to.
+	//
+	// This member is required.
+	DBSecurityGroupName *string
 
 	// The IP range to authorize.
 	CIDRIP *string
+
+	// Id of the EC2 security group to authorize. For VPC DB security groups,
+	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
+	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
+	EC2SecurityGroupId *string
 
 	// Name of the EC2 security group to authorize. For VPC DB security groups,
 	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
 	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupName *string
 
-	// The name of the DB security group to add authorization to.
-	//
-	// This member is required.
-	DBSecurityGroupName *string
-
-	// Id of the EC2 security group to authorize. For VPC DB security groups,
-	// EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId and
-	// either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
-	EC2SecurityGroupId *string
+	// AWS account number of the owner of the EC2 security group specified in the
+	// EC2SecurityGroupName parameter. The AWS access key ID isn't an acceptable value.
+	// For VPC DB security groups, EC2SecurityGroupId must be provided. Otherwise,
+	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
+	// must be provided.
+	EC2SecurityGroupOwnerId *string
 }
 
 type AuthorizeDBSecurityGroupIngressOutput struct {

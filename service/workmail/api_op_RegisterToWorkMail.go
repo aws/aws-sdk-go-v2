@@ -69,16 +69,16 @@ type RegisterToWorkMailInput struct {
 	// This member is required.
 	Email *string
 
+	// The identifier for the user, group, or resource to be updated.
+	//
+	// This member is required.
+	EntityId *string
+
 	// The identifier for the organization under which the user, group, or resource
 	// exists.
 	//
 	// This member is required.
 	OrganizationId *string
-
-	// The identifier for the user, group, or resource to be updated.
-	//
-	// This member is required.
-	EntityId *string
 }
 
 type RegisterToWorkMailOutput struct {

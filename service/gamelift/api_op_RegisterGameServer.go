@@ -87,6 +87,39 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 
 type RegisterGameServerInput struct {
 
+	// An identifier for the game server group where the game server is running. You
+	// can use either the GameServerGroup () name or ARN value.
+	//
+	// This member is required.
+	GameServerGroupName *string
+
+	// A custom string that uniquely identifies the new game server. Game server IDs
+	// are developer-defined and must be unique across all game server groups in your
+	// AWS account.
+	//
+	// This member is required.
+	GameServerId *string
+
+	// The unique identifier for the instance where the game server is running. This ID
+	// is available in the instance metadata.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// Information needed to make inbound client connections to the game server. This
+	// might include IP address and port, DNS name, etc.
+	ConnectionInfo *string
+
+	// A game server tag that can be used to request sorted lists of game servers using
+	// ListGameServers (). Custom sort keys are developer-defined based on how you want
+	// to organize the retrieved game server information.
+	CustomSortKey *string
+
+	// A set of custom game server properties, formatted as a single string value. This
+	// data is passed to a game client or service when it requests information on a
+	// game servers using ListGameServers () or ClaimGameServer ().
+	GameServerData *string
+
 	// A list of labels to assign to the new game server resource. Tags are
 	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
 	// management, access management, and cost allocation. For more information, see
@@ -97,39 +130,6 @@ type RegisterGameServerInput struct {
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []*types.Tag
-
-	// A custom string that uniquely identifies the new game server. Game server IDs
-	// are developer-defined and must be unique across all game server groups in your
-	// AWS account.
-	//
-	// This member is required.
-	GameServerId *string
-
-	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service when it requests information on a
-	// game servers using ListGameServers () or ClaimGameServer ().
-	GameServerData *string
-
-	// A game server tag that can be used to request sorted lists of game servers using
-	// ListGameServers (). Custom sort keys are developer-defined based on how you want
-	// to organize the retrieved game server information.
-	CustomSortKey *string
-
-	// Information needed to make inbound client connections to the game server. This
-	// might include IP address and port, DNS name, etc.
-	ConnectionInfo *string
-
-	// The unique identifier for the instance where the game server is running. This ID
-	// is available in the instance metadata.
-	//
-	// This member is required.
-	InstanceId *string
-
-	// An identifier for the game server group where the game server is running. You
-	// can use either the GameServerGroup () name or ARN value.
-	//
-	// This member is required.
-	GameServerGroupName *string
 }
 
 type RegisterGameServerOutput struct {

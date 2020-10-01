@@ -58,17 +58,17 @@ func (c *Client) UpdateStandardsControl(ctx context.Context, params *UpdateStand
 
 type UpdateStandardsControlInput struct {
 
+	// The ARN of the security standard control to enable or disable.
+	//
+	// This member is required.
+	StandardsControlArn *string
+
 	// The updated status of the security standard control.
 	ControlStatus types.ControlStatus
 
 	// A description of the reason why you are disabling a security standard control.
 	// If you are disabling a control, then this is required.
 	DisabledReason *string
-
-	// The ARN of the security standard control to enable or disable.
-	//
-	// This member is required.
-	StandardsControlArn *string
 }
 
 type UpdateStandardsControlOutput struct {

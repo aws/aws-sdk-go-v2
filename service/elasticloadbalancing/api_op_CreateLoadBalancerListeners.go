@@ -63,15 +63,15 @@ func (c *Client) CreateLoadBalancerListeners(ctx context.Context, params *Create
 // Contains the parameters for CreateLoadBalancerListeners.
 type CreateLoadBalancerListenersInput struct {
 
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
-
 	// The listeners.
 	//
 	// This member is required.
 	Listeners []*types.Listener
+
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
 }
 
 // Contains the parameters for CreateLoadBalancerListener.

@@ -83,36 +83,36 @@ func (c *Client) ListBucketInventoryConfigurations(ctx context.Context, params *
 
 type ListBucketInventoryConfigurationsInput struct {
 
+	// The name of the bucket containing the inventory configurations to retrieve.
+	//
+	// This member is required.
+	Bucket *string
+
 	// The marker used to continue an inventory configuration listing that has been
 	// truncated. Use the NextContinuationToken from a previously truncated list
 	// response to continue the listing. The continuation token is an opaque value that
 	// Amazon S3 understands.
 	ContinuationToken *string
-
-	// The name of the bucket containing the inventory configurations to retrieve.
-	//
-	// This member is required.
-	Bucket *string
 }
 
 type ListBucketInventoryConfigurationsOutput struct {
-
-	// The list of inventory configurations for a bucket.
-	InventoryConfigurationList []*types.InventoryConfiguration
-
-	// The marker used to continue this inventory configuration listing. Use the
-	// NextContinuationToken from this response to continue the listing in a subsequent
-	// request. The continuation token is an opaque value that Amazon S3 understands.
-	NextContinuationToken *string
 
 	// If sent in the request, the marker that is used as a starting point for this
 	// inventory configuration list response.
 	ContinuationToken *string
 
+	// The list of inventory configurations for a bucket.
+	InventoryConfigurationList []*types.InventoryConfiguration
+
 	// Tells whether the returned list of inventory configurations is complete. A value
 	// of true indicates that the list is not complete and the NextContinuationToken is
 	// provided for a subsequent request.
 	IsTruncated *bool
+
+	// The marker used to continue this inventory configuration listing. Use the
+	// NextContinuationToken from this response to continue the listing in a subsequent
+	// request. The continuation token is an opaque value that Amazon S3 understands.
+	NextContinuationToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

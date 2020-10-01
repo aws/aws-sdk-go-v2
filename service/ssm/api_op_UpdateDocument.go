@@ -62,22 +62,14 @@ type UpdateDocumentInput struct {
 	// This member is required.
 	Content *string
 
-	// Specify a new target type for the document.
-	TargetType *string
-
-	// An optional field specifying the version of the artifact you are updating with
-	// the document. For example, "Release 12, Update 6". This value is unique across
-	// all versions of a document, and cannot be changed.
-	VersionName *string
-
-	// A list of key and value pairs that describe attachments to a version of a
-	// document.
-	Attachments []*types.AttachmentsSource
-
 	// The name of the document that you want to update.
 	//
 	// This member is required.
 	Name *string
+
+	// A list of key and value pairs that describe attachments to a version of a
+	// document.
+	Attachments []*types.AttachmentsSource
 
 	// Specify the document format for the new document version. Systems Manager
 	// supports JSON and YAML documents. JSON is the default format.
@@ -87,6 +79,14 @@ type UpdateDocumentInput struct {
 	// latest document version can be specified using the $LATEST variable or by the
 	// version number. Updating a previous version of a document is not supported.
 	DocumentVersion *string
+
+	// Specify a new target type for the document.
+	TargetType *string
+
+	// An optional field specifying the version of the artifact you are updating with
+	// the document. For example, "Release 12, Update 6". This value is unique across
+	// all versions of a document, and cannot be changed.
+	VersionName *string
 }
 
 type UpdateDocumentOutput struct {

@@ -63,13 +63,13 @@ func (c *Client) DeleteDisk(ctx context.Context, params *DeleteDiskInput, optFns
 
 type DeleteDiskInput struct {
 
-	// A Boolean value to indicate whether to delete the enabled add-ons for the disk.
-	ForceDeleteAddOns *bool
-
 	// The unique name of the disk you want to delete (e.g., my-disk).
 	//
 	// This member is required.
 	DiskName *string
+
+	// A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+	ForceDeleteAddOns *bool
 }
 
 type DeleteDiskOutput struct {

@@ -58,23 +58,23 @@ func (c *Client) CreatePackage(ctx context.Context, params *CreatePackageInput, 
 // Container for request parameters to CreatePackage () operation.
 type CreatePackageInput struct {
 
-	// The customer S3 location PackageSource for importing the package.
-	//
-	// This member is required.
-	PackageSource *types.PackageSource
-
-	// Description of the package.
-	PackageDescription *string
-
 	// Unique identifier for the package.
 	//
 	// This member is required.
 	PackageName *string
 
+	// The customer S3 location PackageSource for importing the package.
+	//
+	// This member is required.
+	PackageSource *types.PackageSource
+
 	// Type of package. Currently supports only TXT-DICTIONARY.
 	//
 	// This member is required.
 	PackageType types.PackageType
+
+	// Description of the package.
+	PackageDescription *string
 }
 
 // Container for response returned by CreatePackage () operation.

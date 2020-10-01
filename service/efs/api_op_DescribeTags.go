@@ -62,38 +62,38 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 //
 type DescribeTagsInput struct {
 
-	// (Optional) The maximum number of file system tags to return in the response.
-	// Currently, this number is automatically set to 100, and other values are
-	// ignored. The response is paginated at 100 per page if you have more than 100
-	// tags.
-	MaxItems *int32
+	// The ID of the file system whose tag set you want to retrieve.
+	//
+	// This member is required.
+	FileSystemId *string
 
 	// (Optional) An opaque pagination token returned from a previous DescribeTags
 	// operation (String). If present, it specifies to continue the list from where the
 	// previous call left off.
 	Marker *string
 
-	// The ID of the file system whose tag set you want to retrieve.
-	//
-	// This member is required.
-	FileSystemId *string
+	// (Optional) The maximum number of file system tags to return in the response.
+	// Currently, this number is automatically set to 100, and other values are
+	// ignored. The response is paginated at 100 per page if you have more than 100
+	// tags.
+	MaxItems *int32
 }
 
 //
 type DescribeTagsOutput struct {
 
-	// If a value is present, there are more tags to return. In a subsequent request,
-	// you can provide the value of NextMarker as the value of the Marker parameter in
-	// your next request to retrieve the next set of tags.
-	NextMarker *string
-
-	// If the request included a Marker, the response returns that value in this field.
-	Marker *string
-
 	// Returns tags associated with the file system as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []*types.Tag
+
+	// If the request included a Marker, the response returns that value in this field.
+	Marker *string
+
+	// If a value is present, there are more tags to return. In a subsequent request,
+	// you can provide the value of NextMarker as the value of the Marker parameter in
+	// your next request to retrieve the next set of tags.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

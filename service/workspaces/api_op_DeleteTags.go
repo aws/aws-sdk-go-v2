@@ -56,17 +56,17 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 type DeleteTagsInput struct {
 
-	// The tag keys.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The identifier of the WorkSpaces resource. The supported resource types are
 	// WorkSpaces, registered directories, images, custom bundles, and IP access
 	// control groups.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The tag keys.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type DeleteTagsOutput struct {

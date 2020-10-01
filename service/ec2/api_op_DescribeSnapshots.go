@@ -97,16 +97,11 @@ func (c *Client) DescribeSnapshots(ctx context.Context, params *DescribeSnapshot
 
 type DescribeSnapshotsInput struct {
 
-	// The IDs of the AWS accounts that can create volumes from the snapshot.
-	RestorableByUserIds []*string
-
-	// The snapshot IDs. Default: Describes the snapshots for which you have create
-	// volume permissions.
-	SnapshotIds []*string
-
-	// Scopes the results to snapshots with the specified owners. You can specify a
-	// combination of AWS account IDs, self, and amazon.
-	OwnerIds []*string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// The filters.
 	//
@@ -152,12 +147,6 @@ type DescribeSnapshotsInput struct {
 	// size of the volume, in GiB.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The maximum number of snapshot results returned by DescribeSnapshots in
 	// paginated output. When this parameter is used, DescribeSnapshots only returns
 	// MaxResults results in a single page along with a NextToken response element. The
@@ -174,18 +163,29 @@ type DescribeSnapshotsInput struct {
 	// Pagination continues from the end of the previous results that returned the
 	// NextToken value. This value is null when there are no more results to return.
 	NextToken *string
+
+	// Scopes the results to snapshots with the specified owners. You can specify a
+	// combination of AWS account IDs, self, and amazon.
+	OwnerIds []*string
+
+	// The IDs of the AWS accounts that can create volumes from the snapshot.
+	RestorableByUserIds []*string
+
+	// The snapshot IDs. Default: Describes the snapshots for which you have create
+	// volume permissions.
+	SnapshotIds []*string
 }
 
 type DescribeSnapshotsOutput struct {
-
-	// Information about the snapshots.
-	Snapshots []*types.Snapshot
 
 	// The NextToken value to include in a future DescribeSnapshots request. When the
 	// results of a DescribeSnapshots request exceed MaxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
+
+	// Information about the snapshots.
+	Snapshots []*types.Snapshot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

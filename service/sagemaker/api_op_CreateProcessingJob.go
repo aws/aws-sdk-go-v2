@@ -57,22 +57,16 @@ func (c *Client) CreateProcessingJob(ctx context.Context, params *CreateProcessi
 
 type CreateProcessingJobInput struct {
 
-	// The name of the processing job. The name must be unique within an AWS Region in
-	// the AWS account.
-	//
-	// This member is required.
-	ProcessingJobName *string
-
 	// Configures the processing job to run a specified Docker container image.
 	//
 	// This member is required.
 	AppSpecification *types.AppSpecification
 
-	// Sets the environment variables in the Docker container.
-	Environment map[string]*string
-
-	// Output configuration for the processing job.
-	ProcessingOutputConfig *types.ProcessingOutputConfig
+	// The name of the processing job. The name must be unique within an AWS Region in
+	// the AWS account.
+	//
+	// This member is required.
+	ProcessingJobName *string
 
 	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
 	// for a processing job. In distributed training, you specify more than one
@@ -87,21 +81,8 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
-
-	// For each input, data is downloaded from S3 into the processing container before
-	// the processing job begins running if "S3InputMode" is set to File.
-	ProcessingInputs []*types.ProcessingInput
-
-	// The time limit for how long the processing job is allowed to run.
-	StoppingCondition *types.ProcessingStoppingCondition
-
-	// Networking options for a processing job.
-	NetworkConfig *types.NetworkConfig
+	// Sets the environment variables in the Docker container.
+	Environment map[string]*string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -113,6 +94,25 @@ type CreateProcessingJobInput struct {
 	//
 	//     * CreateTransformJob ()
 	ExperimentConfig *types.ExperimentConfig
+
+	// Networking options for a processing job.
+	NetworkConfig *types.NetworkConfig
+
+	// For each input, data is downloaded from S3 into the processing container before
+	// the processing job begins running if "S3InputMode" is set to File.
+	ProcessingInputs []*types.ProcessingInput
+
+	// Output configuration for the processing job.
+	ProcessingOutputConfig *types.ProcessingOutputConfig
+
+	// The time limit for how long the processing job is allowed to run.
+	StoppingCondition *types.ProcessingStoppingCondition
+
+	// (Optional) An array of key-value pairs. For more information, see Using Cost
+	// Allocation Tags
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []*types.Tag
 }
 
 type CreateProcessingJobOutput struct {

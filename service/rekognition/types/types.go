@@ -33,14 +33,14 @@ type Asset struct {
 // ().
 type AudioMetadata struct {
 
-	// The number of audio channels in the segement.
-	NumberOfChannels *int64
+	// The audio codec used to encode or decode the audio stream.
+	Codec *string
 
 	// The duration of the audio stream in milliseconds.
 	DurationMillis *int64
 
-	// The audio codec used to encode or decode the audio stream.
-	Codec *string
+	// The number of audio channels in the segement.
+	NumberOfChannels *int64
 
 	// The sample rate for the audio stream.
 	SampleRate *int64
@@ -50,11 +50,11 @@ type AudioMetadata struct {
 // determination.
 type Beard struct {
 
-	// Boolean value that indicates whether the face has beard or not.
-	Value *bool
-
 	// Level of confidence in the determination.
 	Confidence *float32
+
+	// Boolean value that indicates whether the face has beard or not.
+	Value *bool
 }
 
 // Identifies the bounding box around the label, face, or text. The left
@@ -74,9 +74,6 @@ type Beard struct {
 // values.
 type BoundingBox struct {
 
-	// Width of the bounding box as a ratio of the overall image width.
-	Width *float32
-
 	// Height of the bounding box as a ratio of the overall image height.
 	Height *float32
 
@@ -85,11 +82,18 @@ type BoundingBox struct {
 
 	// Top coordinate of the bounding box as a ratio of overall image height.
 	Top *float32
+
+	// Width of the bounding box as a ratio of the overall image width.
+	Width *float32
 }
 
 // Provides information about a celebrity recognized by the RecognizeCelebrities ()
 // operation.
 type Celebrity struct {
+
+	// Provides information about the celebrity's face, such as its location on the
+	// image.
+	Face *ComparedFace
 
 	// A unique identifier for the celebrity.
 	Id *string
@@ -104,10 +108,6 @@ type Celebrity struct {
 	// An array of URLs pointing to additional information about the celebrity. If
 	// there is no additional information about the celebrity, this list is empty.
 	Urls []*string
-
-	// Provides information about the celebrity's face, such as its location on the
-	// image.
-	Face *ComparedFace
 }
 
 // Information about a recognized celebrity.
@@ -116,21 +116,21 @@ type CelebrityDetail struct {
 	// Bounding box around the body of a celebrity.
 	BoundingBox *BoundingBox
 
-	// The name of the celebrity.
-	Name *string
-
 	// The confidence, in percentage, that Amazon Rekognition has that the recognized
 	// face is the celebrity.
 	Confidence *float32
-
-	// An array of URLs pointing to additional celebrity information.
-	Urls []*string
 
 	// Face details for the recognized celebrity.
 	Face *FaceDetail
 
 	// The unique identifier for the celebrity.
 	Id *string
+
+	// The name of the celebrity.
+	Name *string
+
+	// An array of URLs pointing to additional celebrity information.
+	Urls []*string
 }
 
 // Information about a detected celebrity and the time the celebrity was detected
@@ -138,32 +138,32 @@ type CelebrityDetail struct {
 // Amazon Rekognition Developer Guide.
 type CelebrityRecognition struct {
 
+	// Information about a recognized celebrity.
+	Celebrity *CelebrityDetail
+
 	// The time, in milliseconds from the start of the video, that the celebrity was
 	// recognized.
 	Timestamp *int64
-
-	// Information about a recognized celebrity.
-	Celebrity *CelebrityDetail
 }
 
 // Provides face metadata for target image faces that are analyzed by CompareFaces
 // and RecognizeCelebrities.
 type ComparedFace struct {
 
-	// An array of facial landmarks.
-	Landmarks []*Landmark
-
 	// Bounding box of the face.
 	BoundingBox *BoundingBox
-
-	// Identifies face image brightness and sharpness.
-	Quality *ImageQuality
 
 	// Level of confidence that what the bounding box contains is a face.
 	Confidence *float32
 
+	// An array of facial landmarks.
+	Landmarks []*Landmark
+
 	// Indicates the pose of the face as determined by its pitch, roll, and yaw.
 	Pose *Pose
+
+	// Identifies face image brightness and sharpness.
+	Quality *ImageQuality
 }
 
 // Type that describes the face Amazon Rekognition chose to compare with the faces
@@ -172,11 +172,11 @@ type ComparedFace struct {
 // selects the largest face in the source image for this comparison.
 type ComparedSourceImageFace struct {
 
-	// Confidence level that the selected bounding box contains a face.
-	Confidence *float32
-
 	// Bounding box of the face.
 	BoundingBox *BoundingBox
+
+	// Confidence level that the selected bounding box contains a face.
+	Confidence *float32
 }
 
 // Provides information about a face in a target image that matches the source
@@ -185,12 +185,12 @@ type ComparedSourceImageFace struct {
 // the source image face matches the face in the bounding box.
 type CompareFacesMatch struct {
 
-	// Level of confidence that the faces match.
-	Similarity *float32
-
 	// Provides face metadata (bounding box and confidence that the bounding box
 	// actually contains a face).
 	Face *ComparedFace
+
+	// Level of confidence that the faces match.
+	Similarity *float32
 }
 
 // Information about an unsafe content label detection in a stored video.
@@ -207,17 +207,17 @@ type ContentModerationDetection struct {
 // A custom label detected in an image by a call to DetectCustomLabels ().
 type CustomLabel struct {
 
-	// The name of the custom label.
-	Name *string
+	// The confidence that the model has in the detection of the custom label. The
+	// range is 0-100. A higher value indicates a higher confidence.
+	Confidence *float32
 
 	// The location of the detected object on the image that corresponds to the custom
 	// label. Includes an axis aligned coarse bounding box surrounding the object and a
 	// finer grain polygon for more accurate spatial information.
 	Geometry *Geometry
 
-	// The confidence that the model has in the detection of the custom label. The
-	// range is 0-100. A higher value indicates a higher confidence.
-	Confidence *float32
+	// The name of the custom label.
+	Name *string
 }
 
 // A set of parameters that allow you to filter out certain results from your
@@ -246,13 +246,13 @@ type DetectionFilter struct {
 // of the image to look for text in.
 type DetectTextFilters struct {
 
-	// A set of parameters that allow you to filter out certain results from your
-	// returned results.
-	WordFilter *DetectionFilter
-
 	// A Filter focusing on a certain area of the image. Uses a BoundingBox object to
 	// set the region of the image.
 	RegionsOfInterest []*RegionOfInterest
+
+	// A set of parameters that allow you to filter out certain results from your
+	// returned results.
+	WordFilter *DetectionFilter
 }
 
 // The emotions that appear to be expressed on the face, and the confidence level
@@ -262,11 +262,11 @@ type DetectTextFilters struct {
 // person pretending to have a sad face might not be sad emotionally.
 type Emotion struct {
 
-	// Type of emotion detected.
-	Type EmotionName
-
 	// Level of confidence in the determination.
 	Confidence *float32
+
+	// Type of emotion detected.
+	Type EmotionName
 }
 
 // The evaluation results for the training of a model.
@@ -308,21 +308,21 @@ type EyeOpen struct {
 // input image, and external image ID that you assigned.
 type Face struct {
 
-	// Unique identifier that Amazon Rekognition assigns to the face.
-	FaceId *string
+	// Bounding box of the face.
+	BoundingBox *BoundingBox
 
 	// Confidence level that the bounding box contains a face (and not a different
 	// object such as a tree).
 	Confidence *float32
 
-	// Unique identifier that Amazon Rekognition assigns to the input image.
-	ImageId *string
-
-	// Bounding box of the face.
-	BoundingBox *BoundingBox
-
 	// Identifier that you assign to all the faces in the input image.
 	ExternalImageId *string
+
+	// Unique identifier that Amazon Rekognition assigns to the face.
+	FaceId *string
+
+	// Unique identifier that Amazon Rekognition assigns to the input image.
+	ImageId *string
 }
 
 // Structure containing attributes of the face that the algorithm detected. A
@@ -348,43 +348,20 @@ type Face struct {
 // For IndexFaces, use the DetectAttributes input parameter.
 type FaceDetail struct {
 
-	// Indicates whether or not the mouth on the face is open, and the confidence level
-	// in the determination.
-	MouthOpen *MouthOpen
-
-	// Indicates whether or not the face is wearing sunglasses, and the confidence
-	// level in the determination.
-	Sunglasses *Sunglasses
-
-	// Indicates whether or not the eyes on the face are open, and the confidence level
-	// in the determination.
-	EyesOpen *EyeOpen
-
-	// The predicted gender of a detected face.
-	Gender *Gender
-
-	// Indicates whether or not the face has a mustache, and the confidence level in
-	// the determination.
-	Mustache *Mustache
-
-	// Identifies image brightness and sharpness. Default attribute.
-	Quality *ImageQuality
-
-	// Indicates whether or not the face is wearing eye glasses, and the confidence
-	// level in the determination.
-	Eyeglasses *Eyeglasses
-
-	// Confidence level that the bounding box contains a face (and not a different
-	// object such as a tree). Default attribute.
-	Confidence *float32
-
-	// Indicates whether or not the face is smiling, and the confidence level in the
-	// determination.
-	Smile *Smile
+	// The estimated age range, in years, for the face. Low represents the lowest
+	// estimated age and High represents the highest estimated age.
+	AgeRange *AgeRange
 
 	// Indicates whether or not the face has a beard, and the confidence level in the
 	// determination.
 	Beard *Beard
+
+	// Bounding box of the face. Default attribute.
+	BoundingBox *BoundingBox
+
+	// Confidence level that the bounding box contains a face (and not a different
+	// object such as a tree). Default attribute.
+	Confidence *float32
 
 	// The emotions that appear to be expressed on the face, and the confidence level
 	// in the determination. The API is only making a determination of the physical
@@ -393,42 +370,65 @@ type FaceDetail struct {
 	// person pretending to have a sad face might not be sad emotionally.
 	Emotions []*Emotion
 
-	// Bounding box of the face. Default attribute.
-	BoundingBox *BoundingBox
+	// Indicates whether or not the face is wearing eye glasses, and the confidence
+	// level in the determination.
+	Eyeglasses *Eyeglasses
+
+	// Indicates whether or not the eyes on the face are open, and the confidence level
+	// in the determination.
+	EyesOpen *EyeOpen
+
+	// The predicted gender of a detected face.
+	Gender *Gender
 
 	// Indicates the location of landmarks on the face. Default attribute.
 	Landmarks []*Landmark
 
-	// The estimated age range, in years, for the face. Low represents the lowest
-	// estimated age and High represents the highest estimated age.
-	AgeRange *AgeRange
+	// Indicates whether or not the mouth on the face is open, and the confidence level
+	// in the determination.
+	MouthOpen *MouthOpen
+
+	// Indicates whether or not the face has a mustache, and the confidence level in
+	// the determination.
+	Mustache *Mustache
 
 	// Indicates the pose of the face as determined by its pitch, roll, and yaw.
 	// Default attribute.
 	Pose *Pose
+
+	// Identifies image brightness and sharpness. Default attribute.
+	Quality *ImageQuality
+
+	// Indicates whether or not the face is smiling, and the confidence level in the
+	// determination.
+	Smile *Smile
+
+	// Indicates whether or not the face is wearing sunglasses, and the confidence
+	// level in the determination.
+	Sunglasses *Sunglasses
 }
 
 // Information about a face detected in a video analysis request and the time the
 // face was detected in the video.
 type FaceDetection struct {
 
-	// Time, in milliseconds from the start of the video, that the face was detected.
-	Timestamp *int64
-
 	// The face properties for the detected face.
 	Face *FaceDetail
+
+	// Time, in milliseconds from the start of the video, that the face was detected.
+	Timestamp *int64
 }
 
 // Provides face metadata. In addition, it also provides the confidence in the
 // match of this face with the input face.
 type FaceMatch struct {
 
-	// Confidence in the match of this face with the input face.
-	Similarity *float32
-
 	// Describes the face properties such as the bounding box, face ID, image ID of the
 	// source image, and external image ID that you assigned.
 	Face *Face
+
+	// Confidence in the match of this face with the input face.
+	Similarity *float32
 }
 
 // Object containing both the face metadata (stored in the backend database), and
@@ -481,12 +481,12 @@ type Gender struct {
 // ()) is located on an image.
 type Geometry struct {
 
-	// Within the bounding box, a fine-grained polygon around the detected item.
-	Polygon []*Point
-
 	// An axis-aligned coarse representation of the detected item's location on the
 	// image.
 	BoundingBox *BoundingBox
+
+	// Within the bounding box, a fine-grained polygon around the detected item.
+	Polygon []*Point
 }
 
 // The S3 bucket that contains the Ground Truth manifest file.
@@ -509,25 +509,16 @@ type HumanLoopActivationOutput struct {
 	// This value conforms to the media type: application/json
 	HumanLoopActivationConditionsEvaluationResults *string
 
-	// The Amazon Resource Name (ARN) of the HumanLoop created.
-	HumanLoopArn *string
-
 	// Shows if and why human review was needed.
 	HumanLoopActivationReasons []*string
+
+	// The Amazon Resource Name (ARN) of the HumanLoop created.
+	HumanLoopArn *string
 }
 
 // Sets up the flow definition the image will be sent to if one of the conditions
 // is met. You can also set certain attributes of the image before review.
 type HumanLoopConfig struct {
-
-	// Sets attributes of the input data.
-	DataAttributes *HumanLoopDataAttributes
-
-	// The name of the human review used for this image. This should be kept unique
-	// within a region.
-	//
-	// This member is required.
-	HumanLoopName *string
 
 	// The Amazon Resource Name (ARN) of the flow definition. You can create a flow
 	// definition by using the Amazon Sagemaker CreateFlowDefinition
@@ -536,6 +527,15 @@ type HumanLoopConfig struct {
 	//
 	// This member is required.
 	FlowDefinitionArn *string
+
+	// The name of the human review used for this image. This should be kept unique
+	// within a region.
+	//
+	// This member is required.
+	HumanLoopName *string
+
+	// Sets attributes of the input data.
+	DataAttributes *HumanLoopDataAttributes
 }
 
 // Allows you to set attributes of the image. Currently, you can declare an image
@@ -575,13 +575,13 @@ type Image struct {
 // Identifies face image brightness and sharpness.
 type ImageQuality struct {
 
-	// Value representing sharpness of the face. The service returns a value between 0
-	// and 100 (inclusive). A higher value indicates a sharper face image.
-	Sharpness *float32
-
 	// Value representing brightness of the face. The service returns a value between 0
 	// and 100 (inclusive). A higher value indicates a brighter face image.
 	Brightness *float32
+
+	// Value representing sharpness of the face. The service returns a value between 0
+	// and 100 (inclusive). A higher value indicates a sharper face image.
+	Sharpness *float32
 }
 
 // An instance of a label returned by Amazon Rekognition Image (DetectLabels ()) or
@@ -617,19 +617,19 @@ type KinesisVideoStream struct {
 // detected instances, parent labels, and level of confidence.
 type Label struct {
 
-	// The name (label) of the object or scene.
-	Name *string
+	// Level of confidence.
+	Confidence *float32
 
 	// If Label represents an object, Instances contains the bounding boxes for each
 	// instance of the detected object. Bounding boxes are returned for common object
 	// labels such as people, cars, furniture, apparel or pets.
 	Instances []*Instance
 
+	// The name (label) of the object or scene.
+	Name *string
+
 	// The parent labels for a label. The response includes all ancestor labels.
 	Parents []*Parent
-
-	// Level of confidence.
-	Confidence *float32
 }
 
 // Information about a label detected in a video analysis request and the time the
@@ -649,15 +649,15 @@ type Landmark struct {
 	// Type of landmark.
 	Type LandmarkType
 
-	// The y-coordinate from the top left of the landmark expressed as the ratio of the
-	// height of the image. For example, if the image is 700 x 200 and the y-coordinate
-	// of the landmark is at 100 pixels, this value is 0.5.
-	Y *float32
-
 	// The x-coordinate from the top left of the landmark expressed as the ratio of the
 	// width of the image. For example, if the image is 700 x 200 and the x-coordinate
 	// of the landmark is at 350 pixels, this value is 0.5.
 	X *float32
+
+	// The y-coordinate from the top left of the landmark expressed as the ratio of the
+	// height of the image. For example, if the image is 700 x 200 and the y-coordinate
+	// of the landmark is at 100 pixels, this value is 0.5.
+	Y *float32
 }
 
 // Provides information about a single type of unsafe content found in an image or
@@ -666,40 +666,40 @@ type Landmark struct {
 // Rekognition Developer Guide.
 type ModerationLabel struct {
 
-	// The name for the parent label. Labels at the top level of the hierarchy have the
-	// parent label "".
-	ParentName *string
-
-	// The label name for the type of unsafe content detected in the image.
-	Name *string
-
 	// Specifies the confidence that Amazon Rekognition has that the label has been
 	// correctly identified. If you don't specify the MinConfidence parameter in the
 	// call to DetectModerationLabels, the operation returns labels with a confidence
 	// value greater than or equal to 50 percent.
 	Confidence *float32
+
+	// The label name for the type of unsafe content detected in the image.
+	Name *string
+
+	// The name for the parent label. Labels at the top level of the hierarchy have the
+	// parent label "".
+	ParentName *string
 }
 
 // Indicates whether or not the mouth on the face is open, and the confidence level
 // in the determination.
 type MouthOpen struct {
 
-	// Boolean value that indicates whether the mouth on the face is open or not.
-	Value *bool
-
 	// Level of confidence in the determination.
 	Confidence *float32
+
+	// Boolean value that indicates whether the mouth on the face is open or not.
+	Value *bool
 }
 
 // Indicates whether or not the face has a mustache, and the confidence level in
 // the determination.
 type Mustache struct {
 
-	// Boolean value that indicates whether the face has mustache or not.
-	Value *bool
-
 	// Level of confidence in the determination.
 	Confidence *float32
+
+	// Boolean value that indicates whether the face has mustache or not.
+	Value *bool
 }
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
@@ -739,16 +739,16 @@ type Parent struct {
 // Details about a person detected in a video analysis request.
 type PersonDetail struct {
 
-	// Identifier for the person detected person within a video. Use to keep track of
-	// the person throughout the video. The identifier is not stored by Amazon
-	// Rekognition.
-	Index *int64
+	// Bounding box around the detected person.
+	BoundingBox *BoundingBox
 
 	// Face details for the detected person.
 	Face *FaceDetail
 
-	// Bounding box around the detected person.
-	BoundingBox *BoundingBox
+	// Identifier for the person detected person within a video. Use to keep track of
+	// the person throughout the video. The identifier is not stored by Amazon
+	// Rekognition.
+	Index *int64
 }
 
 // Details and path tracking information for a single time a person's path is
@@ -758,12 +758,12 @@ type PersonDetail struct {
 // GetPersonTracking in the Amazon Rekognition Developer Guide. </p>
 type PersonDetection struct {
 
+	// Details about a person whose path was tracked in a video.
+	Person *PersonDetail
+
 	// The time, in milliseconds from the start of the video, that the person's path
 	// was tracked.
 	Timestamp *int64
-
-	// Details about a person whose path was tracked in a video.
-	Person *PersonDetail
 }
 
 // Information about a person whose face matches a face(s) in an Amazon Rekognition
@@ -777,12 +777,12 @@ type PersonMatch struct {
 	// person in the video.
 	FaceMatches []*FaceMatch
 
+	// Information about the matched person.
+	Person *PersonDetail
+
 	// The time, in milliseconds from the beginning of the video, that the person was
 	// matched in the video.
 	Timestamp *int64
-
-	// Information about the matched person.
-	Person *PersonDetail
 }
 
 // The X and Y coordinates of a point on an image. The X and Y values returned are
@@ -805,44 +805,58 @@ type Point struct {
 // Indicates the pose of the face as determined by its pitch, roll, and yaw.
 type Pose struct {
 
-	// Value representing the face rotation on the yaw axis.
-	Yaw *float32
+	// Value representing the face rotation on the pitch axis.
+	Pitch *float32
 
 	// Value representing the face rotation on the roll axis.
 	Roll *float32
 
-	// Value representing the face rotation on the pitch axis.
-	Pitch *float32
+	// Value representing the face rotation on the yaw axis.
+	Yaw *float32
 }
 
 // A description of a Amazon Rekognition Custom Labels project.
 type ProjectDescription struct {
 
-	// The current status of the project.
-	Status ProjectStatus
+	// The Unix timestamp for the date and time that the project was created.
+	CreationTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the project.
 	ProjectArn *string
 
-	// The Unix timestamp for the date and time that the project was created.
-	CreationTimestamp *time.Time
+	// The current status of the project.
+	Status ProjectStatus
 }
 
 // The description of a version of a model.
 type ProjectVersionDescription struct {
 
-	// The location where training results are saved.
-	OutputConfig *OutputConfig
+	// The duration, in seconds, that the model version has been billed for training.
+	// This value is only returned if the model version has been successfully trained.
+	BillableTrainingTimeInSeconds *int64
 
-	// The current status of the model version.
-	Status ProjectVersionStatus
+	// The Unix datetime for the date and time that training started.
+	CreationTimestamp *time.Time
+
+	// The training results. EvaluationResult is only returned if training is
+	// successful.
+	EvaluationResult *EvaluationResult
 
 	// The minimum number of inference units used by the model. For more information,
 	// see StartProjectVersion ().
 	MinInferenceUnits *int32
 
-	// The Unix date and time that training of the model ended.
-	TrainingEndTimestamp *time.Time
+	// The location where training results are saved.
+	OutputConfig *OutputConfig
+
+	// The Amazon Resource Name (ARN) of the model version.
+	ProjectVersionArn *string
+
+	// The current status of the model version.
+	Status ProjectVersionStatus
+
+	// A descriptive message for an error or warning that occurred.
+	StatusMessage *string
 
 	// The manifest file that represents the testing results.
 	TestingDataResult *TestingDataResult
@@ -850,22 +864,8 @@ type ProjectVersionDescription struct {
 	// The manifest file that represents the training results.
 	TrainingDataResult *TrainingDataResult
 
-	// The Amazon Resource Name (ARN) of the model version.
-	ProjectVersionArn *string
-
-	// The training results. EvaluationResult is only returned if training is
-	// successful.
-	EvaluationResult *EvaluationResult
-
-	// The duration, in seconds, that the model version has been billed for training.
-	// This value is only returned if the model version has been successfully trained.
-	BillableTrainingTimeInSeconds *int64
-
-	// A descriptive message for an error or warning that occurred.
-	StatusMessage *string
-
-	// The Unix datetime for the date and time that training started.
-	CreationTimestamp *time.Time
+	// The Unix date and time that training of the model ended.
+	TrainingEndTimestamp *time.Time
 }
 
 // Specifies a location within the frame that Rekognition checks for text. Uses a
@@ -889,11 +889,11 @@ type S3Object struct {
 	// Name of the S3 bucket.
 	Bucket *string
 
-	// If the bucket is versioning enabled, you can specify the object version.
-	Version *string
-
 	// S3 object key name.
 	Name *string
+
+	// If the bucket is versioning enabled, you can specify the object version.
+	Version *string
 }
 
 // A technical cue or shot detection segment detected in a video. An array of
@@ -901,17 +901,11 @@ type S3Object struct {
 // returned by GetSegmentDetection ().
 type SegmentDetection struct {
 
-	// The frame-accurate SMPTE timecode, from the start of a video, for the start of a
-	// detected segment. StartTimecode is in HH:MM:SS:fr format (and ;fr for drop
-	// frame-rates).
-	StartTimecodeSMPTE *string
+	// The duration of the detected segment in milliseconds.
+	DurationMillis *int64
 
 	// The duration of the timecode for the detected segment in SMPTE format.
 	DurationSMPTE *string
-
-	// If the segment is a shot detection, contains information about the shot
-	// detection.
-	ShotSegment *ShotSegment
 
 	// The frame-accurate SMPTE timecode, from the start of a video, for the end of a
 	// detected segment. EndTimecode is in HH:MM:SS:fr format (and ;fr for drop
@@ -922,18 +916,24 @@ type SegmentDetection struct {
 	// video.
 	EndTimestampMillis *int64
 
+	// If the segment is a shot detection, contains information about the shot
+	// detection.
+	ShotSegment *ShotSegment
+
+	// The frame-accurate SMPTE timecode, from the start of a video, for the start of a
+	// detected segment. StartTimecode is in HH:MM:SS:fr format (and ;fr for drop
+	// frame-rates).
+	StartTimecodeSMPTE *string
+
 	// The start time of the detected segment in milliseconds from the start of the
 	// video.
 	StartTimestampMillis *int64
 
-	// The type of the segment. Valid values are TECHNICAL_CUE and SHOT.
-	Type SegmentType
-
 	// If the segment is a technical cue, contains information about the technical cue.
 	TechnicalCueSegment *TechnicalCueSegment
 
-	// The duration of the detected segment in milliseconds.
-	DurationMillis *int64
+	// The type of the segment. Valid values are TECHNICAL_CUE and SHOT.
+	Type SegmentType
 }
 
 // Information about the type of a segment requested in a call to
@@ -941,11 +941,11 @@ type SegmentDetection struct {
 // response from GetSegmentDetection ().
 type SegmentTypeInfo struct {
 
-	// The type of a segment (technical cue or shot detection).
-	Type SegmentType
-
 	// The version of the model used to detect segments.
 	ModelVersion *string
+
+	// The type of a segment (technical cue or shot detection).
+	Type SegmentType
 }
 
 // Information about a shot detection segment detected in a video. For more
@@ -964,11 +964,11 @@ type ShotSegment struct {
 // determination.
 type Smile struct {
 
-	// Boolean value that indicates whether the face is smiling or not.
-	Value *bool
-
 	// Level of confidence in the determination.
 	Confidence *float32
+
+	// Boolean value that indicates whether the face is smiling or not.
+	Value *bool
 }
 
 // Filters applied to the technical cue or shot detection segments. For more
@@ -1093,12 +1093,12 @@ type Sunglasses struct {
 // SegmentDetection ().
 type TechnicalCueSegment struct {
 
-	// The type of the technical cue.
-	Type TechnicalCueType
-
 	// The confidence that Amazon Rekognition Video has in the accuracy of the detected
 	// segment.
 	Confidence *float32
+
+	// The type of the technical cue.
+	Type TechnicalCueType
 }
 
 // The dataset used for testing. Optionally, if AutoCreate is set, Amazon
@@ -1135,28 +1135,28 @@ type TestingDataResult struct {
 // Developer Guide.</p>
 type TextDetection struct {
 
-	// The identifier for the detected text. The identifier is only unique for a single
-	// call to DetectText.
-	Id *int32
+	// The confidence that Amazon Rekognition has in the accuracy of the detected text
+	// and the accuracy of the geometry points around the detected text.
+	Confidence *float32
+
+	// The word or line of text recognized by Amazon Rekognition.
+	DetectedText *string
 
 	// The location of the detected text on the image. Includes an axis aligned coarse
 	// bounding box surrounding the text and a finer grain polygon for more accurate
 	// spatial information.
 	Geometry *Geometry
 
-	// The type of text that was detected.
-	Type TextTypes
-
-	// The word or line of text recognized by Amazon Rekognition.
-	DetectedText *string
+	// The identifier for the detected text. The identifier is only unique for a single
+	// call to DetectText.
+	Id *int32
 
 	// The Parent identifier for the detected text identified by the value of ID. If
 	// the type of detected text is LINE, the value of ParentId is Null.
 	ParentId *int32
 
-	// The confidence that Amazon Rekognition has in the accuracy of the detected text
-	// and the accuracy of the geometry points around the detected text.
-	Confidence *float32
+	// The type of text that was detected.
+	Type TextTypes
 }
 
 // Information about text detected in a video. Incudes the detected text, the time
@@ -1184,17 +1184,21 @@ type TrainingData struct {
 // for training.
 type TrainingDataResult struct {
 
+	// The training assets that you supplied for training.
+	Input *TrainingData
+
 	// The images (assets) that were actually trained by Amazon Rekognition Custom
 	// Labels.
 	Output *TrainingData
-
-	// The training assets that you supplied for training.
-	Input *TrainingData
 }
 
 // A face that IndexFaces () detected, but didn't index. Use the Reasons response
 // attribute to determine why a face wasn't indexed.
 type UnindexedFace struct {
+
+	// The structure that contains attributes of a face that IndexFacesdetected, but
+	// didn't index.
+	FaceDetail *FaceDetail
 
 	// An array of reasons that specify why a face wasn't indexed.
 	//
@@ -1217,10 +1221,6 @@ type UnindexedFace struct {
 	//     * SMALL_BOUNDING_BOX - The bounding box
 	// around the face is too small.
 	Reasons []Reason
-
-	// The structure that contains attributes of a face that IndexFacesdetected, but
-	// didn't index.
-	FaceDetail *FaceDetail
 }
 
 // Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
@@ -1237,8 +1237,14 @@ type Video struct {
 // operation.
 type VideoMetadata struct {
 
+	// Type of compression used in the analyzed video.
+	Codec *string
+
 	// Length of the video in milliseconds.
 	DurationMillis *int64
+
+	// Format of the analyzed video. Possible values are MP4, MOV and AVI.
+	Format *string
 
 	// Vertical pixel dimension of the video.
 	FrameHeight *int64
@@ -1248,10 +1254,4 @@ type VideoMetadata struct {
 
 	// Horizontal pixel dimension of the video.
 	FrameWidth *int64
-
-	// Format of the analyzed video. Possible values are MP4, MOV and AVI.
-	Format *string
-
-	// Type of compression used in the analyzed video.
-	Codec *string
 }

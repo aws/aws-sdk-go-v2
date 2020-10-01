@@ -8,35 +8,41 @@ type EventTypeSummary struct {
 	// The system-generated ID of the event.
 	EventTypeId *string
 
+	// The name of the event.
+	EventTypeName *string
+
 	// The resource type of the event.
 	ResourceType *string
 
 	// The name of the service for which the event applies.
 	ServiceName *string
-
-	// The name of the event.
-	EventTypeName *string
 }
 
 // Information about a filter to apply to the list of returned event types. You can
 // filter by resource type or service name.
 type ListEventTypesFilter struct {
 
+	// The system-generated name of the filter type you want to filter by.
+	//
+	// This member is required.
+	Name ListEventTypesFilterName
+
 	// The name of the resource type (for example, pipeline) or service name (for
 	// example, CodePipeline) that you want to filter by.
 	//
 	// This member is required.
 	Value *string
-
-	// The system-generated name of the filter type you want to filter by.
-	//
-	// This member is required.
-	Name ListEventTypesFilterName
 }
 
 // Information about a filter to apply to the list of returned notification rules.
 // You can filter by event type, owner, resource, or target.
 type ListNotificationRulesFilter struct {
+
+	// The name of the attribute you want to use to filter the returned notification
+	// rules.
+	//
+	// This member is required.
+	Name ListNotificationRulesFilterName
 
 	// The value of the attribute you want to use to filter the returned notification
 	// rules. For example, if you specify filtering by RESOURCE in Name, you might
@@ -44,12 +50,6 @@ type ListNotificationRulesFilter struct {
 	//
 	// This member is required.
 	Value *string
-
-	// The name of the attribute you want to use to filter the returned notification
-	// rules.
-	//
-	// This member is required.
-	Name ListNotificationRulesFilterName
 }
 
 // Information about a filter to apply to the list of returned targets. You can
@@ -75,11 +75,11 @@ type ListTargetsFilter struct {
 // Information about a specified notification rule.
 type NotificationRuleSummary struct {
 
-	// The unique ID of the notification rule.
-	Id *string
-
 	// The Amazon Resource Name (ARN) of the notification rule.
 	Arn *string
+
+	// The unique ID of the notification rule.
+	Id *string
 }
 
 // Information about the SNS topics associated with a notification rule.

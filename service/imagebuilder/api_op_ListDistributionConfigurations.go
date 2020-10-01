@@ -56,28 +56,28 @@ func (c *Client) ListDistributionConfigurations(ctx context.Context, params *Lis
 
 type ListDistributionConfigurationsInput struct {
 
+	// The filters.
+	//
+	//     * name - The name of this distribution configuration.
+	Filters []*types.Filter
+
 	// The maximum items to return in a request.
 	MaxResults *int32
 
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
-
-	// The filters.
-	//
-	//     * name - The name of this distribution configuration.
-	Filters []*types.Filter
 }
 
 type ListDistributionConfigurationsOutput struct {
+
+	// The list of distributions.
+	DistributionConfigurationSummaryList []*types.DistributionConfigurationSummary
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.
 	NextToken *string
-
-	// The list of distributions.
-	DistributionConfigurationSummaryList []*types.DistributionConfigurationSummary
 
 	// The request ID that uniquely identifies this request.
 	RequestId *string

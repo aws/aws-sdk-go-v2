@@ -56,15 +56,15 @@ func (c *Client) DescribeAvailablePatches(ctx context.Context, params *DescribeA
 
 type DescribeAvailablePatchesInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
+	// Filters used to scope down the returned patches.
+	Filters []*types.PatchOrchestratorFilter
 
 	// The maximum number of patches to return (per page).
 	MaxResults *int32
 
-	// Filters used to scope down the returned patches.
-	Filters []*types.PatchOrchestratorFilter
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeAvailablePatchesOutput struct {

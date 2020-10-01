@@ -74,6 +74,11 @@ func (c *Client) PutEmailIdentityDkimSigningAttributes(ctx context.Context, para
 // A request to change the DKIM attributes for an email identity.
 type PutEmailIdentityDkimSigningAttributesInput struct {
 
+	// The email identity that you want to configure DKIM for.
+	//
+	// This member is required.
+	EmailIdentity *string
+
 	// The method that you want to use to configure DKIM for the identity. There are
 	// two possible values:
 	//
@@ -92,29 +97,11 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	// want to use to configure DKIM for the identity. This object is only required if
 	// you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
 	SigningAttributes *types.DkimSigningAttributes
-
-	// The email identity that you want to configure DKIM for.
-	//
-	// This member is required.
-	EmailIdentity *string
 }
 
 // If the action is successful, the service sends back an HTTP 200 response. The
 // following data is returned in JSON format by the service.
 type PutEmailIdentityDkimSigningAttributesOutput struct {
-
-	// If you used Easy DKIM
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
-	// configure DKIM authentication for the domain, then this object contains a set of
-	// unique strings that you use to create a set of CNAME records that you add to the
-	// DNS configuration for your domain. When Amazon SES detects these records in the
-	// DNS configuration for your domain, the DKIM authentication process is complete.
-	// If you configured DKIM authentication for the domain by providing your own
-	// public-private key pair, then this object contains the selector that's
-	// associated with your public key. Regardless of the DKIM authentication method
-	// you use, Amazon SES searches for the appropriate records in the DNS
-	// configuration of the domain for up to 72 hours.
-	DkimTokens []*string
 
 	// The DKIM authentication status of the identity. Amazon SES determines the
 	// authentication status by searching for specific records in the DNS configuration
@@ -145,6 +132,19 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 	//     * NOT_STARTED – The DKIM verification
 	// process hasn't been initiated for the domain.
 	DkimStatus types.DkimStatus
+
+	// If you used Easy DKIM
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
+	// configure DKIM authentication for the domain, then this object contains a set of
+	// unique strings that you use to create a set of CNAME records that you add to the
+	// DNS configuration for your domain. When Amazon SES detects these records in the
+	// DNS configuration for your domain, the DKIM authentication process is complete.
+	// If you configured DKIM authentication for the domain by providing your own
+	// public-private key pair, then this object contains the selector that's
+	// associated with your public key. Regardless of the DKIM authentication method
+	// you use, Amazon SES searches for the appropriate records in the DNS
+	// configuration of the domain for up to 72 hours.
+	DkimTokens []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,9 +58,6 @@ func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableH
 
 type ListReviewableHITsInput struct {
 
-	// Can be either Reviewable or Reviewing. Reviewable is the default value.
-	Status types.ReviewableHITStatus
-
 	// The ID of the HIT type of the HITs to consider for the query. If not specified,
 	// all HITs for the Reviewer are considered
 	HITTypeId *string
@@ -70,6 +67,9 @@ type ListReviewableHITsInput struct {
 
 	// Pagination Token
 	NextToken *string
+
+	// Can be either Reviewable or Reviewing. Reviewable is the default value.
+	Status types.ReviewableHITStatus
 }
 
 type ListReviewableHITsOutput struct {

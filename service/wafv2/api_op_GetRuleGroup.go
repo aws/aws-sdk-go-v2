@@ -90,9 +90,6 @@ type GetRuleGroupInput struct {
 
 type GetRuleGroupOutput struct {
 
-	//
-	RuleGroup *types.RuleGroup
-
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -101,6 +98,9 @@ type GetRuleGroupOutput struct {
 	// has been made, the update fails with a WAFOptimisticLockException. If this
 	// happens, perform another get, and use the new token returned by that operation.
 	LockToken *string
+
+	//
+	RuleGroup *types.RuleGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

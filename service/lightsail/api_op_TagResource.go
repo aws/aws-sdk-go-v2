@@ -65,9 +65,6 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
-	ResourceArn *string
-
 	// The name of the resource to which you are adding tags.
 	//
 	// This member is required.
@@ -77,6 +74,9 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags []*types.Tag
+
+	// The Amazon Resource Name (ARN) of the resource to which you want to add a tag.
+	ResourceArn *string
 }
 
 type TagResourceOutput struct {

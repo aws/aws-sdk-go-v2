@@ -58,6 +58,11 @@ func (c *Client) GetJob(ctx context.Context, params *GetJobInput, optFns ...func
 // The request structure for the get job request.
 type GetJobInput struct {
 
+	// The unique ID for an Amplify app.
+	//
+	// This member is required.
+	AppId *string
+
 	// The branch name for the job.
 	//
 	// This member is required.
@@ -67,11 +72,6 @@ type GetJobInput struct {
 	//
 	// This member is required.
 	JobId *string
-
-	// The unique ID for an Amplify app.
-	//
-	// This member is required.
-	AppId *string
 }
 
 type GetJobOutput struct {

@@ -60,16 +60,16 @@ func (c *Client) DescribeDBSecurityGroups(ctx context.Context, params *DescribeD
 //
 type DescribeDBSecurityGroupsInput struct {
 
-	// An optional pagination token provided by a previous DescribeDBSecurityGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string
+	// The name of the DB security group to return details for.
+	DBSecurityGroupName *string
 
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
 
-	// The name of the DB security group to return details for.
-	DBSecurityGroupName *string
+	// An optional pagination token provided by a previous DescribeDBSecurityGroups
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is

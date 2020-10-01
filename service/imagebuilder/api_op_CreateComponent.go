@@ -60,13 +60,20 @@ func (c *Client) CreateComponent(ctx context.Context, params *CreateComponentInp
 
 type CreateComponentInput struct {
 
-	// The tags of the component.
-	Tags map[string]*string
+	// The idempotency token of the component.
+	//
+	// This member is required.
+	ClientToken *string
 
-	// The operating system (OS) version supported by the component. If the OS
-	// information is available, a prefix match is performed against the parent image
-	// OS version during image recipe creation.
-	SupportedOsVersions []*string
+	// The name of the component.
+	//
+	// This member is required.
+	Name *string
+
+	// The platform of the component.
+	//
+	// This member is required.
+	Platform types.Platform
 
 	// The semantic version of the component. This version follows the semantic version
 	// syntax. For example, major.minor.patch. This could be versioned like software
@@ -75,51 +82,44 @@ type CreateComponentInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The ID of the KMS key that should be used to encrypt this component.
-	KmsKeyId *string
-
 	// The change description of the component. Describes what change has been made in
 	// this version, or what makes this version different from other versions of this
 	// component.
 	ChangeDescription *string
+
+	// The data of the component. Used to specify the data inline. Either data or uri
+	// can be used to specify the data within the component.
+	Data *string
+
+	// The description of the component. Describes the contents of the component.
+	Description *string
+
+	// The ID of the KMS key that should be used to encrypt this component.
+	KmsKeyId *string
+
+	// The operating system (OS) version supported by the component. If the OS
+	// information is available, a prefix match is performed against the parent image
+	// OS version during image recipe creation.
+	SupportedOsVersions []*string
+
+	// The tags of the component.
+	Tags map[string]*string
 
 	// The uri of the component. Must be an S3 URL and the requester must have
 	// permission to access the S3 bucket. If you use S3, you can specify component
 	// content up to your service quota. Either data or uri can be used to specify the
 	// data within the component.
 	Uri *string
-
-	// The name of the component.
-	//
-	// This member is required.
-	Name *string
-
-	// The data of the component. Used to specify the data inline. Either data or uri
-	// can be used to specify the data within the component.
-	Data *string
-
-	// The platform of the component.
-	//
-	// This member is required.
-	Platform types.Platform
-
-	// The idempotency token of the component.
-	//
-	// This member is required.
-	ClientToken *string
-
-	// The description of the component. Describes the contents of the component.
-	Description *string
 }
 
 type CreateComponentOutput struct {
 
+	// The idempotency token used to make this request idempotent.
+	ClientToken *string
+
 	// The Amazon Resource Name (ARN) of the component that was created by this
 	// request.
 	ComponentBuildVersionArn *string
-
-	// The idempotency token used to make this request idempotent.
-	ClientToken *string
 
 	// The request ID that uniquely identifies this request.
 	RequestId *string

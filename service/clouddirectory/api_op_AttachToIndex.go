@@ -63,15 +63,15 @@ type AttachToIndexInput struct {
 	// This member is required.
 	DirectoryArn *string
 
-	// A reference to the object that you are attaching to the index.
-	//
-	// This member is required.
-	TargetReference *types.ObjectReference
-
 	// A reference to the index that you are attaching the object to.
 	//
 	// This member is required.
 	IndexReference *types.ObjectReference
+
+	// A reference to the object that you are attaching to the index.
+	//
+	// This member is required.
+	TargetReference *types.ObjectReference
 }
 
 type AttachToIndexOutput struct {

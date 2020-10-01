@@ -85,9 +85,6 @@ type PutPublicAccessBlockInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The MD5 hash of the PutPublicAccessBlock request body.
-	ContentMD5 *string
-
 	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
 	// bucket. You can enable the configuration options in any combination. For more
 	// information about when Amazon S3 considers a bucket or object public, see The
@@ -97,6 +94,9 @@ type PutPublicAccessBlockInput struct {
 	//
 	// This member is required.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
+
+	// The MD5 hash of the PutPublicAccessBlock request body.
+	ContentMD5 *string
 }
 
 type PutPublicAccessBlockOutput struct {

@@ -88,9 +88,6 @@ type DescribeVpcEndpointsInput struct {
 	// the tag value.
 	Filters []*types.Filter
 
-	// One or more endpoint IDs.
-	VpcEndpointIds []*string
-
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
@@ -99,6 +96,9 @@ type DescribeVpcEndpointsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// prior call.)
 	NextToken *string
+
+	// One or more endpoint IDs.
+	VpcEndpointIds []*string
 }
 
 // Contains the output of DescribeVpcEndpoints.

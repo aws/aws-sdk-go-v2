@@ -19,44 +19,34 @@ type DeviceSummary struct {
 	// This member is required.
 	DeviceName *string
 
-	// The provider of the device.
+	// The status of the device.
 	//
 	// This member is required.
-	ProviderName *string
+	DeviceStatus DeviceStatus
 
 	// The type of the device.
 	//
 	// This member is required.
 	DeviceType DeviceType
 
-	// The status of the device.
+	// The provider of the device.
 	//
 	// This member is required.
-	DeviceStatus DeviceStatus
+	ProviderName *string
 }
 
 // Includes information about a quantum task.
 type QuantumTaskSummary struct {
 
-	// The ARN of the task.
+	// The time at which the task was created.
 	//
 	// This member is required.
-	QuantumTaskArn *string
-
-	// The status of the task.
-	//
-	// This member is required.
-	Status QuantumTaskStatus
+	CreatedAt *time.Time
 
 	// The ARN of the device the task ran on.
 	//
 	// This member is required.
 	DeviceArn *string
-
-	// The shots used for the task.
-	//
-	// This member is required.
-	Shots *int64
 
 	// The S3 bucket where the task result file is stored..
 	//
@@ -68,10 +58,20 @@ type QuantumTaskSummary struct {
 	// This member is required.
 	OutputS3Directory *string
 
-	// The time at which the task was created.
+	// The ARN of the task.
 	//
 	// This member is required.
-	CreatedAt *time.Time
+	QuantumTaskArn *string
+
+	// The shots used for the task.
+	//
+	// This member is required.
+	Shots *int64
+
+	// The status of the task.
+	//
+	// This member is required.
+	Status QuantumTaskStatus
 
 	// The time at which the task finished.
 	EndedAt *time.Time
@@ -99,13 +99,13 @@ type SearchQuantumTasksFilter struct {
 	// This member is required.
 	Name *string
 
-	// The values to use for the filter.
-	//
-	// This member is required.
-	Values []*string
-
 	// An operator to use in the filter.
 	//
 	// This member is required.
 	Operator SearchQuantumTasksFilterOperator
+
+	// The values to use for the filter.
+	//
+	// This member is required.
+	Values []*string
 }

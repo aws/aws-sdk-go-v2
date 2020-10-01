@@ -62,11 +62,6 @@ func (c *Client) DeleteSuggester(ctx context.Context, params *DeleteSuggesterInp
 // delete.
 type DeleteSuggesterInput struct {
 
-	// Specifies the name of the suggester you want to delete.
-	//
-	// This member is required.
-	SuggesterName *string
-
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
@@ -74,6 +69,11 @@ type DeleteSuggesterInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// Specifies the name of the suggester you want to delete.
+	//
+	// This member is required.
+	SuggesterName *string
 }
 
 // The result of a DeleteSuggester request. Contains the status of the deleted

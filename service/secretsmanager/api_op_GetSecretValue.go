@@ -116,11 +116,14 @@ type GetSecretValueInput struct {
 
 type GetSecretValueOutput struct {
 
-	// The friendly name of the secret.
-	Name *string
+	// The ARN of the secret.
+	ARN *string
 
 	// The date and time that this version of the secret was created.
 	CreatedDate *time.Time
+
+	// The friendly name of the secret.
+	Name *string
 
 	// The decrypted part of the protected secret information that was originally
 	// provided as binary data in the form of a byte array. The response parameter
@@ -145,9 +148,6 @@ type GetSecretValueOutput struct {
 
 	// The unique identifier of this version of the secret.
 	VersionId *string
-
-	// The ARN of the secret.
-	ARN *string
 
 	// A list of all of the staging labels currently attached to this version of the
 	// secret.

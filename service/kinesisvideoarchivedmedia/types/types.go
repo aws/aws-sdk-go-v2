@@ -15,15 +15,15 @@ import (
 // oldest ingested collection of fragments are returned.
 type ClipFragmentSelector struct {
 
-	// The range of timestamps to return.
-	//
-	// This member is required.
-	TimestampRange *ClipTimestampRange
-
 	// The origin of the timestamps to use (Server or Producer).
 	//
 	// This member is required.
 	FragmentSelectorType ClipFragmentSelectorType
+
+	// The range of timestamps to return.
+	//
+	// This member is required.
+	TimestampRange *ClipTimestampRange
 }
 
 // The range of timestamps for which to return fragments. The values in the
@@ -31,14 +31,6 @@ type ClipFragmentSelector struct {
 // continue past it, or fragments that begin before the end time but continue past
 // it, are included in the session.
 type ClipTimestampRange struct {
-
-	// The starting timestamp in the range of timestamps for which to return fragments.
-	// This value is inclusive. Fragments that start before the StartTimestamp and
-	// continue past it are included in the session. If FragmentSelectorType is
-	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
-	//
-	// This member is required.
-	StartTimestamp *time.Time
 
 	// The end of the timestamp range for the requested media. This value must be
 	// within 3 hours of the specified StartTimestamp, and it must be later than the
@@ -50,15 +42,19 @@ type ClipTimestampRange struct {
 	//
 	// This member is required.
 	EndTimestamp *time.Time
+
+	// The starting timestamp in the range of timestamps for which to return fragments.
+	// This value is inclusive. Fragments that start before the StartTimestamp and
+	// continue past it are included in the session. If FragmentSelectorType is
+	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
+	//
+	// This member is required.
+	StartTimestamp *time.Time
 }
 
 // Contains the range of timestamps for the requested media, and the source of the
 // timestamps.
 type DASHFragmentSelector struct {
-
-	// The start and end of the timestamp range for the requested media. This value
-	// should not be present if PlaybackType is LIVE.
-	TimestampRange *DASHTimestampRange
 
 	// The source of the timestamps for the requested media. When FragmentSelectorType
 	// is set to PRODUCER_TIMESTAMP and GetDASHStreamingSessionURLInput$PlaybackMode ()
@@ -81,6 +77,10 @@ type DASHFragmentSelector struct {
 	// timestamps with values now, they are not included in the HLS media playlist. The
 	// default is SERVER_TIMESTAMP.
 	FragmentSelectorType DASHFragmentSelectorType
+
+	// The start and end of the timestamp range for the requested media. This value
+	// should not be present if PlaybackType is LIVE.
+	TimestampRange *DASHTimestampRange
 }
 
 // The start and end of the timestamp range for the requested media. This value
@@ -89,13 +89,6 @@ type DASHFragmentSelector struct {
 // continue past it, or fragments that begin before the end time but continue past
 // it, are included in the session.
 type DASHTimestampRange struct {
-
-	// The start of the timestamp range for the requested media. If the
-	// DASHTimestampRange value is specified, the StartTimestamp value is required.
-	// This value is inclusive. Fragments that start before the StartTimestamp and
-	// continue past it are included in the session. If FragmentSelectorType is
-	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
-	StartTimestamp *time.Time
 
 	// The end of the timestamp range for the requested media. This value must be
 	// within 3 hours of the specified StartTimestamp, and it must be later than the
@@ -110,27 +103,34 @@ type DASHTimestampRange struct {
 	// <code>EndTimestamp</code> value and continue past it are included in the
 	// session.</p> </note>
 	EndTimestamp *time.Time
+
+	// The start of the timestamp range for the requested media. If the
+	// DASHTimestampRange value is specified, the StartTimestamp value is required.
+	// This value is inclusive. Fragments that start before the StartTimestamp and
+	// continue past it are included in the session. If FragmentSelectorType is
+	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
+	StartTimestamp *time.Time
 }
 
 // Represents a segment of video or other time-delimited data.
 type Fragment struct {
 
-	// The timestamp from the AWS server corresponding to the fragment.
-	ServerTimestamp *time.Time
-
 	// The playback duration or other time value associated with the fragment.
 	FragmentLengthInMilliseconds *int64
-
-	// The total fragment size, including information about the fragment and contained
-	// media data.
-	FragmentSizeInBytes *int64
 
 	// The unique identifier of the fragment. This value monotonically increases based
 	// on the ingestion order.
 	FragmentNumber *string
 
+	// The total fragment size, including information about the fragment and contained
+	// media data.
+	FragmentSizeInBytes *int64
+
 	// The timestamp from the producer corresponding to the fragment.
 	ProducerTimestamp *time.Time
+
+	// The timestamp from the AWS server corresponding to the fragment.
+	ServerTimestamp *time.Time
 }
 
 // Describes the timestamp range and timestamp origin of a range of fragments. Only
@@ -167,10 +167,6 @@ type FragmentSelector struct {
 // timestamps.
 type HLSFragmentSelector struct {
 
-	// The start and end of the timestamp range for the requested media. This value
-	// should not be present if PlaybackType is LIVE.
-	TimestampRange *HLSTimestampRange
-
 	// The source of the timestamps for the requested media. When FragmentSelectorType
 	// is set to PRODUCER_TIMESTAMP and GetHLSStreamingSessionURLInput$PlaybackMode ()
 	// is ON_DEMAND or LIVE_REPLAY, the first fragment ingested with a producer
@@ -192,6 +188,10 @@ type HLSFragmentSelector struct {
 	// timestamps with values now, they are not included in the HLS media playlist. The
 	// default is SERVER_TIMESTAMP.
 	FragmentSelectorType HLSFragmentSelectorType
+
+	// The start and end of the timestamp range for the requested media. This value
+	// should not be present if PlaybackType is LIVE.
+	TimestampRange *HLSTimestampRange
 }
 
 // The start and end of the timestamp range for the requested media. This value
@@ -200,13 +200,6 @@ type HLSFragmentSelector struct {
 // continue past it, or fragments that begin before the end time but continue past
 // it, are included in the session.
 type HLSTimestampRange struct {
-
-	// The start of the timestamp range for the requested media. If the
-	// HLSTimestampRange value is specified, the StartTimestamp value is required. This
-	// value is inclusive. Fragments that start before the StartTimestamp and continue
-	// past it are included in the session. If FragmentSelectorType is
-	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
-	StartTimestamp *time.Time
 
 	// The end of the timestamp range for the requested media. This value must be
 	// within 3 hours of the specified StartTimestamp, and it must be later than the
@@ -219,18 +212,25 @@ type HLSTimestampRange struct {
 	// fragment. Fragments that start before the EndTimestamp value and continue past
 	// it are included in the session.
 	EndTimestamp *time.Time
+
+	// The start of the timestamp range for the requested media. If the
+	// HLSTimestampRange value is specified, the StartTimestamp value is required. This
+	// value is inclusive. Fragments that start before the StartTimestamp and continue
+	// past it are included in the session. If FragmentSelectorType is
+	// SERVER_TIMESTAMP, the StartTimestamp must be later than the stream head.
+	StartTimestamp *time.Time
 }
 
 // The range of timestamps for which to return fragments.
 type TimestampRange struct {
 
-	// The starting timestamp in the range of timestamps for which to return fragments.
-	//
-	// This member is required.
-	StartTimestamp *time.Time
-
 	// The ending timestamp in the range of timestamps for which to return fragments.
 	//
 	// This member is required.
 	EndTimestamp *time.Time
+
+	// The starting timestamp in the range of timestamps for which to return fragments.
+	//
+	// This member is required.
+	StartTimestamp *time.Time
 }

@@ -62,16 +62,16 @@ func (c *Client) AssociateEnvironmentOperationsRole(ctx context.Context, params 
 // Request to add or change the operations role used by an environment.
 type AssociateEnvironmentOperationsRoleInput struct {
 
+	// The name of the environment to which to set the operations role.
+	//
+	// This member is required.
+	EnvironmentName *string
+
 	// The Amazon Resource Name (ARN) of an existing IAM role to be used as the
 	// environment's operations role.
 	//
 	// This member is required.
 	OperationsRole *string
-
-	// The name of the environment to which to set the operations role.
-	//
-	// This member is required.
-	EnvironmentName *string
 }
 
 type AssociateEnvironmentOperationsRoleOutput struct {

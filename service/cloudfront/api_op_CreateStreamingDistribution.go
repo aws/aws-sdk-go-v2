@@ -89,14 +89,14 @@ type CreateStreamingDistributionInput struct {
 // The returned result of the corresponding request.
 type CreateStreamingDistributionOutput struct {
 
+	// The current version of the streaming distribution created.
+	ETag *string
+
 	// The fully qualified URI of the new streaming distribution resource just created.
 	Location *string
 
 	// The streaming distribution's information.
 	StreamingDistribution *types.StreamingDistribution
-
-	// The current version of the streaming distribution created.
-	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

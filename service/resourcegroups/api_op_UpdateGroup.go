@@ -57,9 +57,6 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 
 type UpdateGroupInput struct {
 
-	// Don't use this parameter. Use Group instead.
-	GroupName *string
-
 	// The new description that you want to update the resource group with.
 	// Descriptions can contain letters, numbers, hyphens, underscores, periods, and
 	// spaces.
@@ -67,6 +64,9 @@ type UpdateGroupInput struct {
 
 	// The name or the ARN of the resource group to modify.
 	Group *string
+
+	// Don't use this parameter. Use Group instead.
+	GroupName *string
 }
 
 type UpdateGroupOutput struct {

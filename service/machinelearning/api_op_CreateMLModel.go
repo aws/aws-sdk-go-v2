@@ -69,15 +69,36 @@ func (c *Client) CreateMLModel(ctx context.Context, params *CreateMLModelInput, 
 
 type CreateMLModelInput struct {
 
-	// The Amazon Simple Storage Service (Amazon S3) location and file name that
-	// contains the MLModel recipe. You must specify either the recipe or its URI. If
-	// you don't specify a recipe or its URI, Amazon ML creates a default.
-	RecipeUri *string
+	// A user-supplied ID that uniquely identifies the MLModel.
+	//
+	// This member is required.
+	MLModelId *string
+
+	// The category of supervised learning that this MLModel will address. Choose from
+	// the following types:
+	//
+	//     * Choose REGRESSION if the MLModel will be used to
+	// predict a numeric value.
+	//
+	//     * Choose BINARY if the MLModel result has two
+	// possible values.
+	//
+	//     * Choose MULTICLASS if the MLModel result has a limited
+	// number of values.
+	//
+	// For more information, see the Amazon Machine Learning
+	// Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
+	//
+	// This member is required.
+	MLModelType types.MLModelType
 
 	// The DataSource that points to the training data.
 	//
 	// This member is required.
 	TrainingDataSourceId *string
+
+	// A user-supplied name or description of the MLModel.
+	MLModelName *string
 
 	// A list of the training parameters in the MLModel. The list is implemented as a
 	// map of key-value pairs. The following is the current set of training
@@ -115,35 +136,14 @@ type CreateMLModelInput struct {
 	// can't be used when L1 is specified. Use this parameter sparingly.
 	Parameters map[string]*string
 
-	// A user-supplied name or description of the MLModel.
-	MLModelName *string
-
-	// The category of supervised learning that this MLModel will address. Choose from
-	// the following types:
-	//
-	//     * Choose REGRESSION if the MLModel will be used to
-	// predict a numeric value.
-	//
-	//     * Choose BINARY if the MLModel result has two
-	// possible values.
-	//
-	//     * Choose MULTICLASS if the MLModel result has a limited
-	// number of values.
-	//
-	// For more information, see the Amazon Machine Learning
-	// Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg).
-	//
-	// This member is required.
-	MLModelType types.MLModelType
-
 	// The data recipe for creating the MLModel. You must specify either the recipe or
 	// its URI. If you don't specify a recipe or its URI, Amazon ML creates a default.
 	Recipe *string
 
-	// A user-supplied ID that uniquely identifies the MLModel.
-	//
-	// This member is required.
-	MLModelId *string
+	// The Amazon Simple Storage Service (Amazon S3) location and file name that
+	// contains the MLModel recipe. You must specify either the recipe or its URI. If
+	// you don't specify a recipe or its URI, Amazon ML creates a default.
+	RecipeUri *string
 }
 
 // Represents the output of a CreateMLModel operation, and is an acknowledgement

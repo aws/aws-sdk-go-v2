@@ -65,15 +65,15 @@ type CreateFieldLevelEncryptionConfigInput struct {
 
 type CreateFieldLevelEncryptionConfigOutput struct {
 
-	// The fully qualified URI of the new configuration resource just created.
-	Location *string
-
 	// The current version of the field level encryption configuration. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
 
 	// Returned when you create a new field-level encryption configuration.
 	FieldLevelEncryption *types.FieldLevelEncryption
+
+	// The fully qualified URI of the new configuration resource just created.
+	Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,26 +58,26 @@ func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstan
 
 type CreateInstanceProfileInput struct {
 
-	// When set to true, Device Farm reboots the instance after a test run. The default
-	// value is true.
-	RebootAfterUse *bool
-
-	// The description of your instance profile.
-	Description *string
-
-	// When set to true, Device Farm removes app packages after a test run. The default
-	// value is false for private devices.
-	PackageCleanup *bool
-
 	// The name of your instance profile.
 	//
 	// This member is required.
 	Name *string
 
+	// The description of your instance profile.
+	Description *string
+
 	// An array of strings that specifies the list of app packages that should not be
 	// cleaned up from the device after a test run. The list of packages is considered
 	// only if you set packageCleanup to true.
 	ExcludeAppPackagesFromCleanup []*string
+
+	// When set to true, Device Farm removes app packages after a test run. The default
+	// value is false for private devices.
+	PackageCleanup *bool
+
+	// When set to true, Device Farm reboots the instance after a test run. The default
+	// value is true.
+	RebootAfterUse *bool
 }
 
 type CreateInstanceProfileOutput struct {

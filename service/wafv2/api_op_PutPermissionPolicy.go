@@ -68,12 +68,6 @@ func (c *Client) PutPermissionPolicy(ctx context.Context, params *PutPermissionP
 
 type PutPermissionPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the RuleGroup () to which you want to attach
-	// the policy.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// The policy to attach to the specified rule group.  <p>The policy specifications
 	// must conform to the following:</p> <ul> <li> <p>The policy must be composed
 	// using IAM Policy version 2012-10-17 or version 2015-01-01.</p> </li> <li> <p>The
@@ -90,6 +84,12 @@ type PutPermissionPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	// The Amazon Resource Name (ARN) of the RuleGroup () to which you want to attach
+	// the policy.
+	//
+	// This member is required.
+	ResourceArn *string
 }
 
 type PutPermissionPolicyOutput struct {

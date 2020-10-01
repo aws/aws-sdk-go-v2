@@ -56,15 +56,15 @@ func (c *Client) RegisterRobot(ctx context.Context, params *RegisterRobotInput, 
 
 type RegisterRobotInput struct {
 
-	// The Amazon Resource Name (ARN) of the robot.
-	//
-	// This member is required.
-	Robot *string
-
 	// The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
 	Fleet *string
+
+	// The Amazon Resource Name (ARN) of the robot.
+	//
+	// This member is required.
+	Robot *string
 }
 
 type RegisterRobotOutput struct {

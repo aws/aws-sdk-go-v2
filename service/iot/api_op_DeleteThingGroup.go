@@ -56,13 +56,13 @@ func (c *Client) DeleteThingGroup(ctx context.Context, params *DeleteThingGroupI
 
 type DeleteThingGroupInput struct {
 
-	// The expected version of the thing group to delete.
-	ExpectedVersion *int64
-
 	// The name of the thing group to delete.
 	//
 	// This member is required.
 	ThingGroupName *string
+
+	// The expected version of the thing group to delete.
+	ExpectedVersion *int64
 }
 
 type DeleteThingGroupOutput struct {

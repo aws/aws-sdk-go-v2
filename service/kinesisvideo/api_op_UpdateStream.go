@@ -62,13 +62,14 @@ func (c *Client) UpdateStream(ctx context.Context, params *UpdateStreamInput, op
 
 type UpdateStreamInput struct {
 
-	// The ARN of the stream whose metadata you want to update.
-	StreamARN *string
-
 	// The version of the stream whose metadata you want to update.
 	//
 	// This member is required.
 	CurrentVersion *string
+
+	// The name of the device that is writing to the stream. In the current
+	// implementation, Kinesis Video Streams does not use this name.
+	DeviceName *string
 
 	// The stream's media type. Use MediaType to specify the type of content that the
 	// stream contains to the consumers of the stream. For more information about media
@@ -80,9 +81,8 @@ type UpdateStreamInput struct {
 	// is H.264, specify video/h264 as the MediaType.
 	MediaType *string
 
-	// The name of the device that is writing to the stream. In the current
-	// implementation, Kinesis Video Streams does not use this name.
-	DeviceName *string
+	// The ARN of the stream whose metadata you want to update.
+	StreamARN *string
 
 	// The name of the stream whose metadata you want to update. The stream name is an
 	// identifier for the stream, and must be unique for each account and region.

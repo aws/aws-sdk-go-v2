@@ -58,15 +58,15 @@ func (c *Client) DescribeRuntimeVersions(ctx context.Context, params *DescribeRu
 
 type DescribeRuntimeVersionsInput struct {
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent DescribeRuntimeVersions operation to retrieve the next set of
-	// results.
-	NextToken *string
-
 	// Specify this parameter to limit how many runs are returned each time you use the
 	// DescribeRuntimeVersions operation. If you omit this parameter, the default of
 	// 100 is used.
 	MaxResults *int32
+
+	// A token that indicates that there is more data available. You can use this token
+	// in a subsequent DescribeRuntimeVersions operation to retrieve the next set of
+	// results.
+	NextToken *string
 }
 
 type DescribeRuntimeVersionsOutput struct {

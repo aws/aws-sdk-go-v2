@@ -95,15 +95,15 @@ type ListHandshakesForOrganizationInput struct {
 
 type ListHandshakesForOrganizationOutput struct {
 
+	// A list of Handshake () objects with details about each of the handshakes that
+	// are associated with an organization.
+	Handshakes []*types.Handshake
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
-
-	// A list of Handshake () objects with details about each of the handshakes that
-	// are associated with an organization.
-	Handshakes []*types.Handshake
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

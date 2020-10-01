@@ -57,10 +57,6 @@ func (c *Client) GetOpsSummary(ctx context.Context, params *GetOpsSummaryInput, 
 
 type GetOpsSummaryInput struct {
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
 	// Optional aggregators that return counts of OpsItems based on one or more
 	// expressions.
 	Aggregators []*types.OpsAggregator
@@ -68,14 +64,18 @@ type GetOpsSummaryInput struct {
 	// Optional filters used to scope down the returned OpsItems.
 	Filters []*types.OpsFilter
 
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
+
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
 
-	// Specify the name of a resource data sync to get.
-	SyncName *string
-
 	// The OpsItem data type to return.
 	ResultAttributes []*types.OpsResultAttribute
+
+	// Specify the name of a resource data sync to get.
+	SyncName *string
 }
 
 type GetOpsSummaryOutput struct {

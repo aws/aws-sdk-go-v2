@@ -58,16 +58,16 @@ func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTarget
 
 type DeregisterTargetsInput struct {
 
+	// The Amazon Resource Name (ARN) of the target group.
+	//
+	// This member is required.
+	TargetGroupArn *string
+
 	// The targets. If you specified a port override when you registered a target, you
 	// must specify both the target ID and the port when you deregister it.
 	//
 	// This member is required.
 	Targets []*types.TargetDescription
-
-	// The Amazon Resource Name (ARN) of the target group.
-	//
-	// This member is required.
-	TargetGroupArn *string
 }
 
 type DeregisterTargetsOutput struct {

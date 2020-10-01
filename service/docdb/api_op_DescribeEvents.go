@@ -63,28 +63,30 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 // Represents the input to DescribeEvents ().
 type DescribeEventsInput struct {
 
+	// The number of minutes to retrieve events for. Default: 60
+	Duration *int32
+
 	// The end of the time interval for which to retrieve events, specified in ISO 8601
 	// format. Example: 2009-07-08T18:00Z
 	EndTime *time.Time
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
+	// A list of event categories that trigger notifications for an event notification
+	// subscription.
+	EventCategories []*string
+
+	// This parameter is not currently supported.
+	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
 
-	// The event source to retrieve events for. If no value is specified, all events
-	// are returned.
-	SourceType types.SourceType
-
-	// The beginning of the time interval to retrieve events for, specified in ISO 8601
-	// format. Example: 2009-07-08T18:00Z
-	StartTime *time.Time
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
 	// specified, then all sources are included in the response. Constraints:
@@ -108,27 +110,25 @@ type DescribeEventsInput struct {
 	//     * Cannot end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
-	// A list of event categories that trigger notifications for an event notification
-	// subscription.
-	EventCategories []*string
+	// The event source to retrieve events for. If no value is specified, all events
+	// are returned.
+	SourceType types.SourceType
 
-	// This parameter is not currently supported.
-	Filters []*types.Filter
-
-	// The number of minutes to retrieve events for. Default: 60
-	Duration *int32
+	// The beginning of the time interval to retrieve events for, specified in ISO 8601
+	// format. Example: 2009-07-08T18:00Z
+	StartTime *time.Time
 }
 
 // Represents the output of DescribeEvents ().
 type DescribeEventsOutput struct {
 
+	// Detailed information about one or more events.
+	Events []*types.Event
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
-
-	// Detailed information about one or more events.
-	Events []*types.Event
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

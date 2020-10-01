@@ -64,14 +64,14 @@ func (c *Client) RegisterTransitGatewayMulticastGroupSources(ctx context.Context
 
 type RegisterTransitGatewayMulticastGroupSourcesInput struct {
 
-	// The IP address assigned to the transit gateway multicast group.
-	GroupIpAddress *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The IP address assigned to the transit gateway multicast group.
+	GroupIpAddress *string
 
 	// The group sources' network interface IDs to register with the transit gateway
 	// multicast group.

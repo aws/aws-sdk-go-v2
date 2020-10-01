@@ -59,24 +59,16 @@ func (c *Client) GetPackageVersionAsset(ctx context.Context, params *GetPackageV
 
 type GetPackageVersionAssetInput struct {
 
-	// A string that contains the package version (for example, 3.5.2).
+	// The name of the requested asset.
 	//
 	// This member is required.
-	PackageVersion *string
+	Asset *string
 
 	// The domain that contains the repository that contains the package version with
 	// the requested asset.
 	//
 	// This member is required.
 	Domain *string
-
-	// The name of the package that contains the requested asset.
-	//
-	// This member is required.
-	Package *string
-
-	// The name of the package version revision that contains the requested asset.
-	PackageVersionRevision *string
 
 	// A format that specifies the type of the package version with the requested asset
 	// file. The valid values are:
@@ -89,6 +81,21 @@ type GetPackageVersionAssetInput struct {
 	//
 	// This member is required.
 	Format types.PackageFormat
+
+	// The name of the package that contains the requested asset.
+	//
+	// This member is required.
+	Package *string
+
+	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
+	PackageVersion *string
+
+	// The repository that contains the package version with the requested asset.
+	//
+	// This member is required.
+	Repository *string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
@@ -107,30 +114,23 @@ type GetPackageVersionAssetInput struct {
 	// have a namespace.
 	Namespace *string
 
-	// The name of the requested asset.
-	//
-	// This member is required.
-	Asset *string
-
-	// The repository that contains the package version with the requested asset.
-	//
-	// This member is required.
-	Repository *string
+	// The name of the package version revision that contains the requested asset.
+	PackageVersionRevision *string
 }
 
 type GetPackageVersionAssetOutput struct {
-
-	// The name of the package version revision that contains the downloaded asset.
-	PackageVersionRevision *string
-
-	// A string that contains the package version (for example, 3.5.2).
-	PackageVersion *string
 
 	// The binary file, or asset, that is downloaded.
 	Asset io.ReadCloser
 
 	// The name of the asset that is downloaded.
 	AssetName *string
+
+	// A string that contains the package version (for example, 3.5.2).
+	PackageVersion *string
+
+	// The name of the package version revision that contains the downloaded asset.
+	PackageVersionRevision *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

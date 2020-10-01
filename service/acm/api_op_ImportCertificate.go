@@ -97,28 +97,28 @@ func (c *Client) ImportCertificate(ctx context.Context, params *ImportCertificat
 
 type ImportCertificateInput struct {
 
-	// The Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an imported certificate to replace. To import a new certificate, omit this
-	// field.
-	CertificateArn *string
+	// The certificate to import.
+	//
+	// This member is required.
+	Certificate []byte
 
 	// The private key that matches the public key in the certificate.
 	//
 	// This member is required.
 	PrivateKey []byte
 
-	// One or more resource tags to associate with the imported certificate. Note: You
-	// cannot apply tags when reimporting a certificate.
-	Tags []*types.Tag
-
-	// The certificate to import.
-	//
-	// This member is required.
-	Certificate []byte
+	// The Amazon Resource Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// an imported certificate to replace. To import a new certificate, omit this
+	// field.
+	CertificateArn *string
 
 	// The PEM encoded certificate chain.
 	CertificateChain []byte
+
+	// One or more resource tags to associate with the imported certificate. Note: You
+	// cannot apply tags when reimporting a certificate.
+	Tags []*types.Tag
 }
 
 type ImportCertificateOutput struct {

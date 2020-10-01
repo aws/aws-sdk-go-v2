@@ -72,14 +72,14 @@ type GetApplicationRevisionInput struct {
 // Represents the output of a GetApplicationRevision operation.
 type GetApplicationRevisionOutput struct {
 
-	// General information about the revision.
-	RevisionInfo *types.GenericRevisionInfo
+	// The name of the application that corresponds to the revision.
+	ApplicationName *string
 
 	// Additional information about the revision, including type and location.
 	Revision *types.RevisionLocation
 
-	// The name of the application that corresponds to the revision.
-	ApplicationName *string
+	// General information about the revision.
+	RevisionInfo *types.GenericRevisionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

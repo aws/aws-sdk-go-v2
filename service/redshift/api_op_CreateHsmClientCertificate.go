@@ -66,14 +66,14 @@ func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateH
 //
 type CreateHsmClientCertificateInput struct {
 
-	// A list of tag instances.
-	Tags []*types.Tag
-
 	// The identifier to be assigned to the new HSM client certificate that the cluster
 	// will use to connect to the HSM to use the database encryption keys.
 	//
 	// This member is required.
 	HsmClientCertificateIdentifier *string
+
+	// A list of tag instances.
+	Tags []*types.Tag
 }
 
 type CreateHsmClientCertificateOutput struct {

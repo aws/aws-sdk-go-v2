@@ -74,9 +74,6 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// This member is required.
 	IdentityPoolId *string
 
-	// A unique identifier in the format REGION:GUID.
-	IdentityId *string
-
 	// A set of optional name-value pairs that map provider names to provider tokens.
 	// Each name-value pair represents a user from a public provider or developer
 	// provider. If the user is from a developer provider, the name-value pair will
@@ -89,6 +86,9 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	//
 	// This member is required.
 	Logins map[string]*string
+
+	// A unique identifier in the format REGION:GUID.
+	IdentityId *string
 
 	// The expiration time of the token, in seconds. You can specify a custom
 	// expiration time for the token so that you can cache it. If you don't provide an

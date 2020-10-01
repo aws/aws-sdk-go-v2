@@ -157,50 +157,6 @@ type AssumeRoleWithSAMLInput struct {
 	// This member is required.
 	PrincipalArn *string
 
-	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
-	// use as managed session policies. The policies must exist in the same account as
-	// the role. This parameter is optional. You can provide up to 10 managed policy
-	// ARNs. However, the plain text that you use for both inline and managed session
-	// policies can't exceed 2,048 characters. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference. An AWS conversion compresses the passed session
-	// policies and session tags into a packed binary format that has a separate limit.
-	// Your request can fail for this limit even if your plain text meets the other
-	// requirements. The PackedPolicySize response element indicates by percentage how
-	// close the policies and tags for your request are to the upper size limit.
-	// <p>Passing policies to this operation returns new temporary credentials. The
-	// resulting session's permissions are the intersection of the role's
-	// identity-based policy and the session policies. You can use the role's temporary
-	// credentials in subsequent AWS API calls to access resources in the account that
-	// owns the role. You cannot use session policies to grant more permissions than
-	// those allowed by the identity-based policy of the role that is being assumed.
-	// For more information, see <a
-	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
-	// Policies</a> in the <i>IAM User Guide</i>.</p>
-	PolicyArns []*types.PolicyDescriptorType
-
-	// An IAM policy in JSON format that you want to use as an inline session policy.
-	// This parameter is optional. Passing policies to this operation returns new
-	// temporary credentials. The resulting session's permissions are the intersection
-	// of the role's identity-based policy and the session policies. You can use the
-	// role's temporary credentials in subsequent AWS API calls to access resources in
-	// the account that owns the role. You cannot use session policies to grant more
-	// permissions than those allowed by the identity-based policy of the role that is
-	// being assumed. For more information, see Session Policies
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
-	// in the IAM User Guide. The plain text that you use for both inline and managed
-	// session policies can't exceed 2,048 characters. The JSON policy characters can
-	// be any ASCII character from the space character to the end of the valid
-	// character list (\u0020 through \u00FF). It can also include the tab (\u0009),
-	// linefeed (\u000A), and carriage return (\u000D) characters. An AWS conversion
-	// compresses the passed session policies and session tags into a packed binary
-	// format that has a separate limit. Your request can fail for this limit even if
-	// your plain text meets the other requirements. The PackedPolicySize response
-	// element indicates by percentage how close the policies and tags for your request
-	// are to the upper size limit.
-	Policy *string
-
 	// The Amazon Resource Name (ARN) of the role that the caller is assuming.
 	//
 	// This member is required.
@@ -235,34 +191,69 @@ type AssumeRoleWithSAMLInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html)
 	// in the IAM User Guide.
 	DurationSeconds *int32
+
+	// An IAM policy in JSON format that you want to use as an inline session policy.
+	// This parameter is optional. Passing policies to this operation returns new
+	// temporary credentials. The resulting session's permissions are the intersection
+	// of the role's identity-based policy and the session policies. You can use the
+	// role's temporary credentials in subsequent AWS API calls to access resources in
+	// the account that owns the role. You cannot use session policies to grant more
+	// permissions than those allowed by the identity-based policy of the role that is
+	// being assumed. For more information, see Session Policies
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session)
+	// in the IAM User Guide. The plain text that you use for both inline and managed
+	// session policies can't exceed 2,048 characters. The JSON policy characters can
+	// be any ASCII character from the space character to the end of the valid
+	// character list (\u0020 through \u00FF). It can also include the tab (\u0009),
+	// linefeed (\u000A), and carriage return (\u000D) characters. An AWS conversion
+	// compresses the passed session policies and session tags into a packed binary
+	// format that has a separate limit. Your request can fail for this limit even if
+	// your plain text meets the other requirements. The PackedPolicySize response
+	// element indicates by percentage how close the policies and tags for your request
+	// are to the upper size limit.
+	Policy *string
+
+	// The Amazon Resource Names (ARNs) of the IAM managed policies that you want to
+	// use as managed session policies. The policies must exist in the same account as
+	// the role. This parameter is optional. You can provide up to 10 managed policy
+	// ARNs. However, the plain text that you use for both inline and managed session
+	// policies can't exceed 2,048 characters. For more information about ARNs, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference. An AWS conversion compresses the passed session
+	// policies and session tags into a packed binary format that has a separate limit.
+	// Your request can fail for this limit even if your plain text meets the other
+	// requirements. The PackedPolicySize response element indicates by percentage how
+	// close the policies and tags for your request are to the upper size limit.
+	// <p>Passing policies to this operation returns new temporary credentials. The
+	// resulting session's permissions are the intersection of the role's
+	// identity-based policy and the session policies. You can use the role's temporary
+	// credentials in subsequent AWS API calls to access resources in the account that
+	// owns the role. You cannot use session policies to grant more permissions than
+	// those allowed by the identity-based policy of the role that is being assumed.
+	// For more information, see <a
+	// href="https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#policies_session">Session
+	// Policies</a> in the <i>IAM User Guide</i>.</p>
+	PolicyArns []*types.PolicyDescriptorType
 }
 
 // Contains the response to a successful AssumeRoleWithSAML () request, including
 // temporary AWS credentials that can be used to make AWS requests.
 type AssumeRoleWithSAMLOutput struct {
 
+	// The identifiers for the temporary security credentials that the operation
+	// returns.
+	AssumedRoleUser *types.AssumedRoleUser
+
 	// The value of the Recipient attribute of the SubjectConfirmationData element of
 	// the SAML assertion.
 	Audience *string
 
-	// A percentage value that indicates the packed size of the session policies and
-	// session tags combined passed in the request. The request fails if the packed
-	// size is greater than 100 percent, which means the policies and tags exceeded the
-	// allowed space.
-	PackedPolicySize *int32
-
-	// The format of the name ID, as defined by the Format attribute in the NameID
-	// element of the SAML assertion. Typical examples of the format are transient or
-	// persistent. If the format includes the prefix
-	// urn:oasis:names:tc:SAML:2.0:nameid-format, that prefix is removed. For example,
-	// urn:oasis:names:tc:SAML:2.0:nameid-format:transient is returned as transient. If
-	// the format includes any other prefix, the format is returned with no
-	// modifications.
-	SubjectType *string
-
-	// The identifiers for the temporary security credentials that the operation
-	// returns.
-	AssumedRoleUser *types.AssumedRoleUser
+	// The temporary security credentials, which include an access key ID, a secret
+	// access key, and a security (or session) token. The size of the security token
+	// that STS API operations return is not fixed. We strongly recommend that you make
+	// no assumptions about the maximum size.
+	Credentials *types.Credentials
 
 	// The value of the Issuer element of the SAML assertion.
 	Issuer *string
@@ -275,14 +266,23 @@ type AssumeRoleWithSAMLOutput struct {
 	// + "/MySAMLIdP" ) )
 	NameQualifier *string
 
-	// The temporary security credentials, which include an access key ID, a secret
-	// access key, and a security (or session) token. The size of the security token
-	// that STS API operations return is not fixed. We strongly recommend that you make
-	// no assumptions about the maximum size.
-	Credentials *types.Credentials
+	// A percentage value that indicates the packed size of the session policies and
+	// session tags combined passed in the request. The request fails if the packed
+	// size is greater than 100 percent, which means the policies and tags exceeded the
+	// allowed space.
+	PackedPolicySize *int32
 
 	// The value of the NameID element in the Subject element of the SAML assertion.
 	Subject *string
+
+	// The format of the name ID, as defined by the Format attribute in the NameID
+	// element of the SAML assertion. Typical examples of the format are transient or
+	// persistent. If the format includes the prefix
+	// urn:oasis:names:tc:SAML:2.0:nameid-format, that prefix is removed. For example,
+	// urn:oasis:names:tc:SAML:2.0:nameid-format:transient is returned as transient. If
+	// the format includes any other prefix, the format is returned with no
+	// modifications.
+	SubjectType *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

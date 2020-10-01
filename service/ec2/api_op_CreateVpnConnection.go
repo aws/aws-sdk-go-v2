@@ -69,6 +69,11 @@ func (c *Client) CreateVpnConnection(ctx context.Context, params *CreateVpnConne
 // Contains the parameters for CreateVpnConnection.
 type CreateVpnConnectionInput struct {
 
+	// The ID of the customer gateway.
+	//
+	// This member is required.
+	CustomerGatewayId *string
+
 	// The type of VPN connection (ipsec.1).
 	//
 	// This member is required.
@@ -83,21 +88,16 @@ type CreateVpnConnectionInput struct {
 	// The options for the VPN connection.
 	Options *types.VpnConnectionOptionsSpecification
 
-	// The ID of the customer gateway.
-	//
-	// This member is required.
-	CustomerGatewayId *string
-
 	// The tags to apply to the VPN connection.
 	TagSpecifications []*types.TagSpecification
-
-	// The ID of the virtual private gateway. If you specify a virtual private gateway,
-	// you cannot specify a transit gateway.
-	VpnGatewayId *string
 
 	// The ID of the transit gateway. If you specify a transit gateway, you cannot
 	// specify a virtual private gateway.
 	TransitGatewayId *string
+
+	// The ID of the virtual private gateway. If you specify a virtual private gateway,
+	// you cannot specify a transit gateway.
+	VpnGatewayId *string
 }
 
 // Contains the output of CreateVpnConnection.

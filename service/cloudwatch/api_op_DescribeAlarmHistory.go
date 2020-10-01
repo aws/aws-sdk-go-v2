@@ -60,43 +60,43 @@ func (c *Client) DescribeAlarmHistory(ctx context.Context, params *DescribeAlarm
 
 type DescribeAlarmHistoryInput struct {
 
+	// The name of the alarm.
+	AlarmName *string
+
+	// Use this parameter to specify whether you want the operation to return metric
+	// alarms or composite alarms. If you omit this parameter, only metric alarms are
+	// returned.
+	AlarmTypes []types.AlarmType
+
+	// The ending date to retrieve alarm history.
+	EndDate *time.Time
+
+	// The type of alarm histories to retrieve.
+	HistoryItemType types.HistoryItemType
+
 	// The maximum number of alarm history records to retrieve.
 	MaxRecords *int32
 
-	// The starting date to retrieve alarm history.
-	StartDate *time.Time
+	// The token returned by a previous call to indicate that there is more data
+	// available.
+	NextToken *string
 
 	// Specified whether to return the newest or oldest alarm history first. Specify
 	// TimestampDescending to have the newest event history returned first, and specify
 	// TimestampAscending to have the oldest history returned first.
 	ScanBy types.ScanBy
 
-	// The name of the alarm.
-	AlarmName *string
-
-	// The ending date to retrieve alarm history.
-	EndDate *time.Time
-
-	// The token returned by a previous call to indicate that there is more data
-	// available.
-	NextToken *string
-
-	// The type of alarm histories to retrieve.
-	HistoryItemType types.HistoryItemType
-
-	// Use this parameter to specify whether you want the operation to return metric
-	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned.
-	AlarmTypes []types.AlarmType
+	// The starting date to retrieve alarm history.
+	StartDate *time.Time
 }
 
 type DescribeAlarmHistoryOutput struct {
 
-	// The token that marks the start of the next batch of returned results.
-	NextToken *string
-
 	// The alarm histories, in JSON format.
 	AlarmHistoryItems []*types.AlarmHistoryItem
+
+	// The token that marks the start of the next batch of returned results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

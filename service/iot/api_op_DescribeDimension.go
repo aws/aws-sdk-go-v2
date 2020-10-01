@@ -66,24 +66,24 @@ type DescribeDimensionInput struct {
 
 type DescribeDimensionOutput struct {
 
-	// The date the dimension was last modified.
-	LastModifiedDate *time.Time
-
-	// The type of the dimension.
-	Type types.DimensionType
-
-	// The unique identifier for the dimension.
-	Name *string
+	// The ARN (Amazon resource name) for the dimension.
+	Arn *string
 
 	// The date the dimension was created.
 	CreationDate *time.Time
 
-	// The ARN (Amazon resource name) for the dimension.
-	Arn *string
+	// The date the dimension was last modified.
+	LastModifiedDate *time.Time
+
+	// The unique identifier for the dimension.
+	Name *string
 
 	// The value or list of values used to scope the dimension. For example, for topic
 	// filters, this is the pattern used to match the MQTT topic name.
 	StringValues []*string
+
+	// The type of the dimension.
+	Type types.DimensionType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -85,14 +85,16 @@ type CreateJobInput struct {
 	// This member is required.
 	AccountId *string
 
+	// An idempotency token to ensure that you don't accidentally submit the same
+	// request twice. You can use any string up to the maximum length.
+	//
+	// This member is required.
+	ClientRequestToken *string
+
 	// Configuration parameters for the manifest.
 	//
 	// This member is required.
 	Manifest *types.JobManifest
-
-	// A description for this job. You can use any string within the permitted length.
-	// Descriptions don't need to be unique and can be used for multiple jobs.
-	Description *string
 
 	// The operation that you want this job to perform on each object listed in the
 	// manifest. For more information about the available operations, see Operations
@@ -102,29 +104,15 @@ type CreateJobInput struct {
 	// This member is required.
 	Operation *types.JobOperation
 
-	// An idempotency token to ensure that you don't accidentally submit the same
-	// request twice. You can use any string up to the maximum length.
-	//
-	// This member is required.
-	ClientRequestToken *string
-
 	// The numerical priority for this job. Higher numbers indicate higher priority.
 	//
 	// This member is required.
 	Priority *int32
 
-	// Indicates whether confirmation is required before Amazon S3 runs the job.
-	// Confirmation is only required for jobs created through the Amazon S3 console.
-	ConfirmationRequired *bool
-
 	// Configuration parameters for the optional job-completion report.
 	//
 	// This member is required.
 	Report *types.JobReport
-
-	// A set of tags to associate with the S3 Batch Operations job. This is an optional
-	// parameter.
-	Tags []*types.S3Tag
 
 	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
 	// role that Batch Operations will use to run this job's operation on each object
@@ -132,6 +120,18 @@ type CreateJobInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Indicates whether confirmation is required before Amazon S3 runs the job.
+	// Confirmation is only required for jobs created through the Amazon S3 console.
+	ConfirmationRequired *bool
+
+	// A description for this job. You can use any string within the permitted length.
+	// Descriptions don't need to be unique and can be used for multiple jobs.
+	Description *string
+
+	// A set of tags to associate with the S3 Batch Operations job. This is an optional
+	// parameter.
+	Tags []*types.S3Tag
 }
 
 type CreateJobOutput struct {

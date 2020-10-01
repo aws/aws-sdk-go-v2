@@ -58,6 +58,17 @@ func (c *Client) RegisterUser(ctx context.Context, params *RegisterUserInput, op
 
 type RegisterUserInput struct {
 
+	// The ID for the AWS account that the user is in. Currently, you use the ID for
+	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The email address of the user that you want to register.
+	//
+	// This member is required.
+	Email *string
+
 	// Amazon QuickSight supports several ways of managing the identity of users. This
 	// parameter accepts two values:
 	//
@@ -70,18 +81,10 @@ type RegisterUserInput struct {
 	// This member is required.
 	IdentityType types.IdentityType
 
-	// You need to use this parameter only when you register one or more users using an
-	// assumed IAM role. You don't need to provide the session name for other
-	// scenarios, for example when you are registering an IAM user or an Amazon
-	// QuickSight user. You can register multiple users using the same IAM role if each
-	// user has a different session name. For more information on assuming IAM roles,
-	// see assume-role
-	// (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html)
-	// in the AWS CLI Reference.
-	SessionName *string
-
-	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
-	IamArn *string
+	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
+	Namespace *string
 
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:
@@ -104,17 +107,6 @@ type RegisterUserInput struct {
 	// This member is required.
 	UserRole types.UserRole
 
-	// The namespace. Currently, you should set this to default.
-	//
-	// This member is required.
-	Namespace *string
-
-	// The ID for the AWS account that the user is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
-	//
-	// This member is required.
-	AwsAccountId *string
-
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Currently, custom permissions profile names are
 	// assigned to permissions profiles in the QuickSight console. You use this API to
@@ -129,10 +121,18 @@ type RegisterUserInput struct {
 	// for Single Sign-On (SSO).</p>
 	CustomPermissionsName *string
 
-	// The email address of the user that you want to register.
-	//
-	// This member is required.
-	Email *string
+	// The ARN of the IAM user or role that you are registering with Amazon QuickSight.
+	IamArn *string
+
+	// You need to use this parameter only when you register one or more users using an
+	// assumed IAM role. You don't need to provide the session name for other
+	// scenarios, for example when you are registering an IAM user or an Amazon
+	// QuickSight user. You can register multiple users using the same IAM role if each
+	// user has a different session name. For more information on assuming IAM roles,
+	// see assume-role
+	// (https://awscli.amazonaws.com/v2/documentation/api/latest/reference/sts/assume-role.html)
+	// in the AWS CLI Reference.
+	SessionName *string
 
 	// The Amazon QuickSight user name that you want to create for the user you are
 	// registering.
@@ -144,12 +144,12 @@ type RegisterUserOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
+	// The user name.
+	User *types.User
+
 	// The URL the user visits to complete registration and provide a password. This is
 	// returned only for users with an identity type of QUICKSIGHT.
 	UserInvitationUrl *string
-
-	// The user name.
-	User *types.User
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

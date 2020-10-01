@@ -56,18 +56,18 @@ func (c *Client) UpdateUserHierarchy(ctx context.Context, params *UpdateUserHier
 
 type UpdateUserHierarchyInput struct {
 
-	// The identifier of the hierarchy group.
-	HierarchyGroupId *string
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
 
 	// The identifier of the user account.
 	//
 	// This member is required.
 	UserId *string
 
-	// The identifier of the Amazon Connect instance.
-	//
-	// This member is required.
-	InstanceId *string
+	// The identifier of the hierarchy group.
+	HierarchyGroupId *string
 }
 
 type UpdateUserHierarchyOutput struct {

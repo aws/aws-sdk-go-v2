@@ -57,27 +57,27 @@ func (c *Client) GetRevision(ctx context.Context, params *GetRevisionInput, optF
 
 type GetRevisionInput struct {
 
-	// The unique identifier for a revision.
-	//
-	// This member is required.
-	RevisionId *string
-
 	// The unique identifier for a data set.
 	//
 	// This member is required.
 	DataSetId *string
+
+	// The unique identifier for a revision.
+	//
+	// This member is required.
+	RevisionId *string
 }
 
 type GetRevisionOutput struct {
 
-	// The unique identifier for the revision.
-	Id *string
-
-	// The date and time that the revision was last updated, in ISO 8601 format.
-	UpdatedAt *time.Time
-
 	// The ARN for the revision
 	Arn *string
+
+	// An optional comment about the revision.
+	Comment *string
+
+	// The date and time that the revision was created, in ISO 8601 format.
+	CreatedAt *time.Time
 
 	// The unique identifier for the data set associated with this revision.
 	DataSetId *string
@@ -91,19 +91,19 @@ type GetRevisionOutput struct {
 	// revisions are uniquely identified by their ARN.
 	Finalized *bool
 
-	// The tags for the revision.
-	Tags map[string]*string
-
-	// An optional comment about the revision.
-	Comment *string
-
-	// The date and time that the revision was created, in ISO 8601 format.
-	CreatedAt *time.Time
+	// The unique identifier for the revision.
+	Id *string
 
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.
 	SourceId *string
+
+	// The tags for the revision.
+	Tags map[string]*string
+
+	// The date and time that the revision was last updated, in ISO 8601 format.
+	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

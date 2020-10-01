@@ -57,26 +57,23 @@ func (c *Client) DescribeSavingsPlanRates(ctx context.Context, params *DescribeS
 
 type DescribeSavingsPlanRatesInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve
-	// additional results, make another call with the returned token value.
-	MaxResults *int32
-
 	// The ID of the Savings Plan.
 	//
 	// This member is required.
 	SavingsPlanId *string
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The filters.
 	Filters []*types.SavingsPlanRateFilter
+
+	// The maximum number of results to return with a single call. To retrieve
+	// additional results, make another call with the returned token value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeSavingsPlanRatesOutput struct {
-
-	// Information about the Savings Plans rates.
-	SearchResults []*types.SavingsPlanRate
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
@@ -84,6 +81,9 @@ type DescribeSavingsPlanRatesOutput struct {
 
 	// The ID of the Savings Plan.
 	SavingsPlanId *string
+
+	// Information about the Savings Plans rates.
+	SearchResults []*types.SavingsPlanRate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,11 +65,11 @@ type ModifyCacheSubnetGroupInput struct {
 	// This member is required.
 	CacheSubnetGroupName *string
 
-	// The EC2 subnet IDs for the cache subnet group.
-	SubnetIds []*string
-
 	// A description of the cache subnet group.
 	CacheSubnetGroupDescription *string
+
+	// The EC2 subnet IDs for the cache subnet group.
+	SubnetIds []*string
 }
 
 type ModifyCacheSubnetGroupOutput struct {

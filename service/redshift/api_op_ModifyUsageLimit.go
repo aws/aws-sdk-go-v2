@@ -75,18 +75,9 @@ type ModifyUsageLimitInput struct {
 // Describes a usage limit object for a cluster.
 type ModifyUsageLimitOutput struct {
 
-	// The identifier of the cluster with a usage limit.
-	ClusterIdentifier *string
-
-	// The Amazon Redshift feature to which the limit applies.
-	FeatureType types.UsageLimitFeatureType
-
-	// A list of tag instances.
-	Tags []*types.Tag
-
-	// The type of limit. Depending on the feature type, this can be based on a time
-	// duration or data size.
-	LimitType types.UsageLimitLimitType
+	// The limit amount. If time-based, this amount is in minutes. If data-based, this
+	// amount is in terabytes (TB).
+	Amount *int64
 
 	// The action that Amazon Redshift takes when the limit is reached. Possible values
 	// are:
@@ -100,16 +91,25 @@ type ModifyUsageLimitOutput struct {
 	// feature until the next usage period begins.
 	BreachAction types.UsageLimitBreachAction
 
+	// The identifier of the cluster with a usage limit.
+	ClusterIdentifier *string
+
+	// The Amazon Redshift feature to which the limit applies.
+	FeatureType types.UsageLimitFeatureType
+
+	// The type of limit. Depending on the feature type, this can be based on a time
+	// duration or data size.
+	LimitType types.UsageLimitLimitType
+
 	// The time period that the amount applies to. A weekly period begins on Sunday.
 	// The default is monthly.
 	Period types.UsageLimitPeriod
 
+	// A list of tag instances.
+	Tags []*types.Tag
+
 	// The identifier of the usage limit.
 	UsageLimitId *string
-
-	// The limit amount. If time-based, this amount is in minutes. If data-based, this
-	// amount is in terabytes (TB).
-	Amount *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

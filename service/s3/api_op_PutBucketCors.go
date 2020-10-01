@@ -94,6 +94,11 @@ func (c *Client) PutBucketCors(ctx context.Context, params *PutBucketCorsInput, 
 
 type PutBucketCorsInput struct {
 
+	// Specifies the bucket impacted by the corsconfiguration.
+	//
+	// This member is required.
+	Bucket *string
+
 	// Describes the cross-origin access configuration for objects in an Amazon S3
 	// bucket. For more information, see Enabling Cross-Origin Resource Sharing
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
@@ -107,11 +112,6 @@ type PutBucketCorsInput struct {
 	// transit. For more information, go to RFC 1864.
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
-
-	// Specifies the bucket impacted by the corsconfiguration.
-	//
-	// This member is required.
-	Bucket *string
 }
 
 type PutBucketCorsOutput struct {

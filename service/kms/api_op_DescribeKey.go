@@ -95,11 +95,6 @@ func (c *Client) DescribeKey(ctx context.Context, params *DescribeKeyInput, optF
 
 type DescribeKeyInput struct {
 
-	// A list of grant tokens. For more information, see Grant Tokens
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
-
 	// Describes the specified customer master key (CMK). If you specify a predefined
 	// AWS alias (an AWS alias with no key ID), KMS associates the alias with an AWS
 	// managed CMK
@@ -127,6 +122,11 @@ type DescribeKeyInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	// A list of grant tokens. For more information, see Grant Tokens
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// in the AWS Key Management Service Developer Guide.
+	GrantTokens []*string
 }
 
 type DescribeKeyOutput struct {

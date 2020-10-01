@@ -61,9 +61,6 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 //
 type ListTagsForResourceInput struct {
 
-	// This parameter isn't currently supported.
-	Filters []*types.Filter
-
 	// The Amazon RDS resource with tags to be listed. This value is an Amazon Resource
 	// Name (ARN). For information about creating an ARN, see  Constructing an ARN for
 	// Amazon RDS
@@ -72,6 +69,9 @@ type ListTagsForResourceInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	// This parameter isn't currently supported.
+	Filters []*types.Filter
 }
 
 //

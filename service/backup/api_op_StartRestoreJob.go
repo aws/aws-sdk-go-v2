@@ -59,40 +59,11 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 
 type StartRestoreJobInput struct {
 
-	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	//
-	// This member is required.
-	RecoveryPointArn *string
-
-	// Starts a job to restore a recovery point for one of the following resources:
-	//
-	//
-	// * DynamoDB for Amazon DynamoDB
-	//
-	//     * EBS for Amazon Elastic Block Store
-	//
-	//     *
-	// EC2 for Amazon Elastic Compute Cloud
-	//
-	//     * EFS for Amazon Elastic File System
-	//
-	//
-	// * RDS for Amazon Relational Database Service
-	//
-	//     * Storage Gateway for AWS
-	// Storage Gateway
-	ResourceType *string
-
 	// The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create
 	// the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
 	//
 	// This member is required.
 	IamRoleArn *string
-
-	// A customer chosen string that can be used to distinguish between calls to
-	// StartRestoreJob.
-	IdempotencyToken *string
 
 	// A set of metadata key-value pairs. Contains information, such as a resource
 	// name, required to restore a recovery point. You can get configuration metadata
@@ -126,6 +97,35 @@ type StartRestoreJobInput struct {
 	//
 	// This member is required.
 	Metadata map[string]*string
+
+	// An ARN that uniquely identifies a recovery point; for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	//
+	// This member is required.
+	RecoveryPointArn *string
+
+	// A customer chosen string that can be used to distinguish between calls to
+	// StartRestoreJob.
+	IdempotencyToken *string
+
+	// Starts a job to restore a recovery point for one of the following resources:
+	//
+	//
+	// * DynamoDB for Amazon DynamoDB
+	//
+	//     * EBS for Amazon Elastic Block Store
+	//
+	//     *
+	// EC2 for Amazon Elastic Compute Cloud
+	//
+	//     * EFS for Amazon Elastic File System
+	//
+	//
+	// * RDS for Amazon Relational Database Service
+	//
+	//     * Storage Gateway for AWS
+	// Storage Gateway
+	ResourceType *string
 }
 
 type StartRestoreJobOutput struct {

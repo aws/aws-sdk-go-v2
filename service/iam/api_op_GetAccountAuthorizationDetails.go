@@ -91,8 +91,8 @@ type GetAccountAuthorizationDetailsInput struct {
 // Contains the response to a successful GetAccountAuthorizationDetails () request.
 type GetAccountAuthorizationDetailsOutput struct {
 
-	// A list containing information about IAM roles.
-	RoleDetailList []*types.RoleDetail
+	// A list containing information about IAM groups.
+	GroupDetailList []*types.GroupDetail
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -102,9 +102,6 @@ type GetAccountAuthorizationDetailsOutput struct {
 	// all your results.
 	IsTruncated *bool
 
-	// A list containing information about IAM users.
-	UserDetailList []*types.UserDetail
-
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
@@ -112,8 +109,11 @@ type GetAccountAuthorizationDetailsOutput struct {
 	// A list containing information about managed policies.
 	Policies []*types.ManagedPolicyDetail
 
-	// A list containing information about IAM groups.
-	GroupDetailList []*types.GroupDetail
+	// A list containing information about IAM roles.
+	RoleDetailList []*types.RoleDetail
+
+	// A list containing information about IAM users.
+	UserDetailList []*types.UserDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

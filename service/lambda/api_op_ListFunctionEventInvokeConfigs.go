@@ -77,21 +77,21 @@ type ListFunctionEventInvokeConfigsInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The maximum number of configurations to return.
-	MaxItems *int32
-
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	Marker *string
+
+	// The maximum number of configurations to return.
+	MaxItems *int32
 }
 
 type ListFunctionEventInvokeConfigsOutput struct {
 
-	// The pagination token that's included if more results are available.
-	NextMarker *string
-
 	// A list of configurations.
 	FunctionEventInvokeConfigs []*types.FunctionEventInvokeConfig
+
+	// The pagination token that's included if more results are available.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

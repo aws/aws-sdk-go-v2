@@ -58,6 +58,11 @@ func (c *Client) GetFunctionDefinitionVersion(ctx context.Context, params *GetFu
 
 type GetFunctionDefinitionVersionInput struct {
 
+	// The ID of the Lambda function definition.
+	//
+	// This member is required.
+	FunctionDefinitionId *string
+
 	// The ID of the function definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListFunctionDefinitionVersions'' requests. If the version is the last one
@@ -71,34 +76,29 @@ type GetFunctionDefinitionVersionInput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// The ID of the Lambda function definition.
-	//
-	// This member is required.
-	FunctionDefinitionId *string
 }
 
 type GetFunctionDefinitionVersionOutput struct {
 
-	// The ID of the function definition version.
-	Id *string
+	// The ARN of the function definition version.
+	Arn *string
+
+	// The time, in milliseconds since the epoch, when the function definition version
+	// was created.
+	CreationTimestamp *string
 
 	// Information on the definition.
 	Definition *types.FunctionDefinitionVersion
 
-	// The ARN of the function definition version.
-	Arn *string
-
-	// The version of the function definition version.
-	Version *string
+	// The ID of the function definition version.
+	Id *string
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 
-	// The time, in milliseconds since the epoch, when the function definition version
-	// was created.
-	CreationTimestamp *string
+	// The version of the function definition version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

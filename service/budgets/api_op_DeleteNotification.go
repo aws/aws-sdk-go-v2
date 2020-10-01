@@ -59,6 +59,12 @@ func (c *Client) DeleteNotification(ctx context.Context, params *DeleteNotificat
 // Request of DeleteNotification
 type DeleteNotificationInput struct {
 
+	// The accountId that is associated with the budget whose notification you want to
+	// delete.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The name of the budget whose notification you want to delete.
 	//
 	// This member is required.
@@ -68,12 +74,6 @@ type DeleteNotificationInput struct {
 	//
 	// This member is required.
 	Notification *types.Notification
-
-	// The accountId that is associated with the budget whose notification you want to
-	// delete.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 // Response of DeleteNotification

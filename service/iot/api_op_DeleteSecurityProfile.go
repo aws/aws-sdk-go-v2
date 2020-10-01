@@ -56,15 +56,15 @@ func (c *Client) DeleteSecurityProfile(ctx context.Context, params *DeleteSecuri
 
 type DeleteSecurityProfileInput struct {
 
-	// The expected version of the security profile. A new version is generated
-	// whenever the security profile is updated. If you specify a value that is
-	// different from the actual version, a VersionConflictException is thrown.
-	ExpectedVersion *int64
-
 	// The name of the security profile to be deleted.
 	//
 	// This member is required.
 	SecurityProfileName *string
+
+	// The expected version of the security profile. A new version is generated
+	// whenever the security profile is updated. If you specify a value that is
+	// different from the actual version, a VersionConflictException is thrown.
+	ExpectedVersion *int64
 }
 
 type DeleteSecurityProfileOutput struct {

@@ -60,6 +60,14 @@ func (c *Client) DescribeAccessPoints(ctx context.Context, params *DescribeAcces
 
 type DescribeAccessPointsInput struct {
 
+	// (Optional) Specifies an EFS access point to describe in the response; mutually
+	// exclusive with FileSystemId.
+	AccessPointId *string
+
+	// (Optional) If you provide a FileSystemId, EFS returns all access points for that
+	// file system; mutually exclusive with AccessPointId.
+	FileSystemId *string
+
 	// (Optional) When retrieving all access points for a file system, you can
 	// optionally specify the MaxItems parameter to limit the number of objects
 	// returned in a response. The default value is 100.
@@ -68,14 +76,6 @@ type DescribeAccessPointsInput struct {
 	// NextToken is present if the response is paginated. You can use NextMarker in the
 	// subsequent request to fetch the next page of access point descriptions.
 	NextToken *string
-
-	// (Optional) Specifies an EFS access point to describe in the response; mutually
-	// exclusive with FileSystemId.
-	AccessPointId *string
-
-	// (Optional) If you provide a FileSystemId, EFS returns all access points for that
-	// file system; mutually exclusive with AccessPointId.
-	FileSystemId *string
 }
 
 type DescribeAccessPointsOutput struct {

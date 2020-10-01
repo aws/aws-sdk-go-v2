@@ -95,60 +95,12 @@ func (c *Client) SendBulkTemplatedEmail(ctx context.Context, params *SendBulkTem
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type SendBulkTemplatedEmailInput struct {
 
-	// The ARN of the template to use when sending this email.
-	TemplateArn *string
-
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to use the email address specified in the ReturnPath parameter. For example,
-	// if the owner of example.com (which has ARN
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
-	// that authorizes you to use feedback@example.com, then you would specify the
-	// ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and
-	// the ReturnPath to be feedback@example.com. For more information about sending
-	// authorization, see the Amazon SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-	ReturnPathArn *string
-
-	// The email address that bounces and complaints will be forwarded to when feedback
-	// forwarding is enabled. If the message cannot be delivered to the recipient, then
-	// an error message will be returned from the recipient's ISP; this message will
-	// then be forwarded to the email address specified by the ReturnPath parameter.
-	// The ReturnPath parameter is never overwritten. This email address must be either
-	// individually verified with Amazon SES, or from a domain that has been verified
-	// with Amazon SES.
-	ReturnPath *string
-
-	// A list of replacement values to apply to the template when replacement data is
-	// not specified in a Destination object. These values act as a default or fallback
-	// option when no other data is available. The template data is a JSON object,
-	// typically consisting of key-value pairs in which the keys correspond to
-	// replacement tags in the email template.
-	DefaultTemplateData *string
-
-	// The template to use when sending this email.
-	//
-	// This member is required.
-	Template *string
-
-	// The name of the configuration set to use when you send an email using
-	// SendBulkTemplatedEmail.
-	ConfigurationSetName *string
-
-	// The reply-to email address(es) for the message. If the recipient replies to the
-	// message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string
-
 	// One or more Destination objects. All of the recipients in a Destination will
 	// receive the same version of the email. You can specify up to 50 Destination
 	// objects within a Destinations array.
 	//
 	// This member is required.
 	Destinations []*types.BulkEmailDestination
-
-	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send to a destination using SendBulkTemplatedEmail.
-	DefaultTags []*types.MessageTag
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
@@ -176,6 +128,51 @@ type SendBulkTemplatedEmailInput struct {
 	// This member is required.
 	Source *string
 
+	// The template to use when sending this email.
+	//
+	// This member is required.
+	Template *string
+
+	// The name of the configuration set to use when you send an email using
+	// SendBulkTemplatedEmail.
+	ConfigurationSetName *string
+
+	// A list of tags, in the form of name/value pairs, to apply to an email that you
+	// send to a destination using SendBulkTemplatedEmail.
+	DefaultTags []*types.MessageTag
+
+	// A list of replacement values to apply to the template when replacement data is
+	// not specified in a Destination object. These values act as a default or fallback
+	// option when no other data is available. The template data is a JSON object,
+	// typically consisting of key-value pairs in which the keys correspond to
+	// replacement tags in the email template.
+	DefaultTemplateData *string
+
+	// The reply-to email address(es) for the message. If the recipient replies to the
+	// message, each reply-to address will receive the reply.
+	ReplyToAddresses []*string
+
+	// The email address that bounces and complaints will be forwarded to when feedback
+	// forwarding is enabled. If the message cannot be delivered to the recipient, then
+	// an error message will be returned from the recipient's ISP; this message will
+	// then be forwarded to the email address specified by the ReturnPath parameter.
+	// The ReturnPath parameter is never overwritten. This email address must be either
+	// individually verified with Amazon SES, or from a domain that has been verified
+	// with Amazon SES.
+	ReturnPath *string
+
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to use the email address specified in the ReturnPath parameter. For example,
+	// if the owner of example.com (which has ARN
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
+	// that authorizes you to use feedback@example.com, then you would specify the
+	// ReturnPathArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and
+	// the ReturnPath to be feedback@example.com. For more information about sending
+	// authorization, see the Amazon SES Developer Guide
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	ReturnPathArn *string
+
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to send for the email address specified in the Source parameter. For
@@ -187,6 +184,9 @@ type SendBulkTemplatedEmailInput struct {
 	// see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	SourceArn *string
+
+	// The ARN of the template to use when sending this email.
+	TemplateArn *string
 }
 
 type SendBulkTemplatedEmailOutput struct {

@@ -64,16 +64,16 @@ func (c *Client) StartMonitoringMember(ctx context.Context, params *StartMonitor
 
 type StartMonitoringMemberInput struct {
 
-	// The ARN of the behavior graph.
-	//
-	// This member is required.
-	GraphArn *string
-
 	// The account ID of the member account to try to enable. The account must be an
 	// invited member account with a status of ACCEPTED_BUT_DISABLED.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The ARN of the behavior graph.
+	//
+	// This member is required.
+	GraphArn *string
 }
 
 type StartMonitoringMemberOutput struct {

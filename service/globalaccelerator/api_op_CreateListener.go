@@ -62,6 +62,28 @@ func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput
 
 type CreateListenerInput struct {
 
+	// The Amazon Resource Name (ARN) of your accelerator.
+	//
+	// This member is required.
+	AcceleratorArn *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the
+	// idempotency—that is, the uniqueness—of the request.
+	//
+	// This member is required.
+	IdempotencyToken *string
+
+	// The list of port ranges to support for connections from clients to your
+	// accelerator.
+	//
+	// This member is required.
+	PortRanges []*types.PortRange
+
+	// The protocol for connections from clients to your accelerator.
+	//
+	// This member is required.
+	Protocol types.Protocol
+
 	// Client affinity lets you direct all requests from a user to the same endpoint,
 	// if you have stateful applications, regardless of the port and protocol of the
 	// client request. Clienty affinity gives you control over whether to always route
@@ -78,28 +100,6 @@ type CreateListenerInput struct {
 	// (2-tuple) properties— source (client) IP address and destination IP address—to
 	// select the hash value. The default value is NONE.
 	ClientAffinity types.ClientAffinity
-
-	// The list of port ranges to support for connections from clients to your
-	// accelerator.
-	//
-	// This member is required.
-	PortRanges []*types.PortRange
-
-	// The Amazon Resource Name (ARN) of your accelerator.
-	//
-	// This member is required.
-	AcceleratorArn *string
-
-	// The protocol for connections from clients to your accelerator.
-	//
-	// This member is required.
-	Protocol types.Protocol
-
-	// A unique, case-sensitive identifier that you provide to ensure the
-	// idempotency—that is, the uniqueness—of the request.
-	//
-	// This member is required.
-	IdempotencyToken *string
 }
 
 type CreateListenerOutput struct {

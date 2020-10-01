@@ -66,24 +66,24 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 // <a>ListGatewaysInput$Marker</a> </p> </li> </ul>
 type ListGatewaysInput struct {
 
-	// An opaque string that indicates the position at which to begin the returned list
-	// of gateways.
-	Marker *string
-
 	// Specifies that the list of gateways returned be limited to the specified number
 	// of items.
 	Limit *int32
+
+	// An opaque string that indicates the position at which to begin the returned list
+	// of gateways.
+	Marker *string
 }
 
 type ListGatewaysOutput struct {
+
+	// An array of GatewayInfo () objects.
+	Gateways []*types.GatewayInfo
 
 	// Use the marker in your next request to fetch the next set of gateways in the
 	// list. If there are no more gateways to list, this field does not appear in the
 	// response.
 	Marker *string
-
-	// An array of GatewayInfo () objects.
-	Gateways []*types.GatewayInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -92,6 +92,11 @@ func (c *Client) UpdateRateBasedRule(ctx context.Context, params *UpdateRateBase
 
 type UpdateRateBasedRuleInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The maximum number of requests, which have an identical value in the field
 	// specified by the RateKey, allowed in a five-minute period. If the number of
 	// requests exceeds the RateLimit and the other predicates specified in the rule
@@ -99,11 +104,6 @@ type UpdateRateBasedRuleInput struct {
 	//
 	// This member is required.
 	RateLimit *int64
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 
 	// The RuleId of the RateBasedRule that you want to update. RuleId is returned by
 	// CreateRateBasedRule and by ListRateBasedRules ().

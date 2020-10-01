@@ -82,22 +82,8 @@ type UpdateAssetModelInput struct {
 	// This member is required.
 	AssetModelName *string
 
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
-
 	// A description for the asset model.
 	AssetModelDescription *string
-
-	// The updated property definitions of the asset model. For more information, see
-	// Asset Properties
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
-	// in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per
-	// asset model. For more information, see Quotas
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// AWS IoT SiteWise User Guide.
-	AssetModelProperties []*types.AssetModelProperty
 
 	// The updated hierarchy definitions of the asset model. Each hierarchy specifies
 	// an asset model whose assets can be children of any other assets created from
@@ -108,6 +94,20 @@ type UpdateAssetModelInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
 	// AWS IoT SiteWise User Guide.
 	AssetModelHierarchies []*types.AssetModelHierarchy
+
+	// The updated property definitions of the asset model. For more information, see
+	// Asset Properties
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
+	// in the AWS IoT SiteWise User Guide. You can specify up to 200 properties per
+	// asset model. For more information, see Quotas
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
+	// AWS IoT SiteWise User Guide.
+	AssetModelProperties []*types.AssetModelProperty
+
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 }
 
 type UpdateAssetModelOutput struct {

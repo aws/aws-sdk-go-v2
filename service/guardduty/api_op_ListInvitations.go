@@ -57,25 +57,25 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 
 type ListInvitationsInput struct {
 
+	// You can use this parameter to indicate the maximum number of items that you want
+	// in the response. The default value is 50. The maximum value is 50.
+	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
 	// the action, fill nextToken in the request with the value of NextToken from the
 	// previous response to continue listing data.
 	NextToken *string
-
-	// You can use this parameter to indicate the maximum number of items that you want
-	// in the response. The default value is 50. The maximum value is 50.
-	MaxResults *int32
 }
 
 type ListInvitationsOutput struct {
 
+	// A list of invitation descriptions.
+	Invitations []*types.Invitation
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string
-
-	// A list of invitation descriptions.
-	Invitations []*types.Invitation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

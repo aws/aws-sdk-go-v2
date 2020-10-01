@@ -70,14 +70,14 @@ type DescribeThemePermissionsInput struct {
 
 type DescribeThemePermissionsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the theme.
-	ThemeArn *string
+	// A list of resource permissions set on the theme.
+	Permissions []*types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string
 
-	// A list of resource permissions set on the theme.
-	Permissions []*types.ResourcePermission
+	// The Amazon Resource Name (ARN) of the theme.
+	ThemeArn *string
 
 	// The ID for the theme.
 	ThemeId *string

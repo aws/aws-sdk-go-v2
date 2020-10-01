@@ -60,15 +60,16 @@ func (c *Client) DecreaseReplicaCount(ctx context.Context, params *DecreaseRepli
 
 type DecreaseReplicaCountInput struct {
 
-	// A list of the node ids to remove from the replication group or node group
-	// (shard).
-	ReplicasToRemove []*string
-
 	// If True, the number of replica nodes is decreased immediately.
 	// <code>ApplyImmediately=False</code> is not currently supported.</p>
 	//
 	// This member is required.
 	ApplyImmediately *bool
+
+	// The id of the replication group from which you want to remove replica nodes.
+	//
+	// This member is required.
+	ReplicationGroupId *string
 
 	// The number of read replica nodes you want at the completion of this operation.
 	// For Redis (cluster mode disabled) replication groups, this is the number of
@@ -94,10 +95,9 @@ type DecreaseReplicaCountInput struct {
 	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
 	ReplicaConfiguration []*types.ConfigureShard
 
-	// The id of the replication group from which you want to remove replica nodes.
-	//
-	// This member is required.
-	ReplicationGroupId *string
+	// A list of the node ids to remove from the replication group or node group
+	// (shard).
+	ReplicasToRemove []*string
 }
 
 type DecreaseReplicaCountOutput struct {

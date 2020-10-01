@@ -58,6 +58,26 @@ func (c *Client) UpdateDevice(ctx context.Context, params *UpdateDeviceInput, op
 
 type UpdateDeviceInput struct {
 
+	// The ID of the device.
+	//
+	// This member is required.
+	DeviceId *string
+
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
+
+	// A description of the device. Length Constraints: Maximum length of 256
+	// characters.
+	Description *string
+
+	// Describes a location.
+	Location *types.Location
+
+	// The model of the device. Length Constraints: Maximum length of 128 characters.
+	Model *string
+
 	// The serial number of the device. Length Constraints: Maximum length of 128
 	// characters.
 	SerialNumber *string
@@ -68,28 +88,8 @@ type UpdateDeviceInput struct {
 	// The type of the device.
 	Type *string
 
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
-
 	// The vendor of the device. Length Constraints: Maximum length of 128 characters.
 	Vendor *string
-
-	// Describes a location.
-	Location *types.Location
-
-	// A description of the device. Length Constraints: Maximum length of 256
-	// characters.
-	Description *string
-
-	// The model of the device. Length Constraints: Maximum length of 128 characters.
-	Model *string
-
-	// The ID of the device.
-	//
-	// This member is required.
-	DeviceId *string
 }
 
 type UpdateDeviceOutput struct {

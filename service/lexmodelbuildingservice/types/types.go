@@ -9,35 +9,61 @@ import (
 // Provides information about a bot alias.
 type BotAliasMetadata struct {
 
-	// Settings that determine how Amazon Lex uses conversation logs for the alias.
-	ConversationLogs *ConversationLogsResponse
-
-	// A description of the bot alias.
-	Description *string
-
 	// The name of the bot to which the alias points.
 	BotName *string
 
 	// The version of the Amazon Lex bot to which the alias points.
 	BotVersion *string
 
-	// The date that the bot alias was updated. When you create a resource, the
-	// creation date and last updated date are the same.
-	LastUpdatedDate *time.Time
+	// Checksum of the bot alias.
+	Checksum *string
+
+	// Settings that determine how Amazon Lex uses conversation logs for the alias.
+	ConversationLogs *ConversationLogsResponse
 
 	// The date that the bot alias was created.
 	CreatedDate *time.Time
 
+	// A description of the bot alias.
+	Description *string
+
+	// The date that the bot alias was updated. When you create a resource, the
+	// creation date and last updated date are the same.
+	LastUpdatedDate *time.Time
+
 	// The name of the bot alias.
 	Name *string
-
-	// Checksum of the bot alias.
-	Checksum *string
 }
 
 // Represents an association between an Amazon Lex bot and an external messaging
 // platform.
 type BotChannelAssociation struct {
+
+	// An alias pointing to the specific version of the Amazon Lex bot to which this
+	// association is being made.
+	BotAlias *string
+
+	// Provides information necessary to communicate with the messaging platform.
+	BotConfiguration map[string]*string
+
+	// The name of the Amazon Lex bot to which this association is being made.
+	// Currently, Amazon Lex supports associations with Facebook and Slack, and Twilio.
+	// </note>
+	BotName *string
+
+	// The date that the association between the Amazon Lex bot and the channel was
+	// created.
+	CreatedDate *time.Time
+
+	// A text description of the association you are creating.
+	Description *string
+
+	// If status is FAILED, Amazon Lex provides the reason that it failed to create the
+	// association.
+	FailureReason *string
+
+	// The name of the association between the bot and the channel.
+	Name *string
 
 	// The status of the bot channel.
 	//
@@ -51,71 +77,45 @@ type BotChannelAssociation struct {
 	// reason for the failure, see the failureReason field.
 	Status ChannelStatus
 
-	// If status is FAILED, Amazon Lex provides the reason that it failed to create the
-	// association.
-	FailureReason *string
-
 	// Specifies the type of association by indicating the type of channel being
 	// established between the Amazon Lex bot and the external messaging platform.
 	Type ChannelType
-
-	// The name of the Amazon Lex bot to which this association is being made.
-	// Currently, Amazon Lex supports associations with Facebook and Slack, and Twilio.
-	// </note>
-	BotName *string
-
-	// A text description of the association you are creating.
-	Description *string
-
-	// An alias pointing to the specific version of the Amazon Lex bot to which this
-	// association is being made.
-	BotAlias *string
-
-	// The name of the association between the bot and the channel.
-	Name *string
-
-	// The date that the association between the Amazon Lex bot and the channel was
-	// created.
-	CreatedDate *time.Time
-
-	// Provides information necessary to communicate with the messaging platform.
-	BotConfiguration map[string]*string
 }
 
 // Provides information about a bot. .
 type BotMetadata struct {
 
-	// The date that the bot was updated. When you create a bot, the creation date and
-	// last updated date are the same.
-	LastUpdatedDate *time.Time
-
-	// The status of the bot.
-	Status Status
+	// The date that the bot was created.
+	CreatedDate *time.Time
 
 	// A description of the bot.
 	Description *string
 
-	// The date that the bot was created.
-	CreatedDate *time.Time
-
-	// The version of the bot. For a new bot, the version is always $LATEST.
-	Version *string
+	// The date that the bot was updated. When you create a bot, the creation date and
+	// last updated date are the same.
+	LastUpdatedDate *time.Time
 
 	// The name of the bot.
 	Name *string
+
+	// The status of the bot.
+	Status Status
+
+	// The version of the bot. For a new bot, the version is always $LATEST.
+	Version *string
 }
 
 // Provides metadata for a built-in intent.
 type BuiltinIntentMetadata struct {
-
-	// A list of identifiers for the locales that the intent supports.
-	SupportedLocales []Locale
 
 	// A unique identifier for the built-in intent. To find the signature for an
 	// intent, see Standard Built-in Intents
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	Signature *string
+
+	// A list of identifiers for the locales that the intent supports.
+	SupportedLocales []Locale
 }
 
 // Provides information about a slot used in a built-in intent.
@@ -128,30 +128,30 @@ type BuiltinIntentSlot struct {
 // Provides information about a built in slot type.
 type BuiltinSlotTypeMetadata struct {
 
-	// A list of target locales for the slot.
-	SupportedLocales []Locale
-
 	// A unique identifier for the built-in slot type. To find the signature for a slot
 	// type, see Slot Type Reference
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
 	// in the Alexa Skills Kit.
 	Signature *string
+
+	// A list of target locales for the slot.
+	SupportedLocales []Locale
 }
 
 // Specifies a Lambda function that verifies requests to a bot or fulfills the
 // user's request to a bot..
 type CodeHook struct {
 
-	// The Amazon Resource Name (ARN) of the Lambda function.
-	//
-	// This member is required.
-	Uri *string
-
 	// The version of the request-response that you want Amazon Lex to use to invoke
 	// your Lambda function. For more information, see using-lambda ().
 	//
 	// This member is required.
 	MessageVersion *string
+
+	// The Amazon Resource Name (ARN) of the Lambda function.
+	//
+	// This member is required.
+	Uri *string
 }
 
 // Provides the settings needed for conversation logs.
@@ -211,16 +211,16 @@ type EnumerationValue struct {
 // whether the user wants to order drinks.
 type FollowUpPrompt struct {
 
+	// Prompts for information from the user.
+	//
+	// This member is required.
+	Prompt *Prompt
+
 	// If the user answers "no" to the question defined in the prompt field, Amazon Lex
 	// responds with this statement to acknowledge that the intent was canceled.
 	//
 	// This member is required.
 	RejectionStatement *Statement
-
-	// Prompts for information from the user.
-	//
-	// This member is required.
-	Prompt *Prompt
 }
 
 // Describes how the intent is fulfilled after the user provides all of the
@@ -252,15 +252,15 @@ type FulfillmentActivity struct {
 // Identifies the specific version of an intent.
 type Intent struct {
 
-	// The version of the intent.
-	//
-	// This member is required.
-	IntentVersion *string
-
 	// The name of the intent.
 	//
 	// This member is required.
 	IntentName *string
+
+	// The version of the intent.
+	//
+	// This member is required.
+	IntentVersion *string
 }
 
 // Provides information about an intent.
@@ -269,8 +269,8 @@ type IntentMetadata struct {
 	// The date that the intent was created.
 	CreatedDate *time.Time
 
-	// The version of the intent.
-	Version *string
+	// A description of the intent.
+	Description *string
 
 	// The date that the intent was updated. When you create an intent, the creation
 	// date and last updated date are the same.
@@ -279,8 +279,8 @@ type IntentMetadata struct {
 	// The name of the intent.
 	Name *string
 
-	// A description of the intent.
-	Description *string
+	// The version of the intent.
+	Version *string
 }
 
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
@@ -290,12 +290,13 @@ type IntentMetadata struct {
 // (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
 type KendraConfiguration struct {
 
-	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
-	// from the query. The filter is in the format defined by Amazon Kendra. For more
-	// information, see Filtering queries
-	// (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html). You can override
-	// this filter string with a new filter string at runtime.
-	QueryFilterString *string
+	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
+	// AMAZON.KendraSearchIntent intent to search. The index must be in the same
+	// account and Region as the Amazon Lex bot. If the Amazon Kendra index does not
+	// exist, you get an exception when you call the PutIntent operation.
+	//
+	// This member is required.
+	KendraIndex *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permission to search the
 	// Amazon Kendra index. The role must be in the same account and Region as the
@@ -305,23 +306,16 @@ type KendraConfiguration struct {
 	// This member is required.
 	Role *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the
-	// AMAZON.KendraSearchIntent intent to search. The index must be in the same
-	// account and Region as the Amazon Lex bot. If the Amazon Kendra index does not
-	// exist, you get an exception when you call the PutIntent operation.
-	//
-	// This member is required.
-	KendraIndex *string
+	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
+	// from the query. The filter is in the format defined by Amazon Kendra. For more
+	// information, see Filtering queries
+	// (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html). You can override
+	// this filter string with a new filter string at runtime.
+	QueryFilterString *string
 }
 
 // Settings used to configure delivery mode and destination for conversation logs.
 type LogSettingsRequest struct {
-
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
-	// where the logs should be delivered.
-	//
-	// This member is required.
-	ResourceArn *string
 
 	// Where the logs will be delivered. Text logs are delivered to a CloudWatch Logs
 	// log group. Audio logs are delivered to an S3 bucket.
@@ -329,20 +323,29 @@ type LogSettingsRequest struct {
 	// This member is required.
 	Destination Destination
 
-	// The Amazon Resource Name (ARN) of the AWS KMS customer managed key for
-	// encrypting audio logs delivered to an S3 bucket. The key does not apply to
-	// CloudWatch Logs and is optional for S3 buckets.
-	KmsKeyArn *string
-
 	// The type of logging to enable. Text logs are delivered to a CloudWatch Logs log
 	// group. Audio logs are delivered to an S3 bucket.
 	//
 	// This member is required.
 	LogType LogType
+
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
+	// where the logs should be delivered.
+	//
+	// This member is required.
+	ResourceArn *string
+
+	// The Amazon Resource Name (ARN) of the AWS KMS customer managed key for
+	// encrypting audio logs delivered to an S3 bucket. The key does not apply to
+	// CloudWatch Logs and is optional for S3 buckets.
+	KmsKeyArn *string
 }
 
 // The settings for conversation logs.
 type LogSettingsResponse struct {
+
+	// The destination where logs are delivered.
+	Destination Destination
 
 	// The Amazon Resource Name (ARN) of the key used to encrypt audio logs in an S3
 	// bucket.
@@ -351,17 +354,14 @@ type LogSettingsResponse struct {
 	// The type of logging that is enabled.
 	LogType LogType
 
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
+	// where the logs are delivered.
+	ResourceArn *string
+
 	// The resource prefix is the first part of the S3 object key within the S3 bucket
 	// that you specified to contain audio logs. For CloudWatch Logs it is the prefix
 	// of the log stream name within the log group that you specified.
 	ResourcePrefix *string
-
-	// The destination where logs are delivered.
-	Destination Destination
-
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or S3 bucket
-	// where the logs are delivered.
-	ResourceArn *string
 }
 
 // The message object that provides the message text and its type.
@@ -389,10 +389,10 @@ type Message struct {
 // to prompt the user. For more information, see how-it-works ().
 type Prompt struct {
 
-	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
-	// response. It substitutes session attributes and slot values for placeholders in
-	// the response card. For more information, see ex-resp-card ().
-	ResponseCard *string
+	// The number of times to prompt the user for information.
+	//
+	// This member is required.
+	MaxAttempts *int32
 
 	// An array of objects, each of which provides a message string and its type. You
 	// can specify the message string in plain text or in Speech Synthesis Markup
@@ -401,10 +401,10 @@ type Prompt struct {
 	// This member is required.
 	Messages []*Message
 
-	// The number of times to prompt the user for information.
-	//
-	// This member is required.
-	MaxAttempts *int32
+	// A response card. Amazon Lex uses this prompt at runtime, in the PostText API
+	// response. It substitutes session attributes and slot values for placeholders in
+	// the response card. For more information, see ex-resp-card ().
+	ResponseCard *string
 }
 
 // Describes the resource that refers to the resource that you are attempting to
@@ -423,13 +423,18 @@ type ResourceReference struct {
 // Identifies the version of a specific slot.
 type Slot struct {
 
-	// A description of the slot.
-	Description *string
-
 	// The name of the slot.
 	//
 	// This member is required.
 	Name *string
+
+	// Specifies whether the slot is required or optional.
+	//
+	// This member is required.
+	SlotConstraint SlotConstraint
+
+	// A description of the slot.
+	Description *string
 
 	// Determines whether a slot is obfuscated in conversation logs and stored
 	// utterances. When you obfuscate a slot, the value is replaced by the slot name in
@@ -444,30 +449,25 @@ type Slot struct {
 	// same priority, the order in which Amazon Lex elicits values is arbitrary.
 	Priority *int32
 
+	// A set of possible responses for the slot type used by text-based clients. A user
+	// chooses an option from the response card, instead of using text to reply.
+	ResponseCard *string
+
 	// If you know a specific pattern with which users might respond to an Amazon Lex
 	// request for a slot value, you can provide those utterances to improve accuracy.
 	// This is optional. In most cases, Amazon Lex is capable of understanding user
 	// utterances.
 	SampleUtterances []*string
 
-	// A set of possible responses for the slot type used by text-based clients. A user
-	// chooses an option from the response card, instead of using text to reply.
-	ResponseCard *string
-
-	// The prompt that Amazon Lex uses to elicit the slot value from the user.
-	ValueElicitationPrompt *Prompt
+	// The type of the slot, either a custom slot type that you defined or one of the
+	// built-in slot types.
+	SlotType *string
 
 	// The version of the slot type.
 	SlotTypeVersion *string
 
-	// Specifies whether the slot is required or optional.
-	//
-	// This member is required.
-	SlotConstraint SlotConstraint
-
-	// The type of the slot, either a custom slot type that you defined or one of the
-	// built-in slot types.
-	SlotType *string
+	// The prompt that Amazon Lex uses to elicit the slot value from the user.
+	ValueElicitationPrompt *Prompt
 }
 
 // Provides configuration information for a slot type.
@@ -483,18 +483,18 @@ type SlotTypeMetadata struct {
 	// The date that the slot type was created.
 	CreatedDate *time.Time
 
+	// A description of the slot type.
+	Description *string
+
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last updated date are the same.
 	LastUpdatedDate *time.Time
 
-	// The version of the slot type.
-	Version *string
-
-	// A description of the slot type.
-	Description *string
-
 	// The name of the slot type.
 	Name *string
+
+	// The version of the slot type.
+	Version *string
 }
 
 // Provides a regular expression used to validate the value of a slot.
@@ -544,46 +544,46 @@ type Statement struct {
 // the following symbols: _ . : / = + - @.
 type Tag struct {
 
+	// The key for the tag. Keys are not case-sensitive and must be unique.
+	//
+	// This member is required.
+	Key *string
+
 	// The value associated with a key. The value may be an empty string but it can't
 	// be null.
 	//
 	// This member is required.
 	Value *string
-
-	// The key for the tag. Keys are not case-sensitive and must be unique.
-	//
-	// This member is required.
-	Key *string
 }
 
 // Provides information about a single utterance that was made to your bot.
 type UtteranceData struct {
 
-	// The text that was entered by the user or the text representation of an audio
-	// clip.
-	UtteranceString *string
-
-	// The date that the utterance was first recorded.
-	FirstUtteredDate *time.Time
+	// The number of times that the utterance was processed.
+	Count *int32
 
 	// The total number of individuals that used the utterance.
 	DistinctUsers *int32
 
-	// The number of times that the utterance was processed.
-	Count *int32
+	// The date that the utterance was first recorded.
+	FirstUtteredDate *time.Time
 
 	// The date that the utterance was last recorded.
 	LastUtteredDate *time.Time
+
+	// The text that was entered by the user or the text representation of an audio
+	// clip.
+	UtteranceString *string
 }
 
 // Provides a list of utterances that have been made to a specific version of your
 // bot. The list contains a maximum of 100 utterances.
 type UtteranceList struct {
 
+	// The version of the bot that processed the list.
+	BotVersion *string
+
 	// One or more UtteranceData () objects that contain information about the
 	// utterances that have been made to a bot. The maximum number of object is 100.
 	Utterances []*UtteranceData
-
-	// The version of the bot that processed the list.
-	BotVersion *string
 }

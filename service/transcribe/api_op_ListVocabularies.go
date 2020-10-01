@@ -57,14 +57,6 @@ func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesI
 
 type ListVocabulariesInput struct {
 
-	// When specified, only returns vocabularies with the VocabularyState field equal
-	// to the specified state.
-	StateEquals types.VocabularyState
-
-	// If the result of the previous request to ListVocabularies was truncated, include
-	// the NextToken to fetch the next set of jobs.
-	NextToken *string
-
 	// The maximum number of vocabularies to return in the response. If there are fewer
 	// results in the list, this response contains only the actual results.
 	MaxResults *int32
@@ -74,12 +66,17 @@ type ListVocabulariesInput struct {
 	// case-insensitive, ListVocabularies returns both "vocabularyname" and
 	// "VocabularyName" in the response list.
 	NameContains *string
+
+	// If the result of the previous request to ListVocabularies was truncated, include
+	// the NextToken to fetch the next set of jobs.
+	NextToken *string
+
+	// When specified, only returns vocabularies with the VocabularyState field equal
+	// to the specified state.
+	StateEquals types.VocabularyState
 }
 
 type ListVocabulariesOutput struct {
-
-	// The requested vocabulary state.
-	Status types.VocabularyState
 
 	// The ListVocabularies operation returns a page of vocabularies at a time. The
 	// maximum size of the page is set by the MaxResults parameter. If there are more
@@ -87,6 +84,9 @@ type ListVocabulariesOutput struct {
 	// token. Include the token in the next request to the ListVocabularies operation
 	// to return in the next page of jobs.
 	NextToken *string
+
+	// The requested vocabulary state.
+	Status types.VocabularyState
 
 	// A list of objects that describe the vocabularies that match the search criteria
 	// in the request.

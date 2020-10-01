@@ -62,15 +62,15 @@ func (c *Client) DeleteMember(ctx context.Context, params *DeleteMemberInput, op
 
 type DeleteMemberInput struct {
 
-	// The unique identifier of the network from which the member is removed.
-	//
-	// This member is required.
-	NetworkId *string
-
 	// The unique identifier of the member to remove.
 	//
 	// This member is required.
 	MemberId *string
+
+	// The unique identifier of the network from which the member is removed.
+	//
+	// This member is required.
+	NetworkId *string
 }
 
 type DeleteMemberOutput struct {

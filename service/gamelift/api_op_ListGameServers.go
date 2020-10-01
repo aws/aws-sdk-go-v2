@@ -78,6 +78,16 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 
 type ListGameServersInput struct {
 
+	// An identifier for the game server group for the game server you want to list.
+	// Use either the GameServerGroup () name or ARN value.
+	//
+	// This member is required.
+	GameServerGroupName *string
+
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages.
+	Limit *int32
+
 	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
@@ -87,16 +97,6 @@ type ListGameServersInput struct {
 	// sort value. If this parameter is left empty, the list of game servers is
 	// returned in no particular order.
 	SortOrder types.SortOrder
-
-	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int32
-
-	// An identifier for the game server group for the game server you want to list.
-	// Use either the GameServerGroup () name or ARN value.
-	//
-	// This member is required.
-	GameServerGroupName *string
 }
 
 type ListGameServersOutput struct {

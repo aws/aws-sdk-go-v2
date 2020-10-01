@@ -61,14 +61,12 @@ func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput
 
 type CreateProposalInput struct {
 
-	// A description for the proposal that is visible to voting members, for example,
-	// "Proposal to add Example Corp. as member."
-	Description *string
-
-	// The unique identifier of the network for which the proposal is made.
+	// The type of actions proposed, such as inviting a member or removing a member.
+	// The types of Actions in a proposal are mutually exclusive. For example, a
+	// proposal with Invitations actions cannot also contain Removals actions.
 	//
 	// This member is required.
-	NetworkId *string
+	Actions *types.ProposalActions
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the operation. An idempotent operation completes no more than one time. This
@@ -85,12 +83,14 @@ type CreateProposalInput struct {
 	// This member is required.
 	MemberId *string
 
-	// The type of actions proposed, such as inviting a member or removing a member.
-	// The types of Actions in a proposal are mutually exclusive. For example, a
-	// proposal with Invitations actions cannot also contain Removals actions.
+	// The unique identifier of the network for which the proposal is made.
 	//
 	// This member is required.
-	Actions *types.ProposalActions
+	NetworkId *string
+
+	// A description for the proposal that is visible to voting members, for example,
+	// "Proposal to add Example Corp. as member."
+	Description *string
 }
 
 type CreateProposalOutput struct {

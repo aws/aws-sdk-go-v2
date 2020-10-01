@@ -57,15 +57,15 @@ func (c *Client) AdminAddUserToGroup(ctx context.Context, params *AdminAddUserTo
 
 type AdminAddUserToGroupInput struct {
 
-	// The user pool ID for the user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// The group name.
 	//
 	// This member is required.
 	GroupName *string
+
+	// The user pool ID for the user pool.
+	//
+	// This member is required.
+	UserPoolId *string
 
 	// The username for the user.
 	//

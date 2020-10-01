@@ -61,16 +61,6 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	// date and time.
 	Filters []*types.PatchOrchestratorFilter
 
-	// The instance ID or key/value pair to retrieve information about.
-	Targets []*types.Target
-
-	// The type of resource you want to retrieve information about. For example,
-	// "INSTANCE".
-	ResourceType types.MaintenanceWindowResourceType
-
-	// The ID of the maintenance window to retrieve information about.
-	WindowId *string
-
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
@@ -78,17 +68,27 @@ type DescribeMaintenanceWindowScheduleInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	// The type of resource you want to retrieve information about. For example,
+	// "INSTANCE".
+	ResourceType types.MaintenanceWindowResourceType
+
+	// The instance ID or key/value pair to retrieve information about.
+	Targets []*types.Target
+
+	// The ID of the maintenance window to retrieve information about.
+	WindowId *string
 }
 
 type DescribeMaintenanceWindowScheduleOutput struct {
 
-	// Information about maintenance window executions scheduled for the specified time
-	// range.
-	ScheduledWindowExecutions []*types.ScheduledWindowExecution
-
 	// The token for the next set of items to return. (You use this token in the next
 	// call.)
 	NextToken *string
+
+	// Information about maintenance window executions scheduled for the specified time
+	// range.
+	ScheduledWindowExecutions []*types.ScheduledWindowExecution
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

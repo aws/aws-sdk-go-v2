@@ -57,10 +57,6 @@ func (c *Client) CreateTable(ctx context.Context, params *CreateTableInput, optF
 
 type CreateTableInput struct {
 
-	// The ID of the Data Catalog in which to create the Table. If none is supplied,
-	// the AWS account ID is used by default.
-	CatalogId *string
-
 	// The catalog database in which to create the new table. For Hive compatibility,
 	// this name is entirely lowercase.
 	//
@@ -71,6 +67,10 @@ type CreateTableInput struct {
 	//
 	// This member is required.
 	TableInput *types.TableInput
+
+	// The ID of the Data Catalog in which to create the Table. If none is supplied,
+	// the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type CreateTableOutput struct {

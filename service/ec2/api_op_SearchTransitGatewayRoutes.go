@@ -97,23 +97,23 @@ type SearchTransitGatewayRoutesInput struct {
 	// This member is required.
 	TransitGatewayRouteTableId *string
 
-	// The maximum number of routes to return.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The maximum number of routes to return.
+	MaxResults *int32
 }
 
 type SearchTransitGatewayRoutesOutput struct {
 
-	// Information about the routes.
-	Routes []*types.TransitGatewayRoute
-
 	// Indicates whether there are additional routes available.
 	AdditionalRoutesAvailable *bool
+
+	// Information about the routes.
+	Routes []*types.TransitGatewayRoute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

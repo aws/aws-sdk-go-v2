@@ -9,14 +9,14 @@ import (
 // Describes the configuration of an Auto Scaling group.
 type AutoScalingGroupConfiguration struct {
 
-	// The maximum size, or maximum number of instances, for the Auto Scaling group.
-	MaxSize *int32
+	// The desired capacity, or number of instances, for the Auto Scaling group.
+	DesiredCapacity *int32
 
 	// The instance type for the Auto Scaling group.
 	InstanceType *string
 
-	// The desired capacity, or number of instances, for the Auto Scaling group.
-	DesiredCapacity *int32
+	// The maximum size, or maximum number of instances, for the Auto Scaling group.
+	MaxSize *int32
 
 	// The minimum size, or minimum number of instances, for the Auto Scaling group.
 	MinSize *int32
@@ -25,33 +25,18 @@ type AutoScalingGroupConfiguration struct {
 // Describes an Auto Scaling group recommendation.
 type AutoScalingGroupRecommendation struct {
 
-	// The number of days for which utilization metrics were analyzed for the Auto
-	// Scaling group.
-	LookBackPeriodInDays *float64
-
 	// The AWS account ID of the Auto Scaling group.
 	AccountId *string
-
-	// An array of objects that describe the utilization metrics of the Auto Scaling
-	// group.
-	UtilizationMetrics []*UtilizationMetric
-
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string
-
-	// An array of objects that describe the recommendation options for the Auto
-	// Scaling group.
-	RecommendationOptions []*AutoScalingGroupRecommendationOption
-
-	// An array of objects that describe the current configuration of the Auto Scaling
-	// group.
-	CurrentConfiguration *AutoScalingGroupConfiguration
 
 	// The Amazon Resource Name (ARN) of the Auto Scaling group.
 	AutoScalingGroupArn *string
 
-	// The time stamp of when the Auto Scaling group recommendation was last refreshed.
-	LastRefreshTimestamp *time.Time
+	// The name of the Auto Scaling group.
+	AutoScalingGroupName *string
+
+	// An array of objects that describe the current configuration of the Auto Scaling
+	// group.
+	CurrentConfiguration *AutoScalingGroupConfiguration
 
 	// The finding classification for the Auto Scaling group. Findings for Auto Scaling
 	// groups include:
@@ -69,18 +54,25 @@ type AutoScalingGroupRecommendation struct {
 	// The values that are returned might be NOT_OPTIMIZED or
 	// OPTIMIZED.
 	Finding Finding
+
+	// The time stamp of when the Auto Scaling group recommendation was last refreshed.
+	LastRefreshTimestamp *time.Time
+
+	// The number of days for which utilization metrics were analyzed for the Auto
+	// Scaling group.
+	LookBackPeriodInDays *float64
+
+	// An array of objects that describe the recommendation options for the Auto
+	// Scaling group.
+	RecommendationOptions []*AutoScalingGroupRecommendationOption
+
+	// An array of objects that describe the utilization metrics of the Auto Scaling
+	// group.
+	UtilizationMetrics []*UtilizationMetric
 }
 
 // Describes a recommendation option for an Auto Scaling group.
 type AutoScalingGroupRecommendationOption struct {
-
-	// An array of objects that describe the projected utilization metrics of the Auto
-	// Scaling group recommendation option.
-	ProjectedUtilizationMetrics []*UtilizationMetric
-
-	// The rank of the Auto Scaling group recommendation option. The top recommendation
-	// option is ranked as 1.
-	Rank *int32
 
 	// An array of objects that describe an Auto Scaling group configuration.
 	Configuration *AutoScalingGroupConfiguration
@@ -90,6 +82,14 @@ type AutoScalingGroupRecommendationOption struct {
 	// the performance requirement of your workload. The lowest performance risk is
 	// categorized as 0, and the highest as 5.
 	PerformanceRisk *float64
+
+	// An array of objects that describe the projected utilization metrics of the Auto
+	// Scaling group recommendation option.
+	ProjectedUtilizationMetrics []*UtilizationMetric
+
+	// The rank of the Auto Scaling group recommendation option. The top recommendation
+	// option is ranked as 1.
+	Rank *int32
 }
 
 // Describes the destination of the recommendations export and metadata files.
@@ -126,21 +126,24 @@ type Filter struct {
 // instance family.
 type GetRecommendationError struct {
 
-	// The message, or reason, for the error.
-	Message *string
-
 	// The error code.
 	Code *string
 
 	// The ID of the error.
 	Identifier *string
+
+	// The message, or reason, for the error.
+	Message *string
 }
 
 // Describes an Amazon EC2 instance recommendation.
 type InstanceRecommendation struct {
 
-	// The time stamp of when the instance recommendation was last refreshed.
-	LastRefreshTimestamp *time.Time
+	// The AWS account ID of the instance.
+	AccountId *string
+
+	// The instance type of the current instance.
+	CurrentInstanceType *string
 
 	// The finding classification for the instance. Findings for instances include:
 	//
@@ -168,6 +171,18 @@ type InstanceRecommendation struct {
 	// UNDER_PROVISIONED, OVER_PROVISIONED, or OPTIMIZED.
 	Finding Finding
 
+	// The Amazon Resource Name (ARN) of the current instance.
+	InstanceArn *string
+
+	// The name of the current instance.
+	InstanceName *string
+
+	// The time stamp of when the instance recommendation was last refreshed.
+	LastRefreshTimestamp *time.Time
+
+	// The number of days for which utilization metrics were analyzed for the instance.
+	LookBackPeriodInDays *float64
+
 	// An array of objects that describe the recommendation options for the instance.
 	RecommendationOptions []*InstanceRecommendationOption
 
@@ -176,72 +191,57 @@ type InstanceRecommendation struct {
 
 	// An array of objects that describe the utilization metrics of the instance.
 	UtilizationMetrics []*UtilizationMetric
-
-	// The name of the current instance.
-	InstanceName *string
-
-	// The instance type of the current instance.
-	CurrentInstanceType *string
-
-	// The AWS account ID of the instance.
-	AccountId *string
-
-	// The number of days for which utilization metrics were analyzed for the instance.
-	LookBackPeriodInDays *float64
-
-	// The Amazon Resource Name (ARN) of the current instance.
-	InstanceArn *string
 }
 
 // Describes a recommendation option for an Amazon EC2 instance.
 type InstanceRecommendationOption struct {
 
-	// The rank of the instance recommendation option. The top recommendation option is
-	// ranked as 1.
-	Rank *int32
-
 	// The instance type of the instance recommendation.
 	InstanceType *string
-
-	// An array of objects that describe the projected utilization metrics of the
-	// instance recommendation option.
-	ProjectedUtilizationMetrics []*UtilizationMetric
 
 	// The performance risk of the instance recommendation option. Performance risk is
 	// the likelihood of the recommended instance type not meeting the performance
 	// requirement of your workload. The lowest performance risk is categorized as 0,
 	// and the highest as 5.
 	PerformanceRisk *float64
+
+	// An array of objects that describe the projected utilization metrics of the
+	// instance recommendation option.
+	ProjectedUtilizationMetrics []*UtilizationMetric
+
+	// The rank of the instance recommendation option. The top recommendation option is
+	// ranked as 1.
+	Rank *int32
 }
 
 // Describes a filter that returns a more specific list of recommendation export
 // jobs. This filter is used with the DescribeRecommendationExportJobs action.
 type JobFilter struct {
 
+	// The name of the filter. Specify ResourceType to return export jobs of a specific
+	// resource type (e.g., Ec2Instance). Specify JobStatus to return export jobs with
+	// a specific status (e.g, Complete).
+	Name JobFilterName
+
 	// The value of the filter. If you specify the name parameter as ResourceType, the
 	// valid values are Ec2Instance or AutoScalingGroup. If you specify the name
 	// parameter as JobStatus, the valid values are Queued, InProgress, Complete, or
 	// Failed.
 	Values []*string
-
-	// The name of the filter. Specify ResourceType to return export jobs of a specific
-	// resource type (e.g., Ec2Instance). Specify JobStatus to return export jobs with
-	// a specific status (e.g, Complete).
-	Name JobFilterName
 }
 
 // Describes a projected utilization metric of a recommendation option, such as an
 // Amazon EC2 instance.
 type ProjectedMetric struct {
 
-	// The time stamps of the projected utilization metric.
-	Timestamps []*time.Time
-
 	// The name of the projected utilization metric. Memory metrics are only returned
 	// for resources that have the unified CloudWatch agent installed on them. For more
 	// information, see Enabling Memory Utilization with the CloudWatch Agent
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html).
 	Name MetricName
+
+	// The time stamps of the projected utilization metric.
+	Timestamps []*time.Time
 
 	// The values of the projected utilization metrics.
 	Values []*float64
@@ -254,26 +254,26 @@ type ProjectedMetric struct {
 // your recommendations.</p>
 type RecommendationExportJob struct {
 
-	// The reason for an export job failure.
-	FailureReason *string
-
-	// The status of the export job.
-	Status JobStatus
-
-	// The timestamp of when the export job was last updated.
-	LastUpdatedTimestamp *time.Time
+	// The timestamp of when the export job was created.
+	CreationTimestamp *time.Time
 
 	// An object that describes the destination of the export file.
 	Destination *ExportDestination
 
-	// The resource type of the exported recommendations.
-	ResourceType ResourceType
+	// The reason for an export job failure.
+	FailureReason *string
 
 	// The identification number of the export job.
 	JobId *string
 
-	// The timestamp of when the export job was created.
-	CreationTimestamp *time.Time
+	// The timestamp of when the export job was last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The resource type of the exported recommendations.
+	ResourceType ResourceType
+
+	// The status of the export job.
+	Status JobStatus
 }
 
 // Describes the source of a recommendation, such as an Amazon EC2 instance or Auto
@@ -293,18 +293,15 @@ type RecommendationSummary struct {
 	// The AWS account ID of the recommendation summary.
 	AccountId *string
 
-	// An array of objects that describe a recommendation summary.
-	Summaries []*Summary
-
 	// The resource type of the recommendation.
 	RecommendationResourceType RecommendationSourceType
+
+	// An array of objects that describe a recommendation summary.
+	Summaries []*Summary
 }
 
 // Describes a projected utilization metric of a recommendation option.
 type RecommendedOptionProjectedMetric struct {
-
-	// The recommended instance type.
-	RecommendedInstanceType *string
 
 	// An array of objects that describe a projected utilization metric.
 	ProjectedMetrics []*ProjectedMetric
@@ -315,6 +312,9 @@ type RecommendedOptionProjectedMetric struct {
 	// related to the recommendation option that is also ranked as 1 in the same
 	// response.
 	Rank *int32
+
+	// The recommended instance type.
+	RecommendedInstanceType *string
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -322,16 +322,16 @@ type RecommendedOptionProjectedMetric struct {
 // file.
 type S3Destination struct {
 
-	// The Amazon S3 bucket key of a metadata file. The key uniquely identifies the
-	// object, or metadata file, in the S3 bucket.
-	MetadataKey *string
+	// The name of the Amazon S3 bucket used as the destination of an export file.
+	Bucket *string
 
 	// The Amazon S3 bucket key of an export file. The key uniquely identifies the
 	// object, or export file, in the S3 bucket.
 	Key *string
 
-	// The name of the Amazon S3 bucket used as the destination of an export file.
-	Bucket *string
+	// The Amazon S3 bucket key of a metadata file. The key uniquely identifies the
+	// object, or metadata file, in the S3 bucket.
+	MetadataKey *string
 }
 
 // Describes the destination Amazon Simple Storage Service (Amazon S3) bucket name
@@ -347,28 +347,25 @@ type S3Destination struct {
 // in the Compute Optimizer user guide.
 type S3DestinationConfig struct {
 
-	// The Amazon S3 bucket prefix for an export job.
-	KeyPrefix *string
-
 	// The name of the Amazon S3 bucket to use as the destination for an export job.
 	Bucket *string
+
+	// The Amazon S3 bucket prefix for an export job.
+	KeyPrefix *string
 }
 
 // The summary of a recommendation.
 type Summary struct {
 
-	// The value of the recommendation summary.
-	Value *float64
-
 	// The finding classification of the recommendation.
 	Name Finding
+
+	// The value of the recommendation summary.
+	Value *float64
 }
 
 // Describes a utilization metric of a resource, such as an Amazon EC2 instance.
 type UtilizationMetric struct {
-
-	// The value of the utilization metric.
-	Value *float64
 
 	// The name of the utilization metric. Memory metrics are only returned for
 	// resources that have the unified CloudWatch agent installed on them. For more
@@ -378,4 +375,7 @@ type UtilizationMetric struct {
 
 	// The statistic of the utilization metric.
 	Statistic MetricStatistic
+
+	// The value of the utilization metric.
+	Value *float64
 }

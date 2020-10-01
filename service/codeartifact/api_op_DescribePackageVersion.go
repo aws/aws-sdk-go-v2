@@ -65,10 +65,27 @@ type DescribePackageVersionInput struct {
 	// This member is required.
 	Domain *string
 
+	// A format that specifies the type of the requested package version. The valid
+	// values are:
+	//
+	//     * npm
+	//
+	//     * pypi
+	//
+	//     * maven
+	//
+	// This member is required.
+	Format types.PackageFormat
+
 	// The name of the requested package version.
 	//
 	// This member is required.
 	Package *string
+
+	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
+	PackageVersion *string
 
 	// The name of the repository that contains the package version.
 	//
@@ -91,23 +108,6 @@ type DescribePackageVersionInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
-
-	// A format that specifies the type of the requested package version. The valid
-	// values are:
-	//
-	//     * npm
-	//
-	//     * pypi
-	//
-	//     * maven
-	//
-	// This member is required.
-	Format types.PackageFormat
-
-	// A string that contains the package version (for example, 3.5.2).
-	//
-	// This member is required.
-	PackageVersion *string
 }
 
 type DescribePackageVersionOutput struct {

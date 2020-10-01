@@ -68,14 +68,20 @@ type DescribeLocationS3Input struct {
 // DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 
+	// The time that the Amazon S3 bucket location was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
+	LocationArn *string
+
+	// The URL of the Amazon S3 location that was described.
+	LocationUri *string
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that is used to access an Amazon S3 bucket.  <p>For detailed information
 	// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
 	// DataSync User Guide</i>.</p>
 	S3Config *types.S3Config
-
-	// The time that the Amazon S3 bucket location was created.
-	CreationTime *time.Time
 
 	// The Amazon S3 storage class that you chose to store your files in when this
 	// location is used as a task destination. For more information about S3 storage
@@ -84,12 +90,6 @@ type DescribeLocationS3Output struct {
 	// Service Developer Guide. Some storage classes have behaviors that can affect
 	// your S3 storage cost. For detailed information, see using-storage-classes ().
 	S3StorageClass types.S3StorageClass
-
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket location.
-	LocationArn *string
-
-	// The URL of the Amazon S3 location that was described.
-	LocationUri *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

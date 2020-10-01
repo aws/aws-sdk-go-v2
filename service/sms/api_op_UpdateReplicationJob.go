@@ -58,19 +58,20 @@ func (c *Client) UpdateReplicationJob(ctx context.Context, params *UpdateReplica
 
 type UpdateReplicationJobInput struct {
 
+	// The identifier of the replication job.
+	//
+	// This member is required.
+	ReplicationJobId *string
+
+	// The description of the replication job.
+	Description *string
+
 	// When true, the replication job produces encrypted AMIs . See also KmsKeyId
 	// below.
 	Encrypted *bool
 
-	// The license type to be used for the AMI created by a successful replication run.
-	LicenseType types.LicenseType
-
-	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
-	// once the maximum number is reached and a new AMI is created.
-	NumberOfRecentAmisToKeep *int32
-
-	// The start time of the next replication run.
-	NextReplicationRunStartTime *time.Time
+	// The time between consecutive replication runs, in hours.
+	Frequency *int32
 
 	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
 	// following:
@@ -88,19 +89,18 @@ type UpdateReplicationJobInput struct {
 	// id is not specified, the customer's default KMS key for EBS is used.
 	KmsKeyId *string
 
+	// The license type to be used for the AMI created by a successful replication run.
+	LicenseType types.LicenseType
+
+	// The start time of the next replication run.
+	NextReplicationRunStartTime *time.Time
+
+	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
+	// once the maximum number is reached and a new AMI is created.
+	NumberOfRecentAmisToKeep *int32
+
 	// The name of the IAM role to be used by AWS SMS.
 	RoleName *string
-
-	// The time between consecutive replication runs, in hours.
-	Frequency *int32
-
-	// The identifier of the replication job.
-	//
-	// This member is required.
-	ReplicationJobId *string
-
-	// The description of the replication job.
-	Description *string
 }
 
 type UpdateReplicationJobOutput struct {

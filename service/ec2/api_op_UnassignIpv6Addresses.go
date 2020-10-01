@@ -56,15 +56,15 @@ func (c *Client) UnassignIpv6Addresses(ctx context.Context, params *UnassignIpv6
 
 type UnassignIpv6AddressesInput struct {
 
-	// The ID of the network interface.
-	//
-	// This member is required.
-	NetworkInterfaceId *string
-
 	// The IPv6 addresses to unassign from the network interface.
 	//
 	// This member is required.
 	Ipv6Addresses []*string
+
+	// The ID of the network interface.
+	//
+	// This member is required.
+	NetworkInterfaceId *string
 }
 
 type UnassignIpv6AddressesOutput struct {

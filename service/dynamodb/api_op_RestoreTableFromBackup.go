@@ -76,34 +76,34 @@ func (c *Client) RestoreTableFromBackup(ctx context.Context, params *RestoreTabl
 
 type RestoreTableFromBackupInput struct {
 
-	// List of global secondary indexes for the restored table. The indexes provided
-	// should match existing secondary indexes. You can choose to exclude some or all
-	// of the indexes at the time of restore.
-	GlobalSecondaryIndexOverride []*types.GlobalSecondaryIndex
-
-	// The new server-side encryption settings for the restored table.
-	SSESpecificationOverride *types.SSESpecification
+	// The Amazon Resource Name (ARN) associated with the backup.
+	//
+	// This member is required.
+	BackupArn *string
 
 	// The name of the new table to which the backup must be restored.
 	//
 	// This member is required.
 	TargetTableName *string
 
-	// The Amazon Resource Name (ARN) associated with the backup.
-	//
-	// This member is required.
-	BackupArn *string
+	// The billing mode of the restored table.
+	BillingModeOverride types.BillingMode
+
+	// List of global secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or all
+	// of the indexes at the time of restore.
+	GlobalSecondaryIndexOverride []*types.GlobalSecondaryIndex
 
 	// List of local secondary indexes for the restored table. The indexes provided
 	// should match existing secondary indexes. You can choose to exclude some or all
 	// of the indexes at the time of restore.
 	LocalSecondaryIndexOverride []*types.LocalSecondaryIndex
 
-	// The billing mode of the restored table.
-	BillingModeOverride types.BillingMode
-
 	// Provisioned throughput settings for the restored table.
 	ProvisionedThroughputOverride *types.ProvisionedThroughput
+
+	// The new server-side encryption settings for the restored table.
+	SSESpecificationOverride *types.SSESpecification
 }
 
 type RestoreTableFromBackupOutput struct {

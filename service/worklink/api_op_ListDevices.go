@@ -57,27 +57,27 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 
 type ListDevicesInput struct {
 
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
+
 	// The maximum number of results to be included in the next page.
 	MaxResults *int32
 
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
-
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
 }
 
 type ListDevicesOutput struct {
 
+	// Information about the devices.
+	Devices []*types.DeviceSummary
+
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
-
-	// Information about the devices.
-	Devices []*types.DeviceSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

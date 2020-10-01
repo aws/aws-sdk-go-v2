@@ -78,17 +78,17 @@ func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteS
 // A request to delete a SqlInjectionMatchSet () from AWS WAF.
 type DeleteSqlInjectionMatchSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet () that you want to
 	// delete. SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet () and
 	// by ListSqlInjectionMatchSets ().
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 // The response to a request to delete a SqlInjectionMatchSet () from AWS WAF.

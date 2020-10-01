@@ -57,23 +57,23 @@ func (c *Client) CreatePartition(ctx context.Context, params *CreatePartitionInp
 
 type CreatePartitionInput struct {
 
-	// The name of the metadata table in which the partition is to be created.
-	//
-	// This member is required.
-	TableName *string
-
 	// The name of the metadata database in which the partition is to be created.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// The AWS account ID of the catalog in which the partition is to be created.
-	CatalogId *string
-
 	// A PartitionInput structure defining the partition to be created.
 	//
 	// This member is required.
 	PartitionInput *types.PartitionInput
+
+	// The name of the metadata table in which the partition is to be created.
+	//
+	// This member is required.
+	TableName *string
+
+	// The AWS account ID of the catalog in which the partition is to be created.
+	CatalogId *string
 }
 
 type CreatePartitionOutput struct {

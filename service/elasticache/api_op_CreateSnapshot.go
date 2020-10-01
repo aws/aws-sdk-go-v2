@@ -59,14 +59,14 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 // Represents the input of a CreateSnapshot operation.
 type CreateSnapshotInput struct {
 
-	// The identifier of an existing cluster. The snapshot is created from this
-	// cluster.
-	CacheClusterId *string
-
 	// A name for the snapshot being created.
 	//
 	// This member is required.
 	SnapshotName *string
+
+	// The identifier of an existing cluster. The snapshot is created from this
+	// cluster.
+	CacheClusterId *string
 
 	// The ID of the KMS key used to encrypt the snapshot.
 	KmsKeyId *string

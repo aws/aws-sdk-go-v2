@@ -57,14 +57,6 @@ func (c *Client) DescribeGlobalReplicationGroups(ctx context.Context, params *De
 
 type DescribeGlobalReplicationGroupsInput struct {
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.
-	MaxRecords *int32
-
-	// Returns the list of members that comprise the Global Datastore.
-	ShowMemberInfo *bool
-
 	// The name of the Global Datastore
 	GlobalReplicationGroupId *string
 
@@ -73,18 +65,26 @@ type DescribeGlobalReplicationGroupsInput struct {
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.
+	MaxRecords *int32
+
+	// Returns the list of members that comprise the Global Datastore.
+	ShowMemberInfo *bool
 }
 
 type DescribeGlobalReplicationGroupsOutput struct {
+
+	// Indicates the slot configuration and global identifier for each slice group.
+	GlobalReplicationGroups []*types.GlobalReplicationGroup
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords. >
 	Marker *string
-
-	// Indicates the slot configuration and global identifier for each slice group.
-	GlobalReplicationGroups []*types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

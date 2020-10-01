@@ -60,23 +60,23 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 
 type DiscoverInstancesInput struct {
 
-	// The health status of the instances that you want to discover.
-	HealthStatus types.HealthStatusFilter
+	// The name of the namespace that you specified when you registered the instance.
+	//
+	// This member is required.
+	NamespaceName *string
 
 	// The name of the service that you specified when you registered the instance.
 	//
 	// This member is required.
 	ServiceName *string
 
+	// The health status of the instances that you want to discover.
+	HealthStatus types.HealthStatusFilter
+
 	// The maximum number of instances that you want AWS Cloud Map to return in the
 	// response to a DiscoverInstances request. If you don't specify a value for
 	// MaxResults, AWS Cloud Map returns up to 100 instances.
 	MaxResults *int32
-
-	// The name of the namespace that you specified when you registered the instance.
-	//
-	// This member is required.
-	NamespaceName *string
 
 	// A string map that contains attributes with values that you can use to filter
 	// instances by any custom attribute that you specified when you registered the

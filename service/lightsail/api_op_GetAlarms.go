@@ -63,6 +63,10 @@ func (c *Client) GetAlarms(ctx context.Context, params *GetAlarmsInput, optFns .
 
 type GetAlarmsInput struct {
 
+	// The name of the alarm. Specify an alarm name to return information about a
+	// specific alarm.
+	AlarmName *string
+
 	// The name of the Lightsail resource being monitored by the alarm. Specify a
 	// monitored resource name to return information about all alarms for a specific
 	// resource.
@@ -73,22 +77,18 @@ type GetAlarmsInput struct {
 	// the response will return a next page token that you can specify as the page
 	// token in a subsequent request.
 	PageToken *string
-
-	// The name of the alarm. Specify an alarm name to return information about a
-	// specific alarm.
-	AlarmName *string
 }
 
 type GetAlarmsOutput struct {
+
+	// An array of objects that describe the alarms.
+	Alarms []*types.Alarm
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetAlarms request and specify the next page
 	// token using the pageToken parameter.
 	NextPageToken *string
-
-	// An array of objects that describe the alarms.
-	Alarms []*types.Alarm
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

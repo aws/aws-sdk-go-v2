@@ -82,9 +82,11 @@ func (c *Client) GetFaceSearch(ctx context.Context, params *GetFaceSearchInput, 
 
 type GetFaceSearchInput struct {
 
-	// Sort to use for grouping faces in the response. Use TIMESTAMP to group faces by
-	// the time that they are recognized. Use INDEX to sort by recognized faces.
-	SortBy types.FaceSearchSortBy
+	// The job identifer for the search request. You get the job identifier from an
+	// initial call to StartFaceSearch.
+	//
+	// This member is required.
+	JobId *string
 
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
@@ -96,22 +98,12 @@ type GetFaceSearchInput struct {
 	// You can use this pagination token to retrieve the next set of search results.
 	NextToken *string
 
-	// The job identifer for the search request. You get the job identifier from an
-	// initial call to StartFaceSearch.
-	//
-	// This member is required.
-	JobId *string
+	// Sort to use for grouping faces in the response. Use TIMESTAMP to group faces by
+	// the time that they are recognized. Use INDEX to sort by recognized faces.
+	SortBy types.FaceSearchSortBy
 }
 
 type GetFaceSearchOutput struct {
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string
-
-	// Information about a video that Amazon Rekognition analyzed. Videometadata is
-	// returned in every page of paginated responses from a Amazon Rekognition Video
-	// operation.
-	VideoMetadata *types.VideoMetadata
 
 	// The current status of the face search job.
 	JobStatus types.VideoJobStatus
@@ -128,6 +120,14 @@ type GetFaceSearchOutput struct {
 	// person was matched, face match details (FaceMatches) for matching faces in the
 	// collection, and person information (Person) for the matched person.
 	Persons []*types.PersonMatch
+
+	// If the job fails, StatusMessage provides a descriptive error message.
+	StatusMessage *string
+
+	// Information about a video that Amazon Rekognition analyzed. Videometadata is
+	// returned in every page of paginated responses from a Amazon Rekognition Video
+	// operation.
+	VideoMetadata *types.VideoMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

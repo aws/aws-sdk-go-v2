@@ -23,9 +23,9 @@ type BrokerEBSVolumeInfo struct {
 }
 
 type BrokerLogs struct {
-	Firehose *Firehose
-
 	CloudWatchLogs *CloudWatchLogs
+
+	Firehose *Firehose
 
 	S3 *S3
 }
@@ -48,9 +48,6 @@ type BrokerNodeGroupInfo struct {
 	// This member is required.
 	InstanceType *string
 
-	// Contains information about storage volumes attached to MSK broker nodes.
-	StorageInfo *StorageInfo
-
 	// The distribution of broker nodes across Availability Zones. This is an optional
 	// parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You
 	// can also explicitly set this parameter to the value DEFAULT. No other values are
@@ -64,44 +61,47 @@ type BrokerNodeGroupInfo struct {
 	// If you don't specify a security group, Amazon MSK uses the default security
 	// group associated with the VPC.
 	SecurityGroups []*string
+
+	// Contains information about storage volumes attached to MSK broker nodes.
+	StorageInfo *StorageInfo
 }
 
 // BrokerNodeInfo
 type BrokerNodeInfo struct {
 
-	// Information about the version of software currently deployed on the Kafka
-	// brokers in the cluster.
-	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
-
 	// The attached elastic network interface of the broker.
 	AttachedENIId *string
-
-	// Endpoints for accessing the broker.
-	Endpoints []*string
-
-	// The virtual private cloud (VPC) of the client.
-	ClientVpcIpAddress *string
 
 	// The ID of the broker.
 	BrokerId *float64
 
 	// The client subnet to which this broker node belongs.
 	ClientSubnet *string
+
+	// The virtual private cloud (VPC) of the client.
+	ClientVpcIpAddress *string
+
+	// Information about the version of software currently deployed on the Kafka
+	// brokers in the cluster.
+	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
+
+	// Endpoints for accessing the broker.
+	Endpoints []*string
 }
 
 // Information about the current software installed on the cluster.
 type BrokerSoftwareInfo struct {
 
-	// The version of Apache Kafka.
-	KafkaVersion *string
+	// The Amazon Resource Name (ARN) of the configuration used for the cluster. This
+	// field isn't visible in this preview release.
+	ConfigurationArn *string
 
 	// The revision of the configuration to use. This field isn't visible in this
 	// preview release.
 	ConfigurationRevision *int64
 
-	// The Amazon Resource Name (ARN) of the configuration used for the cluster. This
-	// field isn't visible in this preview release.
-	ConfigurationArn *string
+	// The version of Apache Kafka.
+	KafkaVersion *string
 }
 
 // Includes all client authentication information.
@@ -119,29 +119,34 @@ type CloudWatchLogs struct {
 
 // Returns information about a cluster.
 type ClusterInfo struct {
-	LoggingInfo *LoggingInfo
 
-	// Includes all encryption-related information.
-	EncryptionInfo *EncryptionInfo
+	// Arn of active cluster operation.
+	ActiveOperationArn *string
 
-	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes *int32
+	// Information about the broker nodes.
+	BrokerNodeGroupInfo *BrokerNodeGroupInfo
+
+	// Includes all client authentication information.
+	ClientAuthentication *ClientAuthentication
+
+	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	ClusterArn *string
+
+	// The name of the cluster.
+	ClusterName *string
+
+	// The time when the cluster was created.
+	CreationTime *time.Time
 
 	// Information about the version of software currently deployed on the Kafka
 	// brokers in the cluster.
 	CurrentBrokerSoftwareInfo *BrokerSoftwareInfo
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-	ClusterArn *string
+	// The current version of the MSK cluster.
+	CurrentVersion *string
 
-	// The connection string to use to connect to the Apache ZooKeeper cluster.
-	ZookeeperConnectString *string
-
-	// Settings for open monitoring using Prometheus.
-	OpenMonitoring *OpenMonitoring
-
-	// Arn of active cluster operation.
-	ActiveOperationArn *string
+	// Includes all encryption-related information.
+	EncryptionInfo *EncryptionInfo
 
 	// Specifies which metrics are gathered for the MSK cluster. This property has
 	// three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list
@@ -150,62 +155,58 @@ type ClusterInfo struct {
 	// (https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html).
 	EnhancedMonitoring EnhancedMonitoring
 
-	// Information about the broker nodes.
-	BrokerNodeGroupInfo *BrokerNodeGroupInfo
+	LoggingInfo *LoggingInfo
+
+	// The number of broker nodes in the cluster.
+	NumberOfBrokerNodes *int32
+
+	// Settings for open monitoring using Prometheus.
+	OpenMonitoring *OpenMonitoring
 
 	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
 	State ClusterState
 
-	// The current version of the MSK cluster.
-	CurrentVersion *string
-
 	StateInfo *StateInfo
-
-	// Includes all client authentication information.
-	ClientAuthentication *ClientAuthentication
 
 	// Tags attached to the cluster.
 	Tags map[string]*string
 
-	// The name of the cluster.
-	ClusterName *string
-
-	// The time when the cluster was created.
-	CreationTime *time.Time
+	// The connection string to use to connect to the Apache ZooKeeper cluster.
+	ZookeeperConnectString *string
 }
 
 // Returns information about a cluster operation.
 type ClusterOperationInfo struct {
 
-	// ARN of the cluster operation.
-	OperationArn *string
-
 	// The ID of the API request that triggered this operation.
 	ClientRequestId *string
-
-	// Information about cluster attributes before a cluster is updated.
-	SourceClusterInfo *MutableClusterInfo
-
-	// Describes the error if the operation fails.
-	ErrorInfo *ErrorInfo
-
-	// Type of the cluster operation.
-	OperationType *string
-
-	// State of the cluster operation.
-	OperationState *string
-
-	// The time that the operation was created.
-	CreationTime *time.Time
 
 	// ARN of the cluster.
 	ClusterArn *string
 
+	// The time that the operation was created.
+	CreationTime *time.Time
+
 	// The time at which the operation finished.
 	EndTime *time.Time
 
+	// Describes the error if the operation fails.
+	ErrorInfo *ErrorInfo
+
+	// ARN of the cluster operation.
+	OperationArn *string
+
+	// State of the cluster operation.
+	OperationState *string
+
 	// Steps completed during the operation.
 	OperationSteps []*ClusterOperationStep
+
+	// Type of the cluster operation.
+	OperationType *string
+
+	// Information about cluster attributes before a cluster is updated.
+	SourceClusterInfo *MutableClusterInfo
 
 	// Information about cluster attributes after a cluster is updated.
 	TargetClusterInfo *MutableClusterInfo
@@ -214,11 +215,11 @@ type ClusterOperationInfo struct {
 // Step taken during a cluster operation.
 type ClusterOperationStep struct {
 
-	// The name of the step.
-	StepName *string
-
 	// Information about the step and its status.
 	StepInfo *ClusterOperationStepInfo
+
+	// The name of the step.
+	StepName *string
 }
 
 // State information about the operation step.
@@ -241,28 +242,6 @@ type CompatibleKafkaVersion struct {
 // Represents an MSK Configuration.
 type Configuration struct {
 
-	// Latest revision of the configuration.
-	//
-	// This member is required.
-	LatestRevision *ConfigurationRevision
-
-	// The description of the configuration.
-	//
-	// This member is required.
-	Description *string
-
-	// The name of the configuration.
-	//
-	// This member is required.
-	Name *string
-
-	// An array of the versions of Apache Kafka with which you can use this MSK
-	// configuration. You can use this configuration for an MSK cluster only if the
-	// Apache Kafka version specified for the cluster appears in this array.
-	//
-	// This member is required.
-	KafkaVersions []*string
-
 	// The Amazon Resource Name (ARN) of the configuration.
 	//
 	// This member is required.
@@ -272,20 +251,42 @@ type Configuration struct {
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// The description of the configuration.
+	//
+	// This member is required.
+	Description *string
+
+	// An array of the versions of Apache Kafka with which you can use this MSK
+	// configuration. You can use this configuration for an MSK cluster only if the
+	// Apache Kafka version specified for the cluster appears in this array.
+	//
+	// This member is required.
+	KafkaVersions []*string
+
+	// Latest revision of the configuration.
+	//
+	// This member is required.
+	LatestRevision *ConfigurationRevision
+
+	// The name of the configuration.
+	//
+	// This member is required.
+	Name *string
 }
 
 // Specifies the configuration to use for the brokers.
 type ConfigurationInfo struct {
 
-	// The revision of the configuration to use.
-	//
-	// This member is required.
-	Revision *int64
-
 	// ARN of the configuration to use.
 	//
 	// This member is required.
 	Arn *string
+
+	// The revision of the configuration to use.
+	//
+	// This member is required.
+	Revision *int64
 }
 
 // Describes a configuration revision.
@@ -296,13 +297,13 @@ type ConfigurationRevision struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description of the configuration revision.
-	Description *string
-
 	// The revision number.
 	//
 	// This member is required.
 	Revision *int64
+
+	// The description of the configuration revision.
+	Description *string
 }
 
 // Contains information about the EBS storage volumes attached to Kafka broker
@@ -328,11 +329,11 @@ type EncryptionAtRest struct {
 // transit.
 type EncryptionInfo struct {
 
-	// The details for encryption in transit.
-	EncryptionInTransit *EncryptionInTransit
-
 	// The data-volume encryption details.
 	EncryptionAtRest *EncryptionAtRest
+
+	// The details for encryption in transit.
+	EncryptionInTransit *EncryptionInTransit
 }
 
 // The settings for encrypting data in transit.
@@ -398,26 +399,27 @@ type LoggingInfo struct {
 
 // Information about cluster attributes that can be updated via update APIs.
 type MutableClusterInfo struct {
-	LoggingInfo *LoggingInfo
-
-	// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon
-	// CloudWatch for this cluster.
-	EnhancedMonitoring EnhancedMonitoring
-
-	// The settings for open monitoring.
-	OpenMonitoring *OpenMonitoring
-
-	// The Kafka version.
-	KafkaVersion *string
-
-	// The number of broker nodes in the cluster.
-	NumberOfBrokerNodes *int32
 
 	// Specifies the size of the EBS volume and the ID of the associated broker.
 	BrokerEBSVolumeInfo []*BrokerEBSVolumeInfo
 
 	// Information about the changes in the configuration of the brokers.
 	ConfigurationInfo *ConfigurationInfo
+
+	// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon
+	// CloudWatch for this cluster.
+	EnhancedMonitoring EnhancedMonitoring
+
+	// The Kafka version.
+	KafkaVersion *string
+
+	LoggingInfo *LoggingInfo
+
+	// The number of broker nodes in the cluster.
+	NumberOfBrokerNodes *int32
+
+	// The settings for open monitoring.
+	OpenMonitoring *OpenMonitoring
 }
 
 // Indicates whether you want to enable or disable the Node Exporter.
@@ -441,11 +443,11 @@ type NodeExporterInfo struct {
 // The node information object.
 type NodeInfo struct {
 
-	// The node type.
-	NodeType NodeType
-
 	// The start time.
 	AddedToClusterTime *string
+
+	// The broker node info.
+	BrokerNodeInfo *BrokerNodeInfo
 
 	// The instance type.
 	InstanceType *string
@@ -453,8 +455,8 @@ type NodeInfo struct {
 	// The Amazon Resource Name (ARN) of the node.
 	NodeARN *string
 
-	// The broker node info.
-	BrokerNodeInfo *BrokerNodeInfo
+	// The node type.
+	NodeType NodeType
 
 	// The ZookeeperNodeInfo.
 	ZookeeperNodeInfo *ZookeeperNodeInfo
@@ -481,29 +483,29 @@ type OpenMonitoringInfo struct {
 // Prometheus settings.
 type Prometheus struct {
 
-	// Indicates whether you want to enable or disable the Node Exporter.
-	NodeExporter *NodeExporter
-
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	JmxExporter *JmxExporter
+
+	// Indicates whether you want to enable or disable the Node Exporter.
+	NodeExporter *NodeExporter
 }
 
 // Prometheus settings.
 type PrometheusInfo struct {
 
-	// Indicates whether you want to enable or disable the Node Exporter.
-	NodeExporter *NodeExporterInfo
-
 	// Indicates whether you want to enable or disable the JMX Exporter.
 	JmxExporter *JmxExporterInfo
+
+	// Indicates whether you want to enable or disable the Node Exporter.
+	NodeExporter *NodeExporterInfo
 }
 
 type S3 struct {
-	Prefix *string
-
 	Enabled *bool
 
 	Bucket *string
+
+	Prefix *string
 }
 
 type StateInfo struct {
@@ -529,18 +531,18 @@ type Tls struct {
 // Zookeeper node information.
 type ZookeeperNodeInfo struct {
 
-	// The role-specific ID for Zookeeper.
-	ZookeeperId *float64
+	// The attached elastic network interface of the broker.
+	AttachedENIId *string
 
 	// The virtual private cloud (VPC) IP address of the client.
 	ClientVpcIpAddress *string
 
-	// The version of Zookeeper.
-	ZookeeperVersion *string
-
-	// The attached elastic network interface of the broker.
-	AttachedENIId *string
-
 	// Endpoints for accessing the ZooKeeper.
 	Endpoints []*string
+
+	// The role-specific ID for Zookeeper.
+	ZookeeperId *float64
+
+	// The version of Zookeeper.
+	ZookeeperVersion *string
 }

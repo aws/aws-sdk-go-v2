@@ -56,10 +56,24 @@ func (c *Client) CancelJobExecution(ctx context.Context, params *CancelJobExecut
 
 type CancelJobExecutionInput struct {
 
-	// A collection of name/value pairs that describe the status of the job execution.
-	// If not specified, the statusDetails are unchanged. You can specify at most 10
-	// name/value pairs.
-	StatusDetails map[string]*string
+	// The ID of the job to be canceled.
+	//
+	// This member is required.
+	JobId *string
+
+	// The name of the thing whose execution of the job will be canceled.
+	//
+	// This member is required.
+	ThingName *string
+
+	// (Optional) The expected current version of the job execution. Each time you
+	// update the job execution, its version is incremented. If the version of the job
+	// execution stored in Jobs does not match, the update is rejected with a
+	// VersionMismatch error, and an ErrorResponse that contains the current job
+	// execution status data is returned. (This makes it unnecessary to perform a
+	// separate DescribeJobExecution request in order to obtain the job execution
+	// status data.)
+	ExpectedVersion *int64
 
 	// (Optional) If true the job execution will be canceled if it has status
 	// IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it
@@ -71,24 +85,10 @@ type CancelJobExecutionInput struct {
 	// state.
 	Force *bool
 
-	// (Optional) The expected current version of the job execution. Each time you
-	// update the job execution, its version is incremented. If the version of the job
-	// execution stored in Jobs does not match, the update is rejected with a
-	// VersionMismatch error, and an ErrorResponse that contains the current job
-	// execution status data is returned. (This makes it unnecessary to perform a
-	// separate DescribeJobExecution request in order to obtain the job execution
-	// status data.)
-	ExpectedVersion *int64
-
-	// The ID of the job to be canceled.
-	//
-	// This member is required.
-	JobId *string
-
-	// The name of the thing whose execution of the job will be canceled.
-	//
-	// This member is required.
-	ThingName *string
+	// A collection of name/value pairs that describe the status of the job execution.
+	// If not specified, the statusDetails are unchanged. You can specify at most 10
+	// name/value pairs.
+	StatusDetails map[string]*string
 }
 
 type CancelJobExecutionOutput struct {

@@ -58,16 +58,16 @@ func (c *Client) CreateTestGridUrl(ctx context.Context, params *CreateTestGridUr
 
 type CreateTestGridUrlInput struct {
 
+	// Lifetime, in seconds, of the URL.
+	//
+	// This member is required.
+	ExpiresInSeconds *int32
+
 	// ARN (from CreateTestGridProject () or ListTestGridProjects ()) to associate with
 	// the short-term URL.
 	//
 	// This member is required.
 	ProjectArn *string
-
-	// Lifetime, in seconds, of the URL.
-	//
-	// This member is required.
-	ExpiresInSeconds *int32
 }
 
 type CreateTestGridUrlOutput struct {

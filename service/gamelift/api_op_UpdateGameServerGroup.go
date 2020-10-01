@@ -88,6 +88,12 @@ func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameSe
 
 type UpdateGameServerGroupInput struct {
 
+	// The unique identifier of the game server group to update. Use either the
+	// GameServerGroup () name or ARN value.
+	//
+	// This member is required.
+	GameServerGroupName *string
+
 	// The fallback balancing method to use for the game server group when Spot
 	// instances in a Region become unavailable or are not viable for game hosting.
 	// Once triggered, this method remains active until Spot instances can once again
@@ -105,12 +111,14 @@ type UpdateGameServerGroupInput struct {
 	// instances.
 	BalancingStrategy types.BalancingStrategy
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
-	// submitted role is validated to ensure that it contains the necessary permissions
-	// for game server groups.
-	RoleArn *string
+	// A flag that indicates whether instances in the game server group are protected
+	// from early termination. Unprotected instances that have active game servers
+	// running may by terminated during a scale-down event, causing players to be
+	// dropped from the game. Protected instances cannot be terminated while there are
+	// active game servers running. An exception to this is Spot Instances, which may
+	// be terminated by AWS regardless of protection status. This property is set to
+	// NO_PROTECTION by default.
+	GameServerProtectionPolicy types.GameServerProtectionPolicy
 
 	// An updated list of EC2 instance types to use when creating instances in the
 	// group. The instance definition must specify instance types that are supported by
@@ -121,20 +129,12 @@ type UpdateGameServerGroupInput struct {
 	// Amazon EC2 User Guide..
 	InstanceDefinitions []*types.InstanceDefinition
 
-	// A flag that indicates whether instances in the game server group are protected
-	// from early termination. Unprotected instances that have active game servers
-	// running may by terminated during a scale-down event, causing players to be
-	// dropped from the game. Protected instances cannot be terminated while there are
-	// active game servers running. An exception to this is Spot Instances, which may
-	// be terminated by AWS regardless of protection status. This property is set to
-	// NO_PROTECTION by default.
-	GameServerProtectionPolicy types.GameServerProtectionPolicy
-
-	// The unique identifier of the game server group to update. Use either the
-	// GameServerGroup () name or ARN value.
-	//
-	// This member is required.
-	GameServerGroupName *string
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
+	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
+	// submitted role is validated to ensure that it contains the necessary permissions
+	// for game server groups.
+	RoleArn *string
 }
 
 type UpdateGameServerGroupOutput struct {

@@ -62,6 +62,11 @@ func (c *Client) AttachObject(ctx context.Context, params *AttachObjectInput, op
 
 type AttachObjectInput struct {
 
+	// The child object reference to be attached to the object.
+	//
+	// This member is required.
+	ChildReference *types.ObjectReference
+
 	// Amazon Resource Name (ARN) that is associated with the Directory () where both
 	// objects reside. For more information, see arns ().
 	//
@@ -72,11 +77,6 @@ type AttachObjectInput struct {
 	//
 	// This member is required.
 	LinkName *string
-
-	// The child object reference to be attached to the object.
-	//
-	// This member is required.
-	ChildReference *types.ObjectReference
 
 	// The parent object reference.
 	//

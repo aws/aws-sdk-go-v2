@@ -70,12 +70,12 @@ type ListOfferingsInput struct {
 // Represents the return values of the list of offerings.
 type ListOfferingsOutput struct {
 
-	// A value that represents the list offering results.
-	Offerings []*types.Offering
-
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
+	// A value that represents the list offering results.
+	Offerings []*types.Offering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

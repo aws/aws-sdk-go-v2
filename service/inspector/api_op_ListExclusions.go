@@ -56,6 +56,12 @@ func (c *Client) ListExclusions(ctx context.Context, params *ListExclusionsInput
 
 type ListExclusionsInput struct {
 
+	// The ARN of the assessment run that generated the exclusions that you want to
+	// list.
+	//
+	// This member is required.
+	AssessmentRunArn *string
+
 	// You can use this parameter to indicate the maximum number of items you want in
 	// the response. The default value is 100. The maximum value is 500.
 	MaxResults *int32
@@ -65,12 +71,6 @@ type ListExclusionsInput struct {
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
-
-	// The ARN of the assessment run that generated the exclusions that you want to
-	// list.
-	//
-	// This member is required.
-	AssessmentRunArn *string
 }
 
 type ListExclusionsOutput struct {

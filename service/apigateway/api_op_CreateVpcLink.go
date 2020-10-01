@@ -70,12 +70,6 @@ type CreateVpcLinkInput struct {
 	// This member is required.
 	Name *string
 
-	Template *bool
-
-	Title *string
-
-	TemplateSkipList []*string
-
 	// [Required] The ARN of the network load balancer of the VPC targeted by the VPC
 	// link. The network load balancer must be owned by the same AWS account of the API
 	// owner.
@@ -90,6 +84,12 @@ type CreateVpcLinkInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // An API Gateway VPC link for a RestApi () to access resources in an Amazon
@@ -102,6 +102,9 @@ type CreateVpcLinkInput struct {
 // connectionId property to identify the VpcLink () used.
 type CreateVpcLinkOutput struct {
 
+	// The description of the VPC link.
+	Description *string
+
 	// The identifier of the VpcLink (). It is used in an Integration () to reference
 	// this VpcLink ().
 	Id *string
@@ -109,23 +112,20 @@ type CreateVpcLinkOutput struct {
 	// The name used to label and identify the VPC link.
 	Name *string
 
-	// The description of the VPC link.
-	Description *string
-
-	// A description about the VPC link status.
-	StatusMessage *string
-
-	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
-	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
-
 	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
 	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
 	// the status is DELETING.
 	Status types.VpcLinkStatus
 
+	// A description about the VPC link status.
+	StatusMessage *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
+	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
+	// network load balancer must be owned by the same AWS account of the API owner.
+	TargetArns []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,13 @@ func (c *Client) CreateThemeAlias(ctx context.Context, params *CreateThemeAliasI
 
 type CreateThemeAliasInput struct {
 
+	// The name that you want to give to the theme alias that you are creating. The
+	// alias name can't begin with a $. Alias names that start with $ are reserved by
+	// Amazon QuickSight.
+	//
+	// This member is required.
+	AliasName *string
+
 	// The ID of the AWS account that contains the theme for the new theme alias.
 	//
 	// This member is required.
@@ -71,13 +78,6 @@ type CreateThemeAliasInput struct {
 	//
 	// This member is required.
 	ThemeVersionNumber *int64
-
-	// The name that you want to give to the theme alias that you are creating. The
-	// alias name can't begin with a $. Alias names that start with $ are reserved by
-	// Amazon QuickSight.
-	//
-	// This member is required.
-	AliasName *string
 }
 
 type CreateThemeAliasOutput struct {

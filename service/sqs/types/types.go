@@ -6,23 +6,23 @@ package types
 // request.
 type BatchResultErrorEntry struct {
 
-	// Specifies whether the error happened due to the caller of the batch API action.
-	//
-	// This member is required.
-	SenderFault *bool
-
 	// An error code representing why the action failed on this entry.
 	//
 	// This member is required.
 	Code *string
 
-	// A message explaining why the action failed on this entry.
-	Message *string
-
 	// The Id of an entry in a batch request.
 	//
 	// This member is required.
 	Id *string
+
+	// Specifies whether the error happened due to the caller of the batch API action.
+	//
+	// This member is required.
+	SenderFault *bool
+
+	// A message explaining why the action failed on this entry.
+	Message *string
 }
 
 // Encloses a receipt handle and an entry id for each message in
@@ -38,14 +38,6 @@ type BatchResultErrorEntry struct {
 // &ChangeMessageVisibilityBatchRequestEntry.1.VisibilityTimeout=45
 type ChangeMessageVisibilityBatchRequestEntry struct {
 
-	// A receipt handle.
-	//
-	// This member is required.
-	ReceiptHandle *string
-
-	// The new value (in seconds) for the message's visibility timeout.
-	VisibilityTimeout *int32
-
 	// An identifier for this particular receipt handle used to communicate the result.
 	// The Ids of a batch request need to be unique within a request. This identifier
 	// can have up to 80 characters. The following characters are accepted:
@@ -53,6 +45,14 @@ type ChangeMessageVisibilityBatchRequestEntry struct {
 	//
 	// This member is required.
 	Id *string
+
+	// A receipt handle.
+	//
+	// This member is required.
+	ReceiptHandle *string
+
+	// The new value (in seconds) for the message's visibility timeout.
+	VisibilityTimeout *int32
 }
 
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch ().
@@ -93,23 +93,6 @@ type DeleteMessageBatchResultEntry struct {
 // An Amazon SQS message.
 type Message struct {
 
-	// Each message attribute consists of a Name, Type, and Value. For more
-	// information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
-	// in the Amazon Simple Queue Service Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue
-
-	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
-	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
-	// URL-decodes the message before creating the MD5 digest. For information about
-	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
-	MD5OfMessageAttributes *string
-
-	// An identifier associated with the act of receiving the message. A new receipt
-	// handle is returned every time you receive a message. When deleting a message,
-	// you provide the last received receipt handle to delete the message.
-	ReceiptHandle *string
-
 	// A map of the attributes requested in ReceiveMessage () to their respective
 	// values. Supported attributes:
 	//
@@ -135,15 +118,32 @@ type Message struct {
 	// (http://en.wikipedia.org/wiki/Unix_time) in milliseconds.
 	Attributes map[string]*string
 
-	// A unique identifier for the message. A MessageIdis considered unique across all
-	// AWS accounts for an extended period of time.
-	MessageId *string
+	// The message's contents (not URL-encoded).
+	Body *string
 
 	// An MD5 digest of the non-URL-encoded message body string.
 	MD5OfBody *string
 
-	// The message's contents (not URL-encoded).
-	Body *string
+	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
+	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
+	// URL-decodes the message before creating the MD5 digest. For information about
+	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
+	MD5OfMessageAttributes *string
+
+	// Each message attribute consists of a Name, Type, and Value. For more
+	// information, see Amazon SQS Message Attributes
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// in the Amazon Simple Queue Service Developer Guide.
+	MessageAttributes map[string]*MessageAttributeValue
+
+	// A unique identifier for the message. A MessageIdis considered unique across all
+	// AWS accounts for an extended period of time.
+	MessageId *string
+
+	// An identifier associated with the act of receiving the message. A new receipt
+	// handle is returned every time you receive a message. When deleting a message,
+	// you provide the last received receipt handle to delete the message.
+	ReceiptHandle *string
 }
 
 // The user-specified message attribute value. For string data types, the Value
@@ -153,21 +153,6 @@ type Message struct {
 // Value, are part of the message size restriction (256 KB or 262,144 bytes).
 type MessageAttributeValue struct {
 
-	// Strings are Unicode with UTF-8 binary encoding. For a list of code values, see
-	// ASCII Printable Characters
-	// (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
-	StringValue *string
-
-	// Binary type attributes can store any binary data, such as compressed data,
-	// encrypted data, or images.
-	BinaryValue []byte
-
-	// Not implemented. Reserved for future use.
-	BinaryListValues [][]byte
-
-	// Not implemented. Reserved for future use.
-	StringListValues []*string
-
 	// Amazon SQS supports the following logical data types: String, Number, and
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
@@ -176,6 +161,21 @@ type MessageAttributeValue struct {
 	//
 	// This member is required.
 	DataType *string
+
+	// Not implemented. Reserved for future use.
+	BinaryListValues [][]byte
+
+	// Binary type attributes can store any binary data, such as compressed data,
+	// encrypted data, or images.
+	BinaryValue []byte
+
+	// Not implemented. Reserved for future use.
+	StringListValues []*string
+
+	// Strings are Unicode with UTF-8 binary encoding. For a list of code values, see
+	// ASCII Printable Characters
+	// (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
+	StringValue *string
 }
 
 // The user-specified message system attribute value. For string data types, the
@@ -184,12 +184,6 @@ type MessageAttributeValue struct {
 // must not be empty or null.
 type MessageSystemAttributeValue struct {
 
-	// Not implemented. Reserved for future use.
-	BinaryListValues [][]byte
-
-	// Not implemented. Reserved for future use.
-	StringListValues []*string
-
 	// Amazon SQS supports the following logical data types: String, Number, and
 	// Binary. For the Number data type, you must use StringValue. You can also append
 	// custom labels. For more information, see Amazon SQS Message Attributes
@@ -199,9 +193,15 @@ type MessageSystemAttributeValue struct {
 	// This member is required.
 	DataType *string
 
+	// Not implemented. Reserved for future use.
+	BinaryListValues [][]byte
+
 	// Binary type attributes can store any binary data, such as compressed data,
 	// encrypted data, or images.
 	BinaryValue []byte
+
+	// Not implemented. Reserved for future use.
+	StringListValues []*string
 
 	// Strings are Unicode with UTF-8 binary encoding. For a list of code values, see
 	// ASCII Printable Characters
@@ -212,10 +212,32 @@ type MessageSystemAttributeValue struct {
 // Contains the details of a single Amazon SQS message along with an Id.
 type SendMessageBatchRequestEntry struct {
 
+	// An identifier for a message in this batch used to communicate the result. The
+	// Ids of a batch request need to be unique within a request. This identifier can
+	// have up to 80 characters. The following characters are accepted: alphanumeric
+	// characters, hyphens(-), and underscores (_).
+	//
+	// This member is required.
+	Id *string
+
 	// The body of the message.
 	//
 	// This member is required.
 	MessageBody *string
+
+	// The length of time, in seconds, for which a specific message is delayed. Valid
+	// values: 0 to 900. Maximum: 15 minutes. Messages with a positive DelaySeconds
+	// value become available for processing after the delay period is finished. If you
+	// don't specify a value, the default value for the queue is applied. When you set
+	// FifoQueue, you can't set DelaySeconds per message. You can set this parameter
+	// only on a queue level.
+	DelaySeconds *int32
+
+	// Each message attribute consists of a Name, Type, and Value. For more
+	// information, see Amazon SQS Message Attributes
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
+	// in the Amazon Simple Queue Service Developer Guide.
+	MessageAttributes map[string]*MessageAttributeValue
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of messages within a 5-minute minimum deduplication interval.
@@ -269,20 +291,6 @@ type SendMessageBatchRequestEntry struct {
 	// in the Amazon Simple Queue Service Developer Guide.
 	MessageDeduplicationId *string
 
-	// Each message attribute consists of a Name, Type, and Value. For more
-	// information, see Amazon SQS Message Attributes
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html)
-	// in the Amazon Simple Queue Service Developer Guide.
-	MessageAttributes map[string]*MessageAttributeValue
-
-	// An identifier for a message in this batch used to communicate the result. The
-	// Ids of a batch request need to be unique within a request. This identifier can
-	// have up to 80 characters. The following characters are accepted: alphanumeric
-	// characters, hyphens(-), and underscores (_).
-	//
-	// This member is required.
-	Id *string
-
 	// This parameter applies only to FIFO (first-in-first-out) queues. The tag that
 	// specifies that a message belongs to a specific message group. Messages that
 	// belong to the same message group are processed in a FIFO manner (however,
@@ -319,14 +327,6 @@ type SendMessageBatchRequestEntry struct {
 	//     * The size of a message
 	// system attribute doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]*MessageSystemAttributeValue
-
-	// The length of time, in seconds, for which a specific message is delayed. Valid
-	// values: 0 to 900. Maximum: 15 minutes. Messages with a positive DelaySeconds
-	// value become available for processing after the delay period is finished. If you
-	// don't specify a value, the default value for the queue is applied. When you set
-	// FifoQueue, you can't set DelaySeconds per message. You can set this parameter
-	// only on a queue level.
-	DelaySeconds *int32
 }
 
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch
@@ -338,18 +338,6 @@ type SendMessageBatchResultEntry struct {
 	// This member is required.
 	Id *string
 
-	// An MD5 digest of the non-URL-encoded message system attribute string. You can
-	// use this attribute to verify that Amazon SQS received the message correctly.
-	// Amazon SQS URL-decodes the message before creating the MD5 digest. For
-	// information about MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
-	MD5OfMessageSystemAttributes *string
-
-	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
-	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
-	// URL-decodes the message before creating the MD5 digest. For information about
-	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
-	MD5OfMessageAttributes *string
-
 	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
 	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
 	// URL-decodes the message before creating the MD5 digest. For information about
@@ -358,14 +346,26 @@ type SendMessageBatchResultEntry struct {
 	// This member is required.
 	MD5OfMessageBody *string
 
+	// An identifier for the message.
+	//
+	// This member is required.
+	MessageId *string
+
+	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
+	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
+	// URL-decodes the message before creating the MD5 digest. For information about
+	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
+	MD5OfMessageAttributes *string
+
+	// An MD5 digest of the non-URL-encoded message system attribute string. You can
+	// use this attribute to verify that Amazon SQS received the message correctly.
+	// Amazon SQS URL-decodes the message before creating the MD5 digest. For
+	// information about MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
+	MD5OfMessageSystemAttributes *string
+
 	// This parameter applies only to FIFO (first-in-first-out) queues. The large,
 	// non-consecutive number that Amazon SQS assigns to each message. The length of
 	// SequenceNumber is 128 bits. As SequenceNumber continues to increase for a
 	// particular MessageGroupId.
 	SequenceNumber *string
-
-	// An identifier for the message.
-	//
-	// This member is required.
-	MessageId *string
 }

@@ -58,15 +58,16 @@ func (c *Client) ListServerNeighbors(ctx context.Context, params *ListServerNeig
 
 type ListServerNeighborsInput struct {
 
+	// Configuration ID of the server for which neighbors are being listed.
+	//
+	// This member is required.
+	ConfigurationId *string
+
 	// Maximum number of results to return in a single page of output.
 	MaxResults *int32
 
 	// List of configuration IDs to test for one-hop-away.
 	NeighborConfigurationIds []*string
-
-	// Flag to indicate if port and protocol information is needed as part of the
-	// response.
-	PortInformationNeeded *bool
 
 	// Token to retrieve the next set of results. For example, if you previously
 	// specified 100 IDs for ListServerNeighborsRequest$neighborConfigurationIds but
@@ -75,13 +76,17 @@ type ListServerNeighborsInput struct {
 	// 10.
 	NextToken *string
 
-	// Configuration ID of the server for which neighbors are being listed.
-	//
-	// This member is required.
-	ConfigurationId *string
+	// Flag to indicate if port and protocol information is needed as part of the
+	// response.
+	PortInformationNeeded *bool
 }
 
 type ListServerNeighborsOutput struct {
+
+	// List of distinct servers that are one hop away from the given server.
+	//
+	// This member is required.
+	Neighbors []*types.NeighborConnectionDetail
 
 	// Count of distinct servers that are one hop away from the given server.
 	KnownDependencyCount *int64
@@ -92,11 +97,6 @@ type ListServerNeighborsOutput struct {
 	// along with this token. Use this token in the next query to retrieve the next set
 	// of 10.
 	NextToken *string
-
-	// List of distinct servers that are one hop away from the given server.
-	//
-	// This member is required.
-	Neighbors []*types.NeighborConnectionDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,6 +73,11 @@ func (c *Client) GetAccessPoint(ctx context.Context, params *GetAccessPointInput
 
 type GetAccessPointInput struct {
 
+	// The account ID for the account that owns the specified access point.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The name of the access point whose configuration information you want to
 	// retrieve. For Amazon S3 on Outposts specify the ARN of the access point accessed
 	// in the format arn:aws:s3-outposts:::outpost//accesspoint/. For example, to
@@ -83,27 +88,18 @@ type GetAccessPointInput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The account ID for the account that owns the specified access point.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type GetAccessPointOutput struct {
-
-	// The name of the specified access point.
-	Name *string
-
-	// Contains the virtual private cloud (VPC) configuration for the specified access
-	// point.
-	VpcConfiguration *types.VpcConfiguration
 
 	// The name of the bucket associated with the specified access point.
 	Bucket *string
 
 	// The date and time when the specified access point was created.
 	CreationDate *time.Time
+
+	// The name of the specified access point.
+	Name *string
 
 	// Indicates whether this access point allows access from the public internet. If
 	// VpcConfiguration is specified for this access point, then NetworkOrigin is VPC,
@@ -121,6 +117,10 @@ type GetAccessPointOutput struct {
 	// in the Amazon Simple Storage Service Developer Guide. This is not supported for
 	// Amazon S3 on Outposts.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
+
+	// Contains the virtual private cloud (VPC) configuration for the specified access
+	// point.
+	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

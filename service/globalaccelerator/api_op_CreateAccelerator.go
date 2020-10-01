@@ -73,15 +73,6 @@ type CreateAcceleratorInput struct {
 	// This member is required.
 	IdempotencyToken *string
 
-	// Create tags for an accelerator. For more information, see Tagging in AWS Global
-	// Accelerator
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
-	// in the AWS Global Accelerator Developer Guide.
-	Tags []*types.Tag
-
-	// The value for the address type must be IPv4.
-	IpAddressType types.IpAddressType
-
 	// The name of an accelerator. The name can have a maximum of 32 characters, must
 	// contain only alphanumeric characters or hyphens (-), and must not begin or end
 	// with a hyphen.
@@ -94,6 +85,9 @@ type CreateAcceleratorInput struct {
 	// deleted. If set to false, the accelerator can be deleted.
 	Enabled *bool
 
+	// The value for the address type must be IPv4.
+	IpAddressType types.IpAddressType
+
 	// Optionally, if you've added your own IP address pool to Global Accelerator, you
 	// can choose IP addresses from your own pool to use for the accelerator's static
 	// IP addresses. You can specify one or two addresses, separated by a comma. Do not
@@ -104,6 +98,12 @@ type CreateAcceleratorInput struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html) in
 	// the AWS Global Accelerator Developer Guide.
 	IpAddresses []*string
+
+	// Create tags for an accelerator. For more information, see Tagging in AWS Global
+	// Accelerator
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
+	// in the AWS Global Accelerator Developer Guide.
+	Tags []*types.Tag
 }
 
 type CreateAcceleratorOutput struct {

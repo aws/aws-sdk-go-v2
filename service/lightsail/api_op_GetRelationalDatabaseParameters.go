@@ -61,16 +61,16 @@ func (c *Client) GetRelationalDatabaseParameters(ctx context.Context, params *Ge
 
 type GetRelationalDatabaseParametersInput struct {
 
+	// The name of your database for which to get parameters.
+	//
+	// This member is required.
+	RelationalDatabaseName *string
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetRelationalDatabaseParameters request. If your
 	// results are paginated, the response will return a next page token that you can
 	// specify as the page token in a subsequent request.
 	PageToken *string
-
-	// The name of your database for which to get parameters.
-	//
-	// This member is required.
-	RelationalDatabaseName *string
 }
 
 type GetRelationalDatabaseParametersOutput struct {

@@ -98,6 +98,13 @@ type CreateVpcPeeringConnectionInput struct {
 	// This member is required.
 	FleetId *string
 
+	// A unique identifier for the AWS account with the VPC that you want to peer your
+	// Amazon GameLift fleet with. You can find your Account ID in the AWS Management
+	// Console under account settings.
+	//
+	// This member is required.
+	PeerVpcAwsAccountId *string
+
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
 	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
@@ -107,13 +114,6 @@ type CreateVpcPeeringConnectionInput struct {
 	//
 	// This member is required.
 	PeerVpcId *string
-
-	// A unique identifier for the AWS account with the VPC that you want to peer your
-	// Amazon GameLift fleet with. You can find your Account ID in the AWS Management
-	// Console under account settings.
-	//
-	// This member is required.
-	PeerVpcAwsAccountId *string
 }
 
 type CreateVpcPeeringConnectionOutput struct {

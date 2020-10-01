@@ -60,23 +60,23 @@ func (c *Client) UpdateRoomMembership(ctx context.Context, params *UpdateRoomMem
 
 type UpdateRoomMembershipInput struct {
 
-	// The member ID.
-	//
-	// This member is required.
-	MemberId *string
-
-	// The role of the member.
-	Role types.RoomMembershipRole
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
 
+	// The member ID.
+	//
+	// This member is required.
+	MemberId *string
+
 	// The room ID.
 	//
 	// This member is required.
 	RoomId *string
+
+	// The role of the member.
+	Role types.RoomMembershipRole
 }
 
 type UpdateRoomMembershipOutput struct {

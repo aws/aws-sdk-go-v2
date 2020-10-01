@@ -57,13 +57,6 @@ func (c *Client) ListProvisionedConcurrencyConfigs(ctx context.Context, params *
 
 type ListProvisionedConcurrencyConfigsInput struct {
 
-	// Specify the pagination token that's returned by a previous request to retrieve
-	// the next page of results.
-	Marker *string
-
-	// Specify a number to limit the number of configurations returned.
-	MaxItems *int32
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -81,15 +74,22 @@ type ListProvisionedConcurrencyConfigsInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// Specify the pagination token that's returned by a previous request to retrieve
+	// the next page of results.
+	Marker *string
+
+	// Specify a number to limit the number of configurations returned.
+	MaxItems *int32
 }
 
 type ListProvisionedConcurrencyConfigsOutput struct {
 
-	// A list of provisioned concurrency configurations.
-	ProvisionedConcurrencyConfigs []*types.ProvisionedConcurrencyConfigListItem
-
 	// The pagination token that's included if more results are available.
 	NextMarker *string
+
+	// A list of provisioned concurrency configurations.
+	ProvisionedConcurrencyConfigs []*types.ProvisionedConcurrencyConfigListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

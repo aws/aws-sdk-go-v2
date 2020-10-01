@@ -61,23 +61,26 @@ type ListMedicalTranscriptionJobsInput struct {
 	// contains the specified string.
 	JobNameContains *string
 
-	// When specified, returns only medical transcription jobs with the specified
-	// status. Jobs are ordered by creation date, with the newest jobs returned first.
-	// If you don't specify a status, Amazon Transcribe Medical returns all
-	// transcription jobs ordered by creation date.
-	Status types.TranscriptionJobStatus
+	// The maximum number of medical transcription jobs to return in the response. IF
+	// there are fewer results in the list, this response contains only the actual
+	// results.
+	MaxResults *int32
 
 	// If you a receive a truncated result in the previous request of
 	// ListMedicalTranscriptionJobs, include NextToken to fetch the next set of jobs.
 	NextToken *string
 
-	// The maximum number of medical transcription jobs to return in the response. IF
-	// there are fewer results in the list, this response contains only the actual
-	// results.
-	MaxResults *int32
+	// When specified, returns only medical transcription jobs with the specified
+	// status. Jobs are ordered by creation date, with the newest jobs returned first.
+	// If you don't specify a status, Amazon Transcribe Medical returns all
+	// transcription jobs ordered by creation date.
+	Status types.TranscriptionJobStatus
 }
 
 type ListMedicalTranscriptionJobsOutput struct {
+
+	// A list of objects containing summary information for a transcription job.
+	MedicalTranscriptionJobSummaries []*types.MedicalTranscriptionJobSummary
 
 	// The ListMedicalTranscriptionJobs operation returns a page of jobs at a time. The
 	// maximum size of the page is set by the MaxResults parameter. If the number of
@@ -85,9 +88,6 @@ type ListMedicalTranscriptionJobsOutput struct {
 	// NextPage token. Include the token in the next request to the
 	// ListMedicalTranscriptionJobs operation to return in the next page of jobs.
 	NextToken *string
-
-	// A list of objects containing summary information for a transcription job.
-	MedicalTranscriptionJobSummaries []*types.MedicalTranscriptionJobSummary
 
 	// The requested status of the medical transcription jobs returned.
 	Status types.TranscriptionJobStatus

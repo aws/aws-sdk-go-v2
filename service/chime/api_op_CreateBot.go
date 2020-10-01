@@ -62,13 +62,13 @@ type CreateBotInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The domain of the Amazon Chime Enterprise account.
-	Domain *string
-
 	// The bot display name.
 	//
 	// This member is required.
 	DisplayName *string
+
+	// The domain of the Amazon Chime Enterprise account.
+	Domain *string
 }
 
 type CreateBotOutput struct {

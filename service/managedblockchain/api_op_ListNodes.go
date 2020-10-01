@@ -62,30 +62,30 @@ type ListNodesInput struct {
 	// This member is required.
 	MemberId *string
 
-	// An optional status specifier. If provided, only nodes currently in this status
-	// are listed.
-	Status types.NodeStatus
-
 	// The unique identifier of the network for which to list nodes.
 	//
 	// This member is required.
 	NetworkId *string
 
+	// The maximum number of nodes to list.
+	MaxResults *int32
+
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The maximum number of nodes to list.
-	MaxResults *int32
+	// An optional status specifier. If provided, only nodes currently in this status
+	// are listed.
+	Status types.NodeStatus
 }
 
 type ListNodesOutput struct {
 
+	// The pagination token that indicates the next set of results to retrieve.
+	NextToken *string
+
 	// An array of NodeSummary objects that contain configuration properties for each
 	// node.
 	Nodes []*types.NodeSummary
-
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

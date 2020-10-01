@@ -57,25 +57,25 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 
 type DeleteAppInput struct {
 
-	// The type of app.
-	//
-	// This member is required.
-	AppType types.AppType
-
-	// The user profile name.
-	//
-	// This member is required.
-	UserProfileName *string
-
 	// The name of the app.
 	//
 	// This member is required.
 	AppName *string
 
+	// The type of app.
+	//
+	// This member is required.
+	AppType types.AppType
+
 	// The domain ID.
 	//
 	// This member is required.
 	DomainId *string
+
+	// The user profile name.
+	//
+	// This member is required.
+	UserProfileName *string
 }
 
 type DeleteAppOutput struct {

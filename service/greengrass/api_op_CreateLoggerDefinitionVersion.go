@@ -62,11 +62,11 @@ type CreateLoggerDefinitionVersionInput struct {
 	// This member is required.
 	LoggerDefinitionId *string
 
-	// A list of loggers.
-	Loggers []*types.Logger
-
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
+	// A list of loggers.
+	Loggers []*types.Logger
 }
 
 type CreateLoggerDefinitionVersionOutput struct {
@@ -74,14 +74,14 @@ type CreateLoggerDefinitionVersionOutput struct {
 	// The ARN of the version.
 	Arn *string
 
-	// The ID of the version.
-	Version *string
+	// The time, in milliseconds since the epoch, when the version was created.
+	CreationTimestamp *string
 
 	// The ID of the parent definition that the version is associated with.
 	Id *string
 
-	// The time, in milliseconds since the epoch, when the version was created.
-	CreationTimestamp *string
+	// The ID of the version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

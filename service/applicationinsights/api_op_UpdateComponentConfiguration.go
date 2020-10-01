@@ -59,10 +59,6 @@ func (c *Client) UpdateComponentConfiguration(ctx context.Context, params *Updat
 
 type UpdateComponentConfigurationInput struct {
 
-	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
-	// DOT_NET_WEB, DOT_NET_CORE, SQL_SERVER, and DEFAULT.
-	Tier types.Tier
-
 	// The name of the component.
 	//
 	// This member is required.
@@ -73,9 +69,6 @@ type UpdateComponentConfigurationInput struct {
 	// This member is required.
 	ResourceGroupName *string
 
-	// Indicates whether the application component is monitored.
-	Monitor *bool
-
 	// The configuration settings of the component. The value is the escaped JSON of
 	// the configuration. For more information about the JSON format, see Working with
 	// JSON
@@ -85,6 +78,13 @@ type UpdateComponentConfigurationInput struct {
 	// component configuration file, see Component Configuration
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/component-config.html).
 	ComponentConfiguration *string
+
+	// Indicates whether the application component is monitored.
+	Monitor *bool
+
+	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
+	// DOT_NET_WEB, DOT_NET_CORE, SQL_SERVER, and DEFAULT.
+	Tier types.Tier
 }
 
 type UpdateComponentConfigurationOutput struct {

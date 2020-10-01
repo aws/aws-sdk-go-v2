@@ -57,20 +57,6 @@ func (c *Client) GetDomainSuggestions(ctx context.Context, params *GetDomainSugg
 
 type GetDomainSuggestionsInput struct {
 
-	// The number of suggested domain names that you want Route 53 to return. Specify a
-	// value between 1 and 50.
-	//
-	// This member is required.
-	SuggestionCount *int32
-
-	// If OnlyAvailable is true, Route 53 returns only domain names that are available.
-	// If OnlyAvailable is false, Route 53 returns domain names without checking
-	// whether they're available to be registered. To determine whether the domain is
-	// available, you can call checkDomainAvailability for each suggestion.
-	//
-	// This member is required.
-	OnlyAvailable *bool
-
 	// A domain name that you want to use as the basis for a list of possible domain
 	// names. The top-level domain (TLD), such as .com, must be a TLD that Route 53
 	// supports. For a list of supported TLDs, see Domains that You Can Register with
@@ -98,6 +84,20 @@ type GetDomainSuggestionsInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// If OnlyAvailable is true, Route 53 returns only domain names that are available.
+	// If OnlyAvailable is false, Route 53 returns domain names without checking
+	// whether they're available to be registered. To determine whether the domain is
+	// available, you can call checkDomainAvailability for each suggestion.
+	//
+	// This member is required.
+	OnlyAvailable *bool
+
+	// The number of suggested domain names that you want Route 53 to return. Specify a
+	// value between 1 and 50.
+	//
+	// This member is required.
+	SuggestionCount *int32
 }
 
 type GetDomainSuggestionsOutput struct {

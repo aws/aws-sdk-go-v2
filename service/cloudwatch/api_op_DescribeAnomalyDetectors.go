@@ -59,6 +59,11 @@ func (c *Client) DescribeAnomalyDetectors(ctx context.Context, params *DescribeA
 
 type DescribeAnomalyDetectorsInput struct {
 
+	// Limits the results to only the anomaly detection models that are associated with
+	// the specified metric dimensions. If there are multiple metrics that have these
+	// dimensions and have anomaly detection models associated, they're all returned.
+	Dimensions []*types.Dimension
+
 	// The maximum number of results to return in one operation. The maximum value that
 	// you can specify is 100. To retrieve the remaining results, make another call
 	// with the returned NextToken value.
@@ -70,17 +75,12 @@ type DescribeAnomalyDetectorsInput struct {
 	MetricName *string
 
 	// Limits the results to only the anomaly detection models that are associated with
-	// the specified metric dimensions. If there are multiple metrics that have these
-	// dimensions and have anomaly detection models associated, they're all returned.
-	Dimensions []*types.Dimension
+	// the specified namespace.
+	Namespace *string
 
 	// Use the token returned by the previous operation to request the next page of
 	// results.
 	NextToken *string
-
-	// Limits the results to only the anomaly detection models that are associated with
-	// the specified namespace.
-	Namespace *string
 }
 
 type DescribeAnomalyDetectorsOutput struct {

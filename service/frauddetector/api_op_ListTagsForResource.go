@@ -59,25 +59,25 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The next token from the previous results.
-	NextToken *string
-
-	// The maximum number of objects to return for the request.
-	MaxResults *int32
-
 	// The ARN that specifies the resource whose tags you want to list.
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// The maximum number of objects to return for the request.
+	MaxResults *int32
+
+	// The next token from the previous results.
+	NextToken *string
 }
 
 type ListTagsForResourceOutput struct {
 
-	// A collection of key and value pairs.
-	Tags []*types.Tag
-
 	// The next token for subsequent requests.
 	NextToken *string
+
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

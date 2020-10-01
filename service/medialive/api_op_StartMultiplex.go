@@ -68,35 +68,35 @@ type StartMultiplexInput struct {
 // Placeholder documentation for StartMultiplexResponse
 type StartMultiplexOutput struct {
 
-	// Configuration for a multiplex event.
-	MultiplexSettings *types.MultiplexSettings
-
-	// The unique id of the multiplex.
-	Id *string
-
-	// The current state of the multiplex.
-	State types.MultiplexState
+	// The unique arn of the multiplex.
+	Arn *string
 
 	// A list of availability zones for the multiplex.
 	AvailabilityZones []*string
 
-	// The number of currently healthy pipelines.
-	PipelinesRunningCount *int32
+	// A list of the multiplex output destinations.
+	Destinations []*types.MultiplexOutputDestination
+
+	// The unique id of the multiplex.
+	Id *string
+
+	// Configuration for a multiplex event.
+	MultiplexSettings *types.MultiplexSettings
 
 	// The name of the multiplex.
 	Name *string
 
-	// A list of the multiplex output destinations.
-	Destinations []*types.MultiplexOutputDestination
-
-	// A collection of key-value pairs.
-	Tags map[string]*string
-
-	// The unique arn of the multiplex.
-	Arn *string
+	// The number of currently healthy pipelines.
+	PipelinesRunningCount *int32
 
 	// The number of programs in the multiplex.
 	ProgramCount *int32
+
+	// The current state of the multiplex.
+	State types.MultiplexState
+
+	// A collection of key-value pairs.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

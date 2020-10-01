@@ -59,6 +59,11 @@ func (c *Client) ListHumanLoops(ctx context.Context, params *ListHumanLoopsInput
 
 type ListHumanLoopsInput struct {
 
+	// The Amazon Resource Name (ARN) of a flow definition.
+	//
+	// This member is required.
+	FlowDefinitionArn *string
+
 	// (Optional) The timestamp of the date when you want the human loops to begin in
 	// ISO 8601 format. For example, 2020-02-24.
 	CreationTimeAfter *time.Time
@@ -75,11 +80,6 @@ type ListHumanLoopsInput struct {
 	// A token to display the next page of results.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of a flow definition.
-	//
-	// This member is required.
-	FlowDefinitionArn *string
-
 	// Optional. The order for displaying results. Valid values: Ascending and
 	// Descending.
 	SortOrder types.SortOrder
@@ -87,13 +87,13 @@ type ListHumanLoopsInput struct {
 
 type ListHumanLoopsOutput struct {
 
-	// A token to display the next page of results.
-	NextToken *string
-
 	// An array of objects that contain information about the human loops.
 	//
 	// This member is required.
 	HumanLoopSummaries []*types.HumanLoopSummary
+
+	// A token to display the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

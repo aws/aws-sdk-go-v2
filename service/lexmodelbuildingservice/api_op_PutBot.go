@@ -72,28 +72,6 @@ func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func
 
 type PutBotInput struct {
 
-	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. A user interaction session remains active for the amount of time
-	// specified. If no conversation occurs during this time, the session expires and
-	// Amazon Lex deletes any data provided before the timeout. For example, suppose
-	// that a user chooses the OrderPizza intent, but gets sidetracked halfway through
-	// placing an order. If the user doesn't complete the order within the specified
-	// time, Amazon Lex discards the slot information that it gathered, and the user
-	// must start over. If you don't include the idleSessionTTLInSeconds element in a
-	// PutBot operation request, Amazon Lex uses the default value. This is also true
-	// if the request replaces an existing bot. The default is 300 seconds (5 minutes).
-	IdleSessionTTLInSeconds *int32
-
-	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
-	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but
-	// doesn't build it. If you don't specify this value, the default value is BUILD.
-	ProcessBehavior types.ProcessBehavior
-
-	// When set to true a new numbered version of the bot is created. This is the same
-	// as calling the CreateBotVersion operation. If you don't specify createVersion,
-	// the default is false.
-	CreateVersion *bool
-
 	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
 	// must specify whether your use of Amazon Lex is related to a website, program, or
 	// other application that is directed or targeted, in whole or in part, to children
@@ -119,6 +97,18 @@ type PutBotInput struct {
 	// This member is required.
 	ChildDirected *bool
 
+	// Specifies the target locale for the bot. Any intent used in the bot must be
+	// compatible with the locale of the bot.  <p>The default is
+	// <code>en-US</code>.</p>
+	//
+	// This member is required.
+	Locale types.Locale
+
+	// The name of the bot. The name is not case sensitive.
+	//
+	// This member is required.
+	Name *string
+
 	// When Amazon Lex can't understand the user's input in context, it tries to elicit
 	// the information a few times. After that, Amazon Lex sends the message defined in
 	// abortStatement to the user, and then aborts the conversation. To set the number
@@ -142,11 +132,6 @@ type PutBotInput struct {
 	// don't specify the  checksum field, or if the checksum does not match the $LATEST
 	// version, you get a PreconditionFailedException exception.
 	Checksum *string
-
-	// The name of the bot. The name is not case sensitive.
-	//
-	// This member is required.
-	Name *string
 
 	// When Amazon Lex doesn't understand the user's intent, it uses this message to
 	// get clarification. To specify how many times Amazon Lex should repeat the
@@ -179,17 +164,10 @@ type PutBotInput struct {
 	// from the user, it returns a 400 Bad Request exception.
 	ClarificationPrompt *types.Prompt
 
-	// An array of Intent objects. Each intent represents a command that a user can
-	// express. For example, a pizza ordering bot might support an OrderPizza intent.
-	// For more information, see how-it-works ().
-	Intents []*types.Intent
-
-	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
-	// with the user. The locale configured for the voice must match the locale of the
-	// bot. For more information, see Voices in Amazon Polly
-	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) in the Amazon Polly
-	// Developer Guide.
-	VoiceId *string
+	// When set to true a new numbered version of the bot is created. This is the same
+	// as calling the CreateBotVersion operation. If you don't specify createVersion,
+	// the default is false.
+	CreateVersion *bool
 
 	// A description of the bot.
 	Description *string
@@ -198,42 +176,49 @@ type PutBotInput struct {
 	// analysis. If you don't specify detectSentiment, the default is false.
 	DetectSentiment *bool
 
-	// Specifies the target locale for the bot. Any intent used in the bot must be
-	// compatible with the locale of the bot.  <p>The default is
-	// <code>en-US</code>.</p>
-	//
-	// This member is required.
-	Locale types.Locale
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a
+	// conversation. A user interaction session remains active for the amount of time
+	// specified. If no conversation occurs during this time, the session expires and
+	// Amazon Lex deletes any data provided before the timeout. For example, suppose
+	// that a user chooses the OrderPizza intent, but gets sidetracked halfway through
+	// placing an order. If the user doesn't complete the order within the specified
+	// time, Amazon Lex discards the slot information that it gathered, and the user
+	// must start over. If you don't include the idleSessionTTLInSeconds element in a
+	// PutBot operation request, Amazon Lex uses the default value. This is also true
+	// if the request replaces an existing bot. The default is 300 seconds (5 minutes).
+	IdleSessionTTLInSeconds *int32
+
+	// An array of Intent objects. Each intent represents a command that a user can
+	// express. For example, a pizza ordering bot might support an OrderPizza intent.
+	// For more information, see how-it-works ().
+	Intents []*types.Intent
+
+	// If you set the processBehavior element to BUILD, Amazon Lex builds the bot so
+	// that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but
+	// doesn't build it. If you don't specify this value, the default value is BUILD.
+	ProcessBehavior types.ProcessBehavior
 
 	// A list of tags to add to the bot. You can only add tags when you create a bot,
 	// you can't use the PutBot operation to update the tags on a bot. To update tags,
 	// use the TagResource operation.
 	Tags []*types.Tag
+
+	// The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions
+	// with the user. The locale configured for the voice must match the locale of the
+	// bot. For more information, see Voices in Amazon Polly
+	// (https://docs.aws.amazon.com/polly/latest/dg/voicelist.html) in the Amazon Polly
+	// Developer Guide.
+	VoiceId *string
 }
 
 type PutBotOutput struct {
 
-	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
-	// user. For more information, see PutBot ().
-	VoiceId *string
-
-	// The prompts that Amazon Lex uses when it doesn't understand the user's intent.
-	// For more information, see PutBot ().
-	ClarificationPrompt *types.Prompt
-
-	// true if the bot is configured to send user utterances to Amazon Comprehend for
-	// sentiment analysis. If the detectSentiment field was not specified in the
-	// request, the detectSentiment field is false in the response.
-	DetectSentiment *bool
+	// The message that Amazon Lex uses to abort a conversation. For more information,
+	// see PutBot ().
+	AbortStatement *types.Statement
 
 	// Checksum of the bot that you created.
 	Checksum *string
-
-	// A description of the bot.
-	Description *string
-
-	// The target locale for the bot.
-	Locale types.Locale
 
 	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
 	// must specify whether your use of Amazon Lex is related to a website, program, or
@@ -258,29 +243,46 @@ type PutBotOutput struct {
 	// (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
 
-	// A list of tags associated with the bot.
-	Tags []*types.Tag
+	// The prompts that Amazon Lex uses when it doesn't understand the user's intent.
+	// For more information, see PutBot ().
+	ClarificationPrompt *types.Prompt
+
+	// True if a new version of the bot was created. If the createVersion field was not
+	// specified in the request, the createVersion field is set to false in the
+	// response.
+	CreateVersion *bool
+
+	// The date that the bot was created.
+	CreatedDate *time.Time
+
+	// A description of the bot.
+	Description *string
+
+	// true if the bot is configured to send user utterances to Amazon Comprehend for
+	// sentiment analysis. If the detectSentiment field was not specified in the
+	// request, the detectSentiment field is false in the response.
+	DetectSentiment *bool
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to build the
 	// bot.
 	FailureReason *string
 
-	// An array of Intent objects. For more information, see PutBot ().
-	Intents []*types.Intent
-
-	// The version of the bot. For a new bot, the version is always $LATEST.
-	Version *string
-
 	// The maximum length of time that Amazon Lex retains the data gathered in a
 	// conversation. For more information, see PutBot ().
 	IdleSessionTTLInSeconds *int32
 
+	// An array of Intent objects. For more information, see PutBot ().
+	Intents []*types.Intent
+
+	// The date that the bot was updated. When you create a resource, the creation date
+	// and last updated date are the same.
+	LastUpdatedDate *time.Time
+
+	// The target locale for the bot.
+	Locale types.Locale
+
 	// The name of the bot.
 	Name *string
-
-	// The message that Amazon Lex uses to abort a conversation. For more information,
-	// see PutBot ().
-	AbortStatement *types.Statement
 
 	// When you send a request to create a bot with processBehavior set to BUILD,
 	// Amazon Lex sets the status response element to BUILDING. In the
@@ -293,17 +295,15 @@ type PutBotOutput struct {
 	// bot.
 	Status types.Status
 
-	// The date that the bot was updated. When you create a resource, the creation date
-	// and last updated date are the same.
-	LastUpdatedDate *time.Time
+	// A list of tags associated with the bot.
+	Tags []*types.Tag
 
-	// True if a new version of the bot was created. If the createVersion field was not
-	// specified in the request, the createVersion field is set to false in the
-	// response.
-	CreateVersion *bool
+	// The version of the bot. For a new bot, the version is always $LATEST.
+	Version *string
 
-	// The date that the bot was created.
-	CreatedDate *time.Time
+	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
+	// user. For more information, see PutBot ().
+	VoiceId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

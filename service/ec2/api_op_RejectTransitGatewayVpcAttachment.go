@@ -60,16 +60,16 @@ func (c *Client) RejectTransitGatewayVpcAttachment(ctx context.Context, params *
 
 type RejectTransitGatewayVpcAttachmentInput struct {
 
+	// The ID of the attachment.
+	//
+	// This member is required.
+	TransitGatewayAttachmentId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the attachment.
-	//
-	// This member is required.
-	TransitGatewayAttachmentId *string
 }
 
 type RejectTransitGatewayVpcAttachmentOutput struct {

@@ -63,6 +63,22 @@ func (c *Client) UpdateHealthCheck(ctx context.Context, params *UpdateHealthChec
 // check.
 type UpdateHealthCheckInput struct {
 
+	// The ID for the health check for which you want detailed information. When you
+	// created the health check, CreateHealthCheck returned the ID in the response, in
+	// the HealthCheckId element.
+	//
+	// This member is required.
+	HealthCheckId *string
+
+	// A complex type that identifies the CloudWatch alarm that you want Amazon Route
+	// 53 health checkers to use to determine whether the specified health check is
+	// healthy.
+	AlarmIdentifier *types.AlarmIdentifier
+
+	// A complex type that contains one ChildHealthCheck element for each health check
+	// that you want to associate with a CALCULATED health check.
+	ChildHealthChecks []*string
+
 	// Stops Route 53 from performing health checks. When you disable a health check,
 	// here's what happens:
 	//
@@ -86,81 +102,6 @@ type UpdateHealthCheckInput struct {
 	// disabled. For more information, see <a
 	// href="http://aws.amazon.com/route53/pricing/">Amazon Route 53 Pricing</a>.</p>
 	Disabled *bool
-
-	// The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to
-	// perform health checks on. If you don't specify a value for IPAddress, Route 53
-	// sends a DNS request to resolve the domain name that you specify in
-	// FullyQualifiedDomainName at the interval that you specify in RequestInterval.
-	// Using an IP address that is returned by DNS, Route 53 then checks the health of
-	// the endpoint. Use one of the following formats for the value of IPAddress:
-	//
-	//
-	// * IPv4 address: four values between 0 and 255, separated by periods (.), for
-	// example, 192.0.2.44.
-	//
-	//     * IPv6 address: eight groups of four hexadecimal
-	// values, separated by colons (:), for example,
-	// 2001:0db8:85a3:0000:0000:abcd:0001:2345. You can also shorten IPv6 addresses as
-	// described in RFC 5952, for example, 2001:db8:85a3::abcd:1:2345.
-	//
-	// If the endpoint
-	// is an EC2 instance, we recommend that you create an Elastic IP address,
-	// associate it with your EC2 instance, and specify the Elastic IP address for
-	// IPAddress. This ensures that the IP address of your instance never changes. For
-	// more information, see the applicable documentation:
-	//
-	//     * Linux: Elastic IP
-	// Addresses (EIP)
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// in the Amazon EC2 User Guide for Linux Instances
-	//
-	//     * Windows: Elastic IP
-	// Addresses (EIP)
-	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html)
-	// in the Amazon EC2 User Guide for Windows Instances
-	//
-	// If a health check already
-	// has a value for IPAddress, you can change the value. However, you can't update
-	// an existing health check to add or remove the value of IPAddress. For more
-	// information, see FullyQualifiedDomainName
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName).
-	// Constraints: Route 53 can't check the health of endpoints for which the IP
-	// address is in local, private, non-routable, or multicast ranges. For more
-	// information about IP addresses for which you can't create health checks, see the
-	// following documents:
-	//
-	//     * RFC 5735, Special Use IPv4 Addresses
-	// (https://tools.ietf.org/html/rfc5735)
-	//
-	//     * RFC 6598, IANA-Reserved IPv4 Prefix
-	// for Shared Address Space (https://tools.ietf.org/html/rfc6598)
-	//
-	//     * RFC 5156,
-	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
-	IPAddress *string
-
-	// A complex type that identifies the CloudWatch alarm that you want Amazon Route
-	// 53 health checkers to use to determine whether the specified health check is
-	// healthy.
-	AlarmIdentifier *types.AlarmIdentifier
-
-	// The port on the endpoint that you want Amazon Route 53 to perform health checks
-	// on. Don't specify a value for Port when you specify a value for Type of
-	// CLOUDWATCH_METRIC or CALCULATED.
-	Port *int32
-
-	// The path that you want Amazon Route 53 to request when performing health checks.
-	// The path can be any value for which your endpoint will return an HTTP status
-	// code of 2xx or 3xx when the endpoint is healthy, for example the file
-	// /docs/route53-health-check.html. You can also include query string parameters,
-	// for example, /welcome.html?language=jp&login=y. Specify this value only if you
-	// want to change it.
-	ResourcePath *string
-
-	// Specify whether you want Amazon Route 53 to invert the status of a health check,
-	// for example, to consider a health check unhealthy when it otherwise would be
-	// considered healthy.
-	Inverted *bool
 
 	// Specify whether you want Amazon Route 53 to send the value of
 	// FullyQualifiedDomainName to the endpoint in the client_hello message during TLS
@@ -189,10 +130,6 @@ type UpdateHealthCheckInput struct {
 	// in the Amazon Route 53 Developer Guide. If you don't specify a value for
 	// FailureThreshold, the default value is three health checks.
 	FailureThreshold *int32
-
-	// A complex type that contains one Region element for each region that you want
-	// Amazon Route 53 health checkers to check the specified endpoint from.
-	Regions []types.HealthCheckRegion
 
 	// Amazon Route 53 behavior depends on whether you specify a value for IPAddress.
 	// <note> <p>If a health check already has a value for <code>IPAddress</code>, you
@@ -248,35 +185,6 @@ type UpdateHealthCheckInput struct {
 	// header.</p>
 	FullyQualifiedDomainName *string
 
-	// When CloudWatch has insufficient data about the metric to determine the alarm
-	// state, the status that you want Amazon Route 53 to assign to the health check:
-	//
-	//
-	// * Healthy: Route 53 considers the health check to be healthy.
-	//
-	//     * Unhealthy:
-	// Route 53 considers the health check to be unhealthy.
-	//
-	//     * LastKnownStatus:
-	// Route 53 uses the status of the health check from the last time CloudWatch had
-	// sufficient data to determine the alarm state. For new health checks that have no
-	// last known status, the default status for the health check is healthy.
-	InsufficientDataHealthStatus types.InsufficientDataHealthStatus
-
-	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
-	// want Amazon Route 53 to search for in the response body from the specified
-	// resource. If the string appears in the response body, Route 53 considers the
-	// resource healthy. (You can't change the value of Type when you update a health
-	// check.)
-	SearchString *string
-
-	// The ID for the health check for which you want detailed information. When you
-	// created the health check, CreateHealthCheck returned the ID in the response, in
-	// the HealthCheckId element.
-	//
-	// This member is required.
-	HealthCheckId *string
-
 	// A sequential counter that Amazon Route 53 sets to 1 when you create a health
 	// check and increments by 1 each time you update settings for the health check. We
 	// recommend that you use GetHealthCheck or ListHealthChecks to get the current
@@ -308,6 +216,87 @@ type UpdateHealthCheckInput struct {
 	// this health check to be healthy.
 	HealthThreshold *int32
 
+	// The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to
+	// perform health checks on. If you don't specify a value for IPAddress, Route 53
+	// sends a DNS request to resolve the domain name that you specify in
+	// FullyQualifiedDomainName at the interval that you specify in RequestInterval.
+	// Using an IP address that is returned by DNS, Route 53 then checks the health of
+	// the endpoint. Use one of the following formats for the value of IPAddress:
+	//
+	//
+	// * IPv4 address: four values between 0 and 255, separated by periods (.), for
+	// example, 192.0.2.44.
+	//
+	//     * IPv6 address: eight groups of four hexadecimal
+	// values, separated by colons (:), for example,
+	// 2001:0db8:85a3:0000:0000:abcd:0001:2345. You can also shorten IPv6 addresses as
+	// described in RFC 5952, for example, 2001:db8:85a3::abcd:1:2345.
+	//
+	// If the endpoint
+	// is an EC2 instance, we recommend that you create an Elastic IP address,
+	// associate it with your EC2 instance, and specify the Elastic IP address for
+	// IPAddress. This ensures that the IP address of your instance never changes. For
+	// more information, see the applicable documentation:
+	//
+	//     * Linux: Elastic IP
+	// Addresses (EIP)
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
+	// in the Amazon EC2 User Guide for Linux Instances
+	//
+	//     * Windows: Elastic IP
+	// Addresses (EIP)
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/elastic-ip-addresses-eip.html)
+	// in the Amazon EC2 User Guide for Windows Instances
+	//
+	// If a health check already
+	// has a value for IPAddress, you can change the value. However, you can't update
+	// an existing health check to add or remove the value of IPAddress. For more
+	// information, see FullyQualifiedDomainName
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_UpdateHealthCheck.html#Route53-UpdateHealthCheck-request-FullyQualifiedDomainName).
+	// Constraints: Route 53 can't check the health of endpoints for which the IP
+	// address is in local, private, non-routable, or multicast ranges. For more
+	// information about IP addresses for which you can't create health checks, see the
+	// following documents:
+	//
+	//     * RFC 5735, Special Use IPv4 Addresses
+	// (https://tools.ietf.org/html/rfc5735)
+	//
+	//     * RFC 6598, IANA-Reserved IPv4 Prefix
+	// for Shared Address Space (https://tools.ietf.org/html/rfc6598)
+	//
+	//     * RFC 5156,
+	// Special-Use IPv6 Addresses (https://tools.ietf.org/html/rfc5156)
+	IPAddress *string
+
+	// When CloudWatch has insufficient data about the metric to determine the alarm
+	// state, the status that you want Amazon Route 53 to assign to the health check:
+	//
+	//
+	// * Healthy: Route 53 considers the health check to be healthy.
+	//
+	//     * Unhealthy:
+	// Route 53 considers the health check to be unhealthy.
+	//
+	//     * LastKnownStatus:
+	// Route 53 uses the status of the health check from the last time CloudWatch had
+	// sufficient data to determine the alarm state. For new health checks that have no
+	// last known status, the default status for the health check is healthy.
+	InsufficientDataHealthStatus types.InsufficientDataHealthStatus
+
+	// Specify whether you want Amazon Route 53 to invert the status of a health check,
+	// for example, to consider a health check unhealthy when it otherwise would be
+	// considered healthy.
+	Inverted *bool
+
+	// The port on the endpoint that you want Amazon Route 53 to perform health checks
+	// on. Don't specify a value for Port when you specify a value for Type of
+	// CLOUDWATCH_METRIC or CALCULATED.
+	Port *int32
+
+	// A complex type that contains one Region element for each region that you want
+	// Amazon Route 53 health checkers to check the specified endpoint from.
+	Regions []types.HealthCheckRegion
+
 	// A complex type that contains one ResettableElementName element for each element
 	// that you want to reset to the default value. Valid values for
 	// ResettableElementName include the following:
@@ -332,9 +321,20 @@ type UpdateHealthCheckInput struct {
 	// to null.
 	ResetElements []types.ResettableElementName
 
-	// A complex type that contains one ChildHealthCheck element for each health check
-	// that you want to associate with a CALCULATED health check.
-	ChildHealthChecks []*string
+	// The path that you want Amazon Route 53 to request when performing health checks.
+	// The path can be any value for which your endpoint will return an HTTP status
+	// code of 2xx or 3xx when the endpoint is healthy, for example the file
+	// /docs/route53-health-check.html. You can also include query string parameters,
+	// for example, /welcome.html?language=jp&login=y. Specify this value only if you
+	// want to change it.
+	ResourcePath *string
+
+	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
+	// want Amazon Route 53 to search for in the response body from the specified
+	// resource. If the string appears in the response body, Route 53 considers the
+	// resource healthy. (You can't change the value of Type when you update a health
+	// check.)
+	SearchString *string
 }
 
 // A complex type that contains the response to the UpdateHealthCheck request.

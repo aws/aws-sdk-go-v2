@@ -79,11 +79,6 @@ type DescribeGatewayCapabilityConfigurationInput struct {
 
 type DescribeGatewayCapabilityConfigurationOutput struct {
 
-	// The namespace of the gateway capability.
-	//
-	// This member is required.
-	CapabilityNamespace *string
-
 	// The JSON document that defines the gateway capability's configuration. For more
 	// information, see Configuring data sources (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
@@ -91,6 +86,11 @@ type DescribeGatewayCapabilityConfigurationOutput struct {
 	//
 	// This member is required.
 	CapabilityConfiguration *string
+
+	// The namespace of the gateway capability.
+	//
+	// This member is required.
+	CapabilityNamespace *string
 
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:

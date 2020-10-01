@@ -60,6 +60,10 @@ func (c *Client) ListS3Resources(ctx context.Context, params *ListS3ResourcesInp
 
 type ListS3ResourcesInput struct {
 
+	// Use this parameter to indicate the maximum number of items that you want in the
+	// response. The default value is 250.
+	MaxResults *int32
+
 	// The Amazon Macie Classic member account ID whose associated S3 resources you
 	// want to list.
 	MemberAccountId *string
@@ -69,10 +73,6 @@ type ListS3ResourcesInput struct {
 	// nextToken in the request with the value of nextToken from the previous response
 	// to continue listing data.
 	NextToken *string
-
-	// Use this parameter to indicate the maximum number of items that you want in the
-	// response. The default value is 250.
-	MaxResults *int32
 }
 
 type ListS3ResourcesOutput struct {

@@ -57,21 +57,22 @@ func (c *Client) GenerateClientCertificate(ctx context.Context, params *Generate
 
 // A request to generate a ClientCertificate () resource.
 type GenerateClientCertificateInput struct {
-	Template *bool
-
-	Title *string
-
-	TemplateSkipList []*string
-
-	Name *string
 
 	// The description of the ClientCertificate ().
 	Description *string
+
+	Name *string
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -82,8 +83,17 @@ type GenerateClientCertificateInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type GenerateClientCertificateOutput struct {
 
+	// The identifier of the client certificate.
+	ClientCertificateId *string
+
 	// The timestamp when the client certificate was created.
 	CreatedDate *time.Time
+
+	// The description of the client certificate.
+	Description *string
+
+	// The timestamp when the client certificate will expire.
+	ExpirationDate *time.Time
 
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
@@ -91,15 +101,6 @@ type GenerateClientCertificateOutput struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The timestamp when the client certificate will expire.
-	ExpirationDate *time.Time
-
-	// The description of the client certificate.
-	Description *string
-
-	// The identifier of the client certificate.
-	ClientCertificateId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

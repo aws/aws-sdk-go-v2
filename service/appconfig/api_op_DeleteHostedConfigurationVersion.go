@@ -61,15 +61,15 @@ type DeleteHostedConfigurationVersionInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The versions number to delete.
-	//
-	// This member is required.
-	VersionNumber *int32
-
 	// The configuration profile ID.
 	//
 	// This member is required.
 	ConfigurationProfileId *string
+
+	// The versions number to delete.
+	//
+	// This member is required.
+	VersionNumber *int32
 }
 
 type DeleteHostedConfigurationVersionOutput struct {

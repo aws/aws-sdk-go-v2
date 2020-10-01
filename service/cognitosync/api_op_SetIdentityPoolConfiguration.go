@@ -60,17 +60,17 @@ func (c *Client) SetIdentityPoolConfiguration(ctx context.Context, params *SetId
 // The input for the SetIdentityPoolConfiguration operation.
 type SetIdentityPoolConfigurationInput struct {
 
-	// Options to apply to this identity pool for push synchronization.
-	PushSync *types.PushSync
-
-	// Options to apply to this identity pool for Amazon Cognito streams.
-	CognitoStreams *types.CognitoStreams
-
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. This is the ID of the pool to modify.
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	// Options to apply to this identity pool for Amazon Cognito streams.
+	CognitoStreams *types.CognitoStreams
+
+	// Options to apply to this identity pool for push synchronization.
+	PushSync *types.PushSync
 }
 
 // The output for the SetIdentityPoolConfiguration operation
@@ -79,12 +79,12 @@ type SetIdentityPoolConfigurationOutput struct {
 	// Options to apply to this identity pool for Amazon Cognito streams.
 	CognitoStreams *types.CognitoStreams
 
-	// Options to apply to this identity pool for push synchronization.
-	PushSync *types.PushSync
-
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito.
 	IdentityPoolId *string
+
+	// Options to apply to this identity pool for push synchronization.
+	PushSync *types.PushSync
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

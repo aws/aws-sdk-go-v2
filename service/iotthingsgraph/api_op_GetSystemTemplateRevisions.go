@@ -76,12 +76,12 @@ type GetSystemTemplateRevisionsInput struct {
 
 type GetSystemTemplateRevisionsOutput struct {
 
+	// The string to specify as nextToken when you request the next page of results.
+	NextToken *string
+
 	// An array of objects that contain summary data about the system template
 	// revisions.
 	Summaries []*types.SystemTemplateSummary
-
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

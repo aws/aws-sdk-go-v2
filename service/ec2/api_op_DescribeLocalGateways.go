@@ -57,6 +57,12 @@ func (c *Client) DescribeLocalGateways(ctx context.Context, params *DescribeLoca
 
 type DescribeLocalGatewaysInput struct {
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// One or more filters.
 	Filters []*types.Filter
 
@@ -86,12 +92,6 @@ type DescribeLocalGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 }
 
 type DescribeLocalGatewaysOutput struct {

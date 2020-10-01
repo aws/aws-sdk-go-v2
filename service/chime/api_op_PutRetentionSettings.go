@@ -80,12 +80,12 @@ type PutRetentionSettingsInput struct {
 
 type PutRetentionSettingsOutput struct {
 
-	// The retention settings.
-	RetentionSettings *types.RetentionSettings
-
 	// The timestamp representing the time at which the specified items are permanently
 	// deleted, in ISO 8601 format.
 	InitiateDeletionTimestamp *time.Time
+
+	// The retention settings.
+	RetentionSettings *types.RetentionSettings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

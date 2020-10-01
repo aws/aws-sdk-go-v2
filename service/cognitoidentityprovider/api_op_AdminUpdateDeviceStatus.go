@@ -59,23 +59,23 @@ func (c *Client) AdminUpdateDeviceStatus(ctx context.Context, params *AdminUpdat
 // The request to update the device status, as an administrator.
 type AdminUpdateDeviceStatusInput struct {
 
+	// The device key.
+	//
+	// This member is required.
+	DeviceKey *string
+
 	// The user pool ID.
 	//
 	// This member is required.
 	UserPoolId *string
-
-	// The status indicating whether a device has been remembered or not.
-	DeviceRememberedStatus types.DeviceRememberedStatusType
 
 	// The user name.
 	//
 	// This member is required.
 	Username *string
 
-	// The device key.
-	//
-	// This member is required.
-	DeviceKey *string
+	// The status indicating whether a device has been remembered or not.
+	DeviceRememberedStatus types.DeviceRememberedStatusType
 }
 
 // The status response from the request to update the device, as an administrator.

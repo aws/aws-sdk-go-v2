@@ -61,20 +61,20 @@ type ListTargetsForPolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// The maximum number of results to return at one time.
-	PageSize *int32
-
 	// A marker used to get the next set of results.
 	Marker *string
+
+	// The maximum number of results to return at one time.
+	PageSize *int32
 }
 
 type ListTargetsForPolicyOutput struct {
 
-	// The policy targets.
-	Targets []*string
-
 	// A marker used to get the next set of results.
 	NextMarker *string
+
+	// The policy targets.
+	Targets []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

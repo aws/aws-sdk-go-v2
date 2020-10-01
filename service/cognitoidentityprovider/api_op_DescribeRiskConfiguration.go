@@ -57,13 +57,13 @@ func (c *Client) DescribeRiskConfiguration(ctx context.Context, params *Describe
 
 type DescribeRiskConfigurationInput struct {
 
-	// The app client ID.
-	ClientId *string
-
 	// The user pool ID.
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The app client ID.
+	ClientId *string
 }
 
 type DescribeRiskConfigurationOutput struct {

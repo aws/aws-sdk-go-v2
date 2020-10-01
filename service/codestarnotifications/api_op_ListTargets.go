@@ -63,13 +63,13 @@ type ListTargetsInput struct {
 	// with different names should be applied with AND statements.
 	Filters []*types.ListTargetsFilter
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
-	NextToken *string
-
 	// A non-negative integer used to limit the number of returned results. The maximum
 	// number of results that can be returned is 100.
 	MaxResults *int32
+
+	// An enumeration token that, when provided in a request, returns the next batch of
+	// the results.
+	NextToken *string
 }
 
 type ListTargetsOutput struct {

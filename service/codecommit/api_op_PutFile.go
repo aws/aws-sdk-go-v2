@@ -58,13 +58,6 @@ func (c *Client) PutFile(ctx context.Context, params *PutFileInput, optFns ...fu
 
 type PutFileInput struct {
 
-	// The full commit ID of the head commit in the branch where you want to add or
-	// update the file. If this is an empty repository, no commit ID is required. If
-	// this is not an empty repository, a commit ID is required. The commit ID must
-	// match the ID of the head commit at the time of the operation. Otherwise, an
-	// error occurs, and the file is not added or updated.
-	ParentCommitId *string
-
 	// The name of the branch where you want to add or update the file. If this is an
 	// empty repository, this branch is created.
 	//
@@ -75,13 +68,6 @@ type PutFileInput struct {
 	//
 	// This member is required.
 	FileContent []byte
-
-	// The file mode permissions of the blob. Valid file mode permissions are listed
-	// here.
-	FileMode types.FileModeTypeEnum
-
-	// An email address for the person adding or updating the file.
-	Email *string
 
 	// The name of the file you want to add or update, including the relative path to
 	// the file in the repository. If the path does not currently exist in the
@@ -95,13 +81,27 @@ type PutFileInput struct {
 	// This member is required.
 	RepositoryName *string
 
+	// A message about why this file was added or updated. Although it is optional, a
+	// message makes the commit history for your repository more useful.
+	CommitMessage *string
+
+	// An email address for the person adding or updating the file.
+	Email *string
+
+	// The file mode permissions of the blob. Valid file mode permissions are listed
+	// here.
+	FileMode types.FileModeTypeEnum
+
 	// The name of the person adding or updating the file. Although it is optional, a
 	// name makes the commit history for your repository more useful.
 	Name *string
 
-	// A message about why this file was added or updated. Although it is optional, a
-	// message makes the commit history for your repository more useful.
-	CommitMessage *string
+	// The full commit ID of the head commit in the branch where you want to add or
+	// update the file. If this is an empty repository, no commit ID is required. If
+	// this is not an empty repository, a commit ID is required. The commit ID must
+	// match the ID of the head commit at the time of the operation. Otherwise, an
+	// error occurs, and the file is not added or updated.
+	ParentCommitId *string
 }
 
 type PutFileOutput struct {
@@ -111,16 +111,16 @@ type PutFileOutput struct {
 	// This member is required.
 	BlobId *string
 
+	// The full SHA ID of the commit that contains this file change.
+	//
+	// This member is required.
+	CommitId *string
+
 	// The full SHA-1 pointer of the tree information for the commit that contains this
 	// file change.
 	//
 	// This member is required.
 	TreeId *string
-
-	// The full SHA ID of the commit that contains this file change.
-	//
-	// This member is required.
-	CommitId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

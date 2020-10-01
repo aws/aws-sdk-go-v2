@@ -60,15 +60,17 @@ func (c *Client) GetComplianceSummary(ctx context.Context, params *GetCompliance
 
 type GetComplianceSummaryInput struct {
 
-	// The target identifiers (usually, specific account IDs) to limit the output by.
-	// If you use this parameter, the count of returned noncompliant resources includes
-	// only resources with the specified target IDs.
-	TargetIdFilters []*string
+	// A list of attributes to group the counts of noncompliant resources by. If
+	// supplied, the counts are sorted by those attributes.
+	GroupBy []types.GroupByAttribute
 
-	// A list of tag keys to limit the output by. If you use this parameter, the count
-	// of returned noncompliant resources includes only resources that have the
-	// specified tag keys.
-	TagKeyFilters []*string
+	// A limit that restricts the number of results that are returned per page.
+	MaxResults *int32
+
+	// A string that indicates that additional data is available. Leave this value
+	// empty for your initial request. If the response includes a PaginationToken, use
+	// that string for this value to request an additional page of data.
+	PaginationToken *string
 
 	// A list of Regions to limit the output by. If you use this parameter, the count
 	// of returned noncompliant resources includes only resources in the specified
@@ -101,28 +103,26 @@ type GetComplianceSummaryInput struct {
 	// resource type filter.
 	ResourceTypeFilters []*string
 
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken, use
-	// that string for this value to request an additional page of data.
-	PaginationToken *string
+	// A list of tag keys to limit the output by. If you use this parameter, the count
+	// of returned noncompliant resources includes only resources that have the
+	// specified tag keys.
+	TagKeyFilters []*string
 
-	// A limit that restricts the number of results that are returned per page.
-	MaxResults *int32
-
-	// A list of attributes to group the counts of noncompliant resources by. If
-	// supplied, the counts are sorted by those attributes.
-	GroupBy []types.GroupByAttribute
+	// The target identifiers (usually, specific account IDs) to limit the output by.
+	// If you use this parameter, the count of returned noncompliant resources includes
+	// only resources with the specified target IDs.
+	TargetIdFilters []*string
 }
 
 type GetComplianceSummaryOutput struct {
-
-	// A table that shows counts of noncompliant resources.
-	SummaryList []*types.Summary
 
 	// A string that indicates that the response contains more data than can be
 	// returned in a single response. To receive additional data, specify this string
 	// for the PaginationToken value in a subsequent request.
 	PaginationToken *string
+
+	// A table that shows counts of noncompliant resources.
+	SummaryList []*types.Summary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

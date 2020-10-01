@@ -66,17 +66,29 @@ func (c *Client) CreateOpsItem(ctx context.Context, params *CreateOpsItemInput, 
 
 type CreateOpsItemInput struct {
 
-	// A short heading that describes the nature of the OpsItem and the impacted
-	// resource.
+	// Information about the OpsItem.
 	//
 	// This member is required.
-	Title *string
+	Description *string
 
 	// The origin of the OpsItem, such as Amazon EC2 or Systems Manager. The source
 	// name can't contain the following strings: aws, amazon, and amzn.
 	//
 	// This member is required.
 	Source *string
+
+	// A short heading that describes the nature of the OpsItem and the impacted
+	// resource.
+	//
+	// This member is required.
+	Title *string
+
+	// Specify a category to assign to an OpsItem.
+	Category *string
+
+	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
+	// this OpsItem is edited or changed.
+	Notifications []*types.OpsItemNotification
 
 	// Operational data is custom data that provides useful reference details about the
 	// OpsItem. For example, you can specify log files, error strings, license keys,
@@ -97,25 +109,16 @@ type CreateOpsItemInput struct {
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]*types.OpsItemDataValue
 
-	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
-	// this OpsItem is edited or changed.
-	Notifications []*types.OpsItemNotification
+	// The importance of this OpsItem in relation to other OpsItems in the system.
+	Priority *int32
 
 	// One or more OpsItems that share something in common with the current OpsItems.
 	// For example, related OpsItems can include OpsItems with similar error messages,
 	// impacted resources, or statuses for the impacted resource.
 	RelatedOpsItems []*types.RelatedOpsItem
 
-	// Specify a category to assign to an OpsItem.
-	Category *string
-
-	// Information about the OpsItem.
-	//
-	// This member is required.
-	Description *string
-
-	// The importance of this OpsItem in relation to other OpsItems in the system.
-	Priority *int32
+	// Specify a severity to assign to an OpsItem.
+	Severity *string
 
 	// Optional metadata that you assign to a resource. You can restrict access to
 	// OpsItems by using an inline IAM policy that specifies tags. For more
@@ -125,9 +128,6 @@ type CreateOpsItemInput struct {
 	// <p> <code>Key=Department,Value=Finance</code> </p> <note> <p>To add tags to an
 	// existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>
 	Tags []*types.Tag
-
-	// Specify a severity to assign to an OpsItem.
-	Severity *string
 }
 
 type CreateOpsItemOutput struct {

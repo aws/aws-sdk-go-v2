@@ -73,14 +73,14 @@ func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentI
 
 type CreateExperimentInput struct {
 
-	// The description of the experiment.
-	Description *string
-
 	// The name of the experiment. The name must be unique in your AWS account and is
 	// not case-sensitive.
 	//
 	// This member is required.
 	ExperimentName *string
+
+	// The description of the experiment.
+	Description *string
 
 	// The name of the experiment as displayed. The name doesn't need to be unique. If
 	// you don't specify DisplayName, the value in ExperimentName is displayed.

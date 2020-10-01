@@ -59,15 +59,15 @@ func (c *Client) DescribeJournalKinesisStream(ctx context.Context, params *Descr
 
 type DescribeJournalKinesisStreamInput struct {
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
-	//
-	// This member is required.
-	StreamId *string
-
 	// The name of the ledger.
 	//
 	// This member is required.
 	LedgerName *string
+
+	// The unique ID that QLDB assigns to each QLDB journal stream.
+	//
+	// This member is required.
+	StreamId *string
 }
 
 type DescribeJournalKinesisStreamOutput struct {

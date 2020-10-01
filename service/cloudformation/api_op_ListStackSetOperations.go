@@ -57,13 +57,6 @@ func (c *Client) ListStackSetOperations(ctx context.Context, params *ListStackSe
 
 type ListStackSetOperationsInput struct {
 
-	// If the previous paginated request didn't return all of the remaining results,
-	// the response object's NextToken parameter value is set to a token. To retrieve
-	// the next set of results, call ListStackSetOperations again and assign that token
-	// to the request object's NextToken parameter. If there are no remaining results,
-	// the previous response object's NextToken parameter is set to null.
-	NextToken *string
-
 	// The name or unique ID of the stack set that you want to get operation summaries
 	// for.
 	//
@@ -75,6 +68,13 @@ type ListStackSetOperationsInput struct {
 	// value that you can assign to the NextToken request parameter to get the next set
 	// of results.
 	MaxResults *int32
+
+	// If the previous paginated request didn't return all of the remaining results,
+	// the response object's NextToken parameter value is set to a token. To retrieve
+	// the next set of results, call ListStackSetOperations again and assign that token
+	// to the request object's NextToken parameter. If there are no remaining results,
+	// the previous response object's NextToken parameter is set to null.
+	NextToken *string
 }
 
 type ListStackSetOperationsOutput struct {

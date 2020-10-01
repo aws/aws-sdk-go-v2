@@ -59,10 +59,11 @@ func (c *Client) CreateInsight(ctx context.Context, params *CreateInsightInput, 
 
 type CreateInsightInput struct {
 
-	// The name of the custom insight to create.
+	// One or more attributes used to filter the findings included in the insight. The
+	// insight only includes findings that match the criteria defined in the filters.
 	//
 	// This member is required.
-	Name *string
+	Filters *types.AwsSecurityFindingFilters
 
 	// The attribute used to group the findings for the insight. The grouping attribute
 	// identifies the type of item that the insight applies to. For example, if an
@@ -72,11 +73,10 @@ type CreateInsightInput struct {
 	// This member is required.
 	GroupByAttribute *string
 
-	// One or more attributes used to filter the findings included in the insight. The
-	// insight only includes findings that match the criteria defined in the filters.
+	// The name of the custom insight to create.
 	//
 	// This member is required.
-	Filters *types.AwsSecurityFindingFilters
+	Name *string
 }
 
 type CreateInsightOutput struct {

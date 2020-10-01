@@ -69,10 +69,6 @@ type TerminateProvisionedProductInput struct {
 	// This member is required.
 	TerminateToken *string
 
-	// The identifier of the provisioned product. You cannot specify both
-	// ProvisionedProductName and ProvisionedProductId.
-	ProvisionedProductId *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -86,6 +82,10 @@ type TerminateProvisionedProductInput struct {
 	// If set to true, AWS Service Catalog stops managing the specified provisioned
 	// product even if it cannot delete the underlying resources.
 	IgnoreErrors *bool
+
+	// The identifier of the provisioned product. You cannot specify both
+	// ProvisionedProductName and ProvisionedProductId.
+	ProvisionedProductId *string
 
 	// The name of the provisioned product. You cannot specify both
 	// ProvisionedProductName and ProvisionedProductId.

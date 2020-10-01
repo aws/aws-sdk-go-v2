@@ -72,17 +72,17 @@ type RequestEnvironmentInfoInput struct {
 	// This member is required.
 	InfoType types.EnvironmentInfoType
 
-	// The name of the environment of the requested data. If no such environment is
-	// found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition:
-	// You must specify either this or an EnvironmentId, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
-	EnvironmentName *string
-
 	// The ID of the environment of the requested data. If no such environment is
 	// found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition:
 	// You must specify either this or an EnvironmentName, or both. If you do not
 	// specify either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentId *string
+
+	// The name of the environment of the requested data. If no such environment is
+	// found, RequestEnvironmentInfo returns an InvalidParameterValue error. Condition:
+	// You must specify either this or an EnvironmentId, or both. If you do not specify
+	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	EnvironmentName *string
 }
 
 type RequestEnvironmentInfoOutput struct {

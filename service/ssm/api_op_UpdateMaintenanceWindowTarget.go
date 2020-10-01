@@ -63,54 +63,54 @@ func (c *Client) UpdateMaintenanceWindowTarget(ctx context.Context, params *Upda
 
 type UpdateMaintenanceWindowTargetInput struct {
 
-	// User-provided value that will be included in any CloudWatch events raised while
-	// running tasks for these targets in this maintenance window.
-	OwnerInformation *string
+	// The maintenance window ID with which to modify the target.
+	//
+	// This member is required.
+	WindowId *string
+
+	// The target ID to modify.
+	//
+	// This member is required.
+	WindowTargetId *string
 
 	// An optional description for the update.
 	Description *string
 
-	// The targets to add or replace.
-	Targets []*types.Target
+	// A name for the update.
+	Name *string
+
+	// User-provided value that will be included in any CloudWatch events raised while
+	// running tasks for these targets in this maintenance window.
+	OwnerInformation *string
 
 	// If True, then all fields that are required by the
 	// RegisterTargetWithMaintenanceWindow action are also required for this API
 	// request. Optional fields that are not specified are set to null.
 	Replace *bool
 
-	// The maintenance window ID with which to modify the target.
-	//
-	// This member is required.
-	WindowId *string
-
-	// A name for the update.
-	Name *string
-
-	// The target ID to modify.
-	//
-	// This member is required.
-	WindowTargetId *string
+	// The targets to add or replace.
+	Targets []*types.Target
 }
 
 type UpdateMaintenanceWindowTargetOutput struct {
 
-	// The updated owner.
-	OwnerInformation *string
-
 	// The updated description.
 	Description *string
 
-	// The target ID specified in the update request.
-	WindowTargetId *string
-
 	// The updated name.
 	Name *string
+
+	// The updated owner.
+	OwnerInformation *string
 
 	// The updated targets.
 	Targets []*types.Target
 
 	// The maintenance window ID specified in the update request.
 	WindowId *string
+
+	// The target ID specified in the update request.
+	WindowTargetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

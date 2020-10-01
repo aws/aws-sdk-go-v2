@@ -18,7 +18,6 @@ type AggregatedProfileTime struct {
 
 //
 type AgentConfiguration struct {
-	AgentParameters map[string]*string
 
 	//
 	//
@@ -29,6 +28,8 @@ type AgentConfiguration struct {
 	//
 	// This member is required.
 	ShouldProfile *bool
+
+	AgentParameters map[string]*string
 }
 
 //

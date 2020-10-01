@@ -58,11 +58,6 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 
 type InvokeAsyncInput struct {
 
-	// The JSON that you want to provide to your Lambda function as input.
-	//
-	// This member is required.
-	InvokeArgs io.Reader
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -80,6 +75,11 @@ type InvokeAsyncInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// The JSON that you want to provide to your Lambda function as input.
+	//
+	// This member is required.
+	InvokeArgs io.Reader
 }
 
 // A success response (202 Accepted) indicates that the request is queued for

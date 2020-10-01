@@ -74,28 +74,28 @@ type GetInstancesHealthStatusInput struct {
 	// request.
 	Instances []*string
 
+	// The maximum number of instances that you want AWS Cloud Map to return in the
+	// response to a GetInstancesHealthStatus request. If you don't specify a value for
+	// MaxResults, AWS Cloud Map returns up to 100 instances.
+	MaxResults *int32
+
 	// For the first GetInstancesHealthStatus request, omit this value. If more than
 	// MaxResults instances match the specified criteria, you can submit another
 	// GetInstancesHealthStatus request to get the next group of results. Specify the
 	// value of NextToken from the previous response in the next request.
 	NextToken *string
-
-	// The maximum number of instances that you want AWS Cloud Map to return in the
-	// response to a GetInstancesHealthStatus request. If you don't specify a value for
-	// MaxResults, AWS Cloud Map returns up to 100 instances.
-	MaxResults *int32
 }
 
 type GetInstancesHealthStatusOutput struct {
-
-	// A complex type that contains the IDs and the health status of the instances that
-	// you specified in the GetInstancesHealthStatus request.
-	Status map[string]types.HealthStatus
 
 	// If more than MaxResults instances match the specified criteria, you can submit
 	// another GetInstancesHealthStatus request to get the next group of results.
 	// Specify the value of NextToken from the previous response in the next request.
 	NextToken *string
+
+	// A complex type that contains the IDs and the health status of the instances that
+	// you specified in the GetInstancesHealthStatus request.
+	Status map[string]types.HealthStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

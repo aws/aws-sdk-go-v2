@@ -56,11 +56,11 @@ func (c *Client) SwapEnvironmentCNAMEs(ctx context.Context, params *SwapEnvironm
 // Swaps the CNAMEs of two environments.
 type SwapEnvironmentCNAMEsInput struct {
 
-	// The ID of the source environment. Condition: You must specify at least the
-	// SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If
-	// you specify the SourceEnvironmentId, you must specify the
+	// The ID of the destination environment. Condition: You must specify at least the
+	// DestinationEnvironmentID or the DestinationEnvironmentName. You may also specify
+	// both. You must specify the SourceEnvironmentId with the
 	// DestinationEnvironmentId.
-	SourceEnvironmentId *string
+	DestinationEnvironmentId *string
 
 	// The name of the destination environment. Condition: You must specify at least
 	// the DestinationEnvironmentID or the DestinationEnvironmentName. You may also
@@ -68,11 +68,11 @@ type SwapEnvironmentCNAMEsInput struct {
 	// DestinationEnvironmentName.
 	DestinationEnvironmentName *string
 
-	// The ID of the destination environment. Condition: You must specify at least the
-	// DestinationEnvironmentID or the DestinationEnvironmentName. You may also specify
-	// both. You must specify the SourceEnvironmentId with the
+	// The ID of the source environment. Condition: You must specify at least the
+	// SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If
+	// you specify the SourceEnvironmentId, you must specify the
 	// DestinationEnvironmentId.
-	DestinationEnvironmentId *string
+	SourceEnvironmentId *string
 
 	// The name of the source environment. Condition: You must specify at least the
 	// SourceEnvironmentID or the SourceEnvironmentName. You may also specify both. If

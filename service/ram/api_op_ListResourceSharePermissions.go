@@ -57,9 +57,6 @@ func (c *Client) ListResourceSharePermissions(ctx context.Context, params *ListR
 
 type ListResourceSharePermissionsInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) of the resource share.
 	//
 	// This member is required.
@@ -68,6 +65,9 @@ type ListResourceSharePermissionsInput struct {
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type ListResourceSharePermissionsOutput struct {

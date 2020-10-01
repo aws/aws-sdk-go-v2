@@ -56,14 +56,14 @@ func (c *Client) DeleteFieldLevelEncryptionProfile(ctx context.Context, params *
 
 type DeleteFieldLevelEncryptionProfileInput struct {
 
-	// The value of the ETag header that you received when retrieving the profile to
-	// delete. For example: E2QWRUHAPOMQZL.
-	IfMatch *string
-
 	// Request the ID of the profile you want to delete from CloudFront.
 	//
 	// This member is required.
 	Id *string
+
+	// The value of the ETag header that you received when retrieving the profile to
+	// delete. For example: E2QWRUHAPOMQZL.
+	IfMatch *string
 }
 
 type DeleteFieldLevelEncryptionProfileOutput struct {

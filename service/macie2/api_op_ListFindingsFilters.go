@@ -66,12 +66,12 @@ type ListFindingsFiltersInput struct {
 
 type ListFindingsFiltersOutput struct {
 
+	// An array of objects, one for each filter that's associated with the account.
+	FindingsFilterListItems []*types.FindingsFilterListItem
+
 	// The string to use in a subsequent request to get the next page of results in a
 	// paginated response. This value is null if there are no additional pages.
 	NextToken *string
-
-	// An array of objects, one for each filter that's associated with the account.
-	FindingsFilterListItems []*types.FindingsFilterListItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

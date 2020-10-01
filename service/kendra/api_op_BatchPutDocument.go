@@ -81,16 +81,16 @@ type BatchPutDocumentInput struct {
 	// This member is required.
 	Documents []*types.Document
 
-	// The Amazon Resource Name (ARN) of a role that is allowed to run the
-	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
-	RoleArn *string
-
 	// The identifier of the index to add the documents to. You need to create the
 	// index first using the CreateIndex () operation.
 	//
 	// This member is required.
 	IndexId *string
+
+	// The Amazon Resource Name (ARN) of a role that is allowed to run the
+	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
+	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
+	RoleArn *string
 }
 
 type BatchPutDocumentOutput struct {

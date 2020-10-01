@@ -62,15 +62,15 @@ type DetachFromIndexInput struct {
 	// This member is required.
 	DirectoryArn *string
 
-	// A reference to the object being detached from the index.
-	//
-	// This member is required.
-	TargetReference *types.ObjectReference
-
 	// A reference to the index object.
 	//
 	// This member is required.
 	IndexReference *types.ObjectReference
+
+	// A reference to the object being detached from the index.
+	//
+	// This member is required.
+	TargetReference *types.ObjectReference
 }
 
 type DetachFromIndexOutput struct {

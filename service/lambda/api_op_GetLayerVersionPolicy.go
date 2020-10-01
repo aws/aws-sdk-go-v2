@@ -58,15 +58,15 @@ func (c *Client) GetLayerVersionPolicy(ctx context.Context, params *GetLayerVers
 
 type GetLayerVersionPolicyInput struct {
 
-	// The version number.
-	//
-	// This member is required.
-	VersionNumber *int64
-
 	// The name or Amazon Resource Name (ARN) of the layer.
 	//
 	// This member is required.
 	LayerName *string
+
+	// The version number.
+	//
+	// This member is required.
+	VersionNumber *int64
 }
 
 type GetLayerVersionPolicyOutput struct {

@@ -63,6 +63,17 @@ func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryI
 // Contains the inputs for the ConnectDirectory () operation.
 type ConnectDirectoryInput struct {
 
+	// A DirectoryConnectSettings () object that contains additional information for
+	// the operation.
+	//
+	// This member is required.
+	ConnectSettings *types.DirectoryConnectSettings
+
+	// The fully qualified name of the on-premises directory, such as corp.example.com.
+	//
+	// This member is required.
+	Name *string
+
 	// The password for the on-premises user account.
 	//
 	// This member is required.
@@ -73,25 +84,14 @@ type ConnectDirectoryInput struct {
 	// This member is required.
 	Size types.DirectorySize
 
-	// The fully qualified name of the on-premises directory, such as corp.example.com.
-	//
-	// This member is required.
-	Name *string
-
-	// A DirectoryConnectSettings () object that contains additional information for
-	// the operation.
-	//
-	// This member is required.
-	ConnectSettings *types.DirectoryConnectSettings
+	// A description for the directory.
+	Description *string
 
 	// The NetBIOS name of the on-premises directory, such as CORP.
 	ShortName *string
 
 	// The tags to be assigned to AD Connector.
 	Tags []*types.Tag
-
-	// A description for the directory.
-	Description *string
 }
 
 // Contains the results of the ConnectDirectory () operation.

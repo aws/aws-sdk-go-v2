@@ -86,13 +86,13 @@ type RequestUploadCredentialsInput struct {
 // Represents the returned data in response to a request action.
 type RequestUploadCredentialsOutput struct {
 
+	// Amazon S3 path and key, identifying where the game build files are stored.
+	StorageLocation *types.S3Location
+
 	// AWS credentials required when uploading a game build to the storage location.
 	// These credentials have a limited lifespan and are valid only for the build they
 	// were issued for.
 	UploadCredentials *types.AwsCredentials
-
-	// Amazon S3 path and key, identifying where the game build files are stored.
-	StorageLocation *types.S3Location
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,22 +63,22 @@ func (c *Client) CreateDetector(ctx context.Context, params *CreateDetectorInput
 
 type CreateDetectorInput struct {
 
-	// An object that describes which data sources will be enabled for the detector.
-	DataSources *types.DataSourceConfigurations
-
-	// The idempotency token for the create request.
-	ClientToken *string
-
-	// The tags to be added to a new detector resource.
-	Tags map[string]*string
-
-	// An enum value that specifies how frequently updated findings are exported.
-	FindingPublishingFrequency types.FindingPublishingFrequency
-
 	// A Boolean value that specifies whether the detector is to be enabled.
 	//
 	// This member is required.
 	Enable *bool
+
+	// The idempotency token for the create request.
+	ClientToken *string
+
+	// An object that describes which data sources will be enabled for the detector.
+	DataSources *types.DataSourceConfigurations
+
+	// An enum value that specifies how frequently updated findings are exported.
+	FindingPublishingFrequency types.FindingPublishingFrequency
+
+	// The tags to be added to a new detector resource.
+	Tags map[string]*string
 }
 
 type CreateDetectorOutput struct {

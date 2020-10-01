@@ -59,6 +59,14 @@ func (c *Client) CreateMedicalVocabulary(ctx context.Context, params *CreateMedi
 
 type CreateMedicalVocabularyInput struct {
 
+	// The language code used for the entries within your custom vocabulary. The
+	// language code of your custom vocabulary must match the language code of your
+	// transcription job. US English (en-US) is the only language code available for
+	// Amazon Transcribe Medical.
+	//
+	// This member is required.
+	LanguageCode types.LanguageCode
+
 	// The Amazon S3 location of the text file you use to define your custom
 	// vocabulary. The URI must be in the same AWS region as the API endpoint you're
 	// calling. Enter information about your VocabularyFileUri in the following format:
@@ -74,14 +82,6 @@ type CreateMedicalVocabularyInput struct {
 	// This member is required.
 	VocabularyFileUri *string
 
-	// The language code used for the entries within your custom vocabulary. The
-	// language code of your custom vocabulary must match the language code of your
-	// transcription job. US English (en-US) is the only language code available for
-	// Amazon Transcribe Medical.
-	//
-	// This member is required.
-	LanguageCode types.LanguageCode
-
 	// The name of the custom vocabulary. This case-sensitive name must be unique
 	// within an AWS account. If you try to create a vocabulary with the same name as a
 	// previous vocabulary you will receive a ConflictException error.
@@ -92,21 +92,21 @@ type CreateMedicalVocabularyInput struct {
 
 type CreateMedicalVocabularyOutput struct {
 
+	// If the VocabularyState field is FAILED, this field contains information about
+	// why the job failed.
+	FailureReason *string
+
 	// The language code you chose to describe the entries in your custom vocabulary.
 	// US English (en-US) is the only valid language code for Amazon Transcribe
 	// Medical.
 	LanguageCode types.LanguageCode
 
+	// The date and time you created the vocabulary.
+	LastModifiedTime *time.Time
+
 	// The name of the vocabulary. The name must be unique within an AWS account. It is
 	// also case-sensitive.
 	VocabularyName *string
-
-	// If the VocabularyState field is FAILED, this field contains information about
-	// why the job failed.
-	FailureReason *string
-
-	// The date and time you created the vocabulary.
-	LastModifiedTime *time.Time
 
 	// The processing state of your custom vocabulary in Amazon Transcribe Medical. If
 	// the state is READY you can use the vocabulary in a StartMedicalTranscriptionJob

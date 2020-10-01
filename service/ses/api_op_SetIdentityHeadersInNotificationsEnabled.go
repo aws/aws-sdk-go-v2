@@ -76,16 +76,16 @@ type SetIdentityHeadersInNotificationsEnabledInput struct {
 	// This member is required.
 	Enabled *bool
 
-	// The notification type for which to enable or disable headers in notifications.
-	//
-	// This member is required.
-	NotificationType types.NotificationType
-
 	// The identity for which to enable or disable headers in notifications. Examples:
 	// user@example.com, example.com.
 	//
 	// This member is required.
 	Identity *string
+
+	// The notification type for which to enable or disable headers in notifications.
+	//
+	// This member is required.
+	NotificationType types.NotificationType
 }
 
 // An empty element returned on a successful request.

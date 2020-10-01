@@ -68,11 +68,11 @@ type ListSchemasInput struct {
 
 type ListSchemasOutput struct {
 
-	// A list of schemas.
-	Schemas []*types.DatasetSchemaSummary
-
 	// A token used to get the next set of schemas (if they exist).
 	NextToken *string
+
+	// A list of schemas.
+	Schemas []*types.DatasetSchemaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

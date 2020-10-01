@@ -65,28 +65,18 @@ type DescribeDashboardInput struct {
 
 type DescribeDashboardOutput struct {
 
-	// The ID of the project that the dashboard is in.
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the dashboard, which has the following format.
+	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
 	//
 	// This member is required.
-	ProjectId *string
+	DashboardArn *string
 
 	// The date the dashboard was created, in Unix epoch time.
 	//
 	// This member is required.
 	DashboardCreationDate *time.Time
-
-	// The ID of the dashboard.
-	//
-	// This member is required.
-	DashboardId *string
-
-	// The dashboard's description.
-	DashboardDescription *string
-
-	// The date the dashboard was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	DashboardLastUpdateDate *time.Time
 
 	// The dashboard's definition JSON literal. For detailed information, see Creating
 	// Dashboards (CLI)
@@ -96,18 +86,28 @@ type DescribeDashboardOutput struct {
 	// This member is required.
 	DashboardDefinition *string
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the dashboard, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	// The ID of the dashboard.
 	//
 	// This member is required.
-	DashboardArn *string
+	DashboardId *string
+
+	// The date the dashboard was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	DashboardLastUpdateDate *time.Time
 
 	// The name of the dashboard.
 	//
 	// This member is required.
 	DashboardName *string
+
+	// The ID of the project that the dashboard is in.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The dashboard's description.
+	DashboardDescription *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

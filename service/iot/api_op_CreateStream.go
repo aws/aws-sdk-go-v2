@@ -59,6 +59,17 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 
 type CreateStreamInput struct {
 
+	// The files to stream.
+	//
+	// This member is required.
+	Files []*types.StreamFile
+
+	// An IAM role that allows the IoT service principal assumes to access your S3
+	// files.
+	//
+	// This member is required.
+	RoleArn *string
+
 	// The stream ID.
 	//
 	// This member is required.
@@ -69,29 +80,18 @@ type CreateStreamInput struct {
 
 	// Metadata which can be used to manage streams.
 	Tags []*types.Tag
-
-	// An IAM role that allows the IoT service principal assumes to access your S3
-	// files.
-	//
-	// This member is required.
-	RoleArn *string
-
-	// The files to stream.
-	//
-	// This member is required.
-	Files []*types.StreamFile
 }
 
 type CreateStreamOutput struct {
+
+	// A description of the stream.
+	Description *string
 
 	// The stream ARN.
 	StreamArn *string
 
 	// The stream ID.
 	StreamId *string
-
-	// A description of the stream.
-	Description *string
 
 	// The version of the stream.
 	StreamVersion *int32

@@ -60,10 +60,10 @@ type GetAccountBalanceInput struct {
 type GetAccountBalanceOutput struct {
 
 	// A string representing a currency amount.
-	OnHoldBalance *string
+	AvailableBalance *string
 
 	// A string representing a currency amount.
-	AvailableBalance *string
+	OnHoldBalance *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,34 +55,34 @@ func (c *Client) ExportApi(ctx context.Context, params *ExportApiInput, optFns .
 
 type ExportApiInput struct {
 
-	// The version of the API Gateway export algorithm. API Gateway uses the latest
-	// version by default. Currently, the only supported version is 1.0.
-	ExportVersion *string
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
 
 	// The output type of the exported definition file. Valid values are JSON and YAML.
 	//
 	// This member is required.
 	OutputType *string
 
-	// The name of the API stage to export. If you don't specify this property, a
-	// representation of the latest API configuration is exported.
-	StageName *string
-
-	// The API identifier.
+	// The version of the API specification to use. OAS30, for OpenAPI 3.0, is the only
+	// supported value.
 	//
 	// This member is required.
-	ApiId *string
+	Specification *string
+
+	// The version of the API Gateway export algorithm. API Gateway uses the latest
+	// version by default. Currently, the only supported version is 1.0.
+	ExportVersion *string
 
 	// Specifies whether to include API Gateway extensions
 	// (https://docs.aws.amazon.com//apigateway/latest/developerguide/api-gateway-swagger-extensions.html)
 	// in the exported API definition. API Gateway extensions are included by default.
 	IncludeExtensions *bool
 
-	// The version of the API specification to use. OAS30, for OpenAPI 3.0, is the only
-	// supported value.
-	//
-	// This member is required.
-	Specification *string
+	// The name of the API stage to export. If you don't specify this property, a
+	// representation of the latest API configuration is exported.
+	StageName *string
 }
 
 type ExportApiOutput struct {

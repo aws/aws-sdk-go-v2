@@ -59,22 +59,22 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 // Request to create an application.
 type CreateApplicationInput struct {
 
-	// Specifies an application resource lifecycle configuration to prevent your
-	// application from accumulating too many versions.
-	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
+	// The name of the application. Must be unique within your account.
+	//
+	// This member is required.
+	ApplicationName *string
 
 	// Your description of the application.
 	Description *string
+
+	// Specifies an application resource lifecycle configuration to prevent your
+	// application from accumulating too many versions.
+	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
 
 	// Specifies the tags applied to the application. Elastic Beanstalk applies these
 	// tags only to the application. Environments that you create in the application
 	// don't inherit the tags.
 	Tags []*types.Tag
-
-	// The name of the application. Must be unique within your account.
-	//
-	// This member is required.
-	ApplicationName *string
 }
 
 // Result message containing a single description of an application.

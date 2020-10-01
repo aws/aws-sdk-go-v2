@@ -72,11 +72,11 @@ type ExportClientVpnClientCertificateRevocationListInput struct {
 
 type ExportClientVpnClientCertificateRevocationListOutput struct {
 
-	// The current state of the client certificate revocation list.
-	Status *types.ClientCertificateRevocationListStatus
-
 	// Information about the client certificate revocation list.
 	CertificateRevocationList *string
+
+	// The current state of the client certificate revocation list.
+	Status *types.ClientCertificateRevocationListStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

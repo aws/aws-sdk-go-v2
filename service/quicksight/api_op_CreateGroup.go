@@ -59,9 +59,6 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 // The request object for this operation.
 type CreateGroupInput struct {
 
-	// A description for the group that you want to create.
-	Description *string
-
 	// The ID for the AWS account that the group is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
 	//
@@ -77,16 +74,19 @@ type CreateGroupInput struct {
 	//
 	// This member is required.
 	Namespace *string
+
+	// A description for the group that you want to create.
+	Description *string
 }
 
 // The response object for this operation.
 type CreateGroupOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The name of the group.
 	Group *types.Group
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

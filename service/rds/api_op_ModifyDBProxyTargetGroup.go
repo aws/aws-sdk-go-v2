@@ -57,10 +57,6 @@ func (c *Client) ModifyDBProxyTargetGroup(ctx context.Context, params *ModifyDBP
 
 type ModifyDBProxyTargetGroupInput struct {
 
-	// The settings that determine the size and behavior of the connection pool for the
-	// target group.
-	ConnectionPoolConfig *types.ConnectionPoolConfiguration
-
 	// The name of the new proxy to which to assign the target group.
 	//
 	// This member is required.
@@ -70,6 +66,10 @@ type ModifyDBProxyTargetGroupInput struct {
 	//
 	// This member is required.
 	TargetGroupName *string
+
+	// The settings that determine the size and behavior of the connection pool for the
+	// target group.
+	ConnectionPoolConfig *types.ConnectionPoolConfiguration
 
 	// The new name for the modified DBProxyTarget. An identifier must begin with a
 	// letter and must contain only ASCII letters, digits, and hyphens; it can't end

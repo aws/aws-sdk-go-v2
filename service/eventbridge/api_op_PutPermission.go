@@ -81,10 +81,6 @@ type PutPermissionInput struct {
 	// This member is required.
 	Action *string
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
-	EventBusName *string
-
 	// The 12-digit AWS account ID that you are permitting to put events to your
 	// default event bus. Specify "*" to permit any account to put events to your
 	// default event bus.  <p>If you specify "*" without specifying
@@ -97,6 +93,13 @@ type PutPermissionInput struct {
 	// This member is required.
 	Principal *string
 
+	// An identifier string for the external account that you are granting permissions
+	// to. If you later want to revoke the permission for this external account,
+	// specify this StatementId when you run RemovePermission ().
+	//
+	// This member is required.
+	StatementId *string
+
 	// This parameter enables you to limit the permission to accounts that fulfill a
 	// certain condition, such as being a member of a certain AWS organization. For
 	// more information about AWS Organizations, see What Is AWS Organizations
@@ -108,12 +111,9 @@ type PutPermissionInput struct {
 	// <code>Key</code>, and <code>Value</code> fields.</p>
 	Condition *types.Condition
 
-	// An identifier string for the external account that you are granting permissions
-	// to. If you later want to revoke the permission for this external account,
-	// specify this StatementId when you run RemovePermission ().
-	//
-	// This member is required.
-	StatementId *string
+	// The event bus associated with the rule. If you omit this, the default event bus
+	// is used.
+	EventBusName *string
 }
 
 type PutPermissionOutput struct {

@@ -56,13 +56,6 @@ func (c *Client) ListPortfolios(ctx context.Context, params *ListPortfoliosInput
 
 type ListPortfoliosInput struct {
 
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -72,6 +65,13 @@ type ListPortfoliosInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type ListPortfoliosOutput struct {

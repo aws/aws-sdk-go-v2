@@ -61,17 +61,17 @@ type DeleteMailboxPermissionsInput struct {
 	// This member is required.
 	EntityId *string
 
-	// The identifier of the organization under which the member (user or group)
-	// exists.
-	//
-	// This member is required.
-	OrganizationId *string
-
 	// The identifier of the member (user or group) for which to delete granted
 	// permissions.
 	//
 	// This member is required.
 	GranteeId *string
+
+	// The identifier of the organization under which the member (user or group)
+	// exists.
+	//
+	// This member is required.
+	OrganizationId *string
 }
 
 type DeleteMailboxPermissionsOutput struct {

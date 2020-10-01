@@ -58,15 +58,6 @@ func (c *Client) DescribeVpcEndpointServicePermissions(ctx context.Context, para
 
 type DescribeVpcEndpointServicePermissionsInput struct {
 
-	// One or more filters.
-	//
-	//     * principal - The ARN of the principal.
-	//
-	//     *
-	// principal-type - The principal type (All | Service | OrganizationUnit | Account
-	// | User | Role).
-	Filters []*types.Filter
-
 	// The ID of the service.
 	//
 	// This member is required.
@@ -78,24 +69,33 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The token to retrieve the next page of results.
-	NextToken *string
+	// One or more filters.
+	//
+	//     * principal - The ARN of the principal.
+	//
+	//     *
+	// principal-type - The principal type (All | Service | OrganizationUnit | Account
+	// | User | Role).
+	Filters []*types.Filter
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
 	// MaxResults is given a value larger than 1,000, only 1,000 results are returned.
 	MaxResults *int32
+
+	// The token to retrieve the next page of results.
+	NextToken *string
 }
 
 type DescribeVpcEndpointServicePermissionsOutput struct {
 
+	// Information about one or more allowed principals.
+	AllowedPrincipals []*types.AllowedPrincipal
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// Information about one or more allowed principals.
-	AllowedPrincipals []*types.AllowedPrincipal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

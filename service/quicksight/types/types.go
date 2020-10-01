@@ -19,24 +19,24 @@ type AccountSettings struct {
 	// The name associated with the QuickSight subscription in your AWS account.
 	AccountName *string
 
-	// The main notification email for your QuickSight subscription.
-	NotificationEmail *string
-
 	// The default QuickSight namespace for your AWS account.
 	DefaultNamespace *string
 
 	// The edition of QuickSight that you're currently subscribed to.
 	Edition Edition
+
+	// The main notification email for your QuickSight subscription.
+	NotificationEmail *string
 }
 
 // The active AWS Identity and Access Management (IAM) policy assignment.
 type ActiveIAMPolicyAssignment struct {
 
-	// The Amazon Resource Name (ARN) of the resource.
-	PolicyArn *string
-
 	// A name for the IAM policy assignment.
 	AssignmentName *string
+
+	// The Amazon Resource Name (ARN) of the resource.
+	PolicyArn *string
 }
 
 // Ad hoc (one-time) filtering option.
@@ -70,20 +70,25 @@ type AuroraParameters struct {
 	// This member is required.
 	Database *string
 
-	// Port.
-	//
-	// This member is required.
-	Port *int32
-
 	// Host.
 	//
 	// This member is required.
 	Host *string
+
+	// Port.
+	//
+	// This member is required.
+	Port *int32
 }
 
 // Amazon Aurora with PostgreSQL compatibility parameters.
 type AuroraPostgreSqlParameters struct {
 
+	// Database.
+	//
+	// This member is required.
+	Database *string
+
 	// Host.
 	//
 	// This member is required.
@@ -93,11 +98,6 @@ type AuroraPostgreSqlParameters struct {
 	//
 	// This member is required.
 	Port *int32
-
-	// Database.
-	//
-	// This member is required.
-	Database *string
 }
 
 // AWS IoT Analytics parameters.
@@ -140,10 +140,6 @@ type CalculatedColumn struct {
 // A transform operation that casts a column to a different type.
 type CastColumnTypeOperation struct {
 
-	// When casting a column from string to datetime type, you can supply a string in a
-	// format supported by Amazon QuickSight to denote the source data format.
-	Format *string
-
 	// Column name.
 	//
 	// This member is required.
@@ -153,6 +149,10 @@ type CastColumnTypeOperation struct {
 	//
 	// This member is required.
 	NewColumnType ColumnDataType
+
+	// When casting a column from string to datetime type, you can supply a string in a
+	// format supported by Amazon QuickSight to denote the source data format.
+	Format *string
 }
 
 // Groupings of columns that work together in certain Amazon QuickSight features.
@@ -216,6 +216,16 @@ type CreateColumnsOperation struct {
 // The combination of user name and password that are used as credentials.
 type CredentialPair struct {
 
+	// Password.
+	//
+	// This member is required.
+	Password *string
+
+	// User name.
+	//
+	// This member is required.
+	Username *string
+
 	// A set of alternate data source parameters that you want to share for these
 	// credentials. The credentials are applied in tandem with the data source
 	// parameters when you copy a data source by using a create or update request. The
@@ -226,83 +236,73 @@ type CredentialPair struct {
 	// DataSourceParameters originally used with these Credentials is automatically
 	// allowed.
 	AlternateDataSourceParameters []*DataSourceParameters
-
-	// Password.
-	//
-	// This member is required.
-	Password *string
-
-	// User name.
-	//
-	// This member is required.
-	Username *string
 }
 
 // A physical table type built from the results of the custom SQL query.
 type CustomSql struct {
-
-	// A display name for the SQL query result.
-	//
-	// This member is required.
-	Name *string
 
 	// The Amazon Resource Name (ARN) of the data source.
 	//
 	// This member is required.
 	DataSourceArn *string
 
-	// The column schema from the SQL query result set.
-	Columns []*InputColumn
+	// A display name for the SQL query result.
+	//
+	// This member is required.
+	Name *string
 
 	// The SQL query.
 	//
 	// This member is required.
 	SqlQuery *string
+
+	// The column schema from the SQL query result set.
+	Columns []*InputColumn
 }
 
 // Dashboard.
 type Dashboard struct {
 
-	// Dashboard ID.
-	DashboardId *string
-
-	// Version.
-	Version *DashboardVersion
-
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
-
-	// A display name for the dashboard.
-	Name *string
-
-	// The last time that this dataset was published.
-	LastPublishedTime *time.Time
 
 	// The time that this dataset was created.
 	CreatedTime *time.Time
 
+	// Dashboard ID.
+	DashboardId *string
+
+	// The last time that this dataset was published.
+	LastPublishedTime *time.Time
+
 	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time
+
+	// A display name for the dashboard.
+	Name *string
+
+	// Version.
+	Version *DashboardVersion
 }
 
 // Dashboard error.
 type DashboardError struct {
 
-	// Type.
-	Type DashboardErrorType
-
 	// Message.
 	Message *string
+
+	// Type.
+	Type DashboardErrorType
 }
 
 // Dashboard publish options.
 type DashboardPublishOptions struct {
 
-	// Export to .csv option.
-	ExportToCSVOption *ExportToCSVOption
-
 	// Ad hoc (one-time) filtering option.
 	AdHocFilteringOption *AdHocFilteringOption
+
+	// Export to .csv option.
+	ExportToCSVOption *ExportToCSVOption
 
 	// Sheet controls option.
 	SheetControlsOption *SheetControlsOption
@@ -310,6 +310,12 @@ type DashboardPublishOptions struct {
 
 // A filter that you apply when searching for dashboards.
 type DashboardSearchFilter struct {
+
+	// The comparison operator that you want to use as a filter, for example,
+	// "Operator": "StringEquals".
+	//
+	// This member is required.
+	Operator FilterOperator
 
 	// The name of the value that you want to use as a filter, for example, "Name":
 	// "QUICKSIGHT_USER".
@@ -319,12 +325,6 @@ type DashboardSearchFilter struct {
 	// as a filter, for example, "Value":
 	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
 	Value *string
-
-	// The comparison operator that you want to use as a filter, for example,
-	// "Operator": "StringEquals".
-	//
-	// This member is required.
-	Operator FilterOperator
 }
 
 // Dashboard source entity.
@@ -351,17 +351,17 @@ type DashboardSourceTemplate struct {
 // Dashboard summary.
 type DashboardSummary struct {
 
-	// The time that this dashboard was created.
-	CreatedTime *time.Time
-
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
+
+	// The time that this dashboard was created.
+	CreatedTime *time.Time
 
 	// Dashboard ID.
 	DashboardId *string
 
-	// Published version number.
-	PublishedVersionNumber *int64
+	// The last time that this dashboard was published.
+	LastPublishedTime *time.Time
 
 	// The last time that this dashboard was updated.
 	LastUpdatedTime *time.Time
@@ -369,59 +369,59 @@ type DashboardSummary struct {
 	// A display name for the dashboard.
 	Name *string
 
-	// The last time that this dashboard was published.
-	LastPublishedTime *time.Time
+	// Published version number.
+	PublishedVersionNumber *int64
 }
 
 // Dashboard version.
 type DashboardVersion struct {
 
-	// Version number.
-	VersionNumber *int64
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
 
-	// Errors.
-	Errors []*DashboardError
+	// The time that this dashboard version was created.
+	CreatedTime *time.Time
 
 	// The Amazon Resource Numbers (ARNs) for the datasets that are associated with a
 	// version of the dashboard.
 	DataSetArns []*string
 
-	// The time that this dashboard version was created.
-	CreatedTime *time.Time
-
 	// Description.
 	Description *string
+
+	// Errors.
+	Errors []*DashboardError
 
 	// Source entity ARN.
 	SourceEntityArn *string
 
-	// The Amazon Resource Name (ARN) of the resource.
-	Arn *string
-
 	// The HTTP status of the request.
 	Status ResourceStatus
+
+	// Version number.
+	VersionNumber *int64
 }
 
 // Dashboard version summary.
 type DashboardVersionSummary struct {
 
-	// Description.
-	Description *string
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
 
 	// The time that this dashboard version was created.
 	CreatedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the resource.
-	Arn *string
+	// Description.
+	Description *string
 
-	// Version number.
-	VersionNumber *int64
+	// Source entity ARN.
+	SourceEntityArn *string
 
 	// The HTTP status of the request.
 	Status ResourceStatus
 
-	// Source entity ARN.
-	SourceEntityArn *string
+	// Version number.
+	VersionNumber *int64
 }
 
 // The theme colors that are used for data colors in charts. The colors description
@@ -429,26 +429,46 @@ type DashboardVersionSummary struct {
 // prefixed with #, for example #37BFF5.
 type DataColorPalette struct {
 
-	// The minimum and maximum hexadecimal codes that describe a color gradient.
-	MinMaxGradient []*string
-
 	// The hexadecimal codes for the colors.
 	Colors []*string
 
 	// The hexadecimal code of a color that applies to charts where a lack of data is
 	// highlighted.
 	EmptyFillColor *string
+
+	// The minimum and maximum hexadecimal codes that describe a color gradient.
+	MinMaxGradient []*string
 }
 
 // Dataset.
 type DataSet struct {
 
-	// The last time that this dataset was updated.
-	LastUpdatedTime *time.Time
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
+
+	// Groupings of columns that work together in certain Amazon QuickSight features.
+	// Currently, only geospatial hierarchy is supported.
+	ColumnGroups []*ColumnGroup
 
 	// The amount of SPICE capacity used by this dataset. This is 0 if the dataset
 	// isn't imported into SPICE.
 	ConsumedSpiceCapacityInBytes *int64
+
+	// The time that this dataset was created.
+	CreatedTime *time.Time
+
+	// The ID of the dataset.
+	DataSetId *string
+
+	// Indicates whether you want to import the data into SPICE.
+	ImportMode DataSetImportMode
+
+	// The last time that this dataset was updated.
+	LastUpdatedTime *time.Time
+
+	// Configures the combination and transformation of the data from the physical
+	// tables.
+	LogicalTableMap map[string]*LogicalTable
 
 	// A display name for the dataset.
 	Name *string
@@ -457,41 +477,21 @@ type DataSet struct {
 	// templates, analyses, and dashboards.
 	OutputColumns []*OutputColumn
 
-	// Indicates whether you want to import the data into SPICE.
-	ImportMode DataSetImportMode
-
-	// The Amazon Resource Name (ARN) of the resource.
-	Arn *string
-
-	// The row-level security configuration for the dataset.
-	RowLevelPermissionDataSet *RowLevelPermissionDataSet
-
-	// The ID of the dataset.
-	DataSetId *string
-
-	// Groupings of columns that work together in certain Amazon QuickSight features.
-	// Currently, only geospatial hierarchy is supported.
-	ColumnGroups []*ColumnGroup
-
 	// Declares the physical tables that are available in the underlying data sources.
 	PhysicalTableMap map[string]*PhysicalTable
 
-	// The time that this dataset was created.
-	CreatedTime *time.Time
-
-	// Configures the combination and transformation of the data from the physical
-	// tables.
-	LogicalTableMap map[string]*LogicalTable
+	// The row-level security configuration for the dataset.
+	RowLevelPermissionDataSet *RowLevelPermissionDataSet
 }
 
 // Dataset configuration.
 type DataSetConfiguration struct {
 
-	// Dataset schema.
-	DataSetSchema *DataSetSchema
-
 	// A structure containing the list of column group schemas.
 	ColumnGroupSchemaList []*ColumnGroupSchema
+
+	// Dataset schema.
+	DataSetSchema *DataSetSchema
 
 	// Placeholder.
 	Placeholder *string
@@ -524,36 +524,27 @@ type DataSetSummary struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The row-level security configuration for the dataset.
-	RowLevelPermissionDataSet *RowLevelPermissionDataSet
-
-	// Indicates whether you want to import the data into SPICE.
-	ImportMode DataSetImportMode
-
 	// The time that this dataset was created.
 	CreatedTime *time.Time
-
-	// A display name for the dataset.
-	Name *string
 
 	// The ID of the dataset.
 	DataSetId *string
 
+	// Indicates whether you want to import the data into SPICE.
+	ImportMode DataSetImportMode
+
 	// The last time that this dataset was updated.
 	LastUpdatedTime *time.Time
+
+	// A display name for the dataset.
+	Name *string
+
+	// The row-level security configuration for the dataset.
+	RowLevelPermissionDataSet *RowLevelPermissionDataSet
 }
 
 // The structure of a data source.
 type DataSource struct {
-
-	// The Amazon Resource Name (ARN) of the data source.
-	Arn *string
-
-	// The last time that this data source was updated.
-	LastUpdatedTime *time.Time
-
-	// A display name for the data source.
-	Name *string
 
 	// A set of alternate data source parameters that you want to share for the
 	// credentials stored with this data source. The credentials are applied in tandem
@@ -566,36 +557,45 @@ type DataSource struct {
 	// automatically allowed.
 	AlternateDataSourceParameters []*DataSourceParameters
 
-	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
-	// underlying source.
-	SslProperties *SslProperties
+	// The Amazon Resource Name (ARN) of the data source.
+	Arn *string
+
+	// The time that this data source was created.
+	CreatedTime *time.Time
 
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
 	DataSourceId *string
-
-	// The VPC connection information. You need to use this parameter only when you
-	// want QuickSight to use a VPC connection when connecting to your underlying
-	// source.
-	VpcConnectionProperties *VpcConnectionProperties
-
-	// The type of the data source. This type indicates which database engine the data
-	// source connects to.
-	Type DataSourceType
 
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
 	// This is a variant type structure. For this structure to be valid, only one of
 	// the attributes can be non-null.
 	DataSourceParameters *DataSourceParameters
 
+	// Error information from the last update or the creation of the data source.
+	ErrorInfo *DataSourceErrorInfo
+
+	// The last time that this data source was updated.
+	LastUpdatedTime *time.Time
+
+	// A display name for the data source.
+	Name *string
+
+	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
+	// underlying source.
+	SslProperties *SslProperties
+
 	// The HTTP status of the request.
 	Status ResourceStatus
 
-	// The time that this data source was created.
-	CreatedTime *time.Time
+	// The type of the data source. This type indicates which database engine the data
+	// source connects to.
+	Type DataSourceType
 
-	// Error information from the last update or the creation of the data source.
-	ErrorInfo *DataSourceErrorInfo
+	// The VPC connection information. You need to use this parameter only when you
+	// want QuickSight to use a VPC connection when connecting to your underlying
+	// source.
+	VpcConnectionProperties *VpcConnectionProperties
 }
 
 // Data source credentials. This is a variant type structure. For this structure to
@@ -615,11 +615,11 @@ type DataSourceCredentials struct {
 // Error information for the data source creation or update.
 type DataSourceErrorInfo struct {
 
-	// Error type.
-	Type DataSourceErrorInfoType
-
 	// Error message.
 	Message *string
+
+	// Error type.
+	Type DataSourceErrorInfoType
 }
 
 // The parameters that Amazon QuickSight uses to connect to your underlying data
@@ -627,76 +627,76 @@ type DataSourceErrorInfo struct {
 // one of the attributes can be non-null.
 type DataSourceParameters struct {
 
-	// Presto parameters.
-	PrestoParameters *PrestoParameters
-
-	// ServiceNow parameters.
-	ServiceNowParameters *ServiceNowParameters
-
-	// S3 parameters.
-	S3Parameters *S3Parameters
-
-	// Amazon Aurora MySQL parameters.
-	AuroraParameters *AuroraParameters
-
-	// Twitter parameters.
-	TwitterParameters *TwitterParameters
-
-	// Aurora PostgreSQL parameters.
-	AuroraPostgreSqlParameters *AuroraPostgreSqlParameters
-
-	// Amazon Redshift parameters.
-	RedshiftParameters *RedshiftParameters
+	// Amazon Elasticsearch Service parameters.
+	AmazonElasticsearchParameters *AmazonElasticsearchParameters
 
 	// Amazon Athena parameters.
 	AthenaParameters *AthenaParameters
 
-	// Spark parameters.
-	SparkParameters *SparkParameters
+	// Amazon Aurora MySQL parameters.
+	AuroraParameters *AuroraParameters
 
-	// MariaDB parameters.
-	MariaDbParameters *MariaDbParameters
+	// Aurora PostgreSQL parameters.
+	AuroraPostgreSqlParameters *AuroraPostgreSqlParameters
 
 	// AWS IoT Analytics parameters.
 	AwsIotAnalyticsParameters *AwsIotAnalyticsParameters
 
-	// Amazon RDS parameters.
-	RdsParameters *RdsParameters
+	// Jira parameters.
+	JiraParameters *JiraParameters
+
+	// MariaDB parameters.
+	MariaDbParameters *MariaDbParameters
 
 	// MySQL parameters.
 	MySqlParameters *MySqlParameters
 
-	// Amazon Elasticsearch Service parameters.
-	AmazonElasticsearchParameters *AmazonElasticsearchParameters
+	// PostgreSQL parameters.
+	PostgreSqlParameters *PostgreSqlParameters
+
+	// Presto parameters.
+	PrestoParameters *PrestoParameters
+
+	// Amazon RDS parameters.
+	RdsParameters *RdsParameters
+
+	// Amazon Redshift parameters.
+	RedshiftParameters *RedshiftParameters
+
+	// S3 parameters.
+	S3Parameters *S3Parameters
+
+	// ServiceNow parameters.
+	ServiceNowParameters *ServiceNowParameters
 
 	// Snowflake parameters.
 	SnowflakeParameters *SnowflakeParameters
 
-	// Jira parameters.
-	JiraParameters *JiraParameters
-
-	// Teradata parameters.
-	TeradataParameters *TeradataParameters
+	// Spark parameters.
+	SparkParameters *SparkParameters
 
 	// SQL Server parameters.
 	SqlServerParameters *SqlServerParameters
 
-	// PostgreSQL parameters.
-	PostgreSqlParameters *PostgreSqlParameters
+	// Teradata parameters.
+	TeradataParameters *TeradataParameters
+
+	// Twitter parameters.
+	TwitterParameters *TwitterParameters
 }
 
 // Date time parameter.
 type DateTimeParameter struct {
 
-	// Values.
-	//
-	// This member is required.
-	Values []*time.Time
-
 	// A display name for the dataset.
 	//
 	// This member is required.
 	Name *string
+
+	// Values.
+	//
+	// This member is required.
+	Values []*time.Time
 }
 
 // Decimal parameter.
@@ -716,11 +716,11 @@ type DecimalParameter struct {
 // Error information for the SPICE ingestion of a dataset.
 type ErrorInfo struct {
 
-	// Error type.
-	Type IngestionErrorType
-
 	// Error message.
 	Message *string
+
+	// Error type.
+	Type IngestionErrorType
 }
 
 // Export to .csv option.
@@ -743,11 +743,6 @@ type FilterOperation struct {
 // Geospatial column group that denotes a hierarchy.
 type GeoSpatialColumnGroup struct {
 
-	// A display name for the hierarchy.
-	//
-	// This member is required.
-	Name *string
-
 	// Columns in this hierarchy.
 	//
 	// This member is required.
@@ -757,6 +752,11 @@ type GeoSpatialColumnGroup struct {
 	//
 	// This member is required.
 	CountryCode GeoSpatialCountryCode
+
+	// A display name for the hierarchy.
+	//
+	// This member is required.
+	Name *string
 }
 
 // A group in Amazon QuickSight consists of a set of users. You can use groups to
@@ -764,28 +764,28 @@ type GeoSpatialColumnGroup struct {
 // subscription can't contain more than 500 Amazon QuickSight groups.
 type Group struct {
 
+	// The Amazon Resource Name (ARN) for the group.
+	Arn *string
+
+	// The group description.
+	Description *string
+
 	// The name of the group.
 	GroupName *string
 
 	// The principal ID of the group.
 	PrincipalId *string
-
-	// The group description.
-	Description *string
-
-	// The Amazon Resource Name (ARN) for the group.
-	Arn *string
 }
 
 // A member of an Amazon QuickSight group. Currently, group members must be users.
 // Groups can't be members of another group. .
 type GroupMember struct {
 
-	// The name of the group member (user).
-	MemberName *string
-
 	// The Amazon Resource Name (ARN) for the group member (user).
 	Arn *string
+
+	// The name of the group member (user).
+	MemberName *string
 }
 
 // The display options for gutter spacing between tiles on a sheet.
@@ -799,33 +799,33 @@ type GutterStyle struct {
 // An AWS Identity and Access Management (IAM) policy assignment.
 type IAMPolicyAssignment struct {
 
-	// Assignment name.
-	AssignmentName *string
-
 	// Assignment ID.
 	AssignmentId *string
 
-	// The Amazon Resource Name (ARN) for the IAM policy.
-	PolicyArn *string
-
-	// Identities.
-	Identities map[string][]*string
+	// Assignment name.
+	AssignmentName *string
 
 	// Assignment status.
 	AssignmentStatus AssignmentStatus
 
 	// The AWS account ID.
 	AwsAccountId *string
+
+	// Identities.
+	Identities map[string][]*string
+
+	// The Amazon Resource Name (ARN) for the IAM policy.
+	PolicyArn *string
 }
 
 // IAM policy assignment summary.
 type IAMPolicyAssignmentSummary struct {
 
-	// Assignment status.
-	AssignmentStatus AssignmentStatus
-
 	// Assignment name.
 	AssignmentName *string
+
+	// Assignment status.
+	AssignmentStatus AssignmentStatus
 }
 
 // Information about the SPICE ingestion for a dataset.
@@ -836,39 +836,39 @@ type Ingestion struct {
 	// This member is required.
 	Arn *string
 
-	// Information about rows for a data set SPICE ingestion.
-	RowInfo *RowInfo
-
-	// The size of the data ingested, in bytes.
-	IngestionSizeInBytes *int64
+	// The time that this ingestion started.
+	//
+	// This member is required.
+	CreatedTime *time.Time
 
 	// Ingestion status.
 	//
 	// This member is required.
 	IngestionStatus IngestionStatus
 
-	// Type of this ingestion.
-	RequestType IngestionRequestType
-
 	// Error information for this ingestion.
 	ErrorInfo *ErrorInfo
-
-	// Information about a queued dataset SPICE ingestion.
-	QueueInfo *QueueInfo
 
 	// Ingestion ID.
 	IngestionId *string
 
+	// The size of the data ingested, in bytes.
+	IngestionSizeInBytes *int64
+
 	// The time that this ingestion took, measured in seconds.
 	IngestionTimeInSeconds *int64
 
-	// The time that this ingestion started.
-	//
-	// This member is required.
-	CreatedTime *time.Time
+	// Information about a queued dataset SPICE ingestion.
+	QueueInfo *QueueInfo
 
 	// Event source for this ingestion.
 	RequestSource IngestionRequestSource
+
+	// Type of this ingestion.
+	RequestType IngestionRequestType
+
+	// Information about rows for a data set SPICE ingestion.
+	RowInfo *RowInfo
 }
 
 // Metadata for a column that is used as the input of a transform operation.
@@ -911,11 +911,6 @@ type JiraParameters struct {
 // Join instruction.
 type JoinInstruction struct {
 
-	// Type.
-	//
-	// This member is required.
-	Type JoinType
-
 	// Left operand.
 	//
 	// This member is required.
@@ -930,6 +925,11 @@ type JoinInstruction struct {
 	//
 	// This member is required.
 	RightOperand *string
+
+	// Type.
+	//
+	// This member is required.
+	Type JoinType
 }
 
 // A logical table is a unit that joins and that data transformations operate on. A
@@ -938,6 +938,11 @@ type JoinInstruction struct {
 // a mutable copy of that physical table through transform operations.
 type LogicalTable struct {
 
+	// A display name for the logical table.
+	//
+	// This member is required.
+	Alias *string
+
 	// Source of this logical table.
 	//
 	// This member is required.
@@ -945,11 +950,6 @@ type LogicalTable struct {
 
 	// Transform operations that act on this logical table.
 	DataTransforms []*TransformOperation
-
-	// A display name for the logical table.
-	//
-	// This member is required.
-	Alias *string
 }
 
 // Information about the source of a logical table. This is a variant type
@@ -957,11 +957,11 @@ type LogicalTable struct {
 // non-null.
 type LogicalTableSource struct {
 
-	// Physical table ID.
-	PhysicalTableId *string
-
 	// Specifies the result of a join of two logical tables.
 	JoinInstruction *JoinInstruction
+
+	// Physical table ID.
+	PhysicalTableId *string
 }
 
 // Amazon S3 manifest file location.
@@ -988,11 +988,6 @@ type MarginStyle struct {
 // MariaDB parameters.
 type MariaDbParameters struct {
 
-	// Port.
-	//
-	// This member is required.
-	Port *int32
-
 	// Database.
 	//
 	// This member is required.
@@ -1002,6 +997,11 @@ type MariaDbParameters struct {
 	//
 	// This member is required.
 	Host *string
+
+	// Port.
+	//
+	// This member is required.
+	Port *int32
 }
 
 // MySQL parameters.
@@ -1012,25 +1012,25 @@ type MySqlParameters struct {
 	// This member is required.
 	Database *string
 
-	// Port.
-	//
-	// This member is required.
-	Port *int32
-
 	// Host.
 	//
 	// This member is required.
 	Host *string
+
+	// Port.
+	//
+	// This member is required.
+	Port *int32
 }
 
 // Errors that occur during namespace creation.
 type NamespaceError struct {
 
-	// The error type.
-	Type NamespaceErrorType
-
 	// The message for the error.
 	Message *string
+
+	// The error type.
+	Type NamespaceErrorType
 }
 
 // The error type.
@@ -1039,20 +1039,20 @@ type NamespaceInfoV2 struct {
 	// The namespace ARN.
 	Arn *string
 
-	// The name of the error.
-	Name *string
+	// The namespace AWS Region.
+	CapacityRegion *string
+
+	// The creation status of a namespace that is not yet completely created.
+	CreationStatus NamespaceStatus
 
 	// The identity store used for the namespace.
 	IdentityStore IdentityStore
 
-	// The namespace AWS Region.
-	CapacityRegion *string
+	// The name of the error.
+	Name *string
 
 	// An error that occured when the namespace was created.
 	NamespaceError *NamespaceError
-
-	// The creation status of a namespace that is not yet completely created.
-	CreationStatus NamespaceStatus
 }
 
 // Output column.
@@ -1068,17 +1068,17 @@ type OutputColumn struct {
 // Parameters.
 type Parameters struct {
 
-	// String parameters.
-	StringParameters []*StringParameter
+	// DateTime parameters.
+	DateTimeParameters []*DateTimeParameter
 
 	// Decimal parameters.
 	DecimalParameters []*DecimalParameter
 
-	// DateTime parameters.
-	DateTimeParameters []*DateTimeParameter
-
 	// Integer parameters.
 	IntegerParameters []*IntegerParameter
+
+	// String parameters.
+	StringParameters []*StringParameter
 }
 
 // A view of a data source that contains information about the shape of the data in
@@ -1086,11 +1086,11 @@ type Parameters struct {
 // be valid, only one of the attributes can be non-null.
 type PhysicalTable struct {
 
-	// A physical table type for relational data sources.
-	RelationalTable *RelationalTable
-
 	// A physical table type built from the results of the custom SQL query.
 	CustomSql *CustomSql
+
+	// A physical table type for relational data sources.
+	RelationalTable *RelationalTable
 
 	// A physical table type for as S3 data source.
 	S3Source *S3Source
@@ -1098,6 +1098,11 @@ type PhysicalTable struct {
 
 // PostgreSQL parameters.
 type PostgreSqlParameters struct {
+
+	// Database.
+	//
+	// This member is required.
+	Database *string
 
 	// Host.
 	//
@@ -1108,20 +1113,10 @@ type PostgreSqlParameters struct {
 	//
 	// This member is required.
 	Port *int32
-
-	// Database.
-	//
-	// This member is required.
-	Database *string
 }
 
 // Presto parameters.
 type PrestoParameters struct {
-
-	// Port.
-	//
-	// This member is required.
-	Port *int32
 
 	// Catalog.
 	//
@@ -1132,6 +1127,11 @@ type PrestoParameters struct {
 	//
 	// This member is required.
 	Host *string
+
+	// Port.
+	//
+	// This member is required.
+	Port *int32
 }
 
 // A transform operation that projects columns. Operations that come after a
@@ -1183,26 +1183,18 @@ type RedshiftParameters struct {
 	// This member is required.
 	Database *string
 
+	// Cluster ID. This field can be blank if the Host and Port are provided.
+	ClusterId *string
+
 	// Host. This field can be blank if ClusterId is provided.
 	Host *string
 
 	// Port. This field can be blank if the ClusterId is provided.
 	Port *int32
-
-	// Cluster ID. This field can be blank if the Host and Port are provided.
-	ClusterId *string
 }
 
 // A physical table type for relational data sources.
 type RelationalTable struct {
-
-	// The schema name. This name applies to certain relational database engines.
-	Schema *string
-
-	// The name of the relational table.
-	//
-	// This member is required.
-	Name *string
 
 	// The Amazon Resource Name (ARN) for the data source.
 	//
@@ -1213,6 +1205,14 @@ type RelationalTable struct {
 	//
 	// This member is required.
 	InputColumns []*InputColumn
+
+	// The name of the relational table.
+	//
+	// This member is required.
+	Name *string
+
+	// The schema name. This name applies to certain relational database engines.
+	Schema *string
 }
 
 // A transform operation that renames a column.
@@ -1255,28 +1255,28 @@ type ResourcePermission struct {
 // Information about rows for a data set SPICE ingestion.
 type RowInfo struct {
 
-	// The number of rows that were ingested.
-	RowsIngested *int64
-
 	// The number of rows that were not ingested.
 	RowsDropped *int64
+
+	// The number of rows that were ingested.
+	RowsIngested *int64
 }
 
 // The row-level security configuration for the dataset.
 type RowLevelPermissionDataSet struct {
 
-	// The namespace associated with the row-level permissions dataset.
-	Namespace *string
+	// The Amazon Resource Name (ARN) of the permission dataset.
+	//
+	// This member is required.
+	Arn *string
 
 	// Permission policy.
 	//
 	// This member is required.
 	PermissionPolicy RowLevelPermissionPolicy
 
-	// The Amazon Resource Name (ARN) of the permission dataset.
-	//
-	// This member is required.
-	Arn *string
+	// The namespace associated with the row-level permissions dataset.
+	Namespace *string
 }
 
 // S3 parameters.
@@ -1292,18 +1292,18 @@ type S3Parameters struct {
 // A physical table type for as S3 data source.
 type S3Source struct {
 
-	// Information about the format for the S3 source file or files.
-	UploadSettings *UploadSettings
+	// The amazon Resource Name (ARN) for the data source.
+	//
+	// This member is required.
+	DataSourceArn *string
 
 	// A physical table type for as S3 data source.
 	//
 	// This member is required.
 	InputColumns []*InputColumn
 
-	// The amazon Resource Name (ARN) for the data source.
-	//
-	// This member is required.
-	DataSourceArn *string
+	// Information about the format for the S3 source file or files.
+	UploadSettings *UploadSettings
 }
 
 // ServiceNow parameters.
@@ -1335,6 +1335,11 @@ type SheetStyle struct {
 // Snowflake parameters.
 type SnowflakeParameters struct {
 
+	// Database.
+	//
+	// This member is required.
+	Database *string
+
 	// Host.
 	//
 	// This member is required.
@@ -1344,11 +1349,6 @@ type SnowflakeParameters struct {
 	//
 	// This member is required.
 	Warehouse *string
-
-	// Database.
-	//
-	// This member is required.
-	Database *string
 }
 
 // Spark parameters.
@@ -1368,15 +1368,15 @@ type SparkParameters struct {
 // SQL Server parameters.
 type SqlServerParameters struct {
 
-	// Host.
-	//
-	// This member is required.
-	Host *string
-
 	// Database.
 	//
 	// This member is required.
 	Database *string
+
+	// Host.
+	//
+	// This member is required.
+	Host *string
 
 	// Port.
 	//
@@ -1395,15 +1395,15 @@ type SslProperties struct {
 // String parameter.
 type StringParameter struct {
 
-	// Values.
-	//
-	// This member is required.
-	Values []*string
-
 	// A display name for the dataset.
 	//
 	// This member is required.
 	Name *string
+
+	// Values.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // The key or keys of the key-value pairs for the resource tag or tags assigned to
@@ -1424,16 +1424,16 @@ type Tag struct {
 // A transform operation that tags a column with additional information.
 type TagColumnOperation struct {
 
+	// The column that this operation acts on.
+	//
+	// This member is required.
+	ColumnName *string
+
 	// The dataset column tag, currently only used for geospatial type tagging. . This
 	// is not tags for the AWS tagging feature. .
 	//
 	// This member is required.
 	Tags []*ColumnTag
-
-	// The column that this operation acts on.
-	//
-	// This member is required.
-	ColumnName *string
 }
 
 // A template object. A template is an entity in QuickSight that encapsulates the
@@ -1446,20 +1446,20 @@ type TagColumnOperation struct {
 // to create a template or a dashboard from an existing template.
 type Template struct {
 
-	// Time when this was created.
-	CreatedTime *time.Time
-
 	// The Amazon Resource Name (ARN) of the template.
 	Arn *string
 
-	// The ID for the template. This is unique per AWS Region for each AWS account.
-	TemplateId *string
+	// Time when this was created.
+	CreatedTime *time.Time
+
+	// Time when this was last updated.
+	LastUpdatedTime *time.Time
 
 	// The display name of the template.
 	Name *string
 
-	// Time when this was last updated.
-	LastUpdatedTime *time.Time
+	// The ID for the template. This is unique per AWS Region for each AWS account.
+	TemplateId *string
 
 	// A structure describing the versions of the template.
 	Version *TemplateVersion
@@ -1468,24 +1468,24 @@ type Template struct {
 // The template alias.
 type TemplateAlias struct {
 
-	// The version number of the template alias.
-	TemplateVersionNumber *int64
-
 	// The display name of the template alias.
 	AliasName *string
 
 	// The Amazon Resource Name (ARN) of the template alias.
 	Arn *string
+
+	// The version number of the template alias.
+	TemplateVersionNumber *int64
 }
 
 // List of errors that occurred when the template version creation failed.
 type TemplateError struct {
 
-	// Type of error.
-	Type TemplateErrorType
-
 	// Description of the error type.
 	Message *string
+
+	// Type of error.
+	Type TemplateErrorType
 }
 
 // The source analysis of the template.
@@ -1525,40 +1525,30 @@ type TemplateSourceTemplate struct {
 // The template summary.
 type TemplateSummary struct {
 
-	// The last time that this template was created.
-	CreatedTime *time.Time
-
-	// The ID of the template. This ID is unique per AWS Region for each AWS account.
-	TemplateId *string
-
 	// A summary of a template.
 	Arn *string
+
+	// The last time that this template was created.
+	CreatedTime *time.Time
 
 	// The last time that this template was updated.
 	LastUpdatedTime *time.Time
 
+	// A structure containing a list of version numbers for the template summary.
+	LatestVersionNumber *int64
+
 	// A display name for the template.
 	Name *string
 
-	// A structure containing a list of version numbers for the template summary.
-	LatestVersionNumber *int64
+	// The ID of the template. This ID is unique per AWS Region for each AWS account.
+	TemplateId *string
 }
 
 // A version of a template.
 type TemplateVersion struct {
 
-	// The version number of the template.
-	VersionNumber *int64
-
-	// The HTTP status of the request.
-	Status ResourceStatus
-
-	// Errors associated with the template.
-	Errors []*TemplateError
-
-	// The Amazon Resource Name (ARN) of the analysis or template which was used to
-	// create this template.
-	SourceEntityArn *string
+	// The time that this template version was created.
+	CreatedTime *time.Time
 
 	// Schema of the dataset identified by the placeholder. The idea is that any
 	// dashboard created from the template should be bound to new datasets matching the
@@ -1568,31 +1558,46 @@ type TemplateVersion struct {
 	// The description of the template.
 	Description *string
 
-	// The time that this template version was created.
-	CreatedTime *time.Time
+	// Errors associated with the template.
+	Errors []*TemplateError
+
+	// The Amazon Resource Name (ARN) of the analysis or template which was used to
+	// create this template.
+	SourceEntityArn *string
+
+	// The HTTP status of the request.
+	Status ResourceStatus
+
+	// The version number of the template.
+	VersionNumber *int64
 }
 
 // The template version.
 type TemplateVersionSummary struct {
 
-	// The version number of the template version.
-	VersionNumber *int64
-
 	// The Amazon Resource Name (ARN) of the template version.
 	Arn *string
-
-	// The status of the template version.
-	Status ResourceStatus
 
 	// The time that this template version was created.
 	CreatedTime *time.Time
 
 	// The description of the template version.
 	Description *string
+
+	// The status of the template version.
+	Status ResourceStatus
+
+	// The version number of the template version.
+	VersionNumber *int64
 }
 
 // Teradata parameters.
 type TeradataParameters struct {
+
+	// Database.
+	//
+	// This member is required.
+	Database *string
 
 	// Host.
 	//
@@ -1603,61 +1608,56 @@ type TeradataParameters struct {
 	//
 	// This member is required.
 	Port *int32
-
-	// Database.
-	//
-	// This member is required.
-	Database *string
 }
 
 //
 type Theme struct {
 
+	// The Amazon Resource Name (ARN) of the theme.
+	Arn *string
+
+	// The date and time that the theme was created.
+	CreatedTime *time.Time
+
+	// The date and time that the theme was last updated.
+	LastUpdatedTime *time.Time
+
 	// The name that the user gives to the theme.
 	Name *string
+
+	// The identifier that the user gives to the theme.
+	ThemeId *string
 
 	// The type of theme, based on how it was created. Valid values include: QUICKSIGHT
 	// and CUSTOM.
 	Type ThemeType
 
-	// The date and time that the theme was last updated.
-	LastUpdatedTime *time.Time
-
-	// The Amazon Resource Name (ARN) of the theme.
-	Arn *string
-
 	// A version of a theme.
 	Version *ThemeVersion
-
-	// The date and time that the theme was created.
-	CreatedTime *time.Time
-
-	// The identifier that the user gives to the theme.
-	ThemeId *string
 }
 
 // An alias for a theme.
 type ThemeAlias struct {
-
-	// The version number of the theme alias.
-	ThemeVersionNumber *int64
 
 	// The display name of the theme alias.
 	AliasName *string
 
 	// The Amazon Resource Name (ARN) of the theme alias.
 	Arn *string
+
+	// The version number of the theme alias.
+	ThemeVersionNumber *int64
 }
 
 // The theme configuration. This configuration contains all of the display
 // properties for a theme.
 type ThemeConfiguration struct {
 
-	// Display options related to sheets.
-	Sheet *SheetStyle
-
 	// Color properties that apply to chart data colors.
 	DataColorPalette *DataColorPalette
+
+	// Display options related to sheets.
+	Sheet *SheetStyle
 
 	// Color properties that apply to the UI and to charts, excluding the colors that
 	// apply to data.
@@ -1677,62 +1677,59 @@ type ThemeError struct {
 // The theme summary.
 type ThemeSummary struct {
 
-	// the display name for the theme.
-	Name *string
+	// The Amazon Resource Name (ARN) of the resource.
+	Arn *string
 
 	// The date and time that this theme was created.
 	CreatedTime *time.Time
 
-	// The ID of the theme. This ID is unique per AWS Region for each AWS account.
-	ThemeId *string
+	// The last date and time that this theme was updated.
+	LastUpdatedTime *time.Time
 
 	// The latest version number for the theme.
 	LatestVersionNumber *int64
 
-	// The last date and time that this theme was updated.
-	LastUpdatedTime *time.Time
+	// the display name for the theme.
+	Name *string
 
-	// The Amazon Resource Name (ARN) of the resource.
-	Arn *string
+	// The ID of the theme. This ID is unique per AWS Region for each AWS account.
+	ThemeId *string
 }
 
 // A version of a theme.
 type ThemeVersion struct {
 
-	// The description of the theme.
-	Description *string
-
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
-
-	// The version number of the theme.
-	VersionNumber *int64
-
-	// The date and time that this theme version was created.
-	CreatedTime *time.Time
-
-	// The theme configuration, which contains all the theme display properties.
-	Configuration *ThemeConfiguration
-
-	// The status of the theme version.
-	Status ResourceStatus
 
 	// The Amazon QuickSight-defined ID of the theme that a custom theme inherits from.
 	// All themes initially inherit from a default QuickSight theme.
 	BaseThemeId *string
 
+	// The theme configuration, which contains all the theme display properties.
+	Configuration *ThemeConfiguration
+
+	// The date and time that this theme version was created.
+	CreatedTime *time.Time
+
+	// The description of the theme.
+	Description *string
+
 	// Errors associated with the theme.
 	Errors []*ThemeError
+
+	// The status of the theme version.
+	Status ResourceStatus
+
+	// The version number of the theme.
+	VersionNumber *int64
 }
 
 // The theme version.
 type ThemeVersionSummary struct {
 
-	// The version number of the theme version.
-	VersionNumber *int64
-
-	// The status of the theme version.
-	Status ResourceStatus
+	// The Amazon Resource Name (ARN) of the theme version.
+	Arn *string
 
 	// The date and time that this theme version was created.
 	CreatedTime *time.Time
@@ -1740,18 +1737,21 @@ type ThemeVersionSummary struct {
 	// The description of the theme version.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the theme version.
-	Arn *string
+	// The status of the theme version.
+	Status ResourceStatus
+
+	// The version number of the theme version.
+	VersionNumber *int64
 }
 
 // The display options for the layout of tiles on a sheet.
 type TileLayoutStyle struct {
 
-	// The margin settings that apply around the outside edge of sheets.
-	Margin *MarginStyle
-
 	// The gutter settings that apply between tiles.
 	Gutter *GutterStyle
+
+	// The margin settings that apply around the outside edge of sheets.
+	Margin *MarginStyle
 }
 
 // Display options related to tiles on a sheet.
@@ -1765,18 +1765,8 @@ type TileStyle struct {
 // this structure to be valid, only one of the attributes can be non-null.
 type TransformOperation struct {
 
-	// An operation that renames a column.
-	RenameColumnOperation *RenameColumnOperation
-
 	// A transform operation that casts a column to a different type.
 	CastColumnTypeOperation *CastColumnTypeOperation
-
-	// An operation that tags a column with additional information.
-	TagColumnOperation *TagColumnOperation
-
-	// An operation that projects columns. Operations that come after a projection can
-	// only refer to projected columns.
-	ProjectOperation *ProjectOperation
 
 	// An operation that creates calculated columns. Columns created in one such
 	// operation form a lexical closure.
@@ -1784,6 +1774,16 @@ type TransformOperation struct {
 
 	// An operation that filters rows based on some condition.
 	FilterOperation *FilterOperation
+
+	// An operation that projects columns. Operations that come after a projection can
+	// only refer to projected columns.
+	ProjectOperation *ProjectOperation
+
+	// An operation that renames a column.
+	RenameColumnOperation *RenameColumnOperation
+
+	// An operation that tags a column with additional information.
+	TagColumnOperation *TagColumnOperation
 }
 
 // Twitter parameters.
@@ -1808,20 +1808,15 @@ type TwitterParameters struct {
 // in the Amazon QuickSight User Guide.
 type UIColorPalette struct {
 
-	// This color that applies to warning and informational messages.
-	Warning *string
-
-	// The foreground color that applies to any sheet title, sheet control text, or UI
-	// that appears over the secondary background.
-	SecondaryForeground *string
+	// This color is that applies to selected states and buttons.
+	Accent *string
 
 	// The foreground color that applies to any text or other elements that appear over
-	// the measure color.
-	MeasureForeground *string
+	// the accent color.
+	AccentForeground *string
 
-	// The foreground color that applies to any text or other elements that appear over
-	// the dimension color.
-	DimensionForeground *string
+	// The color that applies to error messages.
+	Danger *string
 
 	// The foreground color that applies to any text or other elements that appear over
 	// the error color.
@@ -1830,45 +1825,56 @@ type UIColorPalette struct {
 	// The color that applies to the names of fields that are identified as dimensions.
 	Dimension *string
 
-	// The color that applies to success messages, for example the check mark for a
-	// successful download.
-	Success *string
+	// The foreground color that applies to any text or other elements that appear over
+	// the dimension color.
+	DimensionForeground *string
+
+	// The color that applies to the names of fields that are identified as measures.
+	Measure *string
+
+	// The foreground color that applies to any text or other elements that appear over
+	// the measure color.
+	MeasureForeground *string
+
+	// The background color that applies to visuals and other high emphasis UI.
+	PrimaryBackground *string
 
 	// The color of text and other foreground elements that appear over the primary
 	// background regions, such as grid lines, borders, table banding, icons, and so
 	// on.
 	PrimaryForeground *string
 
-	// The foreground color that applies to any text or other elements that appear over
-	// the accent color.
-	AccentForeground *string
+	// The background color that applies to the sheet background and sheet controls.
+	SecondaryBackground *string
+
+	// The foreground color that applies to any sheet title, sheet control text, or UI
+	// that appears over the secondary background.
+	SecondaryForeground *string
+
+	// The color that applies to success messages, for example the check mark for a
+	// successful download.
+	Success *string
 
 	// The foreground color that applies to any text or other elements that appear over
 	// the success color.
 	SuccessForeground *string
 
-	// This color is that applies to selected states and buttons.
-	Accent *string
-
-	// The color that applies to error messages.
-	Danger *string
+	// This color that applies to warning and informational messages.
+	Warning *string
 
 	// The foreground color that applies to any text or other elements that appear over
 	// the warning color.
 	WarningForeground *string
-
-	// The background color that applies to visuals and other high emphasis UI.
-	PrimaryBackground *string
-
-	// The color that applies to the names of fields that are identified as measures.
-	Measure *string
-
-	// The background color that applies to the sheet background and sheet controls.
-	SecondaryBackground *string
 }
 
 // Information about the format for a source file or files.
 type UploadSettings struct {
+
+	// Whether the file has a header row, or the files each have a header row.
+	ContainsHeader *bool
+
+	// The delimiter between values in the file.
+	Delimiter *string
 
 	// File format.
 	Format FileFormat
@@ -1878,23 +1884,31 @@ type UploadSettings struct {
 
 	// Text qualifier.
 	TextQualifier TextQualifier
-
-	// The delimiter between values in the file.
-	Delimiter *string
-
-	// Whether the file has a header row, or the files each have a header row.
-	ContainsHeader *bool
 }
 
 // A registered user of Amazon QuickSight. Currently, an Amazon QuickSight
 // subscription can't contain more than 20 million users.
 type User struct {
 
+	// The active status of user. When you create an Amazon QuickSight user that’s not
+	// an IAM user or an Active Directory user, that user is inactive until they sign
+	// in and provide a password.
+	Active *bool
+
+	// The Amazon Resource Name (ARN) for the user.
+	Arn *string
+
 	// The custom permissions profile associated with this user.
 	CustomPermissionsName *string
 
-	// The user's user name.
-	UserName *string
+	// The user's email address.
+	Email *string
+
+	// The type of identity authentication used by the user.
+	IdentityType IdentityType
+
+	// The principal ID of the user.
+	PrincipalId *string
 
 	// The Amazon QuickSight role for the user. The user role can be one of the
 	// following:.
@@ -1915,22 +1929,8 @@ type User struct {
 	// for use.
 	Role UserRole
 
-	// The active status of user. When you create an Amazon QuickSight user that’s not
-	// an IAM user or an Active Directory user, that user is inactive until they sign
-	// in and provide a password.
-	Active *bool
-
-	// The Amazon Resource Name (ARN) for the user.
-	Arn *string
-
-	// The principal ID of the user.
-	PrincipalId *string
-
-	// The user's email address.
-	Email *string
-
-	// The type of identity authentication used by the user.
-	IdentityType IdentityType
+	// The user's user name.
+	UserName *string
 }
 
 // VPC connection properties.

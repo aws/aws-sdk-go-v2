@@ -26,10 +26,6 @@ type ErrorReason struct {
 // A structure that uses CloudWatch metrics to gather data about the service quota.
 type MetricInfo struct {
 
-	// The namespace of the metric. The namespace is a container for CloudWatch
-	// metrics. You can specify a name for the namespace when you create a metric.
-	MetricNamespace *string
-
 	// A dimension is a name/value pair that is part of the identity of a metric. Every
 	// metric has specific characteristics that describe it, and you can think of
 	// dimensions as categories for those characteristics. These dimensions are part of
@@ -37,14 +33,18 @@ type MetricInfo struct {
 	// quota.
 	MetricDimensions map[string]*string
 
+	// The name of the CloudWatch metric that measures usage of a service quota. This
+	// is a required field.
+	MetricName *string
+
+	// The namespace of the metric. The namespace is a container for CloudWatch
+	// metrics. You can specify a name for the namespace when you create a metric.
+	MetricNamespace *string
+
 	// Statistics are metric data aggregations over specified periods of time. This is
 	// the recommended statistic to use when comparing usage in the CloudWatch Metric
 	// against your Service Quota.
 	MetricStatisticRecommendation *string
-
-	// The name of the CloudWatch metric that measures usage of a service quota. This
-	// is a required field.
-	MetricName *string
 }
 
 // A structure that contains information about the quota period.
@@ -60,49 +60,49 @@ type QuotaPeriod struct {
 // A structure that contains information about a requested change for a quota.
 type RequestedServiceQuotaChange struct {
 
-	// The IAM identity who submitted the service quota increase request.
-	Requester *string
-
-	// The name of the AWS service specified in the increase request.
-	ServiceName *string
-
-	// Specifies the service that you want to use.
-	ServiceCode *string
-
-	// Name of the service quota.
-	QuotaName *string
-
-	// The Amazon Resource Name (ARN) of the service quota.
-	QuotaArn *string
-
-	// The unique identifier of a requested service quota change.
-	Id *string
-
-	// New increased value for the service quota.
-	DesiredValue *float64
-
-	// Specifies the unit used for the quota.
-	Unit *string
-
-	// State of the service quota increase request.
-	Status RequestStatus
+	// The case Id for the service quota increase request.
+	CaseId *string
 
 	// The date and time when the service quota increase request was received and the
 	// case Id was created.
 	Created *time.Time
 
-	// Specifies the service quota that you want to use.
-	QuotaCode *string
+	// New increased value for the service quota.
+	DesiredValue *float64
 
 	// Identifies if the quota is global.
 	GlobalQuota *bool
+
+	// The unique identifier of a requested service quota change.
+	Id *string
 
 	// The date and time of the most recent change in the service quota increase
 	// request.
 	LastUpdated *time.Time
 
-	// The case Id for the service quota increase request.
-	CaseId *string
+	// The Amazon Resource Name (ARN) of the service quota.
+	QuotaArn *string
+
+	// Specifies the service quota that you want to use.
+	QuotaCode *string
+
+	// Name of the service quota.
+	QuotaName *string
+
+	// The IAM identity who submitted the service quota increase request.
+	Requester *string
+
+	// Specifies the service that you want to use.
+	ServiceCode *string
+
+	// The name of the AWS service specified in the increase request.
+	ServiceName *string
+
+	// State of the service quota increase request.
+	Status RequestStatus
+
+	// Specifies the unit used for the quota.
+	Unit *string
 }
 
 // A structure that contains the ServiceName and ServiceCode. It does not include
@@ -110,27 +110,21 @@ type RequestedServiceQuotaChange struct {
 // () operation.
 type ServiceInfo struct {
 
-	// The name of the AWS service specified in the increase request.
-	ServiceName *string
-
 	// Specifies the service that you want to use.
 	ServiceCode *string
+
+	// The name of the AWS service specified in the increase request.
+	ServiceName *string
 }
 
 // A structure that contains the full set of details that define the service quota.
 type ServiceQuota struct {
 
-	// The unit of measurement for the value of the service quota.
-	Unit *string
-
 	// Specifies if the quota value can be increased.
 	Adjustable *bool
 
-	// The value of service quota.
-	Value *float64
-
-	// The code identifier for the service quota specified.
-	QuotaCode *string
+	// Specifies the ErrorCode and ErrorMessage when success isn't achieved.
+	ErrorReason *ErrorReason
 
 	// Specifies if the quota is global.
 	GlobalQuota *bool
@@ -138,49 +132,55 @@ type ServiceQuota struct {
 	// Identifies the unit and value of how time is measured.
 	Period *QuotaPeriod
 
-	// Specifies the ErrorCode and ErrorMessage when success isn't achieved.
-	ErrorReason *ErrorReason
-
-	// The name of the AWS service specified in the increase request.
-	ServiceName *string
-
 	// The Amazon Resource Name (ARN) of the service quota.
 	QuotaArn *string
+
+	// The code identifier for the service quota specified.
+	QuotaCode *string
+
+	// The name identifier of the service quota.
+	QuotaName *string
 
 	// Specifies the service that you want to use.
 	ServiceCode *string
 
+	// The name of the AWS service specified in the increase request.
+	ServiceName *string
+
+	// The unit of measurement for the value of the service quota.
+	Unit *string
+
 	// Specifies the details about the measurement.
 	UsageMetric *MetricInfo
 
-	// The name identifier of the service quota.
-	QuotaName *string
+	// The value of service quota.
+	Value *float64
 }
 
 // A structure that contains information about one service quota increase request.
 type ServiceQuotaIncreaseRequestInTemplate struct {
 
-	// The code identifier for the service quota specified in the increase request.
-	QuotaCode *string
-
-	// Specifies if the quota is a global quota.
-	GlobalQuota *bool
-
 	// The AWS Region where the increase request occurs.
 	AwsRegion *string
-
-	// The name of the AWS service specified in the increase request.
-	ServiceName *string
 
 	// Identifies the new, increased value of the service quota in the increase
 	// request.
 	DesiredValue *float64
 
-	// The code identifier for the AWS service specified in the increase request.
-	ServiceCode *string
+	// Specifies if the quota is a global quota.
+	GlobalQuota *bool
+
+	// The code identifier for the service quota specified in the increase request.
+	QuotaCode *string
 
 	// The name of the service quota in the increase request.
 	QuotaName *string
+
+	// The code identifier for the AWS service specified in the increase request.
+	ServiceCode *string
+
+	// The name of the AWS service specified in the increase request.
+	ServiceName *string
 
 	// The unit of measure for the increase request.
 	Unit *string

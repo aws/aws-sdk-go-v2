@@ -81,12 +81,12 @@ type ListEndpointsByPlatformApplicationInput struct {
 // Response for ListEndpointsByPlatformApplication action.
 type ListEndpointsByPlatformApplicationOutput struct {
 
+	// Endpoints returned for ListEndpointsByPlatformApplication action.
+	Endpoints []*types.Endpoint
+
 	// NextToken string is returned when calling ListEndpointsByPlatformApplication
 	// action if additional records are available after the first page results.
 	NextToken *string
-
-	// Endpoints returned for ListEndpointsByPlatformApplication action.
-	Endpoints []*types.Endpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

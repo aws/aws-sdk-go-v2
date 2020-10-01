@@ -57,11 +57,6 @@ func (c *Client) UpdateVirtualRouter(ctx context.Context, params *UpdateVirtualR
 //
 type UpdateVirtualRouterInput struct {
 
-	// The name of the virtual router to update.
-	//
-	// This member is required.
-	VirtualRouterName *string
-
 	// The name of the service mesh that the virtual router resides in.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type UpdateVirtualRouterInput struct {
 	//
 	// This member is required.
 	Spec *types.VirtualRouterSpec
+
+	// The name of the virtual router to update.
+	//
+	// This member is required.
+	VirtualRouterName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.

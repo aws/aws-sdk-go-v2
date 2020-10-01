@@ -58,7 +58,6 @@ func (c *Client) GetVpcLink(ctx context.Context, params *GetVpcLinkInput, optFns
 
 // Gets a specified VPC link under the caller's account in a region.
 type GetVpcLinkInput struct {
-	Template *bool
 
 	// [Required] The identifier of the VpcLink (). It is used in an Integration () to
 	// reference this VpcLink ().
@@ -67,6 +66,8 @@ type GetVpcLinkInput struct {
 	VpcLinkId *string
 
 	Name *string
+
+	Template *bool
 
 	TemplateSkipList []*string
 
@@ -83,6 +84,9 @@ type GetVpcLinkInput struct {
 // connectionId property to identify the VpcLink () used.
 type GetVpcLinkOutput struct {
 
+	// The description of the VPC link.
+	Description *string
+
 	// The identifier of the VpcLink (). It is used in an Integration () to reference
 	// this VpcLink ().
 	Id *string
@@ -90,23 +94,20 @@ type GetVpcLinkOutput struct {
 	// The name used to label and identify the VPC link.
 	Name *string
 
-	// The description of the VPC link.
-	Description *string
-
-	// A description about the VPC link status.
-	StatusMessage *string
-
-	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
-	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
-
 	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
 	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
 	// the status is DELETING.
 	Status types.VpcLinkStatus
 
+	// A description about the VPC link status.
+	StatusMessage *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
+	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
+	// network load balancer must be owned by the same AWS account of the API owner.
+	TargetArns []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -82,6 +82,30 @@ type CreateClusterInput struct {
 	// numbers, and hyphens are allowed.
 	ClusterName *string
 
+	// The capacity provider strategy to use by default for the cluster. When creating
+	// a service or running a task on a cluster, if no capacity provider or launch type
+	// is specified then the default capacity provider strategy for the cluster is
+	// used. A capacity provider strategy consists of one or more capacity providers
+	// along with the base and weight to assign to them. A capacity provider must be
+	// associated with the cluster to be used in a capacity provider strategy. The
+	// PutClusterCapacityProviders () API is used to associate a capacity provider with
+	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
+	// used. If specifying a capacity provider that uses an Auto Scaling group, the
+	// capacity provider must already be created. New capacity providers can be created
+	// with the CreateCapacityProvider () API operation. To use a AWS Fargate capacity
+	// provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS
+	// Fargate capacity providers are available to all accounts and only need to be
+	// associated with a cluster to be used. If a default capacity provider strategy is
+	// not defined for a cluster during creation, it can be defined later with the
+	// PutClusterCapacityProviders () API operation.
+	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
+
+	// The setting to use when creating a cluster. This parameter is used to enable
+	// CloudWatch Container Insights for a cluster. If this value is specified, it will
+	// override the containerInsights value set with PutAccountSetting () or
+	// PutAccountSettingDefault ().
+	Settings []*types.ClusterSetting
+
 	// The metadata that you apply to the cluster to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
 	// define. The following basic restrictions apply to tags:
@@ -112,30 +136,6 @@ type CreateClusterInput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
-
-	// The capacity provider strategy to use by default for the cluster. When creating
-	// a service or running a task on a cluster, if no capacity provider or launch type
-	// is specified then the default capacity provider strategy for the cluster is
-	// used. A capacity provider strategy consists of one or more capacity providers
-	// along with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders () API is used to associate a capacity provider with
-	// a cluster. Only capacity providers with an ACTIVE or UPDATING status can be
-	// used. If specifying a capacity provider that uses an Auto Scaling group, the
-	// capacity provider must already be created. New capacity providers can be created
-	// with the CreateCapacityProvider () API operation. To use a AWS Fargate capacity
-	// provider, specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS
-	// Fargate capacity providers are available to all accounts and only need to be
-	// associated with a cluster to be used. If a default capacity provider strategy is
-	// not defined for a cluster during creation, it can be defined later with the
-	// PutClusterCapacityProviders () API operation.
-	DefaultCapacityProviderStrategy []*types.CapacityProviderStrategyItem
-
-	// The setting to use when creating a cluster. This parameter is used to enable
-	// CloudWatch Container Insights for a cluster. If this value is specified, it will
-	// override the containerInsights value set with PutAccountSetting () or
-	// PutAccountSettingDefault ().
-	Settings []*types.ClusterSetting
 }
 
 type CreateClusterOutput struct {

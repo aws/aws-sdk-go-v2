@@ -57,10 +57,6 @@ func (c *Client) DescribeInstancePatchStates(ctx context.Context, params *Descri
 
 type DescribeInstancePatchStatesInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The ID of the instance whose patch state information should be retrieved.
 	//
 	// This member is required.
@@ -68,16 +64,20 @@ type DescribeInstancePatchStatesInput struct {
 
 	// The maximum number of instances to return (per page).
 	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeInstancePatchStatesOutput struct {
 
+	// The high-level patch state for the requested instances.
+	InstancePatchStates []*types.InstancePatchState
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
-
-	// The high-level patch state for the requested instances.
-	InstancePatchStates []*types.InstancePatchState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

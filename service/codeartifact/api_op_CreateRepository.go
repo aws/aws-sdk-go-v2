@@ -57,6 +57,11 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
+	// The domain that contains the created repository.
+	//
+	// This member is required.
+	Domain *string
+
 	// The name of the repository to create.
 	//
 	// This member is required.
@@ -64,11 +69,6 @@ type CreateRepositoryInput struct {
 
 	// A description of the created repository.
 	Description *string
-
-	// The domain that contains the created repository.
-	//
-	// This member is required.
-	Domain *string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.

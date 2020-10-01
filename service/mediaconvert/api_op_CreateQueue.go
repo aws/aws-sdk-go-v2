@@ -59,25 +59,13 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 
 type CreateQueueInput struct {
 
-	// Optional. A description of the queue that you are creating.
-	Description *string
-
 	// The name of the queue that you are creating.
 	//
 	// This member is required.
 	Name *string
 
-	// Details about the pricing plan for your reserved queue. Required for reserved
-	// queues and not applicable to on-demand queues.
-	ReservationPlanSettings *types.ReservationPlanSettings
-
-	// The tags that you want to add to the resource. You can tag resources with a
-	// key-value pair or with only a key.
-	Tags map[string]*string
-
-	// Initial state of the queue. If you create a paused queue, then jobs in that
-	// queue won't begin.
-	Status types.QueueStatus
+	// Optional. A description of the queue that you are creating.
+	Description *string
 
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. For
 	// on-demand, you pay per minute, billed in increments of .01 minute. For reserved,
@@ -85,6 +73,18 @@ type CreateQueueInput struct {
 	// or how little you use it. Reserved pricing requires a 12-month commitment. When
 	// you use the API to create a queue, the default is on-demand.
 	PricingPlan types.PricingPlan
+
+	// Details about the pricing plan for your reserved queue. Required for reserved
+	// queues and not applicable to on-demand queues.
+	ReservationPlanSettings *types.ReservationPlanSettings
+
+	// Initial state of the queue. If you create a paused queue, then jobs in that
+	// queue won't begin.
+	Status types.QueueStatus
+
+	// The tags that you want to add to the resource. You can tag resources with a
+	// key-value pair or with only a key.
+	Tags map[string]*string
 }
 
 type CreateQueueOutput struct {

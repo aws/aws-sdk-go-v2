@@ -58,6 +58,11 @@ func (c *Client) AssociateResourceShare(ctx context.Context, params *AssociateRe
 
 type AssociateResourceShareInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
+	ResourceShareArn *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
@@ -65,23 +70,18 @@ type AssociateResourceShareInput struct {
 	// The principals.
 	Principals []*string
 
-	// The Amazon Resource Name (ARN) of the resource share.
-	//
-	// This member is required.
-	ResourceShareArn *string
-
 	// The Amazon Resource Names (ARN) of the resources.
 	ResourceArns []*string
 }
 
 type AssociateResourceShareOutput struct {
 
-	// Information about the associations.
-	ResourceShareAssociations []*types.ResourceShareAssociation
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Information about the associations.
+	ResourceShareAssociations []*types.ResourceShareAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

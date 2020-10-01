@@ -86,43 +86,10 @@ func (c *Client) StartWorkflowExecution(ctx context.Context, params *StartWorkfl
 
 type StartWorkflowExecutionInput struct {
 
-	// The IAM role to attach to this workflow execution. Executions of this workflow
-	// type need IAM roles to invoke Lambda functions. If you don't attach an IAM role,
-	// any attempt to schedule a Lambda task fails. This results in a
-	// ScheduleLambdaFunctionFailed history event. For more information, see
-	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
-	// in the Amazon SWF Developer Guide.
-	LambdaRole *string
-
-	// The list of tags to associate with the workflow execution. You can specify a
-	// maximum of 5 tags. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
-	// specifying a TagFilter ().
-	TagList []*string
-
-	// The total duration for this workflow execution. This overrides the
-	// defaultExecutionStartToCloseTimeout specified when registering the workflow
-	// type.  <p>The duration is specified in seconds; an integer greater than or equal
-	// to <code>0</code>. Exceeding this limit causes the workflow execution to time
-	// out. Unlike some of the other timeout parameters in Amazon SWF, you cannot
-	// specify a value of "NONE" for this timeout; there is a one-year max limit on the
-	// time that a workflow execution can run.</p> <note> <p>An execution
-	// start-to-close timeout must be specified either through this parameter or as a
-	// default when the workflow type is registered. If neither this parameter nor a
-	// default execution start-to-close timeout is specified, a fault is returned.</p>
-	// </note>
-	ExecutionStartToCloseTimeout *string
-
 	// The name of the domain in which the workflow execution is created.
 	//
 	// This member is required.
 	Domain *string
-
-	// The input for the workflow execution. This is a free form string which should be
-	// meaningful to the workflow you are starting. This input is made available to the
-	// new workflow execution in the WorkflowExecutionStarted history event.
-	Input *string
 
 	// The user defined identifier associated with the workflow execution. You can use
 	// this to associate a custom identifier with the workflow execution. You may
@@ -166,26 +133,38 @@ type StartWorkflowExecutionInput struct {
 	// then a fault is returned.
 	ChildPolicy types.ChildPolicy
 
-	// Specifies the maximum duration of decision tasks for this workflow execution.
-	// This parameter overrides the defaultTaskStartToCloseTimout specified when
-	// registering the workflow type using RegisterWorkflowType (). The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A task start-to-close timeout for this workflow
-	// execution must be specified either as a default for the workflow type or through
-	// this parameter. If neither this parameter is set nor a default task
-	// start-to-close timeout was specified at registration time then a fault is
-	// returned.
-	TaskStartToCloseTimeout *string
+	// The total duration for this workflow execution. This overrides the
+	// defaultExecutionStartToCloseTimeout specified when registering the workflow
+	// type.  <p>The duration is specified in seconds; an integer greater than or equal
+	// to <code>0</code>. Exceeding this limit causes the workflow execution to time
+	// out. Unlike some of the other timeout parameters in Amazon SWF, you cannot
+	// specify a value of "NONE" for this timeout; there is a one-year max limit on the
+	// time that a workflow execution can run.</p> <note> <p>An execution
+	// start-to-close timeout must be specified either through this parameter or as a
+	// default when the workflow type is registered. If neither this parameter nor a
+	// default execution start-to-close timeout is specified, a fault is returned.</p>
+	// </note>
+	ExecutionStartToCloseTimeout *string
 
-	// The task priority to use for this workflow execution. This overrides any default
-	// priority that was assigned when the workflow type was registered. If not set,
-	// then the default task priority for the workflow type is used. Valid values are
-	// integers that range from Java's Integer.MIN_VALUE (-2147483648) to
-	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// The input for the workflow execution. This is a free form string which should be
+	// meaningful to the workflow you are starting. This input is made available to the
+	// new workflow execution in the WorkflowExecutionStarted history event.
+	Input *string
+
+	// The IAM role to attach to this workflow execution. Executions of this workflow
+	// type need IAM roles to invoke Lambda functions. If you don't attach an IAM role,
+	// any attempt to schedule a Lambda task fails. This results in a
+	// ScheduleLambdaFunctionFailed history event. For more information, see
+	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
+	LambdaRole *string
+
+	// The list of tags to associate with the workflow execution. You can specify a
+	// maximum of 5 tags. You can list workflow executions with a specific tag by
+	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
+	// specifying a TagFilter ().
+	TagList []*string
 
 	// The task list to use for the decision tasks generated for this workflow
 	// execution. This overrides the defaultTaskList specified when registering the
@@ -198,6 +177,27 @@ type StartWorkflowExecutionInput struct {
 	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
 	// <i>be</i> the literal string <code>arn</code>.</p>
 	TaskList *types.TaskList
+
+	// The task priority to use for this workflow execution. This overrides any default
+	// priority that was assigned when the workflow type was registered. If not set,
+	// then the default task priority for the workflow type is used. Valid values are
+	// integers that range from Java's Integer.MIN_VALUE (-2147483648) to
+	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
+	// more information about setting task priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
+
+	// Specifies the maximum duration of decision tasks for this workflow execution.
+	// This parameter overrides the defaultTaskStartToCloseTimout specified when
+	// registering the workflow type using RegisterWorkflowType (). The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration. A task start-to-close timeout for this workflow
+	// execution must be specified either as a default for the workflow type or through
+	// this parameter. If neither this parameter is set nor a default task
+	// start-to-close timeout was specified at registration time then a fault is
+	// returned.
+	TaskStartToCloseTimeout *string
 }
 
 // Specifies the runId of a workflow execution.

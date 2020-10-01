@@ -64,29 +64,6 @@ func (c *Client) PutObjectLegalHold(ctx context.Context, params *PutObjectLegalH
 
 type PutObjectLegalHoldInput struct {
 
-	// The version ID of the object that you want to place a Legal Hold on.
-	VersionId *string
-
-	// The MD5 hash for the request body.
-	ContentMD5 *string
-
-	// The key name for the object that you want to place a Legal Hold on.
-	//
-	// This member is required.
-	Key *string
-
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
-	// Container element for the Legal Hold configuration you want to apply to the
-	// specified object.
-	LegalHold *types.ObjectLockLegalHold
-
 	// The bucket name containing the object that you want to place a Legal Hold on.
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
@@ -99,6 +76,29 @@ type PutObjectLegalHoldInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The key name for the object that you want to place a Legal Hold on.
+	//
+	// This member is required.
+	Key *string
+
+	// The MD5 hash for the request body.
+	ContentMD5 *string
+
+	// Container element for the Legal Hold configuration you want to apply to the
+	// specified object.
+	LegalHold *types.ObjectLockLegalHold
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
+
+	// The version ID of the object that you want to place a Legal Hold on.
+	VersionId *string
 }
 
 type PutObjectLegalHoldOutput struct {

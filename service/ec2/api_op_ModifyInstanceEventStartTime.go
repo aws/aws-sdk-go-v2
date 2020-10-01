@@ -58,11 +58,10 @@ func (c *Client) ModifyInstanceEventStartTime(ctx context.Context, params *Modif
 
 type ModifyInstanceEventStartTimeInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The ID of the event whose date and time you are modifying.
+	//
+	// This member is required.
+	InstanceEventId *string
 
 	// The ID of the instance with the scheduled event.
 	//
@@ -74,10 +73,11 @@ type ModifyInstanceEventStartTimeInput struct {
 	// This member is required.
 	NotBefore *time.Time
 
-	// The ID of the event whose date and time you are modifying.
-	//
-	// This member is required.
-	InstanceEventId *string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ModifyInstanceEventStartTimeOutput struct {

@@ -59,6 +59,12 @@ func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetReco
 
 type GetRecommendationSummariesInput struct {
 
+	// The IDs of the AWS accounts for which to return recommendation summaries. If
+	// your account is the master account of an organization, use this parameter to
+	// specify the member accounts for which you want to return recommendation
+	// summaries. Only one account ID can be specified per request.
+	AccountIds []*string
+
 	// The maximum number of recommendation summaries to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
 	// NextToken value.
@@ -66,23 +72,17 @@ type GetRecommendationSummariesInput struct {
 
 	// The token to advance to the next page of recommendation summaries.
 	NextToken *string
-
-	// The IDs of the AWS accounts for which to return recommendation summaries. If
-	// your account is the master account of an organization, use this parameter to
-	// specify the member accounts for which you want to return recommendation
-	// summaries. Only one account ID can be specified per request.
-	AccountIds []*string
 }
 
 type GetRecommendationSummariesOutput struct {
-
-	// An array of objects that summarize a recommendation.
-	RecommendationSummaries []*types.RecommendationSummary
 
 	// The token to use to advance to the next page of recommendation summaries. This
 	// value is null when there are no more pages of recommendation summaries to
 	// return.
 	NextToken *string
+
+	// An array of objects that summarize a recommendation.
+	RecommendationSummaries []*types.RecommendationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

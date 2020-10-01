@@ -60,37 +60,37 @@ func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, 
 
 type UpdateClusterInput struct {
 
-	// The updated ID for the forwarding address for a cluster. This field is not
-	// supported in most regions.
-	ForwardingAddressId *string
-
-	// The updated shipping option value of this cluster's ShippingDetails () object.
-	ShippingOption types.ShippingOption
-
 	// The cluster ID of the cluster that you want to update, for example
 	// CID123e4567-e89b-12d3-a456-426655440000.
 	//
 	// This member is required.
 	ClusterId *string
 
+	// The ID of the updated Address () object.
+	AddressId *string
+
 	// The updated description of this cluster.
 	Description *string
+
+	// The updated ID for the forwarding address for a cluster. This field is not
+	// supported in most regions.
+	ForwardingAddressId *string
+
+	// The new or updated Notification () object.
+	Notification *types.Notification
 
 	// The updated arrays of JobResource () objects that can include updated S3Resource
 	// () objects or LambdaResource () objects.
 	Resources *types.JobResource
-
-	// The ID of the updated Address () object.
-	AddressId *string
-
-	// The new or updated Notification () object.
-	Notification *types.Notification
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
 	// cluster. To create a role ARN, use the CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
 	// action in AWS Identity and Access Management (IAM).
 	RoleARN *string
+
+	// The updated shipping option value of this cluster's ShippingDetails () object.
+	ShippingOption types.ShippingOption
 }
 
 type UpdateClusterOutput struct {

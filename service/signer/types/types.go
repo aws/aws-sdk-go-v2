@@ -17,16 +17,16 @@ type Destination struct {
 // The encryption algorithm options that are available to a code signing job.
 type EncryptionAlgorithmOptions struct {
 
-	// The default encryption algorithm that is used by a code signing job.
-	//
-	// This member is required.
-	DefaultValue EncryptionAlgorithm
-
 	// The set of accepted encryption algorithms that are allowed in a code signing
 	// job.
 	//
 	// This member is required.
 	AllowedValues []EncryptionAlgorithm
+
+	// The default encryption algorithm that is used by a code signing job.
+	//
+	// This member is required.
+	DefaultValue EncryptionAlgorithm
 }
 
 // The hash algorithms that are available to a code signing job.
@@ -73,15 +73,15 @@ type S3Source struct {
 	// This member is required.
 	BucketName *string
 
-	// Version of your source image in your version enabled S3 bucket.
-	//
-	// This member is required.
-	Version *string
-
 	// Key name of the bucket object that contains your unsigned code.
 	//
 	// This member is required.
 	Key *string
+
+	// Version of your source image in your version enabled S3 bucket.
+	//
+	// This member is required.
+	Version *string
 }
 
 // Points to an S3SignedObject object that contains information about your signed
@@ -136,25 +136,25 @@ type SigningImageFormat struct {
 // Contains information about a signing job.
 type SigningJob struct {
 
-	// The status of the signing job.
-	Status SigningStatus
-
-	// A Source that contains information about a signing job's code image source.
-	Source *Source
+	// The date and time that the signing job was created.
+	CreatedAt *time.Time
 
 	// The ID of the signing job.
 	JobId *string
+
+	// A SignedObject structure that contains information about a signing job's signed
+	// code image.
+	SignedObject *SignedObject
 
 	// A SigningMaterial object that contains the Amazon Resource Name (ARN) of the
 	// certificate used for the signing job.
 	SigningMaterial *SigningMaterial
 
-	// The date and time that the signing job was created.
-	CreatedAt *time.Time
+	// A Source that contains information about a signing job's code image source.
+	Source *Source
 
-	// A SignedObject structure that contains information about a signing job's signed
-	// code image.
-	SignedObject *SignedObject
+	// The status of the signing job.
+	Status SigningStatus
 }
 
 // The ACM certificate that is used to sign your code.
@@ -171,11 +171,20 @@ type SigningMaterial struct {
 // used to perform a code signing job.
 type SigningPlatform struct {
 
-	// The types of targets that can be signed by a code signing platform.
-	Target *string
+	// The category of a code signing platform.
+	Category Category
 
 	// The display name of a code signing platform.
 	DisplayName *string
+
+	// The maximum size (in MB) of code that can be signed by a code signing platform.
+	MaxSizeInMB *int32
+
+	// Any partner entities linked to a code signing platform.
+	Partner *string
+
+	// The ID of a code signing; platform.
+	PlatformId *string
 
 	// The configuration of a code signing platform. This includes the designated hash
 	// algorithm and encryption algorithm of a signing platform.
@@ -184,17 +193,8 @@ type SigningPlatform struct {
 	// The image format of a code signing platform or profile.
 	SigningImageFormat *SigningImageFormat
 
-	// The ID of a code signing; platform.
-	PlatformId *string
-
-	// The category of a code signing platform.
-	Category Category
-
-	// Any partner entities linked to a code signing platform.
-	Partner *string
-
-	// The maximum size (in MB) of code that can be signed by a code signing platform.
-	MaxSizeInMB *int32
+	// The types of targets that can be signed by a code signing platform.
+	Target *string
 }
 
 // Any overrides that are applied to the signing configuration of a code signing
@@ -217,26 +217,26 @@ type SigningPlatformOverrides struct {
 // parameters that can be used by a given code signing user.
 type SigningProfile struct {
 
+	// The Amazon Resource Name (ARN) for the signing profile.
+	Arn *string
+
+	// The ID of a platform that is available for use by a signing profile.
+	PlatformId *string
+
+	// The name of the signing profile.
+	ProfileName *string
+
 	// The ACM certificate that is available for use by a signing profile.
 	SigningMaterial *SigningMaterial
 
 	// The parameters that are available for use by a code signing user.
 	SigningParameters map[string]*string
 
-	// The name of the signing profile.
-	ProfileName *string
-
-	// The ID of a platform that is available for use by a signing profile.
-	PlatformId *string
-
-	// The Amazon Resource Name (ARN) for the signing profile.
-	Arn *string
+	// The status of a code signing profile.
+	Status SigningProfileStatus
 
 	// A list of tags associated with the signing profile.
 	Tags map[string]*string
-
-	// The status of a code signing profile.
-	Status SigningProfileStatus
 }
 
 // An S3Source object that contains information about the S3 bucket where you saved

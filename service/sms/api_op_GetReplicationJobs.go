@@ -61,21 +61,21 @@ type GetReplicationJobsInput struct {
 	// NextToken value.
 	MaxResults *int32
 
-	// The identifier of the replication job.
-	ReplicationJobId *string
-
 	// The token for the next set of results.
 	NextToken *string
+
+	// The identifier of the replication job.
+	ReplicationJobId *string
 }
 
 type GetReplicationJobsOutput struct {
 
-	// Information about the replication jobs.
-	ReplicationJobList []*types.ReplicationJob
-
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the replication jobs.
+	ReplicationJobList []*types.ReplicationJob
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

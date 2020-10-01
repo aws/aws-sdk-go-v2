@@ -61,16 +61,16 @@ func (c *Client) ListLayerVersions(ctx context.Context, params *ListLayerVersion
 
 type ListLayerVersionsInput struct {
 
+	// The name or Amazon Resource Name (ARN) of the layer.
+	//
+	// This member is required.
+	LayerName *string
+
 	// A runtime identifier. For example, go1.x.
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.
 	Marker *string
-
-	// The name or Amazon Resource Name (ARN) of the layer.
-	//
-	// This member is required.
-	LayerName *string
 
 	// The maximum number of versions to return.
 	MaxItems *int32
@@ -78,11 +78,11 @@ type ListLayerVersionsInput struct {
 
 type ListLayerVersionsOutput struct {
 
-	// A pagination token returned when the response doesn't contain all versions.
-	NextMarker *string
-
 	// A list of versions.
 	LayerVersions []*types.LayerVersionsListItem
+
+	// A pagination token returned when the response doesn't contain all versions.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

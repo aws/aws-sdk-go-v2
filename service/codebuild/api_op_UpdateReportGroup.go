@@ -57,6 +57,11 @@ func (c *Client) UpdateReportGroup(ctx context.Context, params *UpdateReportGrou
 
 type UpdateReportGroupInput struct {
 
+	// The ARN of the report group to update.
+	//
+	// This member is required.
+	Arn *string
+
 	// Used to specify an updated export type. Valid values are:
 	//
 	//     * S3: The report
@@ -70,11 +75,6 @@ type UpdateReportGroupInput struct {
 	// These tags are available for use by AWS services that support AWS CodeBuild
 	// report group tags.
 	Tags []*types.Tag
-
-	// The ARN of the report group to update.
-	//
-	// This member is required.
-	Arn *string
 }
 
 type UpdateReportGroupOutput struct {

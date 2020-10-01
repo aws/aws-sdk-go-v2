@@ -58,19 +58,15 @@ func (c *Client) ListServiceActionsForProvisioningArtifact(ctx context.Context, 
 
 type ListServiceActionsForProvisioningArtifactInput struct {
 
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
 	// The product identifier. For example, prod-abcdzk7xy33qa.
 	//
 	// This member is required.
 	ProductId *string
+
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	//
+	// This member is required.
+	ProvisioningArtifactId *string
 
 	// The language code.
 	//
@@ -84,6 +80,10 @@ type ListServiceActionsForProvisioningArtifactInput struct {
 
 	// The maximum number of items to return with this call.
 	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type ListServiceActionsForProvisioningArtifactOutput struct {

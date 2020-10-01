@@ -68,15 +68,15 @@ type GetHostedZoneInput struct {
 // A complex type that contain the response to a GetHostedZone request.
 type GetHostedZoneOutput struct {
 
-	// A complex type that lists the Amazon Route 53 name servers for the specified
-	// hosted zone.
-	DelegationSet *types.DelegationSet
-
 	// A complex type that contains general information about the specified hosted
 	// zone.
 	//
 	// This member is required.
 	HostedZone *types.HostedZone
+
+	// A complex type that lists the Amazon Route 53 name servers for the specified
+	// hosted zone.
+	DelegationSet *types.DelegationSet
 
 	// A complex type that contains information about the VPCs that are associated with
 	// the specified hosted zone.

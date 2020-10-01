@@ -71,6 +71,9 @@ type CreateDataCatalogInput struct {
 	// This member is required.
 	Type types.DataCatalogType
 
+	// A description of the data catalog to be created.
+	Description *string
+
 	// Specifies the Lambda function or functions to use for creating the data catalog.
 	// This is a mapping whose values depend on the catalog type.
 	//
@@ -97,9 +100,6 @@ type CreateDataCatalogInput struct {
 
 	// A list of comma separated tags to add to the data catalog that is created.
 	Tags []*types.Tag
-
-	// A description of the data catalog to be created.
-	Description *string
 }
 
 type CreateDataCatalogOutput struct {

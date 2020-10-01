@@ -56,6 +56,9 @@ func (c *Client) ListServiceQuotaIncreaseRequestsInTemplate(ctx context.Context,
 
 type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 
+	// Specifies the AWS Region for the quota that you want to use.
+	AwsRegion *string
+
 	// (Optional) Limits the number of results that you want to include in the
 	// response. If you don't include this parameter, the response defaults to a value
 	// that's specific to the operation. If additional items exist beyond the specified
@@ -70,9 +73,6 @@ type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 	// subsequent call, set it to the value of the previous call's NextToken response
 	// to indicate where the output should continue from.
 	NextToken *string
-
-	// Specifies the AWS Region for the quota that you want to use.
-	AwsRegion *string
 
 	// The identifier for a service. When performing an operation, use the ServiceCode
 	// to specify a particular service.

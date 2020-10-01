@@ -57,6 +57,11 @@ func (c *Client) RunPipelineActivity(ctx context.Context, params *RunPipelineAct
 
 type RunPipelineActivityInput struct {
 
+	// The sample message payloads on which the pipeline activity is run.
+	//
+	// This member is required.
+	Payloads [][]byte
+
 	// The pipeline activity that is run. This must not be a 'channel' activity or a
 	// 'datastore' activity because these activities are used in a pipeline only to
 	// load the original message and to store the (possibly) transformed message. If a
@@ -65,22 +70,17 @@ type RunPipelineActivityInput struct {
 	//
 	// This member is required.
 	PipelineActivity *types.PipelineActivity
-
-	// The sample message payloads on which the pipeline activity is run.
-	//
-	// This member is required.
-	Payloads [][]byte
 }
 
 type RunPipelineActivityOutput struct {
+
+	// In case the pipeline activity fails, the log message that is generated.
+	LogResult *string
 
 	// The enriched or transformed sample message payloads as base64-encoded strings.
 	// (The results of running the pipeline activity on each input sample message
 	// payload, encoded in base64.)
 	Payloads [][]byte
-
-	// In case the pipeline activity fails, the log message that is generated.
-	LogResult *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

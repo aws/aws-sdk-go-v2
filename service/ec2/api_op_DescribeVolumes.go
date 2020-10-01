@@ -64,8 +64,11 @@ func (c *Client) DescribeVolumes(ctx context.Context, params *DescribeVolumesInp
 
 type DescribeVolumesInput struct {
 
-	// The volume IDs.
-	VolumeIds []*string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// The filters.
 	//
@@ -127,18 +130,6 @@ type DescribeVolumesInput struct {
 	// HDD, sc1 for Cold HDD, or standard for Magnetic volumes.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// The NextToken value returned from a previous paginated DescribeVolumes request
-	// where MaxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// NextToken value. This value is null when there are no more results to return.
-	NextToken *string
-
 	// The maximum number of volume results returned by DescribeVolumes in paginated
 	// output. When this parameter is used, DescribeVolumes only returns MaxResults
 	// results in a single page along with a NextToken response element. The remaining
@@ -148,18 +139,27 @@ type DescribeVolumesInput struct {
 	// If this parameter is not used, then DescribeVolumes returns all results. You
 	// cannot specify this parameter and the volume IDs parameter in the same request.
 	MaxResults *int32
+
+	// The NextToken value returned from a previous paginated DescribeVolumes request
+	// where MaxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// NextToken value. This value is null when there are no more results to return.
+	NextToken *string
+
+	// The volume IDs.
+	VolumeIds []*string
 }
 
 type DescribeVolumesOutput struct {
-
-	// Information about the volumes.
-	Volumes []*types.Volume
 
 	// The NextToken value to include in a future DescribeVolumes request. When the
 	// results of a DescribeVolumes request exceed MaxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
+
+	// Information about the volumes.
+	Volumes []*types.Volume
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

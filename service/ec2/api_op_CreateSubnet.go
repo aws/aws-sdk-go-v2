@@ -71,28 +71,17 @@ func (c *Client) CreateSubnet(ctx context.Context, params *CreateSubnetInput, op
 
 type CreateSubnetInput struct {
 
-	// The IPv6 network range for the subnet, in CIDR notation. The subnet size must
-	// use a /64 prefix length.
-	Ipv6CidrBlock *string
-
-	// The ID of the VPC.
-	//
-	// This member is required.
-	VpcId *string
-
-	// The AZ ID or the Local Zone ID of the subnet.
-	AvailabilityZoneId *string
-
-	// The Amazon Resource Name (ARN) of the Outpost. If you specify an Outpost ARN,
-	// you must also specify the Availability Zone of the Outpost subnet.
-	OutpostArn *string
-
 	// The IPv4 network range for the subnet, in CIDR notation. For example,
 	// 10.0.0.0/24. We modify the specified CIDR block to its canonical form; for
 	// example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
 	//
 	// This member is required.
 	CidrBlock *string
+
+	// The ID of the VPC.
+	//
+	// This member is required.
+	VpcId *string
 
 	// The Availability Zone or Local Zone for the subnet. Default: AWS selects one for
 	// you. If you create more than one subnet in your VPC, we do not necessarily
@@ -105,14 +94,25 @@ type CreateSubnetInput struct {
 	// Outpost ARN.
 	AvailabilityZone *string
 
-	// The tags to assign to the subnet.
-	TagSpecifications []*types.TagSpecification
+	// The AZ ID or the Local Zone ID of the subnet.
+	AvailabilityZoneId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The IPv6 network range for the subnet, in CIDR notation. The subnet size must
+	// use a /64 prefix length.
+	Ipv6CidrBlock *string
+
+	// The Amazon Resource Name (ARN) of the Outpost. If you specify an Outpost ARN,
+	// you must also specify the Availability Zone of the Outpost subnet.
+	OutpostArn *string
+
+	// The tags to assign to the subnet.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateSubnetOutput struct {

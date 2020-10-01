@@ -65,13 +65,13 @@ type ListPipelinesInput struct {
 // Represents the output of a ListPipelines action.
 type ListPipelinesOutput struct {
 
-	// The list of pipelines.
-	Pipelines []*types.PipelineSummary
-
 	// If the amount of returned information is significantly large, an identifier is
 	// also returned. It can be used in a subsequent list pipelines call to return the
 	// next set of pipelines in the list.
 	NextToken *string
+
+	// The list of pipelines.
+	Pipelines []*types.PipelineSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

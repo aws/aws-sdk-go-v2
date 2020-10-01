@@ -56,16 +56,16 @@ func (c *Client) DescribeDestinations(ctx context.Context, params *DescribeDesti
 
 type DescribeDestinationsInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
+	// The prefix to match. If you don't specify a value, no prefix filter is applied.
+	DestinationNamePrefix *string
 
 	// The maximum number of items returned. If you don't specify a value, the default
 	// is up to 50 items.
 	Limit *int32
 
-	// The prefix to match. If you don't specify a value, no prefix filter is applied.
-	DestinationNamePrefix *string
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeDestinationsOutput struct {

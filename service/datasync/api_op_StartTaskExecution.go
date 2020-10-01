@@ -63,16 +63,6 @@ func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecut
 // StartTaskExecutionRequest
 type StartTaskExecutionInput struct {
 
-	// Represents the options that are available to control the behavior of a
-	// StartTaskExecution () operation. Behavior includes preserving metadata such as
-	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
-	// in the destination, data integrity verification, and so on. A task has a set of
-	// default options associated with it. If you don't specify an option in
-	// StartTaskExecution (), the default value is used. You can override the defaults
-	// options on each task execution by specifying an overriding Options value to
-	// StartTaskExecution ().
-	OverrideOptions *types.Options
-
 	// The Amazon Resource Name (ARN) of the task to start.
 	//
 	// This member is required.
@@ -83,6 +73,16 @@ type StartTaskExecutionInput struct {
 	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
 	// example: "/folder1|/folder2"
 	Includes []*types.FilterRule
+
+	// Represents the options that are available to control the behavior of a
+	// StartTaskExecution () operation. Behavior includes preserving metadata such as
+	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
+	// in the destination, data integrity verification, and so on. A task has a set of
+	// default options associated with it. If you don't specify an option in
+	// StartTaskExecution (), the default value is used. You can override the defaults
+	// options on each task execution by specifying an overriding Options value to
+	// StartTaskExecution ().
+	OverrideOptions *types.Options
 }
 
 // StartTaskExecutionResponse

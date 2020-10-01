@@ -65,11 +65,11 @@ type GetImageRecipePolicyInput struct {
 
 type GetImageRecipePolicyOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The image recipe policy object.
 	Policy *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,14 +77,14 @@ type ListDeadLetterSourceQueuesInput struct {
 // A list of your dead letter source queues.
 type ListDeadLetterSourceQueuesOutput struct {
 
-	// Pagination token to include in the next request.
-	NextToken *string
-
 	// A list of source queue URLs that have the RedrivePolicy queue attribute
 	// configured with a dead-letter queue.
 	//
 	// This member is required.
 	QueueUrls []*string
+
+	// Pagination token to include in the next request.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

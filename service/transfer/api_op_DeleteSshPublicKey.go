@@ -57,16 +57,16 @@ func (c *Client) DeleteSshPublicKey(ctx context.Context, params *DeleteSshPublic
 
 type DeleteSshPublicKeyInput struct {
 
-	// A unique identifier used to reference your user's specific SSH key.
-	//
-	// This member is required.
-	SshPublicKeyId *string
-
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// instance that has the user assigned to it.
 	//
 	// This member is required.
 	ServerId *string
+
+	// A unique identifier used to reference your user's specific SSH key.
+	//
+	// This member is required.
+	SshPublicKeyId *string
 
 	// A unique string that identifies a user whose public key is being deleted.
 	//

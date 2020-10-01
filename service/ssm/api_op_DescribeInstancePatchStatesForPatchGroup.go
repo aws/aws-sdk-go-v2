@@ -79,12 +79,12 @@ type DescribeInstancePatchStatesForPatchGroupInput struct {
 
 type DescribeInstancePatchStatesForPatchGroupOutput struct {
 
+	// The high-level patch state for the requested instances.
+	InstancePatchStates []*types.InstancePatchState
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
-
-	// The high-level patch state for the requested instances.
-	InstancePatchStates []*types.InstancePatchState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

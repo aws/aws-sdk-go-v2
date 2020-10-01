@@ -102,11 +102,6 @@ type ListResourceRecordSetsInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// The first name in the lexicographic ordering of resource record sets that you
-	// want to list. If the specified record name doesn't exist, the results begin with
-	// the first resource record set that has a name greater than the value of name.
-	StartRecordName *string
-
 	// (Optional) The maximum number of resource records sets to include in the
 	// response body for this request. If the response includes more than maxitems
 	// resource record sets, the value of the IsTruncated element in the response is
@@ -120,6 +115,11 @@ type ListResourceRecordSetsInput struct {
 	// NextRecordIdentifier from the previous response to get the next resource record
 	// set that has the current DNS name and type.
 	StartRecordIdentifier *string
+
+	// The first name in the lexicographic ordering of resource record sets that you
+	// want to list. If the specified record name doesn't exist, the results begin with
+	// the first resource record set that has a name greater than the value of name.
+	StartRecordName *string
 
 	// The type of resource record set to begin the record listing from. Valid values
 	// for basic resource record sets: A | AAAA | CAA | CNAME | MX | NAPTR | NS | PTR |
@@ -162,15 +162,15 @@ type ListResourceRecordSetsOutput struct {
 	// This member is required.
 	IsTruncated *bool
 
-	// Information about multiple resource record sets.
-	//
-	// This member is required.
-	ResourceRecordSets []*types.ResourceRecordSet
-
 	// The maximum number of records you requested.
 	//
 	// This member is required.
 	MaxItems *string
+
+	// Information about multiple resource record sets.
+	//
+	// This member is required.
+	ResourceRecordSets []*types.ResourceRecordSet
 
 	// Resource record sets that have a routing policy other than simple: If results
 	// were truncated for a given DNS name and type, the value of SetIdentifier for the
@@ -180,13 +180,13 @@ type ListResourceRecordSetsOutput struct {
 	// in the Amazon Route 53 Developer Guide.
 	NextRecordIdentifier *string
 
-	// If the results were truncated, the type of the next record in the list. This
-	// element is present only if IsTruncated is true.
-	NextRecordType types.RRType
-
 	// If the results were truncated, the name of the next record in the list. This
 	// element is present only if IsTruncated is true.
 	NextRecordName *string
+
+	// If the results were truncated, the type of the next record in the list. This
+	// element is present only if IsTruncated is true.
+	NextRecordType types.RRType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

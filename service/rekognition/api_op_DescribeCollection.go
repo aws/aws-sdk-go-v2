@@ -69,22 +69,22 @@ type DescribeCollectionInput struct {
 
 type DescribeCollectionOutput struct {
 
+	// The Amazon Resource Name (ARN) of the collection.
+	CollectionARN *string
+
 	// The number of milliseconds since the Unix epoch time until the creation of the
 	// collection. The Unix epoch time is 00:00:00 Coordinated Universal Time (UTC),
 	// Thursday, 1 January 1970.
 	CreationTimestamp *time.Time
 
-	// The Amazon Resource Name (ARN) of the collection.
-	CollectionARN *string
+	// The number of faces that are indexed into the collection. To index faces into a
+	// collection, use IndexFaces ().
+	FaceCount *int64
 
 	// The version of the face model that's used by the collection for face detection.
 	// <p>For more information, see Model Versioning in the Amazon Rekognition
 	// Developer Guide.</p>
 	FaceModelVersion *string
-
-	// The number of faces that are indexed into the collection. To index faces into a
-	// collection, use IndexFaces ().
-	FaceCount *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

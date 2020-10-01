@@ -62,22 +62,22 @@ func (c *Client) GetMLTaskRuns(ctx context.Context, params *GetMLTaskRunsInput, 
 
 type GetMLTaskRunsInput struct {
 
-	// The sorting criteria, in the TaskRunSortCriteria structure, for the task run.
-	Sort *types.TaskRunSortCriteria
-
-	// A token for pagination of the results. The default is empty.
-	NextToken *string
-
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// The filter criteria, in the TaskRunFilterCriteria structure, for the task run.
-	Filter *types.TaskRunFilterCriteria
-
 	// The unique identifier of the machine learning transform.
 	//
 	// This member is required.
 	TransformId *string
+
+	// The filter criteria, in the TaskRunFilterCriteria structure, for the task run.
+	Filter *types.TaskRunFilterCriteria
+
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// A token for pagination of the results. The default is empty.
+	NextToken *string
+
+	// The sorting criteria, in the TaskRunSortCriteria structure, for the task run.
+	Sort *types.TaskRunSortCriteria
 }
 
 type GetMLTaskRunsOutput struct {

@@ -56,34 +56,34 @@ func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRule
 
 type ListResolverRulesInput struct {
 
-	// For the first ListResolverRules request, omit this value. If you have more than
-	// MaxResults resolver rules, you can submit another ListResolverRules request to
-	// get the next group of resolver rules. In the next request, specify the value of
-	// NextToken from the previous response.
-	NextToken *string
-
-	// The maximum number of resolver rules that you want to return in the response to
-	// a ListResolverRules request. If you don't specify a value for MaxResults,
-	// Resolver returns up to 100 resolver rules.
-	MaxResults *int32
-
 	// An optional specification to return a subset of resolver rules, such as all
 	// resolver rules that are associated with the same resolver endpoint. If you
 	// submit a second or subsequent ListResolverRules request and specify the
 	// NextToken parameter, you must use the same values for Filters, if any, as in the
 	// previous request.
 	Filters []*types.Filter
+
+	// The maximum number of resolver rules that you want to return in the response to
+	// a ListResolverRules request. If you don't specify a value for MaxResults,
+	// Resolver returns up to 100 resolver rules.
+	MaxResults *int32
+
+	// For the first ListResolverRules request, omit this value. If you have more than
+	// MaxResults resolver rules, you can submit another ListResolverRules request to
+	// get the next group of resolver rules. In the next request, specify the value of
+	// NextToken from the previous response.
+	NextToken *string
 }
 
 type ListResolverRulesOutput struct {
+
+	// The value that you specified for MaxResults in the request.
+	MaxResults *int32
 
 	// If more than MaxResults resolver rules match the specified criteria, you can
 	// submit another ListResolverRules request to get the next group of results. In
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
-
-	// The value that you specified for MaxResults in the request.
-	MaxResults *int32
 
 	// The resolver rules that were created using the current AWS account and that
 	// match the specified filters, if any.

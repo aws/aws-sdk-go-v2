@@ -57,6 +57,11 @@ func (c *Client) UpdateJobQueue(ctx context.Context, params *UpdateJobQueueInput
 
 type UpdateJobQueueInput struct {
 
+	// The name or the Amazon Resource Name (ARN) of the job queue.
+	//
+	// This member is required.
+	JobQueue *string
+
 	// Details the set of compute environments mapped to a job queue and their order
 	// relative to each other. This is one of the parameters used by the job scheduler
 	// to determine which compute environment should execute a given job.
@@ -68,11 +73,6 @@ type UpdateJobQueueInput struct {
 	// for example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1.
 	Priority *int32
-
-	// The name or the Amazon Resource Name (ARN) of the job queue.
-	//
-	// This member is required.
-	JobQueue *string
 
 	// Describes the queue's ability to accept new jobs.
 	State types.JQState

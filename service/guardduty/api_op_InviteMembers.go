@@ -60,14 +60,6 @@ func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, 
 
 type InviteMembersInput struct {
 
-	// A Boolean value that specifies whether you want to disable email notification to
-	// the accounts that you are inviting to GuardDuty as members.
-	DisableEmailNotification *bool
-
-	// The invitation message that you want to send to the accounts that you're
-	// inviting to GuardDuty as members.
-	Message *string
-
 	// A list of account IDs of the accounts that you want to invite to GuardDuty as
 	// members.
 	//
@@ -79,6 +71,14 @@ type InviteMembersInput struct {
 	//
 	// This member is required.
 	DetectorId *string
+
+	// A Boolean value that specifies whether you want to disable email notification to
+	// the accounts that you are inviting to GuardDuty as members.
+	DisableEmailNotification *bool
+
+	// The invitation message that you want to send to the accounts that you're
+	// inviting to GuardDuty as members.
+	Message *string
 }
 
 type InviteMembersOutput struct {

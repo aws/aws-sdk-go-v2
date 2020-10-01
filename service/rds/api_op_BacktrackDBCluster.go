@@ -96,36 +96,36 @@ type BacktrackDBClusterInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// A value that indicates whether to force the DB cluster to backtrack when binary
+	// logging is enabled. Otherwise, an error occurs when binary logging is enabled.
+	Force *bool
+
 	// A value that indicates whether to backtrack the DB cluster to the earliest
 	// possible backtrack time when BacktrackTo is set to a timestamp earlier than the
 	// earliest backtrack time. When this parameter is disabled and BacktrackTo is set
 	// to a timestamp earlier than the earliest backtrack time, an error occurs.
 	UseEarliestTimeOnPointInTimeUnavailable *bool
-
-	// A value that indicates whether to force the DB cluster to backtrack when binary
-	// logging is enabled. Otherwise, an error occurs when binary logging is enabled.
-	Force *bool
 }
 
 // This data type is used as a response element in the DescribeDBClusterBacktracks
 // action.
 type BacktrackDBClusterOutput struct {
 
-	// The timestamp of the time to which the DB cluster was backtracked.
-	BacktrackTo *time.Time
+	// Contains the backtrack identifier.
+	BacktrackIdentifier *string
 
 	// The timestamp of the time at which the backtrack was requested.
 	BacktrackRequestCreationTime *time.Time
 
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
-	// key that identifies a DB cluster.
-	DBClusterIdentifier *string
+	// The timestamp of the time to which the DB cluster was backtracked.
+	BacktrackTo *time.Time
 
 	// The timestamp of the time from which the DB cluster was backtracked.
 	BacktrackedFrom *time.Time
 
-	// Contains the backtrack identifier.
-	BacktrackIdentifier *string
+	// Contains a user-supplied DB cluster identifier. This identifier is the unique
+	// key that identifies a DB cluster.
+	DBClusterIdentifier *string
 
 	// The status of the backtrack. This property returns one of the following
 	// values:

@@ -65,12 +65,12 @@ type GetFieldLevelEncryptionProfileConfigInput struct {
 
 type GetFieldLevelEncryptionProfileConfigOutput struct {
 
-	// Return the field-level encryption profile configuration information.
-	FieldLevelEncryptionProfileConfig *types.FieldLevelEncryptionProfileConfig
-
 	// The current version of the field-level encryption profile configuration result.
 	// For example: E2QWRUHAPOMQZL.
 	ETag *string
+
+	// Return the field-level encryption profile configuration information.
+	FieldLevelEncryptionProfileConfig *types.FieldLevelEncryptionProfileConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -150,51 +150,10 @@ func (c *Client) UpdateService(ctx context.Context, params *UpdateServiceInput, 
 
 type UpdateServiceInput struct {
 
-	// The family and revision (family:revision) or full ARN of the task definition to
-	// run in your service. If a revision is not specified, the latest ACTIVE revision
-	// is used. If you modify the task definition with UpdateService, Amazon ECS spawns
-	// a task with the new version of the task definition and then stops an old task
-	// after the new version is running.
-	TaskDefinition *string
-
-	// The period of time, in seconds, that the Amazon ECS service scheduler should
-	// ignore unhealthy Elastic Load Balancing target health checks after a task has
-	// first started. This is only valid if your service is configured to use a load
-	// balancer. If your service's tasks take a while to start and respond to Elastic
-	// Load Balancing health checks, you can specify a health check grace period of up
-	// to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler
-	// ignores the Elastic Load Balancing health check status. This grace period can
-	// prevent the ECS service scheduler from marking tasks as unhealthy and stopping
-	// them before they have time to come up.
-	HealthCheckGracePeriodSeconds *int32
-
-	// The platform version on which your tasks in the service are running. A platform
-	// version is only specified for tasks using the Fargate launch type. If a platform
-	// version is not specified, the LATEST platform version is used by default. For
-	// more information, see AWS Fargate Platform Versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
-	// in the Amazon Elastic Container Service Developer Guide.
-	PlatformVersion *string
-
-	// Whether to force a new deployment of the service. Deployments are not forced by
-	// default. You can use this option to trigger a new deployment with no service
-	// definition changes. For example, you can update a service's tasks to use a newer
-	// Docker image with the same image/tag combination (my_image:latest) or to roll
-	// Fargate tasks onto a newer platform version.
-	ForceNewDeployment *bool
-
-	// An array of task placement constraint objects to update the service to use. If
-	// no value is specified, the existing placement constraints for the service will
-	// remain unchanged. If this value is specified, it will override any existing
-	// placement constraints defined for the service. To remove all existing placement
-	// constraints, specify an empty array. You can specify a maximum of 10 constraints
-	// per task (this limit includes constraints in the task definition and those
-	// specified at runtime).
-	PlacementConstraints []*types.PlacementConstraint
-
-	// Optional deployment parameters that control how many tasks run during the
-	// deployment and the ordering of stopping and starting tasks.
-	DeploymentConfiguration *types.DeploymentConfiguration
+	// The name of the service to update.
+	//
+	// This member is required.
+	Service *string
 
 	// The capacity provider strategy to update the service to use. If the service is
 	// using the default capacity provider strategy for the cluster, the service can be
@@ -217,8 +176,48 @@ type UpdateServiceInput struct {
 	// cluster after the cluster is created.
 	CapacityProviderStrategy []*types.CapacityProviderStrategyItem
 
+	// The short name or full Amazon Resource Name (ARN) of the cluster that your
+	// service is running on. If you do not specify a cluster, the default cluster is
+	// assumed.
+	Cluster *string
+
+	// Optional deployment parameters that control how many tasks run during the
+	// deployment and the ordering of stopping and starting tasks.
+	DeploymentConfiguration *types.DeploymentConfiguration
+
+	// The number of instantiations of the task to place and keep running in your
+	// service.
+	DesiredCount *int32
+
+	// Whether to force a new deployment of the service. Deployments are not forced by
+	// default. You can use this option to trigger a new deployment with no service
+	// definition changes. For example, you can update a service's tasks to use a newer
+	// Docker image with the same image/tag combination (my_image:latest) or to roll
+	// Fargate tasks onto a newer platform version.
+	ForceNewDeployment *bool
+
+	// The period of time, in seconds, that the Amazon ECS service scheduler should
+	// ignore unhealthy Elastic Load Balancing target health checks after a task has
+	// first started. This is only valid if your service is configured to use a load
+	// balancer. If your service's tasks take a while to start and respond to Elastic
+	// Load Balancing health checks, you can specify a health check grace period of up
+	// to 2,147,483,647 seconds. During that time, the Amazon ECS service scheduler
+	// ignores the Elastic Load Balancing health check status. This grace period can
+	// prevent the ECS service scheduler from marking tasks as unhealthy and stopping
+	// them before they have time to come up.
+	HealthCheckGracePeriodSeconds *int32
+
 	// An object representing the network configuration for a task or service.
 	NetworkConfiguration *types.NetworkConfiguration
+
+	// An array of task placement constraint objects to update the service to use. If
+	// no value is specified, the existing placement constraints for the service will
+	// remain unchanged. If this value is specified, it will override any existing
+	// placement constraints defined for the service. To remove all existing placement
+	// constraints, specify an empty array. You can specify a maximum of 10 constraints
+	// per task (this limit includes constraints in the task definition and those
+	// specified at runtime).
+	PlacementConstraints []*types.PlacementConstraint
 
 	// The task placement strategy objects to update the service to use. If no value is
 	// specified, the existing placement strategy for the service will remain
@@ -228,19 +227,20 @@ type UpdateServiceInput struct {
 	// service.
 	PlacementStrategy []*types.PlacementStrategy
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that your
-	// service is running on. If you do not specify a cluster, the default cluster is
-	// assumed.
-	Cluster *string
+	// The platform version on which your tasks in the service are running. A platform
+	// version is only specified for tasks using the Fargate launch type. If a platform
+	// version is not specified, the LATEST platform version is used by default. For
+	// more information, see AWS Fargate Platform Versions
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	PlatformVersion *string
 
-	// The number of instantiations of the task to place and keep running in your
-	// service.
-	DesiredCount *int32
-
-	// The name of the service to update.
-	//
-	// This member is required.
-	Service *string
+	// The family and revision (family:revision) or full ARN of the task definition to
+	// run in your service. If a revision is not specified, the latest ACTIVE revision
+	// is used. If you modify the task definition with UpdateService, Amazon ECS spawns
+	// a task with the new version of the task definition and then stops an old task
+	// after the new version is running.
+	TaskDefinition *string
 }
 
 type UpdateServiceOutput struct {

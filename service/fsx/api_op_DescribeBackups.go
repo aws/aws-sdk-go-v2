@@ -75,23 +75,23 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 // The request object for DescribeBackups operation.
 type DescribeBackupsInput struct {
 
-	// Opaque pagination token returned from a previous DescribeBackups operation
-	// (String). If a token present, the action continues the list from where the
-	// returning call left off.
-	NextToken *string
-
-	// Filters structure. Supported names are file-system-id and backup-type.
-	Filters []*types.Filter
-
 	// IDs of the backups you want to retrieve (String). This overrides any filters. If
 	// any IDs are not found, BackupNotFound will be thrown.
 	BackupIds []*string
+
+	// Filters structure. Supported names are file-system-id and backup-type.
+	Filters []*types.Filter
 
 	// Maximum number of backups to return in the response (integer). This parameter
 	// value must be greater than 0. The number of items that Amazon FSx returns is the
 	// minimum of the MaxResults parameter specified in the request and the service's
 	// internal maximum number of items per page.
 	MaxResults *int32
+
+	// Opaque pagination token returned from a previous DescribeBackups operation
+	// (String). If a token present, the action continues the list from where the
+	// returning call left off.
+	NextToken *string
 }
 
 // Response object for DescribeBackups operation.

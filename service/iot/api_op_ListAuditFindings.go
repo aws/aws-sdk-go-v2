@@ -58,29 +58,29 @@ func (c *Client) ListAuditFindings(ctx context.Context, params *ListAuditFinding
 
 type ListAuditFindingsInput struct {
 
+	// A filter to limit results to the findings for the specified audit check.
+	CheckName *string
+
+	// A filter to limit results to those found before the specified time. You must
+	// specify either the startTime and endTime or the taskId, but not both.
+	EndTime *time.Time
+
+	// The maximum number of results to return at one time. The default is 25.
+	MaxResults *int32
+
 	// The token for the next set of results.
 	NextToken *string
+
+	// Information identifying the noncompliant resource.
+	ResourceIdentifier *types.ResourceIdentifier
 
 	// A filter to limit results to those found after the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
 	StartTime *time.Time
 
-	// A filter to limit results to the findings for the specified audit check.
-	CheckName *string
-
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int32
-
 	// A filter to limit results to the audit with the specified ID. You must specify
 	// either the taskId or the startTime and endTime, but not both.
 	TaskId *string
-
-	// Information identifying the noncompliant resource.
-	ResourceIdentifier *types.ResourceIdentifier
-
-	// A filter to limit results to those found before the specified time. You must
-	// specify either the startTime and endTime or the taskId, but not both.
-	EndTime *time.Time
 }
 
 type ListAuditFindingsOutput struct {

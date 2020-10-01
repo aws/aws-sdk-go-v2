@@ -57,15 +57,15 @@ func (c *Client) BatchDeleteScheduledAction(ctx context.Context, params *BatchDe
 
 type BatchDeleteScheduledActionInput struct {
 
-	// The names of the scheduled actions to delete. The maximum number allowed is 50.
-	//
-	// This member is required.
-	ScheduledActionNames []*string
-
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
+
+	// The names of the scheduled actions to delete. The maximum number allowed is 50.
+	//
+	// This member is required.
+	ScheduledActionNames []*string
 }
 
 type BatchDeleteScheduledActionOutput struct {

@@ -61,21 +61,21 @@ type ListDomainConfigurationsInput struct {
 	// The marker for the next set of results.
 	Marker *string
 
-	// The type of service delivered by the endpoint.
-	ServiceType types.ServiceType
-
 	// The result page size.
 	PageSize *int32
+
+	// The type of service delivered by the endpoint.
+	ServiceType types.ServiceType
 }
 
 type ListDomainConfigurationsOutput struct {
 
-	// The marker for the next set of results.
-	NextMarker *string
-
 	// A list of objects that contain summary information about the user's domain
 	// configurations.
 	DomainConfigurations []*types.DomainConfigurationSummary
+
+	// The marker for the next set of results.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

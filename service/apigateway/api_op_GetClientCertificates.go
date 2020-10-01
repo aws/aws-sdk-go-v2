@@ -58,20 +58,21 @@ func (c *Client) GetClientCertificates(ctx context.Context, params *GetClientCer
 // A request to get information about a collection of ClientCertificate ()
 // resources.
 type GetClientCertificatesInput struct {
-	Title *string
-
-	Template *bool
-
-	Name *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
+	Name *string
+
 	// The current pagination position in the paged result set.
 	Position *string
 
+	Template *bool
+
 	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection of ClientCertificate () resources. Use Client-Side

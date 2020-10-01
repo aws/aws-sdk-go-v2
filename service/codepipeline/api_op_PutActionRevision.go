@@ -58,16 +58,6 @@ func (c *Client) PutActionRevision(ctx context.Context, params *PutActionRevisio
 // Represents the input of a PutActionRevision action.
 type PutActionRevisionInput struct {
 
-	// The name of the stage that contains the action that acts on the revision.
-	//
-	// This member is required.
-	StageName *string
-
-	// The name of the pipeline that starts processing the revision to the source.
-	//
-	// This member is required.
-	PipelineName *string
-
 	// The name of the action that processes the revision.
 	//
 	// This member is required.
@@ -77,6 +67,16 @@ type PutActionRevisionInput struct {
 	//
 	// This member is required.
 	ActionRevision *types.ActionRevision
+
+	// The name of the pipeline that starts processing the revision to the source.
+	//
+	// This member is required.
+	PipelineName *string
+
+	// The name of the stage that contains the action that acts on the revision.
+	//
+	// This member is required.
+	StageName *string
 }
 
 // Represents the output of a PutActionRevision action.

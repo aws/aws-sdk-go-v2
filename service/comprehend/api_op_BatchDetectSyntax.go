@@ -59,13 +59,6 @@ func (c *Client) BatchDetectSyntax(ctx context.Context, params *BatchDetectSynta
 
 type BatchDetectSyntaxInput struct {
 
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document must contain fewer that 5,000 bytes of
-	// UTF-8 encoded characters.
-	//
-	// This member is required.
-	TextList []*string
-
 	// The language of the input documents. You can specify any of the following
 	// languages supported by Amazon Comprehend: German ("de"), English ("en"), Spanish
 	// ("es"), French ("fr"), Italian ("it"), or Portuguese ("pt"). All documents must
@@ -73,6 +66,13 @@ type BatchDetectSyntaxInput struct {
 	//
 	// This member is required.
 	LanguageCode types.SyntaxLanguageCode
+
+	// A list containing the text of the input documents. The list can contain a
+	// maximum of 25 documents. Each document must contain fewer that 5,000 bytes of
+	// UTF-8 encoded characters.
+	//
+	// This member is required.
+	TextList []*string
 }
 
 type BatchDetectSyntaxOutput struct {

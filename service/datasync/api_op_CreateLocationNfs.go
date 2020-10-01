@@ -59,9 +59,6 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 // CreateLocationNfsRequest
 type CreateLocationNfsInput struct {
 
-	// The NFS mount options that DataSync can use to mount your NFS share.
-	MountOptions *types.NfsMountOptions
-
 	// Contains a list of Amazon Resource Names (ARNs) of agents that are used to
 	// connect to an NFS server. If you are copying data to or from your AWS Snowcone
 	// device, see NFS Server on AWS Snowcone
@@ -70,11 +67,6 @@ type CreateLocationNfsInput struct {
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
-
-	// The key-value pair that represents the tag that you want to add to the location.
-	// The value can be an empty string. We recommend using tags to name your
-	// resources.
-	Tags []*types.TagListEntry
 
 	// The name of the NFS server. This value is the IP address or Domain Name Service
 	// (DNS) name of the NFS server. An agent that is installed on-premises uses this
@@ -109,6 +101,14 @@ type CreateLocationNfsInput struct {
 	//
 	// This member is required.
 	Subdirectory *string
+
+	// The NFS mount options that DataSync can use to mount your NFS share.
+	MountOptions *types.NfsMountOptions
+
+	// The key-value pair that represents the tag that you want to add to the location.
+	// The value can be an empty string. We recommend using tags to name your
+	// resources.
+	Tags []*types.TagListEntry
 }
 
 // CreateLocationNfsResponse

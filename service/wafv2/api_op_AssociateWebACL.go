@@ -66,12 +66,6 @@ func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInp
 
 type AssociateWebACLInput struct {
 
-	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with
-	// the resource.
-	//
-	// This member is required.
-	WebACLArn *string
-
 	// The Amazon Resource Name (ARN) of the resource to associate with the web ACL.
 	// <p>The ARN must be in one of the following formats:</p> <ul> <li> <p>For an
 	// Application Load Balancer:
@@ -82,6 +76,12 @@ type AssociateWebACLInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with
+	// the resource.
+	//
+	// This member is required.
+	WebACLArn *string
 }
 
 type AssociateWebACLOutput struct {

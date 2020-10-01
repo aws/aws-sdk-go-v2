@@ -60,10 +60,6 @@ func (c *Client) ListOnPremisesInstances(ctx context.Context, params *ListOnPrem
 // Represents the input of a ListOnPremisesInstances operation.
 type ListOnPremisesInstancesInput struct {
 
-	// The on-premises instance tags that are used to restrict the on-premises instance
-	// names returned.
-	TagFilters []*types.TagFilter
-
 	// An identifier returned from the previous list on-premises instances call. It can
 	// be used to return the next set of on-premises instances in the list.
 	NextToken *string
@@ -76,18 +72,22 @@ type ListOnPremisesInstancesInput struct {
 	//     *
 	// Registered: Include registered on-premises instances in the resulting list.
 	RegistrationStatus types.RegistrationStatus
+
+	// The on-premises instance tags that are used to restrict the on-premises instance
+	// names returned.
+	TagFilters []*types.TagFilter
 }
 
 // Represents the output of the list on-premises instances operation.
 type ListOnPremisesInstancesOutput struct {
 
+	// The list of matching on-premises instance names.
+	InstanceNames []*string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list on-premises instances call to return the next
 	// set of on-premises instances in the list.
 	NextToken *string
-
-	// The list of matching on-premises instance names.
-	InstanceNames []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,10 +57,6 @@ func (c *Client) DescribeLocalGatewayRouteTables(ctx context.Context, params *De
 
 type DescribeLocalGatewayRouteTablesInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -81,11 +77,15 @@ type DescribeLocalGatewayRouteTablesInput struct {
 	// state of the local gateway route table.
 	Filters []*types.Filter
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The IDs of the local gateway route tables.
 	LocalGatewayRouteTableIds []*string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeLocalGatewayRouteTablesOutput struct {

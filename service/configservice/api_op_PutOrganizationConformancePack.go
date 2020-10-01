@@ -87,16 +87,6 @@ type PutOrganizationConformancePackInput struct {
 	// This member is required.
 	DeliveryS3Bucket *string
 
-	// A string containing full conformance pack template body. Structure containing
-	// the template body with a minimum length of 1 byte and a maximum length of 51,200
-	// bytes.
-	TemplateBody *string
-
-	// Location of file containing the template body. The uri must point to the
-	// conformance pack template (max size: 300 KB). You must have access to read
-	// Amazon S3 bucket.
-	TemplateS3Uri *string
-
 	// Name of the organization conformance pack you want to create.
 	//
 	// This member is required.
@@ -111,6 +101,16 @@ type PutOrganizationConformancePackInput struct {
 	// A list of AWS accounts to be excluded from an organization conformance pack
 	// while deploying a conformance pack.
 	ExcludedAccounts []*string
+
+	// A string containing full conformance pack template body. Structure containing
+	// the template body with a minimum length of 1 byte and a maximum length of 51,200
+	// bytes.
+	TemplateBody *string
+
+	// Location of file containing the template body. The uri must point to the
+	// conformance pack template (max size: 300 KB). You must have access to read
+	// Amazon S3 bucket.
+	TemplateS3Uri *string
 }
 
 type PutOrganizationConformancePackOutput struct {

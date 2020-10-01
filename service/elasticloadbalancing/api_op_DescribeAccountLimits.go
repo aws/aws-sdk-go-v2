@@ -59,22 +59,22 @@ func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAcco
 
 type DescribeAccountLimitsInput struct {
 
-	// The maximum number of results to return with this call.
-	PageSize *int32
-
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
+	// The maximum number of results to return with this call.
+	PageSize *int32
 }
 
 type DescribeAccountLimitsOutput struct {
 
+	// Information about the limits.
+	Limits []*types.Limit
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	NextMarker *string
-
-	// Information about the limits.
-	Limits []*types.Limit
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

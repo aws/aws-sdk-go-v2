@@ -56,12 +56,6 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// The ARN of the Project or ReportGroup resource you want to associate with a
-	// resource policy.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// A JSON-formatted resource policy. For more information, see Sharing a Project
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
 	// and Sharing a Report Group
@@ -70,6 +64,12 @@ type PutResourcePolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
+
+	// The ARN of the Project or ReportGroup resource you want to associate with a
+	// resource policy.
+	//
+	// This member is required.
+	ResourceArn *string
 }
 
 type PutResourcePolicyOutput struct {

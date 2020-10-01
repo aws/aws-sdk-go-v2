@@ -60,23 +60,10 @@ func (c *Client) UpdateDevicePool(ctx context.Context, params *UpdateDevicePoolI
 // Represents a request to the update device pool operation.
 type UpdateDevicePoolInput struct {
 
-	// The number of devices that Device Farm can add to your device pool. Device Farm
-	// adds devices that are available and that meet the criteria that you assign for
-	// the rules parameter. Depending on how many devices meet these constraints, your
-	// device pool might contain fewer devices than the value for this parameter. By
-	// specifying the maximum number of devices, you can control the costs that you
-	// incur by running tests. If you use this parameter in your request, you cannot
-	// use the clearMaxDevices parameter in the same request.
-	MaxDevices *int32
-
 	// The Amazon Resource Name (ARN) of the Device Farm device pool to update.
 	//
 	// This member is required.
 	Arn *string
-
-	// Represents the rules to modify for the device pool. Updating rules is optional.
-	// If you update rules for your request, the update replaces the existing rules.
-	Rules []*types.Rule
 
 	// Sets whether the maxDevices parameter applies to your device pool. If you set
 	// this parameter to true, the maxDevices parameter does not apply, and Device Farm
@@ -86,11 +73,24 @@ type UpdateDevicePoolInput struct {
 	// the maxDevices parameter in the same request.
 	ClearMaxDevices *bool
 
+	// A description of the device pool to update.
+	Description *string
+
+	// The number of devices that Device Farm can add to your device pool. Device Farm
+	// adds devices that are available and that meet the criteria that you assign for
+	// the rules parameter. Depending on how many devices meet these constraints, your
+	// device pool might contain fewer devices than the value for this parameter. By
+	// specifying the maximum number of devices, you can control the costs that you
+	// incur by running tests. If you use this parameter in your request, you cannot
+	// use the clearMaxDevices parameter in the same request.
+	MaxDevices *int32
+
 	// A string that represents the name of the device pool to update.
 	Name *string
 
-	// A description of the device pool to update.
-	Description *string
+	// Represents the rules to modify for the device pool. Updating rules is optional.
+	// If you update rules for your request, the update replaces the existing rules.
+	Rules []*types.Rule
 }
 
 // Represents the result of an update device pool request.

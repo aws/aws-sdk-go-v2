@@ -13,11 +13,6 @@ type AbortTransactionResult struct {
 // Contains the details of the transaction to commit.
 type CommitTransactionRequest struct {
 
-	// Specifies the transaction ID of the transaction to commit.
-	//
-	// This member is required.
-	TransactionId *string
-
 	// Specifies the commit digest for the transaction to commit. For every active
 	// transaction, the commit digest must be passed. QLDB validates CommitDigest and
 	// rejects the commit with an error if the digest computed on the client does not
@@ -25,16 +20,21 @@ type CommitTransactionRequest struct {
 	//
 	// This member is required.
 	CommitDigest []byte
+
+	// Specifies the transaction ID of the transaction to commit.
+	//
+	// This member is required.
+	TransactionId *string
 }
 
 // Contains the details of the committed transaction.
 type CommitTransactionResult struct {
 
-	// The transaction ID of the committed transaction.
-	TransactionId *string
-
 	// The commit digest of the committed transaction.
 	CommitDigest []byte
+
+	// The transaction ID of the committed transaction.
+	TransactionId *string
 }
 
 // Specifies a request to end the session.
@@ -48,18 +48,18 @@ type EndSessionResult struct {
 // Specifies a request to execute a statement.
 type ExecuteStatementRequest struct {
 
-	// Specifies the parameters for the parameterized statement in the request.
-	Parameters []*ValueHolder
+	// Specifies the statement of the request.
+	//
+	// This member is required.
+	Statement *string
 
 	// Specifies the transaction ID of the request.
 	//
 	// This member is required.
 	TransactionId *string
 
-	// Specifies the statement of the request.
-	//
-	// This member is required.
-	Statement *string
+	// Specifies the parameters for the parameterized statement in the request.
+	Parameters []*ValueHolder
 }
 
 // Contains the details of the executed statement.

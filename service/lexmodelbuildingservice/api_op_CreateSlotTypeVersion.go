@@ -66,34 +66,34 @@ func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTy
 
 type CreateSlotTypeVersionInput struct {
 
+	// The name of the slot type that you want to create a new version for. The name is
+	// case sensitive.
+	//
+	// This member is required.
+	Name *string
+
 	// Checksum for the $LATEST version of the slot type that you want to publish. If
 	// you specify a checksum and the $LATEST version of the slot type has a different
 	// checksum, Amazon Lex returns a PreconditionFailedException exception and doesn't
 	// publish the new version. If you don't specify a checksum, Amazon Lex publishes
 	// the $LATEST version.
 	Checksum *string
-
-	// The name of the slot type that you want to create a new version for. The name is
-	// case sensitive.
-	//
-	// This member is required.
-	Name *string
 }
 
 type CreateSlotTypeVersionOutput struct {
 
-	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType ().
-	ValueSelectionStrategy types.SlotValueSelectionStrategy
-
-	// Configuration information that extends the parent built-in slot type.
-	SlotTypeConfigurations []*types.SlotTypeConfiguration
+	// Checksum of the $LATEST version of the slot type.
+	Checksum *string
 
 	// The date that the slot type was created.
 	CreatedDate *time.Time
 
-	// The built-in slot type used a the parent of the slot type.
-	ParentSlotTypeSignature *string
+	// A description of the slot type.
+	Description *string
+
+	// A list of EnumerationValue objects that defines the values that the slot type
+	// can take.
+	EnumerationValues []*types.EnumerationValue
 
 	// The date that the slot type was updated. When you create a resource, the
 	// creation date and last update date are the same.
@@ -102,15 +102,15 @@ type CreateSlotTypeVersionOutput struct {
 	// The name of the slot type.
 	Name *string
 
-	// Checksum of the $LATEST version of the slot type.
-	Checksum *string
+	// The built-in slot type used a the parent of the slot type.
+	ParentSlotTypeSignature *string
 
-	// A description of the slot type.
-	Description *string
+	// Configuration information that extends the parent built-in slot type.
+	SlotTypeConfigurations []*types.SlotTypeConfiguration
 
-	// A list of EnumerationValue objects that defines the values that the slot type
-	// can take.
-	EnumerationValues []*types.EnumerationValue
+	// The strategy that Amazon Lex uses to determine the value of the slot. For more
+	// information, see PutSlotType ().
+	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version assigned to the new slot type version.
 	Version *string

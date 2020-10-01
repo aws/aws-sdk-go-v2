@@ -56,24 +56,19 @@ func (c *Client) ResendConfirmationCode(ctx context.Context, params *ResendConfi
 // Represents the request to resend the confirmation code.
 type ResendConfirmationCodeInput struct {
 
-	// Contextual data such as the user's device fingerprint, IP address, or location
-	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
-	// security.
-	UserContextData *types.UserContextDataType
+	// The ID of the client associated with the user pool.
+	//
+	// This member is required.
+	ClientId *string
 
 	// The user name of the user to whom you wish to resend a confirmation code.
 	//
 	// This member is required.
 	Username *string
 
-	// The ID of the client associated with the user pool.
-	//
-	// This member is required.
-	ClientId *string
-
-	// A keyed-hash message authentication code (HMAC) calculated using the secret key
-	// of a user pool client and username plus the client ID in the message.
-	SecretHash *string
+	// The Amazon Pinpoint analytics metadata for collecting metrics for
+	// ResendConfirmationCode calls.
+	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -103,9 +98,14 @@ type ResendConfirmationCodeInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for
-	// ResendConfirmationCode calls.
-	AnalyticsMetadata *types.AnalyticsMetadataType
+	// A keyed-hash message authentication code (HMAC) calculated using the secret key
+	// of a user pool client and username plus the client ID in the message.
+	SecretHash *string
+
+	// Contextual data such as the user's device fingerprint, IP address, or location
+	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
+	// security.
+	UserContextData *types.UserContextDataType
 }
 
 // The response from the server when the Amazon Cognito Your User Pools service

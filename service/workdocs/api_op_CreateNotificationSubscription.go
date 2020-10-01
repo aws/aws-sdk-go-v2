@@ -61,17 +61,6 @@ func (c *Client) CreateNotificationSubscription(ctx context.Context, params *Cre
 
 type CreateNotificationSubscriptionInput struct {
 
-	// The notification type.
-	//
-	// This member is required.
-	SubscriptionType types.SubscriptionType
-
-	// The protocol to use. The supported value is https, which delivers JSON-encoded
-	// messages using HTTPS POST.
-	//
-	// This member is required.
-	Protocol types.SubscriptionProtocolType
-
 	// The endpoint to receive the notifications. If the protocol is HTTPS, the
 	// endpoint is a URL that begins with https.
 	//
@@ -82,6 +71,17 @@ type CreateNotificationSubscriptionInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	// The protocol to use. The supported value is https, which delivers JSON-encoded
+	// messages using HTTPS POST.
+	//
+	// This member is required.
+	Protocol types.SubscriptionProtocolType
+
+	// The notification type.
+	//
+	// This member is required.
+	SubscriptionType types.SubscriptionType
 }
 
 type CreateNotificationSubscriptionOutput struct {

@@ -58,15 +58,15 @@ func (c *Client) DeleteVirtualRouter(ctx context.Context, params *DeleteVirtualR
 //
 type DeleteVirtualRouterInput struct {
 
-	// The name of the virtual router to delete.
-	//
-	// This member is required.
-	VirtualRouterName *string
-
 	// The name of the service mesh to delete the virtual router in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the virtual router to delete.
+	//
+	// This member is required.
+	VirtualRouterName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For

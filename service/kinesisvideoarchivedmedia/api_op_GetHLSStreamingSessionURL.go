@@ -207,6 +207,16 @@ func (c *Client) GetHLSStreamingSessionURL(ctx context.Context, params *GetHLSSt
 
 type GetHLSStreamingSessionURLInput struct {
 
+	// Specifies which format should be used for packaging the media. Specifying the
+	// FRAGMENTED_MP4 container format packages the media into MP4 fragments (fMP4 or
+	// CMAF). This is the recommended packaging because there is minimal packaging
+	// overhead. The other container format option is MPEG_TS. HLS has supported MPEG
+	// TS chunks since it was released and is sometimes the only supported packaging on
+	// older HLS players. MPEG TS typically has a 5-25 percent packaging overhead. This
+	// means MPEG TS typically requires 5-25 percent more bandwidth and cost than fMP4.
+	// The default is FRAGMENTED_MP4.
+	ContainerFormat types.ContainerFormat
+
 	// Specifies when flags marking discontinuities between fragments are added to the
 	// media playlists. Media players typically build a timeline of media content to
 	// play, based on the timestamps of each fragment. This means that if there is any
@@ -239,16 +249,6 @@ type GetHLSStreamingSessionURLInput struct {
 	// PRODUCER_TIMESTAMP.
 	DiscontinuityMode types.HLSDiscontinuityMode
 
-	// Specifies which format should be used for packaging the media. Specifying the
-	// FRAGMENTED_MP4 container format packages the media into MP4 fragments (fMP4 or
-	// CMAF). This is the recommended packaging because there is minimal packaging
-	// overhead. The other container format option is MPEG_TS. HLS has supported MPEG
-	// TS chunks since it was released and is sometimes the only supported packaging on
-	// older HLS players. MPEG TS typically has a 5-25 percent packaging overhead. This
-	// means MPEG TS typically requires 5-25 percent more bandwidth and cost than fMP4.
-	// The default is FRAGMENTED_MP4.
-	ContainerFormat types.ContainerFormat
-
 	// Specifies when the fragment start timestamps should be included in the HLS media
 	// playlist. Typically, media players report the playhead position as a time
 	// relative to the start of the first fragment in the playback session. However,
@@ -260,6 +260,21 @@ type GetHLSStreamingSessionURLInput struct {
 	// start timestamps. Similarly, when HLSFragmentSelector () is PRODUCER_TIMESTAMP,
 	// the timestamps will be the producer start timestamps.
 	DisplayFragmentTimestamp types.HLSDisplayFragmentTimestamp
+
+	// The time in seconds until the requested session expires. This value can be
+	// between 300 (5 minutes) and 43200 (12 hours). When a session expires, no new
+	// calls to GetHLSMasterPlaylist, GetHLSMediaPlaylist, GetMP4InitFragment,
+	// GetMP4MediaFragment, or GetTSFragment can be made for that session. The default
+	// is 300 (5 minutes).
+	Expires *int32
+
+	// The time range of the requested fragment and the source of the timestamps. This
+	// parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
+	// parameter is optional if PlaybackMode isLIVE. If PlaybackMode is LIVE, the
+	// FragmentSelectorType can be set, but the TimestampRange should not be set. If
+	// PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
+	// TimestampRange must be set.
+	HLSFragmentSelector *types.HLSFragmentSelector
 
 	// The maximum number of fragments that are returned in the HLS media playlists.
 	// When the PlaybackMode is LIVE, the most recent fragments are returned up to this
@@ -275,14 +290,6 @@ type GetHLSStreamingSessionURLInput struct {
 	// fragments, and more than 2 1/2 hours of video on streams with 10-second
 	// fragments.
 	MaxMediaPlaylistFragmentResults *int64
-
-	// The Amazon Resource Name (ARN) of the stream for which to retrieve the HLS
-	// master playlist URL. You must specify either the StreamName or the StreamARN.
-	StreamARN *string
-
-	// The name of the stream for which to retrieve the HLS master playlist URL. You
-	// must specify either the StreamName or the StreamARN.
-	StreamName *string
 
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
@@ -330,20 +337,13 @@ type GetHLSStreamingSessionURLInput struct {
 	// The default is LIVE.
 	PlaybackMode types.HLSPlaybackMode
 
-	// The time in seconds until the requested session expires. This value can be
-	// between 300 (5 minutes) and 43200 (12 hours). When a session expires, no new
-	// calls to GetHLSMasterPlaylist, GetHLSMediaPlaylist, GetMP4InitFragment,
-	// GetMP4MediaFragment, or GetTSFragment can be made for that session. The default
-	// is 300 (5 minutes).
-	Expires *int32
+	// The Amazon Resource Name (ARN) of the stream for which to retrieve the HLS
+	// master playlist URL. You must specify either the StreamName or the StreamARN.
+	StreamARN *string
 
-	// The time range of the requested fragment and the source of the timestamps. This
-	// parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
-	// parameter is optional if PlaybackMode isLIVE. If PlaybackMode is LIVE, the
-	// FragmentSelectorType can be set, but the TimestampRange should not be set. If
-	// PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
-	// TimestampRange must be set.
-	HLSFragmentSelector *types.HLSFragmentSelector
+	// The name of the stream for which to retrieve the HLS master playlist URL. You
+	// must specify either the StreamName or the StreamARN.
+	StreamName *string
 }
 
 type GetHLSStreamingSessionURLOutput struct {

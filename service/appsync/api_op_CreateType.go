@@ -62,17 +62,17 @@ type CreateTypeInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The type format: SDL or JSON.
-	//
-	// This member is required.
-	Format types.TypeDefinitionFormat
-
 	// The type definition, in GraphQL Schema Definition Language (SDL) format. For
 	// more information, see the GraphQL SDL documentation
 	// (http://graphql.org/learn/schema/).
 	//
 	// This member is required.
 	Definition *string
+
+	// The type format: SDL or JSON.
+	//
+	// This member is required.
+	Format types.TypeDefinitionFormat
 }
 
 type CreateTypeOutput struct {

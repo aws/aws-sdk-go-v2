@@ -58,15 +58,6 @@ func (c *Client) UpgradeElasticsearchDomain(ctx context.Context, params *Upgrade
 // Container for request parameters to UpgradeElasticsearchDomain () operation.
 type UpgradeElasticsearchDomainInput struct {
 
-	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
-	// to be performed. This will not actually perform the Upgrade.
-	PerformCheckOnly *bool
-
-	// The version of Elasticsearch that you intend to upgrade the domain to.
-	//
-	// This member is required.
-	TargetVersion *string
-
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
 	// number and can contain the following characters: a-z (lowercase), 0-9, and -
@@ -74,23 +65,32 @@ type UpgradeElasticsearchDomainInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// The version of Elasticsearch that you intend to upgrade the domain to.
+	//
+	// This member is required.
+	TargetVersion *string
+
+	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
+	// to be performed. This will not actually perform the Upgrade.
+	PerformCheckOnly *bool
 }
 
 // Container for response returned by UpgradeElasticsearchDomain () operation.
 type UpgradeElasticsearchDomainOutput struct {
 
+	// The name of an Elasticsearch domain. Domain names are unique across the domains
+	// owned by an account within an AWS region. Domain names start with a letter or
+	// number and can contain the following characters: a-z (lowercase), 0-9, and -
+	// (hyphen).
+	DomainName *string
+
 	// This flag, when set to True, indicates that an Upgrade Eligibility Check needs
 	// to be performed. This will not actually perform the Upgrade.
 	PerformCheckOnly *bool
 
 	// The version of Elasticsearch that you intend to upgrade the domain to.
 	TargetVersion *string
-
-	// The name of an Elasticsearch domain. Domain names are unique across the domains
-	// owned by an account within an AWS region. Domain names start with a letter or
-	// number and can contain the following characters: a-z (lowercase), 0-9, and -
-	// (hyphen).
-	DomainName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

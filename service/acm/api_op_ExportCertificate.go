@@ -84,13 +84,13 @@ type ExportCertificateOutput struct {
 	// The base64 PEM-encoded certificate.
 	Certificate *string
 
-	// The encrypted private key associated with the public key in the certificate. The
-	// key is output in PKCS #8 format and is base64 PEM-encoded.
-	PrivateKey *string
-
 	// The base64 PEM-encoded certificate chain. This does not include the certificate
 	// that you are exporting.
 	CertificateChain *string
+
+	// The encrypted private key associated with the public key in the certificate. The
+	// key is output in PKCS #8 format and is base64 PEM-encoded.
+	PrivateKey *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

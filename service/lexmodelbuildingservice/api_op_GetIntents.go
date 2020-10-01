@@ -66,12 +66,6 @@ func (c *Client) GetIntents(ctx context.Context, params *GetIntentsInput, optFns
 
 type GetIntentsInput struct {
 
-	// A pagination token that fetches the next page of intents. If the response to
-	// this API call is truncated, Amazon Lex returns a pagination token in the
-	// response. To fetch the next page of intents, specify the pagination token in the
-	// next request.
-	NextToken *string
-
 	// The maximum number of intents to return in the response. The default is 10.
 	MaxResults *int32
 
@@ -79,6 +73,12 @@ type GetIntentsInput struct {
 	// its name matches the substring. For example, "xyz" matches both "xyzabc" and
 	// "abcxyz."
 	NameContains *string
+
+	// A pagination token that fetches the next page of intents. If the response to
+	// this API call is truncated, Amazon Lex returns a pagination token in the
+	// response. To fetch the next page of intents, specify the pagination token in the
+	// next request.
+	NextToken *string
 }
 
 type GetIntentsOutput struct {

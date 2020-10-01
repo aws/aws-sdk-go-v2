@@ -57,15 +57,15 @@ func (c *Client) UpdateModel(ctx context.Context, params *UpdateModelInput, optF
 
 type UpdateModelInput struct {
 
-	// The model type.
-	//
-	// This member is required.
-	ModelType types.ModelTypeEnum
-
 	// The model ID.
 	//
 	// This member is required.
 	ModelId *string
+
+	// The model type.
+	//
+	// This member is required.
+	ModelType types.ModelTypeEnum
 
 	// The new model description.
 	Description *string

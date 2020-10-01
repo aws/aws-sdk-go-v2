@@ -69,11 +69,11 @@ type ListOriginEndpointsInput struct {
 
 type ListOriginEndpointsOutput struct {
 
-	// A list of OriginEndpoint records.
-	OriginEndpoints []*types.OriginEndpoint
-
 	// A token that can be used to resume pagination from the end of the collection.
 	NextToken *string
+
+	// A list of OriginEndpoint records.
+	OriginEndpoints []*types.OriginEndpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

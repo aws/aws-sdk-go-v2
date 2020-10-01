@@ -67,12 +67,6 @@ func (c *Client) UpdateScalingParameters(ctx context.Context, params *UpdateScal
 // you want to configure.
 type UpdateScalingParametersInput struct {
 
-	// The desired instance type and desired number of replicas of each index
-	// partition.
-	//
-	// This member is required.
-	ScalingParameters *types.ScalingParameters
-
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
@@ -80,6 +74,12 @@ type UpdateScalingParametersInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// The desired instance type and desired number of replicas of each index
+	// partition.
+	//
+	// This member is required.
+	ScalingParameters *types.ScalingParameters
 }
 
 // The result of a UpdateScalingParameters request. Contains the status of the

@@ -63,16 +63,16 @@ func (c *Client) BatchDeleteTable(ctx context.Context, params *BatchDeleteTableI
 
 type BatchDeleteTableInput struct {
 
-	// A list of the table to delete.
-	//
-	// This member is required.
-	TablesToDelete []*string
-
 	// The name of the catalog database in which the tables to delete reside. For Hive
 	// compatibility, this name is entirely lowercase.
 	//
 	// This member is required.
 	DatabaseName *string
+
+	// A list of the table to delete.
+	//
+	// This member is required.
+	TablesToDelete []*string
 
 	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
 	// account ID is used by default.

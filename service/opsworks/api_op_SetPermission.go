@@ -68,13 +68,13 @@ type SetPermissionInput struct {
 	// This member is required.
 	IamUserArn *string
 
-	// The user is allowed to use SSH to communicate with the instance.
-	AllowSsh *bool
-
 	// The stack ID.
 	//
 	// This member is required.
 	StackId *string
+
+	// The user is allowed to use SSH to communicate with the instance.
+	AllowSsh *bool
 
 	// The user is allowed to use sudo to elevate privileges.
 	AllowSudo *bool

@@ -57,13 +57,13 @@ func (c *Client) DescribeWorkspaceBundles(ctx context.Context, params *DescribeW
 
 type DescribeWorkspaceBundlesInput struct {
 
-	// The token for the next set of results. (You received this token from a previous
-	// call.)
-	NextToken *string
-
 	// The identifiers of the bundles. You cannot combine this parameter with any other
 	// filter.
 	BundleIds []*string
+
+	// The token for the next set of results. (You received this token from a previous
+	// call.)
+	NextToken *string
 
 	// The owner of the bundles. You cannot combine this parameter with any other
 	// filter. Specify AMAZON to describe the bundles provided by AWS or null to

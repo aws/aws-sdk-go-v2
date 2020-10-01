@@ -57,13 +57,13 @@ func (c *Client) ListTeamMembers(ctx context.Context, params *ListTeamMembersInp
 
 type ListTeamMembersInput struct {
 
-	// The maximum number of team members you want returned in a response.
-	MaxResults *int32
-
 	// The ID of the project for which you want to list team members.
 	//
 	// This member is required.
 	ProjectId *string
+
+	// The maximum number of team members you want returned in a response.
+	MaxResults *int32
 
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.

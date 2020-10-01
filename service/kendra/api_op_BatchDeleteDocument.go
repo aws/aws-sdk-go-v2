@@ -61,6 +61,11 @@ func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDoc
 
 type BatchDeleteDocumentInput struct {
 
+	// One or more identifiers for documents to delete from the index.
+	//
+	// This member is required.
+	DocumentIdList []*string
+
 	// The identifier of the index that contains the documents to delete.
 	//
 	// This member is required.
@@ -68,11 +73,6 @@ type BatchDeleteDocumentInput struct {
 
 	// Maps a particular data source sync job to a particular data source.
 	DataSourceSyncJobMetricTarget *types.DataSourceSyncJobMetricTarget
-
-	// One or more identifiers for documents to delete from the index.
-	//
-	// This member is required.
-	DocumentIdList []*string
 }
 
 type BatchDeleteDocumentOutput struct {

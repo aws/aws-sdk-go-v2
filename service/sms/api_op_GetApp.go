@@ -62,11 +62,11 @@ type GetAppInput struct {
 
 type GetAppOutput struct {
 
-	// List of server groups belonging to the application.
-	ServerGroups []*types.ServerGroup
-
 	// Information about the application.
 	AppSummary *types.AppSummary
+
+	// List of server groups belonging to the application.
+	ServerGroups []*types.ServerGroup
 
 	// List of tags associated with the application.
 	Tags []*types.Tag

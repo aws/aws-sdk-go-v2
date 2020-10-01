@@ -70,11 +70,11 @@ type RevokeFlowEntitlementInput struct {
 
 type RevokeFlowEntitlementOutput struct {
 
-	// The ARN of the flow that the entitlement was revoked from.
-	FlowArn *string
-
 	// The ARN of the entitlement that was revoked.
 	EntitlementArn *string
+
+	// The ARN of the flow that the entitlement was revoked from.
+	FlowArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,6 +57,9 @@ func (c *Client) DescribeRules(ctx context.Context, params *DescribeRulesInput, 
 
 type DescribeRulesInput struct {
 
+	// The Amazon Resource Name (ARN) of the listener.
+	ListenerArn *string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
@@ -66,19 +69,16 @@ type DescribeRulesInput struct {
 
 	// The Amazon Resource Names (ARN) of the rules.
 	RuleArns []*string
-
-	// The Amazon Resource Name (ARN) of the listener.
-	ListenerArn *string
 }
 
 type DescribeRulesOutput struct {
 
-	// Information about the rules.
-	Rules []*types.Rule
-
 	// If there are additional results, this is the marker for the next set of results.
 	// Otherwise, this is null.
 	NextMarker *string
+
+	// Information about the rules.
+	Rules []*types.Rule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

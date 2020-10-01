@@ -60,14 +60,14 @@ func (c *Client) DescribeCustomerGateways(ctx context.Context, params *DescribeC
 // Contains the parameters for DescribeCustomerGateways.
 type DescribeCustomerGatewaysInput struct {
 
+	// One or more customer gateway IDs. Default: Describes all your customer gateways.
+	CustomerGatewayIds []*string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// One or more customer gateway IDs. Default: Describes all your customer gateways.
-	CustomerGatewayIds []*string
 
 	// One or more filters.
 	//

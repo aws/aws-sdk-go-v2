@@ -64,6 +64,11 @@ type VoteOnProposalInput struct {
 	// This member is required.
 	NetworkId *string
 
+	// The unique identifier of the proposal.
+	//
+	// This member is required.
+	ProposalId *string
+
 	// The value of the vote.
 	//
 	// This member is required.
@@ -73,11 +78,6 @@ type VoteOnProposalInput struct {
 	//
 	// This member is required.
 	VoterMemberId *string
-
-	// The unique identifier of the proposal.
-	//
-	// This member is required.
-	ProposalId *string
 }
 
 type VoteOnProposalOutput struct {

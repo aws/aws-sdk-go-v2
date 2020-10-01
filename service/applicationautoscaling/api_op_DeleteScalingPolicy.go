@@ -65,6 +65,11 @@ func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingP
 
 type DeleteScalingPolicyInput struct {
 
+	// The name of the scaling policy.
+	//
+	// This member is required.
+	PolicyName *string
+
 	// The identifier of the resource associated with the scalable target. This string
 	// consists of the resource type and unique identifier.
 	//
@@ -191,11 +196,6 @@ type DeleteScalingPolicyInput struct {
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
-
-	// The name of the scaling policy.
-	//
-	// This member is required.
-	PolicyName *string
 }
 
 type DeleteScalingPolicyOutput struct {

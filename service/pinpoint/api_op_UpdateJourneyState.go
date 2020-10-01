@@ -57,16 +57,16 @@ func (c *Client) UpdateJourneyState(ctx context.Context, params *UpdateJourneySt
 
 type UpdateJourneyStateInput struct {
 
-	// The unique identifier for the journey.
-	//
-	// This member is required.
-	JourneyId *string
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The unique identifier for the journey.
+	//
+	// This member is required.
+	JourneyId *string
 
 	// Changes the status of a journey.
 	//

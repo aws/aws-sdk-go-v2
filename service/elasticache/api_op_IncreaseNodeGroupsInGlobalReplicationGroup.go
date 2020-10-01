@@ -57,25 +57,25 @@ func (c *Client) IncreaseNodeGroupsInGlobalReplicationGroup(ctx context.Context,
 
 type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 
-	// The number of node groups you wish to add
-	//
-	// This member is required.
-	NodeGroupCount *int32
-
 	// Indicates that the process begins immediately. At present, the only permitted
 	// value for this parameter is true.
 	//
 	// This member is required.
 	ApplyImmediately *bool
 
-	// Describes the replication group IDs, the AWS regions where they are stored and
-	// the shard configuration for each that comprise the Global Datastore
-	RegionalConfigurations []*types.RegionalConfiguration
-
 	// The name of the Global Datastore
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
+
+	// The number of node groups you wish to add
+	//
+	// This member is required.
+	NodeGroupCount *int32
+
+	// Describes the replication group IDs, the AWS regions where they are stored and
+	// the shard configuration for each that comprise the Global Datastore
+	RegionalConfigurations []*types.RegionalConfiguration
 }
 
 type IncreaseNodeGroupsInGlobalReplicationGroupOutput struct {

@@ -66,21 +66,21 @@ type CreateObjectInput struct {
 	// This member is required.
 	DirectoryArn *string
 
-	// The name of link that is used to attach this object to a parent.
-	LinkName *string
-
-	// If specified, the parent reference to which this object will be attached.
-	ParentReference *types.ObjectReference
-
 	// A list of schema facets to be associated with the object. Do not provide minor
 	// version components. See SchemaFacet () for details.
 	//
 	// This member is required.
 	SchemaFacets []*types.SchemaFacet
 
+	// The name of link that is used to attach this object to a parent.
+	LinkName *string
+
 	// The attribute map whose attribute ARN contains the key and attribute value as
 	// the map value.
 	ObjectAttributeList []*types.AttributeKeyAndValue
+
+	// If specified, the parent reference to which this object will be attached.
+	ParentReference *types.ObjectReference
 }
 
 type CreateObjectOutput struct {

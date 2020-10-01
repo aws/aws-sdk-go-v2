@@ -58,16 +58,16 @@ func (c *Client) DeleteNetworkInterface(ctx context.Context, params *DeleteNetwo
 // Contains the parameters for DeleteNetworkInterface.
 type DeleteNetworkInterfaceInput struct {
 
+	// The ID of the network interface.
+	//
+	// This member is required.
+	NetworkInterfaceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the network interface.
-	//
-	// This member is required.
-	NetworkInterfaceId *string
 }
 
 type DeleteNetworkInterfaceOutput struct {

@@ -64,19 +64,10 @@ type CreateResolverInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The name of the data source for which the resolver is being created.
-	DataSourceName *string
-
 	// The name of the field to attach the resolver to.
 	//
 	// This member is required.
 	FieldName *string
-
-	// The mapping template to be used for responses from the data source.
-	ResponseMappingTemplate *string
-
-	// The caching configuration for the resolver.
-	CachingConfig *types.CachingConfig
 
 	// The mapping template to be used for requests. A resolver uses a request mapping
 	// template to convert a GraphQL expression into a format that a data source can
@@ -86,13 +77,16 @@ type CreateResolverInput struct {
 	// This member is required.
 	RequestMappingTemplate *string
 
-	// The SyncConfig for a resolver attached to a versioned datasource.
-	SyncConfig *types.SyncConfig
-
 	// The name of the Type.
 	//
 	// This member is required.
 	TypeName *string
+
+	// The caching configuration for the resolver.
+	CachingConfig *types.CachingConfig
+
+	// The name of the data source for which the resolver is being created.
+	DataSourceName *string
 
 	// The resolver type.
 	//
@@ -108,6 +102,12 @@ type CreateResolverInput struct {
 
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
+
+	// The mapping template to be used for responses from the data source.
+	ResponseMappingTemplate *string
+
+	// The SyncConfig for a resolver attached to a versioned datasource.
+	SyncConfig *types.SyncConfig
 }
 
 type CreateResolverOutput struct {

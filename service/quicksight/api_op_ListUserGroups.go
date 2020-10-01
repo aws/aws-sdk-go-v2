@@ -58,39 +58,39 @@ func (c *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsInput
 
 type ListUserGroupsInput struct {
 
-	// The maximum number of results to return from this request.
-	MaxResults *int32
-
-	// The namespace. Currently, you should set this to default.
-	//
-	// This member is required.
-	Namespace *string
-
-	// A pagination token that can be used in a subsequent request.
-	NextToken *string
-
 	// The AWS account ID that the user is in. Currently, you use the ID for the AWS
 	// account that contains your Amazon QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
 
+	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
+	Namespace *string
+
 	// The Amazon QuickSight user name that you want to list group memberships for.
 	//
 	// This member is required.
 	UserName *string
+
+	// The maximum number of results to return from this request.
+	MaxResults *int32
+
+	// A pagination token that can be used in a subsequent request.
+	NextToken *string
 }
 
 type ListUserGroupsOutput struct {
-
-	// The AWS request ID for this operation.
-	RequestId *string
 
 	// The list of groups the user is a member of.
 	GroupList []*types.Group
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

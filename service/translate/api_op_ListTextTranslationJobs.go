@@ -56,16 +56,16 @@ func (c *Client) ListTextTranslationJobs(ctx context.Context, params *ListTextTr
 
 type ListTextTranslationJobsInput struct {
 
-	// The token to request the next page of results.
-	NextToken *string
-
-	// The maximum number of results to return in each page. The default value is 100.
-	MaxResults *int32
-
 	// The parameters that specify which batch translation jobs to retrieve. Filters
 	// include job name, job status, and submission time. You can only set one filter
 	// at a time.
 	Filter *types.TextTranslationJobFilter
+
+	// The maximum number of results to return in each page. The default value is 100.
+	MaxResults *int32
+
+	// The token to request the next page of results.
+	NextToken *string
 }
 
 type ListTextTranslationJobsOutput struct {

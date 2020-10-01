@@ -56,12 +56,10 @@ func (c *Client) DeleteApplicationInputProcessingConfiguration(ctx context.Conte
 
 type DeleteApplicationInputProcessingConfigurationInput struct {
 
-	// The ID of the input configuration from which to delete the input processing
-	// configuration. You can get a list of the input IDs for an application by using
-	// the DescribeApplication () operation.
+	// The name of the application.
 	//
 	// This member is required.
-	InputId *string
+	ApplicationName *string
 
 	// The application version. You can use the DescribeApplication () operation to get
 	// the current application version. If the version specified is not the current
@@ -70,19 +68,21 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
-	// The name of the application.
+	// The ID of the input configuration from which to delete the input processing
+	// configuration. You can get a list of the input IDs for an application by using
+	// the DescribeApplication () operation.
 	//
 	// This member is required.
-	ApplicationName *string
+	InputId *string
 }
 
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 
-	// The current application version ID.
-	ApplicationVersionId *int64
-
 	// The Amazon Resource Name (ARN) of the application.
 	ApplicationARN *string
+
+	// The current application version ID.
+	ApplicationVersionId *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

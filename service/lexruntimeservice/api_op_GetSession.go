@@ -57,35 +57,32 @@ func (c *Client) GetSession(ctx context.Context, params *GetSessionInput, optFns
 
 type GetSessionInput struct {
 
-	// The name of the bot that contains the session data.
-	//
-	// This member is required.
-	BotName *string
-
-	// A string used to filter the intents returned in the recentIntentSummaryView
-	// structure. When you specify a filter, only intents with their checkpointLabel
-	// field set to that string are returned.
-	CheckpointLabelFilter *string
-
 	// The alias in use for the bot that contains the session data.
 	//
 	// This member is required.
 	BotAlias *string
+
+	// The name of the bot that contains the session data.
+	//
+	// This member is required.
+	BotName *string
 
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot.
 	//
 	// This member is required.
 	UserId *string
+
+	// A string used to filter the intents returned in the recentIntentSummaryView
+	// structure. When you specify a filter, only intents with their checkpointLabel
+	// field set to that string are returned.
+	CheckpointLabelFilter *string
 }
 
 type GetSessionOutput struct {
 
 	// Describes the current state of the bot.
 	DialogAction *types.DialogAction
-
-	// A unique identifier for the session.
-	SessionId *string
 
 	// An array of information about the intents used in the session. The array can
 	// contain a maximum of three summaries. If more than three intents are used in the
@@ -98,6 +95,9 @@ type GetSessionOutput struct {
 	// contains application information passed between Amazon Lex and a client
 	// application.
 	SessionAttributes map[string]*string
+
+	// A unique identifier for the session.
+	SessionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

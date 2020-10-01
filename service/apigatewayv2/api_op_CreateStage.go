@@ -59,62 +59,52 @@ func (c *Client) CreateStage(ctx context.Context, params *CreateStageInput, optF
 // Creates a new Stage resource to represent a stage.
 type CreateStageInput struct {
 
-	// A map that defines the stage variables for a Stage. Variable names can have
-	// alphanumeric and underscore characters, and the values must match
-	// [A-Za-z0-9-._~:/?#&=,]+.
-	StageVariables map[string]*string
-
-	// The description for the API stage.
-	Description *string
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
 
 	// The name of the stage.
 	//
 	// This member is required.
 	StageName *string
 
-	// The deployment identifier of the API stage.
-	DeploymentId *string
-
 	// Settings for logging access in this stage.
 	AccessLogSettings *types.AccessLogSettings
-
-	// Route settings for the stage, by routeKey.
-	RouteSettings map[string]*types.RouteSettings
-
-	// The default route settings for the stage.
-	DefaultRouteSettings *types.RouteSettings
-
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
 
 	// Specifies whether updates to an API automatically trigger a new deployment. The
 	// default value is false.
 	AutoDeploy *bool
 
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
-
 	// The identifier of a client certificate for a Stage. Supported only for WebSocket
 	// APIs.
 	ClientCertificateId *string
-}
 
-type CreateStageOutput struct {
+	// The default route settings for the stage.
+	DefaultRouteSettings *types.RouteSettings
+
+	// The deployment identifier of the API stage.
+	DeploymentId *string
+
+	// The description for the API stage.
+	Description *string
 
 	// Route settings for the stage, by routeKey.
 	RouteSettings map[string]*types.RouteSettings
 
-	// The timestamp when the stage was created.
-	CreatedDate *time.Time
+	// A map that defines the stage variables for a Stage. Variable names can have
+	// alphanumeric and underscore characters, and the values must match
+	// [A-Za-z0-9-._~:/?#&=,]+.
+	StageVariables map[string]*string
 
-	// The identifier of the Deployment that the Stage is associated with. Can't be
-	// updated if autoDeploy is enabled.
-	DeploymentId *string
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
+}
 
-	// The timestamp when the stage was last updated.
-	LastUpdatedDate *time.Time
+type CreateStageOutput struct {
+
+	// Settings for logging access in this stage.
+	AccessLogSettings *types.AccessLogSettings
 
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
@@ -125,18 +115,32 @@ type CreateStageOutput struct {
 	// default value is false.
 	AutoDeploy *bool
 
-	// Describes the status of the last deployment of a stage. Supported only for
-	// stages with autoDeploy enabled.
-	LastDeploymentStatusMessage *string
+	// The identifier of a client certificate for a Stage. Supported only for WebSocket
+	// APIs.
+	ClientCertificateId *string
+
+	// The timestamp when the stage was created.
+	CreatedDate *time.Time
 
 	// Default route settings for the stage.
 	DefaultRouteSettings *types.RouteSettings
 
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+	// The identifier of the Deployment that the Stage is associated with. Can't be
+	// updated if autoDeploy is enabled.
+	DeploymentId *string
 
-	// Settings for logging access in this stage.
-	AccessLogSettings *types.AccessLogSettings
+	// The description of the stage.
+	Description *string
+
+	// Describes the status of the last deployment of a stage. Supported only for
+	// stages with autoDeploy enabled.
+	LastDeploymentStatusMessage *string
+
+	// The timestamp when the stage was last updated.
+	LastUpdatedDate *time.Time
+
+	// Route settings for the stage, by routeKey.
+	RouteSettings map[string]*types.RouteSettings
 
 	// The name of the stage.
 	StageName *string
@@ -146,12 +150,8 @@ type CreateStageOutput struct {
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]*string
 
-	// The identifier of a client certificate for a Stage. Supported only for WebSocket
-	// APIs.
-	ClientCertificateId *string
-
-	// The description of the stage.
-	Description *string
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

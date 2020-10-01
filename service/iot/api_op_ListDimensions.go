@@ -55,11 +55,11 @@ func (c *Client) ListDimensions(ctx context.Context, params *ListDimensionsInput
 
 type ListDimensionsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to retrieve at one time.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListDimensionsOutput struct {

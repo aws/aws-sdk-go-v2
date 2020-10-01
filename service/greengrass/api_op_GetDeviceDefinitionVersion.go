@@ -57,6 +57,11 @@ func (c *Client) GetDeviceDefinitionVersion(ctx context.Context, params *GetDevi
 
 type GetDeviceDefinitionVersionInput struct {
 
+	// The ID of the device definition.
+	//
+	// This member is required.
+	DeviceDefinitionId *string
+
 	// The ID of the device definition version. This value maps to the ''Version''
 	// property of the corresponding ''VersionInformation'' object, which is returned
 	// by ''ListDeviceDefinitionVersions'' requests. If the version is the last one
@@ -70,34 +75,29 @@ type GetDeviceDefinitionVersionInput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// The ID of the device definition.
-	//
-	// This member is required.
-	DeviceDefinitionId *string
 }
 
 type GetDeviceDefinitionVersionOutput struct {
 
-	// The version of the device definition version.
-	Version *string
-
-	// The ID of the device definition version.
-	Id *string
+	// The ARN of the device definition version.
+	Arn *string
 
 	// The time, in milliseconds since the epoch, when the device definition version
 	// was created.
 	CreationTimestamp *string
 
+	// Information about the device definition version.
+	Definition *types.DeviceDefinitionVersion
+
+	// The ID of the device definition version.
+	Id *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
 
-	// Information about the device definition version.
-	Definition *types.DeviceDefinitionVersion
-
-	// The ARN of the device definition version.
-	Arn *string
+	// The version of the device definition version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

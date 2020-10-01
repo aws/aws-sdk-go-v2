@@ -56,16 +56,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the notification rule to tag.
+	//
+	// This member is required.
+	Arn *string
+
 	// The list of tags to associate with the resource. Tag key names cannot start with
 	// "aws".
 	//
 	// This member is required.
 	Tags map[string]*string
-
-	// The Amazon Resource Name (ARN) of the notification rule to tag.
-	//
-	// This member is required.
-	Arn *string
 }
 
 type TagResourceOutput struct {

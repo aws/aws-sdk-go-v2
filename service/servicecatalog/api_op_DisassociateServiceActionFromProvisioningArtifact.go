@@ -67,6 +67,11 @@ type DisassociateServiceActionFromProvisioningArtifactInput struct {
 	// This member is required.
 	ProvisioningArtifactId *string
 
+	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	//
+	// This member is required.
+	ServiceActionId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -76,11 +81,6 @@ type DisassociateServiceActionFromProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// This member is required.
-	ServiceActionId *string
 }
 
 type DisassociateServiceActionFromProvisioningArtifactOutput struct {

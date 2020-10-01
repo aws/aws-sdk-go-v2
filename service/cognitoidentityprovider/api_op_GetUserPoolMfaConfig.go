@@ -65,12 +65,6 @@ type GetUserPoolMfaConfigInput struct {
 
 type GetUserPoolMfaConfigOutput struct {
 
-	// The SMS text message multi-factor (MFA) configuration.
-	SmsMfaConfiguration *types.SmsMfaConfigType
-
-	// The software token multi-factor (MFA) configuration.
-	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
-
 	// The multi-factor (MFA) configuration. Valid values include:
 	//
 	//     * OFF MFA will
@@ -82,6 +76,12 @@ type GetUserPoolMfaConfigOutput struct {
 	// * OPTIONAL MFA will be required only for individual users who have an MFA factor
 	// enabled.
 	MfaConfiguration types.UserPoolMfaType
+
+	// The SMS text message multi-factor (MFA) configuration.
+	SmsMfaConfiguration *types.SmsMfaConfigType
+
+	// The software token multi-factor (MFA) configuration.
+	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,14 +74,10 @@ func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optF
 
 type CreateRouteInput struct {
 
-	// The ID of a VPC peering connection.
-	VpcPeeringConnectionId *string
-
-	// The ID of a network interface.
-	NetworkInterfaceId *string
-
-	// The ID of the local gateway.
-	LocalGatewayId *string
+	// The ID of the route table for the route.
+	//
+	// This member is required.
+	RouteTableId *string
 
 	// The IPv4 CIDR address block used for the destination match. Routing decisions
 	// are based on the most specific match. We modify the specified CIDR block to its
@@ -89,14 +85,12 @@ type CreateRouteInput struct {
 	// 100.68.0.0/18.
 	DestinationCidrBlock *string
 
+	// The IPv6 CIDR block used for the destination match. Routing decisions are based
+	// on the most specific match.
+	DestinationIpv6CidrBlock *string
+
 	// The ID of a prefix list used for the destination match.
 	DestinationPrefixListId *string
-
-	// [IPv6 traffic only] The ID of an egress-only internet gateway.
-	EgressOnlyInternetGatewayId *string
-
-	// The ID of an internet gateway or virtual private gateway attached to your VPC.
-	GatewayId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -104,24 +98,30 @@ type CreateRouteInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the route table for the route.
-	//
-	// This member is required.
-	RouteTableId *string
+	// [IPv6 traffic only] The ID of an egress-only internet gateway.
+	EgressOnlyInternetGatewayId *string
 
-	// The ID of a transit gateway.
-	TransitGatewayId *string
-
-	// The IPv6 CIDR block used for the destination match. Routing decisions are based
-	// on the most specific match.
-	DestinationIpv6CidrBlock *string
-
-	// [IPv4 traffic only] The ID of a NAT gateway.
-	NatGatewayId *string
+	// The ID of an internet gateway or virtual private gateway attached to your VPC.
+	GatewayId *string
 
 	// The ID of a NAT instance in your VPC. The operation fails if you specify an
 	// instance ID unless exactly one network interface is attached.
 	InstanceId *string
+
+	// The ID of the local gateway.
+	LocalGatewayId *string
+
+	// [IPv4 traffic only] The ID of a NAT gateway.
+	NatGatewayId *string
+
+	// The ID of a network interface.
+	NetworkInterfaceId *string
+
+	// The ID of a transit gateway.
+	TransitGatewayId *string
+
+	// The ID of a VPC peering connection.
+	VpcPeeringConnectionId *string
 }
 
 type CreateRouteOutput struct {

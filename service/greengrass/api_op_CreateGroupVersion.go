@@ -61,29 +61,29 @@ type CreateGroupVersionInput struct {
 	// This member is required.
 	GroupId *string
 
-	// The ARN of the device definition version for this group.
-	DeviceDefinitionVersionArn *string
+	// A client token used to correlate requests and responses.
+	AmznClientToken *string
+
+	// The ARN of the connector definition version for this group.
+	ConnectorDefinitionVersionArn *string
 
 	// The ARN of the core definition version for this group.
 	CoreDefinitionVersionArn *string
 
-	// A client token used to correlate requests and responses.
-	AmznClientToken *string
+	// The ARN of the device definition version for this group.
+	DeviceDefinitionVersionArn *string
 
 	// The ARN of the function definition version for this group.
 	FunctionDefinitionVersionArn *string
 
-	// The ARN of the connector definition version for this group.
-	ConnectorDefinitionVersionArn *string
+	// The ARN of the logger definition version for this group.
+	LoggerDefinitionVersionArn *string
 
 	// The ARN of the resource definition version for this group.
 	ResourceDefinitionVersionArn *string
 
 	// The ARN of the subscription definition version for this group.
 	SubscriptionDefinitionVersionArn *string
-
-	// The ARN of the logger definition version for this group.
-	LoggerDefinitionVersionArn *string
 }
 
 type CreateGroupVersionOutput struct {
@@ -91,14 +91,14 @@ type CreateGroupVersionOutput struct {
 	// The ARN of the version.
 	Arn *string
 
-	// The ID of the version.
-	Version *string
+	// The time, in milliseconds since the epoch, when the version was created.
+	CreationTimestamp *string
 
 	// The ID of the parent definition that the version is associated with.
 	Id *string
 
-	// The time, in milliseconds since the epoch, when the version was created.
-	CreationTimestamp *string
+	// The ID of the version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

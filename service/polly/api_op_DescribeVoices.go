@@ -68,14 +68,9 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 
 type DescribeVoicesInput struct {
 
-	// The language identification tag (ISO 639 code for the language name-ISO 3166
-	// country code) for filtering the list of voices returned. If you don't specify
-	// this optional parameter, all available voices are returned. </p>
-	LanguageCode types.LanguageCode
-
-	// An opaque pagination token returned from the previous DescribeVoices operation.
-	// If present, this indicates where to continue the listing.
-	NextToken *string
+	// Specifies the engine (standard or neural) used by Amazon Polly when processing
+	// input text for speech synthesis.
+	Engine types.Engine
 
 	// Boolean value indicating whether to return any bilingual voices that use the
 	// specified language as an additional language. For instance, if you request all
@@ -84,9 +79,14 @@ type DescribeVoicesInput struct {
 	// yes but not if you specify no.
 	IncludeAdditionalLanguageCodes *bool
 
-	// Specifies the engine (standard or neural) used by Amazon Polly when processing
-	// input text for speech synthesis.
-	Engine types.Engine
+	// The language identification tag (ISO 639 code for the language name-ISO 3166
+	// country code) for filtering the list of voices returned. If you don't specify
+	// this optional parameter, all available voices are returned. </p>
+	LanguageCode types.LanguageCode
+
+	// An opaque pagination token returned from the previous DescribeVoices operation.
+	// If present, this indicates where to continue the listing.
+	NextToken *string
 }
 
 type DescribeVoicesOutput struct {

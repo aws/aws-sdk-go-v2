@@ -56,16 +56,16 @@ func (c *Client) DeleteRepositoryPolicy(ctx context.Context, params *DeleteRepos
 
 type DeleteRepositoryPolicyInput struct {
 
-	// The AWS account ID associated with the registry that contains the repository
-	// policy to delete. If you do not specify a registry, the default registry is
-	// assumed.
-	RegistryId *string
-
 	// The name of the repository that is associated with the repository policy to
 	// delete.
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The AWS account ID associated with the registry that contains the repository
+	// policy to delete. If you do not specify a registry, the default registry is
+	// assumed.
+	RegistryId *string
 }
 
 type DeleteRepositoryPolicyOutput struct {

@@ -103,15 +103,15 @@ type PutBucketPolicyInput struct {
 	// This member is required.
 	Bucket *string
 
-	// Set this parameter to true to confirm that you want to remove your permissions
-	// to change this bucket policy in the future. This is not supported by Amazon S3
-	// on Outposts buckets.
-	ConfirmRemoveSelfBucketAccess *bool
-
 	// The bucket policy as a JSON document.
 	//
 	// This member is required.
 	Policy *string
+
+	// Set this parameter to true to confirm that you want to remove your permissions
+	// to change this bucket policy in the future. This is not supported by Amazon S3
+	// on Outposts buckets.
+	ConfirmRemoveSelfBucketAccess *bool
 }
 
 type PutBucketPolicyOutput struct {

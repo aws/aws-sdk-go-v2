@@ -58,13 +58,6 @@ func (c *Client) EnableStageTransition(ctx context.Context, params *EnableStageT
 // Represents the input of an EnableStageTransition action.
 type EnableStageTransitionInput struct {
 
-	// Specifies whether artifacts are allowed to enter the stage and be processed by
-	// the actions in that stage (inbound) or whether already processed artifacts are
-	// allowed to transition to the next stage (outbound).
-	//
-	// This member is required.
-	TransitionType types.StageTransitionType
-
 	// The name of the pipeline in which you want to enable the flow of artifacts from
 	// one stage to another.
 	//
@@ -76,6 +69,13 @@ type EnableStageTransitionInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	// Specifies whether artifacts are allowed to enter the stage and be processed by
+	// the actions in that stage (inbound) or whether already processed artifacts are
+	// allowed to transition to the next stage (outbound).
+	//
+	// This member is required.
+	TransitionType types.StageTransitionType
 }
 
 type EnableStageTransitionOutput struct {

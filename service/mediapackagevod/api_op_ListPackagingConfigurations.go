@@ -56,15 +56,15 @@ func (c *Client) ListPackagingConfigurations(ctx context.Context, params *ListPa
 
 type ListPackagingConfigurationsInput struct {
 
-	// Returns MediaPackage VOD PackagingConfigurations associated with the specified
-	// PackagingGroup.
-	PackagingGroupId *string
-
 	// Upper bound on number of records to return.
 	MaxResults *int32
 
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
+
+	// Returns MediaPackage VOD PackagingConfigurations associated with the specified
+	// PackagingGroup.
+	PackagingGroupId *string
 }
 
 type ListPackagingConfigurationsOutput struct {

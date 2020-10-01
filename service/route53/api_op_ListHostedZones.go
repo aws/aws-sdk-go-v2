@@ -84,12 +84,6 @@ type ListHostedZonesInput struct {
 
 type ListHostedZonesOutput struct {
 
-	// If IsTruncated is true, the value of NextMarker identifies the first hosted zone
-	// in the next group of hosted zones. Submit another ListHostedZones request, and
-	// specify the value of NextMarker from the response in the marker parameter. This
-	// element is present only if IsTruncated is true.
-	NextMarker *string
-
 	// A complex type that contains general information about the hosted zone.
 	//
 	// This member is required.
@@ -103,18 +97,24 @@ type ListHostedZonesOutput struct {
 	// This member is required.
 	IsTruncated *bool
 
-	// The value that you specified for the maxitems parameter in the call to
-	// ListHostedZones that produced the current response.
-	//
-	// This member is required.
-	MaxItems *string
-
 	// For the second and subsequent calls to ListHostedZones, Marker is the value that
 	// you specified for the marker parameter in the request that produced the current
 	// response.
 	//
 	// This member is required.
 	Marker *string
+
+	// The value that you specified for the maxitems parameter in the call to
+	// ListHostedZones that produced the current response.
+	//
+	// This member is required.
+	MaxItems *string
+
+	// If IsTruncated is true, the value of NextMarker identifies the first hosted zone
+	// in the next group of hosted zones. Submit another ListHostedZones request, and
+	// specify the value of NextMarker from the response in the marker parameter. This
+	// element is present only if IsTruncated is true.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -84,16 +84,16 @@ func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrac
 
 type CreateEventTrackerInput struct {
 
-	// The name for the event tracker.
-	//
-	// This member is required.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the dataset group that receives the event
 	// data.
 	//
 	// This member is required.
 	DatasetGroupArn *string
+
+	// The name for the event tracker.
+	//
+	// This member is required.
+	Name *string
 }
 
 type CreateEventTrackerOutput struct {

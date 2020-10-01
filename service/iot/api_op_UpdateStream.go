@@ -57,13 +57,6 @@ func (c *Client) UpdateStream(ctx context.Context, params *UpdateStreamInput, op
 
 type UpdateStreamInput struct {
 
-	// An IAM role that allows the IoT service principal assumes to access your S3
-	// files.
-	RoleArn *string
-
-	// The files associated with the stream.
-	Files []*types.StreamFile
-
 	// The stream ID.
 	//
 	// This member is required.
@@ -71,18 +64,25 @@ type UpdateStreamInput struct {
 
 	// The description of the stream.
 	Description *string
+
+	// The files associated with the stream.
+	Files []*types.StreamFile
+
+	// An IAM role that allows the IoT service principal assumes to access your S3
+	// files.
+	RoleArn *string
 }
 
 type UpdateStreamOutput struct {
 
-	// The stream ID.
-	StreamId *string
+	// A description of the stream.
+	Description *string
 
 	// The stream ARN.
 	StreamArn *string
 
-	// A description of the stream.
-	Description *string
+	// The stream ID.
+	StreamId *string
 
 	// The stream version.
 	StreamVersion *int32

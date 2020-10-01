@@ -65,22 +65,22 @@ type UpdateBasePathMappingInput struct {
 	// This member is required.
 	BasePath *string
 
-	TemplateSkipList []*string
-
-	Title *string
-
 	// [Required] The domain name of the BasePathMapping () resource to change.
 	//
 	// This member is required.
 	DomainName *string
-
-	Template *bool
 
 	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -90,15 +90,15 @@ type UpdateBasePathMappingInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type UpdateBasePathMappingOutput struct {
 
-	// The name of the associated stage.
-	Stage *string
-
 	// The base path name that callers of the API must provide as part of the URL after
 	// the domain name.
 	BasePath *string
 
 	// The string identifier of the associated RestApi ().
 	RestApiId *string
+
+	// The name of the associated stage.
+	Stage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

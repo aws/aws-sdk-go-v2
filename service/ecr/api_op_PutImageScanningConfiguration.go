@@ -57,18 +57,18 @@ func (c *Client) PutImageScanningConfiguration(ctx context.Context, params *PutI
 
 type PutImageScanningConfigurationInput struct {
 
-	// The name of the repository in which to update the image scanning configuration
-	// setting.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// The image scanning configuration for the repository. This setting determines
 	// whether images are scanned for known vulnerabilities after being pushed to the
 	// repository.
 	//
 	// This member is required.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
+
+	// The name of the repository in which to update the image scanning configuration
+	// setting.
+	//
+	// This member is required.
+	RepositoryName *string
 
 	// The AWS account ID associated with the registry that contains the repository in
 	// which to update the image scanning configuration setting. If you do not specify

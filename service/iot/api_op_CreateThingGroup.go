@@ -59,6 +59,11 @@ func (c *Client) CreateThingGroup(ctx context.Context, params *CreateThingGroupI
 
 type CreateThingGroupInput struct {
 
+	// The thing group name to create.
+	//
+	// This member is required.
+	ThingGroupName *string
+
 	// The name of the parent thing group.
 	ParentGroupName *string
 
@@ -67,20 +72,15 @@ type CreateThingGroupInput struct {
 
 	// The thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties
-
-	// The thing group name to create.
-	//
-	// This member is required.
-	ThingGroupName *string
 }
 
 type CreateThingGroupOutput struct {
 
-	// The thing group ID.
-	ThingGroupId *string
-
 	// The thing group ARN.
 	ThingGroupArn *string
+
+	// The thing group ID.
+	ThingGroupId *string
 
 	// The thing group name.
 	ThingGroupName *string

@@ -74,13 +74,13 @@ type GetPullRequestOverrideStateInput struct {
 
 type GetPullRequestOverrideStateOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user or identity that overrode the rules
-	// and their requirements for the pull request.
-	Overrider *string
-
 	// A Boolean value that indicates whether a pull request has had its rules set
 	// aside (TRUE) or whether all approval rules still apply (FALSE).
 	Overridden *bool
+
+	// The Amazon Resource Name (ARN) of the user or identity that overrode the rules
+	// and their requirements for the pull request.
+	Overrider *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

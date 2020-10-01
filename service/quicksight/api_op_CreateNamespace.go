@@ -69,22 +69,29 @@ type CreateNamespaceInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The tags that you want to associate with the namespace that you're creating.
-	Tags []*types.Tag
+	// Specifies the type of your user identity directory. Currently, this supports
+	// users with an identity type of QUICKSIGHT.
+	//
+	// This member is required.
+	IdentityStore types.IdentityStore
 
 	// The name that you want to use to describe the new namespace.
 	//
 	// This member is required.
 	Namespace *string
 
-	// Specifies the type of your user identity directory. Currently, this supports
-	// users with an identity type of QUICKSIGHT.
-	//
-	// This member is required.
-	IdentityStore types.IdentityStore
+	// The tags that you want to associate with the namespace that you're creating.
+	Tags []*types.Tag
 }
 
 type CreateNamespaceOutput struct {
+
+	// The ARN of the QuickSight namespace you created.
+	Arn *string
+
+	// The AWS Region that you want to use for the free SPICE capacity for the new
+	// namespace. This is set to the region that you run CreateNamespace in.
+	CapacityRegion *string
 
 	// The status of the creation of the namespace. This is an asynchronous process. A
 	// status of CREATED means that your namespace is ready to use. If an error occurs,
@@ -92,22 +99,15 @@ type CreateNamespaceOutput struct {
 	// non-retryable error, refer to the error message for follow-up actions.
 	CreationStatus types.NamespaceStatus
 
-	// The name of the new namespace that you created.
-	Name *string
-
 	// Specifies the type of your user identity directory. Currently, this supports
 	// users with an identity type of QUICKSIGHT.
 	IdentityStore types.IdentityStore
 
+	// The name of the new namespace that you created.
+	Name *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
-
-	// The AWS Region that you want to use for the free SPICE capacity for the new
-	// namespace. This is set to the region that you run CreateNamespace in.
-	CapacityRegion *string
-
-	// The ARN of the QuickSight namespace you created.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

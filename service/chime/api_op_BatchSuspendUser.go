@@ -67,15 +67,15 @@ func (c *Client) BatchSuspendUser(ctx context.Context, params *BatchSuspendUserI
 
 type BatchSuspendUserInput struct {
 
-	// The request containing the user IDs to suspend.
-	//
-	// This member is required.
-	UserIdList []*string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The request containing the user IDs to suspend.
+	//
+	// This member is required.
+	UserIdList []*string
 }
 
 type BatchSuspendUserOutput struct {

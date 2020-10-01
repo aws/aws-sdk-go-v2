@@ -66,21 +66,21 @@ type ListLogPatternsInput struct {
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
 
-	// The name of the log pattern set.
-	PatternSetName *string
-
 	// The token to request the next page of results.
 	NextToken *string
+
+	// The name of the log pattern set.
+	PatternSetName *string
 }
 
 type ListLogPatternsOutput struct {
 
+	// The list of log patterns.
+	LogPatterns []*types.LogPattern
+
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// The list of log patterns.
-	LogPatterns []*types.LogPattern
 
 	// The name of the resource group.
 	ResourceGroupName *string

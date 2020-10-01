@@ -82,14 +82,15 @@ func (c *Client) PutBucketVersioning(ctx context.Context, params *PutBucketVersi
 
 type PutBucketVersioningInput struct {
 
-	// The concatenation of the authentication device's serial number, a space, and the
-	// value that is displayed on your authentication device.
-	MFA *string
-
 	// The bucket name.
 	//
 	// This member is required.
 	Bucket *string
+
+	// Container for setting the versioning state.
+	//
+	// This member is required.
+	VersioningConfiguration *types.VersioningConfiguration
 
 	// >The base64-encoded 128-bit MD5 digest of the data. You must use this header as
 	// a message integrity check to verify that the request body was not corrupted in
@@ -97,10 +98,9 @@ type PutBucketVersioningInput struct {
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
 
-	// Container for setting the versioning state.
-	//
-	// This member is required.
-	VersioningConfiguration *types.VersioningConfiguration
+	// The concatenation of the authentication device's serial number, a space, and the
+	// value that is displayed on your authentication device.
+	MFA *string
 }
 
 type PutBucketVersioningOutput struct {

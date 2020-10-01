@@ -66,10 +66,11 @@ type DescribeFleetHistoryInput struct {
 	// This member is required.
 	FleetId *string
 
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int32
+	// The start date and time for the events, in UTC format (for example,
+	// YYYY-MM-DDTHH:MM:SSZ).
+	//
+	// This member is required.
+	StartTime *time.Time
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -77,14 +78,13 @@ type DescribeFleetHistoryInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The start date and time for the events, in UTC format (for example,
-	// YYYY-MM-DDTHH:MM:SSZ).
-	//
-	// This member is required.
-	StartTime *time.Time
-
 	// The type of events to describe. By default, all events are described.
 	EventType types.FleetEventType
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	MaxResults *int32
 
 	// The token for the next set of results.
 	NextToken *string
@@ -92,12 +92,11 @@ type DescribeFleetHistoryInput struct {
 
 type DescribeFleetHistoryOutput struct {
 
+	// The ID of the EC Fleet.
+	FleetId *string
+
 	// Information about the events in the history of the EC2 Fleet.
 	HistoryRecords []*types.HistoryRecordEntry
-
-	// The start date and time for the events, in UTC format (for example,
-	// YYYY-MM-DDTHH:MM:SSZ).
-	StartTime *time.Time
 
 	// The last date and time for the events, in UTC format (for example,
 	// YYYY-MM-DDTHH:MM:SSZ). All records up to this time were retrieved. If nextToken
@@ -107,8 +106,9 @@ type DescribeFleetHistoryOutput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// The ID of the EC Fleet.
-	FleetId *string
+	// The start date and time for the events, in UTC format (for example,
+	// YYYY-MM-DDTHH:MM:SSZ).
+	StartTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

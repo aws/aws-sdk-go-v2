@@ -58,39 +58,48 @@ func (c *Client) CreatePackagingConfiguration(ctx context.Context, params *Creat
 // A new MediaPackage VOD PackagingConfiguration resource configuration.
 type CreatePackagingConfigurationInput struct {
 
-	// A collection of tags associated with a resource
-	Tags map[string]*string
-
-	// A CMAF packaging configuration.
-	CmafPackage *types.CmafPackage
-
 	// The ID of the PackagingConfiguration.
 	//
 	// This member is required.
 	Id *string
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *types.DashPackage
 
 	// The ID of a PackagingGroup.
 	//
 	// This member is required.
 	PackagingGroupId *string
 
+	// A CMAF packaging configuration.
+	CmafPackage *types.CmafPackage
+
+	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+	DashPackage *types.DashPackage
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
 
 	// A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
 	MssPackage *types.MssPackage
+
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 }
 
 type CreatePackagingConfigurationOutput struct {
 
+	// The ARN of the PackagingConfiguration.
+	Arn *string
+
 	// A CMAF packaging configuration.
 	CmafPackage *types.CmafPackage
 
+	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
+	DashPackage *types.DashPackage
+
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
+
+	// The ID of the PackagingConfiguration.
+	Id *string
 
 	// A Microsoft Smooth Streaming (MSS) PackagingConfiguration.
 	MssPackage *types.MssPackage
@@ -98,17 +107,8 @@ type CreatePackagingConfigurationOutput struct {
 	// The ID of a PackagingGroup.
 	PackagingGroupId *string
 
-	// The ID of the PackagingConfiguration.
-	Id *string
-
 	// A collection of tags associated with a resource
 	Tags map[string]*string
-
-	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
-	DashPackage *types.DashPackage
-
-	// The ARN of the PackagingConfiguration.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

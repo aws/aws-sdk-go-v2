@@ -56,9 +56,6 @@ func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePol
 
 type GetResourcePoliciesInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The Amazon Resource Names (ARN) of the resources.
 	//
 	// This member is required.
@@ -68,18 +65,21 @@ type GetResourcePoliciesInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
+	// The token for the next page of results.
+	NextToken *string
+
 	// The principal.
 	Principal *string
 }
 
 type GetResourcePoliciesOutput struct {
 
-	// A key policy document, in JSON format.
-	Policies []*string
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// A key policy document, in JSON format.
+	Policies []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

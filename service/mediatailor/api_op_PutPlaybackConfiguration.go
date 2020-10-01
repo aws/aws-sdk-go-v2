@@ -56,16 +56,36 @@ func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlayba
 
 type PutPlaybackConfigurationInput struct {
 
-	// The URL prefix for the master playlist for the stream, minus the asset ID. The
-	// maximum length is 512 characters.
-	VideoContentSourceUrl *string
+	// The URL for the ad decision server (ADS). This includes the specification of
+	// static parameters and placeholders for dynamic parameters. AWS Elemental
+	// MediaTailor substitutes player-specific and session-specific parameters as
+	// needed when calling the ADS. Alternately, for testing you can provide a static
+	// VAST URL. The maximum length is 25,000 characters.
+	AdDecisionServerUrl *string
 
 	// The configuration for Avail Suppression. Ad suppression can be used to turn off
 	// ad personalization in a long manifest, or if a viewer joins mid-break.
 	AvailSuppression *types.AvailSuppression
 
+	// The configuration for bumpers. Bumpers are short audio or video clips that play
+	// at the start or before the end of an ad break.
+	Bumper *types.Bumper
+
+	// The configuration for using a content delivery network (CDN), like Amazon
+	// CloudFront, for content and ad segment management.
+	CdnConfiguration *types.CdnConfiguration
+
+	// The configuration for DASH content.
+	DashConfiguration *types.DashConfigurationForPut
+
+	// The configuration for pre-roll ad insertion.
+	LivePreRollConfiguration *types.LivePreRollConfiguration
+
 	// The identifier for the playback configuration.
 	Name *string
+
+	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+	PersonalizationThresholdSeconds *int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in
@@ -75,47 +95,21 @@ type PutPlaybackConfigurationInput struct {
 	// high-quality asset that contains both audio and video.
 	SlateAdUrl *string
 
-	// The configuration for DASH content.
-	DashConfiguration *types.DashConfigurationForPut
-
-	// The name that is used to associate this playback configuration with a custom
-	// transcode profile. This overrides the dynamic transcoding defaults of
-	// MediaTailor. Use this only if you have already set up custom profiles with the
-	// help of AWS Support.
-	TranscodeProfileName *string
-
-	// The URL for the ad decision server (ADS). This includes the specification of
-	// static parameters and placeholders for dynamic parameters. AWS Elemental
-	// MediaTailor substitutes player-specific and session-specific parameters as
-	// needed when calling the ADS. Alternately, for testing you can provide a static
-	// VAST URL. The maximum length is 25,000 characters.
-	AdDecisionServerUrl *string
-
 	// The tags to assign to the playback configuration.
 	Tags map[string]*string
 
-	// The configuration for using a content delivery network (CDN), like Amazon
-	// CloudFront, for content and ad segment management.
-	CdnConfiguration *types.CdnConfiguration
-
-	// The configuration for bumpers. Bumpers are short audio or video clips that play
-	// at the start or before the end of an ad break.
-	Bumper *types.Bumper
-
-	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
-	PersonalizationThresholdSeconds *int32
-
-	// The configuration for pre-roll ad insertion.
-	LivePreRollConfiguration *types.LivePreRollConfiguration
-}
-
-type PutPlaybackConfigurationOutput struct {
-
 	// The name that is used to associate this playback configuration with a custom
 	// transcode profile. This overrides the dynamic transcoding defaults of
 	// MediaTailor. Use this only if you have already set up custom profiles with the
 	// help of AWS Support.
 	TranscodeProfileName *string
+
+	// The URL prefix for the master playlist for the stream, minus the asset ID. The
+	// maximum length is 512 characters.
+	VideoContentSourceUrl *string
+}
+
+type PutPlaybackConfigurationOutput struct {
 
 	// The URL for the ad decision server (ADS). This includes the specification of
 	// static parameters and placeholders for dynamic parameters. AWS Elemental
@@ -124,47 +118,43 @@ type PutPlaybackConfigurationOutput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for using a content delivery network (CDN), like Amazon
-	// CloudFront, for content and ad segment management.
-	CdnConfiguration *types.CdnConfiguration
-
-	// The identifier for the playback configuration.
-	Name *string
-
-	// The Amazon Resource Name (ARN) for the playback configuration.
-	PlaybackConfigurationArn *string
-
-	// The URL that the player uses to initialize a session that uses client-side
-	// reporting.
-	SessionInitializationEndpointPrefix *string
-
-	// The configuration for HLS content.
-	HlsConfiguration *types.HlsConfiguration
-
-	// The URL prefix for the master playlist for the stream, minus the asset ID. The
-	// maximum length is 512 characters.
-	VideoContentSourceUrl *string
+	// The configuration for Avail Suppression. Ad suppression can be used to turn off
+	// ad personalization in a long manifest, or if a viewer joins mid-break.
+	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
 	// at the start or before the end of an ad break.
 	Bumper *types.Bumper
 
+	// The configuration for using a content delivery network (CDN), like Amazon
+	// CloudFront, for content and ad segment management.
+	CdnConfiguration *types.CdnConfiguration
+
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfiguration
+
+	// The configuration for HLS content.
+	HlsConfiguration *types.HlsConfiguration
 
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
 
+	// The identifier for the playback configuration.
+	Name *string
+
 	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
 	PersonalizationThresholdSeconds *int32
 
-	// The configuration for Avail Suppression. Ad suppression can be used to turn off
-	// ad personalization in a long manifest, or if a viewer joins mid-break.
-	AvailSuppression *types.AvailSuppression
+	// The Amazon Resource Name (ARN) for the playback configuration.
+	PlaybackConfigurationArn *string
 
 	// The URL that the player accesses to get a manifest from AWS Elemental
 	// MediaTailor. This session will use server-side reporting.
 	PlaybackEndpointPrefix *string
+
+	// The URL that the player uses to initialize a session that uses client-side
+	// reporting.
+	SessionInitializationEndpointPrefix *string
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
 	// that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in
@@ -176,6 +166,16 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The tags assigned to the playback configuration.
 	Tags map[string]*string
+
+	// The name that is used to associate this playback configuration with a custom
+	// transcode profile. This overrides the dynamic transcoding defaults of
+	// MediaTailor. Use this only if you have already set up custom profiles with the
+	// help of AWS Support.
+	TranscodeProfileName *string
+
+	// The URL prefix for the master playlist for the stream, minus the asset ID. The
+	// maximum length is 512 characters.
+	VideoContentSourceUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

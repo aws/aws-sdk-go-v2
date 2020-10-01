@@ -63,12 +63,6 @@ func (c *Client) ReportInstanceStatus(ctx context.Context, params *ReportInstanc
 
 type ReportInstanceStatusInput struct {
 
-	// The time at which the reported instance health state began.
-	StartTime *time.Time
-
-	// The time at which the reported instance health state ended.
-	EndTime *time.Time
-
 	// The instances.
 	//
 	// This member is required.
@@ -113,14 +107,20 @@ type ReportInstanceStatusInput struct {
 	// This member is required.
 	Status types.ReportStatusType
 
+	// Descriptive text about the health state of your instance.
+	Description *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// Descriptive text about the health state of your instance.
-	Description *string
+	// The time at which the reported instance health state ended.
+	EndTime *time.Time
+
+	// The time at which the reported instance health state began.
+	StartTime *time.Time
 }
 
 type ReportInstanceStatusOutput struct {

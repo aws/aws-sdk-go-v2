@@ -60,18 +60,18 @@ func (c *Client) DeleteRemediationExceptions(ctx context.Context, params *Delete
 
 type DeleteRemediationExceptionsInput struct {
 
+	// The name of the AWS Config rule for which you want to delete remediation
+	// exception configuration.
+	//
+	// This member is required.
+	ConfigRuleName *string
+
 	// An exception list of resource exception keys to be processed with the current
 	// request. AWS Config adds exception for each resource key. For example, AWS
 	// Config adds 3 exceptions for 3 resource keys.
 	//
 	// This member is required.
 	ResourceKeys []*types.RemediationExceptionResourceKey
-
-	// The name of the AWS Config rule for which you want to delete remediation
-	// exception configuration.
-	//
-	// This member is required.
-	ConfigRuleName *string
 }
 
 type DeleteRemediationExceptionsOutput struct {

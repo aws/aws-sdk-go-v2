@@ -61,15 +61,15 @@ func (c *Client) ModifyWorkspaceState(ctx context.Context, params *ModifyWorkspa
 
 type ModifyWorkspaceStateInput struct {
 
-	// The WorkSpace state.
-	//
-	// This member is required.
-	WorkspaceState types.TargetWorkspaceState
-
 	// The identifier of the WorkSpace.
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// The WorkSpace state.
+	//
+	// This member is required.
+	WorkspaceState types.TargetWorkspaceState
 }
 
 type ModifyWorkspaceStateOutput struct {

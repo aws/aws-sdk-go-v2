@@ -65,9 +65,10 @@ func (c *Client) UpdateFacet(ctx context.Context, params *UpdateFacetInput, optF
 
 type UpdateFacetInput struct {
 
-	// The object type that is associated with the facet. See
-	// CreateFacetRequest$ObjectType () for more details.
-	ObjectType types.ObjectType
+	// The name of the facet.
+	//
+	// This member is required.
+	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the Facet (). For more
 	// information, see arns ().
@@ -80,10 +81,9 @@ type UpdateFacetInput struct {
 	// operation to perform.
 	AttributeUpdates []*types.FacetAttributeUpdate
 
-	// The name of the facet.
-	//
-	// This member is required.
-	Name *string
+	// The object type that is associated with the facet. See
+	// CreateFacetRequest$ObjectType () for more details.
+	ObjectType types.ObjectType
 }
 
 type UpdateFacetOutput struct {

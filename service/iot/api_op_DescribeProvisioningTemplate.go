@@ -66,36 +66,36 @@ type DescribeProvisioningTemplateInput struct {
 
 type DescribeProvisioningTemplateOutput struct {
 
+	// The date when the fleet provisioning template was created.
+	CreationDate *time.Time
+
+	// The default fleet template version ID.
+	DefaultVersionId *int32
+
 	// The description of the fleet provisioning template.
 	Description *string
+
+	// True if the fleet provisioning template is enabled, otherwise false.
+	Enabled *bool
 
 	// The date when the fleet provisioning template was last modified.
 	LastModifiedDate *time.Time
 
-	// The ARN of the fleet provisioning template.
-	TemplateArn *string
-
-	// The date when the fleet provisioning template was created.
-	CreationDate *time.Time
+	// Gets information about a pre-provisioned hook.
+	PreProvisioningHook *types.ProvisioningHook
 
 	// The ARN of the role associated with the provisioning template. This IoT role
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string
 
-	// True if the fleet provisioning template is enabled, otherwise false.
-	Enabled *bool
-
-	// The name of the fleet provisioning template.
-	TemplateName *string
-
-	// Gets information about a pre-provisioned hook.
-	PreProvisioningHook *types.ProvisioningHook
+	// The ARN of the fleet provisioning template.
+	TemplateArn *string
 
 	// The JSON formatted contents of the fleet provisioning template.
 	TemplateBody *string
 
-	// The default fleet template version ID.
-	DefaultVersionId *int32
+	// The name of the fleet provisioning template.
+	TemplateName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

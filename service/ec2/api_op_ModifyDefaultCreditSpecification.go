@@ -69,12 +69,6 @@ func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *M
 
 type ModifyDefaultCreditSpecificationInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The credit option for CPU usage of the instance family. Valid Values: standard |
 	// unlimited
 	//
@@ -85,6 +79,12 @@ type ModifyDefaultCreditSpecificationInput struct {
 	//
 	// This member is required.
 	InstanceFamily types.UnlimitedSupportedInstanceFamily
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ModifyDefaultCreditSpecificationOutput struct {

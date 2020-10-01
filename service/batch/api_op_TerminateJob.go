@@ -58,17 +58,17 @@ func (c *Client) TerminateJob(ctx context.Context, params *TerminateJobInput, op
 
 type TerminateJobInput struct {
 
+	// The AWS Batch job ID of the job to terminate.
+	//
+	// This member is required.
+	JobId *string
+
 	// A message to attach to the job that explains the reason for canceling it. This
 	// message is returned by future DescribeJobs () operations on the job. This
 	// message is also recorded in the AWS Batch activity logs.
 	//
 	// This member is required.
 	Reason *string
-
-	// The AWS Batch job ID of the job to terminate.
-	//
-	// This member is required.
-	JobId *string
 }
 
 type TerminateJobOutput struct {

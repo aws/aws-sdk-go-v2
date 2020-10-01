@@ -60,6 +60,12 @@ func (c *Client) NotifyApplicationState(ctx context.Context, params *NotifyAppli
 
 type NotifyApplicationStateInput struct {
 
+	// The configurationId in Application Discovery Service that uniquely identifies
+	// the grouped application.
+	//
+	// This member is required.
+	ApplicationId *string
+
 	// Status of the application - Not Started, In-Progress, Complete.
 	//
 	// This member is required.
@@ -68,12 +74,6 @@ type NotifyApplicationStateInput struct {
 	// Optional boolean flag to indicate whether any effect should take place. Used to
 	// test if the caller has permission to make the call.
 	DryRun *bool
-
-	// The configurationId in Application Discovery Service that uniquely identifies
-	// the grouped application.
-	//
-	// This member is required.
-	ApplicationId *string
 
 	// The timestamp when the application state changed.
 	UpdateDateTime *time.Time

@@ -62,6 +62,22 @@ func (c *Client) AdminUpdateUserAttributes(ctx context.Context, params *AdminUpd
 // Represents the request to update the user's attributes as an administrator.
 type AdminUpdateUserAttributesInput struct {
 
+	// An array of name-value pairs representing user attributes. For custom
+	// attributes, you must prepend the custom: prefix to the attribute name.
+	//
+	// This member is required.
+	UserAttributes []*types.AttributeType
+
+	// The user pool ID for the user pool where you want to update user attributes.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// The user name of the user for whom you want to update user attributes.
+	//
+	// This member is required.
+	Username *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -89,22 +105,6 @@ type AdminUpdateUserAttributesInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
-
-	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
-	//
-	// This member is required.
-	UserAttributes []*types.AttributeType
-
-	// The user pool ID for the user pool where you want to update user attributes.
-	//
-	// This member is required.
-	UserPoolId *string
-
-	// The user name of the user for whom you want to update user attributes.
-	//
-	// This member is required.
-	Username *string
 }
 
 // Represents the response from the server for the request to update user

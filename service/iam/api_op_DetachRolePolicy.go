@@ -61,15 +61,6 @@ func (c *Client) DetachRolePolicy(ctx context.Context, params *DetachRolePolicyI
 
 type DetachRolePolicyInput struct {
 
-	// The name (friendly name, not ARN) of the IAM role to detach the policy from.
-	// This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
-	// and lowercase alphanumeric characters with no spaces. You can also include any
-	// of the following characters: _+=,.@-
-	//
-	// This member is required.
-	RoleName *string
-
 	// The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more
 	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
@@ -78,6 +69,15 @@ type DetachRolePolicyInput struct {
 	//
 	// This member is required.
 	PolicyArn *string
+
+	// The name (friendly name, not ARN) of the IAM role to detach the policy from.
+	// This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// This member is required.
+	RoleName *string
 }
 
 type DetachRolePolicyOutput struct {

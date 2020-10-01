@@ -61,15 +61,15 @@ type DeleteLogPatternInput struct {
 	// This member is required.
 	PatternName *string
 
-	// The name of the resource group.
-	//
-	// This member is required.
-	ResourceGroupName *string
-
 	// The name of the log pattern set.
 	//
 	// This member is required.
 	PatternSetName *string
+
+	// The name of the resource group.
+	//
+	// This member is required.
+	ResourceGroupName *string
 }
 
 type DeleteLogPatternOutput struct {

@@ -59,13 +59,13 @@ func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, 
 
 type UpdateChannelInput struct {
 
-	// Channel latency mode. Default: LOW.
-	LatencyMode types.ChannelLatencyMode
-
 	// ARN of the channel to be updated.
 	//
 	// This member is required.
 	Arn *string
+
+	// Channel latency mode. Default: LOW.
+	LatencyMode types.ChannelLatencyMode
 
 	// Channel name.
 	Name *string

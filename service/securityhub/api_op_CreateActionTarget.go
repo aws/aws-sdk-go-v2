@@ -58,15 +58,15 @@ func (c *Client) CreateActionTarget(ctx context.Context, params *CreateActionTar
 
 type CreateActionTargetInput struct {
 
-	// The ID for the custom action target.
-	//
-	// This member is required.
-	Id *string
-
 	// The description for the custom action target.
 	//
 	// This member is required.
 	Description *string
+
+	// The ID for the custom action target.
+	//
+	// This member is required.
+	Id *string
 
 	// The name of the custom action target.
 	//

@@ -58,16 +58,16 @@ func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrinci
 // The input for the DetachPrincipalPolicy operation.
 type DetachPrincipalPolicyInput struct {
 
+	// The name of the policy to detach.
+	//
+	// This member is required.
+	PolicyName *string
+
 	// The principal. If the principal is a certificate, specify the certificate ARN.
 	// If the principal is an Amazon Cognito identity, specify the identity ID.
 	//
 	// This member is required.
 	Principal *string
-
-	// The name of the policy to detach.
-	//
-	// This member is required.
-	PolicyName *string
 }
 
 type DetachPrincipalPolicyOutput struct {

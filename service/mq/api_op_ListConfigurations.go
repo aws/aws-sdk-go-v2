@@ -56,20 +56,16 @@ func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurati
 
 type ListConfigurationsInput struct {
 
-	// The token that specifies the next page of results Amazon MQ should return. To
-	// request the first page, leave nextToken empty.
-	NextToken *string
-
 	// The maximum number of configurations that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults *int32
-}
-
-type ListConfigurationsOutput struct {
 
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
+}
+
+type ListConfigurationsOutput struct {
 
 	// The list of all revisions for the specified configuration.
 	Configurations []*types.Configuration
@@ -77,6 +73,10 @@ type ListConfigurationsOutput struct {
 	// The maximum number of configurations that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults *int32
+
+	// The token that specifies the next page of results Amazon MQ should return. To
+	// request the first page, leave nextToken empty.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

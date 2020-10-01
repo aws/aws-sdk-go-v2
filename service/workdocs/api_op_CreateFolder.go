@@ -57,17 +57,17 @@ func (c *Client) CreateFolder(ctx context.Context, params *CreateFolderInput, op
 
 type CreateFolderInput struct {
 
+	// The ID of the parent folder.
+	//
+	// This member is required.
+	ParentFolderId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
 
 	// The name of the new folder.
 	Name *string
-
-	// The ID of the parent folder.
-	//
-	// This member is required.
-	ParentFolderId *string
 }
 
 type CreateFolderOutput struct {

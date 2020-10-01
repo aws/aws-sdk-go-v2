@@ -59,11 +59,6 @@ func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *Fai
 
 type FailoverGlobalReplicationGroupInput struct {
 
-	// The name of the primary replication group
-	//
-	// This member is required.
-	PrimaryReplicationGroupId *string
-
 	// The name of the Global Datastore
 	//
 	// This member is required.
@@ -73,6 +68,11 @@ type FailoverGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	PrimaryRegion *string
+
+	// The name of the primary replication group
+	//
+	// This member is required.
+	PrimaryReplicationGroupId *string
 }
 
 type FailoverGlobalReplicationGroupOutput struct {

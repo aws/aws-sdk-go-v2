@@ -67,15 +67,15 @@ type UpdateEndpointInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Specifies the channel type and other settings for an endpoint.
-	//
-	// This member is required.
-	EndpointRequest *types.EndpointRequest
-
 	// The unique identifier for the endpoint.
 	//
 	// This member is required.
 	EndpointId *string
+
+	// Specifies the channel type and other settings for an endpoint.
+	//
+	// This member is required.
+	EndpointRequest *types.EndpointRequest
 }
 
 type UpdateEndpointOutput struct {

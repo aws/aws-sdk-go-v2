@@ -71,11 +71,11 @@ type ListIdentityPoolsInput struct {
 // The result of a successful ListIdentityPools action.
 type ListIdentityPoolsOutput struct {
 
-	// A pagination token.
-	NextToken *string
-
 	// The identity pools returned by the ListIdentityPools action.
 	IdentityPools []*types.IdentityPoolShortDescription
+
+	// A pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

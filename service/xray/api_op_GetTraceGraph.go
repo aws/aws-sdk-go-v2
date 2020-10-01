@@ -68,11 +68,11 @@ type GetTraceGraphInput struct {
 
 type GetTraceGraphOutput struct {
 
-	// The services that have processed one of the specified requests.
-	Services []*types.Service
-
 	// Pagination token.
 	NextToken *string
+
+	// The services that have processed one of the specified requests.
+	Services []*types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -84,13 +84,25 @@ func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePla
 // Represents the input for a request action.
 type DescribePlayerSessionsInput struct {
 
+	// A unique identifier for the game session to retrieve player sessions for.
+	GameSessionId *string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. If a player session ID is specified,
 	// this parameter is ignored.
 	Limit *int32
 
+	// Token that indicates the start of the next sequential page of results. Use the
+	// token that is returned with a previous call to this action. To start at the
+	// beginning of the result set, do not specify a value. If a player session ID is
+	// specified, this parameter is ignored.
+	NextToken *string
+
 	// A unique identifier for a player to retrieve player sessions for.
 	PlayerId *string
+
+	// A unique identifier for a player session to retrieve.
+	PlayerSessionId *string
 
 	// Player session status to filter results on. Possible player session statuses
 	// include the following:
@@ -109,18 +121,6 @@ type DescribePlayerSessionsInput struct {
 	// player did not connect and/or was not validated within the timeout limit (60
 	// seconds).
 	PlayerSessionStatusFilter *string
-
-	// Token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
-	// beginning of the result set, do not specify a value. If a player session ID is
-	// specified, this parameter is ignored.
-	NextToken *string
-
-	// A unique identifier for the game session to retrieve player sessions for.
-	GameSessionId *string
-
-	// A unique identifier for a player session to retrieve.
-	PlayerSessionId *string
 }
 
 // Represents the returned data in response to a request action.

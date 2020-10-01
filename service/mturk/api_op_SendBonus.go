@@ -68,6 +68,13 @@ type SendBonusInput struct {
 	// This member is required.
 	AssignmentId *string
 
+	// The Bonus amount is a US Dollar amount specified using a string (for example,
+	// "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include
+	// currency symbols or currency codes.
+	//
+	// This member is required.
+	BonusAmount *string
+
 	// A message that explains the reason for the bonus payment. The Worker receiving
 	// the bonus can see this message.
 	//
@@ -78,13 +85,6 @@ type SendBonusInput struct {
 	//
 	// This member is required.
 	WorkerId *string
-
-	// The Bonus amount is a US Dollar amount specified using a string (for example,
-	// "5" represents $5.00 USD and "101.42" represents $101.42 USD). Do not include
-	// currency symbols or currency codes.
-	//
-	// This member is required.
-	BonusAmount *string
 
 	// A unique identifier for this request, which allows you to retry the call on
 	// error without granting multiple bonuses. This is useful in cases such as network

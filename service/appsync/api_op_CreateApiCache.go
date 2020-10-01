@@ -68,6 +68,16 @@ type CreateApiCacheInput struct {
 	// This member is required.
 	ApiCachingBehavior types.ApiCachingBehavior
 
+	// The GraphQL API Id.
+	//
+	// This member is required.
+	ApiId *string
+
+	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
+	//
+	// This member is required.
+	Ttl *int64
+
 	// The cache instance type.
 	//
 	//     * T2_SMALL: A t2.small instance type.
@@ -95,19 +105,9 @@ type CreateApiCacheInput struct {
 	// creation.
 	AtRestEncryptionEnabled *bool
 
-	// The GraphQL API Id.
-	//
-	// This member is required.
-	ApiId *string
-
 	// Transit encryption flag when connecting to cache. This setting cannot be updated
 	// after creation.
 	TransitEncryptionEnabled *bool
-
-	// TTL in seconds for cache entries. Valid values are between 1 and 3600 seconds.
-	//
-	// This member is required.
-	Ttl *int64
 }
 
 // Represents the output of a CreateApiCache operation.

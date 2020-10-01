@@ -60,6 +60,11 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 
 type UpdateProjectInput struct {
 
+	// The name of the project to be updated.
+	//
+	// This member is required.
+	ProjectName *string
+
 	// An optional user-defined description for the project.
 	Description *string
 
@@ -68,11 +73,6 @@ type UpdateProjectInput struct {
 	// placementTemplate, you can update the associated callbackOverrides for the
 	// device definition using this API.
 	PlacementTemplate *types.PlacementTemplate
-
-	// The name of the project to be updated.
-	//
-	// This member is required.
-	ProjectName *string
 }
 
 type UpdateProjectOutput struct {

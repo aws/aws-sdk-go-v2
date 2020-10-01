@@ -57,9 +57,10 @@ func (c *Client) DescribeLDAPSSettings(ctx context.Context, params *DescribeLDAP
 
 type DescribeLDAPSSettingsInput struct {
 
-	// The type of LDAP security to enable. Currently only the value Client is
-	// supported.
-	Type types.LDAPSType
+	// The identifier of the directory.
+	//
+	// This member is required.
+	DirectoryId *string
 
 	// Specifies the number of items that should be displayed on one page.
 	Limit *int32
@@ -67,21 +68,20 @@ type DescribeLDAPSSettingsInput struct {
 	// The type of next token used for pagination.
 	NextToken *string
 
-	// The identifier of the directory.
-	//
-	// This member is required.
-	DirectoryId *string
+	// The type of LDAP security to enable. Currently only the value Client is
+	// supported.
+	Type types.LDAPSType
 }
 
 type DescribeLDAPSSettingsOutput struct {
 
-	// The next token used to retrieve the LDAPS settings if the number of setting
-	// types exceeds page limit and there is another page.
-	NextToken *string
-
 	// Information about LDAP security for the specified directory, including status of
 	// enablement, state last updated date time, and the reason for the state.
 	LDAPSSettingsInfo []*types.LDAPSSettingInfo
+
+	// The next token used to retrieve the LDAPS settings if the number of setting
+	// types exceeds page limit and there is another page.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

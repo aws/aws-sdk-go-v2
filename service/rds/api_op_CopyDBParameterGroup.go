@@ -72,10 +72,10 @@ type CopyDBParameterGroupInput struct {
 	// This member is required.
 	SourceDBParameterGroupIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	// A description for the copied DB parameter group.
+	//
+	// This member is required.
+	TargetDBParameterGroupDescription *string
 
 	// The identifier for the copied DB parameter group. Constraints:
 	//
@@ -95,10 +95,10 @@ type CopyDBParameterGroupInput struct {
 	// This member is required.
 	TargetDBParameterGroupIdentifier *string
 
-	// A description for the copied DB parameter group.
-	//
-	// This member is required.
-	TargetDBParameterGroupDescription *string
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	Tags []*types.Tag
 }
 
 type CopyDBParameterGroupOutput struct {

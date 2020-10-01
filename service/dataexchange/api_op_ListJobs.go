@@ -56,15 +56,15 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
-	// The token value retrieved from a previous call to access the next page of
-	// results.
-	NextToken *string
+	// The unique identifier for a data set.
+	DataSetId *string
 
 	// The maximum number of results returned by a single call.
 	MaxResults *int32
 
-	// The unique identifier for a data set.
-	DataSetId *string
+	// The token value retrieved from a previous call to access the next page of
+	// results.
+	NextToken *string
 
 	// The unique identifier for a revision.
 	RevisionId *string

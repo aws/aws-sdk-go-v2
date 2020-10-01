@@ -60,16 +60,16 @@ func (c *Client) WithdrawByoipCidr(ctx context.Context, params *WithdrawByoipCid
 
 type WithdrawByoipCidrInput struct {
 
+	// The address range, in CIDR notation.
+	//
+	// This member is required.
+	Cidr *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The address range, in CIDR notation.
-	//
-	// This member is required.
-	Cidr *string
 }
 
 type WithdrawByoipCidrOutput struct {

@@ -7,20 +7,11 @@ package types
 // and schema elements in the definition.
 type ReportDefinition struct {
 
-	// Whether you want Amazon Web Services to overwrite the previous version of each
-	// report or to deliver the report in addition to the previous versions.
-	ReportVersioning ReportVersioning
-
-	// The length of time covered by the report.
+	// A list of strings that indicate additional content that Amazon Web Services
+	// includes in the report, such as individual resource IDs.
 	//
 	// This member is required.
-	TimeUnit TimeUnit
-
-	// The name of the report that you want to create. The name must be unique, is case
-	// sensitive, and can't include spaces.
-	//
-	// This member is required.
-	ReportName *string
+	AdditionalSchemaElements []SchemaElement
 
 	// The compression format that AWS uses for the report.
 	//
@@ -32,33 +23,42 @@ type ReportDefinition struct {
 	// This member is required.
 	Format ReportFormat
 
-	// The prefix that AWS adds to the report name when AWS delivers the report. Your
-	// prefix can't include spaces.
+	// The name of the report that you want to create. The name must be unique, is case
+	// sensitive, and can't include spaces.
 	//
 	// This member is required.
-	S3Prefix *string
-
-	// A list of strings that indicate additional content that Amazon Web Services
-	// includes in the report, such as individual resource IDs.
-	//
-	// This member is required.
-	AdditionalSchemaElements []SchemaElement
-
-	// Whether you want Amazon Web Services to update your reports after they have been
-	// finalized if Amazon Web Services detects charges related to previous months.
-	// These charges can include refunds, credits, or support fees.
-	RefreshClosedReports *bool
+	ReportName *string
 
 	// The S3 bucket where AWS delivers the report.
 	//
 	// This member is required.
 	S3Bucket *string
 
+	// The prefix that AWS adds to the report name when AWS delivers the report. Your
+	// prefix can't include spaces.
+	//
+	// This member is required.
+	S3Prefix *string
+
 	// The region of the S3 bucket that AWS delivers the report into.
 	//
 	// This member is required.
 	S3Region AWSRegion
 
+	// The length of time covered by the report.
+	//
+	// This member is required.
+	TimeUnit TimeUnit
+
 	// A list of manifests that you want Amazon Web Services to create for this report.
 	AdditionalArtifacts []AdditionalArtifact
+
+	// Whether you want Amazon Web Services to update your reports after they have been
+	// finalized if Amazon Web Services detects charges related to previous months.
+	// These charges can include refunds, credits, or support fees.
+	RefreshClosedReports *bool
+
+	// Whether you want Amazon Web Services to overwrite the previous version of each
+	// report or to deliver the report in addition to the previous versions.
+	ReportVersioning ReportVersioning
 }

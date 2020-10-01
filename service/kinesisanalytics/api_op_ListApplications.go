@@ -70,14 +70,14 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 //
 type ListApplicationsInput struct {
 
-	// Maximum number of applications to list.
-	Limit *int32
-
 	// Name of the application to start the list with. When using pagination to
 	// retrieve the list, you don't need to specify this parameter in the first
 	// request. However, in subsequent requests, you add the last application name from
 	// the previous response to get the next page of applications.
 	ExclusiveStartApplicationName *string
+
+	// Maximum number of applications to list.
+	Limit *int32
 }
 
 //

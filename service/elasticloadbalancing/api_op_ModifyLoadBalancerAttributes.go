@@ -78,25 +78,25 @@ func (c *Client) ModifyLoadBalancerAttributes(ctx context.Context, params *Modif
 // Contains the parameters for ModifyLoadBalancerAttributes.
 type ModifyLoadBalancerAttributesInput struct {
 
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
-
 	// The attributes for the load balancer.
 	//
 	// This member is required.
 	LoadBalancerAttributes *types.LoadBalancerAttributes
+
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
 }
 
 // Contains the output of ModifyLoadBalancerAttributes.
 type ModifyLoadBalancerAttributesOutput struct {
 
-	// The name of the load balancer.
-	LoadBalancerName *string
-
 	// Information about the load balancer attributes.
 	LoadBalancerAttributes *types.LoadBalancerAttributes
+
+	// The name of the load balancer.
+	LoadBalancerName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

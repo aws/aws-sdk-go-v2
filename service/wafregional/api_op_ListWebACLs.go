@@ -78,14 +78,14 @@ type ListWebACLsInput struct {
 
 type ListWebACLsOutput struct {
 
-	// An array of WebACLSummary () objects.
-	WebACLs []*types.WebACLSummary
-
 	// If you have more WebACL objects than the number that you specified for Limit in
 	// the request, the response includes a NextMarker value. To list more WebACL
 	// objects, submit another ListWebACLs request, and specify the NextMarker value
 	// from the response in the NextMarker value in the next request.
 	NextMarker *string
+
+	// An array of WebACLSummary () objects.
+	WebACLs []*types.WebACLSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

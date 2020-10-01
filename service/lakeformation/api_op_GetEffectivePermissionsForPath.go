@@ -59,17 +59,17 @@ func (c *Client) GetEffectivePermissionsForPath(ctx context.Context, params *Get
 
 type GetEffectivePermissionsForPathInput struct {
 
-	// The identifier for the Data Catalog. By default, the account ID. The Data
-	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
-	CatalogId *string
-
 	// The Amazon Resource Name (ARN) of the resource for which you want to get
 	// permissions.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The identifier for the Data Catalog. By default, the account ID. The Data
+	// Catalog is the persistent metadata store. It contains database definitions,
+	// table definitions, and other control information to manage your AWS Lake
+	// Formation environment.
+	CatalogId *string
 
 	// The maximum number of results to return.
 	MaxResults *int32
@@ -80,12 +80,12 @@ type GetEffectivePermissionsForPathInput struct {
 
 type GetEffectivePermissionsForPathOutput struct {
 
+	// A continuation token, if this is not the first call to retrieve this list.
+	NextToken *string
+
 	// A list of the permissions for the specified table or database resource located
 	// at the path in Amazon S3.
 	Permissions []*types.PrincipalResourcePermissions
-
-	// A continuation token, if this is not the first call to retrieve this list.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

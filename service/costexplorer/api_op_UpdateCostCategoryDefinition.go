@@ -59,13 +59,6 @@ func (c *Client) UpdateCostCategoryDefinition(ctx context.Context, params *Updat
 
 type UpdateCostCategoryDefinitionInput struct {
 
-	// The Expression object used to categorize costs. For more information, see
-	// CostCategoryRule
-	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
-	//
-	// This member is required.
-	Rules []*types.CostCategoryRule
-
 	// The unique identifier for your Cost Category.
 	//
 	// This member is required.
@@ -75,15 +68,22 @@ type UpdateCostCategoryDefinitionInput struct {
 	//
 	// This member is required.
 	RuleVersion types.CostCategoryRuleVersion
+
+	// The Expression object used to categorize costs. For more information, see
+	// CostCategoryRule
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html).
+	//
+	// This member is required.
+	Rules []*types.CostCategoryRule
 }
 
 type UpdateCostCategoryDefinitionOutput struct {
 
-	// The Cost Category's effective start date.
-	EffectiveStart *string
-
 	// The unique identifier for your Cost Category.
 	CostCategoryArn *string
+
+	// The Cost Category's effective start date.
+	EffectiveStart *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

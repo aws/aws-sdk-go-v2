@@ -57,13 +57,6 @@ func (c *Client) RemoveResourcePermission(ctx context.Context, params *RemoveRes
 
 type RemoveResourcePermissionInput struct {
 
-	// The principal type of the resource.
-	PrincipalType types.PrincipalType
-
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// The principal ID of the resource.
 	//
 	// This member is required.
@@ -73,6 +66,13 @@ type RemoveResourcePermissionInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
+
+	// The principal type of the resource.
+	PrincipalType types.PrincipalType
 }
 
 type RemoveResourcePermissionOutput struct {

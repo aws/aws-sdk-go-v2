@@ -72,15 +72,15 @@ type CreateNodeInput struct {
 	// This member is required.
 	MemberId *string
 
-	// The properties of a node configuration.
-	//
-	// This member is required.
-	NodeConfiguration *types.NodeConfiguration
-
 	// The unique identifier of the network in which this node runs.
 	//
 	// This member is required.
 	NetworkId *string
+
+	// The properties of a node configuration.
+	//
+	// This member is required.
+	NodeConfiguration *types.NodeConfiguration
 }
 
 type CreateNodeOutput struct {

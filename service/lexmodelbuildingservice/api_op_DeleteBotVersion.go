@@ -58,16 +58,16 @@ func (c *Client) DeleteBotVersion(ctx context.Context, params *DeleteBotVersionI
 
 type DeleteBotVersionInput struct {
 
+	// The name of the bot.
+	//
+	// This member is required.
+	Name *string
+
 	// The version of the bot to delete. You cannot delete the $LATEST version of the
 	// bot. To delete the $LATEST version, use the DeleteBot () operation.
 	//
 	// This member is required.
 	Version *string
-
-	// The name of the bot.
-	//
-	// This member is required.
-	Name *string
 }
 
 type DeleteBotVersionOutput struct {

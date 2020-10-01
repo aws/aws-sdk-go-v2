@@ -65,30 +65,35 @@ type UpdateUserProfileInput struct {
 	// This member is required.
 	UserArn *string
 
+	// The name that is displayed as the friendly name for the user in AWS CodeStar.
+	DisplayName *string
+
+	// The email address that is displayed as part of the user's profile in AWS
+	// CodeStar.
+	EmailAddress *string
+
 	// The SSH public key associated with the user in AWS CodeStar. If a project owner
 	// allows the user remote access to project resources, this public key will be used
 	// along with the user's private key for SSH access.
 	SshPublicKey *string
-
-	// The name that is displayed as the friendly name for the user in AWS CodeStar.
-	DisplayName *string
-
-	// The email address that is displayed as part of the user's profile in AWS
-	// CodeStar.
-	EmailAddress *string
 }
 
 type UpdateUserProfileOutput struct {
 
+	// The Amazon Resource Name (ARN) of the user in IAM.
+	//
+	// This member is required.
+	UserArn *string
+
+	// The date the user profile was created, in timestamp format.
+	CreatedTimestamp *time.Time
+
 	// The name that is displayed as the friendly name for the user in AWS CodeStar.
 	DisplayName *string
 
 	// The email address that is displayed as part of the user's profile in AWS
 	// CodeStar.
 	EmailAddress *string
-
-	// The date the user profile was created, in timestamp format.
-	CreatedTimestamp *time.Time
 
 	// The date the user profile was last modified, in timestamp format.
 	LastModifiedTimestamp *time.Time
@@ -97,11 +102,6 @@ type UpdateUserProfileOutput struct {
 	// portion of the public/private keypair the user can use to access project
 	// resources if a project owner allows the user remote access to those resources.
 	SshPublicKey *string
-
-	// The Amazon Resource Name (ARN) of the user in IAM.
-	//
-	// This member is required.
-	UserArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,11 +69,6 @@ type DescribeModelPackageInput struct {
 
 type DescribeModelPackageOutput struct {
 
-	// The name of the model package being described.
-	//
-	// This member is required.
-	ModelPackageName *string
-
 	// A timestamp specifying when the model package was created.
 	//
 	// This member is required.
@@ -84,32 +79,37 @@ type DescribeModelPackageOutput struct {
 	// This member is required.
 	ModelPackageArn *string
 
-	// Details about the algorithm that was used to create the model package.
-	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
-
-	// Details about the current status of the model package.
+	// The name of the model package being described.
 	//
 	// This member is required.
-	ModelPackageStatusDetails *types.ModelPackageStatusDetails
-
-	// Configurations for one or more transform jobs that Amazon SageMaker runs to test
-	// the model package.
-	ValidationSpecification *types.ModelPackageValidationSpecification
-
-	// A brief summary of the model package.
-	ModelPackageDescription *string
-
-	// Whether the model package is certified for listing on AWS Marketplace.
-	CertifyForMarketplace *bool
+	ModelPackageName *string
 
 	// The current status of the model package.
 	//
 	// This member is required.
 	ModelPackageStatus types.ModelPackageStatus
 
+	// Details about the current status of the model package.
+	//
+	// This member is required.
+	ModelPackageStatusDetails *types.ModelPackageStatusDetails
+
+	// Whether the model package is certified for listing on AWS Marketplace.
+	CertifyForMarketplace *bool
+
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
+
+	// A brief summary of the model package.
+	ModelPackageDescription *string
+
+	// Details about the algorithm that was used to create the model package.
+	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
+	// Configurations for one or more transform jobs that Amazon SageMaker runs to test
+	// the model package.
+	ValidationSpecification *types.ModelPackageValidationSpecification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

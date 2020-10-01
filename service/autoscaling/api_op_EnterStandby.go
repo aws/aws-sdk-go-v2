@@ -66,9 +66,6 @@ func (c *Client) EnterStandby(ctx context.Context, params *EnterStandbyInput, op
 
 type EnterStandbyInput struct {
 
-	// The IDs of the instances. You can specify up to 20 instances.
-	InstanceIds []*string
-
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
@@ -79,6 +76,9 @@ type EnterStandbyInput struct {
 	//
 	// This member is required.
 	ShouldDecrementDesiredCapacity *bool
+
+	// The IDs of the instances. You can specify up to 20 instances.
+	InstanceIds []*string
 }
 
 type EnterStandbyOutput struct {

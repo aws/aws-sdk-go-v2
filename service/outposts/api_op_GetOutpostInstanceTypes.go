@@ -57,9 +57,6 @@ func (c *Client) GetOutpostInstanceTypes(ctx context.Context, params *GetOutpost
 
 type GetOutpostInstanceTypesInput struct {
 
-	// The pagination token.
-	NextToken *string
-
 	// The ID of the Outpost.
 	//
 	// This member is required.
@@ -67,21 +64,24 @@ type GetOutpostInstanceTypesInput struct {
 
 	// The maximum page size.
 	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type GetOutpostInstanceTypesOutput struct {
-
-	// The Amazon Resource Name (ARN) of the Outpost.
-	OutpostArn *string
-
-	// The ID of the Outpost.
-	OutpostId *string
 
 	// Information about the instance types.
 	InstanceTypes []*types.InstanceTypeItem
 
 	// The pagination token.
 	NextToken *string
+
+	// The Amazon Resource Name (ARN) of the Outpost.
+	OutpostArn *string
+
+	// The ID of the Outpost.
+	OutpostId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

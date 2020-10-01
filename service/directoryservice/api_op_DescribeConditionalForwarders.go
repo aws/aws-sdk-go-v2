@@ -60,15 +60,15 @@ func (c *Client) DescribeConditionalForwarders(ctx context.Context, params *Desc
 // Describes a conditional forwarder.
 type DescribeConditionalForwardersInput struct {
 
-	// The fully qualified domain names (FQDN) of the remote domains for which to get
-	// the list of associated conditional forwarders. If this member is null, all
-	// conditional forwarders are returned.
-	RemoteDomainNames []*string
-
 	// The directory ID for which to get the list of associated conditional forwarders.
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// The fully qualified domain names (FQDN) of the remote domains for which to get
+	// the list of associated conditional forwarders. If this member is null, all
+	// conditional forwarders are returned.
+	RemoteDomainNames []*string
 }
 
 // The result of a DescribeConditionalForwarder request.

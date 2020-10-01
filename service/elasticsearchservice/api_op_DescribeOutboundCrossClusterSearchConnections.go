@@ -58,14 +58,6 @@ func (c *Client) DescribeOutboundCrossClusterSearchConnections(ctx context.Conte
 // DescribeOutboundCrossClusterSearchConnections () operation.
 type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 
-	// Set this value to limit the number of results returned. If not specified,
-	// defaults to 100.
-	MaxResults *int32
-
-	// NextToken is sent in case the earlier API call results contain the NextToken. It
-	// is used for pagination.
-	NextToken *string
-
 	// A list of filters used to match properties for outbound cross-cluster search
 	// connection. Available Filter () names for this operation are:
 	//
@@ -82,19 +74,27 @@ type DescribeOutboundCrossClusterSearchConnectionsInput struct {
 	//     *
 	// source-domain-info.domain-name
 	Filters []*types.Filter
+
+	// Set this value to limit the number of results returned. If not specified,
+	// defaults to 100.
+	MaxResults *int32
+
+	// NextToken is sent in case the earlier API call results contain the NextToken. It
+	// is used for pagination.
+	NextToken *string
 }
 
 // The result of a DescribeOutboundCrossClusterSearchConnections () request.
 // Contains the list of connections matching the filter criteria.
 type DescribeOutboundCrossClusterSearchConnectionsOutput struct {
 
-	// If more results are available and NextToken is present, make the next request to
-	// the same API with the received NextToken to paginate the remaining results.
-	NextToken *string
-
 	// Consists of list of OutboundCrossClusterSearchConnection () matching the
 	// specified filter criteria.
 	CrossClusterSearchConnections []*types.OutboundCrossClusterSearchConnection
+
+	// If more results are available and NextToken is present, make the next request to
+	// the same API with the received NextToken to paginate the remaining results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

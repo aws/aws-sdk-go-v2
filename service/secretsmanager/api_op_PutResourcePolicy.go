@@ -82,10 +82,6 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent
-	// broad access to your secret.
-	BlockPublicPolicy *bool
-
 	// A JSON-formatted string that's constructed according to the grammar and syntax
 	// for an AWS resource-based policy. The policy in the string identifies who can
 	// access or manage this secret and its versions. For information on how to format
@@ -117,15 +113,19 @@ type PutResourcePolicyInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent
+	// broad access to your secret.
+	BlockPublicPolicy *bool
 }
 
 type PutResourcePolicyOutput struct {
 
-	// The friendly name of the secret that the retrieved by the resource-based policy.
-	Name *string
-
 	// The ARN of the secret retrieved by the resource-based policy.
 	ARN *string
+
+	// The friendly name of the secret that the retrieved by the resource-based policy.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

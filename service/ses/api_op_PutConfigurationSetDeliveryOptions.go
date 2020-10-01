@@ -58,15 +58,15 @@ func (c *Client) PutConfigurationSetDeliveryOptions(ctx context.Context, params 
 // A request to modify the delivery options for a configuration set.
 type PutConfigurationSetDeliveryOptionsInput struct {
 
-	// Specifies whether messages that use the configuration set are required to use
-	// Transport Layer Security (TLS).
-	DeliveryOptions *types.DeliveryOptions
-
 	// The name of the configuration set that you want to specify the delivery options
 	// for.
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	// Specifies whether messages that use the configuration set are required to use
+	// Transport Layer Security (TLS).
+	DeliveryOptions *types.DeliveryOptions
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

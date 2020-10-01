@@ -58,11 +58,6 @@ func (c *Client) GetProvisionedConcurrencyConfig(ctx context.Context, params *Ge
 
 type GetProvisionedConcurrencyConfigInput struct {
 
-	// The version number or alias name.
-	//
-	// This member is required.
-	Qualifier *string
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -80,29 +75,34 @@ type GetProvisionedConcurrencyConfigInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// The version number or alias name.
+	//
+	// This member is required.
+	Qualifier *string
 }
 
 type GetProvisionedConcurrencyConfigOutput struct {
 
-	// The amount of provisioned concurrency requested.
-	RequestedProvisionedConcurrentExecutions *int32
+	// The amount of provisioned concurrency allocated.
+	AllocatedProvisionedConcurrentExecutions *int32
 
 	// The amount of provisioned concurrency available.
 	AvailableProvisionedConcurrentExecutions *int32
-
-	// For failed allocations, the reason that provisioned concurrency could not be
-	// allocated.
-	StatusReason *string
 
 	// The date and time that a user last updated the configuration, in ISO 8601 format
 	// (https://www.iso.org/iso-8601-date-and-time-format.html).
 	LastModified *string
 
+	// The amount of provisioned concurrency requested.
+	RequestedProvisionedConcurrentExecutions *int32
+
 	// The status of the allocation process.
 	Status types.ProvisionedConcurrencyStatusEnum
 
-	// The amount of provisioned concurrency allocated.
-	AllocatedProvisionedConcurrentExecutions *int32
+	// For failed allocations, the reason that provisioned concurrency could not be
+	// allocated.
+	StatusReason *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

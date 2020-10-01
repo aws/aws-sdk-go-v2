@@ -71,9 +71,12 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 
 type CreateMembersInput struct {
 
-	// Customized message text to include in the invitation email message to the
-	// invited member accounts.
-	Message *string
+	// The list of AWS accounts to invite to become member accounts in the behavior
+	// graph. For each invited account, the account list contains the account
+	// identifier and the AWS account root user email address.
+	//
+	// This member is required.
+	Accounts []*types.Account
 
 	// The ARN of the behavior graph to invite the member accounts to contribute their
 	// data to.
@@ -81,26 +84,23 @@ type CreateMembersInput struct {
 	// This member is required.
 	GraphArn *string
 
-	// The list of AWS accounts to invite to become member accounts in the behavior
-	// graph. For each invited account, the account list contains the account
-	// identifier and the AWS account root user email address.
-	//
-	// This member is required.
-	Accounts []*types.Account
+	// Customized message text to include in the invitation email message to the
+	// invited member accounts.
+	Message *string
 }
 
 type CreateMembersOutput struct {
+
+	// The set of member account invitation requests that Detective was able to
+	// process. This includes accounts that are being verified, that failed
+	// verification, and that passed verification and are being sent an invitation.
+	Members []*types.MemberDetail
 
 	// The list of accounts for which Detective was unable to process the invitation
 	// request. For each account, the list provides the reason why the request could
 	// not be processed. The list includes accounts that are already member accounts in
 	// the behavior graph.
 	UnprocessedAccounts []*types.UnprocessedAccount
-
-	// The set of member account invitation requests that Detective was able to
-	// process. This includes accounts that are being verified, that failed
-	// verification, and that passed verification and are being sent an invitation.
-	Members []*types.MemberDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

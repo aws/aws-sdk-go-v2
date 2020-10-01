@@ -61,11 +61,6 @@ func (c *Client) AdminSetUserSettings(ctx context.Context, params *AdminSetUserS
 // delivery medium.
 type AdminSetUserSettingsInput struct {
 
-	// The user name of the user that you are setting options for.
-	//
-	// This member is required.
-	Username *string
-
 	// You can use this parameter only to set an SMS configuration that uses SMS for
 	// delivery.
 	//
@@ -76,6 +71,11 @@ type AdminSetUserSettingsInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The user name of the user that you are setting options for.
+	//
+	// This member is required.
+	Username *string
 }
 
 // Represents the response from the server to set user settings as an

@@ -69,18 +69,18 @@ func (c *Client) DeleteVPCAssociationAuthorization(ctx context.Context, params *
 type DeleteVPCAssociationAuthorizationInput struct {
 
 	// When removing authorization to associate a VPC that was created by one AWS
-	// account with a hosted zone that was created with a different AWS account, a
-	// complex type that includes the ID and region of the VPC.
-	//
-	// This member is required.
-	VPC *types.VPC
-
-	// When removing authorization to associate a VPC that was created by one AWS
 	// account with a hosted zone that was created with a different AWS account, the ID
 	// of the hosted zone.
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	// When removing authorization to associate a VPC that was created by one AWS
+	// account with a hosted zone that was created with a different AWS account, a
+	// complex type that includes the ID and region of the VPC.
+	//
+	// This member is required.
+	VPC *types.VPC
 }
 
 // Empty response for the request.

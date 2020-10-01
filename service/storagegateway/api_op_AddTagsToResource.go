@@ -66,6 +66,11 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 // AddTagsToResourceInput
 type AddTagsToResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
+	//
+	// This member is required.
+	ResourceARN *string
+
 	// The key-value pair that represents the tag you want to add to the resource. The
 	// value can be an empty string.  <note> <p>Valid characters for key and value are
 	// letters, spaces, and numbers representable in UTF-8 format, and the following
@@ -74,11 +79,6 @@ type AddTagsToResourceInput struct {
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the resource you want to add tags to.
-	//
-	// This member is required.
-	ResourceARN *string
 }
 
 // AddTagsToResourceOutput

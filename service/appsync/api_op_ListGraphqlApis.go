@@ -66,12 +66,12 @@ type ListGraphqlApisInput struct {
 
 type ListGraphqlApisOutput struct {
 
+	// The GraphqlApi objects.
+	GraphqlApis []*types.GraphqlApi
+
 	// An identifier to be passed in the next request to this operation to return the
 	// next set of items in the list.
 	NextToken *string
-
-	// The GraphqlApi objects.
-	GraphqlApis []*types.GraphqlApi
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

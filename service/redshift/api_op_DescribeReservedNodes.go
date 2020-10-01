@@ -57,9 +57,6 @@ func (c *Client) DescribeReservedNodes(ctx context.Context, params *DescribeRese
 //
 type DescribeReservedNodesInput struct {
 
-	// Identifier for the node reservation.
-	ReservedNodeId *string
-
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeReservedNodes () request exceed
 	// the value specified in MaxRecords, AWS returns a value in the Marker field of
@@ -73,13 +70,13 @@ type DescribeReservedNodesInput struct {
 	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
+	// Identifier for the node reservation.
+	ReservedNodeId *string
 }
 
 //
 type DescribeReservedNodesOutput struct {
-
-	// The list of ReservedNode objects.
-	ReservedNodes []*types.ReservedNode
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -87,6 +84,9 @@ type DescribeReservedNodesOutput struct {
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
+	// The list of ReservedNode objects.
+	ReservedNodes []*types.ReservedNode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

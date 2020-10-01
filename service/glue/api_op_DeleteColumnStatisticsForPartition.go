@@ -56,11 +56,6 @@ func (c *Client) DeleteColumnStatisticsForPartition(ctx context.Context, params 
 
 type DeleteColumnStatisticsForPartitionInput struct {
 
-	// The name of the partitions' table.
-	//
-	// This member is required.
-	TableName *string
-
 	// Name of the column.
 	//
 	// This member is required.
@@ -71,14 +66,19 @@ type DeleteColumnStatisticsForPartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The ID of the Data Catalog where the partitions in question reside. If none is
-	// supplied, the AWS account ID is used by default.
-	CatalogId *string
-
 	// A list of partition values identifying the partition.
 	//
 	// This member is required.
 	PartitionValues []*string
+
+	// The name of the partitions' table.
+	//
+	// This member is required.
+	TableName *string
+
+	// The ID of the Data Catalog where the partitions in question reside. If none is
+	// supplied, the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type DeleteColumnStatisticsForPartitionOutput struct {

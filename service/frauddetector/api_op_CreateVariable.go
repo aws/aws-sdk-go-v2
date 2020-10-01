@@ -57,15 +57,31 @@ func (c *Client) CreateVariable(ctx context.Context, params *CreateVariableInput
 
 type CreateVariableInput struct {
 
+	// The source of the data.
+	//
+	// This member is required.
+	DataSource types.DataSource
+
+	// The data type.
+	//
+	// This member is required.
+	DataType types.DataType
+
 	// The default value for the variable when no value is received.
 	//
 	// This member is required.
 	DefaultValue *string
 
-	// The source of the data.
+	// The name of the variable.
 	//
 	// This member is required.
-	DataSource types.DataSource
+	Name *string
+
+	// The description.
+	Description *string
+
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 
 	// The variable type. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
@@ -78,22 +94,6 @@ type CreateVariableInput struct {
 	// SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP |
 	// USERAGENT
 	VariableType *string
-
-	// A collection of key and value pairs.
-	Tags []*types.Tag
-
-	// The data type.
-	//
-	// This member is required.
-	DataType types.DataType
-
-	// The name of the variable.
-	//
-	// This member is required.
-	Name *string
-
-	// The description.
-	Description *string
 }
 
 type CreateVariableOutput struct {

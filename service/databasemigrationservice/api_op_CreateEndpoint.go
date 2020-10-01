@@ -58,55 +58,17 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 //
 type CreateEndpointInput struct {
 
-	// Provides information that defines an Amazon Redshift endpoint.
-	RedshiftSettings *types.RedshiftSettings
+	// The database endpoint identifier. Identifiers must begin with a letter and must
+	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or
+	// contain two consecutive hyphens.
+	//
+	// This member is required.
+	EndpointIdentifier *string
 
-	// One or more tags to be assigned to the endpoint.
-	Tags []*types.Tag
-
-	// The name of the server where the endpoint database resides.
-	ServerName *string
-
-	// Additional attributes associated with the connection. Each attribute is
-	// specified as a name-value pair associated by an equal sign (=). Multiple
-	// attributes are separated by a semicolon (;) with no additional white space. For
-	// information on the attributes available for connecting your source or target
-	// endpoint, see Working with AWS DMS Endpoints
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html) in the
-	// AWS Database Migration Service User Guide.
-	ExtraConnectionAttributes *string
-
-	// Settings in JSON format for the source MongoDB endpoint. For more information
-	// about the available settings, see Using MongoDB as a Target for AWS Database
-	// Migration Service
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration)
-	// in the AWS Database Migration Service User Guide.
-	MongoDbSettings *types.MongoDbSettings
-
-	// The Amazon Resource Name (ARN) for the certificate.
-	CertificateArn *string
-
-	// The password to be used to log in to the endpoint database.
-	Password *string
-
-	// Settings in JSON format for the source and target SAP ASE endpoint. For
-	// information about other available settings, see Extra connection attributes when
-	// using SAP ASE as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib)
-	// and Extra connection attributes when using SAP ASE as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
-	SybaseSettings *types.SybaseSettings
-
-	// An AWS KMS key identifier that is used to encrypt the connection parameters for
-	// the endpoint. If you don't specify a value for the KmsKeyId parameter, then AWS
-	// DMS uses your default encryption key. AWS KMS creates the default encryption key
-	// for your AWS account. Your AWS account has a different default encryption key
-	// for each AWS Region.
-	KmsKeyId *string
-
-	// The name of the endpoint database.
-	DatabaseName *string
+	// The type of endpoint. Valid values are source and target.
+	//
+	// This member is required.
+	EndpointType types.ReplicationEndpointTypeValue
 
 	// The type of engine for the endpoint. Valid values, depending on the EndpointType
 	// value, include "mysql", "oracle", "postgres", "mariadb", "aurora",
@@ -117,106 +79,11 @@ type CreateEndpointInput struct {
 	// This member is required.
 	EngineName *string
 
-	// Settings in JSON format for the target Elasticsearch endpoint. For more
-	// information about the available settings, see Extra Connection Attributes When
-	// Using Elasticsearch as a Target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration)
-	// in the AWS Database Migration Service User Guide.
-	ElasticsearchSettings *types.ElasticsearchSettings
+	// The Amazon Resource Name (ARN) for the certificate.
+	CertificateArn *string
 
-	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
-	// about other available settings, see Using Object Mapping to Migrate Data to
-	// DynamoDB
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html) in
-	// the AWS Database Migration Service User Guide.
-	DynamoDbSettings *types.DynamoDbSettings
-
-	// The user name to be used to log in to the endpoint database.
-	Username *string
-
-	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
-	// For more information about the available settings, see Using Amazon Kinesis Data
-	// Streams as a Target for AWS Database Migration Service
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html) in
-	// the AWS Database Migration Service User Guide.
-	KinesisSettings *types.KinesisSettings
-
-	// The external table definition.
-	ExternalTableDefinition *string
-
-	// Settings in JSON format for the source and target MySQL endpoint. For
-	// information about other available settings, see Extra connection attributes when
-	// using MySQL as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib)
-	// and Extra connection attributes when using a MySQL-compatible database as a
-	// target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
-	MySQLSettings *types.MySQLSettings
-
-	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default
-	// is none
-	SslMode types.DmsSslModeValue
-
-	// The type of endpoint. Valid values are source and target.
-	//
-	// This member is required.
-	EndpointType types.ReplicationEndpointTypeValue
-
-	// The Amazon Resource Name (ARN) for the service access role that you want to use
-	// to create the endpoint.
-	ServiceAccessRoleArn *string
-
-	// Settings in JSON format for the source and target PostgreSQL endpoint. For
-	// information about other available settings, see Extra connection attributes when
-	// using PostgreSQL as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib)
-	// and  Extra connection attributes when using PostgreSQL as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
-	PostgreSQLSettings *types.PostgreSQLSettings
-
-	// The database endpoint identifier. Identifiers must begin with a letter and must
-	// contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or
-	// contain two consecutive hyphens.
-	//
-	// This member is required.
-	EndpointIdentifier *string
-
-	// Settings in JSON format for the source and target Microsoft SQL Server endpoint.
-	// For information about other available settings, see Extra connection attributes
-	// when using SQL Server as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib)
-	// and  Extra connection attributes when using SQL Server as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
-	MicrosoftSQLServerSettings *types.MicrosoftSQLServerSettings
-
-	// Settings in JSON format for the source and target Oracle endpoint. For
-	// information about other available settings, see Extra connection attributes when
-	// using Oracle as a source for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib)
-	// and  Extra connection attributes when using Oracle as a target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib)
-	// in the AWS Database Migration Service User Guide.
-	OracleSettings *types.OracleSettings
-
-	// Settings in JSON format for the target Apache Kafka endpoint. For more
-	// information about the available settings, see Using Apache Kafka as a Target for
-	// AWS Database Migration Service
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html) in the
-	// AWS Database Migration Service User Guide.
-	KafkaSettings *types.KafkaSettings
-
-	// The port used by the endpoint database.
-	Port *int32
-
-	// Settings in JSON format for the target Amazon Neptune endpoint. For more
-	// information about the available settings, see Specifying Endpoint Settings for
-	// Amazon Neptune as a Target
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings)
-	// in the AWS Database Migration Service User Guide.
-	NeptuneSettings *types.NeptuneSettings
+	// The name of the endpoint database.
+	DatabaseName *string
 
 	// The settings in JSON format for the DMS transfer type of source endpoint.
 	// Possible settings include the following:
@@ -238,12 +105,31 @@ type CreateEndpointInput struct {
 	// "BucketName": "string", "CompressionType": "none"|"gzip" }
 	DmsTransferSettings *types.DmsTransferSettings
 
-	// Settings in JSON format for the target Amazon S3 endpoint. For more information
-	// about the available settings, see Extra Connection Attributes When Using Amazon
-	// S3 as a Target for AWS DMS
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
+	// Settings in JSON format for the target Amazon DynamoDB endpoint. For information
+	// about other available settings, see Using Object Mapping to Migrate Data to
+	// DynamoDB
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.DynamoDB.html) in
+	// the AWS Database Migration Service User Guide.
+	DynamoDbSettings *types.DynamoDbSettings
+
+	// Settings in JSON format for the target Elasticsearch endpoint. For more
+	// information about the available settings, see Extra Connection Attributes When
+	// Using Elasticsearch as a Target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Elasticsearch.html#CHAP_Target.Elasticsearch.Configuration)
 	// in the AWS Database Migration Service User Guide.
-	S3Settings *types.S3Settings
+	ElasticsearchSettings *types.ElasticsearchSettings
+
+	// The external table definition.
+	ExternalTableDefinition *string
+
+	// Additional attributes associated with the connection. Each attribute is
+	// specified as a name-value pair associated by an equal sign (=). Multiple
+	// attributes are separated by a semicolon (;) with no additional white space. For
+	// information on the attributes available for connecting your source or target
+	// endpoint, see Working with AWS DMS Endpoints
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Endpoints.html) in the
+	// AWS Database Migration Service User Guide.
+	ExtraConnectionAttributes *string
 
 	// Settings in JSON format for the source IBM Db2 LUW endpoint. For information
 	// about other available settings, see Extra connection attributes when using Db2
@@ -251,6 +137,120 @@ type CreateEndpointInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DB2.ConnectionAttrib)
 	// in the AWS Database Migration Service User Guide.
 	IBMDb2Settings *types.IBMDb2Settings
+
+	// Settings in JSON format for the target Apache Kafka endpoint. For more
+	// information about the available settings, see Using Apache Kafka as a Target for
+	// AWS Database Migration Service
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html) in the
+	// AWS Database Migration Service User Guide.
+	KafkaSettings *types.KafkaSettings
+
+	// Settings in JSON format for the target endpoint for Amazon Kinesis Data Streams.
+	// For more information about the available settings, see Using Amazon Kinesis Data
+	// Streams as a Target for AWS Database Migration Service
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kinesis.html) in
+	// the AWS Database Migration Service User Guide.
+	KinesisSettings *types.KinesisSettings
+
+	// An AWS KMS key identifier that is used to encrypt the connection parameters for
+	// the endpoint. If you don't specify a value for the KmsKeyId parameter, then AWS
+	// DMS uses your default encryption key. AWS KMS creates the default encryption key
+	// for your AWS account. Your AWS account has a different default encryption key
+	// for each AWS Region.
+	KmsKeyId *string
+
+	// Settings in JSON format for the source and target Microsoft SQL Server endpoint.
+	// For information about other available settings, see Extra connection attributes
+	// when using SQL Server as a source for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.ConnectionAttrib)
+	// and  Extra connection attributes when using SQL Server as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SQLServer.ConnectionAttrib)
+	// in the AWS Database Migration Service User Guide.
+	MicrosoftSQLServerSettings *types.MicrosoftSQLServerSettings
+
+	// Settings in JSON format for the source MongoDB endpoint. For more information
+	// about the available settings, see Using MongoDB as a Target for AWS Database
+	// Migration Service
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MongoDB.html#CHAP_Source.MongoDB.Configuration)
+	// in the AWS Database Migration Service User Guide.
+	MongoDbSettings *types.MongoDbSettings
+
+	// Settings in JSON format for the source and target MySQL endpoint. For
+	// information about other available settings, see Extra connection attributes when
+	// using MySQL as a source for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.ConnectionAttrib)
+	// and Extra connection attributes when using a MySQL-compatible database as a
+	// target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.MySQL.ConnectionAttrib)
+	// in the AWS Database Migration Service User Guide.
+	MySQLSettings *types.MySQLSettings
+
+	// Settings in JSON format for the target Amazon Neptune endpoint. For more
+	// information about the available settings, see Specifying Endpoint Settings for
+	// Amazon Neptune as a Target
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Neptune.html#CHAP_Target.Neptune.EndpointSettings)
+	// in the AWS Database Migration Service User Guide.
+	NeptuneSettings *types.NeptuneSettings
+
+	// Settings in JSON format for the source and target Oracle endpoint. For
+	// information about other available settings, see Extra connection attributes when
+	// using Oracle as a source for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.Oracle.ConnectionAttrib)
+	// and  Extra connection attributes when using Oracle as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Oracle.ConnectionAttrib)
+	// in the AWS Database Migration Service User Guide.
+	OracleSettings *types.OracleSettings
+
+	// The password to be used to log in to the endpoint database.
+	Password *string
+
+	// The port used by the endpoint database.
+	Port *int32
+
+	// Settings in JSON format for the source and target PostgreSQL endpoint. For
+	// information about other available settings, see Extra connection attributes when
+	// using PostgreSQL as a source for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.ConnectionAttrib)
+	// and  Extra connection attributes when using PostgreSQL as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.ConnectionAttrib)
+	// in the AWS Database Migration Service User Guide.
+	PostgreSQLSettings *types.PostgreSQLSettings
+
+	// Provides information that defines an Amazon Redshift endpoint.
+	RedshiftSettings *types.RedshiftSettings
+
+	// Settings in JSON format for the target Amazon S3 endpoint. For more information
+	// about the available settings, see Extra Connection Attributes When Using Amazon
+	// S3 as a Target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring)
+	// in the AWS Database Migration Service User Guide.
+	S3Settings *types.S3Settings
+
+	// The name of the server where the endpoint database resides.
+	ServerName *string
+
+	// The Amazon Resource Name (ARN) for the service access role that you want to use
+	// to create the endpoint.
+	ServiceAccessRoleArn *string
+
+	// The Secure Sockets Layer (SSL) mode to use for the SSL connection. The default
+	// is none
+	SslMode types.DmsSslModeValue
+
+	// Settings in JSON format for the source and target SAP ASE endpoint. For
+	// information about other available settings, see Extra connection attributes when
+	// using SAP ASE as a source for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SAP.ConnectionAttrib)
+	// and Extra connection attributes when using SAP ASE as a target for AWS DMS
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.SAP.ConnectionAttrib)
+	// in the AWS Database Migration Service User Guide.
+	SybaseSettings *types.SybaseSettings
+
+	// One or more tags to be assigned to the endpoint.
+	Tags []*types.Tag
+
+	// The user name to be used to log in to the endpoint database.
+	Username *string
 }
 
 //

@@ -60,15 +60,15 @@ type ListMembersInput struct {
 	// The maximum number of items to include in each page of a paginated response.
 	MaxResults *int32
 
+	// The nextToken string that specifies which page of results to return in a
+	// paginated response.
+	NextToken *string
+
 	// Specifies which accounts to include in the response, based on the status of an
 	// account's relationship with the master account. By default, the response
 	// includes only current member accounts. To include all accounts, set the value
 	// for this parameter to false.
 	OnlyAssociated *string
-
-	// The nextToken string that specifies which page of results to return in a
-	// paginated response.
-	NextToken *string
 }
 
 type ListMembersOutput struct {

@@ -70,26 +70,26 @@ type CreateProjectVersionInput struct {
 	// This member is required.
 	OutputConfig *types.OutputConfig
 
-	// A name for the version of the model. This value must be unique.
-	//
-	// This member is required.
-	VersionName *string
-
 	// The ARN of the Amazon Rekognition Custom Labels project that manages the model
 	// that you want to train.
 	//
 	// This member is required.
 	ProjectArn *string
 
+	// The dataset to use for testing.
+	//
+	// This member is required.
+	TestingData *types.TestingData
+
 	// The dataset to use for training.
 	//
 	// This member is required.
 	TrainingData *types.TrainingData
 
-	// The dataset to use for testing.
+	// A name for the version of the model. This value must be unique.
 	//
 	// This member is required.
-	TestingData *types.TestingData
+	VersionName *string
 }
 
 type CreateProjectVersionOutput struct {

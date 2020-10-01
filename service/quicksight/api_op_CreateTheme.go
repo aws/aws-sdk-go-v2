@@ -61,11 +61,10 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// An ID for the theme that you want to create. The theme ID is unique per AWS
-	// Region in each AWS account.
+	// The ID of the AWS account where you want to store the new theme.
 	//
 	// This member is required.
-	ThemeId *string
+	AwsAccountId *string
 
 	// The ID of the theme that a custom theme will inherit from. All themes inherit
 	// from one of the starting themes defined by Amazon QuickSight. For a list of the
@@ -74,18 +73,6 @@ type CreateThemeInput struct {
 	//
 	// This member is required.
 	BaseThemeId *string
-
-	// A map of the key-value pairs for the resource tag or tags that you want to add
-	// to the resource.
-	Tags []*types.Tag
-
-	// The ID of the AWS account where you want to store the new theme.
-	//
-	// This member is required.
-	AwsAccountId *string
-
-	// A valid grouping of resource permissions to apply to the new theme.
-	Permissions []*types.ResourcePermission
 
 	// The theme configuration, which contains the theme display properties.
 	//
@@ -97,6 +84,19 @@ type CreateThemeInput struct {
 	// This member is required.
 	Name *string
 
+	// An ID for the theme that you want to create. The theme ID is unique per AWS
+	// Region in each AWS account.
+	//
+	// This member is required.
+	ThemeId *string
+
+	// A valid grouping of resource permissions to apply to the new theme.
+	Permissions []*types.ResourcePermission
+
+	// A map of the key-value pairs for the resource tag or tags that you want to add
+	// to the resource.
+	Tags []*types.Tag
+
 	// A description of the first version of the theme that you're creating. Every time
 	// UpdateTheme is called, a new version is created. Each version of the theme has a
 	// description of the version in the VersionDescription field.
@@ -105,17 +105,17 @@ type CreateThemeInput struct {
 
 type CreateThemeOutput struct {
 
-	// The ID of the theme.
-	ThemeId *string
-
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) for the theme.
 	Arn *string
 
 	// The theme creation status.
 	CreationStatus types.ResourceStatus
+
+	// The AWS request ID for this operation.
+	RequestId *string
+
+	// The ID of the theme.
+	ThemeId *string
 
 	// The Amazon Resource Name (ARN) for the new theme.
 	VersionArn *string

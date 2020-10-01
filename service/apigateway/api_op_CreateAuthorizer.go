@@ -59,7 +59,6 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 
 // Request to add a new Authorizer () to an existing RestApi () resource.
 type CreateAuthorizerInput struct {
-	Template *bool
 
 	// [Required] The name of the authorizer.
 	//
@@ -70,10 +69,6 @@ type CreateAuthorizerInput struct {
 	//
 	// This member is required.
 	RestApiId *string
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// [Required] The authorizer type. Valid values are TOKEN for a Lambda function
 	// using a single authorization token submitted in a custom header, REQUEST for a
@@ -87,20 +82,29 @@ type CreateAuthorizerInput struct {
 	// functional impact.
 	AuthType *string
 
+	// Specifies the required credentials as an IAM role for API Gateway to invoke the
+	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
+	// function, specify null.
+	AuthorizerCredentials *string
+
 	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
 	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
 	// responses. If this field is not set, the default value is 300. The maximum value
 	// is 3600, or 1 hour.
 	AuthorizerResultTtlInSeconds *int32
 
-	// A validation expression for the incoming identity token. For TOKEN authorizers,
-	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
-	// Gateway will match the aud field of the incoming token from the client against
-	// the specified regular expression. It will invoke the authorizer's Lambda
-	// function when there is a match. Otherwise, it will return a 401 Unauthorized
-	// response without calling the Lambda function. The validation expression does not
-	// apply to the REQUEST authorizer.
-	IdentityValidationExpression *string
+	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
+	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
+	// example,
+	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+	// In general, the URI has this form
+	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
+	// same as the region hosting the Lambda function, path indicates that the
+	// remaining substring in the URI should be treated as the path to the resource,
+	// including the initial /. For Lambda functions, this is usually of the form
+	// /2015-03-31/functions/[FunctionARN]/invocations.
+	AuthorizerUri *string
 
 	// The identity source for which authorization is requested.
 	//
@@ -126,29 +130,26 @@ type CreateAuthorizerInput struct {
 	// optional.
 	IdentitySource *string
 
-	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
-	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
-	// example,
-	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
-	// In general, the URI has this form
-	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
-	// same as the region hosting the Lambda function, path indicates that the
-	// remaining substring in the URI should be treated as the path to the resource,
-	// including the initial /. For Lambda functions, this is usually of the form
-	// /2015-03-31/functions/[FunctionARN]/invocations.
-	AuthorizerUri *string
-
-	// Specifies the required credentials as an IAM role for API Gateway to invoke the
-	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
-	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
-	// function, specify null.
-	AuthorizerCredentials *string
+	// A validation expression for the incoming identity token. For TOKEN authorizers,
+	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
+	// Gateway will match the aud field of the incoming token from the client against
+	// the specified regular expression. It will invoke the authorizer's Lambda
+	// function when there is a match. Otherwise, it will return a 401 Unauthorized
+	// response without calling the Lambda function. The validation expression does not
+	// apply to the REQUEST authorizer.
+	IdentityValidationExpression *string
 
 	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
 	// authorizer. Each element is of this format:
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
 	// or REQUEST authorizer, this is not defined.
 	ProviderARNs []*string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -159,14 +160,36 @@ type CreateAuthorizerInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type CreateAuthorizerOutput struct {
 
-	// [Required] The name of the authorizer.
-	Name *string
+	// Optional customer-defined field, used in OpenAPI imports and exports without
+	// functional impact.
+	AuthType *string
 
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, specify null.
 	AuthorizerCredentials *string
+
+	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
+	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
+	// responses. If this field is not set, the default value is 300. The maximum value
+	// is 3600, or 1 hour.
+	AuthorizerResultTtlInSeconds *int32
+
+	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
+	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
+	// example,
+	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+	// In general, the URI has this form
+	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
+	// same as the region hosting the Lambda function, path indicates that the
+	// remaining substring in the URI should be treated as the path to the resource,
+	// including the initial /. For Lambda functions, this is usually of the form
+	// /2015-03-31/functions/[FunctionARN]/invocations.
+	AuthorizerUri *string
+
+	// The identifier for the authorizer resource.
+	Id *string
 
 	// The identity source for which authorization is requested.
 	//
@@ -192,34 +215,6 @@ type CreateAuthorizerOutput struct {
 	// optional.
 	IdentitySource *string
 
-	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
-	// authorization token submitted in a custom header, REQUEST for a Lambda function
-	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
-	// Cognito user pool.
-	Type types.AuthorizerType
-
-	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
-	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
-	// example,
-	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
-	// In general, the URI has this form
-	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
-	// same as the region hosting the Lambda function, path indicates that the
-	// remaining substring in the URI should be treated as the path to the resource,
-	// including the initial /. For Lambda functions, this is usually of the form
-	// /2015-03-31/functions/[FunctionARN]/invocations.
-	AuthorizerUri *string
-
-	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
-	// authorizer. Each element is of this format:
-	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
-	// or REQUEST authorizer, this is not defined.
-	ProviderARNs []*string
-
-	// Optional customer-defined field, used in OpenAPI imports and exports without
-	// functional impact.
-	AuthType *string
-
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
 	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
 	// Gateway will match the aud field of the incoming token from the client against
@@ -229,14 +224,20 @@ type CreateAuthorizerOutput struct {
 	// apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
 
-	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
-	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
-	// responses. If this field is not set, the default value is 300. The maximum value
-	// is 3600, or 1 hour.
-	AuthorizerResultTtlInSeconds *int32
+	// [Required] The name of the authorizer.
+	Name *string
 
-	// The identifier for the authorizer resource.
-	Id *string
+	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
+	// authorizer. Each element is of this format:
+	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
+	// or REQUEST authorizer, this is not defined.
+	ProviderARNs []*string
+
+	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
+	// authorization token submitted in a custom header, REQUEST for a Lambda function
+	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
+	// Cognito user pool.
+	Type types.AuthorizerType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

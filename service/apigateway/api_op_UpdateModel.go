@@ -64,22 +64,22 @@ type UpdateModelInput struct {
 	// This member is required.
 	ModelName *string
 
-	Title *string
-
-	Name *string
-
-	TemplateSkipList []*string
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
-	Template *bool
+	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -92,17 +92,17 @@ type UpdateModelInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type UpdateModelOutput struct {
 
-	// The identifier for the model resource.
-	Id *string
-
-	// The name of the model. Must be an alphanumeric string.
-	Name *string
-
 	// The content-type for the model.
 	ContentType *string
 
 	// The description of the model.
 	Description *string
+
+	// The identifier for the model resource.
+	Id *string
+
+	// The name of the model. Must be an alphanumeric string.
+	Name *string
 
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model. Do

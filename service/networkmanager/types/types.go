@@ -19,20 +19,20 @@ type Bandwidth struct {
 // Describes the association between a customer gateway, a device, and a link.
 type CustomerGatewayAssociation struct {
 
-	// The association state.
-	State CustomerGatewayAssociationState
+	// The Amazon Resource Name (ARN) of the customer gateway.
+	CustomerGatewayArn *string
 
 	// The ID of the device.
 	DeviceId *string
-
-	// The Amazon Resource Name (ARN) of the customer gateway.
-	CustomerGatewayArn *string
 
 	// The ID of the global network.
 	GlobalNetworkId *string
 
 	// The ID of the link.
 	LinkId *string
+
+	// The association state.
+	State CustomerGatewayAssociationState
 }
 
 // Describes a device.
@@ -41,20 +41,32 @@ type Device struct {
 	// The date and time that the site was created.
 	CreatedAt *time.Time
 
+	// The description of the device.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the device.
+	DeviceArn *string
+
 	// The ID of the device.
 	DeviceId *string
 
 	// The ID of the global network.
 	GlobalNetworkId *string
 
+	// The site location.
+	Location *Location
+
 	// The device model.
 	Model *string
 
-	// The description of the device.
-	Description *string
-
 	// The device serial number.
 	SerialNumber *string
+
+	// The site ID.
+	SiteId *string
+
+	// The device state.
+	State DeviceState
 
 	// The tags for the device.
 	Tags []*Tag
@@ -62,46 +74,37 @@ type Device struct {
 	// The device type.
 	Type *string
 
-	// The site ID.
-	SiteId *string
-
-	// The site location.
-	Location *Location
-
-	// The device state.
-	State DeviceState
-
 	// The device vendor.
 	Vendor *string
-
-	// The Amazon Resource Name (ARN) of the device.
-	DeviceArn *string
 }
 
 // Describes a global network.
 type GlobalNetwork struct {
 
-	// The tags for the global network.
-	Tags []*Tag
-
 	// The date and time that the global network was created.
 	CreatedAt *time.Time
-
-	// The ID of the global network.
-	GlobalNetworkId *string
 
 	// The description of the global network.
 	Description *string
 
+	// The Amazon Resource Name (ARN) of the global network.
+	GlobalNetworkArn *string
+
+	// The ID of the global network.
+	GlobalNetworkId *string
+
 	// The state of the global network.
 	State GlobalNetworkState
 
-	// The Amazon Resource Name (ARN) of the global network.
-	GlobalNetworkArn *string
+	// The tags for the global network.
+	Tags []*Tag
 }
 
 // Describes a link.
 type Link struct {
+
+	// The bandwidth for the link.
+	Bandwidth *Bandwidth
 
 	// The date and time that the link was created.
 	CreatedAt *time.Time
@@ -112,33 +115,33 @@ type Link struct {
 	// The ID of the global network.
 	GlobalNetworkId *string
 
-	// The type of the link.
-	Type *string
+	// The Amazon Resource Name (ARN) of the link.
+	LinkArn *string
 
 	// The ID of the link.
 	LinkId *string
 
+	// The provider of the link.
+	Provider *string
+
 	// The ID of the site.
 	SiteId *string
 
-	// The provider of the link.
-	Provider *string
+	// The state of the link.
+	State LinkState
 
 	// The tags for the link.
 	Tags []*Tag
 
-	// The bandwidth for the link.
-	Bandwidth *Bandwidth
-
-	// The Amazon Resource Name (ARN) of the link.
-	LinkArn *string
-
-	// The state of the link.
-	State LinkState
+	// The type of the link.
+	Type *string
 }
 
 // Describes the association between a device and a link.
 type LinkAssociation struct {
+
+	// The device ID for the link association.
+	DeviceId *string
 
 	// The ID of the global network.
 	GlobalNetworkId *string
@@ -148,9 +151,6 @@ type LinkAssociation struct {
 
 	// The ID of the link.
 	LinkId *string
-
-	// The device ID for the link association.
-	DeviceId *string
 }
 
 // Describes a location.
@@ -159,39 +159,39 @@ type Location struct {
 	// The physical address.
 	Address *string
 
-	// The longitude.
-	Longitude *string
-
 	// The latitude.
 	Latitude *string
+
+	// The longitude.
+	Longitude *string
 }
 
 // Describes a site.
 type Site struct {
 
-	// The state of the site.
-	State SiteState
-
-	// The location of the site.
-	Location *Location
-
 	// The date and time that the site was created.
 	CreatedAt *time.Time
-
-	// The ID of the global network.
-	GlobalNetworkId *string
 
 	// The description of the site.
 	Description *string
 
-	// The tags for the site.
-	Tags []*Tag
+	// The ID of the global network.
+	GlobalNetworkId *string
+
+	// The location of the site.
+	Location *Location
 
 	// The Amazon Resource Name (ARN) of the site.
 	SiteArn *string
 
 	// The ID of the site.
 	SiteId *string
+
+	// The state of the site.
+	State SiteState
+
+	// The tags for the site.
+	Tags []*Tag
 }
 
 // Describes a tag.
@@ -207,24 +207,24 @@ type Tag struct {
 // Describes the registration of a transit gateway to a global network.
 type TransitGatewayRegistration struct {
 
+	// The ID of the global network.
+	GlobalNetworkId *string
+
 	// The state of the transit gateway registration.
 	State *TransitGatewayRegistrationStateReason
 
 	// The Amazon Resource Name (ARN) of the transit gateway.
 	TransitGatewayArn *string
-
-	// The ID of the global network.
-	GlobalNetworkId *string
 }
 
 // Describes the status of a transit gateway registration.
 type TransitGatewayRegistrationStateReason struct {
 
-	// The message for the state reason.
-	Message *string
-
 	// The code for the state reason.
 	Code TransitGatewayRegistrationState
+
+	// The message for the state reason.
+	Message *string
 }
 
 // Describes a validation exception for a field.

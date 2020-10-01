@@ -57,16 +57,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 // The request object for UntagResource action.
 type UntagResourceInput struct {
 
+	// The ARN of the Amazon FSx resource to untag.
+	//
+	// This member is required.
+	ResourceARN *string
+
 	// A list of keys of tags on the resource to untag. In case the tag key doesn't
 	// exist, the call will still succeed to be idempotent.
 	//
 	// This member is required.
 	TagKeys []*string
-
-	// The ARN of the Amazon FSx resource to untag.
-	//
-	// This member is required.
-	ResourceARN *string
 }
 
 // The response object for UntagResource action.

@@ -84,16 +84,6 @@ type DeleteDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// A value that indicates whether to skip the creation of a final DB snapshot
-	// before the DB instance is deleted. If skip is specified, no DB snapshot is
-	// created. If skip isn't specified, a DB snapshot is created before the DB
-	// instance is deleted. By default, skip isn't specified, and the DB snapshot is
-	// created. When a DB instance is in a failure state and has a status of 'failed',
-	// 'incompatible-restore', or 'incompatible-network', it can only be deleted when
-	// skip is specified. Specify skip when deleting a read replica. The
-	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
-	SkipFinalSnapshot *bool
-
 	// A value that indicates whether to remove automated backups immediately after the
 	// DB instance is deleted. This parameter isn't case-sensitive. The default is to
 	// remove automated backups immediately after the DB instance is deleted.
@@ -114,6 +104,16 @@ type DeleteDBInstanceInput struct {
 	//
 	//     * Can't be specified when deleting a read replica.
 	FinalDBSnapshotIdentifier *string
+
+	// A value that indicates whether to skip the creation of a final DB snapshot
+	// before the DB instance is deleted. If skip is specified, no DB snapshot is
+	// created. If skip isn't specified, a DB snapshot is created before the DB
+	// instance is deleted. By default, skip isn't specified, and the DB snapshot is
+	// created. When a DB instance is in a failure state and has a status of 'failed',
+	// 'incompatible-restore', or 'incompatible-network', it can only be deleted when
+	// skip is specified. Specify skip when deleting a read replica. The
+	// FinalDBSnapshotIdentifier parameter must be specified if skip isn't specified.
+	SkipFinalSnapshot *bool
 }
 
 type DeleteDBInstanceOutput struct {

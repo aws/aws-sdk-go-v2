@@ -72,14 +72,14 @@ type GetBackupVaultAccessPolicyOutput struct {
 	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
 	BackupVaultArn *string
 
-	// The backup vault access policy document in JSON format.
-	Policy *string
-
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// Region where they are created. They consist of lowercase letters, numbers, and
 	// hyphens.
 	BackupVaultName *string
+
+	// The backup vault access policy document in JSON format.
+	Policy *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,18 +65,18 @@ type GetComplianceDetailsByResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// The nextToken string returned on a previous page that you use to get the next
-	// page of results in a paginated response.
-	NextToken *string
+	// The type of the AWS resource for which you want compliance information.
+	//
+	// This member is required.
+	ResourceType *string
 
 	// Filters the results by compliance. The allowed values are COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE.
 	ComplianceTypes []types.ComplianceType
 
-	// The type of the AWS resource for which you want compliance information.
-	//
-	// This member is required.
-	ResourceType *string
+	// The nextToken string returned on a previous page that you use to get the next
+	// page of results in a paginated response.
+	NextToken *string
 }
 
 //

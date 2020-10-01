@@ -71,11 +71,11 @@ type AddFlowVpcInterfacesInput struct {
 
 type AddFlowVpcInterfacesOutput struct {
 
-	// The details of the newly added VPC interfaces.
-	VpcInterfaces []*types.VpcInterface
-
 	// The ARN of the flow that these VPC interfaces were added to.
 	FlowArn *string
+
+	// The details of the newly added VPC interfaces.
+	VpcInterfaces []*types.VpcInterface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

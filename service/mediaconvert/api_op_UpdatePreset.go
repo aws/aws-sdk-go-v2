@@ -57,9 +57,6 @@ func (c *Client) UpdatePreset(ctx context.Context, params *UpdatePresetInput, op
 
 type UpdatePresetInput struct {
 
-	// Settings for preset
-	Settings *types.PresetSettings
-
 	// The name of the preset you are modifying.
 	//
 	// This member is required.
@@ -70,6 +67,9 @@ type UpdatePresetInput struct {
 
 	// The new description for the preset, if you are changing it.
 	Description *string
+
+	// Settings for preset
+	Settings *types.PresetSettings
 }
 
 type UpdatePresetOutput struct {

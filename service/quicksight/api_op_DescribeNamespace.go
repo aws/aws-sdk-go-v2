@@ -57,16 +57,16 @@ func (c *Client) DescribeNamespace(ctx context.Context, params *DescribeNamespac
 
 type DescribeNamespaceInput struct {
 
-	// The namespace that you want to describe.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The ID for the AWS account that contains the QuickSight namespace that you want
 	// to describe.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The namespace that you want to describe.
+	//
+	// This member is required.
+	Namespace *string
 }
 
 type DescribeNamespaceOutput struct {

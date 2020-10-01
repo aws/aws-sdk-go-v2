@@ -63,9 +63,6 @@ type DescribeManagedPrefixListsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// One or more filters.
 	//
 	//     * owner-id - The ID of the prefix list owner.
@@ -80,6 +77,9 @@ type DescribeManagedPrefixListsInput struct {
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// One or more prefix list IDs.
 	PrefixListIds []*string

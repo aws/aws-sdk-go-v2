@@ -61,16 +61,16 @@ func (c *Client) RegisterEventTopic(ctx context.Context, params *RegisterEventTo
 // Registers a new event topic.
 type RegisterEventTopicInput struct {
 
+	// The Directory ID that will publish status messages to the SNS topic.
+	//
+	// This member is required.
+	DirectoryId *string
+
 	// The SNS topic name to which the directory will publish status messages. This SNS
 	// topic must be in the same region as the specified Directory ID.
 	//
 	// This member is required.
 	TopicName *string
-
-	// The Directory ID that will publish status messages to the SNS topic.
-	//
-	// This member is required.
-	DirectoryId *string
 }
 
 // The result of a RegisterEventTopic request.

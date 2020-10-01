@@ -64,9 +64,6 @@ func (c *Client) CreateThing(ctx context.Context, params *CreateThingInput, optF
 // The input for the CreateThing operation.
 type CreateThingInput struct {
 
-	// The name of the billing group the thing will be added to.
-	BillingGroupName *string
-
 	// The name of the thing to create. You can't change a thing's name after you
 	// create it. To change a thing's name, you must create a new thing, give it the
 	// new name, and then delete the old thing.
@@ -74,12 +71,15 @@ type CreateThingInput struct {
 	// This member is required.
 	ThingName *string
 
-	// The name of the thing type associated with the new thing.
-	ThingTypeName *string
-
 	// The attribute payload, which consists of up to three name/value pairs in a JSON
 	// document. For example: {\"attributes\":{\"string1\":\"string2\"}}
 	AttributePayload *types.AttributePayload
+
+	// The name of the billing group the thing will be added to.
+	BillingGroupName *string
+
+	// The name of the thing type associated with the new thing.
+	ThingTypeName *string
 }
 
 // The output of the CreateThing operation.

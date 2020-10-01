@@ -58,16 +58,16 @@ func (c *Client) GetTypedLinkFacetInformation(ctx context.Context, params *GetTy
 
 type GetTypedLinkFacetInformationInput struct {
 
+	// The unique name of the typed link facet.
+	//
+	// This member is required.
+	Name *string
+
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().
 	//
 	// This member is required.
 	SchemaArn *string
-
-	// The unique name of the typed link facet.
-	//
-	// This member is required.
-	Name *string
 }
 
 type GetTypedLinkFacetInformationOutput struct {

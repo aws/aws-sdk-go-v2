@@ -68,14 +68,6 @@ type AddApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The reference data source can be an object in your Amazon S3 bucket. Kinesis
-	// Data Analytics reads the object and copies the data into the in-application
-	// table that is created. You provide an S3 bucket, object key name, and the
-	// resulting in-application table that is created.
-	//
-	// This member is required.
-	ReferenceDataSource *types.ReferenceDataSource
-
 	// The version of the application for which you are adding the reference data
 	// source. You can use the DescribeApplication () operation to get the current
 	// application version. If the version specified is not the current version, the
@@ -83,9 +75,20 @@ type AddApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	// The reference data source can be an object in your Amazon S3 bucket. Kinesis
+	// Data Analytics reads the object and copies the data into the in-application
+	// table that is created. You provide an S3 bucket, object key name, and the
+	// resulting in-application table that is created.
+	//
+	// This member is required.
+	ReferenceDataSource *types.ReferenceDataSource
 }
 
 type AddApplicationReferenceDataSourceOutput struct {
+
+	// The application Amazon Resource Name (ARN).
+	ApplicationARN *string
 
 	// The updated application version ID. Amazon Kinesis Data Analytics increments
 	// this ID when the application is updated.
@@ -93,9 +96,6 @@ type AddApplicationReferenceDataSourceOutput struct {
 
 	// Describes reference data sources configured for the application. </p>
 	ReferenceDataSourceDescriptions []*types.ReferenceDataSourceDescription
-
-	// The application Amazon Resource Name (ARN).
-	ApplicationARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

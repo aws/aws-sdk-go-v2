@@ -64,15 +64,15 @@ func (c *Client) ReportTaskProgress(ctx context.Context, params *ReportTaskProgr
 // Contains the parameters for ReportTaskProgress.
 type ReportTaskProgressInput struct {
 
-	// Key-value pairs that define the properties of the ReportTaskProgressInput
-	// object.
-	Fields []*types.Field
-
 	// The ID of the task assigned to the task runner. This value is provided in the
 	// response for PollForTask ().
 	//
 	// This member is required.
 	TaskId *string
+
+	// Key-value pairs that define the properties of the ReportTaskProgressInput
+	// object.
+	Fields []*types.Field
 }
 
 // Contains the output of ReportTaskProgress.

@@ -57,10 +57,6 @@ func (c *Client) UpdateDatabase(ctx context.Context, params *UpdateDatabaseInput
 
 type UpdateDatabaseInput struct {
 
-	// The ID of the Data Catalog in which the metadata database resides. If none is
-	// provided, the AWS account ID is used by default.
-	CatalogId *string
-
 	// A DatabaseInput object specifying the new definition of the metadata database in
 	// the catalog.
 	//
@@ -72,6 +68,10 @@ type UpdateDatabaseInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The ID of the Data Catalog in which the metadata database resides. If none is
+	// provided, the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type UpdateDatabaseOutput struct {

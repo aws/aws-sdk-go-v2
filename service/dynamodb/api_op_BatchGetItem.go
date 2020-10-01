@@ -195,11 +195,6 @@ type BatchGetItemInput struct {
 // Represents the output of a BatchGetItem operation.
 type BatchGetItemOutput struct {
 
-	// A map of table name to a list of items. Each object in Responses consists of a
-	// table name, along with a map of attribute data consisting of the data type and
-	// attribute value.
-	Responses map[string][]map[string]*types.AttributeValue
-
 	// The read capacity units consumed by the entire BatchGetItem operation. Each
 	// element consists of:
 	//
@@ -208,6 +203,11 @@ type BatchGetItemOutput struct {
 	//
 	//     * CapacityUnits - The total number of capacity units consumed.
 	ConsumedCapacity []*types.ConsumedCapacity
+
+	// A map of table name to a list of items. Each object in Responses consists of a
+	// table name, along with a map of attribute data consisting of the data type and
+	// attribute value.
+	Responses map[string][]map[string]*types.AttributeValue
 
 	// A map of tables and their respective keys that were not processed with the
 	// current response. The UnprocessedKeys value is in the same form as RequestItems,

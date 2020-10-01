@@ -73,13 +73,13 @@ type DescribeAvailabilityMonitorTestOutput struct {
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
-	// The status of the High Availability monitoring test. If a test hasn't been
-	// performed, the value of this field is null.
-	Status types.AvailabilityMonitorTestStatus
-
 	// The time the High Availability monitoring test was started. If a test hasn't
 	// been performed, the value of this field is null.
 	StartTime *time.Time
+
+	// The status of the High Availability monitoring test. If a test hasn't been
+	// performed, the value of this field is null.
+	Status types.AvailabilityMonitorTestStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

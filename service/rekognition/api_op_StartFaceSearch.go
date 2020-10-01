@@ -67,15 +67,15 @@ func (c *Client) StartFaceSearch(ctx context.Context, params *StartFaceSearchInp
 
 type StartFaceSearchInput struct {
 
-	// The minimum confidence in the person match to return. For example, don't return
-	// any matches where confidence in matches is less than 70%. The default value is
-	// 80%.
-	FaceMatchThreshold *float32
-
 	// ID of the collection that contains the faces you want to search for.
 	//
 	// This member is required.
 	CollectionId *string
+
+	// The video you want to search. The video must be stored in an Amazon S3 bucket.
+	//
+	// This member is required.
+	Video *types.Video
 
 	// Idempotent token used to identify the start request. If you use the same token
 	// with multiple StartFaceSearch requests, the same JobId is returned. Use
@@ -83,10 +83,10 @@ type StartFaceSearchInput struct {
 	// than once.
 	ClientRequestToken *string
 
-	// The video you want to search. The video must be stored in an Amazon S3 bucket.
-	//
-	// This member is required.
-	Video *types.Video
+	// The minimum confidence in the person match to return. For example, don't return
+	// any matches where confidence in matches is less than 70%. The default value is
+	// 80%.
+	FaceMatchThreshold *float32
 
 	// An identifier you specify that's returned in the completion notification that's
 	// published to your Amazon Simple Notification Service topic. For example, you can

@@ -61,10 +61,10 @@ type UpdateCompanyNetworkConfigurationInput struct {
 	// This member is required.
 	FleetArn *string
 
-	// The VPC with connectivity to associated websites.
+	// The security groups associated with access to the provided subnets.
 	//
 	// This member is required.
-	VpcId *string
+	SecurityGroupIds []*string
 
 	// The subnets used for X-ENI connections from Amazon WorkLink rendering
 	// containers.
@@ -72,10 +72,10 @@ type UpdateCompanyNetworkConfigurationInput struct {
 	// This member is required.
 	SubnetIds []*string
 
-	// The security groups associated with access to the provided subnets.
+	// The VPC with connectivity to associated websites.
 	//
 	// This member is required.
-	SecurityGroupIds []*string
+	VpcId *string
 }
 
 type UpdateCompanyNetworkConfigurationOutput struct {

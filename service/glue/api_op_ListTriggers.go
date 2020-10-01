@@ -67,22 +67,22 @@ type ListTriggersInput struct {
 	// The maximum size of a list to return.
 	MaxResults *int32
 
-	// Specifies to return only these tagged resources.
-	Tags map[string]*string
-
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]*string
 }
 
 type ListTriggersOutput struct {
 
-	// The names of all triggers in the account, or the triggers with the specified
-	// tags.
-	TriggerNames []*string
-
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string
+
+	// The names of all triggers in the account, or the triggers with the specified
+	// tags.
+	TriggerNames []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

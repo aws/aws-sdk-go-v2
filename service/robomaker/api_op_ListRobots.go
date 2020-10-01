@@ -64,12 +64,6 @@ type ListRobotsInput struct {
 	// Available.
 	Filters []*types.Filter
 
-	// The nextToken value returned from a previous paginated ListRobots request where
-	// maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	NextToken *string
-
 	// When this parameter is used, ListRobots only returns maxResults results in a
 	// single page along with a nextToken response element. The remaining results of
 	// the initial request can be seen by sending another ListRobots request with the
@@ -77,18 +71,24 @@ type ListRobotsInput struct {
 	// is not used, then ListRobots returns up to 200 results and a nextToken value if
 	// applicable.
 	MaxResults *int32
+
+	// The nextToken value returned from a previous paginated ListRobots request where
+	// maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	NextToken *string
 }
 
 type ListRobotsOutput struct {
-
-	// A list of robots that meet the criteria of the request.
-	Robots []*types.Robot
 
 	// The nextToken value to include in a future ListRobots request. When the results
 	// of a ListRobot request exceed maxResults, this value can be used to retrieve the
 	// next page of results. This value is null when there are no more results to
 	// return.
 	NextToken *string
+
+	// A list of robots that meet the criteria of the request.
+	Robots []*types.Robot
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

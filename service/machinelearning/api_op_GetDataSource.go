@@ -74,13 +74,9 @@ type GetDataSourceInput struct {
 // Represents the output of a GetDataSource operation and describes a DataSource.
 type GetDataSourceOutput struct {
 
-	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS.
-	// StartedAt isn't available if the DataSource is in the PENDING state.
-	StartedAt *time.Time
-
-	// The schema used by all of the data files of this DataSource. Note: This
-	// parameter is provided as part of the verbose format.
-	DataSourceSchema *string
+	// The parameter is true if statistics need to be generated from the observation
+	// data.
+	ComputeStatistics *bool
 
 	// The approximate CPU time in milliseconds that Amazon Machine Learning spent
 	// processing the DataSource, normalized and scaled on computation resources.
@@ -88,36 +84,69 @@ type GetDataSourceOutput struct {
 	// the ComputeStatistics is set to true.
 	ComputeTime *int64
 
-	// A user-supplied name or description of the DataSource.
-	Name *string
-
-	// The ID assigned to the DataSource at creation. This value should be identical to
-	// the value of the DataSourceId in the request.
-	DataSourceId *string
+	// The time that the DataSource was created. The time is expressed in epoch time.
+	CreatedAt *time.Time
 
 	// The AWS user account from which the DataSource was created. The account type can
 	// be either an AWS root account or an AWS Identity and Access Management (IAM)
 	// user account.
 	CreatedByIamUser *string
 
-	// The user-supplied description of the most recent details about creating the
-	// DataSource.
-	Message *string
+	// The location of the data file or directory in Amazon Simple Storage Service
+	// (Amazon S3).
+	DataLocationS3 *string
+
+	// A JSON string that represents the splitting and rearrangement requirement used
+	// when this DataSource was created.
+	DataRearrangement *string
 
 	// The total size of observations in the data files.
 	DataSizeInBytes *int64
 
-	// The parameter is true if statistics need to be generated from the observation
-	// data.
-	ComputeStatistics *bool
+	// The ID assigned to the DataSource at creation. This value should be identical to
+	// the value of the DataSourceId in the request.
+	DataSourceId *string
+
+	// The schema used by all of the data files of this DataSource. Note: This
+	// parameter is provided as part of the verbose format.
+	DataSourceSchema *string
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
 	// or FAILED. FinishedAt is only available when the DataSource is in the COMPLETED
 	// or FAILED state.
 	FinishedAt *time.Time
 
+	// The time of the most recent edit to the DataSource. The time is expressed in
+	// epoch time.
+	LastUpdatedAt *time.Time
+
 	// A link to the file containing logs of CreateDataSourceFrom* operations.
 	LogUri *string
+
+	// The user-supplied description of the most recent details about creating the
+	// DataSource.
+	Message *string
+
+	// A user-supplied name or description of the DataSource.
+	Name *string
+
+	// The number of data files referenced by the DataSource.
+	NumberOfFiles *int64
+
+	// The datasource details that are specific to Amazon RDS.
+	RDSMetadata *types.RDSMetadata
+
+	// Describes the DataSource details specific to Amazon Redshift.
+	RedshiftMetadata *types.RedshiftMetadata
+
+	// The Amazon Resource Name (ARN) of an AWS IAM Role
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
+	// such as the following: arn:aws:iam::account:role/rolename.
+	RoleARN *string
+
+	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS.
+	// StartedAt isn't available if the DataSource is in the PENDING state.
+	StartedAt *time.Time
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:
@@ -136,35 +165,6 @@ type GetDataSourceOutput struct {
 	//     * DELETED - The
 	// DataSource is marked as deleted. It is not usable.
 	Status types.EntityStatus
-
-	// The datasource details that are specific to Amazon RDS.
-	RDSMetadata *types.RDSMetadata
-
-	// The location of the data file or directory in Amazon Simple Storage Service
-	// (Amazon S3).
-	DataLocationS3 *string
-
-	// Describes the DataSource details specific to Amazon Redshift.
-	RedshiftMetadata *types.RedshiftMetadata
-
-	// The number of data files referenced by the DataSource.
-	NumberOfFiles *int64
-
-	// The Amazon Resource Name (ARN) of an AWS IAM Role
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
-	// such as the following: arn:aws:iam::account:role/rolename.
-	RoleARN *string
-
-	// The time that the DataSource was created. The time is expressed in epoch time.
-	CreatedAt *time.Time
-
-	// A JSON string that represents the splitting and rearrangement requirement used
-	// when this DataSource was created.
-	DataRearrangement *string
-
-	// The time of the most recent edit to the DataSource. The time is expressed in
-	// epoch time.
-	LastUpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

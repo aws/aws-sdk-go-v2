@@ -58,6 +58,70 @@ func (c *Client) DescribeDBSnapshots(ctx context.Context, params *DescribeDBSnap
 //
 type DescribeDBSnapshotsInput struct {
 
+	// The ID of the DB instance to retrieve the list of DB snapshots for. This
+	// parameter can't be used in conjunction with DBSnapshotIdentifier. This parameter
+	// isn't case-sensitive. Constraints:
+	//
+	//     * If supplied, must match the identifier
+	// of an existing DBInstance.
+	DBInstanceIdentifier *string
+
+	// A specific DB snapshot identifier to describe. This parameter can't be used in
+	// conjunction with DBInstanceIdentifier. This value is stored as a lowercase
+	// string. Constraints:
+	//
+	//     * If supplied, must match the identifier of an
+	// existing DBSnapshot.
+	//
+	//     * If this identifier is for an automated snapshot, the
+	// SnapshotType parameter must also be specified.
+	DBSnapshotIdentifier *string
+
+	// A specific DB resource ID to describe.
+	DbiResourceId *string
+
+	// A filter that specifies one or more DB snapshots to describe. Supported
+	// filters:
+	//
+	//     * db-instance-id - Accepts DB instance identifiers and DB instance
+	// Amazon Resource Names (ARNs).
+	//
+	//     * db-snapshot-id - Accepts DB snapshot
+	// identifiers.
+	//
+	//     * dbi-resource-id - Accepts identifiers of source DB
+	// instances.
+	//
+	//     * snapshot-type - Accepts types of DB snapshots.
+	//
+	//     * engine -
+	// Accepts names of database engines.
+	Filters []*types.Filter
+
+	// A value that indicates whether to include manual DB cluster snapshots that are
+	// public and can be copied or restored by any AWS account. By default, the public
+	// snapshots are not included. You can share a manual DB snapshot as public by
+	// using the ModifyDBSnapshotAttribute () API.
+	IncludePublic *bool
+
+	// A value that indicates whether to include shared manual DB cluster snapshots
+	// from other AWS accounts that this AWS account has been given permission to copy
+	// or restore. By default, these snapshots are not included. You can give an AWS
+	// account permission to restore a manual DB snapshot from another AWS account by
+	// using the ModifyDBSnapshotAttribute API action.
+	IncludeShared *bool
+
+	// An optional pagination token provided by a previous DescribeDBSnapshots request.
+	// If this parameter is specified, the response includes only records beyond the
+	// marker, up to the value specified by MaxRecords.
+	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that you can retrieve the remaining results.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
+
 	// The type of snapshots to be returned. You can specify one of the following
 	// values:
 	//
@@ -89,70 +153,6 @@ type DescribeDBSnapshotsInput struct {
 	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
 	// parameter doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
-
-	// An optional pagination token provided by a previous DescribeDBSnapshots request.
-	// If this parameter is specified, the response includes only records beyond the
-	// marker, up to the value specified by MaxRecords.
-	Marker *string
-
-	// A value that indicates whether to include manual DB cluster snapshots that are
-	// public and can be copied or restored by any AWS account. By default, the public
-	// snapshots are not included. You can share a manual DB snapshot as public by
-	// using the ModifyDBSnapshotAttribute () API.
-	IncludePublic *bool
-
-	// A value that indicates whether to include shared manual DB cluster snapshots
-	// from other AWS accounts that this AWS account has been given permission to copy
-	// or restore. By default, these snapshots are not included. You can give an AWS
-	// account permission to restore a manual DB snapshot from another AWS account by
-	// using the ModifyDBSnapshotAttribute API action.
-	IncludeShared *bool
-
-	// A filter that specifies one or more DB snapshots to describe. Supported
-	// filters:
-	//
-	//     * db-instance-id - Accepts DB instance identifiers and DB instance
-	// Amazon Resource Names (ARNs).
-	//
-	//     * db-snapshot-id - Accepts DB snapshot
-	// identifiers.
-	//
-	//     * dbi-resource-id - Accepts identifiers of source DB
-	// instances.
-	//
-	//     * snapshot-type - Accepts types of DB snapshots.
-	//
-	//     * engine -
-	// Accepts names of database engines.
-	Filters []*types.Filter
-
-	// A specific DB snapshot identifier to describe. This parameter can't be used in
-	// conjunction with DBInstanceIdentifier. This value is stored as a lowercase
-	// string. Constraints:
-	//
-	//     * If supplied, must match the identifier of an
-	// existing DBSnapshot.
-	//
-	//     * If this identifier is for an automated snapshot, the
-	// SnapshotType parameter must also be specified.
-	DBSnapshotIdentifier *string
-
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
-
-	// A specific DB resource ID to describe.
-	DbiResourceId *string
-
-	// The ID of the DB instance to retrieve the list of DB snapshots for. This
-	// parameter can't be used in conjunction with DBSnapshotIdentifier. This parameter
-	// isn't case-sensitive. Constraints:
-	//
-	//     * If supplied, must match the identifier
-	// of an existing DBInstance.
-	DBInstanceIdentifier *string
 }
 
 // Contains the result of a successful invocation of the DescribeDBSnapshots

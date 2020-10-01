@@ -57,15 +57,15 @@ func (c *Client) DescribeVirtualRouter(ctx context.Context, params *DescribeVirt
 //
 type DescribeVirtualRouterInput struct {
 
-	// The name of the virtual router to describe.
-	//
-	// This member is required.
-	VirtualRouterName *string
-
 	// The name of the service mesh that the virtual router resides in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the virtual router to describe.
+	//
+	// This member is required.
+	VirtualRouterName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For

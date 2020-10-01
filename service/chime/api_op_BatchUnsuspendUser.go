@@ -64,15 +64,15 @@ func (c *Client) BatchUnsuspendUser(ctx context.Context, params *BatchUnsuspendU
 
 type BatchUnsuspendUserInput struct {
 
-	// The request containing the user IDs to unsuspend.
-	//
-	// This member is required.
-	UserIdList []*string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The request containing the user IDs to unsuspend.
+	//
+	// This member is required.
+	UserIdList []*string
 }
 
 type BatchUnsuspendUserOutput struct {

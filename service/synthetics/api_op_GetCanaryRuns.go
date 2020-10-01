@@ -62,13 +62,13 @@ type GetCanaryRunsInput struct {
 	// This member is required.
 	Name *string
 
-	// A token that indicates that there is more data available. You can use this token
-	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.
-	NextToken *string
-
 	// Specify this parameter to limit how many runs are returned each time you use the
 	// GetCanaryRuns operation. If you omit this parameter, the default of 100 is used.
 	MaxResults *int32
+
+	// A token that indicates that there is more data available. You can use this token
+	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.
+	NextToken *string
 }
 
 type GetCanaryRunsOutput struct {

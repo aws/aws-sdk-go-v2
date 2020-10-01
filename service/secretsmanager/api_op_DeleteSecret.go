@@ -92,19 +92,6 @@ func (c *Client) DeleteSecret(ctx context.Context, params *DeleteSecretInput, op
 
 type DeleteSecretInput struct {
 
-	// (Optional) Specifies that the secret is to be deleted without any recovery
-	// window. You can't use both this parameter and the RecoveryWindowInDays parameter
-	// in the same API call. An asynchronous background process performs the actual
-	// deletion, so there can be a short delay before the operation completes. If you
-	// write code to delete and then immediately recreate a secret with the same name,
-	// ensure that your code includes appropriate back off and retry logic. Use this
-	// parameter with caution. This parameter causes the operation to skip the normal
-	// waiting period before the permanent deletion that AWS would normally impose with
-	// the RecoveryWindowInDays parameter. If you delete a secret with the
-	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
-	// secret. It is permanently lost.
-	ForceDeleteWithoutRecovery *bool
-
 	// Specifies the secret that you want to delete. You can specify either the Amazon
 	// Resource Name (ARN) or the friendly name of the secret. If you specify an ARN,
 	// we generally recommend that you specify a complete ARN. You can specify a
@@ -126,6 +113,19 @@ type DeleteSecretInput struct {
 	// This member is required.
 	SecretId *string
 
+	// (Optional) Specifies that the secret is to be deleted without any recovery
+	// window. You can't use both this parameter and the RecoveryWindowInDays parameter
+	// in the same API call. An asynchronous background process performs the actual
+	// deletion, so there can be a short delay before the operation completes. If you
+	// write code to delete and then immediately recreate a secret with the same name,
+	// ensure that your code includes appropriate back off and retry logic. Use this
+	// parameter with caution. This parameter causes the operation to skip the normal
+	// waiting period before the permanent deletion that AWS would normally impose with
+	// the RecoveryWindowInDays parameter. If you delete a secret with the
+	// ForceDeleteWithouRecovery parameter, then you have no opportunity to recover the
+	// secret. It is permanently lost.
+	ForceDeleteWithoutRecovery *bool
+
 	// (Optional) Specifies the number of days that Secrets Manager waits before it can
 	// delete the secret. You can't use both this parameter and the
 	// ForceDeleteWithoutRecovery parameter in the same API call. This value can range
@@ -138,13 +138,13 @@ type DeleteSecretOutput struct {
 	// The ARN of the secret that is now scheduled for deletion.
 	ARN *string
 
-	// The friendly name of the secret that is now scheduled for deletion.
-	Name *string
-
 	// The date and time after which this secret can be deleted by Secrets Manager and
 	// can no longer be restored. This value is the date and time of the delete request
 	// plus the number of days specified in RecoveryWindowInDays.
 	DeletionDate *time.Time
+
+	// The friendly name of the secret that is now scheduled for deletion.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

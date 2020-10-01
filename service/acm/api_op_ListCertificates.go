@@ -59,17 +59,17 @@ func (c *Client) ListCertificates(ctx context.Context, params *ListCertificatesI
 
 type ListCertificatesInput struct {
 
-	// Use this parameter when paginating results to specify the maximum number of
-	// items to return in the response. If additional items exist beyond the number you
-	// specify, the NextToken element is sent in the response. Use this NextToken value
-	// in a subsequent request to retrieve additional items.
-	MaxItems *int32
-
 	// Filter the certificate list by status value.
 	CertificateStatuses []types.CertificateStatus
 
 	// Filter the certificate list. For more information, see the Filters () structure.
 	Includes *types.Filters
+
+	// Use this parameter when paginating results to specify the maximum number of
+	// items to return in the response. If additional items exist beyond the number you
+	// specify, the NextToken element is sent in the response. Use this NextToken value
+	// in a subsequent request to retrieve additional items.
+	MaxItems *int32
 
 	// Use this parameter only when paginating results and only in a subsequent request
 	// after you receive a response with truncated results. Set it to the value of
@@ -79,12 +79,12 @@ type ListCertificatesInput struct {
 
 type ListCertificatesOutput struct {
 
+	// A list of ACM certificates.
+	CertificateSummaryList []*types.CertificateSummary
+
 	// When the list is truncated, this value is present and contains the value to use
 	// for the NextToken parameter in a subsequent pagination request.
 	NextToken *string
-
-	// A list of ACM certificates.
-	CertificateSummaryList []*types.CertificateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

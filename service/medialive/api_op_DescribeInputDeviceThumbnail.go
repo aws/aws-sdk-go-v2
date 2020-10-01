@@ -59,35 +59,35 @@ func (c *Client) DescribeInputDeviceThumbnail(ctx context.Context, params *Descr
 // Placeholder documentation for DescribeInputDeviceThumbnailRequest
 type DescribeInputDeviceThumbnailInput struct {
 
-	// The unique ID of this input device. For example, hd-123456789abcdef.
-	//
-	// This member is required.
-	InputDeviceId *string
-
 	// The HTTP Accept header. Indicates the requested type for the thumbnail.
 	//
 	// This member is required.
 	Accept types.AcceptHeader
+
+	// The unique ID of this input device. For example, hd-123456789abcdef.
+	//
+	// This member is required.
+	InputDeviceId *string
 }
 
 // Placeholder documentation for DescribeInputDeviceThumbnailResponse
 type DescribeInputDeviceThumbnailOutput struct {
 
-	// Specifies the media type of the thumbnail.
-	ContentType types.ContentType
+	// The binary data for the thumbnail that the Link device has most recently sent to
+	// MediaLive.
+	Body io.ReadCloser
 
 	// The length of the content.
 	ContentLength *int64
+
+	// Specifies the media type of the thumbnail.
+	ContentType types.ContentType
 
 	// The unique, cacheable version of this thumbnail.
 	ETag *string
 
 	// The date and time the thumbnail was last updated at the device.
 	LastModified *time.Time
-
-	// The binary data for the thumbnail that the Link device has most recently sent to
-	// MediaLive.
-	Body io.ReadCloser
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

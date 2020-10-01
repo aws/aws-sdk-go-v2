@@ -62,18 +62,18 @@ type UpdateConferenceProviderInput struct {
 	// This member is required.
 	ConferenceProviderArn *string
 
-	// The IP endpoint and protocol for calling.
-	IPDialIn *types.IPDialIn
+	// The type of the conference provider.
+	//
+	// This member is required.
+	ConferenceProviderType types.ConferenceProviderType
 
 	// The meeting settings for the conference provider.
 	//
 	// This member is required.
 	MeetingSetting *types.MeetingSetting
 
-	// The type of the conference provider.
-	//
-	// This member is required.
-	ConferenceProviderType types.ConferenceProviderType
+	// The IP endpoint and protocol for calling.
+	IPDialIn *types.IPDialIn
 
 	// The information for PSTN conferencing.
 	PSTNDialIn *types.PSTNDialIn

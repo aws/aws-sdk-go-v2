@@ -56,27 +56,27 @@ func (c *Client) ListDirectories(ctx context.Context, params *ListDirectoriesInp
 
 type ListDirectoriesInput struct {
 
+	// The maximum number of results to retrieve.
+	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
+
 	// The state of the directories in the list. Can be either Enabled, Disabled, or
 	// Deleted.
 	State types.DirectoryState
-
-	// The pagination token.
-	NextToken *string
-
-	// The maximum number of results to retrieve.
-	MaxResults *int32
 }
 
 type ListDirectoriesOutput struct {
-
-	// The pagination token.
-	NextToken *string
 
 	// Lists all directories that are associated with your account in pagination
 	// fashion.
 	//
 	// This member is required.
 	Directories []*types.Directory
+
+	// The pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

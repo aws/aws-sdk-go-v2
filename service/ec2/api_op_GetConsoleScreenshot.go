@@ -57,16 +57,16 @@ func (c *Client) GetConsoleScreenshot(ctx context.Context, params *GetConsoleScr
 
 type GetConsoleScreenshotInput struct {
 
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the instance.
-	//
-	// This member is required.
-	InstanceId *string
 
 	// When set to true, acts as keystroke input and wakes up an instance that's in
 	// standby or "sleep" mode.
@@ -75,11 +75,11 @@ type GetConsoleScreenshotInput struct {
 
 type GetConsoleScreenshotOutput struct {
 
-	// The ID of the instance.
-	InstanceId *string
-
 	// The data that comprises the image.
 	ImageData *string
+
+	// The ID of the instance.
+	InstanceId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

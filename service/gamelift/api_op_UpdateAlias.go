@@ -75,9 +75,11 @@ func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optF
 // Represents the input for a request action.
 type UpdateAliasInput struct {
 
-	// The routing configuration, including routing type and fleet target, for the
-	// alias.
-	RoutingStrategy *types.RoutingStrategy
+	// A unique identifier for the alias that you want to update. You can use either
+	// the alias ID or ARN value.
+	//
+	// This member is required.
+	AliasId *string
 
 	// A human-readable description of the alias.
 	Description *string
@@ -86,11 +88,9 @@ type UpdateAliasInput struct {
 	// be unique.
 	Name *string
 
-	// A unique identifier for the alias that you want to update. You can use either
-	// the alias ID or ARN value.
-	//
-	// This member is required.
-	AliasId *string
+	// The routing configuration, including routing type and fleet target, for the
+	// alias.
+	RoutingStrategy *types.RoutingStrategy
 }
 
 // Represents the returned data in response to a request action.

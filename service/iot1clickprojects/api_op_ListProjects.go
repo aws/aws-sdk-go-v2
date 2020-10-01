@@ -67,14 +67,14 @@ type ListProjectsInput struct {
 
 type ListProjectsOutput struct {
 
-	// The token used to retrieve the next set of results - will be effectively empty
-	// if there are no further results.
-	NextToken *string
-
 	// An object containing the list of projects.
 	//
 	// This member is required.
 	Projects []*types.ProjectSummary
+
+	// The token used to retrieve the next set of results - will be effectively empty
+	// if there are no further results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

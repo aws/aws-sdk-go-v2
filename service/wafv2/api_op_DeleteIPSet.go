@@ -61,6 +61,12 @@ func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optF
 
 type DeleteIPSetInput struct {
 
+	// A unique identifier for the set. This ID is returned in the responses to create
+	// and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
+	Id *string
+
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
 	// make changes to the entity associated with the token, you provide the token to
@@ -71,6 +77,12 @@ type DeleteIPSetInput struct {
 	//
 	// This member is required.
 	LockToken *string
+
+	// The name of the IP set. You cannot change the name of an IPSet after you create
+	// it.
+	//
+	// This member is required.
+	Name *string
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
@@ -85,18 +97,6 @@ type DeleteIPSetInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
-
-	// The name of the IP set. You cannot change the name of an IPSet after you create
-	// it.
-	//
-	// This member is required.
-	Name *string
-
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
 }
 
 type DeleteIPSetOutput struct {

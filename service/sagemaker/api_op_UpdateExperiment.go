@@ -57,13 +57,13 @@ func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentI
 
 type UpdateExperimentInput struct {
 
-	// The description of the experiment.
-	Description *string
-
 	// The name of the experiment to update.
 	//
 	// This member is required.
 	ExperimentName *string
+
+	// The description of the experiment.
+	Description *string
 
 	// The name of the experiment as displayed. The name doesn't need to be unique. If
 	// DisplayName isn't specified, ExperimentName is displayed.

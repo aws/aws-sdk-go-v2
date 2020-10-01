@@ -65,15 +65,15 @@ func (c *Client) DeleteAssetModel(ctx context.Context, params *DeleteAssetModelI
 
 type DeleteAssetModelInput struct {
 
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
-
 	// The ID of the asset model to delete.
 	//
 	// This member is required.
 	AssetModelId *string
+
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 }
 
 type DeleteAssetModelOutput struct {

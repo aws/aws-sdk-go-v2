@@ -65,24 +65,6 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 type CreatePolicyInput struct {
 
-	// The friendly name of the policy. IAM user, group, role, and policy names must be
-	// unique within the account. Names are not distinguished by case. For example, you
-	// cannot create resources named both "MyResource" and "myresource".
-	//
-	// This member is required.
-	PolicyName *string
-
-	// The path for the policy. For more information about paths, see IAM Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
-	// IAM User Guide. This parameter is optional. If it is not included, it defaults
-	// to a slash (/). This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
-	// forward slash (/) by itself or a string that must begin and end with forward
-	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
-	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
-	Path *string
-
 	// The JSON policy document that you want to use as the content for the new policy.
 	// You must provide policies in JSON format in IAM. However, for AWS CloudFormation
 	// templates formatted in YAML, you can provide the policy in JSON or YAML format.
@@ -104,11 +86,29 @@ type CreatePolicyInput struct {
 	// This member is required.
 	PolicyDocument *string
 
+	// The friendly name of the policy. IAM user, group, role, and policy names must be
+	// unique within the account. Names are not distinguished by case. For example, you
+	// cannot create resources named both "MyResource" and "myresource".
+	//
+	// This member is required.
+	PolicyName *string
+
 	// A friendly description of the policy. Typically used to store information about
 	// the permissions defined in the policy. For example, "Grants access to production
 	// DynamoDB tables." The policy description is immutable. After a value is
 	// assigned, it cannot be changed.
 	Description *string
+
+	// The path for the policy. For more information about paths, see IAM Identifiers
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
+	// IAM User Guide. This parameter is optional. If it is not included, it defaults
+	// to a slash (/). This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
+	// forward slash (/) by itself or a string that must begin and end with forward
+	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
+	// through the DEL character (\u007F), including most punctuation characters,
+	// digits, and upper and lowercased letters.
+	Path *string
 }
 
 // Contains the response to a successful CreatePolicy () request.

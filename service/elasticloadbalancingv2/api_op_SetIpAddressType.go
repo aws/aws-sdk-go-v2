@@ -58,17 +58,17 @@ func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeI
 
 type SetIpAddressTypeInput struct {
 
-	// The Amazon Resource Name (ARN) of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerArn *string
-
 	// The IP address type. The possible values are ipv4 (for IPv4 addresses) and
 	// dualstack (for IPv4 and IPv6 addresses). Internal load balancers must use ipv4.
 	// Network Load Balancers must use ipv4.
 	//
 	// This member is required.
 	IpAddressType types.IpAddressType
+
+	// The Amazon Resource Name (ARN) of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerArn *string
 }
 
 type SetIpAddressTypeOutput struct {

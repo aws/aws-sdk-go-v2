@@ -57,25 +57,25 @@ func (c *Client) ListEndpointConfigs(ctx context.Context, params *ListEndpointCo
 
 type ListEndpointConfigsInput struct {
 
+	// A filter that returns only endpoint configurations with a creation time greater
+	// than or equal to the specified time (timestamp).
+	CreationTimeAfter *time.Time
+
 	// A filter that returns only endpoint configurations created before the specified
 	// time (timestamp).
 	CreationTimeBefore *time.Time
+
+	// The maximum number of training jobs to return in the response.
+	MaxResults *int32
 
 	// A string in the endpoint configuration name. This filter returns only endpoint
 	// configurations whose name contains the specified string.
 	NameContains *string
 
-	// A filter that returns only endpoint configurations with a creation time greater
-	// than or equal to the specified time (timestamp).
-	CreationTimeAfter *time.Time
-
 	// If the result of the previous ListEndpointConfig request was truncated, the
 	// response includes a NextToken. To retrieve the next set of endpoint
 	// configurations, use the token in the next request.
 	NextToken *string
-
-	// The maximum number of training jobs to return in the response.
-	MaxResults *int32
 
 	// The field to sort results by. The default is CreationTime.
 	SortBy types.EndpointConfigSortKey
@@ -86,14 +86,14 @@ type ListEndpointConfigsInput struct {
 
 type ListEndpointConfigsOutput struct {
 
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of endpoint configurations, use it in the subsequent request
-	NextToken *string
-
 	// An array of endpoint configurations.
 	//
 	// This member is required.
 	EndpointConfigs []*types.EndpointConfigSummary
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of endpoint configurations, use it in the subsequent request
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

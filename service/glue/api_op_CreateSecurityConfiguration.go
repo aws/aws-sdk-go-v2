@@ -63,15 +63,15 @@ func (c *Client) CreateSecurityConfiguration(ctx context.Context, params *Create
 
 type CreateSecurityConfigurationInput struct {
 
-	// The name for the new security configuration.
-	//
-	// This member is required.
-	Name *string
-
 	// The encryption configuration for the new security configuration.
 	//
 	// This member is required.
 	EncryptionConfiguration *types.EncryptionConfiguration
+
+	// The name for the new security configuration.
+	//
+	// This member is required.
+	Name *string
 }
 
 type CreateSecurityConfigurationOutput struct {

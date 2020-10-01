@@ -58,26 +58,26 @@ func (c *Client) ListUserPools(ctx context.Context, params *ListUserPoolsInput, 
 // Represents the request to list user pools.
 type ListUserPoolsInput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
-	NextToken *string
-
 	// The maximum number of results you want the request to return when listing the
 	// user pools.
 	//
 	// This member is required.
 	MaxResults *int32
+
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
+	NextToken *string
 }
 
 // Represents the response to list user pools.
 type ListUserPoolsOutput struct {
 
-	// The user pools from the response to list users.
-	UserPools []*types.UserPoolDescriptionType
-
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
+	// The user pools from the response to list users.
+	UserPools []*types.UserPoolDescriptionType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,15 +63,15 @@ func (c *Client) GetQueueUrl(ctx context.Context, params *GetQueueUrlInput, optF
 //
 type GetQueueUrlInput struct {
 
-	// The AWS account ID of the account that created the queue.
-	QueueOwnerAWSAccountId *string
-
 	// The name of the queue whose URL must be fetched. Maximum 80 characters. Valid
 	// values: alphanumeric characters, hyphens (-), and underscores (_). Queue URLs
 	// and names are case-sensitive.
 	//
 	// This member is required.
 	QueueName *string
+
+	// The AWS account ID of the account that created the queue.
+	QueueOwnerAWSAccountId *string
 }
 
 // For more information, see Interpreting Responses

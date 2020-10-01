@@ -57,8 +57,8 @@ func (c *Client) ListTopicRules(ctx context.Context, params *ListTopicRulesInput
 // The input for the ListTopicRules operation.
 type ListTopicRulesInput struct {
 
-	// The topic.
-	Topic *string
+	// The maximum number of results to return.
+	MaxResults *int32
 
 	// A token used to retrieve the next value.
 	NextToken *string
@@ -66,8 +66,8 @@ type ListTopicRulesInput struct {
 	// Specifies whether the rule is disabled.
 	RuleDisabled *bool
 
-	// The maximum number of results to return.
-	MaxResults *int32
+	// The topic.
+	Topic *string
 }
 
 // The output from the ListTopicRules operation.

@@ -74,11 +74,11 @@ type RestoreAddressToClassicInput struct {
 
 type RestoreAddressToClassicOutput struct {
 
-	// The move status for the IP address.
-	Status types.Status
-
 	// The Elastic IP address.
 	PublicIp *string
+
+	// The move status for the IP address.
+	Status types.Status
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,31 +57,31 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The nextToken string returned on a previous page that you use to get the next
-	// page of results in a paginated response.
-	NextToken *string
-
-	// The maximum number of tags returned on each page. The limit maximum is 50. You
-	// cannot specify a number greater than 50. If you specify 0, AWS Config uses the
-	// default.
-	Limit *int32
-
 	// The Amazon Resource Name (ARN) that identifies the resource for which to list
 	// the tags. Currently, the supported resources are ConfigRule,
 	// ConfigurationAggregator and AggregatorAuthorization.
 	//
 	// This member is required.
 	ResourceArn *string
-}
 
-type ListTagsForResourceOutput struct {
-
-	// The tags for the resource.
-	Tags []*types.Tag
+	// The maximum number of tags returned on each page. The limit maximum is 50. You
+	// cannot specify a number greater than 50. If you specify 0, AWS Config uses the
+	// default.
+	Limit *int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+}
+
+type ListTagsForResourceOutput struct {
+
+	// The nextToken string returned on a previous page that you use to get the next
+	// page of results in a paginated response.
+	NextToken *string
+
+	// The tags for the resource.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

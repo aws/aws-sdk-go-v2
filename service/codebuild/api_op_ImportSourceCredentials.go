@@ -58,21 +58,6 @@ func (c *Client) ImportSourceCredentials(ctx context.Context, params *ImportSour
 
 type ImportSourceCredentialsInput struct {
 
-	// The source provider used for this project.
-	//
-	// This member is required.
-	ServerType types.ServerType
-
-	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not
-	// valid for other types of source providers or connections.
-	Username *string
-
-	// For GitHub or GitHub Enterprise, this is the personal access token. For
-	// Bitbucket, this is the app password.
-	//
-	// This member is required.
-	Token *string
-
 	// The type of authentication used to connect to a GitHub, GitHub Enterprise, or
 	// Bitbucket repository. An OAUTH connection is not supported by the API and must
 	// be created using the AWS CodeBuild console.
@@ -80,9 +65,24 @@ type ImportSourceCredentialsInput struct {
 	// This member is required.
 	AuthType types.AuthType
 
+	// The source provider used for this project.
+	//
+	// This member is required.
+	ServerType types.ServerType
+
+	// For GitHub or GitHub Enterprise, this is the personal access token. For
+	// Bitbucket, this is the app password.
+	//
+	// This member is required.
+	Token *string
+
 	// Set to false to prevent overwriting the repository source credentials. Set to
 	// true to overwrite the repository source credentials. The default value is true.
 	ShouldOverwrite *bool
+
+	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not
+	// valid for other types of source providers or connections.
+	Username *string
 }
 
 type ImportSourceCredentialsOutput struct {

@@ -9,6 +9,14 @@ import (
 // An object that contains information about your account details.
 type AccountDetails struct {
 
+	// Additional email addresses where updates are sent about your account review
+	// process.
+	AdditionalContactEmailAddresses []*string
+
+	// The language you would prefer for the case. The contact language can be one of
+	// ENGLISH or JAPANESE.
+	ContactLanguage ContactLanguage
+
 	// The type of email your account is sending. The mail type can be one of the
 	// following:
 	//
@@ -19,23 +27,15 @@ type AccountDetails struct {
 	// sending traffic is to communicate during a transaction with a customer.
 	MailType MailType
 
-	// The URL of your website. This information helps us better understand the type of
-	// content that you plan to send.
-	WebsiteURL *string
+	// Information about the review of the latest details you submitted.
+	ReviewDetails *ReviewDetails
 
 	// A description of the types of email that you plan to send.
 	UseCaseDescription *string
 
-	// Additional email addresses where updates are sent about your account review
-	// process.
-	AdditionalContactEmailAddresses []*string
-
-	// The language you would prefer for the case. The contact language can be one of
-	// ENGLISH or JAPANESE.
-	ContactLanguage ContactLanguage
-
-	// Information about the review of the latest details you submitted.
-	ReviewDetails *ReviewDetails
+	// The URL of your website. This information helps us better understand the type of
+	// content that you plan to send.
+	WebsiteURL *string
 }
 
 // An object that contains information about a blacklisting event that impacts one
@@ -103,13 +103,13 @@ type BulkEmailEntry struct {
 // The result of the SendBulkEmail operation of each specified BulkEmailEntry.
 type BulkEmailEntryResult struct {
 
-	// The unique message identifier returned from the SendBulkTemplatedEmail
-	// operation.
-	MessageId *string
-
 	// A description of an error that prevented a message being sent using the
 	// SendBulkTemplatedEmail operation.
 	Error *string
+
+	// The unique message identifier returned from the SendBulkTemplatedEmail
+	// operation.
+	MessageId *string
 
 	// The status of a message sent using the SendBulkTemplatedEmail operation.
 	// Possible values for this parameter include:
@@ -239,18 +239,18 @@ type Content struct {
 type CustomVerificationEmailTemplateMetadata struct {
 
 	// The URL that the recipient of the verification email is sent to if his or her
-	// address is successfully verified.
-	SuccessRedirectionURL *string
+	// address is not successfully verified.
+	FailureRedirectionURL *string
 
 	// The email address that the custom verification email is sent from.
 	FromEmailAddress *string
 
+	// The URL that the recipient of the verification email is sent to if his or her
+	// address is successfully verified.
+	SuccessRedirectionURL *string
+
 	// The name of the custom verification email template.
 	TemplateName *string
-
-	// The URL that the recipient of the verification email is sent to if his or her
-	// address is not successfully verified.
-	FailureRedirectionURL *string
 
 	// The subject line of the custom verification email.
 	TemplateSubject *string
@@ -279,6 +279,17 @@ type DailyVolume struct {
 // in the Amazon SES Developer Guide.
 type DedicatedIp struct {
 
+	// An IPv4 address.
+	//
+	// This member is required.
+	Ip *string
+
+	// Indicates how complete the dedicated IP warm-up process is. When this value
+	// equals 1, the address has completed the warm-up process and is ready for use.
+	//
+	// This member is required.
+	WarmupPercentage *int32
+
 	// The warm-up status of a dedicated IP address. The status can have one of the
 	// following values:
 	//
@@ -291,23 +302,16 @@ type DedicatedIp struct {
 	// This member is required.
 	WarmupStatus WarmupStatus
 
-	// An IPv4 address.
-	//
-	// This member is required.
-	Ip *string
-
 	// The name of the dedicated IP pool that the IP address is associated with.
 	PoolName *string
-
-	// Indicates how complete the dedicated IP warm-up process is. When this value
-	// equals 1, the address has completed the warm-up process and is ready for use.
-	//
-	// This member is required.
-	WarmupPercentage *int32
 }
 
 // An object that contains metadata related to a predictive inbox placement test.
 type DeliverabilityTestReport struct {
+
+	// The date and time when the predictive inbox placement test was created, in Unix
+	// time format.
+	CreateDate *time.Time
 
 	// The status of the predictive inbox placement test. If the status is IN_PROGRESS,
 	// then the predictive inbox placement test is currently running. Predictive inbox
@@ -319,19 +323,15 @@ type DeliverabilityTestReport struct {
 	// The sender address that you specified for the predictive inbox placement test.
 	FromEmailAddress *string
 
+	// A unique string that identifies the predictive inbox placement test.
+	ReportId *string
+
 	// A name that helps you identify a predictive inbox placement test report.
 	ReportName *string
 
 	// The subject line for an email that you submitted in a predictive inbox placement
 	// test.
 	Subject *string
-
-	// A unique string that identifies the predictive inbox placement test.
-	ReportId *string
-
-	// The date and time when the predictive inbox placement test was created, in Unix
-	// time format.
-	CreateDate *time.Time
 }
 
 // Used to associate a configuration set with a dedicated IP pool.
@@ -352,9 +352,6 @@ type DeliveryOptions struct {
 // An object that describes the recipients for an email.
 type Destination struct {
 
-	// An array that contains the email addresses of the "To" recipients for the email.
-	ToAddresses []*string
-
 	// An array that contains the email addresses of the "BCC" (blind carbon copy)
 	// recipients for the email.
 	BccAddresses []*string
@@ -362,6 +359,9 @@ type Destination struct {
 	// An array that contains the email addresses of the "CC" (carbon copy) recipients
 	// for the email.
 	CcAddresses []*string
+
+	// An array that contains the email addresses of the "To" recipients for the email.
+	ToAddresses []*string
 }
 
 // An object that contains information about the DKIM authentication status for an
@@ -376,19 +376,6 @@ type Destination struct {
 // identity
 type DkimAttributes struct {
 
-	// If you used Easy DKIM
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
-	// configure DKIM authentication for the domain, then this object contains a set of
-	// unique strings that you use to create a set of CNAME records that you add to the
-	// DNS configuration for your domain. When Amazon SES detects these records in the
-	// DNS configuration for your domain, the DKIM authentication process is complete.
-	// If you configured DKIM authentication for the domain by providing your own
-	// public-private key pair, then this object contains the selector for the public
-	// key. Regardless of the DKIM authentication method you use, Amazon SES searches
-	// for the appropriate records in the DNS configuration of the domain for up to 72
-	// hours.
-	Tokens []*string
-
 	// A string that indicates how DKIM was configured for the identity. There are two
 	// possible values:
 	//
@@ -400,6 +387,11 @@ type DkimAttributes struct {
 	// EXTERNAL – Indicates that DKIM was configured for the identity by using Bring
 	// Your Own DKIM (BYODKIM).
 	SigningAttributesOrigin DkimSigningAttributesOrigin
+
+	// If the value is true, then the messages that you send from the identity are
+	// signed using DKIM. If the value is false, then the messages that you send from
+	// the identity aren't DKIM-signed.
+	SigningEnabled *bool
 
 	// Describes whether or not Amazon SES has successfully located the DKIM records in
 	// the DNS records for the domain. The status can be one of the following:
@@ -423,27 +415,35 @@ type DkimAttributes struct {
 	// verification process hasn't been initiated for the domain.
 	Status DkimStatus
 
-	// If the value is true, then the messages that you send from the identity are
-	// signed using DKIM. If the value is false, then the messages that you send from
-	// the identity aren't DKIM-signed.
-	SigningEnabled *bool
+	// If you used Easy DKIM
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html) to
+	// configure DKIM authentication for the domain, then this object contains a set of
+	// unique strings that you use to create a set of CNAME records that you add to the
+	// DNS configuration for your domain. When Amazon SES detects these records in the
+	// DNS configuration for your domain, the DKIM authentication process is complete.
+	// If you configured DKIM authentication for the domain by providing your own
+	// public-private key pair, then this object contains the selector for the public
+	// key. Regardless of the DKIM authentication method you use, Amazon SES searches
+	// for the appropriate records in the DNS configuration of the domain for up to 72
+	// hours.
+	Tokens []*string
 }
 
 // An object that contains information about the tokens used for setting up Bring
 // Your Own DKIM (BYODKIM).
 type DkimSigningAttributes struct {
 
-	// A string that's used to identify a public key in the DNS configuration for a
-	// domain.
-	//
-	// This member is required.
-	DomainSigningSelector *string
-
 	// A private key that's used to generate a DKIM signature. The private key must use
 	// 1024-bit RSA encryption, and must be encoded using base64 encoding.
 	//
 	// This member is required.
 	DomainSigningPrivateKey *string
+
+	// A string that's used to identify a public key in the DNS configuration for a
+	// domain.
+	//
+	// This member is required.
+	DomainSigningSelector *string
 }
 
 // An object that contains the deliverability data for a specific campaign. This
@@ -452,19 +452,49 @@ type DkimSigningAttributes struct {
 // (PutDeliverabilityDashboardOption operation).
 type DomainDeliverabilityCampaign struct {
 
-	// The number of email messages that were delivered to recipients’ inboxes.
-	InboxCount *int64
+	// The unique identifier for the campaign. The Deliverability dashboard
+	// automatically generates and assigns this identifier to a campaign.
+	CampaignId *string
+
+	// The percentage of email messages that were deleted by recipients, without being
+	// opened first. Due to technical limitations, this value only includes recipients
+	// who opened the message by using an email client that supports images.
+	DeleteRate *float64
+
+	// The major email providers who handled the email message.
+	Esps []*string
+
+	// The first time, in Unix time format, when the email message was delivered to any
+	// recipient's inbox. This value can help you determine how long it took for a
+	// campaign to deliver an email message.
+	FirstSeenDateTime *time.Time
+
+	// The verified email address that the email message was sent from.
+	FromAddress *string
 
 	// The URL of an image that contains a snapshot of the email message that was sent.
 	ImageUrl *string
+
+	// The number of email messages that were delivered to recipients’ inboxes.
+	InboxCount *int64
+
+	// The last time, in Unix time format, when the email message was delivered to any
+	// recipient's inbox. This value can help you determine how long it took for a
+	// campaign to deliver an email message.
+	LastSeenDateTime *time.Time
+
+	// The projected number of recipients that the email message was sent to.
+	ProjectedVolume *int64
 
 	// The percentage of email messages that were opened and then deleted by
 	// recipients. Due to technical limitations, this value only includes recipients
 	// who opened the message by using an email client that supports images.
 	ReadDeleteRate *float64
 
-	// The projected number of recipients that the email message was sent to.
-	ProjectedVolume *int64
+	// The percentage of email messages that were opened by recipients. Due to
+	// technical limitations, this value only includes recipients who opened the
+	// message by using an email client that supports images.
+	ReadRate *float64
 
 	// The IP addresses that were used to send the email message.
 	SendingIps []*string
@@ -473,38 +503,8 @@ type DomainDeliverabilityCampaign struct {
 	// mail folders.
 	SpamCount *int64
 
-	// The percentage of email messages that were opened by recipients. Due to
-	// technical limitations, this value only includes recipients who opened the
-	// message by using an email client that supports images.
-	ReadRate *float64
-
-	// The unique identifier for the campaign. The Deliverability dashboard
-	// automatically generates and assigns this identifier to a campaign.
-	CampaignId *string
-
-	// The major email providers who handled the email message.
-	Esps []*string
-
-	// The verified email address that the email message was sent from.
-	FromAddress *string
-
 	// The subject line, or title, of the email message.
 	Subject *string
-
-	// The last time, in Unix time format, when the email message was delivered to any
-	// recipient's inbox. This value can help you determine how long it took for a
-	// campaign to deliver an email message.
-	LastSeenDateTime *time.Time
-
-	// The first time, in Unix time format, when the email message was delivered to any
-	// recipient's inbox. This value can help you determine how long it took for a
-	// campaign to deliver an email message.
-	FirstSeenDateTime *time.Time
-
-	// The percentage of email messages that were deleted by recipients, without being
-	// opened first. Due to technical limitations, this value only includes recipients
-	// who opened the message by using an email client that supports images.
-	DeleteRate *float64
 }
 
 // An object that contains information about the Deliverability dashboard
@@ -514,13 +514,13 @@ type DomainDeliverabilityCampaign struct {
 // placement, and other metrics for the domain.
 type DomainDeliverabilityTrackingOption struct {
 
-	// An object that contains information about the inbox placement data settings for
-	// the domain.
-	InboxPlacementTrackingOption *InboxPlacementTrackingOption
-
 	// A verified domain that’s associated with your AWS account and currently has an
 	// active Deliverability dashboard subscription.
 	Domain *string
+
+	// An object that contains information about the inbox placement data settings for
+	// the domain.
+	InboxPlacementTrackingOption *InboxPlacementTrackingOption
 
 	// The date, in Unix time format, when you enabled the Deliverability dashboard for
 	// the domain.
@@ -531,24 +531,24 @@ type DomainDeliverabilityTrackingOption struct {
 // email domains to a specific email provider.
 type DomainIspPlacement struct {
 
-	// The name of the email provider that the inbox placement data applies to.
-	IspName *string
-
 	// The percentage of messages that were sent from the selected domain to the
 	// specified email provider that arrived in recipients' inboxes.
 	InboxPercentage *float64
 
 	// The total number of messages that were sent from the selected domain to the
-	// specified email provider that arrived in recipients' spam or junk mail folders.
-	SpamRawCount *int64
-
-	// The total number of messages that were sent from the selected domain to the
 	// specified email provider that arrived in recipients' inboxes.
 	InboxRawCount *int64
+
+	// The name of the email provider that the inbox placement data applies to.
+	IspName *string
 
 	// The percentage of messages that were sent from the selected domain to the
 	// specified email provider that arrived in recipients' spam or junk mail folders.
 	SpamPercentage *float64
+
+	// The total number of messages that were sent from the selected domain to the
+	// specified email provider that arrived in recipients' spam or junk mail folders.
+	SpamRawCount *int64
 }
 
 // An object that defines the entire content of the email, including the message
@@ -596,25 +596,25 @@ type EmailContent struct {
 // text-only part.
 type EmailTemplateContent struct {
 
-	// The email body that will be visible to recipients whose email clients do not
-	// display HTML.
-	Text *string
+	// The HTML body of the email.
+	Html *string
 
 	// The subject line of the email.
 	Subject *string
 
-	// The HTML body of the email.
-	Html *string
+	// The email body that will be visible to recipients whose email clients do not
+	// display HTML.
+	Text *string
 }
 
 // Contains information about an email template.
 type EmailTemplateMetadata struct {
 
-	// The name of the template.
-	TemplateName *string
-
 	// The time and date the template was created.
 	CreatedTimestamp *time.Time
+
+	// The name of the template.
+	TemplateName *string
 }
 
 // In the Amazon SES API v2, events include message sends, deliveries, opens,
@@ -624,30 +624,6 @@ type EmailTemplateMetadata struct {
 // complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon
 // S3 for long-term storage.
 type EventDestination struct {
-
-	// An object that defines an Amazon SNS destination for email events. You can use
-	// Amazon SNS to send notification when certain email events occur.
-	SnsDestination *SnsDestination
-
-	// An object that defines an Amazon CloudWatch destination for email events. You
-	// can use Amazon CloudWatch to monitor and gain insights on your email sending
-	// metrics.
-	CloudWatchDestination *CloudWatchDestination
-
-	// If true, the event destination is enabled. When the event destination is
-	// enabled, the specified event types are sent to the destinations in this
-	// EventDestinationDefinition. If false, the event destination is disabled. When
-	// the event destination is disabled, events aren't sent to the specified
-	// destinations.
-	Enabled *bool
-
-	// An object that defines an Amazon Pinpoint project destination for email events.
-	// You can send email event data to a Amazon Pinpoint project to view metrics using
-	// the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For
-	// more information, see Transactional Messaging Charts
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
-	// in the Amazon Pinpoint User Guide.
-	PinpointDestination *PinpointDestination
 
 	// The types of events that Amazon SES sends to the specified event destinations.
 	//
@@ -659,17 +635,22 @@ type EventDestination struct {
 	// This member is required.
 	Name *string
 
+	// An object that defines an Amazon CloudWatch destination for email events. You
+	// can use Amazon CloudWatch to monitor and gain insights on your email sending
+	// metrics.
+	CloudWatchDestination *CloudWatchDestination
+
+	// If true, the event destination is enabled. When the event destination is
+	// enabled, the specified event types are sent to the destinations in this
+	// EventDestinationDefinition. If false, the event destination is disabled. When
+	// the event destination is disabled, events aren't sent to the specified
+	// destinations.
+	Enabled *bool
+
 	// An object that defines an Amazon Kinesis Data Firehose destination for email
 	// events. You can use Amazon Kinesis Data Firehose to stream data to other
 	// services, such as Amazon S3 and Amazon Redshift.
 	KinesisFirehoseDestination *KinesisFirehoseDestination
-}
-
-// An object that defines the event destination. Specifically, it defines which
-// services receive events from emails sent using the configuration set that the
-// event destination is associated with. Also defines the types of events that are
-// sent to the event destination.
-type EventDestinationDefinition struct {
 
 	// An object that defines an Amazon Pinpoint project destination for email events.
 	// You can send email event data to a Amazon Pinpoint project to view metrics using
@@ -679,6 +660,22 @@ type EventDestinationDefinition struct {
 	// in the Amazon Pinpoint User Guide.
 	PinpointDestination *PinpointDestination
 
+	// An object that defines an Amazon SNS destination for email events. You can use
+	// Amazon SNS to send notification when certain email events occur.
+	SnsDestination *SnsDestination
+}
+
+// An object that defines the event destination. Specifically, it defines which
+// services receive events from emails sent using the configuration set that the
+// event destination is associated with. Also defines the types of events that are
+// sent to the event destination.
+type EventDestinationDefinition struct {
+
+	// An object that defines an Amazon CloudWatch destination for email events. You
+	// can use Amazon CloudWatch to monitor and gain insights on your email sending
+	// metrics.
+	CloudWatchDestination *CloudWatchDestination
+
 	// If true, the event destination is enabled. When the event destination is
 	// enabled, the specified event types are sent to the destinations in this
 	// EventDestinationDefinition. If false, the event destination is disabled. When
@@ -686,33 +683,30 @@ type EventDestinationDefinition struct {
 	// destinations.
 	Enabled *bool
 
-	// An object that defines an Amazon CloudWatch destination for email events. You
-	// can use Amazon CloudWatch to monitor and gain insights on your email sending
-	// metrics.
-	CloudWatchDestination *CloudWatchDestination
-
-	// An object that defines an Amazon SNS destination for email events. You can use
-	// Amazon SNS to send notification when certain email events occur.
-	SnsDestination *SnsDestination
+	// An object that defines an Amazon Kinesis Data Firehose destination for email
+	// events. You can use Amazon Kinesis Data Firehose to stream data to other
+	// services, such as Amazon S3 and Amazon Redshift.
+	KinesisFirehoseDestination *KinesisFirehoseDestination
 
 	// An array that specifies which events the Amazon SES API v2 should send to the
 	// destinations in this EventDestinationDefinition.
 	MatchingEventTypes []EventType
 
-	// An object that defines an Amazon Kinesis Data Firehose destination for email
-	// events. You can use Amazon Kinesis Data Firehose to stream data to other
-	// services, such as Amazon S3 and Amazon Redshift.
-	KinesisFirehoseDestination *KinesisFirehoseDestination
+	// An object that defines an Amazon Pinpoint project destination for email events.
+	// You can send email event data to a Amazon Pinpoint project to view metrics using
+	// the Transactional Messaging dashboards that are built in to Amazon Pinpoint. For
+	// more information, see Transactional Messaging Charts
+	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/analytics-transactional-messages.html)
+	// in the Amazon Pinpoint User Guide.
+	PinpointDestination *PinpointDestination
+
+	// An object that defines an Amazon SNS destination for email events. You can use
+	// Amazon SNS to send notification when certain email events occur.
+	SnsDestination *SnsDestination
 }
 
 // Information about an email identity.
 type IdentityInfo struct {
-
-	// Indicates whether or not you can send email from the identity. An identity is an
-	// email address or domain that you send email from. Before you can send email from
-	// an identity, you have to demostrate that you own the identity, and that you
-	// authorize Amazon SES to send email from that identity.
-	SendingEnabled *bool
 
 	// The address or domain of the identity.
 	IdentityName *string
@@ -728,6 +722,12 @@ type IdentityInfo struct {
 	//     * MANAGED_DOMAIN – The identity is a domain that is managed by
 	// AWS.
 	IdentityType IdentityType
+
+	// Indicates whether or not you can send email from the identity. An identity is an
+	// email address or domain that you send email from. Before you can send email from
+	// an identity, you have to demostrate that you own the identity, and that you
+	// authorize Amazon SES to send email from that identity.
+	SendingEnabled *bool
 }
 
 // An object that contains information about the inbox placement data settings for
@@ -759,21 +759,37 @@ type IspPlacement struct {
 // services, such as Amazon S3 and Amazon Redshift.
 type KinesisFirehoseDestination struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses
-	// to send email events to the Amazon Kinesis Data Firehose stream.
-	//
-	// This member is required.
-	IamRoleArn *string
-
 	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose stream that
 	// the Amazon SES API v2 sends email events to.
 	//
 	// This member is required.
 	DeliveryStreamArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM role that the Amazon SES API v2 uses
+	// to send email events to the Amazon Kinesis Data Firehose stream.
+	//
+	// This member is required.
+	IamRoleArn *string
 }
 
 // A list of attributes that are associated with a MAIL FROM domain.
 type MailFromAttributes struct {
+
+	// The action that you want to take if the required MX record can't be found when
+	// you send an email. When you set this value to UseDefaultValue, the mail is sent
+	// using amazonses.com as the MAIL FROM domain. When you set this value to
+	// RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
+	// and doesn't attempt to deliver the email. These behaviors are taken when the
+	// custom MAIL FROM domain configuration is in the Pending, Failed, and
+	// TemporaryFailure states.
+	//
+	// This member is required.
+	BehaviorOnMxFailure BehaviorOnMxFailure
+
+	// The name of a domain that an email identity uses as a custom MAIL FROM domain.
+	//
+	// This member is required.
+	MailFromDomain *string
 
 	// The status of the MAIL FROM domain. This status can have the following values:
 	//
@@ -792,22 +808,6 @@ type MailFromAttributes struct {
 	//
 	// This member is required.
 	MailFromDomainStatus MailFromDomainStatus
-
-	// The name of a domain that an email identity uses as a custom MAIL FROM domain.
-	//
-	// This member is required.
-	MailFromDomain *string
-
-	// The action that you want to take if the required MX record can't be found when
-	// you send an email. When you set this value to UseDefaultValue, the mail is sent
-	// using amazonses.com as the MAIL FROM domain. When you set this value to
-	// RejectMessage, the Amazon SES API v2 returns a MailFromDomainNotVerified error,
-	// and doesn't attempt to deliver the email. These behaviors are taken when the
-	// custom MAIL FROM domain configuration is in the Pending, Failed, and
-	// TemporaryFailure states.
-	//
-	// This member is required.
-	BehaviorOnMxFailure BehaviorOnMxFailure
 }
 
 // Represents the email message that you're sending. The Message object consists of
@@ -833,18 +833,6 @@ type Message struct {
 // message tags when you publish email sending events.
 type MessageTag struct {
 
-	// The value of the message tag. The message tag value has to meet the following
-	// criteria:
-	//
-	//     * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
-	// underscores (_), or dashes (-).
-	//
-	//     * It can contain no more than 256
-	// characters.
-	//
-	// This member is required.
-	Value *string
-
 	// The name of the message tag. The message tag name has to meet the following
 	// criteria:
 	//
@@ -856,6 +844,18 @@ type MessageTag struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The value of the message tag. The message tag value has to meet the following
+	// criteria:
+	//
+	//     * It can only contain ASCII letters (a–z, A–Z), numbers (0–9),
+	// underscores (_), or dashes (-).
+	//
+	//     * It can contain no more than 256
+	// characters.
+	//
+	// This member is required.
+	Value *string
 }
 
 // An object that contains information about email that was sent from the selected
@@ -866,13 +866,13 @@ type OverallVolume struct {
 	// email providers.
 	DomainIspPlacements []*DomainIspPlacement
 
-	// An object that contains information about the numbers of messages that arrived
-	// in recipients' inboxes and junk mail folders.
-	VolumeStatistics *VolumeStatistics
-
 	// The percentage of emails that were sent from the domain that were read by their
 	// recipients.
 	ReadRatePercent *float64
+
+	// An object that contains information about the numbers of messages that arrived
+	// in recipients' inboxes and junk mail folders.
+	VolumeStatistics *VolumeStatistics
 }
 
 // An object that defines an Amazon Pinpoint project destination for email events.
@@ -891,25 +891,25 @@ type PinpointDestination struct {
 // An object that contains inbox placement data for an email provider.
 type PlacementStatistics struct {
 
+	// The percentage of emails that were authenticated by using DomainKeys Identified
+	// Mail (DKIM) during the predictive inbox placement test.
+	DkimPercentage *float64
+
 	// The percentage of emails that arrived in recipients' inboxes during the
 	// predictive inbox placement test.
 	InboxPercentage *float64
 
-	// The percentage of emails that were authenticated by using Sender Policy
-	// Framework (SPF) during the predictive inbox placement test.
-	SpfPercentage *float64
-
-	// The percentage of emails that were authenticated by using DomainKeys Identified
-	// Mail (DKIM) during the predictive inbox placement test.
-	DkimPercentage *float64
+	// The percentage of emails that didn't arrive in recipients' inboxes at all during
+	// the predictive inbox placement test.
+	MissingPercentage *float64
 
 	// The percentage of emails that arrived in recipients' spam or junk mail folders
 	// during the predictive inbox placement test.
 	SpamPercentage *float64
 
-	// The percentage of emails that didn't arrive in recipients' inboxes at all during
-	// the predictive inbox placement test.
-	MissingPercentage *float64
+	// The percentage of emails that were authenticated by using Sender Policy
+	// Framework (SPF) during the predictive inbox placement test.
+	SpfPercentage *float64
 }
 
 // Represents the raw content of an email message.
@@ -967,18 +967,21 @@ type ReplacementTemplate struct {
 // using this configuration set in the current AWS Region.
 type ReputationOptions struct {
 
-	// If true, tracking of reputation metrics is enabled for the configuration set. If
-	// false, tracking of reputation metrics is disabled for the configuration set.
-	ReputationMetricsEnabled *bool
-
 	// The date and time (in Unix time) when the reputation metrics were last given a
 	// fresh start. When your account is given a fresh start, your reputation metrics
 	// are calculated starting from the date of the fresh start.
 	LastFreshStart *time.Time
+
+	// If true, tracking of reputation metrics is enabled for the configuration set. If
+	// false, tracking of reputation metrics is disabled for the configuration set.
+	ReputationMetricsEnabled *bool
 }
 
 // An object that contains information about your account details review.
 type ReviewDetails struct {
+
+	// The associated support center case ID (if any).
+	CaseId *string
 
 	// The status of the latest review of your account. The status can be one of the
 	// following:
@@ -996,9 +999,6 @@ type ReviewDetails struct {
 	// error occurred and we didn't receive your appeal. You can submit your appeal
 	// again.
 	Status ReviewStatus
-
-	// The associated support center case ID (if any).
-	CaseId *string
 }
 
 // Used to enable or disable email sending for messages that use this configuration
@@ -1070,22 +1070,17 @@ type SuppressedDestination struct {
 // that is on the suppression list for your account.
 type SuppressedDestinationAttributes struct {
 
-	// The unique identifier of the email message that caused the email address to be
-	// added to the suppression list for your account.
-	MessageId *string
-
 	// A unique identifier that's generated when an email address is added to the
 	// suppression list for your account.
 	FeedbackId *string
+
+	// The unique identifier of the email message that caused the email address to be
+	// added to the suppression list for your account.
+	MessageId *string
 }
 
 // A summary that describes the suppressed email address.
 type SuppressedDestinationSummary struct {
-
-	// The reason that the address was added to the suppression list for your account.
-	//
-	// This member is required.
-	Reason SuppressionListReason
 
 	// The email address that's on the suppression list for your account.
 	//
@@ -1097,6 +1092,11 @@ type SuppressedDestinationSummary struct {
 	//
 	// This member is required.
 	LastUpdateTime *time.Time
+
+	// The reason that the address was added to the suppression list for your account.
+	//
+	// This member is required.
+	Reason SuppressionListReason
 }
 
 // An object that contains information about the email address suppression
@@ -1165,6 +1165,12 @@ type SuppressionOptions struct {
 // for your AWS account.
 type Tag struct {
 
+	// One part of a key-value pair that defines a tag. The maximum length of a tag key
+	// is 128 characters. The minimum length is 1 character.
+	//
+	// This member is required.
+	Key *string
+
 	// The optional part of a key-value pair that defines a tag. The maximum length of
 	// a tag value is 256 characters. The minimum length is 0 characters. If you don't
 	// want a resource to have a specific tag value, don't specify a value for this
@@ -1173,12 +1179,6 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
-
-	// One part of a key-value pair that defines a tag. The maximum length of a tag key
-	// is 128 characters. The minimum length is 1 character.
-	//
-	// This member is required.
-	Key *string
 }
 
 // An object that defines the email template to use for an email message, and the
@@ -1224,12 +1224,12 @@ type VolumeStatistics struct {
 	InboxRawCount *int64
 
 	// An estimate of the percentage of emails sent from the current domain that will
-	// arrive in recipients' spam or junk mail folders.
-	ProjectedSpam *int64
-
-	// An estimate of the percentage of emails sent from the current domain that will
 	// arrive in recipients' inboxes.
 	ProjectedInbox *int64
+
+	// An estimate of the percentage of emails sent from the current domain that will
+	// arrive in recipients' spam or junk mail folders.
+	ProjectedSpam *int64
 
 	// The total number of emails that arrived in recipients' spam or junk mail
 	// folders.

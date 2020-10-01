@@ -57,10 +57,17 @@ func (c *Client) StartMedicalTranscriptionJob(ctx context.Context, params *Start
 
 type StartMedicalTranscriptionJobInput struct {
 
-	// The medical specialty of any clinician speaking in the input media.
+	// The language code for the language spoken in the input media file. US English
+	// (en-US) is the valid value for medical transcription jobs. Any other value you
+	// enter for language code results in a BadRequestException error.
 	//
 	// This member is required.
-	Specialty types.Specialty
+	LanguageCode types.LanguageCode
+
+	// Describes the input media file in a transcription request.
+	//
+	// This member is required.
+	Media *types.Media
 
 	// The name of the medical transcription job. You can't use the strings "." or ".."
 	// by themselves as the job name. The name must also be unique within an AWS
@@ -86,12 +93,10 @@ type StartMedicalTranscriptionJobInput struct {
 	// This member is required.
 	OutputBucketName *string
 
-	// The language code for the language spoken in the input media file. US English
-	// (en-US) is the valid value for medical transcription jobs. Any other value you
-	// enter for language code results in a BadRequestException error.
+	// The medical specialty of any clinician speaking in the input media.
 	//
 	// This member is required.
-	LanguageCode types.LanguageCode
+	Specialty types.Specialty
 
 	// The type of speech in the input audio. CONVERSATION refers to conversations
 	// between two or more speakers, e.g., a conversations between doctors and
@@ -104,9 +109,6 @@ type StartMedicalTranscriptionJobInput struct {
 	// The audio format of the input media file.
 	MediaFormat types.MediaFormat
 
-	// Optional settings for the medical transcription job.
-	Settings *types.MedicalTranscriptionSetting
-
 	// The sample rate, in Hertz, of the audio track in the input media file. If you do
 	// not specify the media sample rate, Amazon Transcribe Medical determines the
 	// sample rate. If you specify the sample rate, it must match the rate detected by
@@ -114,11 +116,6 @@ type StartMedicalTranscriptionJobInput struct {
 	// MediaSampleRateHertz field blank and let Amazon Transcribe Medical determine the
 	// sample rate.
 	MediaSampleRateHertz *int32
-
-	// Describes the input media file in a transcription request.
-	//
-	// This member is required.
-	Media *types.Media
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
 	// to encrypt the output of the transcription job. The user calling the
@@ -147,6 +144,9 @@ type StartMedicalTranscriptionJobInput struct {
 	// to encrypt your output, you must also specify an output location in the
 	// OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string
+
+	// Optional settings for the medical transcription job.
+	Settings *types.MedicalTranscriptionSetting
 }
 
 type StartMedicalTranscriptionJobOutput struct {

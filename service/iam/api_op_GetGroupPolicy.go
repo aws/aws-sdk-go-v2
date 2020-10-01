@@ -67,14 +67,6 @@ func (c *Client) GetGroupPolicy(ctx context.Context, params *GetGroupPolicyInput
 
 type GetGroupPolicyInput struct {
 
-	// The name of the policy document to get. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
-	// upper and lowercase alphanumeric characters with no spaces. You can also include
-	// any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	PolicyName *string
-
 	// The name of the group the policy is associated with. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
@@ -82,10 +74,23 @@ type GetGroupPolicyInput struct {
 	//
 	// This member is required.
 	GroupName *string
+
+	// The name of the policy document to get. This parameter allows (through its regex
+	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
+	// upper and lowercase alphanumeric characters with no spaces. You can also include
+	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	PolicyName *string
 }
 
 // Contains the response to a successful GetGroupPolicy () request.
 type GetGroupPolicyOutput struct {
+
+	// The group the policy is associated with.
+	//
+	// This member is required.
+	GroupName *string
 
 	// The policy document. IAM stores policies in JSON format. However, resources that
 	// were created using AWS CloudFormation templates can be formatted in YAML. AWS
@@ -99,11 +104,6 @@ type GetGroupPolicyOutput struct {
 	//
 	// This member is required.
 	PolicyName *string
-
-	// The group the policy is associated with.
-	//
-	// This member is required.
-	GroupName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

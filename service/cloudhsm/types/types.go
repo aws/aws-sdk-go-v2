@@ -6,13 +6,13 @@ package types
 // resource.
 type Tag struct {
 
-	// The value of the tag.
-	//
-	// This member is required.
-	Value *string
-
 	// The key of the tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value of the tag.
+	//
+	// This member is required.
+	Value *string
 }

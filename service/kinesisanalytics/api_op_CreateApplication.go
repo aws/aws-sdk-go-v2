@@ -82,8 +82,10 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 // TBD
 type CreateApplicationInput struct {
 
-	// Summary description of the application.
-	ApplicationDescription *string
+	// Name of your Amazon Kinesis Analytics application (for example, sample-app).
+	//
+	// This member is required.
+	ApplicationName *string
 
 	// One or more SQL statements that read input data, transform it, and generate
 	// output. For example, you can write a SQL statement that reads data from one
@@ -100,6 +102,29 @@ type CreateApplicationInput struct {
 	// <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then
 	// your application code must create these streams. </p>
 	ApplicationCode *string
+
+	// Summary description of the application.
+	ApplicationDescription *string
+
+	// Use this parameter to configure a CloudWatch log stream to monitor application
+	// configuration errors. For more information, see Working with Amazon CloudWatch
+	// Logs
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
+	CloudWatchLoggingOptions []*types.CloudWatchLoggingOption
+
+	// Use this parameter to configure the application input. You can configure your
+	// application to receive input from a single streaming source. In this
+	// configuration, you map this streaming source to an in-application stream that is
+	// created. Your application code can then query the in-application stream like a
+	// table (you can think of it as a constantly updating table). For the streaming
+	// source, you provide its Amazon Resource Name (ARN) and format of data on the
+	// stream (for example, JSON, CSV, etc.). You also must provide an IAM role that
+	// Amazon Kinesis Analytics can assume to read this stream on your behalf. To
+	// create the in-application stream, you need to specify a schema to transform your
+	// data into a schematized version used in SQL. In the schema, you provide the
+	// necessary mapping of the data elements in the streaming source to record columns
+	// in the in-app stream.
+	Inputs []*types.Input
 
 	// You can configure application output to write data from any of the
 	// in-application streams to up to three destinations. These destinations can be
@@ -121,31 +146,6 @@ type CreateApplicationInput struct {
 	// is 50. For more information, see Using Tagging
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-tagging.html).
 	Tags []*types.Tag
-
-	// Use this parameter to configure a CloudWatch log stream to monitor application
-	// configuration errors. For more information, see Working with Amazon CloudWatch
-	// Logs
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html).
-	CloudWatchLoggingOptions []*types.CloudWatchLoggingOption
-
-	// Name of your Amazon Kinesis Analytics application (for example, sample-app).
-	//
-	// This member is required.
-	ApplicationName *string
-
-	// Use this parameter to configure the application input. You can configure your
-	// application to receive input from a single streaming source. In this
-	// configuration, you map this streaming source to an in-application stream that is
-	// created. Your application code can then query the in-application stream like a
-	// table (you can think of it as a constantly updating table). For the streaming
-	// source, you provide its Amazon Resource Name (ARN) and format of data on the
-	// stream (for example, JSON, CSV, etc.). You also must provide an IAM role that
-	// Amazon Kinesis Analytics can assume to read this stream on your behalf. To
-	// create the in-application stream, you need to specify a schema to transform your
-	// data into a schematized version used in SQL. In the schema, you provide the
-	// necessary mapping of the data elements in the streaming source to record columns
-	// in the in-app stream.
-	Inputs []*types.Input
 }
 
 // TBD

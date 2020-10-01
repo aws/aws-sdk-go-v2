@@ -59,15 +59,15 @@ func (c *Client) RebootNode(ctx context.Context, params *RebootNodeInput, optFns
 
 type RebootNodeInput struct {
 
-	// The system-assigned ID of the node to be rebooted.
-	//
-	// This member is required.
-	NodeId *string
-
 	// The name of the DAX cluster containing the node to be rebooted.
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The system-assigned ID of the node to be rebooted.
+	//
+	// This member is required.
+	NodeId *string
 }
 
 type RebootNodeOutput struct {

@@ -106,16 +106,11 @@ func (c *Client) PutComplianceItems(ctx context.Context, params *PutComplianceIt
 
 type PutComplianceItemsInput struct {
 
-	// Specify an ID for this resource. For a managed instance, this is the instance
-	// ID.
+	// Specify the compliance type. For example, specify Association (for a State
+	// Manager association), Patch, or Custom:string.
 	//
 	// This member is required.
-	ResourceId *string
-
-	// MD5 or SHA-256 content hash. The content hash is used to determine if existing
-	// information should be overwritten or ignored. If the content hashes match, the
-	// request to put compliance information is ignored.
-	ItemContentHash *string
+	ComplianceType *string
 
 	// A summary of the call execution that includes an execution ID, the type of
 	// execution (for example, Command), and the date/time of the execution using a
@@ -123,6 +118,30 @@ type PutComplianceItemsInput struct {
 	//
 	// This member is required.
 	ExecutionSummary *types.ComplianceExecutionSummary
+
+	// Information about the compliance as defined by the resource type. For example,
+	// for a patch compliance type, Items includes information about the PatchSeverity,
+	// Classification, and so on.
+	//
+	// This member is required.
+	Items []*types.ComplianceItemEntry
+
+	// Specify an ID for this resource. For a managed instance, this is the instance
+	// ID.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// Specify the type of resource. ManagedInstance is currently the only supported
+	// resource type.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// MD5 or SHA-256 content hash. The content hash is used to determine if existing
+	// information should be overwritten or ignored. If the content hashes match, the
+	// request to put compliance information is ignored.
+	ItemContentHash *string
 
 	// The mode for uploading compliance items. You can specify COMPLETE or PARTIAL. In
 	// COMPLETE mode, the system overwrites all existing compliance information for the
@@ -132,25 +151,6 @@ type PutComplianceItemsInput struct {
 	// to MANUAL. By default, all requests use COMPLETE mode. This attribute is only
 	// valid for association compliance.
 	UploadType types.ComplianceUploadType
-
-	// Information about the compliance as defined by the resource type. For example,
-	// for a patch compliance type, Items includes information about the PatchSeverity,
-	// Classification, and so on.
-	//
-	// This member is required.
-	Items []*types.ComplianceItemEntry
-
-	// Specify the compliance type. For example, specify Association (for a State
-	// Manager association), Patch, or Custom:string.
-	//
-	// This member is required.
-	ComplianceType *string
-
-	// Specify the type of resource. ManagedInstance is currently the only supported
-	// resource type.
-	//
-	// This member is required.
-	ResourceType *string
 }
 
 type PutComplianceItemsOutput struct {

@@ -64,12 +64,6 @@ func (c *Client) ListServiceQuotas(ctx context.Context, params *ListServiceQuota
 
 type ListServiceQuotasInput struct {
 
-	// (Optional) Use this parameter in a request if you receive a NextToken response
-	// in a previous request that indicates that there's more output available. In a
-	// subsequent call, set it to the value of the previous call's NextToken response
-	// to indicate where the output should continue from.
-	NextToken *string
-
 	// The identifier for a service. When performing an operation, use the ServiceCode
 	// to specify a particular service.
 	//
@@ -84,6 +78,12 @@ type ListServiceQuotasInput struct {
 	// get the next part of the results. You should check NextToken after every
 	// operation to ensure that you receive all of the results.
 	MaxResults *int32
+
+	// (Optional) Use this parameter in a request if you receive a NextToken response
+	// in a previous request that indicates that there's more output available. In a
+	// subsequent call, set it to the value of the previous call's NextToken response
+	// to indicate where the output should continue from.
+	NextToken *string
 }
 
 type ListServiceQuotasOutput struct {

@@ -61,6 +61,17 @@ func (c *Client) GetRegexPatternSet(ctx context.Context, params *GetRegexPattern
 
 type GetRegexPatternSetInput struct {
 
+	// A unique identifier for the set. This ID is returned in the responses to create
+	// and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the set. You cannot change the name after you create the set.
+	//
+	// This member is required.
+	Name *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -74,17 +85,6 @@ type GetRegexPatternSetInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
-
-	// The name of the set. You cannot change the name after you create the set.
-	//
-	// This member is required.
-	Name *string
-
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
 }
 
 type GetRegexPatternSetOutput struct {

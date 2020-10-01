@@ -69,11 +69,11 @@ type BatchGetJobsInput struct {
 
 type BatchGetJobsOutput struct {
 
-	// A list of names of jobs not found.
-	JobsNotFound []*string
-
 	// A list of job definitions.
 	Jobs []*types.Job
+
+	// A list of names of jobs not found.
+	JobsNotFound []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

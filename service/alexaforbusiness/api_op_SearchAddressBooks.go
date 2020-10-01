@@ -58,32 +58,32 @@ func (c *Client) SearchAddressBooks(ctx context.Context, params *SearchAddressBo
 
 type SearchAddressBooksInput struct {
 
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response only
-	// includes results beyond the token, up to the value specified by MaxResults.
-	NextToken *string
-
 	// The filters to use to list a specified set of address books. The supported
 	// filter key is AddressBookName.
 	Filters []*types.Filter
-
-	// The sort order to use in listing the specified set of address books. The
-	// supported sort key is AddressBookName.
-	SortCriteria []*types.Sort
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
+
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response only
+	// includes results beyond the token, up to the value specified by MaxResults.
+	NextToken *string
+
+	// The sort order to use in listing the specified set of address books. The
+	// supported sort key is AddressBookName.
+	SortCriteria []*types.Sort
 }
 
 type SearchAddressBooksOutput struct {
 
-	// The token returned to indicate that there is more data available.
-	NextToken *string
-
 	// The address books that meet the specified set of filter criteria, in sort order.
 	AddressBooks []*types.AddressBookData
+
+	// The token returned to indicate that there is more data available.
+	NextToken *string
 
 	// The total number of address books returned.
 	TotalCount *int32

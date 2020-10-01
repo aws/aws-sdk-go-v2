@@ -66,47 +66,13 @@ func (c *Client) ModifyInstanceAttribute(ctx context.Context, params *ModifyInst
 
 type ModifyInstanceAttributeInput struct {
 
-	// Changes the instance type to the specified value. For more information, see
-	// Instance types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html). If
-	// the instance type is not valid, the error returned is
-	// InvalidInstanceAttributeValue.
-	InstanceType *types.AttributeValue
-
-	// Set to simple to enable enhanced networking with the Intel 82599 Virtual
-	// Function interface for the instance. There is no way to disable enhanced
-	// networking with the Intel 82599 Virtual Function interface at this time. This
-	// option is supported only for HVM instances. Specifying this option with a PV
-	// instance can make it unreachable.
-	SriovNetSupport *types.AttributeValue
-
-	// A new value for the attribute. Use only with the kernel, ramdisk, userData,
-	// disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
-	Value *string
-
-	// Specifies whether an instance stops or terminates when you initiate shutdown
-	// from the instance (using the operating system command for system shutdown).
-	InstanceInitiatedShutdownBehavior *types.AttributeValue
-
-	// Changes the instance's RAM disk to the specified value. We recommend that you
-	// use PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
-	Ramdisk *types.AttributeValue
-
-	// If the value is true, you can't terminate the instance using the Amazon EC2
-	// console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot
-	// Instances.
-	DisableApiTermination *types.AttributeBooleanValue
-
-	// Changes the instance's kernel to the specified value. We recommend that you use
-	// PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
-	Kernel *types.AttributeValue
-
 	// The ID of the instance.
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The name of the attribute.
+	Attribute types.InstanceAttributeName
 
 	// Modifies the DeleteOnTermination attribute for volumes that are currently
 	// attached. The volume must be owned by the caller. If no value is specified for
@@ -118,6 +84,24 @@ type ModifyInstanceAttributeInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	BlockDeviceMappings []*types.InstanceBlockDeviceMappingSpecification
 
+	// If the value is true, you can't terminate the instance using the Amazon EC2
+	// console, CLI, or API; otherwise, you can. You cannot use this parameter for Spot
+	// Instances.
+	DisableApiTermination *types.AttributeBooleanValue
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
+	// Specifies whether the instance is optimized for Amazon EBS I/O. This
+	// optimization provides dedicated throughput to Amazon EBS and an optimized
+	// configuration stack to provide optimal EBS I/O performance. This optimization
+	// isn't available with all instance types. Additional usage charges apply when
+	// using an EBS Optimized instance.
+	EbsOptimized *types.AttributeBooleanValue
+
 	// Set to true to enable enhanced networking with ENA for the instance. This option
 	// is supported only for HVM instances. Specifying this option with a PV instance
 	// can make it unreachable.
@@ -128,31 +112,47 @@ type ModifyInstanceAttributeInput struct {
 	// You must specify the security group ID, not the security group name.
 	Groups []*string
 
-	// Changes the instance's user data to the specified value. If you are using an AWS
-	// SDK or command line tool, base64-encoding is performed for you, and you can load
-	// the text from a file. Otherwise, you must provide base64-encoded text.
-	UserData *types.BlobAttributeValue
+	// Specifies whether an instance stops or terminates when you initiate shutdown
+	// from the instance (using the operating system command for system shutdown).
+	InstanceInitiatedShutdownBehavior *types.AttributeValue
 
-	// The name of the attribute.
-	Attribute types.InstanceAttributeName
+	// Changes the instance type to the specified value. For more information, see
+	// Instance types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html). If
+	// the instance type is not valid, the error returned is
+	// InvalidInstanceAttributeValue.
+	InstanceType *types.AttributeValue
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// Changes the instance's kernel to the specified value. We recommend that you use
+	// PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
+	Kernel *types.AttributeValue
+
+	// Changes the instance's RAM disk to the specified value. We recommend that you
+	// use PV-GRUB instead of kernels and RAM disks. For more information, see PV-GRUB
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html).
+	Ramdisk *types.AttributeValue
 
 	// Specifies whether source/destination checking is enabled. A value of true means
 	// that checking is enabled, and false means that checking is disabled. This value
 	// must be false for a NAT instance to perform NAT.
 	SourceDestCheck *types.AttributeBooleanValue
 
-	// Specifies whether the instance is optimized for Amazon EBS I/O. This
-	// optimization provides dedicated throughput to Amazon EBS and an optimized
-	// configuration stack to provide optimal EBS I/O performance. This optimization
-	// isn't available with all instance types. Additional usage charges apply when
-	// using an EBS Optimized instance.
-	EbsOptimized *types.AttributeBooleanValue
+	// Set to simple to enable enhanced networking with the Intel 82599 Virtual
+	// Function interface for the instance. There is no way to disable enhanced
+	// networking with the Intel 82599 Virtual Function interface at this time. This
+	// option is supported only for HVM instances. Specifying this option with a PV
+	// instance can make it unreachable.
+	SriovNetSupport *types.AttributeValue
+
+	// Changes the instance's user data to the specified value. If you are using an AWS
+	// SDK or command line tool, base64-encoding is performed for you, and you can load
+	// the text from a file. Otherwise, you must provide base64-encoded text.
+	UserData *types.BlobAttributeValue
+
+	// A new value for the attribute. Use only with the kernel, ramdisk, userData,
+	// disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
+	Value *string
 }
 
 type ModifyInstanceAttributeOutput struct {

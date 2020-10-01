@@ -59,29 +59,15 @@ func (c *Client) CreateReplicationTask(ctx context.Context, params *CreateReplic
 //
 type CreateReplicationTaskInput struct {
 
+	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
+	//
+	// This member is required.
+	MigrationType types.MigrationTypeValue
+
 	// The Amazon Resource Name (ARN) of a replication instance.
 	//
 	// This member is required.
 	ReplicationInstanceArn *string
-
-	// Indicates the start time for a change data capture (CDC) operation. Use either
-	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
-	// start. Specifying both values results in an error. Timestamp Example:
-	// --cdc-start-time “2018-03-08T12:12:12”
-	CdcStartTime *time.Time
-
-	// The table mappings for the task, in JSON format. For more information, see Using
-	// Table Mapping to Specify Task Settings
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
-	// in the AWS Database Migration Service User Guide.
-	//
-	// This member is required.
-	TableMappings *string
-
-	// An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
-	//
-	// This member is required.
-	TargetEndpointArn *string
 
 	// An identifier for the replication task. Constraints:
 	//
@@ -101,6 +87,19 @@ type CreateReplicationTaskInput struct {
 	// This member is required.
 	SourceEndpointArn *string
 
+	// The table mappings for the task, in JSON format. For more information, see Using
+	// Table Mapping to Specify Task Settings
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.html)
+	// in the AWS Database Migration Service User Guide.
+	//
+	// This member is required.
+	TableMappings *string
+
+	// An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
+	//
+	// This member is required.
+	TargetEndpointArn *string
+
 	// Indicates when you want a change data capture (CDC) operation to start. Use
 	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
 	// to start. Specifying both values results in an error. The value can be in date,
@@ -116,11 +115,23 @@ type CreateReplicationTaskInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
 
+	// Indicates the start time for a change data capture (CDC) operation. Use either
+	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
+	// start. Specifying both values results in an error. Timestamp Example:
+	// --cdc-start-time “2018-03-08T12:12:12”
+	CdcStartTime *time.Time
+
 	// Indicates when you want a change data capture (CDC) operation to stop. The value
 	// can be either server time or commit time. Server time example:
 	// --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example:
 	// --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
 	CdcStopPosition *string
+
+	// Overall settings for the task, in JSON format. For more information, see
+	// Specifying Task Settings for AWS Database Migration Service Tasks
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
+	// in the AWS Database Migration User Guide.
+	ReplicationTaskSettings *string
 
 	// One or more tags to be assigned to the replication task.
 	Tags []*types.Tag
@@ -131,17 +142,6 @@ type CreateReplicationTaskInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html) in
 	// the AWS Database Migration Service User Guide.
 	TaskData *string
-
-	// Overall settings for the task, in JSON format. For more information, see
-	// Specifying Task Settings for AWS Database Migration Service Tasks
-	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html)
-	// in the AWS Database Migration User Guide.
-	ReplicationTaskSettings *string
-
-	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
-	//
-	// This member is required.
-	MigrationType types.MigrationTypeValue
 }
 
 //

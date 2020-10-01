@@ -58,30 +58,10 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 
 type UpdateIAMPolicyAssignmentInput struct {
 
-	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
-	// in this assignment.
-	PolicyArn *string
-
-	// The status of the assignment. Possible values are as follows:
-	//
-	//     * ENABLED -
-	// Anything specified in this assignment is used when creating the data source.
-	//
-	//
-	// * DISABLED - This assignment isn't used when creating the data source.
-	//
-	//     *
-	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
-	// data source.
-	AssignmentStatus types.AssignmentStatus
-
 	// The name of the assignment. This name must be unique within an AWS account.
 	//
 	// This member is required.
 	AssignmentName *string
-
-	// The QuickSight users, groups, or both that you want to assign the policy to.
-	Identities map[string][]*string
 
 	// The ID of the AWS account that contains the IAM policy assignment.
 	//
@@ -92,13 +72,6 @@ type UpdateIAMPolicyAssignmentInput struct {
 	//
 	// This member is required.
 	Namespace *string
-}
-
-type UpdateIAMPolicyAssignmentOutput struct {
-
-	// The ARN for the IAM policy applied to the QuickSight users and groups specified
-	// in this assignment.
-	PolicyArn *string
 
 	// The status of the assignment. Possible values are as follows:
 	//
@@ -113,17 +86,44 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	// data source.
 	AssignmentStatus types.AssignmentStatus
 
+	// The QuickSight users, groups, or both that you want to assign the policy to.
+	Identities map[string][]*string
+
+	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
+	// in this assignment.
+	PolicyArn *string
+}
+
+type UpdateIAMPolicyAssignmentOutput struct {
+
+	// The ID of the assignment.
+	AssignmentId *string
+
 	// The name of the assignment.
 	AssignmentName *string
+
+	// The status of the assignment. Possible values are as follows:
+	//
+	//     * ENABLED -
+	// Anything specified in this assignment is used when creating the data source.
+	//
+	//
+	// * DISABLED - This assignment isn't used when creating the data source.
+	//
+	//     *
+	// DRAFT - This assignment is an unfinished draft and isn't used when creating the
+	// data source.
+	AssignmentStatus types.AssignmentStatus
 
 	// The QuickSight users, groups, or both that the IAM policy is assigned to.
 	Identities map[string][]*string
 
+	// The ARN for the IAM policy applied to the QuickSight users and groups specified
+	// in this assignment.
+	PolicyArn *string
+
 	// The AWS request ID for this operation.
 	RequestId *string
-
-	// The ID of the assignment.
-	AssignmentId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

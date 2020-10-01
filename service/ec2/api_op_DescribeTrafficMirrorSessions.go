@@ -57,8 +57,11 @@ func (c *Client) DescribeTrafficMirrorSessions(ctx context.Context, params *Desc
 
 type DescribeTrafficMirrorSessionsInput struct {
 
-	// The ID of the Traffic Mirror session.
-	TrafficMirrorSessionIds []*string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// One or more filters. The possible values are:
 	//
@@ -89,18 +92,15 @@ type DescribeTrafficMirrorSessionsInput struct {
 	// virtual-network-id: The virtual network ID of the Traffic Mirror session.
 	Filters []*types.Filter
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The token for the next page of results.
+	NextToken *string
+
+	// The ID of the Traffic Mirror session.
+	TrafficMirrorSessionIds []*string
 }
 
 type DescribeTrafficMirrorSessionsOutput struct {

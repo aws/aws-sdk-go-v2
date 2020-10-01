@@ -57,16 +57,16 @@ func (c *Client) UpdateApplicationSettings(ctx context.Context, params *UpdateAp
 
 type UpdateApplicationSettingsInput struct {
 
-	// Specifies the default settings for an application.
-	//
-	// This member is required.
-	WriteApplicationSettingsRequest *types.WriteApplicationSettingsRequest
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// Specifies the default settings for an application.
+	//
+	// This member is required.
+	WriteApplicationSettingsRequest *types.WriteApplicationSettingsRequest
 }
 
 type UpdateApplicationSettingsOutput struct {

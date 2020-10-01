@@ -61,21 +61,22 @@ func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, 
 
 type GetMetricDataInput struct {
 
-	// The grouping applied to the metrics returned. For example, when results are
-	// grouped by queue, the metrics returned are grouped by queue. The values returned
-	// apply to the metrics for each queue rather than aggregated for all queues. The
-	// only supported grouping is QUEUE. If no grouping is specified, a summary of
-	// metrics for all queues is returned.
-	Groupings []types.Grouping
-
-	// The timestamp, in UNIX Epoch time format, at which to start the reporting
-	// interval for the retrieval of historical metrics data. The time must be
-	// specified using a multiple of 5 minutes, such as 10:05, 10:10, 10:15. The start
-	// time cannot be earlier than 24 hours before the time of the request. Historical
-	// metrics are available only for 24 hours.
+	// The timestamp, in UNIX Epoch time format, at which to end the reporting interval
+	// for the retrieval of historical metrics data. The time must be specified using
+	// an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be later than
+	// the start time timestamp. The time range between the start and end time must be
+	// less than 24 hours.
 	//
 	// This member is required.
-	StartTime *time.Time
+	EndTime *time.Time
+
+	// The queues, up to 100, or channels, to use to filter the metrics returned.
+	// Metric data is retrieved only for the resources associated with the queues or
+	// channels included in the filter. You can include both queue IDs and queue ARNs
+	// in the same request. The only supported channel is VOICE.
+	//
+	// This member is required.
+	Filters *types.Filters
 
 	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
 	// The following historical metrics are available. For a description of each
@@ -105,47 +106,46 @@ type GetMetricDataInput struct {
 	// This member is required.
 	HistoricalMetrics []*types.HistoricalMetric
 
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string
-
-	// The maximimum number of results to return per page.
-	MaxResults *int32
-
 	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The timestamp, in UNIX Epoch time format, at which to end the reporting interval
-	// for the retrieval of historical metrics data. The time must be specified using
-	// an interval of 5 minutes, such as 11:00, 11:05, 11:10, and must be later than
-	// the start time timestamp. The time range between the start and end time must be
-	// less than 24 hours.
+	// The timestamp, in UNIX Epoch time format, at which to start the reporting
+	// interval for the retrieval of historical metrics data. The time must be
+	// specified using a multiple of 5 minutes, such as 10:05, 10:10, 10:15. The start
+	// time cannot be earlier than 24 hours before the time of the request. Historical
+	// metrics are available only for 24 hours.
 	//
 	// This member is required.
-	EndTime *time.Time
+	StartTime *time.Time
 
-	// The queues, up to 100, or channels, to use to filter the metrics returned.
-	// Metric data is retrieved only for the resources associated with the queues or
-	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. The only supported channel is VOICE.
-	//
-	// This member is required.
-	Filters *types.Filters
+	// The grouping applied to the metrics returned. For example, when results are
+	// grouped by queue, the metrics returned are grouped by queue. The values returned
+	// apply to the metrics for each queue rather than aggregated for all queues. The
+	// only supported grouping is QUEUE. If no grouping is specified, a summary of
+	// metrics for all queues is returned.
+	Groupings []types.Grouping
+
+	// The maximimum number of results to return per page.
+	MaxResults *int32
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string
 }
 
 type GetMetricDataOutput struct {
+
+	// Information about the historical metrics. If no grouping is specified, a summary
+	// of metric data is returned.
+	MetricResults []*types.HistoricalMetricResult
 
 	// If there are additional results, this is the token for the next set of results.
 	// The token expires after 5 minutes from the time it is created. Subsequent
 	// requests that use the token must use the same request parameters as the request
 	// that generated the token.
 	NextToken *string
-
-	// Information about the historical metrics. If no grouping is specified, a summary
-	// of metric data is returned.
-	MetricResults []*types.HistoricalMetricResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

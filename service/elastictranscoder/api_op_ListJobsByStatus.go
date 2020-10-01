@@ -60,16 +60,16 @@ func (c *Client) ListJobsByStatus(ctx context.Context, params *ListJobsByStatusI
 // The ListJobsByStatusRequest structure.
 type ListJobsByStatusInput struct {
 
-	// To list jobs in chronological order by the date and time that they were
-	// submitted, enter true. To list jobs in reverse chronological order, enter false.
-	Ascending *string
-
 	// To get information about all of the jobs associated with the current AWS account
 	// that have a given status, specify the following status: Submitted, Progressing,
 	// Complete, Canceled, or Error.
 	//
 	// This member is required.
 	Status *string
+
+	// To list jobs in chronological order by the date and time that they were
+	// submitted, enter true. To list jobs in reverse chronological order, enter false.
+	Ascending *string
 
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
 	// subsequent GET requests to get each successive page of results.

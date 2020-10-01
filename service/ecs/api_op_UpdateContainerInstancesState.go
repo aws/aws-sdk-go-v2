@@ -98,6 +98,11 @@ func (c *Client) UpdateContainerInstancesState(ctx context.Context, params *Upda
 
 type UpdateContainerInstancesStateInput struct {
 
+	// A list of container instance IDs or full ARN entries.
+	//
+	// This member is required.
+	ContainerInstances []*string
+
 	// The container instance state with which to update the container instance. The
 	// only valid values for this action are ACTIVE and DRAINING. A container instance
 	// can only be updated to DRAINING status once it has reached an ACTIVE state. If a
@@ -107,11 +112,6 @@ type UpdateContainerInstancesStateInput struct {
 	//
 	// This member is required.
 	Status types.ContainerInstanceStatus
-
-	// A list of container instance IDs or full ARN entries.
-	//
-	// This member is required.
-	ContainerInstances []*string
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// container instance to update. If you do not specify a cluster, the default

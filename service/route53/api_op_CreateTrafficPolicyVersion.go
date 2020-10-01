@@ -74,14 +74,14 @@ type CreateTrafficPolicyVersionInput struct {
 	// This member is required.
 	Document *string
 
-	// The comment that you specified in the CreateTrafficPolicyVersion request, if
-	// any.
-	Comment *string
-
 	// The ID of the traffic policy for which you want to create a new version.
 	//
 	// This member is required.
 	Id *string
+
+	// The comment that you specified in the CreateTrafficPolicyVersion request, if
+	// any.
+	Comment *string
 }
 
 // A complex type that contains the response information for the

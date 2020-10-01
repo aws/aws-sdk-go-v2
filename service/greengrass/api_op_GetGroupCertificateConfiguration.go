@@ -64,12 +64,12 @@ type GetGroupCertificateConfigurationInput struct {
 
 type GetGroupCertificateConfigurationOutput struct {
 
-	// The amount of time remaining before the certificate expires, in milliseconds.
-	CertificateExpiryInMilliseconds *string
-
 	// The amount of time remaining before the certificate authority expires, in
 	// milliseconds.
 	CertificateAuthorityExpiryInMilliseconds *string
+
+	// The amount of time remaining before the certificate expires, in milliseconds.
+	CertificateExpiryInMilliseconds *string
 
 	// The ID of the group certificate configuration.
 	GroupId *string

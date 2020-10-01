@@ -56,9 +56,6 @@ func (c *Client) DescribeExportImageTasks(ctx context.Context, params *DescribeE
 
 type DescribeExportImageTasksInput struct {
 
-	// A token that indicates the next page of results.
-	NextToken *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -68,12 +65,15 @@ type DescribeExportImageTasksInput struct {
 	// The IDs of the export image tasks.
 	ExportImageTaskIds []*string
 
-	// The maximum number of results to return in a single call.
-	MaxResults *int32
-
 	// Filter tasks using the task-state filter and one of the following values:
 	// active, completed, deleting, or deleted.
 	Filters []*types.Filter
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int32
+
+	// A token that indicates the next page of results.
+	NextToken *string
 }
 
 type DescribeExportImageTasksOutput struct {

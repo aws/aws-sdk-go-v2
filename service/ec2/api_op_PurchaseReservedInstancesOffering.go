@@ -70,21 +70,21 @@ func (c *Client) PurchaseReservedInstancesOffering(ctx context.Context, params *
 // Contains the parameters for PurchaseReservedInstancesOffering.
 type PurchaseReservedInstancesOfferingInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The number of Reserved Instances to purchase.
+	//
+	// This member is required.
+	InstanceCount *int32
 
 	// The ID of the Reserved Instance offering to purchase.
 	//
 	// This member is required.
 	ReservedInstancesOfferingId *string
 
-	// The number of Reserved Instances to purchase.
-	//
-	// This member is required.
-	InstanceCount *int32
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// Specified for Reserved Instance Marketplace offerings to limit the total order
 	// and ensure that the Reserved Instances are not purchased at unexpected prices.

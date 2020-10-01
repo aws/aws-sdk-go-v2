@@ -72,11 +72,11 @@ type GetGroupCertificateAuthorityOutput struct {
 	// The ARN of the certificate authority for the group.
 	GroupCertificateAuthorityArn *string
 
-	// The PEM encoded certificate for the group.
-	PemEncodedCertificate *string
-
 	// The ID of the certificate authority for the group.
 	GroupCertificateAuthorityId *string
+
+	// The PEM encoded certificate for the group.
+	PemEncodedCertificate *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

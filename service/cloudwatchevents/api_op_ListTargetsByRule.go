@@ -57,20 +57,20 @@ func (c *Client) ListTargetsByRule(ctx context.Context, params *ListTargetsByRul
 
 type ListTargetsByRuleInput struct {
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
-	EventBusName *string
-
-	// The token returned by a previous call to retrieve the next set of results.
-	NextToken *string
-
 	// The name of the rule.
 	//
 	// This member is required.
 	Rule *string
 
+	// The event bus associated with the rule. If you omit this, the default event bus
+	// is used.
+	EventBusName *string
+
 	// The maximum number of results to return.
 	Limit *int32
+
+	// The token returned by a previous call to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListTargetsByRuleOutput struct {

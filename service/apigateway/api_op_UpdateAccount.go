@@ -58,17 +58,17 @@ func (c *Client) UpdateAccount(ctx context.Context, params *UpdateAccountInput, 
 // Requests API Gateway to change information about the current Account ()
 // resource.
 type UpdateAccountInput struct {
-	TemplateSkipList []*string
-
-	Title *string
-
 	Name *string
-
-	Template *bool
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the
@@ -119,18 +119,18 @@ type UpdateAccountInput struct {
 // (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-account.html)
 type UpdateAccountOutput struct {
 
+	// The version of the API keys used for the account.
+	ApiKeyVersion *string
+
+	// The ARN of an Amazon CloudWatch role for the current Account ().
+	CloudwatchRoleArn *string
+
 	// A list of features supported for the account. When usage plans are enabled, the
 	// features list will include an entry of "UsagePlans".
 	Features []*string
 
-	// The version of the API keys used for the account.
-	ApiKeyVersion *string
-
 	// Specifies the API request limits configured for the current Account ().
 	ThrottleSettings *types.ThrottleSettings
-
-	// The ARN of an Amazon CloudWatch role for the current Account ().
-	CloudwatchRoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

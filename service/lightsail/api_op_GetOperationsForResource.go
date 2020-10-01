@@ -57,30 +57,30 @@ func (c *Client) GetOperationsForResource(ctx context.Context, params *GetOperat
 
 type GetOperationsForResourceInput struct {
 
+	// The name of the resource for which you are requesting information.
+	//
+	// This member is required.
+	ResourceName *string
+
 	// The token to advance to the next page of results from your request. To get a
 	// page token, perform an initial GetOperationsForResource request. If your results
 	// are paginated, the response will return a next page token that you can specify
 	// as the page token in a subsequent request.
 	PageToken *string
-
-	// The name of the resource for which you are requesting information.
-	//
-	// This member is required.
-	ResourceName *string
 }
 
 type GetOperationsForResourceOutput struct {
+
+	// (Deprecated) Returns the number of pages of results that remain. In releases
+	// prior to June 12, 2017, this parameter returned null by the API. It is now
+	// deprecated, and the API returns the next page token parameter instead.
+	NextPageCount *string
 
 	// The token to advance to the next page of resutls from your request. A next page
 	// token is not returned if there are no more results to display. To get the next
 	// page of results, perform another GetOperationsForResource request and specify
 	// the next page token using the pageToken parameter.
 	NextPageToken *string
-
-	// (Deprecated) Returns the number of pages of results that remain. In releases
-	// prior to June 12, 2017, this parameter returned null by the API. It is now
-	// deprecated, and the API returns the next page token parameter instead.
-	NextPageCount *string
 
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the

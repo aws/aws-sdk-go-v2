@@ -63,11 +63,6 @@ func (c *Client) SetPlatformApplicationAttributes(ctx context.Context, params *S
 // Input for SetPlatformApplicationAttributes action.
 type SetPlatformApplicationAttributesInput struct {
 
-	// PlatformApplicationArn for SetPlatformApplicationAttributes action.
-	//
-	// This member is required.
-	PlatformApplicationArn *string
-
 	// A map of the platform application attributes. Attributes in this map include the
 	// following:
 	//
@@ -108,6 +103,11 @@ type SetPlatformApplicationAttributesInput struct {
 	//
 	// This member is required.
 	Attributes map[string]*string
+
+	// PlatformApplicationArn for SetPlatformApplicationAttributes action.
+	//
+	// This member is required.
+	PlatformApplicationArn *string
 }
 
 type SetPlatformApplicationAttributesOutput struct {

@@ -57,15 +57,15 @@ func (c *Client) RebuildEnvironment(ctx context.Context, params *RebuildEnvironm
 //
 type RebuildEnvironmentInput struct {
 
-	// The name of the environment to rebuild. Condition: You must specify either this
-	// or an EnvironmentId, or both. If you do not specify either, AWS Elastic
-	// Beanstalk returns MissingRequiredParameter error.
-	EnvironmentName *string
-
 	// The ID of the environment to rebuild. Condition: You must specify either this or
 	// an EnvironmentName, or both. If you do not specify either, AWS Elastic Beanstalk
 	// returns MissingRequiredParameter error.
 	EnvironmentId *string
+
+	// The name of the environment to rebuild. Condition: You must specify either this
+	// or an EnvironmentId, or both. If you do not specify either, AWS Elastic
+	// Beanstalk returns MissingRequiredParameter error.
+	EnvironmentName *string
 }
 
 type RebuildEnvironmentOutput struct {

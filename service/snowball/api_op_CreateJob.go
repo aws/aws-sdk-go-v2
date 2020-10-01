@@ -61,6 +61,54 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
+	// The ID for the address that you want the Snowball shipped to.
+	AddressId *string
+
+	// The ID of a cluster. If you're creating a job for a node in a cluster, you need
+	// to provide only this clusterId value. The other job attributes are inherited
+	// from the cluster.
+	ClusterId *string
+
+	// Defines an optional description of this specific job, for example Important
+	// Photos 2016-08-11.
+	Description *string
+
+	// Defines the device configuration for an AWS Snowcone job.
+	DeviceConfiguration *types.DeviceConfiguration
+
+	// The forwarding address ID for a job. This field is not supported in most
+	// regions.
+	ForwardingAddressId *string
+
+	// Defines the type of job that you're creating.
+	JobType types.JobType
+
+	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
+	// using the CreateKey
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) AWS Key
+	// Management Service (KMS) API action.
+	KmsKeyARN *string
+
+	// Defines the Amazon Simple Notification Service (Amazon SNS) notification
+	// settings for this job.
+	Notification *types.Notification
+
+	// Defines the Amazon S3 buckets associated with this job.  <p>With
+	// <code>IMPORT</code> jobs, you specify the bucket or buckets that your
+	// transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs,
+	// you specify the bucket or buckets that your transferred data will be exported
+	// from. Optionally, you can also specify a <code>KeyRange</code> value. If you
+	// choose to export a range, you define the length of the range by providing either
+	// an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code>
+	// value, or both. Ranges are UTF-8 binary sorted.</p>
+	Resources *types.JobResource
+
+	// The RoleARN that you want to associate with this job. RoleArns are created using
+	// the CreateRole
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) AWS
+	// Identity and Access Management (IAM) API action.
+	RoleARN *string
+
 	// The shipping speed for this job. This speed doesn't dictate how soon you'll get
 	// the Snowball, rather it represents how quickly the Snowball moves to its
 	// destination while in transit. Regional shipping speeds are as follows:  <ul>
@@ -74,39 +122,10 @@ type CreateJobInput struct {
 	// two-day shipping.</p> </li> </ul>
 	ShippingOption types.ShippingOption
 
-	// The forwarding address ID for a job. This field is not supported in most
-	// regions.
-	ForwardingAddressId *string
-
 	// If your job is being created in one of the US regions, you have the option of
 	// specifying what size Snowball you'd like for this job. In all other regions,
 	// Snowballs come with 80 TB in storage capacity.
 	SnowballCapacityPreference types.SnowballCapacity
-
-	// The KmsKeyARN that you want to associate with this job. KmsKeyARNs are created
-	// using the CreateKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) AWS Key
-	// Management Service (KMS) API action.
-	KmsKeyARN *string
-
-	// Defines the type of job that you're creating.
-	JobType types.JobType
-
-	// The RoleARN that you want to associate with this job. RoleArns are created using
-	// the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) AWS
-	// Identity and Access Management (IAM) API action.
-	RoleARN *string
-
-	// Defines the Amazon Simple Notification Service (Amazon SNS) notification
-	// settings for this job.
-	Notification *types.Notification
-
-	// The tax documents required in your AWS Region.
-	TaxDocuments *types.TaxDocuments
-
-	// Defines the device configuration for an AWS Snowcone job.
-	DeviceConfiguration *types.DeviceConfiguration
 
 	// The type of AWS Snowball device to use for this job. For cluster jobs, AWS
 	// Snowball currently supports only the EDGE device type. The type of AWS Snowball
@@ -116,27 +135,8 @@ type CreateJobInput struct {
 	// in the Snowball Edge Developer Guide.
 	SnowballType types.SnowballType
 
-	// Defines an optional description of this specific job, for example Important
-	// Photos 2016-08-11.
-	Description *string
-
-	// Defines the Amazon S3 buckets associated with this job.  <p>With
-	// <code>IMPORT</code> jobs, you specify the bucket or buckets that your
-	// transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs,
-	// you specify the bucket or buckets that your transferred data will be exported
-	// from. Optionally, you can also specify a <code>KeyRange</code> value. If you
-	// choose to export a range, you define the length of the range by providing either
-	// an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code>
-	// value, or both. Ranges are UTF-8 binary sorted.</p>
-	Resources *types.JobResource
-
-	// The ID of a cluster. If you're creating a job for a node in a cluster, you need
-	// to provide only this clusterId value. The other job attributes are inherited
-	// from the cluster.
-	ClusterId *string
-
-	// The ID for the address that you want the Snowball shipped to.
-	AddressId *string
+	// The tax documents required in your AWS Region.
+	TaxDocuments *types.TaxDocuments
 }
 
 type CreateJobOutput struct {

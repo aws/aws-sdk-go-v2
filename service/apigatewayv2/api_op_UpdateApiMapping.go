@@ -62,36 +62,36 @@ type UpdateApiMappingInput struct {
 	// This member is required.
 	ApiId *string
 
+	// The API mapping identifier.
+	//
+	// This member is required.
+	ApiMappingId *string
+
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The API stage.
-	Stage *string
-
 	// The API mapping key.
 	ApiMappingKey *string
 
-	// The API mapping identifier.
-	//
-	// This member is required.
-	ApiMappingId *string
+	// The API stage.
+	Stage *string
 }
 
 type UpdateApiMappingOutput struct {
 
-	// The API stage.
-	Stage *string
-
 	// The API identifier.
 	ApiId *string
+
+	// The API mapping identifier.
+	ApiMappingId *string
 
 	// The API mapping key.
 	ApiMappingKey *string
 
-	// The API mapping identifier.
-	ApiMappingId *string
+	// The API stage.
+	Stage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

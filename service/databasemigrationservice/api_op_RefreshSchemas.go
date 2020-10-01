@@ -60,15 +60,15 @@ func (c *Client) RefreshSchemas(ctx context.Context, params *RefreshSchemasInput
 //
 type RefreshSchemasInput struct {
 
-	// The Amazon Resource Name (ARN) of the replication instance.
-	//
-	// This member is required.
-	ReplicationInstanceArn *string
-
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
 	//
 	// This member is required.
 	EndpointArn *string
+
+	// The Amazon Resource Name (ARN) of the replication instance.
+	//
+	// This member is required.
+	ReplicationInstanceArn *string
 }
 
 //

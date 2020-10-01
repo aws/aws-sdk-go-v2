@@ -62,19 +62,19 @@ func (c *Client) DescribeElasticIps(ctx context.Context, params *DescribeElastic
 
 type DescribeElasticIpsInput struct {
 
-	// A stack ID. If you include this parameter, DescribeElasticIps returns a
-	// description of the Elastic IP addresses that are registered with the specified
-	// stack.
-	StackId *string
+	// The instance ID. If you include this parameter, DescribeElasticIps returns a
+	// description of the Elastic IP addresses associated with the specified instance.
+	InstanceId *string
 
 	// An array of Elastic IP addresses to be described. If you include this parameter,
 	// DescribeElasticIps returns a description of the specified Elastic IP addresses.
 	// Otherwise, it returns a description of every Elastic IP address.
 	Ips []*string
 
-	// The instance ID. If you include this parameter, DescribeElasticIps returns a
-	// description of the Elastic IP addresses associated with the specified instance.
-	InstanceId *string
+	// A stack ID. If you include this parameter, DescribeElasticIps returns a
+	// description of the Elastic IP addresses that are registered with the specified
+	// stack.
+	StackId *string
 }
 
 // Contains the response to a DescribeElasticIps request.

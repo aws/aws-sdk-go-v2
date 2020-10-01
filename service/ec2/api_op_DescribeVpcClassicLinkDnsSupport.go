@@ -67,21 +67,21 @@ type DescribeVpcClassicLinkDnsSupportInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
-	// One or more VPC IDs.
-	VpcIds []*string
-
 	// The token for the next page of results.
 	NextToken *string
+
+	// One or more VPC IDs.
+	VpcIds []*string
 }
 
 type DescribeVpcClassicLinkDnsSupportOutput struct {
 
-	// Information about the ClassicLink DNS support status of the VPCs.
-	Vpcs []*types.ClassicLinkDnsSupport
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the ClassicLink DNS support status of the VPCs.
+	Vpcs []*types.ClassicLinkDnsSupport
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

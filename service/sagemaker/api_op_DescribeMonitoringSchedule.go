@@ -66,27 +66,6 @@ type DescribeMonitoringScheduleInput struct {
 
 type DescribeMonitoringScheduleOutput struct {
 
-	// The status of an monitoring job.
-	//
-	// This member is required.
-	MonitoringScheduleStatus types.ScheduleStatus
-
-	// The name of the endpoint for the monitoring job.
-	EndpointName *string
-
-	// Describes metadata on the last execution to run, if there was one.
-	LastMonitoringExecutionSummary *types.MonitoringExecutionSummary
-
-	// The configuration object that specifies the monitoring schedule and defines the
-	// monitoring job.
-	//
-	// This member is required.
-	MonitoringScheduleConfig *types.MonitoringScheduleConfig
-
-	// A string, up to one KB in size, that contains the reason a monitoring job
-	// failed, if it failed.
-	FailureReason *string
-
 	// The time at which the monitoring job was created.
 	//
 	// This member is required.
@@ -97,15 +76,36 @@ type DescribeMonitoringScheduleOutput struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	//
+	// This member is required.
+	MonitoringScheduleArn *string
+
+	// The configuration object that specifies the monitoring schedule and defines the
+	// monitoring job.
+	//
+	// This member is required.
+	MonitoringScheduleConfig *types.MonitoringScheduleConfig
+
 	// Name of the monitoring schedule.
 	//
 	// This member is required.
 	MonitoringScheduleName *string
 
-	// The Amazon Resource Name (ARN) of the monitoring schedule.
+	// The status of an monitoring job.
 	//
 	// This member is required.
-	MonitoringScheduleArn *string
+	MonitoringScheduleStatus types.ScheduleStatus
+
+	// The name of the endpoint for the monitoring job.
+	EndpointName *string
+
+	// A string, up to one KB in size, that contains the reason a monitoring job
+	// failed, if it failed.
+	FailureReason *string
+
+	// Describes metadata on the last execution to run, if there was one.
+	LastMonitoringExecutionSummary *types.MonitoringExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

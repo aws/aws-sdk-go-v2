@@ -106,12 +106,12 @@ type ListVaultsInput struct {
 // Contains the Amazon S3 Glacier response to your request.
 type ListVaultsOutput struct {
 
-	// List of vaults.
-	VaultList []*types.DescribeVaultOutput
-
 	// The vault ARN at which to continue pagination of the results. You use the marker
 	// in another List Vaults request to obtain more vaults in the list.
 	Marker *string
+
+	// List of vaults.
+	VaultList []*types.DescribeVaultOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

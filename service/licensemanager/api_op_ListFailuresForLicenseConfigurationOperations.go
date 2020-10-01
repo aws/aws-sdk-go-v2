@@ -57,16 +57,16 @@ func (c *Client) ListFailuresForLicenseConfigurationOperations(ctx context.Conte
 
 type ListFailuresForLicenseConfigurationOperationsInput struct {
 
-	// Token for the next set of results.
-	NextToken *string
-
-	// Maximum number of results to return in a single call.
-	MaxResults *int32
-
 	// Amazon Resource Name of the license configuration.
 	//
 	// This member is required.
 	LicenseConfigurationArn *string
+
+	// Maximum number of results to return in a single call.
+	MaxResults *int32
+
+	// Token for the next set of results.
+	NextToken *string
 }
 
 type ListFailuresForLicenseConfigurationOperationsOutput struct {

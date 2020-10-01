@@ -57,15 +57,15 @@ func (c *Client) ListManagedSchemaArns(ctx context.Context, params *ListManagedS
 
 type ListManagedSchemaArnsInput struct {
 
+	// The maximum number of results to retrieve.
+	MaxResults *int32
+
 	// The pagination token.
 	NextToken *string
 
 	// The response for ListManagedSchemaArns. When this parameter is used, all minor
 	// version ARNs for a major version are listed.
 	SchemaArn *string
-
-	// The maximum number of results to retrieve.
-	MaxResults *int32
 }
 
 type ListManagedSchemaArnsOutput struct {

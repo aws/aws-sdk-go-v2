@@ -67,26 +67,26 @@ func (c *Client) MigrateWorkspace(ctx context.Context, params *MigrateWorkspaceI
 
 type MigrateWorkspaceInput struct {
 
-	// The identifier of the WorkSpace to migrate from.
-	//
-	// This member is required.
-	SourceWorkspaceId *string
-
 	// The identifier of the target bundle type to migrate the WorkSpace to.
 	//
 	// This member is required.
 	BundleId *string
+
+	// The identifier of the WorkSpace to migrate from.
+	//
+	// This member is required.
+	SourceWorkspaceId *string
 }
 
 type MigrateWorkspaceOutput struct {
+
+	// The original identifier of the WorkSpace that is being migrated.
+	SourceWorkspaceId *string
 
 	// The new identifier of the WorkSpace that is being migrated. If the migration
 	// does not succeed, the target WorkSpace ID will not be used, and the WorkSpace
 	// will still have the original WorkSpace ID.
 	TargetWorkspaceId *string
-
-	// The original identifier of the WorkSpace that is being migrated.
-	SourceWorkspaceId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

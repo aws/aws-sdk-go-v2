@@ -61,51 +61,15 @@ func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *Crea
 
 type CreateTrafficMirrorFilterRuleInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// The source CIDR block to assign to the Traffic Mirror rule.
-	//
-	// This member is required.
-	SourceCidrBlock *string
-
-	// The action to take (accept | reject) on the filtered traffic.
-	//
-	// This member is required.
-	RuleAction types.TrafficMirrorRuleAction
-
-	// The protocol, for example UDP, to assign to the Traffic Mirror rule. For
-	// information about the protocol value, see Protocol Numbers
-	// (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml) on
-	// the Internet Assigned Numbers Authority (IANA) website.
-	Protocol *int32
-
 	// The destination CIDR block to assign to the Traffic Mirror rule.
 	//
 	// This member is required.
 	DestinationCidrBlock *string
 
-	// The description of the Traffic Mirror rule.
-	Description *string
-
-	// The destination port range.
-	DestinationPortRange *types.TrafficMirrorPortRangeRequest
-
-	// The type of traffic (ingress | egress).
+	// The action to take (accept | reject) on the filtered traffic.
 	//
 	// This member is required.
-	TrafficDirection types.TrafficDirection
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
-
-	// The source port range.
-	SourcePortRange *types.TrafficMirrorPortRangeRequest
+	RuleAction types.TrafficMirrorRuleAction
 
 	// The number of the Traffic Mirror rule. This number must be unique for each
 	// Traffic Mirror rule in a given direction. The rules are processed in ascending
@@ -114,10 +78,46 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	// This member is required.
 	RuleNumber *int32
 
+	// The source CIDR block to assign to the Traffic Mirror rule.
+	//
+	// This member is required.
+	SourceCidrBlock *string
+
+	// The type of traffic (ingress | egress).
+	//
+	// This member is required.
+	TrafficDirection types.TrafficDirection
+
 	// The ID of the filter that this rule is associated with.
 	//
 	// This member is required.
 	TrafficMirrorFilterId *string
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
+
+	// The description of the Traffic Mirror rule.
+	Description *string
+
+	// The destination port range.
+	DestinationPortRange *types.TrafficMirrorPortRangeRequest
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
+	// The protocol, for example UDP, to assign to the Traffic Mirror rule. For
+	// information about the protocol value, see Protocol Numbers
+	// (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml) on
+	// the Internet Assigned Numbers Authority (IANA) website.
+	Protocol *int32
+
+	// The source port range.
+	SourcePortRange *types.TrafficMirrorPortRangeRequest
 }
 
 type CreateTrafficMirrorFilterRuleOutput struct {

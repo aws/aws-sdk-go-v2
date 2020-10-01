@@ -59,13 +59,6 @@ func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfil
 
 type CreateUserProfileInput struct {
 
-	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-',
-	// and '_'. If the specified name includes other punctuation marks, AWS OpsWorks
-	// Stacks removes them. For example, my.name will be changed to myname. If you do
-	// not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM
-	// user name.
-	SshUsername *string
-
 	// The user's IAM ARN; this can also be a federated user's ARN.
 	//
 	// This member is required.
@@ -78,6 +71,13 @@ type CreateUserProfileInput struct {
 
 	// The user's public SSH key.
 	SshPublicKey *string
+
+	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9], '-',
+	// and '_'. If the specified name includes other punctuation marks, AWS OpsWorks
+	// Stacks removes them. For example, my.name will be changed to myname. If you do
+	// not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM
+	// user name.
+	SshUsername *string
 }
 
 // Contains the response to a CreateUserProfile request.

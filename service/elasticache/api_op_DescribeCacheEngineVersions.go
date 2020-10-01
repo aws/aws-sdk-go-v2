@@ -57,22 +57,6 @@ func (c *Client) DescribeCacheEngineVersions(ctx context.Context, params *Descri
 // Represents the input of a DescribeCacheEngineVersions operation.
 type DescribeCacheEngineVersionsInput struct {
 
-	// The cache engine version to return. Example: 1.4.14
-	EngineVersion *string
-
-	// If true, specifies that only the default version of the specified engine or
-	// engine and major version combination is to be returned.
-	DefaultOnly *bool
-
-	// The cache engine to return. Valid values: memcached | redis
-	Engine *string
-
-	// An optional marker returned from a prior request. Use this marker for pagination
-	// of results from this operation. If this parameter is specified, the response
-	// includes only records beyond the marker, up to the value specified by
-	// MaxRecords.
-	Marker *string
-
 	// The name of a specific cache parameter group family to return details for. Valid
 	// values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2 |
 	// redis4.0 | redis5.0 | Constraints:
@@ -86,6 +70,22 @@ type DescribeCacheEngineVersionsInput struct {
 	// hyphen or contain two consecutive hyphens
 	CacheParameterGroupFamily *string
 
+	// If true, specifies that only the default version of the specified engine or
+	// engine and major version combination is to be returned.
+	DefaultOnly *bool
+
+	// The cache engine to return. Valid values: memcached | redis
+	Engine *string
+
+	// The cache engine version to return. Example: 1.4.14
+	EngineVersion *string
+
+	// An optional marker returned from a prior request. Use this marker for pagination
+	// of results from this operation. If this parameter is specified, the response
+	// includes only records beyond the marker, up to the value specified by
+	// MaxRecords.
+	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
 	// that the remaining results can be retrieved.  <p>Default: 100</p>
@@ -96,12 +96,12 @@ type DescribeCacheEngineVersionsInput struct {
 // Represents the output of a DescribeCacheEngineVersions () operation.
 type DescribeCacheEngineVersionsOutput struct {
 
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string
-
 	// A list of cache engine version details. Each element in the list contains
 	// detailed information about one cache engine version.
 	CacheEngineVersions []*types.CacheEngineVersion
+
+	// Provides an identifier to allow retrieval of paginated results.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

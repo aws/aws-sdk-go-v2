@@ -57,36 +57,36 @@ func (c *Client) ListAutoMLJobs(ctx context.Context, params *ListAutoMLJobsInput
 
 type ListAutoMLJobsInput struct {
 
-	// The parameter by which to sort the results. The default is AutoMLJobName.
-	SortBy types.AutoMLSortBy
+	// Request a list of jobs, using a filter for time.
+	CreationTimeAfter *time.Time
 
 	// Request a list of jobs, using a filter for time.
 	CreationTimeBefore *time.Time
 
-	// Request a list of jobs, using a filter for status.
-	StatusEquals types.AutoMLJobStatus
+	// Request a list of jobs, using a filter for time.
+	LastModifiedTimeAfter *time.Time
 
 	// Request a list of jobs, using a filter for time.
 	LastModifiedTimeBefore *time.Time
 
-	// Request a list of jobs, using a filter for time.
-	CreationTimeAfter *time.Time
+	// Request a list of jobs up to a specified limit.
+	MaxResults *int32
 
 	// Request a list of jobs, using a search filter for name.
 	NameContains *string
-
-	// The sort order for the results. The default is Descending.
-	SortOrder types.AutoMLSortOrder
 
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string
 
-	// Request a list of jobs, using a filter for time.
-	LastModifiedTimeAfter *time.Time
+	// The parameter by which to sort the results. The default is AutoMLJobName.
+	SortBy types.AutoMLSortBy
 
-	// Request a list of jobs up to a specified limit.
-	MaxResults *int32
+	// The sort order for the results. The default is Descending.
+	SortOrder types.AutoMLSortOrder
+
+	// Request a list of jobs, using a filter for status.
+	StatusEquals types.AutoMLJobStatus
 }
 
 type ListAutoMLJobsOutput struct {

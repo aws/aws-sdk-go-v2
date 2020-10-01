@@ -56,14 +56,14 @@ func (c *Client) ListIndices(ctx context.Context, params *ListIndicesInput, optF
 
 type ListIndicesInput struct {
 
+	// The maximum number of data sources to return.
+	MaxResults *int32
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
 	// this pagination token to retrieve the next set of indexes
 	// (DataSourceSummaryItems).
 	NextToken *string
-
-	// The maximum number of data sources to return.
-	MaxResults *int32
 }
 
 type ListIndicesOutput struct {

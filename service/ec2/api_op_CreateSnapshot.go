@@ -83,6 +83,11 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 
 type CreateSnapshotInput struct {
 
+	// The ID of the EBS volume.
+	//
+	// This member is required.
+	VolumeId *string
+
 	// A description for the snapshot.
 	Description *string
 
@@ -94,49 +99,10 @@ type CreateSnapshotInput struct {
 
 	// The tags to apply to the snapshot during creation.
 	TagSpecifications []*types.TagSpecification
-
-	// The ID of the EBS volume.
-	//
-	// This member is required.
-	VolumeId *string
 }
 
 // Describes a snapshot.
 type CreateSnapshotOutput struct {
-
-	// The AWS account ID of the EBS snapshot owner.
-	OwnerId *string
-
-	// The size of the volume, in GiB.
-	VolumeSize *int32
-
-	// The AWS owner alias, as maintained by Amazon. The possible values are: amazon |
-	// self | all | aws-marketplace | microsoft. This AWS owner alias is not to be
-	// confused with the user-configured AWS account alias, which is set from the IAM
-	// console.
-	OwnerAlias *string
-
-	// The ID of the snapshot. Each snapshot receives a unique identifier when it is
-	// created.
-	SnapshotId *string
-
-	// The ID of the volume that was used to create the snapshot. Snapshots created by
-	// the CopySnapshot () action have an arbitrary volume ID that should not be used
-	// for any purpose.
-	VolumeId *string
-
-	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
-	// operation fails (for example, if the proper AWS Key Management Service (AWS KMS)
-	// permissions are not obtained) this field displays error state details to help
-	// you diagnose why the error occurred. This parameter is only returned by
-	// DescribeSnapshots ().
-	StateMessage *string
-
-	// Indicates whether the snapshot is encrypted.
-	Encrypted *bool
-
-	// Any tags assigned to the snapshot.
-	Tags []*types.Tag
 
 	// The data encryption key identifier for the snapshot. This value is a unique
 	// identifier that corresponds to the data encryption key that was used to encrypt
@@ -146,22 +112,56 @@ type CreateSnapshotOutput struct {
 	// lineage. This parameter is only returned by DescribeSnapshots ().
 	DataEncryptionKeyId *string
 
-	// The progress of the snapshot, as a percentage.
-	Progress *string
+	// The description for the snapshot.
+	Description *string
+
+	// Indicates whether the snapshot is encrypted.
+	Encrypted *bool
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) that was used to protect the volume encryption key for
 	// the parent volume.
 	KmsKeyId *string
 
-	// The description for the snapshot.
-	Description *string
+	// The AWS owner alias, as maintained by Amazon. The possible values are: amazon |
+	// self | all | aws-marketplace | microsoft. This AWS owner alias is not to be
+	// confused with the user-configured AWS account alias, which is set from the IAM
+	// console.
+	OwnerAlias *string
+
+	// The AWS account ID of the EBS snapshot owner.
+	OwnerId *string
+
+	// The progress of the snapshot, as a percentage.
+	Progress *string
+
+	// The ID of the snapshot. Each snapshot receives a unique identifier when it is
+	// created.
+	SnapshotId *string
+
+	// The time stamp when the snapshot was initiated.
+	StartTime *time.Time
 
 	// The snapshot state.
 	State types.SnapshotState
 
-	// The time stamp when the snapshot was initiated.
-	StartTime *time.Time
+	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
+	// operation fails (for example, if the proper AWS Key Management Service (AWS KMS)
+	// permissions are not obtained) this field displays error state details to help
+	// you diagnose why the error occurred. This parameter is only returned by
+	// DescribeSnapshots ().
+	StateMessage *string
+
+	// Any tags assigned to the snapshot.
+	Tags []*types.Tag
+
+	// The ID of the volume that was used to create the snapshot. Snapshots created by
+	// the CopySnapshot () action have an arbitrary volume ID that should not be used
+	// for any purpose.
+	VolumeId *string
+
+	// The size of the volume, in GiB.
+	VolumeSize *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,14 +64,14 @@ type ListTagsForStreamInput struct {
 	// This member is required.
 	StreamName *string
 
+	// The key to use as the starting point for the list of tags. If this parameter is
+	// set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
+	ExclusiveStartTagKey *string
+
 	// The number of tags to return. If this number is less than the total number of
 	// tags associated with the stream, HasMoreTags is set to true. To list additional
 	// tags, set ExclusiveStartTagKey to the last key in the response.
 	Limit *int32
-
-	// The key to use as the starting point for the list of tags. If this parameter is
-	// set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
-	ExclusiveStartTagKey *string
 }
 
 // Represents the output for ListTagsForStream.

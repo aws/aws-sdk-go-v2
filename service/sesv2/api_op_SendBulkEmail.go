@@ -60,31 +60,6 @@ func (c *Client) SendBulkEmail(ctx context.Context, params *SendBulkEmailInput, 
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type SendBulkEmailInput struct {
 
-	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using the SendEmail operation. Tags correspond to characteristics of the
-	// email that you define, so that you can publish email sending events.
-	DefaultEmailTags []*types.MessageTag
-
-	// The name of the configuration set that you want to use when sending the email.
-	ConfigurationSetName *string
-
-	// The "Reply-to" email addresses for the message. When the recipient replies to
-	// the message, each Reply-to address receives the reply.
-	ReplyToAddresses []*string
-
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to use the email address specified in the FromEmailAddress parameter. For
-	// example, if the owner of example.com (which has ARN
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
-	// that authorizes you to use sender@example.com, then you would specify the
-	// FromEmailAddressIdentityArn to be
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FromEmailAddress to be sender@example.com. For more information about sending
-	// authorization, see the Amazon SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-	FromEmailAddressIdentityArn *string
-
 	// The list of bulk email entry objects.
 	//
 	// This member is required.
@@ -95,6 +70,17 @@ type SendBulkEmailInput struct {
 	//
 	// This member is required.
 	DefaultContent *types.BulkEmailContent
+
+	// The name of the configuration set that you want to use when sending the email.
+	ConfigurationSetName *string
+
+	// A list of tags, in the form of name/value pairs, to apply to an email that you
+	// send using the SendEmail operation. Tags correspond to characteristics of the
+	// email that you define, so that you can publish email sending events.
+	DefaultEmailTags []*types.MessageTag
+
+	// The address that you want bounce and complaint notifications to be sent to.
+	FeedbackForwardingEmailAddress *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -109,12 +95,26 @@ type SendBulkEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	FeedbackForwardingEmailAddressIdentityArn *string
 
-	// The address that you want bounce and complaint notifications to be sent to.
-	FeedbackForwardingEmailAddress *string
-
 	// The email address that you want to use as the "From" address for the email. The
 	// address that you specify has to be verified.
 	FromEmailAddress *string
+
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to use the email address specified in the FromEmailAddress parameter. For
+	// example, if the owner of example.com (which has ARN
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
+	// that authorizes you to use sender@example.com, then you would specify the
+	// FromEmailAddressIdentityArn to be
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+	// FromEmailAddress to be sender@example.com. For more information about sending
+	// authorization, see the Amazon SES Developer Guide
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	FromEmailAddressIdentityArn *string
+
+	// The "Reply-to" email addresses for the message. When the recipient replies to
+	// the message, each Reply-to address receives the reply.
+	ReplyToAddresses []*string
 }
 
 // The following data is returned in JSON format by the service.

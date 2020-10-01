@@ -59,6 +59,12 @@ func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *St
 
 type StartAuditMitigationActionsTaskInput struct {
 
+	// For an audit check, specifies which mitigation actions to apply. Those actions
+	// must be defined in your AWS account.
+	//
+	// This member is required.
+	AuditCheckToActionsMapping map[string][]*string
+
 	// Each audit mitigation task must have a unique client request token. If you try
 	// to start a new task with the same token as a task that already exists, an
 	// exception occurs. If you omit this value, a unique client request token is
@@ -79,12 +85,6 @@ type StartAuditMitigationActionsTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
-
-	// For an audit check, specifies which mitigation actions to apply. Those actions
-	// must be defined in your AWS account.
-	//
-	// This member is required.
-	AuditCheckToActionsMapping map[string][]*string
 }
 
 type StartAuditMitigationActionsTaskOutput struct {

@@ -61,11 +61,11 @@ type ListEntitiesDetectionV2JobsInput struct {
 	// filter at a time.
 	Filter *types.ComprehendMedicalAsyncJobFilter
 
-	// Identifies the next page of results to return.
-	NextToken *string
-
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
+	// Identifies the next page of results to return.
+	NextToken *string
 }
 
 type ListEntitiesDetectionV2JobsOutput struct {

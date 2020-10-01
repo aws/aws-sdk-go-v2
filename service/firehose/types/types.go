@@ -13,6 +13,12 @@ import (
 // one of them, you must also provide a value for the other.
 type BufferingHints struct {
 
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300. This parameter is
+	// optional but if you specify a value for it, you must also specify a value for
+	// SizeInMBs, and vice versa.
+	IntervalInSeconds *int32
+
 	// Buffer incoming data to the specified size, in MiBs, before delivering it to the
 	// destination. The default value is 5. This parameter is optional but if you
 	// specify a value for it, you must also specify a value for IntervalInSeconds, and
@@ -21,20 +27,10 @@ type BufferingHints struct {
 	// example, if you typically ingest data at 1 MiB/sec, the value should be 10 MiB
 	// or higher.
 	SizeInMBs *int32
-
-	// Buffer incoming data for the specified period of time, in seconds, before
-	// delivering it to the destination. The default value is 300. This parameter is
-	// optional but if you specify a value for it, you must also specify a value for
-	// SizeInMBs, and vice versa.
-	IntervalInSeconds *int32
 }
 
 // Describes the Amazon CloudWatch logging options for your delivery stream.
 type CloudWatchLoggingOptions struct {
-
-	// The CloudWatch log stream name for logging. This value is required if CloudWatch
-	// logging is enabled.
-	LogStreamName *string
 
 	// Enables or disables CloudWatch logging.
 	Enabled *bool
@@ -42,6 +38,10 @@ type CloudWatchLoggingOptions struct {
 	// The CloudWatch group name for logging. This value is required if CloudWatch
 	// logging is enabled.
 	LogGroupName *string
+
+	// The CloudWatch log stream name for logging. This value is required if CloudWatch
+	// logging is enabled.
+	LogStreamName *string
 }
 
 // Describes a COPY command for Amazon Redshift.
@@ -80,11 +80,6 @@ type CopyCommand struct {
 // (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html).
 type DataFormatConversionConfiguration struct {
 
-	// Specifies the serializer that you want Kinesis Data Firehose to use to convert
-	// the format of your data to the Parquet or ORC format. This parameter is required
-	// if Enabled is set to true.
-	OutputFormatConfiguration *OutputFormatConfiguration
-
 	// Defaults to true. Set it to false if you want to disable format conversion while
 	// preserving the configuration details.
 	Enabled *bool
@@ -94,6 +89,11 @@ type DataFormatConversionConfiguration struct {
 	// to true.
 	InputFormatConfiguration *InputFormatConfiguration
 
+	// Specifies the serializer that you want Kinesis Data Firehose to use to convert
+	// the format of your data to the Parquet or ORC format. This parameter is required
+	// if Enabled is set to true.
+	OutputFormatConfiguration *OutputFormatConfiguration
+
 	// Specifies the AWS Glue Data Catalog table that contains the column information.
 	// This parameter is required if Enabled is set to true.
 	SchemaConfiguration *SchemaConfiguration
@@ -102,22 +102,25 @@ type DataFormatConversionConfiguration struct {
 // Contains information about a delivery stream.
 type DeliveryStreamDescription struct {
 
-	// The name of the delivery stream.
-	//
-	// This member is required.
-	DeliveryStreamName *string
-
-	// The destinations.
-	//
-	// This member is required.
-	Destinations []*DestinationDescription
-
 	// The Amazon Resource Name (ARN) of the delivery stream. For more information, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
 	DeliveryStreamARN *string
+
+	// The name of the delivery stream.
+	//
+	// This member is required.
+	DeliveryStreamName *string
+
+	// The status of the delivery stream. If the status of a delivery stream is
+	// CREATING_FAILED, this status doesn't change, and you can't invoke
+	// CreateDeliveryStream again on it. However, you can invoke the
+	// DeleteDeliveryStream () operation to delete it.
+	//
+	// This member is required.
+	DeliveryStreamStatus DeliveryStreamStatus
 
 	// The delivery stream type. This can be one of the following values:
 	//
@@ -131,6 +134,16 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	DeliveryStreamType DeliveryStreamType
 
+	// The destinations.
+	//
+	// This member is required.
+	Destinations []*DestinationDescription
+
+	// Indicates whether there are more destinations available to list.
+	//
+	// This member is required.
+	HasMoreDestinations *bool
+
 	// Each time the destination is updated for a delivery stream, the version ID is
 	// changed, and the current version ID is required when updating the destination.
 	// This is so that the service knows it is applying the changes to the correct
@@ -139,29 +152,16 @@ type DeliveryStreamDescription struct {
 	// This member is required.
 	VersionId *string
 
-	// The status of the delivery stream. If the status of a delivery stream is
-	// CREATING_FAILED, this status doesn't change, and you can't invoke
-	// CreateDeliveryStream again on it. However, you can invoke the
-	// DeleteDeliveryStream () operation to delete it.
-	//
-	// This member is required.
-	DeliveryStreamStatus DeliveryStreamStatus
-
 	// The date and time that the delivery stream was created.
 	CreateTimestamp *time.Time
 
-	// Indicates whether there are more destinations available to list.
-	//
-	// This member is required.
-	HasMoreDestinations *bool
+	// Indicates the server-side encryption (SSE) status for the delivery stream.
+	DeliveryStreamEncryptionConfiguration *DeliveryStreamEncryptionConfiguration
 
 	// Provides details in case one of the following operations fails due to an error
 	// related to KMS: CreateDeliveryStream (), DeleteDeliveryStream (),
 	// StartDeliveryStreamEncryption (), StopDeliveryStreamEncryption ().
 	FailureDescription *FailureDescription
-
-	// Indicates the server-side encryption (SSE) status for the delivery stream.
-	DeliveryStreamEncryptionConfiguration *DeliveryStreamEncryptionConfiguration
 
 	// The date and time that the delivery stream was last updated.
 	LastUpdateTimestamp *time.Time
@@ -262,33 +262,37 @@ type Deserializer struct {
 // Describes the destination for a delivery stream.
 type DestinationDescription struct {
 
-	// The destination in Amazon Redshift.
-	RedshiftDestinationDescription *RedshiftDestinationDescription
-
 	// The ID of the destination.
 	//
 	// This member is required.
 	DestinationId *string
 
-	// Describes the specified HTTP endpoint destination.
-	HttpEndpointDestinationDescription *HttpEndpointDestinationDescription
-
 	// The destination in Amazon ES.
 	ElasticsearchDestinationDescription *ElasticsearchDestinationDescription
 
-	// The destination in Splunk.
-	SplunkDestinationDescription *SplunkDestinationDescription
+	// The destination in Amazon S3.
+	ExtendedS3DestinationDescription *ExtendedS3DestinationDescription
+
+	// Describes the specified HTTP endpoint destination.
+	HttpEndpointDestinationDescription *HttpEndpointDestinationDescription
+
+	// The destination in Amazon Redshift.
+	RedshiftDestinationDescription *RedshiftDestinationDescription
 
 	// [Deprecated] The destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
-	// The destination in Amazon S3.
-	ExtendedS3DestinationDescription *ExtendedS3DestinationDescription
+	// The destination in Splunk.
+	SplunkDestinationDescription *SplunkDestinationDescription
 }
 
 // Describes the buffering to perform before delivering data to the Amazon ES
 // destination.
 type ElasticsearchBufferingHints struct {
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300 (5 minutes).
+	IntervalInSeconds *int32
 
 	// Buffer incoming data to the specified size, in MBs, before delivering it to the
 	// destination. The default value is 5. We recommend setting this parameter to a
@@ -296,10 +300,6 @@ type ElasticsearchBufferingHints struct {
 	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
 	// value should be 10 MB or higher.
 	SizeInMBs *int32
-
-	// Buffer incoming data for the specified period of time, in seconds, before
-	// delivering it to the destination. The default value is 300 (5 minutes).
-	IntervalInSeconds *int32
 }
 
 // Describes the configuration of a destination in Amazon ES.
@@ -309,35 +309,6 @@ type ElasticsearchDestinationConfiguration struct {
 	//
 	// This member is required.
 	IndexName *string
-
-	// The endpoint to use when communicating with the cluster. Specify either this
-	// ClusterEndpoint or the DomainARN field.
-	ClusterEndpoint *string
-
-	// The configuration for the backup Amazon S3 location.
-	//
-	// This member is required.
-	S3Configuration *S3DestinationConfiguration
-
-	// The buffering options. If no value is specified, the default values for
-	// ElasticsearchBufferingHints are used.
-	BufferingHints *ElasticsearchBufferingHints
-
-	// The details of the VPC of the Amazon ES destination.
-	VpcConfiguration *VpcConfiguration
-
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
-	// to Amazon ES. The default value is 300 (5 minutes).
-	RetryOptions *ElasticsearchRetryOptions
-
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
-	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Kinesis Data Firehose returns an error during run time.
-	// <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>
-	TypeName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
 	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
@@ -350,6 +321,31 @@ type ElasticsearchDestinationConfiguration struct {
 	// This member is required.
 	RoleARN *string
 
+	// The configuration for the backup Amazon S3 location.
+	//
+	// This member is required.
+	S3Configuration *S3DestinationConfiguration
+
+	// The buffering options. If no value is specified, the default values for
+	// ElasticsearchBufferingHints are used.
+	BufferingHints *ElasticsearchBufferingHints
+
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string
+
+	// The ARN of the Amazon ES domain. The IAM role must have permissions for
+	// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
+	// DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
+	// For more information, see Amazon Resource Names (ARNs) and AWS Service
+	// Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
+	DomainARN *string
+
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
 	// the IndexName to facilitate the expiration of old data. For more information,
 	// see Index Rotation for the Amazon ES Destination
@@ -359,6 +355,10 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon ES. The default value is 300 (5 minutes).
+	RetryOptions *ElasticsearchRetryOptions
 
 	// Defines how documents should be delivered to Amazon S3. When it is set to
 	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not
@@ -372,53 +372,29 @@ type ElasticsearchDestinationConfiguration struct {
 	// you create the delivery stream.
 	S3BackupMode ElasticsearchS3BackupMode
 
-	// The ARN of the Amazon ES domain. The IAM role must have permissions for
-	// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
-	// DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
-	// For more information, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	// <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
-	DomainARN *string
+	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
+	// per index. If you try to specify a new type for an existing index that already
+	// has another type, Kinesis Data Firehose returns an error during run time.
+	// <p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>
+	TypeName *string
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfiguration *VpcConfiguration
 }
 
 // The destination description in Amazon ES.
 type ElasticsearchDestinationDescription struct {
 
-	// The Amazon CloudWatch logging options.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The Elasticsearch index name.
-	IndexName *string
-
-	// The details of the VPC of the Amazon ES destination.
-	VpcConfigurationDescription *VpcConfigurationDescription
-
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
 	// The buffering options.
 	BufferingHints *ElasticsearchBufferingHints
 
-	// The Amazon S3 backup mode.
-	S3BackupMode ElasticsearchS3BackupMode
-
-	// The Elasticsearch index rotation period
-	IndexRotationPeriod ElasticsearchIndexRotationPeriod
+	// The Amazon CloudWatch logging options.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The endpoint to use when communicating with the cluster. Kinesis Data Firehose
 	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
 	// ES.
 	ClusterEndpoint *string
-
-	// The Elasticsearch type name. This applies to Elasticsearch 6.x and lower
-	// versions. For Elasticsearch 7.x, there's no value for TypeName.
-	TypeName *string
-
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	RoleARN *string
 
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource Names
 	// (ARNs) and AWS Service Namespaces
@@ -427,40 +403,50 @@ type ElasticsearchDestinationDescription struct {
 	// <code>DomainARN</code> to send data to Amazon ES.</p>
 	DomainARN *string
 
+	// The Elasticsearch index name.
+	IndexName *string
+
+	// The Elasticsearch index rotation period
+	IndexRotationPeriod ElasticsearchIndexRotationPeriod
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
 	// The Amazon ES retry options.
 	RetryOptions *ElasticsearchRetryOptions
 
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	RoleARN *string
+
+	// The Amazon S3 backup mode.
+	S3BackupMode ElasticsearchS3BackupMode
+
 	// The Amazon S3 destination.
 	S3DestinationDescription *S3DestinationDescription
+
+	// The Elasticsearch type name. This applies to Elasticsearch 6.x and lower
+	// versions. For Elasticsearch 7.x, there's no value for TypeName.
+	TypeName *string
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfigurationDescription *VpcConfigurationDescription
 }
 
 // Describes an update for a destination in Amazon ES.
 type ElasticsearchDestinationUpdate struct {
 
-	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
-	// per index. If you try to specify a new type for an existing index that already
-	// has another type, Kinesis Data Firehose returns an error during runtime.  <p>If
-	// you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,
-	// Kinesis Data Firehose still delivers data to Elasticsearch with the old index
-	// name and type name. If you want to update your delivery stream with a new index
-	// name, provide an empty string for <code>TypeName</code>. </p>
-	TypeName *string
-
-	// The endpoint to use when communicating with the cluster. Specify either this
-	// ClusterEndpoint or the DomainARN field.
-	ClusterEndpoint *string
+	// The buffering options. If no value is specified, ElasticsearchBufferingHints
+	// object default values are used.
+	BufferingHints *ElasticsearchBufferingHints
 
 	// The CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
-	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
-	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
-	// For more information, see Grant Kinesis Data Firehose Access to an Amazon S3
-	// Destination
-	// (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	RoleARN *string
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
+	ClusterEndpoint *string
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
 	// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
@@ -471,22 +457,8 @@ type ElasticsearchDestinationUpdate struct {
 	// <p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
 	DomainARN *string
 
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
-	// The Amazon S3 destination.
-	S3Update *S3DestinationUpdate
-
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
-	// to Amazon ES. The default value is 300 (5 minutes).
-	RetryOptions *ElasticsearchRetryOptions
-
 	// The Elasticsearch index name.
 	IndexName *string
-
-	// The buffering options. If no value is specified, ElasticsearchBufferingHints
-	// object default values are used.
-	BufferingHints *ElasticsearchBufferingHints
 
 	// The Elasticsearch index rotation period. Index rotation appends a timestamp to
 	// IndexName to facilitate the expiration of old data. For more information, see
@@ -494,6 +466,34 @@ type ElasticsearchDestinationUpdate struct {
 	// (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-index-rotation).
 	// Default value is OneDay.
 	IndexRotationPeriod ElasticsearchIndexRotationPeriod
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon ES. The default value is 300 (5 minutes).
+	RetryOptions *ElasticsearchRetryOptions
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Amazon ES Configuration API and for indexing documents.
+	// For more information, see Grant Kinesis Data Firehose Access to an Amazon S3
+	// Destination
+	// (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
+	// and Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	RoleARN *string
+
+	// The Amazon S3 destination.
+	S3Update *S3DestinationUpdate
+
+	// The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type
+	// per index. If you try to specify a new type for an existing index that already
+	// has another type, Kinesis Data Firehose returns an error during runtime.  <p>If
+	// you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream,
+	// Kinesis Data Firehose still delivers data to Elasticsearch with the old index
+	// name and type name. If you want to update your delivery stream with a new index
+	// name, provide an empty string for <code>TypeName</code>. </p>
+	TypeName *string
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -522,8 +522,12 @@ type EncryptionConfiguration struct {
 // Describes the configuration of a destination in Amazon S3.
 type ExtendedS3DestinationConfiguration struct {
 
-	// The configuration for backup in Amazon S3.
-	S3BackupConfiguration *S3DestinationConfiguration
+	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
+	BucketARN *string
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
@@ -532,21 +536,28 @@ type ExtendedS3DestinationConfiguration struct {
 	// This member is required.
 	RoleARN *string
 
-	// The encryption configuration. If no value is specified, the default is no
-	// encryption.
-	EncryptionConfiguration *EncryptionConfiguration
-
-	// The Amazon S3 backup mode. After you create a delivery stream, you can update it
-	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
-	// update the delivery stream to disable it.
-	S3BackupMode S3BackupMode
+	// The buffering option.
+	BufferingHints *BufferingHints
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
+	// The compression format. If no value is specified, the default is UNCOMPRESSED.
+	CompressionFormat CompressionFormat
+
 	// The serializer, deserializer, and schema for converting data from the JSON
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration
+
+	// The encryption configuration. If no value is specified, the default is no
+	// encryption.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
+	// writing them to S3. This prefix appears immediately following the bucket name.
+	// For information about how to specify this prefix, see Custom Prefixes for Amazon
+	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
+	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
 	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
@@ -557,11 +568,17 @@ type ExtendedS3DestinationConfiguration struct {
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	// The buffering option.
-	BufferingHints *BufferingHints
+	// The configuration for backup in Amazon S3.
+	S3BackupConfiguration *S3DestinationConfiguration
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	CompressionFormat CompressionFormat
+	// The Amazon S3 backup mode. After you create a delivery stream, you can update it
+	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
+	// update the delivery stream to disable it.
+	S3BackupMode S3BackupMode
+}
+
+// Describes a destination in Amazon S3.
+type ExtendedS3DestinationDescription struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
 	// and AWS Service Namespaces
@@ -570,29 +587,21 @@ type ExtendedS3DestinationConfiguration struct {
 	// This member is required.
 	BucketARN *string
 
-	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
-	// writing them to S3. This prefix appears immediately following the bucket name.
-	// For information about how to specify this prefix, see Custom Prefixes for Amazon
-	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-	ErrorOutputPrefix *string
-}
-
-// Describes a destination in Amazon S3.
-type ExtendedS3DestinationDescription struct {
-
 	// The buffering option.
 	//
 	// This member is required.
 	BufferingHints *BufferingHints
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED.
+	//
+	// This member is required.
+	CompressionFormat CompressionFormat
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
 	//
 	// This member is required.
 	EncryptionConfiguration *EncryptionConfiguration
-
-	// The Amazon S3 backup mode.
-	S3BackupMode S3BackupMode
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
@@ -601,23 +610,24 @@ type ExtendedS3DestinationDescription struct {
 	// This member is required.
 	RoleARN *string
 
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The serializer, deserializer, and schema for converting data from the JSON
+	// format to the Parquet or ORC format before writing it to Amazon S3.
+	DataFormatConversionConfiguration *DataFormatConversionConfiguration
+
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
 	// writing them to S3. This prefix appears immediately following the bucket name.
 	// For information about how to specify this prefix, see Custom Prefixes for Amazon
 	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// This member is required.
-	BucketARN *string
-
-	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	//
-	// This member is required.
-	CompressionFormat CompressionFormat
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects
+	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
+	Prefix *string
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
@@ -625,48 +635,23 @@ type ExtendedS3DestinationDescription struct {
 	// The configuration for backup in Amazon S3.
 	S3BackupDescription *S3DestinationDescription
 
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The serializer, deserializer, and schema for converting data from the JSON
-	// format to the Parquet or ORC format before writing it to Amazon S3.
-	DataFormatConversionConfiguration *DataFormatConversionConfiguration
-
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects
-	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-	Prefix *string
+	// The Amazon S3 backup mode.
+	S3BackupMode S3BackupMode
 }
 
 // Describes an update for a destination in Amazon S3.
 type ExtendedS3DestinationUpdate struct {
-
-	// The encryption configuration. If no value is specified, the default is no
-	// encryption.
-	EncryptionConfiguration *EncryptionConfiguration
-
-	// The buffering option.
-	BufferingHints *BufferingHints
-
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	RoleARN *string
-
-	// The Amazon S3 destination for backup.
-	S3BackupUpdate *S3DestinationUpdate
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
 	// and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string
 
-	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
-	// writing them to S3. This prefix appears immediately following the bucket name.
-	// For information about how to specify this prefix, see Custom Prefixes for Amazon
-	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-	ErrorOutputPrefix *string
+	// The buffering option.
+	BufferingHints *BufferingHints
+
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	CompressionFormat CompressionFormat
@@ -675,8 +660,15 @@ type ExtendedS3DestinationUpdate struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration
 
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
+	// The encryption configuration. If no value is specified, the default is no
+	// encryption.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
+	// writing them to S3. This prefix appears immediately following the bucket name.
+	// For information about how to specify this prefix, see Custom Prefixes for Amazon
+	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
+	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
 	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
@@ -684,12 +676,20 @@ type ExtendedS3DestinationUpdate struct {
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
 
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	RoleARN *string
 
 	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
 	// If backup is enabled, you can't update the delivery stream to disable it.
 	S3BackupMode S3BackupMode
+
+	// The Amazon S3 destination for backup.
+	S3BackupUpdate *S3DestinationUpdate
 }
 
 // Provides details in case one of the following operations fails due to an error
@@ -697,15 +697,15 @@ type ExtendedS3DestinationUpdate struct {
 // StartDeliveryStreamEncryption (), StopDeliveryStreamEncryption ().
 type FailureDescription struct {
 
-	// The type of error that caused the failure.
-	//
-	// This member is required.
-	Type DeliveryStreamFailureType
-
 	// A message providing details about the error that caused the failure.
 	//
 	// This member is required.
 	Details *string
+
+	// The type of error that caused the failure.
+	//
+	// This member is required.
+	Type DeliveryStreamFailureType
 }
 
 // The native Hive / HCatalog JsonSerDe. Used by Kinesis Data Firehose for
@@ -764,14 +764,14 @@ type HttpEndpointCommonAttribute struct {
 // delivers data.
 type HttpEndpointConfiguration struct {
 
-	// The access key required for Kinesis Firehose to authenticate with the HTTP
-	// endpoint selected as the destination.
-	AccessKey *string
-
 	// The URL of the HTTP endpoint selected as the destination.
 	//
 	// This member is required.
 	Url *string
+
+	// The access key required for Kinesis Firehose to authenticate with the HTTP
+	// endpoint selected as the destination.
+	AccessKey *string
 
 	// The name of the HTTP endpoint selected as the destination.
 	Name *string
@@ -790,35 +790,10 @@ type HttpEndpointDescription struct {
 // Describes the configuration of the HTTP endpoint destination.
 type HttpEndpointDestinationConfiguration struct {
 
-	// Describes a data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
-	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
-	// data to the specified HTTP endpoint destination, or if it doesn't receive a
-	// valid acknowledgment of receipt from the specified HTTP endpoint destination.
-	RetryOptions *HttpEndpointRetryOptions
-
 	// The configuration of the HTTP endpoint selected as the destination.
 	//
 	// This member is required.
 	EndpointConfiguration *HttpEndpointConfiguration
-
-	// The configuration of the requeste sent to the HTTP endpoint specified as the
-	// destination.
-	RequestConfiguration *HttpEndpointRequestConfiguration
-
-	// Describes the S3 bucket backup options for the data that Kinesis Data Firehose
-	// delivers to the HTTP endpoint destination. You can back up all documents
-	// (AllData) or only the documents that Kinesis Data Firehose could not deliver to
-	// the specified HTTP endpoint destination (FailedDataOnly).
-	S3BackupMode HttpEndpointS3BackupMode
-
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// Kinesis Data Firehose uses this IAM role for all the permissions that the
-	// delivery stream needs.
-	RoleARN *string
 
 	// Describes the configuration of a destination in Amazon S3.
 	//
@@ -831,24 +806,60 @@ type HttpEndpointDestinationConfiguration struct {
 	// parameters are optional. However, if you specify a value for one of them, you
 	// must also provide a value for the other.
 	BufferingHints *HttpEndpointBufferingHints
-}
-
-// Describes the HTTP endpoint destination.
-type HttpEndpointDestinationDescription struct {
-
-	// Describes a destination in Amazon S3.
-	S3DestinationDescription *S3DestinationDescription
-
-	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
-	// data to the specified HTTP endpoint destination, or if it doesn't receive a
-	// valid acknowledgment of receipt from the specified HTTP endpoint destination.
-	RetryOptions *HttpEndpointRetryOptions
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
+
+	// The configuration of the requeste sent to the HTTP endpoint specified as the
+	// destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration
+
+	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+	// data to the specified HTTP endpoint destination, or if it doesn't receive a
+	// valid acknowledgment of receipt from the specified HTTP endpoint destination.
+	RetryOptions *HttpEndpointRetryOptions
+
+	// Kinesis Data Firehose uses this IAM role for all the permissions that the
+	// delivery stream needs.
+	RoleARN *string
+
+	// Describes the S3 bucket backup options for the data that Kinesis Data Firehose
+	// delivers to the HTTP endpoint destination. You can back up all documents
+	// (AllData) or only the documents that Kinesis Data Firehose could not deliver to
+	// the specified HTTP endpoint destination (FailedDataOnly).
+	S3BackupMode HttpEndpointS3BackupMode
+}
+
+// Describes the HTTP endpoint destination.
+type HttpEndpointDestinationDescription struct {
+
+	// Describes buffering options that can be applied to the data before it is
+	// delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these
+	// options as hints, and it might choose to use more optimal values. The SizeInMBs
+	// and IntervalInSeconds parameters are optional. However, if specify a value for
+	// one of them, you must also provide a value for the other.
+	BufferingHints *HttpEndpointBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The configuration of the specified HTTP endpoint destination.
+	EndpointConfiguration *HttpEndpointDescription
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The configuration of request sent to the HTTP endpoint specified as the
+	// destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration
+
+	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
+	// data to the specified HTTP endpoint destination, or if it doesn't receive a
+	// valid acknowledgment of receipt from the specified HTTP endpoint destination.
+	RetryOptions *HttpEndpointRetryOptions
 
 	// Kinesis Data Firehose uses this IAM role for all the permissions that the
 	// delivery stream needs.
@@ -860,6 +871,13 @@ type HttpEndpointDestinationDescription struct {
 	// the specified HTTP endpoint destination (FailedDataOnly).
 	S3BackupMode HttpEndpointS3BackupMode
 
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription
+}
+
+// Updates the specified HTTP endpoint destination.
+type HttpEndpointDestinationUpdate struct {
+
 	// Describes buffering options that can be applied to the data before it is
 	// delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these
 	// options as hints, and it might choose to use more optimal values. The SizeInMBs
@@ -867,22 +885,18 @@ type HttpEndpointDestinationDescription struct {
 	// one of them, you must also provide a value for the other.
 	BufferingHints *HttpEndpointBufferingHints
 
-	// The configuration of request sent to the HTTP endpoint specified as the
-	// destination.
-	RequestConfiguration *HttpEndpointRequestConfiguration
-
-	// The configuration of the specified HTTP endpoint destination.
-	EndpointConfiguration *HttpEndpointDescription
-}
-
-// Updates the specified HTTP endpoint destination.
-type HttpEndpointDestinationUpdate struct {
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// Describes the configuration of the HTTP endpoint destination.
 	EndpointConfiguration *HttpEndpointConfiguration
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
+
+	// The configuration of the request sent to the HTTP endpoint specified as the
+	// destination.
+	RequestConfiguration *HttpEndpointRequestConfiguration
 
 	// Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
 	// data to the specified HTTP endpoint destination, or if it doesn't receive a
@@ -892,20 +906,6 @@ type HttpEndpointDestinationUpdate struct {
 	// Kinesis Data Firehose uses this IAM role for all the permissions that the
 	// delivery stream needs.
 	RoleARN *string
-
-	// Describes buffering options that can be applied to the data before it is
-	// delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these
-	// options as hints, and it might choose to use more optimal values. The SizeInMBs
-	// and IntervalInSeconds parameters are optional. However, if specify a value for
-	// one of them, you must also provide a value for the other.
-	BufferingHints *HttpEndpointBufferingHints
-
-	// The configuration of the request sent to the HTTP endpoint specified as the
-	// destination.
-	RequestConfiguration *HttpEndpointRequestConfiguration
-
-	// Describes the Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// Describes the S3 bucket backup options for the data that Kinesis Firehose
 	// delivers to the HTTP endpoint destination. You can back up all documents
@@ -920,15 +920,15 @@ type HttpEndpointDestinationUpdate struct {
 // The configuration of the HTTP endpoint request.
 type HttpEndpointRequestConfiguration struct {
 
+	// Describes the metadata sent to the HTTP endpoint destination.
+	CommonAttributes []*HttpEndpointCommonAttribute
+
 	// Kinesis Data Firehose uses the content encoding to compress the body of a
 	// request before sending the request to the destination. For more information, see
 	// Content-Encoding
 	// (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding) in
 	// MDN Web Docs, the official Mozilla documentation.
 	ContentEncoding ContentEncoding
-
-	// Describes the metadata sent to the HTTP endpoint destination.
-	CommonAttributes []*HttpEndpointCommonAttribute
 }
 
 // Describes the retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -958,19 +958,19 @@ type InputFormatConfiguration struct {
 // as the source for a delivery stream.
 type KinesisStreamSourceConfiguration struct {
 
-	// The ARN of the role that provides access to the source Kinesis data stream. For
-	// more information, see AWS Identity and Access Management (IAM) ARN Format
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
-	//
-	// This member is required.
-	RoleARN *string
-
 	// The ARN of the source Kinesis data stream. For more information, see Amazon
 	// Kinesis Data Streams ARN Format
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	//
 	// This member is required.
 	KinesisStreamARN *string
+
+	// The ARN of the role that provides access to the source Kinesis data stream. For
+	// more information, see AWS Identity and Access Management (IAM) ARN Format
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
+	//
+	// This member is required.
+	RoleARN *string
 }
 
 // Details about a Kinesis data stream used as the source for a Kinesis Data
@@ -1011,15 +1011,15 @@ type KMSEncryptionConfig struct {
 // the native Hive / HCatalog JsonSerDe.
 type OpenXJsonSerDe struct {
 
+	// When set to true, which is the default, Kinesis Data Firehose converts JSON keys
+	// to lowercase before deserializing them.
+	CaseInsensitive *bool
+
 	// Maps column names to JSON keys that aren't identical to the column names. This
 	// is useful when the JSON contains keys that are Hive keywords. For example,
 	// timestamp is a Hive keyword. If you have a JSON key named timestamp, set this
 	// parameter to {"ts": "timestamp"} to map this key to a column named ts.
 	ColumnToJsonKeyMappings map[string]*string
-
-	// When set to true, which is the default, Kinesis Data Firehose converts JSON keys
-	// to lowercase before deserializing them.
-	CaseInsensitive *bool
 
 	// When set to true, specifies that the names of the keys include dots and that you
 	// want Kinesis Data Firehose to replace them with underscores. This is useful
@@ -1033,9 +1033,38 @@ type OpenXJsonSerDe struct {
 // Amazon S3. For more information, see Apache ORC (https://orc.apache.org/docs/).
 type OrcSerDe struct {
 
+	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
+	// intend to copy the data from Amazon S3 to HDFS before querying. The default is
+	// 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for
+	// padding calculations.
+	BlockSizeBytes *int32
+
 	// The column names for which you want Kinesis Data Firehose to create bloom
 	// filters. The default is null.
 	BloomFilterColumns []*string
+
+	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger
+	// the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum
+	// is 1.
+	BloomFilterFalsePositiveProbability *float64
+
+	// The compression code to use over data blocks. The default is SNAPPY.
+	Compression OrcCompression
+
+	// Represents the fraction of the total number of non-null rows. To turn off
+	// dictionary encoding, set this fraction to a number that is less than the number
+	// of distinct keys in a dictionary. To always use dictionary encoding, set this
+	// threshold to 1.
+	DictionaryKeyThreshold *float64
+
+	// Set this to true to indicate that you want stripes to be padded to the HDFS
+	// block boundaries. This is useful if you intend to copy the data from Amazon S3
+	// to HDFS before querying. The default is false.
+	EnablePadding *bool
+
+	// The version of the file to write. The possible values are V0_11 and V0_12. The
+	// default is V0_12.
+	FormatVersion OrcFormatVersion
 
 	// A number between 0 and 1 that defines the tolerance for block padding as a
 	// decimal fraction of stripe size. The default value is 0.05, which means 5
@@ -1048,18 +1077,6 @@ type OrcSerDe struct {
 	// Firehose ignores this parameter when OrcSerDe$EnablePadding () is false.
 	PaddingTolerance *float64
 
-	// Represents the fraction of the total number of non-null rows. To turn off
-	// dictionary encoding, set this fraction to a number that is less than the number
-	// of distinct keys in a dictionary. To always use dictionary encoding, set this
-	// threshold to 1.
-	DictionaryKeyThreshold *float64
-
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
-	// intend to copy the data from Amazon S3 to HDFS before querying. The default is
-	// 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for
-	// padding calculations.
-	BlockSizeBytes *int32
-
 	// The number of rows between index entries. The default is 10,000 and the minimum
 	// is 1,000.
 	RowIndexStride *int32
@@ -1067,23 +1084,6 @@ type OrcSerDe struct {
 	// The number of bytes in each stripe. The default is 64 MiB and the minimum is 8
 	// MiB.
 	StripeSizeBytes *int32
-
-	// The version of the file to write. The possible values are V0_11 and V0_12. The
-	// default is V0_12.
-	FormatVersion OrcFormatVersion
-
-	// The compression code to use over data blocks. The default is SNAPPY.
-	Compression OrcCompression
-
-	// The Bloom filter false positive probability (FPP). The lower the FPP, the bigger
-	// the Bloom filter. The default value is 0.05, the minimum is 0, and the maximum
-	// is 1.
-	BloomFilterFalsePositiveProbability *float64
-
-	// Set this to true to indicate that you want stripes to be padded to the HDFS
-	// block boundaries. This is useful if you intend to copy the data from Amazon S3
-	// to HDFS before querying. The default is false.
-	EnablePadding *bool
 }
 
 // Specifies the serializer that you want Kinesis Data Firehose to use to convert
@@ -1101,17 +1101,24 @@ type OutputFormatConfiguration struct {
 // (https://parquet.apache.org/documentation/latest/).
 type ParquetSerDe struct {
 
+	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
+	// intend to copy the data from Amazon S3 to HDFS before querying. The default is
+	// 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for
+	// padding calculations.
+	BlockSizeBytes *int32
+
 	// The compression code to use over data blocks. The possible values are
 	// UNCOMPRESSED, SNAPPY, and GZIP, with the default being SNAPPY. Use SNAPPY for
 	// higher decompression speed. Use GZIP if the compression ratio is more important
 	// than speed.
 	Compression ParquetCompression
 
-	// The Hadoop Distributed File System (HDFS) block size. This is useful if you
-	// intend to copy the data from Amazon S3 to HDFS before querying. The default is
-	// 256 MiB and the minimum is 64 MiB. Kinesis Data Firehose uses this value for
-	// padding calculations.
-	BlockSizeBytes *int32
+	// Indicates whether to enable dictionary compression.
+	EnableDictionaryCompression *bool
+
+	// The maximum amount of padding to apply. This is useful if you intend to copy the
+	// data from Amazon S3 to HDFS before querying. The default is 0.
+	MaxPaddingBytes *int32
 
 	// The Parquet page size. Column chunks are divided into pages. A page is
 	// conceptually an indivisible unit (in terms of compression and encoding). The
@@ -1121,13 +1128,6 @@ type ParquetSerDe struct {
 	// Indicates the version of row format to output. The possible values are V1 and
 	// V2. The default is V1.
 	WriterVersion ParquetWriterVersion
-
-	// Indicates whether to enable dictionary compression.
-	EnableDictionaryCompression *bool
-
-	// The maximum amount of padding to apply. This is useful if you intend to copy the
-	// data from Amazon S3 to HDFS before querying. The default is 0.
-	MaxPaddingBytes *int32
 }
 
 // Describes a data processing configuration.
@@ -1172,14 +1172,14 @@ type ProcessorParameter struct {
 // includes an error code and an error message.
 type PutRecordBatchResponseEntry struct {
 
+	// The error code for an individual record result.
+	ErrorCode *string
+
 	// The error message for an individual record result.
 	ErrorMessage *string
 
 	// The ID of the record.
 	RecordId *string
-
-	// The error code for an individual record result.
-	ErrorCode *string
 }
 
 // The unit of data in a delivery stream.
@@ -1194,6 +1194,28 @@ type Record struct {
 
 // Describes the configuration of a destination in Amazon Redshift.
 type RedshiftDestinationConfiguration struct {
+
+	// The database connection string.
+	//
+	// This member is required.
+	ClusterJDBCURL *string
+
+	// The COPY command.
+	//
+	// This member is required.
+	CopyCommand *CopyCommand
+
+	// The user password.
+	//
+	// This member is required.
+	Password *string
+
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
+	RoleARN *string
 
 	// The configuration for the intermediate Amazon S3 location from which Amazon
 	// Redshift obtains data. Restrictions are described in the topic for
@@ -1210,33 +1232,8 @@ type RedshiftDestinationConfiguration struct {
 	// This member is required.
 	Username *string
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// This member is required.
-	RoleARN *string
-
-	// The configuration for backup in Amazon S3.
-	S3BackupConfiguration *S3DestinationConfiguration
-
 	// The CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The database connection string.
-	//
-	// This member is required.
-	ClusterJDBCURL *string
-
-	// The user password.
-	//
-	// This member is required.
-	Password *string
-
-	// The Amazon S3 backup mode. After you create a delivery stream, you can update it
-	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
-	// update the delivery stream to disable it.
-	S3BackupMode RedshiftS3BackupMode
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
@@ -1245,17 +1242,27 @@ type RedshiftDestinationConfiguration struct {
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions
 
-	// The COPY command.
-	//
-	// This member is required.
-	CopyCommand *CopyCommand
+	// The configuration for backup in Amazon S3.
+	S3BackupConfiguration *S3DestinationConfiguration
+
+	// The Amazon S3 backup mode. After you create a delivery stream, you can update it
+	// to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't
+	// update the delivery stream to disable it.
+	S3BackupMode RedshiftS3BackupMode
 }
 
 // Describes a destination in Amazon Redshift.
 type RedshiftDestinationDescription struct {
 
-	// The Amazon S3 backup mode.
-	S3BackupMode RedshiftS3BackupMode
+	// The database connection string.
+	//
+	// This member is required.
+	ClusterJDBCURL *string
+
+	// The COPY command.
+	//
+	// This member is required.
+	CopyCommand *CopyCommand
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
@@ -1269,53 +1276,61 @@ type RedshiftDestinationDescription struct {
 	// This member is required.
 	S3DestinationDescription *S3DestinationDescription
 
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
-	// to Amazon Redshift. Default value is 3600 (60 minutes).
-	RetryOptions *RedshiftRetryOptions
-
-	// The COPY command.
-	//
-	// This member is required.
-	CopyCommand *CopyCommand
-
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
 	// The name of the user.
 	//
 	// This member is required.
 	Username *string
 
-	// The database connection string.
-	//
-	// This member is required.
-	ClusterJDBCURL *string
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon Redshift. Default value is 3600 (60 minutes).
+	RetryOptions *RedshiftRetryOptions
 
 	// The configuration for backup in Amazon S3.
 	S3BackupDescription *S3DestinationDescription
+
+	// The Amazon S3 backup mode.
+	S3BackupMode RedshiftS3BackupMode
 }
 
 // Describes an update for a destination in Amazon Redshift.
 type RedshiftDestinationUpdate struct {
 
-	// The Amazon S3 destination for backup.
-	S3BackupUpdate *S3DestinationUpdate
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The database connection string.
+	ClusterJDBCURL *string
 
 	// The COPY command.
 	CopyCommand *CopyCommand
+
+	// The user password.
+	Password *string
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
 
 	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions
 
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	RoleARN *string
 
-	// The name of the user.
-	Username *string
+	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
+	// If backup is enabled, you can't update the delivery stream to disable it.
+	S3BackupMode RedshiftS3BackupMode
+
+	// The Amazon S3 destination for backup.
+	S3BackupUpdate *S3DestinationUpdate
 
 	// The Amazon S3 destination. The compression formats SNAPPY or ZIP cannot be
 	// specified in RedshiftDestinationUpdate.S3Update because the Amazon Redshift COPY
@@ -1323,23 +1338,8 @@ type RedshiftDestinationUpdate struct {
 	// formats.
 	S3Update *S3DestinationUpdate
 
-	// The user password.
-	Password *string
-
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	RoleARN *string
-
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The database connection string.
-	ClusterJDBCURL *string
-
-	// You can update a delivery stream to enable Amazon S3 backup if it is disabled.
-	// If backup is enabled, you can't update the delivery stream to disable it.
-	S3BackupMode RedshiftS3BackupMode
+	// The name of the user.
+	Username *string
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -1357,25 +1357,12 @@ type RedshiftRetryOptions struct {
 // Describes the configuration of a destination in Amazon S3.
 type S3DestinationConfiguration struct {
 
-	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
-	// destinations because they are not supported by the Amazon Redshift COPY
-	// operation that reads from the S3 bucket.
-	CompressionFormat CompressionFormat
-
-	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
-	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
-	// Prefixes for Amazon S3 Objects
-	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-	Prefix *string
-
-	// The buffering option. If no value is specified, BufferingHints object default
-	// values are used.
-	BufferingHints *BufferingHints
-
-	// The encryption configuration. If no value is specified, the default is no
-	// encryption.
-	EncryptionConfiguration *EncryptionConfiguration
+	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
+	// and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
+	BucketARN *string
 
 	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
 	// Amazon Resource Names (ARNs) and AWS Service Namespaces
@@ -1384,14 +1371,38 @@ type S3DestinationConfiguration struct {
 	// This member is required.
 	RoleARN *string
 
+	// The buffering option. If no value is specified, BufferingHints object default
+	// values are used.
+	BufferingHints *BufferingHints
+
+	// The CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED.
+	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
+	// destinations because they are not supported by the Amazon Redshift COPY
+	// operation that reads from the S3 bucket.
+	CompressionFormat CompressionFormat
+
+	// The encryption configuration. If no value is specified, the default is no
+	// encryption.
+	EncryptionConfiguration *EncryptionConfiguration
+
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
 	// writing them to S3. This prefix appears immediately following the bucket name.
 	// For information about how to specify this prefix, see Custom Prefixes for Amazon
 	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string
 
-	// The CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
+	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
+	// Prefixes for Amazon S3 Objects
+	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
+	Prefix *string
+}
+
+// Describes a destination in Amazon S3.
+type S3DestinationDescription struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
 	// and AWS Service Namespaces
@@ -1399,10 +1410,30 @@ type S3DestinationConfiguration struct {
 	//
 	// This member is required.
 	BucketARN *string
-}
 
-// Describes a destination in Amazon S3.
-type S3DestinationDescription struct {
+	// The buffering option. If no value is specified, BufferingHints object default
+	// values are used.
+	//
+	// This member is required.
+	BufferingHints *BufferingHints
+
+	// The compression format. If no value is specified, the default is UNCOMPRESSED.
+	//
+	// This member is required.
+	CompressionFormat CompressionFormat
+
+	// The encryption configuration. If no value is specified, the default is no
+	// encryption.
+	//
+	// This member is required.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	//
+	// This member is required.
+	RoleARN *string
 
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
@@ -1413,70 +1444,27 @@ type S3DestinationDescription struct {
 	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	ErrorOutputPrefix *string
 
-	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// This member is required.
-	BucketARN *string
-
-	// The compression format. If no value is specified, the default is UNCOMPRESSED.
-	//
-	// This member is required.
-	CompressionFormat CompressionFormat
-
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// This member is required.
-	RoleARN *string
-
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
 	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
 	// Prefixes for Amazon S3 Objects
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
-
-	// The buffering option. If no value is specified, BufferingHints object default
-	// values are used.
-	//
-	// This member is required.
-	BufferingHints *BufferingHints
-
-	// The encryption configuration. If no value is specified, the default is no
-	// encryption.
-	//
-	// This member is required.
-	EncryptionConfiguration *EncryptionConfiguration
 }
 
 // Describes an update for a destination in Amazon S3.
 type S3DestinationUpdate struct {
-
-	// The encryption configuration. If no value is specified, the default is no
-	// encryption.
-	EncryptionConfiguration *EncryptionConfiguration
-
-	// The buffering option. If no value is specified, BufferingHints object default
-	// values are used.
-	BufferingHints *BufferingHints
-
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	RoleARN *string
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
 	// and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string
 
-	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
-	// writing them to S3. This prefix appears immediately following the bucket name.
-	// For information about how to specify this prefix, see Custom Prefixes for Amazon
-	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
-	ErrorOutputPrefix *string
+	// The buffering option. If no value is specified, BufferingHints object default
+	// values are used.
+	BufferingHints *BufferingHints
+
+	// The CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The compression format. If no value is specified, the default is UNCOMPRESSED.
 	// The compression formats SNAPPY or ZIP cannot be specified for Amazon Redshift
@@ -1484,14 +1472,26 @@ type S3DestinationUpdate struct {
 	// operation that reads from the S3 bucket.
 	CompressionFormat CompressionFormat
 
-	// The CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+	// The encryption configuration. If no value is specified, the default is no
+	// encryption.
+	EncryptionConfiguration *EncryptionConfiguration
+
+	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
+	// writing them to S3. This prefix appears immediately following the bucket name.
+	// For information about how to specify this prefix, see Custom Prefixes for Amazon
+	// S3 Objects (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
+	ErrorOutputPrefix *string
 
 	// The "YYYY/MM/DD/HH" time format prefix is automatically used for delivered
 	// Amazon S3 files. You can also specify a custom prefix, as described in Custom
 	// Prefixes for Amazon S3 Objects
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
+
+	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
+	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	RoleARN *string
 }
 
 // Specifies the schema to which you want Kinesis Data Firehose to configure your
@@ -1499,9 +1499,16 @@ type S3DestinationUpdate struct {
 // set to true.
 type SchemaConfiguration struct {
 
+	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account
+	// ID is used by default.
+	CatalogId *string
+
 	// Specifies the name of the AWS Glue database that contains the schema for the
 	// output data.
 	DatabaseName *string
+
+	// If you don't specify an AWS Region, the default is the current Region.
+	Region *string
 
 	// The role that Kinesis Data Firehose can use to access AWS Glue. This role must
 	// be in the same account you use for Kinesis Data Firehose. Cross-account roles
@@ -1511,13 +1518,6 @@ type SchemaConfiguration struct {
 	// Specifies the AWS Glue table that contains the column information that
 	// constitutes your data schema.
 	TableName *string
-
-	// If you don't specify an AWS Region, the default is the current Region.
-	Region *string
-
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account
-	// ID is used by default.
-	CatalogId *string
 
 	// Specifies the table version for the output data schema. If you don't specify
 	// this version ID, or if you set it to LATEST, Kinesis Data Firehose uses the most
@@ -1555,11 +1555,16 @@ type SourceDescription struct {
 // Describes the configuration of a destination in Splunk.
 type SplunkDestinationConfiguration struct {
 
-	// The amount of time that Kinesis Data Firehose waits to receive an acknowledgment
-	// from Splunk after it sends it data. At the end of the timeout period, Kinesis
-	// Data Firehose either tries to send the data again or considers it an error,
-	// based on your retry settings.
-	HECAcknowledgmentTimeoutInSeconds *int32
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends
+	// your data.
+	//
+	// This member is required.
+	HECEndpoint *string
+
+	// This type can be either "Raw" or "Event."
+	//
+	// This member is required.
+	HECEndpointType HECEndpointType
 
 	// This is a GUID that you obtain from your Splunk cluster when you create a new
 	// HEC endpoint.
@@ -1567,17 +1572,26 @@ type SplunkDestinationConfiguration struct {
 	// This member is required.
 	HECToken *string
 
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
-	// Splunk, or if it doesn't receive an acknowledgment of receipt from Splunk.
-	RetryOptions *SplunkRetryOptions
-
-	// This type can be either "Raw" or "Event."
+	// The configuration for the backup Amazon S3 location.
 	//
 	// This member is required.
-	HECEndpointType HECEndpointType
+	S3Configuration *S3DestinationConfiguration
+
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The amount of time that Kinesis Data Firehose waits to receive an acknowledgment
+	// from Splunk after it sends it data. At the end of the timeout period, Kinesis
+	// Data Firehose either tries to send the data again or considers it an error,
+	// based on your retry settings.
+	HECAcknowledgmentTimeoutInSeconds *int32
 
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
+	// Splunk, or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions
 
 	// Defines how documents should be delivered to Amazon S3. When set to
 	// FailedEventsOnly, Kinesis Data Firehose writes any data that could not be
@@ -1587,41 +1601,13 @@ type SplunkDestinationConfiguration struct {
 	// this backup mode from FailedEventsOnly to AllEvents. You can't update it from
 	// AllEvents to FailedEventsOnly.
 	S3BackupMode SplunkS3BackupMode
-
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
-
-	// The configuration for the backup Amazon S3 location.
-	//
-	// This member is required.
-	S3Configuration *S3DestinationConfiguration
-
-	// The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends
-	// your data.
-	//
-	// This member is required.
-	HECEndpoint *string
 }
 
 // Describes a destination in Splunk.
 type SplunkDestinationDescription struct {
 
-	// Defines how documents should be delivered to Amazon S3. When set to
-	// FailedDocumentsOnly, Kinesis Data Firehose writes any data that could not be
-	// indexed to the configured Amazon S3 destination. When set to AllDocuments,
-	// Kinesis Data Firehose delivers all incoming records to Amazon S3, and also
-	// writes failed documents to Amazon S3. Default value is FailedDocumentsOnly.
-	S3BackupMode SplunkS3BackupMode
-
-	// A GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
-	HECToken *string
-
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
-	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
-	RetryOptions *SplunkRetryOptions
-
-	// This type can be either "Raw" or "Event."
-	HECEndpointType HECEndpointType
+	// The Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
 	// The amount of time that Kinesis Data Firehose waits to receive an acknowledgment
 	// from Splunk after it sends it data. At the end of the timeout period, Kinesis
@@ -1629,15 +1615,29 @@ type SplunkDestinationDescription struct {
 	// based on your retry settings.
 	HECAcknowledgmentTimeoutInSeconds *int32
 
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
 	// The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends
 	// your data.
 	HECEndpoint *string
 
-	// The Amazon CloudWatch logging options for your delivery stream.
-	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+	// This type can be either "Raw" or "Event."
+	HECEndpointType HECEndpointType
+
+	// A GUID you obtain from your Splunk cluster when you create a new HEC endpoint.
+	HECToken *string
+
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
+	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions
+
+	// Defines how documents should be delivered to Amazon S3. When set to
+	// FailedDocumentsOnly, Kinesis Data Firehose writes any data that could not be
+	// indexed to the configured Amazon S3 destination. When set to AllDocuments,
+	// Kinesis Data Firehose delivers all incoming records to Amazon S3, and also
+	// writes failed documents to Amazon S3. Default value is FailedDocumentsOnly.
+	S3BackupMode SplunkS3BackupMode
 
 	// The Amazon S3 destination.>
 	S3DestinationDescription *S3DestinationDescription
@@ -1649,32 +1649,29 @@ type SplunkDestinationUpdate struct {
 	// The Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
-	// The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends
-	// your data.
-	HECEndpoint *string
-
-	// The data processing configuration.
-	ProcessingConfiguration *ProcessingConfiguration
-
-	// This type can be either "Raw" or "Event."
-	HECEndpointType HECEndpointType
-
-	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
-	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
-	RetryOptions *SplunkRetryOptions
-
 	// The amount of time that Kinesis Data Firehose waits to receive an acknowledgment
 	// from Splunk after it sends data. At the end of the timeout period, Kinesis Data
 	// Firehose either tries to send the data again or considers it an error, based on
 	// your retry settings.
 	HECAcknowledgmentTimeoutInSeconds *int32
 
+	// The HTTP Event Collector (HEC) endpoint to which Kinesis Data Firehose sends
+	// your data.
+	HECEndpoint *string
+
+	// This type can be either "Raw" or "Event."
+	HECEndpointType HECEndpointType
+
 	// A GUID that you obtain from your Splunk cluster when you create a new HEC
 	// endpoint.
 	HECToken *string
 
-	// Your update to the configuration of the backup Amazon S3 location.
-	S3Update *S3DestinationUpdate
+	// The data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to
+	// Splunk or if it doesn't receive an acknowledgment of receipt from Splunk.
+	RetryOptions *SplunkRetryOptions
 
 	// Specifies how you want Kinesis Data Firehose to back up documents to Amazon S3.
 	// When set to FailedDocumentsOnly, Kinesis Data Firehose writes any data that
@@ -1684,6 +1681,9 @@ type SplunkDestinationUpdate struct {
 	// FailedEventsOnly. You can update this backup mode from FailedEventsOnly to
 	// AllEvents. You can't update it from AllEvents to FailedEventsOnly.
 	S3BackupMode SplunkS3BackupMode
+
+	// Your update to the configuration of the backup Amazon S3 location.
+	S3Update *S3DestinationUpdate
 }
 
 // Configures retry behavior in case Kinesis Data Firehose is unable to deliver
@@ -1701,53 +1701,20 @@ type SplunkRetryOptions struct {
 // pair.
 type Tag struct {
 
-	// An optional string, which you can use to describe or define the tag. Maximum
-	// length: 256 characters. Valid characters: Unicode letters, digits, white space,
-	// _ . / = + - % @
-	Value *string
-
 	// A unique identifier for the tag. Maximum length: 128 characters. Valid
 	// characters: Unicode letters, digits, white space, _ . / = + - % @
 	//
 	// This member is required.
 	Key *string
+
+	// An optional string, which you can use to describe or define the tag. Maximum
+	// length: 256 characters. Valid characters: Unicode letters, digits, white space,
+	// _ . / = + - % @
+	Value *string
 }
 
 // The details of the VPC of the Amazon ES destination.
 type VpcConfiguration struct {
-
-	// The IDs of the security groups that you want Kinesis Data Firehose to use when
-	// it creates ENIs in the VPC of the Amazon ES destination. You can use the same
-	// security group that the Amazon ES domain uses or different ones. If you specify
-	// different security groups here, ensure that they allow outbound HTTPS traffic to
-	// the Amazon ES domain's security group. Also ensure that the Amazon ES domain's
-	// security group allows HTTPS traffic from the security groups specified here. If
-	// you use the same security group for both your delivery stream and the Amazon ES
-	// domain, make sure the security group inbound rule allows HTTPS traffic. For more
-	// information about security group rules, see Security group rules
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
-	// in the Amazon VPC documentation.
-	//
-	// This member is required.
-	SecurityGroupIds []*string
-
-	// The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs
-	// in the VPC of the Amazon ES destination. Make sure that the routing tables and
-	// inbound and outbound rules allow traffic to flow from the subnets whose IDs are
-	// specified here to the subnets that have the destination Amazon ES endpoints.
-	// Kinesis Data Firehose creates at least one ENI in each of the subnets that are
-	// specified here. Do not delete or modify these ENIs. The number of ENIs that
-	// Kinesis Data Firehose creates in the subnets specified here scales up and down
-	// automatically based on throughput. To enable Kinesis Data Firehose to scale up
-	// the number of ENIs to match throughput, ensure that you have sufficient quota.
-	// To help you calculate the quota you need, assume that Kinesis Data Firehose can
-	// create up to three ENIs for this delivery stream for each of the subnets
-	// specified here. For more information about ENI quota, see Network Interfaces
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
-	// in the Amazon VPC Quotas topic.
-	//
-	// This member is required.
-	SubnetIds []*string
 
 	// The ARN of the IAM role that you want the delivery stream to use to create
 	// endpoints in the destination VPC. You can use your existing Kinesis Data
@@ -1781,43 +1748,43 @@ type VpcConfiguration struct {
 	//
 	// This member is required.
 	RoleARN *string
-}
 
-// The details of the VPC of the Amazon ES destination.
-type VpcConfigurationDescription struct {
-
-	// The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC
-	// of the Amazon ES destination. Make sure that the routing tables and inbound and
-	// outbound rules allow traffic to flow from the subnets whose IDs are specified
-	// here to the subnets that have the destination Amazon ES endpoints. Kinesis Data
-	// Firehose creates at least one ENI in each of the subnets that are specified
-	// here. Do not delete or modify these ENIs. The number of ENIs that Kinesis Data
-	// Firehose creates in the subnets specified here scales up and down automatically
-	// based on throughput. To enable Kinesis Data Firehose to scale up the number of
-	// ENIs to match throughput, ensure that you have sufficient quota. To help you
-	// calculate the quota you need, assume that Kinesis Data Firehose can create up to
-	// three ENIs for this delivery stream for each of the subnets specified here. For
-	// more information about ENI quota, see Network Interfaces
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
-	// in the Amazon VPC Quotas topic.
-	//
-	// This member is required.
-	SubnetIds []*string
-
-	// The IDs of the security groups that Kinesis Data Firehose uses when it creates
-	// ENIs in the VPC of the Amazon ES destination. You can use the same security
-	// group that the Amazon ES domain uses or different ones. If you specify different
-	// security groups, ensure that they allow outbound HTTPS traffic to the Amazon ES
-	// domain's security group. Also ensure that the Amazon ES domain's security group
-	// allows HTTPS traffic from the security groups specified here. If you use the
-	// same security group for both your delivery stream and the Amazon ES domain, make
-	// sure the security group inbound rule allows HTTPS traffic. For more information
-	// about security group rules, see Security group rules
+	// The IDs of the security groups that you want Kinesis Data Firehose to use when
+	// it creates ENIs in the VPC of the Amazon ES destination. You can use the same
+	// security group that the Amazon ES domain uses or different ones. If you specify
+	// different security groups here, ensure that they allow outbound HTTPS traffic to
+	// the Amazon ES domain's security group. Also ensure that the Amazon ES domain's
+	// security group allows HTTPS traffic from the security groups specified here. If
+	// you use the same security group for both your delivery stream and the Amazon ES
+	// domain, make sure the security group inbound rule allows HTTPS traffic. For more
+	// information about security group rules, see Security group rules
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
 	// in the Amazon VPC documentation.
 	//
 	// This member is required.
 	SecurityGroupIds []*string
+
+	// The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs
+	// in the VPC of the Amazon ES destination. Make sure that the routing tables and
+	// inbound and outbound rules allow traffic to flow from the subnets whose IDs are
+	// specified here to the subnets that have the destination Amazon ES endpoints.
+	// Kinesis Data Firehose creates at least one ENI in each of the subnets that are
+	// specified here. Do not delete or modify these ENIs. The number of ENIs that
+	// Kinesis Data Firehose creates in the subnets specified here scales up and down
+	// automatically based on throughput. To enable Kinesis Data Firehose to scale up
+	// the number of ENIs to match throughput, ensure that you have sufficient quota.
+	// To help you calculate the quota you need, assume that Kinesis Data Firehose can
+	// create up to three ENIs for this delivery stream for each of the subnets
+	// specified here. For more information about ENI quota, see Network Interfaces
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
+	// in the Amazon VPC Quotas topic.
+	//
+	// This member is required.
+	SubnetIds []*string
+}
+
+// The details of the VPC of the Amazon ES destination.
+type VpcConfigurationDescription struct {
 
 	// The ARN of the IAM role that the delivery stream uses to create endpoints in the
 	// destination VPC. You can use your existing Kinesis Data Firehose delivery role
@@ -1851,6 +1818,39 @@ type VpcConfigurationDescription struct {
 	//
 	// This member is required.
 	RoleARN *string
+
+	// The IDs of the security groups that Kinesis Data Firehose uses when it creates
+	// ENIs in the VPC of the Amazon ES destination. You can use the same security
+	// group that the Amazon ES domain uses or different ones. If you specify different
+	// security groups, ensure that they allow outbound HTTPS traffic to the Amazon ES
+	// domain's security group. Also ensure that the Amazon ES domain's security group
+	// allows HTTPS traffic from the security groups specified here. If you use the
+	// same security group for both your delivery stream and the Amazon ES domain, make
+	// sure the security group inbound rule allows HTTPS traffic. For more information
+	// about security group rules, see Security group rules
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules)
+	// in the Amazon VPC documentation.
+	//
+	// This member is required.
+	SecurityGroupIds []*string
+
+	// The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC
+	// of the Amazon ES destination. Make sure that the routing tables and inbound and
+	// outbound rules allow traffic to flow from the subnets whose IDs are specified
+	// here to the subnets that have the destination Amazon ES endpoints. Kinesis Data
+	// Firehose creates at least one ENI in each of the subnets that are specified
+	// here. Do not delete or modify these ENIs. The number of ENIs that Kinesis Data
+	// Firehose creates in the subnets specified here scales up and down automatically
+	// based on throughput. To enable Kinesis Data Firehose to scale up the number of
+	// ENIs to match throughput, ensure that you have sufficient quota. To help you
+	// calculate the quota you need, assume that Kinesis Data Firehose can create up to
+	// three ENIs for this delivery stream for each of the subnets specified here. For
+	// more information about ENI quota, see Network Interfaces
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis)
+	// in the Amazon VPC Quotas topic.
+	//
+	// This member is required.
+	SubnetIds []*string
 
 	// The ID of the Amazon ES destination's VPC.
 	//

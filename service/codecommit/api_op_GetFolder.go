@@ -78,9 +78,11 @@ type GetFolderInput struct {
 
 type GetFolderOutput struct {
 
-	// The full SHA-1 pointer of the tree information for the commit that contains the
-	// folder.
-	TreeId *string
+	// The full commit ID used as a reference for the returned version of the folder
+	// content.
+	//
+	// This member is required.
+	CommitId *string
 
 	// The fully qualified path of the folder whose contents are returned.
 	//
@@ -90,11 +92,8 @@ type GetFolderOutput struct {
 	// The list of files in the specified folder, if any.
 	Files []*types.File
 
-	// The full commit ID used as a reference for the returned version of the folder
-	// content.
-	//
-	// This member is required.
-	CommitId *string
+	// The list of folders that exist under the specified folder, if any.
+	SubFolders []*types.Folder
 
 	// The list of submodules in the specified folder, if any.
 	SubModules []*types.SubModule
@@ -103,8 +102,9 @@ type GetFolderOutput struct {
 	// if any.
 	SymbolicLinks []*types.SymbolicLink
 
-	// The list of folders that exist under the specified folder, if any.
-	SubFolders []*types.Folder
+	// The full SHA-1 pointer of the tree information for the commit that contains the
+	// folder.
+	TreeId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,15 +64,15 @@ type UpdateDetectorVersionStatusInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// The new status.
-	//
-	// This member is required.
-	Status types.DetectorVersionStatus
-
 	// The detector version ID.
 	//
 	// This member is required.
 	DetectorVersionId *string
+
+	// The new status.
+	//
+	// This member is required.
+	Status types.DetectorVersionStatus
 }
 
 type UpdateDetectorVersionStatusOutput struct {

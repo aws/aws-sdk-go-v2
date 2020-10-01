@@ -65,14 +65,6 @@ func (c *Client) SendBounce(ctx context.Context, params *SendBounceInput, optFns
 // received through Amazon SES.
 type SendBounceInput struct {
 
-	// The message ID of the message to be bounced.
-	//
-	// This member is required.
-	OriginalMessageId *string
-
-	// Message-related DSN fields. If not specified, Amazon SES will choose the values.
-	MessageDsn *types.MessageDsn
-
 	// The address to use in the "From" header of the bounce message. This must be an
 	// identity that you have verified with Amazon SES.
 	//
@@ -86,10 +78,10 @@ type SendBounceInput struct {
 	// This member is required.
 	BouncedRecipientInfoList []*types.BouncedRecipientInfo
 
-	// Human-readable text for the bounce message to explain the failure. If not
-	// specified, the text will be auto-generated based on the bounced recipient
-	// information.
-	Explanation *string
+	// The message ID of the message to be bounced.
+	//
+	// This member is required.
+	OriginalMessageId *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -97,6 +89,14 @@ type SendBounceInput struct {
 	// about sending authorization, see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	BounceSenderArn *string
+
+	// Human-readable text for the bounce message to explain the failure. If not
+	// specified, the text will be auto-generated based on the bounced recipient
+	// information.
+	Explanation *string
+
+	// Message-related DSN fields. If not specified, Amazon SES will choose the values.
+	MessageDsn *types.MessageDsn
 }
 
 // Represents a unique message ID.

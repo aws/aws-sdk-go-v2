@@ -58,13 +58,13 @@ func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, op
 
 type ListDataSetsInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *int32
-
 	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
@@ -75,11 +75,11 @@ type ListDataSetsOutput struct {
 	// The list of dataset summaries.
 	DataSetSummaries []*types.DataSetSummary
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

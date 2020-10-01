@@ -65,23 +65,23 @@ type DescribeBillingGroupInput struct {
 
 type DescribeBillingGroupOutput struct {
 
-	// The version of the billing group.
-	Version *int64
-
-	// The properties of the billing group.
-	BillingGroupProperties *types.BillingGroupProperties
-
-	// Additional information about the billing group.
-	BillingGroupMetadata *types.BillingGroupMetadata
+	// The ARN of the billing group.
+	BillingGroupArn *string
 
 	// The ID of the billing group.
 	BillingGroupId *string
 
+	// Additional information about the billing group.
+	BillingGroupMetadata *types.BillingGroupMetadata
+
 	// The name of the billing group.
 	BillingGroupName *string
 
-	// The ARN of the billing group.
-	BillingGroupArn *string
+	// The properties of the billing group.
+	BillingGroupProperties *types.BillingGroupProperties
+
+	// The version of the billing group.
+	Version *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -68,13 +68,13 @@ type SetReceiptRulePositionInput struct {
 	// This member is required.
 	RuleName *string
 
-	// The name of the receipt rule after which to place the specified receipt rule.
-	After *string
-
 	// The name of the receipt rule set that contains the receipt rule to reposition.
 	//
 	// This member is required.
 	RuleSetName *string
+
+	// The name of the receipt rule after which to place the specified receipt rule.
+	After *string
 }
 
 // An empty element returned on a successful request.

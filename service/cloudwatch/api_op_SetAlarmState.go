@@ -71,26 +71,26 @@ func (c *Client) SetAlarmState(ctx context.Context, params *SetAlarmStateInput, 
 
 type SetAlarmStateInput struct {
 
+	// The name of the alarm.
+	//
+	// This member is required.
+	AlarmName *string
+
 	// The reason that this alarm is set to this specific state, in text format.
 	//
 	// This member is required.
 	StateReason *string
-
-	// The reason that this alarm is set to this specific state, in JSON format. For
-	// SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling
-	// or application Auto Scaling alarm actions, the Auto Scaling policy uses the
-	// information in this field to take the correct action.
-	StateReasonData *string
 
 	// The value of the state.
 	//
 	// This member is required.
 	StateValue types.StateValue
 
-	// The name of the alarm.
-	//
-	// This member is required.
-	AlarmName *string
+	// The reason that this alarm is set to this specific state, in JSON format. For
+	// SNS or EC2 alarm actions, this is just informational. But for EC2 Auto Scaling
+	// or application Auto Scaling alarm actions, the Auto Scaling policy uses the
+	// information in this field to take the correct action.
+	StateReasonData *string
 }
 
 type SetAlarmStateOutput struct {

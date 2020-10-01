@@ -63,14 +63,32 @@ func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpee
 
 type StartSpeechSynthesisTaskInput struct {
 
-	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
-	// "8000", "16000", "22050", and "24000". The default value for standard voices is
-	// "22050". The default value for neural voices is "24000". Valid values for pcm
-	// are "8000" and "16000" The default value is "16000".
-	SampleRate *string
+	// The format in which the returned output will be encoded. For audio stream, this
+	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
+	//
+	// This member is required.
+	OutputFormat types.OutputFormat
 
-	// The type of speech marks returned for the input text.
-	SpeechMarkTypes []types.SpeechMarkType
+	// Amazon S3 bucket name to which the output file will be saved.
+	//
+	// This member is required.
+	OutputS3BucketName *string
+
+	// The input text to synthesize. If you specify ssml as the TextType, follow the
+	// SSML format for the input text.
+	//
+	// This member is required.
+	Text *string
+
+	// Voice ID to use for the synthesis.
+	//
+	// This member is required.
+	VoiceId types.VoiceId
+
+	// Specifies the engine (standard or neural) for Amazon Polly to use when
+	// processing input text for speech synthesis. Using a voice that is not supported
+	// for the engine selected will result in an error.
+	Engine types.Engine
 
 	// Optional language code for the Speech Synthesis request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
@@ -88,43 +106,25 @@ type StartSpeechSynthesisTaskInput struct {
 	// the same as the language of the voice.
 	LexiconNames []*string
 
-	// Amazon S3 bucket name to which the output file will be saved.
-	//
-	// This member is required.
-	OutputS3BucketName *string
-
-	// Specifies the engine (standard or neural) for Amazon Polly to use when
-	// processing input text for speech synthesis. Using a voice that is not supported
-	// for the engine selected will result in an error.
-	Engine types.Engine
-
 	// The Amazon S3 key prefix for the output speech file.
 	OutputS3KeyPrefix *string
 
-	// Specifies whether the input text is plain text or SSML. The default value is
-	// plain text.
-	TextType types.TextType
+	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
+	// "8000", "16000", "22050", and "24000". The default value for standard voices is
+	// "22050". The default value for neural voices is "24000". Valid values for pcm
+	// are "8000" and "16000" The default value is "16000".
+	SampleRate *string
 
 	// ARN for the SNS topic optionally used for providing status notification for a
 	// speech synthesis task.
 	SnsTopicArn *string
 
-	// The input text to synthesize. If you specify ssml as the TextType, follow the
-	// SSML format for the input text.
-	//
-	// This member is required.
-	Text *string
+	// The type of speech marks returned for the input text.
+	SpeechMarkTypes []types.SpeechMarkType
 
-	// Voice ID to use for the synthesis.
-	//
-	// This member is required.
-	VoiceId types.VoiceId
-
-	// The format in which the returned output will be encoded. For audio stream, this
-	// will be mp3, ogg_vorbis, or pcm. For speech marks, this will be json.
-	//
-	// This member is required.
-	OutputFormat types.OutputFormat
+	// Specifies whether the input text is plain text or SSML. The default value is
+	// plain text.
+	TextType types.TextType
 }
 
 type StartSpeechSynthesisTaskOutput struct {

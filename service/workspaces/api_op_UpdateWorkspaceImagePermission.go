@@ -70,15 +70,15 @@ type UpdateWorkspaceImagePermissionInput struct {
 	// This member is required.
 	AllowCopyImage *bool
 
-	// The identifier of the AWS account to share or unshare the image with.
-	//
-	// This member is required.
-	SharedAccountId *string
-
 	// The identifier of the image.
 	//
 	// This member is required.
 	ImageId *string
+
+	// The identifier of the AWS account to share or unshare the image with.
+	//
+	// This member is required.
+	SharedAccountId *string
 }
 
 type UpdateWorkspaceImagePermissionOutput struct {

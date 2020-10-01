@@ -67,15 +67,6 @@ type DescribeEndpointConfigInput struct {
 
 type DescribeEndpointConfigOutput struct {
 
-	// An array of ProductionVariant objects, one for each model that you want to host
-	// at this endpoint.
-	//
-	// This member is required.
-	ProductionVariants []*types.ProductionVariant
-
-	//
-	DataCaptureConfig *types.DataCaptureConfig
-
 	// A timestamp that shows when the endpoint configuration was created.
 	//
 	// This member is required.
@@ -86,14 +77,23 @@ type DescribeEndpointConfigOutput struct {
 	// This member is required.
 	EndpointConfigArn *string
 
-	// AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML
-	// storage volume attached to the instance.
-	KmsKeyId *string
-
 	// Name of the Amazon SageMaker endpoint configuration.
 	//
 	// This member is required.
 	EndpointConfigName *string
+
+	// An array of ProductionVariant objects, one for each model that you want to host
+	// at this endpoint.
+	//
+	// This member is required.
+	ProductionVariants []*types.ProductionVariant
+
+	//
+	DataCaptureConfig *types.DataCaptureConfig
+
+	// AWS KMS key ID Amazon SageMaker uses to encrypt data when storing it on the ML
+	// storage volume attached to the instance.
+	KmsKeyId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

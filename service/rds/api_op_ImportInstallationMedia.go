@@ -58,16 +58,11 @@ func (c *Client) ImportInstallationMedia(ctx context.Context, params *ImportInst
 
 type ImportInstallationMediaInput struct {
 
-	// The version number of the database engine to use. For a list of valid engine
-	// versions, call DescribeDBEngineVersions (). The following are the database
-	// engines and links to information about the major and minor versions. The list
-	// only includes DB engines that require an on-premises customer provided license.
-	// <p> <b>Microsoft SQL Server</b> </p> <p>See <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version
-	// and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>
+	// The identifier of the custom Availability Zone (AZ) to import the installation
+	// media to.
 	//
 	// This member is required.
-	EngineVersion *string
+	CustomAvailabilityZoneId *string
 
 	// The name of the database engine to be used for this instance.  <p>The list only
 	// includes supported DB engines that require an on-premises customer provided
@@ -79,45 +74,46 @@ type ImportInstallationMediaInput struct {
 	// This member is required.
 	Engine *string
 
+	// The path to the installation medium for the specified DB engine. Example:
+	// SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso
+	//
+	// This member is required.
+	EngineInstallationMediaPath *string
+
+	// The version number of the database engine to use. For a list of valid engine
+	// versions, call DescribeDBEngineVersions (). The following are the database
+	// engines and links to information about the major and minor versions. The list
+	// only includes DB engines that require an on-premises customer provided license.
+	// <p> <b>Microsoft SQL Server</b> </p> <p>See <a
+	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.FeatureSupport">Version
+	// and Feature Support on Amazon RDS</a> in the <i>Amazon RDS User Guide.</i> </p>
+	//
+	// This member is required.
+	EngineVersion *string
+
 	// The path to the installation medium for the operating system associated with the
 	// specified DB engine. Example:
 	// WindowsISO/en_windows_server_2016_x64_dvd_9327751.iso
 	//
 	// This member is required.
 	OSInstallationMediaPath *string
-
-	// The identifier of the custom Availability Zone (AZ) to import the installation
-	// media to.
-	//
-	// This member is required.
-	CustomAvailabilityZoneId *string
-
-	// The path to the installation medium for the specified DB engine. Example:
-	// SQLServerISO/en_sql_server_2016_enterprise_x64_dvd_8701793.iso
-	//
-	// This member is required.
-	EngineInstallationMediaPath *string
 }
 
 // Contains the installation media for a DB engine that requires an on-premises
 // customer provided license, such as Microsoft SQL Server.
 type ImportInstallationMediaOutput struct {
 
-	// The status of the installation medium.
-	Status *string
-
-	// The engine version of the DB engine.
-	EngineVersion *string
-
 	// The custom Availability Zone (AZ) that contains the installation media.
 	CustomAvailabilityZoneId *string
 
-	// The path to the installation medium for the operating system associated with the
-	// DB engine.
-	OSInstallationMediaPath *string
-
 	// The DB engine.
 	Engine *string
+
+	// The path to the installation medium for the DB engine.
+	EngineInstallationMediaPath *string
+
+	// The engine version of the DB engine.
+	EngineVersion *string
 
 	// If an installation media failure occurred, the cause of the failure.
 	FailureCause *types.InstallationMediaFailureCause
@@ -125,8 +121,12 @@ type ImportInstallationMediaOutput struct {
 	// The installation medium ID.
 	InstallationMediaId *string
 
-	// The path to the installation medium for the DB engine.
-	EngineInstallationMediaPath *string
+	// The path to the installation medium for the operating system associated with the
+	// DB engine.
+	OSInstallationMediaPath *string
+
+	// The status of the installation medium.
+	Status *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

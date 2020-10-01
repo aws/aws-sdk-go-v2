@@ -68,21 +68,15 @@ func (c *Client) CreatePortal(ctx context.Context, params *CreatePortalInput, op
 
 type CreatePortalInput struct {
 
-	// A list of key-value pairs that contain metadata for the portal. For more
-	// information, see Tagging your AWS IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
-	Tags map[string]*string
+	// The AWS administrator's contact email address.
+	//
+	// This member is required.
+	PortalContactEmail *string
 
 	// A friendly name for the portal.
 	//
 	// This member is required.
 	PortalName *string
-
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -95,31 +89,26 @@ type CreatePortalInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The AWS administrator's contact email address.
-	//
-	// This member is required.
-	PortalContactEmail *string
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
+
+	// A description for the portal.
+	PortalDescription *string
 
 	// A logo image to display in the portal. Upload a square, high-resolution image.
 	// The image is displayed on a dark background.
 	PortalLogoImageFile *types.ImageFile
 
-	// A description for the portal.
-	PortalDescription *string
+	// A list of key-value pairs that contain metadata for the portal. For more
+	// information, see Tagging your AWS IoT SiteWise resources
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// in the AWS IoT SiteWise User Guide.
+	Tags map[string]*string
 }
 
 type CreatePortalOutput struct {
-
-	// The associated AWS SSO application Id.
-	//
-	// This member is required.
-	SsoApplicationId *string
-
-	// The status of the portal, which contains a state (CREATING after successfully
-	// calling this operation) and any error message.
-	//
-	// This member is required.
-	PortalStatus *types.PortalStatus
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -129,15 +118,26 @@ type CreatePortalOutput struct {
 	// This member is required.
 	PortalArn *string
 
+	// The ID of the created portal.
+	//
+	// This member is required.
+	PortalId *string
+
 	// The public URL for the AWS IoT SiteWise Monitor portal.
 	//
 	// This member is required.
 	PortalStartUrl *string
 
-	// The ID of the created portal.
+	// The status of the portal, which contains a state (CREATING after successfully
+	// calling this operation) and any error message.
 	//
 	// This member is required.
-	PortalId *string
+	PortalStatus *types.PortalStatus
+
+	// The associated AWS SSO application Id.
+	//
+	// This member is required.
+	SsoApplicationId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

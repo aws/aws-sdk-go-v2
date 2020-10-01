@@ -57,14 +57,16 @@ func (c *Client) GetGroupsForCapacityReservation(ctx context.Context, params *Ge
 
 type GetGroupsForCapacityReservationInput struct {
 
+	// The ID of the Capacity Reservation.
+	//
+	// This member is required.
+	CapacityReservationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The token to use to retrieve the next page of results.
-	NextToken *string
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the returned
@@ -72,10 +74,8 @@ type GetGroupsForCapacityReservationInput struct {
 	// larger value than 500, you receive an error.
 	MaxResults *int32
 
-	// The ID of the Capacity Reservation.
-	//
-	// This member is required.
-	CapacityReservationId *string
+	// The token to use to retrieve the next page of results.
+	NextToken *string
 }
 
 type GetGroupsForCapacityReservationOutput struct {

@@ -59,25 +59,31 @@ func (c *Client) CreateCrawler(ctx context.Context, params *CreateCrawlerInput, 
 
 type CreateCrawlerInput struct {
 
+	// Name of the new crawler.
+	//
+	// This member is required.
+	Name *string
+
 	// The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new
 	// crawler to access customer resources.
 	//
 	// This member is required.
 	Role *string
 
-	// The tags to use with this crawler request. You may use tags to limit access to
-	// the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
-	// developer guide.
-	Tags map[string]*string
+	// A list of collection of targets to crawl.
+	//
+	// This member is required.
+	Targets *types.CrawlerTargets
 
 	// A list of custom classifiers that the user has registered. By default, all
 	// built-in classifiers are included in a crawl, but these custom classifiers
 	// always override the default classifiers for a given classification.
 	Classifiers []*string
 
-	// The table prefix used for catalog tables that are created.
-	TablePrefix *string
+	// Crawler configuration information. This versioned JSON string allows users to
+	// specify aspects of a crawler's behavior. For more information, see Configuring a
+	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
+	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
 	CrawlerSecurityConfiguration *string
@@ -86,6 +92,9 @@ type CreateCrawlerInput struct {
 	// arn:aws:daylight:us-east-1::database/sometable/*.
 	DatabaseName *string
 
+	// A description of the new crawler.
+	Description *string
+
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
@@ -93,26 +102,17 @@ type CreateCrawlerInput struct {
 	// 12 * * ? *).
 	Schedule *string
 
-	// Name of the new crawler.
-	//
-	// This member is required.
-	Name *string
-
-	// A description of the new crawler.
-	Description *string
-
-	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Configuring a
-	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
-	Configuration *string
-
-	// A list of collection of targets to crawl.
-	//
-	// This member is required.
-	Targets *types.CrawlerTargets
-
 	// The policy for the crawler's update and deletion behavior.
 	SchemaChangePolicy *types.SchemaChangePolicy
+
+	// The table prefix used for catalog tables that are created.
+	TablePrefix *string
+
+	// The tags to use with this crawler request. You may use tags to limit access to
+	// the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS
+	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
+	// developer guide.
+	Tags map[string]*string
 }
 
 type CreateCrawlerOutput struct {

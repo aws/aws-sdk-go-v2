@@ -92,14 +92,6 @@ type CreateCustomKeyStoreInput struct {
 	// This member is required.
 	CustomKeyStoreName *string
 
-	// Enter the content of the trust anchor certificate for the cluster. This is the
-	// content of the customerCA.crt file that you created when you initialized the
-	// cluster
-	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html).
-	//
-	// This member is required.
-	TrustAnchorCertificate *string
-
 	// Enter the password of the kmsuser crypto user (CU) account
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
 	// in the specified AWS CloudHSM cluster. AWS KMS logs into the cluster as this
@@ -110,6 +102,14 @@ type CreateCustomKeyStoreInput struct {
 	//
 	// This member is required.
 	KeyStorePassword *string
+
+	// Enter the content of the trust anchor certificate for the cluster. This is the
+	// content of the customerCA.crt file that you created when you initialized the
+	// cluster
+	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html).
+	//
+	// This member is required.
+	TrustAnchorCertificate *string
 }
 
 type CreateCustomKeyStoreOutput struct {

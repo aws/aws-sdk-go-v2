@@ -65,18 +65,10 @@ type GetQuantumTaskInput struct {
 
 type GetQuantumTaskOutput struct {
 
-	// The ARN of the task.
+	// The time at which the task was created.
 	//
 	// This member is required.
-	QuantumTaskArn *string
-
-	// The status of the task.
-	//
-	// This member is required.
-	Status types.QuantumTaskStatus
-
-	// The reason that a task failed.
-	FailureReason *string
+	CreatedAt *time.Time
 
 	// The ARN of the device the task was run on.
 	//
@@ -89,11 +81,6 @@ type GetQuantumTaskOutput struct {
 	// This member is required.
 	DeviceParameters *string
 
-	// The number of shots used in the task.
-	//
-	// This member is required.
-	Shots *int64
-
 	// The S3 bucket where task results are stored.
 	//
 	// This member is required.
@@ -104,13 +91,26 @@ type GetQuantumTaskOutput struct {
 	// This member is required.
 	OutputS3Directory *string
 
-	// The time at which the task was created.
+	// The ARN of the task.
 	//
 	// This member is required.
-	CreatedAt *time.Time
+	QuantumTaskArn *string
+
+	// The number of shots used in the task.
+	//
+	// This member is required.
+	Shots *int64
+
+	// The status of the task.
+	//
+	// This member is required.
+	Status types.QuantumTaskStatus
 
 	// The time at which the task ended.
 	EndedAt *time.Time
+
+	// The reason that a task failed.
+	FailureReason *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

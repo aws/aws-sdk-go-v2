@@ -59,13 +59,17 @@ func (c *Client) DescribeType(ctx context.Context, params *DescribeTypeInput, op
 
 type DescribeTypeInput struct {
 
-	// The name of the type. Conditional: You must specify either TypeName and Type, or
-	// Arn.
-	TypeName *string
-
 	// The Amazon Resource Name (ARN) of the type. Conditional: You must specify either
 	// TypeName and Type, or Arn.
 	Arn *string
+
+	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
+	// must specify either TypeName and Type, or Arn.
+	Type types.RegistryType
+
+	// The name of the type. Conditional: You must specify either TypeName and Type, or
+	// Arn.
+	TypeName *string
 
 	// The ID of a specific version of the type. The version ID is the value at the end
 	// of the Amazon Resource Name (ARN) assigned to the type version when it is
@@ -73,13 +77,17 @@ type DescribeTypeInput struct {
 	// that specific type version. Otherwise, it returns information about the default
 	// type version.
 	VersionId *string
-
-	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
-	// must specify either TypeName and Type, or Arn.
-	Type types.RegistryType
 }
 
 type DescribeTypeOutput struct {
+
+	// The Amazon Resource Name (ARN) of the type.
+	Arn *string
+
+	// The ID of the default version of the type. The default version is used when the
+	// type version is not specified. To set the default version of a type, use
+	// SetTypeDefaultVersion ().
+	DefaultVersionId *string
 
 	// The deprecation status of the type. Valid values include:
 	//
@@ -91,35 +99,29 @@ type DescribeTypeOutput struct {
 	// deregistered and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
-	// The URL of the source code for the type.
-	SourceUrl *string
-
 	// The description of the registered type.
 	Description *string
-
-	// The Amazon Resource Name (ARN) of the type.
-	Arn *string
 
 	// The URL of a page providing detailed documentation for this type.
 	DocumentationUrl *string
 
-	// The name of the registered type.
-	TypeName *string
+	// The Amazon Resource Name (ARN) of the IAM execution role used to register the
+	// type. If your resource type calls AWS APIs in any of its handlers, you must
+	// create an IAM execution role
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
+	// the necessary permissions to call those AWS APIs, and provision that execution
+	// role in your account. CloudFormation then assumes that execution role to provide
+	// your resource type with the appropriate credentials.
+	ExecutionRoleArn *string
 
-	// The schema that defines the type. For more information on type schemas, see
-	// Resource Provider Schema
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
-	// in the CloudFormation CLI User Guide.
-	Schema *string
+	// Whether the specified type version is set as the default version.
+	IsDefaultVersion *bool
 
 	// When the specified type version was registered.
 	LastUpdated *time.Time
 
-	// The kind of type. Currently the only valid value is RESOURCE.
-	Type types.RegistryType
-
-	// When the specified type version was registered.
-	TimeCreated *time.Time
+	// Contains logging configuration information for a type.
+	LoggingConfig *types.LoggingConfig
 
 	// The provisioning behavior of the type. AWS CloudFormation determines the
 	// provisioning type during registration, based on the types of handlers in the
@@ -144,14 +146,23 @@ type DescribeTypeOutput struct {
 	//         * delete
 	ProvisioningType types.ProvisioningType
 
-	// The Amazon Resource Name (ARN) of the IAM execution role used to register the
-	// type. If your resource type calls AWS APIs in any of its handlers, you must
-	// create an IAM execution role
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
-	// the necessary permissions to call those AWS APIs, and provision that execution
-	// role in your account. CloudFormation then assumes that execution role to provide
-	// your resource type with the appropriate credentials.
-	ExecutionRoleArn *string
+	// The schema that defines the type. For more information on type schemas, see
+	// Resource Provider Schema
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
+	// in the CloudFormation CLI User Guide.
+	Schema *string
+
+	// The URL of the source code for the type.
+	SourceUrl *string
+
+	// When the specified type version was registered.
+	TimeCreated *time.Time
+
+	// The kind of type. Currently the only valid value is RESOURCE.
+	Type types.RegistryType
+
+	// The name of the registered type.
+	TypeName *string
 
 	// The scope at which the type is visible and usable in CloudFormation operations.
 	// Valid values include:
@@ -163,17 +174,6 @@ type DescribeTypeOutput struct {
 	//     * PUBLIC: The type is publically visible and
 	// usable within any Amazon account.
 	Visibility types.Visibility
-
-	// Contains logging configuration information for a type.
-	LoggingConfig *types.LoggingConfig
-
-	// Whether the specified type version is set as the default version.
-	IsDefaultVersion *bool
-
-	// The ID of the default version of the type. The default version is used when the
-	// type version is not specified. To set the default version of a type, use
-	// SetTypeDefaultVersion ().
-	DefaultVersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

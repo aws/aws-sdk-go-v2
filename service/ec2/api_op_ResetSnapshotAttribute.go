@@ -60,6 +60,12 @@ func (c *Client) ResetSnapshotAttribute(ctx context.Context, params *ResetSnapsh
 
 type ResetSnapshotAttributeInput struct {
 
+	// The attribute to reset. Currently, only the attribute for permission to create
+	// volumes can be reset.
+	//
+	// This member is required.
+	Attribute types.SnapshotAttributeName
+
 	// The ID of the snapshot.
 	//
 	// This member is required.
@@ -70,12 +76,6 @@ type ResetSnapshotAttributeInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The attribute to reset. Currently, only the attribute for permission to create
-	// volumes can be reset.
-	//
-	// This member is required.
-	Attribute types.SnapshotAttributeName
 }
 
 type ResetSnapshotAttributeOutput struct {

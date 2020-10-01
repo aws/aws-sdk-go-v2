@@ -62,9 +62,6 @@ func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *Cre
 // Contains the parameters for CreateSpotDatafeedSubscription.
 type CreateSpotDatafeedSubscriptionInput struct {
 
-	// A prefix for the data feed file names.
-	Prefix *string
-
 	// The Amazon S3 bucket in which to store the Spot Instance data feed.
 	//
 	// This member is required.
@@ -75,6 +72,9 @@ type CreateSpotDatafeedSubscriptionInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// A prefix for the data feed file names.
+	Prefix *string
 }
 
 // Contains the output of CreateSpotDatafeedSubscription.

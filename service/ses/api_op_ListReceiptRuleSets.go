@@ -74,14 +74,14 @@ type ListReceiptRuleSetsInput struct {
 // A list of receipt rule sets that exist under your AWS account.
 type ListReceiptRuleSetsOutput struct {
 
-	// The metadata for the currently active receipt rule set. The metadata consists of
-	// the rule set name and the timestamp of when the rule set was created.
-	RuleSets []*types.ReceiptRuleSetMetadata
-
 	// A token indicating that there are additional receipt rule sets available to be
 	// listed. Pass this token to successive calls of ListReceiptRuleSets to retrieve
 	// up to 100 receipt rule sets at a time.
 	NextToken *string
+
+	// The metadata for the currently active receipt rule set. The metadata consists of
+	// the rule set name and the timestamp of when the rule set was created.
+	RuleSets []*types.ReceiptRuleSetMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

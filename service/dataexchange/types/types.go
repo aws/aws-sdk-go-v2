@@ -9,15 +9,15 @@ import (
 // The destination for the asset.
 type AssetDestinationEntry struct {
 
-	// The S3 bucket that is the destination for the asset.
-	//
-	// This member is required.
-	Bucket *string
-
 	// The unique identifier for the asset.
 	//
 	// This member is required.
 	AssetId *string
+
+	// The S3 bucket that is the destination for the asset.
+	//
+	// This member is required.
+	Bucket *string
 
 	// The name of the object in Amazon S3 for the asset.
 	Key *string
@@ -35,10 +35,36 @@ type AssetDetails struct {
 // AWS Data Exchange for each of those files.
 type AssetEntry struct {
 
-	// The asset ID of the owned asset corresponding to the entitled asset being
-	// viewed. This parameter is returned when an asset owner is viewing the entitled
-	// copy of its owned asset.
-	SourceId *string
+	// The ARN for the asset.
+	//
+	// This member is required.
+	Arn *string
+
+	// Information about the asset, including its size.
+	//
+	// This member is required.
+	AssetDetails *AssetDetails
+
+	// The type of file your data is stored in. Currently, the supported asset type is
+	// S3_SNAPSHOT.
+	//
+	// This member is required.
+	AssetType AssetType
+
+	// The date and time that the asset was created, in ISO 8601 format.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The unique identifier for the data set associated with this asset.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the asset.
+	//
+	// This member is required.
+	Id *string
 
 	// The name of the asset. When importing from Amazon S3, the S3 object key is used
 	// as the asset name. When exporting to Amazon S3, the asset name is used as
@@ -47,46 +73,20 @@ type AssetEntry struct {
 	// This member is required.
 	Name *string
 
-	// Information about the asset, including its size.
+	// The unique identifier for the revision associated with this asset.
 	//
 	// This member is required.
-	AssetDetails *AssetDetails
+	RevisionId *string
 
 	// The date and time that the asset was last updated, in ISO 8601 format.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
-	//
-	// This member is required.
-	AssetType AssetType
-
-	// The unique identifier for the revision associated with this asset.
-	//
-	// This member is required.
-	RevisionId *string
-
-	// The date and time that the asset was created, in ISO 8601 format.
-	//
-	// This member is required.
-	CreatedAt *time.Time
-
-	// The unique identifier for the asset.
-	//
-	// This member is required.
-	Id *string
-
-	// The ARN for the asset.
-	//
-	// This member is required.
-	Arn *string
-
-	// The unique identifier for the data set associated with this asset.
-	//
-	// This member is required.
-	DataSetId *string
+	// The asset ID of the owned asset corresponding to the entitled asset being
+	// viewed. This parameter is returned when an asset owner is viewing the entitled
+	// copy of its owned asset.
+	SourceId *string
 }
 
 // The source of the assets.
@@ -106,21 +106,21 @@ type AssetSourceEntry struct {
 // A data set is an AWS resource with one or more revisions.
 type DataSetEntry struct {
 
-	// A property that defines the data set as OWNED by the account (for providers) or
-	// ENTITLED to the account (for subscribers).
+	// The ARN for the data set.
 	//
 	// This member is required.
-	Origin Origin
+	Arn *string
+
+	// The type of file your data is stored in. Currently, the supported asset type is
+	// S3_SNAPSHOT.
+	//
+	// This member is required.
+	AssetType AssetType
 
 	// The date and time that the data set was created, in ISO 8601 format.
 	//
 	// This member is required.
 	CreatedAt *time.Time
-
-	// The ARN for the data set.
-	//
-	// This member is required.
-	Arn *string
 
 	// The description for the data set.
 	//
@@ -137,10 +137,11 @@ type DataSetEntry struct {
 	// This member is required.
 	Name *string
 
-	// The data set ID of the owned data set corresponding to the entitled data set
-	// being viewed. This parameter is returned when a data set owner is viewing the
-	// entitled copy of its owned data set.
-	SourceId *string
+	// A property that defines the data set as OWNED by the account (for providers) or
+	// ENTITLED to the account (for subscribers).
+	//
+	// This member is required.
+	Origin Origin
 
 	// The date and time that the data set was last updated, in ISO 8601 format.
 	//
@@ -151,19 +152,17 @@ type DataSetEntry struct {
 	// on AWS Marketplace.
 	OriginDetails *OriginDetails
 
-	// The type of file your data is stored in. Currently, the supported asset type is
-	// S3_SNAPSHOT.
-	//
-	// This member is required.
-	AssetType AssetType
+	// The data set ID of the owned data set corresponding to the entitled data set
+	// being viewed. This parameter is returned when a data set owner is viewing the
+	// entitled copy of its owned data set.
+	SourceId *string
 }
 
 type Details struct {
+	ImportAssetFromSignedUrlJobErrorDetails *ImportAssetFromSignedUrlJobErrorDetails
 
 	// The list of sources for the assets.
 	ImportAssetsFromS3JobErrorDetails []*AssetSourceEntry
-
-	ImportAssetFromSignedUrlJobErrorDetails *ImportAssetFromSignedUrlJobErrorDetails
 }
 
 // Details of the operation to be performed by the job.
@@ -179,13 +178,13 @@ type ExportAssetsToS3RequestDetails struct {
 	// This member is required.
 	DataSetId *string
 
-	// Encryption configuration for the export job.
-	Encryption *ExportServerSideEncryption
-
 	// The unique identifier for the revision associated with this export request.
 	//
 	// This member is required.
 	RevisionId *string
+
+	// Encryption configuration for the export job.
+	Encryption *ExportServerSideEncryption
 }
 
 // Details about the export to Amazon S3 response.
@@ -196,15 +195,15 @@ type ExportAssetsToS3ResponseDetails struct {
 	// This member is required.
 	AssetDestinations []*AssetDestinationEntry
 
-	// The unique identifier for the revision associated with this export response.
-	//
-	// This member is required.
-	RevisionId *string
-
 	// The unique identifier for the data set associated with this export job.
 	//
 	// This member is required.
 	DataSetId *string
+
+	// The unique identifier for the revision associated with this export response.
+	//
+	// This member is required.
+	RevisionId *string
 
 	// Encryption configuration of the export job.
 	Encryption *ExportServerSideEncryption
@@ -212,11 +211,6 @@ type ExportAssetsToS3ResponseDetails struct {
 
 // Details of the operation to be performed by the job.
 type ExportAssetToSignedUrlRequestDetails struct {
-
-	// The unique identifier for the revision associated with this export request.
-	//
-	// This member is required.
-	RevisionId *string
 
 	// The unique identifier for the asset that is exported to a signed URL.
 	//
@@ -227,6 +221,11 @@ type ExportAssetToSignedUrlRequestDetails struct {
 	//
 	// This member is required.
 	DataSetId *string
+
+	// The unique identifier for the revision associated with this export request.
+	//
+	// This member is required.
+	RevisionId *string
 }
 
 // The details of the export to signed URL response.
@@ -242,9 +241,6 @@ type ExportAssetToSignedUrlResponseDetails struct {
 	// This member is required.
 	DataSetId *string
 
-	// The date and time that the signed URL expires, in ISO 8601 format.
-	SignedUrlExpiresAt *time.Time
-
 	// The unique identifier for the revision associated with this export response.
 	//
 	// This member is required.
@@ -252,6 +248,9 @@ type ExportAssetToSignedUrlResponseDetails struct {
 
 	// The signed URL for the export request.
 	SignedUrl *string
+
+	// The date and time that the signed URL expires, in ISO 8601 format.
+	SignedUrlExpiresAt *time.Time
 }
 
 // Encryption configuration of the export job. Includes the encryption type as well
@@ -259,15 +258,15 @@ type ExportAssetToSignedUrlResponseDetails struct {
 // encryption type.
 type ExportServerSideEncryption struct {
 
-	// The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt
-	// the Amazon S3 objects. This parameter is required if you choose aws:kms as an
-	// encryption type.
-	KmsKeyArn *string
-
 	// The type of server side encryption used for encrypting the objects in Amazon S3.
 	//
 	// This member is required.
 	Type ServerSideEncryptionTypes
+
+	// The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt
+	// the Amazon S3 objects. This parameter is required if you choose aws:kms as an
+	// encryption type.
+	KmsKeyArn *string
 }
 
 type ImportAssetFromSignedUrlJobErrorDetails struct {
@@ -282,6 +281,12 @@ type ImportAssetFromSignedUrlJobErrorDetails struct {
 
 // Details of the operation to be performed by the job.
 type ImportAssetFromSignedUrlRequestDetails struct {
+
+	// The name of the asset. When importing from Amazon S3, the S3 object key is used
+	// as the asset name.
+	//
+	// This member is required.
+	AssetName *string
 
 	// The unique identifier for the data set associated with this import job.
 	//
@@ -298,42 +303,36 @@ type ImportAssetFromSignedUrlRequestDetails struct {
 	//
 	// This member is required.
 	RevisionId *string
-
-	// The name of the asset. When importing from Amazon S3, the S3 object key is used
-	// as the asset name.
-	//
-	// This member is required.
-	AssetName *string
 }
 
 // The details in the response for an import request, including the signed URL and
 // other information.
 type ImportAssetFromSignedUrlResponseDetails struct {
 
-	// The signed URL.
-	SignedUrl *string
+	// The name for the asset associated with this import response.
+	//
+	// This member is required.
+	AssetName *string
 
 	// The unique identifier for the data set associated with this import job.
 	//
 	// This member is required.
 	DataSetId *string
 
-	// The time and date at which the signed URL expires, in ISO 8601 format.
-	SignedUrlExpiresAt *time.Time
+	// The unique identifier for the revision associated with this import response.
+	//
+	// This member is required.
+	RevisionId *string
 
 	// The Base64-encoded Md5 hash for the asset, used to ensure the integrity of the
 	// file at that location.
 	Md5Hash *string
 
-	// The name for the asset associated with this import response.
-	//
-	// This member is required.
-	AssetName *string
+	// The signed URL.
+	SignedUrl *string
 
-	// The unique identifier for the revision associated with this import response.
-	//
-	// This member is required.
-	RevisionId *string
+	// The time and date at which the signed URL expires, in ISO 8601 format.
+	SignedUrlExpiresAt *time.Time
 }
 
 // Details of the operation to be performed by the job.
@@ -358,15 +357,15 @@ type ImportAssetsFromS3RequestDetails struct {
 // Details from an import from Amazon S3 response.
 type ImportAssetsFromS3ResponseDetails struct {
 
-	// The unique identifier for the data set associated with this import job.
-	//
-	// This member is required.
-	DataSetId *string
-
 	// Is a list of Amazon S3 bucket and object key pairs.
 	//
 	// This member is required.
 	AssetSources []*AssetSourceEntry
+
+	// The unique identifier for the data set associated with this import job.
+	//
+	// This member is required.
+	DataSetId *string
 
 	// The unique identifier for the revision associated with this import response.
 	//
@@ -385,19 +384,6 @@ type JobEntry struct {
 	// This member is required.
 	Arn *string
 
-	// The unique identifier for the job.
-	//
-	// This member is required.
-	Id *string
-
-	// The state of the job.
-	//
-	// This member is required.
-	State State
-
-	// Errors for jobs.
-	Errors []*JobError
-
 	// The date and time that the job was created, in ISO 8601 format.
 	//
 	// This member is required.
@@ -409,6 +395,16 @@ type JobEntry struct {
 	// This member is required.
 	Details *ResponseDetails
 
+	// The unique identifier for the job.
+	//
+	// This member is required.
+	Id *string
+
+	// The state of the job.
+	//
+	// This member is required.
+	State State
+
 	// The job type.
 	//
 	// This member is required.
@@ -418,34 +414,37 @@ type JobEntry struct {
 	//
 	// This member is required.
 	UpdatedAt *time.Time
+
+	// Errors for jobs.
+	Errors []*JobError
 }
 
 // An error that occurred with the job request.
 type JobError struct {
-
-	// The type of resource related to the error.
-	ResourceType JobErrorResourceTypes
-
-	Details *Details
-
-	// The value of the exceeded limit.
-	LimitValue *float64
 
 	// The code for the job error.
 	//
 	// This member is required.
 	Code Code
 
-	// The name of the limit that was reached.
-	LimitName JobErrorLimitName
-
-	// The unique identifier for the resource related to the error.
-	ResourceId *string
-
 	// The message related to the job error.
 	//
 	// This member is required.
 	Message *string
+
+	Details *Details
+
+	// The name of the limit that was reached.
+	LimitName JobErrorLimitName
+
+	// The value of the exceeded limit.
+	LimitValue *float64
+
+	// The unique identifier for the resource related to the error.
+	ResourceId *string
+
+	// The type of resource related to the error.
+	ResourceType JobErrorResourceTypes
 }
 
 type OriginDetails struct {
@@ -458,18 +457,21 @@ type RequestDetails struct {
 	// Details about the export to signed URL request.
 	ExportAssetToSignedUrl *ExportAssetToSignedUrlRequestDetails
 
-	// Details about the import from Amazon S3 request.
-	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
+	// Details about the export to Amazon S3 request.
+	ExportAssetsToS3 *ExportAssetsToS3RequestDetails
 
 	// Details about the import from signed URL request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
 
-	// Details about the export to Amazon S3 request.
-	ExportAssetsToS3 *ExportAssetsToS3RequestDetails
+	// Details about the import from Amazon S3 request.
+	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
 }
 
 // Details for the response.
 type ResponseDetails struct {
+
+	// Details for the export to signed URL response.
+	ExportAssetToSignedUrl *ExportAssetToSignedUrlResponseDetails
 
 	// Details for the export to Amazon S3 response.
 	ExportAssetsToS3 *ExportAssetsToS3ResponseDetails
@@ -479,41 +481,38 @@ type ResponseDetails struct {
 
 	// Details for the import from Amazon S3 response.
 	ImportAssetsFromS3 *ImportAssetsFromS3ResponseDetails
-
-	// Details for the export to signed URL response.
-	ExportAssetToSignedUrl *ExportAssetToSignedUrlResponseDetails
 }
 
 // A revision is a container for one or more assets.
 type RevisionEntry struct {
 
-	// The unique identifier for the data set associated with this revision.
+	// The ARN for the revision.
 	//
 	// This member is required.
-	DataSetId *string
-
-	// The revision ID of the owned revision corresponding to the entitled revision
-	// being viewed. This parameter is returned when a revision owner is viewing the
-	// entitled copy of its owned revision.
-	SourceId *string
-
-	// The unique identifier for the revision.
-	//
-	// This member is required.
-	Id *string
+	Arn *string
 
 	// The date and time that the revision was created, in ISO 8601 format.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// An optional comment about the revision.
-	Comment *string
-
-	// The ARN for the revision.
+	// The unique identifier for the data set associated with this revision.
 	//
 	// This member is required.
-	Arn *string
+	DataSetId *string
+
+	// The unique identifier for the revision.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time that the revision was last updated, in ISO 8601 format.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// An optional comment about the revision.
+	Comment *string
 
 	// To publish a revision to a data set in a product, the revision must first be
 	// finalized. Finalizing a revision tells AWS Data Exchange that your changes to
@@ -524,10 +523,10 @@ type RevisionEntry struct {
 	// revisions are uniquely identified by their ARN.
 	Finalized *bool
 
-	// The date and time that the revision was last updated, in ISO 8601 format.
-	//
-	// This member is required.
-	UpdatedAt *time.Time
+	// The revision ID of the owned revision corresponding to the entitled revision
+	// being viewed. This parameter is returned when a revision owner is viewing the
+	// entitled copy of its owned revision.
+	SourceId *string
 }
 
 // The S3 object that is the asset.

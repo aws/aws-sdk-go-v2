@@ -111,11 +111,6 @@ func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingI
 
 type PutBucketTaggingInput struct {
 
-	//
-	//
-	// This member is required.
-	Tagging *types.Tagging
-
 	// The AWS account ID of the Outposts bucket.
 	//
 	// This member is required.
@@ -131,6 +126,11 @@ type PutBucketTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	//
+	//
+	// This member is required.
+	Tagging *types.Tagging
 }
 
 type PutBucketTaggingOutput struct {

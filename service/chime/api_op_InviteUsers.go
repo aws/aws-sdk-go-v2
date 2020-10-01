@@ -64,13 +64,13 @@ type InviteUsersInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The user type.
-	UserType types.UserType
-
 	// The user email addresses to which to send the email invitation.
 	//
 	// This member is required.
 	UserEmailList []*string
+
+	// The user type.
+	UserType types.UserType
 }
 
 type InviteUsersOutput struct {

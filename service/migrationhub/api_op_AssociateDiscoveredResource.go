@@ -69,14 +69,14 @@ type AssociateDiscoveredResourceInput struct {
 	// This member is required.
 	MigrationTaskName *string
 
-	// Optional boolean flag to indicate whether any effect should take place. Used to
-	// test if the caller has permission to make the call.
-	DryRun *bool
-
 	// The name of the ProgressUpdateStream.
 	//
 	// This member is required.
 	ProgressUpdateStream *string
+
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
+	DryRun *bool
 }
 
 type AssociateDiscoveredResourceOutput struct {

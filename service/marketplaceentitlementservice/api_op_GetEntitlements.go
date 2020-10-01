@@ -60,13 +60,12 @@ func (c *Client) GetEntitlements(ctx context.Context, params *GetEntitlementsInp
 // operation.
 type GetEntitlementsInput struct {
 
-	// The maximum number of items to retrieve from the GetEntitlements operation. For
-	// pagination, use the NextToken field in subsequent calls to GetEntitlements.
-	MaxResults *int32
-
-	// For paginated calls to GetEntitlements, pass the NextToken from the previous
-	// GetEntitlementsResult.
-	NextToken *string
+	// Product code is used to uniquely identify a product in AWS Marketplace. The
+	// product code will be provided by AWS Marketplace when the product listing is
+	// created.
+	//
+	// This member is required.
+	ProductCode *string
 
 	// Filter is used to return entitlements for a specific customer or for a specific
 	// dimension. Filters are described as keys mapped to a lists of values. Filtered
@@ -74,12 +73,13 @@ type GetEntitlementsInput struct {
 	// each filter key.
 	Filter map[string][]*string
 
-	// Product code is used to uniquely identify a product in AWS Marketplace. The
-	// product code will be provided by AWS Marketplace when the product listing is
-	// created.
-	//
-	// This member is required.
-	ProductCode *string
+	// The maximum number of items to retrieve from the GetEntitlements operation. For
+	// pagination, use the NextToken field in subsequent calls to GetEntitlements.
+	MaxResults *int32
+
+	// For paginated calls to GetEntitlements, pass the NextToken from the previous
+	// GetEntitlementsResult.
+	NextToken *string
 }
 
 // The GetEntitlementsRequest contains results from the GetEntitlements operation.

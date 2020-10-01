@@ -60,8 +60,10 @@ func (c *Client) ListUsageForLicenseConfiguration(ctx context.Context, params *L
 
 type ListUsageForLicenseConfigurationInput struct {
 
-	// Maximum number of results to return in a single call.
-	MaxResults *int32
+	// Amazon Resource Name (ARN) of the license configuration.
+	//
+	// This member is required.
+	LicenseConfigurationArn *string
 
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
@@ -77,22 +79,20 @@ type ListUsageForLicenseConfigurationInput struct {
 	// the account that owns the resource. Logical operators are EQUALS | NOT_EQUALS.
 	Filters []*types.Filter
 
+	// Maximum number of results to return in a single call.
+	MaxResults *int32
+
 	// Token for the next set of results.
 	NextToken *string
-
-	// Amazon Resource Name (ARN) of the license configuration.
-	//
-	// This member is required.
-	LicenseConfigurationArn *string
 }
 
 type ListUsageForLicenseConfigurationOutput struct {
 
-	// Token for the next set of results.
-	NextToken *string
-
 	// Information about the license configurations.
 	LicenseConfigurationUsageList []*types.LicenseConfigurationUsage
+
+	// Token for the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

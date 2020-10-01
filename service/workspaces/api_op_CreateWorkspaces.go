@@ -66,14 +66,14 @@ type CreateWorkspacesInput struct {
 
 type CreateWorkspacesOutput struct {
 
+	// Information about the WorkSpaces that could not be created.
+	FailedRequests []*types.FailedCreateWorkspaceRequest
+
 	// Information about the WorkSpaces that were created. Because this operation is
 	// asynchronous, the identifier returned is not immediately available for use with
 	// other operations. For example, if you call DescribeWorkspaces () before the
 	// WorkSpace is created, the information returned can be incomplete.
 	PendingRequests []*types.Workspace
-
-	// Information about the WorkSpaces that could not be created.
-	FailedRequests []*types.FailedCreateWorkspaceRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

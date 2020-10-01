@@ -58,19 +58,19 @@ func (c *Client) ListClusterOperations(ctx context.Context, params *ListClusterO
 
 type ListClusterOperationsInput struct {
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
-	// token in your next request.
-	NextToken *string
+	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+	//
+	// This member is required.
+	ClusterArn *string
 
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
 	MaxResults *int32
 
-	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
-	//
-	// This member is required.
-	ClusterArn *string
+	// The paginated results marker. When the result of the operation is truncated, the
+	// call returns NextToken in the response. To get the next batch, provide this
+	// token in your next request.
+	NextToken *string
 }
 
 type ListClusterOperationsOutput struct {

@@ -59,13 +59,13 @@ func (c *Client) GetSearchSuggestions(ctx context.Context, params *GetSearchSugg
 
 type GetSearchSuggestionsInput struct {
 
-	// Limits the property names that are included in the response.
-	SuggestionQuery *types.SuggestionQuery
-
 	// The name of the Amazon SageMaker resource to search for.
 	//
 	// This member is required.
 	Resource types.ResourceType
+
+	// Limits the property names that are included in the response.
+	SuggestionQuery *types.SuggestionQuery
 }
 
 type GetSearchSuggestionsOutput struct {

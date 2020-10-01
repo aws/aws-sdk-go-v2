@@ -57,12 +57,10 @@ func (c *Client) CreateSecurityProfile(ctx context.Context, params *CreateSecuri
 
 type CreateSecurityProfileInput struct {
 
-	// Specifies the destinations to which alerts are sent. (Alerts are always sent to
-	// the console.) Alerts are generated when a device (thing) violates a behavior.
-	AlertTargets map[string]*types.AlertTarget
-
-	// Metadata that can be used to manage the security profile.
-	Tags []*types.Tag
+	// The name you are giving to the security profile.
+	//
+	// This member is required.
+	SecurityProfileName *string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
@@ -70,21 +68,23 @@ type CreateSecurityProfileInput struct {
 	// CreateSecurityProfileRequest$additionalMetricsToRetainV2 () instead.
 	AdditionalMetricsToRetain []*string
 
-	// The name you are giving to the security profile.
-	//
-	// This member is required.
-	SecurityProfileName *string
-
-	// A description of the security profile.
-	SecurityProfileDescription *string
-
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
 	// metric specified here.
 	AdditionalMetricsToRetainV2 []*types.MetricToRetain
 
+	// Specifies the destinations to which alerts are sent. (Alerts are always sent to
+	// the console.) Alerts are generated when a device (thing) violates a behavior.
+	AlertTargets map[string]*types.AlertTarget
+
 	// Specifies the behaviors that, when violated by a device (thing), cause an alert.
 	Behaviors []*types.Behavior
+
+	// A description of the security profile.
+	SecurityProfileDescription *string
+
+	// Metadata that can be used to manage the security profile.
+	Tags []*types.Tag
 }
 
 type CreateSecurityProfileOutput struct {

@@ -65,10 +65,6 @@ func (c *Client) DeleteReplicationGroup(ctx context.Context, params *DeleteRepli
 // Represents the input of a DeleteReplicationGroup operation.
 type DeleteReplicationGroupInput struct {
 
-	// If set to true, all of the read replicas are deleted, but the primary node is
-	// retained.
-	RetainPrimaryCluster *bool
-
 	// The identifier for the cluster to be deleted. This parameter is not case
 	// sensitive.
 	//
@@ -80,6 +76,10 @@ type DeleteReplicationGroupInput struct {
 	// this is to ensure that it captures the freshest data. After the final snapshot
 	// is taken, the replication group is immediately deleted.
 	FinalSnapshotIdentifier *string
+
+	// If set to true, all of the read replicas are deleted, but the primary node is
+	// retained.
+	RetainPrimaryCluster *bool
 }
 
 type DeleteReplicationGroupOutput struct {

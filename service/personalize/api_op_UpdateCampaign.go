@@ -61,9 +61,6 @@ func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput
 
 type UpdateCampaignInput struct {
 
-	// The ARN of a new solution version to deploy.
-	SolutionVersionArn *string
-
 	// The Amazon Resource Name (ARN) of the campaign.
 	//
 	// This member is required.
@@ -72,6 +69,9 @@ type UpdateCampaignInput struct {
 	// Specifies the requested minimum provisioned transactions (recommendations) per
 	// second that Amazon Personalize will support.
 	MinProvisionedTPS *int32
+
+	// The ARN of a new solution version to deploy.
+	SolutionVersionArn *string
 }
 
 type UpdateCampaignOutput struct {

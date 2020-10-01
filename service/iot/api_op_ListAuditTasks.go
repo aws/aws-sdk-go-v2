@@ -59,10 +59,6 @@ func (c *Client) ListAuditTasks(ctx context.Context, params *ListAuditTasksInput
 
 type ListAuditTasksInput struct {
 
-	// A filter to limit the output to the specified type of audit: can be one of
-	// "ON_DEMAND_AUDIT_TASK" or "SCHEDULED__AUDIT_TASK".
-	TaskType types.AuditTaskType
-
 	// The end of the time period.
 	//
 	// This member is required.
@@ -75,15 +71,19 @@ type ListAuditTasksInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// A filter to limit the output to audits with the specified completion status: can
-	// be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
-	TaskStatus types.AuditTaskStatus
+	// The maximum number of results to return at one time. The default is 25.
+	MaxResults *int32
 
 	// The token for the next set of results.
 	NextToken *string
 
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int32
+	// A filter to limit the output to audits with the specified completion status: can
+	// be one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
+	TaskStatus types.AuditTaskStatus
+
+	// A filter to limit the output to the specified type of audit: can be one of
+	// "ON_DEMAND_AUDIT_TASK" or "SCHEDULED__AUDIT_TASK".
+	TaskType types.AuditTaskType
 }
 
 type ListAuditTasksOutput struct {

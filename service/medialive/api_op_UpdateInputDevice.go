@@ -58,13 +58,13 @@ func (c *Client) UpdateInputDevice(ctx context.Context, params *UpdateInputDevic
 // A request to update an input device.
 type UpdateInputDeviceInput struct {
 
-	// The settings that you want to apply to the input device.
-	HdDeviceSettings *types.InputDeviceConfigurableSettings
-
 	// The unique ID of the input device. For example, hd-123456789abcdef.
 	//
 	// This member is required.
 	InputDeviceId *string
+
+	// The settings that you want to apply to the input device.
+	HdDeviceSettings *types.InputDeviceConfigurableSettings
 
 	// The name that you assigned to this input device (not the unique ID).
 	Name *string
@@ -76,14 +76,8 @@ type UpdateInputDeviceOutput struct {
 	// The unique ARN of the input device.
 	Arn *string
 
-	// The network MAC address of the input device.
-	MacAddress *string
-
-	// Settings that describe an input device that is type HD.
-	HdDeviceSettings *types.InputDeviceHdSettings
-
-	// The type of the input device.
-	Type types.InputDeviceType
+	// The state of the connection between the input device and AWS.
+	ConnectionState types.InputDeviceConnectionState
 
 	// The status of the action to synchronize the device configuration. If you change
 	// the configuration of the input device (for example, the maximum bitrate),
@@ -92,20 +86,26 @@ type UpdateInputDeviceOutput struct {
 	// means that it has not updated its configuration.
 	DeviceSettingsSyncState types.DeviceSettingsSyncState
 
+	// Settings that describe an input device that is type HD.
+	HdDeviceSettings *types.InputDeviceHdSettings
+
+	// The unique ID of the input device.
+	Id *string
+
+	// The network MAC address of the input device.
+	MacAddress *string
+
+	// A name that you specify for the input device.
+	Name *string
+
 	// The network settings for the input device.
 	NetworkSettings *types.InputDeviceNetworkSettings
 
 	// The unique serial number of the input device.
 	SerialNumber *string
 
-	// A name that you specify for the input device.
-	Name *string
-
-	// The unique ID of the input device.
-	Id *string
-
-	// The state of the connection between the input device and AWS.
-	ConnectionState types.InputDeviceConnectionState
+	// The type of the input device.
+	Type types.InputDeviceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

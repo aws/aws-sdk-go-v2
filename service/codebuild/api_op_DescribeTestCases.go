@@ -57,15 +57,18 @@ func (c *Client) DescribeTestCases(ctx context.Context, params *DescribeTestCase
 
 type DescribeTestCasesInput struct {
 
-	// The maximum number of paginated test cases returned per response. Use nextToken
-	// to iterate pages in the list of returned TestCase objects. The default value is
-	// 100.
-	MaxResults *int32
-
 	// The ARN of the report for which test cases are returned.
 	//
 	// This member is required.
 	ReportArn *string
+
+	// A TestCaseFilter object used to filter the returned reports.
+	Filter *types.TestCaseFilter
+
+	// The maximum number of paginated test cases returned per response. Use nextToken
+	// to iterate pages in the list of returned TestCase objects. The default value is
+	// 100.
+	MaxResults *int32
 
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
@@ -74,9 +77,6 @@ type DescribeTestCasesInput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
-
-	// A TestCaseFilter object used to filter the returned reports.
-	Filter *types.TestCaseFilter
 }
 
 type DescribeTestCasesOutput struct {

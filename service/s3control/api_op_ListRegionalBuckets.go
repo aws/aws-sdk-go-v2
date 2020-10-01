@@ -73,11 +73,11 @@ type ListRegionalBucketsInput struct {
 	//
 	MaxResults *int32
 
-	// The ID of the AWS Outposts. This is required by Amazon S3 on Outposts buckets.
-	OutpostId *string
-
 	//
 	NextToken *string
+
+	// The ID of the AWS Outposts. This is required by Amazon S3 on Outposts buckets.
+	OutpostId *string
 }
 
 type ListRegionalBucketsOutput struct {

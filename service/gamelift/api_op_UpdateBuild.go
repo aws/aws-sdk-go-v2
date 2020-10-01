@@ -80,13 +80,13 @@ type UpdateBuildInput struct {
 	// This member is required.
 	BuildId *string
 
-	// Version information that is associated with a build or script. Version strings
-	// do not need to be unique.
-	Version *string
-
 	// A descriptive label that is associated with a build. Build names do not need to
 	// be unique.
 	Name *string
+
+	// Version information that is associated with a build or script. Version strings
+	// do not need to be unique.
+	Version *string
 }
 
 // Represents the returned data in response to a request action.

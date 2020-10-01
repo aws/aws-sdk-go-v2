@@ -63,13 +63,6 @@ type GetSdkInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// A string-to-string key-value map of query parameters sdkType-dependent
-	// properties of the SDK. For sdkType of objectivec or swift, a parameter named
-	// classPrefix is required. For sdkType of android, parameters named groupId,
-	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
-	// java, parameters named serviceName and javaPackageName are required.
-	Parameters map[string]*string
-
 	// [Required] The language for the generated SDK. Currently java, javascript,
 	// android, objectivec (for iOS), swift (for iOS), and ruby are supported.
 	//
@@ -80,19 +73,26 @@ type GetSdkInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	// A string-to-string key-value map of query parameters sdkType-dependent
+	// properties of the SDK. For sdkType of objectivec or swift, a parameter named
+	// classPrefix is required. For sdkType of android, parameters named groupId,
+	// artifactId, artifactVersion, and invokerPackage are required. For sdkType of
+	// java, parameters named serviceName and javaPackageName are required.
+	Parameters map[string]*string
 }
 
 // The binary blob response to GetSdk (), which contains the generated SDK.
 type GetSdkOutput struct {
+
+	// The binary blob response to GetSdk (), which contains the generated SDK.
+	Body []byte
 
 	// The content-disposition header value in the HTTP response.
 	ContentDisposition *string
 
 	// The content-type header value in the HTTP response.
 	ContentType *string
-
-	// The binary blob response to GetSdk (), which contains the generated SDK.
-	Body []byte
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

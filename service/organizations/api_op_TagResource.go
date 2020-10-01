@@ -59,17 +59,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The ID of the resource to add a tag to.
+	//
+	// This member is required.
+	ResourceId *string
+
 	// The tag to add to the specified resource. You must specify both a tag key and
 	// value. You can set the value of a tag to an empty string, but you can't set it
 	// to null.
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The ID of the resource to add a tag to.
-	//
-	// This member is required.
-	ResourceId *string
 }
 
 type TagResourceOutput struct {

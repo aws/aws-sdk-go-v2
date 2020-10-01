@@ -66,11 +66,11 @@ type GetSchemaAsJsonInput struct {
 
 type GetSchemaAsJsonOutput struct {
 
-	// The name of the retrieved schema.
-	Name *string
-
 	// The JSON representation of the schema document.
 	Document *string
+
+	// The name of the retrieved schema.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

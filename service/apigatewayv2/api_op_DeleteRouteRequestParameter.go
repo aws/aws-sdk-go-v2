@@ -56,20 +56,20 @@ func (c *Client) DeleteRouteRequestParameter(ctx context.Context, params *Delete
 
 type DeleteRouteRequestParameterInput struct {
 
-	// The route ID.
+	// The API identifier.
 	//
 	// This member is required.
-	RouteId *string
+	ApiId *string
 
 	// The route request parameter key.
 	//
 	// This member is required.
 	RequestParameterKey *string
 
-	// The API identifier.
+	// The route ID.
 	//
 	// This member is required.
-	ApiId *string
+	RouteId *string
 }
 
 type DeleteRouteRequestParameterOutput struct {

@@ -59,9 +59,6 @@ func (c *Client) ViewBilling(ctx context.Context, params *ViewBillingInput, optF
 // The ViewBilling request includes the following elements.
 type ViewBillingInput struct {
 
-	// The number of billing records to be returned. Default: 20
-	MaxItems *int32
-
 	// The end date and time for the time period for which you want a list of billing
 	// records. Specify the date and time in Unix time format and Coordinated Universal
 	// time (UTC).
@@ -76,6 +73,9 @@ type ViewBillingInput struct {
 	// marker must match the value of NextPageMarker that was returned in the previous
 	// response.
 	Marker *string
+
+	// The number of billing records to be returned. Default: 20
+	MaxItems *int32
 
 	// The beginning date and time for the time period for which you want a list of
 	// billing records. Specify the date and time in Unix time format and Coordinated

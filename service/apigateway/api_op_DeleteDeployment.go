@@ -58,11 +58,6 @@ func (c *Client) DeleteDeployment(ctx context.Context, params *DeleteDeploymentI
 
 // Requests API Gateway to delete a Deployment () resource.
 type DeleteDeploymentInput struct {
-	TemplateSkipList []*string
-
-	Title *string
-
-	Name *string
 
 	// [Required] The identifier of the Deployment () resource to delete.
 	//
@@ -74,7 +69,13 @@ type DeleteDeploymentInput struct {
 	// This member is required.
 	RestApiId *string
 
+	Name *string
+
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 type DeleteDeploymentOutput struct {

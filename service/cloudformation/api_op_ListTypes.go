@@ -57,6 +57,22 @@ func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns .
 
 type ListTypesInput struct {
 
+	// The deprecation status of the types that you want to get summary information
+	// about. Valid values include:
+	//
+	//     * LIVE: The type is registered for use in
+	// CloudFormation operations.
+	//
+	//     * DEPRECATED: The type has been deregistered and
+	// can no longer be used in CloudFormation operations.
+	DeprecatedStatus types.DeprecatedStatus
+
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	MaxResults *int32
+
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
@@ -80,22 +96,6 @@ type ListTypesInput struct {
 	// read, and delete handlers, and therefore cannot actually be provisioned.
 	ProvisioningType types.ProvisioningType
 
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
-	MaxResults *int32
-
-	// The deprecation status of the types that you want to get summary information
-	// about. Valid values include:
-	//
-	//     * LIVE: The type is registered for use in
-	// CloudFormation operations.
-	//
-	//     * DEPRECATED: The type has been deregistered and
-	// can no longer be used in CloudFormation operations.
-	DeprecatedStatus types.DeprecatedStatus
-
 	// The scope at which the type is visible and usable in CloudFormation operations.
 	// Valid values include:
 	//
@@ -112,15 +112,15 @@ type ListTypesInput struct {
 
 type ListTypesOutput struct {
 
-	// A list of TypeSummary structures that contain information about the specified
-	// types.
-	TypeSummaries []*types.TypeSummary
-
 	// If the request doesn't return all of the remaining results, NextToken is set to
 	// a token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns
 	// all results, NextToken is set to null.
 	NextToken *string
+
+	// A list of TypeSummary structures that contain information about the specified
+	// types.
+	TypeSummaries []*types.TypeSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

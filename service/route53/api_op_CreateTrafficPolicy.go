@@ -61,17 +61,17 @@ func (c *Client) CreateTrafficPolicy(ctx context.Context, params *CreateTrafficP
 // to create.
 type CreateTrafficPolicyInput struct {
 
-	// The name of the traffic policy.
-	//
-	// This member is required.
-	Name *string
-
 	// The definition of this traffic policy in JSON format. For more information, see
 	// Traffic Policy Document Format
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html).
 	//
 	// This member is required.
 	Document *string
+
+	// The name of the traffic policy.
+	//
+	// This member is required.
+	Name *string
 
 	// (Optional) Any comments that you want to include about the traffic policy.
 	Comment *string

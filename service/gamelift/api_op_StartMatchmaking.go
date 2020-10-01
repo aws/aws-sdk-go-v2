@@ -144,11 +144,6 @@ type StartMatchmakingInput struct {
 	// This member is required.
 	ConfigurationName *string
 
-	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
-	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
-	// track the matchmaking ticket status and retrieve match results.
-	TicketId *string
-
 	// Information on each player to be matched. This information must include a player
 	// ID, and may contain player attributes and latency data to be used in the
 	// matchmaking process. After a successful match, Player objects contain the name
@@ -156,6 +151,11 @@ type StartMatchmakingInput struct {
 	//
 	// This member is required.
 	Players []*types.Player
+
+	// A unique identifier for a matchmaking ticket. If no ticket ID is specified here,
+	// Amazon GameLift will generate one in the form of a UUID. Use this identifier to
+	// track the matchmaking ticket status and retrieve match results.
+	TicketId *string
 }
 
 // Represents the returned data in response to a request action.

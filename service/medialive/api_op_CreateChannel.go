@@ -60,25 +60,27 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 // A request to create a channel
 type CreateChannelInput struct {
 
-	// Name of channel.
-	Name *string
+	// The class for this channel. STANDARD for a channel with two pipelines or
+	// SINGLE_PIPELINE for a channel with one pipeline.
+	ChannelClass types.ChannelClass
+
+	// Placeholder documentation for __listOfOutputDestination
+	Destinations []*types.OutputDestination
 
 	// Encoder Settings
 	EncoderSettings *types.EncoderSettings
 
-	// The log level to write to CloudWatch Logs.
-	LogLevel types.LogLevel
-
 	// List of input attachments for channel.
 	InputAttachments []*types.InputAttachment
 
-	// An optional Amazon Resource Name (ARN) of the role to assume when running the
-	// Channel.
-	RoleArn *string
+	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+	InputSpecification *types.InputSpecification
 
-	// The class for this channel. STANDARD for a channel with two pipelines or
-	// SINGLE_PIPELINE for a channel with one pipeline.
-	ChannelClass types.ChannelClass
+	// The log level to write to CloudWatch Logs.
+	LogLevel types.LogLevel
+
+	// Name of channel.
+	Name *string
 
 	// Unique request ID to be specified. This is needed to prevent retries from
 	// creating multiple resources.
@@ -87,14 +89,12 @@ type CreateChannelInput struct {
 	// Deprecated field that's only usable by whitelisted customers.
 	Reserved *string
 
+	// An optional Amazon Resource Name (ARN) of the role to assume when running the
+	// Channel.
+	RoleArn *string
+
 	// A collection of key-value pairs.
 	Tags map[string]*string
-
-	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
-	InputSpecification *types.InputSpecification
-
-	// Placeholder documentation for __listOfOutputDestination
-	Destinations []*types.OutputDestination
 }
 
 // Placeholder documentation for CreateChannelResponse

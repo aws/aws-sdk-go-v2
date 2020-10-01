@@ -75,9 +75,6 @@ type DescribeTaskDefinitionInput struct {
 
 type DescribeTaskDefinitionOutput struct {
 
-	// The full task definition description.
-	TaskDefinition *types.TaskDefinition
-
 	// The metadata that is applied to the task definition to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -108,6 +105,9 @@ type DescribeTaskDefinitionOutput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
+
+	// The full task definition description.
+	TaskDefinition *types.TaskDefinition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

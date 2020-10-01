@@ -57,28 +57,46 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 
 type CreateProjectInput struct {
 
-	// Stores recently used information so that it can be quickly accessed at a later
-	// time.
-	Cache *types.ProjectCache
-
-	// Information about logs for the build project. These can be logs in Amazon
-	// CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
-	LogsConfig *types.LogsConfig
-
 	// Information about the build output artifacts for the build project.
 	//
 	// This member is required.
 	Artifacts *types.ProjectArtifacts
 
-	// A list of tag key and value pairs associated with this build project. These tags
-	// are available for use by AWS services that support AWS CodeBuild build project
-	// tags.
-	Tags []*types.Tag
+	// Information about the build environment for the build project.
+	//
+	// This member is required.
+	Environment *types.ProjectEnvironment
 
-	// An array of ProjectSourceVersion objects. If secondarySourceVersions is
-	// specified at the build level, then they take precedence over these
-	// secondarySourceVersions (at the project level).
-	SecondarySourceVersions []*types.ProjectSourceVersion
+	// The name of the build project.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the AWS Identity and Access Management (IAM) role that enables AWS
+	// CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+	//
+	// This member is required.
+	ServiceRole *string
+
+	// Information about the build input source code for the build project.
+	//
+	// This member is required.
+	Source *types.ProjectSource
+
+	// Set this to true to generate a publicly accessible URL for your project's build
+	// badge.
+	BadgeEnabled *bool
+
+	// A ProjectBuildBatchConfig () object that defines the batch build options for the
+	// project.
+	BuildBatchConfig *types.ProjectBuildBatchConfig
+
+	// Stores recently used information so that it can be quickly accessed at a later
+	// time.
+	Cache *types.ProjectCache
+
+	// A description that makes the build project easy to identify.
+	Description *string
 
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used
 	// for encrypting the build output artifacts. You can use a cross-account KMS key
@@ -86,6 +104,30 @@ type CreateProjectInput struct {
 	// that key. You can specify either the Amazon Resource Name (ARN) of the CMK or,
 	// if available, the CMK's alias (using the format alias/alias-name ).
 	EncryptionKey *string
+
+	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
+	// ProjectFileSystemLocation object specifies the identifier, location,
+	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
+	// File System.
+	FileSystemLocations []*types.ProjectFileSystemLocation
+
+	// Information about logs for the build project. These can be logs in Amazon
+	// CloudWatch Logs, logs uploaded to a specified S3 bucket, or both.
+	LogsConfig *types.LogsConfig
+
+	// The number of minutes a build is allowed to be queued before it times out.
+	QueuedTimeoutInMinutes *int32
+
+	// An array of ProjectArtifacts objects.
+	SecondaryArtifacts []*types.ProjectArtifacts
+
+	// An array of ProjectSourceVersion objects. If secondarySourceVersions is
+	// specified at the build level, then they take precedence over these
+	// secondarySourceVersions (at the project level).
+	SecondarySourceVersions []*types.ProjectSourceVersion
+
+	// An array of ProjectSource objects.
+	SecondarySources []*types.ProjectSource
 
 	// A version of the build input to be built for this project. If not specified, the
 	// latest version is used. If specified, it must be one of:
@@ -116,60 +158,18 @@ type CreateProjectInput struct {
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string
 
-	// A description that makes the build project easy to identify.
-	Description *string
-
-	// An array of ProjectArtifacts objects.
-	SecondaryArtifacts []*types.ProjectArtifacts
-
-	// An array of ProjectSource objects.
-	SecondarySources []*types.ProjectSource
-
-	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
-	// ProjectFileSystemLocation object specifies the identifier, location,
-	// mountOptions, mountPoint, and type of a file system created using Amazon Elastic
-	// File System.
-	FileSystemLocations []*types.ProjectFileSystemLocation
-
-	// Information about the build input source code for the build project.
-	//
-	// This member is required.
-	Source *types.ProjectSource
-
-	// VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
-	VpcConfig *types.VpcConfig
-
-	// The number of minutes a build is allowed to be queued before it times out.
-	QueuedTimeoutInMinutes *int32
-
-	// Information about the build environment for the build project.
-	//
-	// This member is required.
-	Environment *types.ProjectEnvironment
+	// A list of tag key and value pairs associated with this build project. These tags
+	// are available for use by AWS services that support AWS CodeBuild build project
+	// tags.
+	Tags []*types.Tag
 
 	// How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before
 	// it times out any build that has not been marked as completed. The default is 60
 	// minutes.
 	TimeoutInMinutes *int32
 
-	// The name of the build project.
-	//
-	// This member is required.
-	Name *string
-
-	// The ARN of the AWS Identity and Access Management (IAM) role that enables AWS
-	// CodeBuild to interact with dependent AWS services on behalf of the AWS account.
-	//
-	// This member is required.
-	ServiceRole *string
-
-	// Set this to true to generate a publicly accessible URL for your project's build
-	// badge.
-	BadgeEnabled *bool
-
-	// A ProjectBuildBatchConfig () object that defines the batch build options for the
-	// project.
-	BuildBatchConfig *types.ProjectBuildBatchConfig
+	// VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.
+	VpcConfig *types.VpcConfig
 }
 
 type CreateProjectOutput struct {

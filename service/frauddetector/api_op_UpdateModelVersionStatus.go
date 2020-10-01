@@ -68,15 +68,15 @@ type UpdateModelVersionStatusInput struct {
 	// This member is required.
 	ModelId *string
 
-	// The model version number.
-	//
-	// This member is required.
-	ModelVersionNumber *string
-
 	// The model type.
 	//
 	// This member is required.
 	ModelType types.ModelTypeEnum
+
+	// The model version number.
+	//
+	// This member is required.
+	ModelVersionNumber *string
 
 	// The model version status.
 	//

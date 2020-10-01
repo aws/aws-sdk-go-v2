@@ -57,29 +57,29 @@ func (c *Client) ListEntities(ctx context.Context, params *ListEntitiesInput, op
 
 type ListEntitiesInput struct {
 
-	// The type of entities to retrieve.
-	//
-	// This member is required.
-	EntityType *string
-
 	// The catalog related to the request. Fixed value: AWSMarketplace
 	//
 	// This member is required.
 	Catalog *string
 
-	// The value of the next token, if it exists. Null if there are no more results.
-	NextToken *string
+	// The type of entities to retrieve.
+	//
+	// This member is required.
+	EntityType *string
+
+	// An array of filter objects. Each filter object contains two attributes,
+	// filterName and filterValues.
+	FilterList []*types.Filter
 
 	// Specifies the upper limit of the elements on a single page. If a value isn't
 	// provided, the default value is 20.
 	MaxResults *int32
 
+	// The value of the next token, if it exists. Null if there are no more results.
+	NextToken *string
+
 	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *types.Sort
-
-	// An array of filter objects. Each filter object contains two attributes,
-	// filterName and filterValues.
-	FilterList []*types.Filter
 }
 
 type ListEntitiesOutput struct {

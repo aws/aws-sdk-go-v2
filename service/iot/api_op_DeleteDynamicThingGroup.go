@@ -56,13 +56,13 @@ func (c *Client) DeleteDynamicThingGroup(ctx context.Context, params *DeleteDyna
 
 type DeleteDynamicThingGroupInput struct {
 
-	// The expected version of the dynamic thing group to delete.
-	ExpectedVersion *int64
-
 	// The name of the dynamic thing group to delete.
 	//
 	// This member is required.
 	ThingGroupName *string
+
+	// The expected version of the dynamic thing group to delete.
+	ExpectedVersion *int64
 }
 
 type DeleteDynamicThingGroupOutput struct {

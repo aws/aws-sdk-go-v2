@@ -76,17 +76,17 @@ type DescribeUserInput struct {
 
 type DescribeUserOutput struct {
 
-	// An array containing the properties of the user account for the ServerID value
-	// that you specified.
-	//
-	// This member is required.
-	User *types.DescribedUser
-
 	// A system-assigned unique identifier for a file transfer protocol-enabled server
 	// that has this user assigned.
 	//
 	// This member is required.
 	ServerId *string
+
+	// An array containing the properties of the user account for the ServerID value
+	// that you specified.
+	//
+	// This member is required.
+	User *types.DescribedUser
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,10 +64,6 @@ type SendEventInput struct {
 	// This member is required.
 	ConnectionToken *string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string
-
 	// The content type of the request. Supported types are:  <ul> <li>
 	// <p>application/vnd.amazonaws.connect.event.typing</p> </li> <li>
 	// <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p> </li>
@@ -76,6 +72,10 @@ type SendEventInput struct {
 	// This member is required.
 	ContentType *string
 
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
+
 	// The content of the event to be sent (for example, message text). This is not yet
 	// supported.
 	Content *string
@@ -83,12 +83,12 @@ type SendEventInput struct {
 
 type SendEventOutput struct {
 
-	// The ID of the response.
-	Id *string
-
 	// The time when the event was sent. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
+
+	// The ID of the response.
+	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

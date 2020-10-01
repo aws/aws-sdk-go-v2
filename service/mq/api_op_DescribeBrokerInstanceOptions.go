@@ -56,22 +56,22 @@ func (c *Client) DescribeBrokerInstanceOptions(ctx context.Context, params *Desc
 
 type DescribeBrokerInstanceOptionsInput struct {
 
+	// Filter response by engine type.
+	EngineType *string
+
+	// Filter response by host instance type.
+	HostInstanceType *string
+
+	// The maximum number of instance options that Amazon MQ can return per page (20 by
+	// default). This value must be an integer from 5 to 100.
+	MaxResults *int32
+
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
 
 	// Filter response by storage type.
 	StorageType *string
-
-	// The maximum number of instance options that Amazon MQ can return per page (20 by
-	// default). This value must be an integer from 5 to 100.
-	MaxResults *int32
-
-	// Filter response by host instance type.
-	HostInstanceType *string
-
-	// Filter response by engine type.
-	EngineType *string
 }
 
 type DescribeBrokerInstanceOptionsOutput struct {
@@ -79,13 +79,13 @@ type DescribeBrokerInstanceOptionsOutput struct {
 	// List of available broker instance options.
 	BrokerInstanceOptions []*types.BrokerInstanceOption
 
-	// The token that specifies the next page of results Amazon MQ should return. To
-	// request the first page, leave nextToken empty.
-	NextToken *string
-
 	// Required. The maximum number of instance options that can be returned per page
 	// (20 by default). This value must be an integer from 5 to 100.
 	MaxResults *int32
+
+	// The token that specifies the next page of results Amazon MQ should return. To
+	// request the first page, leave nextToken empty.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

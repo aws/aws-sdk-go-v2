@@ -68,16 +68,16 @@ type ListPipelinesInput struct {
 // Contains the output of ListPipelines.
 type ListPipelinesOutput struct {
 
-	// Indicates whether there are more results that can be obtained by a subsequent
-	// call.
-	HasMoreResults *bool
-
 	// The pipeline identifiers. If you require additional information about the
 	// pipelines, you can use these identifiers to call DescribePipelines () and
 	// GetPipelineDefinition ().
 	//
 	// This member is required.
 	PipelineIdList []*types.PipelineIdName
+
+	// Indicates whether there are more results that can be obtained by a subsequent
+	// call.
+	HasMoreResults *bool
 
 	// The starting point for the next page of results. To view the next page of
 	// results, call ListPipelinesOutput again with this marker value. If the value is

@@ -63,6 +63,18 @@ func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactM
 
 type CreateContactMethodInput struct {
 
+	// The destination of the contact method, such as an email address or a mobile
+	// phone number. Use the E.164 format when specifying a mobile phone number. E.164
+	// is a standard for the phone number structure used for international
+	// telecommunication. Phone numbers that follow this format can have a maximum of
+	// 15 digits, and they are prefixed with the plus character (+) and the country
+	// code. For example, a U.S. phone number in E.164 format would be specified as
+	// +1XXX5550100. For more information, see E.164
+	// (https://en.wikipedia.org/wiki/E.164) on Wikipedia.
+	//
+	// This member is required.
+	ContactEndpoint *string
+
 	// The protocol of the contact method, such as Email or SMS (text messaging). The
 	// SMS protocol is supported only in the following AWS Regions.
 	//
@@ -92,18 +104,6 @@ type CreateContactMethodInput struct {
 	//
 	// This member is required.
 	Protocol types.ContactProtocol
-
-	// The destination of the contact method, such as an email address or a mobile
-	// phone number. Use the E.164 format when specifying a mobile phone number. E.164
-	// is a standard for the phone number structure used for international
-	// telecommunication. Phone numbers that follow this format can have a maximum of
-	// 15 digits, and they are prefixed with the plus character (+) and the country
-	// code. For example, a U.S. phone number in E.164 format would be specified as
-	// +1XXX5550100. For more information, see E.164
-	// (https://en.wikipedia.org/wiki/E.164) on Wikipedia.
-	//
-	// This member is required.
-	ContactEndpoint *string
 }
 
 type CreateContactMethodOutput struct {

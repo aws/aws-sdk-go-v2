@@ -72,13 +72,13 @@ type GetCertificateInput struct {
 
 type GetCertificateOutput struct {
 
+	// The ACM-issued certificate corresponding to the ARN specified as input.
+	Certificate *string
+
 	// Certificates forming the requested certificate's chain of trust. The chain
 	// consists of the certificate of the issuing CA and the intermediate certificates
 	// of any other subordinate CAs.
 	CertificateChain *string
-
-	// The ACM-issued certificate corresponding to the ARN specified as input.
-	Certificate *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

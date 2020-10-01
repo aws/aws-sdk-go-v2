@@ -58,6 +58,11 @@ func (c *Client) StopJob(ctx context.Context, params *StopJobInput, optFns ...fu
 // The request structure for the stop job request.
 type StopJobInput struct {
 
+	// The unique ID for an Amplify app.
+	//
+	// This member is required.
+	AppId *string
+
 	// The name for the branch, for the job.
 	//
 	// This member is required.
@@ -67,11 +72,6 @@ type StopJobInput struct {
 	//
 	// This member is required.
 	JobId *string
-
-	// The unique ID for an Amplify app.
-	//
-	// This member is required.
-	AppId *string
 }
 
 // The result structure for the stop job request.

@@ -62,11 +62,6 @@ func (c *Client) DescribeDBInstanceAutomatedBackups(ctx context.Context, params 
 // Parameter input for DescribeDBInstanceAutomatedBackups.
 type DescribeDBInstanceAutomatedBackupsInput struct {
 
-	// The pagination token provided in the previous request. If this parameter is
-	// specified the response includes only records beyond the marker, up to
-	// MaxRecords.
-	Marker *string
-
 	// (Optional) The user-supplied instance identifier. If this parameter is
 	// specified, it must match the identifier of an existing DB instance. It returns
 	// information from the specific DB instance' automated backup. This parameter
@@ -105,6 +100,11 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 	// specified in the response.
 	Filters []*types.Filter
 
+	// The pagination token provided in the previous request. If this parameter is
+	// specified the response includes only records beyond the marker, up to
+	// MaxRecords.
+	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
@@ -115,13 +115,13 @@ type DescribeDBInstanceAutomatedBackupsInput struct {
 // DescribeDBInstanceAutomatedBackups action.
 type DescribeDBInstanceAutomatedBackupsOutput struct {
 
+	// A list of DBInstanceAutomatedBackup instances.
+	DBInstanceAutomatedBackups []*types.DBInstanceAutomatedBackup
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
-
-	// A list of DBInstanceAutomatedBackup instances.
-	DBInstanceAutomatedBackups []*types.DBInstanceAutomatedBackup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -73,28 +73,28 @@ type GetConfigInput struct {
 	// This member is required.
 	ClientArn *string
 
+	// The client version.
+	//
+	// This member is required.
+	ClientVersion types.ClientVersion
+
 	// A list of ARNs that identify the high-availability partition groups that are
 	// associated with the client.
 	//
 	// This member is required.
 	HapgList []*string
-
-	// The client version.
-	//
-	// This member is required.
-	ClientVersion types.ClientVersion
 }
 
 type GetConfigOutput struct {
-
-	// The type of credentials.
-	ConfigType *string
 
 	// The certificate file containing the server.pem files of the HSMs.
 	ConfigCred *string
 
 	// The chrystoki.conf configuration file.
 	ConfigFile *string
+
+	// The type of credentials.
+	ConfigType *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

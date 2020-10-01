@@ -58,16 +58,6 @@ func (c *Client) DescribeFlowLogs(ctx context.Context, params *DescribeFlowLogsI
 
 type DescribeFlowLogsInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
-	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
-	FlowLogIds []*string
-
-	// The token for the next page of results.
-	NextToken *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -104,6 +94,16 @@ type DescribeFlowLogsInput struct {
 	// resource. Use this filter to find all resources assigned a tag with a specific
 	// key, regardless of the tag value.
 	Filter []*types.Filter
+
+	// One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
+	FlowLogIds []*string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeFlowLogsOutput struct {

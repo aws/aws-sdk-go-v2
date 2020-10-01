@@ -60,6 +60,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
+	// the supported resources are Amazon ECS capacity providers, tasks, services, task
+	// definitions, clusters, and container instances.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// The tags to add to the resource. A tag is an array of key-value pairs. The
 	// following basic restrictions apply to tags:
 	//
@@ -91,13 +98,6 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the resource to which to add tags. Currently,
-	// the supported resources are Amazon ECS capacity providers, tasks, services, task
-	// definitions, clusters, and container instances.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type TagResourceOutput struct {

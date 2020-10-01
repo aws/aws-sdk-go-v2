@@ -84,6 +84,21 @@ func (c *Client) CreateEndpointConfig(ctx context.Context, params *CreateEndpoin
 
 type CreateEndpointConfigInput struct {
 
+	// The name of the endpoint configuration. You specify this name in a
+	// CreateEndpoint () request.
+	//
+	// This member is required.
+	EndpointConfigName *string
+
+	// An list of ProductionVariant objects, one for each model that you want to host
+	// at this endpoint.
+	//
+	// This member is required.
+	ProductionVariants []*types.ProductionVariant
+
+	//
+	DataCaptureConfig *types.DataCaptureConfig
+
 	// The Amazon Resource Name (ARN) of a AWS Key Management Service key that Amazon
 	// SageMaker uses to encrypt data on the storage volume attached to the ML compute
 	// instance that hosts the endpoint. The KmsKeyId can be any of the following
@@ -120,25 +135,10 @@ type CreateEndpointConfigInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	KmsKeyId *string
 
-	// The name of the endpoint configuration. You specify this name in a
-	// CreateEndpoint () request.
-	//
-	// This member is required.
-	EndpointConfigName *string
-
 	// A list of key-value pairs. For more information, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
-
-	// An list of ProductionVariant objects, one for each model that you want to host
-	// at this endpoint.
-	//
-	// This member is required.
-	ProductionVariants []*types.ProductionVariant
-
-	//
-	DataCaptureConfig *types.DataCaptureConfig
 }
 
 type CreateEndpointConfigOutput struct {

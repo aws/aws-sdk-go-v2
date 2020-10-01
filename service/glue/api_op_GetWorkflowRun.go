@@ -57,6 +57,11 @@ func (c *Client) GetWorkflowRun(ctx context.Context, params *GetWorkflowRunInput
 
 type GetWorkflowRunInput struct {
 
+	// Name of the workflow being run.
+	//
+	// This member is required.
+	Name *string
+
 	// The ID of the workflow run.
 	//
 	// This member is required.
@@ -64,11 +69,6 @@ type GetWorkflowRunInput struct {
 
 	// Specifies whether to include the workflow graph in response or not.
 	IncludeGraph *bool
-
-	// Name of the workflow being run.
-	//
-	// This member is required.
-	Name *string
 }
 
 type GetWorkflowRunOutput struct {

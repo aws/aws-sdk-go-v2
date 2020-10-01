@@ -56,11 +56,6 @@ func (c *Client) DeleteTheme(ctx context.Context, params *DeleteThemeInput, optF
 
 type DeleteThemeInput struct {
 
-	// The version of the theme that you want to delete. Note: If you don't provide a
-	// version number, you're using this call to DeleteTheme to delete all versions of
-	// the theme.
-	VersionNumber *int64
-
 	// The ID of the AWS account that contains the theme that you're deleting.
 	//
 	// This member is required.
@@ -70,15 +65,20 @@ type DeleteThemeInput struct {
 	//
 	// This member is required.
 	ThemeId *string
+
+	// The version of the theme that you want to delete. Note: If you don't provide a
+	// version number, you're using this call to DeleteTheme to delete all versions of
+	// the theme.
+	VersionNumber *int64
 }
 
 type DeleteThemeOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the resource.
 	Arn *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// An ID for the theme.
 	ThemeId *string

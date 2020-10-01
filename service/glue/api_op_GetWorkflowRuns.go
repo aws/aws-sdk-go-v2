@@ -62,14 +62,14 @@ type GetWorkflowRunsInput struct {
 	// This member is required.
 	Name *string
 
-	// The maximum size of the response.
-	NextToken *string
-
 	// Specifies whether to include the workflow graph in response or not.
 	IncludeGraph *bool
 
 	// The maximum number of workflow runs to be included in the response.
 	MaxResults *int32
+
+	// The maximum size of the response.
+	NextToken *string
 }
 
 type GetWorkflowRunsOutput struct {

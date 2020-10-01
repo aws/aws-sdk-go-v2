@@ -68,11 +68,11 @@ func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStream
 
 type CreateStreamProcessorInput struct {
 
-	// Face recognition input parameters to be used by the stream processor. Includes
-	// the collection to use for face recognition and the face attributes to detect.
+	// Kinesis video stream stream that provides the source streaming video. If you are
+	// using the AWS CLI, the parameter name is StreamProcessorInput.
 	//
 	// This member is required.
-	Settings *types.StreamProcessorSettings
+	Input *types.StreamProcessorInput
 
 	// An identifier you assign to the stream processor. You can use Name to manage the
 	// stream processor. For example, you can get the current status of the stream
@@ -88,16 +88,16 @@ type CreateStreamProcessorInput struct {
 	// This member is required.
 	Output *types.StreamProcessorOutput
 
-	// Kinesis video stream stream that provides the source streaming video. If you are
-	// using the AWS CLI, the parameter name is StreamProcessorInput.
-	//
-	// This member is required.
-	Input *types.StreamProcessorInput
-
 	// ARN of the IAM role that allows access to the stream processor.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Face recognition input parameters to be used by the stream processor. Includes
+	// the collection to use for face recognition and the face attributes to detect.
+	//
+	// This member is required.
+	Settings *types.StreamProcessorSettings
 }
 
 type CreateStreamProcessorOutput struct {

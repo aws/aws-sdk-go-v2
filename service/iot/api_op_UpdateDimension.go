@@ -75,26 +75,26 @@ type UpdateDimensionInput struct {
 
 type UpdateDimensionOutput struct {
 
+	// The ARN (Amazon resource name) of the created dimension.
+	Arn *string
+
+	// The date and time, in milliseconds since epoch, when the dimension was initially
+	// created.
+	CreationDate *time.Time
+
+	// The date and time, in milliseconds since epoch, when the dimension was most
+	// recently updated.
+	LastModifiedDate *time.Time
+
+	// A unique identifier for the dimension.
+	Name *string
+
 	// The value or list of values used to scope the dimension. For example, for topic
 	// filters, this is the pattern used to match the MQTT topic name.
 	StringValues []*string
 
 	// The type of the dimension.
 	Type types.DimensionType
-
-	// The date and time, in milliseconds since epoch, when the dimension was initially
-	// created.
-	CreationDate *time.Time
-
-	// A unique identifier for the dimension.
-	Name *string
-
-	// The ARN (Amazon resource name) of the created dimension.
-	Arn *string
-
-	// The date and time, in milliseconds since epoch, when the dimension was most
-	// recently updated.
-	LastModifiedDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

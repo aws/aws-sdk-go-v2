@@ -94,15 +94,6 @@ type CreateDataSourceFromRedshiftInput struct {
 	// This member is required.
 	DataSourceId *string
 
-	// The compute statistics for a DataSource. The statistics are generated from the
-	// observation data referenced by a DataSource. Amazon ML uses the statistics
-	// internally during MLModel training. This parameter must be set to true if the
-	// DataSource needs to be used for MLModel training.
-	ComputeStatistics *bool
-
-	// A user-supplied name or description of the DataSource.
-	DataSourceName *string
-
 	// The data specification of an Amazon Redshift DataSource:
 	//
 	//     *
@@ -147,6 +138,15 @@ type CreateDataSourceFromRedshiftInput struct {
 	//
 	// This member is required.
 	RoleARN *string
+
+	// The compute statistics for a DataSource. The statistics are generated from the
+	// observation data referenced by a DataSource. Amazon ML uses the statistics
+	// internally during MLModel training. This parameter must be set to true if the
+	// DataSource needs to be used for MLModel training.
+	ComputeStatistics *bool
+
+	// A user-supplied name or description of the DataSource.
+	DataSourceName *string
 }
 
 // Represents the output of a CreateDataSourceFromRedshift operation, and is an

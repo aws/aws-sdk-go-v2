@@ -57,20 +57,21 @@ func (c *Client) GetRestApis(ctx context.Context, params *GetRestApisInput, optF
 
 // The GET request to list existing RestApis () defined for your collection.
 type GetRestApisInput struct {
-	Name *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
-	TemplateSkipList []*string
-
-	Title *string
+	Name *string
 
 	// The current pagination position in the paged result set.
 	Position *string
 
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Contains references to your APIs and links that guide you in how to interact

@@ -58,11 +58,6 @@ func (c *Client) CheckDomainTransferability(ctx context.Context, params *CheckDo
 // The CheckDomainTransferability request contains the following elements.
 type CheckDomainTransferabilityInput struct {
 
-	// If the registrar for the top-level domain (TLD) requires an authorization code
-	// to transfer the domain, the code that you got from the current registrar for the
-	// domain.
-	AuthCode *string
-
 	// The name of the domain that you want to transfer to Route 53. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
 	// supported TLDs, see Domains that You Can Register with Amazon Route 53
@@ -83,6 +78,11 @@ type CheckDomainTransferabilityInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// If the registrar for the top-level domain (TLD) requires an authorization code
+	// to transfer the domain, the code that you got from the current registrar for the
+	// domain.
+	AuthCode *string
 }
 
 // The CheckDomainTransferability response includes the following elements.

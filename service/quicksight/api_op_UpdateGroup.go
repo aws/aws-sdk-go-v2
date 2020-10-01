@@ -63,6 +63,11 @@ type UpdateGroupInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// The name of the group that you want to update.
+	//
+	// This member is required.
+	GroupName *string
+
 	// The namespace. Currently, you should set this to default.
 	//
 	// This member is required.
@@ -70,20 +75,15 @@ type UpdateGroupInput struct {
 
 	// The description for the group that you want to update.
 	Description *string
-
-	// The name of the group that you want to update.
-	//
-	// This member is required.
-	GroupName *string
 }
 
 type UpdateGroupOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The name of the group.
 	Group *types.Group
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

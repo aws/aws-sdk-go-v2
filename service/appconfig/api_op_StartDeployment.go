@@ -63,6 +63,11 @@ type StartDeploymentInput struct {
 	// This member is required.
 	ApplicationId *string
 
+	// The configuration profile ID.
+	//
+	// This member is required.
+	ConfigurationProfileId *string
+
 	// The configuration version to deploy.
 	//
 	// This member is required.
@@ -73,18 +78,13 @@ type StartDeploymentInput struct {
 	// This member is required.
 	DeploymentStrategyId *string
 
-	// The configuration profile ID.
-	//
-	// This member is required.
-	ConfigurationProfileId *string
-
-	// A description of the deployment.
-	Description *string
-
 	// The environment ID.
 	//
 	// This member is required.
 	EnvironmentId *string
+
+	// A description of the deployment.
+	Description *string
 
 	// Metadata to assign to the deployment. Tags help organize and categorize your
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
@@ -94,14 +94,50 @@ type StartDeploymentInput struct {
 
 type StartDeploymentOutput struct {
 
-	// The ID of the deployment strategy that was deployed.
-	DeploymentStrategyId *string
-
 	// The ID of the application that was deployed.
 	ApplicationId *string
 
+	// The time the deployment completed.
+	CompletedAt *time.Time
+
 	// Information about the source location of the configuration.
 	ConfigurationLocationUri *string
+
+	// The name of the configuration.
+	ConfigurationName *string
+
+	// The ID of the configuration profile that was deployed.
+	ConfigurationProfileId *string
+
+	// The configuration version that was deployed.
+	ConfigurationVersion *string
+
+	// Total amount of time the deployment lasted.
+	DeploymentDurationInMinutes *int32
+
+	// The sequence number of the deployment.
+	DeploymentNumber *int32
+
+	// The ID of the deployment strategy that was deployed.
+	DeploymentStrategyId *string
+
+	// The description of the deployment.
+	Description *string
+
+	// The ID of the environment that was deployed.
+	EnvironmentId *string
+
+	// A list containing all events related to a deployment. The most recent events are
+	// displayed first.
+	EventLog []*types.DeploymentEvent
+
+	// The amount of time AppConfig monitored for alarms before considering the
+	// deployment to be complete and no longer eligible for automatic roll back.
+	FinalBakeTimeInMinutes *int32
+
+	// The percentage of targets to receive a deployed configuration during each
+	// interval.
+	GrowthFactor *float32
 
 	// The algorithm used to define how percentage grew over time.
 	GrowthType types.GrowthType
@@ -109,47 +145,11 @@ type StartDeploymentOutput struct {
 	// The percentage of targets for which the deployment is available.
 	PercentageComplete *float32
 
-	// The state of the deployment.
-	State types.DeploymentState
-
-	// A list containing all events related to a deployment. The most recent events are
-	// displayed first.
-	EventLog []*types.DeploymentEvent
-
-	// The configuration version that was deployed.
-	ConfigurationVersion *string
-
-	// The description of the deployment.
-	Description *string
-
-	// The ID of the configuration profile that was deployed.
-	ConfigurationProfileId *string
-
-	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
-
-	// The amount of time AppConfig monitored for alarms before considering the
-	// deployment to be complete and no longer eligible for automatic roll back.
-	FinalBakeTimeInMinutes *int32
-
 	// The time the deployment started.
 	StartedAt *time.Time
 
-	// The sequence number of the deployment.
-	DeploymentNumber *int32
-
-	// The percentage of targets to receive a deployed configuration during each
-	// interval.
-	GrowthFactor *float32
-
-	// The time the deployment completed.
-	CompletedAt *time.Time
-
-	// The name of the configuration.
-	ConfigurationName *string
-
-	// The ID of the environment that was deployed.
-	EnvironmentId *string
+	// The state of the deployment.
+	State types.DeploymentState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

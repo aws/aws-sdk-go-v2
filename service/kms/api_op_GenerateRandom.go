@@ -61,15 +61,15 @@ func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput
 
 type GenerateRandomInput struct {
 
-	// The length of the byte string.
-	NumberOfBytes *int32
-
 	// Generates the random byte string in the AWS CloudHSM cluster that is associated
 	// with the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 	// To find the ID of a custom key store, use the DescribeCustomKeyStores ()
 	// operation.
 	CustomKeyStoreId *string
+
+	// The length of the byte string.
+	NumberOfBytes *int32
 }
 
 type GenerateRandomOutput struct {

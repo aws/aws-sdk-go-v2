@@ -62,7 +62,21 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 // A PUT request to update an existing API, with external API definitions specified
 // as the request body.
 type PutRestApiInput struct {
-	Title *string
+
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
+	// A query parameter to indicate whether to rollback the API update (true) or not
+	// (false) when a warning is encountered. The default value is false.
+	FailOnWarnings *bool
+
+	// The mode query parameter to specify the update mode. Valid values are "merge"
+	// and "overwrite". By default, the update mode is "merge".
+	Mode types.PutMode
+
+	Name *string
 
 	// Custom header parameters as part of the request. For example, to exclude
 	// DocumentationParts () from an imported API, set ignore=documentation as a
@@ -71,40 +85,16 @@ type PutRestApiInput struct {
 	// 'file:///path/to/imported-api-body.json'.
 	Parameters map[string]*string
 
-	TemplateSkipList []*string
-
 	Template *bool
 
-	// The mode query parameter to specify the update mode. Valid values are "merge"
-	// and "overwrite". By default, the update mode is "merge".
-	Mode types.PutMode
+	TemplateSkipList []*string
 
-	// A query parameter to indicate whether to rollback the API update (true) or not
-	// (false) when a warning is encountered. The default value is false.
-	FailOnWarnings *bool
-
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	Name *string
+	Title *string
 }
 
 // Represents a REST API. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type PutRestApiOutput struct {
-
-	// The API's description.
-	Description *string
-
-	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
-	Policy *string
-
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
-	// API.
-	EndpointConfiguration *types.EndpointConfiguration
 
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
@@ -116,29 +106,23 @@ type PutRestApiOutput struct {
 	// a custom authorizer.
 	ApiKeySource types.ApiKeySourceType
 
-	// The API's name.
-	Name *string
-
-	// A version identifier for the API.
-	Version *string
-
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
-
-	// The warning messages reported when failonwarnings is turned on during API
-	// import.
-	Warnings []*string
+	// The list of binary media types supported by the RestApi (). By default, the
+	// RestApi () supports only UTF-8-encoded text payloads.
+	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
 
+	// The API's description.
+	Description *string
+
+	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// API.
+	EndpointConfiguration *types.EndpointConfiguration
+
 	// The API's identifier. This identifier is unique across all of your APIs in API
 	// Gateway.
 	Id *string
-
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
 
 	// A nullable integer that is used to enable compression (with non-negative between
 	// 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null
@@ -146,6 +130,23 @@ type PutRestApiOutput struct {
 	// not applied on the payload if the payload size is smaller than this value.
 	// Setting it to zero allows compression for any payload size.
 	MinimumCompressionSize *int32
+
+	// The API's name.
+	Name *string
+
+	// A stringified JSON policy document that applies to this RestApi regardless of
+	// the caller and Method () configuration.
+	Policy *string
+
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
+
+	// A version identifier for the API.
+	Version *string
+
+	// The warning messages reported when failonwarnings is turned on during API
+	// import.
+	Warnings []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -96,14 +96,14 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 // in the Amazon CloudFront Developer Guide.
 type DeleteDistributionInput struct {
 
-	// The value of the ETag header that you received when you disabled the
-	// distribution. For example: E2QWRUHAPOMQZL.
-	IfMatch *string
-
 	// The distribution ID.
 	//
 	// This member is required.
 	Id *string
+
+	// The value of the ETag header that you received when you disabled the
+	// distribution. For example: E2QWRUHAPOMQZL.
+	IfMatch *string
 }
 
 type DeleteDistributionOutput struct {

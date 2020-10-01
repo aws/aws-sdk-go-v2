@@ -58,11 +58,8 @@ func (c *Client) DescribeCacheParameterGroups(ctx context.Context, params *Descr
 // Represents the input of a DescribeCacheParameterGroups operation.
 type DescribeCacheParameterGroupsInput struct {
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.  <p>Default: 100</p>
-	// <p>Constraints: minimum 20; maximum 100.</p>
-	MaxRecords *int32
+	// The name of a specific cache parameter group to return details for.
+	CacheParameterGroupName *string
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
@@ -70,19 +67,22 @@ type DescribeCacheParameterGroupsInput struct {
 	// MaxRecords.
 	Marker *string
 
-	// The name of a specific cache parameter group to return details for.
-	CacheParameterGroupName *string
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.  <p>Default: 100</p>
+	// <p>Constraints: minimum 20; maximum 100.</p>
+	MaxRecords *int32
 }
 
 // Represents the output of a DescribeCacheParameterGroups operation.
 type DescribeCacheParameterGroupsOutput struct {
 
-	// Provides an identifier to allow retrieval of paginated results.
-	Marker *string
-
 	// A list of cache parameter groups. Each element in the list contains detailed
 	// information about one cache parameter group.
 	CacheParameterGroups []*types.CacheParameterGroup
+
+	// Provides an identifier to allow retrieval of paginated results.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

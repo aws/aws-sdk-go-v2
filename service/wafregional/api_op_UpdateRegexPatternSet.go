@@ -101,11 +101,10 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 
 type UpdateRegexPatternSetInput struct {
 
-	// An array of RegexPatternSetUpdate objects that you want to insert into or delete
-	// from a RegexPatternSet ().
+	// The value returned by the most recent call to GetChangeToken ().
 	//
 	// This member is required.
-	Updates []*types.RegexPatternSetUpdate
+	ChangeToken *string
 
 	// The RegexPatternSetId of the RegexPatternSet () that you want to update.
 	// RegexPatternSetId is returned by CreateRegexPatternSet () and by
@@ -114,10 +113,11 @@ type UpdateRegexPatternSetInput struct {
 	// This member is required.
 	RegexPatternSetId *string
 
-	// The value returned by the most recent call to GetChangeToken ().
+	// An array of RegexPatternSetUpdate objects that you want to insert into or delete
+	// from a RegexPatternSet ().
 	//
 	// This member is required.
-	ChangeToken *string
+	Updates []*types.RegexPatternSetUpdate
 }
 
 type UpdateRegexPatternSetOutput struct {

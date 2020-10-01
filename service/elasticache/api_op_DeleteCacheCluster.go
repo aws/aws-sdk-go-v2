@@ -75,16 +75,16 @@ func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClus
 // Represents the input of a DeleteCacheCluster operation.
 type DeleteCacheClusterInput struct {
 
-	// The user-supplied name of a final cluster snapshot. This is the unique name that
-	// identifies the snapshot. ElastiCache creates the snapshot, and then deletes the
-	// cluster immediately afterward.
-	FinalSnapshotIdentifier *string
-
 	// The cluster identifier for the cluster to be deleted. This parameter is not case
 	// sensitive.
 	//
 	// This member is required.
 	CacheClusterId *string
+
+	// The user-supplied name of a final cluster snapshot. This is the unique name that
+	// identifies the snapshot. ElastiCache creates the snapshot, and then deletes the
+	// cluster immediately afterward.
+	FinalSnapshotIdentifier *string
 }
 
 type DeleteCacheClusterOutput struct {

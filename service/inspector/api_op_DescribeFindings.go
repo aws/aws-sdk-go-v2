@@ -57,28 +57,28 @@ func (c *Client) DescribeFindings(ctx context.Context, params *DescribeFindingsI
 
 type DescribeFindingsInput struct {
 
-	// The locale into which you want to translate a finding description,
-	// recommendation, and the short description that identifies the finding.
-	Locale types.Locale
-
 	// The ARN that specifies the finding that you want to describe.
 	//
 	// This member is required.
 	FindingArns []*string
+
+	// The locale into which you want to translate a finding description,
+	// recommendation, and the short description that identifies the finding.
+	Locale types.Locale
 }
 
 type DescribeFindingsOutput struct {
-
-	// Information about the finding.
-	//
-	// This member is required.
-	Findings []*types.Finding
 
 	// Finding details that cannot be described. An error code is provided for each
 	// failed item.
 	//
 	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
+
+	// Information about the finding.
+	//
+	// This member is required.
+	Findings []*types.Finding
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

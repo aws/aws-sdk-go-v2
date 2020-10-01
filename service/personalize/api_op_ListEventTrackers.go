@@ -59,11 +59,11 @@ func (c *Client) ListEventTrackers(ctx context.Context, params *ListEventTracker
 
 type ListEventTrackersInput struct {
 
-	// The maximum number of event trackers to return.
-	MaxResults *int32
-
 	// The ARN of a dataset group used to filter the response.
 	DatasetGroupArn *string
+
+	// The maximum number of event trackers to return.
+	MaxResults *int32
 
 	// A token returned from the previous call to ListEventTrackers for getting the
 	// next set of event trackers (if they exist).
@@ -72,11 +72,11 @@ type ListEventTrackersInput struct {
 
 type ListEventTrackersOutput struct {
 
-	// A token for getting the next set of event trackers (if they exist).
-	NextToken *string
-
 	// A list of event trackers.
 	EventTrackers []*types.EventTrackerSummary
+
+	// A token for getting the next set of event trackers (if they exist).
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

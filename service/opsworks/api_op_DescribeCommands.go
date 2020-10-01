@@ -61,6 +61,11 @@ func (c *Client) DescribeCommands(ctx context.Context, params *DescribeCommandsI
 
 type DescribeCommandsInput struct {
 
+	// An array of command IDs. If you include this parameter, DescribeCommands returns
+	// a description of the specified commands. Otherwise, it returns a description of
+	// every command.
+	CommandIds []*string
+
 	// The deployment ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified deployment.
 	DeploymentId *string
@@ -68,11 +73,6 @@ type DescribeCommandsInput struct {
 	// The instance ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified instance.
 	InstanceId *string
-
-	// An array of command IDs. If you include this parameter, DescribeCommands returns
-	// a description of the specified commands. Otherwise, it returns a description of
-	// every command.
-	CommandIds []*string
 }
 
 // Contains the response to a DescribeCommands request.

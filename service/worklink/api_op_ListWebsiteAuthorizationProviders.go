@@ -73,12 +73,12 @@ type ListWebsiteAuthorizationProvidersInput struct {
 
 type ListWebsiteAuthorizationProvidersOutput struct {
 
-	// The website authorization providers.
-	WebsiteAuthorizationProviders []*types.WebsiteAuthorizationProviderSummary
-
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
+	// The website authorization providers.
+	WebsiteAuthorizationProviders []*types.WebsiteAuthorizationProviderSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,14 +74,14 @@ type ListMemberAccountsInput struct {
 
 type ListMemberAccountsOutput struct {
 
+	// An array of account IDs.
+	MemberAccounts []*string
+
 	// If you have more member account IDs than the number that you specified for
 	// MaxResults in the request, the response includes a NextToken value. To list more
 	// IDs, submit another ListMemberAccounts request, and specify the NextToken value
 	// from the response in the NextToken value in the next request.
 	NextToken *string
-
-	// An array of account IDs.
-	MemberAccounts []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

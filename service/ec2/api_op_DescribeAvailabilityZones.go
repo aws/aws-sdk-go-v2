@@ -67,8 +67,11 @@ type DescribeAvailabilityZonesInput struct {
 	// Regions where you have chosen the option to opt in.
 	AllAvailabilityZones *bool
 
-	// The names of the Zones.
-	ZoneNames []*string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// The filters.
 	//
@@ -105,14 +108,11 @@ type DescribeAvailabilityZonesInput struct {
 	//     * zone-type - The type of zone, for example, local-zone.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The IDs of the Zones.
 	ZoneIds []*string
+
+	// The names of the Zones.
+	ZoneNames []*string
 }
 
 type DescribeAvailabilityZonesOutput struct {

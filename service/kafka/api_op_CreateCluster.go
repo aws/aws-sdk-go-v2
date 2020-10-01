@@ -57,59 +57,59 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// Includes all client authentication related information.
-	ClientAuthentication *types.ClientAuthentication
-
-	// The version of Apache Kafka.
+	// Information about the broker nodes in the cluster.
 	//
 	// This member is required.
-	KafkaVersion *string
+	BrokerNodeGroupInfo *types.BrokerNodeGroupInfo
 
 	// The name of the cluster.
 	//
 	// This member is required.
 	ClusterName *string
 
-	// Specifies the level of monitoring for the MSK cluster. The possible values are
-	// DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
-	EnhancedMonitoring types.EnhancedMonitoring
-
-	// Create tags when creating the cluster.
-	Tags map[string]*string
-
-	// Represents the configuration that you want MSK to use for the brokers in a
-	// cluster.
-	ConfigurationInfo *types.ConfigurationInfo
+	// The version of Apache Kafka.
+	//
+	// This member is required.
+	KafkaVersion *string
 
 	// The number of broker nodes in the cluster.
 	//
 	// This member is required.
 	NumberOfBrokerNodes *int32
 
-	LoggingInfo *types.LoggingInfo
+	// Includes all client authentication related information.
+	ClientAuthentication *types.ClientAuthentication
 
-	// Information about the broker nodes in the cluster.
-	//
-	// This member is required.
-	BrokerNodeGroupInfo *types.BrokerNodeGroupInfo
+	// Represents the configuration that you want MSK to use for the brokers in a
+	// cluster.
+	ConfigurationInfo *types.ConfigurationInfo
 
 	// Includes all encryption-related information.
 	EncryptionInfo *types.EncryptionInfo
 
+	// Specifies the level of monitoring for the MSK cluster. The possible values are
+	// DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+	EnhancedMonitoring types.EnhancedMonitoring
+
+	LoggingInfo *types.LoggingInfo
+
 	// The settings for open monitoring.
 	OpenMonitoring *types.OpenMonitoringInfo
+
+	// Create tags when creating the cluster.
+	Tags map[string]*string
 }
 
 type CreateClusterOutput struct {
+
+	// The Amazon Resource Name (ARN) of the cluster.
+	ClusterArn *string
 
 	// The name of the MSK cluster.
 	ClusterName *string
 
 	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
 	State types.ClusterState
-
-	// The Amazon Resource Name (ARN) of the cluster.
-	ClusterArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,15 +59,15 @@ func (c *Client) DeleteVirtualNode(ctx context.Context, params *DeleteVirtualNod
 //
 type DeleteVirtualNodeInput struct {
 
-	// The name of the virtual node to delete.
-	//
-	// This member is required.
-	VirtualNodeName *string
-
 	// The name of the service mesh to delete the virtual node in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the virtual node to delete.
+	//
+	// This member is required.
+	VirtualNodeName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For

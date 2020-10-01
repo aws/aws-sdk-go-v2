@@ -60,16 +60,17 @@ func (c *Client) UpdateTaskSet(ctx context.Context, params *UpdateTaskSetInput, 
 
 type UpdateTaskSetInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the task set to update.
-	//
-	// This member is required.
-	TaskSet *string
-
 	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
 	// service that the task set exists in.
 	//
 	// This member is required.
 	Cluster *string
+
+	// A floating-point percentage of the desired number of tasks to place and keep
+	// running in the task set.
+	//
+	// This member is required.
+	Scale *types.Scale
 
 	// The short name or full Amazon Resource Name (ARN) of the service that the task
 	// set exists in.
@@ -77,11 +78,10 @@ type UpdateTaskSetInput struct {
 	// This member is required.
 	Service *string
 
-	// A floating-point percentage of the desired number of tasks to place and keep
-	// running in the task set.
+	// The short name or full Amazon Resource Name (ARN) of the task set to update.
 	//
 	// This member is required.
-	Scale *types.Scale
+	TaskSet *string
 }
 
 type UpdateTaskSetOutput struct {

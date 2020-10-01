@@ -63,22 +63,22 @@ type ListCertificatesInput struct {
 	// order, based on the creation date.
 	AscendingOrder *bool
 
-	// The result page size.
-	PageSize *int32
-
 	// The marker for the next set of results.
 	Marker *string
+
+	// The result page size.
+	PageSize *int32
 }
 
 // The output of the ListCertificates operation.
 type ListCertificatesOutput struct {
 
+	// The descriptions of the certificates.
+	Certificates []*types.Certificate
+
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string
-
-	// The descriptions of the certificates.
-	Certificates []*types.Certificate
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

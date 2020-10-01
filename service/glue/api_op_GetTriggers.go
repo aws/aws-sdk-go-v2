@@ -69,11 +69,11 @@ type GetTriggersInput struct {
 
 type GetTriggersOutput struct {
 
-	// A list of triggers for the specified job.
-	Triggers []*types.Trigger
-
 	// A continuation token, if not all the requested triggers have yet been returned.
 	NextToken *string
+
+	// A list of triggers for the specified job.
+	Triggers []*types.Trigger
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

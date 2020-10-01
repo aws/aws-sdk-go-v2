@@ -57,14 +57,6 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// One or more tags.
-	Tags map[string]*string
-
-	// The identifier of the security profile for the user.
-	//
-	// This member is required.
-	SecurityProfileIds []*string
-
 	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
@@ -75,8 +67,23 @@ type CreateUserInput struct {
 	// This member is required.
 	PhoneConfig *types.UserPhoneConfig
 
-	// The identifier of the hierarchy group for the user.
-	HierarchyGroupId *string
+	// The identifier of the routing profile for the user.
+	//
+	// This member is required.
+	RoutingProfileId *string
+
+	// The identifier of the security profile for the user.
+	//
+	// This member is required.
+	SecurityProfileIds []*string
+
+	// The user name for the account. For instances not using SAML for identity
+	// management, the user name can include up to 20 characters. If you are using SAML
+	// for identity management, the user name can include up to 64 characters from
+	// [a-zA-Z0-9_-.\@]+.
+	//
+	// This member is required.
+	Username *string
 
 	// The identifier of the user account in the directory used for identity
 	// management. If Amazon Connect cannot access the directory, you can specify this
@@ -89,6 +96,9 @@ type CreateUserInput struct {
 	// returned.
 	DirectoryUserId *string
 
+	// The identifier of the hierarchy group for the user.
+	HierarchyGroupId *string
+
 	// The information about the identity of the user.
 	IdentityInfo *types.UserIdentityInfo
 
@@ -97,27 +107,17 @@ type CreateUserInput struct {
 	// password.
 	Password *string
 
-	// The identifier of the routing profile for the user.
-	//
-	// This member is required.
-	RoutingProfileId *string
-
-	// The user name for the account. For instances not using SAML for identity
-	// management, the user name can include up to 20 characters. If you are using SAML
-	// for identity management, the user name can include up to 64 characters from
-	// [a-zA-Z0-9_-.\@]+.
-	//
-	// This member is required.
-	Username *string
+	// One or more tags.
+	Tags map[string]*string
 }
 
 type CreateUserOutput struct {
 
-	// The identifier of the user account.
-	UserId *string
-
 	// The Amazon Resource Name (ARN) of the user account.
 	UserArn *string
+
+	// The identifier of the user account.
+	UserId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

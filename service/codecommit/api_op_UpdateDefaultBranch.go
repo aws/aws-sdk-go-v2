@@ -60,15 +60,15 @@ func (c *Client) UpdateDefaultBranch(ctx context.Context, params *UpdateDefaultB
 // Represents the input of an update default branch operation.
 type UpdateDefaultBranchInput struct {
 
-	// The name of the repository to set or change the default branch for.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// The name of the branch to set as the default.
 	//
 	// This member is required.
 	DefaultBranchName *string
+
+	// The name of the repository to set or change the default branch for.
+	//
+	// This member is required.
+	RepositoryName *string
 }
 
 type UpdateDefaultBranchOutput struct {

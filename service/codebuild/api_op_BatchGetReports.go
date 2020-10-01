@@ -65,12 +65,12 @@ type BatchGetReportsInput struct {
 
 type BatchGetReportsOutput struct {
 
+	// The array of Report objects returned by BatchGetReports.
+	Reports []*types.Report
+
 	// An array of ARNs passed to BatchGetReportGroups that are not associated with a
 	// Report.
 	ReportsNotFound []*string
-
-	// The array of Report objects returned by BatchGetReports.
-	Reports []*types.Report
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,16 +60,16 @@ func (c *Client) PutDestinationPolicy(ctx context.Context, params *PutDestinatio
 
 type PutDestinationPolicyInput struct {
 
-	// A name for an existing destination.
-	//
-	// This member is required.
-	DestinationName *string
-
 	// An IAM policy document that authorizes cross-account users to deliver their log
 	// events to the associated destination.
 	//
 	// This member is required.
 	AccessPolicy *string
+
+	// A name for an existing destination.
+	//
+	// This member is required.
+	DestinationName *string
 }
 
 type PutDestinationPolicyOutput struct {

@@ -60,12 +60,12 @@ func (c *Client) ListSolutionVersions(ctx context.Context, params *ListSolutionV
 
 type ListSolutionVersionsInput struct {
 
+	// The maximum number of solution versions to return.
+	MaxResults *int32
+
 	// A token returned from the previous call to ListSolutionVersions for getting the
 	// next set of solution versions (if they exist).
 	NextToken *string
-
-	// The maximum number of solution versions to return.
-	MaxResults *int32
 
 	// The Amazon Resource Name (ARN) of the solution.
 	SolutionArn *string

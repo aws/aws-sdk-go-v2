@@ -63,16 +63,16 @@ type ApplySecurityGroupsToClientVpnTargetNetworkInput struct {
 	// This member is required.
 	ClientVpnEndpointId *string
 
-	// The ID of the VPC in which the associated target network is located.
-	//
-	// This member is required.
-	VpcId *string
-
 	// The IDs of the security groups to apply to the associated target network. Up to
 	// 5 security groups can be applied to an associated target network.
 	//
 	// This member is required.
 	SecurityGroupIds []*string
+
+	// The ID of the VPC in which the associated target network is located.
+	//
+	// This member is required.
+	VpcId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

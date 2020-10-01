@@ -62,15 +62,15 @@ func (c *Client) AssociateApprovalRuleTemplateWithRepository(ctx context.Context
 
 type AssociateApprovalRuleTemplateWithRepositoryInput struct {
 
-	// The name of the repository that you want to associate with the template.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// The name for the approval rule template.
 	//
 	// This member is required.
 	ApprovalRuleTemplateName *string
+
+	// The name of the repository that you want to associate with the template.
+	//
+	// This member is required.
+	RepositoryName *string
 }
 
 type AssociateApprovalRuleTemplateWithRepositoryOutput struct {

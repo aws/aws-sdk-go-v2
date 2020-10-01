@@ -57,27 +57,27 @@ func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitig
 
 type UpdateMitigationActionInput struct {
 
-	// The ARN of the IAM role that is used to apply the mitigation action.
-	RoleArn *string
-
-	// Defines the type of action and the parameters for that action.
-	ActionParams *types.MitigationActionParams
-
 	// The friendly name for the mitigation action. You can't change the name by using
 	// UpdateMitigationAction. Instead, you must delete and re-create the mitigation
 	// action with the new name.
 	//
 	// This member is required.
 	ActionName *string
+
+	// Defines the type of action and the parameters for that action.
+	ActionParams *types.MitigationActionParams
+
+	// The ARN of the IAM role that is used to apply the mitigation action.
+	RoleArn *string
 }
 
 type UpdateMitigationActionOutput struct {
 
-	// A unique identifier for the mitigation action.
-	ActionId *string
-
 	// The ARN for the new mitigation action.
 	ActionArn *string
+
+	// A unique identifier for the mitigation action.
+	ActionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

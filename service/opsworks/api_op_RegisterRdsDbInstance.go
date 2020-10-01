@@ -60,11 +60,6 @@ func (c *Client) RegisterRdsDbInstance(ctx context.Context, params *RegisterRdsD
 
 type RegisterRdsDbInstanceInput struct {
 
-	// The Amazon RDS instance's ARN.
-	//
-	// This member is required.
-	RdsDbInstanceArn *string
-
 	// The database password.
 	//
 	// This member is required.
@@ -74,6 +69,11 @@ type RegisterRdsDbInstanceInput struct {
 	//
 	// This member is required.
 	DbUser *string
+
+	// The Amazon RDS instance's ARN.
+	//
+	// This member is required.
+	RdsDbInstanceArn *string
 
 	// The stack ID.
 	//

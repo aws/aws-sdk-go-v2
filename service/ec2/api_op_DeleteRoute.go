@@ -56,27 +56,27 @@ func (c *Client) DeleteRoute(ctx context.Context, params *DeleteRouteInput, optF
 
 type DeleteRouteInput struct {
 
+	// The ID of the route table.
+	//
+	// This member is required.
+	RouteTableId *string
+
+	// The IPv4 CIDR range for the route. The value you specify must match the CIDR for
+	// the route exactly.
+	DestinationCidrBlock *string
+
 	// The IPv6 CIDR range for the route. The value you specify must match the CIDR for
 	// the route exactly.
 	DestinationIpv6CidrBlock *string
+
+	// The ID of the prefix list for the route.
+	DestinationPrefixListId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The IPv4 CIDR range for the route. The value you specify must match the CIDR for
-	// the route exactly.
-	DestinationCidrBlock *string
-
-	// The ID of the route table.
-	//
-	// This member is required.
-	RouteTableId *string
-
-	// The ID of the prefix list for the route.
-	DestinationPrefixListId *string
 }
 
 type DeleteRouteOutput struct {

@@ -80,14 +80,19 @@ func (c *Client) GetWorkflowExecutionHistory(ctx context.Context, params *GetWor
 
 type GetWorkflowExecutionHistoryInput struct {
 
-	// When set to true, returns the events in reverse order. By default the results
-	// are returned in ascending order of the eventTimeStamp of the events.
-	ReverseOrder *bool
-
 	// The name of the domain containing the workflow execution.
 	//
 	// This member is required.
 	Domain *string
+
+	// Specifies the workflow execution for which to return the history.
+	//
+	// This member is required.
+	Execution *types.WorkflowExecution
+
+	// The maximum number of results that are returned per call. Use nextPageToken to
+	// obtain further pages of results.
+	MaximumPageSize *int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -98,14 +103,9 @@ type GetWorkflowExecutionHistoryInput struct {
 	// how many results can be returned in a single call. </p>
 	NextPageToken *string
 
-	// Specifies the workflow execution for which to return the history.
-	//
-	// This member is required.
-	Execution *types.WorkflowExecution
-
-	// The maximum number of results that are returned per call. Use nextPageToken to
-	// obtain further pages of results.
-	MaximumPageSize *int32
+	// When set to true, returns the events in reverse order. By default the results
+	// are returned in ascending order of the eventTimeStamp of the events.
+	ReverseOrder *bool
 }
 
 // Paginated representation of a workflow history for a workflow execution. This is

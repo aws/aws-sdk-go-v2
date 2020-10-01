@@ -62,16 +62,16 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The tag key pairs that you want to remove from the specified resources.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The Amazon Resource Name (ARN) of the Global Accelerator resource to remove tags
 	// from. An ARN uniquely identifies a resource.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The tag key pairs that you want to remove from the specified resources.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type UntagResourceOutput struct {

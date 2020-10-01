@@ -57,15 +57,15 @@ func (c *Client) ModifyWorkspaceCreationProperties(ctx context.Context, params *
 
 type ModifyWorkspaceCreationPropertiesInput struct {
 
-	// The default properties for creating WorkSpaces.
-	//
-	// This member is required.
-	WorkspaceCreationProperties *types.WorkspaceCreationProperties
-
 	// The identifier of the directory.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The default properties for creating WorkSpaces.
+	//
+	// This member is required.
+	WorkspaceCreationProperties *types.WorkspaceCreationProperties
 }
 
 type ModifyWorkspaceCreationPropertiesOutput struct {

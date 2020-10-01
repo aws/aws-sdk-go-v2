@@ -58,8 +58,10 @@ func (c *Client) GetCustomerGatewayAssociations(ctx context.Context, params *Get
 
 type GetCustomerGatewayAssociationsInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
 
 	// One or more customer gateway Amazon Resource Names (ARNs). For more information,
 	// see Resources Defined by Amazon EC2
@@ -70,10 +72,8 @@ type GetCustomerGatewayAssociationsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type GetCustomerGatewayAssociationsOutput struct {

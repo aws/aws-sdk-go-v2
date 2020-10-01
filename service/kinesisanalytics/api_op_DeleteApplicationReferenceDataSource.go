@@ -70,6 +70,14 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
+	// Version of the application. You can use the DescribeApplication
+	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// operation to get the current application version. If the version specified is
+	// not the current version, the ConcurrentModificationException is returned.
+	//
+	// This member is required.
+	CurrentApplicationVersionId *int64
+
 	// ID of the reference data source. When you add a reference data source to your
 	// application using the AddApplicationReferenceDataSource
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html),
@@ -79,14 +87,6 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	ReferenceId *string
-
-	// Version of the application. You can use the DescribeApplication
-	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
-	//
-	// This member is required.
-	CurrentApplicationVersionId *int64
 }
 
 type DeleteApplicationReferenceDataSourceOutput struct {

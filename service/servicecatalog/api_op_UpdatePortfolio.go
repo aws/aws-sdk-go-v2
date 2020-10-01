@@ -58,19 +58,10 @@ func (c *Client) UpdatePortfolio(ctx context.Context, params *UpdatePortfolioInp
 
 type UpdatePortfolioInput struct {
 
-	// The tags to remove.
-	RemoveTags []*string
-
 	// The portfolio identifier.
 	//
 	// This member is required.
 	Id *string
-
-	// The updated description of the portfolio.
-	Description *string
-
-	// The updated name of the portfolio provider.
-	ProviderName *string
 
 	// The language code.
 	//
@@ -82,11 +73,20 @@ type UpdatePortfolioInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
+	// The tags to add.
+	AddTags []*types.Tag
+
+	// The updated description of the portfolio.
+	Description *string
+
 	// The name to use for display purposes.
 	DisplayName *string
 
-	// The tags to add.
-	AddTags []*types.Tag
+	// The updated name of the portfolio provider.
+	ProviderName *string
+
+	// The tags to remove.
+	RemoveTags []*string
 }
 
 type UpdatePortfolioOutput struct {

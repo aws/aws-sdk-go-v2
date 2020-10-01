@@ -60,11 +60,8 @@ func (c *Client) CreateInput(ctx context.Context, params *CreateInputInput, optF
 // The name of the input
 type CreateInputInput struct {
 
-	// A collection of key-value pairs.
-	Tags map[string]*string
-
-	// Placeholder documentation for InputType
-	Type types.InputType
+	// Destination settings for PUSH type inputs.
+	Destinations []*types.InputDestinationRequest
 
 	// Settings for the devices.
 	InputDevices []*types.InputDeviceSettings
@@ -72,36 +69,39 @@ type CreateInputInput struct {
 	// A list of security groups referenced by IDs to attach to the input.
 	InputSecurityGroups []*string
 
-	// The Amazon Resource Name (ARN) of the role this input assumes during and after
-	// creation.
-	RoleArn *string
-
-	// Name of the input.
-	Name *string
-
-	// The source URLs for a PULL-type input. Every PULL type input needs exactly two
-	// source URLs for redundancy. Only specify sources for PULL type Inputs. Leave
-	// Destinations empty.
-	Sources []*types.InputSourceRequest
-
 	// A list of the MediaConnect Flows that you want to use in this input. You can
 	// specify as few as one Flow and presently, as many as two. The only requirement
 	// is when you have more than one is that each Flow is in a separate Availability
 	// Zone as this ensures your EML input is redundant to AZ issues.
 	MediaConnectFlows []*types.MediaConnectFlowRequest
 
+	// Name of the input.
+	Name *string
+
+	// Unique identifier of the request to ensure the request is handled exactly once
+	// in case of retries.
+	RequestId *string
+
+	// The Amazon Resource Name (ARN) of the role this input assumes during and after
+	// creation.
+	RoleArn *string
+
+	// The source URLs for a PULL-type input. Every PULL type input needs exactly two
+	// source URLs for redundancy. Only specify sources for PULL type Inputs. Leave
+	// Destinations empty.
+	Sources []*types.InputSourceRequest
+
+	// A collection of key-value pairs.
+	Tags map[string]*string
+
+	// Placeholder documentation for InputType
+	Type types.InputType
+
 	// Settings for a private VPC Input. When this property is specified, the input
 	// destination addresses will be created in a VPC rather than with public Internet
 	// addresses. This property requires setting the roleArn property on Input
 	// creation. Not compatible with the inputSecurityGroups property.
 	Vpc *types.InputVpcRequest
-
-	// Destination settings for PUSH type inputs.
-	Destinations []*types.InputDestinationRequest
-
-	// Unique identifier of the request to ensure the request is handled exactly once
-	// in case of retries.
-	RequestId *string
 }
 
 // Placeholder documentation for CreateInputResponse

@@ -67,18 +67,31 @@ type DescribeProcessingJobInput struct {
 
 type DescribeProcessingJobOutput struct {
 
-	// The ARN of a monitoring schedule for an endpoint associated with this processing
-	// job.
-	MonitoringScheduleArn *string
+	// Configures the processing job to run a specified container image.
+	//
+	// This member is required.
+	AppSpecification *types.AppSpecification
 
-	// The time at which the processing job started.
-	ProcessingStartTime *time.Time
+	// The time at which the processing job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
 
-	// The configuration information used to create an experiment.
-	ExperimentConfig *types.ExperimentConfig
+	// The Amazon Resource Name (ARN) of the processing job.
+	//
+	// This member is required.
+	ProcessingJobArn *string
 
-	// The time limit for how long the processing job is allowed to run.
-	StoppingCondition *types.ProcessingStoppingCondition
+	// The name of the processing job. The name must be unique within an AWS Region in
+	// the AWS account.
+	//
+	// This member is required.
+	ProcessingJobName *string
+
+	// Provides the status of a processing job.
+	//
+	// This member is required.
+	ProcessingJobStatus types.ProcessingJobStatus
 
 	// Identifies the resources, ML compute instances, and ML storage volumes to deploy
 	// for a processing job. In distributed training, you specify more than one
@@ -87,22 +100,32 @@ type DescribeProcessingJobOutput struct {
 	// This member is required.
 	ProcessingResources *types.ProcessingResources
 
-	// Networking options for a processing job.
-	NetworkConfig *types.NetworkConfig
-
 	// The ARN of an AutoML job associated with this processing job.
 	AutoMLJobArn *string
+
+	// The environment variables set in the Docker container.
+	Environment map[string]*string
+
+	// An optional string, up to one KB in size, that contains metadata from the
+	// processing container when the processing job exits.
+	ExitMessage *string
+
+	// The configuration information used to create an experiment.
+	ExperimentConfig *types.ExperimentConfig
 
 	// A string, up to one KB in size, that contains the reason a processing job
 	// failed, if it failed.
 	FailureReason *string
 
-	// The ARN of a training job associated with this processing job.
-	TrainingJobArn *string
+	// The time at which the processing job was last modified.
+	LastModifiedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
-	// to perform tasks on your behalf.
-	RoleArn *string
+	// The ARN of a monitoring schedule for an endpoint associated with this processing
+	// job.
+	MonitoringScheduleArn *string
+
+	// Networking options for a processing job.
+	NetworkConfig *types.NetworkConfig
 
 	// The time at which the processing job completed.
 	ProcessingEndTime *time.Time
@@ -110,44 +133,21 @@ type DescribeProcessingJobOutput struct {
 	// The inputs for a processing job.
 	ProcessingInputs []*types.ProcessingInput
 
-	// The name of the processing job. The name must be unique within an AWS Region in
-	// the AWS account.
-	//
-	// This member is required.
-	ProcessingJobName *string
-
-	// The Amazon Resource Name (ARN) of the processing job.
-	//
-	// This member is required.
-	ProcessingJobArn *string
-
-	// An optional string, up to one KB in size, that contains metadata from the
-	// processing container when the processing job exits.
-	ExitMessage *string
-
-	// Provides the status of a processing job.
-	//
-	// This member is required.
-	ProcessingJobStatus types.ProcessingJobStatus
-
-	// Configures the processing job to run a specified container image.
-	//
-	// This member is required.
-	AppSpecification *types.AppSpecification
-
 	// Output configuration for the processing job.
 	ProcessingOutputConfig *types.ProcessingOutputConfig
 
-	// The time at which the processing job was created.
-	//
-	// This member is required.
-	CreationTime *time.Time
+	// The time at which the processing job started.
+	ProcessingStartTime *time.Time
 
-	// The environment variables set in the Docker container.
-	Environment map[string]*string
+	// The Amazon Resource Name (ARN) of an IAM role that Amazon SageMaker can assume
+	// to perform tasks on your behalf.
+	RoleArn *string
 
-	// The time at which the processing job was last modified.
-	LastModifiedTime *time.Time
+	// The time limit for how long the processing job is allowed to run.
+	StoppingCondition *types.ProcessingStoppingCondition
+
+	// The ARN of a training job associated with this processing job.
+	TrainingJobArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

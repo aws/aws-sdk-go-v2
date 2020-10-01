@@ -61,16 +61,19 @@ func (c *Client) DescribeServers(ctx context.Context, params *DescribeServersInp
 type DescribeServersInput struct {
 
 	// This is not currently implemented for DescribeServers requests.
+	MaxResults *int32
+
+	// This is not currently implemented for DescribeServers requests.
 	NextToken *string
 
 	// Describes the server with the specified ServerName.
 	ServerName *string
-
-	// This is not currently implemented for DescribeServers requests.
-	MaxResults *int32
 }
 
 type DescribeServersOutput struct {
+
+	// This is not currently implemented for DescribeServers requests.
+	NextToken *string
 
 	// Contains the response to a DescribeServers request. For Chef Automate servers:
 	// If DescribeServersResponse$Servers$EngineAttributes includes
@@ -82,9 +85,6 @@ type DescribeServersOutput struct {
 	// Puppet API over TCP port number 8140. The CA certificate is also used to sign
 	// node certificates.
 	Servers []*types.Server
-
-	// This is not currently implemented for DescribeServers requests.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

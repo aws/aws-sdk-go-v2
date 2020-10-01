@@ -71,11 +71,11 @@ type AssociateTrialComponentInput struct {
 
 type AssociateTrialComponentOutput struct {
 
-	// The ARN of the trial component.
-	TrialComponentArn *string
-
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
+
+	// The ARN of the trial component.
+	TrialComponentArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

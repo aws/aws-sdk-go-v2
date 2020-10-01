@@ -61,6 +61,11 @@ func (c *Client) ModifyClusterParameterGroup(ctx context.Context, params *Modify
 //
 type ModifyClusterParameterGroupInput struct {
 
+	// The name of the parameter group to be modified.
+	//
+	// This member is required.
+	ParameterGroupName *string
+
 	// An array of parameters to be modified. A maximum of 20 parameters can be
 	// modified in a single request. For each parameter to be modified, you must supply
 	// at least the parameter name and parameter value; other name-value pairs of the
@@ -69,23 +74,18 @@ type ModifyClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	Parameters []*types.Parameter
-
-	// The name of the parameter group to be modified.
-	//
-	// This member is required.
-	ParameterGroupName *string
 }
 
 //
 type ModifyClusterParameterGroupOutput struct {
 
+	// The name of the cluster parameter group.
+	ParameterGroupName *string
+
 	// The status of the parameter group. For example, if you made a change to a
 	// parameter group name-value pair, then the change could be pending a reboot of an
 	// associated cluster.
 	ParameterGroupStatus *string
-
-	// The name of the cluster parameter group.
-	ParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

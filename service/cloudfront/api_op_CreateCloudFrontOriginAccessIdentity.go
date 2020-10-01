@@ -79,11 +79,11 @@ type CreateCloudFrontOriginAccessIdentityInput struct {
 // The returned result of the corresponding request.
 type CreateCloudFrontOriginAccessIdentityOutput struct {
 
-	// The current version of the origin access identity created.
-	ETag *string
-
 	// The origin access identity's information.
 	CloudFrontOriginAccessIdentity *types.CloudFrontOriginAccessIdentity
+
+	// The current version of the origin access identity created.
+	ETag *string
 
 	// The fully qualified URI of the new origin access identity just created.
 	Location *string

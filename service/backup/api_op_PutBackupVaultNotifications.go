@@ -63,12 +63,6 @@ type PutBackupVaultNotificationsInput struct {
 	// This member is required.
 	BackupVaultEvents []types.BackupVaultEvent
 
-	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s
-	// events; for example, arn:aws:sns:us-west-2:111122223333:MyVaultTopic.
-	//
-	// This member is required.
-	SNSTopicArn *string
-
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// AWS Region where they are created. They consist of lowercase letters, numbers,
@@ -76,6 +70,12 @@ type PutBackupVaultNotificationsInput struct {
 	//
 	// This member is required.
 	BackupVaultName *string
+
+	// The Amazon Resource Name (ARN) that specifies the topic for a backup vault’s
+	// events; for example, arn:aws:sns:us-west-2:111122223333:MyVaultTopic.
+	//
+	// This member is required.
+	SNSTopicArn *string
 }
 
 type PutBackupVaultNotificationsOutput struct {

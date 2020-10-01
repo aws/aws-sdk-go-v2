@@ -60,18 +60,15 @@ func (c *Client) ListRequestedServiceQuotaChangeHistoryByQuota(ctx context.Conte
 
 type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 
-	// Specifies the service that you want to use.
-	//
-	// This member is required.
-	ServiceCode *string
-
-	// Specifies the status value of the quota increase request.
-	Status types.RequestStatus
-
 	// Specifies the service quota that you want to use
 	//
 	// This member is required.
 	QuotaCode *string
+
+	// Specifies the service that you want to use.
+	//
+	// This member is required.
+	ServiceCode *string
 
 	// (Optional) Limits the number of results that you want to include in the
 	// response. If you don't include this parameter, the response defaults to a value
@@ -87,6 +84,9 @@ type ListRequestedServiceQuotaChangeHistoryByQuotaInput struct {
 	// subsequent call, set it to the value of the previous call's NextToken response
 	// to indicate where the output should continue from.
 	NextToken *string
+
+	// Specifies the status value of the quota increase request.
+	Status types.RequestStatus
 }
 
 type ListRequestedServiceQuotaChangeHistoryByQuotaOutput struct {

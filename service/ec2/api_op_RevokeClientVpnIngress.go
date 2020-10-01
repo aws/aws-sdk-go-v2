@@ -69,9 +69,6 @@ type RevokeClientVpnIngressInput struct {
 	// This member is required.
 	TargetNetworkCidr *string
 
-	// Indicates whether access should be revoked for all clients.
-	RevokeAllGroups *bool
-
 	// The ID of the Active Directory group for which to revoke access.
 	AccessGroupId *string
 
@@ -80,6 +77,9 @@ type RevokeClientVpnIngressInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// Indicates whether access should be revoked for all clients.
+	RevokeAllGroups *bool
 }
 
 type RevokeClientVpnIngressOutput struct {

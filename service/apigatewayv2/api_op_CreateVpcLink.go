@@ -69,29 +69,23 @@ type CreateVpcLinkInput struct {
 	// This member is required.
 	SubnetIds []*string
 
-	// A list of tags.
-	Tags map[string]*string
-
 	// A list of security group IDs for the VPC link.
 	SecurityGroupIds []*string
+
+	// A list of tags.
+	Tags map[string]*string
 }
 
 type CreateVpcLinkOutput struct {
 
-	// The status of the VPC link.
-	VpcLinkStatus types.VpcLinkStatus
-
-	// The version of the VPC link.
-	VpcLinkVersion types.VpcLinkVersion
+	// The timestamp when the VPC link was created.
+	CreatedDate *time.Time
 
 	// The name of the VPC link.
 	Name *string
 
-	// The timestamp when the VPC link was created.
-	CreatedDate *time.Time
-
-	// The ID of the VPC link.
-	VpcLinkId *string
+	// A list of security group IDs for the VPC link.
+	SecurityGroupIds []*string
 
 	// A list of subnet IDs to include in the VPC link.
 	SubnetIds []*string
@@ -99,11 +93,17 @@ type CreateVpcLinkOutput struct {
 	// Tags for the VPC link.
 	Tags map[string]*string
 
-	// A list of security group IDs for the VPC link.
-	SecurityGroupIds []*string
+	// The ID of the VPC link.
+	VpcLinkId *string
+
+	// The status of the VPC link.
+	VpcLinkStatus types.VpcLinkStatus
 
 	// A message summarizing the cause of the status of the VPC link.
 	VpcLinkStatusMessage *string
+
+	// The version of the VPC link.
+	VpcLinkVersion types.VpcLinkVersion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

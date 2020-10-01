@@ -62,6 +62,16 @@ func (c *Client) StartReplicationTask(ctx context.Context, params *StartReplicat
 //
 type StartReplicationTaskInput struct {
 
+	// The Amazon Resource Name (ARN) of the replication task to be started.
+	//
+	// This member is required.
+	ReplicationTaskArn *string
+
+	// The type of replication task.
+	//
+	// This member is required.
+	StartReplicationTaskType types.StartReplicationTaskTypeValue
+
 	// Indicates when you want a change data capture (CDC) operation to start. Use
 	// either CdcStartPosition or CdcStartTime to specify when you want a CDC operation
 	// to start. Specifying both values results in an error. The value can be in date,
@@ -77,27 +87,17 @@ type StartReplicationTaskInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.ConnectionAttrib).
 	CdcStartPosition *string
 
-	// Indicates when you want a change data capture (CDC) operation to stop. The value
-	// can be either server time or commit time. Server time example:
-	// --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example:
-	// --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
-	CdcStopPosition *string
-
-	// The Amazon Resource Name (ARN) of the replication task to be started.
-	//
-	// This member is required.
-	ReplicationTaskArn *string
-
-	// The type of replication task.
-	//
-	// This member is required.
-	StartReplicationTaskType types.StartReplicationTaskTypeValue
-
 	// Indicates the start time for a change data capture (CDC) operation. Use either
 	// CdcStartTime or CdcStartPosition to specify when you want a CDC operation to
 	// start. Specifying both values results in an error. Timestamp Example:
 	// --cdc-start-time “2018-03-08T12:12:12”
 	CdcStartTime *time.Time
+
+	// Indicates when you want a change data capture (CDC) operation to stop. The value
+	// can be either server time or commit time. Server time example:
+	// --cdc-stop-position “server_time:3018-02-09T12:12:12” Commit time example:
+	// --cdc-stop-position “commit_time: 3018-02-09T12:12:12 “
+	CdcStopPosition *string
 }
 
 //

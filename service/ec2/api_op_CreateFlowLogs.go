@@ -70,25 +70,39 @@ func (c *Client) CreateFlowLogs(ctx context.Context, params *CreateFlowLogsInput
 
 type CreateFlowLogsInput struct {
 
+	// The ID of the subnet, network interface, or VPC for which you want to create a
+	// flow log. Constraints: Maximum of 1000 resources
+	//
+	// This member is required.
+	ResourceIds []*string
+
 	// The type of resource for which to create the flow log. For example, if you
 	// specified a VPC ID for the ResourceId property, specify VPC for this property.
 	//
 	// This member is required.
 	ResourceType types.FlowLogsResourceType
 
-	// The name of a new or existing CloudWatch Logs log group where Amazon EC2
-	// publishes your flow logs. If you specify LogDestinationType as s3, do not
-	// specify DeliverLogsPermissionArn or LogGroupName.
-	LogGroupName *string
+	// The type of traffic to log. You can log traffic that the resource accepts or
+	// rejects, or all traffic.
+	//
+	// This member is required.
+	TrafficType types.TrafficType
 
-	// The fields to include in the flow log record, in the order in which they should
-	// appear. For a list of available fields, see Flow Log Records
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records).
-	// If you omit this parameter, the flow log is created using the default format. If
-	// you specify this parameter, you must specify at least one field. Specify the
-	// fields using the ${field-id} format, separated by spaces. For the AWS CLI, use
-	// single quotation marks (' ') to surround the parameter value.
-	LogFormat *string
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
+	ClientToken *string
+
+	// The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a
+	// CloudWatch Logs log group in your account. If you specify LogDestinationType as
+	// s3, do not specify DeliverLogsPermissionArn or LogGroupName.
+	DeliverLogsPermissionArn *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// Specifies the destination to which the flow log data is to be published. Flow
 	// log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket.
@@ -106,14 +120,26 @@ type CreateFlowLogsInput struct {
 	// This is a reserved term.
 	LogDestination *string
 
-	// The ID of the subnet, network interface, or VPC for which you want to create a
-	// flow log. Constraints: Maximum of 1000 resources
-	//
-	// This member is required.
-	ResourceIds []*string
+	// Specifies the type of destination to which the flow log data is to be published.
+	// Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow
+	// log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data
+	// to Amazon S3, specify s3. If you specify LogDestinationType as s3, do not
+	// specify DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs
+	LogDestinationType types.LogDestinationType
 
-	// The tags to apply to the flow logs.
-	TagSpecifications []*types.TagSpecification
+	// The fields to include in the flow log record, in the order in which they should
+	// appear. For a list of available fields, see Flow Log Records
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records).
+	// If you omit this parameter, the flow log is created using the default format. If
+	// you specify this parameter, you must specify at least one field. Specify the
+	// fields using the ${field-id} format, separated by spaces. For the AWS CLI, use
+	// single quotation marks (' ') to surround the parameter value.
+	LogFormat *string
+
+	// The name of a new or existing CloudWatch Logs log group where Amazon EC2
+	// publishes your flow logs. If you specify LogDestinationType as s3, do not
+	// specify DeliverLogsPermissionArn or LogGroupName.
+	LogGroupName *string
 
 	// The maximum interval of time during which a flow of packets is captured and
 	// aggregated into a flow log record. You can specify 60 seconds (1 minute) or 600
@@ -124,47 +150,21 @@ type CreateFlowLogsInput struct {
 	// that you specify. Default: 600
 	MaxAggregationInterval *int32
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// Specifies the type of destination to which the flow log data is to be published.
-	// Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow
-	// log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data
-	// to Amazon S3, specify s3. If you specify LogDestinationType as s3, do not
-	// specify DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs
-	LogDestinationType types.LogDestinationType
-
-	// The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a
-	// CloudWatch Logs log group in your account. If you specify LogDestinationType as
-	// s3, do not specify DeliverLogsPermissionArn or LogGroupName.
-	DeliverLogsPermissionArn *string
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
-	ClientToken *string
-
-	// The type of traffic to log. You can log traffic that the resource accepts or
-	// rejects, or all traffic.
-	//
-	// This member is required.
-	TrafficType types.TrafficType
+	// The tags to apply to the flow logs.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateFlowLogsOutput struct {
 
-	// Information about the flow logs that could not be created successfully.
-	Unsuccessful []*types.UnsuccessfulItem
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
+	ClientToken *string
 
 	// The IDs of the flow logs.
 	FlowLogIds []*string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
-	ClientToken *string
+	// Information about the flow logs that could not be created successfully.
+	Unsuccessful []*types.UnsuccessfulItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

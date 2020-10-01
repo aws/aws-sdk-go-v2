@@ -68,18 +68,18 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 // option to true.
 type DescribeExpressionsInput struct {
 
-	// Limits the DescribeExpressions () response to the specified expressions. If not
-	// specified, all expressions are shown.
-	ExpressionNames []*string
+	// The name of the domain you want to describe.
+	//
+	// This member is required.
+	DomainName *string
 
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
 
-	// The name of the domain you want to describe.
-	//
-	// This member is required.
-	DomainName *string
+	// Limits the DescribeExpressions () response to the specified expressions. If not
+	// specified, all expressions are shown.
+	ExpressionNames []*string
 }
 
 // The result of a DescribeExpressions request. Contains the expressions configured

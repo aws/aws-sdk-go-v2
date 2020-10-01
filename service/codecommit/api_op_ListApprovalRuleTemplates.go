@@ -67,13 +67,13 @@ type ListApprovalRuleTemplatesInput struct {
 
 type ListApprovalRuleTemplatesOutput struct {
 
-	// An enumeration token that allows the operation to batch the next results of the
-	// operation.
-	NextToken *string
-
 	// The names of all the approval rule templates found in the AWS Region for your
 	// AWS account.
 	ApprovalRuleTemplateNames []*string
+
+	// An enumeration token that allows the operation to batch the next results of the
+	// operation.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

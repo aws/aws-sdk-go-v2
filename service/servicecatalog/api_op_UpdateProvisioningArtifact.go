@@ -64,6 +64,26 @@ type UpdateProvisioningArtifactInput struct {
 	// This member is required.
 	ProductId *string
 
+	// The identifier of the provisioning artifact.
+	//
+	// This member is required.
+	ProvisioningArtifactId *string
+
+	// The language code.
+	//
+	//     * en - English (default)
+	//
+	//     * jp - Japanese
+	//
+	//     * zh
+	// - Chinese
+	AcceptLanguage *string
+
+	// Indicates whether the product version is active. Inactive provisioning artifacts
+	// are invisible to end users. End users cannot launch or update a provisioned
+	// product from an inactive provisioning artifact.
+	Active *bool
+
 	// The updated description of the provisioning artifact.
 	Description *string
 
@@ -75,40 +95,20 @@ type UpdateProvisioningArtifactInput struct {
 	// provisioned products using a deprecated version.
 	Guidance types.ProvisioningArtifactGuidance
 
-	// The identifier of the provisioning artifact.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
-
 	// The updated name of the provisioning artifact.
 	Name *string
-
-	// Indicates whether the product version is active. Inactive provisioning artifacts
-	// are invisible to end users. End users cannot launch or update a provisioned
-	// product from an inactive provisioning artifact.
-	Active *bool
-
-	// The language code.
-	//
-	//     * en - English (default)
-	//
-	//     * jp - Japanese
-	//
-	//     * zh
-	// - Chinese
-	AcceptLanguage *string
 }
 
 type UpdateProvisioningArtifactOutput struct {
 
-	// The status of the current request.
-	Status types.Status
+	// The URL of the CloudFormation template in Amazon S3.
+	Info map[string]*string
 
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
 
-	// The URL of the CloudFormation template in Amazon S3.
-	Info map[string]*string
+	// The status of the current request.
+	Status types.Status
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,18 +59,20 @@ func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, op
 
 type ListPackagesInput struct {
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The domain that contains the repository that contains the requested list of
+	// packages.
 	//
-	//     * The namespace of a Maven package is its
-	// groupId.
+	// This member is required.
+	Domain *string
+
+	// The name of the repository from which packages are to be listed.
 	//
-	//     * The namespace of an npm package is its scope.
-	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
-	Namespace *string
+	// This member is required.
+	Repository *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
 
 	// The format of the packages. The valid package types are:
 	//
@@ -84,31 +86,29 @@ type ListPackagesInput struct {
 	// distributable format, such as a JAR file.
 	Format types.PackageFormat
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
+	// The maximum number of results to return per page.
+	MaxResults *int32
+
+	// The namespace of the package. The package component that specifies its namespace
+	// depends on its type. For example:
+	//
+	//     * The namespace of a Maven package is its
+	// groupId.
+	//
+	//     * The namespace of an npm package is its scope.
+	//
+	//     * A Python
+	// package does not contain a corresponding component, so Python packages do not
+	// have a namespace.
+	Namespace *string
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The maximum number of results to return per page.
-	MaxResults *int32
-
 	// A prefix used to filter returned repositories. Only repositories with names that
 	// start with repositoryPrefix are returned.
 	PackagePrefix *string
-
-	// The name of the repository from which packages are to be listed.
-	//
-	// This member is required.
-	Repository *string
-
-	// The domain that contains the repository that contains the requested list of
-	// packages.
-	//
-	// This member is required.
-	Domain *string
 }
 
 type ListPackagesOutput struct {

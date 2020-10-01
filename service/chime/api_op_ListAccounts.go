@@ -59,26 +59,26 @@ func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, op
 
 type ListAccountsInput struct {
 
-	// User email address with which to filter results.
-	UserEmail *string
+	// The maximum number of results to return in a single call. Defaults to 100.
+	MaxResults *int32
 
 	// Amazon Chime account name prefix with which to filter results.
 	Name *string
 
-	// The maximum number of results to return in a single call. Defaults to 100.
-	MaxResults *int32
-
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	// User email address with which to filter results.
+	UserEmail *string
 }
 
 type ListAccountsOutput struct {
 
-	// The token to use to retrieve the next page of results.
-	NextToken *string
-
 	// List of Amazon Chime accounts and account details.
 	Accounts []*types.Account
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

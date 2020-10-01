@@ -68,13 +68,13 @@ type GetTableVersionInput struct {
 	// This member is required.
 	TableName *string
 
-	// The ID value of the table version to be retrieved. A VersionID is a string
-	// representation of an integer. Each version is incremented by 1.
-	VersionId *string
-
 	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
 	// account ID is used by default.
 	CatalogId *string
+
+	// The ID value of the table version to be retrieved. A VersionID is a string
+	// representation of an integer. Each version is incremented by 1.
+	VersionId *string
 }
 
 type GetTableVersionOutput struct {

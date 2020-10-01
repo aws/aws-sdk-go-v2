@@ -79,6 +79,9 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 
+	// The application's Amazon Resource Name (ARN).
+	ApplicationARN *string
+
 	// The version ID of the application. Kinesis Data Analytics updates the
 	// ApplicationVersionId each time you change the CloudWatch logging options.
 	ApplicationVersionId *int64
@@ -86,9 +89,6 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	// The descriptions of the remaining CloudWatch logging options for the
 	// application.
 	CloudWatchLoggingOptionDescriptions []*types.CloudWatchLoggingOptionDescription
-
-	// The application's Amazon Resource Name (ARN).
-	ApplicationARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

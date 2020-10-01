@@ -58,15 +58,15 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 // The request structure for the list jobs request.
 type ListJobsInput struct {
 
-	// The name for a branch.
-	//
-	// This member is required.
-	BranchName *string
-
 	// The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
+
+	// The name for a branch.
+	//
+	// This member is required.
+	BranchName *string
 
 	// The maximum number of records to list in a single response.
 	MaxResults *int32

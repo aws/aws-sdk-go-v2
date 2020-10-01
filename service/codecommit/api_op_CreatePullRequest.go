@@ -59,6 +59,14 @@ func (c *Client) CreatePullRequest(ctx context.Context, params *CreatePullReques
 
 type CreatePullRequestInput struct {
 
+	// The targets for the pull request, including the source of the code to be
+	// reviewed (the source branch) and the destination where the creator of the pull
+	// request intends the code to be merged after the pull request is closed (the
+	// destination branch).
+	//
+	// This member is required.
+	Targets []*types.Target
+
 	// The title of the pull request. This title is used to identify the pull request
 	// to other users in the repository.
 	//
@@ -75,14 +83,6 @@ type CreatePullRequestInput struct {
 
 	// A description of the pull request.
 	Description *string
-
-	// The targets for the pull request, including the source of the code to be
-	// reviewed (the source branch) and the destination where the creator of the pull
-	// request intends the code to be merged after the pull request is closed (the
-	// destination branch).
-	//
-	// This member is required.
-	Targets []*types.Target
 }
 
 type CreatePullRequestOutput struct {

@@ -75,18 +75,18 @@ type CreateGlobalClusterInput struct {
 	// Provides the name of the database engine to be used for this DB cluster.
 	Engine *string
 
-	// The storage encryption setting for the new global database cluster.
-	StorageEncrypted *bool
-
 	// The engine version of the Aurora global database.
 	EngineVersion *string
+
+	// The cluster identifier of the new global database cluster.
+	GlobalClusterIdentifier *string
 
 	// The Amazon Resource Name (ARN) to use as the primary cluster of the global
 	// database. This parameter is optional.
 	SourceDBClusterIdentifier *string
 
-	// The cluster identifier of the new global database cluster.
-	GlobalClusterIdentifier *string
+	// The storage encryption setting for the new global database cluster.
+	StorageEncrypted *bool
 }
 
 type CreateGlobalClusterOutput struct {

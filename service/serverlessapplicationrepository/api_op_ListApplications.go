@@ -56,11 +56,11 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
-	// A token to specify where to start paginating.
-	NextToken *string
-
 	// The total number of items to return.
 	MaxItems *int32
+
+	// A token to specify where to start paginating.
+	NextToken *string
 }
 
 type ListApplicationsOutput struct {

@@ -69,17 +69,17 @@ type CancelSpotFleetRequestsInput struct {
 	// This member is required.
 	SpotFleetRequestIds []*string
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// Indicates whether to terminate instances for a Spot Fleet request if it is
 	// canceled successfully.
 	//
 	// This member is required.
 	TerminateInstances *bool
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 // Contains the output of CancelSpotFleetRequests.

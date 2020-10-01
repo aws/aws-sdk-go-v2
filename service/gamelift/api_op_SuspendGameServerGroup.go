@@ -93,16 +93,16 @@ func (c *Client) SuspendGameServerGroup(ctx context.Context, params *SuspendGame
 
 type SuspendGameServerGroupInput struct {
 
-	// The action to suspend for this game server group.
-	//
-	// This member is required.
-	SuspendActions []types.GameServerGroupAction
-
 	// The unique identifier of the game server group to stop activity on. Use either
 	// the GameServerGroup () name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
+
+	// The action to suspend for this game server group.
+	//
+	// This member is required.
+	SuspendActions []types.GameServerGroupAction
 }
 
 type SuspendGameServerGroupOutput struct {

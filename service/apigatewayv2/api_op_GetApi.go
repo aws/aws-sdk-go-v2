@@ -66,13 +66,42 @@ type GetApiInput struct {
 
 type GetApiOutput struct {
 
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+	// stage name is typically appended to this URI to form a complete path to a
+	// deployed API stage.
+	ApiEndpoint *string
+
+	// The API ID.
+	ApiId *string
+
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	ApiKeySelectionExpression *string
+
+	// A CORS configuration. Supported only for HTTP APIs.
+	CorsConfiguration *types.Cors
+
+	// The timestamp when the API was created.
+	CreatedDate *time.Time
+
+	// The description of the API.
+	Description *string
+
+	// Avoid validating models when creating a deployment. Supported only for WebSocket
+	// APIs.
+	DisableSchemaValidation *bool
+
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
 	ImportInfo []*string
 
-	// The description of the API.
-	Description *string
+	// The name of the API.
+	Name *string
+
+	// The API protocol.
+	ProtocolType types.ProtocolType
 
 	// The route selection expression for the API. For HTTP APIs, the
 	// routeSelectionExpression must be ${request.method} ${request.path}. If not
@@ -80,44 +109,15 @@ type GetApiOutput struct {
 	// WebSocket APIs.
 	RouteSelectionExpression *string
 
-	// The API protocol.
-	ProtocolType types.ProtocolType
-
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
-	DisableSchemaValidation *bool
-
-	// The name of the API.
-	Name *string
-
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
-	// deployed API stage.
-	ApiEndpoint *string
-
-	// The timestamp when the API was created.
-	CreatedDate *time.Time
+	// A collection of tags associated with the API.
+	Tags map[string]*string
 
 	// A version identifier for the API.
 	Version *string
 
-	// A CORS configuration. Supported only for HTTP APIs.
-	CorsConfiguration *types.Cors
-
-	// The API ID.
-	ApiId *string
-
-	// A collection of tags associated with the API.
-	Tags map[string]*string
-
 	// The warning messages reported when failonwarnings is turned on during API
 	// import.
 	Warnings []*string
-
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
-	ApiKeySelectionExpression *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

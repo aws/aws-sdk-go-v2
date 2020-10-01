@@ -57,15 +57,15 @@ func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *Up
 
 type UpdateOrganizationConfigurationInput struct {
 
-	// The ID of the detector to update the delegated administrator for.
-	//
-	// This member is required.
-	DetectorId *string
-
 	// Indicates whether to automatically enable member accounts in the organization.
 	//
 	// This member is required.
 	AutoEnable *bool
+
+	// The ID of the detector to update the delegated administrator for.
+	//
+	// This member is required.
+	DetectorId *string
 
 	// An object describes which data sources will be updated.
 	DataSources *types.OrganizationDataSourceConfigurations

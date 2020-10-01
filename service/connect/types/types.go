@@ -23,8 +23,8 @@ type ChatMessage struct {
 // Contains summary information about a contact flow.
 type ContactFlowSummary struct {
 
-	// The name of the contact flow.
-	Name *string
+	// The Amazon Resource Name (ARN) of the contact flow.
+	Arn *string
 
 	// The type of contact flow.
 	ContactFlowType ContactFlowType
@@ -32,25 +32,25 @@ type ContactFlowSummary struct {
 	// The identifier of the contact flow.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the contact flow.
-	Arn *string
+	// The name of the contact flow.
+	Name *string
 }
 
 // Contains credentials to use for federation.
 type Credentials struct {
 
-	// Renews the expiration timer for a generated token.
-	RefreshTokenExpiration *time.Time
+	// An access token generated for a federated user to access Amazon Connect.
+	AccessToken *string
 
 	// A token generated with an expiration time for the session a user is logged in to
 	// Amazon Connect.
 	AccessTokenExpiration *time.Time
 
-	// An access token generated for a federated user to access Amazon Connect.
-	AccessToken *string
-
 	// Renews a token generated for a user to access the Amazon Connect instance.
 	RefreshToken *string
+
+	// Renews the expiration timer for a generated token.
+	RefreshTokenExpiration *time.Time
 }
 
 // Contains information about a real-time metric. For a description of each metric,
@@ -59,31 +59,31 @@ type Credentials struct {
 // in the Amazon Connect Administrator Guide.
 type CurrentMetric struct {
 
-	// The unit for the metric.
-	Unit Unit
-
 	// The name of the metric.
 	Name CurrentMetricName
+
+	// The unit for the metric.
+	Unit Unit
 }
 
 // Contains the data for a real-time metric.
 type CurrentMetricData struct {
 
-	// The value of the metric.
-	Value *float64
-
 	// Information about the metric.
 	Metric *CurrentMetric
+
+	// The value of the metric.
+	Value *float64
 }
 
 // Contains information about a set of real-time metrics.
 type CurrentMetricResult struct {
 
-	// The dimensions for the metrics.
-	Dimensions *Dimensions
-
 	// The set of metrics.
 	Collections []*CurrentMetricData
+
+	// The dimensions for the metrics.
+	Dimensions *Dimensions
 }
 
 // Contains information about the dimensions for a set of metrics.
@@ -110,56 +110,53 @@ type Filters struct {
 // Contains information about a hierarchy group.
 type HierarchyGroup struct {
 
+	// The Amazon Resource Name (ARN) of the hierarchy group.
+	Arn *string
+
 	// Information about the levels in the hierarchy group.
 	HierarchyPath *HierarchyPath
 
-	// The Amazon Resource Name (ARN) of the hierarchy group.
-	Arn *string
+	// The identifier of the hierarchy group.
+	Id *string
 
 	// The identifier of the level in the hierarchy group.
 	LevelId *string
 
 	// The name of the hierarchy group.
 	Name *string
-
-	// The identifier of the hierarchy group.
-	Id *string
 }
 
 // Contains summary information about a hierarchy group.
 type HierarchyGroupSummary struct {
 
-	// The name of the hierarchy group.
-	Name *string
+	// The Amazon Resource Name (ARN) of the hierarchy group.
+	Arn *string
 
 	// The identifier of the hierarchy group.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the hierarchy group.
-	Arn *string
+	// The name of the hierarchy group.
+	Name *string
 }
 
 // Contains information about a hierarchy level.
 type HierarchyLevel struct {
-
-	// The name of the hierarchy level.
-	Name *string
 
 	// The Amazon Resource Name (ARN) of the hierarchy level.
 	Arn *string
 
 	// The identifier of the hierarchy level.
 	Id *string
+
+	// The name of the hierarchy level.
+	Name *string
 }
 
 // Contains information about the levels of a hierarchy group.
 type HierarchyPath struct {
 
-	// Information about level two.
-	LevelTwo *HierarchyGroupSummary
-
-	// Information about level three.
-	LevelThree *HierarchyGroupSummary
+	// Information about level five.
+	LevelFive *HierarchyGroupSummary
 
 	// Information about level four.
 	LevelFour *HierarchyGroupSummary
@@ -167,8 +164,11 @@ type HierarchyPath struct {
 	// Information about level one.
 	LevelOne *HierarchyGroupSummary
 
-	// Information about level five.
-	LevelFive *HierarchyGroupSummary
+	// Information about level three.
+	LevelThree *HierarchyGroupSummary
+
+	// Information about level two.
+	LevelTwo *HierarchyGroupSummary
 }
 
 // Contains information about a hierarchy structure.
@@ -177,17 +177,17 @@ type HierarchyStructure struct {
 	// Information about level five.
 	LevelFive *HierarchyLevel
 
-	// Information about level three.
-	LevelThree *HierarchyLevel
-
-	// Information about level two.
-	LevelTwo *HierarchyLevel
-
 	// Information about level four.
 	LevelFour *HierarchyLevel
 
 	// Information about level one.
 	LevelOne *HierarchyLevel
+
+	// Information about level three.
+	LevelThree *HierarchyLevel
+
+	// Information about level two.
+	LevelTwo *HierarchyLevel
 }
 
 // Contains information about a historical metric. For a description of each
@@ -196,14 +196,14 @@ type HierarchyStructure struct {
 // in the Amazon Connect Administrator Guide.
 type HistoricalMetric struct {
 
+	// The name of the metric.
+	Name HistoricalMetricName
+
 	// The statistic for the metric.
 	Statistic Statistic
 
 	// The threshold for the metric, used with service level metrics.
 	Threshold *Threshold
-
-	// The name of the metric.
-	Name HistoricalMetricName
 
 	// The unit for the metric.
 	Unit Unit
@@ -212,11 +212,11 @@ type HistoricalMetric struct {
 // Contains the data for a historical metric.
 type HistoricalMetricData struct {
 
-	// The value of the metric.
-	Value *float64
-
 	// Information about the metric.
 	Metric *HistoricalMetric
+
+	// The value of the metric.
+	Value *float64
 }
 
 // Contains information about the historical metrics retrieved.
@@ -254,20 +254,20 @@ type ParticipantDetails struct {
 // Contains summary information about a phone number for a contact center.
 type PhoneNumberSummary struct {
 
-	// The phone number.
-	PhoneNumber *string
-
 	// The Amazon Resource Name (ARN) of the phone number.
 	Arn *string
-
-	// The type of phone number.
-	PhoneNumberType PhoneNumberType
 
 	// The identifier of the phone number.
 	Id *string
 
+	// The phone number.
+	PhoneNumber *string
+
 	// The ISO country code.
 	PhoneNumberCountryCode PhoneNumberCountryCode
+
+	// The type of phone number.
+	PhoneNumberType PhoneNumberType
 }
 
 // Contains information about a queue resource for which metrics are returned.
@@ -283,43 +283,43 @@ type QueueReference struct {
 // Contains summary information about a queue.
 type QueueSummary struct {
 
-	// The name of the queue.
-	Name *string
-
-	// The type of queue.
-	QueueType QueueType
-
 	// The Amazon Resource Name (ARN) of the queue.
 	Arn *string
 
 	// The identifier of the queue.
 	Id *string
+
+	// The name of the queue.
+	Name *string
+
+	// The type of queue.
+	QueueType QueueType
 }
 
 // Contains summary information about a routing profile.
 type RoutingProfileSummary struct {
 
-	// The name of the routing profile.
-	Name *string
+	// The Amazon Resource Name (ARN) of the routing profile.
+	Arn *string
 
 	// The identifier of the routing profile.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the routing profile.
-	Arn *string
+	// The name of the routing profile.
+	Name *string
 }
 
 // Contains information about a security profile.
 type SecurityProfileSummary struct {
+
+	// The Amazon Resource Name (ARN) of the security profile.
+	Arn *string
 
 	// The identifier of the security profile.
 	Id *string
 
 	// The name of the security profile.
 	Name *string
-
-	// The Amazon Resource Name (ARN) of the security profile.
-	Arn *string
 }
 
 // Contains information about the threshold for service level metrics.
@@ -335,40 +335,44 @@ type Threshold struct {
 // Contains information about a user account for a Amazon Connect instance.
 type User struct {
 
+	// The Amazon Resource Name (ARN) of the user account.
+	Arn *string
+
 	// The identifier of the user account in the directory used for identity
 	// management.
 	DirectoryUserId *string
 
-	// Information about the user identity.
-	IdentityInfo *UserIdentityInfo
-
-	// The identifiers of the security profiles for the user.
-	SecurityProfileIds []*string
-
 	// The identifier of the hierarchy group for the user.
 	HierarchyGroupId *string
 
+	// The identifier of the user account.
+	Id *string
+
+	// Information about the user identity.
+	IdentityInfo *UserIdentityInfo
+
 	// Information about the phone configuration for the user.
 	PhoneConfig *UserPhoneConfig
+
+	// The identifier of the routing profile for the user.
+	RoutingProfileId *string
+
+	// The identifiers of the security profiles for the user.
+	SecurityProfileIds []*string
 
 	// The tags.
 	Tags map[string]*string
 
 	// The user name assigned to the user account.
 	Username *string
-
-	// The identifier of the routing profile for the user.
-	RoutingProfileId *string
-
-	// The Amazon Resource Name (ARN) of the user account.
-	Arn *string
-
-	// The identifier of the user account.
-	Id *string
 }
 
 // Contains information about the identity of a user.
 type UserIdentityInfo struct {
+
+	// The email address. If you are using SAML for identity management and include
+	// this parameter, an error is returned.
+	Email *string
 
 	// The first name. This is required if you are using Amazon Connect or SAML for
 	// identity management.
@@ -377,17 +381,10 @@ type UserIdentityInfo struct {
 	// The last name. This is required if you are using Amazon Connect or SAML for
 	// identity management.
 	LastName *string
-
-	// The email address. If you are using SAML for identity management and include
-	// this parameter, an error is returned.
-	Email *string
 }
 
 // Contains information about the phone configuration settings for a user.
 type UserPhoneConfig struct {
-
-	// The Auto accept setting.
-	AutoAccept *bool
 
 	// The phone type.
 	//
@@ -397,6 +394,9 @@ type UserPhoneConfig struct {
 	// The After Call Work (ACW) timeout setting, in seconds.
 	AfterContactWorkTimeLimit *int32
 
+	// The Auto accept setting.
+	AutoAccept *bool
+
 	// The phone number for the user's desk phone.
 	DeskPhoneNumber *string
 }
@@ -404,14 +404,14 @@ type UserPhoneConfig struct {
 // Contains summary information about a user.
 type UserSummary struct {
 
-	// The Amazon Connect user name of the user account.
-	Username *string
-
 	// The Amazon Resource Name (ARN) of the user account.
 	Arn *string
 
 	// The identifier of the user account.
 	Id *string
+
+	// The Amazon Connect user name of the user account.
+	Username *string
 }
 
 // Contains information about the recording configuration settings.

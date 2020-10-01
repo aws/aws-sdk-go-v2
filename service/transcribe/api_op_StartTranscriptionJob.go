@@ -57,13 +57,34 @@ func (c *Client) StartTranscriptionJob(ctx context.Context, params *StartTranscr
 
 type StartTranscriptionJobInput struct {
 
+	// The language code for the language used in the input media file.
+	//
+	// This member is required.
+	LanguageCode types.LanguageCode
+
+	// An object that describes the input media for a transcription job.
+	//
+	// This member is required.
+	Media *types.Media
+
+	// The name of the job. Note that you can't use the strings "." or ".." by
+	// themselves as the job name. The name must also be unique within an AWS account.
+	// If you try to create a transcription job with the same name as a previous
+	// transcription job you will receive a ConflictException error.
+	//
+	// This member is required.
+	TranscriptionJobName *string
+
+	// An object that contains the request parameters for content redaction.
+	ContentRedaction *types.ContentRedaction
+
 	// Provides information about how a transcription job is executed. Use this field
 	// to indicate that the job can be queued for deferred execution if the concurrency
 	// limit is reached and there are no slots available to immediately run the job.
 	JobExecutionSettings *types.JobExecutionSettings
 
-	// A Settings object that provides optional settings for a transcription job.
-	Settings *types.Settings
+	// The format of the input media file.
+	MediaFormat types.MediaFormat
 
 	// The sample rate, in Hertz, of the audio track in the input media file. If you do
 	// not specify the media sample rate, Amazon Transcribe determines the sample rate.
@@ -90,14 +111,6 @@ type StartTranscriptionJobInput struct {
 	// shareable URL that provides secure access to your transcription, and returns it
 	// in the TranscriptFileUri field. Use this URL to download the transcription.
 	OutputBucketName *string
-
-	// The language code for the language used in the input media file.
-	//
-	// This member is required.
-	LanguageCode types.LanguageCode
-
-	// The format of the input media file.
-	MediaFormat types.MediaFormat
 
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
 	// to encrypt the output of the transcription job. The user calling the
@@ -126,21 +139,8 @@ type StartTranscriptionJobInput struct {
 	// you must also specify an output location in the OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string
 
-	// An object that contains the request parameters for content redaction.
-	ContentRedaction *types.ContentRedaction
-
-	// An object that describes the input media for a transcription job.
-	//
-	// This member is required.
-	Media *types.Media
-
-	// The name of the job. Note that you can't use the strings "." or ".." by
-	// themselves as the job name. The name must also be unique within an AWS account.
-	// If you try to create a transcription job with the same name as a previous
-	// transcription job you will receive a ConflictException error.
-	//
-	// This member is required.
-	TranscriptionJobName *string
+	// A Settings object that provides optional settings for a transcription job.
+	Settings *types.Settings
 }
 
 type StartTranscriptionJobOutput struct {

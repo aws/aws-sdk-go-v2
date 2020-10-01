@@ -59,6 +59,13 @@ func (c *Client) CreateCustomActionType(ctx context.Context, params *CreateCusto
 // Represents the input of a CreateCustomActionType operation.
 type CreateCustomActionTypeInput struct {
 
+	// The category of the custom action, such as a build action or a test action.
+	// Although Source and Approval are listed as valid values, they are not currently
+	// functional. These values are reserved for future use.
+	//
+	// This member is required.
+	Category types.ActionCategory
+
 	// The details of the input artifact for the action, such as its commit ID.
 	//
 	// This member is required.
@@ -69,21 +76,15 @@ type CreateCustomActionTypeInput struct {
 	// This member is required.
 	OutputArtifactDetails *types.ArtifactDetails
 
-	// URLs that provide users information about this custom action.
-	Settings *types.ActionTypeSettings
-
-	// The version identifier of the custom action.
-	//
-	// This member is required.
-	Version *string
-
 	// The provider of the service used in the custom action, such as AWS CodeDeploy.
 	//
 	// This member is required.
 	Provider *string
 
-	// The tags for the custom action.
-	Tags []*types.Tag
+	// The version identifier of the custom action.
+	//
+	// This member is required.
+	Version *string
 
 	// The configuration properties for the custom action. You can refer to a name in
 	// the configuration properties of the custom action within the URL templates by
@@ -93,12 +94,11 @@ type CreateCustomActionTypeInput struct {
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/how-to-create-custom-action.html).
 	ConfigurationProperties []*types.ActionConfigurationProperty
 
-	// The category of the custom action, such as a build action or a test action.
-	// Although Source and Approval are listed as valid values, they are not currently
-	// functional. These values are reserved for future use.
-	//
-	// This member is required.
-	Category types.ActionCategory
+	// URLs that provide users information about this custom action.
+	Settings *types.ActionTypeSettings
+
+	// The tags for the custom action.
+	Tags []*types.Tag
 }
 
 // Represents the output of a CreateCustomActionType operation.

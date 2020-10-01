@@ -57,21 +57,21 @@ func (c *Client) PutDetector(ctx context.Context, params *PutDetectorInput, optF
 
 type PutDetectorInput struct {
 
-	// A collection of key and value pairs.
-	Tags []*types.Tag
-
-	// The description of the detector.
-	Description *string
+	// The detector ID.
+	//
+	// This member is required.
+	DetectorId *string
 
 	// The name of the event type.
 	//
 	// This member is required.
 	EventTypeName *string
 
-	// The detector ID.
-	//
-	// This member is required.
-	DetectorId *string
+	// The description of the detector.
+	Description *string
+
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 }
 
 type PutDetectorOutput struct {

@@ -56,6 +56,11 @@ func (c *Client) UpdateRole(ctx context.Context, params *UpdateRoleInput, optFns
 
 type UpdateRoleInput struct {
 
+	// The name of the role that you want to modify.
+	//
+	// This member is required.
+	RoleName *string
+
 	// The new description that you want to apply to the specified role.
 	Description *string
 
@@ -73,11 +78,6 @@ type UpdateRoleInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32
-
-	// The name of the role that you want to modify.
-	//
-	// This member is required.
-	RoleName *string
 }
 
 type UpdateRoleOutput struct {

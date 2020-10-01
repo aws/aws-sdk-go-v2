@@ -57,23 +57,23 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// The ARN of the resource.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListTagsForResourceOutput struct {
 
-	// The list of tags assigned to the resource.
-	Tags []*types.Tag
-
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
+	// The list of tags assigned to the resource.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

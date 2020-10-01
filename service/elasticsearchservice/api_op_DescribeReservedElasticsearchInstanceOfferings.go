@@ -57,13 +57,13 @@ func (c *Client) DescribeReservedElasticsearchInstanceOfferings(ctx context.Cont
 // Container for parameters to DescribeReservedElasticsearchInstanceOfferings
 type DescribeReservedElasticsearchInstanceOfferingsInput struct {
 
-	// NextToken should be sent in case if earlier API call produced result containing
-	// NextToken. It is used for pagination.
-	NextToken *string
-
 	// Set this value to limit the number of results returned. If not specified,
 	// defaults to 100.
 	MaxResults *int32
+
+	// NextToken should be sent in case if earlier API call produced result containing
+	// NextToken. It is used for pagination.
+	NextToken *string
 
 	// The offering identifier filter value. Use this parameter to show only the
 	// available offering that matches the specified reservation identifier.
@@ -73,11 +73,11 @@ type DescribeReservedElasticsearchInstanceOfferingsInput struct {
 // Container for results from DescribeReservedElasticsearchInstanceOfferings
 type DescribeReservedElasticsearchInstanceOfferingsOutput struct {
 
-	// List of reserved Elasticsearch instance offerings
-	ReservedElasticsearchInstanceOfferings []*types.ReservedElasticsearchInstanceOffering
-
 	// Provides an identifier to allow retrieval of paginated results.
 	NextToken *string
+
+	// List of reserved Elasticsearch instance offerings
+	ReservedElasticsearchInstanceOfferings []*types.ReservedElasticsearchInstanceOffering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

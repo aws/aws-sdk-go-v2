@@ -75,16 +75,6 @@ type PutKeyPolicyInput struct {
 	// This member is required.
 	KeyId *string
 
-	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the CMK becomes unmanageable.
-	// Do not set this value to true indiscriminately. For more information, refer to
-	// the scenario in the Default Key Policy
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
-	// section in the AWS Key Management Service Developer Guide. Use this parameter
-	// only when you intend to prevent the principal that is making the request from
-	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
-	BypassPolicyLockoutSafetyCheck *bool
-
 	// The key policy to attach to the CMK. The key policy must meet the following
 	// criteria:
 	//
@@ -118,6 +108,16 @@ type PutKeyPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	// A flag to indicate whether to bypass the key policy lockout safety check.
+	// Setting this value to true increases the risk that the CMK becomes unmanageable.
+	// Do not set this value to true indiscriminately. For more information, refer to
+	// the scenario in the Default Key Policy
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
+	// section in the AWS Key Management Service Developer Guide. Use this parameter
+	// only when you intend to prevent the principal that is making the request from
+	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
+	BypassPolicyLockoutSafetyCheck *bool
 }
 
 type PutKeyPolicyOutput struct {

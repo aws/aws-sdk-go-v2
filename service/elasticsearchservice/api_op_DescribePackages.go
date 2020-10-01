@@ -58,24 +58,23 @@ func (c *Client) DescribePackages(ctx context.Context, params *DescribePackagesI
 // Container for request parameters to DescribePackage () operation.
 type DescribePackagesInput struct {
 
+	// Only returns packages that match the DescribePackagesFilterList values.
+	Filters []*types.DescribePackagesFilter
+
 	// Limits results to a maximum number of packages.
 	MaxResults *int32
 
 	// Used for pagination. Only necessary if a previous API call includes a non-null
 	// NextToken value. If provided, returns results for the next page.
 	NextToken *string
-
-	// Only returns packages that match the DescribePackagesFilterList values.
-	Filters []*types.DescribePackagesFilter
 }
 
 // Container for response returned by DescribePackages () operation.
 type DescribePackagesOutput struct {
+	NextToken *string
 
 	// List of PackageDetails objects.
 	PackageDetailsList []*types.PackageDetails
-
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

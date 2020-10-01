@@ -57,9 +57,10 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 // Creates a new ActiveMQ user.
 type CreateUserInput struct {
 
-	// Required. The password of the user. This value must be at least 12 characters
-	// long, must contain at least 4 unique characters, and must not contain commas.
-	Password *string
+	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
+	BrokerId *string
 
 	// The username of the ActiveMQ user. This value can contain only alphanumeric
 	// characters, dashes, periods, underscores, and tildes (- . _ ~). This value must
@@ -76,10 +77,9 @@ type CreateUserInput struct {
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []*string
 
-	// The unique ID that Amazon MQ generates for the broker.
-	//
-	// This member is required.
-	BrokerId *string
+	// Required. The password of the user. This value must be at least 12 characters
+	// long, must contain at least 4 unique characters, and must not contain commas.
+	Password *string
 }
 
 type CreateUserOutput struct {

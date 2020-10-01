@@ -86,28 +86,29 @@ type GetDocumentTextDetectionInput struct {
 	// This member is required.
 	JobId *string
 
-	// If the previous response was incomplete (because there are more blocks to
-	// retrieve), Amazon Textract returns a pagination token in the response. You can
-	// use this pagination token to retrieve the next set of blocks.
-	NextToken *string
-
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 1,000. If you specify a value greater than 1,000, a maximum
 	// of 1,000 results is returned. The default value is 1,000.
 	MaxResults *int32
+
+	// If the previous response was incomplete (because there are more blocks to
+	// retrieve), Amazon Textract returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of blocks.
+	NextToken *string
 }
 
 type GetDocumentTextDetectionOutput struct {
 
-	// A list of warnings that occurred during the text-detection operation for the
-	// document.
-	Warnings []*types.Warning
+	// The results of the text-detection operation.
+	Blocks []*types.Block
 
 	//
 	DetectDocumentTextModelVersion *string
 
-	// The current status of an asynchronous text-detection operation for the document.
-	StatusMessage *string
+	// Information about a document that Amazon Textract processed. DocumentMetadata is
+	// returned in every page of paginated responses from an Amazon Textract video
+	// operation.
+	DocumentMetadata *types.DocumentMetadata
 
 	// The current status of the text detection job.
 	JobStatus types.JobStatus
@@ -117,13 +118,12 @@ type GetDocumentTextDetectionOutput struct {
 	// results.
 	NextToken *string
 
-	// The results of the text-detection operation.
-	Blocks []*types.Block
+	// The current status of an asynchronous text-detection operation for the document.
+	StatusMessage *string
 
-	// Information about a document that Amazon Textract processed. DocumentMetadata is
-	// returned in every page of paginated responses from an Amazon Textract video
-	// operation.
-	DocumentMetadata *types.DocumentMetadata
+	// A list of warnings that occurred during the text-detection operation for the
+	// document.
+	Warnings []*types.Warning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

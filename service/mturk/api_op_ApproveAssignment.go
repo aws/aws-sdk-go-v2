@@ -73,15 +73,15 @@ func (c *Client) ApproveAssignment(ctx context.Context, params *ApproveAssignmen
 
 type ApproveAssignmentInput struct {
 
-	// A flag indicating that an assignment should be approved even if it was
-	// previously rejected. Defaults to False.
-	OverrideRejection *bool
-
 	// The ID of the assignment. The assignment must correspond to a HIT created by the
 	// Requester.
 	//
 	// This member is required.
 	AssignmentId *string
+
+	// A flag indicating that an assignment should be approved even if it was
+	// previously rejected. Defaults to False.
+	OverrideRejection *bool
 
 	// A message for the Worker, which the Worker can see in the Status section of the
 	// web site.

@@ -65,16 +65,16 @@ type DeleteBuildBatchInput struct {
 
 type DeleteBuildBatchOutput struct {
 
-	// The status code.
-	StatusCode *string
+	// An array of strings that contain the identifiers of the builds that were
+	// deleted.
+	BuildsDeleted []*string
 
 	// An array of BuildNotDeleted objects that specify the builds that could not be
 	// deleted.
 	BuildsNotDeleted []*types.BuildNotDeleted
 
-	// An array of strings that contain the identifiers of the builds that were
-	// deleted.
-	BuildsDeleted []*string
+	// The status code.
+	StatusCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

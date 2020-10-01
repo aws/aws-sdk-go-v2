@@ -85,14 +85,14 @@ type CreateCachePolicyInput struct {
 
 type CreateCachePolicyOutput struct {
 
+	// A cache policy.
+	CachePolicy *types.CachePolicy
+
 	// The current version of the cache policy.
 	ETag *string
 
 	// The fully qualified URI of the cache policy just created.
 	Location *string
-
-	// A cache policy.
-	CachePolicy *types.CachePolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

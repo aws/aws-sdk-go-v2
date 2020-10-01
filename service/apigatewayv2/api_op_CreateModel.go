@@ -57,18 +57,15 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 // Creates a new Model.
 type CreateModelInput struct {
 
-	// The name of the model. Must be alphanumeric.
-	//
-	// This member is required.
-	Name *string
-
 	// The API identifier.
 	//
 	// This member is required.
 	ApiId *string
 
-	// The content-type for the model, for example, "application/json".
-	ContentType *string
+	// The name of the model. Must be alphanumeric.
+	//
+	// This member is required.
+	Name *string
 
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.
@@ -76,23 +73,26 @@ type CreateModelInput struct {
 	// This member is required.
 	Schema *string
 
+	// The content-type for the model, for example, "application/json".
+	ContentType *string
+
 	// The description of the model.
 	Description *string
 }
 
 type CreateModelOutput struct {
 
-	// The name of the model. Must be alphanumeric.
-	Name *string
-
-	// The model identifier.
-	ModelId *string
-
 	// The content-type for the model, for example, "application/json".
 	ContentType *string
 
 	// The description of the model.
 	Description *string
+
+	// The model identifier.
+	ModelId *string
+
+	// The name of the model. Must be alphanumeric.
+	Name *string
 
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 model.

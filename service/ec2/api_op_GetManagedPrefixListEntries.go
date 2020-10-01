@@ -57,17 +57,6 @@ func (c *Client) GetManagedPrefixListEntries(ctx context.Context, params *GetMan
 
 type GetManagedPrefixListEntriesInput struct {
 
-	// The version of the prefix list for which to return the entries. The default is
-	// the current version.
-	TargetVersion *int64
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
-	// The token for the next page of results.
-	NextToken *string
-
 	// The ID of the prefix list.
 	//
 	// This member is required.
@@ -78,6 +67,17 @@ type GetManagedPrefixListEntriesInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
+	// The version of the prefix list for which to return the entries. The default is
+	// the current version.
+	TargetVersion *int64
 }
 
 type GetManagedPrefixListEntriesOutput struct {

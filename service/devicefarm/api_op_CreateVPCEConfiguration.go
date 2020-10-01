@@ -58,16 +58,6 @@ func (c *Client) CreateVPCEConfiguration(ctx context.Context, params *CreateVPCE
 
 type CreateVPCEConfigurationInput struct {
 
-	// An optional description that provides details about your VPC endpoint
-	// configuration.
-	VpceConfigurationDescription *string
-
-	// The name of the VPC endpoint service running in your AWS account that you want
-	// Device Farm to test.
-	//
-	// This member is required.
-	VpceServiceName *string
-
 	// The DNS name of the service running in your VPC that you want Device Farm to
 	// test.
 	//
@@ -79,6 +69,16 @@ type CreateVPCEConfigurationInput struct {
 	//
 	// This member is required.
 	VpceConfigurationName *string
+
+	// The name of the VPC endpoint service running in your AWS account that you want
+	// Device Farm to test.
+	//
+	// This member is required.
+	VpceServiceName *string
+
+	// An optional description that provides details about your VPC endpoint
+	// configuration.
+	VpceConfigurationDescription *string
 }
 
 type CreateVPCEConfigurationOutput struct {

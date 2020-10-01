@@ -57,27 +57,27 @@ func (c *Client) ListPolicyAttachments(ctx context.Context, params *ListPolicyAt
 
 type ListPolicyAttachmentsInput struct {
 
-	// The reference that identifies the policy object.
-	//
-	// This member is required.
-	PolicyReference *types.ObjectReference
-
-	// The pagination token.
-	NextToken *string
-
-	// The maximum number of items to be retrieved in a single call. This is an
-	// approximate number.
-	MaxResults *int32
-
-	// Represents the manner and timing in which the successful write or update of an
-	// object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel types.ConsistencyLevel
-
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// objects reside. For more information, see arns ().
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	// The reference that identifies the policy object.
+	//
+	// This member is required.
+	PolicyReference *types.ObjectReference
+
+	// Represents the manner and timing in which the successful write or update of an
+	// object is reflected in a subsequent read operation of that same object.
+	ConsistencyLevel types.ConsistencyLevel
+
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
+	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type ListPolicyAttachmentsOutput struct {

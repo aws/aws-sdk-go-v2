@@ -63,16 +63,16 @@ type ListProposalVotesInput struct {
 	// This member is required.
 	NetworkId *string
 
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string
-
-	// The maximum number of votes to return.
-	MaxResults *int32
-
 	// The unique identifier of the proposal.
 	//
 	// This member is required.
 	ProposalId *string
+
+	// The maximum number of votes to return.
+	MaxResults *int32
+
+	// The pagination token that indicates the next set of results to retrieve.
+	NextToken *string
 }
 
 type ListProposalVotesOutput struct {

@@ -59,11 +59,11 @@ type GetIndexingConfigurationInput struct {
 
 type GetIndexingConfigurationOutput struct {
 
-	// Thing indexing configuration.
-	ThingIndexingConfiguration *types.ThingIndexingConfiguration
-
 	// The index configuration.
 	ThingGroupIndexingConfiguration *types.ThingGroupIndexingConfiguration
+
+	// Thing indexing configuration.
+	ThingIndexingConfiguration *types.ThingIndexingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

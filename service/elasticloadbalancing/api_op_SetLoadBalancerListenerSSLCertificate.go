@@ -68,15 +68,15 @@ type SetLoadBalancerListenerSSLCertificateInput struct {
 	// This member is required.
 	LoadBalancerName *string
 
-	// The Amazon Resource Name (ARN) of the SSL certificate.
-	//
-	// This member is required.
-	SSLCertificateId *string
-
 	// The port that uses the specified SSL certificate.
 	//
 	// This member is required.
 	LoadBalancerPort *int32
+
+	// The Amazon Resource Name (ARN) of the SSL certificate.
+	//
+	// This member is required.
+	SSLCertificateId *string
 }
 
 // Contains the output of SetLoadBalancerListenerSSLCertificate.

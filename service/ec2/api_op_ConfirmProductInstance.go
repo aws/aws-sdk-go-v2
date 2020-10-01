@@ -58,15 +58,15 @@ func (c *Client) ConfirmProductInstance(ctx context.Context, params *ConfirmProd
 
 type ConfirmProductInstanceInput struct {
 
-	// The product code. This must be a product code that you own.
-	//
-	// This member is required.
-	ProductCode *string
-
 	// The ID of the instance.
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The product code. This must be a product code that you own.
+	//
+	// This member is required.
+	ProductCode *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

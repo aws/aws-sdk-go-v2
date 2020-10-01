@@ -59,27 +59,27 @@ func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns .
 
 type UpdateJobInput struct {
 
-	// The updated shipping option value of this job's ShippingDetails () object.
-	ShippingOption types.ShippingOption
-
-	// The updated ID for the forwarding address for a job. This field is not supported
-	// in most regions.
-	ForwardingAddressId *string
-
-	// The updated description of this job's JobMetadata () object.
-	Description *string
-
-	// The ID of the updated Address () object.
-	AddressId *string
-
-	// The new or updated Notification () object.
-	Notification *types.Notification
-
 	// The job ID of the job that you want to update, for example
 	// JID123e4567-e89b-12d3-a456-426655440000.
 	//
 	// This member is required.
 	JobId *string
+
+	// The ID of the updated Address () object.
+	AddressId *string
+
+	// The updated description of this job's JobMetadata () object.
+	Description *string
+
+	// The updated ID for the forwarding address for a job. This field is not supported
+	// in most regions.
+	ForwardingAddressId *string
+
+	// The new or updated Notification () object.
+	Notification *types.Notification
+
+	// The updated JobResource object, or the updated JobResource () object.
+	Resources *types.JobResource
 
 	// The new role Amazon Resource Name (ARN) that you want to associate with this
 	// job. To create a role ARN, use the CreateRole
@@ -87,12 +87,12 @@ type UpdateJobInput struct {
 	// Identity and Access Management (IAM) API action.
 	RoleARN *string
 
+	// The updated shipping option value of this job's ShippingDetails () object.
+	ShippingOption types.ShippingOption
+
 	// The updated SnowballCapacityPreference of this job's JobMetadata () object. The
 	// 50 TB Snowballs are only available in the US regions.
 	SnowballCapacityPreference types.SnowballCapacity
-
-	// The updated JobResource object, or the updated JobResource () object.
-	Resources *types.JobResource
 }
 
 type UpdateJobOutput struct {

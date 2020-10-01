@@ -58,15 +58,17 @@ func (c *Client) UpdateTrialComponent(ctx context.Context, params *UpdateTrialCo
 
 type UpdateTrialComponentInput struct {
 
-	// Replaces all of the component's hyperparameters with the specified
-	// hyperparameters.
-	Parameters map[string]*types.TrialComponentParameterValue
+	// The name of the component to update.
+	//
+	// This member is required.
+	TrialComponentName *string
 
-	// The output artifacts to remove from the component.
-	OutputArtifactsToRemove []*string
+	// The name of the component as displayed. The name doesn't need to be unique. If
+	// DisplayName isn't specified, TrialComponentName is displayed.
+	DisplayName *string
 
-	// The new status of the component.
-	Status *types.TrialComponentStatus
+	// When the component ended.
+	EndTime *time.Time
 
 	// Replaces all of the component's input artifacts with the specified artifacts.
 	InputArtifacts map[string]*types.TrialComponentArtifact
@@ -77,23 +79,21 @@ type UpdateTrialComponentInput struct {
 	// Replaces all of the component's output artifacts with the specified artifacts.
 	OutputArtifacts map[string]*types.TrialComponentArtifact
 
+	// The output artifacts to remove from the component.
+	OutputArtifactsToRemove []*string
+
+	// Replaces all of the component's hyperparameters with the specified
+	// hyperparameters.
+	Parameters map[string]*types.TrialComponentParameterValue
+
 	// The hyperparameters to remove from the component.
 	ParametersToRemove []*string
 
 	// When the component started.
 	StartTime *time.Time
 
-	// The name of the component to update.
-	//
-	// This member is required.
-	TrialComponentName *string
-
-	// When the component ended.
-	EndTime *time.Time
-
-	// The name of the component as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialComponentName is displayed.
-	DisplayName *string
+	// The new status of the component.
+	Status *types.TrialComponentStatus
 }
 
 type UpdateTrialComponentOutput struct {

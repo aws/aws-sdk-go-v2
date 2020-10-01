@@ -69,11 +69,11 @@ type DescribeStandardsInput struct {
 
 type DescribeStandardsOutput struct {
 
-	// A list of available standards.
-	Standards []*types.Standard
-
 	// The pagination token to use to request the next page of results.
 	NextToken *string
+
+	// A list of available standards.
+	Standards []*types.Standard
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

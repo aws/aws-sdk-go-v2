@@ -64,9 +64,17 @@ type CreateClusterInput struct {
 	// This member is required.
 	AddressId *string
 
-	// An optional description of this specific cluster, for example Environmental Data
-	// Cluster-01.
-	Description *string
+	// The type of job for this cluster. Currently, the only job type supported for
+	// clusters is LOCAL_USE.
+	//
+	// This member is required.
+	JobType types.JobType
+
+	// The resources associated with the cluster job. These resources include Amazon S3
+	// buckets and optional AWS Lambda functions written in the Python language.
+	//
+	// This member is required.
+	Resources *types.JobResource
 
 	// The RoleARN that you want to associate with this cluster. RoleArn values are
 	// created by using the CreateRole
@@ -75,13 +83,6 @@ type CreateClusterInput struct {
 	//
 	// This member is required.
 	RoleARN *string
-
-	// The tax documents required in your AWS Region.
-	TaxDocuments *types.TaxDocuments
-
-	// The forwarding address ID for a cluster. This field is not supported in most
-	// regions.
-	ForwardingAddressId *string
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
 	// soon you'll get each Snowball Edge device, rather it represents how quickly each
@@ -115,14 +116,13 @@ type CreateClusterInput struct {
 	// This member is required.
 	ShippingOption types.ShippingOption
 
-	// The type of AWS Snowball device to use for this cluster. </p> <note> <p>For
-	// cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device
-	// type.</p> </note>
-	SnowballType types.SnowballType
+	// An optional description of this specific cluster, for example Environmental Data
+	// Cluster-01.
+	Description *string
 
-	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
-	// this cluster.
-	Notification *types.Notification
+	// The forwarding address ID for a cluster. This field is not supported in most
+	// regions.
+	ForwardingAddressId *string
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
 	// values are created by using the CreateKey
@@ -130,17 +130,17 @@ type CreateClusterInput struct {
 	// action in AWS Key Management Service (AWS KMS).
 	KmsKeyARN *string
 
-	// The type of job for this cluster. Currently, the only job type supported for
-	// clusters is LOCAL_USE.
-	//
-	// This member is required.
-	JobType types.JobType
+	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
+	// this cluster.
+	Notification *types.Notification
 
-	// The resources associated with the cluster job. These resources include Amazon S3
-	// buckets and optional AWS Lambda functions written in the Python language.
-	//
-	// This member is required.
-	Resources *types.JobResource
+	// The type of AWS Snowball device to use for this cluster. </p> <note> <p>For
+	// cluster jobs, AWS Snowball currently supports only the <code>EDGE</code> device
+	// type.</p> </note>
+	SnowballType types.SnowballType
+
+	// The tax documents required in your AWS Region.
+	TaxDocuments *types.TaxDocuments
 }
 
 type CreateClusterOutput struct {

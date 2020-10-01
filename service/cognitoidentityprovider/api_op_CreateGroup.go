@@ -58,6 +58,19 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
+	// The name of the group. Must be unique.
+	//
+	// This member is required.
+	GroupName *string
+
+	// The user pool ID for the user pool.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// A string containing the description of the group.
+	Description *string
+
 	// A nonnegative integer value that specifies the precedence of this group relative
 	// to the other groups that a user can belong to in the user pool. Zero is the
 	// highest precedence value. Groups with lower Precedence values take precedence
@@ -72,21 +85,8 @@ type CreateGroupInput struct {
 	// users' tokens. The default Precedence value is null.
 	Precedence *int32
 
-	// The name of the group. Must be unique.
-	//
-	// This member is required.
-	GroupName *string
-
-	// The user pool ID for the user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// The role ARN for the group.
 	RoleArn *string
-
-	// A string containing the description of the group.
-	Description *string
 }
 
 type CreateGroupOutput struct {

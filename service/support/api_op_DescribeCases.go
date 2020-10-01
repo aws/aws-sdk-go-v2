@@ -80,23 +80,17 @@ func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, 
 
 type DescribeCasesInput struct {
 
-	// Specifies whether to include resolved support cases in the DescribeCases
-	// response. By default, resolved cases aren't included.
-	IncludeResolvedCases *bool
-
-	// A list of ID numbers of the support cases you want returned. The maximum number
-	// of cases is 100.
-	CaseIdList []*string
-
-	// A resumption point for pagination.
-	NextToken *string
-
-	// The maximum number of results to return before paginating.
-	MaxResults *int32
+	// The start date for a filtered date search on support case communications. Case
+	// communications are available for 12 months after creation.
+	AfterTime *string
 
 	// The end date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	BeforeTime *string
+
+	// A list of ID numbers of the support cases you want returned. The maximum number
+	// of cases is 100.
+	CaseIdList []*string
 
 	// The ID displayed for a case in the AWS Support Center user interface.
 	DisplayId *string
@@ -105,14 +99,20 @@ type DescribeCasesInput struct {
 	// default, communications are incuded.
 	IncludeCommunications *bool
 
-	// The start date for a filtered date search on support case communications. Case
-	// communications are available for 12 months after creation.
-	AfterTime *string
+	// Specifies whether to include resolved support cases in the DescribeCases
+	// response. By default, resolved cases aren't included.
+	IncludeResolvedCases *bool
 
 	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
 	Language *string
+
+	// The maximum number of results to return before paginating.
+	MaxResults *int32
+
+	// A resumption point for pagination.
+	NextToken *string
 }
 
 // Returns an array of CaseDetails

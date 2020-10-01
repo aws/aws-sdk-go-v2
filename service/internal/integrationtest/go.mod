@@ -50,6 +50,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/iam v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v0.26.0
+	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.1.0 // indirect
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/iot v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/kms v0.26.0
@@ -84,10 +86,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v0.26.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v0.26.0
 	github.com/awslabs/smithy-go v0.1.1
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v0.1.0
-	github.com/aws/aws-sdk-go-v2/credentials v0.1.1
-	github.com/aws/aws-sdk-go-v2/ec2imds v0.1.1
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v0.1.1
 )
 
 go 1.15
@@ -261,3 +259,5 @@ replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
 replace github.com/aws/aws-sdk-go-v2/ec2imds => ../../../ec2imds/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../service/internal/s3shared/
+
+replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/

@@ -58,15 +58,15 @@ func (c *Client) DescribeRepository(ctx context.Context, params *DescribeReposit
 
 type DescribeRepositoryInput struct {
 
-	// A string that specifies the name of the requested repository.
-	//
-	// This member is required.
-	Repository *string
-
 	// The name of the domain that contains the repository to describe.
 	//
 	// This member is required.
 	Domain *string
+
+	// A string that specifies the name of the requested repository.
+	//
+	// This member is required.
+	Repository *string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.

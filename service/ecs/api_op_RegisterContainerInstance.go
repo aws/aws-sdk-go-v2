@@ -59,24 +59,16 @@ func (c *Client) RegisterContainerInstance(ctx context.Context, params *Register
 
 type RegisterContainerInstanceInput struct {
 
-	// The ARN of the container instance (if it was previously registered).
-	ContainerInstanceArn *string
-
 	// The container instance attributes that this container instance supports.
 	Attributes []*types.Attribute
-
-	// The version information for the Amazon ECS container agent and Docker daemon
-	// running on the container instance.
-	VersionInfo *types.VersionInfo
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster with which to
 	// register your container instance. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
 
-	// The devices that are available on the container instance. The only supported
-	// device type is a GPU.
-	PlatformDevices []*types.PlatformDevice
+	// The ARN of the container instance (if it was previously registered).
+	ContainerInstanceArn *string
 
 	// The instance identity document for the EC2 instance to register. This document
 	// can be found by running the following command from the instance: curl
@@ -88,8 +80,9 @@ type RegisterContainerInstanceInput struct {
 	// http://169.254.169.254/latest/dynamic/instance-identity/signature/
 	InstanceIdentityDocumentSignature *string
 
-	// The resources available on the instance.
-	TotalResources []*types.Resource
+	// The devices that are available on the container instance. The only supported
+	// device type is a GPU.
+	PlatformDevices []*types.PlatformDevice
 
 	// The metadata that you apply to the container instance to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
@@ -121,6 +114,13 @@ type RegisterContainerInstanceInput struct {
 	// this prefix. Tags with this prefix do not count against your tags per resource
 	// limit.
 	Tags []*types.Tag
+
+	// The resources available on the instance.
+	TotalResources []*types.Resource
+
+	// The version information for the Amazon ECS container agent and Docker daemon
+	// running on the container instance.
+	VersionInfo *types.VersionInfo
 }
 
 type RegisterContainerInstanceOutput struct {

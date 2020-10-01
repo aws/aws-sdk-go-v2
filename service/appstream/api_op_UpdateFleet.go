@@ -61,14 +61,34 @@ func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optF
 
 type UpdateFleetInput struct {
 
-	// The ARN of the public, private, or shared image to use.
-	ImageArn *string
+	// The fleet attributes to delete.
+	AttributesToDelete []types.FleetAttribute
+
+	// The desired capacity for the fleet.
+	ComputeCapacity *types.ComputeCapacity
+
+	// Deletes the VPC association for the specified fleet.
+	DeleteVpcConfig *bool
+
+	// The description to display.
+	Description *string
+
+	// The amount of time that a streaming session remains active after users
+	// disconnect. If users try to reconnect to the streaming session after a
+	// disconnection or network interruption within this time interval, they are
+	// connected to their previous session. Otherwise, they are connected to a new
+	// session with a new streaming instance. Specify a value between 60 and 360000.
+	DisconnectTimeoutInSeconds *int32
+
+	// The fleet name to display.
+	DisplayName *string
+
+	// The name of the directory and organizational unit (OU) to use to join the fleet
+	// to a Microsoft Active Directory domain.
+	DomainJoinInfo *types.DomainJoinInfo
 
 	// Enables or disables default internet access for the fleet.
 	EnableDefaultInternetAccess *bool
-
-	// The VPC configuration for the fleet.
-	VpcConfig *types.VpcConfig
 
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the fleet. To assume
 	// a role, a fleet instance calls the AWS Security Token Service (STS) AssumeRole
@@ -81,42 +101,6 @@ type UpdateFleetInput struct {
 	// AppStream 2.0 Streaming Instances</a> in the <i>Amazon AppStream 2.0
 	// Administration Guide</i>.</p>
 	IamRoleArn *string
-
-	// The fleet attributes to delete.
-	AttributesToDelete []types.FleetAttribute
-
-	// The description to display.
-	Description *string
-
-	// The name of the directory and organizational unit (OU) to use to join the fleet
-	// to a Microsoft Active Directory domain.
-	DomainJoinInfo *types.DomainJoinInfo
-
-	// A unique name for the fleet.
-	Name *string
-
-	// The maximum amount of time that a streaming session can remain active, in
-	// seconds. If users are still connected to a streaming instance five minutes
-	// before this limit is reached, they are prompted to save any open documents
-	// before being disconnected. After this time elapses, the instance is terminated
-	// and replaced by a new instance. Specify a value between 600 and 360000.
-	MaxUserDurationInSeconds *int32
-
-	// The amount of time that a streaming session remains active after users
-	// disconnect. If users try to reconnect to the streaming session after a
-	// disconnection or network interruption within this time interval, they are
-	// connected to their previous session. Otherwise, they are connected to a new
-	// session with a new streaming instance. Specify a value between 60 and 360000.
-	DisconnectTimeoutInSeconds *int32
-
-	// Deletes the VPC association for the specified fleet.
-	DeleteVpcConfig *bool
-
-	// The name of the image used to create the fleet.
-	ImageName *string
-
-	// The desired capacity for the fleet.
-	ComputeCapacity *types.ComputeCapacity
 
 	// The amount of time that users can be idle (inactive) before they are
 	// disconnected from their streaming session and the DisconnectTimeoutInSeconds
@@ -138,6 +122,12 @@ type UpdateFleetInput struct {
 	// value is rounded up. For example, if you specify a value of 90, users are
 	// disconnected after 2 minutes of inactivity. </p> </note>
 	IdleDisconnectTimeoutInSeconds *int32
+
+	// The ARN of the public, private, or shared image to use.
+	ImageArn *string
+
+	// The name of the image used to create the fleet.
+	ImageName *string
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
@@ -192,8 +182,18 @@ type UpdateFleetInput struct {
 	// stream.graphics-pro.16xlarge
 	InstanceType *string
 
-	// The fleet name to display.
-	DisplayName *string
+	// The maximum amount of time that a streaming session can remain active, in
+	// seconds. If users are still connected to a streaming instance five minutes
+	// before this limit is reached, they are prompted to save any open documents
+	// before being disconnected. After this time elapses, the instance is terminated
+	// and replaced by a new instance. Specify a value between 600 and 360000.
+	MaxUserDurationInSeconds *int32
+
+	// A unique name for the fleet.
+	Name *string
+
+	// The VPC configuration for the fleet.
+	VpcConfig *types.VpcConfig
 }
 
 type UpdateFleetOutput struct {

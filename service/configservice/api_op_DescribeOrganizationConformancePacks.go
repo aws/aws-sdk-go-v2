@@ -62,26 +62,26 @@ func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, param
 
 type DescribeOrganizationConformancePacksInput struct {
 
-	// The name that you assign to an organization conformance pack.
-	OrganizationConformancePackNames []*string
+	// The maximum number of organization config packs returned on each page. If you do
+	// no specify a number, AWS Config uses the default. The default is 100.
+	Limit *int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The maximum number of organization config packs returned on each page. If you do
-	// no specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
+	// The name that you assign to an organization conformance pack.
+	OrganizationConformancePackNames []*string
 }
 
 type DescribeOrganizationConformancePacksOutput struct {
 
-	// Returns a list of OrganizationConformancePacks objects.
-	OrganizationConformancePacks []*types.OrganizationConformancePack
-
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
+	// Returns a list of OrganizationConformancePacks objects.
+	OrganizationConformancePacks []*types.OrganizationConformancePack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -54,10 +54,6 @@ func (c *Client) ListAccountRoles(ctx context.Context, params *ListAccountRolesI
 
 type ListAccountRolesInput struct {
 
-	// The page token from the previous response output when you request subsequent
-	// pages.
-	NextToken *string
-
 	// The token issued by the CreateToken API call. For more information, see
 	// CreateToken
 	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
@@ -73,6 +69,10 @@ type ListAccountRolesInput struct {
 
 	// The number of items that clients can request per page.
 	MaxResults *int32
+
+	// The page token from the previous response output when you request subsequent
+	// pages.
+	NextToken *string
 }
 
 type ListAccountRolesOutput struct {

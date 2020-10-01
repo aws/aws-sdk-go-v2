@@ -58,12 +58,6 @@ func (c *Client) ListRecoveryPointsByBackupVault(ctx context.Context, params *Li
 
 type ListRecoveryPointsByBackupVaultInput struct {
 
-	// The next item following a partial list of returned items. For example, if a
-	// request is made to return maxResults number of items, NextToken allows you to
-	// return more items in your list starting at the location pointed to by the next
-	// token.
-	NextToken *string
-
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// AWS Region where they are created. They consist of lowercase letters, numbers,
@@ -72,15 +66,8 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// This member is required.
 	BackupVaultName *string
 
-	// Returns only recovery points that match the specified resource Amazon Resource
-	// Name (ARN).
-	ByResourceArn *string
-
 	// Returns only recovery points that match the specified backup plan ID.
 	ByBackupPlanId *string
-
-	// The maximum number of items to be returned.
-	MaxResults *int32
 
 	// Returns only recovery points that were created after the specified timestamp.
 	ByCreatedAfter *time.Time
@@ -88,21 +75,34 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// Returns only recovery points that were created before the specified timestamp.
 	ByCreatedBefore *time.Time
 
+	// Returns only recovery points that match the specified resource Amazon Resource
+	// Name (ARN).
+	ByResourceArn *string
+
 	// Returns only recovery points that match the specified resource type.
 	ByResourceType *string
-}
 
-type ListRecoveryPointsByBackupVaultOutput struct {
-
-	// An array of objects that contain detailed information about recovery points
-	// saved in a backup vault.
-	RecoveryPoints []*types.RecoveryPointByBackupVault
+	// The maximum number of items to be returned.
+	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+}
+
+type ListRecoveryPointsByBackupVaultOutput struct {
+
+	// The next item following a partial list of returned items. For example, if a
+	// request is made to return maxResults number of items, NextToken allows you to
+	// return more items in your list starting at the location pointed to by the next
+	// token.
+	NextToken *string
+
+	// An array of objects that contain detailed information about recovery points
+	// saved in a backup vault.
+	RecoveryPoints []*types.RecoveryPointByBackupVault
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

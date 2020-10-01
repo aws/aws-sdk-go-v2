@@ -67,11 +67,11 @@ type ListFacetAttributesInput struct {
 	// This member is required.
 	SchemaArn *string
 
-	// The pagination token.
-	NextToken *string
-
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type ListFacetAttributesOutput struct {

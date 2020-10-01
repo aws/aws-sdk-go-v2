@@ -77,15 +77,15 @@ func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optF
 
 type DescribeJobInput struct {
 
-	// The ID for the job whose information you want to retrieve.
-	//
-	// This member is required.
-	JobId *string
-
 	//
 	//
 	// This member is required.
 	AccountId *string
+
+	// The ID for the job whose information you want to retrieve.
+	//
+	// This member is required.
+	JobId *string
 }
 
 type DescribeJobOutput struct {

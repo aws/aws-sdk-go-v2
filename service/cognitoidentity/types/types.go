@@ -28,14 +28,14 @@ type CognitoIdentityProvider struct {
 // Credentials for the provided identity ID.
 type Credentials struct {
 
-	// The Secret Access Key portion of the credentials
-	SecretKey *string
-
 	// The Access Key portion of the credentials.
 	AccessKeyId *string
 
 	// The date at which these credentials will expire.
 	Expiration *time.Time
+
+	// The Secret Access Key portion of the credentials
+	SecretKey *string
 
 	// The Session Token portion of the credentials
 	SessionToken *string
@@ -44,14 +44,14 @@ type Credentials struct {
 // A description of the identity.
 type IdentityDescription struct {
 
-	// Date on which the identity was last modified.
-	LastModifiedDate *time.Time
-
 	// Date on which the identity was created.
 	CreationDate *time.Time
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
+	// Date on which the identity was last modified.
+	LastModifiedDate *time.Time
 
 	// The provider names.
 	Logins []*string
@@ -60,11 +60,11 @@ type IdentityDescription struct {
 // A description of the identity pool.
 type IdentityPoolShortDescription struct {
 
-	// A string that you provide.
-	IdentityPoolName *string
-
 	// An identity pool ID in the format REGION:GUID.
 	IdentityPoolId *string
+
+	// A string that you provide.
+	IdentityPoolName *string
 }
 
 // A rule that maps a claim name, a claim value, and a match type to a role ARN.
@@ -76,16 +76,16 @@ type MappingRule struct {
 	// This member is required.
 	Claim *string
 
-	// The role ARN.
-	//
-	// This member is required.
-	RoleARN *string
-
 	// The match condition that specifies how closely the claim value in the IdP token
 	// must match Value.
 	//
 	// This member is required.
 	MatchType MappingRuleMatchType
+
+	// The role ARN.
+	//
+	// This member is required.
+	RoleARN *string
 
 	// A brief string that the claim must match, for example, "paid" or "yes".
 	//
@@ -103,15 +103,15 @@ type RoleMapping struct {
 	// This member is required.
 	Type RoleMappingType
 
-	// The rules to be used for mapping users to roles. If you specify Rules as the
-	// role mapping type, RulesConfiguration is required.
-	RulesConfiguration *RulesConfigurationType
-
 	// If you specify Token or Rules as the Type, AmbiguousRoleResolution is required.
 	// Specifies the action to be taken if either no rules match the claim value for
 	// the Rules type, or there is no cognito:preferred_role claim and there are
 	// multiple cognito:roles matches for the Token type.
 	AmbiguousRoleResolution AmbiguousRoleResolutionType
+
+	// The rules to be used for mapping users to roles. If you specify Rules as the
+	// role mapping type, RulesConfiguration is required.
+	RulesConfiguration *RulesConfigurationType
 }
 
 // A container for rules.

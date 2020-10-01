@@ -62,11 +62,11 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 //
 type ListQueuesInput struct {
 
-	// Pagination token to request the next set of results.
-	NextToken *string
-
 	// Maximum number of results to include in the response.
 	MaxResults *int32
+
+	// Pagination token to request the next set of results.
+	NextToken *string
 
 	// A string to use for filtering the list results. Only those queues whose name
 	// begins with the specified string are returned. Queue URLs and names are

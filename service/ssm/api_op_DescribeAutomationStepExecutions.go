@@ -63,6 +63,10 @@ type DescribeAutomationStepExecutionsInput struct {
 	// This member is required.
 	AutomationExecutionId *string
 
+	// One or more filters to limit the number of step executions returned by the
+	// request.
+	Filters []*types.StepExecutionFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
@@ -70,10 +74,6 @@ type DescribeAutomationStepExecutionsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
-
-	// One or more filters to limit the number of step executions returned by the
-	// request.
-	Filters []*types.StepExecutionFilter
 
 	// A boolean that indicates whether to list step executions in reverse order by
 	// start time. The default value is false.

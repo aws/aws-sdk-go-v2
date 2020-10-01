@@ -73,6 +73,11 @@ type CreateProvisioningArtifactInput struct {
 	// This member is required.
 	Parameters *types.ProvisioningArtifactProperties
 
+	// The product identifier.
+	//
+	// This member is required.
+	ProductId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -82,11 +87,6 @@ type CreateProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The product identifier.
-	//
-	// This member is required.
-	ProductId *string
 }
 
 type CreateProvisioningArtifactOutput struct {

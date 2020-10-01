@@ -61,27 +61,27 @@ func (c *Client) CancelMLTaskRun(ctx context.Context, params *CancelMLTaskRunInp
 
 type CancelMLTaskRunInput struct {
 
-	// The unique identifier of the machine learning transform.
-	//
-	// This member is required.
-	TransformId *string
-
 	// A unique identifier for the task run.
 	//
 	// This member is required.
 	TaskRunId *string
+
+	// The unique identifier of the machine learning transform.
+	//
+	// This member is required.
+	TransformId *string
 }
 
 type CancelMLTaskRunOutput struct {
 
-	// The unique identifier of the machine learning transform.
-	TransformId *string
+	// The status for this run.
+	Status types.TaskStatusType
 
 	// The unique identifier for the task run.
 	TaskRunId *string
 
-	// The status for this run.
-	Status types.TaskStatusType
+	// The unique identifier of the machine learning transform.
+	TransformId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

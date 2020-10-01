@@ -80,11 +80,11 @@ type UpdateDashboardPermissionsOutput struct {
 	// The Amazon Resource Name (ARN) of the dashboard.
 	DashboardArn *string
 
-	// Information about the permissions on the dashboard.
-	Permissions []*types.ResourcePermission
-
 	// The ID for the dashboard.
 	DashboardId *string
+
+	// Information about the permissions on the dashboard.
+	Permissions []*types.ResourcePermission
 
 	// The AWS request ID for this operation.
 	RequestId *string

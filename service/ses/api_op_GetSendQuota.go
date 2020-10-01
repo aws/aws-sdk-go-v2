@@ -61,9 +61,6 @@ type GetSendQuotaInput struct {
 // number of emails you have sent in the last 24 hours.
 type GetSendQuotaOutput struct {
 
-	// The number of emails sent during the previous 24 hours.
-	SentLast24Hours *float64
-
 	// The maximum number of emails the user is allowed to send in a 24-hour interval.
 	// A value of -1 signifies an unlimited quota.
 	Max24HourSend *float64
@@ -72,6 +69,9 @@ type GetSendQuotaOutput struct {
 	// per second. The rate at which Amazon SES accepts the user's messages might be
 	// less than the maximum send rate.
 	MaxSendRate *float64
+
+	// The number of emails sent during the previous 24 hours.
+	SentLast24Hours *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

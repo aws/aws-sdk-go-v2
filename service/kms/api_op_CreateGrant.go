@@ -101,16 +101,6 @@ func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optF
 
 type CreateGrantInput struct {
 
-	// A list of grant tokens. For more information, see Grant Tokens
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
-
-	// A list of operations that the grant permits.
-	//
-	// This member is required.
-	Operations []types.GrantOperation
-
 	// The principal that is given permission to perform the operations that the grant
 	// permits. To specify the principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -123,28 +113,6 @@ type CreateGrantInput struct {
 	//
 	// This member is required.
 	GranteePrincipal *string
-
-	// The principal that is given permission to retire the grant by using RetireGrant
-	// () operation. To specify the principal, use the Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an AWS principal. Valid AWS principals include AWS accounts (root), IAM users,
-	// federated users, and assumed role users. For examples of the ARN syntax to use
-	// for specifying a principal, see AWS Identity and Access Management (IAM)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
-	// in the Example ARNs section of the AWS General Reference.
-	RetiringPrincipal *string
-
-	// A friendly name for identifying the grant. Use this value to prevent the
-	// unintended creation of duplicate grants when retrying this request. When this
-	// value is absent, all CreateGrant requests result in a new grant with a unique
-	// GrantId even if all the supplied parameters are identical. This can result in
-	// unintended duplicates when you retry the CreateGrant request. When this value is
-	// present, you can retry a CreateGrant request with identical parameters; if the
-	// grant already exists, the original GrantId is returned without creating a new
-	// grant. Note that the returned grant token is unique with every CreateGrant
-	// request, even when a duplicate GrantId is returned. All grant tokens obtained in
-	// this way can be used interchangeably.
-	Name *string
 
 	// The unique identifier for the customer master key (CMK) that the grant applies
 	// to.  <p>Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
@@ -162,6 +130,11 @@ type CreateGrantInput struct {
 	// This member is required.
 	KeyId *string
 
+	// A list of operations that the grant permits.
+	//
+	// This member is required.
+	Operations []types.GrantOperation
+
 	// Allows a cryptographic operation
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
 	// only when the encryption context matches or includes the encryption context
@@ -170,6 +143,33 @@ type CreateGrantInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
 	// in the AWS Key Management Service Developer Guide .
 	Constraints *types.GrantConstraints
+
+	// A list of grant tokens. For more information, see Grant Tokens
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// in the AWS Key Management Service Developer Guide.
+	GrantTokens []*string
+
+	// A friendly name for identifying the grant. Use this value to prevent the
+	// unintended creation of duplicate grants when retrying this request. When this
+	// value is absent, all CreateGrant requests result in a new grant with a unique
+	// GrantId even if all the supplied parameters are identical. This can result in
+	// unintended duplicates when you retry the CreateGrant request. When this value is
+	// present, you can retry a CreateGrant request with identical parameters; if the
+	// grant already exists, the original GrantId is returned without creating a new
+	// grant. Note that the returned grant token is unique with every CreateGrant
+	// request, even when a duplicate GrantId is returned. All grant tokens obtained in
+	// this way can be used interchangeably.
+	Name *string
+
+	// The principal that is given permission to retire the grant by using RetireGrant
+	// () operation. To specify the principal, use the Amazon Resource Name (ARN)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// an AWS principal. Valid AWS principals include AWS accounts (root), IAM users,
+	// federated users, and assumed role users. For examples of the ARN syntax to use
+	// for specifying a principal, see AWS Identity and Access Management (IAM)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
+	// in the Example ARNs section of the AWS General Reference.
+	RetiringPrincipal *string
 }
 
 type CreateGrantOutput struct {

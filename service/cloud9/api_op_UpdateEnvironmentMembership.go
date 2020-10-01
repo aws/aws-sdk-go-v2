@@ -58,11 +58,11 @@ func (c *Client) UpdateEnvironmentMembership(ctx context.Context, params *Update
 
 type UpdateEnvironmentMembershipInput struct {
 
-	// The Amazon Resource Name (ARN) of the environment member whose settings you want
-	// to change.
+	// The ID of the environment for the environment member whose settings you want to
+	// change.
 	//
 	// This member is required.
-	UserArn *string
+	EnvironmentId *string
 
 	// The replacement type of environment member permissions you want to associate
 	// with this environment member. Available values include:
@@ -76,11 +76,11 @@ type UpdateEnvironmentMembershipInput struct {
 	// This member is required.
 	Permissions types.MemberPermissions
 
-	// The ID of the environment for the environment member whose settings you want to
-	// change.
+	// The Amazon Resource Name (ARN) of the environment member whose settings you want
+	// to change.
 	//
 	// This member is required.
-	EnvironmentId *string
+	UserArn *string
 }
 
 type UpdateEnvironmentMembershipOutput struct {

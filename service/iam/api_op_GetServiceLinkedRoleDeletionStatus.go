@@ -71,13 +71,13 @@ type GetServiceLinkedRoleDeletionStatusInput struct {
 
 type GetServiceLinkedRoleDeletionStatusOutput struct {
 
-	// An object that contains details about the reason the deletion failed.
-	Reason *types.DeletionTaskFailureReasonType
-
 	// The status of the deletion.
 	//
 	// This member is required.
 	Status types.DeletionTaskStatusType
+
+	// An object that contains details about the reason the deletion failed.
+	Reason *types.DeletionTaskFailureReasonType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

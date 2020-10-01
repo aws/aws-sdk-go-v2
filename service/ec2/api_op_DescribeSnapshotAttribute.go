@@ -61,6 +61,11 @@ func (c *Client) DescribeSnapshotAttribute(ctx context.Context, params *Describe
 
 type DescribeSnapshotAttributeInput struct {
 
+	// The snapshot attribute you would like to view.
+	//
+	// This member is required.
+	Attribute types.SnapshotAttributeName
+
 	// The ID of the EBS snapshot.
 	//
 	// This member is required.
@@ -71,24 +76,19 @@ type DescribeSnapshotAttributeInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The snapshot attribute you would like to view.
-	//
-	// This member is required.
-	Attribute types.SnapshotAttributeName
 }
 
 type DescribeSnapshotAttributeOutput struct {
 
-	// The ID of the EBS snapshot.
-	SnapshotId *string
+	// The users and groups that have the permissions for creating volumes from the
+	// snapshot.
+	CreateVolumePermissions []*types.CreateVolumePermission
 
 	// The product codes.
 	ProductCodes []*types.ProductCode
 
-	// The users and groups that have the permissions for creating volumes from the
-	// snapshot.
-	CreateVolumePermissions []*types.CreateVolumePermission
+	// The ID of the EBS snapshot.
+	SnapshotId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

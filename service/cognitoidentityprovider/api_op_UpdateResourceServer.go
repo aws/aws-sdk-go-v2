@@ -64,15 +64,15 @@ type UpdateResourceServerInput struct {
 	// This member is required.
 	Identifier *string
 
-	// The user pool ID for the user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// The name of the resource server.
 	//
 	// This member is required.
 	Name *string
+
+	// The user pool ID for the user pool.
+	//
+	// This member is required.
+	UserPoolId *string
 
 	// The scope values to be set for the resource server.
 	Scopes []*types.ResourceServerScopeType

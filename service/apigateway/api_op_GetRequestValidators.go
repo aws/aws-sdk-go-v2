@@ -58,25 +58,26 @@ func (c *Client) GetRequestValidators(ctx context.Context, params *GetRequestVal
 
 // Gets the RequestValidators () collection of a given RestApi ().
 type GetRequestValidatorsInput struct {
-	Template *bool
-
-	Title *string
-
-	Name *string
-
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
-	Limit *int32
-
-	// The current pagination position in the paged result set.
-	Position *string
-
-	TemplateSkipList []*string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
+
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit *int32
+
+	Name *string
+
+	// The current pagination position in the paged result set.
+	Position *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A collection of RequestValidator () resources of a given RestApi (). In OpenAPI,

@@ -64,17 +64,11 @@ func (c *Client) GetConfiguration(ctx context.Context, params *GetConfigurationI
 
 type GetConfigurationInput struct {
 
-	// The environment to get. Specify either the environment name or the environment
+	// The application to get. Specify either the application name or the application
 	// ID.
 	//
 	// This member is required.
-	Environment *string
-
-	// The configuration to get. Specify either the configuration name or the
-	// configuration ID.
-	//
-	// This member is required.
-	Configuration *string
+	Application *string
 
 	// A unique ID to identify the client for the configuration. This ID enables
 	// AppConfig to deploy the configuration in intervals, as defined in the deployment
@@ -83,11 +77,17 @@ type GetConfigurationInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The application to get. Specify either the application name or the application
+	// The configuration to get. Specify either the configuration name or the
+	// configuration ID.
+	//
+	// This member is required.
+	Configuration *string
+
+	// The environment to get. Specify either the environment name or the environment
 	// ID.
 	//
 	// This member is required.
-	Application *string
+	Environment *string
 
 	// The configuration version returned in the most recent GetConfiguration response.
 	// AWS AppConfig uses the value of the ClientConfigurationVersion parameter to
@@ -106,6 +106,9 @@ type GetConfigurationInput struct {
 
 type GetConfigurationOutput struct {
 
+	// The configuration version.
+	ConfigurationVersion *string
+
 	// The content of the configuration or the configuration data.
 	Content []byte
 
@@ -113,9 +116,6 @@ type GetConfigurationOutput struct {
 	// more information, see Content-Type
 	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
-
-	// The configuration version.
-	ConfigurationVersion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

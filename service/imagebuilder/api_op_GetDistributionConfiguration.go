@@ -66,11 +66,11 @@ type GetDistributionConfigurationInput struct {
 
 type GetDistributionConfigurationOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The distribution configuration object.
 	DistributionConfiguration *types.DistributionConfiguration
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -142,35 +142,35 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 
 type CreateBucketInput struct {
 
-	// Allows grantee to create, overwrite, and delete any object in the bucket.
-	GrantWrite *string
-
-	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
-	ObjectLockEnabledForBucket *bool
+	// The name of the bucket to create.
+	//
+	// This member is required.
+	Bucket *string
 
 	// The canned ACL to apply to the bucket.
 	ACL types.BucketCannedACL
 
-	// Allows grantee to write the ACL for the applicable bucket.
-	GrantWriteACP *string
-
-	// Allows grantee to list the objects in the bucket.
-	GrantRead *string
-
 	// The configuration information for the bucket.
 	CreateBucketConfiguration *types.CreateBucketConfiguration
-
-	// Allows grantee to read the bucket ACL.
-	GrantReadACP *string
 
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
 	// bucket.
 	GrantFullControl *string
 
-	// The name of the bucket to create.
-	//
-	// This member is required.
-	Bucket *string
+	// Allows grantee to list the objects in the bucket.
+	GrantRead *string
+
+	// Allows grantee to read the bucket ACL.
+	GrantReadACP *string
+
+	// Allows grantee to create, overwrite, and delete any object in the bucket.
+	GrantWrite *string
+
+	// Allows grantee to write the ACL for the applicable bucket.
+	GrantWriteACP *string
+
+	// Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+	ObjectLockEnabledForBucket *bool
 }
 
 type CreateBucketOutput struct {

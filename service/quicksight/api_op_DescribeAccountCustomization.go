@@ -63,28 +63,28 @@ type DescribeAccountCustomizationInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// The namespace associated with the customization that you're describing.
+	Namespace *string
+
 	// The status of the creation of the customization. This is an asynchronous
 	// process. A status of CREATED means that your customization is ready to use.
 	Resolved *bool
-
-	// The namespace associated with the customization that you're describing.
-	Namespace *string
 }
 
 type DescribeAccountCustomizationOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
-	// The namespace associated with the customization that you're describing.
-	Namespace *string
+	// The customizations associated with QuickSight.
+	AccountCustomization *types.AccountCustomization
 
 	// The ID for the AWS account that you want to describe QuickSight customizations
 	// for.
 	AwsAccountId *string
 
-	// The customizations associated with QuickSight.
-	AccountCustomization *types.AccountCustomization
+	// The namespace associated with the customization that you're describing.
+	Namespace *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

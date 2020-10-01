@@ -101,6 +101,11 @@ func (c *Client) UpdateXssMatchSet(ctx context.Context, params *UpdateXssMatchSe
 // A request to update an XssMatchSet ().
 type UpdateXssMatchSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// An array of XssMatchSetUpdate objects that you want to insert into or delete
 	// from an XssMatchSet (). For more information, see the applicable data types:
 	//
@@ -115,11 +120,6 @@ type UpdateXssMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.XssMatchSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 
 	// The XssMatchSetId of the XssMatchSet that you want to update. XssMatchSetId is
 	// returned by CreateXssMatchSet () and by ListXssMatchSets ().

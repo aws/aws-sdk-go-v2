@@ -67,14 +67,14 @@ type ListMLTransformsInput struct {
 	// The maximum size of a list to return.
 	MaxResults *int32
 
-	// Specifies to return only these tagged resources.
-	Tags map[string]*string
-
 	// A continuation token, if this is a continuation request.
 	NextToken *string
 
 	// A TransformSortCriteria used to sort the machine learning transforms.
 	Sort *types.TransformSortCriteria
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]*string
 }
 
 type ListMLTransformsOutput struct {

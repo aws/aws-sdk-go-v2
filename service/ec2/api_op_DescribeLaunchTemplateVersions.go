@@ -59,19 +59,11 @@ func (c *Client) DescribeLaunchTemplateVersions(ctx context.Context, params *Des
 
 type DescribeLaunchTemplateVersionsInput struct {
 
-	// The name of the launch template. To describe one or more versions of a specified
-	// launch template, you must specify either the launch template ID or the launch
-	// template name in the request. To describe all the latest or default launch
-	// template versions in your account, you must omit this parameter.
-	LaunchTemplateName *string
-
-	// The version number after which to describe launch template versions.
-	MinVersion *string
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 1 and 200.
-	MaxResults *int32
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// One or more filters.
 	//
@@ -98,8 +90,31 @@ type DescribeLaunchTemplateVersionsInput struct {
 	//     * ram-disk-id - The RAM disk ID.
 	Filters []*types.Filter
 
+	// The ID of the launch template. To describe one or more versions of a specified
+	// launch template, you must specify either the launch template ID or the launch
+	// template name in the request. To describe all the latest or default launch
+	// template versions in your account, you must omit this parameter.
+	LaunchTemplateId *string
+
+	// The name of the launch template. To describe one or more versions of a specified
+	// launch template, you must specify either the launch template ID or the launch
+	// template name in the request. To describe all the latest or default launch
+	// template versions in your account, you must omit this parameter.
+	LaunchTemplateName *string
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value. This
+	// value can be between 1 and 200.
+	MaxResults *int32
+
 	// The version number up to which to describe launch template versions.
 	MaxVersion *string
+
+	// The version number after which to describe launch template versions.
+	MinVersion *string
+
+	// The token to request the next page of results.
+	NextToken *string
 
 	// One or more versions of the launch template. Valid values depend on whether you
 	// are describing a specified launch template (by ID or name) or all launch
@@ -110,21 +125,6 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// are defined as the default version, the valid value is $Default. You can specify
 	// $Latest and $Default in the same call. You cannot specify numbers.
 	Versions []*string
-
-	// The ID of the launch template. To describe one or more versions of a specified
-	// launch template, you must specify either the launch template ID or the launch
-	// template name in the request. To describe all the latest or default launch
-	// template versions in your account, you must omit this parameter.
-	LaunchTemplateId *string
-
-	// The token to request the next page of results.
-	NextToken *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 }
 
 type DescribeLaunchTemplateVersionsOutput struct {

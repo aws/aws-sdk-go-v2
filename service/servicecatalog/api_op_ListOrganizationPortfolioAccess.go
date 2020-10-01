@@ -75,17 +75,10 @@ type ListOrganizationPortfolioAccessInput struct {
 	// This member is required.
 	OrganizationNodeType types.OrganizationNodeType
 
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
 	// The portfolio identifier. For example, port-2abcdext3y5fk.
 	//
 	// This member is required.
 	PortfolioId *string
-
-	// The maximum number of items to return with this call.
-	PageSize *int32
 
 	// The language code.
 	//
@@ -96,6 +89,13 @@ type ListOrganizationPortfolioAccessInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type ListOrganizationPortfolioAccessOutput struct {

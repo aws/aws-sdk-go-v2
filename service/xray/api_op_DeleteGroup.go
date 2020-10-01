@@ -55,11 +55,11 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The case-sensitive name of the group.
-	GroupName *string
-
 	// The ARN of the group that was generated on creation.
 	GroupARN *string
+
+	// The case-sensitive name of the group.
+	GroupName *string
 }
 
 type DeleteGroupOutput struct {

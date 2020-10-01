@@ -108,29 +108,27 @@ func (c *Client) HeadObject(ctx context.Context, params *HeadObjectInput, optFns
 
 type HeadObjectInput struct {
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure that the
-	// encryption key was transmitted without error.
-	SSECustomerKeyMD5 *string
-
 	// The name of the bucket containing the object.
 	//
 	// This member is required.
 	Bucket *string
 
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
+	// The object key.
+	//
+	// This member is required.
+	Key *string
 
-	// Downloads the specified range bytes of an object. For more information about the
-	// HTTP Range header, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35 (). Amazon S3
-	// doesn't support retrieving multiple ranges of data per GET request.
-	Range *string
+	// Return the object only if its entity tag (ETag) is the same as the one
+	// specified, otherwise return a 412 (precondition failed).
+	IfMatch *string
+
+	// Return the object only if it has been modified since the specified time,
+	// otherwise return a 304 (not modified).
+	IfModifiedSince *time.Time
+
+	// Return the object only if its entity tag (ETag) is different from the one
+	// specified, otherwise return a 304 (not modified).
+	IfNoneMatch *string
 
 	// Return the object only if it has not been modified since the specified time,
 	// otherwise return a 412 (precondition failed).
@@ -142,18 +140,23 @@ type HeadObjectInput struct {
 	// object.
 	PartNumber *int32
 
-	// Return the object only if its entity tag (ETag) is different from the one
-	// specified, otherwise return a 304 (not modified).
-	IfNoneMatch *string
+	// Downloads the specified range bytes of an object. For more information about the
+	// HTTP Range header, see
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35 (). Amazon S3
+	// doesn't support retrieving multiple ranges of data per GET request.
+	Range *string
 
-	// The object key.
-	//
-	// This member is required.
-	Key *string
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
 
-	// Return the object only if it has been modified since the specified time,
-	// otherwise return a 304 (not modified).
-	IfModifiedSince *time.Time
+	// Specifies the algorithm to use to when encrypting the object (for example,
+	// AES256).
+	SSECustomerAlgorithm *string
 
 	// Specifies the customer-provided encryption key for Amazon S3 to use in
 	// encrypting data. This value is used to store the object and then it is
@@ -162,31 +165,85 @@ type HeadObjectInput struct {
 	// x-amz-server-side-encryption-customer-algorithm header.
 	SSECustomerKey *string
 
+	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
+	SSECustomerKeyMD5 *string
+
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
-
-	// Return the object only if its entity tag (ETag) is the same as the one
-	// specified, otherwise return a 412 (precondition failed).
-	IfMatch *string
-
-	// Specifies the algorithm to use to when encrypting the object (for example,
-	// AES256).
-	SSECustomerAlgorithm *string
 }
 
 type HeadObjectOutput struct {
 
-	// If server-side encryption with a customer-provided encryption key was requested,
-	// the response will include this header confirming the encryption algorithm used.
-	SSECustomerAlgorithm *string
+	// Indicates that a range of bytes was specified.
+	AcceptRanges *string
+
+	// Specifies caching behavior along the request/reply chain.
+	CacheControl *string
+
+	// Specifies presentational information for the object.
+	ContentDisposition *string
+
+	// Specifies what content encodings have been applied to the object and thus what
+	// decoding mechanisms must be applied to obtain the media-type referenced by the
+	// Content-Type header field.
+	ContentEncoding *string
+
+	// The language the content is in.
+	ContentLanguage *string
+
+	// Size of the body in bytes.
+	ContentLength *int64
+
+	// A standard MIME type describing the format of the object data.
+	ContentType *string
+
+	// Specifies whether the object retrieved was (true) or was not (false) a Delete
+	// Marker. If false, this response header does not appear in the response.
+	DeleteMarker *bool
+
+	// An ETag is an opaque identifier assigned by a web server to a specific version
+	// of a resource found at a URL.
+	ETag *string
+
+	// If the object expiration is configured (see PUT Bucket lifecycle), the response
+	// includes this header. It includes the expiry-date and rule-id key-value pairs
+	// providing object expiration information. The value of the rule-id is URL
+	// encoded.
+	Expiration *string
+
+	// The date and time at which the object is no longer cacheable.
+	Expires *time.Time
 
 	// Last modified date of the object
 	LastModified *time.Time
 
-	// If server-side encryption with a customer-provided encryption key was requested,
-	// the response will include this header to provide round-trip message integrity
-	// verification of the customer-provided encryption key.
-	SSECustomerKeyMD5 *string
+	// A map of metadata to store with the object in S3.
+	Metadata map[string]*string
+
+	// This is set to the number of metadata entries not returned in x-amz-meta
+	// headers. This can happen if you create metadata using an API like SOAP that
+	// supports more flexible metadata than the REST API. For example, using SOAP, you
+	// can create metadata whose values are not legal HTTP headers.
+	MissingMeta *int32
+
+	// Specifies whether a legal hold is in effect for this object. This header is only
+	// returned if the requester has the s3:GetObjectLegalHold permission. This header
+	// is not returned if the specified version of this object has never had a legal
+	// hold applied. For more information about S3 Object Lock, see Object Lock
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
+	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
+
+	// The Object Lock mode, if any, that's in effect for this object. This header is
+	// only returned if the requester has the s3:GetObjectRetention permission. For
+	// more information about S3 Object Lock, see Object Lock
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
+	ObjectLockMode types.ObjectLockMode
+
+	// The date and time when the Object Lock retention period expires. This header is
+	// only returned if the requester has the s3:GetObjectRetention permission.
+	ObjectLockRetainUntilDate *time.Time
 
 	// The count of parts this object has.
 	PartsCount *int32
@@ -214,8 +271,9 @@ type HeadObjectOutput struct {
 	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html">Replication</a>.</p>
 	ReplicationStatus types.ReplicationStatus
 
-	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string
+	// If present, indicates that the requester was successfully charged for the
+	// request.
+	RequestCharged types.RequestCharged
 
 	// If the object is an archived object (an object whose storage class is GLACIER),
 	// the response includes this header if either the archive restoration is in
@@ -230,87 +288,14 @@ type HeadObjectOutput struct {
 	// Objects: General Considerations</a>.</p>
 	Restore *string
 
-	// Specifies what content encodings have been applied to the object and thus what
-	// decoding mechanisms must be applied to obtain the media-type referenced by the
-	// Content-Type header field.
-	ContentEncoding *string
+	// If server-side encryption with a customer-provided encryption key was requested,
+	// the response will include this header confirming the encryption algorithm used.
+	SSECustomerAlgorithm *string
 
-	// If present, indicates that the requester was successfully charged for the
-	// request.
-	RequestCharged types.RequestCharged
-
-	// Version of the object.
-	VersionId *string
-
-	// Specifies caching behavior along the request/reply chain.
-	CacheControl *string
-
-	// The date and time when the Object Lock retention period expires. This header is
-	// only returned if the requester has the s3:GetObjectRetention permission.
-	ObjectLockRetainUntilDate *time.Time
-
-	// If the bucket is configured as a website, redirects requests for this object to
-	// another object in the same bucket or to an external URL. Amazon S3 stores the
-	// value of this header in the object metadata.
-	WebsiteRedirectLocation *string
-
-	// Size of the body in bytes.
-	ContentLength *int64
-
-	// The date and time at which the object is no longer cacheable.
-	Expires *time.Time
-
-	// Specifies whether a legal hold is in effect for this object. This header is only
-	// returned if the requester has the s3:GetObjectLegalHold permission. This header
-	// is not returned if the specified version of this object has never had a legal
-	// hold applied. For more information about S3 Object Lock, see Object Lock
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
-
-	// This is set to the number of metadata entries not returned in x-amz-meta
-	// headers. This can happen if you create metadata using an API like SOAP that
-	// supports more flexible metadata than the REST API. For example, using SOAP, you
-	// can create metadata whose values are not legal HTTP headers.
-	MissingMeta *int32
-
-	// Specifies presentational information for the object.
-	ContentDisposition *string
-
-	// Specifies whether the object retrieved was (true) or was not (false) a Delete
-	// Marker. If false, this response header does not appear in the response.
-	DeleteMarker *bool
-
-	// The language the content is in.
-	ContentLanguage *string
-
-	// An ETag is an opaque identifier assigned by a web server to a specific version
-	// of a resource found at a URL.
-	ETag *string
-
-	// If the object expiration is configured (see PUT Bucket lifecycle), the response
-	// includes this header. It includes the expiry-date and rule-id key-value pairs
-	// providing object expiration information. The value of the rule-id is URL
-	// encoded.
-	Expiration *string
-
-	// Indicates that a range of bytes was specified.
-	AcceptRanges *string
-
-	// The Object Lock mode, if any, that's in effect for this object. This header is
-	// only returned if the requester has the s3:GetObjectRetention permission. For
-	// more information about S3 Object Lock, see Object Lock
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-	ObjectLockMode types.ObjectLockMode
-
-	// A standard MIME type describing the format of the object data.
-	ContentType *string
-
-	// Provides storage class information of the object. Amazon S3 returns this header
-	// for all objects except for S3 Standard storage class objects.  <p>For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
-	// Classes</a>.</p>
-	StorageClass types.StorageClass
+	// If server-side encryption with a customer-provided encryption key was requested,
+	// the response will include this header to provide round-trip message integrity
+	// verification of the customer-provided encryption key.
+	SSECustomerKeyMD5 *string
 
 	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
 	// symmetric customer managed customer master key (CMK) that was used for the
@@ -322,6 +307,21 @@ type HeadObjectOutput struct {
 	// includes this header with the value of the server-side encryption algorithm used
 	// when storing this object in Amazon S3 (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
+
+	// Provides storage class information of the object. Amazon S3 returns this header
+	// for all objects except for S3 Standard storage class objects.  <p>For more
+	// information, see <a
+	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html">Storage
+	// Classes</a>.</p>
+	StorageClass types.StorageClass
+
+	// Version of the object.
+	VersionId *string
+
+	// If the bucket is configured as a website, redirects requests for this object to
+	// another object in the same bucket or to an external URL. Amazon S3 stores the
+	// value of this header in the object metadata.
+	WebsiteRedirectLocation *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

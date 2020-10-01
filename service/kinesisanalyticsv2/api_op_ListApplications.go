@@ -71,17 +71,17 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
+	// A list of ApplicationSummary objects.
+	//
+	// This member is required.
+	ApplicationSummaries []*types.ApplicationSummary
+
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. Pass this token into a subsequent command to retrieve the
 	// next set of items For more information about pagination, see Using the AWS
 	// Command Line Interface's Pagination Options
 	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string
-
-	// A list of ApplicationSummary objects.
-	//
-	// This member is required.
-	ApplicationSummaries []*types.ApplicationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

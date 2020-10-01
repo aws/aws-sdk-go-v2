@@ -58,16 +58,16 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 // Represents a request to the update project operation.
 type UpdateProjectInput struct {
 
+	// The Amazon Resource Name (ARN) of the project whose name to update.
+	//
+	// This member is required.
+	Arn *string
+
 	// The number of minutes a test run in the project executes before it times out.
 	DefaultJobTimeoutMinutes *int32
 
 	// A string that represents the new name of the project that you are updating.
 	Name *string
-
-	// The Amazon Resource Name (ARN) of the project whose name to update.
-	//
-	// This member is required.
-	Arn *string
 }
 
 // Represents the result of an update project request.

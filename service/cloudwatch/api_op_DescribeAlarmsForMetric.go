@@ -58,32 +58,32 @@ func (c *Client) DescribeAlarmsForMetric(ctx context.Context, params *DescribeAl
 
 type DescribeAlarmsForMetricInput struct {
 
-	// The namespace of the metric.
-	//
-	// This member is required.
-	Namespace *string
-
-	// The period, in seconds, over which the statistic is applied.
-	Period *int32
-
-	// The dimensions associated with the metric. If the metric has any associated
-	// dimensions, you must specify them in order for the call to succeed.
-	Dimensions []*types.Dimension
-
-	// The statistic for the metric, other than percentiles. For percentile statistics,
-	// use ExtendedStatistics.
-	Statistic types.Statistic
-
 	// The name of the metric.
 	//
 	// This member is required.
 	MetricName *string
 
-	// The unit for the metric.
-	Unit types.StandardUnit
+	// The namespace of the metric.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The dimensions associated with the metric. If the metric has any associated
+	// dimensions, you must specify them in order for the call to succeed.
+	Dimensions []*types.Dimension
 
 	// The percentile statistic for the metric. Specify a value between p0.0 and p100.
 	ExtendedStatistic *string
+
+	// The period, in seconds, over which the statistic is applied.
+	Period *int32
+
+	// The statistic for the metric, other than percentiles. For percentile statistics,
+	// use ExtendedStatistics.
+	Statistic types.Statistic
+
+	// The unit for the metric.
+	Unit types.StandardUnit
 }
 
 type DescribeAlarmsForMetricOutput struct {

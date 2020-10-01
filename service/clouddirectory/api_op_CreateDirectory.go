@@ -61,24 +61,19 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 
 type CreateDirectoryInput struct {
 
+	// The name of the Directory (). Should be unique per account, per region.
+	//
+	// This member is required.
+	Name *string
+
 	// The Amazon Resource Name (ARN) of the published schema that will be copied into
 	// the data Directory (). For more information, see arns ().
 	//
 	// This member is required.
 	SchemaArn *string
-
-	// The name of the Directory (). Should be unique per account, per region.
-	//
-	// This member is required.
-	Name *string
 }
 
 type CreateDirectoryOutput struct {
-
-	// The name of the Directory ().
-	//
-	// This member is required.
-	Name *string
 
 	// The ARN of the published schema in the Directory (). Once a published schema is
 	// copied into the directory, it has its own ARN, which is referred to applied
@@ -92,6 +87,11 @@ type CreateDirectoryOutput struct {
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	// The name of the Directory ().
+	//
+	// This member is required.
+	Name *string
 
 	// The root object node of the created directory.
 	//

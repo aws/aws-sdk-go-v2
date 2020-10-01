@@ -71,11 +71,11 @@ type GetJobRunsInput struct {
 
 type GetJobRunsOutput struct {
 
-	// A continuation token, if not all requested job runs have been returned.
-	NextToken *string
-
 	// A list of job-run metadata objects.
 	JobRuns []*types.JobRun
+
+	// A continuation token, if not all requested job runs have been returned.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

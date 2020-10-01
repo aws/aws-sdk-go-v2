@@ -73,12 +73,12 @@ type DisassociateResourceSharePermissionInput struct {
 
 type DisassociateResourceSharePermissionOutput struct {
 
-	// Indicates whether the request succeeded.
-	ReturnValue *bool
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Indicates whether the request succeeded.
+	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

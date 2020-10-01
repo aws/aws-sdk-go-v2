@@ -59,17 +59,21 @@ func (c *Client) CreateDomainName(ctx context.Context, params *CreateDomainNameI
 
 // A request to create a new domain name.
 type CreateDomainNameInput struct {
-	Template *bool
 
-	Title *string
+	// [Required] The name of the DomainName () resource.
+	//
+	// This member is required.
+	DomainName *string
 
-	Name *string
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
+	CertificateArn *string
 
-	TemplateSkipList []*string
-
-	// [Deprecated] Your edge-optimized endpoint's domain name certificate's private
-	// key.
-	CertificatePrivateKey *string
+	// [Deprecated] The body of the server certificate that will be used by
+	// edge-optimized endpoint for this domain name provided by your certificate
+	// authority.
+	CertificateBody *string
 
 	// [Deprecated] The intermediate certificates and optionally the root certificate,
 	// one after the other without any blank lines, used by an edge-optimized endpoint
@@ -80,46 +84,43 @@ type CreateDomainNameInput struct {
 	// chain of trust path.
 	CertificateChain *string
 
+	// The user-friendly name of the certificate that will be used by edge-optimized
+	// endpoint for this domain name.
+	CertificateName *string
+
+	// [Deprecated] Your edge-optimized endpoint's domain name certificate's private
+	// key.
+	CertificatePrivateKey *string
+
+	// The endpoint configuration of this DomainName () showing the endpoint types of
+	// the domain name.
+	EndpointConfiguration *types.EndpointConfiguration
+
+	Name *string
+
+	// The reference to an AWS-managed certificate that will be used by regional
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
+	RegionalCertificateArn *string
+
 	// The user-friendly name of the certificate that will be used by regional endpoint
 	// for this domain name.
 	RegionalCertificateName *string
+
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
+	// (). The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy types.SecurityPolicy
 
 	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]*string
 
-	// [Deprecated] The body of the server certificate that will be used by
-	// edge-optimized endpoint for this domain name provided by your certificate
-	// authority.
-	CertificateBody *string
+	Template *bool
 
-	// The user-friendly name of the certificate that will be used by edge-optimized
-	// endpoint for this domain name.
-	CertificateName *string
+	TemplateSkipList []*string
 
-	// [Required] The name of the DomainName () resource.
-	//
-	// This member is required.
-	DomainName *string
-
-	// The endpoint configuration of this DomainName () showing the endpoint types of
-	// the domain name.
-	EndpointConfiguration *types.EndpointConfiguration
-
-	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
-	// (). The valid values are TLS_1_0 and TLS_1_2.
-	SecurityPolicy types.SecurityPolicy
-
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
-	CertificateArn *string
-
-	// The reference to an AWS-managed certificate that will be used by regional
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
-	RegionalCertificateArn *string
+	Title *string
 }
 
 // Represents a custom domain name as a user-friendly host name of an API (RestApi
@@ -135,15 +136,25 @@ type CreateDomainNameInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type CreateDomainNameOutput struct {
 
-	// The domain name associated with the regional endpoint for this custom domain
-	// name. You set up this association by adding a DNS record that points the custom
-	// domain name to this regional domain name. The regional domain name is returned
-	// by API Gateway when you create a regional endpoint.
-	RegionalDomainName *string
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
+	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
 	// this domain name.
 	CertificateName *string
+
+	// The timestamp when the certificate that was used by edge-optimized endpoint for
+	// this domain name was uploaded.
+	CertificateUploadDate *time.Time
+
+	// The domain name of the Amazon CloudFront distribution associated with this
+	// custom domain name for an edge-optimized endpoint. You set up this association
+	// when adding a DNS record pointing the custom domain name to this distribution
+	// name. For more information about CloudFront distributions, see the Amazon
+	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
+	DistributionDomainName *string
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
@@ -156,34 +167,33 @@ type CreateDomainNameOutput struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
-	// (). The valid values are TLS_1_0 and TLS_1_2.
-	SecurityPolicy types.SecurityPolicy
+	// The status of the DomainName () migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
+	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// updated.
+	DomainNameStatus types.DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
 	// DomainName () migration.
 	DomainNameStatusMessage *string
 
+	// The endpoint configuration of this DomainName () showing the endpoint types of
+	// the domain name.
+	EndpointConfiguration *types.EndpointConfiguration
+
 	// The reference to an AWS-managed certificate that will be used for validating the
 	// regional domain name. AWS Certificate Manager is the only supported source.
 	RegionalCertificateArn *string
-
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
-	CertificateArn *string
-
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
-	CertificateUploadDate *time.Time
 
 	// The name of the certificate that will be used for validating the regional domain
 	// name.
 	RegionalCertificateName *string
 
-	// The endpoint configuration of this DomainName () showing the endpoint types of
-	// the domain name.
-	EndpointConfiguration *types.EndpointConfiguration
+	// The domain name associated with the regional endpoint for this custom domain
+	// name. You set up this association by adding a DNS record that points the custom
+	// domain name to this regional domain name. The regional domain name is returned
+	// by API Gateway when you create a regional endpoint.
+	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
 	// more information, see Set up a Regional Custom Domain Name
@@ -192,21 +202,12 @@ type CreateDomainNameOutput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
 	RegionalHostedZoneId *string
 
-	// The domain name of the Amazon CloudFront distribution associated with this
-	// custom domain name for an edge-optimized endpoint. You set up this association
-	// when adding a DNS record pointing the custom domain name to this distribution
-	// name. For more information about CloudFront distributions, see the Amazon
-	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
-	DistributionDomainName *string
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
+	// (). The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy types.SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The status of the DomainName () migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
-	// updated.
-	DomainNameStatus types.DomainNameStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

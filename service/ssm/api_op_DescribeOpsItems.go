@@ -117,12 +117,12 @@ type DescribeOpsItemsInput struct {
 
 type DescribeOpsItemsOutput struct {
 
-	// A list of OpsItems.
-	OpsItemSummaries []*types.OpsItemSummary
-
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
+
+	// A list of OpsItems.
+	OpsItemSummaries []*types.OpsItemSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,10 +56,19 @@ func (c *Client) ListBuildBatchesForProject(ctx context.Context, params *ListBui
 
 type ListBuildBatchesForProjectInput struct {
 
+	// A BuildBatchFilter object that specifies the filters for the search.
+	Filter *types.BuildBatchFilter
+
+	// The maximum number of results to return.
+	MaxResults *int32
+
 	// The nextToken value returned from a previous call to ListBuildBatchesForProject.
 	// This specifies the next item to return. To return the beginning of the list,
 	// exclude this parameter.
 	NextToken *string
+
+	// The name of the project.
+	ProjectName *string
 
 	// Specifies the sort order of the returned items. Valid values include:
 	//
@@ -70,15 +79,6 @@ type ListBuildBatchesForProjectInput struct {
 	// * DESCENDING: List the batch build identifiers in descending order by
 	// identifier.
 	SortOrder types.SortOrderType
-
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// A BuildBatchFilter object that specifies the filters for the search.
-	Filter *types.BuildBatchFilter
-
-	// The name of the project.
-	ProjectName *string
 }
 
 type ListBuildBatchesForProjectOutput struct {

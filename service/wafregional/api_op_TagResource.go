@@ -73,12 +73,12 @@ type TagResourceInput struct {
 	//
 	//
 	// This member is required.
-	Tags []*types.Tag
+	ResourceARN *string
 
 	//
 	//
 	// This member is required.
-	ResourceARN *string
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

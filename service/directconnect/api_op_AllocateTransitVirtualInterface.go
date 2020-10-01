@@ -64,20 +64,20 @@ func (c *Client) AllocateTransitVirtualInterface(ctx context.Context, params *Al
 
 type AllocateTransitVirtualInterfaceInput struct {
 
-	// The ID of the AWS account that owns the transit virtual interface.
+	// The ID of the connection on which the transit virtual interface is provisioned.
 	//
 	// This member is required.
-	OwnerAccount *string
+	ConnectionId *string
 
 	// Information about the transit virtual interface.
 	//
 	// This member is required.
 	NewTransitVirtualInterfaceAllocation *types.NewTransitVirtualInterfaceAllocation
 
-	// The ID of the connection on which the transit virtual interface is provisioned.
+	// The ID of the AWS account that owns the transit virtual interface.
 	//
 	// This member is required.
-	ConnectionId *string
+	OwnerAccount *string
 }
 
 type AllocateTransitVirtualInterfaceOutput struct {

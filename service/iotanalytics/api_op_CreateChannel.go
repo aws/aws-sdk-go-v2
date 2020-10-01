@@ -58,6 +58,11 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
+	// The name of the channel.
+	//
+	// This member is required.
+	ChannelName *string
+
 	// Where channel data is stored. You may choose one of "serviceManagedS3" or
 	// "customerManagedS3" storage. If not specified, the default is
 	// "serviceManagedS3". This cannot be changed after creation of the channel.
@@ -69,23 +74,18 @@ type CreateChannelInput struct {
 
 	// Metadata which can be used to manage the channel.
 	Tags []*types.Tag
-
-	// The name of the channel.
-	//
-	// This member is required.
-	ChannelName *string
 }
 
 type CreateChannelOutput struct {
-
-	// How long, in days, message data is kept for the channel.
-	RetentionPeriod *types.RetentionPeriod
 
 	// The ARN of the channel.
 	ChannelArn *string
 
 	// The name of the channel.
 	ChannelName *string
+
+	// How long, in days, message data is kept for the channel.
+	RetentionPeriod *types.RetentionPeriod
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

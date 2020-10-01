@@ -59,6 +59,14 @@ func (c *Client) ImportClientVpnClientCertificateRevocationList(ctx context.Cont
 
 type ImportClientVpnClientCertificateRevocationListInput struct {
 
+	// The client certificate revocation list file. For more information, see Generate
+	// a Client Certificate Revocation List
+	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
+	// in the AWS Client VPN Administrator Guide.
+	//
+	// This member is required.
+	CertificateRevocationList *string
+
 	// The ID of the Client VPN endpoint to which the client certificate revocation
 	// list applies.
 	//
@@ -70,14 +78,6 @@ type ImportClientVpnClientCertificateRevocationListInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The client certificate revocation list file. For more information, see Generate
-	// a Client Certificate Revocation List
-	// (https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate)
-	// in the AWS Client VPN Administrator Guide.
-	//
-	// This member is required.
-	CertificateRevocationList *string
 }
 
 type ImportClientVpnClientCertificateRevocationListOutput struct {

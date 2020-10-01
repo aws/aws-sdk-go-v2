@@ -61,32 +61,32 @@ func (c *Client) DescribeServices(ctx context.Context, params *DescribeServicesI
 
 type DescribeServicesInput struct {
 
+	// The format version that you want the response to be in. Valid values are: aws_v1
+	FormatVersion *string
+
 	// The maximum number of results that you want returned in the response.
 	MaxResults *int32
-
-	// The code for the service whose information you want to retrieve, such as
-	// AmazonEC2. You can use the ServiceCode to filter the results in a GetProducts
-	// call. To retrieve a list of all services, leave this blank.
-	ServiceCode *string
 
 	// The pagination token that indicates the next set of results that you want to
 	// retrieve.
 	NextToken *string
 
-	// The format version that you want the response to be in. Valid values are: aws_v1
-	FormatVersion *string
+	// The code for the service whose information you want to retrieve, such as
+	// AmazonEC2. You can use the ServiceCode to filter the results in a GetProducts
+	// call. To retrieve a list of all services, leave this blank.
+	ServiceCode *string
 }
 
 type DescribeServicesOutput struct {
-
-	// The service metadata for the service or services in the response.
-	Services []*types.Service
 
 	// The format version of the response. For example, aws_v1.
 	FormatVersion *string
 
 	// The pagination token for the next set of retreivable results.
 	NextToken *string
+
+	// The service metadata for the service or services in the response.
+	Services []*types.Service
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

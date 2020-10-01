@@ -57,13 +57,13 @@ func (c *Client) ListTestGridSessionActions(ctx context.Context, params *ListTes
 
 type ListTestGridSessionActionsInput struct {
 
-	// The maximum number of sessions to return per response.
-	MaxResult *int32
-
 	// The ARN of the session to retrieve.
 	//
 	// This member is required.
 	SessionArn *string
+
+	// The maximum number of sessions to return per response.
+	MaxResult *int32
 
 	// Pagination token.
 	NextToken *string

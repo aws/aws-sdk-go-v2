@@ -75,18 +75,15 @@ type GetCoreDefinitionVersionInput struct {
 
 type GetCoreDefinitionVersionOutput struct {
 
+	// The ARN of the core definition version.
+	Arn *string
+
 	// The time, in milliseconds since the epoch, when the core definition version was
 	// created.
 	CreationTimestamp *string
 
-	// The ARN of the core definition version.
-	Arn *string
-
 	// Information about the core definition version.
 	Definition *types.CoreDefinitionVersion
-
-	// The version of the core definition version.
-	Version *string
 
 	// The ID of the core definition version.
 	Id *string
@@ -94,6 +91,9 @@ type GetCoreDefinitionVersionOutput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
+	// The version of the core definition version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

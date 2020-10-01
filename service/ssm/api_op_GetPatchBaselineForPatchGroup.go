@@ -69,14 +69,14 @@ type GetPatchBaselineForPatchGroupInput struct {
 
 type GetPatchBaselineForPatchGroupOutput struct {
 
-	// The name of the patch group.
-	PatchGroup *string
-
 	// The ID of the patch baseline that should be used for the patch group.
 	BaselineId *string
 
 	// The operating system rule specified for patch groups using the patch baseline.
 	OperatingSystem types.OperatingSystem
+
+	// The name of the patch group.
+	PatchGroup *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

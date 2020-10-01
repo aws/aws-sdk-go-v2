@@ -59,11 +59,6 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 
 type AddTagsToResourceInput struct {
 
-	// The tags to be assigned to the Amazon Neptune resource.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The Amazon Neptune resource that the tags are added to. This value is an Amazon
 	// Resource Name (ARN). For information about creating an ARN, see  Constructing an
 	// Amazon Resource Name (ARN)
@@ -71,6 +66,11 @@ type AddTagsToResourceInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	// The tags to be assigned to the Amazon Neptune resource.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type AddTagsToResourceOutput struct {

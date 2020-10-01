@@ -72,8 +72,11 @@ type CreateJobInput struct {
 
 type CreateJobOutput struct {
 
-	// The job type.
-	Type types.Type
+	// The ARN for the job.
+	Arn *string
+
+	// The date and time that the job was created, in ISO 8601 format.
+	CreatedAt *time.Time
 
 	// Details about the job.
 	Details *types.ResponseDetails
@@ -81,17 +84,14 @@ type CreateJobOutput struct {
 	// The errors associated with jobs.
 	Errors []*types.JobError
 
-	// The date and time that the job was created, in ISO 8601 format.
-	CreatedAt *time.Time
+	// The unique identifier for the job.
+	Id *string
 
 	// The state of the job.
 	State types.State
 
-	// The unique identifier for the job.
-	Id *string
-
-	// The ARN for the job.
-	Arn *string
+	// The job type.
+	Type types.Type
 
 	// The date and time that the job was last updated, in ISO 8601 format.
 	UpdatedAt *time.Time

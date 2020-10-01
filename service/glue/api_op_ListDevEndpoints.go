@@ -63,11 +63,11 @@ type ListDevEndpointsInput struct {
 	// The maximum size of a list to return.
 	MaxResults *int32
 
-	// Specifies to return only these tagged resources.
-	Tags map[string]*string
-
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
+	// Specifies to return only these tagged resources.
+	Tags map[string]*string
 }
 
 type ListDevEndpointsOutput struct {

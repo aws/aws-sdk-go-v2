@@ -56,12 +56,12 @@ func (c *Client) ListSubscriptionDefinitions(ctx context.Context, params *ListSu
 
 type ListSubscriptionDefinitionsInput struct {
 
+	// The maximum number of results to be returned per request.
+	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// The maximum number of results to be returned per request.
-	MaxResults *string
 }
 
 type ListSubscriptionDefinitionsOutput struct {

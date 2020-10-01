@@ -73,6 +73,11 @@ func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *
 //
 type AddApplicationReferenceDataSourceInput struct {
 
+	// Name of an existing application.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// Version of the application for which you are adding the reference data source.
 	// You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
@@ -91,11 +96,6 @@ type AddApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	ReferenceDataSource *types.ReferenceDataSource
-
-	// Name of an existing application.
-	//
-	// This member is required.
-	ApplicationName *string
 }
 
 //

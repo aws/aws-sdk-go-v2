@@ -62,15 +62,15 @@ type ResetPasswordInput struct {
 	// This member is required.
 	OrganizationId *string
 
-	// The identifier of the user for whom the password is reset.
-	//
-	// This member is required.
-	UserId *string
-
 	// The new password for the user.
 	//
 	// This member is required.
 	Password *string
+
+	// The identifier of the user for whom the password is reset.
+	//
+	// This member is required.
+	UserId *string
 }
 
 type ResetPasswordOutput struct {

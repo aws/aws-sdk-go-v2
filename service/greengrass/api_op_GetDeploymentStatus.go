@@ -70,6 +70,10 @@ type GetDeploymentStatusInput struct {
 
 type GetDeploymentStatusOutput struct {
 
+	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or
+	// ''Failure''.
+	DeploymentStatus *string
+
 	// The type of the deployment.
 	DeploymentType types.DeploymentType
 
@@ -82,10 +86,6 @@ type GetDeploymentStatusOutput struct {
 	// The time, in milliseconds since the epoch, when the deployment status was
 	// updated.
 	UpdatedAt *string
-
-	// The status of the deployment: ''InProgress'', ''Building'', ''Success'', or
-	// ''Failure''.
-	DeploymentStatus *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

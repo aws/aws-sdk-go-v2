@@ -108,15 +108,6 @@ type CreateRuleInput struct {
 	// This member is required.
 	ChangeToken *string
 
-	//
-	Tags []*types.Tag
-
-	// A friendly name or description of the Rule (). You can't change the name of a
-	// Rule after you create it.
-	//
-	// This member is required.
-	Name *string
-
 	// A friendly name or description for the metrics for this Rule. The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128
 	// and minimum length one. It can't contain whitespace or metric names reserved for
@@ -125,6 +116,15 @@ type CreateRuleInput struct {
 	//
 	// This member is required.
 	MetricName *string
+
+	// A friendly name or description of the Rule (). You can't change the name of a
+	// Rule after you create it.
+	//
+	// This member is required.
+	Name *string
+
+	//
+	Tags []*types.Tag
 }
 
 type CreateRuleOutput struct {

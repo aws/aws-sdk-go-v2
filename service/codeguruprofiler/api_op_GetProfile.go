@@ -65,6 +65,11 @@ func (c *Client) GetProfile(ctx context.Context, params *GetProfileInput, optFns
 // The structure representing the getProfileRequest.
 type GetProfileInput struct {
 
+	// The name of the profiling group to get.
+	//
+	// This member is required.
+	ProfilingGroupName *string
+
 	// The format of the profile to return. You can choose application/json or the
 	// default application/x-amzn-ion.
 	Accept *string
@@ -81,11 +86,6 @@ type GetProfileInput struct {
 	// startTime, period, and endTime.
 	Period *string
 
-	// The name of the profiling group to get.
-	//
-	// This member is required.
-	ProfilingGroupName *string
-
 	// The start time of the profile to get. You must specify exactly two of the
 	// following parameters: startTime, period, and endTime.
 	StartTime *time.Time
@@ -93,9 +93,6 @@ type GetProfileInput struct {
 
 // The structure representing the getProfileResponse.
 type GetProfileOutput struct {
-
-	// The content encoding of the profile.
-	ContentEncoding *string
 
 	// The content type of the profile in the payload. It is either application/json or
 	// the default application/x-amzn-ion.
@@ -107,6 +104,9 @@ type GetProfileOutput struct {
 	//
 	// This member is required.
 	Profile []byte
+
+	// The content encoding of the profile.
+	ContentEncoding *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

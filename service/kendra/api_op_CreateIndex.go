@@ -63,27 +63,10 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 
 type CreateIndexInput struct {
 
-	// The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data
-	// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
-	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
-
 	// The name for the new index.
 	//
 	// This member is required.
 	Name *string
-
-	// A list of key-value pairs that identify the index. You can use the tags to
-	// identify and organize your resources and to control access to resources.
-	Tags []*types.Tag
-
-	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for
-	// indexes intended for development, testing, or proof of concept. Use
-	// ENTERPRISE_EDITION for your production databases. Once you set the edition for
-	// an index, it can't be changed.
-	Edition types.IndexEdition
-
-	// A description for the index.
-	Description *string
 
 	// An IAM role that gives Amazon Kendra permissions to access your Amazon
 	// CloudWatch logs and metrics. This is also the role used when you use the
@@ -96,6 +79,23 @@ type CreateIndexInput struct {
 	// calls to the CreateIndex operation with the same client token will create only
 	// one index.”
 	ClientToken *string
+
+	// A description for the index.
+	Description *string
+
+	// The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for
+	// indexes intended for development, testing, or proof of concept. Use
+	// ENTERPRISE_EDITION for your production databases. Once you set the edition for
+	// an index, it can't be changed.
+	Edition types.IndexEdition
+
+	// The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data
+	// indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
+
+	// A list of key-value pairs that identify the index. You can use the tags to
+	// identify and organize your resources and to control access to resources.
+	Tags []*types.Tag
 }
 
 type CreateIndexOutput struct {

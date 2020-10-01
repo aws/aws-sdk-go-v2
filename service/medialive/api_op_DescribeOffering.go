@@ -67,8 +67,31 @@ type DescribeOfferingInput struct {
 // Placeholder documentation for DescribeOfferingResponse
 type DescribeOfferingOutput struct {
 
+	// Unique offering ARN, e.g.
+	// 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
+	Arn *string
+
+	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+	CurrencyCode *string
+
 	// Lease duration, e.g. '12'
 	Duration *int32
+
+	// Units for duration, e.g. 'MONTHS'
+	DurationUnits types.OfferingDurationUnits
+
+	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
+	FixedPrice *float64
+
+	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ
+	// in US West (Oregon)'
+	OfferingDescription *string
+
+	// Unique offering ID, e.g. '87654321'
+	OfferingId *string
+
+	// Offering type, e.g. 'NO_UPFRONT'
+	OfferingType types.OfferingType
 
 	// AWS region, e.g. 'us-west-2'
 	Region *string
@@ -76,31 +99,8 @@ type DescribeOfferingOutput struct {
 	// Resource configuration details
 	ResourceSpecification *types.ReservationResourceSpecification
 
-	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ
-	// in US West (Oregon)'
-	OfferingDescription *string
-
 	// Recurring usage charge for each reserved resource, e.g. '157.0'
 	UsagePrice *float64
-
-	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
-	CurrencyCode *string
-
-	// Offering type, e.g. 'NO_UPFRONT'
-	OfferingType types.OfferingType
-
-	// Unique offering ID, e.g. '87654321'
-	OfferingId *string
-
-	// Units for duration, e.g. 'MONTHS'
-	DurationUnits types.OfferingDurationUnits
-
-	// Unique offering ARN, e.g.
-	// 'arn:aws:medialive:us-west-2:123456789012:offering:87654321'
-	Arn *string
-
-	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
-	FixedPrice *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,20 +57,20 @@ func (c *Client) UpdateMLModel(ctx context.Context, params *UpdateMLModelInput, 
 
 type UpdateMLModelInput struct {
 
+	// The ID assigned to the MLModel during creation.
+	//
+	// This member is required.
+	MLModelId *string
+
+	// A user-supplied name or description of the MLModel.
+	MLModelName *string
+
 	// The ScoreThreshold used in binary classification MLModel that marks the boundary
 	// between a positive prediction and a negative prediction. Output values greater
 	// than or equal to the ScoreThreshold receive a positive result from the MLModel,
 	// such as true. Output values less than the ScoreThreshold receive a negative
 	// response from the MLModel, such as false.
 	ScoreThreshold *float32
-
-	// A user-supplied name or description of the MLModel.
-	MLModelName *string
-
-	// The ID assigned to the MLModel during creation.
-	//
-	// This member is required.
-	MLModelId *string
 }
 
 // Represents the output of an UpdateMLModel operation. You can see the updated

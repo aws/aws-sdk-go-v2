@@ -58,9 +58,6 @@ func (c *Client) DescribeSchedule(ctx context.Context, params *DescribeScheduleI
 // Placeholder documentation for DescribeScheduleRequest
 type DescribeScheduleInput struct {
 
-	// Placeholder documentation for __string
-	NextToken *string
-
 	// Id of the channel whose schedule is being updated.
 	//
 	// This member is required.
@@ -68,6 +65,9 @@ type DescribeScheduleInput struct {
 
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
+
+	// Placeholder documentation for __string
+	NextToken *string
 }
 
 // Placeholder documentation for DescribeScheduleResponse

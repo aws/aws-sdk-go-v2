@@ -86,16 +86,6 @@ func (c *Client) DeleteArchive(ctx context.Context, params *DeleteArchiveInput, 
 // Provides options for deleting an archive from an Amazon S3 Glacier vault.
 type DeleteArchiveInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
-	// The ID of the archive to delete.
-	//
-	// This member is required.
-	ArchiveId *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -104,6 +94,16 @@ type DeleteArchiveInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The ID of the archive to delete.
+	//
+	// This member is required.
+	ArchiveId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
 }
 
 type DeleteArchiveOutput struct {

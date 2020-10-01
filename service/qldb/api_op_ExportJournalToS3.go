@@ -64,6 +64,14 @@ func (c *Client) ExportJournalToS3(ctx context.Context, params *ExportJournalToS
 
 type ExportJournalToS3Input struct {
 
+	// The exclusive end date and time for the range of journal contents that you want
+	// to export. The ExclusiveEndTime must be in ISO 8601 date and time format and in
+	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
+	// ExclusiveEndTime must be less than or equal to the current UTC date and time.
+	//
+	// This member is required.
+	ExclusiveEndTime *time.Time
+
 	// The inclusive start date and time for the range of journal contents that you
 	// want to export. The InclusiveStartTime must be in ISO 8601 date and time format
 	// and in Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
@@ -74,11 +82,10 @@ type ExportJournalToS3Input struct {
 	// This member is required.
 	InclusiveStartTime *time.Time
 
-	// The configuration settings of the Amazon S3 bucket destination for your export
-	// request.
+	// The name of the ledger.
 	//
 	// This member is required.
-	S3ExportConfiguration *types.S3ExportConfiguration
+	Name *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal export job to do the following:
@@ -93,18 +100,11 @@ type ExportJournalToS3Input struct {
 	// This member is required.
 	RoleArn *string
 
-	// The name of the ledger.
+	// The configuration settings of the Amazon S3 bucket destination for your export
+	// request.
 	//
 	// This member is required.
-	Name *string
-
-	// The exclusive end date and time for the range of journal contents that you want
-	// to export. The ExclusiveEndTime must be in ISO 8601 date and time format and in
-	// Universal Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The
-	// ExclusiveEndTime must be less than or equal to the current UTC date and time.
-	//
-	// This member is required.
-	ExclusiveEndTime *time.Time
+	S3ExportConfiguration *types.S3ExportConfiguration
 }
 
 type ExportJournalToS3Output struct {

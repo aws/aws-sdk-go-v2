@@ -81,6 +81,11 @@ func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicatio
 //
 type AddApplicationOutputInput struct {
 
+	// Name of the application to which you want to add the output configuration.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// Version of the application to which you want to add the output configuration.
 	// You can use the DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
@@ -89,11 +94,6 @@ type AddApplicationOutputInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
-
-	// Name of the application to which you want to add the output configuration.
-	//
-	// This member is required.
-	ApplicationName *string
 
 	// An array of objects, each describing one output configuration. In the output
 	// configuration, you specify the name of an in-application stream, a destination

@@ -63,18 +63,13 @@ func (c *Client) CreateDiskFromSnapshot(ctx context.Context, params *CreateDiskF
 
 type CreateDiskFromSnapshotInput struct {
 
-	// The name of the source disk from which the source automatic snapshot was
-	// created. Constraints:
+	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
+	// Choose the same Availability Zone as the Lightsail instance where you want to
+	// create the disk. Use the GetRegions operation to list the Availability Zones
+	// where Lightsail is currently available.
 	//
-	//     * This parameter cannot be defined together with the
-	// disk snapshot name parameter. The source disk name and disk snapshot name
-	// parameters are mutually exclusive.
-	//
-	//     * Define this parameter only when
-	// creating a new disk from an automatic snapshot. For more information, see the
-	// Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	SourceDiskName *string
+	// This member is required.
+	AvailabilityZone *string
 
 	// The unique Lightsail disk name (e.g., my-disk).
 	//
@@ -97,31 +92,6 @@ type CreateDiskFromSnapshotInput struct {
 	// parameters are mutually exclusive.
 	DiskSnapshotName *string
 
-	// A Boolean value to indicate whether to use the latest available automatic
-	// snapshot. Constraints:
-	//
-	//     * This parameter cannot be defined together with the
-	// restore date parameter. The use latest restorable auto snapshot and restore date
-	// parameters are mutually exclusive.
-	//
-	//     * Define this parameter only when
-	// creating a new disk from an automatic snapshot. For more information, see the
-	// Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
-	UseLatestRestorableAutoSnapshot *bool
-
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
-
-	// The Availability Zone where you want to create the disk (e.g., us-east-2a).
-	// Choose the same Availability Zone as the Lightsail instance where you want to
-	// create the disk. Use the GetRegions operation to list the Availability Zones
-	// where Lightsail is currently available.
-	//
-	// This member is required.
-	AvailabilityZone *string
-
 	// The date of the automatic snapshot to use for the new disk. Use the get auto
 	// snapshots operation to identify the dates of the available automatic snapshots.
 	// Constraints:
@@ -138,6 +108,36 @@ type CreateDiskFromSnapshotInput struct {
 	// Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	RestoreDate *string
+
+	// The name of the source disk from which the source automatic snapshot was
+	// created. Constraints:
+	//
+	//     * This parameter cannot be defined together with the
+	// disk snapshot name parameter. The source disk name and disk snapshot name
+	// parameters are mutually exclusive.
+	//
+	//     * Define this parameter only when
+	// creating a new disk from an automatic snapshot. For more information, see the
+	// Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	SourceDiskName *string
+
+	// The tag keys and optional values to add to the resource during create. Use the
+	// TagResource action to tag a resource after it's created.
+	Tags []*types.Tag
+
+	// A Boolean value to indicate whether to use the latest available automatic
+	// snapshot. Constraints:
+	//
+	//     * This parameter cannot be defined together with the
+	// restore date parameter. The use latest restorable auto snapshot and restore date
+	// parameters are mutually exclusive.
+	//
+	//     * Define this parameter only when
+	// creating a new disk from an automatic snapshot. For more information, see the
+	// Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
+	UseLatestRestorableAutoSnapshot *bool
 }
 
 type CreateDiskFromSnapshotOutput struct {

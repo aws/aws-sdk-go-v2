@@ -66,15 +66,15 @@ type StartImageScanInput struct {
 	// This member is required.
 	ImageId *types.ImageIdentifier
 
-	// The AWS account ID associated with the registry that contains the repository in
-	// which to start an image scan request. If you do not specify a registry, the
-	// default registry is assumed.
-	RegistryId *string
-
 	// The name of the repository that contains the images to scan.
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The AWS account ID associated with the registry that contains the repository in
+	// which to start an image scan request. If you do not specify a registry, the
+	// default registry is assumed.
+	RegistryId *string
 }
 
 type StartImageScanOutput struct {

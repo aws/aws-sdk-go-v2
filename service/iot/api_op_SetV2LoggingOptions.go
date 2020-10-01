@@ -59,11 +59,11 @@ type SetV2LoggingOptionsInput struct {
 	// The default logging level.
 	DefaultLogLevel types.LogLevel
 
-	// The ARN of the role that allows IoT to write to Cloudwatch logs.
-	RoleArn *string
-
 	// If true all logs are disabled. The default is false.
 	DisableAllLogs *bool
+
+	// The ARN of the role that allows IoT to write to Cloudwatch logs.
+	RoleArn *string
 }
 
 type SetV2LoggingOptionsOutput struct {

@@ -58,16 +58,16 @@ func (c *Client) DetachObject(ctx context.Context, params *DetachObjectInput, op
 
 type DetachObjectInput struct {
 
-	// The link name associated with the object that needs to be detached.
-	//
-	// This member is required.
-	LinkName *string
-
 	// The Amazon Resource Name (ARN) that is associated with the Directory () where
 	// objects reside. For more information, see arns ().
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	// The link name associated with the object that needs to be detached.
+	//
+	// This member is required.
+	LinkName *string
 
 	// The parent reference from which the object with the specified link name is
 	// detached.

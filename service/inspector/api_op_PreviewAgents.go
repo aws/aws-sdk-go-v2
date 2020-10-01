@@ -76,16 +76,16 @@ type PreviewAgentsInput struct {
 
 type PreviewAgentsOutput struct {
 
+	// The resulting list of agents.
+	//
+	// This member is required.
+	AgentPreviews []*types.AgentPreview
+
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to be
 	// listed, this parameter is set to null.
 	NextToken *string
-
-	// The resulting list of agents.
-	//
-	// This member is required.
-	AgentPreviews []*types.AgentPreview
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

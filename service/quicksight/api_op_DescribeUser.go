@@ -57,6 +57,12 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
+	// The ID for the AWS account that the user is in. Currently, you use the ID for
+	// the AWS account that contains your Amazon QuickSight account.
+	//
+	// This member is required.
+	AwsAccountId *string
+
 	// The namespace. Currently, you should set this to default.
 	//
 	// This member is required.
@@ -66,12 +72,6 @@ type DescribeUserInput struct {
 	//
 	// This member is required.
 	UserName *string
-
-	// The ID for the AWS account that the user is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
-	//
-	// This member is required.
-	AwsAccountId *string
 }
 
 type DescribeUserOutput struct {

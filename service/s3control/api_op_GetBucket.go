@@ -90,14 +90,14 @@ type GetBucketInput struct {
 
 type GetBucketOutput struct {
 
+	// The Outposts bucket requested.
+	Bucket *string
+
 	// The creation date of the Outposts bucket.
 	CreationDate *time.Time
 
 	//
 	PublicAccessBlockEnabled *bool
-
-	// The Outposts bucket requested.
-	Bucket *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

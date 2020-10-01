@@ -56,18 +56,18 @@ func (c *Client) CreateProvisioningTemplateVersion(ctx context.Context, params *
 
 type CreateProvisioningTemplateVersionInput struct {
 
-	// Sets a fleet provision template version as the default version.
-	SetAsDefault *bool
+	// The JSON formatted contents of the fleet provisioning template.
+	//
+	// This member is required.
+	TemplateBody *string
 
 	// The name of the fleet provisioning template.
 	//
 	// This member is required.
 	TemplateName *string
 
-	// The JSON formatted contents of the fleet provisioning template.
-	//
-	// This member is required.
-	TemplateBody *string
+	// Sets a fleet provision template version as the default version.
+	SetAsDefault *bool
 }
 
 type CreateProvisioningTemplateVersionOutput struct {
@@ -76,14 +76,14 @@ type CreateProvisioningTemplateVersionOutput struct {
 	// otherwise false.
 	IsDefaultVersion *bool
 
+	// The ARN that identifies the provisioning template.
+	TemplateArn *string
+
 	// The name of the fleet provisioning template.
 	TemplateName *string
 
 	// The version of the fleet provisioning template.
 	VersionId *int32
-
-	// The ARN that identifies the provisioning template.
-	TemplateArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

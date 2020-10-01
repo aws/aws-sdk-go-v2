@@ -81,11 +81,6 @@ func (c *Client) GetVaultNotifications(ctx context.Context, params *GetVaultNoti
 // Glacier vault.
 type GetVaultNotificationsInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -94,6 +89,11 @@ type GetVaultNotificationsInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
 }
 
 // Contains the Amazon S3 Glacier response to your request.

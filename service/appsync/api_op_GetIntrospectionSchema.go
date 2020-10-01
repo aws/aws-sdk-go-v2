@@ -57,10 +57,6 @@ func (c *Client) GetIntrospectionSchema(ctx context.Context, params *GetIntrospe
 
 type GetIntrospectionSchemaInput struct {
 
-	// A flag that specifies whether the schema introspection should contain
-	// directives.
-	IncludeDirectives *bool
-
 	// The API ID.
 	//
 	// This member is required.
@@ -70,6 +66,10 @@ type GetIntrospectionSchemaInput struct {
 	//
 	// This member is required.
 	Format types.OutputType
+
+	// A flag that specifies whether the schema introspection should contain
+	// directives.
+	IncludeDirectives *bool
 }
 
 type GetIntrospectionSchemaOutput struct {

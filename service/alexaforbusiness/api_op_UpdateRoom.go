@@ -61,11 +61,11 @@ type UpdateRoomInput struct {
 	// The updated profile ARN for the room.
 	ProfileArn *string
 
-	// The ARN of the room to update.
-	RoomArn *string
-
 	// The updated provider calendar ARN for the room.
 	ProviderCalendarId *string
+
+	// The ARN of the room to update.
+	RoomArn *string
 
 	// The updated name for the room.
 	RoomName *string

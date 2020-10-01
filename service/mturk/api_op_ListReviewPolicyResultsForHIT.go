@@ -61,54 +61,54 @@ func (c *Client) ListReviewPolicyResultsForHIT(ctx context.Context, params *List
 
 type ListReviewPolicyResultsForHITInput struct {
 
+	// The unique identifier of the HIT to retrieve review results for.
+	//
+	// This member is required.
+	HITId *string
+
 	// Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination token
 	NextToken *string
 
-	// Specify if the operation should retrieve a list of the results computed by the
-	// Review Policies.
-	RetrieveResults *bool
-
 	// The Policy Level(s) to retrieve review results for - HIT or Assignment. If
 	// omitted, the default behavior is to retrieve all data for both policy levels.
 	// For a list of all the described policies, see Review Policies.
 	PolicyLevels []types.ReviewPolicyLevel
 
-	// The unique identifier of the HIT to retrieve review results for.
-	//
-	// This member is required.
-	HITId *string
-
 	// Specify if the operation should retrieve a list of the actions taken executing
 	// the Review Policies and their outcomes.
 	RetrieveActions *bool
+
+	// Specify if the operation should retrieve a list of the results computed by the
+	// Review Policies.
+	RetrieveResults *bool
 }
 
 type ListReviewPolicyResultsForHITOutput struct {
-
-	// Contains both ReviewResult and ReviewAction elements for a particular HIT.
-	HITReviewReport *types.ReviewReport
-
-	// The name of the HIT-level Review Policy. This contains only the PolicyName
-	// element.
-	HITReviewPolicy *types.ReviewPolicy
 
 	// The name of the Assignment-level Review Policy. This contains only the
 	// PolicyName element.
 	AssignmentReviewPolicy *types.ReviewPolicy
 
-	// If the previous response was incomplete (because there is more data to
-	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
-	// You can use this pagination token to retrieve the next set of results.
-	NextToken *string
+	// Contains both ReviewResult and ReviewAction elements for an Assignment.
+	AssignmentReviewReport *types.ReviewReport
 
 	// The HITId of the HIT for which results have been returned.
 	HITId *string
 
-	// Contains both ReviewResult and ReviewAction elements for an Assignment.
-	AssignmentReviewReport *types.ReviewReport
+	// The name of the HIT-level Review Policy. This contains only the PolicyName
+	// element.
+	HITReviewPolicy *types.ReviewPolicy
+
+	// Contains both ReviewResult and ReviewAction elements for a particular HIT.
+	HITReviewReport *types.ReviewReport
+
+	// If the previous response was incomplete (because there is more data to
+	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
+	// You can use this pagination token to retrieve the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

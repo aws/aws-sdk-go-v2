@@ -58,15 +58,6 @@ func (c *Client) EnableMFADevice(ctx context.Context, params *EnableMFADeviceInp
 
 type EnableMFADeviceInput struct {
 
-	// The serial number that uniquely identifies the MFA device. For virtual MFA
-	// devices, the serial number is the device ARN. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: =,.@:/-
-	//
-	// This member is required.
-	SerialNumber *string
-
 	// An authentication code emitted by the device. The format for this parameter is a
 	// string of six digits. Submit your request immediately after generating the
 	// authentication codes. If you generate the codes and then wait too long to submit
@@ -90,6 +81,15 @@ type EnableMFADeviceInput struct {
 	//
 	// This member is required.
 	AuthenticationCode2 *string
+
+	// The serial number that uniquely identifies the MFA device. For virtual MFA
+	// devices, the serial number is the device ARN. This parameter allows (through its
+	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// consisting of upper and lowercase alphanumeric characters with no spaces. You
+	// can also include any of the following characters: =,.@:/-
+	//
+	// This member is required.
+	SerialNumber *string
 
 	// The name of the IAM user for whom you want to enable the MFA device. This
 	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a

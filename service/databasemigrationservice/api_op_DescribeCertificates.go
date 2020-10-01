@@ -57,6 +57,9 @@ func (c *Client) DescribeCertificates(ctx context.Context, params *DescribeCerti
 
 type DescribeCertificatesInput struct {
 
+	// Filters applied to the certificates described in the form of key-value pairs.
+	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
@@ -67,19 +70,16 @@ type DescribeCertificatesInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 10
 	MaxRecords *int32
-
-	// Filters applied to the certificates described in the form of key-value pairs.
-	Filters []*types.Filter
 }
 
 type DescribeCertificatesOutput struct {
 
-	// The pagination token.
-	Marker *string
-
 	// The Secure Sockets Layer (SSL) certificates associated with the replication
 	// instance.
 	Certificates []*types.Certificate
+
+	// The pagination token.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,6 +72,9 @@ type DescribeScalableTargetsInput struct {
 	// applicable.
 	MaxResults *int32
 
+	// The token for the next set of results.
+	NextToken *string
+
 	// The identifier of the resource associated with the scalable target. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
 	// dimension, you must also specify a resource ID.
@@ -131,9 +134,6 @@ type DescribeScalableTargetsInput struct {
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
 	ResourceIds []*string
-
-	// The token for the next set of results.
-	NextToken *string
 
 	// The scalable dimension associated with the scalable target. This string consists
 	// of the service namespace, resource type, and scaling property. If you specify a
@@ -197,12 +197,12 @@ type DescribeScalableTargetsInput struct {
 
 type DescribeScalableTargetsOutput struct {
 
-	// The scalable targets that match the request parameters.
-	ScalableTargets []*types.ScalableTarget
-
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string
+
+	// The scalable targets that match the request parameters.
+	ScalableTargets []*types.ScalableTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

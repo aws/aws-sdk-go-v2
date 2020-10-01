@@ -61,12 +61,12 @@ type GetResourcePolicyInput struct {
 
 type GetResourcePolicyOutput struct {
 
-	// The revision ID.
-	RevisionId *string
-
 	// The resource-based policy.
 	// This value conforms to the media type: application/json
 	Policy *string
+
+	// The revision ID.
+	RevisionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

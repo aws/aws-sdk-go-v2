@@ -95,11 +95,11 @@ type DeleteResourcePolicyInput struct {
 
 type DeleteResourcePolicyOutput struct {
 
-	// The friendly name of the secret that the resource-based policy was deleted for.
-	Name *string
-
 	// The ARN of the secret that the resource-based policy was deleted for.
 	ARN *string
+
+	// The friendly name of the secret that the resource-based policy was deleted for.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

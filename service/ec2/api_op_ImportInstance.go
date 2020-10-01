@@ -64,8 +64,16 @@ func (c *Client) ImportInstance(ctx context.Context, params *ImportInstanceInput
 
 type ImportInstanceInput struct {
 
+	// The instance operating system.
+	//
+	// This member is required.
+	Platform types.PlatformValues
+
 	// A description for the instance being imported.
 	Description *string
+
+	// The disk image.
+	DiskImages []*types.DiskImage
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -75,14 +83,6 @@ type ImportInstanceInput struct {
 
 	// The launch specification.
 	LaunchSpecification *types.ImportInstanceLaunchSpecification
-
-	// The disk image.
-	DiskImages []*types.DiskImage
-
-	// The instance operating system.
-	//
-	// This member is required.
-	Platform types.PlatformValues
 }
 
 type ImportInstanceOutput struct {

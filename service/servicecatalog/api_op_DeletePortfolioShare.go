@@ -60,12 +60,6 @@ func (c *Client) DeletePortfolioShare(ctx context.Context, params *DeletePortfol
 
 type DeletePortfolioShareInput struct {
 
-	// The AWS account ID.
-	AccountId *string
-
-	// The organization node to whom you are going to stop sharing.
-	OrganizationNode *types.OrganizationNode
-
 	// The portfolio identifier.
 	//
 	// This member is required.
@@ -80,6 +74,12 @@ type DeletePortfolioShareInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The AWS account ID.
+	AccountId *string
+
+	// The organization node to whom you are going to stop sharing.
+	OrganizationNode *types.OrganizationNode
 }
 
 type DeletePortfolioShareOutput struct {

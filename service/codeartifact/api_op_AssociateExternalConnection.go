@@ -59,19 +59,10 @@ func (c *Client) AssociateExternalConnection(ctx context.Context, params *Associ
 
 type AssociateExternalConnectionInput struct {
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the domain that contains the repository.
 	//
 	// This member is required.
 	Domain *string
-
-	// The name of the repository to which the external connection is added.
-	//
-	// This member is required.
-	Repository *string
 
 	// The name of the external connection to add to the repository. The following
 	// values are supported:
@@ -95,6 +86,15 @@ type AssociateExternalConnectionInput struct {
 	//
 	// This member is required.
 	ExternalConnection *string
+
+	// The name of the repository to which the external connection is added.
+	//
+	// This member is required.
+	Repository *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
 }
 
 type AssociateExternalConnectionOutput struct {

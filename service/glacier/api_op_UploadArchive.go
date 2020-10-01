@@ -93,17 +93,6 @@ func (c *Client) UploadArchive(ctx context.Context, params *UploadArchiveInput, 
 // Provides options to add an archive to a vault.
 type UploadArchiveInput struct {
 
-	// The data to upload.
-	Body io.Reader
-
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
-	// The SHA256 tree hash of the data being uploaded.
-	Checksum *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -113,8 +102,19 @@ type UploadArchiveInput struct {
 	// This member is required.
 	AccountId *string
 
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
+
 	// The optional description of the archive you are uploading.
 	ArchiveDescription *string
+
+	// The data to upload.
+	Body io.Reader
+
+	// The SHA256 tree hash of the data being uploaded.
+	Checksum *string
 }
 
 // Contains the Amazon S3 Glacier response to your request. For information about
@@ -124,11 +124,11 @@ type UploadArchiveInput struct {
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
 type UploadArchiveOutput struct {
 
-	// The checksum of the archive computed by Amazon S3 Glacier.
-	Checksum *string
-
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string
+
+	// The checksum of the archive computed by Amazon S3 Glacier.
+	Checksum *string
 
 	// The relative URI path of the newly added archive resource.
 	Location *string

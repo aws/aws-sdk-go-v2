@@ -65,11 +65,11 @@ type StartDiscovererInput struct {
 
 type StartDiscovererOutput struct {
 
-	// The state of the discoverer.
-	State types.DiscovererState
-
 	// The ID of the discoverer.
 	DiscovererId *string
+
+	// The state of the discoverer.
+	State types.DiscovererState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

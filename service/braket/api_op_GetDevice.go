@@ -69,31 +69,31 @@ type GetDeviceOutput struct {
 	// This member is required.
 	DeviceArn *string
 
+	// Details about the capabilities of the device.
+	// This value conforms to the media type: application/json
+	//
+	// This member is required.
+	DeviceCapabilities *string
+
 	// The name of the device.
 	//
 	// This member is required.
 	DeviceName *string
-
-	// The name of the partner company for the device.
-	//
-	// This member is required.
-	ProviderName *string
-
-	// The type of the device.
-	//
-	// This member is required.
-	DeviceType types.DeviceType
 
 	// The status of the device.
 	//
 	// This member is required.
 	DeviceStatus types.DeviceStatus
 
-	// Details about the capabilities of the device.
-	// This value conforms to the media type: application/json
+	// The type of the device.
 	//
 	// This member is required.
-	DeviceCapabilities *string
+	DeviceType types.DeviceType
+
+	// The name of the partner company for the device.
+	//
+	// This member is required.
+	ProviderName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

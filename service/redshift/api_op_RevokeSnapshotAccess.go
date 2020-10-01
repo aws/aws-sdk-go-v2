@@ -63,16 +63,16 @@ func (c *Client) RevokeSnapshotAccess(ctx context.Context, params *RevokeSnapsho
 //
 type RevokeSnapshotAccessInput struct {
 
-	// The identifier of the snapshot that the account can no longer access.
-	//
-	// This member is required.
-	SnapshotIdentifier *string
-
 	// The identifier of the AWS customer account that can no longer restore the
 	// specified snapshot.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string
+
+	// The identifier of the snapshot that the account can no longer access.
+	//
+	// This member is required.
+	SnapshotIdentifier *string
 
 	// The identifier of the cluster the snapshot was created from. This parameter is
 	// required if your IAM user has a policy containing a snapshot resource element

@@ -58,9 +58,6 @@ func (c *Client) PutRoomSkillParameter(ctx context.Context, params *PutRoomSkill
 
 type PutRoomSkillParameterInput struct {
 
-	// The ARN of the room associated with the room skill parameter. Required.
-	RoomArn *string
-
 	// The updated room skill parameter. Required.
 	//
 	// This member is required.
@@ -70,6 +67,9 @@ type PutRoomSkillParameterInput struct {
 	//
 	// This member is required.
 	SkillId *string
+
+	// The ARN of the room associated with the room skill parameter. Required.
+	RoomArn *string
 }
 
 type PutRoomSkillParameterOutput struct {

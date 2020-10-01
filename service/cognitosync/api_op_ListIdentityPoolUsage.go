@@ -59,27 +59,27 @@ func (c *Client) ListIdentityPoolUsage(ctx context.Context, params *ListIdentity
 // A request for usage information on an identity pool.
 type ListIdentityPoolUsageInput struct {
 
-	// A pagination token for obtaining the next page of results.
-	NextToken *string
-
 	// The maximum number of results to be returned.
 	MaxResults *int32
+
+	// A pagination token for obtaining the next page of results.
+	NextToken *string
 }
 
 // Returned for a successful ListIdentityPoolUsage request.
 type ListIdentityPoolUsageOutput struct {
 
-	// Usage information for the identity pools.
-	IdentityPoolUsages []*types.IdentityPoolUsage
-
 	// Total number of identities for the identity pool.
 	Count *int32
 
-	// A pagination token for obtaining the next page of results.
-	NextToken *string
+	// Usage information for the identity pools.
+	IdentityPoolUsages []*types.IdentityPoolUsage
 
 	// The maximum number of results to be returned.
 	MaxResults *int32
+
+	// A pagination token for obtaining the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

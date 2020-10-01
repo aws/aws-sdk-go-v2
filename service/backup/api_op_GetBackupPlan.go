@@ -58,34 +58,39 @@ func (c *Client) GetBackupPlan(ctx context.Context, params *GetBackupPlanInput, 
 
 type GetBackupPlanInput struct {
 
-	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
-	// 1,024 bytes long. Version IDs cannot be edited.
-	VersionId *string
-
 	// Uniquely identifies a backup plan.
 	//
 	// This member is required.
 	BackupPlanId *string
-}
-
-type GetBackupPlanOutput struct {
-
-	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
-	CreatorRequestId *string
-
-	// Uniquely identifies a backup plan.
-	BackupPlanId *string
 
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
 	VersionId *string
+}
+
+type GetBackupPlanOutput struct {
+
+	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
+	// sets of Rules.
+	BackupPlan *types.BackupPlan
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
+	// example,
+	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
+	BackupPlanArn *string
+
+	// Uniquely identifies a backup plan.
+	BackupPlanId *string
 
 	// The date and time that a backup plan is created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
+
+	// A unique string that identifies the request and allows failed requests to be
+	// retried without the risk of executing the operation twice.
+	CreatorRequestId *string
 
 	// The date and time that a backup plan is deleted, in Unix format and Coordinated
 	// Universal Time (UTC). The value of DeletionDate is accurate to milliseconds. For
@@ -99,14 +104,9 @@ type GetBackupPlanOutput struct {
 	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	LastExecutionDate *time.Time
 
-	// Specifies the body of a backup plan. Includes a BackupPlanName and one or more
-	// sets of Rules.
-	BackupPlan *types.BackupPlan
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
-	// example,
-	// arn:aws:backup:us-east-1:123456789012:plan:8F81F553-3A74-4A3F-B93D-B3360DC80C50.
-	BackupPlanArn *string
+	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
+	// 1,024 bytes long. Version IDs cannot be edited.
+	VersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

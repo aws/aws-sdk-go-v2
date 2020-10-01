@@ -62,11 +62,11 @@ type ListDashboardsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
-
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListDashboardsOutput struct {

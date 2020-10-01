@@ -58,6 +58,11 @@ func (c *Client) DetachClassicLinkVpc(ctx context.Context, params *DetachClassic
 
 type DetachClassicLinkVpcInput struct {
 
+	// The ID of the instance to unlink from the VPC.
+	//
+	// This member is required.
+	InstanceId *string
+
 	// The ID of the VPC to which the instance is linked.
 	//
 	// This member is required.
@@ -68,11 +73,6 @@ type DetachClassicLinkVpcInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the instance to unlink from the VPC.
-	//
-	// This member is required.
-	InstanceId *string
 }
 
 type DetachClassicLinkVpcOutput struct {

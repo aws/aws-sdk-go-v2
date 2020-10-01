@@ -59,15 +59,15 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 type DeleteTagsInput struct {
 
-	// An array or one or more tag keys to delete.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The Amazon Resource Name (ARN) of the resource whose tags you want to delete.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// An array or one or more tag keys to delete.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type DeleteTagsOutput struct {

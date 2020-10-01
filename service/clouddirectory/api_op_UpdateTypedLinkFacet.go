@@ -58,11 +58,6 @@ func (c *Client) UpdateTypedLinkFacet(ctx context.Context, params *UpdateTypedLi
 
 type UpdateTypedLinkFacetInput struct {
 
-	// The unique name of the typed link facet.
-	//
-	// This member is required.
-	Name *string
-
 	// Attributes update structure.
 	//
 	// This member is required.
@@ -80,6 +75,11 @@ type UpdateTypedLinkFacetInput struct {
 	//
 	// This member is required.
 	IdentityAttributeOrder []*string
+
+	// The unique name of the typed link facet.
+	//
+	// This member is required.
+	Name *string
 
 	// The Amazon Resource Name (ARN) that is associated with the schema. For more
 	// information, see arns ().

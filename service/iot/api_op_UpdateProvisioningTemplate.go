@@ -62,24 +62,24 @@ type UpdateProvisioningTemplateInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// True to enable the fleet provisioning template, otherwise false.
-	Enabled *bool
-
-	// Removes pre-provisioning hook template.
-	RemovePreProvisioningHook *bool
-
-	// Updates the pre-provisioning hook template.
-	PreProvisioningHook *types.ProvisioningHook
-
 	// The ID of the default provisioning template version.
 	DefaultVersionId *int32
 
 	// The description of the fleet provisioning template.
 	Description *string
 
+	// True to enable the fleet provisioning template, otherwise false.
+	Enabled *bool
+
+	// Updates the pre-provisioning hook template.
+	PreProvisioningHook *types.ProvisioningHook
+
 	// The ARN of the role associated with the provisioning template. This IoT role
 	// grants permission to provision a device.
 	ProvisioningRoleArn *string
+
+	// Removes pre-provisioning hook template.
+	RemovePreProvisioningHook *bool
 }
 
 type UpdateProvisioningTemplateOutput struct {

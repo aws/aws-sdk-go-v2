@@ -64,17 +64,17 @@ func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInp
 // by owner and dataset name.
 type DescribeDatasetInput struct {
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	//
-	// This member is required.
-	IdentityId *string
-
 	// A string of up to 128 characters. Allowed characters are a-z, A-Z, 0-9, '_'
 	// (underscore), '-' (dash), and '.' (dot).
 	//
 	// This member is required.
 	DatasetName *string
+
+	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
+	// created by Amazon Cognito. GUID generation is unique within a region.
+	//
+	// This member is required.
+	IdentityId *string
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. GUID generation is unique within a region.

@@ -72,13 +72,13 @@ type UpdateEnrollmentStatusInput struct {
 
 type UpdateEnrollmentStatusOutput struct {
 
+	// The enrollment status of the account.
+	Status types.Status
+
 	// The reason for the enrollment status of the account. For example, an account
 	// might show a status of Pending because member accounts of an organization
 	// require more time to be enrolled in the service.
 	StatusReason *string
-
-	// The enrollment status of the account.
-	Status types.Status
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

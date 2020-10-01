@@ -61,13 +61,13 @@ func (c *Client) GetInstanceAccessDetails(ctx context.Context, params *GetInstan
 
 type GetInstanceAccessDetailsInput struct {
 
-	// The protocol to use to connect to your instance. Defaults to ssh.
-	Protocol types.InstanceAccessProtocol
-
 	// The name of the instance to access.
 	//
 	// This member is required.
 	InstanceName *string
+
+	// The protocol to use to connect to your instance. Defaults to ssh.
+	Protocol types.InstanceAccessProtocol
 }
 
 type GetInstanceAccessDetailsOutput struct {

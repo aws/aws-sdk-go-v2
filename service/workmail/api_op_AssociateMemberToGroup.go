@@ -56,15 +56,15 @@ func (c *Client) AssociateMemberToGroup(ctx context.Context, params *AssociateMe
 
 type AssociateMemberToGroupInput struct {
 
-	// The member (user or group) to associate to the group.
-	//
-	// This member is required.
-	MemberId *string
-
 	// The group to which the member (user or group) is associated.
 	//
 	// This member is required.
 	GroupId *string
+
+	// The member (user or group) to associate to the group.
+	//
+	// This member is required.
+	MemberId *string
 
 	// The organization under which the group exists.
 	//

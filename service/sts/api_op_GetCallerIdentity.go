@@ -68,12 +68,12 @@ type GetCallerIdentityInput struct {
 // information about the entity making the request.
 type GetCallerIdentityOutput struct {
 
-	// The AWS ARN associated with the calling entity.
-	Arn *string
-
 	// The AWS account ID number of the account that owns or contains the calling
 	// entity.
 	Account *string
+
+	// The AWS ARN associated with the calling entity.
+	Arn *string
 
 	// The unique identifier of the calling entity. The exact value depends on the type
 	// of entity that is making the call. The values returned are those listed in the

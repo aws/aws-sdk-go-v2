@@ -57,8 +57,10 @@ func (c *Client) UpdateTemplatePermissions(ctx context.Context, params *UpdateTe
 
 type UpdateTemplatePermissionsInput struct {
 
-	// A list of resource permissions to be revoked from the template.
-	RevokePermissions []*types.ResourcePermission
+	// The ID of the AWS account that contains the template.
+	//
+	// This member is required.
+	AwsAccountId *string
 
 	// The ID for the template.
 	//
@@ -68,25 +70,23 @@ type UpdateTemplatePermissionsInput struct {
 	// A list of resource permissions to be granted on the template.
 	GrantPermissions []*types.ResourcePermission
 
-	// The ID of the AWS account that contains the template.
-	//
-	// This member is required.
-	AwsAccountId *string
+	// A list of resource permissions to be revoked from the template.
+	RevokePermissions []*types.ResourcePermission
 }
 
 type UpdateTemplatePermissionsOutput struct {
+
+	// A list of resource permissions to be set on the template.
+	Permissions []*types.ResourcePermission
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// The Amazon Resource Name (ARN) of the template.
 	TemplateArn *string
 
 	// The ID for the template.
 	TemplateId *string
-
-	// The AWS request ID for this operation.
-	RequestId *string
-
-	// A list of resource permissions to be set on the template.
-	Permissions []*types.ResourcePermission
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

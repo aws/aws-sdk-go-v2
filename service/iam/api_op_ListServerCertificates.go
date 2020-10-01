@@ -68,6 +68,15 @@ type ListServerCertificatesInput struct {
 	// should start.
 	Marker *string
 
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	MaxItems *int32
+
 	// The path prefix for filtering the results. For example: /company/servercerts
 	// would get all server certificates for which the path starts with
 	// /company/servercerts. This parameter is optional. If it is not included, it
@@ -78,15 +87,6 @@ type ListServerCertificatesInput struct {
 	// character from the ! (\u0021) through the DEL character (\u007F), including most
 	// punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
-
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
-	MaxItems *int32
 }
 
 // Contains the response to a successful ListServerCertificates () request.

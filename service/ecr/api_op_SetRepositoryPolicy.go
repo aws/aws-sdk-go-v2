@@ -67,16 +67,16 @@ type SetRepositoryPolicyInput struct {
 	// This member is required.
 	PolicyText *string
 
+	// The name of the repository to receive the policy.
+	//
+	// This member is required.
+	RepositoryName *string
+
 	// If the policy you are attempting to set on a repository policy would prevent you
 	// from setting another policy in the future, you must force the
 	// SetRepositoryPolicy () operation. This is intended to prevent accidental
 	// repository lock outs.
 	Force *bool
-
-	// The name of the repository to receive the policy.
-	//
-	// This member is required.
-	RepositoryName *string
 
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
@@ -85,14 +85,14 @@ type SetRepositoryPolicyInput struct {
 
 type SetRepositoryPolicyOutput struct {
 
-	// The repository name associated with the request.
-	RepositoryName *string
-
 	// The JSON repository policy text applied to the repository.
 	PolicyText *string
 
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

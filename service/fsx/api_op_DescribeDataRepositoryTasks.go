@@ -66,11 +66,6 @@ func (c *Client) DescribeDataRepositoryTasks(ctx context.Context, params *Descri
 
 type DescribeDataRepositoryTasksInput struct {
 
-	// (Optional) Opaque pagination token returned from a previous operation (String).
-	// If present, this token indicates from what point you can continue processing the
-	// request, where the previous NextToken value left off.
-	NextToken *string
-
 	// (Optional) You can use filters to narrow the DescribeDataRepositoryTasks
 	// response to include just tasks for specific file systems, or tasks in a specific
 	// lifecycle state.
@@ -80,19 +75,24 @@ type DescribeDataRepositoryTasksInput struct {
 	// integer greater than zero.
 	MaxResults *int32
 
+	// (Optional) Opaque pagination token returned from a previous operation (String).
+	// If present, this token indicates from what point you can continue processing the
+	// request, where the previous NextToken value left off.
+	NextToken *string
+
 	// (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
 	TaskIds []*string
 }
 
 type DescribeDataRepositoryTasksOutput struct {
 
+	// The collection of data repository task descriptions returned.
+	DataRepositoryTasks []*types.DataRepositoryTask
+
 	// (Optional) Opaque pagination token returned from a previous operation (String).
 	// If present, this token indicates from what point you can continue processing the
 	// request, where the previous NextToken value left off.
 	NextToken *string
-
-	// The collection of data repository task descriptions returned.
-	DataRepositoryTasks []*types.DataRepositoryTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

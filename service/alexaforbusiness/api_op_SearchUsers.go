@@ -57,6 +57,15 @@ func (c *Client) SearchUsers(ctx context.Context, params *SearchUsersInput, optF
 
 type SearchUsersInput struct {
 
+	// The filters to use for listing a specific set of users. Required. Supported
+	// filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
+	Filters []*types.Filter
+
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved. Required.
+	MaxResults *int32
+
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
@@ -66,27 +75,18 @@ type SearchUsersInput struct {
 	// The sort order to use in listing the filtered set of users. Required. Supported
 	// sort keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
 	SortCriteria []*types.Sort
-
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved. Required.
-	MaxResults *int32
-
-	// The filters to use for listing a specific set of users. Required. Supported
-	// filter keys are UserId, FirstName, LastName, Email, and EnrollmentStatus.
-	Filters []*types.Filter
 }
 
 type SearchUsersOutput struct {
-
-	// The users that meet the specified set of filter criteria, in sort order.
-	Users []*types.UserData
 
 	// The token returned to indicate that there is more data available.
 	NextToken *string
 
 	// The total number of users returned.
 	TotalCount *int32
+
+	// The users that meet the specified set of filter criteria, in sort order.
+	Users []*types.UserData
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

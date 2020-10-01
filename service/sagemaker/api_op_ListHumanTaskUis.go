@@ -57,25 +57,25 @@ func (c *Client) ListHumanTaskUis(ctx context.Context, params *ListHumanTaskUisI
 
 type ListHumanTaskUisInput struct {
 
-	// The total number of items to return. If the total number of available items is
-	// more than the value specified in MaxResults, then a NextToken will be provided
-	// in the output that you can use to resume pagination.
-	MaxResults *int32
+	// A filter that returns only human task user interfaces with a creation time
+	// greater than or equal to the specified timestamp.
+	CreationTimeAfter *time.Time
 
 	// A filter that returns only human task user interfaces that were created before
 	// the specified timestamp.
 	CreationTimeBefore *time.Time
 
-	// An optional value that specifies whether you want the results sorted in
-	// Ascending or Descending order.
-	SortOrder types.SortOrder
+	// The total number of items to return. If the total number of available items is
+	// more than the value specified in MaxResults, then a NextToken will be provided
+	// in the output that you can use to resume pagination.
+	MaxResults *int32
 
 	// A token to resume pagination.
 	NextToken *string
 
-	// A filter that returns only human task user interfaces with a creation time
-	// greater than or equal to the specified timestamp.
-	CreationTimeAfter *time.Time
+	// An optional value that specifies whether you want the results sorted in
+	// Ascending or Descending order.
+	SortOrder types.SortOrder
 }
 
 type ListHumanTaskUisOutput struct {

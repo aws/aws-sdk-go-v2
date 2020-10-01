@@ -12,11 +12,14 @@ type AccessPointDescription struct {
 	// The unique Amazon Resource Name (ARN) associated with the access point.
 	AccessPointArn *string
 
-	// Identified the AWS account that owns the access point resource.
-	OwnerId *string
-
 	// The ID of the access point, assigned by Amazon EFS.
 	AccessPointId *string
+
+	// The opaque string specified in the request to ensure idempotent creation.
+	ClientToken *string
+
+	// The ID of the EFS file system that the access point applies to.
+	FileSystemId *string
 
 	// Identifies the lifecycle phase of the access point.
 	LifeCycleState LifeCycleState
@@ -24,23 +27,20 @@ type AccessPointDescription struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// The ID of the EFS file system that the access point applies to.
-	FileSystemId *string
-
-	// The tags associated with the access point, presented as an array of Tag objects.
-	Tags []*Tag
-
-	// The directory on the Amazon EFS file system that the access point exposes as the
-	// root directory to NFS clients using the access point.
-	RootDirectory *RootDirectory
-
-	// The opaque string specified in the request to ensure idempotent creation.
-	ClientToken *string
+	// Identified the AWS account that owns the access point resource.
+	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group
 	// IDs on the access point that is used for all file operations by NFS clients
 	// using the access point.
 	PosixUser *PosixUser
+
+	// The directory on the Amazon EFS file system that the access point exposes as the
+	// root directory to NFS clients using the access point.
+	RootDirectory *RootDirectory
+
+	// The tags associated with the access point, presented as an array of Tag objects.
+	Tags []*Tag
 }
 
 // The backup policy for the file system, showing the curent status. If ENABLED,
@@ -96,6 +96,44 @@ type CreationInfo struct {
 // A description of the file system.
 type FileSystemDescription struct {
 
+	// The time that the file system was created, in seconds (since
+	// 1970-01-01T00:00:00Z).
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The opaque string specified in the request.
+	//
+	// This member is required.
+	CreationToken *string
+
+	// The ID of the file system, assigned by Amazon EFS.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The lifecycle phase of the file system.
+	//
+	// This member is required.
+	LifeCycleState LifeCycleState
+
+	// The current number of mount targets that the file system has. For more
+	// information, see CreateMountTarget ().
+	//
+	// This member is required.
+	NumberOfMountTargets *int32
+
+	// The AWS account that created the file system. If the file system was created by
+	// an IAM user, the parent account to which the user belongs is the owner.
+	//
+	// This member is required.
+	OwnerId *string
+
+	// The performance mode of the file system.
+	//
+	// This member is required.
+	PerformanceMode PerformanceMode
+
 	// The latest known metered size (in bytes) of data stored in the file system, in
 	// its Value field, and the time at which that size was determined in its Timestamp
 	// field. The Timestamp value is the integer number of seconds since
@@ -109,72 +147,13 @@ type FileSystemDescription struct {
 	// This member is required.
 	SizeInBytes *FileSystemSize
 
-	// The time that the file system was created, in seconds (since
-	// 1970-01-01T00:00:00Z).
-	//
-	// This member is required.
-	CreationTime *time.Time
-
-	// The AWS account that created the file system. If the file system was created by
-	// an IAM user, the parent account to which the user belongs is the owner.
-	//
-	// This member is required.
-	OwnerId *string
-
 	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []*Tag
 
-	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget ().
-	//
-	// This member is required.
-	NumberOfMountTargets *int32
-
-	// The performance mode of the file system.
-	//
-	// This member is required.
-	PerformanceMode PerformanceMode
-
-	// The opaque string specified in the request.
-	//
-	// This member is required.
-	CreationToken *string
-
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
-
-	// The throughput, measured in MiB/s, that you want to provision for a file system.
-	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
-	// limit on throughput is 1024 MiB/s. You can get these limits increased by
-	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
-	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
-	// the Amazon EFS User Guide.
-	ProvisionedThroughputInMibps *float64
-
-	// The lifecycle phase of the file system.
-	//
-	// This member is required.
-	LifeCycleState LifeCycleState
-
-	// The ID of the file system, assigned by Amazon EFS.
-	//
-	// This member is required.
-	FileSystemId *string
-
-	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem (). If the file system has a Name tag, Amazon EFS returns
-	// the value in this field.
-	Name *string
-
-	// The throughput mode for a file system. There are two throughput modes to choose
-	// from for your file system: bursting and provisioned. If you set ThroughputMode
-	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
-	// can decrease your file system's throughput in Provisioned Throughput mode or
-	// change between the throughput modes as long as it’s been more than 24 hours
-	// since the last decrease or throughput mode change.
-	ThroughputMode ThroughputMode
 
 	// The Amazon Resource Name (ARN) for the EFS file system, in the format
 	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id . Example
@@ -185,6 +164,27 @@ type FileSystemDescription struct {
 	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that
 	// was used to protect the encrypted file system.
 	KmsKeyId *string
+
+	// You can add tags to a file system, including a Name tag. For more information,
+	// see CreateFileSystem (). If the file system has a Name tag, Amazon EFS returns
+	// the value in this field.
+	Name *string
+
+	// The throughput, measured in MiB/s, that you want to provision for a file system.
+	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
+	// limit on throughput is 1024 MiB/s. You can get these limits increased by
+	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
+	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
+	// the Amazon EFS User Guide.
+	ProvisionedThroughputInMibps *float64
+
+	// The throughput mode for a file system. There are two throughput modes to choose
+	// from for your file system: bursting and provisioned. If you set ThroughputMode
+	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
+	// can decrease your file system's throughput in Provisioned Throughput mode or
+	// change between the throughput modes as long as it’s been more than 24 hours
+	// since the last decrease or throughput mode change.
+	ThroughputMode ThroughputMode
 }
 
 // The latest known metered size (in bytes) of data stored in the file system, in
@@ -201,6 +201,10 @@ type FileSystemSize struct {
 	// This member is required.
 	Value *int64
 
+	// The time at which the size of data, returned in the Value field, was determined.
+	// The value is the integer number of seconds since 1970-01-01T00:00:00Z.
+	Timestamp *time.Time
+
 	// The latest known metered size (in bytes) of data stored in the Infrequent Access
 	// storage class.
 	ValueInIA *int64
@@ -208,10 +212,6 @@ type FileSystemSize struct {
 	// The latest known metered size (in bytes) of data stored in the Standard storage
 	// class.
 	ValueInStandard *int64
-
-	// The time at which the size of data, returned in the Value field, was determined.
-	// The value is the integer number of seconds since 1970-01-01T00:00:00Z.
-	Timestamp *time.Time
 }
 
 // Describes a policy used by EFS lifecycle management to transition files to the
@@ -227,16 +227,25 @@ type LifecyclePolicy struct {
 // Provides a description of a mount target.
 type MountTargetDescription struct {
 
-	// Address at which the file system can be mounted by using the mount target.
-	IpAddress *string
-
-	// AWS account ID that owns the resource.
-	OwnerId *string
+	// The ID of the file system for which the mount target is intended.
+	//
+	// This member is required.
+	FileSystemId *string
 
 	// Lifecycle state of the mount target.
 	//
 	// This member is required.
 	LifeCycleState LifeCycleState
+
+	// System-assigned mount target ID.
+	//
+	// This member is required.
+	MountTargetId *string
+
+	// The ID of the mount target's subnet.
+	//
+	// This member is required.
+	SubnetId *string
 
 	// The unique and consistent identifier of the Availability Zone (AZ) that the
 	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
@@ -249,24 +258,15 @@ type MountTargetDescription struct {
 	// as us-east-1a for another AWS account.
 	AvailabilityZoneName *string
 
-	// The ID of the mount target's subnet.
-	//
-	// This member is required.
-	SubnetId *string
-
-	// System-assigned mount target ID.
-	//
-	// This member is required.
-	MountTargetId *string
+	// Address at which the file system can be mounted by using the mount target.
+	IpAddress *string
 
 	// The ID of the network interface that Amazon EFS created when it created the
 	// mount target.
 	NetworkInterfaceId *string
 
-	// The ID of the file system for which the mount target is intended.
-	//
-	// This member is required.
-	FileSystemId *string
+	// AWS account ID that owns the resource.
+	OwnerId *string
 
 	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
 	VpcId *string

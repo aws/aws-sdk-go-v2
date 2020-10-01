@@ -67,19 +67,6 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 //
 type CopyClusterSnapshotInput struct {
 
-	// The number of days that a manual snapshot is retained. If the value is -1, the
-	// manual snapshot is retained indefinitely. The value must be either -1 or an
-	// integer between 1 and 3,653. The default value is -1.
-	ManualSnapshotRetentionPeriod *int32
-
-	// The identifier of the cluster the source snapshot was created from. This
-	// parameter is required if your IAM user has a policy containing a snapshot
-	// resource element that specifies anything other than * for the cluster name.
-	// Constraints:
-	//
-	//     * Must be the identifier for a valid cluster.
-	SourceSnapshotClusterIdentifier *string
-
 	// The identifier for the source snapshot. Constraints:
 	//
 	//     * Must be the
@@ -106,6 +93,19 @@ type CopyClusterSnapshotInput struct {
 	//
 	// This member is required.
 	TargetSnapshotIdentifier *string
+
+	// The number of days that a manual snapshot is retained. If the value is -1, the
+	// manual snapshot is retained indefinitely. The value must be either -1 or an
+	// integer between 1 and 3,653. The default value is -1.
+	ManualSnapshotRetentionPeriod *int32
+
+	// The identifier of the cluster the source snapshot was created from. This
+	// parameter is required if your IAM user has a policy containing a snapshot
+	// resource element that specifies anything other than * for the cluster name.
+	// Constraints:
+	//
+	//     * Must be the identifier for a valid cluster.
+	SourceSnapshotClusterIdentifier *string
 }
 
 type CopyClusterSnapshotOutput struct {

@@ -74,12 +74,12 @@ type ListTagsForResourceInput struct {
 // ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 
-	// Array of resource tags.
-	Tags []*types.TagListEntry
-
 	// An opaque string that indicates the position at which to begin returning the
 	// next list of resource tags.
 	NextToken *string
+
+	// Array of resource tags.
+	Tags []*types.TagListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

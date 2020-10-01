@@ -57,17 +57,17 @@ func (c *Client) ListCoreDefinitionVersions(ctx context.Context, params *ListCor
 
 type ListCoreDefinitionVersionsInput struct {
 
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string
-
-	// The maximum number of results to be returned per request.
-	MaxResults *string
-
 	// The ID of the core definition.
 	//
 	// This member is required.
 	CoreDefinitionId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *string
+
+	// The token for the next set of results, or ''null'' if there are no additional
+	// results.
+	NextToken *string
 }
 
 type ListCoreDefinitionVersionsOutput struct {

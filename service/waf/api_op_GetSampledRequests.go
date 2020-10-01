@@ -72,20 +72,13 @@ func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledReque
 
 type GetSampledRequestsInput struct {
 
-	// The start date and time and the end date and time of the range for which you
-	// want GetSampledRequests to return a sample of requests. You must specify the
-	// times in Coordinated Universal Time (UTC) format. UTC format includes the
-	// special designator, Z. For example, "2016-09-27T14:50Z". You can specify any
-	// time range in the previous three hours.
+	// The number of requests that you want AWS WAF to return from among the first
+	// 5,000 requests that your AWS resource received during the time range. If your
+	// resource received fewer requests than the value of MaxItems, GetSampledRequests
+	// returns information about all of them.
 	//
 	// This member is required.
-	TimeWindow *types.TimeWindow
-
-	// The WebACLId of the WebACL for which you want GetSampledRequests to return a
-	// sample of requests.
-	//
-	// This member is required.
-	WebAclId *string
+	MaxItems *int64
 
 	// RuleId is one of three values:
 	//
@@ -100,16 +93,32 @@ type GetSampledRequestsInput struct {
 	// This member is required.
 	RuleId *string
 
-	// The number of requests that you want AWS WAF to return from among the first
-	// 5,000 requests that your AWS resource received during the time range. If your
-	// resource received fewer requests than the value of MaxItems, GetSampledRequests
-	// returns information about all of them.
+	// The start date and time and the end date and time of the range for which you
+	// want GetSampledRequests to return a sample of requests. You must specify the
+	// times in Coordinated Universal Time (UTC) format. UTC format includes the
+	// special designator, Z. For example, "2016-09-27T14:50Z". You can specify any
+	// time range in the previous three hours.
 	//
 	// This member is required.
-	MaxItems *int64
+	TimeWindow *types.TimeWindow
+
+	// The WebACLId of the WebACL for which you want GetSampledRequests to return a
+	// sample of requests.
+	//
+	// This member is required.
+	WebAclId *string
 }
 
 type GetSampledRequestsOutput struct {
+
+	// The total number of requests from which GetSampledRequests got a sample of
+	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
+	// every request that your AWS resource received during the specified time range.
+	PopulationSize *int64
+
+	// A complex type that contains detailed information about each of the requests in
+	// the sample.
+	SampledRequests []*types.SampledHTTPRequest
 
 	// Usually, TimeWindow is the time range that you specified in the
 	// GetSampledRequests request. However, if your AWS resource received more than
@@ -117,15 +126,6 @@ type GetSampledRequestsOutput struct {
 	// GetSampledRequests returns the time range for the first 5,000 requests. Times
 	// are in Coordinated Universal Time (UTC) format.
 	TimeWindow *types.TimeWindow
-
-	// A complex type that contains detailed information about each of the requests in
-	// the sample.
-	SampledRequests []*types.SampledHTTPRequest
-
-	// The total number of requests from which GetSampledRequests got a sample of
-	// MaxItems requests. If PopulationSize is less than MaxItems, the sample includes
-	// every request that your AWS resource received during the specified time range.
-	PopulationSize *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

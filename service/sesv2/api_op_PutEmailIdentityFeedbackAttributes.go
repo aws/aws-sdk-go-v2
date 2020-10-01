@@ -66,6 +66,12 @@ func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params 
 // processed.
 type PutEmailIdentityFeedbackAttributesInput struct {
 
+	// The email identity that you want to configure bounce and complaint feedback
+	// forwarding for.
+	//
+	// This member is required.
+	EmailIdentity *string
+
 	// Sets the feedback forwarding configuration for the identity. If the value is
 	// true, you receive email notifications when bounce or complaint events occur.
 	// These notifications are sent to the address that you specified in the
@@ -75,12 +81,6 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// destination), you receive an email notification when these events occur (even if
 	// this setting is disabled).
 	EmailForwardingEnabled *bool
-
-	// The email identity that you want to configure bounce and complaint feedback
-	// forwarding for.
-	//
-	// This member is required.
-	EmailIdentity *string
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

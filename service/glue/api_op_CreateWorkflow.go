@@ -62,14 +62,14 @@ type CreateWorkflowInput struct {
 	// This member is required.
 	Name *string
 
-	// The tags to be used with this workflow.
-	Tags map[string]*string
+	// A collection of properties to be used as part of each execution of the workflow.
+	DefaultRunProperties map[string]*string
 
 	// A description of the workflow.
 	Description *string
 
-	// A collection of properties to be used as part of each execution of the workflow.
-	DefaultRunProperties map[string]*string
+	// The tags to be used with this workflow.
+	Tags map[string]*string
 }
 
 type CreateWorkflowOutput struct {

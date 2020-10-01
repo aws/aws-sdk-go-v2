@@ -56,22 +56,22 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
-	// The token to request the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32
+
+	// The token to request the next page of results.
+	NextToken *string
 }
 
 type ListApplicationsOutput struct {
 
+	// The list of applications.
+	ApplicationInfoList []*types.ApplicationInfo
+
 	// The token used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// The list of applications.
-	ApplicationInfoList []*types.ApplicationInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

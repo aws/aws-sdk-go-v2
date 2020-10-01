@@ -57,6 +57,16 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
+	// The name of the resource group.
+	//
+	// This member is required.
+	ResourceGroupName *string
+
+	// Indicates whether Application Insights can listen to CloudWatch events for the
+	// application resources, such as instance terminated, failed deployment, and
+	// others.
+	CWEMonitorEnabled *bool
+
 	// When set to true, creates opsItems for any problems detected on an application.
 	OpsCenterEnabled *bool
 
@@ -68,16 +78,6 @@ type CreateApplicationInput struct {
 	// value (Value). The maximum length of a tag key is 128 characters. The maximum
 	// length of a tag value is 256 characters.
 	Tags []*types.Tag
-
-	// The name of the resource group.
-	//
-	// This member is required.
-	ResourceGroupName *string
-
-	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated, failed deployment, and
-	// others.
-	CWEMonitorEnabled *bool
 }
 
 type CreateApplicationOutput struct {

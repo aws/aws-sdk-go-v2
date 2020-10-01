@@ -88,8 +88,18 @@ type PutProvisionedConcurrencyConfigInput struct {
 
 type PutProvisionedConcurrencyConfigOutput struct {
 
+	// The amount of provisioned concurrency allocated.
+	AllocatedProvisionedConcurrentExecutions *int32
+
 	// The amount of provisioned concurrency available.
 	AvailableProvisionedConcurrentExecutions *int32
+
+	// The date and time that a user last updated the configuration, in ISO 8601 format
+	// (https://www.iso.org/iso-8601-date-and-time-format.html).
+	LastModified *string
+
+	// The amount of provisioned concurrency requested.
+	RequestedProvisionedConcurrentExecutions *int32
 
 	// The status of the allocation process.
 	Status types.ProvisionedConcurrencyStatusEnum
@@ -97,16 +107,6 @@ type PutProvisionedConcurrencyConfigOutput struct {
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
-
-	// The amount of provisioned concurrency requested.
-	RequestedProvisionedConcurrentExecutions *int32
-
-	// The amount of provisioned concurrency allocated.
-	AllocatedProvisionedConcurrentExecutions *int32
-
-	// The date and time that a user last updated the configuration, in ISO 8601 format
-	// (https://www.iso.org/iso-8601-date-and-time-format.html).
-	LastModified *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

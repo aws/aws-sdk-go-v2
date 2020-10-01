@@ -64,15 +64,15 @@ type CreateHumanTaskUiInput struct {
 	// This member is required.
 	HumanTaskUiName *string
 
-	// An array of key-value pairs that contain metadata to help you categorize and
-	// organize a human review workflow user interface. Each tag consists of a key and
-	// a value, both of which you define.
-	Tags []*types.Tag
-
 	// The Liquid template for the worker user interface.
 	//
 	// This member is required.
 	UiTemplate *types.UiTemplate
+
+	// An array of key-value pairs that contain metadata to help you categorize and
+	// organize a human review workflow user interface. Each tag consists of a key and
+	// a value, both of which you define.
+	Tags []*types.Tag
 }
 
 type CreateHumanTaskUiOutput struct {

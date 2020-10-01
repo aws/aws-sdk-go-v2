@@ -60,12 +60,6 @@ func (c *Client) ReplaceNetworkAclAssociation(ctx context.Context, params *Repla
 
 type ReplaceNetworkAclAssociationInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the current association between the original network ACL and the
 	// subnet.
 	//
@@ -76,6 +70,12 @@ type ReplaceNetworkAclAssociationInput struct {
 	//
 	// This member is required.
 	NetworkAclId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ReplaceNetworkAclAssociationOutput struct {

@@ -57,28 +57,28 @@ func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGr
 
 type CreateBillingGroupInput struct {
 
-	// Metadata which can be used to manage the billing group.
-	Tags []*types.Tag
-
-	// The properties of the billing group.
-	BillingGroupProperties *types.BillingGroupProperties
-
 	// The name you wish to give to the billing group.
 	//
 	// This member is required.
 	BillingGroupName *string
+
+	// The properties of the billing group.
+	BillingGroupProperties *types.BillingGroupProperties
+
+	// Metadata which can be used to manage the billing group.
+	Tags []*types.Tag
 }
 
 type CreateBillingGroupOutput struct {
+
+	// The ARN of the billing group.
+	BillingGroupArn *string
 
 	// The ID of the billing group.
 	BillingGroupId *string
 
 	// The name you gave to the billing group.
 	BillingGroupName *string
-
-	// The ARN of the billing group.
-	BillingGroupArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

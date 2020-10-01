@@ -7,18 +7,18 @@ package types
 // repository after project creation.
 type Code struct {
 
-	// The location where the source code files provided with the project request are
-	// stored. AWS CodeStar retrieves the files during project creation.
-	//
-	// This member is required.
-	Source *CodeSource
-
 	// The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or
 	// GitHub. After AWS CodeStar provisions the new repository, the source code files
 	// provided with the project request are placed in the repository.
 	//
 	// This member is required.
 	Destination *CodeDestination
+
+	// The location where the source code files provided with the project request are
+	// stored. AWS CodeStar retrieves the files during project creation.
+	//
+	// This member is required.
+	Source *CodeSource
 }
 
 // Information about the AWS CodeCommit repository to be created in AWS CodeStar.
@@ -37,15 +37,15 @@ type CodeCommitCodeDestination struct {
 // provided with the project request are placed in the repository.
 type CodeDestination struct {
 
-	// Information about the GitHub repository to be created in AWS CodeStar. This is
-	// where the source code files provided with the project request will be uploaded
-	// after project creation.
-	GitHub *GitHubCodeDestination
-
 	// Information about the AWS CodeCommit repository to be created in AWS CodeStar.
 	// This is where the source code files provided with the project request will be
 	// uploaded after project creation.
 	CodeCommit *CodeCommitCodeDestination
+
+	// Information about the GitHub repository to be created in AWS CodeStar. This is
+	// where the source code files provided with the project request will be uploaded
+	// after project creation.
+	GitHub *GitHubCodeDestination
 }
 
 // The location where the source code files provided with the project request are
@@ -64,11 +64,22 @@ type CodeSource struct {
 // after project creation.
 type GitHubCodeDestination struct {
 
-	// The type of GitHub repository to be created in AWS CodeStar. Valid values are
-	// User or Organization.
+	// Whether to enable issues for the GitHub repository.
 	//
 	// This member is required.
-	Type *string
+	IssuesEnabled *bool
+
+	// Name of the GitHub repository to be created in AWS CodeStar.
+	//
+	// This member is required.
+	Name *string
+
+	// The GitHub username for the owner of the GitHub repository to be created in AWS
+	// CodeStar. If this repository should be owned by a GitHub organization, provide
+	// its name.
+	//
+	// This member is required.
+	Owner *string
 
 	// Whether the GitHub repository is to be a private repository.
 	//
@@ -80,22 +91,11 @@ type GitHubCodeDestination struct {
 	// This member is required.
 	Token *string
 
-	// Name of the GitHub repository to be created in AWS CodeStar.
+	// The type of GitHub repository to be created in AWS CodeStar. Valid values are
+	// User or Organization.
 	//
 	// This member is required.
-	Name *string
-
-	// Whether to enable issues for the GitHub repository.
-	//
-	// This member is required.
-	IssuesEnabled *bool
-
-	// The GitHub username for the owner of the GitHub repository to be created in AWS
-	// CodeStar. If this repository should be owned by a GitHub organization, provide
-	// its name.
-	//
-	// This member is required.
-	Owner *string
+	Type *string
 
 	// Description for the GitHub repository to be created in AWS CodeStar. This
 	// description displays in GitHub after the repository is created.
@@ -117,11 +117,11 @@ type ProjectStatus struct {
 // Information about the metadata for a project.
 type ProjectSummary struct {
 
-	// The ID of the project.
-	ProjectId *string
-
 	// The Amazon Resource Name (ARN) of the project.
 	ProjectArn *string
+
+	// The ID of the project.
+	ProjectId *string
 }
 
 // Information about a resource for a project.
@@ -178,13 +178,13 @@ type Toolchain struct {
 	// This member is required.
 	Source *ToolchainSource
 
-	// The list of parameter overrides to be passed into the toolchain template during
-	// stack provisioning, if any.
-	StackParameters map[string]*string
-
 	// The service role ARN for AWS CodeStar to use for the toolchain template during
 	// stack provisioning.
 	RoleArn *string
+
+	// The list of parameter overrides to be passed into the toolchain template during
+	// stack provisioning, if any.
+	StackParameters map[string]*string
 }
 
 // The Amazon S3 location where the toolchain template file provided with the
@@ -202,9 +202,6 @@ type ToolchainSource struct {
 // Information about a user's profile in AWS CodeStar.
 type UserProfileSummary struct {
 
-	// The email address associated with the user.
-	EmailAddress *string
-
 	// The display name of a user in AWS CodeStar. For example, this could be set to
 	// both first and last name ("Mary Major") or a single name ("Mary"). The display
 	// name is also used to generate the initial icon associated with the user in AWS
@@ -216,11 +213,14 @@ type UserProfileSummary struct {
 	// the space ("MJ", not "MM").
 	DisplayName *string
 
-	// The Amazon Resource Name (ARN) of the user in IAM.
-	UserArn *string
+	// The email address associated with the user.
+	EmailAddress *string
 
 	// The SSH public key associated with the user in AWS CodeStar. If a project owner
 	// allows the user remote access to project resources, this public key will be used
 	// along with the user's private key for SSH access.
 	SshPublicKey *string
+
+	// The Amazon Resource Name (ARN) of the user in IAM.
+	UserArn *string
 }

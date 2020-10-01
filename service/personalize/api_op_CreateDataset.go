@@ -92,17 +92,6 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetGroupArn *string
 
-	// The name for the dataset.
-	//
-	// This member is required.
-	Name *string
-
-	// The ARN of the schema to associate with the dataset. The schema defines the
-	// dataset fields.
-	//
-	// This member is required.
-	SchemaArn *string
-
 	// The type of dataset. One of the following (case insensitive) values:
 	//
 	//     *
@@ -114,6 +103,17 @@ type CreateDatasetInput struct {
 	//
 	// This member is required.
 	DatasetType *string
+
+	// The name for the dataset.
+	//
+	// This member is required.
+	Name *string
+
+	// The ARN of the schema to associate with the dataset. The schema defines the
+	// dataset fields.
+	//
+	// This member is required.
+	SchemaArn *string
 }
 
 type CreateDatasetOutput struct {

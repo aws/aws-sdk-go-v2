@@ -71,6 +71,11 @@ func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns
 // CreateTaskRequest
 type CreateTaskInput struct {
 
+	// The Amazon Resource Name (ARN) of an AWS storage resource's location.
+	//
+	// This member is required.
+	DestinationLocationArn *string
+
 	// The Amazon Resource Name (ARN) of the source location for the task.
 	//
 	// This member is required.
@@ -80,29 +85,15 @@ type CreateTaskInput struct {
 	// to monitor and log events in the task.
 	CloudWatchLogGroupArn *string
 
-	// The name of a task. This value is a text reference that is used to identify the
-	// task in the console.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of an AWS storage resource's location.
-	//
-	// This member is required.
-	DestinationLocationArn *string
-
-	// The key-value pair that represents the tag that you want to add to the resource.
-	// The value can be an empty string.
-	Tags []*types.TagListEntry
-
 	// A list of filter rules that determines which files to exclude from a task. The
 	// list should contain a single filter string that consists of the patterns to
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
 	// "/folder1|/folder2"
 	Excludes []*types.FilterRule
 
-	// Specifies a schedule used to periodically transfer files from a source to a
-	// destination location. The schedule should be specified in UTC time. For more
-	// information, see task-scheduling ().
-	Schedule *types.TaskSchedule
+	// The name of a task. This value is a text reference that is used to identify the
+	// task in the console.
+	Name *string
 
 	// The set of configuration options that control the behavior of a single execution
 	// of the task that occurs when you call StartTaskExecution. You can configure
@@ -111,6 +102,15 @@ type CreateTaskInput struct {
 	// task execution, you can override these options by specifying the OverrideOptions
 	// before starting the task execution. For more information, see the operation.
 	Options *types.Options
+
+	// Specifies a schedule used to periodically transfer files from a source to a
+	// destination location. The schedule should be specified in UTC time. For more
+	// information, see task-scheduling ().
+	Schedule *types.TaskSchedule
+
+	// The key-value pair that represents the tag that you want to add to the resource.
+	// The value can be an empty string.
+	Tags []*types.TagListEntry
 }
 
 // CreateTaskResponse

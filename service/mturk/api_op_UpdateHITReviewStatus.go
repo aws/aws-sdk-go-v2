@@ -58,6 +58,11 @@ func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITRev
 
 type UpdateHITReviewStatusInput struct {
 
+	// The ID of the HIT to update.
+	//
+	// This member is required.
+	HITId *string
+
 	// Specifies how to update the HIT status. Default is False.
 	//
 	//     * Setting this to
@@ -66,11 +71,6 @@ type UpdateHITReviewStatusInput struct {
 	//     * Setting
 	// this to true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
-
-	// The ID of the HIT to update.
-	//
-	// This member is required.
-	HITId *string
 }
 
 type UpdateHITReviewStatusOutput struct {

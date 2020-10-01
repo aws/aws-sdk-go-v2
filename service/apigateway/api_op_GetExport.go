@@ -58,6 +58,27 @@ func (c *Client) GetExport(ctx context.Context, params *GetExportInput, optFns .
 // Request a new export of a RestApi () for a particular Stage ().
 type GetExportInput struct {
 
+	// [Required] The type of export. Acceptable values are 'oas30' for OpenAPI 3.0.x
+	// and 'swagger' for Swagger/OpenAPI 2.0.
+	//
+	// This member is required.
+	ExportType *string
+
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
+	// [Required] The name of the Stage () that will be exported.
+	//
+	// This member is required.
+	StageName *string
+
+	// The content-type of the export, for example application/json. Currently
+	// application/json and application/yaml are supported for exportType ofoas30 and
+	// swagger. This should be specified in the Accept header for direct API requests.
+	Accepts *string
+
 	// A key-value map of query string parameters that specify properties of the
 	// export, depending on the requested exportType. For exportTypeoas30 and swagger,
 	// any combination of the following parameters are supported:
@@ -66,27 +87,6 @@ type GetExportInput struct {
 	// the API with x-amazon-apigateway-authorizer extensions. postman will export the
 	// API with Postman extensions, allowing for import to the Postman tool
 	Parameters map[string]*string
-
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	// The content-type of the export, for example application/json. Currently
-	// application/json and application/yaml are supported for exportType ofoas30 and
-	// swagger. This should be specified in the Accept header for direct API requests.
-	Accepts *string
-
-	// [Required] The type of export. Acceptable values are 'oas30' for OpenAPI 3.0.x
-	// and 'swagger' for Swagger/OpenAPI 2.0.
-	//
-	// This member is required.
-	ExportType *string
-
-	// [Required] The name of the Stage () that will be exported.
-	//
-	// This member is required.
-	StageName *string
 }
 
 // The binary blob response to GetExport (), which contains the generated SDK.
@@ -95,12 +95,12 @@ type GetExportOutput struct {
 	// The binary blob response to GetExport (), which contains the export.
 	Body []byte
 
+	// The content-disposition header value in the HTTP response.
+	ContentDisposition *string
+
 	// The content-type header value in the HTTP response. This will correspond to a
 	// valid 'accept' type in the request.
 	ContentType *string
-
-	// The content-disposition header value in the HTTP response.
-	ContentDisposition *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

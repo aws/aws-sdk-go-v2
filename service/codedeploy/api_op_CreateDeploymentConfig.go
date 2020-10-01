@@ -63,6 +63,9 @@ type CreateDeploymentConfigInput struct {
 	// This member is required.
 	DeploymentConfigName *string
 
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	ComputePlatform types.ComputePlatform
+
 	// The minimum number of healthy instances that should be available at any time
 	// during the deployment. There are two parameters expected in the input: type and
 	// value. The type parameter takes either of the following values:
@@ -84,9 +87,6 @@ type CreateDeploymentConfigInput struct {
 
 	// The configuration that specifies how the deployment traffic is routed.
 	TrafficRoutingConfig *types.TrafficRoutingConfig
-
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
-	ComputePlatform types.ComputePlatform
 }
 
 // Represents the output of a CreateDeploymentConfig operation.

@@ -10,59 +10,62 @@ import (
 // replies from the resource.
 type BookingOptions struct {
 
-	// The resource's ability to automatically decline any recurring requests.
-	AutoDeclineRecurringRequests *bool
-
 	// The resource's ability to automatically reply to requests. If disabled,
 	// delegates must be associated to the resource.
 	AutoAcceptRequests *bool
 
 	// The resource's ability to automatically decline any conflicting requests.
 	AutoDeclineConflictingRequests *bool
+
+	// The resource's ability to automatically decline any recurring requests.
+	AutoDeclineRecurringRequests *bool
 }
 
 // The name of the attribute, which is one of the values defined in the
 // UserAttribute enumeration.
 type Delegate struct {
 
-	// The type of the delegate: user or group.
-	//
-	// This member is required.
-	Type MemberType
-
 	// The identifier for the user or group associated as the resource's delegate.
 	//
 	// This member is required.
 	Id *string
+
+	// The type of the delegate: user or group.
+	//
+	// This member is required.
+	Type MemberType
 }
 
 // The representation of an Amazon WorkMail group.
 type Group struct {
 
-	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
-	State EntityState
+	// The date indicating when the group was disabled from Amazon WorkMail use.
+	DisabledDate *time.Time
 
 	// The email of the group.
 	Email *string
 
-	// The identifier of the group.
-	Id *string
-
 	// The date indicating when the group was enabled for Amazon WorkMail use.
 	EnabledDate *time.Time
+
+	// The identifier of the group.
+	Id *string
 
 	// The name of the group.
 	Name *string
 
-	// The date indicating when the group was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time
+	// The state of the group, which can be ENABLED, DISABLED, or DELETED.
+	State EntityState
 }
 
 // The representation of a user or group.
 type Member struct {
 
-	// The state of the member, which can be ENABLED, DISABLED, or DELETED.
-	State EntityState
+	// The date indicating when the member was disabled from Amazon WorkMail use.
+	DisabledDate *time.Time
+
+	// The date indicating when the member was enabled for Amazon WorkMail use.
+	EnabledDate *time.Time
 
 	// The identifier of the member.
 	Id *string
@@ -70,37 +73,45 @@ type Member struct {
 	// The name of the member.
 	Name *string
 
-	// The date indicating when the member was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time
+	// The state of the member, which can be ENABLED, DISABLED, or DELETED.
+	State EntityState
 
 	// A member can be a user or group.
 	Type MemberType
-
-	// The date indicating when the member was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time
 }
 
 // The representation of an organization.
 type OrganizationSummary struct {
+
+	// The alias associated with the organization.
+	Alias *string
 
 	// The error message associated with the organization. It is only present if
 	// unexpected behavior has occurred with regards to the organization. It provides
 	// insight or solutions regarding unexpected behavior.
 	ErrorMessage *string
 
-	// The state associated with the organization.
-	State *string
-
-	// The alias associated with the organization.
-	Alias *string
-
 	// The identifier associated with the organization.
 	OrganizationId *string
+
+	// The state associated with the organization.
+	State *string
 }
 
 // Permission granted to a user, group, or resource to access a certain aspect of
 // another user, group, or resource mailbox.
 type Permission struct {
+
+	// The identifier of the user, group, or resource to which the permissions are
+	// granted.
+	//
+	// This member is required.
+	GranteeId *string
+
+	// The type of user, group, or resource referred to in GranteeId.
+	//
+	// This member is required.
+	GranteeType MemberType
 
 	// The permissions granted to the grantee. SEND_AS allows the grantee to send email
 	// as the owner of the mailbox (the grantee is not mentioned on these emails).
@@ -111,61 +122,41 @@ type Permission struct {
 	//
 	// This member is required.
 	PermissionValues []PermissionType
-
-	// The type of user, group, or resource referred to in GranteeId.
-	//
-	// This member is required.
-	GranteeType MemberType
-
-	// The identifier of the user, group, or resource to which the permissions are
-	// granted.
-	//
-	// This member is required.
-	GranteeId *string
 }
 
 // The representation of a resource.
 type Resource struct {
 
-	// The date indicating when the resource was enabled for Amazon WorkMail use.
-	EnabledDate *time.Time
+	// The date indicating when the resource was disabled from Amazon WorkMail use.
+	DisabledDate *time.Time
 
 	// The email of the resource.
 	Email *string
 
-	// The type of the resource: equipment or room.
-	Type ResourceType
-
-	// The date indicating when the resource was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time
-
-	// The name of the resource.
-	Name *string
+	// The date indicating when the resource was enabled for Amazon WorkMail use.
+	EnabledDate *time.Time
 
 	// The identifier of the resource.
 	Id *string
 
+	// The name of the resource.
+	Name *string
+
 	// The state of the resource, which can be ENABLED, DISABLED, or DELETED.
 	State EntityState
+
+	// The type of the resource: equipment or room.
+	Type ResourceType
 }
 
 // The representation of an Amazon WorkMail user.
 type User struct {
 
+	// The date indicating when the user was disabled from Amazon WorkMail use.
+	DisabledDate *time.Time
+
 	// The display name of the user.
 	DisplayName *string
-
-	// The state of the user, which can be ENABLED, DISABLED, or DELETED.
-	State EntityState
-
-	// The name of the user.
-	Name *string
-
-	// The role of the user.
-	UserRole UserRole
-
-	// The identifier of the user.
-	Id *string
 
 	// The email of the user.
 	Email *string
@@ -173,6 +164,15 @@ type User struct {
 	// The date indicating when the user was enabled for Amazon WorkMail use.
 	EnabledDate *time.Time
 
-	// The date indicating when the user was disabled from Amazon WorkMail use.
-	DisabledDate *time.Time
+	// The identifier of the user.
+	Id *string
+
+	// The name of the user.
+	Name *string
+
+	// The state of the user, which can be ENABLED, DISABLED, or DELETED.
+	State EntityState
+
+	// The role of the user.
+	UserRole UserRole
 }

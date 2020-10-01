@@ -61,6 +61,23 @@ func (c *Client) DeleteRegexPatternSet(ctx context.Context, params *DeleteRegexP
 
 type DeleteRegexPatternSetInput struct {
 
+	// A unique identifier for the set. This ID is returned in the responses to create
+	// and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
+	Id *string
+
+	// A token used for optimistic locking. AWS WAF returns a token to your get and
+	// list requests, to mark the state of the entity at the time of the request. To
+	// make changes to the entity associated with the token, you provide the token to
+	// operations like update and delete. AWS WAF uses the token to ensure that no
+	// changes have been made to the entity since you last retrieved it. If a change
+	// has been made, the update fails with a WAFOptimisticLockException. If this
+	// happens, perform another get, and use the new token returned by that operation.
+	//
+	// This member is required.
+	LockToken *string
+
 	// The name of the set. You cannot change the name after you create the set.
 	//
 	// This member is required.
@@ -79,23 +96,6 @@ type DeleteRegexPatternSetInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
-
-	// A token used for optimistic locking. AWS WAF returns a token to your get and
-	// list requests, to mark the state of the entity at the time of the request. To
-	// make changes to the entity associated with the token, you provide the token to
-	// operations like update and delete. AWS WAF uses the token to ensure that no
-	// changes have been made to the entity since you last retrieved it. If a change
-	// has been made, the update fails with a WAFOptimisticLockException. If this
-	// happens, perform another get, and use the new token returned by that operation.
-	//
-	// This member is required.
-	LockToken *string
-
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
 }
 
 type DeleteRegexPatternSetOutput struct {

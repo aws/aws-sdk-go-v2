@@ -67,6 +67,11 @@ func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAW
 
 type ListAWSDefaultServiceQuotasInput struct {
 
+	// Specifies the service that you want to use.
+	//
+	// This member is required.
+	ServiceCode *string
+
 	// (Optional) Limits the number of results that you want to include in the
 	// response. If you don't include this parameter, the response defaults to a value
 	// that's specific to the operation. If additional items exist beyond the specified
@@ -85,23 +90,18 @@ type ListAWSDefaultServiceQuotasInput struct {
 	// to the operation to get the next part of the results. You should check NextToken
 	// after every operation to ensure that you receive all of the results.
 	NextToken *string
-
-	// Specifies the service that you want to use.
-	//
-	// This member is required.
-	ServiceCode *string
 }
 
 type ListAWSDefaultServiceQuotasOutput struct {
-
-	// A list of the quotas in the account with the AWS default values.
-	Quotas []*types.ServiceQuota
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request that indicates that there's more output available. In a
 	// subsequent call, set it to the value of the previous call's NextToken response
 	// to indicate where the output should continue from.
 	NextToken *string
+
+	// A list of the quotas in the account with the AWS default values.
+	Quotas []*types.ServiceQuota
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -80,30 +80,6 @@ func (c *Client) ListObjectsV2(ctx context.Context, params *ListObjectsV2Input, 
 
 type ListObjectsV2Input struct {
 
-	// Confirms that the requester knows that she or he will be charged for the list
-	// objects request in V2 style. Bucket owners need not specify this parameter in
-	// their requests.
-	RequestPayer types.RequestPayer
-
-	// Sets the maximum number of keys returned in the response. By default the API
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
-	MaxKeys *int32
-
-	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
-	// listing after this specified key. StartAfter can be any key in the bucket.
-	StartAfter *string
-
-	// The owner field is not present in listV2 by default, if you want to return owner
-	// field with each key in the result then set the fetch owner field to true.
-	FetchOwner *bool
-
-	// Limits the response to keys that begin with the specified prefix.
-	Prefix *string
-
-	// A delimiter is a character you use to group keys.
-	Delimiter *string
-
 	// Bucket name to list. When using this API with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
@@ -120,17 +96,35 @@ type ListObjectsV2Input struct {
 	// bucket with a token. ContinuationToken is obfuscated and is not a real key.
 	ContinuationToken *string
 
+	// A delimiter is a character you use to group keys.
+	Delimiter *string
+
 	// Encoding type used by Amazon S3 to encode object keys in the response.
 	EncodingType types.EncodingType
+
+	// The owner field is not present in listV2 by default, if you want to return owner
+	// field with each key in the result then set the fetch owner field to true.
+	FetchOwner *bool
+
+	// Sets the maximum number of keys returned in the response. By default the API
+	// returns up to 1,000 key names. The response might contain fewer keys but will
+	// never contain more.
+	MaxKeys *int32
+
+	// Limits the response to keys that begin with the specified prefix.
+	Prefix *string
+
+	// Confirms that the requester knows that she or he will be charged for the list
+	// objects request in V2 style. Bucket owners need not specify this parameter in
+	// their requests.
+	RequestPayer types.RequestPayer
+
+	// StartAfter is where you want Amazon S3 to start listing from. Amazon S3 starts
+	// listing after this specified key. StartAfter can be any key in the bucket.
+	StartAfter *string
 }
 
 type ListObjectsV2Output struct {
-
-	// If StartAfter was sent with the request, it is included in the response.
-	StartAfter *string
-
-	// Keys that begin with the indicated prefix.
-	Prefix *string
 
 	// All of the keys rolled up into a common prefix count as a single return when
 	// calculating the number of returns.  <p>A response can contain
@@ -145,10 +139,11 @@ type ListObjectsV2Output struct {
 	// count as a single return when calculating the number of returns. </p>
 	CommonPrefixes []*types.CommonPrefix
 
-	// Sets the maximum number of keys returned in the response. By default the API
-	// returns up to 1,000 key names. The response might contain fewer keys but will
-	// never contain more.
-	MaxKeys *int32
+	// Metadata about each object returned.
+	Contents []*types.Object
+
+	// If ContinuationToken was sent with the request, it is included in the response.
+	ContinuationToken *string
 
 	// Causes keys that contain the same string between the prefix and the first
 	// occurrence of the delimiter to be rolled up into a single result element in the
@@ -157,22 +152,6 @@ type ListObjectsV2Output struct {
 	// MaxKeys value.
 	Delimiter *string
 
-	// KeyCount is the number of keys returned with this request. KeyCount will always
-	// be less than equals to MaxKeys field. Say you ask for 50 keys, your result will
-	// include less than equals 50 keys
-	KeyCount *int32
-
-	// Set to false if all of the results were returned. Set to true if more keys are
-	// available to return. If the number of results exceeds that specified by MaxKeys,
-	// all of the results might not be returned.
-	IsTruncated *bool
-
-	// Metadata about each object returned.
-	Contents []*types.Object
-
-	// If ContinuationToken was sent with the request, it is included in the response.
-	ContinuationToken *string
-
 	// Encoding type used by Amazon S3 to encode object key names in the XML response.
 	// <p>If you specify the encoding-type request parameter, Amazon S3 includes this
 	// element in the response, and returns encoded key name values in the following
@@ -180,11 +159,20 @@ type ListObjectsV2Output struct {
 	// <code>StartAfter</code>.</p>
 	EncodingType types.EncodingType
 
-	// NextContinuationToken is sent when isTruncated is true, which means there are
-	// more keys in the bucket that can be listed. The next list requests to Amazon S3
-	// can be continued with this NextContinuationToken. NextContinuationToken is
-	// obfuscated and is not a real key
-	NextContinuationToken *string
+	// Set to false if all of the results were returned. Set to true if more keys are
+	// available to return. If the number of results exceeds that specified by MaxKeys,
+	// all of the results might not be returned.
+	IsTruncated *bool
+
+	// KeyCount is the number of keys returned with this request. KeyCount will always
+	// be less than equals to MaxKeys field. Say you ask for 50 keys, your result will
+	// include less than equals 50 keys
+	KeyCount *int32
+
+	// Sets the maximum number of keys returned in the response. By default the API
+	// returns up to 1,000 key names. The response might contain fewer keys but will
+	// never contain more.
+	MaxKeys *int32
 
 	// Bucket name. When using this API with an access point, you must direct requests
 	// to the access point hostname. The access point hostname takes the form
@@ -195,6 +183,18 @@ type ListObjectsV2Output struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
 	// the Amazon Simple Storage Service Developer Guide.
 	Name *string
+
+	// NextContinuationToken is sent when isTruncated is true, which means there are
+	// more keys in the bucket that can be listed. The next list requests to Amazon S3
+	// can be continued with this NextContinuationToken. NextContinuationToken is
+	// obfuscated and is not a real key
+	NextContinuationToken *string
+
+	// Keys that begin with the indicated prefix.
+	Prefix *string
+
+	// If StartAfter was sent with the request, it is included in the response.
+	StartAfter *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

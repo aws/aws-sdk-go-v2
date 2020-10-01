@@ -59,15 +59,15 @@ func (c *Client) GetPullRequestApprovalStates(ctx context.Context, params *GetPu
 
 type GetPullRequestApprovalStatesInput struct {
 
-	// The system-generated ID for the pull request revision.
-	//
-	// This member is required.
-	RevisionId *string
-
 	// The system-generated ID for the pull request.
 	//
 	// This member is required.
 	PullRequestId *string
+
+	// The system-generated ID for the pull request revision.
+	//
+	// This member is required.
+	RevisionId *string
 }
 
 type GetPullRequestApprovalStatesOutput struct {

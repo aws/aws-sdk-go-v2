@@ -84,9 +84,6 @@ type CreateDBParameterGroupInput struct {
 	// This member is required.
 	DBParameterGroupFamily *string
 
-	// Tags to assign to the DB parameter group.
-	Tags []*types.Tag
-
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * Must be 1 to 255
@@ -107,6 +104,9 @@ type CreateDBParameterGroupInput struct {
 	//
 	// This member is required.
 	Description *string
+
+	// Tags to assign to the DB parameter group.
+	Tags []*types.Tag
 }
 
 type CreateDBParameterGroupOutput struct {

@@ -126,6 +126,30 @@ func (c *Client) CreateAccount(ctx context.Context, params *CreateAccountInput, 
 
 type CreateAccountInput struct {
 
+	// The friendly name of the member account.
+	//
+	// This member is required.
+	AccountName *string
+
+	// The email address of the owner to assign to the new member account. This email
+	// address must not already be associated with another AWS account. You must use a
+	// valid email address to complete account creation. You can't access the root user
+	// of the account or remove an account that was created with an invalid email
+	// address.
+	//
+	// This member is required.
+	Email *string
+
+	// If set to ALLOW, the new account enables IAM users to access account billing
+	// information if they have the required permissions. If set to DENY, only the root
+	// user of the new account can access account billing information. For more
+	// information, see Activating Access to the Billing and Cost Management Console
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
+	// in the AWS Billing and Cost Management User Guide. If you don't specify this
+	// parameter, the value defaults to ALLOW, and IAM users and roles with the
+	// required permissions can access billing information for the new account.
+	IamUserAccessToBilling types.IAMUserAccessToBilling
+
 	// (Optional) The name of an IAM role that AWS Organizations automatically
 	// preconfigures in the new member account. This role trusts the master account,
 	// allowing users in the master account to assume the role, as permitted by the
@@ -149,30 +173,6 @@ type CreateAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
-
-	// If set to ALLOW, the new account enables IAM users to access account billing
-	// information if they have the required permissions. If set to DENY, only the root
-	// user of the new account can access account billing information. For more
-	// information, see Activating Access to the Billing and Cost Management Console
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
-	// in the AWS Billing and Cost Management User Guide. If you don't specify this
-	// parameter, the value defaults to ALLOW, and IAM users and roles with the
-	// required permissions can access billing information for the new account.
-	IamUserAccessToBilling types.IAMUserAccessToBilling
-
-	// The email address of the owner to assign to the new member account. This email
-	// address must not already be associated with another AWS account. You must use a
-	// valid email address to complete account creation. You can't access the root user
-	// of the account or remove an account that was created with an invalid email
-	// address.
-	//
-	// This member is required.
-	Email *string
-
-	// The friendly name of the member account.
-	//
-	// This member is required.
-	AccountName *string
 }
 
 type CreateAccountOutput struct {

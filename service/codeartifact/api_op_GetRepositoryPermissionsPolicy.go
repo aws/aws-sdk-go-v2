@@ -57,10 +57,6 @@ func (c *Client) GetRepositoryPermissionsPolicy(ctx context.Context, params *Get
 
 type GetRepositoryPermissionsPolicyInput struct {
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the domain containing the repository whose associated resource
 	// policy is to be retrieved.
 	//
@@ -71,6 +67,10 @@ type GetRepositoryPermissionsPolicyInput struct {
 	//
 	// This member is required.
 	Repository *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
 }
 
 type GetRepositoryPermissionsPolicyOutput struct {

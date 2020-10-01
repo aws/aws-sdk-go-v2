@@ -63,9 +63,10 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 
 type CreateDashboardInput struct {
 
-	// A structure that contains the permissions of the dashboard. You can use this
-	// structure for granting permissions with principal and action information.
-	Permissions []*types.ResourcePermission
+	// The ID of the AWS account where you want to create the dashboard.
+	//
+	// This member is required.
+	AwsAccountId *string
 
 	// The ID for the dashboard, also added to the IAM policy.
 	//
@@ -76,29 +77,6 @@ type CreateDashboardInput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// A description for the first version of the dashboard being created.
-	VersionDescription *string
-
-	// The ID of the AWS account where you want to create the dashboard.
-	//
-	// This member is required.
-	AwsAccountId *string
-
-	// Contains a map of the key-value pairs for the resource tag or tags assigned to
-	// the dashboard.
-	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the theme that is being used for this
-	// dashboard. If you add a value for this field, it overrides the value that is
-	// used in the source entity. The theme ARN must exist in the same AWS account
-	// where you create the dashboard.
-	ThemeArn *string
-
-	// The parameters for the creation of the dashboard, which you want to use to
-	// override the default settings. A dashboard can have any type of parameters, and
-	// some parameters might accept multiple values.
-	Parameters *types.Parameters
 
 	// The entity that you are using as a source when you create the dashboard. In
 	// SourceEntity, you specify the type of object you're using as source. You can
@@ -131,25 +109,47 @@ type CreateDashboardInput struct {
 	// SheetControlsOption - This visibility state can be either COLLAPSED or EXPANDED.
 	// This option is COLLAPSED by default.
 	DashboardPublishOptions *types.DashboardPublishOptions
+
+	// The parameters for the creation of the dashboard, which you want to use to
+	// override the default settings. A dashboard can have any type of parameters, and
+	// some parameters might accept multiple values.
+	Parameters *types.Parameters
+
+	// A structure that contains the permissions of the dashboard. You can use this
+	// structure for granting permissions with principal and action information.
+	Permissions []*types.ResourcePermission
+
+	// Contains a map of the key-value pairs for the resource tag or tags assigned to
+	// the dashboard.
+	Tags []*types.Tag
+
+	// The Amazon Resource Name (ARN) of the theme that is being used for this
+	// dashboard. If you add a value for this field, it overrides the value that is
+	// used in the source entity. The theme ARN must exist in the same AWS account
+	// where you create the dashboard.
+	ThemeArn *string
+
+	// A description for the first version of the dashboard being created.
+	VersionDescription *string
 }
 
 type CreateDashboardOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
-	// The ID for the dashboard.
-	DashboardId *string
+	// The ARN of the dashboard.
+	Arn *string
 
 	// The status of the dashboard creation request.
 	CreationStatus types.ResourceStatus
 
+	// The ID for the dashboard.
+	DashboardId *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
+
 	// The ARN of the dashboard, including the version number of the first version that
 	// is created.
 	VersionArn *string
-
-	// The ARN of the dashboard.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,10 +58,10 @@ func (c *Client) GetViolationDetails(ctx context.Context, params *GetViolationDe
 
 type GetViolationDetailsInput struct {
 
-	// The ID of the resource that has violations.
+	// The AWS account ID that you want the details for.
 	//
 	// This member is required.
-	ResourceId *string
+	MemberAccount *string
 
 	// The ID of the AWS Firewall Manager policy that you want the details for. This
 	// currently only supports security group content audit policies.
@@ -69,10 +69,10 @@ type GetViolationDetailsInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// The AWS account ID that you want the details for.
+	// The ID of the resource that has violations.
 	//
 	// This member is required.
-	MemberAccount *string
+	ResourceId *string
 
 	// The resource type. This is in the format shown in the AWS Resource Types
 	// Reference

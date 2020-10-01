@@ -64,15 +64,15 @@ func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificat
 
 type CreateCertificateInput struct {
 
-	// The tag keys and optional values to add to the certificate during create.
-	// <p>Use the <code>TagResource</code> action to tag a resource after it's
-	// created.</p>
-	Tags []*types.Tag
-
 	// The name for the certificate.
 	//
 	// This member is required.
 	CertificateName *string
+
+	// The domain name (e.g., example.com) for the certificate.
+	//
+	// This member is required.
+	DomainName *string
 
 	// An array of strings that specify the alternate domains (e.g., example2.com) and
 	// subdomains (e.g., blog.example.com) for the certificate.  <p>You can specify a
@@ -81,10 +81,10 @@ type CreateCertificateInput struct {
 	// supported.</p>
 	SubjectAlternativeNames []*string
 
-	// The domain name (e.g., example.com) for the certificate.
-	//
-	// This member is required.
-	DomainName *string
+	// The tag keys and optional values to add to the certificate during create.
+	// <p>Use the <code>TagResource</code> action to tag a resource after it's
+	// created.</p>
+	Tags []*types.Tag
 }
 
 type CreateCertificateOutput struct {

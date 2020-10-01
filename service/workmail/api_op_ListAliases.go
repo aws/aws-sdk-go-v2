@@ -56,22 +56,22 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 
 type ListAliasesInput struct {
 
+	// The identifier for the entity for which to list the aliases.
+	//
+	// This member is required.
+	EntityId *string
+
 	// The identifier for the organization under which the entity exists.
 	//
 	// This member is required.
 	OrganizationId *string
 
-	// The token to use to retrieve the next page of results. The first call does not
-	// contain any tokens.
-	NextToken *string
-
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
-	// The identifier for the entity for which to list the aliases.
-	//
-	// This member is required.
-	EntityId *string
+	// The token to use to retrieve the next page of results. The first call does not
+	// contain any tokens.
+	NextToken *string
 }
 
 type ListAliasesOutput struct {

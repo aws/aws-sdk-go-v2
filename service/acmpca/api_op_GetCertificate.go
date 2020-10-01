@@ -80,12 +80,12 @@ type GetCertificateInput struct {
 
 type GetCertificateOutput struct {
 
+	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.
+	Certificate *string
+
 	// The base64 PEM-encoded certificate chain that chains up to the on-premises root
 	// CA certificate that you used to sign your private CA certificate.
 	CertificateChain *string
-
-	// The base64 PEM-encoded certificate specified by the CertificateArn parameter.
-	Certificate *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

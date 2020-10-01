@@ -62,29 +62,37 @@ func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optF
 
 type CreateAssetInput struct {
 
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
-
 	// The ID of the asset model from which to create the asset.
 	//
 	// This member is required.
 	AssetModelId *string
+
+	// A unique, friendly name for the asset.
+	//
+	// This member is required.
+	AssetName *string
+
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset. For more
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
 	Tags map[string]*string
-
-	// A unique, friendly name for the asset.
-	//
-	// This member is required.
-	AssetName *string
 }
 
 type CreateAssetOutput struct {
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the asset, which has the following format.
+	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
+	//
+	// This member is required.
+	AssetArn *string
 
 	// The ID of the asset. This ID uniquely identifies the asset within AWS IoT
 	// SiteWise and can be used with other AWS IoT SiteWise APIs.
@@ -97,14 +105,6 @@ type CreateAssetOutput struct {
 	//
 	// This member is required.
 	AssetStatus *types.AssetStatus
-
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset/${AssetId}
-	//
-	// This member is required.
-	AssetArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

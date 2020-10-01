@@ -60,13 +60,13 @@ func (c *Client) DeleteThingShadow(ctx context.Context, params *DeleteThingShado
 // The input for the DeleteThingShadow operation.
 type DeleteThingShadowInput struct {
 
-	// The name of the shadow.
-	ShadowName *string
-
 	// The name of the thing.
 	//
 	// This member is required.
 	ThingName *string
+
+	// The name of the shadow.
+	ShadowName *string
 }
 
 // The output from the DeleteThingShadow operation.

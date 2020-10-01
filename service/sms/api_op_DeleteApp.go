@@ -57,16 +57,16 @@ func (c *Client) DeleteApp(ctx context.Context, params *DeleteAppInput, optFns .
 
 type DeleteAppInput struct {
 
-	// While deleting the application, terminate the stack corresponding to the
-	// application.
-	ForceTerminateApp *bool
+	// ID of the application to delete.
+	AppId *string
 
 	// While deleting the application, stop all replication jobs corresponding to the
 	// servers in the application.
 	ForceStopAppReplication *bool
 
-	// ID of the application to delete.
-	AppId *string
+	// While deleting the application, terminate the stack corresponding to the
+	// application.
+	ForceTerminateApp *bool
 }
 
 type DeleteAppOutput struct {

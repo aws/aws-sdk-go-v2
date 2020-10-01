@@ -56,25 +56,25 @@ func (c *Client) DeleteCustomMetadata(ctx context.Context, params *DeleteCustomM
 
 type DeleteCustomMetadataInput struct {
 
-	// Flag to indicate removal of all custom metadata properties from the specified
-	// resource.
-	DeleteAll *bool
-
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// The ID of the resource, either a document or folder.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The ID of the version, if the custom metadata is being deleted from a document
-	// version.
-	VersionId *string
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
+
+	// Flag to indicate removal of all custom metadata properties from the specified
+	// resource.
+	DeleteAll *bool
 
 	// List of properties to remove.
 	Keys []*string
+
+	// The ID of the version, if the custom metadata is being deleted from a document
+	// version.
+	VersionId *string
 }
 
 type DeleteCustomMetadataOutput struct {

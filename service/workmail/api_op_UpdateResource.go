@@ -59,22 +59,22 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 
 type UpdateResourceInput struct {
 
-	// The identifier of the resource to be updated.
-	//
-	// This member is required.
-	ResourceId *string
-
 	// The identifier associated with the organization for which the resource is
 	// updated.
 	//
 	// This member is required.
 	OrganizationId *string
 
-	// The name of the resource to be updated.
-	Name *string
+	// The identifier of the resource to be updated.
+	//
+	// This member is required.
+	ResourceId *string
 
 	// The resource's booking options to be updated.
 	BookingOptions *types.BookingOptions
+
+	// The name of the resource to be updated.
+	Name *string
 }
 
 type UpdateResourceOutput struct {

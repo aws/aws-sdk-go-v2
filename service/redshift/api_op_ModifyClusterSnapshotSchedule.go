@@ -56,14 +56,14 @@ func (c *Client) ModifyClusterSnapshotSchedule(ctx context.Context, params *Modi
 
 type ModifyClusterSnapshotScheduleInput struct {
 
-	// A boolean to indicate whether to remove the assoiciation between the cluster and
-	// the schedule.
-	DisassociateSchedule *bool
-
 	// A unique identifier for the cluster whose snapshot schedule you want to modify.
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	// A boolean to indicate whether to remove the assoiciation between the cluster and
+	// the schedule.
+	DisassociateSchedule *bool
 
 	// A unique alphanumeric identifier for the schedule that you want to associate
 	// with the cluster.

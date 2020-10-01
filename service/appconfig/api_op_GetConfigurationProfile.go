@@ -57,16 +57,16 @@ func (c *Client) GetConfigurationProfile(ctx context.Context, params *GetConfigu
 
 type GetConfigurationProfileInput struct {
 
-	// The ID of the configuration profile you want to get.
-	//
-	// This member is required.
-	ConfigurationProfileId *string
-
 	// The ID of the application that includes the configuration profile you want to
 	// get.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The ID of the configuration profile you want to get.
+	//
+	// This member is required.
+	ConfigurationProfileId *string
 }
 
 type GetConfigurationProfileOutput struct {
@@ -74,24 +74,24 @@ type GetConfigurationProfileOutput struct {
 	// The application ID.
 	ApplicationId *string
 
+	// The configuration profile description.
+	Description *string
+
+	// The configuration profile ID.
+	Id *string
+
+	// The URI location of the configuration.
+	LocationUri *string
+
 	// The name of the configuration profile.
 	Name *string
-
-	// A list of methods for validating the configuration.
-	Validators []*types.Validator
 
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
 
-	// The URI location of the configuration.
-	LocationUri *string
-
-	// The configuration profile ID.
-	Id *string
-
-	// The configuration profile description.
-	Description *string
+	// A list of methods for validating the configuration.
+	Validators []*types.Validator
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

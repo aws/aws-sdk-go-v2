@@ -67,15 +67,6 @@ func (c *Client) CreateWebhook(ctx context.Context, params *CreateWebhookInput, 
 
 type CreateWebhookInput struct {
 
-	// Specifies the type of build this webhook will trigger.
-	BuildType types.WebhookBuildType
-
-	// An array of arrays of WebhookFilter objects used to determine which webhooks are
-	// triggered. At least one WebhookFilter in the array must specify EVENT as its
-	// type. For a build to be triggered, at least one filter group in the filterGroups
-	// array must pass. For a filter group to pass, each of its filters must pass.
-	FilterGroups [][]*types.WebhookFilter
-
 	// The name of the AWS CodeBuild project.
 	//
 	// This member is required.
@@ -86,6 +77,15 @@ type CreateWebhookInput struct {
 	// then it is built. If branchFilter is empty, then all branches are built. It is
 	// recommended that you use filterGroups instead of branchFilter.
 	BranchFilter *string
+
+	// Specifies the type of build this webhook will trigger.
+	BuildType types.WebhookBuildType
+
+	// An array of arrays of WebhookFilter objects used to determine which webhooks are
+	// triggered. At least one WebhookFilter in the array must specify EVENT as its
+	// type. For a build to be triggered, at least one filter group in the filterGroups
+	// array must pass. For a filter group to pass, each of its filters must pass.
+	FilterGroups [][]*types.WebhookFilter
 }
 
 type CreateWebhookOutput struct {

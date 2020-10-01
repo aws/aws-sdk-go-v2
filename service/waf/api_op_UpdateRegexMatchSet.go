@@ -102,6 +102,11 @@ func (c *Client) UpdateRegexMatchSet(ctx context.Context, params *UpdateRegexMat
 
 type UpdateRegexMatchSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The RegexMatchSetId of the RegexMatchSet () that you want to update.
 	// RegexMatchSetId is returned by CreateRegexMatchSet () and by ListRegexMatchSets
 	// ().
@@ -114,11 +119,6 @@ type UpdateRegexMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.RegexMatchSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type UpdateRegexMatchSetOutput struct {

@@ -58,16 +58,6 @@ func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, op
 
 type CreatePresetInput struct {
 
-	// Optional. A description of the preset you are creating.
-	Description *string
-
-	// Optional. A category for the preset you are creating.
-	Category *string
-
-	// The tags that you want to add to the resource. You can tag resources with a
-	// key-value pair or with only a key.
-	Tags map[string]*string
-
 	// The name of the preset you are creating.
 	//
 	// This member is required.
@@ -77,6 +67,16 @@ type CreatePresetInput struct {
 	//
 	// This member is required.
 	Settings *types.PresetSettings
+
+	// Optional. A category for the preset you are creating.
+	Category *string
+
+	// Optional. A description of the preset you are creating.
+	Description *string
+
+	// The tags that you want to add to the resource. You can tag resources with a
+	// key-value pair or with only a key.
+	Tags map[string]*string
 }
 
 type CreatePresetOutput struct {

@@ -58,15 +58,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// A list of keys of tags to remove from the specified application.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The ARN of the Kinesis Analytics application from which to remove the tags.
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// A list of keys of tags to remove from the specified application.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type UntagResourceOutput struct {

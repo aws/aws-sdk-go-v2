@@ -68,17 +68,17 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 
 type PutPublicAccessBlockInput struct {
 
-	// The PublicAccessBlock configuration that you want to apply to the specified AWS
-	// account.
-	//
-	// This member is required.
-	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
-
 	// The account ID for the AWS account whose PublicAccessBlock configuration you
 	// want to set.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The PublicAccessBlock configuration that you want to apply to the specified AWS
+	// account.
+	//
+	// This member is required.
+	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 }
 
 type PutPublicAccessBlockOutput struct {

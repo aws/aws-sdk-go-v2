@@ -67,9 +67,9 @@ type ListKafkaVersionsInput struct {
 }
 
 type ListKafkaVersionsOutput struct {
-	NextToken *string
-
 	KafkaVersions []*types.KafkaVersion
+
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

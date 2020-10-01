@@ -60,23 +60,16 @@ func (c *Client) CreateSoftwareUpdateJob(ctx context.Context, params *CreateSoft
 
 type CreateSoftwareUpdateJobInput struct {
 
-	// The operating system of the cores which are the targets of an update.
-	//
-	// This member is required.
-	UpdateTargetsOperatingSystem types.UpdateTargetsOperatingSystem
-
-	// The minimum level of log statements that should be logged by the OTA Agent
-	// during an update.
-	UpdateAgentLogLevel types.UpdateAgentLogLevel
-
-	// A client token used to correlate requests and responses.
-	AmznClientToken *string
-
 	// The IAM Role that Greengrass will use to create pre-signed URLs pointing towards
 	// the update artifact.
 	//
 	// This member is required.
 	S3UrlSignerRole *string
+
+	// The piece of software on the Greengrass core that will be updated.
+	//
+	// This member is required.
+	SoftwareToUpdate types.SoftwareToUpdate
 
 	// The ARNs of the targets (IoT things or IoT thing groups) that this update will
 	// be applied to.
@@ -89,22 +82,29 @@ type CreateSoftwareUpdateJobInput struct {
 	// This member is required.
 	UpdateTargetsArchitecture types.UpdateTargetsArchitecture
 
-	// The piece of software on the Greengrass core that will be updated.
+	// The operating system of the cores which are the targets of an update.
 	//
 	// This member is required.
-	SoftwareToUpdate types.SoftwareToUpdate
+	UpdateTargetsOperatingSystem types.UpdateTargetsOperatingSystem
+
+	// A client token used to correlate requests and responses.
+	AmznClientToken *string
+
+	// The minimum level of log statements that should be logged by the OTA Agent
+	// during an update.
+	UpdateAgentLogLevel types.UpdateAgentLogLevel
 }
 
 type CreateSoftwareUpdateJobOutput struct {
-
-	// The software version installed on the device or devices after the update.
-	PlatformSoftwareVersion *string
 
 	// The IoT Job ARN corresponding to this update.
 	IotJobArn *string
 
 	// The IoT Job Id corresponding to this update.
 	IotJobId *string
+
+	// The software version installed on the device or devices after the update.
+	PlatformSoftwareVersion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

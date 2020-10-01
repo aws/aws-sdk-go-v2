@@ -102,6 +102,13 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 // Represents the input for a request action.
 type DescribeFleetUtilizationInput struct {
 
+	// A unique identifier for a fleet(s) to retrieve utilization data for. You can use
+	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
+	// do not include this parameter. If the list of fleet identifiers includes fleets
+	// that don't currently exist, the request succeeds but no attributes for that
+	// fleet are returned.
+	FleetIds []*string
+
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages. This parameter is ignored when the
 	// request specifies one or a list of fleet IDs.
@@ -112,25 +119,18 @@ type DescribeFleetUtilizationInput struct {
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
 	NextToken *string
-
-	// A unique identifier for a fleet(s) to retrieve utilization data for. You can use
-	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
-	// do not include this parameter. If the list of fleet identifiers includes fleets
-	// that don't currently exist, the request succeeds but no attributes for that
-	// fleet are returned.
-	FleetIds []*string
 }
 
 // Represents the returned data in response to a request action.
 type DescribeFleetUtilizationOutput struct {
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
-	NextToken *string
-
 	// A collection of objects containing utilization information for each requested
 	// fleet ID.
 	FleetUtilization []*types.FleetUtilization
+
+	// Token that indicates where to resume retrieving results on the next call to this
+	// action. If no token is returned, these results represent the end of the list.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

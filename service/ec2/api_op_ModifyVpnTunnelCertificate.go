@@ -62,16 +62,16 @@ type ModifyVpnTunnelCertificateInput struct {
 	// This member is required.
 	VpnConnectionId *string
 
+	// The external IP address of the VPN tunnel.
+	//
+	// This member is required.
+	VpnTunnelOutsideIpAddress *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The external IP address of the VPN tunnel.
-	//
-	// This member is required.
-	VpnTunnelOutsideIpAddress *string
 }
 
 type ModifyVpnTunnelCertificateOutput struct {

@@ -57,11 +57,11 @@ func (c *Client) UpdateIndexingConfiguration(ctx context.Context, params *Update
 
 type UpdateIndexingConfigurationInput struct {
 
-	// Thing indexing configuration.
-	ThingIndexingConfiguration *types.ThingIndexingConfiguration
-
 	// Thing group indexing configuration.
 	ThingGroupIndexingConfiguration *types.ThingGroupIndexingConfiguration
+
+	// Thing indexing configuration.
+	ThingIndexingConfiguration *types.ThingIndexingConfiguration
 }
 
 type UpdateIndexingConfigurationOutput struct {

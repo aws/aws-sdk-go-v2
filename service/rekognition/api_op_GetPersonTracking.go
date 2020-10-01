@@ -82,12 +82,6 @@ func (c *Client) GetPersonTracking(ctx context.Context, params *GetPersonTrackin
 
 type GetPersonTrackingInput struct {
 
-	// Sort to use for elements in the Persons array. Use TIMESTAMP to sort array
-	// elements by the time persons are detected. Use INDEX to sort by the tracked
-	// persons. If you sort by INDEX, the array elements for each person are sorted by
-	// detection confidence. The default sort is by TIMESTAMP.
-	SortBy types.PersonTrackingSortBy
-
 	// The identifier for a job that tracks persons in a video. You get the JobId from
 	// a call to StartPersonTracking.
 	//
@@ -103,6 +97,12 @@ type GetPersonTrackingInput struct {
 	// retrieve), Amazon Rekognition Video returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of persons.
 	NextToken *string
+
+	// Sort to use for elements in the Persons array. Use TIMESTAMP to sort array
+	// elements by the time persons are detected. Use INDEX to sort by the tracked
+	// persons. If you sort by INDEX, the array elements for each person are sorted by
+	// detection confidence. The default sort is by TIMESTAMP.
+	SortBy types.PersonTrackingSortBy
 }
 
 type GetPersonTrackingOutput struct {
@@ -119,13 +119,13 @@ type GetPersonTrackingOutput struct {
 	// person's path is tracked.
 	Persons []*types.PersonDetection
 
+	// If the job fails, StatusMessage provides a descriptive error message.
+	StatusMessage *string
+
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
 	// is returned in every page of paginated responses from a Amazon Rekognition Video
 	// operation.
 	VideoMetadata *types.VideoMetadata
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

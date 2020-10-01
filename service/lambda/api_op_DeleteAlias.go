@@ -57,11 +57,6 @@ func (c *Client) DeleteAlias(ctx context.Context, params *DeleteAliasInput, optF
 
 type DeleteAliasInput struct {
 
-	// The name of the alias.
-	//
-	// This member is required.
-	Name *string
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -79,6 +74,11 @@ type DeleteAliasInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// The name of the alias.
+	//
+	// This member is required.
+	Name *string
 }
 
 type DeleteAliasOutput struct {

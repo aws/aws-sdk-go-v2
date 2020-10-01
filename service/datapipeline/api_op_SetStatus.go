@@ -61,22 +61,22 @@ func (c *Client) SetStatus(ctx context.Context, params *SetStatusInput, optFns .
 // Contains the parameters for SetStatus.
 type SetStatusInput struct {
 
-	// The status to be set on all the objects specified in objectIds. For components,
-	// use PAUSE or RESUME. For instances, use TRY_CANCEL, RERUN, or MARK_FINISHED.
+	// The IDs of the objects. The corresponding objects can be either physical or
+	// components, but not a mix of both types.
 	//
 	// This member is required.
-	Status *string
+	ObjectIds []*string
 
 	// The ID of the pipeline that contains the objects.
 	//
 	// This member is required.
 	PipelineId *string
 
-	// The IDs of the objects. The corresponding objects can be either physical or
-	// components, but not a mix of both types.
+	// The status to be set on all the objects specified in objectIds. For components,
+	// use PAUSE or RESUME. For instances, use TRY_CANCEL, RERUN, or MARK_FINISHED.
 	//
 	// This member is required.
-	ObjectIds []*string
+	Status *string
 }
 
 type SetStatusOutput struct {

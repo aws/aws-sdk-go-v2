@@ -79,9 +79,6 @@ type CreateServiceLinkedRoleInput struct {
 	// This member is required.
 	AWSServiceName *string
 
-	// The description of the role.
-	Description *string
-
 	// A string that you provide, which is combined with the service-provided prefix to
 	// form the complete role name. If you make multiple requests for the same service,
 	// then you must supply a different CustomSuffix for each request. Otherwise the
@@ -90,6 +87,9 @@ type CreateServiceLinkedRoleInput struct {
 	// If you provide an optional suffix and the operation fails, try the operation
 	// again without the suffix.
 	CustomSuffix *string
+
+	// The description of the role.
+	Description *string
 }
 
 type CreateServiceLinkedRoleOutput struct {

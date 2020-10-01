@@ -71,8 +71,8 @@ func (c *Client) CreateTransitGateway(ctx context.Context, params *CreateTransit
 
 type CreateTransitGatewayInput struct {
 
-	// The tags to apply to the transit gateway.
-	TagSpecifications []*types.TagSpecification
+	// A description of the transit gateway.
+	Description *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -83,8 +83,8 @@ type CreateTransitGatewayInput struct {
 	// The transit gateway options.
 	Options *types.TransitGatewayRequestOptions
 
-	// A description of the transit gateway.
-	Description *string
+	// The tags to apply to the transit gateway.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateTransitGatewayOutput struct {

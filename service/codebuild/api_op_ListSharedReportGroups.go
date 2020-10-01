@@ -61,6 +61,14 @@ type ListSharedReportGroupsInput struct {
 	// is 100.
 	MaxResults *int32
 
+	// During a previous call, the maximum number of items that can be returned is the
+	// value specified in maxResults. If there more items in the list, then a unique
+	// string called a nextToken is returned. To get the next batch of items in the
+	// list, call this operation again, adding the next token to the call. To get all
+	// of the items in the list, keep calling this operation with each subsequent next
+	// token that is returned, until no more next tokens are returned.
+	NextToken *string
+
 	// The criterion to be used to list report groups shared with the current AWS
 	// account or user. Valid values include:
 	//
@@ -78,22 +86,10 @@ type ListSharedReportGroupsInput struct {
 	//
 	//     * DESCENDING: List in descending order.
 	SortOrder types.SortOrderType
-
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults. If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
-	NextToken *string
 }
 
 type ListSharedReportGroupsOutput struct {
 
-	// The list of ARNs for the report groups shared with the current AWS account or
-	// user.
-	ReportGroups []*string
-
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -101,6 +97,10 @@ type ListSharedReportGroupsOutput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
+	// The list of ARNs for the report groups shared with the current AWS account or
+	// user.
+	ReportGroups []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

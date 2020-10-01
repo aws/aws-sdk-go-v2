@@ -60,11 +60,11 @@ func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePol
 
 type GetResourcePoliciesInput struct {
 
-	// A continuation token, if this is a continuation request.
-	NextToken *string
-
 	// The maximum size of a list to return.
 	MaxResults *int32
+
+	// A continuation token, if this is a continuation request.
+	NextToken *string
 }
 
 type GetResourcePoliciesOutput struct {

@@ -58,12 +58,6 @@ func (c *Client) EnableVgwRoutePropagation(ctx context.Context, params *EnableVg
 // Contains the parameters for EnableVgwRoutePropagation.
 type EnableVgwRoutePropagationInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the virtual private gateway that is attached to a VPC. The virtual
 	// private gateway must be attached to the same VPC that the routing tables are
 	// associated with.
@@ -76,6 +70,12 @@ type EnableVgwRoutePropagationInput struct {
 	//
 	// This member is required.
 	RouteTableId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type EnableVgwRoutePropagationOutput struct {

@@ -76,12 +76,12 @@ type ListPartnerEventSourcesInput struct {
 
 type ListPartnerEventSourcesOutput struct {
 
-	// The list of partner event sources returned by the operation.
-	PartnerEventSources []*types.PartnerEventSource
-
 	// A token you can use in a subsequent operation to retrieve the next set of
 	// results.
 	NextToken *string
+
+	// The list of partner event sources returned by the operation.
+	PartnerEventSources []*types.PartnerEventSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

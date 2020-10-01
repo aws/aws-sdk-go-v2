@@ -58,12 +58,6 @@ func (c *Client) GetCommandInvocation(ctx context.Context, params *GetCommandInv
 
 type GetCommandInvocationInput struct {
 
-	// (Optional) The name of the plugin for which you want detailed results. If the
-	// document contains only one plugin, the name can be omitted and the details will
-	// be returned. Plugin names are also referred to as step names in Systems Manager
-	// documents.
-	PluginName *string
-
 	// (Required) The parent command ID of the invocation plugin.
 	//
 	// This member is required.
@@ -75,9 +69,33 @@ type GetCommandInvocationInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	// (Optional) The name of the plugin for which you want detailed results. If the
+	// document contains only one plugin, the name can be omitted and the details will
+	// be returned. Plugin names are also referred to as step names in Systems Manager
+	// documents.
+	PluginName *string
 }
 
 type GetCommandInvocationOutput struct {
+
+	// CloudWatch Logs information where Systems Manager sent the command output.
+	CloudWatchOutputConfig *types.CloudWatchOutputConfig
+
+	// The parent command ID of the invocation plugin.
+	CommandId *string
+
+	// The comment text for the command.
+	Comment *string
+
+	// The name of the document that was run. For example, AWS-RunShellScript.
+	DocumentName *string
+
+	// The SSM document version used in the request.
+	DocumentVersion *string
+
+	// Duration since ExecutionStartDateTime.
+	ExecutionElapsedTime *string
 
 	// The date and time the plugin was finished running. Date and time are written in
 	// ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
@@ -86,28 +104,47 @@ type GetCommandInvocationOutput struct {
 	// plugin has not started to run, the string is empty.
 	ExecutionEndDateTime *string
 
-	// The parent command ID of the invocation plugin.
-	CommandId *string
+	// The date and time the plugin started running. Date and time are written in ISO
+	// 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
+	// following sample AWS CLI command uses the InvokedBefore filter. aws ssm
+	// list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z If the
+	// plugin has not started to run, the string is empty.
+	ExecutionStartDateTime *string
 
-	// The URL for the complete text written by the plugin to stdout in Amazon S3. If
-	// an S3 bucket was not specified, then this string is empty.
-	StandardOutputUrl *string
+	// The ID of the managed instance targeted by the command. A managed instance can
+	// be an EC2 instance or an instance in your hybrid environment that is configured
+	// for Systems Manager.
+	InstanceId *string
 
-	// The URL for the complete text written by the plugin to stderr. If the command
-	// has not finished running, then this string is empty.
-	StandardErrorUrl *string
-
-	// The name of the document that was run. For example, AWS-RunShellScript.
-	DocumentName *string
+	// The name of the plugin for which you want detailed results. For example,
+	// aws:RunShellScript is a plugin.
+	PluginName *string
 
 	// The error level response code for the plugin script. If the response code is -1,
 	// then the command has not started running on the instance, or it was not received
 	// by the instance.
 	ResponseCode *int32
 
-	// The name of the plugin for which you want detailed results. For example,
-	// aws:RunShellScript is a plugin.
-	PluginName *string
+	// The first 8,000 characters written by the plugin to stderr. If the command has
+	// not finished running, then this string is empty.
+	StandardErrorContent *string
+
+	// The URL for the complete text written by the plugin to stderr. If the command
+	// has not finished running, then this string is empty.
+	StandardErrorUrl *string
+
+	// The first 24,000 characters written by the plugin to stdout. If the command has
+	// not finished running, if ExecutionStatus is neither Succeeded nor Failed, then
+	// this string is empty.
+	StandardOutputContent *string
+
+	// The URL for the complete text written by the plugin to stdout in Amazon S3. If
+	// an S3 bucket was not specified, then this string is empty.
+	StandardOutputUrl *string
+
+	// The status of this invocation plugin. This status can be different than
+	// StatusDetails.
+	Status types.CommandInvocationStatus
 
 	// A detailed status of the command execution for an invocation. StatusDetails
 	// includes more information than Status because it includes states resulting from
@@ -145,43 +182,6 @@ type GetCommandInvocationOutput struct {
 	// invocations were canceled by the system. This is a terminal state.</p> </li>
 	// </ul>
 	StatusDetails *string
-
-	// The date and time the plugin started running. Date and time are written in ISO
-	// 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
-	// following sample AWS CLI command uses the InvokedBefore filter. aws ssm
-	// list-commands --filters key=InvokedBefore,value=2017-06-07T00:00:00Z If the
-	// plugin has not started to run, the string is empty.
-	ExecutionStartDateTime *string
-
-	// The ID of the managed instance targeted by the command. A managed instance can
-	// be an EC2 instance or an instance in your hybrid environment that is configured
-	// for Systems Manager.
-	InstanceId *string
-
-	// The first 24,000 characters written by the plugin to stdout. If the command has
-	// not finished running, if ExecutionStatus is neither Succeeded nor Failed, then
-	// this string is empty.
-	StandardOutputContent *string
-
-	// The comment text for the command.
-	Comment *string
-
-	// Duration since ExecutionStartDateTime.
-	ExecutionElapsedTime *string
-
-	// The first 8,000 characters written by the plugin to stderr. If the command has
-	// not finished running, then this string is empty.
-	StandardErrorContent *string
-
-	// The SSM document version used in the request.
-	DocumentVersion *string
-
-	// The status of this invocation plugin. This status can be different than
-	// StatusDetails.
-	Status types.CommandInvocationStatus
-
-	// CloudWatch Logs information where Systems Manager sent the command output.
-	CloudWatchOutputConfig *types.CloudWatchOutputConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,23 +65,23 @@ type GetBulkDeploymentStatusInput struct {
 
 type GetBulkDeploymentStatusOutput struct {
 
-	// Tag(s) attached to the resource arn.
-	Tags map[string]*string
-
-	// The time, in ISO format, when the deployment was created.
-	CreatedAt *string
-
-	// Error message
-	ErrorMessage *string
+	// Relevant metrics on input records processed during bulk deployment.
+	BulkDeploymentMetrics *types.BulkDeploymentMetrics
 
 	// The status of the bulk deployment.
 	BulkDeploymentStatus types.BulkDeploymentStatus
 
-	// Relevant metrics on input records processed during bulk deployment.
-	BulkDeploymentMetrics *types.BulkDeploymentMetrics
+	// The time, in ISO format, when the deployment was created.
+	CreatedAt *string
 
 	// Error details
 	ErrorDetails []*types.ErrorDetail
+
+	// Error message
+	ErrorMessage *string
+
+	// Tag(s) attached to the resource arn.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

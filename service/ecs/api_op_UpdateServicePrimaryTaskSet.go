@@ -62,6 +62,12 @@ func (c *Client) UpdateServicePrimaryTaskSet(ctx context.Context, params *Update
 
 type UpdateServicePrimaryTaskSetInput struct {
 
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// service that the task set exists in.
+	//
+	// This member is required.
+	Cluster *string
+
 	// The short name or full Amazon Resource Name (ARN) of the task set to set as the
 	// primary task set in the deployment.
 	//
@@ -73,12 +79,6 @@ type UpdateServicePrimaryTaskSetInput struct {
 	//
 	// This member is required.
 	Service *string
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task set exists in.
-	//
-	// This member is required.
-	Cluster *string
 }
 
 type UpdateServicePrimaryTaskSetOutput struct {

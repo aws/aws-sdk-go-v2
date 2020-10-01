@@ -57,20 +57,6 @@ func (c *Client) ListIndex(ctx context.Context, params *ListIndexInput, optFns .
 
 type ListIndexInput struct {
 
-	// The pagination token.
-	NextToken *string
-
-	// Specifies the ranges of indexed values that you want to query.
-	RangesOnIndexedValues []*types.ObjectAttributeRange
-
-	// The consistency level to execute the request at.
-	ConsistencyLevel types.ConsistencyLevel
-
-	// The maximum number of objects in a single page to retrieve from the index during
-	// a request. For more information, see Amazon Cloud Directory Limits
-	// (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
-	MaxResults *int32
-
 	// The ARN of the directory that the index exists in.
 	//
 	// This member is required.
@@ -80,15 +66,29 @@ type ListIndexInput struct {
 	//
 	// This member is required.
 	IndexReference *types.ObjectReference
-}
 
-type ListIndexOutput struct {
+	// The consistency level to execute the request at.
+	ConsistencyLevel types.ConsistencyLevel
+
+	// The maximum number of objects in a single page to retrieve from the index during
+	// a request. For more information, see Amazon Cloud Directory Limits
+	// (http://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html).
+	MaxResults *int32
 
 	// The pagination token.
 	NextToken *string
 
+	// Specifies the ranges of indexed values that you want to query.
+	RangesOnIndexedValues []*types.ObjectAttributeRange
+}
+
+type ListIndexOutput struct {
+
 	// The objects and indexed values attached to the index.
 	IndexAttachments []*types.IndexAttachment
+
+	// The pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

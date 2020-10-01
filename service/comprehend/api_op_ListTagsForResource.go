@@ -66,15 +66,15 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
+	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are
+	// querying.
+	ResourceArn *string
+
 	// Tags associated with the Amazon Comprehend resource being queried. A tag is a
 	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 	// For example, a tag with "Sales" as the key might be added to a resource to
 	// indicate its use by the sales department.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are
-	// querying.
-	ResourceArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

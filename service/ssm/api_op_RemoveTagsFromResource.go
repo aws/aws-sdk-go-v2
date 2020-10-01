@@ -67,11 +67,6 @@ type RemoveTagsFromResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// Tag keys that you want to remove from the specified resource.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The type of resource from which you want to remove a tag. The ManagedInstance
 	// type for this API action is only for on-premises managed instances. Specify the
 	// name of the managed instance in the following format: mi-ID_number. For example,
@@ -79,6 +74,11 @@ type RemoveTagsFromResourceInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceTypeForTagging
+
+	// Tag keys that you want to remove from the specified resource.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type RemoveTagsFromResourceOutput struct {

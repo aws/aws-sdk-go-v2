@@ -57,16 +57,16 @@ func (c *Client) DeregisterEventTopic(ctx context.Context, params *DeregisterEve
 // Removes the specified directory as a publisher to the specified SNS topic.
 type DeregisterEventTopicInput struct {
 
-	// The name of the SNS topic from which to remove the directory as a publisher.
-	//
-	// This member is required.
-	TopicName *string
-
 	// The Directory ID to remove as a publisher. This directory will no longer send
 	// messages to the specified SNS topic.
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// The name of the SNS topic from which to remove the directory as a publisher.
+	//
+	// This member is required.
+	TopicName *string
 }
 
 // The result of a DeregisterEventTopic request.

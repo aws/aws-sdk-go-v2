@@ -56,15 +56,6 @@ func (c *Client) ListRecordHistory(ctx context.Context, params *ListRecordHistor
 
 type ListRecordHistoryInput struct {
 
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *types.AccessLevelFilter
-
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
-	// The search filter to scope the results.
-	SearchFilter *types.ListRecordHistorySearchFilter
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -75,19 +66,28 @@ type ListRecordHistoryInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
+	// The access level to use to obtain results. The default is User.
+	AccessLevelFilter *types.AccessLevelFilter
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
+	// The search filter to scope the results.
+	SearchFilter *types.ListRecordHistorySearchFilter
 }
 
 type ListRecordHistoryOutput struct {
 
-	// The records, in reverse chronological order.
-	RecordDetails []*types.RecordDetail
-
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
+	// The records, in reverse chronological order.
+	RecordDetails []*types.RecordDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

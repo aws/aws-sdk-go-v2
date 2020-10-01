@@ -56,14 +56,14 @@ func (c *Client) ListOTAUpdates(ctx context.Context, params *ListOTAUpdatesInput
 
 type ListOTAUpdatesInput struct {
 
-	// The OTA update job status.
-	OtaUpdateStatus types.OTAUpdateStatus
+	// The maximum number of results to return at one time.
+	MaxResults *int32
 
 	// A token used to retrieve the next set of results.
 	NextToken *string
 
-	// The maximum number of results to return at one time.
-	MaxResults *int32
+	// The OTA update job status.
+	OtaUpdateStatus types.OTAUpdateStatus
 }
 
 type ListOTAUpdatesOutput struct {

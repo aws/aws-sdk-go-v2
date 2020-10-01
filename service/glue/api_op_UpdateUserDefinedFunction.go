@@ -57,24 +57,24 @@ func (c *Client) UpdateUserDefinedFunction(ctx context.Context, params *UpdateUs
 
 type UpdateUserDefinedFunctionInput struct {
 
-	// A FunctionInput object that redefines the function in the Data Catalog.
-	//
-	// This member is required.
-	FunctionInput *types.UserDefinedFunctionInput
-
-	// The ID of the Data Catalog where the function to be updated is located. If none
-	// is provided, the AWS account ID is used by default.
-	CatalogId *string
-
 	// The name of the catalog database where the function to be updated is located.
 	//
 	// This member is required.
 	DatabaseName *string
 
+	// A FunctionInput object that redefines the function in the Data Catalog.
+	//
+	// This member is required.
+	FunctionInput *types.UserDefinedFunctionInput
+
 	// The name of the function.
 	//
 	// This member is required.
 	FunctionName *string
+
+	// The ID of the Data Catalog where the function to be updated is located. If none
+	// is provided, the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type UpdateUserDefinedFunctionOutput struct {

@@ -12,10 +12,17 @@ import (
 // arn:aws:budgetservice::AccountId:budget/budgetName
 type Budget struct {
 
-	// The types of costs that are included in this COST budget. USAGE, RI_UTILIZATION,
-	// RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets do
-	// not have CostTypes.
-	CostTypes *CostTypes
+	// The name of a budget. The name must be unique within an account. The : and \
+	// characters aren't allowed in BudgetName.
+	//
+	// This member is required.
+	BudgetName *string
+
+	// Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings
+	// Plans utilization, or Savings Plans coverage.
+	//
+	// This member is required.
+	BudgetType BudgetType
 
 	// The length of time until a budget resets the actual and forecasted spend. DAILY
 	// is available only for RI_UTILIZATION, RI_COVERAGE, Savings_Plans_Utilization,
@@ -23,6 +30,18 @@ type Budget struct {
 	//
 	// This member is required.
 	TimeUnit TimeUnit
+
+	// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
+	// utilization, or Savings Plans coverage that you want to track with your budget.
+	// BudgetLimit is required for cost or usage budgets, but optional for RI or
+	// Savings Plans utilization or coverage budgets. RI and Savings Plans utilization
+	// or coverage budgets default to 100, which is the only valid value for RI or
+	// Savings Plans utilization or coverage budgets. You can't use BudgetLimit with
+	// PlannedBudgetLimits for CreateBudget and UpdateBudget actions.
+	BudgetLimit *Spend
+
+	// The actual and forecasted cost or usage that the budget tracks.
+	CalculatedSpend *CalculatedSpend
 
 	// The cost filters, such as service or tag, that are applied to a budget. AWS
 	// Budgets supports the following services as a filter for RI budgets:
@@ -41,8 +60,10 @@ type Budget struct {
 	// Elasticsearch Service
 	CostFilters map[string][]*string
 
-	// The actual and forecasted cost or usage that the budget tracks.
-	CalculatedSpend *CalculatedSpend
+	// The types of costs that are included in this COST budget. USAGE, RI_UTILIZATION,
+	// RI_COVERAGE, Savings_Plans_Utilization, and Savings_Plans_Coverage budgets do
+	// not have CostTypes.
+	CostTypes *CostTypes
 
 	// The last time that you updated this budget.
 	LastUpdatedTime *time.Time
@@ -69,21 +90,6 @@ type Budget struct {
 	// PlannedBudgetLimits.
 	PlannedBudgetLimits map[string]*Spend
 
-	// The name of a budget. The name must be unique within an account. The : and \
-	// characters aren't allowed in BudgetName.
-	//
-	// This member is required.
-	BudgetName *string
-
-	// The total amount of cost, usage, RI utilization, RI coverage, Savings Plans
-	// utilization, or Savings Plans coverage that you want to track with your budget.
-	// BudgetLimit is required for cost or usage budgets, but optional for RI or
-	// Savings Plans utilization or coverage budgets. RI and Savings Plans utilization
-	// or coverage budgets default to 100, which is the only valid value for RI or
-	// Savings Plans utilization or coverage budgets. You can't use BudgetLimit with
-	// PlannedBudgetLimits for CreateBudget and UpdateBudget actions.
-	BudgetLimit *Spend
-
 	// The period of time that is covered by a budget. The period has a start date and
 	// an end date. The start date must come before the end date. The end date must
 	// come before 06/15/87 00:00 UTC. If you create your budget and don't specify a
@@ -97,12 +103,6 @@ type Budget struct {
 	// operation. After the end date, AWS deletes the budget and all associated
 	// notifications and subscribers.
 	TimePeriod *TimePeriod
-
-	// Whether this budget tracks costs, usage, RI utilization, RI coverage, Savings
-	// Plans utilization, or Savings Plans coverage.
-	//
-	// This member is required.
-	BudgetType BudgetType
 }
 
 // The amount of cost or usage that you created the budget for, compared to your
@@ -127,12 +127,13 @@ type BudgetPerformanceHistory struct {
 	// allowed.
 	BudgetName *string
 
+	// The type of a budget. It must be one of the following types: COST, USAGE,
+	// RI_UTILIZATION, or RI_COVERAGE.
+	BudgetType BudgetType
+
 	// A list of amounts of cost or usage that you created budgets for, compared to
 	// your actual costs or usage.
 	BudgetedAndActualAmountsList []*BudgetedAndActualAmounts
-
-	// The time unit of the budget, such as MONTHLY or QUARTERLY.
-	TimeUnit TimeUnit
 
 	// The history of the cost filters for a budget during the specified time period.
 	CostFilters map[string][]*string
@@ -140,9 +141,8 @@ type BudgetPerformanceHistory struct {
 	// The history of the cost types for a budget during the specified time period.
 	CostTypes *CostTypes
 
-	// The type of a budget. It must be one of the following types: COST, USAGE,
-	// RI_UTILIZATION, or RI_COVERAGE.
-	BudgetType BudgetType
+	// The time unit of the budget, such as MONTHLY or QUARTERLY.
+	TimeUnit TimeUnit
 }
 
 // The spend objects that are associated with this budget. The actualSpend tracks
@@ -152,13 +152,13 @@ type BudgetPerformanceHistory struct {
 // EC2, your actualSpend is 50 USD, and your forecastedSpend is 75 USD.
 type CalculatedSpend struct {
 
-	// The amount of cost, usage, or RI units that you are forecasted to use.
-	ForecastedSpend *Spend
-
 	// The amount of cost, usage, or RI units that you have used.
 	//
 	// This member is required.
 	ActualSpend *Spend
+
+	// The amount of cost, usage, or RI units that you are forecasted to use.
+	ForecastedSpend *Spend
 }
 
 // The types of cost that are included in a COST budget, such as tax and
@@ -166,41 +166,41 @@ type CalculatedSpend struct {
 // CostTypes.
 type CostTypes struct {
 
-	// Specifies whether a budget includes upfront RI costs. The default value is true.
-	IncludeUpfront *bool
-
-	// Specifies whether a budget includes subscriptions. The default value is true.
-	IncludeSubscription *bool
-
 	// Specifies whether a budget includes credits. The default value is true.
 	IncludeCredit *bool
 
 	// Specifies whether a budget includes discounts. The default value is true.
 	IncludeDiscount *bool
 
-	// Specifies whether a budget includes refunds. The default value is true.
-	IncludeRefund *bool
+	// Specifies whether a budget includes non-RI subscription costs. The default value
+	// is true.
+	IncludeOtherSubscription *bool
 
 	// Specifies whether a budget includes recurring fees such as monthly RI fees. The
 	// default value is true.
 	IncludeRecurring *bool
 
-	// Specifies whether a budget uses the amortized rate. The default value is false.
-	UseAmortized *bool
+	// Specifies whether a budget includes refunds. The default value is true.
+	IncludeRefund *bool
 
-	// Specifies whether a budget includes non-RI subscription costs. The default value
-	// is true.
-	IncludeOtherSubscription *bool
+	// Specifies whether a budget includes subscriptions. The default value is true.
+	IncludeSubscription *bool
 
 	// Specifies whether a budget includes support subscription fees. The default value
 	// is true.
 	IncludeSupport *bool
 
-	// Specifies whether a budget uses a blended rate. The default value is false.
-	UseBlended *bool
-
 	// Specifies whether a budget includes taxes. The default value is true.
 	IncludeTax *bool
+
+	// Specifies whether a budget includes upfront RI costs. The default value is true.
+	IncludeUpfront *bool
+
+	// Specifies whether a budget uses the amortized rate. The default value is false.
+	UseAmortized *bool
+
+	// Specifies whether a budget uses a blended rate. The default value is false.
+	UseBlended *bool
 }
 
 // A notification that is associated with a budget. A budget can have up to five
@@ -226,17 +226,11 @@ type Notification struct {
 	// This member is required.
 	ComparisonOperator ComparisonOperator
 
-	// The type of threshold for a notification. For ABSOLUTE_VALUE thresholds, AWS
-	// notifies you when you go over or are forecasted to go over your total cost
-	// threshold. For PERCENTAGE thresholds, AWS notifies you when you go over or are
-	// forecasted to go over a certain percentage of your forecasted spend. For
-	// example, if you have a budget for 200 dollars and you have a PERCENTAGE
-	// threshold of 80%, AWS notifies you when you go over 160 dollars.
-	ThresholdType ThresholdType
-
-	// Whether this notification is in alarm. If a budget notification is in the ALARM
-	// state, you have passed the set threshold for the budget.
-	NotificationState NotificationState
+	// Whether the notification is for how much you have spent (ACTUAL) or for how much
+	// you're forecasted to spend (FORECASTED).
+	//
+	// This member is required.
+	NotificationType NotificationType
 
 	// The threshold that is associated with a notification. Thresholds are always a
 	// percentage.
@@ -244,11 +238,17 @@ type Notification struct {
 	// This member is required.
 	Threshold *float64
 
-	// Whether the notification is for how much you have spent (ACTUAL) or for how much
-	// you're forecasted to spend (FORECASTED).
-	//
-	// This member is required.
-	NotificationType NotificationType
+	// Whether this notification is in alarm. If a budget notification is in the ALARM
+	// state, you have passed the set threshold for the budget.
+	NotificationState NotificationState
+
+	// The type of threshold for a notification. For ABSOLUTE_VALUE thresholds, AWS
+	// notifies you when you go over or are forecasted to go over your total cost
+	// threshold. For PERCENTAGE thresholds, AWS notifies you when you go over or are
+	// forecasted to go over a certain percentage of your forecasted spend. For
+	// example, if you have a budget for 200 dollars and you have a PERCENTAGE
+	// threshold of 80%, AWS notifies you when you go over 160 dollars.
+	ThresholdType ThresholdType
 }
 
 // A notification with subscribers. A notification can have one SNS subscriber and
@@ -316,6 +316,13 @@ type Subscriber struct {
 // restrictions on the end date.
 type TimePeriod struct {
 
+	// The end date for a budget. If you didn't specify an end date, AWS set your end
+	// date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and
+	// Cost Management console and the API. After the end date, AWS deletes the budget
+	// and all associated notifications and subscribers. You can change your end date
+	// with the UpdateBudget operation.
+	End *time.Time
+
 	// The start date for a budget. If you created your budget and didn't specify a
 	// start date, AWS defaults to the start of your chosen time period (DAILY,
 	// MONTHLY, QUARTERLY, or ANNUALLY). For example, if you created your budget on
@@ -325,11 +332,4 @@ type TimePeriod struct {
 	// Management console and the API. You can change your start date with the
 	// UpdateBudget operation.
 	Start *time.Time
-
-	// The end date for a budget. If you didn't specify an end date, AWS set your end
-	// date to 06/15/87 00:00 UTC. The defaults are the same for the AWS Billing and
-	// Cost Management console and the API. After the end date, AWS deletes the budget
-	// and all associated notifications and subscribers. You can change your end date
-	// with the UpdateBudget operation.
-	End *time.Time
 }

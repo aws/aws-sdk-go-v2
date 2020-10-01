@@ -83,6 +83,11 @@ func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, op
 
 type DeleteBucketInput struct {
 
+	// The account ID that owns the Outposts bucket.
+	//
+	// This member is required.
+	AccountId *string
+
 	// Specifies the bucket being deleted. For Amazon S3 on Outposts specify the ARN of
 	// the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/. For
 	// example, to access the bucket reports through outpost my-outpost owned by
@@ -92,11 +97,6 @@ type DeleteBucketInput struct {
 	//
 	// This member is required.
 	Bucket *string
-
-	// The account ID that owns the Outposts bucket.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type DeleteBucketOutput struct {

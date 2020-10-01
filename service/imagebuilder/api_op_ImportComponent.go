@@ -59,6 +59,26 @@ func (c *Client) ImportComponent(ctx context.Context, params *ImportComponentInp
 
 type ImportComponentInput struct {
 
+	// The idempotency token of the component.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The format of the resource that you want to import as a component.
+	//
+	// This member is required.
+	Format types.ComponentFormat
+
+	// The name of the component.
+	//
+	// This member is required.
+	Name *string
+
+	// The platform of the component.
+	//
+	// This member is required.
+	Platform types.Platform
+
 	// The semantic version of the component. This version follows the semantic version
 	// syntax. For example, major.minor.patch. This could be versioned like software
 	// (2.0.1) or like a date (2019.12.01).
@@ -66,67 +86,47 @@ type ImportComponentInput struct {
 	// This member is required.
 	SemanticVersion *string
 
-	// The name of the component.
-	//
-	// This member is required.
-	Name *string
-
-	// The uri of the component. Must be an S3 URL and the requester must have
-	// permission to access the S3 bucket. If you use S3, you can specify component
-	// content up to your service quota. Either data or uri can be used to specify the
-	// data within the component.
-	Uri *string
-
-	// The platform of the component.
-	//
-	// This member is required.
-	Platform types.Platform
-
 	// The type of the component denotes whether the component is used to build the
 	// image or only to test it.
 	//
 	// This member is required.
 	Type types.ComponentType
 
-	// The description of the component. Describes the contents of the component.
-	Description *string
-
-	// The tags of the component.
-	Tags map[string]*string
-
-	// The idempotency token of the component.
-	//
-	// This member is required.
-	ClientToken *string
-
 	// The change description of the component. Describes what change has been made in
 	// this version, or what makes this version different from other versions of this
 	// component.
 	ChangeDescription *string
 
-	// The ID of the KMS key that should be used to encrypt this component.
-	KmsKeyId *string
-
-	// The format of the resource that you want to import as a component.
-	//
-	// This member is required.
-	Format types.ComponentFormat
-
 	// The data of the component. Used to specify the data inline. Either data or uri
 	// can be used to specify the data within the component.
 	Data *string
+
+	// The description of the component. Describes the contents of the component.
+	Description *string
+
+	// The ID of the KMS key that should be used to encrypt this component.
+	KmsKeyId *string
+
+	// The tags of the component.
+	Tags map[string]*string
+
+	// The uri of the component. Must be an S3 URL and the requester must have
+	// permission to access the S3 bucket. If you use S3, you can specify component
+	// content up to your service quota. Either data or uri can be used to specify the
+	// data within the component.
+	Uri *string
 }
 
 type ImportComponentOutput struct {
-
-	// The request ID that uniquely identifies this request.
-	RequestId *string
 
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the imported component.
 	ComponentBuildVersionArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

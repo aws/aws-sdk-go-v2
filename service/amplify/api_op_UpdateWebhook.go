@@ -58,16 +58,16 @@ func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, 
 // The request structure for the update webhook request.
 type UpdateWebhookInput struct {
 
+	// The unique ID for a webhook.
+	//
+	// This member is required.
+	WebhookId *string
+
 	// The name for a branch that is part of an Amplify app.
 	BranchName *string
 
 	// The description for a webhook.
 	Description *string
-
-	// The unique ID for a webhook.
-	//
-	// This member is required.
-	WebhookId *string
 }
 
 // The result structure for the update webhook request.

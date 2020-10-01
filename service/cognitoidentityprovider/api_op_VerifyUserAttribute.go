@@ -59,15 +59,15 @@ type VerifyUserAttributeInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The verification code in the request to verify user attributes.
-	//
-	// This member is required.
-	Code *string
-
 	// The attribute name in the request to verify user attributes.
 	//
 	// This member is required.
 	AttributeName *string
+
+	// The verification code in the request to verify user attributes.
+	//
+	// This member is required.
+	Code *string
 }
 
 // A container representing the response from the server from the request to verify

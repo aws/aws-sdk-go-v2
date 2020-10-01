@@ -60,9 +60,6 @@ func (c *Client) ExportBundle(ctx context.Context, params *ExportBundleInput, op
 // required to integrate mobile web or app clients with backed AWS resources.
 type ExportBundleInput struct {
 
-	// Unique project identifier.
-	ProjectId *string
-
 	// Unique bundle identifier.
 	//
 	// This member is required.
@@ -70,6 +67,9 @@ type ExportBundleInput struct {
 
 	// Developer desktop or target application platform.
 	Platform types.Platform
+
+	// Unique project identifier.
+	ProjectId *string
 }
 
 // Result structure which contains link to download custom-generated SDK and tool

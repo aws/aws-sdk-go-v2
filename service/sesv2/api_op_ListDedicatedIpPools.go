@@ -71,14 +71,14 @@ type ListDedicatedIpPoolsInput struct {
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 
+	// A list of all of the dedicated IP pools that are associated with your AWS
+	// account in the current Region.
+	DedicatedIpPools []*string
+
 	// A token that indicates that there are additional IP pools to list. To view
 	// additional IP pools, issue another request to ListDedicatedIpPools, passing this
 	// token in the NextToken parameter.
 	NextToken *string
-
-	// A list of all of the dedicated IP pools that are associated with your AWS
-	// account in the current Region.
-	DedicatedIpPools []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

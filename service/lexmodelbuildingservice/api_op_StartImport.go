@@ -58,28 +58,6 @@ func (c *Client) StartImport(ctx context.Context, params *StartImportInput, optF
 
 type StartImportInput struct {
 
-	// A list of tags to add to the imported bot. You can only add tags when you import
-	// a bot, you can't add tags to an intent or slot type.
-	Tags []*types.Tag
-
-	// Specifies the type of resource to export. Each resource also exports any
-	// resources that it depends on.
-	//
-	//     * A bot exports dependent intents.
-	//
-	//     * An
-	// intent exports dependent slot types.
-	//
-	// This member is required.
-	ResourceType types.ResourceType
-
-	// A zip archive in binary format. The archive should contain one file, a JSON file
-	// containing the resource to import. The resource should match the type specified
-	// in the resourceType field.
-	//
-	// This member is required.
-	Payload []byte
-
 	// Specifies the action that the StartImport operation should take when there is an
 	// existing resource with the same name.
 	//
@@ -93,9 +71,34 @@ type StartImportInput struct {
 	//
 	// This member is required.
 	MergeStrategy types.MergeStrategy
+
+	// A zip archive in binary format. The archive should contain one file, a JSON file
+	// containing the resource to import. The resource should match the type specified
+	// in the resourceType field.
+	//
+	// This member is required.
+	Payload []byte
+
+	// Specifies the type of resource to export. Each resource also exports any
+	// resources that it depends on.
+	//
+	//     * A bot exports dependent intents.
+	//
+	//     * An
+	// intent exports dependent slot types.
+	//
+	// This member is required.
+	ResourceType types.ResourceType
+
+	// A list of tags to add to the imported bot. You can only add tags when you import
+	// a bot, you can't add tags to an intent or slot type.
+	Tags []*types.Tag
 }
 
 type StartImportOutput struct {
+
+	// A timestamp for the date and time that the import job was requested.
+	CreatedDate *time.Time
 
 	// The identifier for the specific import job.
 	ImportId *string
@@ -104,20 +107,17 @@ type StartImportOutput struct {
 	// for the failure using the GetImport operation.
 	ImportStatus types.ImportStatus
 
-	// A list of tags added to the imported bot.
-	Tags []*types.Tag
-
-	// The type of resource to import.
-	ResourceType types.ResourceType
+	// The action to take when there is a merge conflict.
+	MergeStrategy types.MergeStrategy
 
 	// The name given to the import job.
 	Name *string
 
-	// A timestamp for the date and time that the import job was requested.
-	CreatedDate *time.Time
+	// The type of resource to import.
+	ResourceType types.ResourceType
 
-	// The action to take when there is a merge conflict.
-	MergeStrategy types.MergeStrategy
+	// A list of tags added to the imported bot.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

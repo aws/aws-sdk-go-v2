@@ -66,15 +66,6 @@ func (c *Client) ListTrafficPolicyInstancesByHostedZone(ctx context.Context, par
 // hosted zone.
 type ListTrafficPolicyInstancesByHostedZoneInput struct {
 
-	// If the value of IsTruncated in the previous response is true, you have more
-	// traffic policy instances. To get more traffic policy instances, submit another
-	// ListTrafficPolicyInstances request. For the value of trafficpolicyinstancetype,
-	// specify the value of TrafficPolicyInstanceTypeMarker from the previous response,
-	// which is the type of the first traffic policy instance in the next group of
-	// traffic policy instances. If the value of IsTruncated in the previous response
-	// was false, there are no more traffic policy instances to get.
-	TrafficPolicyInstanceTypeMarker types.RRType
-
 	// The ID of the hosted zone that you want to list traffic policy instances for.
 	//
 	// This member is required.
@@ -96,6 +87,15 @@ type ListTrafficPolicyInstancesByHostedZoneInput struct {
 	// traffic policy instances. If the value of IsTruncated in the previous response
 	// was false, there are no more traffic policy instances to get.
 	TrafficPolicyInstanceNameMarker *string
+
+	// If the value of IsTruncated in the previous response is true, you have more
+	// traffic policy instances. To get more traffic policy instances, submit another
+	// ListTrafficPolicyInstances request. For the value of trafficpolicyinstancetype,
+	// specify the value of TrafficPolicyInstanceTypeMarker from the previous response,
+	// which is the type of the first traffic policy instance in the next group of
+	// traffic policy instances. If the value of IsTruncated in the previous response
+	// was false, there are no more traffic policy instances to get.
+	TrafficPolicyInstanceTypeMarker types.RRType
 }
 
 // A complex type that contains the response information for the request.

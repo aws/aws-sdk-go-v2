@@ -67,6 +67,9 @@ type DescribeThingTypeInput struct {
 // The output for the DescribeThingType operation.
 type DescribeThingTypeOutput struct {
 
+	// The thing type ARN.
+	ThingTypeArn *string
+
 	// The thing type ID.
 	ThingTypeId *string
 
@@ -77,9 +80,6 @@ type DescribeThingTypeOutput struct {
 
 	// The name of the thing type.
 	ThingTypeName *string
-
-	// The thing type ARN.
-	ThingTypeArn *string
 
 	// The ThingTypeProperties contains information about the thing type including
 	// description, and a list of searchable thing attribute names.

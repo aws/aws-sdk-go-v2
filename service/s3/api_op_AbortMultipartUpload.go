@@ -96,6 +96,16 @@ type AbortMultipartUploadInput struct {
 	// This member is required.
 	Bucket *string
 
+	// Key of the object for which the multipart upload was initiated.
+	//
+	// This member is required.
+	Key *string
+
+	// Upload ID that identifies the multipart upload.
+	//
+	// This member is required.
+	UploadId *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -103,16 +113,6 @@ type AbortMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
-
-	// Upload ID that identifies the multipart upload.
-	//
-	// This member is required.
-	UploadId *string
-
-	// Key of the object for which the multipart upload was initiated.
-	//
-	// This member is required.
-	Key *string
 }
 
 type AbortMultipartUploadOutput struct {

@@ -61,15 +61,15 @@ func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optF
 
 type UpdateAssetInput struct {
 
-	// A unique, friendly name for the asset.
-	//
-	// This member is required.
-	AssetName *string
-
 	// The ID of the asset to update.
 	//
 	// This member is required.
 	AssetId *string
+
+	// A unique, friendly name for the asset.
+	//
+	// This member is required.
+	AssetName *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent

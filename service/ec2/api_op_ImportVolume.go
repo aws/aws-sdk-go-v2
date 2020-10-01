@@ -67,24 +67,24 @@ type ImportVolumeInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// A description of the volume.
-	Description *string
+	// The disk image.
+	//
+	// This member is required.
+	Image *types.DiskImageDetail
 
 	// The volume size.
 	//
 	// This member is required.
 	Volume *types.VolumeDetail
 
-	// The disk image.
-	//
-	// This member is required.
-	Image *types.DiskImageDetail
+	// A description of the volume.
+	Description *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ImportVolumeOutput struct {

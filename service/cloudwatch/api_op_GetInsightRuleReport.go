@@ -89,30 +89,32 @@ func (c *Client) GetInsightRuleReport(ctx context.Context, params *GetInsightRul
 
 type GetInsightRuleReportInput struct {
 
-	// The start time of the data to use in the report. When used in a raw HTTP Query
-	// API, it is formatted as yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
-	//
-	// This member is required.
-	StartTime *time.Time
-
 	// The end time of the data to use in the report. When used in a raw HTTP Query
 	// API, it is formatted as yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
 	//
 	// This member is required.
 	EndTime *time.Time
 
+	// The period, in seconds, to use for the statistics in the
+	// InsightRuleMetricDatapoint results.
+	//
+	// This member is required.
+	Period *int32
+
 	// The name of the rule that you want to see data from.
 	//
 	// This member is required.
 	RuleName *string
 
+	// The start time of the data to use in the report. When used in a raw HTTP Query
+	// API, it is formatted as yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
+	//
+	// This member is required.
+	StartTime *time.Time
+
 	// The maximum number of contributors to include in the report. The range is 1 to
 	// 100. If you omit this, the default of 10 is used.
 	MaxContributorCount *int32
-
-	// Determines what statistic to use to rank the contributors. Valid values are SUM
-	// and MAXIMUM.
-	OrderBy *string
 
 	// Specifies which metrics to use for aggregation of contributor values for the
 	// report. You can specify one or more of the following metrics:
@@ -146,29 +148,27 @@ type GetInsightRuleReportInput struct {
 	// period represented by that data point.
 	Metrics []*string
 
-	// The period, in seconds, to use for the statistics in the
-	// InsightRuleMetricDatapoint results.
-	//
-	// This member is required.
-	Period *int32
+	// Determines what statistic to use to rank the contributors. Valid values are SUM
+	// and MAXIMUM.
+	OrderBy *string
 }
 
 type GetInsightRuleReportOutput struct {
 
+	// The sum of the values from all individual contributors that match the rule.
+	AggregateValue *float64
+
 	// Specifies whether this rule aggregates contributor data by COUNT or SUM.
 	AggregationStatistic *string
+
+	// An approximate count of the unique contributors found by this rule in this time
+	// period.
+	ApproximateUniqueCount *int64
 
 	// An array of the unique contributors found by this rule in this time period. If
 	// the rule contains multiple keys, each combination of values for the keys counts
 	// as a unique contributor.
 	Contributors []*types.InsightRuleContributor
-
-	// The sum of the values from all individual contributors that match the rule.
-	AggregateValue *float64
-
-	// A time series of metric data points that matches the time period in the rule
-	// request.
-	MetricDatapoints []*types.InsightRuleMetricDatapoint
 
 	// An array of the strings used as the keys for this rule. The keys are the
 	// dimensions used to classify contributors. If the rule contains more than one
@@ -176,9 +176,9 @@ type GetInsightRuleReportOutput struct {
 	// contributor.
 	KeyLabels []*string
 
-	// An approximate count of the unique contributors found by this rule in this time
-	// period.
-	ApproximateUniqueCount *int64
+	// A time series of metric data points that matches the time period in the rule
+	// request.
+	MetricDatapoints []*types.InsightRuleMetricDatapoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

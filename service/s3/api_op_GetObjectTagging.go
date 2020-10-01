@@ -73,9 +73,6 @@ func (c *Client) GetObjectTagging(ctx context.Context, params *GetObjectTaggingI
 
 type GetObjectTaggingInput struct {
 
-	// The versionId of the object for which to get the tagging information.
-	VersionId *string
-
 	// The bucket name containing the object for which to get the tagging information.
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
@@ -93,6 +90,9 @@ type GetObjectTaggingInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The versionId of the object for which to get the tagging information.
+	VersionId *string
 }
 
 type GetObjectTaggingOutput struct {

@@ -59,16 +59,16 @@ func (c *Client) DisassociateTeamMember(ctx context.Context, params *Disassociat
 
 type DisassociateTeamMemberInput struct {
 
+	// The ID of the AWS CodeStar project from which you want to remove a team member.
+	//
+	// This member is required.
+	ProjectId *string
+
 	// The Amazon Resource Name (ARN) of the IAM user or group whom you want to remove
 	// from the project.
 	//
 	// This member is required.
 	UserArn *string
-
-	// The ID of the AWS CodeStar project from which you want to remove a team member.
-	//
-	// This member is required.
-	ProjectId *string
 }
 
 type DisassociateTeamMemberOutput struct {

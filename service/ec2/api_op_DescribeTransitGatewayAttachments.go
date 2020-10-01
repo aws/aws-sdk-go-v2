@@ -64,13 +64,6 @@ type DescribeTransitGatewayAttachmentsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
-	// The token for the next page of results.
-	NextToken *string
-
 	// One or more filters. The possible values are:
 	//
 	//     * association.state - The
@@ -103,18 +96,25 @@ type DescribeTransitGatewayAttachmentsInput struct {
 	// gateway.
 	Filters []*types.Filter
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
 	// The IDs of the attachments.
 	TransitGatewayAttachmentIds []*string
 }
 
 type DescribeTransitGatewayAttachmentsOutput struct {
 
-	// Information about the attachments.
-	TransitGatewayAttachments []*types.TransitGatewayAttachment
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the attachments.
+	TransitGatewayAttachments []*types.TransitGatewayAttachment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

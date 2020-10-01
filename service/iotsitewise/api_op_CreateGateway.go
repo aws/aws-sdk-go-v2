@@ -61,6 +61,11 @@ func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, 
 
 type CreateGatewayInput struct {
 
+	// A unique, friendly name for the gateway.
+	//
+	// This member is required.
+	GatewayName *string
+
 	// The gateway's platform. You can only specify one platform in a gateway.
 	//
 	// This member is required.
@@ -71,20 +76,9 @@ type CreateGatewayInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
 	Tags map[string]*string
-
-	// A unique, friendly name for the gateway.
-	//
-	// This member is required.
-	GatewayName *string
 }
 
 type CreateGatewayOutput struct {
-
-	// The ID of the gateway device. You can use this ID when you call other AWS IoT
-	// SiteWise APIs.
-	//
-	// This member is required.
-	GatewayId *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -93,6 +87,12 @@ type CreateGatewayOutput struct {
 	//
 	// This member is required.
 	GatewayArn *string
+
+	// The ID of the gateway device. You can use this ID when you call other AWS IoT
+	// SiteWise APIs.
+	//
+	// This member is required.
+	GatewayId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

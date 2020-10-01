@@ -60,32 +60,36 @@ func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilatio
 
 type ListCompilationJobsInput struct {
 
-	// If the result of the previous ListCompilationJobs request was truncated, the
-	// response includes a NextToken. To retrieve the next set of model compilation
-	// jobs, use the token in the next request.
-	NextToken *string
-
 	// A filter that returns the model compilation jobs that were created after a
 	// specified time.
 	CreationTimeAfter *time.Time
+
+	// A filter that returns the model compilation jobs that were created before a
+	// specified time.
+	CreationTimeBefore *time.Time
+
+	// A filter that returns the model compilation jobs that were modified after a
+	// specified time.
+	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns the model compilation jobs that were modified before a
 	// specified time.
 	LastModifiedTimeBefore *time.Time
 
-	// The field by which to sort results. The default is CreationTime.
-	SortBy types.ListCompilationJobsSortBy
+	// The maximum number of model compilation jobs to return in the response.
+	MaxResults *int32
 
 	// A filter that returns the model compilation jobs whose name contains a specified
 	// string.
 	NameContains *string
 
-	// The maximum number of model compilation jobs to return in the response.
-	MaxResults *int32
+	// If the result of the previous ListCompilationJobs request was truncated, the
+	// response includes a NextToken. To retrieve the next set of model compilation
+	// jobs, use the token in the next request.
+	NextToken *string
 
-	// A filter that returns the model compilation jobs that were modified after a
-	// specified time.
-	LastModifiedTimeAfter *time.Time
+	// The field by which to sort results. The default is CreationTime.
+	SortBy types.ListCompilationJobsSortBy
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
@@ -93,10 +97,6 @@ type ListCompilationJobsInput struct {
 	// A filter that retrieves model compilation jobs with a specific
 	// DescribeCompilationJobResponse$CompilationJobStatus () status.
 	StatusEquals types.CompilationJobStatus
-
-	// A filter that returns the model compilation jobs that were created before a
-	// specified time.
-	CreationTimeBefore *time.Time
 }
 
 type ListCompilationJobsOutput struct {

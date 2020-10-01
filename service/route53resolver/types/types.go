@@ -23,41 +23,41 @@ type Filter struct {
 // to use for DNS queries.
 type IpAddressRequest struct {
 
-	// The IP address that you want to use for DNS queries.
-	Ip *string
-
 	// The subnet that contains the IP address.
 	//
 	// This member is required.
 	SubnetId *string
+
+	// The IP address that you want to use for DNS queries.
+	Ip *string
 }
 
 // In the response to a GetResolverEndpoint () request, information about the IP
 // addresses that the resolver endpoint uses for DNS queries.
 type IpAddressResponse struct {
 
-	// A status code that gives the current status of the request.
-	Status IpAddressStatus
+	// The date and time that the IP address was created, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// One IP address that the resolver endpoint uses for DNS queries.
+	Ip *string
 
 	// The ID of one IP address.
 	IpId *string
-
-	// The ID of one subnet.
-	SubnetId *string
 
 	// The date and time that the IP address was last modified, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	ModificationTime *string
 
-	// The date and time that the IP address was created, in Unix time format and
-	// Coordinated Universal Time (UTC).
-	CreationTime *string
+	// A status code that gives the current status of the request.
+	Status IpAddressStatus
 
 	// A message that provides additional information about the status of the request.
 	StatusMessage *string
 
-	// One IP address that the resolver endpoint uses for DNS queries.
-	Ip *string
+	// The ID of one subnet.
+	SubnetId *string
 }
 
 // In an UpdateResolverEndpoint () request, information about an IP address to
@@ -67,13 +67,13 @@ type IpAddressUpdate struct {
 	// The new IP address.
 	Ip *string
 
-	// The ID of the subnet that includes the IP address that you want to update. To
-	// get this ID, use GetResolverEndpoint ().
-	SubnetId *string
-
 	// Only when removing an IP address from a resolver endpoint: The ID of the IP
 	// address that you want to remove. To get this ID, use GetResolverEndpoint ().
 	IpId *string
+
+	// The ID of the subnet that includes the IP address that you want to update. To
+	// get this ID, use GetResolverEndpoint ().
+	SubnetId *string
 }
 
 // In the response to a CreateResolverEndpoint (), DeleteResolverEndpoint (),
@@ -82,27 +82,17 @@ type IpAddressUpdate struct {
 // outbound resolver endpoint.
 type ResolverEndpoint struct {
 
-	// The name that you assigned to the resolver endpoint when you submitted a
-	// CreateResolverEndpoint () request.
-	Name *string
-
-	// The date and time that the endpoint was last modified, in Unix time format and
-	// Coordinated Universal Time (UTC).
-	ModificationTime *string
-
-	// The ID of one or more security groups that control access to this VPC. The
-	// security group must include one or more inbound resolver rules.
-	SecurityGroupIds []*string
+	// The ARN (Amazon Resource Name) for the resolver endpoint.
+	Arn *string
 
 	// The date and time that the endpoint was created, in Unix time format and
 	// Coordinated Universal Time (UTC).
 	CreationTime *string
 
-	// The ID of the VPC that you want to create the resolver endpoint in.
-	HostVPCId *string
-
-	// The ID of the resolver endpoint.
-	Id *string
+	// A unique string that identifies the request that created the resolver endpoint.
+	// The CreatorRequestId allows failed requests to be retried without the risk of
+	// executing the operation twice.
+	CreatorRequestId *string
 
 	// Indicates whether the resolver endpoint allows inbound or outbound DNS
 	// queries:
@@ -114,22 +104,32 @@ type ResolverEndpoint struct {
 	// another VPC
 	Direction ResolverEndpointDirection
 
-	// A code that specifies the current status of the resolver endpoint.
-	Status ResolverEndpointStatus
+	// The ID of the VPC that you want to create the resolver endpoint in.
+	HostVPCId *string
 
-	// The ARN (Amazon Resource Name) for the resolver endpoint.
-	Arn *string
-
-	// A detailed description of the status of the resolver endpoint.
-	StatusMessage *string
-
-	// A unique string that identifies the request that created the resolver endpoint.
-	// The CreatorRequestId allows failed requests to be retried without the risk of
-	// executing the operation twice.
-	CreatorRequestId *string
+	// The ID of the resolver endpoint.
+	Id *string
 
 	// The number of IP addresses that the resolver endpoint can use for DNS queries.
 	IpAddressCount *int32
+
+	// The date and time that the endpoint was last modified, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// The name that you assigned to the resolver endpoint when you submitted a
+	// CreateResolverEndpoint () request.
+	Name *string
+
+	// The ID of one or more security groups that control access to this VPC. The
+	// security group must include one or more inbound resolver rules.
+	SecurityGroupIds []*string
+
+	// A code that specifies the current status of the resolver endpoint.
+	Status ResolverEndpointStatus
+
+	// A detailed description of the status of the resolver endpoint.
+	StatusMessage *string
 }
 
 // For queries that originate in your VPC, detailed information about a resolver
@@ -141,16 +141,33 @@ type ResolverRule struct {
 	// The ARN (Amazon Resource Name) for the resolver rule specified by Id.
 	Arn *string
 
-	// This value is always FORWARD. Other resolver rule types aren't supported.
-	RuleType RuleTypeOption
-
 	// A unique string that you specified when you created the resolver rule.
 	// CreatorRequestIdidentifies the request and allows failed requests to be retried
 	// without the risk of executing the operation twice.
 	CreatorRequestId *string
 
+	// DNS queries for this domain name are forwarded to the IP addresses that are
+	// specified in TargetIps. If a query matches multiple resolver rules (example.com
+	// and www.example.com), the query is routed using the resolver rule that contains
+	// the most specific domain name (www.example.com).
+	DomainName *string
+
 	// The ID that Resolver assigned to the resolver rule when you created it.
 	Id *string
+
+	// The name for the resolver rule, which you specified when you created the
+	// resolver rule.
+	Name *string
+
+	// When a rule is shared with another AWS account, the account ID of the account
+	// that the rule is shared with.
+	OwnerId *string
+
+	// The ID of the endpoint that the rule is associated with.
+	ResolverEndpointId *string
+
+	// This value is always FORWARD. Other resolver rule types aren't supported.
+	RuleType RuleTypeOption
 
 	// Whether the rules is shared and, if so, whether the current account is sharing
 	// the rule with another account, or another account is sharing the rule with the
@@ -160,45 +177,17 @@ type ResolverRule struct {
 	// A code that specifies the current status of the resolver rule.
 	Status ResolverRuleStatus
 
-	// DNS queries for this domain name are forwarded to the IP addresses that are
-	// specified in TargetIps. If a query matches multiple resolver rules (example.com
-	// and www.example.com), the query is routed using the resolver rule that contains
-	// the most specific domain name (www.example.com).
-	DomainName *string
-
-	// When a rule is shared with another AWS account, the account ID of the account
-	// that the rule is shared with.
-	OwnerId *string
-
-	// The ID of the endpoint that the rule is associated with.
-	ResolverEndpointId *string
+	// A detailed description of the status of a resolver rule.
+	StatusMessage *string
 
 	// An array that contains the IP addresses and ports that you want to forward
 	TargetIps []*TargetAddress
-
-	// The name for the resolver rule, which you specified when you created the
-	// resolver rule.
-	Name *string
-
-	// A detailed description of the status of a resolver rule.
-	StatusMessage *string
 }
 
 // In the response to an AssociateResolverRule (), DisassociateResolverRule (), or
 // ListResolverRuleAssociations () request, information about an association
 // between a resolver rule and a VPC.
 type ResolverRuleAssociation struct {
-
-	// The ID of the VPC that you associated the resolver rule with.
-	VPCId *string
-
-	// A code that specifies the current status of the association between a resolver
-	// rule and a VPC.
-	Status ResolverRuleAssociationStatus
-
-	// The ID of the resolver rule that you associated with the VPC that is specified
-	// by VPCId.
-	ResolverRuleId *string
 
 	// The ID of the association between a resolver rule and a VPC. Resolver assigns
 	// this value when you submit an AssociateResolverRule () request.
@@ -207,14 +196,29 @@ type ResolverRuleAssociation struct {
 	// The name of an association between a resolver rule and a VPC.
 	Name *string
 
+	// The ID of the resolver rule that you associated with the VPC that is specified
+	// by VPCId.
+	ResolverRuleId *string
+
+	// A code that specifies the current status of the association between a resolver
+	// rule and a VPC.
+	Status ResolverRuleAssociationStatus
+
 	// A detailed description of the status of the association between a resolver rule
 	// and a VPC.
 	StatusMessage *string
+
+	// The ID of the VPC that you associated the resolver rule with.
+	VPCId *string
 }
 
 // In an UpdateResolverRule () request, information about the changes that you want
 // to make.
 type ResolverRuleConfig struct {
+
+	// The new name for the resolver rule. The name that you specify appears in the
+	// Resolver dashboard in the Route 53 console.
+	Name *string
 
 	// The ID of the new outbound resolver endpoint that you want to use to route DNS
 	// queries to the IP addresses that you specify in TargetIps.
@@ -223,10 +227,6 @@ type ResolverRuleConfig struct {
 	// For DNS queries that originate in your VPC, the new IP addresses that you want
 	// to route outbound DNS queries to.
 	TargetIps []*TargetAddress
-
-	// The new name for the resolver rule. The name that you specify appears in the
-	// Resolver dashboard in the Route 53 console.
-	Name *string
 }
 
 // One tag that you want to add to the specified resource. A tag consists of a Key
@@ -247,12 +247,12 @@ type Tag struct {
 // DNS queries to.
 type TargetAddress struct {
 
-	// The port at Ip that you want to forward DNS queries to.
-	Port *int32
-
 	// One IP address that you want to forward DNS queries to. You can specify only
 	// IPv4 addresses.
 	//
 	// This member is required.
 	Ip *string
+
+	// The port at Ip that you want to forward DNS queries to.
+	Port *int32
 }

@@ -57,13 +57,13 @@ func (c *Client) ListResourceDefinitionVersions(ctx context.Context, params *Lis
 
 type ListResourceDefinitionVersionsInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *string
-
 	// The ID of the resource definition.
 	//
 	// This member is required.
 	ResourceDefinitionId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *string
 
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.

@@ -56,15 +56,15 @@ func (c *Client) AssociateTagOptionWithResource(ctx context.Context, params *Ass
 
 type AssociateTagOptionWithResourceInput struct {
 
-	// The TagOption identifier.
-	//
-	// This member is required.
-	TagOptionId *string
-
 	// The resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The TagOption identifier.
+	//
+	// This member is required.
+	TagOptionId *string
 }
 
 type AssociateTagOptionWithResourceOutput struct {

@@ -79,29 +79,32 @@ type DescribeForecastInput struct {
 
 type DescribeForecastOutput struct {
 
+	// When the forecast creation task was created.
+	CreationTime *time.Time
+
 	// The ARN of the dataset group that provided the data used to train the predictor.
 	DatasetGroupArn *string
 
 	// The forecast ARN as specified in the request.
 	ForecastArn *string
 
-	// The ARN of the predictor used to generate the forecast.
-	PredictorArn *string
-
-	// If an error occurred, an informational message about the error.
-	Message *string
+	// The name of the forecast.
+	ForecastName *string
 
 	// The quantiles at which probabilistic forecasts were generated.
 	ForecastTypes []*string
-
-	// The name of the forecast.
-	ForecastName *string
 
 	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
 	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
 	// and when inference is complete (status changed to ACTIVE) or fails (status
 	// changed to CREATE_FAILED).
 	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The ARN of the predictor used to generate the forecast.
+	PredictorArn *string
 
 	// The status of the forecast. States include:
 	//
@@ -116,9 +119,6 @@ type DescribeForecastOutput struct {
 	// The Status of the forecast must be ACTIVE before you can query or
 	// export the forecast.
 	Status *string
-
-	// When the forecast creation task was created.
-	CreationTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

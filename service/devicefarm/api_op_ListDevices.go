@@ -57,10 +57,6 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 // Represents the result of a list devices request.
 type ListDevicesInput struct {
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) of the project.
 	Arn *string
 
@@ -140,18 +136,22 @@ type ListDevicesInput struct {
 	//         * In a request, the AVAILABILITY attribute takes the
 	// following values: AVAILABLE, HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.
 	Filters []*types.DeviceFilter
+
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
+	NextToken *string
 }
 
 // Represents the result of a list devices operation.
 type ListDevicesOutput struct {
 
+	// Information about the devices.
+	Devices []*types.Device
+
 	// If the number of items that are returned is significantly large, this is an
 	// identifier that is also returned. It can be used in a subsequent call to this
 	// operation to return the next set of items in the list.
 	NextToken *string
-
-	// Information about the devices.
-	Devices []*types.Device
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

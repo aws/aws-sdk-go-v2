@@ -58,15 +58,15 @@ func (c *Client) AssociateIamInstanceProfile(ctx context.Context, params *Associ
 
 type AssociateIamInstanceProfileInput struct {
 
-	// The ID of the instance.
-	//
-	// This member is required.
-	InstanceId *string
-
 	// The IAM instance profile.
 	//
 	// This member is required.
 	IamInstanceProfile *types.IamInstanceProfileSpecification
+
+	// The ID of the instance.
+	//
+	// This member is required.
+	InstanceId *string
 }
 
 type AssociateIamInstanceProfileOutput struct {

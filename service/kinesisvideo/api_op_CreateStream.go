@@ -63,28 +63,11 @@ func (c *Client) CreateStream(ctx context.Context, params *CreateStreamInput, op
 
 type CreateStreamInput struct {
 
-	// The media type of the stream. Consumers of the stream can use this information
-	// when processing the stream. For more information about media types, see Media
-	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If you
-	// choose to specify the MediaType, see Naming Requirements
-	// (https://tools.ietf.org/html/rfc6838#section-4.2) for guidelines.  <p>Example
-	// valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This
-	// parameter is optional; the default value is <code>null</code> (or empty in
-	// JSON).</p>
-	MediaType *string
-
 	// A name for the stream that you are creating. The stream name is an identifier
 	// for the stream, and must be unique for each account and region.
 	//
 	// This member is required.
 	StreamName *string
-
-	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis
-	// Video Streams to use to encrypt stream data. If no key ID is specified, the
-	// default, Kinesis Video-managed key (aws/kinesisvideo) is used. For more
-	// information, see DescribeKey
-	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
-	KmsKeyId *string
 
 	// The number of hours that you want to retain the data in the stream. Kinesis
 	// Video Streams retains the data in a data store that is associated with the
@@ -98,6 +81,23 @@ type CreateStreamInput struct {
 	// The name of the device that is writing to the stream. In the current
 	// implementation, Kinesis Video Streams does not use this name.
 	DeviceName *string
+
+	// The ID of the AWS Key Management Service (AWS KMS) key that you want Kinesis
+	// Video Streams to use to encrypt stream data. If no key ID is specified, the
+	// default, Kinesis Video-managed key (aws/kinesisvideo) is used. For more
+	// information, see DescribeKey
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestParameters).
+	KmsKeyId *string
+
+	// The media type of the stream. Consumers of the stream can use this information
+	// when processing the stream. For more information about media types, see Media
+	// Types (http://www.iana.org/assignments/media-types/media-types.xhtml). If you
+	// choose to specify the MediaType, see Naming Requirements
+	// (https://tools.ietf.org/html/rfc6838#section-4.2) for guidelines.  <p>Example
+	// valid values include "video/h264" and "video/h264,audio/aac".</p> <p>This
+	// parameter is optional; the default value is <code>null</code> (or empty in
+	// JSON).</p>
+	MediaType *string
 
 	// A list of tags to associate with the specified stream. Each tag is a key-value
 	// pair (the value is optional).

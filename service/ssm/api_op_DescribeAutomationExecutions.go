@@ -60,24 +60,24 @@ type DescribeAutomationExecutionsInput struct {
 	// Filters used to limit the scope of executions that are requested.
 	Filters []*types.AutomationExecutionFilter
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeAutomationExecutionsOutput struct {
 
-	// The token to use when requesting the next set of items. If there are no
-	// additional items to return, the string is empty.
-	NextToken *string
-
 	// The list of details about each automation execution which has occurred which
 	// matches the filter specification, if any.
 	AutomationExecutionMetadataList []*types.AutomationExecutionMetadata
+
+	// The token to use when requesting the next set of items. If there are no
+	// additional items to return, the string is empty.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,12 +55,6 @@ func (c *Client) AddThingToThingGroup(ctx context.Context, params *AddThingToThi
 
 type AddThingToThingGroupInput struct {
 
-	// The name of the thing to add to a group.
-	ThingName *string
-
-	// The name of the group to which you are adding a thing.
-	ThingGroupName *string
-
 	// Override dynamic thing groups with static thing groups when 10-group limit is
 	// reached. If a thing belongs to 10 thing groups, and one or more of those groups
 	// are dynamic thing groups, adding a thing to a static group removes the thing
@@ -72,6 +66,12 @@ type AddThingToThingGroupInput struct {
 
 	// The ARN of the group to which you are adding a thing.
 	ThingGroupArn *string
+
+	// The name of the group to which you are adding a thing.
+	ThingGroupName *string
+
+	// The name of the thing to add to a group.
+	ThingName *string
 }
 
 type AddThingToThingGroupOutput struct {

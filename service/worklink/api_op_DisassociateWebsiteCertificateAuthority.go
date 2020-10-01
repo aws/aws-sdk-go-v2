@@ -56,15 +56,15 @@ func (c *Client) DisassociateWebsiteCertificateAuthority(ctx context.Context, pa
 
 type DisassociateWebsiteCertificateAuthorityInput struct {
 
-	// A unique identifier for the CA.
-	//
-	// This member is required.
-	WebsiteCaId *string
-
 	// The ARN of the fleet.
 	//
 	// This member is required.
 	FleetArn *string
+
+	// A unique identifier for the CA.
+	//
+	// This member is required.
+	WebsiteCaId *string
 }
 
 type DisassociateWebsiteCertificateAuthorityOutput struct {

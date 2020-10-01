@@ -59,14 +59,14 @@ func (c *Client) PutConfigurationSetTrackingOptions(ctx context.Context, params 
 // configuration set.
 type PutConfigurationSetTrackingOptionsInput struct {
 
-	// The domain that you want to use to track open and click events.
-	CustomRedirectDomain *string
-
 	// The name of the configuration set that you want to add a custom tracking domain
 	// to.
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	// The domain that you want to use to track open and click events.
+	CustomRedirectDomain *string
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

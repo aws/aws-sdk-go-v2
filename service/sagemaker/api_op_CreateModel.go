@@ -78,25 +78,6 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 
 type CreateModelInput struct {
 
-	// A VpcConfig () object that specifies the VPC that you want your model to connect
-	// to. Control access to and from your model container by configuring the VPC.
-	// VpcConfig is used in hosting services and in batch transform. For more
-	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html) and Protect Data
-	// in Batch Transform Jobs by Using an Amazon Virtual Private Cloud
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
-	VpcConfig *types.VpcConfig
-
-	// Isolates the model container. No inbound or outbound network calls can be made
-	// to or from the model container.
-	EnableNetworkIsolation *bool
-
-	// An array of key-value pairs. For more information, see Using Cost Allocation
-	// Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
-
 	// The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker can assume
 	// to access model artifacts and docker image for deployment on ML compute
 	// instances or for batch transform jobs. Deploying on ML compute instances is part
@@ -108,11 +89,6 @@ type CreateModelInput struct {
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// The location of the primary docker image containing inference code, associated
-	// artifacts, and custom environment map that the inference code uses when the
-	// model is deployed for predictions.
-	PrimaryContainer *types.ContainerDefinition
-
 	// The name of the new model.
 	//
 	// This member is required.
@@ -120,6 +96,30 @@ type CreateModelInput struct {
 
 	// Specifies the containers in the inference pipeline.
 	Containers []*types.ContainerDefinition
+
+	// Isolates the model container. No inbound or outbound network calls can be made
+	// to or from the model container.
+	EnableNetworkIsolation *bool
+
+	// The location of the primary docker image containing inference code, associated
+	// artifacts, and custom environment map that the inference code uses when the
+	// model is deployed for predictions.
+	PrimaryContainer *types.ContainerDefinition
+
+	// An array of key-value pairs. For more information, see Using Cost Allocation
+	// Tags
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []*types.Tag
+
+	// A VpcConfig () object that specifies the VPC that you want your model to connect
+	// to. Control access to and from your model container by configuring the VPC.
+	// VpcConfig is used in hosting services and in batch transform. For more
+	// information, see Protect Endpoints by Using an Amazon Virtual Private Cloud
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/host-vpc.html) and Protect Data
+	// in Batch Transform Jobs by Using an Amazon Virtual Private Cloud
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
+	VpcConfig *types.VpcConfig
 }
 
 type CreateModelOutput struct {

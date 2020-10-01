@@ -69,21 +69,21 @@ type DescribeEntityInput struct {
 
 type DescribeEntityOutput struct {
 
-	// The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).
-	LastModifiedDate *string
-
-	// The named type of the entity, in the format of EntityType@Version.
-	EntityType *string
-
-	// The identifier of the entity, in the format of EntityId@RevisionId.
-	EntityIdentifier *string
-
 	// This stringified JSON object includes the details of the entity.
 	Details *string
 
 	// The ARN associated to the unique identifier for the change set referenced in
 	// this request.
 	EntityArn *string
+
+	// The identifier of the entity, in the format of EntityId@RevisionId.
+	EntityIdentifier *string
+
+	// The named type of the entity, in the format of EntityType@Version.
+	EntityType *string
+
+	// The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).
+	LastModifiedDate *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,15 +56,15 @@ func (c *Client) CancelIngestion(ctx context.Context, params *CancelIngestionInp
 
 type CancelIngestionInput struct {
 
-	// The ID of the dataset used in the ingestion.
-	//
-	// This member is required.
-	DataSetId *string
-
 	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The ID of the dataset used in the ingestion.
+	//
+	// This member is required.
+	DataSetId *string
 
 	// An ID for the ingestion.
 	//
@@ -74,14 +74,14 @@ type CancelIngestionInput struct {
 
 type CancelIngestionOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
+	// The Amazon Resource Name (ARN) for the data ingestion.
+	Arn *string
 
 	// An ID for the ingestion.
 	IngestionId *string
 
-	// The Amazon Resource Name (ARN) for the data ingestion.
-	Arn *string
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

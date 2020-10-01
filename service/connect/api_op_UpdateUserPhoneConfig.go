@@ -57,20 +57,20 @@ func (c *Client) UpdateUserPhoneConfig(ctx context.Context, params *UpdateUserPh
 
 type UpdateUserPhoneConfigInput struct {
 
-	// The identifier of the user account.
+	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
-	UserId *string
+	InstanceId *string
 
 	// Information about phone configuration settings for the user.
 	//
 	// This member is required.
 	PhoneConfig *types.UserPhoneConfig
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the user account.
 	//
 	// This member is required.
-	InstanceId *string
+	UserId *string
 }
 
 type UpdateUserPhoneConfigOutput struct {

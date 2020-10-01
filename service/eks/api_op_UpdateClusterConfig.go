@@ -79,8 +79,10 @@ func (c *Client) UpdateClusterConfig(ctx context.Context, params *UpdateClusterC
 
 type UpdateClusterConfigInput struct {
 
-	// An object representing the VPC configuration to use for an Amazon EKS cluster.
-	ResourcesVpcConfig *types.VpcConfigRequest
+	// The name of the Amazon EKS cluster to update.
+	//
+	// This member is required.
+	Name *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
@@ -95,10 +97,8 @@ type UpdateClusterConfigInput struct {
 	// Amazon CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
 	Logging *types.Logging
 
-	// The name of the Amazon EKS cluster to update.
-	//
-	// This member is required.
-	Name *string
+	// An object representing the VPC configuration to use for an Amazon EKS cluster.
+	ResourcesVpcConfig *types.VpcConfigRequest
 }
 
 type UpdateClusterConfigOutput struct {

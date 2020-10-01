@@ -98,14 +98,23 @@ func (c *Client) LookupEvents(ctx context.Context, params *LookupEventsInput, op
 // Contains a request for LookupEvents.
 type LookupEventsInput struct {
 
+	// Specifies that only events that occur before or at the specified time are
+	// returned. If the specified end time is before the specified start time, an error
+	// is returned.
+	EndTime *time.Time
+
+	// Specifies the event category. If you do not specify an event category, events of
+	// the category are not returned in the response. For example, if you do not
+	// specify insight as the value of EventCategory, no Insights events are returned.
+	EventCategory types.EventCategory
+
 	// Contains a list of lookup attributes. Currently the list can contain only one
 	// item.
 	LookupAttributes []*types.LookupAttribute
 
-	// Specifies that only events that occur after or at the specified time are
-	// returned. If the specified start time is after the specified end time, an error
-	// is returned.
-	StartTime *time.Time
+	// The number of events to return. Possible values are 1 through 50. The default is
+	// 50.
+	MaxResults *int32
 
 	// The token to use to get the next page of results after a previous API call. This
 	// token must be passed in with the same parameters that were specified in the the
@@ -114,19 +123,10 @@ type LookupEventsInput struct {
 	// same parameters.
 	NextToken *string
 
-	// Specifies the event category. If you do not specify an event category, events of
-	// the category are not returned in the response. For example, if you do not
-	// specify insight as the value of EventCategory, no Insights events are returned.
-	EventCategory types.EventCategory
-
-	// The number of events to return. Possible values are 1 through 50. The default is
-	// 50.
-	MaxResults *int32
-
-	// Specifies that only events that occur before or at the specified time are
-	// returned. If the specified end time is before the specified start time, an error
+	// Specifies that only events that occur after or at the specified time are
+	// returned. If the specified start time is after the specified end time, an error
 	// is returned.
-	EndTime *time.Time
+	StartTime *time.Time
 }
 
 // Contains a response to a LookupEvents action.

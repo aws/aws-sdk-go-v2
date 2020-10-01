@@ -69,11 +69,11 @@ type ListByoipCidrsInput struct {
 
 type ListByoipCidrsOutput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// Information about your address ranges.
 	ByoipCidrs []*types.ByoipCidr
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

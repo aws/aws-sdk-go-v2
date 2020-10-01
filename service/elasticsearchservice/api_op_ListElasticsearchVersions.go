@@ -74,13 +74,13 @@ type ListElasticsearchVersionsInput struct {
 // ListElasticsearchVersions () operation.
 type ListElasticsearchVersionsOutput struct {
 
+	// List of supported elastic search versions.
+	ElasticsearchVersions []*string
+
 	// Paginated APIs accepts NextToken input to returns next page results and provides
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
 	NextToken *string
-
-	// List of supported elastic search versions.
-	ElasticsearchVersions []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

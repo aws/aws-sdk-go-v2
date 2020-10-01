@@ -68,17 +68,6 @@ func (c *Client) GenerateDataSet(ctx context.Context, params *GenerateDataSetInp
 // Container for the parameters to the GenerateDataSet operation.
 type GenerateDataSetInput struct {
 
-	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
-	// set has been published or if an error has occurred.
-	//
-	// This member is required.
-	SnsTopicArn *string
-
-	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
-	// notification message and the data set metadata file. These key-value pairs can
-	// be used to correlated responses with tracking information from other systems.
-	CustomerDefinedValues map[string]*string
-
 	// The date a data set was published. For daily data sets, provide a date with
 	// day-level granularity for the desired day. For monthly data sets except those
 	// with prefix disbursed_amount, provide a date with month-level granularity for
@@ -89,19 +78,6 @@ type GenerateDataSetInput struct {
 	//
 	// This member is required.
 	DataSetPublicationDate *time.Time
-
-	// (Optional) The desired S3 prefix for the published data set, similar to a
-	// directory path in standard file systems. For example, if given the bucket name
-	// "mybucket" and the prefix "myprefix/mydatasets", the output file "outputfile"
-	// would be published to "s3://mybucket/myprefix/mydatasets/outputfile". If the
-	// prefix directory structure does not exist, it will be created. If no prefix is
-	// provided, the data set will be published to the S3 bucket root.
-	DestinationS3Prefix *string
-
-	// The name (friendly name, not ARN) of the destination S3 bucket.
-	//
-	// This member is required.
-	DestinationS3BucketName *string
 
 	// The desired data set type.
 	//
@@ -187,11 +163,35 @@ type GenerateDataSetInput struct {
 	// This member is required.
 	DataSetType types.DataSetType
 
+	// The name (friendly name, not ARN) of the destination S3 bucket.
+	//
+	// This member is required.
+	DestinationS3BucketName *string
+
 	// The Amazon Resource Name (ARN) of the Role with an attached permissions policy
 	// to interact with the provided AWS services.
 	//
 	// This member is required.
 	RoleNameArn *string
+
+	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
+	// set has been published or if an error has occurred.
+	//
+	// This member is required.
+	SnsTopicArn *string
+
+	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
+	// notification message and the data set metadata file. These key-value pairs can
+	// be used to correlated responses with tracking information from other systems.
+	CustomerDefinedValues map[string]*string
+
+	// (Optional) The desired S3 prefix for the published data set, similar to a
+	// directory path in standard file systems. For example, if given the bucket name
+	// "mybucket" and the prefix "myprefix/mydatasets", the output file "outputfile"
+	// would be published to "s3://mybucket/myprefix/mydatasets/outputfile". If the
+	// prefix directory structure does not exist, it will be created. If no prefix is
+	// provided, the data set will be published to the S3 bucket root.
+	DestinationS3Prefix *string
 }
 
 // Container for the result of the GenerateDataSet operation.

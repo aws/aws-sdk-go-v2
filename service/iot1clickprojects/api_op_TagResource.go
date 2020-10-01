@@ -59,17 +59,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The ARN of the resouce for which tag(s) should be added or modified.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// The new or modifying tag(s) for the resource. See AWS IoT 1-Click Service Limits
 	// (https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits)
 	// for the maximum number of tags allowed per resource.
 	//
 	// This member is required.
 	Tags map[string]*string
-
-	// The ARN of the resouce for which tag(s) should be added or modified.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type TagResourceOutput struct {

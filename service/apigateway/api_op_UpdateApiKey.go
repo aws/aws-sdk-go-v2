@@ -59,22 +59,23 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 
 // A request to change information about an ApiKey () resource.
 type UpdateApiKeyInput struct {
-	Title *string
-
-	Name *string
 
 	// [Required] The identifier of the ApiKey () resource to be updated.
 	//
 	// This member is required.
 	ApiKey *string
 
-	Template *bool
-
-	TemplateSkipList []*string
+	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A resource that can be distributed to callers for executing Method () resources
@@ -84,33 +85,33 @@ type UpdateApiKeyInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type UpdateApiKeyOutput struct {
 
+	// The timestamp when the API Key was created.
+	CreatedDate *time.Time
+
+	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
+	// Marketplace.
+	CustomerId *string
+
+	// The description of the API Key.
+	Description *string
+
+	// Specifies whether the API Key can be used by callers.
+	Enabled *bool
+
+	// The identifier of the API Key.
+	Id *string
+
+	// The timestamp when the API Key was last updated.
+	LastUpdatedDate *time.Time
+
 	// The name of the API Key.
 	Name *string
 
 	// A list of Stage () resources that are associated with the ApiKey () resource.
 	StageKeys []*string
 
-	// The timestamp when the API Key was created.
-	CreatedDate *time.Time
-
-	// The identifier of the API Key.
-	Id *string
-
-	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
-	// Marketplace.
-	CustomerId *string
-
-	// The timestamp when the API Key was last updated.
-	LastUpdatedDate *time.Time
-
-	// Specifies whether the API Key can be used by callers.
-	Enabled *bool
-
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The description of the API Key.
-	Description *string
 
 	// The value of the API Key.
 	Value *string

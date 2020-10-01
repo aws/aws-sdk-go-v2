@@ -73,8 +73,10 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// This member is required.
 	NetworkLoadBalancerArns []*string
 
-	// The private DNS name to assign to the VPC endpoint service.
-	PrivateDnsName *string
+	// Indicates whether requests from service consumers to create an endpoint to your
+	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections
+	// ().
+	AcceptanceRequired *bool
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
@@ -87,13 +89,11 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// The private DNS name to assign to the VPC endpoint service.
+	PrivateDnsName *string
+
 	// The tags to associate with the service.
 	TagSpecifications []*types.TagSpecification
-
-	// Indicates whether requests from service consumers to create an endpoint to your
-	// service must be accepted. To accept a request, use AcceptVpcEndpointConnections
-	// ().
-	AcceptanceRequired *bool
 }
 
 type CreateVpcEndpointServiceConfigurationOutput struct {

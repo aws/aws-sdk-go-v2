@@ -57,11 +57,11 @@ func (c *Client) DescribeReportDefinitions(ctx context.Context, params *Describe
 // Requests a list of AWS Cost and Usage reports owned by the account.
 type DescribeReportDefinitionsInput struct {
 
-	// A generic string.
-	NextToken *string
-
 	// The maximum number of results that AWS returns for the operation.
 	MaxResults *int32
+
+	// A generic string.
+	NextToken *string
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.

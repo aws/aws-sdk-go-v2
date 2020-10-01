@@ -66,10 +66,6 @@ func (c *Client) CreateTrial(ctx context.Context, params *CreateTrialInput, optF
 
 type CreateTrialInput struct {
 
-	// The name of the trial as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialName is displayed.
-	DisplayName *string
-
 	// The name of the experiment to associate the trial with.
 	//
 	// This member is required.
@@ -80,6 +76,10 @@ type CreateTrialInput struct {
 	//
 	// This member is required.
 	TrialName *string
+
+	// The name of the trial as displayed. The name doesn't need to be unique. If
+	// DisplayName isn't specified, TrialName is displayed.
+	DisplayName *string
 
 	// A list of tags to associate with the trial. You can use Search () API to search
 	// on the tags.

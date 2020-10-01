@@ -69,14 +69,14 @@ type DisassociateVpcCidrBlockInput struct {
 
 type DisassociateVpcCidrBlockOutput struct {
 
-	// The ID of the VPC.
-	VpcId *string
-
 	// Information about the IPv4 CIDR block association.
 	CidrBlockAssociation *types.VpcCidrBlockAssociation
 
 	// Information about the IPv6 CIDR block association.
 	Ipv6CidrBlockAssociation *types.VpcIpv6CidrBlockAssociation
+
+	// The ID of the VPC.
+	VpcId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -89,22 +89,6 @@ func (c *Client) GenerateDataKeyPair(ctx context.Context, params *GenerateDataKe
 
 type GenerateDataKeyPairInput struct {
 
-	// Specifies the encryption context that will be used when encrypting the private
-	// key in the data key pair. An encryption context is a collection of non-secret
-	// key-value pairs that represents additional authenticated data. When you use an
-	// encryption context to encrypt data, you must specify the same (an exact
-	// case-sensitive match) encryption context to decrypt the data. An encryption
-	// context is optional when encrypting with a symmetric CMK, but it is highly
-	// recommended. For more information, see Encryption Context
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the AWS Key Management Service Developer Guide.
-	EncryptionContext map[string]*string
-
-	// A list of grant tokens. For more information, see Grant Tokens
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
-
 	// Specifies the symmetric CMK that encrypts the private key in the data key pair.
 	// You cannot specify an asymmetric CMK or a CMK in a custom key store. To get the
 	// type and origin of your CMK, use the DescribeKey () operation. To specify a CMK,
@@ -138,13 +122,25 @@ type GenerateDataKeyPairInput struct {
 	//
 	// This member is required.
 	KeyPairSpec types.DataKeyPairSpec
+
+	// Specifies the encryption context that will be used when encrypting the private
+	// key in the data key pair. An encryption context is a collection of non-secret
+	// key-value pairs that represents additional authenticated data. When you use an
+	// encryption context to encrypt data, you must specify the same (an exact
+	// case-sensitive match) encryption context to decrypt the data. An encryption
+	// context is optional when encrypting with a symmetric CMK, but it is highly
+	// recommended. For more information, see Encryption Context
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// in the AWS Key Management Service Developer Guide.
+	EncryptionContext map[string]*string
+
+	// A list of grant tokens. For more information, see Grant Tokens
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// in the AWS Key Management Service Developer Guide.
+	GrantTokens []*string
 }
 
 type GenerateDataKeyPairOutput struct {
-
-	// The encrypted copy of the private key. When you use the HTTP API or the AWS CLI,
-	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
-	PrivateKeyCiphertextBlob []byte
 
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
@@ -153,6 +149,10 @@ type GenerateDataKeyPairOutput struct {
 
 	// The type of data key pair that was generated.
 	KeyPairSpec types.DataKeyPairSpec
+
+	// The encrypted copy of the private key. When you use the HTTP API or the AWS CLI,
+	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
+	PrivateKeyCiphertextBlob []byte
 
 	// The plaintext copy of the private key. When you use the HTTP API or the AWS CLI,
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.

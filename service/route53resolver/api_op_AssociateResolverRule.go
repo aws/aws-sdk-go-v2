@@ -67,14 +67,14 @@ type AssociateResolverRuleInput struct {
 	// This member is required.
 	ResolverRuleId *string
 
-	// A name for the association that you're creating between a resolver rule and a
-	// VPC.
-	Name *string
-
 	// The ID of the VPC that you want to associate the resolver rule with.
 	//
 	// This member is required.
 	VPCId *string
+
+	// A name for the association that you're creating between a resolver rule and a
+	// VPC.
+	Name *string
 }
 
 type AssociateResolverRuleOutput struct {

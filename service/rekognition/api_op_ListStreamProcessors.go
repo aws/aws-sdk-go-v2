@@ -57,15 +57,15 @@ func (c *Client) ListStreamProcessors(ctx context.Context, params *ListStreamPro
 
 type ListStreamProcessorsInput struct {
 
+	// Maximum number of stream processors you want Amazon Rekognition Video to return
+	// in the response. The default is 1000.
+	MaxResults *int32
+
 	// If the previous response was incomplete (because there are more stream
 	// processors to retrieve), Amazon Rekognition Video returns a pagination token in
 	// the response. You can use this pagination token to retrieve the next set of
 	// stream processors.
 	NextToken *string
-
-	// Maximum number of stream processors you want Amazon Rekognition Video to return
-	// in the response. The default is 1000.
-	MaxResults *int32
 }
 
 type ListStreamProcessorsOutput struct {

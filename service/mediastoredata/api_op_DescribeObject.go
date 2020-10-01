@@ -66,12 +66,6 @@ type DescribeObjectInput struct {
 
 type DescribeObjectOutput struct {
 
-	// The date and time that the object was last modified.
-	LastModified *time.Time
-
-	// The content type of the object.
-	ContentType *string
-
 	// An optional CacheControl header that allows the caller to control the object's
 	// cache behavior. Headers can be passed in as specified in the HTTP at
 	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
@@ -79,11 +73,17 @@ type DescribeObjectOutput struct {
 	// a custom user-defined value are also accepted.
 	CacheControl *string
 
+	// The length of the object in bytes.
+	ContentLength *int64
+
+	// The content type of the object.
+	ContentType *string
+
 	// The ETag that represents a unique instance of the object.
 	ETag *string
 
-	// The length of the object in bytes.
-	ContentLength *int64
+	// The date and time that the object was last modified.
+	LastModified *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,10 +71,6 @@ func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputS
 
 type DiscoverInputSchemaInput struct {
 
-	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
-	// stream on your behalf.
-	RoleARN *string
-
 	// The InputProcessingConfiguration
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html)
 	// to use to preprocess the records before discovering the schema of the records.
@@ -84,15 +80,24 @@ type DiscoverInputSchemaInput struct {
 	// the specified streaming source discovery purposes.
 	InputStartingPositionConfiguration *types.InputStartingPositionConfiguration
 
-	// Specify this parameter to discover a schema from data in an Amazon S3 object.
-	S3Configuration *types.S3Configuration
-
 	// Amazon Resource Name (ARN) of the streaming source.
 	ResourceARN *string
+
+	// ARN of the IAM role that Amazon Kinesis Analytics can assume to access the
+	// stream on your behalf.
+	RoleARN *string
+
+	// Specify this parameter to discover a schema from data in an Amazon S3 object.
+	S3Configuration *types.S3Configuration
 }
 
 //
 type DiscoverInputSchemaOutput struct {
+
+	// Schema inferred from the streaming source. It identifies the format of the data
+	// in the streaming source and how each data element maps to corresponding columns
+	// in the in-application stream that you can create.
+	InputSchema *types.SourceSchema
 
 	// An array of elements, where each element corresponds to a row in a stream record
 	// (a stream record can have more than one row).
@@ -101,11 +106,6 @@ type DiscoverInputSchemaOutput struct {
 	// Stream data that was modified by the processor specified in the
 	// InputProcessingConfiguration parameter.
 	ProcessedInputRecords []*string
-
-	// Schema inferred from the streaming source. It identifies the format of the data
-	// in the streaming source and how each data element maps to corresponding columns
-	// in the in-application stream that you can create.
-	InputSchema *types.SourceSchema
 
 	// Raw stream data that was sampled to infer the schema.
 	RawInputRecords []*string

@@ -58,17 +58,23 @@ func (c *Client) PutMailboxPermissions(ctx context.Context, params *PutMailboxPe
 
 type PutMailboxPermissionsInput struct {
 
+	// The identifier of the user, group, or resource for which to update mailbox
+	// permissions.
+	//
+	// This member is required.
+	EntityId *string
+
 	// The identifier of the user, group, or resource to which to grant the
 	// permissions.
 	//
 	// This member is required.
 	GranteeId *string
 
-	// The identifier of the user, group, or resource for which to update mailbox
-	// permissions.
+	// The identifier of the organization under which the user, group, or resource
+	// exists.
 	//
 	// This member is required.
-	EntityId *string
+	OrganizationId *string
 
 	// The permissions granted to the grantee. SEND_AS allows the grantee to send email
 	// as the owner of the mailbox (the grantee is not mentioned on these emails).
@@ -79,12 +85,6 @@ type PutMailboxPermissionsInput struct {
 	//
 	// This member is required.
 	PermissionValues []types.PermissionType
-
-	// The identifier of the organization under which the user, group, or resource
-	// exists.
-	//
-	// This member is required.
-	OrganizationId *string
 }
 
 type PutMailboxPermissionsOutput struct {

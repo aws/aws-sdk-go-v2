@@ -74,23 +74,23 @@ func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemI
 // The request object for DeleteFileSystem operation.
 type DeleteFileSystemInput struct {
 
-	// The configuration object for the Microsoft Windows file system used in the
-	// DeleteFileSystem operation.
-	WindowsConfiguration *types.DeleteFileSystemWindowsConfiguration
+	// The ID of the file system you want to delete.
+	//
+	// This member is required.
+	FileSystemId *string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// deletion. This is automatically filled on your behalf when using the AWS CLI or
 	// SDK.
 	ClientRequestToken *string
 
-	// The ID of the file system you want to delete.
-	//
-	// This member is required.
-	FileSystemId *string
-
 	// The configuration object for the Amazon FSx for Lustre file system being deleted
 	// in the DeleteFileSystem operation.
 	LustreConfiguration *types.DeleteFileSystemLustreConfiguration
+
+	// The configuration object for the Microsoft Windows file system used in the
+	// DeleteFileSystem operation.
+	WindowsConfiguration *types.DeleteFileSystemWindowsConfiguration
 }
 
 // The response object for the DeleteFileSystem operation.
@@ -102,13 +102,13 @@ type DeleteFileSystemOutput struct {
 	// The file system lifecycle for the deletion request. Should be DELETING.
 	Lifecycle types.FileSystemLifecycle
 
-	// The response object for the Microsoft Windows file system used in the
-	// DeleteFileSystem operation.
-	WindowsResponse *types.DeleteFileSystemWindowsResponse
-
 	// The response object for the Amazon FSx for Lustre file system being deleted in
 	// the DeleteFileSystem operation.
 	LustreResponse *types.DeleteFileSystemLustreResponse
+
+	// The response object for the Microsoft Windows file system used in the
+	// DeleteFileSystem operation.
+	WindowsResponse *types.DeleteFileSystemWindowsResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,11 +59,17 @@ func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, 
 
 // Requests API Gateway to get information about a Deployment () resource.
 type GetDeploymentInput struct {
-	TemplateSkipList []*string
 
-	Title *string
+	// [Required] The identifier of the Deployment () resource to get information
+	// about.
+	//
+	// This member is required.
+	DeploymentId *string
 
-	Name *string
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
 
 	// A query parameter to retrieve the specified embedded resources of the returned
 	// Deployment () resource in the response. In a REST API call, this embed parameter
@@ -76,18 +82,13 @@ type GetDeploymentInput struct {
 	// /restapis/{restapi_id}/deployments/{deployment_id}?embed=apisummary.
 	Embed []*string
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	// [Required] The identifier of the Deployment () resource to get information
-	// about.
-	//
-	// This member is required.
-	DeploymentId *string
+	Name *string
 
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // An immutable representation of a RestApi () resource that can be called by users
@@ -101,18 +102,18 @@ type GetDeploymentInput struct {
 // AWS SDKs (https://aws.amazon.com/tools/)
 type GetDeploymentOutput struct {
 
-	// The date and time that the deployment resource was created.
-	CreatedDate *time.Time
-
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
 
-	// The identifier for the deployment resource.
-	Id *string
+	// The date and time that the deployment resource was created.
+	CreatedDate *time.Time
 
 	// The description for the deployment resource.
 	Description *string
+
+	// The identifier for the deployment resource.
+	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

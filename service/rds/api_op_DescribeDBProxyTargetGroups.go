@@ -58,16 +58,18 @@ func (c *Client) DescribeDBProxyTargetGroups(ctx context.Context, params *Descri
 
 type DescribeDBProxyTargetGroupsInput struct {
 
-	// The identifier of the DBProxyTargetGroup to describe.
-	TargetGroupName *string
-
-	// This parameter is not currently supported.
-	Filters []*types.Filter
-
 	// The identifier of the DBProxy associated with the target group.
 	//
 	// This member is required.
 	DBProxyName *string
+
+	// This parameter is not currently supported.
+	Filters []*types.Filter
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to the
+	// value specified by MaxRecords.
+	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
@@ -75,10 +77,8 @@ type DescribeDBProxyTargetGroupsInput struct {
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
-	Marker *string
+	// The identifier of the DBProxyTargetGroup to describe.
+	TargetGroupName *string
 }
 
 type DescribeDBProxyTargetGroupsOutput struct {

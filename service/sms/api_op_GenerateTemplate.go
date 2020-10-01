@@ -58,11 +58,11 @@ func (c *Client) GenerateTemplate(ctx context.Context, params *GenerateTemplateI
 
 type GenerateTemplateInput struct {
 
-	// Format for generating the Amazon CloudFormation template.
-	TemplateFormat types.OutputFormat
-
 	// ID of the application associated with the Amazon CloudFormation template.
 	AppId *string
+
+	// Format for generating the Amazon CloudFormation template.
+	TemplateFormat types.OutputFormat
 }
 
 type GenerateTemplateOutput struct {

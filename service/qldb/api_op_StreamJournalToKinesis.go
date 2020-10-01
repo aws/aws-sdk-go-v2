@@ -60,6 +60,16 @@ func (c *Client) StreamJournalToKinesis(ctx context.Context, params *StreamJourn
 
 type StreamJournalToKinesisInput struct {
 
+	// The inclusive start date and time from which to start streaming journal data.
+	// This parameter must be in ISO 8601 date and time format and in Universal
+	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The InclusiveStartTime
+	// cannot be in the future and must be before ExclusiveEndTime. If you provide an
+	// InclusiveStartTime that is before the ledger's CreationDateTime, QLDB
+	// effectively defaults it to the ledger's CreationDateTime.
+	//
+	// This member is required.
+	InclusiveStartTime *time.Time
+
 	// The configuration settings of the Kinesis Data Streams destination for your
 	// stream request.
 	//
@@ -70,16 +80,6 @@ type StreamJournalToKinesisInput struct {
 	//
 	// This member is required.
 	LedgerName *string
-
-	// The exclusive date and time that specifies when the stream ends. If you don't
-	// define this parameter, the stream runs indefinitely until you cancel it. The
-	// ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
-	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z
-	ExclusiveEndTime *time.Time
-
-	// The key-value pairs to add as tags to the stream that you want to create. Tag
-	// keys are case sensitive. Tag values are case sensitive and can be null.
-	Tags map[string]*string
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for
 	// a journal stream to write data records to a Kinesis Data Streams resource.
@@ -97,15 +97,15 @@ type StreamJournalToKinesisInput struct {
 	// This member is required.
 	StreamName *string
 
-	// The inclusive start date and time from which to start streaming journal data.
-	// This parameter must be in ISO 8601 date and time format and in Universal
-	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z The InclusiveStartTime
-	// cannot be in the future and must be before ExclusiveEndTime. If you provide an
-	// InclusiveStartTime that is before the ledger's CreationDateTime, QLDB
-	// effectively defaults it to the ledger's CreationDateTime.
-	//
-	// This member is required.
-	InclusiveStartTime *time.Time
+	// The exclusive date and time that specifies when the stream ends. If you don't
+	// define this parameter, the stream runs indefinitely until you cancel it. The
+	// ExclusiveEndTime must be in ISO 8601 date and time format and in Universal
+	// Coordinated Time (UTC). For example: 2019-06-13T21:36:34Z
+	ExclusiveEndTime *time.Time
+
+	// The key-value pairs to add as tags to the stream that you want to create. Tag
+	// keys are case sensitive. Tag values are case sensitive and can be null.
+	Tags map[string]*string
 }
 
 type StreamJournalToKinesisOutput struct {

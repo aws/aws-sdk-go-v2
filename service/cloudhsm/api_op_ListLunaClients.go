@@ -75,14 +75,14 @@ type ListLunaClientsInput struct {
 
 type ListLunaClientsOutput struct {
 
-	// If not null, more results are available. Pass this to ListLunaClients to
-	// retrieve the next set of items.
-	NextToken *string
-
 	// The list of clients.
 	//
 	// This member is required.
 	ClientList []*string
+
+	// If not null, more results are available. Pass this to ListLunaClients to
+	// retrieve the next set of items.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

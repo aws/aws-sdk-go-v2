@@ -56,11 +56,11 @@ func (c *Client) ListTopicRuleDestinations(ctx context.Context, params *ListTopi
 
 type ListTopicRuleDestinationsInput struct {
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListTopicRuleDestinationsOutput struct {

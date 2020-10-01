@@ -63,6 +63,11 @@ type BatchDeleteTableVersionInput struct {
 	// This member is required.
 	DatabaseName *string
 
+	// The name of the table. For Hive compatibility, this name is entirely lowercase.
+	//
+	// This member is required.
+	TableName *string
+
 	// A list of the IDs of versions to be deleted. A VersionId is a string
 	// representation of an integer. Each version is incremented by 1.
 	//
@@ -72,11 +77,6 @@ type BatchDeleteTableVersionInput struct {
 	// The ID of the Data Catalog where the tables reside. If none is provided, the AWS
 	// account ID is used by default.
 	CatalogId *string
-
-	// The name of the table. For Hive compatibility, this name is entirely lowercase.
-	//
-	// This member is required.
-	TableName *string
 }
 
 type BatchDeleteTableVersionOutput struct {

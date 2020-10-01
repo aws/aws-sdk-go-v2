@@ -67,46 +67,46 @@ type CreateNetworkInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// An optional description for the network.
-	Description *string
-
-	// The name of the network.
+	// The blockchain framework that the network uses.
 	//
 	// This member is required.
-	Name *string
+	Framework types.Framework
+
+	// The version of the blockchain framework that the network uses.
+	//
+	// This member is required.
+	FrameworkVersion *string
 
 	// Configuration properties for the first member within the network.
 	//
 	// This member is required.
 	MemberConfiguration *types.MemberConfiguration
 
+	// The name of the network.
+	//
+	// This member is required.
+	Name *string
+
 	// The voting rules used by the network to determine if a proposal is approved.
 	//
 	// This member is required.
 	VotingPolicy *types.VotingPolicy
 
-	// The blockchain framework that the network uses.
-	//
-	// This member is required.
-	Framework types.Framework
+	// An optional description for the network.
+	Description *string
 
 	// Configuration properties of the blockchain framework relevant to the network
 	// configuration.
 	FrameworkConfiguration *types.NetworkFrameworkConfiguration
-
-	// The version of the blockchain framework that the network uses.
-	//
-	// This member is required.
-	FrameworkVersion *string
 }
 
 type CreateNetworkOutput struct {
 
-	// The unique identifier for the network.
-	NetworkId *string
-
 	// The unique identifier for the first member within the network.
 	MemberId *string
+
+	// The unique identifier for the network.
+	NetworkId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

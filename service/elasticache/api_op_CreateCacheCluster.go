@@ -60,24 +60,6 @@ func (c *Client) CreateCacheCluster(ctx context.Context, params *CreateCacheClus
 // Represents the input of a CreateCacheCluster operation.
 type CreateCacheClusterInput struct {
 
-	// The EC2 Availability Zone in which the cluster is created. All nodes belonging
-	// to this cluster are placed in the preferred Availability Zone. If you want to
-	// create your nodes across multiple Availability Zones, use
-	// PreferredAvailabilityZones. Default: System chosen Availability Zone.
-	PreferredAvailabilityZone *string
-
-	// The name of the cache engine to be used for this cluster. Valid values for this
-	// parameter are: memcached | redis
-	Engine *string
-
-	// A list of security group names to associate with this cluster. Use this
-	// parameter only when you are creating a cluster outside of an Amazon Virtual
-	// Private Cloud (Amazon VPC).
-	CacheSecurityGroupNames []*string
-
-	// The port number on which each of the cache nodes accepts connections.
-	Port *int32
-
 	// The node group (shard) identifier. This parameter is stored as a lowercase
 	// string. Constraints:
 	//
@@ -92,84 +74,32 @@ type CreateCacheClusterInput struct {
 	// This member is required.
 	CacheClusterId *string
 
-	// The name of a Redis snapshot from which to restore data into the new node group
-	// (shard). The snapshot status changes to restoring while the new node group
-	// (shard) is being created. This parameter is only valid if the Engine parameter
-	// is redis.
-	SnapshotName *string
+	// Specifies whether the nodes in this Memcached cluster are created in a single
+	// Availability Zone or created across multiple Availability Zones in the cluster's
+	// region. This parameter is only supported for Memcached clusters. If the AZMode
+	// and PreferredAvailabilityZones are not specified, ElastiCache assumes single-az
+	// mode.
+	AZMode types.AZMode
 
-	// A list of the Availability Zones in which cache nodes are created. The order of
-	// the zones in the list is not important. This option is only supported on
-	// Memcached. If you are creating your cluster in an Amazon VPC (recommended) you
-	// can only locate nodes in Availability Zones that are associated with the subnets
-	// in the selected subnet group. The number of Availability Zones listed must equal
-	// the value of NumCacheNodes. If you want all the nodes in the same Availability
-	// Zone, use PreferredAvailabilityZone instead, or repeat the Availability Zone
-	// multiple times in the list. Default: System chosen Availability Zones.
-	PreferredAvailabilityZones []*string
-
-	// Specifies the weekly time range during which maintenance on the cluster is
-	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:  <p>Specifies the weekly time range during which maintenance  on
-	// the cluster is performed. It is specified as a range in the format
-	// ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60
-	// minute period. Valid values for ddd are:
+	// Reserved parameter. The password used to access a password protected server.
+	// Password constraints:
 	//
-	//     * sun
-	//
-	//     * mon
-	//
-	//     * tue
+	//     * Must be only printable ASCII characters.
 	//
 	//     *
-	// wed
+	// Must be at least 16 characters and no more than 128 characters in length.
 	//
-	//     * thu
+	//     *
+	// The only permitted printable special characters are !, &, #, $, ^, <, >, and -.
+	// Other printable special characters cannot be used in the AUTH token.
 	//
-	//     * fri
-	//
-	//     * sat
-	//
-	// Example: sun:23:00-mon:01:30
-	PreferredMaintenanceWindow *string
+	// For more
+	// information, see AUTH password (http://redis.io/commands/AUTH) at
+	// http://redis.io/commands/AUTH.
+	AuthToken *string
 
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool
-
-	// The version number of the cache engine to be used for this cluster. To view the
-	// supported cache engine versions, use the DescribeCacheEngineVersions operation.
-	// <p> <b>Important:</b> You can upgrade to a newer engine version (see <a
-	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
-	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
-	// version. If you want to use an earlier engine version, you must delete the
-	// existing cluster or replication group and create it anew with the earlier engine
-	// version. </p>
-	EngineVersion *string
-
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
-	// topic to which notifications are sent. The Amazon SNS topic owner must be the
-	// same as the cluster owner.
-	NotificationTopicArn *string
-
-	// One or more VPC security groups associated with the cluster. Use this parameter
-	// only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon
-	// VPC).
-	SecurityGroupIds []*string
-
-	// The name of the parameter group to associate with this cluster. If this argument
-	// is omitted, the default parameter group for the specified engine is used. You
-	// cannot use any parameter group which has cluster-enabled='yes' when creating a
-	// cluster.
-	CacheParameterGroupName *string
-
-	// The initial number of cache nodes that the cluster has. For clusters running
-	// Redis, this value must be 1. For clusters running Memcached, this value must be
-	// between 1 and 20. If you need more than 20 nodes for your Memcached cluster,
-	// please fill out the ElastiCache Limit Increase Request form at
-	// http://aws.amazon.com/contact-us/elasticache-node-limit-request/
-	// (http://aws.amazon.com/contact-us/elasticache-node-limit-request/).
-	NumCacheNodes *int32
 
 	// The compute and memory capacity of the nodes in the node group (shard). The
 	// following node types are supported by ElastiCache. Generally speaking, the
@@ -220,14 +150,96 @@ type CreateCacheClusterInput struct {
 	// later.</p> </li> </ul>
 	CacheNodeType *string
 
-	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your node group (shard). Example: 05:00-09:00 If you do not specify
-	// this parameter, ElastiCache automatically chooses an appropriate time range.
-	// This parameter is only valid if the Engine parameter is redis.
-	SnapshotWindow *string
+	// The name of the parameter group to associate with this cluster. If this argument
+	// is omitted, the default parameter group for the specified engine is used. You
+	// cannot use any parameter group which has cluster-enabled='yes' when creating a
+	// cluster.
+	CacheParameterGroupName *string
 
-	// A list of cost allocation tags to be added to this resource.
-	Tags []*types.Tag
+	// A list of security group names to associate with this cluster. Use this
+	// parameter only when you are creating a cluster outside of an Amazon Virtual
+	// Private Cloud (Amazon VPC).
+	CacheSecurityGroupNames []*string
+
+	// The name of the subnet group to be used for the cluster. Use this parameter only
+	// when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).
+	// If you're going to launch your cluster in an Amazon VPC, you need to create a
+	// subnet group before you start creating a cluster. For more information, see
+	// Subnets and Subnet Groups
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html).
+	CacheSubnetGroupName *string
+
+	// The name of the cache engine to be used for this cluster. Valid values for this
+	// parameter are: memcached | redis
+	Engine *string
+
+	// The version number of the cache engine to be used for this cluster. To view the
+	// supported cache engine versions, use the DescribeCacheEngineVersions operation.
+	// <p> <b>Important:</b> You can upgrade to a newer engine version (see <a
+	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
+	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
+	// version. If you want to use an earlier engine version, you must delete the
+	// existing cluster or replication group and create it anew with the earlier engine
+	// version. </p>
+	EngineVersion *string
+
+	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
+	// topic to which notifications are sent. The Amazon SNS topic owner must be the
+	// same as the cluster owner.
+	NotificationTopicArn *string
+
+	// The initial number of cache nodes that the cluster has. For clusters running
+	// Redis, this value must be 1. For clusters running Memcached, this value must be
+	// between 1 and 20. If you need more than 20 nodes for your Memcached cluster,
+	// please fill out the ElastiCache Limit Increase Request form at
+	// http://aws.amazon.com/contact-us/elasticache-node-limit-request/
+	// (http://aws.amazon.com/contact-us/elasticache-node-limit-request/).
+	NumCacheNodes *int32
+
+	// The port number on which each of the cache nodes accepts connections.
+	Port *int32
+
+	// The EC2 Availability Zone in which the cluster is created. All nodes belonging
+	// to this cluster are placed in the preferred Availability Zone. If you want to
+	// create your nodes across multiple Availability Zones, use
+	// PreferredAvailabilityZones. Default: System chosen Availability Zone.
+	PreferredAvailabilityZone *string
+
+	// A list of the Availability Zones in which cache nodes are created. The order of
+	// the zones in the list is not important. This option is only supported on
+	// Memcached. If you are creating your cluster in an Amazon VPC (recommended) you
+	// can only locate nodes in Availability Zones that are associated with the subnets
+	// in the selected subnet group. The number of Availability Zones listed must equal
+	// the value of NumCacheNodes. If you want all the nodes in the same Availability
+	// Zone, use PreferredAvailabilityZone instead, or repeat the Availability Zone
+	// multiple times in the list. Default: System chosen Availability Zones.
+	PreferredAvailabilityZones []*string
+
+	// Specifies the weekly time range during which maintenance on the cluster is
+	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
+	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
+	// for ddd are:  <p>Specifies the weekly time range during which maintenance  on
+	// the cluster is performed. It is specified as a range in the format
+	// ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance window is a 60
+	// minute period. Valid values for ddd are:
+	//
+	//     * sun
+	//
+	//     * mon
+	//
+	//     * tue
+	//
+	//     *
+	// wed
+	//
+	//     * thu
+	//
+	//     * fri
+	//
+	//     * sat
+	//
+	// Example: sun:23:00-mon:01:30
+	PreferredMaintenanceWindow *string
 
 	// The ID of the replication group to which this cluster should belong. If this
 	// parameter is specified, the cluster is added to the specified replication group
@@ -239,37 +251,10 @@ type CreateCacheClusterInput struct {
 	// redis.
 	ReplicationGroupId *string
 
-	// The number of days for which ElastiCache retains automatic snapshots before
-	// deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot
-	// taken today is retained for 5 days before being deleted. This parameter is only
-	// valid if the Engine parameter is redis. Default: 0 (i.e., automatic backups are
-	// disabled for this cache cluster).
-	SnapshotRetentionLimit *int32
-
-	// Reserved parameter. The password used to access a password protected server.
-	// Password constraints:
-	//
-	//     * Must be only printable ASCII characters.
-	//
-	//     *
-	// Must be at least 16 characters and no more than 128 characters in length.
-	//
-	//     *
-	// The only permitted printable special characters are !, &, #, $, ^, <, >, and -.
-	// Other printable special characters cannot be used in the AUTH token.
-	//
-	// For more
-	// information, see AUTH password (http://redis.io/commands/AUTH) at
-	// http://redis.io/commands/AUTH.
-	AuthToken *string
-
-	// The name of the subnet group to be used for the cluster. Use this parameter only
-	// when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon VPC).
-	// If you're going to launch your cluster in an Amazon VPC, you need to create a
-	// subnet group before you start creating a cluster. For more information, see
-	// Subnets and Subnet Groups
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.html).
-	CacheSubnetGroupName *string
+	// One or more VPC security groups associated with the cluster. Use this parameter
+	// only when you are creating a cluster in an Amazon Virtual Private Cloud (Amazon
+	// VPC).
+	SecurityGroupIds []*string
 
 	// A single-element string list containing an Amazon Resource Name (ARN) that
 	// uniquely identifies a Redis RDB snapshot file stored in Amazon S3. The snapshot
@@ -279,12 +264,27 @@ type CreateCacheClusterInput struct {
 	// arn:aws:s3:::my_bucket/snapshot1.rdb
 	SnapshotArns []*string
 
-	// Specifies whether the nodes in this Memcached cluster are created in a single
-	// Availability Zone or created across multiple Availability Zones in the cluster's
-	// region. This parameter is only supported for Memcached clusters. If the AZMode
-	// and PreferredAvailabilityZones are not specified, ElastiCache assumes single-az
-	// mode.
-	AZMode types.AZMode
+	// The name of a Redis snapshot from which to restore data into the new node group
+	// (shard). The snapshot status changes to restoring while the new node group
+	// (shard) is being created. This parameter is only valid if the Engine parameter
+	// is redis.
+	SnapshotName *string
+
+	// The number of days for which ElastiCache retains automatic snapshots before
+	// deleting them. For example, if you set SnapshotRetentionLimit to 5, a snapshot
+	// taken today is retained for 5 days before being deleted. This parameter is only
+	// valid if the Engine parameter is redis. Default: 0 (i.e., automatic backups are
+	// disabled for this cache cluster).
+	SnapshotRetentionLimit *int32
+
+	// The daily time range (in UTC) during which ElastiCache begins taking a daily
+	// snapshot of your node group (shard). Example: 05:00-09:00 If you do not specify
+	// this parameter, ElastiCache automatically chooses an appropriate time range.
+	// This parameter is only valid if the Engine parameter is redis.
+	SnapshotWindow *string
+
+	// A list of cost allocation tags to be added to this resource.
+	Tags []*types.Tag
 }
 
 type CreateCacheClusterOutput struct {

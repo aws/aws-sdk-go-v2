@@ -63,6 +63,19 @@ type CreateDevicePoolInput struct {
 	// This member is required.
 	Name *string
 
+	// The ARN of the project for the device pool.
+	//
+	// This member is required.
+	ProjectArn *string
+
+	// The device pool's rules.
+	//
+	// This member is required.
+	Rules []*types.Rule
+
+	// The device pool's description.
+	Description *string
+
 	// The number of devices that Device Farm can add to your device pool. Device Farm
 	// adds devices that are available and meet the criteria that you assign for the
 	// rules parameter. Depending on how many devices meet these constraints, your
@@ -70,19 +83,6 @@ type CreateDevicePoolInput struct {
 	// specifying the maximum number of devices, you can control the costs that you
 	// incur by running tests.
 	MaxDevices *int32
-
-	// The ARN of the project for the device pool.
-	//
-	// This member is required.
-	ProjectArn *string
-
-	// The device pool's description.
-	Description *string
-
-	// The device pool's rules.
-	//
-	// This member is required.
-	Rules []*types.Rule
 }
 
 // Represents the result of a create device pool request.

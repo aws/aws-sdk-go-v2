@@ -65,20 +65,20 @@ type DescribeChannelInput struct {
 
 type DescribeChannelOutput struct {
 
+	// The Amazon Resource Name (ARN) assigned to the Channel.
+	Arn *string
+
 	// A short text description of the Channel.
 	Description *string
-
-	// A collection of tags associated with a resource
-	Tags map[string]*string
-
-	// The ID of the Channel.
-	Id *string
 
 	// An HTTP Live Streaming (HLS) ingest resource configuration.
 	HlsIngest *types.HlsIngest
 
-	// The Amazon Resource Name (ARN) assigned to the Channel.
-	Arn *string
+	// The ID of the Channel.
+	Id *string
+
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

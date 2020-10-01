@@ -63,11 +63,11 @@ type GenerateCredentialReportInput struct {
 // Contains the response to a successful GenerateCredentialReport () request.
 type GenerateCredentialReportOutput struct {
 
-	// Information about the state of the credential report.
-	State types.ReportStateType
-
 	// Information about the credential report.
 	Description *string
+
+	// Information about the state of the credential report.
+	State types.ReportStateType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

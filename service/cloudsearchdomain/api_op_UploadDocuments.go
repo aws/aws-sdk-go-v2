@@ -79,11 +79,6 @@ func (c *Client) UploadDocuments(ctx context.Context, params *UploadDocumentsInp
 // Container for the parameters to the UploadDocuments request.
 type UploadDocumentsInput struct {
 
-	// A batch of documents formatted in JSON or HTML.
-	//
-	// This member is required.
-	Documents io.Reader
-
 	// The format of the batch you are uploading. Amazon CloudSearch supports two
 	// document batch formats:
 	//
@@ -93,23 +88,28 @@ type UploadDocumentsInput struct {
 	//
 	// This member is required.
 	ContentType types.ContentType
+
+	// A batch of documents formatted in JSON or HTML.
+	//
+	// This member is required.
+	Documents io.Reader
 }
 
 // Contains the response to an UploadDocuments request.
 type UploadDocumentsOutput struct {
-
-	// Any warnings returned by the document service about the documents being
-	// uploaded.
-	Warnings []*types.DocumentServiceWarning
-
-	// The status of an UploadDocumentsRequest.
-	Status *string
 
 	// The number of documents that were added to the search domain.
 	Adds *int64
 
 	// The number of documents that were deleted from the search domain.
 	Deletes *int64
+
+	// The status of an UploadDocumentsRequest.
+	Status *string
+
+	// Any warnings returned by the document service about the documents being
+	// uploaded.
+	Warnings []*types.DocumentServiceWarning
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,11 +59,11 @@ type GetNotificationChannelInput struct {
 
 type GetNotificationChannelOutput struct {
 
-	// The SNS topic that records AWS Firewall Manager activity.
-	SnsTopicArn *string
-
 	// The IAM role that is used by AWS Firewall Manager to record activity to SNS.
 	SnsRoleName *string
+
+	// The SNS topic that records AWS Firewall Manager activity.
+	SnsTopicArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

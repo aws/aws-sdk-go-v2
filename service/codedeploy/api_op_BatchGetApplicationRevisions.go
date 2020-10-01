@@ -59,31 +59,31 @@ func (c *Client) BatchGetApplicationRevisions(ctx context.Context, params *Batch
 // Represents the input of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsInput struct {
 
+	// The name of an AWS CodeDeploy application about which to get revision
+	// information.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// An array of RevisionLocation objects that specify information to get about the
 	// application revisions, including type and location. The maximum number of
 	// RevisionLocation objects you can specify is 25.
 	//
 	// This member is required.
 	Revisions []*types.RevisionLocation
-
-	// The name of an AWS CodeDeploy application about which to get revision
-	// information.
-	//
-	// This member is required.
-	ApplicationName *string
 }
 
 // Represents the output of a BatchGetApplicationRevisions operation.
 type BatchGetApplicationRevisionsOutput struct {
+
+	// The name of the application that corresponds to the revisions.
+	ApplicationName *string
 
 	// Information about errors that might have occurred during the API call.
 	ErrorMessage *string
 
 	// Additional information about the revisions, including the type and location.
 	Revisions []*types.RevisionInfo
-
-	// The name of the application that corresponds to the revisions.
-	ApplicationName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

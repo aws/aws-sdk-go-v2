@@ -58,24 +58,24 @@ func (c *Client) DescribeAssociationExecutionTargets(ctx context.Context, params
 
 type DescribeAssociationExecutionTargetsInput struct {
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
-	// Filters for the request. You can specify the following filters and values.
-	// Status (EQUAL) ResourceId (EQUAL) ResourceType (EQUAL)
-	Filters []*types.AssociationExecutionTargetsFilter
+	// The association ID that includes the execution for which you want to view
+	// details.
+	//
+	// This member is required.
+	AssociationId *string
 
 	// The execution ID for which you want to view details.
 	//
 	// This member is required.
 	ExecutionId *string
 
-	// The association ID that includes the execution for which you want to view
-	// details.
-	//
-	// This member is required.
-	AssociationId *string
+	// Filters for the request. You can specify the following filters and values.
+	// Status (EQUAL) ResourceId (EQUAL) ResourceType (EQUAL)
+	Filters []*types.AssociationExecutionTargetsFilter
+
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string

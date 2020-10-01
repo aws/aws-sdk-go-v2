@@ -62,11 +62,6 @@ func (c *Client) TestDNSAnswer(ctx context.Context, params *TestDNSAnswerInput, 
 // DNS resolver, an EDNS0 client subnet IP address, and a subnet mask.
 type TestDNSAnswerInput struct {
 
-	// If you want to simulate a request from a specific DNS resolver, specify the IP
-	// address for that resolver. If you omit this value, TestDnsAnswer uses the IP
-	// address of a DNS resolver in the AWS US East (N. Virginia) Region (us-east-1).
-	ResolverIP *string
-
 	// The ID of the hosted zone that you want Amazon Route 53 to simulate a query for.
 	//
 	// This member is required.
@@ -77,6 +72,16 @@ type TestDNSAnswerInput struct {
 	//
 	// This member is required.
 	RecordName *string
+
+	// The type of the resource record set.
+	//
+	// This member is required.
+	RecordType types.RRType
+
+	// If the resolver that you specified for resolverip supports EDNS0, specify the
+	// IPv4 or IPv6 address of a client in the applicable location, for example,
+	// 192.0.2.44 or 2001:db8:85a3::8a2e:370:7334.
+	EDNS0ClientSubnetIP *string
 
 	// If you specify an IP address for edns0clientsubnetip, you can optionally specify
 	// the number of bits of the IP address that you want the checking tool to include
@@ -92,15 +97,10 @@ type TestDNSAnswerInput struct {
 	// * IPv6: Specify a value between 0 and 128
 	EDNS0ClientSubnetMask *string
 
-	// The type of the resource record set.
-	//
-	// This member is required.
-	RecordType types.RRType
-
-	// If the resolver that you specified for resolverip supports EDNS0, specify the
-	// IPv4 or IPv6 address of a client in the applicable location, for example,
-	// 192.0.2.44 or 2001:db8:85a3::8a2e:370:7334.
-	EDNS0ClientSubnetIP *string
+	// If you want to simulate a request from a specific DNS resolver, specify the IP
+	// address for that resolver. If you omit this value, TestDnsAnswer uses the IP
+	// address of a DNS resolver in the AWS US East (N. Virginia) Region (us-east-1).
+	ResolverIP *string
 }
 
 // A complex type that contains the response to a TestDNSAnswer request.
@@ -117,10 +117,21 @@ type TestDNSAnswerOutput struct {
 	// This member is required.
 	Protocol *string
 
+	// A list that contains values that Amazon Route 53 returned for this resource
+	// record set.
+	//
+	// This member is required.
+	RecordData []*string
+
 	// The name of the resource record set that you submitted a request for.
 	//
 	// This member is required.
 	RecordName *string
+
+	// The type of the resource record set that you submitted a request for.
+	//
+	// This member is required.
+	RecordType types.RRType
 
 	// A code that indicates whether the request is valid or not. The most common
 	// response code is NOERROR, meaning that the request is valid. If the response is
@@ -131,17 +142,6 @@ type TestDNSAnswerOutput struct {
 	//
 	// This member is required.
 	ResponseCode *string
-
-	// A list that contains values that Amazon Route 53 returned for this resource
-	// record set.
-	//
-	// This member is required.
-	RecordData []*string
-
-	// The type of the resource record set that you submitted a request for.
-	//
-	// This member is required.
-	RecordType types.RRType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

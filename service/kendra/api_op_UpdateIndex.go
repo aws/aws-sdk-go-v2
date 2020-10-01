@@ -57,29 +57,29 @@ func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optF
 
 type UpdateIndexInput struct {
 
+	// The identifier of the index to update.
+	//
+	// This member is required.
+	Id *string
+
 	// Sets the number of addtional storage and query capacity units that should be
 	// used by the index. You can change the capacity of the index up to 5 times per
 	// day. If you are using extra storage units, you can't reduce the storage capacity
 	// below that required to meet the storage needs for your index.
 	CapacityUnits *types.CapacityUnitsConfiguration
 
-	// The identifier of the index to update.
-	//
-	// This member is required.
-	Id *string
+	// A new description for the index.
+	Description *string
 
 	// The document metadata to update.
 	DocumentMetadataConfigurationUpdates []*types.DocumentMetadataConfiguration
 
-	// A new description for the index.
-	Description *string
+	// The name of the index to update.
+	Name *string
 
 	// A new IAM role that gives Amazon Kendra permission to access your Amazon
 	// CloudWatch logs.
 	RoleArn *string
-
-	// The name of the index to update.
-	Name *string
 }
 
 type UpdateIndexOutput struct {

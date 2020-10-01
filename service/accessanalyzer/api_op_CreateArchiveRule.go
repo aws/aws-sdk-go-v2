@@ -63,15 +63,15 @@ type CreateArchiveRuleInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// The name of the rule to create.
-	//
-	// This member is required.
-	RuleName *string
-
 	// The criteria for the rule.
 	//
 	// This member is required.
 	Filter map[string]*types.Criterion
+
+	// The name of the rule to create.
+	//
+	// This member is required.
+	RuleName *string
 
 	// A client token.
 	ClientToken *string

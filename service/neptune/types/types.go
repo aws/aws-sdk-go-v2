@@ -16,11 +16,11 @@ type AvailabilityZone struct {
 // Specifies a character set.
 type CharacterSet struct {
 
-	// The name of the character set.
-	CharacterSetName *string
-
 	// The description of the character set.
 	CharacterSetDescription *string
+
+	// The name of the character set.
+	CharacterSetName *string
 }
 
 // The configuration setting for the log types to be enabled for export to
@@ -29,20 +29,132 @@ type CharacterSet struct {
 // which logs will be exported (or not exported) to CloudWatch Logs.</p>
 type CloudwatchLogsExportConfiguration struct {
 
-	// The list of log types to enable.
-	EnableLogTypes []*string
-
 	// The list of log types to disable.
 	DisableLogTypes []*string
+
+	// The list of log types to enable.
+	EnableLogTypes []*string
 }
 
 // Contains the details of an Amazon Neptune DB cluster. This data type is used as
 // a response element in the DescribeDBClusters () action.
 type DBCluster struct {
 
+	// AllocatedStorage always returns 1, because Neptune DB cluster storage size is
+	// not fixed, but instead automatically adjusts as needed.
+	AllocatedStorage *int32
+
+	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
+	// associated with the DB cluster. IAM roles that are associated with a DB cluster
+	// grant permission for the DB cluster to access other AWS services on your behalf.
+	AssociatedRoles []*DBClusterRole
+
+	// Provides the list of EC2 Availability Zones that instances in the DB cluster can
+	// be created in.
+	AvailabilityZones []*string
+
+	// Specifies the number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
+
+	// (Not supported by Neptune)
+	CharacterSetName *string
+
+	// Identifies the clone group to which the DB cluster is associated.
+	CloneGroupId *string
+
+	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Time (UTC).
+	ClusterCreateTime *time.Time
+
+	// The Amazon Resource Name (ARN) for the DB cluster.
+	DBClusterArn *string
+
+	// Contains a user-supplied DB cluster identifier. This identifier is the unique
+	// key that identifies a DB cluster.
+	DBClusterIdentifier *string
+
+	// Provides the list of instances that make up the DB cluster.
+	DBClusterMembers []*DBClusterMember
+
+	// (Not supported by Neptune)
+	DBClusterOptionGroupMemberships []*DBClusterOptionGroupStatus
+
+	// Specifies the name of the DB cluster parameter group for the DB cluster.
+	DBClusterParameterGroup *string
+
+	// Specifies information on the subnet group associated with the DB cluster,
+	// including the name, description, and subnets in the subnet group.
+	DBSubnetGroup *string
+
+	// Contains the name of the initial database of this DB cluster that was provided
+	// at create time, if one was specified when the DB cluster was created. This same
+	// name is returned for the life of the DB cluster.
+	DatabaseName *string
+
+	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
+	// cluster is accessed.
+	DbClusterResourceId *string
+
+	// Indicates whether or not the DB cluster has deletion protection enabled. The
+	// database can't be deleted when deletion protection is enabled.
+	DeletionProtection *bool
+
+	// Specifies the earliest time to which a database can be restored with
+	// point-in-time restore.
+	EarliestRestorableTime *time.Time
+
+	// A list of log types that this DB cluster is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudwatchLogsExports []*string
+
+	// Specifies the connection endpoint for the primary instance of the DB cluster.
+	Endpoint *string
+
+	// Provides the name of the database engine to be used for this DB cluster.
+	Engine *string
+
+	// Indicates the database engine version.
+	EngineVersion *string
+
+	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
+	HostedZoneId *string
+
+	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
+	// accounts is enabled, and otherwise false.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
+	// cluster.
+	KmsKeyId *string
+
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time
+
+	// Contains the master username for the DB cluster.
+	MasterUsername *string
+
+	// Specifies whether the DB cluster has instances in multiple Availability Zones.
+	MultiAZ *bool
+
+	// Specifies the progress of the operation as a percentage.
+	PercentProgress *string
+
+	// Specifies the port that the database engine is listening on.
+	Port *int32
+
+	// Specifies the daily time range during which automated backups are created if
+	// automated backups are enabled, as determined by the BackupRetentionPeriod.
+	PreferredBackupWindow *string
+
+	// Specifies the weekly time range during which system maintenance can occur, in
+	// Universal Coordinated Time (UTC).
+	PreferredMaintenanceWindow *string
+
+	// Contains one or more identifiers of the Read Replicas associated with this DB
+	// cluster.
+	ReadReplicaIdentifiers []*string
 
 	// The reader endpoint for the DB cluster. The reader endpoint for a DB cluster
 	// load-balances connections across the Read Replicas that are available in a DB
@@ -55,148 +167,36 @@ type DBCluster struct {
 	// cluster, you can then reconnect to the reader endpoint.
 	ReaderEndpoint *string
 
-	// Provides the name of the database engine to be used for this DB cluster.
-	Engine *string
-
-	// Indicates whether or not the DB cluster has deletion protection enabled. The
-	// database can't be deleted when deletion protection is enabled.
-	DeletionProtection *bool
-
-	// (Not supported by Neptune)
-	DBClusterOptionGroupMemberships []*DBClusterOptionGroupStatus
-
-	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
-	HostedZoneId *string
-
-	// Provides the list of EC2 Availability Zones that instances in the DB cluster can
-	// be created in.
-	AvailabilityZones []*string
-
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// cluster.
-	KmsKeyId *string
-
-	// Specifies the weekly time range during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC).
-	PreferredMaintenanceWindow *string
-
-	// Contains the name of the initial database of this DB cluster that was provided
-	// at create time, if one was specified when the DB cluster was created. This same
-	// name is returned for the life of the DB cluster.
-	DatabaseName *string
-
-	// Specifies the daily time range during which automated backups are created if
-	// automated backups are enabled, as determined by the BackupRetentionPeriod.
-	PreferredBackupWindow *string
-
-	// The Amazon Resource Name (ARN) for the DB cluster.
-	DBClusterArn *string
-
-	// Specifies the name of the DB cluster parameter group for the DB cluster.
-	DBClusterParameterGroup *string
-
-	// Specifies information on the subnet group associated with the DB cluster,
-	// including the name, description, and subnets in the subnet group.
-	DBSubnetGroup *string
-
-	// A list of log types that this DB cluster is configured to export to CloudWatch
-	// Logs.
-	EnabledCloudwatchLogsExports []*string
-
-	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
-	// associated with the DB cluster. IAM roles that are associated with a DB cluster
-	// grant permission for the DB cluster to access other AWS services on your behalf.
-	AssociatedRoles []*DBClusterRole
-
-	// Specifies whether the DB cluster has instances in multiple Availability Zones.
-	MultiAZ *bool
-
-	// Provides a list of VPC security groups that the DB cluster belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
-
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
-	IAMDatabaseAuthenticationEnabled *bool
-
-	// Specifies whether the DB cluster is encrypted.
-	StorageEncrypted *bool
-
 	// Not supported by Neptune.
 	ReplicationSourceIdentifier *string
-
-	// Specifies the connection endpoint for the primary instance of the DB cluster.
-	Endpoint *string
-
-	// Contains the master username for the DB cluster.
-	MasterUsername *string
-
-	// Specifies the number of days for which automatic DB snapshots are retained.
-	BackupRetentionPeriod *int32
-
-	// Specifies the progress of the operation as a percentage.
-	PercentProgress *string
-
-	// Contains a user-supplied DB cluster identifier. This identifier is the unique
-	// key that identifies a DB cluster.
-	DBClusterIdentifier *string
-
-	// Identifies the clone group to which the DB cluster is associated.
-	CloneGroupId *string
-
-	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// cluster is accessed.
-	DbClusterResourceId *string
-
-	// Provides the list of instances that make up the DB cluster.
-	DBClusterMembers []*DBClusterMember
-
-	// AllocatedStorage always returns 1, because Neptune DB cluster storage size is
-	// not fixed, but instead automatically adjusts as needed.
-	AllocatedStorage *int32
-
-	// Contains one or more identifiers of the Read Replicas associated with this DB
-	// cluster.
-	ReadReplicaIdentifiers []*string
 
 	// Specifies the current state of this DB cluster.
 	Status *string
 
-	// Specifies the earliest time to which a database can be restored with
-	// point-in-time restore.
-	EarliestRestorableTime *time.Time
+	// Specifies whether the DB cluster is encrypted.
+	StorageEncrypted *bool
 
-	// Indicates the database engine version.
-	EngineVersion *string
-
-	// (Not supported by Neptune)
-	CharacterSetName *string
-
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
-	// Time (UTC).
-	ClusterCreateTime *time.Time
-
-	// Specifies the port that the database engine is listening on.
-	Port *int32
+	// Provides a list of VPC security groups that the DB cluster belongs to.
+	VpcSecurityGroups []*VpcSecurityGroupMembership
 }
 
 // Contains information about an instance that is part of a DB cluster.
 type DBClusterMember struct {
 
-	// Value that is true if the cluster member is the primary instance for the DB
-	// cluster and false otherwise.
-	IsClusterWriter *bool
+	// Specifies the status of the DB cluster parameter group for this member of the DB
+	// cluster.
+	DBClusterParameterGroupStatus *string
 
 	// Specifies the instance identifier for this member of the DB cluster.
 	DBInstanceIdentifier *string
 
+	// Value that is true if the cluster member is the primary instance for the DB
+	// cluster and false otherwise.
+	IsClusterWriter *bool
+
 	// A value that specifies the order in which a Read Replica is promoted to the
 	// primary instance after a failure of the existing primary instance.
 	PromotionTier *int32
-
-	// Specifies the status of the DB cluster parameter group for this member of the DB
-	// cluster.
-	DBClusterParameterGroupStatus *string
 }
 
 // Contains status information for a DB cluster option group.
@@ -214,15 +214,15 @@ type DBClusterOptionGroupStatus struct {
 // action.
 type DBClusterParameterGroup struct {
 
+	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
+	DBClusterParameterGroupArn *string
+
 	// Provides the name of the DB cluster parameter group.
 	DBClusterParameterGroupName *string
 
 	// Provides the name of the DB parameter group family that this DB cluster
 	// parameter group is compatible with.
 	DBParameterGroupFamily *string
-
-	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
-	DBClusterParameterGroupArn *string
 
 	// Provides the customer-specified description for this DB cluster parameter group.
 	Description *string
@@ -256,26 +256,23 @@ type DBClusterRole struct {
 // used as a response element in the DescribeDBClusterSnapshots () action.
 type DBClusterSnapshot struct {
 
-	// Specifies the time when the DB cluster was created, in Universal Coordinated
-	// Time (UTC).
-	ClusterCreateTime *time.Time
-
-	// Specifies the name of the database engine.
-	Engine *string
+	// Specifies the allocated storage size in gibibytes (GiB).
+	AllocatedStorage *int32
 
 	// Provides the list of EC2 Availability Zones that instances in the DB cluster
 	// snapshot can be restored in.
 	AvailabilityZones []*string
 
-	// Provides the version of the database engine for this DB cluster snapshot.
-	EngineVersion *string
+	// Specifies the time when the DB cluster was created, in Universal Coordinated
+	// Time (UTC).
+	ClusterCreateTime *time.Time
 
-	// Provides the master username for the DB cluster snapshot.
-	MasterUsername *string
+	// Specifies the DB cluster identifier of the DB cluster that this DB cluster
+	// snapshot was created from.
+	DBClusterIdentifier *string
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
-	// cluster snapshot.
-	KmsKeyId *string
+	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
+	DBClusterSnapshotArn *string
 
 	// Specifies the identifier for a DB cluster snapshot. Must match the identifier of
 	// an existing snapshot.  <p>After you restore a DB cluster using a
@@ -291,29 +288,25 @@ type DBClusterSnapshot struct {
 	// original DB cluster is deleted.</p>
 	DBClusterSnapshotIdentifier *string
 
-	// Specifies the allocated storage size in gibibytes (GiB).
-	AllocatedStorage *int32
+	// Specifies the name of the database engine.
+	Engine *string
 
-	// Provides the license model information for this DB cluster snapshot.
-	LicenseModel *string
-
-	// Provides the VPC ID associated with the DB cluster snapshot.
-	VpcId *string
+	// Provides the version of the database engine for this DB cluster snapshot.
+	EngineVersion *string
 
 	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
 	// accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled *bool
 
-	// Specifies whether the DB cluster snapshot is encrypted.
-	StorageEncrypted *bool
+	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
+	// cluster snapshot.
+	KmsKeyId *string
 
-	// Specifies the DB cluster identifier of the DB cluster that this DB cluster
-	// snapshot was created from.
-	DBClusterIdentifier *string
+	// Provides the license model information for this DB cluster snapshot.
+	LicenseModel *string
 
-	// Provides the time when the snapshot was taken, in Universal Coordinated Time
-	// (UTC).
-	SnapshotCreateTime *time.Time
+	// Provides the master username for the DB cluster snapshot.
+	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
 	PercentProgress *int32
@@ -322,8 +315,12 @@ type DBClusterSnapshot struct {
 	// snapshot.
 	Port *int32
 
-	// The Amazon Resource Name (ARN) for the DB cluster snapshot.
-	DBClusterSnapshotArn *string
+	// Provides the time when the snapshot was taken, in Universal Coordinated Time
+	// (UTC).
+	SnapshotCreateTime *time.Time
+
+	// Provides the type of the DB cluster snapshot.
+	SnapshotType *string
 
 	// If the DB cluster snapshot was copied from a source DB cluster snapshot, the
 	// Amazon Resource Name (ARN) for the source DB cluster snapshot, otherwise, a null
@@ -333,8 +330,11 @@ type DBClusterSnapshot struct {
 	// Specifies the status of this DB cluster snapshot.
 	Status *string
 
-	// Provides the type of the DB cluster snapshot.
-	SnapshotType *string
+	// Specifies whether the DB cluster snapshot is encrypted.
+	StorageEncrypted *bool
+
+	// Provides the VPC ID associated with the DB cluster snapshot.
+	VpcId *string
 }
 
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
@@ -375,32 +375,17 @@ type DBClusterSnapshotAttributesResult struct {
 // DescribeDBEngineVersions ().
 type DBEngineVersion struct {
 
-	// (Not supported by Neptune)
-	SupportedCharacterSets []*CharacterSet
-
-	// A list of engine versions that this database engine version can be upgraded to.
-	ValidUpgradeTarget []*UpgradeTarget
-
-	// (Not supported by Neptune)
-	DefaultCharacterSet *CharacterSet
-
-	// Indicates whether the database engine version supports read replicas.
-	SupportsReadReplica *bool
-
-	// The types of logs that the database engine has available for export to
-	// CloudWatch Logs.
-	ExportableLogTypes []*string
-
-	// A list of the time zones supported by this engine for the Timezone parameter of
-	// the CreateDBInstance action.
-	SupportedTimezones []*Timezone
-
 	// The description of the database engine.
 	DBEngineDescription *string
 
-	// A value that indicates whether the engine version supports exporting the log
-	// types specified by ExportableLogTypes to CloudWatch Logs.
-	SupportsLogExportsToCloudwatchLogs *bool
+	// The description of the database engine version.
+	DBEngineVersionDescription *string
+
+	// The name of the DB parameter group family for the database engine.
+	DBParameterGroupFamily *string
+
+	// (Not supported by Neptune)
+	DefaultCharacterSet *CharacterSet
 
 	// The name of the database engine.
 	Engine *string
@@ -408,124 +393,93 @@ type DBEngineVersion struct {
 	// The version number of the database engine.
 	EngineVersion *string
 
-	// The name of the DB parameter group family for the database engine.
-	DBParameterGroupFamily *string
+	// The types of logs that the database engine has available for export to
+	// CloudWatch Logs.
+	ExportableLogTypes []*string
 
-	// The description of the database engine version.
-	DBEngineVersionDescription *string
+	// (Not supported by Neptune)
+	SupportedCharacterSets []*CharacterSet
+
+	// A list of the time zones supported by this engine for the Timezone parameter of
+	// the CreateDBInstance action.
+	SupportedTimezones []*Timezone
+
+	// A value that indicates whether the engine version supports exporting the log
+	// types specified by ExportableLogTypes to CloudWatch Logs.
+	SupportsLogExportsToCloudwatchLogs *bool
+
+	// Indicates whether the database engine version supports read replicas.
+	SupportsReadReplica *bool
+
+	// A list of engine versions that this database engine version can be upgraded to.
+	ValidUpgradeTarget []*UpgradeTarget
 }
 
 // Contains the details of an Amazon Neptune DB instance. This data type is used as
 // a response element in the DescribeDBInstances () action.
 type DBInstance struct {
 
+	// Specifies the allocated storage size specified in gibibytes.
+	AllocatedStorage *int32
+
+	// Indicates that minor version patches are applied automatically.
+	AutoMinorVersionUpgrade *bool
+
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
 
-	// The database name.
-	DBName *string
-
-	// Contains one or more identifiers of the Read Replicas associated with this DB
-	// instance.
-	ReadReplicaDBInstanceIdentifiers []*string
-
-	// Specifies the allocated storage size specified in gibibytes.
-	AllocatedStorage *int32
+	// Specifies the number of days for which automatic DB snapshots are retained.
+	BackupRetentionPeriod *int32
 
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
 
-	// Contains the name of the compute and memory capacity class of the DB instance.
-	DBInstanceClass *string
-
-	// Specifies the latest time to which a database can be restored with point-in-time
-	// restore.
-	LatestRestorableTime *time.Time
-
-	// Provides the name of the database engine to be used for this DB instance.
-	Engine *string
-
-	// The interval, in seconds, between points when Enhanced Monitoring metrics are
-	// collected for the DB instance.
-	MonitoringInterval *int32
-
-	// A list of log types that this DB instance is configured to export to CloudWatch
-	// Logs.
-	EnabledCloudwatchLogsExports []*string
-
-	// The Amazon Resource Name (ARN) for the DB instance.
-	DBInstanceArn *string
-
-	// Specifies the current state of this database.
-	DBInstanceStatus *string
-
-	// If the DB instance is a member of a DB cluster, contains the name of the DB
-	// cluster that the DB instance is a member of.
-	DBClusterIdentifier *string
-
-	// Not supported
-	DomainMemberships []*DomainMembership
+	// (Not supported by Neptune)
+	CharacterSetName *string
 
 	// Specifies whether tags are copied from the DB instance to snapshots of the DB
 	// instance.
 	CopyTagsToSnapshot *bool
 
-	// Contains one or more identifiers of DB clusters that are Read Replicas of this
-	// DB instance.
-	ReadReplicaDBClusterIdentifiers []*string
+	// If the DB instance is a member of a DB cluster, contains the name of the DB
+	// cluster that the DB instance is a member of.
+	DBClusterIdentifier *string
 
-	// Not supported: The encryption for DB instances is managed by the DB cluster.
-	StorageEncrypted *bool
+	// The Amazon Resource Name (ARN) for the DB instance.
+	DBInstanceArn *string
 
-	// Not supported.
-	Timezone *string
-
-	// The ARN for the IAM role that permits Neptune to send Enhanced Monitoring
-	// metrics to Amazon CloudWatch Logs.
-	MonitoringRoleArn *string
-
-	// If present, specifies the name of the secondary Availability Zone for a DB
-	// instance with multi-AZ support.
-	SecondaryAvailabilityZone *string
-
-	// Provides the date and time the DB instance was created.
-	InstanceCreateTime *time.Time
-
-	// Contains the master username for the DB instance.
-	MasterUsername *string
-
-	// Provides List of DB security group elements containing only DBSecurityGroup.Name
-	// and DBSecurityGroup.Status subelements.
-	DBSecurityGroups []*DBSecurityGroupMembership
-
-	// A value that specifies the order in which a Read Replica is promoted to the
-	// primary instance after a failure of the existing primary instance.
-	PromotionTier *int32
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log stream that
-	// receives the Enhanced Monitoring metrics data for the DB instance.
-	EnhancedMonitoringResourceArn *string
+	// Contains the name of the compute and memory capacity class of the DB instance.
+	DBInstanceClass *string
 
 	// Contains a user-supplied database identifier. This identifier is the unique key
 	// that identifies a DB instance.
 	DBInstanceIdentifier *string
 
-	// Contains the identifier of the source DB instance if this DB instance is a Read
-	// Replica.
-	ReadReplicaSourceDBInstanceIdentifier *string
+	// Specifies the current state of this database.
+	DBInstanceStatus *string
 
-	// Specifies the storage type associated with DB instance.
-	StorageType *string
+	// The database name.
+	DBName *string
 
-	// Indicates the database engine version.
-	EngineVersion *string
+	// Provides the list of DB parameter groups applied to this DB instance.
+	DBParameterGroups []*DBParameterGroupStatus
 
-	// (Not supported by Neptune)
-	CharacterSetName *string
+	// Provides List of DB security group elements containing only DBSecurityGroup.Name
+	// and DBSecurityGroup.Status subelements.
+	DBSecurityGroups []*DBSecurityGroupMembership
 
-	// Specifies the weekly time range during which system maintenance can occur, in
-	// Universal Coordinated Time (UTC).
-	PreferredMaintenanceWindow *string
+	// Specifies information on the subnet group associated with the DB instance,
+	// including the name, description, and subnets in the subnet group.
+	DBSubnetGroup *DBSubnetGroup
+
+	// Specifies the port that the DB instance listens on. If the DB instance is part
+	// of a DB cluster, this can be a different port than the DB cluster port.
+	DbInstancePort *int32
+
+	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
+	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
+	// instance is accessed.
+	DbiResourceId *string
 
 	// Indicates whether or not the DB instance has deletion protection enabled. The
 	// instance can't be deleted when deletion protection is enabled. See Deleting a DB
@@ -533,89 +487,128 @@ type DBInstance struct {
 	// (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html).
 	DeletionProtection *bool
 
-	// This flag should no longer be used.
-	PubliclyAccessible *bool
+	// Not supported
+	DomainMemberships []*DomainMembership
 
-	// Specifies information on the subnet group associated with the DB instance,
-	// including the name, description, and subnets in the subnet group.
-	DBSubnetGroup *DBSubnetGroup
-
-	// License model information for this DB instance.
-	LicenseModel *string
+	// A list of log types that this DB instance is configured to export to CloudWatch
+	// Logs.
+	EnabledCloudwatchLogsExports []*string
 
 	// Specifies the connection endpoint.
 	Endpoint *Endpoint
 
+	// Provides the name of the database engine to be used for this DB instance.
+	Engine *string
+
+	// Indicates the database engine version.
+	EngineVersion *string
+
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log stream that
+	// receives the Enhanced Monitoring metrics data for the DB instance.
+	EnhancedMonitoringResourceArn *string
+
+	// True if AWS Identity and Access Management (IAM) authentication is enabled, and
+	// otherwise false.
+	IAMDatabaseAuthenticationEnabled *bool
+
+	// Provides the date and time the DB instance was created.
+	InstanceCreateTime *time.Time
+
+	// Specifies the Provisioned IOPS (I/O operations per second) value.
+	Iops *int32
+
 	// Not supported: The encryption for DB instances is managed by the DB cluster.
 	KmsKeyId *string
 
-	// Specifies the port that the DB instance listens on. If the DB instance is part
-	// of a DB cluster, this can be a different port than the DB cluster port.
-	DbInstancePort *int32
+	// Specifies the latest time to which a database can be restored with point-in-time
+	// restore.
+	LatestRestorableTime *time.Time
+
+	// License model information for this DB instance.
+	LicenseModel *string
+
+	// Contains the master username for the DB instance.
+	MasterUsername *string
+
+	// The interval, in seconds, between points when Enhanced Monitoring metrics are
+	// collected for the DB instance.
+	MonitoringInterval *int32
+
+	// The ARN for the IAM role that permits Neptune to send Enhanced Monitoring
+	// metrics to Amazon CloudWatch Logs.
+	MonitoringRoleArn *string
+
+	// Specifies if the DB instance is a Multi-AZ deployment.
+	MultiAZ *bool
+
+	// (Not supported by Neptune)
+	OptionGroupMemberships []*OptionGroupMembership
 
 	// Specifies that changes to the DB instance are pending. This element is only
 	// included when changes are pending. Specific changes are identified by
 	// subelements.
 	PendingModifiedValues *PendingModifiedValues
 
-	// Provides the list of DB parameter groups applied to this DB instance.
-	DBParameterGroups []*DBParameterGroupStatus
-
-	// Specifies the Provisioned IOPS (I/O operations per second) value.
-	Iops *int32
-
-	// Indicates that minor version patches are applied automatically.
-	AutoMinorVersionUpgrade *bool
-
-	// The ARN from the key store with which the instance is associated for TDE
-	// encryption.
-	TdeCredentialArn *string
-
-	// Specifies if the DB instance is a Multi-AZ deployment.
-	MultiAZ *bool
-
-	// Provides a list of VPC security group elements that the DB instance belongs to.
-	VpcSecurityGroups []*VpcSecurityGroupMembership
+	// (Not supported by Neptune)
+	PerformanceInsightsEnabled *bool
 
 	// (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string
-
-	// The status of a Read Replica. If the instance is not a Read Replica, this is
-	// blank.
-	StatusInfos []*DBInstanceStatusInfo
-
-	// (Not supported by Neptune)
-	OptionGroupMemberships []*OptionGroupMembership
-
-	// Specifies the number of days for which automatic DB snapshots are retained.
-	BackupRetentionPeriod *int32
-
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
-	DbiResourceId *string
 
 	// Specifies the daily time range during which automated backups are created if
 	// automated backups are enabled, as determined by the BackupRetentionPeriod.
 	PreferredBackupWindow *string
 
-	// True if AWS Identity and Access Management (IAM) authentication is enabled, and
-	// otherwise false.
-	IAMDatabaseAuthenticationEnabled *bool
+	// Specifies the weekly time range during which system maintenance can occur, in
+	// Universal Coordinated Time (UTC).
+	PreferredMaintenanceWindow *string
 
-	// (Not supported by Neptune)
-	PerformanceInsightsEnabled *bool
+	// A value that specifies the order in which a Read Replica is promoted to the
+	// primary instance after a failure of the existing primary instance.
+	PromotionTier *int32
+
+	// This flag should no longer be used.
+	PubliclyAccessible *bool
+
+	// Contains one or more identifiers of DB clusters that are Read Replicas of this
+	// DB instance.
+	ReadReplicaDBClusterIdentifiers []*string
+
+	// Contains one or more identifiers of the Read Replicas associated with this DB
+	// instance.
+	ReadReplicaDBInstanceIdentifiers []*string
+
+	// Contains the identifier of the source DB instance if this DB instance is a Read
+	// Replica.
+	ReadReplicaSourceDBInstanceIdentifier *string
+
+	// If present, specifies the name of the secondary Availability Zone for a DB
+	// instance with multi-AZ support.
+	SecondaryAvailabilityZone *string
+
+	// The status of a Read Replica. If the instance is not a Read Replica, this is
+	// blank.
+	StatusInfos []*DBInstanceStatusInfo
+
+	// Not supported: The encryption for DB instances is managed by the DB cluster.
+	StorageEncrypted *bool
+
+	// Specifies the storage type associated with DB instance.
+	StorageType *string
+
+	// The ARN from the key store with which the instance is associated for TDE
+	// encryption.
+	TdeCredentialArn *string
+
+	// Not supported.
+	Timezone *string
+
+	// Provides a list of VPC security group elements that the DB instance belongs to.
+	VpcSecurityGroups []*VpcSecurityGroupMembership
 }
 
 // Provides a list of status information for a DB instance.
 type DBInstanceStatusInfo struct {
-
-	// Status of the DB instance. For a StatusType of read replica, the values can be
-	// replicating, error, stopped, or terminated.
-	Status *string
-
-	// This value is currently "read replication."
-	StatusType *string
 
 	// Details of the error if there is an error for the instance. If the instance is
 	// not in an error state, this value is blank.
@@ -624,24 +617,31 @@ type DBInstanceStatusInfo struct {
 	// Boolean value that is true if the instance is operating normally, or false if
 	// the instance is in an error state.
 	Normal *bool
+
+	// Status of the DB instance. For a StatusType of read replica, the values can be
+	// replicating, error, stopped, or terminated.
+	Status *string
+
+	// This value is currently "read replication."
+	StatusType *string
 }
 
 // Contains the details of an Amazon Neptune DB parameter group. This data type is
 // used as a response element in the DescribeDBParameterGroups () action.
 type DBParameterGroup struct {
 
-	// Provides the customer-specified description for this DB parameter group.
-	Description *string
+	// The Amazon Resource Name (ARN) for the DB parameter group.
+	DBParameterGroupArn *string
 
 	// Provides the name of the DB parameter group family that this DB parameter group
 	// is compatible with.
 	DBParameterGroupFamily *string
 
-	// The Amazon Resource Name (ARN) for the DB parameter group.
-	DBParameterGroupArn *string
-
 	// Provides the name of the DB parameter group.
 	DBParameterGroupName *string
+
+	// Provides the customer-specified description for this DB parameter group.
+	Description *string
 }
 
 // The status of the DB parameter group. This data type is used as a response
@@ -657,11 +657,11 @@ type DBParameterGroup struct {
 //     * RebootDBInstance ()
 type DBParameterGroupStatus struct {
 
-	// The status of parameter updates.
-	ParameterApplyStatus *string
-
 	// The name of the DP parameter group.
 	DBParameterGroupName *string
+
+	// The status of parameter updates.
+	ParameterApplyStatus *string
 }
 
 // Specifies membership in a designated DB security group.
@@ -678,23 +678,23 @@ type DBSecurityGroupMembership struct {
 // used as a response element in the DescribeDBSubnetGroups () action.
 type DBSubnetGroup struct {
 
-	// Provides the VpcId of the DB subnet group.
-	VpcId *string
-
 	// The Amazon Resource Name (ARN) for the DB subnet group.
 	DBSubnetGroupArn *string
 
 	// Provides the description of the DB subnet group.
 	DBSubnetGroupDescription *string
 
-	// Provides the status of the DB subnet group.
-	SubnetGroupStatus *string
-
 	// The name of the DB subnet group.
 	DBSubnetGroupName *string
 
+	// Provides the status of the DB subnet group.
+	SubnetGroupStatus *string
+
 	// Contains a list of Subnet () elements.
 	Subnets []*Subnet
+
+	// Provides the VpcId of the DB subnet group.
+	VpcId *string
 }
 
 // An Active Directory Domain membership record associated with a DB instance.
@@ -703,6 +703,9 @@ type DomainMembership struct {
 	// The identifier of the Active Directory Domain.
 	Domain *string
 
+	// The fully qualified domain name of the Active Directory Domain.
+	FQDN *string
+
 	// The name of the IAM role to be used when making API calls to the Directory
 	// Service.
 	IAMRoleName *string
@@ -710,46 +713,43 @@ type DomainMembership struct {
 	// The status of the DB instance's Active Directory Domain membership, such as
 	// joined, pending-join, failed etc).
 	Status *string
-
-	// The fully qualified domain name of the Active Directory Domain.
-	FQDN *string
 }
 
 // A range of double values.
 type DoubleRange struct {
 
-	// The maximum value in the range.
-	To *float64
-
 	// The minimum value in the range.
 	From *float64
+
+	// The maximum value in the range.
+	To *float64
 }
 
 // Specifies a connection endpoint.
 type Endpoint struct {
 
-	// Specifies the port that the database engine is listening on.
-	Port *int32
+	// Specifies the DNS address of the DB instance.
+	Address *string
 
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// Specifies the DNS address of the DB instance.
-	Address *string
+	// Specifies the port that the database engine is listening on.
+	Port *int32
 }
 
 // Contains the result of a successful invocation of the
 // DescribeEngineDefaultParameters () action.
 type EngineDefaults struct {
 
+	// Specifies the name of the DB parameter group family that the engine default
+	// parameters apply to.
+	DBParameterGroupFamily *string
+
 	// An optional pagination token provided by a previous EngineDefaults request. If
 	// this parameter is specified, the response includes only records beyond the
 	// marker, up to the value specified by MaxRecords .
 	Marker *string
-
-	// Specifies the name of the DB parameter group family that the engine default
-	// parameters apply to.
-	DBParameterGroupFamily *string
 
 	// Contains a list of engine default parameters.
 	Parameters []*Parameter
@@ -761,20 +761,20 @@ type Event struct {
 	// Specifies the date and time of the event.
 	Date *time.Time
 
+	// Specifies the category for the event.
+	EventCategories []*string
+
+	// Provides the text of this event.
+	Message *string
+
+	// The Amazon Resource Name (ARN) for the event.
+	SourceArn *string
+
 	// Provides the identifier for the source of the event.
 	SourceIdentifier *string
 
 	// Specifies the source type for this event.
 	SourceType SourceType
-
-	// Provides the text of this event.
-	Message *string
-
-	// Specifies the category for the event.
-	EventCategories []*string
-
-	// The Amazon Resource Name (ARN) for the event.
-	SourceArn *string
 }
 
 // Contains the results of a successful invocation of the DescribeEventCategories
@@ -792,21 +792,30 @@ type EventCategoriesMap struct {
 // DescribeEventSubscriptions () action.
 type EventSubscription struct {
 
+	// The event notification subscription Id.
+	CustSubscriptionId *string
+
+	// The AWS customer account associated with the event notification subscription.
+	CustomerAwsId *string
+
 	// A Boolean value indicating if the subscription is enabled. True indicates the
 	// subscription is enabled.
 	Enabled *bool
 
-	// The topic ARN of the event notification subscription.
-	SnsTopicArn *string
+	// A list of event categories for the event notification subscription.
+	EventCategoriesList []*string
 
 	// The Amazon Resource Name (ARN) for the event subscription.
 	EventSubscriptionArn *string
 
-	// The event notification subscription Id.
-	CustSubscriptionId *string
+	// The topic ARN of the event notification subscription.
+	SnsTopicArn *string
 
 	// A list of source IDs for the event notification subscription.
 	SourceIdsList []*string
+
+	// The source type for the event notification subscription.
+	SourceType *string
 
 	// The status of the event notification subscription. Constraints: Can be one of
 	// the following: creating | modifying | deleting | active | no-permission |
@@ -814,15 +823,6 @@ type EventSubscription struct {
 	// permission to post to the SNS topic. The status "topic-not-exist" indicates that
 	// the topic was deleted after the subscription was created.
 	Status *string
-
-	// A list of event categories for the event notification subscription.
-	EventCategoriesList []*string
-
-	// The source type for the event notification subscription.
-	SourceType *string
-
-	// The AWS customer account associated with the event notification subscription.
-	CustomerAwsId *string
 
 	// The time the event notification subscription was created.
 	SubscriptionCreationTime *string
@@ -845,45 +845,64 @@ type Filter struct {
 // Provides information on the option groups the DB instance is a member of.
 type OptionGroupMembership struct {
 
+	// The name of the option group that the instance belongs to.
+	OptionGroupName *string
+
 	// The status of the DB instance's option group membership. Valid values are:
 	// in-sync, pending-apply, pending-removal, pending-maintenance-apply,
 	// pending-maintenance-removal, applying, removing, and failed.
 	Status *string
-
-	// The name of the option group that the instance belongs to.
-	OptionGroupName *string
 }
 
 // Contains a list of available options for a DB instance. This data type is used
 // as a response element in the DescribeOrderableDBInstanceOptions () action.
 type OrderableDBInstanceOption struct {
 
-	// The DB instance class for a DB instance.
-	DBInstanceClass *string
-
 	// A list of Availability Zones for a DB instance.
 	AvailabilityZones []*AvailabilityZone
+
+	// The DB instance class for a DB instance.
+	DBInstanceClass *string
 
 	// The engine type of a DB instance.
 	Engine *string
 
-	// Indicates whether a DB instance is Multi-AZ capable.
-	MultiAZCapable *bool
+	// The engine version of a DB instance.
+	EngineVersion *string
+
+	// The license model for a DB instance.
+	LicenseModel *string
+
+	// Maximum total provisioned IOPS for a DB instance.
+	MaxIopsPerDbInstance *int32
+
+	// Maximum provisioned IOPS per GiB for a DB instance.
+	MaxIopsPerGib *float64
 
 	// Maximum storage size for a DB instance.
 	MaxStorageSize *int32
 
-	// Indicates whether a DB instance is in a VPC.
-	Vpc *bool
+	// Minimum total provisioned IOPS for a DB instance.
+	MinIopsPerDbInstance *int32
 
-	// The engine version of a DB instance.
-	EngineVersion *string
+	// Minimum provisioned IOPS per GiB for a DB instance.
+	MinIopsPerGib *float64
+
+	// Minimum storage size for a DB instance.
+	MinStorageSize *int32
+
+	// Indicates whether a DB instance is Multi-AZ capable.
+	MultiAZCapable *bool
+
+	// Indicates whether a DB instance can have a Read Replica.
+	ReadReplicaCapable *bool
 
 	// Indicates the storage type for a DB instance.
 	StorageType *string
 
-	// Minimum total provisioned IOPS for a DB instance.
-	MinIopsPerDbInstance *int32
+	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
+	// to 60 seconds.
+	SupportsEnhancedMonitoring *bool
 
 	// Indicates whether a DB instance supports IAM database authentication.
 	SupportsIAMDatabaseAuthentication *bool
@@ -891,69 +910,50 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports provisioned IOPS.
 	SupportsIops *bool
 
-	// Indicates whether a DB instance supports Enhanced Monitoring at intervals from 1
-	// to 60 seconds.
-	SupportsEnhancedMonitoring *bool
-
-	// The license model for a DB instance.
-	LicenseModel *string
-
-	// Maximum provisioned IOPS per GiB for a DB instance.
-	MaxIopsPerGib *float64
-
-	// Maximum total provisioned IOPS for a DB instance.
-	MaxIopsPerDbInstance *int32
-
 	// (Not supported by Neptune)
 	SupportsPerformanceInsights *bool
 
-	// Indicates whether a DB instance can have a Read Replica.
-	ReadReplicaCapable *bool
-
-	// Minimum storage size for a DB instance.
-	MinStorageSize *int32
-
-	// Minimum provisioned IOPS per GiB for a DB instance.
-	MinIopsPerGib *float64
-
 	// Indicates whether a DB instance supports encrypted storage.
 	SupportsStorageEncryption *bool
+
+	// Indicates whether a DB instance is in a VPC.
+	Vpc *bool
 }
 
 // Specifies a parameter.
 type Parameter struct {
 
-	// Provides a description of the parameter.
-	Description *string
+	// Specifies the valid range of values for the parameter.
+	AllowedValues *string
+
+	// Indicates when to apply parameter updates.
+	ApplyMethod ApplyMethod
 
 	// Specifies the engine specific parameters type.
 	ApplyType *string
+
+	// Specifies the valid data type for the parameter.
+	DataType *string
+
+	// Provides a description of the parameter.
+	Description *string
 
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable *bool
 
-	// Indicates when to apply parameter updates.
-	ApplyMethod ApplyMethod
+	// The earliest engine version to which the parameter can apply.
+	MinimumEngineVersion *string
 
 	// Specifies the name of the parameter.
 	ParameterName *string
 
-	// Indicates the source of the parameter value.
-	Source *string
-
-	// Specifies the valid data type for the parameter.
-	DataType *string
-
-	// The earliest engine version to which the parameter can apply.
-	MinimumEngineVersion *string
-
-	// Specifies the valid range of values for the parameter.
-	AllowedValues *string
-
 	// Specifies the value of the parameter.
 	ParameterValue *string
+
+	// Indicates the source of the parameter value.
+	Source *string
 }
 
 // A list of the log types whose configuration is still pending. In other words,
@@ -972,8 +972,14 @@ type PendingCloudwatchLogsExports struct {
 // Provides information about a pending maintenance action for a resource.
 type PendingMaintenanceAction struct {
 
-	// Indicates the type of opt-in request that has been received for the resource.
-	OptInStatus *string
+	// The type of pending maintenance action that is available for the resource.
+	Action *string
+
+	// The date of the maintenance window when the action is applied. The maintenance
+	// action is applied to the resource during its first maintenance window after this
+	// date. If this date is specified, any next-maintenance opt-in requests are
+	// ignored.
+	AutoAppliedAfterDate *time.Time
 
 	// The effective date when the pending maintenance action is applied to the
 	// resource. This date takes into account opt-in requests received from the
@@ -985,34 +991,39 @@ type PendingMaintenanceAction struct {
 	// A description providing more detail about the maintenance action.
 	Description *string
 
-	// The type of pending maintenance action that is available for the resource.
-	Action *string
-
-	// The date of the maintenance window when the action is applied. The maintenance
-	// action is applied to the resource during its first maintenance window after this
-	// date. If this date is specified, any next-maintenance opt-in requests are
-	// ignored.
-	AutoAppliedAfterDate *time.Time
-
 	// The date when the maintenance action is automatically applied. The maintenance
 	// action is applied to the resource on this date regardless of the maintenance
 	// window for the resource. If this date is specified, any immediate opt-in
 	// requests are ignored.
 	ForcedApplyDate *time.Time
+
+	// Indicates the type of opt-in request that has been received for the resource.
+	OptInStatus *string
 }
 
 // This data type is used as a response element in the ModifyDBInstance () action.
 type PendingModifiedValues struct {
 
-	// Specifies the storage type to be associated with the DB instance.
-	StorageType *string
+	// Contains the new AllocatedStorage size for the DB instance that will be applied
+	// or is currently being applied.
+	AllocatedStorage *int32
 
-	// The license model for the DB instance. Valid values: license-included |
-	// bring-your-own-license | general-public-license
-	LicenseModel *string
+	// Specifies the pending number of days for which automated backups are retained.
+	BackupRetentionPeriod *int32
 
-	// Specifies the pending port for the DB instance.
-	Port *int32
+	// Specifies the identifier of the CA certificate for the DB instance.
+	CACertificateIdentifier *string
+
+	// Contains the new DBInstanceClass for the DB instance that will be applied or is
+	// currently being applied.
+	DBInstanceClass *string
+
+	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
+	// or is currently being applied.
+	DBInstanceIdentifier *string
+
+	// The new DB subnet group for the DB instance.
+	DBSubnetGroupName *string
 
 	// Indicates the database engine version.
 	EngineVersion *string
@@ -1021,50 +1032,39 @@ type PendingModifiedValues struct {
 	// applied or is currently being applied.
 	Iops *int32
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
-	// or is currently being applied.
-	AllocatedStorage *int32
-
-	// The new DB subnet group for the DB instance.
-	DBSubnetGroupName *string
+	// The license model for the DB instance. Valid values: license-included |
+	// bring-your-own-license | general-public-license
+	LicenseModel *string
 
 	// Contains the pending or currently-in-progress change of the master credentials
 	// for the DB instance.
 	MasterUserPassword *string
 
-	// Specifies the identifier of the CA certificate for the DB instance.
-	CACertificateIdentifier *string
-
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
-	// or is currently being applied.
-	DBInstanceIdentifier *string
+	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
+	MultiAZ *bool
 
 	// This PendingCloudwatchLogsExports structure specifies pending changes to which
 	// CloudWatch logs are enabled and which are disabled.
 	PendingCloudwatchLogsExports *PendingCloudwatchLogsExports
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied or is
-	// currently being applied.
-	DBInstanceClass *string
+	// Specifies the pending port for the DB instance.
+	Port *int32
 
-	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.
-	MultiAZ *bool
-
-	// Specifies the pending number of days for which automated backups are retained.
-	BackupRetentionPeriod *int32
+	// Specifies the storage type to be associated with the DB instance.
+	StorageType *string
 }
 
 // A range of integer values.
 type Range struct {
+
+	// The minimum value in the range.
+	From *int32
 
 	// The step value for the range. For example, if you have a range of 5,000 to
 	// 10,000, with a step value of 1,000, the valid values start at 5,000 and step up
 	// by 1,000. Even though 7,500 is within the range, it isn't a valid value for the
 	// range. The valid values are 5,000, 6,000, 7,000, 8,000...
 	Step *int32
-
-	// The minimum value in the range.
-	From *int32
 
 	// The maximum value in the range.
 	To *int32
@@ -1085,14 +1085,14 @@ type ResourcePendingMaintenanceActions struct {
 // DescribeDBSubnetGroups () action.
 type Subnet struct {
 
-	// Specifies the status of the subnet.
-	SubnetStatus *string
+	// Specifies the EC2 Availability Zone that the subnet is in.
+	SubnetAvailabilityZone *AvailabilityZone
 
 	// Specifies the identifier of the subnet.
 	SubnetIdentifier *string
 
-	// Specifies the EC2 Availability Zone that the subnet is in.
-	SubnetAvailabilityZone *AvailabilityZone
+	// Specifies the status of the subnet.
+	SubnetStatus *string
 }
 
 // Metadata assigned to an Amazon Neptune resource consisting of a key-value pair.
@@ -1121,21 +1121,21 @@ type Timezone struct {
 // The version of the database engine that a DB instance can be upgraded to.
 type UpgradeTarget struct {
 
-	// The version of the database engine that a DB instance can be upgraded to.
-	Description *string
-
 	// A value that indicates whether the target version is applied to any source DB
 	// instances that have AutoMinorVersionUpgrade set to true.
 	AutoUpgrade *bool
+
+	// The version of the database engine that a DB instance can be upgraded to.
+	Description *string
+
+	// The name of the upgrade target database engine.
+	Engine *string
 
 	// The version number of the upgrade target database engine.
 	EngineVersion *string
 
 	// A value that indicates whether a database engine is upgraded to a major version.
 	IsMajorVersionUpgrade *bool
-
-	// The name of the upgrade target database engine.
-	Engine *string
 }
 
 // Information about valid modifications that you can make to your DB instance.
@@ -1158,14 +1158,14 @@ type ValidStorageOptions struct {
 	// storage.
 	IopsToStorageRatio []*DoubleRange
 
-	// The valid storage types for your DB instance. For example, gp2, io1.
-	StorageType *string
-
 	// The valid range of provisioned IOPS. For example, 1000-20000.
 	ProvisionedIops []*Range
 
 	// The valid range of storage in gibibytes. For example, 100 to 16384.
 	StorageSize []*Range
+
+	// The valid storage types for your DB instance. For example, gp2, io1.
+	StorageType *string
 }
 
 // This data type is used as a response element for queries on VPC security group

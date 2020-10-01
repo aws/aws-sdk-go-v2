@@ -93,14 +93,6 @@ func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceI
 
 type RegisterInstanceInput struct {
 
-	// A unique string that identifies the request and that allows failed
-	// RegisterInstance requests to be retried without the risk of executing the
-	// operation twice. You must use a unique CreatorRequestId string every time you
-	// submit a RegisterInstance request if you're registering additional instances for
-	// the same namespace and service. CreatorRequestId can be any unique string, for
-	// example, a date/time stamp.
-	CreatorRequestId *string
-
 	// A string map that contains the following information for the service that you
 	// specify in ServiceId:
 	//
@@ -198,6 +190,14 @@ type RegisterInstanceInput struct {
 	//
 	// This member is required.
 	ServiceId *string
+
+	// A unique string that identifies the request and that allows failed
+	// RegisterInstance requests to be retried without the risk of executing the
+	// operation twice. You must use a unique CreatorRequestId string every time you
+	// submit a RegisterInstance request if you're registering additional instances for
+	// the same namespace and service. CreatorRequestId can be any unique string, for
+	// example, a date/time stamp.
+	CreatorRequestId *string
 }
 
 type RegisterInstanceOutput struct {

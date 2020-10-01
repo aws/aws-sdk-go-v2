@@ -77,15 +77,20 @@ type DescribeHapgInput struct {
 // Contains the output of the DescribeHapg () action.
 type DescribeHapgOutput struct {
 
-	// The list of partition serial numbers that belong to the high-availability
-	// partition group.
-	PartitionSerialList []*string
+	// The ARN of the high-availability partition group.
+	HapgArn *string
 
 	// The serial number of the high-availability partition group.
 	HapgSerial *string
 
 	//
+	HsmsLastActionFailed []*string
+
+	//
 	HsmsPendingDeletion []*string
+
+	//
+	HsmsPendingRegistration []*string
 
 	// The label for the high-availability partition group.
 	Label *string
@@ -93,14 +98,9 @@ type DescribeHapgOutput struct {
 	// The date and time the high-availability partition group was last modified.
 	LastModifiedTimestamp *string
 
-	// The ARN of the high-availability partition group.
-	HapgArn *string
-
-	//
-	HsmsLastActionFailed []*string
-
-	//
-	HsmsPendingRegistration []*string
+	// The list of partition serial numbers that belong to the high-availability
+	// partition group.
+	PartitionSerialList []*string
 
 	// The state of the high-availability partition group.
 	State types.CloudHsmObjectState

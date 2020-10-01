@@ -73,15 +73,15 @@ type UpdateDeploymentInput struct {
 
 	Name *string
 
-	Title *string
-
-	TemplateSkipList []*string
-
-	Template *bool
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // An immutable representation of a RestApi () resource that can be called by users
@@ -95,18 +95,18 @@ type UpdateDeploymentInput struct {
 // AWS SDKs (https://aws.amazon.com/tools/)
 type UpdateDeploymentOutput struct {
 
-	// The date and time that the deployment resource was created.
-	CreatedDate *time.Time
-
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*types.MethodSnapshot
 
-	// The identifier for the deployment resource.
-	Id *string
+	// The date and time that the deployment resource was created.
+	CreatedDate *time.Time
 
 	// The description for the deployment resource.
 	Description *string
+
+	// The identifier for the deployment resource.
+	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

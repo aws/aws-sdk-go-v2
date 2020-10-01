@@ -66,9 +66,29 @@ type DescribeSimulationJobBatchInput struct {
 
 type DescribeSimulationJobBatchOutput struct {
 
+	// The Amazon Resource Name (ARN) of the batch.
+	Arn *string
+
+	// The batch policy.
+	BatchPolicy *types.BatchPolicy
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientRequestToken *string
+
+	// The time, in milliseconds since the epoch, when the simulation job batch was
+	// created.
+	CreatedAt *time.Time
+
+	// A list of created simulation job summaries.
+	CreatedRequests []*types.SimulationJobSummary
+
+	// A list of failed create simulation job requests. The request failed to be
+	// created into a simulation job. Failed requests do not have a simulation job ID.
+	FailedRequests []*types.FailedCreateSimulationJobRequest
+
+	// The failure code of the simulation job batch.
+	FailureCode types.SimulationJobBatchErrorCode
 
 	// The reason the simulation job batch failed.
 	FailureReason *string
@@ -77,9 +97,9 @@ type DescribeSimulationJobBatchOutput struct {
 	// last updated.
 	LastUpdatedAt *time.Time
 
-	// The time, in milliseconds since the epoch, when the simulation job batch was
-	// created.
-	CreatedAt *time.Time
+	// A list of pending simulation job requests. These requests have not yet been
+	// created into simulation jobs.
+	PendingRequests []*types.SimulationJobRequest
 
 	// The status of the batch. Pending The simulation job batch request is pending.
 	// InProgress The simulation job batch is in progress. Failed The simulation job
@@ -98,29 +118,9 @@ type DescribeSimulationJobBatchOutput struct {
 	// will be TimedOut. TimedOut The simulation batch job timed out.
 	Status types.SimulationJobBatchStatus
 
-	// A list of pending simulation job requests. These requests have not yet been
-	// created into simulation jobs.
-	PendingRequests []*types.SimulationJobRequest
-
-	// A list of created simulation job summaries.
-	CreatedRequests []*types.SimulationJobSummary
-
-	// The Amazon Resource Name (ARN) of the batch.
-	Arn *string
-
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// job batch.
 	Tags map[string]*string
-
-	// The failure code of the simulation job batch.
-	FailureCode types.SimulationJobBatchErrorCode
-
-	// The batch policy.
-	BatchPolicy *types.BatchPolicy
-
-	// A list of failed create simulation job requests. The request failed to be
-	// created into a simulation job. Failed requests do not have a simulation job ID.
-	FailedRequests []*types.FailedCreateSimulationJobRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

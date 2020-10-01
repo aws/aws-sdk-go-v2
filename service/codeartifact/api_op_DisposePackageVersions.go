@@ -69,9 +69,10 @@ func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePack
 
 type DisposePackageVersionsInput struct {
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
+	// The name of the domain that contains the repository you want to dispose.
+	//
+	// This member is required.
+	Domain *string
 
 	// A format that specifies the type of package versions you want to dispose. The
 	// valid values are:
@@ -85,18 +86,10 @@ type DisposePackageVersionsInput struct {
 	// This member is required.
 	Format types.PackageFormat
 
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
+	// The name of the package with the versions you want to dispose.
 	//
-	//     * The namespace of a Maven package is its
-	// groupId.
-	//
-	//     * The namespace of an npm package is its scope.
-	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
-	Namespace *string
+	// This member is required.
+	Package *string
 
 	// The name of the repository that contains the package versions you want to
 	// dispose.
@@ -104,18 +97,14 @@ type DisposePackageVersionsInput struct {
 	// This member is required.
 	Repository *string
 
-	// The revisions of the package versions you want to dispose.
-	VersionRevisions map[string]*string
-
-	// The name of the domain that contains the repository you want to dispose.
-	//
-	// This member is required.
-	Domain *string
-
 	// The versions of the package you want to dispose.
 	//
 	// This member is required.
 	Versions []*string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
 
 	// The expected status of the package version to dispose. Valid values are:
 	//
@@ -131,16 +120,24 @@ type DisposePackageVersionsInput struct {
 	//     * Disposed
 	ExpectedStatus types.PackageVersionStatus
 
-	// The name of the package with the versions you want to dispose.
+	// The namespace of the package. The package component that specifies its namespace
+	// depends on its type. For example:
 	//
-	// This member is required.
-	Package *string
+	//     * The namespace of a Maven package is its
+	// groupId.
+	//
+	//     * The namespace of an npm package is its scope.
+	//
+	//     * A Python
+	// package does not contain a corresponding component, so Python packages do not
+	// have a namespace.
+	Namespace *string
+
+	// The revisions of the package versions you want to dispose.
+	VersionRevisions map[string]*string
 }
 
 type DisposePackageVersionsOutput struct {
-
-	// A list of the package versions that were successfully disposed.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
 
 	// A PackageVersionError object that contains a map of errors codes for the
 	// disposed package versions that failed. The possible error codes are:
@@ -159,6 +156,9 @@ type DisposePackageVersionsOutput struct {
 	//
 	//     * SKIPPED
 	FailedVersions map[string]*types.PackageVersionError
+
+	// A list of the package versions that were successfully disposed.
+	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

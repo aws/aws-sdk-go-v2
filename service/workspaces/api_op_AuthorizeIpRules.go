@@ -59,15 +59,15 @@ func (c *Client) AuthorizeIpRules(ctx context.Context, params *AuthorizeIpRulesI
 
 type AuthorizeIpRulesInput struct {
 
-	// The rules to add to the group.
-	//
-	// This member is required.
-	UserRules []*types.IpRuleItem
-
 	// The identifier of the group.
 	//
 	// This member is required.
 	GroupId *string
+
+	// The rules to add to the group.
+	//
+	// This member is required.
+	UserRules []*types.IpRuleItem
 }
 
 type AuthorizeIpRulesOutput struct {

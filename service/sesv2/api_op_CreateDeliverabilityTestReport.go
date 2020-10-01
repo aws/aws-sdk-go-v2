@@ -78,6 +78,11 @@ type CreateDeliverabilityTestReportInput struct {
 	// This member is required.
 	Content *types.EmailContent
 
+	// The email address that the predictive inbox placement test email was sent from.
+	//
+	// This member is required.
+	FromEmailAddress *string
+
 	// A unique name that helps you to identify the predictive inbox placement test
 	// when you retrieve the results.
 	ReportName *string
@@ -85,11 +90,6 @@ type CreateDeliverabilityTestReportInput struct {
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the predictive inbox placement test.
 	Tags []*types.Tag
-
-	// The email address that the predictive inbox placement test email was sent from.
-	//
-	// This member is required.
-	FromEmailAddress *string
 }
 
 // Information about the predictive inbox placement test that you created.

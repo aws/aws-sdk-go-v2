@@ -63,12 +63,12 @@ type GetInvitationConfigurationOutput struct {
 	// can use.
 	ContactEmail *string
 
+	// The name of the organization sending the enrollment invite to a user.
+	OrganizationName *string
+
 	// The list of private skill IDs that you want to recommend to the user to enable
 	// in the invitation.
 	PrivateSkillIds []*string
-
-	// The name of the organization sending the enrollment invite to a user.
-	OrganizationName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

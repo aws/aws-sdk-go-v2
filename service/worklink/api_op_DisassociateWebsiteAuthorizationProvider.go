@@ -58,15 +58,15 @@ func (c *Client) DisassociateWebsiteAuthorizationProvider(ctx context.Context, p
 
 type DisassociateWebsiteAuthorizationProviderInput struct {
 
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
-
 	// A unique identifier for the authorization provider.
 	//
 	// This member is required.
 	AuthorizationProviderId *string
+
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
 }
 
 type DisassociateWebsiteAuthorizationProviderOutput struct {

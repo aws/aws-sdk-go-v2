@@ -56,35 +56,35 @@ func (c *Client) DescribeImportSnapshotTasks(ctx context.Context, params *Descri
 
 type DescribeImportSnapshotTasksInput struct {
 
-	// A list of import snapshot task IDs.
-	ImportTaskIds []*string
-
-	// The filters.
-	Filters []*types.Filter
-
-	// A token that indicates the next page of results.
-	NextToken *string
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The filters.
+	Filters []*types.Filter
+
+	// A list of import snapshot task IDs.
+	ImportTaskIds []*string
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
+	MaxResults *int32
+
+	// A token that indicates the next page of results.
+	NextToken *string
 }
 
 type DescribeImportSnapshotTasksOutput struct {
 
-	// The token to use to get the next page of results. This value is null when there
-	// are no more results to return.
-	NextToken *string
-
 	// A list of zero or more import snapshot tasks that are currently active or were
 	// completed or canceled in the previous 7 days.
 	ImportSnapshotTasks []*types.ImportSnapshotTask
+
+	// The token to use to get the next page of results. This value is null when there
+	// are no more results to return.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

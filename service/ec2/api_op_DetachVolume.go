@@ -74,6 +74,9 @@ type DetachVolumeInput struct {
 	// This member is required.
 	VolumeId *string
 
+	// The device name.
+	Device *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -92,31 +95,28 @@ type DetachVolumeInput struct {
 	// The ID of the instance. If you are detaching a Multi-Attach enabled volume, you
 	// must specify an instance ID.
 	InstanceId *string
-
-	// The device name.
-	Device *string
 }
 
 // Describes volume attachment details.
 type DetachVolumeOutput struct {
 
-	// The ID of the volume.
-	VolumeId *string
-
-	// The ID of the instance.
-	InstanceId *string
-
 	// The time stamp when the attachment initiated.
 	AttachTime *time.Time
-
-	// The device name.
-	Device *string
 
 	// Indicates whether the EBS volume is deleted on instance termination.
 	DeleteOnTermination *bool
 
+	// The device name.
+	Device *string
+
+	// The ID of the instance.
+	InstanceId *string
+
 	// The attachment state of the volume.
 	State types.VolumeAttachmentState
+
+	// The ID of the volume.
+	VolumeId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

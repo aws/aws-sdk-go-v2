@@ -62,11 +62,10 @@ func (c *Client) CreateVpnGateway(ctx context.Context, params *CreateVpnGatewayI
 // Contains the parameters for CreateVpnGateway.
 type CreateVpnGatewayInput struct {
 
-	// The Availability Zone for the virtual private gateway.
-	AvailabilityZone *string
-
-	// The tags to apply to the virtual private gateway.
-	TagSpecifications []*types.TagSpecification
+	// The type of VPN connection this virtual private gateway supports.
+	//
+	// This member is required.
+	Type types.GatewayType
 
 	// A private Autonomous System Number (ASN) for the Amazon side of a BGP session.
 	// If you're using a 16-bit ASN, it must be in the 64512 to 65534 range. If you're
@@ -74,16 +73,17 @@ type CreateVpnGatewayInput struct {
 	// 64512
 	AmazonSideAsn *int64
 
-	// The type of VPN connection this virtual private gateway supports.
-	//
-	// This member is required.
-	Type types.GatewayType
+	// The Availability Zone for the virtual private gateway.
+	AvailabilityZone *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The tags to apply to the virtual private gateway.
+	TagSpecifications []*types.TagSpecification
 }
 
 // Contains the output of CreateVpnGateway.

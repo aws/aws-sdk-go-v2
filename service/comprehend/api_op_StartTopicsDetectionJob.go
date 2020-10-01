@@ -69,20 +69,24 @@ type StartTopicsDetectionJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// A unique identifier for the request. If you do not set the client request token,
-	// Amazon Comprehend generates one.
-	ClientRequestToken *string
-
-	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
-	// containing the resources you are using for your topic detection job. For more
-	// information, see Amazon VPC
-	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
-	VpcConfig *types.VpcConfig
-
 	// Specifies the format and location of the input data for the job.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
+	// Specifies where to send the output files. The output is a compressed archive
+	// with two files, topic-terms.csv that lists the terms associated with each topic,
+	// and doc-topics.csv that lists the documents associated with each topic
+	//
+	// This member is required.
+	OutputDataConfig *types.OutputDataConfig
+
+	// A unique identifier for the request. If you do not set the client request token,
+	// Amazon Comprehend generates one.
+	ClientRequestToken *string
+
+	// The identifier of the job.
+	JobName *string
 
 	// The number of topics to detect.
 	NumberOfTopics *int32
@@ -99,18 +103,18 @@ type StartTopicsDetectionJobInput struct {
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
-	// Specifies where to send the output files. The output is a compressed archive
-	// with two files, topic-terms.csv that lists the terms associated with each topic,
-	// and doc-topics.csv that lists the documents associated with each topic
-	//
-	// This member is required.
-	OutputDataConfig *types.OutputDataConfig
-
-	// The identifier of the job.
-	JobName *string
+	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
+	// containing the resources you are using for your topic detection job. For more
+	// information, see Amazon VPC
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
+	VpcConfig *types.VpcConfig
 }
 
 type StartTopicsDetectionJobOutput struct {
+
+	// The identifier generated for the job. To get the status of the job, use this
+	// identifier with the DescribeTopicDetectionJob operation.
+	JobId *string
 
 	// The status of the job:
 	//
@@ -126,10 +130,6 @@ type StartTopicsDetectionJobOutput struct {
 	//     * FAILED - The job did not complete. To get details, use the
 	// DescribeTopicDetectionJob operation.
 	JobStatus types.JobStatus
-
-	// The identifier generated for the job. To get the status of the job, use this
-	// identifier with the DescribeTopicDetectionJob operation.
-	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

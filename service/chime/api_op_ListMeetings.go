@@ -59,20 +59,20 @@ func (c *Client) ListMeetings(ctx context.Context, params *ListMeetingsInput, op
 
 type ListMeetingsInput struct {
 
-	// The token to use to retrieve the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string
 }
 
 type ListMeetingsOutput struct {
 
-	// The token to use to retrieve the next page of results.
-	NextToken *string
-
 	// The Amazon Chime SDK meeting information.
 	Meetings []*types.Meeting
+
+	// The token to use to retrieve the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

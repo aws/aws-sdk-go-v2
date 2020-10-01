@@ -65,24 +65,23 @@ type DescribeOriginEndpointInput struct {
 
 type DescribeOriginEndpointOutput struct {
 
-	// Maximum duration (seconds) of content to retain for startover playback. If not
-	// specified, startover playback will be disabled for the OriginEndpoint.
-	StartoverWindowSeconds *int32
-
-	// A Common Media Application Format (CMAF) packaging configuration.
-	CmafPackage *types.CmafPackage
-
-	// A collection of tags associated with a resource
-	Tags map[string]*string
+	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
+	Arn *string
 
 	// CDN Authorization credentials
 	Authorization *types.Authorization
 
-	// A short string appended to the end of the OriginEndpoint URL.
-	ManifestName *string
+	// The ID of the Channel the OriginEndpoint is associated with.
+	ChannelId *string
+
+	// A Common Media Application Format (CMAF) packaging configuration.
+	CmafPackage *types.CmafPackage
 
 	// A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.
 	DashPackage *types.DashPackage
+
+	// A short text description of the OriginEndpoint.
+	Description *string
 
 	// An HTTP Live Streaming (HLS) packaging configuration.
 	HlsPackage *types.HlsPackage
@@ -90,18 +89,11 @@ type DescribeOriginEndpointOutput struct {
 	// The ID of the OriginEndpoint.
 	Id *string
 
-	// The Amazon Resource Name (ARN) assigned to the OriginEndpoint.
-	Arn *string
-
-	// A short text description of the OriginEndpoint.
-	Description *string
+	// A short string appended to the end of the OriginEndpoint URL.
+	ManifestName *string
 
 	// A Microsoft Smooth Streaming (MSS) packaging configuration.
 	MssPackage *types.MssPackage
-
-	// A list of source IP CIDR blocks that will be allowed to access the
-	// OriginEndpoint.
-	Whitelist []*string
 
 	// Control whether origination of video is allowed for this OriginEndpoint. If set
 	// to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of
@@ -110,15 +102,23 @@ type DescribeOriginEndpointOutput struct {
 	// origination
 	Origination types.Origination
 
-	// The URL of the packaged OriginEndpoint for consumption.
-	Url *string
+	// Maximum duration (seconds) of content to retain for startover playback. If not
+	// specified, startover playback will be disabled for the OriginEndpoint.
+	StartoverWindowSeconds *int32
 
-	// The ID of the Channel the OriginEndpoint is associated with.
-	ChannelId *string
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 
 	// Amount of delay (seconds) to enforce on the playback of live content. If not
 	// specified, there will be no time delay in effect for the OriginEndpoint.
 	TimeDelaySeconds *int32
+
+	// The URL of the packaged OriginEndpoint for consumption.
+	Url *string
+
+	// A list of source IP CIDR blocks that will be allowed to access the
+	// OriginEndpoint.
+	Whitelist []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,15 +58,15 @@ func (c *Client) DeleteDomainAssociation(ctx context.Context, params *DeleteDoma
 // The request structure for the delete domain association request.
 type DeleteDomainAssociationInput struct {
 
-	// The name of the domain.
-	//
-	// This member is required.
-	DomainName *string
-
 	// The unique id for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
+
+	// The name of the domain.
+	//
+	// This member is required.
+	DomainName *string
 }
 
 type DeleteDomainAssociationOutput struct {

@@ -59,13 +59,6 @@ func (c *Client) DescribePlacementGroups(ctx context.Context, params *DescribePl
 
 type DescribePlacementGroupsInput struct {
 
-	// The IDs of the placement groups.
-	GroupIds []*string
-
-	// The names of the placement groups. Default: Describes all your placement groups,
-	// or only those otherwise specified.
-	GroupNames []*string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -93,6 +86,13 @@ type DescribePlacementGroupsInput struct {
 	// filter to find all resources that have a tag with a specific key, regardless of
 	// the tag value.
 	Filters []*types.Filter
+
+	// The IDs of the placement groups.
+	GroupIds []*string
+
+	// The names of the placement groups. Default: Describes all your placement groups,
+	// or only those otherwise specified.
+	GroupNames []*string
 }
 
 type DescribePlacementGroupsOutput struct {

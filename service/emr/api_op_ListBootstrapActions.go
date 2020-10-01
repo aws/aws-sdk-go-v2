@@ -58,23 +58,23 @@ func (c *Client) ListBootstrapActions(ctx context.Context, params *ListBootstrap
 // This input determines which bootstrap actions to retrieve.
 type ListBootstrapActionsInput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
 	// The cluster identifier for the bootstrap actions to list.
 	//
 	// This member is required.
 	ClusterId *string
+
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
 }
 
 // This output contains the bootstrap actions detail.
 type ListBootstrapActionsOutput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
 	// The bootstrap actions associated with the cluster.
 	BootstrapActions []*types.Command
+
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

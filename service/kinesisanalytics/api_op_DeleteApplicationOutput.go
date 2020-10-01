@@ -64,6 +64,11 @@ func (c *Client) DeleteApplicationOutput(ctx context.Context, params *DeleteAppl
 //
 type DeleteApplicationOutputInput struct {
 
+	// Amazon Kinesis Analytics application name.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// Amazon Kinesis Analytics application version. You can use the
 	// DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
@@ -72,11 +77,6 @@ type DeleteApplicationOutputInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
-
-	// Amazon Kinesis Analytics application name.
-	//
-	// This member is required.
-	ApplicationName *string
 
 	// The ID of the configuration to delete. Each output configuration that is added
 	// to the application, either when the application is created or later using the

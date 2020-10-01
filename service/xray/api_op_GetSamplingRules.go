@@ -62,11 +62,11 @@ type GetSamplingRulesInput struct {
 
 type GetSamplingRulesOutput struct {
 
-	// Rule definitions and metadata.
-	SamplingRuleRecords []*types.SamplingRuleRecord
-
 	// Pagination token.
 	NextToken *string
+
+	// Rule definitions and metadata.
+	SamplingRuleRecords []*types.SamplingRuleRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

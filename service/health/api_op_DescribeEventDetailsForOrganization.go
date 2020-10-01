@@ -65,14 +65,14 @@ func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params
 
 type DescribeEventDetailsForOrganizationInput struct {
 
-	// The locale (language) to return information in. English (en) is the default and
-	// the only supported value at this time.
-	Locale *string
-
 	// A set of JSON elements that includes the awsAccountId and the eventArn.
 	//
 	// This member is required.
 	OrganizationEventDetailFilters []*types.EventAccountFilter
+
+	// The locale (language) to return information in. English (en) is the default and
+	// the only supported value at this time.
+	Locale *string
 }
 
 type DescribeEventDetailsForOrganizationOutput struct {

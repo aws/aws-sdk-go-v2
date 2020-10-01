@@ -43,28 +43,28 @@ type EncryptionKey struct {
 // The input configuration properties for requesting a batch translation job.
 type InputDataConfig struct {
 
-	// The URI of the AWS S3 folder that contains the input file. The folder must be in
-	// the same Region as the API endpoint you are calling.
-	//
-	// This member is required.
-	S3Uri *string
-
 	// The multipurpose internet mail extension (MIME) type of the input files. Valid
 	// values are text/plain for plaintext files and text/html for HTML files.
 	//
 	// This member is required.
 	ContentType *string
+
+	// The URI of the AWS S3 folder that contains the input file. The folder must be in
+	// the same Region as the API endpoint you are calling.
+	//
+	// This member is required.
+	S3Uri *string
 }
 
 // The number of documents successfully and unsuccessfully processed during a
 // translation job.
 type JobDetails struct {
 
-	// The number of documents used as input in a translation job.
-	InputDocumentsCount *int32
-
 	// The number of documents that could not be processed during a translation job.
 	DocumentsWithErrorsCount *int32
+
+	// The number of documents used as input in a translation job.
+	InputDocumentsCount *int32
 
 	// The number of documents successfully processed during a translation job.
 	TranslatedDocumentsCount *int32
@@ -83,20 +83,15 @@ type OutputDataConfig struct {
 // The term being translated by the custom terminology.
 type Term struct {
 
-	// The target text of the term being translated by the custom terminology.
-	TargetText *string
-
 	// The source text of the term being translated by the custom terminology.
 	SourceText *string
+
+	// The target text of the term being translated by the custom terminology.
+	TargetText *string
 }
 
 // The data associated with the custom terminology.
 type TerminologyData struct {
-
-	// The data format of the custom terminology. Either CSV or TMX.
-	//
-	// This member is required.
-	Format TerminologyDataFormat
 
 	// The file containing the custom terminology data. Your version of the AWS SDK
 	// performs a Base64-encoding on this field before sending a request to the AWS
@@ -104,6 +99,11 @@ type TerminologyData struct {
 	//
 	// This member is required.
 	File []byte
+
+	// The data format of the custom terminology. Either CSV or TMX.
+	//
+	// This member is required.
+	Format TerminologyDataFormat
 }
 
 // The location of the custom terminology data.
@@ -123,38 +123,38 @@ type TerminologyDataLocation struct {
 // The properties of the custom terminology.
 type TerminologyProperties struct {
 
-	// The size of the file used when importing a custom terminology.
-	SizeBytes *int32
+	// The Amazon Resource Name (ARN) of the custom terminology.
+	Arn *string
+
+	// The time at which the custom terminology was created, based on the timestamp.
+	CreatedAt *time.Time
 
 	// The description of the custom terminology properties.
 	Description *string
 
+	// The encryption key for the custom terminology.
+	EncryptionKey *EncryptionKey
+
+	// The time at which the custom terminology was last update, based on the
+	// timestamp.
+	LastUpdatedAt *time.Time
+
 	// The name of the custom terminology.
 	Name *string
+
+	// The size of the file used when importing a custom terminology.
+	SizeBytes *int32
 
 	// The language code for the source text of the translation request for which the
 	// custom terminology is being used.
 	SourceLanguageCode *string
 
-	// The Amazon Resource Name (ARN) of the custom terminology.
-	Arn *string
-
 	// The language codes for the target languages available with the custom
 	// terminology file. All possible target languages are returned in array.
 	TargetLanguageCodes []*string
 
-	// The encryption key for the custom terminology.
-	EncryptionKey *EncryptionKey
-
 	// The number of terms included in the custom terminology.
 	TermCount *int32
-
-	// The time at which the custom terminology was created, based on the timestamp.
-	CreatedAt *time.Time
-
-	// The time at which the custom terminology was last update, based on the
-	// timestamp.
-	LastUpdatedAt *time.Time
 }
 
 // Provides information for filtering a list of translation jobs. For more
@@ -163,6 +163,9 @@ type TextTranslationJobFilter struct {
 
 	// Filters the list of jobs by name.
 	JobName *string
+
+	// Filters the list of jobs based by job status.
+	JobStatus JobStatus
 
 	// Filters the list of jobs based on the time that the job was submitted for
 	// processing and returns only the jobs submitted after the specified time. Jobs
@@ -173,41 +176,17 @@ type TextTranslationJobFilter struct {
 	// processing and returns only the jobs submitted before the specified time. Jobs
 	// are returned in ascending order, oldest to newest.
 	SubmittedBeforeTime *time.Time
-
-	// Filters the list of jobs based by job status.
-	JobStatus JobStatus
 }
 
 // Provides information about a translation job.
 type TextTranslationJobProperties struct {
 
-	// The user-defined name of the translation job.
-	JobName *string
-
-	// A list containing the names of the terminologies applied to a translation job.
-	// Only one terminology can be applied per StartTextTranslationJob () request at
-	// this time.
-	TerminologyNames []*string
-
-	// The language code of the language of the target text. The language must be a
-	// language supported by Amazon Translate.
-	TargetLanguageCodes []*string
-
-	// An explanation of any errors that may have occured during the translation job.
-	Message *string
-
-	// The status of the translation job.
-	JobStatus JobStatus
+	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
+	// role that granted Amazon Translate read access to the job's input data.
+	DataAccessRoleArn *string
 
 	// The time at which the translation job ended.
 	EndTime *time.Time
-
-	// The time at which the translation job was submitted.
-	SubmittedTime *time.Time
-
-	// The output configuration properties that were specified when the job was
-	// requested.
-	OutputDataConfig *OutputDataConfig
 
 	// The input configuration properties that were specified when the job was
 	// requested.
@@ -217,14 +196,35 @@ type TextTranslationJobProperties struct {
 	// translation job.
 	JobDetails *JobDetails
 
+	// The ID of the translation job.
+	JobId *string
+
+	// The user-defined name of the translation job.
+	JobName *string
+
+	// The status of the translation job.
+	JobStatus JobStatus
+
+	// An explanation of any errors that may have occured during the translation job.
+	Message *string
+
+	// The output configuration properties that were specified when the job was
+	// requested.
+	OutputDataConfig *OutputDataConfig
+
 	// The language code of the language of the source text. The language must be a
 	// language supported by Amazon Translate.
 	SourceLanguageCode *string
 
-	// The ID of the translation job.
-	JobId *string
+	// The time at which the translation job was submitted.
+	SubmittedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM)
-	// role that granted Amazon Translate read access to the job's input data.
-	DataAccessRoleArn *string
+	// The language code of the language of the target text. The language must be a
+	// language supported by Amazon Translate.
+	TargetLanguageCodes []*string
+
+	// A list containing the names of the terminologies applied to a translation job.
+	// Only one terminology can be applied per StartTextTranslationJob () request at
+	// this time.
+	TerminologyNames []*string
 }

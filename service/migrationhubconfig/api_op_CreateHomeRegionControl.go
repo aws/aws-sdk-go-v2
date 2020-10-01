@@ -57,10 +57,6 @@ func (c *Client) CreateHomeRegionControl(ctx context.Context, params *CreateHome
 
 type CreateHomeRegionControlInput struct {
 
-	// Optional Boolean flag to indicate whether any effect should take place. It tests
-	// whether the caller has permission to make the call.
-	DryRun *bool
-
 	// The name of the home region of the calling account.
 	//
 	// This member is required.
@@ -71,6 +67,10 @@ type CreateHomeRegionControlInput struct {
 	//
 	// This member is required.
 	Target *types.Target
+
+	// Optional Boolean flag to indicate whether any effect should take place. It tests
+	// whether the caller has permission to make the call.
+	DryRun *bool
 }
 
 type CreateHomeRegionControlOutput struct {

@@ -67,10 +67,6 @@ type ChangeTagsForResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// A complex type that contains a list of the tags that you want to delete from the
-	// specified health check or hosted zone. You can specify up to 10 keys.
-	RemoveTagKeys []*string
-
 	// The type of the resource.
 	//
 	//     * The resource type for health checks is
@@ -85,6 +81,10 @@ type ChangeTagsForResourceInput struct {
 	// specified health check or hosted zone and/or the tags that you want to edit
 	// Value for. You can add a maximum of 10 tags to a health check or a hosted zone.
 	AddTags []*types.Tag
+
+	// A complex type that contains a list of the tags that you want to delete from the
+	// specified health check or hosted zone. You can specify up to 10 keys.
+	RemoveTagKeys []*string
 }
 
 // Empty response for the request.

@@ -59,19 +59,13 @@ func (c *Client) CreateStackSet(ctx context.Context, params *CreateStackSetInput
 
 type CreateStackSetInput struct {
 
-	// The structure that contains the template body, with a minimum length of 1 byte
-	// and a maximum length of 51,200 bytes. For more information, see Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
-	// TemplateBody or the TemplateURL parameter, but not both.
-	TemplateBody *string
-
-	// The name of the IAM execution role to use to create the stack set. If you do not
-	// specify an execution role, AWS CloudFormation uses the
-	// AWSCloudFormationStackSetExecutionRole role for the stack set operation. Specify
-	// an IAM role only if you are using customized execution roles to control which
-	// stack resources users and groups can include in their stack sets.  </p>
-	ExecutionRoleName *string
+	// The name to associate with the stack set. The name must be unique in the Region
+	// where you create your stack set. A stack name can contain only alphanumeric
+	// characters (case-sensitive) and hyphens. It must start with an alphabetic
+	// character and can't be longer than 128 characters.
+	//
+	// This member is required.
+	StackSetName *string
 
 	// The Amazon Resource Number (ARN) of the IAM role to use to create this stack
 	// set. Specify an IAM role only if you are using customized administrator roles to
@@ -86,45 +80,6 @@ type CreateStackSetInput struct {
 	// that are added to the target organization or organizational unit (OU). Specify
 	// only if PermissionModel is SERVICE_MANAGED.
 	AutoDeployment *types.AutoDeployment
-
-	// The name to associate with the stack set. The name must be unique in the Region
-	// where you create your stack set. A stack name can contain only alphanumeric
-	// characters (case-sensitive) and hyphens. It must start with an alphabetic
-	// character and can't be longer than 128 characters.
-	//
-	// This member is required.
-	StackSetName *string
-
-	// The input parameters for the stack set template.
-	Parameters []*types.Parameter
-
-	// A description of the stack set. You can use the description to identify the
-	// stack set's purpose or other important information.
-	Description *string
-
-	// The key-value pairs to associate with this stack set and the stacks created from
-	// it. AWS CloudFormation also propagates these tags to supported resources that
-	// are created in the stacks. A maximum number of 50 tags can be specified. If you
-	// specify tags as part of a CreateStackSet action, AWS CloudFormation checks to
-	// see if you have the required IAM permission to tag resources. If you don't, the
-	// entire CreateStackSet action fails with an access denied error, and the stack
-	// set is not created.
-	Tags []*types.Tag
-
-	// The location of the file that contains the template body. The URL must point to
-	// a template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket.
-	// For more information, see Template Anatomy
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
-	// TemplateBody or the TemplateURL parameter, but not both.
-	TemplateURL *string
-
-	// A unique identifier for this CreateStackSet request. Specify this token if you
-	// plan to retry requests so that AWS CloudFormation knows that you're not
-	// attempting to create another stack set with the same name. You might retry
-	// CreateStackSet requests to ensure that AWS CloudFormation successfully received
-	// them. If you don't specify an operation ID, the SDK generates one automatically.
-	ClientRequestToken *string
 
 	// In some cases, you must explicitly acknowledge that your stack set template
 	// contains certain capabilities in order for AWS CloudFormation to create the
@@ -201,6 +156,27 @@ type CreateStackSetInput struct {
 	// will fail.
 	Capabilities []types.Capability
 
+	// A unique identifier for this CreateStackSet request. Specify this token if you
+	// plan to retry requests so that AWS CloudFormation knows that you're not
+	// attempting to create another stack set with the same name. You might retry
+	// CreateStackSet requests to ensure that AWS CloudFormation successfully received
+	// them. If you don't specify an operation ID, the SDK generates one automatically.
+	ClientRequestToken *string
+
+	// A description of the stack set. You can use the description to identify the
+	// stack set's purpose or other important information.
+	Description *string
+
+	// The name of the IAM execution role to use to create the stack set. If you do not
+	// specify an execution role, AWS CloudFormation uses the
+	// AWSCloudFormationStackSetExecutionRole role for the stack set operation. Specify
+	// an IAM role only if you are using customized execution roles to control which
+	// stack resources users and groups can include in their stack sets.  </p>
+	ExecutionRoleName *string
+
+	// The input parameters for the stack set template.
+	Parameters []*types.Parameter
+
 	// Describes how the IAM roles required for stack set operations are created. By
 	// default, SELF-MANAGED is specified.
 	//
@@ -215,6 +191,30 @@ type CreateStackSetInput struct {
 	// information, see Grant Service-Managed Stack Set Permissions
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-prereqs-service-managed.html).
 	PermissionModel types.PermissionModels
+
+	// The key-value pairs to associate with this stack set and the stacks created from
+	// it. AWS CloudFormation also propagates these tags to supported resources that
+	// are created in the stacks. A maximum number of 50 tags can be specified. If you
+	// specify tags as part of a CreateStackSet action, AWS CloudFormation checks to
+	// see if you have the required IAM permission to tag resources. If you don't, the
+	// entire CreateStackSet action fails with an access denied error, and the stack
+	// set is not created.
+	Tags []*types.Tag
+
+	// The structure that contains the template body, with a minimum length of 1 byte
+	// and a maximum length of 51,200 bytes. For more information, see Template Anatomy
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
+	// TemplateBody or the TemplateURL parameter, but not both.
+	TemplateBody *string
+
+	// The location of the file that contains the template body. The URL must point to
+	// a template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket.
+	// For more information, see Template Anatomy
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
+	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
+	// TemplateBody or the TemplateURL parameter, but not both.
+	TemplateURL *string
 }
 
 type CreateStackSetOutput struct {

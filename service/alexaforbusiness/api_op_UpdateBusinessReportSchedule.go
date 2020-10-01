@@ -63,18 +63,18 @@ type UpdateBusinessReportScheduleInput struct {
 	// This member is required.
 	ScheduleArn *string
 
-	// The recurrence of the reports.
-	Recurrence *types.BusinessReportRecurrence
-
 	// The format of the generated report (individual CSV files or zipped files of
 	// individual files).
 	Format types.BusinessReportFormat
 
-	// The S3 key where the report is delivered.
-	S3KeyPrefix *string
+	// The recurrence of the reports.
+	Recurrence *types.BusinessReportRecurrence
 
 	// The S3 location of the output reports.
 	S3BucketName *string
+
+	// The S3 key where the report is delivered.
+	S3KeyPrefix *string
 
 	// The name identifier of the schedule.
 	ScheduleName *string

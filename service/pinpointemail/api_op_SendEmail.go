@@ -69,12 +69,24 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 // A request to send an email message.
 type SendEmailInput struct {
 
-	// The "Reply-to" email addresses for the message. When the recipient replies to
-	// the message, each Reply-to address receives the reply.
-	ReplyToAddresses []*string
+	// An object that contains the body of the message. You can send either a Simple
+	// message or a Raw message.
+	//
+	// This member is required.
+	Content *types.EmailContent
+
+	// An object that contains the recipients of the email message.
+	//
+	// This member is required.
+	Destination *types.Destination
 
 	// The name of the configuration set that you want to use when sending the email.
 	ConfigurationSetName *string
+
+	// A list of tags, in the form of name/value pairs, to apply to an email that you
+	// send using the SendEmail operation. Tags correspond to characteristics of the
+	// email that you define, so that you can publish email sending events.
+	EmailTags []*types.MessageTag
 
 	// The address that Amazon Pinpoint should send bounce and complaint notifications
 	// to.
@@ -84,21 +96,9 @@ type SendEmailInput struct {
 	// address that you specify has to be verified.
 	FromEmailAddress *string
 
-	// An object that contains the recipients of the email message.
-	//
-	// This member is required.
-	Destination *types.Destination
-
-	// An object that contains the body of the message. You can send either a Simple
-	// message or a Raw message.
-	//
-	// This member is required.
-	Content *types.EmailContent
-
-	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using the SendEmail operation. Tags correspond to characteristics of the
-	// email that you define, so that you can publish email sending events.
-	EmailTags []*types.MessageTag
+	// The "Reply-to" email addresses for the message. When the recipient replies to
+	// the message, each Reply-to address receives the reply.
+	ReplyToAddresses []*string
 }
 
 // A unique message ID that you receive when Amazon Pinpoint accepts an email for

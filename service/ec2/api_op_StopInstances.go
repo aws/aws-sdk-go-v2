@@ -97,16 +97,22 @@ func (c *Client) StopInstances(ctx context.Context, params *StopInstancesInput, 
 
 type StopInstancesInput struct {
 
+	// The IDs of the instances.
+	//
+	// This member is required.
+	InstanceIds []*string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// Forces the instances to stop. The instances do not have an opportunity to flush
 	// file system caches or file system metadata. If you use this option, you must
 	// perform file system check and repair procedures. This option is not recommended
 	// for Windows instances. Default: false
 	Force *bool
-
-	// The IDs of the instances.
-	//
-	// This member is required.
-	InstanceIds []*string
 
 	// Hibernates the instance if the instance was enabled for hibernation at launch.
 	// If the instance cannot hibernate successfully, a normal shutdown occurs. For
@@ -114,12 +120,6 @@ type StopInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Default: false
 	Hibernate *bool
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 }
 
 type StopInstancesOutput struct {

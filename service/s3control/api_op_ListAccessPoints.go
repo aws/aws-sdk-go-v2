@@ -81,6 +81,11 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 
 type ListAccessPointsInput struct {
 
+	// The AWS account ID for owner of the bucket whose access points you want to list.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The name of the bucket whose associated access points you want to list. For
 	// Amazon S3 on Outposts specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
@@ -96,11 +101,6 @@ type ListAccessPointsInput struct {
 	// retrieve the next page of access points.
 	MaxResults *int32
 
-	// The AWS account ID for owner of the bucket whose access points you want to list.
-	//
-	// This member is required.
-	AccountId *string
-
 	// A continuation token. If a previous call to ListAccessPoints returned a
 	// continuation token in the NextToken field, then providing that value here causes
 	// Amazon S3 to retrieve the next page of results.
@@ -109,14 +109,14 @@ type ListAccessPointsInput struct {
 
 type ListAccessPointsOutput struct {
 
+	// Contains identification and configuration information for one or more access
+	// points associated with the specified bucket.
+	AccessPointList []*types.AccessPoint
+
 	// If the specified bucket has more access points than can be returned in one call
 	// to this API, this field contains a continuation token that you can provide in
 	// subsequent calls to this API to retrieve additional access points.
 	NextToken *string
-
-	// Contains identification and configuration information for one or more access
-	// points associated with the specified bucket.
-	AccessPointList []*types.AccessPoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

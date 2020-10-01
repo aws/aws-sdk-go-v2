@@ -58,6 +58,29 @@ func (c *Client) UpdatePushTemplate(ctx context.Context, params *UpdatePushTempl
 
 type UpdatePushTemplateInput struct {
 
+	// Specifies the content and settings for a message template that can be used in
+	// messages that are sent through a push notification channel.
+	//
+	// This member is required.
+	PushNotificationTemplateRequest *types.PushNotificationTemplateRequest
+
+	// The name of the message template. A template name must start with an
+	// alphanumeric character and can contain a maximum of 128 characters. The
+	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
+	// Template names are case sensitive.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// Specifies whether to save the updates as a new version of the message template.
+	// Valid values are: true, save the updates as a new version; and, false, save the
+	// updates to (overwrite) the latest existing version of the template. If you don't
+	// specify a value for this parameter, Amazon Pinpoint saves the updates to
+	// (overwrites) the latest existing version of the template. If you specify a value
+	// of true for this parameter, don't specify a value for the version parameter.
+	// Otherwise, an error will occur.
+	CreateNewVersion *bool
+
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other
 	// information for all the versions of a template, use the Template Versions
@@ -78,29 +101,6 @@ type UpdatePushTemplateInput struct {
 	//     * For a delete operation, deletes the template, including all
 	// versions of the template.
 	Version *string
-
-	// The name of the message template. A template name must start with an
-	// alphanumeric character and can contain a maximum of 128 characters. The
-	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
-	// Template names are case sensitive.
-	//
-	// This member is required.
-	TemplateName *string
-
-	// Specifies whether to save the updates as a new version of the message template.
-	// Valid values are: true, save the updates as a new version; and, false, save the
-	// updates to (overwrite) the latest existing version of the template. If you don't
-	// specify a value for this parameter, Amazon Pinpoint saves the updates to
-	// (overwrites) the latest existing version of the template. If you specify a value
-	// of true for this parameter, don't specify a value for the version parameter.
-	// Otherwise, an error will occur.
-	CreateNewVersion *bool
-
-	// Specifies the content and settings for a message template that can be used in
-	// messages that are sent through a push notification channel.
-	//
-	// This member is required.
-	PushNotificationTemplateRequest *types.PushNotificationTemplateRequest
 }
 
 type UpdatePushTemplateOutput struct {

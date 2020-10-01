@@ -66,18 +66,18 @@ type GetVocabularyFilterInput struct {
 
 type GetVocabularyFilterOutput struct {
 
+	// The URI of the list of words in the vocabulary filter. You can use this URI to
+	// get the list of words.
+	DownloadUri *string
+
 	// The language code of the words in the vocabulary filter.
 	LanguageCode types.LanguageCode
-
-	// The name of the vocabulary filter.
-	VocabularyFilterName *string
 
 	// The date and time that the contents of the vocabulary filter were updated.
 	LastModifiedTime *time.Time
 
-	// The URI of the list of words in the vocabulary filter. You can use this URI to
-	// get the list of words.
-	DownloadUri *string
+	// The name of the vocabulary filter.
+	VocabularyFilterName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

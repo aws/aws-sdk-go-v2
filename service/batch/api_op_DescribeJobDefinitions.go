@@ -57,17 +57,12 @@ func (c *Client) DescribeJobDefinitions(ctx context.Context, params *DescribeJob
 
 type DescribeJobDefinitionsInput struct {
 
-	// The status with which to filter job definitions.
-	Status *string
+	// The name of the job definition to describe.
+	JobDefinitionName *string
 
-	// The nextToken value returned from a previous paginated DescribeJobDefinitions
-	// request where maxResults was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value. This value is null when there are no more results
-	// to return. This token should be treated as an opaque identifier that is only
-	// used to retrieve the next items in a list and not for other programmatic
-	// purposes.
-	NextToken *string
+	// A list of up to 100 job definition names or full Amazon Resource Name (ARN)
+	// entries.
+	JobDefinitions []*string
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated
 	// output. When this parameter is used, DescribeJobDefinitions only returns
@@ -78,24 +73,29 @@ type DescribeJobDefinitionsInput struct {
 	// returns up to 100 results and a nextToken value if applicable.
 	MaxResults *int32
 
-	// A list of up to 100 job definition names or full Amazon Resource Name (ARN)
-	// entries.
-	JobDefinitions []*string
+	// The nextToken value returned from a previous paginated DescribeJobDefinitions
+	// request where maxResults was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value. This value is null when there are no more results
+	// to return. This token should be treated as an opaque identifier that is only
+	// used to retrieve the next items in a list and not for other programmatic
+	// purposes.
+	NextToken *string
 
-	// The name of the job definition to describe.
-	JobDefinitionName *string
+	// The status with which to filter job definitions.
+	Status *string
 }
 
 type DescribeJobDefinitionsOutput struct {
+
+	// The list of job definitions.
+	JobDefinitions []*types.JobDefinition
 
 	// The nextToken value to include in a future DescribeJobDefinitions request. When
 	// the results of a DescribeJobDefinitions request exceed maxResults, this value
 	// can be used to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string
-
-	// The list of job definitions.
-	JobDefinitions []*types.JobDefinition
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -84,11 +84,8 @@ type GetObjectInput struct {
 
 type GetObjectOutput struct {
 
-	// The content type of the object.
-	ContentType *string
-
-	// The length of the object in bytes.
-	ContentLength *int64
+	// The bytes of the object.
+	Body io.ReadCloser
 
 	// An optional CacheControl header that allows the caller to control the object's
 	// cache behavior. Headers can be passed in as specified in the HTTP spec at
@@ -97,17 +94,20 @@ type GetObjectOutput struct {
 	// a custom user-defined value are also accepted.
 	CacheControl *string
 
+	// The length of the object in bytes.
+	ContentLength *int64
+
 	// The range of bytes to retrieve.
 	ContentRange *string
+
+	// The content type of the object.
+	ContentType *string
 
 	// The ETag that represents a unique instance of the object.
 	ETag *string
 
 	// The date and time that the object was last modified.
 	LastModified *time.Time
-
-	// The bytes of the object.
-	Body io.ReadCloser
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -34,53 +34,6 @@ type RotationRulesType struct {
 // GetSecretValue () operation.
 type SecretListEntry struct {
 
-	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
-	// expire the secret either automatically per the schedule or manually by a call to
-	// RotateSecret ().
-	RotationLambdaARN *string
-
-	// The last date that this secret was accessed. This value is truncated to midnight
-	// of the date and therefore shows only the date, not the time.
-	LastAccessedDate *time.Time
-
-	// The list of user-defined tags associated with the secret. To add tags to a
-	// secret, use TagResource (). To remove tags, use UntagResource ().
-	Tags []*Tag
-
-	// Returns the name of the service that created the secret.
-	OwningService *string
-
-	// Indicates whether automatic, scheduled rotation is enabled for this secret.
-	RotationEnabled *bool
-
-	// The ARN or alias of the AWS KMS customer master key (CMK) used to encrypt the
-	// SecretString and SecretBinary fields in each version of the secret. If you don't
-	// provide a key, then Secrets Manager defaults to encrypting the secret fields
-	// with the default KMS CMK, the key named awssecretsmanager, for this account.
-	KmsKeyId *string
-
-	// A list of all of the currently assigned SecretVersionStage staging labels and
-	// the SecretVersionId attached to each one. Staging labels are used to keep track
-	// of the different versions during the rotation process. A version that does not
-	// have any SecretVersionStage is considered deprecated and subject to deletion.
-	// Such versions are not included in this list.
-	SecretVersionsToStages map[string][]*string
-
-	// The last date and time that this secret was modified in any way.
-	LastChangedDate *time.Time
-
-	// A structure that defines the rotation configuration for the secret.
-	RotationRules *RotationRulesType
-
-	// The friendly name of the secret. You can use forward slashes in the name to
-	// represent a path hierarchy. For example, /prod/databases/dbserver1 could
-	// represent the secret for a server named dbserver1 in the folder databases in the
-	// folder prod.
-	Name *string
-
-	// The user-provided description of the secret.
-	Description *string
-
 	// The Amazon Resource Name (ARN) of the secret. For more information about ARNs in
 	// Secrets Manager, see Policy Resources
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources)
@@ -96,22 +49,69 @@ type SecretListEntry struct {
 	// DeleteSecret () operation.
 	DeletedDate *time.Time
 
+	// The user-provided description of the secret.
+	Description *string
+
+	// The ARN or alias of the AWS KMS customer master key (CMK) used to encrypt the
+	// SecretString and SecretBinary fields in each version of the secret. If you don't
+	// provide a key, then Secrets Manager defaults to encrypting the secret fields
+	// with the default KMS CMK, the key named awssecretsmanager, for this account.
+	KmsKeyId *string
+
+	// The last date that this secret was accessed. This value is truncated to midnight
+	// of the date and therefore shows only the date, not the time.
+	LastAccessedDate *time.Time
+
+	// The last date and time that this secret was modified in any way.
+	LastChangedDate *time.Time
+
 	// The last date and time that the rotation process for this secret was invoked.
 	LastRotatedDate *time.Time
+
+	// The friendly name of the secret. You can use forward slashes in the name to
+	// represent a path hierarchy. For example, /prod/databases/dbserver1 could
+	// represent the secret for a server named dbserver1 in the folder databases in the
+	// folder prod.
+	Name *string
+
+	// Returns the name of the service that created the secret.
+	OwningService *string
+
+	// Indicates whether automatic, scheduled rotation is enabled for this secret.
+	RotationEnabled *bool
+
+	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
+	// expire the secret either automatically per the schedule or manually by a call to
+	// RotateSecret ().
+	RotationLambdaARN *string
+
+	// A structure that defines the rotation configuration for the secret.
+	RotationRules *RotationRulesType
+
+	// A list of all of the currently assigned SecretVersionStage staging labels and
+	// the SecretVersionId attached to each one. Staging labels are used to keep track
+	// of the different versions during the rotation process. A version that does not
+	// have any SecretVersionStage is considered deprecated and subject to deletion.
+	// Such versions are not included in this list.
+	SecretVersionsToStages map[string][]*string
+
+	// The list of user-defined tags associated with the secret. To add tags to a
+	// secret, use TagResource (). To remove tags, use UntagResource ().
+	Tags []*Tag
 }
 
 // A structure that contains information about one version of a secret.
 type SecretVersionsListEntry struct {
 
-	// The unique version identifier of this version of the secret.
-	VersionId *string
+	// The date and time this version of the secret was created.
+	CreatedDate *time.Time
 
 	// The date that this version of the secret was last accessed. Note that the
 	// resolution of this field is at the date level and does not include the time.
 	LastAccessedDate *time.Time
 
-	// The date and time this version of the secret was created.
-	CreatedDate *time.Time
+	// The unique version identifier of this version of the secret.
+	VersionId *string
 
 	// An array of staging labels that are currently associated with this version of
 	// the secret.
@@ -121,11 +121,11 @@ type SecretVersionsListEntry struct {
 // A structure that contains information about a tag.
 type Tag struct {
 
-	// The string value associated with the key of the tag.
-	Value *string
-
 	// The key identifier, or name, of the tag.
 	Key *string
+
+	// The string value associated with the key of the tag.
+	Value *string
 }
 
 // Displays errors that occurred during validation of the resource policy.

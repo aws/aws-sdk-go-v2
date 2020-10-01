@@ -61,6 +61,12 @@ func (c *Client) DescribeTaskSets(ctx context.Context, params *DescribeTaskSetsI
 
 type DescribeTaskSetsInput struct {
 
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// service that the task sets exist in.
+	//
+	// This member is required.
+	Cluster *string
+
 	// The short name or full Amazon Resource Name (ARN) of the service that the task
 	// sets exist in.
 	//
@@ -74,21 +80,15 @@ type DescribeTaskSetsInput struct {
 
 	// The ID or full Amazon Resource Name (ARN) of task sets to describe.
 	TaskSets []*string
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// service that the task sets exist in.
-	//
-	// This member is required.
-	Cluster *string
 }
 
 type DescribeTaskSetsOutput struct {
 
-	// The list of task sets described.
-	TaskSets []*types.TaskSet
-
 	// Any failures associated with the call.
 	Failures []*types.Failure
+
+	// The list of task sets described.
+	TaskSets []*types.TaskSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

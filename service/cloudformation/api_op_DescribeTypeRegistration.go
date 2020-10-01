@@ -77,14 +77,14 @@ type DescribeTypeRegistrationOutput struct {
 	// The current status of the type registration request.
 	ProgressStatus types.RegistrationStatus
 
+	// The Amazon Resource Name (ARN) of the type being registered. For registration
+	// requests with a ProgressStatus of other than COMPLETE, this will be null.
+	TypeArn *string
+
 	// The Amazon Resource Name (ARN) of this specific version of the type being
 	// registered. For registration requests with a ProgressStatus of other than
 	// COMPLETE, this will be null.
 	TypeVersionArn *string
-
-	// The Amazon Resource Name (ARN) of the type being registered. For registration
-	// requests with a ProgressStatus of other than COMPLETE, this will be null.
-	TypeArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,13 +71,13 @@ type ListPipelinesInput struct {
 // A list of the pipelines associated with the current AWS account.
 type ListPipelinesOutput struct {
 
-	// An array of Pipeline objects.
-	Pipelines []*types.Pipeline
-
 	// A value that you use to access the second and subsequent pages of results, if
 	// any. When the pipelines fit on one page or when you've reached the last page of
 	// results, the value of NextPageToken is null.
 	NextPageToken *string
+
+	// An array of Pipeline objects.
+	Pipelines []*types.Pipeline
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

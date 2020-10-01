@@ -57,18 +57,12 @@ func (c *Client) CreateDocumentationPart(ctx context.Context, params *CreateDocu
 
 // Creates a new documentation part of a given API.
 type CreateDocumentationPartInput struct {
-	Name *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The location of the targeted API entity of the to-be-created
+	// documentation part.
 	//
 	// This member is required.
-	RestApiId *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	Title *string
+	Location *types.DocumentationPartLocation
 
 	// [Required] The new documentation content map of the targeted API entity.
 	// Enclosed key-value pairs are API-specific, but only OpenAPI-compliant key-value
@@ -77,11 +71,18 @@ type CreateDocumentationPartInput struct {
 	// This member is required.
 	Properties *string
 
-	// [Required] The location of the targeted API entity of the to-be-created
-	// documentation part.
+	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
-	Location *types.DocumentationPartLocation
+	RestApiId *string
+
+	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of

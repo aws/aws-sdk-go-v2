@@ -58,23 +58,23 @@ func (c *Client) ListInstanceGroups(ctx context.Context, params *ListInstanceGro
 // This input determines which instance groups to retrieve.
 type ListInstanceGroupsInput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
 	// The identifier of the cluster for which to list the instance groups.
 	//
 	// This member is required.
 	ClusterId *string
+
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
 }
 
 // This input determines which instance groups to retrieve.
 type ListInstanceGroupsOutput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
 	// The list of instance groups for the cluster and given filters.
 	InstanceGroups []*types.InstanceGroup
+
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

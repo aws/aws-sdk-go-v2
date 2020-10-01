@@ -57,14 +57,14 @@ func (c *Client) DeleteDomainPermissionsPolicy(ctx context.Context, params *Dele
 
 type DeleteDomainPermissionsPolicyInput struct {
 
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the domain associated with the resource policy to be deleted.
 	//
 	// This member is required.
 	Domain *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
 
 	// The current revision of the resource policy to be deleted. This revision is used
 	// for optimistic locking, which prevents others from overwriting your changes to

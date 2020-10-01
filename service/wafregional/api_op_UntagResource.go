@@ -65,12 +65,12 @@ type UntagResourceInput struct {
 	//
 	//
 	// This member is required.
-	TagKeys []*string
+	ResourceARN *string
 
 	//
 	//
 	// This member is required.
-	ResourceARN *string
+	TagKeys []*string
 }
 
 type UntagResourceOutput struct {

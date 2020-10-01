@@ -82,14 +82,11 @@ func (c *Client) CreateFileSystemFromBackup(ctx context.Context, params *CreateF
 // The request object for the CreateFileSystemFromBackup operation.
 type CreateFileSystemFromBackupInput struct {
 
-	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
-	// creation. This string is automatically filled on your behalf when you use the
-	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
-	ClientRequestToken *string
-
-	// The tags to be applied to the file system at file system creation. The key value
-	// of the Name tag appears in the console as the file system name.
-	Tags []*types.Tag
+	// The ID of the backup. Specifies the backup to use if you're creating a file
+	// system from an existing backup.
+	//
+	// This member is required.
+	BackupId *string
 
 	// Specifies the IDs of the subnets that the file system will be accessible from.
 	// For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet
@@ -102,17 +99,13 @@ type CreateFileSystemFromBackupInput struct {
 	// This member is required.
 	SubnetIds []*string
 
+	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
+	// creation. This string is automatically filled on your behalf when you use the
+	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	ClientRequestToken *string
+
 	// The Lustre configuration for the file system being created.
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
-
-	// The ID of the backup. Specifies the backup to use if you're creating a file
-	// system from an existing backup.
-	//
-	// This member is required.
-	BackupId *string
-
-	// The configuration for this Microsoft Windows file system.
-	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration
 
 	// A list of IDs for the security groups that apply to the specified network
 	// interfaces created for file system access. These security groups apply to all
@@ -137,6 +130,13 @@ type CreateFileSystemFromBackupInput struct {
 	// storage only if the original SSD file system had a storage capacity of at least
 	// 2000 GiB.
 	StorageType types.StorageType
+
+	// The tags to be applied to the file system at file system creation. The key value
+	// of the Name tag appears in the console as the file system name.
+	Tags []*types.Tag
+
+	// The configuration for this Microsoft Windows file system.
+	WindowsConfiguration *types.CreateFileSystemWindowsConfiguration
 }
 
 // The response object for the CreateFileSystemFromBackup operation.

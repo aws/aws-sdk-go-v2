@@ -101,16 +101,16 @@ type PutBucketWebsiteInput struct {
 	// This member is required.
 	Bucket *string
 
+	// Container for the request.
+	//
+	// This member is required.
+	WebsiteConfiguration *types.WebsiteConfiguration
+
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
-
-	// Container for the request.
-	//
-	// This member is required.
-	WebsiteConfiguration *types.WebsiteConfiguration
 }
 
 type PutBucketWebsiteOutput struct {

@@ -66,10 +66,6 @@ type DescribeVpnGatewaysInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more virtual private gateway IDs. Default: Describes all your virtual
-	// private gateways.
-	VpnGatewayIds []*string
-
 	// One or more filters.
 	//
 	//     * amazon-side-asn - The Autonomous System Number (ASN)
@@ -104,6 +100,10 @@ type DescribeVpnGatewaysInput struct {
 	//     *
 	// vpn-gateway-id - The ID of the virtual private gateway.
 	Filters []*types.Filter
+
+	// One or more virtual private gateway IDs. Default: Describes all your virtual
+	// private gateways.
+	VpnGatewayIds []*string
 }
 
 // Contains the output of DescribeVpnGateways.

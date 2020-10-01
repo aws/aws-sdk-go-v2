@@ -77,11 +77,11 @@ type MoveAddressToVpcInput struct {
 
 type MoveAddressToVpcOutput struct {
 
-	// The status of the move of the IP address.
-	Status types.Status
-
 	// The allocation ID for the Elastic IP address.
 	AllocationId *string
+
+	// The status of the move of the IP address.
+	Status types.Status
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

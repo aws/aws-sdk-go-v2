@@ -67,23 +67,10 @@ func (c *Client) DescribeClusterParameters(ctx context.Context, params *Describe
 //
 type DescribeClusterParametersInput struct {
 
-	// The parameter types to return. Specify user to show parameters that are
-	// different form the default. Similarly, specify engine-default to show parameters
-	// that are the same as the default parameter group. Default: All parameter types
-	// returned. Valid Values: user | engine-default
-	Source *string
-
 	// The name of a cluster parameter group for which to return details.
 	//
 	// This member is required.
 	ParameterGroupName *string
-
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int32
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterParameters () request
@@ -92,6 +79,19 @@ type DescribeClusterParametersInput struct {
 	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	MaxRecords *int32
+
+	// The parameter types to return. Specify user to show parameters that are
+	// different form the default. Similarly, specify engine-default to show parameters
+	// that are the same as the default parameter group. Default: All parameter types
+	// returned. Valid Values: user | engine-default
+	Source *string
 }
 
 // Contains the output from the DescribeClusterParameters () action.

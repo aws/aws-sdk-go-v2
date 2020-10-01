@@ -59,6 +59,11 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 type DeleteTagsInput struct {
 
+	// The ID of the tagged ML object. For example, exampleModelId.
+	//
+	// This member is required.
+	ResourceId *string
+
 	// The type of the tagged ML object.
 	//
 	// This member is required.
@@ -68,11 +73,6 @@ type DeleteTagsInput struct {
 	//
 	// This member is required.
 	TagKeys []*string
-
-	// The ID of the tagged ML object. For example, exampleModelId.
-	//
-	// This member is required.
-	ResourceId *string
 }
 
 // Amazon ML returns the following elements.

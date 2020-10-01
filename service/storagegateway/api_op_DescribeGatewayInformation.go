@@ -71,6 +71,29 @@ type DescribeGatewayInformationInput struct {
 // A JSON object containing the following fields:
 type DescribeGatewayInformationOutput struct {
 
+	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used
+	// to monitor events in the gateway.
+	CloudWatchLogGroupARN *string
+
+	// The ID of the Amazon EC2 instance that was used to launch the gateway.
+	Ec2InstanceId *string
+
+	// The AWS Region where the Amazon EC2 instance is located.
+	Ec2InstanceRegion *string
+
+	// The type of endpoint for your gateway.  <p>Valid Values: <code>STANDARD</code> |
+	// <code>FIPS</code> </p>
+	EndpointType *string
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
+	// to return a list of gateways for your account and AWS Region.
+	GatewayARN *string
+
+	// The unique identifier assigned to your gateway during activation. This ID
+	// becomes part of the gateway Amazon Resource Name (ARN), which you use as input
+	// for other operations.
+	GatewayId *string
+
 	// The name you configured for your gateway.
 	GatewayName *string
 
@@ -78,27 +101,11 @@ type DescribeGatewayInformationOutput struct {
 	// interfaces.
 	GatewayNetworkInterfaces []*types.NetworkInterface
 
-	// The date on which an update to the gateway is available. This date is in the
-	// time zone of the gateway. If the gateway is not available for an update this
-	// field is not returned in the response.
-	NextUpdateAvailabilityDate *string
+	// A value that indicates the operating state of the gateway.
+	GatewayState *string
 
-	// The AWS Region where the Amazon EC2 instance is located.
-	Ec2InstanceRegion *string
-
-	// The date on which the last software update was applied to the gateway. If the
-	// gateway has never been updated, this field does not return a value in the
-	// response.
-	LastSoftwareUpdate *string
-
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch Log Group that is used
-	// to monitor events in the gateway.
-	CloudWatchLogGroupARN *string
-
-	// The unique identifier assigned to your gateway during activation. This ID
-	// becomes part of the gateway Amazon Resource Name (ARN), which you use as input
-	// for other operations.
-	GatewayId *string
+	// A value that indicates the time zone configured for the gateway.
+	GatewayTimezone *string
 
 	// The type of the gateway.
 	GatewayType *string
@@ -106,31 +113,24 @@ type DescribeGatewayInformationOutput struct {
 	// The type of hypervisor environment used by the host.
 	HostEnvironment types.HostEnvironment
 
-	// The configuration settings for the virtual private cloud (VPC) endpoint for your
-	// gateway.
-	VPCEndpoint *string
+	// The date on which the last software update was applied to the gateway. If the
+	// gateway has never been updated, this field does not return a value in the
+	// response.
+	LastSoftwareUpdate *string
+
+	// The date on which an update to the gateway is available. This date is in the
+	// time zone of the gateway. If the gateway is not available for an update this
+	// field is not returned in the response.
+	NextUpdateAvailabilityDate *string
 
 	// A list of up to 50 tags assigned to the gateway, sorted alphabetically by key
 	// name. Each tag is a key-value pair. For a gateway with more than 10 tags
 	// assigned, you can view all tags using the ListTagsForResource API operation.
 	Tags []*types.Tag
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
-	GatewayARN *string
-
-	// A value that indicates the time zone configured for the gateway.
-	GatewayTimezone *string
-
-	// A value that indicates the operating state of the gateway.
-	GatewayState *string
-
-	// The type of endpoint for your gateway.  <p>Valid Values: <code>STANDARD</code> |
-	// <code>FIPS</code> </p>
-	EndpointType *string
-
-	// The ID of the Amazon EC2 instance that was used to launch the gateway.
-	Ec2InstanceId *string
+	// The configuration settings for the virtual private cloud (VPC) endpoint for your
+	// gateway.
+	VPCEndpoint *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,16 +57,16 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// This member is required.
+	AuthenticationType types.AuthenticationType
+
 	// The email address of the user.  <note> <p>Users' email addresses are
 	// case-sensitive.</p> </note>
 	//
 	// This member is required.
 	UserName *string
-
-	// The authentication type for the user. You must specify USERPOOL.
-	//
-	// This member is required.
-	AuthenticationType types.AuthenticationType
 }
 
 type DeleteUserOutput struct {

@@ -58,18 +58,25 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 
 type DescribeDomainInput struct {
 
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
-
 	// The name of the domain.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
 }
 
 type DescribeDomainOutput struct {
+
+	// The ARN of an issued ACM certificate that is valid for the domain being
+	// associated.
+	AcmCertificateArn *string
+
+	// The time that the domain was added.
+	CreatedTime *time.Time
 
 	// The name to display.
 	DisplayName *string
@@ -79,13 +86,6 @@ type DescribeDomainOutput struct {
 
 	// The current state for the domain.
 	DomainStatus types.DomainStatus
-
-	// The time that the domain was added.
-	CreatedTime *time.Time
-
-	// The ARN of an issued ACM certificate that is valid for the domain being
-	// associated.
-	AcmCertificateArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

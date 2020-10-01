@@ -57,16 +57,16 @@ func (c *Client) DeleteUserByPrincipalId(ctx context.Context, params *DeleteUser
 //
 type DeleteUserByPrincipalIdInput struct {
 
-	// The namespace. Currently, you should set this to default.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The ID for the AWS account that the user is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
+	Namespace *string
 
 	// The principal ID of the user.
 	//

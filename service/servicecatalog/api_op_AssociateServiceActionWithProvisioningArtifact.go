@@ -56,6 +56,21 @@ func (c *Client) AssociateServiceActionWithProvisioningArtifact(ctx context.Cont
 
 type AssociateServiceActionWithProvisioningArtifactInput struct {
 
+	// The product identifier. For example, prod-abcdzk7xy33qa.
+	//
+	// This member is required.
+	ProductId *string
+
+	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+	//
+	// This member is required.
+	ProvisioningArtifactId *string
+
+	// The self-service action identifier. For example, act-fs7abcd89wxyz.
+	//
+	// This member is required.
+	ServiceActionId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -65,21 +80,6 @@ type AssociateServiceActionWithProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The product identifier. For example, prod-abcdzk7xy33qa.
-	//
-	// This member is required.
-	ProductId *string
-
-	// The self-service action identifier. For example, act-fs7abcd89wxyz.
-	//
-	// This member is required.
-	ServiceActionId *string
-
-	// The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
 }
 
 type AssociateServiceActionWithProvisioningArtifactOutput struct {

@@ -63,12 +63,6 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
-	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string
-
 	// Specifies the type of policy that you want to include in the response. You must
 	// specify one of the following values:
 	//
@@ -100,6 +94,12 @@ type ListPoliciesInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
+	// The parameter for receiving additional results if you receive a NextToken
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
+	NextToken *string
 }
 
 type ListPoliciesOutput struct {

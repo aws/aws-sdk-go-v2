@@ -72,14 +72,14 @@ type UpdateFindingsInput struct {
 	// This member is required.
 	Status types.FindingStatusUpdate
 
+	// A client token.
+	ClientToken *string
+
 	// The IDs of the findings to update.
 	Ids []*string
 
 	// The ARN of the resource identified in the finding.
 	ResourceArn *string
-
-	// A client token.
-	ClientToken *string
 }
 
 type UpdateFindingsOutput struct {

@@ -58,6 +58,14 @@ func (c *Client) GetPushTemplate(ctx context.Context, params *GetPushTemplateInp
 
 type GetPushTemplateInput struct {
 
+	// The name of the message template. A template name must start with an
+	// alphanumeric character and can contain a maximum of 128 characters. The
+	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
+	// Template names are case sensitive.
+	//
+	// This member is required.
+	TemplateName *string
+
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other
 	// information for all the versions of a template, use the Template Versions
@@ -78,14 +86,6 @@ type GetPushTemplateInput struct {
 	//     * For a delete operation, deletes the template, including all
 	// versions of the template.
 	Version *string
-
-	// The name of the message template. A template name must start with an
-	// alphanumeric character and can contain a maximum of 128 characters. The
-	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
-	// Template names are case sensitive.
-	//
-	// This member is required.
-	TemplateName *string
 }
 
 type GetPushTemplateOutput struct {

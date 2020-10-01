@@ -61,6 +61,14 @@ func (c *Client) DeleteUserPolicy(ctx context.Context, params *DeleteUserPolicyI
 
 type DeleteUserPolicyInput struct {
 
+	// The name identifying the policy document to delete. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	PolicyName *string
+
 	// The name (friendly name, not ARN) identifying the user that the policy is
 	// embedded in. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -69,14 +77,6 @@ type DeleteUserPolicyInput struct {
 	//
 	// This member is required.
 	UserName *string
-
-	// The name identifying the policy document to delete. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	PolicyName *string
 }
 
 type DeleteUserPolicyOutput struct {

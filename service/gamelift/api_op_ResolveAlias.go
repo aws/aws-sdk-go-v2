@@ -81,13 +81,13 @@ type ResolveAliasInput struct {
 // Represents the returned data in response to a request action.
 type ResolveAliasOutput struct {
 
-	// The fleet identifier that the alias is pointing to.
-	FleetId *string
-
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet resource that this alias points to.
 	FleetArn *string
+
+	// The fleet identifier that the alias is pointing to.
+	FleetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,16 +69,16 @@ func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationI
 
 type CreateEvaluationInput struct {
 
-	// A user-supplied ID that uniquely identifies the Evaluation.
-	//
-	// This member is required.
-	EvaluationId *string
-
 	// The ID of the DataSource for the evaluation. The schema of the DataSource must
 	// match the schema used to create the MLModel.
 	//
 	// This member is required.
 	EvaluationDataSourceId *string
+
+	// A user-supplied ID that uniquely identifies the Evaluation.
+	//
+	// This member is required.
+	EvaluationId *string
 
 	// The ID of the MLModel to evaluate. The schema used in creating the MLModel must
 	// match the schema of the DataSource used in the Evaluation.

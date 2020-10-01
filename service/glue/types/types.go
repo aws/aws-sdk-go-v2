@@ -9,15 +9,6 @@ import (
 // Defines an action to be initiated by a trigger.
 type Action struct {
 
-	// The JobRun timeout in minutes. This is the maximum time that a job run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
-	// job.
-	Timeout *int32
-
-	// Specifies configuration properties of a job run notification.
-	NotificationProperty *NotificationProperty
-
 	// The job arguments used when this trigger fires. For this job run, they replace
 	// the default arguments set in the job definition itself. You can specify
 	// arguments here that your own job-execution script consumes, as well as arguments
@@ -30,75 +21,84 @@ type Action struct {
 	// topic in the developer guide.
 	Arguments map[string]*string
 
-	// The name of the SecurityConfiguration structure to be used with this action.
-	SecurityConfiguration *string
-
 	// The name of the crawler to be used with this action.
 	CrawlerName *string
 
 	// The name of a job to be executed.
 	JobName *string
+
+	// Specifies configuration properties of a job run notification.
+	NotificationProperty *NotificationProperty
+
+	// The name of the SecurityConfiguration structure to be used with this action.
+	SecurityConfiguration *string
+
+	// The JobRun timeout in minutes. This is the maximum time that a job run can
+	// consume resources before it is terminated and enters TIMEOUT status. The default
+	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
+	// job.
+	Timeout *int32
 }
 
 // Records an error that occurred when attempting to stop a specified job run.
 type BatchStopJobRunError struct {
 
-	// The JobRunId of the job run in question.
-	JobRunId *string
+	// Specifies details about the error that was encountered.
+	ErrorDetail *ErrorDetail
 
 	// The name of the job definition that is used in the job run in question.
 	JobName *string
 
-	// Specifies details about the error that was encountered.
-	ErrorDetail *ErrorDetail
+	// The JobRunId of the job run in question.
+	JobRunId *string
 }
 
 // Records a successful request to stop a specified JobRun.
 type BatchStopJobRunSuccessfulSubmission struct {
 
-	// The JobRunId of the job run that was stopped.
-	JobRunId *string
-
 	// The name of the job definition used in the job run that was stopped.
 	JobName *string
+
+	// The JobRunId of the job run that was stopped.
+	JobRunId *string
 }
 
 // Defines a binary column statistics data.
 type BinaryColumnStatisticsData struct {
 
-	// Number of nulls.
+	// Average length of the column.
 	//
 	// This member is required.
-	NumberOfNulls *int64
+	AverageLength *float64
 
 	// Maximum length of the column.
 	//
 	// This member is required.
 	MaximumLength *int64
 
-	// Average length of the column.
+	// Number of nulls.
 	//
 	// This member is required.
-	AverageLength *float64
+	NumberOfNulls *int64
 }
 
 // Defines a boolean column statistics.
 type BooleanColumnStatisticsData struct {
 
-	// Number of true value.
+	// Number of false value.
 	//
 	// This member is required.
-	NumberOfTrues *int64
+	NumberOfFalses *int64
 
 	// Number of nulls.
 	//
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Number of false value.
+	// Number of true value.
 	//
 	// This member is required.
-	NumberOfFalses *int64
+	NumberOfTrues *int64
 }
 
 // Specifies a table definition in the AWS Glue Data Catalog.
@@ -183,42 +183,39 @@ type CodeGenEdge struct {
 	// This member is required.
 	Source *string
 
-	// The target of the edge.
-	TargetParameter *string
-
 	// The ID of the node at which the edge ends.
 	//
 	// This member is required.
 	Target *string
+
+	// The target of the edge.
+	TargetParameter *string
 }
 
 // Represents a node in a directed acyclic graph (DAG)
 type CodeGenNode struct {
-
-	// The line number of the node.
-	LineNumber *int32
 
 	// Properties of the node, in the form of name-value pairs.
 	//
 	// This member is required.
 	Args []*CodeGenNodeArg
 
+	// A node identifier that is unique within the node's graph.
+	//
+	// This member is required.
+	Id *string
+
 	// The type of node that this is.
 	//
 	// This member is required.
 	NodeType *string
 
-	// A node identifier that is unique within the node's graph.
-	//
-	// This member is required.
-	Id *string
+	// The line number of the node.
+	LineNumber *int32
 }
 
 // An argument or property of a node.
 type CodeGenNodeArg struct {
-
-	// True if the value is used as a parameter.
-	Param *bool
 
 	// The name of the argument or property.
 	//
@@ -229,21 +226,24 @@ type CodeGenNodeArg struct {
 	//
 	// This member is required.
 	Value *string
+
+	// True if the value is used as a parameter.
+	Param *bool
 }
 
 // A column in a Table.
 type Column struct {
 
-	// These key-value pairs define properties associated with the column.
-	Parameters map[string]*string
-
-	// A free-form text comment.
-	Comment *string
-
 	// The name of the Column.
 	//
 	// This member is required.
 	Name *string
+
+	// A free-form text comment.
+	Comment *string
+
+	// These key-value pairs define properties associated with the column.
+	Parameters map[string]*string
 
 	// The data type of the Column.
 	Type *string
@@ -252,11 +252,11 @@ type Column struct {
 // Defines a column containing error.
 type ColumnError struct {
 
-	// The error message occurred during operation.
-	Error *ErrorDetail
-
 	// The name of the column.
 	ColumnName *string
+
+	// The error message occurred during operation.
+	Error *ErrorDetail
 }
 
 // Defines a column statistics.
@@ -267,20 +267,20 @@ type ColumnStatistics struct {
 	// This member is required.
 	AnalyzedTime *time.Time
 
-	// The statistics of the column.
+	// The name of the column.
 	//
 	// This member is required.
-	StatisticsData *ColumnStatisticsData
+	ColumnName *string
 
 	// The type of the column.
 	//
 	// This member is required.
 	ColumnType *string
 
-	// The name of the column.
+	// The statistics of the column.
 	//
 	// This member is required.
-	ColumnName *string
+	StatisticsData *ColumnStatisticsData
 }
 
 // Defines a column statistics data.
@@ -291,8 +291,17 @@ type ColumnStatisticsData struct {
 	// This member is required.
 	Type ColumnStatisticsType
 
-	// String Column Statistics Data.
-	StringColumnStatisticsData *StringColumnStatisticsData
+	// Binary Column Statistics Data.
+	BinaryColumnStatisticsData *BinaryColumnStatisticsData
+
+	// Boolean Column Statistics Data.
+	BooleanColumnStatisticsData *BooleanColumnStatisticsData
+
+	// Date Column Statistics Data.
+	DateColumnStatisticsData *DateColumnStatisticsData
+
+	// Decimal Column Statistics Data.
+	DecimalColumnStatisticsData *DecimalColumnStatisticsData
 
 	// Double Column Statistics Data.
 	DoubleColumnStatisticsData *DoubleColumnStatisticsData
@@ -300,17 +309,8 @@ type ColumnStatisticsData struct {
 	// Long Column Statistics Data.
 	LongColumnStatisticsData *LongColumnStatisticsData
 
-	// Boolean Column Statistics Data.
-	BooleanColumnStatisticsData *BooleanColumnStatisticsData
-
-	// Decimal Column Statistics Data.
-	DecimalColumnStatisticsData *DecimalColumnStatisticsData
-
-	// Date Column Statistics Data.
-	DateColumnStatisticsData *DateColumnStatisticsData
-
-	// Binary Column Statistics Data.
-	BinaryColumnStatisticsData *BinaryColumnStatisticsData
+	// String Column Statistics Data.
+	StringColumnStatisticsData *StringColumnStatisticsData
 }
 
 // Defines a column containing error.
@@ -326,18 +326,18 @@ type ColumnStatisticsError struct {
 // Defines a condition under which a trigger fires.
 type Condition struct {
 
-	// The name of the crawler to which this condition applies.
-	CrawlerName *string
-
 	// The state of the crawler to which this condition applies.
 	CrawlState CrawlState
 
-	// A logical operator.
-	LogicalOperator LogicalOperator
+	// The name of the crawler to which this condition applies.
+	CrawlerName *string
 
 	// The name of the job whose JobRuns this condition applies to, and on which this
 	// trigger waits.
 	JobName *string
+
+	// A logical operator.
+	LogicalOperator LogicalOperator
 
 	// The condition state. Currently, the values supported are SUCCEEDED, STOPPED,
 	// TIMEOUT, and FAILED.
@@ -350,32 +350,25 @@ type Condition struct {
 // Wikipedia.</p>
 type ConfusionMatrix struct {
 
-	// The number of matches in the data that the transform correctly found, in the
+	// The number of matches in the data that the transform didn't find, in the
 	// confusion matrix for your transform.
-	NumTruePositives *int64
+	NumFalseNegatives *int64
 
 	// The number of nonmatches in the data that the transform incorrectly classified
 	// as a match, in the confusion matrix for your transform.
 	NumFalsePositives *int64
 
-	// The number of matches in the data that the transform didn't find, in the
-	// confusion matrix for your transform.
-	NumFalseNegatives *int64
-
 	// The number of nonmatches in the data that the transform correctly rejected, in
 	// the confusion matrix for your transform.
 	NumTrueNegatives *int64
+
+	// The number of matches in the data that the transform correctly found, in the
+	// confusion matrix for your transform.
+	NumTruePositives *int64
 }
 
 // Defines a connection to a data source.
 type Connection struct {
-
-	// The name of the connection definition.
-	Name *string
-
-	// A map of physical connection requirements, such as virtual private cloud (VPC)
-	// and SecurityGroup, that are needed to make this connection successfully.
-	PhysicalConnectionRequirements *PhysicalConnectionRequirements
 
 	// These key-value pairs define parameters for the connection:
 	//
@@ -466,8 +459,8 @@ type Connection struct {
 	// The type of the connection. Currently, SFTP is not supported.
 	ConnectionType ConnectionType
 
-	// A list of criteria that can be used in selecting this connection.
-	MatchCriteria []*string
+	// The time that this connection definition was created.
+	CreationTime *time.Time
 
 	// The description of the connection.
 	Description *string
@@ -475,15 +468,27 @@ type Connection struct {
 	// The user, group, or role that last updated this connection definition.
 	LastUpdatedBy *string
 
-	// The time that this connection definition was created.
-	CreationTime *time.Time
-
 	// The last time that this connection definition was updated.
 	LastUpdatedTime *time.Time
+
+	// A list of criteria that can be used in selecting this connection.
+	MatchCriteria []*string
+
+	// The name of the connection definition.
+	Name *string
+
+	// A map of physical connection requirements, such as virtual private cloud (VPC)
+	// and SecurityGroup, that are needed to make this connection successfully.
+	PhysicalConnectionRequirements *PhysicalConnectionRequirements
 }
 
 // A structure that is used to specify a connection to create or update.
 type ConnectionInput struct {
+
+	// These key-value pairs define parameters for the connection.
+	//
+	// This member is required.
+	ConnectionProperties map[string]*string
 
 	// The type of the connection. Currently, these types are supported:
 	//
@@ -502,25 +507,20 @@ type ConnectionInput struct {
 	// This member is required.
 	ConnectionType ConnectionType
 
-	// A list of criteria that can be used in selecting this connection.
-	MatchCriteria []*string
-
-	// These key-value pairs define parameters for the connection.
-	//
-	// This member is required.
-	ConnectionProperties map[string]*string
-
-	// A map of physical connection requirements, such as virtual private cloud (VPC)
-	// and SecurityGroup, that are needed to successfully make this connection.
-	PhysicalConnectionRequirements *PhysicalConnectionRequirements
-
-	// The description of the connection.
-	Description *string
-
 	// The name of the connection.
 	//
 	// This member is required.
 	Name *string
+
+	// The description of the connection.
+	Description *string
+
+	// A list of criteria that can be used in selecting this connection.
+	MatchCriteria []*string
+
+	// A map of physical connection requirements, such as virtual private cloud (VPC)
+	// and SecurityGroup, that are needed to successfully make this connection.
+	PhysicalConnectionRequirements *PhysicalConnectionRequirements
 }
 
 // The data structure used by the Data Catalog to encrypt the password as part of
@@ -535,6 +535,13 @@ type ConnectionInput struct {
 // have decrypt permission on the password key.</p>
 type ConnectionPasswordEncryption struct {
 
+	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
+	// remain encrypted in the responses of GetConnection and GetConnections. This
+	// encryption takes effect independently from catalog encryption.
+	//
+	// This member is required.
+	ReturnConnectionPasswordEncrypted *bool
+
 	// An AWS KMS key that is used to encrypt the connection password.  <p>If
 	// connection password protection is enabled, the caller of
 	// <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least
@@ -543,13 +550,6 @@ type ConnectionPasswordEncryption struct {
 	// decrypt permission to enable or restrict access on the password key according to
 	// your security requirements.</p>
 	AwsKmsKeyId *string
-
-	// When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords
-	// remain encrypted in the responses of GetConnection and GetConnections. This
-	// encryption takes effect independently from catalog encryption.
-	//
-	// This member is required.
-	ReturnConnectionPasswordEncrypted *bool
 }
 
 // Specifies the connections used by a job.
@@ -562,23 +562,23 @@ type ConnectionsList struct {
 // The details of a crawl in the workflow.
 type Crawl struct {
 
+	// The date and time on which the crawl completed.
+	CompletedOn *time.Time
+
 	// The error message associated with the crawl.
 	ErrorMessage *string
 
-	// The date and time on which the crawl started.
-	StartedOn *time.Time
-
-	// The date and time on which the crawl completed.
-	CompletedOn *time.Time
+	// The log group associated with the crawl.
+	LogGroup *string
 
 	// The log stream associated with the crawl.
 	LogStream *string
 
+	// The date and time on which the crawl started.
+	StartedOn *time.Time
+
 	// The state of the crawler.
 	State CrawlState
-
-	// The log group associated with the crawl.
-	LogGroup *string
 }
 
 // Specifies a crawler program that examines a data source and uses classifiers to
@@ -586,59 +586,59 @@ type Crawl struct {
 // concerning the data source in the AWS Glue Data Catalog.
 type Crawler struct {
 
-	// The status of the last crawl, and potentially error information if an error
-	// occurred.
-	LastCrawl *LastCrawlInfo
-
-	// Indicates whether the crawler is running, or whether a run is pending.
-	State CrawlerState
-
-	// The Amazon Resource Name (ARN) of an IAM role that's used to access customer
-	// resources, such as Amazon Simple Storage Service (Amazon S3) data.
-	Role *string
-
-	// The name of the crawler.
-	Name *string
-
-	// For scheduled crawlers, the schedule when the crawler runs.
-	Schedule *Schedule
-
-	// The name of the SecurityConfiguration structure to be used by this crawler.
-	CrawlerSecurityConfiguration *string
-
-	// The name of the database in which the crawler's output is stored.
-	DatabaseName *string
-
-	// If the crawler is running, contains the total time elapsed since the last crawl
-	// began.
-	CrawlElapsedTime *int64
-
-	// The policy that specifies update and delete behaviors for the crawler.
-	SchemaChangePolicy *SchemaChangePolicy
-
-	// A description of the crawler.
-	Description *string
-
-	// A collection of targets to crawl.
-	Targets *CrawlerTargets
-
-	// The time that the crawler was created.
-	CreationTime *time.Time
-
-	// The prefix added to the names of tables that are created.
-	TablePrefix *string
+	// A list of UTF-8 strings that specify the custom classifiers that are associated
+	// with the crawler.
+	Classifiers []*string
 
 	// Crawler configuration information. This versioned JSON string allows users to
 	// specify aspects of a crawler's behavior. For more information, see Configuring a
 	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string
 
+	// If the crawler is running, contains the total time elapsed since the last crawl
+	// began.
+	CrawlElapsedTime *int64
+
+	// The name of the SecurityConfiguration structure to be used by this crawler.
+	CrawlerSecurityConfiguration *string
+
+	// The time that the crawler was created.
+	CreationTime *time.Time
+
+	// The name of the database in which the crawler's output is stored.
+	DatabaseName *string
+
+	// A description of the crawler.
+	Description *string
+
+	// The status of the last crawl, and potentially error information if an error
+	// occurred.
+	LastCrawl *LastCrawlInfo
+
 	// The time that the crawler was last updated.
 	LastUpdated *time.Time
 
-	// A list of UTF-8 strings that specify the custom classifiers that are associated
-	// with the crawler.
-	Classifiers []*string
+	// The name of the crawler.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of an IAM role that's used to access customer
+	// resources, such as Amazon Simple Storage Service (Amazon S3) data.
+	Role *string
+
+	// For scheduled crawlers, the schedule when the crawler runs.
+	Schedule *Schedule
+
+	// The policy that specifies update and delete behaviors for the crawler.
+	SchemaChangePolicy *SchemaChangePolicy
+
+	// Indicates whether the crawler is running, or whether a run is pending.
+	State CrawlerState
+
+	// The prefix added to the names of tables that are created.
+	TablePrefix *string
+
+	// A collection of targets to crawl.
+	Targets *CrawlerTargets
 
 	// The version of the crawler.
 	Version *int64
@@ -647,8 +647,14 @@ type Crawler struct {
 // Metrics for a specified crawler.
 type CrawlerMetrics struct {
 
+	// The name of the crawler.
+	CrawlerName *string
+
 	// The duration of the crawler's most recent run, in seconds.
 	LastRuntimeSeconds *float64
+
+	// The median duration of this crawler's runs, in seconds.
+	MedianRuntimeSeconds *float64
 
 	// True if the crawler is still estimating how long it will take to complete this
 	// run.
@@ -657,20 +663,14 @@ type CrawlerMetrics struct {
 	// The number of tables created by this crawler.
 	TablesCreated *int32
 
-	// The name of the crawler.
-	CrawlerName *string
-
-	// The median duration of this crawler's runs, in seconds.
-	MedianRuntimeSeconds *float64
-
 	// The number of tables deleted by this crawler.
 	TablesDeleted *int32
 
-	// The estimated time left to complete a running crawl.
-	TimeLeftSeconds *float64
-
 	// The number of tables updated by this crawler.
 	TablesUpdated *int32
+
+	// The estimated time left to complete a running crawl.
+	TimeLeftSeconds *float64
 }
 
 // The details of a Crawler node present in the workflow.
@@ -683,25 +683,21 @@ type CrawlerNodeDetails struct {
 // Specifies data stores to crawl.
 type CrawlerTargets struct {
 
-	// Specifies JDBC targets.
-	JdbcTargets []*JdbcTarget
-
-	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
-	S3Targets []*S3Target
-
 	// Specifies AWS Glue Data Catalog targets.
 	CatalogTargets []*CatalogTarget
 
 	// Specifies Amazon DynamoDB targets.
 	DynamoDBTargets []*DynamoDBTarget
+
+	// Specifies JDBC targets.
+	JdbcTargets []*JdbcTarget
+
+	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
+	S3Targets []*S3Target
 }
 
 // Specifies a custom CSV classifier for CreateClassifier to create.
 type CreateCsvClassifierRequest struct {
-
-	// Specifies not to trim values before identifying the type of column values. The
-	// default value is true.
-	DisableValueTrimming *bool
 
 	// The name of the classifier.
 	//
@@ -711,14 +707,18 @@ type CreateCsvClassifierRequest struct {
 	// Enables the processing of files that contain only one column.
 	AllowSingleColumn *bool
 
+	// Indicates whether the CSV file contains a header.
+	ContainsHeader CsvHeaderOption
+
 	// A custom symbol to denote what separates each column entry in the row.
 	Delimiter *string
 
+	// Specifies not to trim values before identifying the type of column values. The
+	// default value is true.
+	DisableValueTrimming *bool
+
 	// A list of strings representing column names.
 	Header []*string
-
-	// Indicates whether the CSV file contains a header.
-	ContainsHeader CsvHeaderOption
 
 	// A custom symbol to denote what combines content into a single column value. Must
 	// be different from the column delimiter.
@@ -728,33 +728,28 @@ type CreateCsvClassifierRequest struct {
 // Specifies a grok classifier for CreateClassifier to create.
 type CreateGrokClassifierRequest struct {
 
-	// Optional custom grok patterns used by this classifier.
-	CustomPatterns *string
-
 	// An identifier of the data format that the classifier matches, such as Twitter,
 	// JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
 	//
 	// This member is required.
 	Classification *string
 
+	// The grok pattern used by this classifier.
+	//
+	// This member is required.
+	GrokPattern *string
+
 	// The name of the new classifier.
 	//
 	// This member is required.
 	Name *string
 
-	// The grok pattern used by this classifier.
-	//
-	// This member is required.
-	GrokPattern *string
+	// Optional custom grok patterns used by this classifier.
+	CustomPatterns *string
 }
 
 // Specifies a JSON classifier for CreateClassifier to create.
 type CreateJsonClassifierRequest struct {
-
-	// The name of the classifier.
-	//
-	// This member is required.
-	Name *string
 
 	// A JsonPath string defining the JSON data for the classifier to classify. AWS
 	// Glue supports a subset of JsonPath, as described in Writing JsonPath Custom
@@ -763,6 +758,11 @@ type CreateJsonClassifierRequest struct {
 	//
 	// This member is required.
 	JsonPath *string
+
+	// The name of the classifier.
+	//
+	// This member is required.
+	Name *string
 }
 
 // Specifies an XML classifier for CreateClassifier to create.
@@ -788,39 +788,39 @@ type CreateXMLClassifierRequest struct {
 // A classifier for custom CSV content.
 type CsvClassifier struct {
 
-	// The time that this classifier was registered.
-	CreationTime *time.Time
-
-	// The version of this classifier.
-	Version *int64
-
-	// Specifies not to trim values before identifying the type of column values. The
-	// default value is true.
-	DisableValueTrimming *bool
-
-	// Indicates whether the CSV file contains a header.
-	ContainsHeader CsvHeaderOption
-
-	// A custom symbol to denote what separates each column entry in the row.
-	Delimiter *string
-
-	// Enables the processing of files that contain only one column.
-	AllowSingleColumn *bool
-
-	// A custom symbol to denote what combines content into a single column value. It
-	// must be different from the column delimiter.
-	QuoteSymbol *string
-
-	// A list of strings representing column names.
-	Header []*string
-
 	// The name of the classifier.
 	//
 	// This member is required.
 	Name *string
 
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool
+
+	// Indicates whether the CSV file contains a header.
+	ContainsHeader CsvHeaderOption
+
+	// The time that this classifier was registered.
+	CreationTime *time.Time
+
+	// A custom symbol to denote what separates each column entry in the row.
+	Delimiter *string
+
+	// Specifies not to trim values before identifying the type of column values. The
+	// default value is true.
+	DisableValueTrimming *bool
+
+	// A list of strings representing column names.
+	Header []*string
+
 	// The time that this classifier was last updated.
 	LastUpdated *time.Time
+
+	// A custom symbol to denote what combines content into a single column value. It
+	// must be different from the column delimiter.
+	QuoteSymbol *string
+
+	// The version of this classifier.
+	Version *int64
 }
 
 // The Database object represents a logical grouping of tables that might reside in
@@ -836,8 +836,8 @@ type Database struct {
 	// The ID of the Data Catalog in which the database resides.
 	CatalogId *string
 
-	// The location of the database (for example, an HDFS path).
-	LocationUri *string
+	// Creates a set of default permissions on the table for principals.
+	CreateTableDefaultPermissions []*PrincipalPermissions
 
 	// The time at which the metadata database was created in the catalog.
 	CreateTime *time.Time
@@ -845,11 +845,11 @@ type Database struct {
 	// A description of the database.
 	Description *string
 
+	// The location of the database (for example, an HDFS path).
+	LocationUri *string
+
 	// These key-value pairs define parameters and properties of the database.
 	Parameters map[string]*string
-
-	// Creates a set of default permissions on the table for principals.
-	CreateTableDefaultPermissions []*PrincipalPermissions
 
 	// A DatabaseIdentifier structure that describes a target database for resource
 	// linking.
@@ -869,12 +869,17 @@ type DatabaseIdentifier struct {
 // The structure used to create or update a database.
 type DatabaseInput struct {
 
-	// A DatabaseIdentifier structure that describes a target database for resource
-	// linking.
-	TargetDatabase *DatabaseIdentifier
+	// The name of the database. For Hive compatibility, this is folded to lowercase
+	// when it is stored.
+	//
+	// This member is required.
+	Name *string
 
 	// Creates a set of default permissions on the table for principals.
 	CreateTableDefaultPermissions []*PrincipalPermissions
+
+	// A description of the database.
+	Description *string
 
 	// The location of the database (for example, an HDFS path).
 	LocationUri *string
@@ -883,27 +888,22 @@ type DatabaseInput struct {
 	// key-value pairs define parameters and properties of the database.
 	Parameters map[string]*string
 
-	// A description of the database.
-	Description *string
-
-	// The name of the database. For Hive compatibility, this is folded to lowercase
-	// when it is stored.
-	//
-	// This member is required.
-	Name *string
+	// A DatabaseIdentifier structure that describes a target database for resource
+	// linking.
+	TargetDatabase *DatabaseIdentifier
 }
 
 // Contains configuration information for maintaining Data Catalog security.
 type DataCatalogEncryptionSettings struct {
-
-	// Specifies the encryption-at-rest configuration for the Data Catalog.
-	EncryptionAtRest *EncryptionAtRest
 
 	// When connection password protection is enabled, the Data Catalog uses a
 	// customer-provided key to encrypt the password as part of CreateConnection or
 	// UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection
 	// properties. You can enable catalog encryption or only password encryption.
 	ConnectionPasswordEncryption *ConnectionPasswordEncryption
+
+	// Specifies the encryption-at-rest configuration for the Data Catalog.
+	EncryptionAtRest *EncryptionAtRest
 }
 
 // The AWS Lake Formation principal.
@@ -926,81 +926,79 @@ type DateColumnStatisticsData struct {
 	// This member is required.
 	NumberOfNulls *int64
 
-	// Minimum value of the column.
-	MinimumValue *time.Time
-
 	// Maximum value of the column.
 	MaximumValue *time.Time
+
+	// Minimum value of the column.
+	MinimumValue *time.Time
 }
 
 // Defines a decimal column statistics data.
 type DecimalColumnStatisticsData struct {
-
-	// Minimum value of the column.
-	MinimumValue *DecimalNumber
 
 	// Number of distinct values.
 	//
 	// This member is required.
 	NumberOfDistinctValues *int64
 
-	// Maximum value of the column.
-	MaximumValue *DecimalNumber
-
 	// Number of nulls.
 	//
 	// This member is required.
 	NumberOfNulls *int64
+
+	// Maximum value of the column.
+	MaximumValue *DecimalNumber
+
+	// Minimum value of the column.
+	MinimumValue *DecimalNumber
 }
 
 // Contains a numeric value in decimal format.
 type DecimalNumber struct {
 
-	// The unscaled numeric value.
-	//
-	// This member is required.
-	UnscaledValue []byte
-
 	// The scale that determines where the decimal point falls in the unscaled value.
 	//
 	// This member is required.
 	Scale *int32
+
+	// The unscaled numeric value.
+	//
+	// This member is required.
+	UnscaledValue []byte
 }
 
 // A development endpoint where a developer can remotely debug extract, transform,
 // and load (ETL) scripts.
 type DevEndpoint struct {
 
-	// The public key to be used by this DevEndpoint for authentication. This attribute
-	// is provided for backward compatibility because the recommended attribute to use
-	// is public keys.
-	PublicKey *string
+	// A map of arguments used to configure the DevEndpoint. Valid arguments are:
+	//
+	//
+	// * "--enable-glue-datacatalog": ""
+	//
+	//     * "GLUE_PYTHON_VERSION": "3"
+	//
+	//     *
+	// "GLUE_PYTHON_VERSION": "2"
+	//
+	//     <p>You can specify a version of Python support
+	// for development endpoints by using the <code>Arguments</code> parameter in the
+	// <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no
+	// arguments are provided, the version defaults to Python 2.</p>
+	Arguments map[string]*string
 
-	// A list of security group identifiers used in this DevEndpoint.
-	SecurityGroupIds []*string
+	// The AWS Availability Zone where this DevEndpoint is located.
+	AvailabilityZone *string
 
-	// A private IP address to access the DevEndpoint within a VPC if the DevEndpoint
-	// is created within one. The PrivateAddress field is present only when you create
-	// the DevEndpoint within your VPC.
-	PrivateAddress *string
+	// The point in time at which this DevEndpoint was created.
+	CreatedTimestamp *time.Time
 
-	// The name of the SecurityConfiguration structure to be used with this
-	// DevEndpoint.
-	SecurityConfiguration *string
-
-	// The YARN endpoint address used by this DevEndpoint.
-	YarnEndpointAddress *string
+	// The name of the DevEndpoint.
+	EndpointName *string
 
 	// The path to one or more Java .jar files in an S3 bucket that should be loaded in
 	// your DevEndpoint. You can only use pure Java/Scala libraries with a DevEndpoint.
 	ExtraJarsS3Path *string
-
-	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
-	// DevEndpoint.
-	NumberOfNodes *int32
-
-	// The AWS Availability Zone where this DevEndpoint is located.
-	AvailabilityZone *string
 
 	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
 	// loaded in your DevEndpoint. Multiple values must be complete paths separated by
@@ -1010,11 +1008,78 @@ type DevEndpoint struct {
 	// not currently supported.</p> </note>
 	ExtraPythonLibsS3Path *string
 
+	// The reason for a current failure in this DevEndpoint.
+	FailureReason *string
+
+	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// supports. The Python version indicates the version supported for running your
+	// ETL scripts on development endpoints.  <p>For more information about the
+	// available AWS Glue versions and corresponding Spark and Python versions, see <a
+	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
+	// in the developer guide.</p> <p>Development endpoints that are created without
+	// specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version
+	// of Python support for development endpoints by using the <code>Arguments</code>
+	// parameter in the <code>CreateDevEndpoint</code> or
+	// <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version
+	// defaults to Python 2.</p>
+	GlueVersion *string
+
+	// The point in time at which this DevEndpoint was last modified.
+	LastModifiedTimestamp *time.Time
+
+	// The status of the last update.
+	LastUpdateStatus *string
+
+	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
+	// DevEndpoint.
+	NumberOfNodes *int32
+
+	// The number of workers of a defined workerType that are allocated to the
+	// development endpoint.  <p>The maximum number of workers you can define are 299
+	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	NumberOfWorkers *int32
+
+	// A private IP address to access the DevEndpoint within a VPC if the DevEndpoint
+	// is created within one. The PrivateAddress field is present only when you create
+	// the DevEndpoint within your VPC.
+	PrivateAddress *string
+
+	// The public IP address used by this DevEndpoint. The PublicAddress field is
+	// present only when you create a non-virtual private cloud (VPC) DevEndpoint.
+	PublicAddress *string
+
+	// The public key to be used by this DevEndpoint for authentication. This attribute
+	// is provided for backward compatibility because the recommended attribute to use
+	// is public keys.
+	PublicKey *string
+
+	// A list of public keys to be used by the DevEndpoints for authentication. Using
+	// this attribute is preferred over a single public key because the public keys
+	// allow you to have a different private key per client. If you previously created
+	// an endpoint with a public key, you must remove that key to be able to set a list
+	// of public keys. Call the UpdateDevEndpoint API operation with the public key
+	// content in the deletePublicKeys attribute, and the list of new keys in the
+	// addPublicKeys attribute.
+	PublicKeys []*string
+
 	// The Amazon Resource Name (ARN) of the IAM role used in this DevEndpoint.
 	RoleArn *string
 
-	// The Apache Zeppelin port for the remote Apache Spark interpreter.
-	ZeppelinRemoteSparkInterpreterPort *int32
+	// The name of the SecurityConfiguration structure to be used with this
+	// DevEndpoint.
+	SecurityConfiguration *string
+
+	// A list of security group identifiers used in this DevEndpoint.
+	SecurityGroupIds []*string
+
+	// The current status of this DevEndpoint.
+	Status *string
+
+	// The subnet ID for this DevEndpoint.
+	SubnetId *string
+
+	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
+	VpcId *string
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
@@ -1038,76 +1103,11 @@ type DevEndpoint struct {
 	// </p>
 	WorkerType WorkerType
 
-	// The public IP address used by this DevEndpoint. The PublicAddress field is
-	// present only when you create a non-virtual private cloud (VPC) DevEndpoint.
-	PublicAddress *string
+	// The YARN endpoint address used by this DevEndpoint.
+	YarnEndpointAddress *string
 
-	// The status of the last update.
-	LastUpdateStatus *string
-
-	// The subnet ID for this DevEndpoint.
-	SubnetId *string
-
-	// A list of public keys to be used by the DevEndpoints for authentication. Using
-	// this attribute is preferred over a single public key because the public keys
-	// allow you to have a different private key per client. If you previously created
-	// an endpoint with a public key, you must remove that key to be able to set a list
-	// of public keys. Call the UpdateDevEndpoint API operation with the public key
-	// content in the deletePublicKeys attribute, and the list of new keys in the
-	// addPublicKeys attribute.
-	PublicKeys []*string
-
-	// The number of workers of a defined workerType that are allocated to the
-	// development endpoint.  <p>The maximum number of workers you can define are 299
-	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
-	NumberOfWorkers *int32
-
-	// The point in time at which this DevEndpoint was created.
-	CreatedTimestamp *time.Time
-
-	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
-	VpcId *string
-
-	// The name of the DevEndpoint.
-	EndpointName *string
-
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
-	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints.  <p>For more information about the
-	// available AWS Glue versions and corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Development endpoints that are created without
-	// specifying a Glue version default to Glue 0.9.</p> <p>You can specify a version
-	// of Python support for development endpoints by using the <code>Arguments</code>
-	// parameter in the <code>CreateDevEndpoint</code> or
-	// <code>UpdateDevEndpoint</code> APIs. If no arguments are provided, the version
-	// defaults to Python 2.</p>
-	GlueVersion *string
-
-	// A map of arguments used to configure the DevEndpoint. Valid arguments are:
-	//
-	//
-	// * "--enable-glue-datacatalog": ""
-	//
-	//     * "GLUE_PYTHON_VERSION": "3"
-	//
-	//     *
-	// "GLUE_PYTHON_VERSION": "2"
-	//
-	//     <p>You can specify a version of Python support
-	// for development endpoints by using the <code>Arguments</code> parameter in the
-	// <code>CreateDevEndpoint</code> or <code>UpdateDevEndpoint</code> APIs. If no
-	// arguments are provided, the version defaults to Python 2.</p>
-	Arguments map[string]*string
-
-	// The point in time at which this DevEndpoint was last modified.
-	LastModifiedTimestamp *time.Time
-
-	// The current status of this DevEndpoint.
-	Status *string
-
-	// The reason for a current failure in this DevEndpoint.
-	FailureReason *string
+	// The Apache Zeppelin port for the remote Apache Spark interpreter.
+	ZeppelinRemoteSparkInterpreterPort *int32
 }
 
 // Custom libraries to be loaded into a development endpoint.
@@ -1129,9 +1129,6 @@ type DevEndpointCustomLibraries struct {
 // Defines a double column statistics data.
 type DoubleColumnStatisticsData struct {
 
-	// Minimum value of the column.
-	MinimumValue *float64
-
 	// Number of distinct values.
 	//
 	// This member is required.
@@ -1144,10 +1141,16 @@ type DoubleColumnStatisticsData struct {
 
 	// Maximum value of the column.
 	MaximumValue *float64
+
+	// Minimum value of the column.
+	MinimumValue *float64
 }
 
 // Specifies an Amazon DynamoDB table to crawl.
 type DynamoDBTarget struct {
+
+	// The name of the DynamoDB table to crawl.
+	Path *string
 
 	// Indicates whether to scan all the records, or to sample rows from the table.
 	// Scanning all the records can take a long time when the table is not a high
@@ -1164,45 +1167,42 @@ type DynamoDBTarget struct {
 	// 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of
 	// the max configured Read Capacity Unit (for tables using on-demand mode).</p>
 	ScanRate *float64
-
-	// The name of the DynamoDB table to crawl.
-	Path *string
 }
 
 // An edge represents a directed connection between two AWS Glue components that
 // are part of the workflow the edge belongs to.
 type Edge struct {
 
-	// The unique of the node within the workflow where the edge starts.
-	SourceId *string
-
 	// The unique of the node within the workflow where the edge ends.
 	DestinationId *string
+
+	// The unique of the node within the workflow where the edge starts.
+	SourceId *string
 }
 
 // Specifies the encryption-at-rest configuration for the Data Catalog.
 type EncryptionAtRest struct {
 
-	// The ID of the AWS KMS key to use for encryption at rest.
-	SseAwsKmsKeyId *string
-
 	// The encryption-at-rest mode for encrypting Data Catalog data.
 	//
 	// This member is required.
 	CatalogEncryptionMode CatalogEncryptionMode
+
+	// The ID of the AWS KMS key to use for encryption at rest.
+	SseAwsKmsKeyId *string
 }
 
 // Specifies an encryption configuration.
 type EncryptionConfiguration struct {
-
-	// The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.
-	S3Encryption []*S3Encryption
 
 	// The encryption configuration for Amazon CloudWatch.
 	CloudWatchEncryption *CloudWatchEncryption
 
 	// The encryption configuration for job bookmarks.
 	JobBookmarksEncryption *JobBookmarksEncryption
+
+	// The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.
+	S3Encryption []*S3Encryption
 }
 
 // Contains details about an error.
@@ -1219,13 +1219,13 @@ type ErrorDetail struct {
 // transform.
 type EvaluationMetrics struct {
 
-	// The evaluation metrics for the find matches algorithm.
-	FindMatchesMetrics *FindMatchesMetrics
-
 	// The type of machine learning transform.
 	//
 	// This member is required.
 	TransformType TransformType
+
+	// The evaluation metrics for the find matches algorithm.
+	FindMatchesMetrics *FindMatchesMetrics
 }
 
 // An execution property of a job.
@@ -1251,18 +1251,6 @@ type ExportLabelsTaskRunProperties struct {
 // quality metrics are based on a subset of your data, so they are not precise.
 type FindMatchesMetrics struct {
 
-	// The confusion matrix shows you what your transform is predicting accurately and
-	// what types of errors it is making. For more information, see Confusion matrix
-	// (https://en.wikipedia.org/wiki/Confusion_matrix) in Wikipedia.
-	ConfusionMatrix *ConfusionMatrix
-
-	// The precision metric indicates when often your transform is correct when it
-	// predicts a match. Specifically, it measures how well the transform finds true
-	// positives from the total true positives possible. For more information, see
-	// Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall) in
-	// Wikipedia.
-	Precision *float64
-
 	// The area under the precision/recall curve (AUPRC) is a single number measuring
 	// the overall quality of the transform, that is independent of the choice made for
 	// precision vs. recall. Higher values indicate that you have a more attractive
@@ -1270,10 +1258,22 @@ type FindMatchesMetrics struct {
 	// (https://en.wikipedia.org/wiki/Precision_and_recall) in Wikipedia.
 	AreaUnderPRCurve *float64
 
+	// The confusion matrix shows you what your transform is predicting accurately and
+	// what types of errors it is making. For more information, see Confusion matrix
+	// (https://en.wikipedia.org/wiki/Confusion_matrix) in Wikipedia.
+	ConfusionMatrix *ConfusionMatrix
+
 	// The maximum F1 metric indicates the transform's accuracy between 0 and 1, where
 	// 1 is the best accuracy. For more information, see F1 score
 	// (https://en.wikipedia.org/wiki/F1_score) in Wikipedia.
 	F1 *float64
+
+	// The precision metric indicates when often your transform is correct when it
+	// predicts a match. Specifically, it measures how well the transform finds true
+	// positives from the total true positives possible. For more information, see
+	// Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall) in
+	// Wikipedia.
+	Precision *float64
 
 	// The recall metric indicates that for an actual match, how often your transform
 	// predicts the match. Specifically, it measures how well the transform finds true
@@ -1285,18 +1285,6 @@ type FindMatchesMetrics struct {
 
 // The parameters to configure the find matches transform.
 type FindMatchesParameters struct {
-
-	// The name of a column that uniquely identifies rows in the source table. Used to
-	// help identify matching records.
-	PrimaryKeyColumnName *string
-
-	// The value to switch on or off to force the output to match the provided labels
-	// from users. If the value is True, the find matches transform forces the output
-	// to match the provided labels. The results override the normal conflation
-	// results. If the value is False, the find matches transform does not ensure all
-	// the labels provided are respected, and the results rely on the trained model.
-	// Note that setting this value to true may increase the conflation execution time.
-	EnforceProvidedLabels *bool
 
 	// The value that is selected when tuning your transform for a balance between
 	// accuracy and cost. A value of 0.5 means that the system balances accuracy and
@@ -1310,6 +1298,14 @@ type FindMatchesParameters struct {
 	// the transform.</p>
 	AccuracyCostTradeoff *float64
 
+	// The value to switch on or off to force the output to match the provided labels
+	// from users. If the value is True, the find matches transform forces the output
+	// to match the provided labels. The results override the normal conflation
+	// results. If the value is False, the find matches transform does not ensure all
+	// the labels provided are respected, and the results rely on the trained model.
+	// Note that setting this value to true may increase the conflation execution time.
+	EnforceProvidedLabels *bool
+
 	// The value selected when tuning your transform for a balance between precision
 	// and recall. A value of 0.5 means no preference; a value of 1.0 means a bias
 	// purely for precision, and a value of 0.0 means a bias for recall. Because this
@@ -1319,6 +1315,10 @@ type FindMatchesParameters struct {
 	// recall metric indicates that for an actual match, how often your model predicts
 	// the match.</p>
 	PrecisionRecallTradeoff *float64
+
+	// The name of a column that uniquely identifies rows in the source table. Used to
+	// help identify matching records.
+	PrimaryKeyColumnName *string
 }
 
 // Specifies configuration properties for a Find Matches task run.
@@ -1327,11 +1327,11 @@ type FindMatchesTaskRunProperties struct {
 	// The job ID for the Find Matches task run.
 	JobId *string
 
-	// The job run ID for the Find Matches task run.
-	JobRunId *string
-
 	// The name assigned to the job for the Find Matches task run.
 	JobName *string
+
+	// The job run ID for the Find Matches task run.
+	JobRunId *string
 }
 
 // Filters the connection definitions that are returned by the GetConnections API
@@ -1349,17 +1349,17 @@ type GetConnectionsFilter struct {
 // A structure for returning a resource policy.
 type GluePolicy struct {
 
-	// The date and time at which the policy was last updated.
-	UpdateTime *time.Time
-
-	// Contains the requested policy document, in JSON format.
-	PolicyInJson *string
+	// The date and time at which the policy was created.
+	CreateTime *time.Time
 
 	// Contains the hash value associated with this policy.
 	PolicyHash *string
 
-	// The date and time at which the policy was created.
-	CreateTime *time.Time
+	// Contains the requested policy document, in JSON format.
+	PolicyInJson *string
+
+	// The date and time at which the policy was last updated.
+	UpdateTime *time.Time
 }
 
 // The database and table in the AWS Glue Data Catalog that is used for input or
@@ -1371,13 +1371,13 @@ type GlueTable struct {
 	// This member is required.
 	DatabaseName *string
 
-	// A unique identifier for the AWS Glue Data Catalog.
-	CatalogId *string
-
 	// A table name in the AWS Glue Data Catalog.
 	//
 	// This member is required.
 	TableName *string
+
+	// A unique identifier for the AWS Glue Data Catalog.
+	CatalogId *string
 
 	// The name of the connection to the AWS Glue Data Catalog.
 	ConnectionName *string
@@ -1386,10 +1386,11 @@ type GlueTable struct {
 // A classifier that uses grok patterns.
 type GrokClassifier struct {
 
-	// Optional custom grok patterns defined by this classifier. For more information,
-	// see custom patterns in Writing Custom Classifiers
-	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
-	CustomPatterns *string
+	// An identifier of the data format that the classifier matches, such as Twitter,
+	// JSON, Omniture logs, and so on.
+	//
+	// This member is required.
+	Classification *string
 
 	// The grok pattern applied to a data store by this classifier. For more
 	// information, see built-in patterns in Writing Custom Classifiers
@@ -1398,25 +1399,24 @@ type GrokClassifier struct {
 	// This member is required.
 	GrokPattern *string
 
-	// The version of this classifier.
-	Version *int64
-
-	// The time that this classifier was last updated.
-	LastUpdated *time.Time
-
-	// An identifier of the data format that the classifier matches, such as Twitter,
-	// JSON, Omniture logs, and so on.
-	//
-	// This member is required.
-	Classification *string
-
-	// The time that this classifier was registered.
-	CreationTime *time.Time
-
 	// The name of the classifier.
 	//
 	// This member is required.
 	Name *string
+
+	// The time that this classifier was registered.
+	CreationTime *time.Time
+
+	// Optional custom grok patterns defined by this classifier. For more information,
+	// see custom patterns in Writing Custom Classifiers
+	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html).
+	CustomPatterns *string
+
+	// The time that this classifier was last updated.
+	LastUpdated *time.Time
+
+	// The version of this classifier.
+	Version *int64
 }
 
 // Specifies configuration properties for an importing labels task run.
@@ -1436,28 +1436,52 @@ type JdbcTarget struct {
 	// The name of the connection to use to connect to the JDBC target.
 	ConnectionName *string
 
-	// The path of the JDBC target.
-	Path *string
-
 	// A list of glob patterns used to exclude from the crawl. For more information,
 	// see Catalog Tables with a Crawler
 	// (https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html).
 	Exclusions []*string
+
+	// The path of the JDBC target.
+	Path *string
 }
 
 // Specifies a job definition.
 type Job struct {
 
-	// This field is reserved for future use.
-	LogUri *string
+	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
+	// data processing units (DPUs) allocated to runs of this job. You can allocate
+	// from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
+	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
+	// pricing page</a>.</p> <p></p>
+	AllocatedCapacity *int32
 
 	// The JobCommand that executes this job.
 	Command *JobCommand
 
-	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
-	NumberOfWorkers *int32
+	// The connections used for this job.
+	Connections *ConnectionsList
+
+	// The time and date that this job definition was created.
+	CreatedOn *time.Time
+
+	// The default arguments for this job, specified as name-value pairs. You can
+	// specify arguments here that your own job-execution script consumes, as well as
+	// arguments that AWS Glue itself consumes. For information about how to specify
+	// and consume your own Job arguments, see the Calling AWS Glue APIs in Python
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide. For information about the key-value pairs that AWS
+	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// topic in the developer guide.
+	DefaultArguments map[string]*string
+
+	// A description of the job.
+	Description *string
+
+	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
+	// for this job.
+	ExecutionProperty *ExecutionProperty
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
@@ -1468,49 +1492,11 @@ type Job struct {
 	// version default to Glue 0.9.</p>
 	GlueVersion *string
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value
-	// of Standard, G.1X, or G.2X.
-	//
-	//     * For the Standard worker type, each worker
-	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
-	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
-	// for memory-intensive jobs.
-	//
-	//     * For the G.2X worker type, each worker maps to
-	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
-	// worker. We recommend this worker type for memory-intensive jobs.
-	WorkerType WorkerType
+	// The last point in time when this job definition was modified.
+	LastModifiedOn *time.Time
 
-	// Specifies configuration properties of a job notification.
-	NotificationProperty *NotificationProperty
-
-	// The name of the SecurityConfiguration structure to be used with this job.
-	SecurityConfiguration *string
-
-	// The time and date that this job definition was created.
-	CreatedOn *time.Time
-
-	// The name you assign to this job definition.
-	Name *string
-
-	// The connections used for this job.
-	Connections *ConnectionsList
-
-	// The job timeout in minutes. This is the maximum time that a job run can consume
-	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
-	Timeout *int32
-
-	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
-	// data processing units (DPUs) allocated to runs of this job. You can allocate
-	// from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
-	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p> <p></p>
-	AllocatedCapacity *int32
+	// This field is reserved for future use.
+	LogUri *string
 
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
@@ -1529,42 +1515,65 @@ type Job struct {
 	// allocation.</p> </li> </ul>
 	MaxCapacity *float64
 
-	// Non-overridable arguments for this job, specified as name-value pairs.
-	NonOverridableArguments map[string]*string
-
 	// The maximum number of times to retry this job after a JobRun fails.
 	MaxRetries *int32
 
-	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
-	// for this job.
-	ExecutionProperty *ExecutionProperty
+	// The name you assign to this job definition.
+	Name *string
 
-	// The last point in time when this job definition was modified.
-	LastModifiedOn *time.Time
+	// Non-overridable arguments for this job, specified as name-value pairs.
+	NonOverridableArguments map[string]*string
 
-	// The default arguments for this job, specified as name-value pairs. You can
-	// specify arguments here that your own job-execution script consumes, as well as
-	// arguments that AWS Glue itself consumes. For information about how to specify
-	// and consume your own Job arguments, see the Calling AWS Glue APIs in Python
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-	// topic in the developer guide.
-	DefaultArguments map[string]*string
+	// Specifies configuration properties of a job notification.
+	NotificationProperty *NotificationProperty
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.  <p>The maximum number of workers you can define are 299 for
+	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	NumberOfWorkers *int32
 
 	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
 	Role *string
 
-	// A description of the job.
-	Description *string
+	// The name of the SecurityConfiguration structure to be used with this job.
+	SecurityConfiguration *string
+
+	// The job timeout in minutes. This is the maximum time that a job run can consume
+	// resources before it is terminated and enters TIMEOUT status. The default is
+	// 2,880 minutes (48 hours).
+	Timeout *int32
+
+	// The type of predefined worker that is allocated when a job runs. Accepts a value
+	// of Standard, G.1X, or G.2X.
+	//
+	//     * For the Standard worker type, each worker
+	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
+	//
+	//
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
+	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
+	// for memory-intensive jobs.
+	//
+	//     * For the G.2X worker type, each worker maps to
+	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
+	// worker. We recommend this worker type for memory-intensive jobs.
+	WorkerType WorkerType
 }
 
 // Defines a point that a job can resume processing.
 type JobBookmarkEntry struct {
 
+	// The attempt ID number.
+	Attempt *int32
+
 	// The bookmark itself.
 	JobBookmark *string
+
+	// The name of the job in question.
+	JobName *string
+
+	// The unique run identifier associated with the previous job run.
+	PreviousRunId *string
 
 	// The run ID number.
 	Run *int32
@@ -1572,17 +1581,8 @@ type JobBookmarkEntry struct {
 	// The run ID number.
 	RunId *string
 
-	// The name of the job in question.
-	JobName *string
-
 	// The version of the job.
 	Version *int32
-
-	// The unique run identifier associated with the previous job run.
-	PreviousRunId *string
-
-	// The attempt ID number.
-	Attempt *int32
 }
 
 // Specifies how job bookmark data should be encrypted.
@@ -1603,13 +1603,13 @@ type JobCommand struct {
 	// ETL job, this must be gluestreaming.
 	Name *string
 
-	// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that
-	// executes a job.
-	ScriptLocation *string
-
 	// The Python version being used to execute a Python shell job. Allowed values are
 	// 2 or 3.
 	PythonVersion *string
+
+	// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that
+	// executes a job.
+	ScriptLocation *string
 }
 
 // The details of a Job node present in the workflow.
@@ -1622,8 +1622,37 @@ type JobNodeDetails struct {
 // Contains information about a job run.
 type JobRun struct {
 
+	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
+	// data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be
+	// allocated; the default is 10. A DPU is a relative measure of processing power
+	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
+	// pricing page</a>.</p>
+	AllocatedCapacity *int32
+
+	// The job arguments associated with this run. For this job run, they replace the
+	// default arguments set in the job definition itself. You can specify arguments
+	// here that your own job-execution script consumes, as well as arguments that AWS
+	// Glue itself consumes. For information about how to specify and consume your own
+	// job arguments, see the Calling AWS Glue APIs in Python
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
+	// topic in the developer guide. For information about the key-value pairs that AWS
+	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
+	// topic in the developer guide.
+	Arguments map[string]*string
+
 	// The number of the attempt to run this job.
 	Attempt *int32
+
+	// The date and time that this job run completed.
+	CompletedOn *time.Time
+
+	// An error message associated with this job run.
+	ErrorMessage *string
+
+	// The amount of time (in seconds) that the job run consumed resources.
+	ExecutionTime *int32
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
@@ -1634,33 +1663,25 @@ type JobRun struct {
 	// version default to Glue 0.9.</p>
 	GlueVersion *string
 
-	// The date and time at which this job run was started.
-	StartedOn *time.Time
+	// The ID of this job run.
+	Id *string
 
-	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
-	NumberOfWorkers *int32
+	// The name of the job definition being used in this run.
+	JobName *string
 
-	// The amount of time (in seconds) that the job run consumed resources.
-	ExecutionTime *int32
+	// The current state of the job run.
+	JobRunState JobRunState
 
-	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
-	// data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be
-	// allocated; the default is 10. A DPU is a relative measure of processing power
-	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p>
-	AllocatedCapacity *int32
+	// The last time that this job run was modified.
+	LastModifiedOn *time.Time
 
-	// A list of predecessors to this job run.
-	PredecessorRuns []*Predecessor
-
-	// The JobRun timeout in minutes. This is the maximum time that a job run can
-	// consume resources before it is terminated and enters TIMEOUT status. The default
-	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
-	// job.
-	Timeout *int32
+	// The name of the log group for secure logging that can be server-side encrypted
+	// in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which
+	// case the default encryption is NONE. If you add a role name and
+	// SecurityConfiguration name (in other words,
+	// /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security
+	// configuration is used to encrypt the log group.
+	LogGroupName *string
 
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
@@ -1678,8 +1699,35 @@ type JobRun struct {
 	// allocation.</p> </li> </ul>
 	MaxCapacity *float64
 
-	// The current state of the job run.
-	JobRunState JobRunState
+	// Specifies configuration properties of a job run notification.
+	NotificationProperty *NotificationProperty
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.  <p>The maximum number of workers you can define are 299 for
+	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	NumberOfWorkers *int32
+
+	// A list of predecessors to this job run.
+	PredecessorRuns []*Predecessor
+
+	// The ID of the previous run of this job. For example, the JobRunId specified in
+	// the StartJobRun action.
+	PreviousRunId *string
+
+	// The name of the SecurityConfiguration structure to be used with this job run.
+	SecurityConfiguration *string
+
+	// The date and time at which this job run was started.
+	StartedOn *time.Time
+
+	// The JobRun timeout in minutes. This is the maximum time that a job run can
+	// consume resources before it is terminated and enters TIMEOUT status. The default
+	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
+	// job.
+	Timeout *int32
+
+	// The name of the trigger that started this job run.
+	TriggerName *string
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a value
 	// of Standard, G.1X, or G.2X.
@@ -1695,63 +1743,11 @@ type JobRun struct {
 	// worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per
 	// worker.
 	WorkerType WorkerType
-
-	// An error message associated with this job run.
-	ErrorMessage *string
-
-	// The name of the log group for secure logging that can be server-side encrypted
-	// in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which
-	// case the default encryption is NONE. If you add a role name and
-	// SecurityConfiguration name (in other words,
-	// /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security
-	// configuration is used to encrypt the log group.
-	LogGroupName *string
-
-	// The name of the SecurityConfiguration structure to be used with this job run.
-	SecurityConfiguration *string
-
-	// The date and time that this job run completed.
-	CompletedOn *time.Time
-
-	// The name of the job definition being used in this run.
-	JobName *string
-
-	// The ID of this job run.
-	Id *string
-
-	// The ID of the previous run of this job. For example, the JobRunId specified in
-	// the StartJobRun action.
-	PreviousRunId *string
-
-	// Specifies configuration properties of a job run notification.
-	NotificationProperty *NotificationProperty
-
-	// The last time that this job run was modified.
-	LastModifiedOn *time.Time
-
-	// The job arguments associated with this run. For this job run, they replace the
-	// default arguments set in the job definition itself. You can specify arguments
-	// here that your own job-execution script consumes, as well as arguments that AWS
-	// Glue itself consumes. For information about how to specify and consume your own
-	// job arguments, see the Calling AWS Glue APIs in Python
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the key-value pairs that AWS
-	// Glue consumes to set up your job, see the Special Parameters Used by AWS Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-	// topic in the developer guide.
-	Arguments map[string]*string
-
-	// The name of the trigger that started this job run.
-	TriggerName *string
 }
 
 // Specifies information used to update an existing job definition. The previous
 // job definition is completely overwritten by this information.
 type JobUpdate struct {
-
-	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
-	// for this job.
-	ExecutionProperty *ExecutionProperty
 
 	// This field is deprecated. Use MaxCapacity instead.  <p>The number of AWS Glue
 	// data processing units (DPUs) to allocate to this job. You can allocate from 2 to
@@ -1761,28 +1757,11 @@ type JobUpdate struct {
 	// pricing page</a>.</p>
 	AllocatedCapacity *int32
 
-	// The job timeout in minutes. This is the maximum time that a job run can consume
-	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
-	Timeout *int32
-
-	// The connections used for this job.
-	Connections *ConnectionsList
-
-	// Specifies the configuration properties of a job notification.
-	NotificationProperty *NotificationProperty
-
 	// The JobCommand that executes this job (required).
 	Command *JobCommand
 
-	// The name of the SecurityConfiguration structure to be used with this job.
-	SecurityConfiguration *string
-
-	// This field is reserved for future use.
-	LogUri *string
-
-	// Non-overridable arguments for this job, specified as name-value pairs.
-	NonOverridableArguments map[string]*string
+	// The connections used for this job.
+	Connections *ConnectionsList
 
 	// The default arguments for this job. You can specify arguments here that your own
 	// job-execution script consumes, as well as arguments that AWS Glue itself
@@ -1795,8 +1774,12 @@ type JobUpdate struct {
 	// topic in the developer guide.
 	DefaultArguments map[string]*string
 
-	// The maximum number of times to retry this job if it fails.
-	MaxRetries *int32
+	// Description of the job being defined.
+	Description *string
+
+	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
+	// for this job.
+	ExecutionProperty *ExecutionProperty
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for jobs of type
@@ -1806,24 +1789,8 @@ type JobUpdate struct {
 	// in the developer guide.</p>
 	GlueVersion *string
 
-	// The type of predefined worker that is allocated when a job runs. Accepts a value
-	// of Standard, G.1X, or G.2X.
-	//
-	//     * For the Standard worker type, each worker
-	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
-	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
-	// for memory-intensive jobs.
-	//
-	//     * For the G.2X worker type, each worker maps to
-	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
-	// worker. We recommend this worker type for memory-intensive jobs.
-	WorkerType WorkerType
-
-	// Description of the job being defined.
-	Description *string
+	// This field is reserved for future use.
+	LogUri *string
 
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
@@ -1841,6 +1808,15 @@ type JobUpdate struct {
 	// allocation.</p> </li> </ul>
 	MaxCapacity *float64
 
+	// The maximum number of times to retry this job if it fails.
+	MaxRetries *int32
+
+	// Non-overridable arguments for this job, specified as name-value pairs.
+	NonOverridableArguments map[string]*string
+
+	// Specifies the configuration properties of a job notification.
+	NotificationProperty *NotificationProperty
+
 	// The number of workers of a defined workerType that are allocated when a job
 	// runs.  <p>The maximum number of workers you can define are 299 for
 	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
@@ -1849,6 +1825,30 @@ type JobUpdate struct {
 	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job
 	// (required).
 	Role *string
+
+	// The name of the SecurityConfiguration structure to be used with this job.
+	SecurityConfiguration *string
+
+	// The job timeout in minutes. This is the maximum time that a job run can consume
+	// resources before it is terminated and enters TIMEOUT status. The default is
+	// 2,880 minutes (48 hours).
+	Timeout *int32
+
+	// The type of predefined worker that is allocated when a job runs. Accepts a value
+	// of Standard, G.1X, or G.2X.
+	//
+	//     * For the Standard worker type, each worker
+	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
+	//
+	//
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
+	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
+	// for memory-intensive jobs.
+	//
+	//     * For the G.2X worker type, each worker maps to
+	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
+	// worker. We recommend this worker type for memory-intensive jobs.
+	WorkerType WorkerType
 }
 
 // A classifier for JSON content.
@@ -1862,13 +1862,13 @@ type JsonClassifier struct {
 	// This member is required.
 	JsonPath *string
 
-	// The time that this classifier was registered.
-	CreationTime *time.Time
-
 	// The name of the classifier.
 	//
 	// This member is required.
 	Name *string
+
+	// The time that this classifier was registered.
+	CreationTime *time.Time
 
 	// The time that this classifier was last updated.
 	LastUpdated *time.Time
@@ -1888,40 +1888,45 @@ type LabelingSetGenerationTaskRunProperties struct {
 // Status and error information about the most recent crawl.
 type LastCrawlInfo struct {
 
-	// The time at which the crawl started.
-	StartTime *time.Time
+	// If an error occurred, the error information about the last crawl.
+	ErrorMessage *string
 
 	// The log group for the last crawl.
 	LogGroup *string
 
-	// The prefix for a message about this crawl.
-	MessagePrefix *string
-
 	// The log stream for the last crawl.
 	LogStream *string
 
+	// The prefix for a message about this crawl.
+	MessagePrefix *string
+
+	// The time at which the crawl started.
+	StartTime *time.Time
+
 	// Status of the last crawl.
 	Status LastCrawlStatus
-
-	// If an error occurred, the error information about the last crawl.
-	ErrorMessage *string
 }
 
 // The location of resources.
 type Location struct {
-
-	// An Amazon Simple Storage Service (Amazon S3) location.
-	S3 []*CodeGenNodeArg
 
 	// An Amazon DynamoDB table location.
 	DynamoDB []*CodeGenNodeArg
 
 	// A JDBC location.
 	Jdbc []*CodeGenNodeArg
+
+	// An Amazon Simple Storage Service (Amazon S3) location.
+	S3 []*CodeGenNodeArg
 }
 
 // Defines a long column statistics data.
 type LongColumnStatisticsData struct {
+
+	// Number of distinct values.
+	//
+	// This member is required.
+	NumberOfDistinctValues *int64
 
 	// Number of nulls.
 	//
@@ -1931,11 +1936,6 @@ type LongColumnStatisticsData struct {
 	// Maximum value of the column.
 	MaximumValue *int64
 
-	// Number of distinct values.
-	//
-	// This member is required.
-	NumberOfDistinctValues *int64
-
 	// Minimum value of the column.
 	MinimumValue *int64
 }
@@ -1943,42 +1943,38 @@ type LongColumnStatisticsData struct {
 // Defines a mapping.
 type MappingEntry struct {
 
+	// The source path.
+	SourcePath *string
+
 	// The name of the source table.
 	SourceTable *string
 
-	// The target type.
-	TargetType *string
-
-	// The target table.
-	TargetTable *string
-
-	// The source path.
-	SourcePath *string
+	// The source type.
+	SourceType *string
 
 	// The target path.
 	TargetPath *string
 
-	// The source type.
-	SourceType *string
+	// The target table.
+	TargetTable *string
+
+	// The target type.
+	TargetType *string
 }
 
 // A structure for a machine learning transform.
 type MLTransform struct {
 
-	// A count identifier for the labeling files generated by AWS Glue for this
-	// transform. As you create a better transform, you can iteratively download,
-	// label, and upload the labeling file.
-	LabelCount *int32
+	// A timestamp. The time and date that this machine learning transform was created.
+	CreatedOn *time.Time
 
-	// A timestamp. The last point in time when this machine learning transform was
-	// modified.
-	LastModifiedOn *time.Time
+	// A user-defined, long-form description text for the machine learning transform.
+	// Descriptions are not guaranteed to be unique and can be changed at any time.
+	Description *string
 
-	// A TransformParameters object. You can use parameters to tune (customize) the
-	// behavior of the machine learning transform by specifying what data it learns
-	// from and your preference on various tradeoffs (such as precious vs. recall, or
-	// accuracy vs. cost).
-	Parameters *TransformParameters
+	// An EvaluationMetrics object. Evaluation metrics provide an estimate of the
+	// quality of your machine learning transform.
+	EvaluationMetrics *EvaluationMetrics
 
 	// This value determines which version of AWS Glue this machine learning transform
 	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
@@ -1988,58 +1984,17 @@ type MLTransform struct {
 	// in the developer guide.
 	GlueVersion *string
 
-	// A user-defined name for the machine learning transform. Names are not guaranteed
-	// unique and can be changed at any time.
-	Name *string
-
-	// An EvaluationMetrics object. Evaluation metrics provide an estimate of the
-	// quality of your machine learning transform.
-	EvaluationMetrics *EvaluationMetrics
-
-	// A map of key-value pairs representing the columns and data types that this
-	// transform can run against. Has an upper bound of 100 columns.
-	Schema []*SchemaColumn
-
-	// A user-defined, long-form description text for the machine learning transform.
-	// Descriptions are not guaranteed to be unique and can be changed at any time.
-	Description *string
-
-	// The timeout in minutes of the machine learning transform.
-	Timeout *int32
-
 	// A list of AWS Glue table definitions used by the transform.
 	InputRecordTables []*GlueTable
 
-	// The maximum number of times to retry after an MLTaskRun of the machine learning
-	// transform fails.
-	MaxRetries *int32
+	// A count identifier for the labeling files generated by AWS Glue for this
+	// transform. As you create a better transform, you can iteratively download,
+	// label, and upload the labeling file.
+	LabelCount *int32
 
-	// The number of workers of a defined workerType that are allocated when a task of
-	// the transform runs.  <p>If <code>WorkerType</code> is set, then
-	// <code>NumberOfWorkers</code> is required (and vice versa).</p>
-	NumberOfWorkers *int32
-
-	// The name or Amazon Resource Name (ARN) of the IAM role with the required
-	// permissions. The required permissions include both AWS Glue service role
-	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
-	// transform.  <ul> <li> <p>This role needs AWS Glue service role permissions to
-	// allow access to resources in AWS Glue. See <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach
-	// a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role
-	// needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
-	// targets, temporary directory, scripts, and any libraries used by the task run
-	// for this transform.</p> </li> </ul>
-	Role *string
-
-	// The current status of the machine learning transform.
-	Status TransformStatusType
-
-	// The unique transform ID that is generated for the machine learning transform.
-	// The ID is guaranteed to be unique and does not change.
-	TransformId *string
-
-	// A timestamp. The time and date that this machine learning transform was created.
-	CreatedOn *time.Time
+	// A timestamp. The last point in time when this machine learning transform was
+	// modified.
+	LastModifiedOn *time.Time
 
 	// The number of AWS Glue data processing units (DPUs) that are allocated to task
 	// runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10.
@@ -2058,6 +2013,51 @@ type MLTransform struct {
 	// set to a value other than <code>Standard</code>, the <code>MaxCapacity</code>
 	// field is set automatically and becomes read-only.</p>
 	MaxCapacity *float64
+
+	// The maximum number of times to retry after an MLTaskRun of the machine learning
+	// transform fails.
+	MaxRetries *int32
+
+	// A user-defined name for the machine learning transform. Names are not guaranteed
+	// unique and can be changed at any time.
+	Name *string
+
+	// The number of workers of a defined workerType that are allocated when a task of
+	// the transform runs.  <p>If <code>WorkerType</code> is set, then
+	// <code>NumberOfWorkers</code> is required (and vice versa).</p>
+	NumberOfWorkers *int32
+
+	// A TransformParameters object. You can use parameters to tune (customize) the
+	// behavior of the machine learning transform by specifying what data it learns
+	// from and your preference on various tradeoffs (such as precious vs. recall, or
+	// accuracy vs. cost).
+	Parameters *TransformParameters
+
+	// The name or Amazon Resource Name (ARN) of the IAM role with the required
+	// permissions. The required permissions include both AWS Glue service role
+	// permissions to AWS Glue resources, and Amazon S3 permissions required by the
+	// transform.  <ul> <li> <p>This role needs AWS Glue service role permissions to
+	// allow access to resources in AWS Glue. See <a
+	// href="https://docs.aws.amazon.com/glue/latest/dg/attach-policy-iam-user.html">Attach
+	// a Policy to IAM Users That Access AWS Glue</a>.</p> </li> <li> <p>This role
+	// needs permission to your Amazon Simple Storage Service (Amazon S3) sources,
+	// targets, temporary directory, scripts, and any libraries used by the task run
+	// for this transform.</p> </li> </ul>
+	Role *string
+
+	// A map of key-value pairs representing the columns and data types that this
+	// transform can run against. Has an upper bound of 100 columns.
+	Schema []*SchemaColumn
+
+	// The current status of the machine learning transform.
+	Status TransformStatusType
+
+	// The timeout in minutes of the machine learning transform.
+	Timeout *int32
+
+	// The unique transform ID that is generated for the machine learning transform.
+	// The ID is guaranteed to be unique and does not change.
+	TransformId *string
 
 	// The type of predefined worker that is allocated when a task of this transform
 	// runs. Accepts a value of Standard, G.1X, or G.2X.
@@ -2089,23 +2089,23 @@ type MLTransform struct {
 // part of a workflow.
 type Node struct {
 
+	// Details of the crawler when the node represents a crawler.
+	CrawlerDetails *CrawlerNodeDetails
+
 	// Details of the Job when the node represents a Job.
 	JobDetails *JobNodeDetails
-
-	// Details of the Trigger when the node represents a Trigger.
-	TriggerDetails *TriggerNodeDetails
-
-	// The unique Id assigned to the node within the workflow.
-	UniqueId *string
 
 	// The name of the AWS Glue component represented by the node.
 	Name *string
 
-	// Details of the crawler when the node represents a crawler.
-	CrawlerDetails *CrawlerNodeDetails
+	// Details of the Trigger when the node represents a Trigger.
+	TriggerDetails *TriggerNodeDetails
 
 	// The type of AWS Glue component represented by the node.
 	Type NodeType
+
+	// The unique Id assigned to the node within the workflow.
+	UniqueId *string
 }
 
 // Specifies configuration properties of a notification.
@@ -2134,11 +2134,17 @@ type Order struct {
 // Represents a slice of table data.
 type Partition struct {
 
-	// The last time at which the partition was accessed.
-	LastAccessTime *time.Time
+	// The ID of the Data Catalog in which the partition resides.
+	CatalogId *string
+
+	// The time at which the partition was created.
+	CreationTime *time.Time
 
 	// The name of the catalog database in which to create the partition.
 	DatabaseName *string
+
+	// The last time at which the partition was accessed.
+	LastAccessTime *time.Time
 
 	// The last time at which column statistics were computed for this partition.
 	LastAnalyzedTime *time.Time
@@ -2146,37 +2152,40 @@ type Partition struct {
 	// These key-value pairs define partition parameters.
 	Parameters map[string]*string
 
-	// The time at which the partition was created.
-	CreationTime *time.Time
-
 	// Provides information about the physical location where the partition is stored.
 	StorageDescriptor *StorageDescriptor
-
-	// The values of the partition.
-	Values []*string
 
 	// The name of the database table in which to create the partition.
 	TableName *string
 
-	// The ID of the Data Catalog in which the partition resides.
-	CatalogId *string
+	// The values of the partition.
+	Values []*string
 }
 
 // Contains information about a partition error.
 type PartitionError struct {
 
-	// The values that define the partition.
-	PartitionValues []*string
-
 	// The details about the partition error.
 	ErrorDetail *ErrorDetail
+
+	// The values that define the partition.
+	PartitionValues []*string
 }
 
 // The structure used to create and update a partition.
 type PartitionInput struct {
 
+	// The last time at which the partition was accessed.
+	LastAccessTime *time.Time
+
 	// The last time at which column statistics were computed for this partition.
 	LastAnalyzedTime *time.Time
+
+	// These key-value pairs define partition parameters.
+	Parameters map[string]*string
+
+	// Provides information about the physical location where the partition is stored.
+	StorageDescriptor *StorageDescriptor
 
 	// The values of the partition. Although this parameter is not required by the SDK,
 	// you must specify this parameter for a valid input.  <p>The values for the keys
@@ -2184,15 +2193,6 @@ type PartitionInput struct {
 	// ordered in the same order as the partition keys appearing in the Amazon S3
 	// prefix. Otherwise AWS Glue will add the values to the wrong keys.</p>
 	Values []*string
-
-	// Provides information about the physical location where the partition is stored.
-	StorageDescriptor *StorageDescriptor
-
-	// These key-value pairs define partition parameters.
-	Parameters map[string]*string
-
-	// The last time at which the partition was accessed.
-	LastAccessTime *time.Time
 }
 
 // Contains a list of values defining partitions.
@@ -2207,16 +2207,16 @@ type PartitionValueList struct {
 // Specifies the physical requirements for a connection.
 type PhysicalConnectionRequirements struct {
 
+	// The connection's Availability Zone. This field is redundant because the
+	// specified subnet implies the Availability Zone to be used. Currently the field
+	// must be populated, but it will be deprecated in the future.
+	AvailabilityZone *string
+
 	// The security group ID list used by the connection.
 	SecurityGroupIdList []*string
 
 	// The subnet ID used by the connection.
 	SubnetId *string
-
-	// The connection's Availability Zone. This field is redundant because the
-	// specified subnet implies the Availability Zone to be used. Currently the field
-	// must be populated, but it will be deprecated in the future.
-	AvailabilityZone *string
 }
 
 // A job run that was used in the predicate of a conditional trigger that triggered
@@ -2233,12 +2233,12 @@ type Predecessor struct {
 // Defines the predicate of the trigger, which determines when it fires.
 type Predicate struct {
 
+	// A list of the conditions that determine when the trigger will fire.
+	Conditions []*Condition
+
 	// An optional field if only one condition is listed. If multiple conditions are
 	// listed, then this field is required.
 	Logical Logical
-
-	// A list of the conditions that determine when the trigger will fire.
-	Conditions []*Condition
 }
 
 // Permissions granted to a principal.
@@ -2254,24 +2254,24 @@ type PrincipalPermissions struct {
 // Defines a property predicate.
 type PropertyPredicate struct {
 
-	// The value of the property.
-	Value *string
-
 	// The comparator used to compare this property to others.
 	Comparator Comparator
 
 	// The key of the property.
 	Key *string
+
+	// The value of the property.
+	Value *string
 }
 
 // The URIs for function resources.
 type ResourceUri struct {
 
-	// The URI for accessing the resource.
-	Uri *string
-
 	// The type of the resource.
 	ResourceType ResourceType
+
+	// The URI for accessing the resource.
+	Uri *string
 }
 
 // Specifies how Amazon Simple Storage Service (Amazon S3) data should be
@@ -2300,15 +2300,15 @@ type S3Target struct {
 // A scheduling object using a cron statement to schedule an event.
 type Schedule struct {
 
-	// The state of the schedule.
-	State ScheduleState
-
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
 	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
 	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
 	// 12 * * ? *).
 	ScheduleExpression *string
+
+	// The state of the schedule.
+	State ScheduleState
 }
 
 // A policy that specifies update and deletion behaviors for the crawler.
@@ -2326,24 +2326,24 @@ type SchemaChangePolicy struct {
 // structures.
 type SchemaColumn struct {
 
-	// The name of the column.
-	Name *string
-
 	// The type of data in the column.
 	DataType *string
+
+	// The name of the column.
+	Name *string
 }
 
 // Specifies a security configuration.
 type SecurityConfiguration struct {
+
+	// The time at which this security configuration was created.
+	CreatedTimeStamp *time.Time
 
 	// The encryption configuration associated with this security configuration.
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The name of the security configuration.
 	Name *string
-
-	// The time at which this security configuration was created.
-	CreatedTimeStamp *time.Time
 }
 
 // Defines a non-overlapping region of a table's partitions, allowing multiple
@@ -2366,15 +2366,15 @@ type Segment struct {
 // an extractor and loader.
 type SerDeInfo struct {
 
-	// Usually the class that implements the SerDe. An example is
-	// org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
-	SerializationLibrary *string
-
 	// Name of the SerDe.
 	Name *string
 
 	// These key-value pairs define initialization parameters for the SerDe.
 	Parameters map[string]*string
+
+	// Usually the class that implements the SerDe. An example is
+	// org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
+	SerializationLibrary *string
 }
 
 // Specifies skewed values in a table. Skewed values are those that occur with very
@@ -2394,53 +2394,53 @@ type SkewedInfo struct {
 // Specifies a field to sort by and a sort order.
 type SortCriterion struct {
 
-	// An ascending or descending sort.
-	Sort Sort
-
 	// The name of the field on which to sort.
 	FieldName *string
+
+	// An ascending or descending sort.
+	Sort Sort
 }
 
 // Describes the physical storage of table data.
 type StorageDescriptor struct {
 
-	// The input format: SequenceFileInputFormat (binary), or TextInputFormat, or a
-	// custom format.
-	InputFormat *string
+	// A list of reducer grouping columns, clustering columns, and bucketing columns in
+	// the table.
+	BucketColumns []*string
 
 	// A list of the Columns in the table.
 	Columns []*Column
 
-	// Must be specified if the table contains any dimension columns.
-	NumberOfBuckets *int32
+	// True if the data in the table is compressed, or False if not.
+	Compressed *bool
+
+	// The input format: SequenceFileInputFormat (binary), or TextInputFormat, or a
+	// custom format.
+	InputFormat *string
 
 	// The physical location of the table. By default, this takes the form of the
 	// warehouse location, followed by the database location in the warehouse, followed
 	// by the table name.
 	Location *string
 
-	// The information about values that appear frequently in a column (skewed values).
-	SkewedInfo *SkewedInfo
+	// Must be specified if the table contains any dimension columns.
+	NumberOfBuckets *int32
 
 	// The output format: SequenceFileOutputFormat (binary), or
 	// IgnoreKeyTextOutputFormat, or a custom format.
 	OutputFormat *string
 
-	// A list of reducer grouping columns, clustering columns, and bucketing columns in
-	// the table.
-	BucketColumns []*string
-
 	// The user-supplied properties in key-value form.
 	Parameters map[string]*string
 
-	// True if the data in the table is compressed, or False if not.
-	Compressed *bool
+	// The serialization/deserialization (SerDe) information.
+	SerdeInfo *SerDeInfo
+
+	// The information about values that appear frequently in a column (skewed values).
+	SkewedInfo *SkewedInfo
 
 	// A list specifying the sort order of each bucket in the table.
 	SortColumns []*Order
-
-	// The serialization/deserialization (SerDe) information.
-	SerdeInfo *SerDeInfo
 
 	// True if the table data is stored in subdirectories, or False if not.
 	StoredAsSubDirectories *bool
@@ -2454,15 +2454,15 @@ type StringColumnStatisticsData struct {
 	// This member is required.
 	AverageLength *float64
 
-	// Number of distinct values.
-	//
-	// This member is required.
-	NumberOfDistinctValues *int64
-
 	// Maximum value of the column.
 	//
 	// This member is required.
 	MaximumLength *int64
+
+	// Number of distinct values.
+	//
+	// This member is required.
+	NumberOfDistinctValues *int64
 
 	// Number of nulls.
 	//
@@ -2473,43 +2473,48 @@ type StringColumnStatisticsData struct {
 // Represents a collection of related data organized in columns and rows.
 type Table struct {
 
+	// The table name. For Hive compatibility, this must be entirely lowercase.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID of the Data Catalog in which the table resides.
+	CatalogId *string
+
+	// The time when the table definition was created in the Data Catalog.
+	CreateTime *time.Time
+
+	// The person or entity who created the table.
+	CreatedBy *string
+
+	// The name of the database where the table metadata resides. For Hive
+	// compatibility, this must be all lowercase.
+	DatabaseName *string
+
+	// A description of the table.
+	Description *string
+
+	// Indicates whether the table has been registered with AWS Lake Formation.
+	IsRegisteredWithLakeFormation *bool
+
 	// The last time that the table was accessed. This is usually taken from HDFS, and
 	// might not be reliable.
 	LastAccessTime *time.Time
 
-	// The ID of the Data Catalog in which the table resides.
-	CatalogId *string
+	// The last time that column statistics were computed for this table.
+	LastAnalyzedTime *time.Time
+
+	// The owner of the table.
+	Owner *string
+
+	// These key-value pairs define properties associated with the table.
+	Parameters map[string]*string
 
 	// A list of columns by which the table is partitioned. Only primitive types are
 	// supported as partition keys. When you create a table used by Amazon Athena, and
 	// you do not specify any partitionKeys, you must at least set the value of
 	// partitionKeys to an empty list. For example: "PartitionKeys": []
 	PartitionKeys []*Column
-
-	// A description of the table.
-	Description *string
-
-	// The name of the database where the table metadata resides. For Hive
-	// compatibility, this must be all lowercase.
-	DatabaseName *string
-
-	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
-	TableType *string
-
-	// A TableIdentifier structure that describes a target table for resource linking.
-	TargetTable *TableIdentifier
-
-	// The person or entity who created the table.
-	CreatedBy *string
-
-	// These key-value pairs define properties associated with the table.
-	Parameters map[string]*string
-
-	// The time when the table definition was created in the Data Catalog.
-	CreateTime *time.Time
-
-	// If the table is a view, the expanded text of the view; otherwise null.
-	ViewExpandedText *string
 
 	// The retention time for this table.
 	Retention *int32
@@ -2518,25 +2523,20 @@ type Table struct {
 	// table.
 	StorageDescriptor *StorageDescriptor
 
-	// The table name. For Hive compatibility, this must be entirely lowercase.
-	//
-	// This member is required.
-	Name *string
+	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
+	TableType *string
 
-	// Indicates whether the table has been registered with AWS Lake Formation.
-	IsRegisteredWithLakeFormation *bool
-
-	// If the table is a view, the original text of the view; otherwise null.
-	ViewOriginalText *string
-
-	// The owner of the table.
-	Owner *string
+	// A TableIdentifier structure that describes a target table for resource linking.
+	TargetTable *TableIdentifier
 
 	// The last time that the table was updated.
 	UpdateTime *time.Time
 
-	// The last time that column statistics were computed for this table.
-	LastAnalyzedTime *time.Time
+	// If the table is a view, the expanded text of the view; otherwise null.
+	ViewExpandedText *string
+
+	// If the table is a view, the original text of the view; otherwise null.
+	ViewOriginalText *string
 }
 
 // An error record for table operations.
@@ -2565,20 +2565,35 @@ type TableIdentifier struct {
 // A structure used to define a table.
 type TableInput struct {
 
-	// If the table is a view, the expanded text of the view; otherwise null.
-	ViewExpandedText *string
-
-	// The retention time for this table.
-	Retention *int32
-
-	// The last time that column statistics were computed for this table.
-	LastAnalyzedTime *time.Time
-
 	// The table name. For Hive compatibility, this is folded to lowercase when it is
 	// stored.
 	//
 	// This member is required.
 	Name *string
+
+	// A description of the table.
+	Description *string
+
+	// The last time that the table was accessed.
+	LastAccessTime *time.Time
+
+	// The last time that column statistics were computed for this table.
+	LastAnalyzedTime *time.Time
+
+	// The table owner.
+	Owner *string
+
+	// These key-value pairs define properties associated with the table.
+	Parameters map[string]*string
+
+	// A list of columns by which the table is partitioned. Only primitive types are
+	// supported as partition keys. When you create a table used by Amazon Athena, and
+	// you do not specify any partitionKeys, you must at least set the value of
+	// partitionKeys to an empty list. For example: "PartitionKeys": []
+	PartitionKeys []*Column
+
+	// The retention time for this table.
+	Retention *int32
 
 	// A storage descriptor containing information about the physical storage of this
 	// table.
@@ -2587,29 +2602,14 @@ type TableInput struct {
 	// The type of this table (EXTERNAL_TABLE, VIRTUAL_VIEW, etc.).
 	TableType *string
 
-	// These key-value pairs define properties associated with the table.
-	Parameters map[string]*string
-
-	// If the table is a view, the original text of the view; otherwise null.
-	ViewOriginalText *string
-
-	// The table owner.
-	Owner *string
-
-	// A list of columns by which the table is partitioned. Only primitive types are
-	// supported as partition keys. When you create a table used by Amazon Athena, and
-	// you do not specify any partitionKeys, you must at least set the value of
-	// partitionKeys to an empty list. For example: "PartitionKeys": []
-	PartitionKeys []*Column
-
 	// A TableIdentifier structure that describes a target table for resource linking.
 	TargetTable *TableIdentifier
 
-	// The last time that the table was accessed.
-	LastAccessTime *time.Time
+	// If the table is a view, the expanded text of the view; otherwise null.
+	ViewExpandedText *string
 
-	// A description of the table.
-	Description *string
+	// If the table is a view, the original text of the view; otherwise null.
+	ViewOriginalText *string
 }
 
 // Specifies a version of a table.
@@ -2629,31 +2629,16 @@ type TableVersionError struct {
 	// The details about the error.
 	ErrorDetail *ErrorDetail
 
+	// The name of the table in question.
+	TableName *string
+
 	// The ID value of the version in question. A VersionID is a string representation
 	// of an integer. Each version is incremented by 1.
 	VersionId *string
-
-	// The name of the table in question.
-	TableName *string
 }
 
 // The sampling parameters that are associated with the machine learning transform.
 type TaskRun struct {
-
-	// The date and time that this task run started.
-	StartedOn *time.Time
-
-	// The amount of time (in seconds) that the task run consumed resources.
-	ExecutionTime *int32
-
-	// The current status of the requested task run.
-	Status TaskStatusType
-
-	// Specifies configuration properties associated with this task run.
-	Properties *TaskRunProperties
-
-	// The unique identifier for the transform.
-	TransformId *string
 
 	// The last point in time that the requested task run was completed.
 	CompletedOn *time.Time
@@ -2661,90 +2646,92 @@ type TaskRun struct {
 	// The list of error strings associated with this task run.
 	ErrorString *string
 
+	// The amount of time (in seconds) that the task run consumed resources.
+	ExecutionTime *int32
+
+	// The last point in time that the requested task run was updated.
+	LastModifiedOn *time.Time
+
 	// The names of the log group for secure logging, associated with this task run.
 	LogGroupName *string
+
+	// Specifies configuration properties associated with this task run.
+	Properties *TaskRunProperties
+
+	// The date and time that this task run started.
+	StartedOn *time.Time
+
+	// The current status of the requested task run.
+	Status TaskStatusType
 
 	// The unique identifier for this task run.
 	TaskRunId *string
 
-	// The last point in time that the requested task run was updated.
-	LastModifiedOn *time.Time
+	// The unique identifier for the transform.
+	TransformId *string
 }
 
 // The criteria that are used to filter the task runs for the machine learning
 // transform.
 type TaskRunFilterCriteria struct {
 
-	// Filter on task runs started before this date.
-	StartedBefore *time.Time
-
 	// Filter on task runs started after this date.
 	StartedAfter *time.Time
 
-	// The type of task run.
-	TaskRunType TaskType
+	// Filter on task runs started before this date.
+	StartedBefore *time.Time
 
 	// The current status of the task run.
 	Status TaskStatusType
+
+	// The type of task run.
+	TaskRunType TaskType
 }
 
 // The configuration properties for the task run.
 type TaskRunProperties struct {
 
-	// The type of task run.
-	TaskType TaskType
-
-	// The configuration properties for a labeling set generation task run.
-	LabelingSetGenerationTaskRunProperties *LabelingSetGenerationTaskRunProperties
-
-	// The configuration properties for an importing labels task run.
-	ImportLabelsTaskRunProperties *ImportLabelsTaskRunProperties
+	// The configuration properties for an exporting labels task run.
+	ExportLabelsTaskRunProperties *ExportLabelsTaskRunProperties
 
 	// The configuration properties for a find matches task run.
 	FindMatchesTaskRunProperties *FindMatchesTaskRunProperties
 
-	// The configuration properties for an exporting labels task run.
-	ExportLabelsTaskRunProperties *ExportLabelsTaskRunProperties
+	// The configuration properties for an importing labels task run.
+	ImportLabelsTaskRunProperties *ImportLabelsTaskRunProperties
+
+	// The configuration properties for a labeling set generation task run.
+	LabelingSetGenerationTaskRunProperties *LabelingSetGenerationTaskRunProperties
+
+	// The type of task run.
+	TaskType TaskType
 }
 
 // The sorting criteria that are used to sort the list of task runs for the machine
 // learning transform.
 type TaskRunSortCriteria struct {
 
-	// The sort direction to be used to sort the list of task runs for the machine
-	// learning transform.
-	//
-	// This member is required.
-	SortDirection SortDirectionType
-
 	// The column to be used to sort the list of task runs for the machine learning
 	// transform.
 	//
 	// This member is required.
 	Column TaskRunSortColumnType
+
+	// The sort direction to be used to sort the list of task runs for the machine
+	// learning transform.
+	//
+	// This member is required.
+	SortDirection SortDirectionType
 }
 
 // The criteria used to filter the machine learning transforms.
 type TransformFilterCriteria struct {
 
-	// Filters on datasets with a specific schema. The Map object is an array of
-	// key-value pairs representing the schema this transform accepts, where Column is
-	// the name of a column, and Type is the type of the data such as an integer or
-	// string. Has an upper bound of 100 columns.
-	Schema []*SchemaColumn
-
-	// A unique transform name that is used to filter the machine learning transforms.
-	Name *string
-
-	// The type of machine learning transform that is used to filter the machine
-	// learning transforms.
-	TransformType TransformType
-
-	// Filter on transforms last modified before this date.
-	LastModifiedBefore *time.Time
-
 	// The time and date after which the transforms were created.
 	CreatedAfter *time.Time
+
+	// The time and date before which the transforms were created.
+	CreatedBefore *time.Time
 
 	// This value determines which version of AWS Glue this machine learning transform
 	// is compatible with. Glue 1.0 is recommended for most customers. If the value is
@@ -2754,24 +2741,34 @@ type TransformFilterCriteria struct {
 	// in the developer guide.
 	GlueVersion *string
 
-	// The time and date before which the transforms were created.
-	CreatedBefore *time.Time
+	// Filter on transforms last modified after this date.
+	LastModifiedAfter *time.Time
+
+	// Filter on transforms last modified before this date.
+	LastModifiedBefore *time.Time
+
+	// A unique transform name that is used to filter the machine learning transforms.
+	Name *string
+
+	// Filters on datasets with a specific schema. The Map object is an array of
+	// key-value pairs representing the schema this transform accepts, where Column is
+	// the name of a column, and Type is the type of the data such as an integer or
+	// string. Has an upper bound of 100 columns.
+	Schema []*SchemaColumn
 
 	// Filters the list of machine learning transforms by the last known status of the
 	// transforms (to indicate whether a transform can be used or not). One of
 	// "NOT_READY", "READY", or "DELETING".
 	Status TransformStatusType
 
-	// Filter on transforms last modified after this date.
-	LastModifiedAfter *time.Time
+	// The type of machine learning transform that is used to filter the machine
+	// learning transforms.
+	TransformType TransformType
 }
 
 // The algorithm-specific parameters that are associated with the machine learning
 // transform.
 type TransformParameters struct {
-
-	// The parameters for the find matches algorithm.
-	FindMatchesParameters *FindMatchesParameters
 
 	// The type of machine learning transform. For information about the types of
 	// machine learning transforms, see Creating Machine Learning Transforms
@@ -2779,6 +2776,9 @@ type TransformParameters struct {
 	//
 	// This member is required.
 	TransformType TransformType
+
+	// The parameters for the find matches algorithm.
+	FindMatchesParameters *FindMatchesParameters
 }
 
 // The sorting criteria that are associated with the machine learning transform.
@@ -2800,26 +2800,20 @@ type TransformSortCriteria struct {
 // Information about a specific trigger.
 type Trigger struct {
 
-	// The predicate of this trigger, which defines when it will fire.
-	Predicate *Predicate
-
-	// The type of trigger that this is.
-	Type TriggerType
-
-	// The name of the trigger.
-	Name *string
-
-	// The name of the workflow associated with the trigger.
-	WorkflowName *string
-
 	// The actions initiated by this trigger.
 	Actions []*Action
+
+	// A description of this trigger.
+	Description *string
 
 	// Reserved for future use.
 	Id *string
 
-	// A description of this trigger.
-	Description *string
+	// The name of the trigger.
+	Name *string
+
+	// The predicate of this trigger, which defines when it will fire.
+	Predicate *Predicate
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
@@ -2830,6 +2824,12 @@ type Trigger struct {
 
 	// The current state of the trigger.
 	State TriggerState
+
+	// The type of trigger that this is.
+	Type TriggerType
+
+	// The name of the workflow associated with the trigger.
+	WorkflowName *string
 }
 
 // The details of a Trigger node present in the workflow.
@@ -2843,17 +2843,17 @@ type TriggerNodeDetails struct {
 // updates the previous trigger definition by overwriting it completely.
 type TriggerUpdate struct {
 
-	// The predicate of this trigger, which defines when it will fire.
-	Predicate *Predicate
+	// The actions initiated by this trigger.
+	Actions []*Action
 
 	// A description of this trigger.
 	Description *string
 
-	// The actions initiated by this trigger.
-	Actions []*Action
-
 	// Reserved for future use.
 	Name *string
+
+	// The predicate of this trigger, which defines when it will fire.
+	Predicate *Predicate
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
@@ -2866,68 +2866,73 @@ type TriggerUpdate struct {
 // Specifies a custom CSV classifier to be updated.
 type UpdateCsvClassifierRequest struct {
 
-	// Specifies not to trim values before identifying the type of column values. The
-	// default value is true.
-	DisableValueTrimming *bool
-
-	// A custom symbol to denote what separates each column entry in the row.
-	Delimiter *string
-
-	// A list of strings representing column names.
-	Header []*string
-
-	// Enables the processing of files that contain only one column.
-	AllowSingleColumn *bool
-
 	// The name of the classifier.
 	//
 	// This member is required.
 	Name *string
 
-	// A custom symbol to denote what combines content into a single column value. It
-	// must be different from the column delimiter.
-	QuoteSymbol *string
+	// Enables the processing of files that contain only one column.
+	AllowSingleColumn *bool
 
 	// Indicates whether the CSV file contains a header.
 	ContainsHeader CsvHeaderOption
+
+	// A custom symbol to denote what separates each column entry in the row.
+	Delimiter *string
+
+	// Specifies not to trim values before identifying the type of column values. The
+	// default value is true.
+	DisableValueTrimming *bool
+
+	// A list of strings representing column names.
+	Header []*string
+
+	// A custom symbol to denote what combines content into a single column value. It
+	// must be different from the column delimiter.
+	QuoteSymbol *string
 }
 
 // Specifies a grok classifier to update when passed to UpdateClassifier.
 type UpdateGrokClassifierRequest struct {
+
+	// The name of the GrokClassifier.
+	//
+	// This member is required.
+	Name *string
+
+	// An identifier of the data format that the classifier matches, such as Twitter,
+	// JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
+	Classification *string
 
 	// Optional custom grok patterns used by this classifier.
 	CustomPatterns *string
 
 	// The grok pattern used by this classifier.
 	GrokPattern *string
-
-	// An identifier of the data format that the classifier matches, such as Twitter,
-	// JSON, Omniture logs, Amazon CloudWatch Logs, and so on.
-	Classification *string
-
-	// The name of the GrokClassifier.
-	//
-	// This member is required.
-	Name *string
 }
 
 // Specifies a JSON classifier to be updated.
 type UpdateJsonClassifierRequest struct {
+
+	// The name of the classifier.
+	//
+	// This member is required.
+	Name *string
 
 	// A JsonPath string defining the JSON data for the classifier to classify. AWS
 	// Glue supports a subset of JsonPath, as described in Writing JsonPath Custom
 	// Classifiers
 	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json).
 	JsonPath *string
+}
+
+// Specifies an XML classifier to be updated.
+type UpdateXMLClassifierRequest struct {
 
 	// The name of the classifier.
 	//
 	// This member is required.
 	Name *string
-}
-
-// Specifies an XML classifier to be updated.
-type UpdateXMLClassifierRequest struct {
 
 	// An identifier of the data format that the classifier matches.
 	Classification *string
@@ -2937,67 +2942,61 @@ type UpdateXMLClassifierRequest struct {
 	// empty row element that contains only attributes can be parsed as long as it ends
 	// with a closing tag (for example,  is okay, but  is not).
 	RowTag *string
-
-	// The name of the classifier.
-	//
-	// This member is required.
-	Name *string
 }
 
 // Represents the equivalent of a Hive user-defined function (UDF) definition.
 type UserDefinedFunction struct {
 
-	// The name of the catalog database that contains the function.
-	DatabaseName *string
+	// The ID of the Data Catalog in which the function resides.
+	CatalogId *string
 
 	// The Java class that contains the function code.
 	ClassName *string
 
-	// The ID of the Data Catalog in which the function resides.
-	CatalogId *string
-
 	// The time at which the function was created.
 	CreateTime *time.Time
 
+	// The name of the catalog database that contains the function.
+	DatabaseName *string
+
 	// The name of the function.
 	FunctionName *string
-
-	// The resource URIs for the function.
-	ResourceUris []*ResourceUri
 
 	// The owner of the function.
 	OwnerName *string
 
 	// The owner type.
 	OwnerType PrincipalType
+
+	// The resource URIs for the function.
+	ResourceUris []*ResourceUri
 }
 
 // A structure used to create or update a user-defined function.
 type UserDefinedFunctionInput struct {
 
-	// The owner type.
-	OwnerType PrincipalType
+	// The Java class that contains the function code.
+	ClassName *string
 
 	// The name of the function.
 	FunctionName *string
 
-	// The resource URIs for the function.
-	ResourceUris []*ResourceUri
-
-	// The Java class that contains the function code.
-	ClassName *string
-
 	// The owner of the function.
 	OwnerName *string
+
+	// The owner type.
+	OwnerType PrincipalType
+
+	// The resource URIs for the function.
+	ResourceUris []*ResourceUri
 }
 
 // A workflow represents a flow in which AWS Glue components should be executed to
 // complete a logical task.
 type Workflow struct {
 
-	// The graph representing all the AWS Glue components that belong to the workflow
-	// as nodes and directed connections between them as edges.
-	Graph *WorkflowGraph
+	// The date and time when the workflow was created.
+	CreatedOn *time.Time
 
 	// A collection of properties to be used as part of each execution of the workflow.
 	DefaultRunProperties map[string]*string
@@ -3005,8 +3004,9 @@ type Workflow struct {
 	// A description of the workflow.
 	Description *string
 
-	// The name of the workflow representing the flow.
-	Name *string
+	// The graph representing all the AWS Glue components that belong to the workflow
+	// as nodes and directed connections between them as edges.
+	Graph *WorkflowGraph
 
 	// The date and time when the workflow was last modified.
 	LastModifiedOn *time.Time
@@ -3014,8 +3014,8 @@ type Workflow struct {
 	// The information about the last execution of the workflow.
 	LastRun *WorkflowRun
 
-	// The date and time when the workflow was created.
-	CreatedOn *time.Time
+	// The name of the workflow representing the flow.
+	Name *string
 }
 
 // A workflow graph represents the complete workflow containing all the AWS Glue
@@ -3036,12 +3036,6 @@ type WorkflowGraph struct {
 // information.
 type WorkflowRun struct {
 
-	// The statistics of the run.
-	Statistics *WorkflowRunStatistics
-
-	// Name of the workflow that was executed.
-	Name *string
-
 	// The date and time when the workflow run completed.
 	CompletedOn *time.Time
 
@@ -3049,39 +3043,45 @@ type WorkflowRun struct {
 	// as nodes and directed connections between them as edges.
 	Graph *WorkflowGraph
 
-	// The date and time when the workflow run was started.
-	StartedOn *time.Time
-
-	// The workflow run properties which were set during the run.
-	WorkflowRunProperties map[string]*string
-
-	// The ID of this workflow run.
-	WorkflowRunId *string
+	// Name of the workflow that was executed.
+	Name *string
 
 	// The ID of the previous workflow run.
 	PreviousRunId *string
 
+	// The date and time when the workflow run was started.
+	StartedOn *time.Time
+
+	// The statistics of the run.
+	Statistics *WorkflowRunStatistics
+
 	// The status of the workflow run.
 	Status WorkflowRunStatus
+
+	// The ID of this workflow run.
+	WorkflowRunId *string
+
+	// The workflow run properties which were set during the run.
+	WorkflowRunProperties map[string]*string
 }
 
 // Workflow run statistics provides statistics about the workflow run.
 type WorkflowRunStatistics struct {
 
-	// Total number of Actions that timed out.
-	TimeoutActions *int32
+	// Total number of Actions that have failed.
+	FailedActions *int32
 
 	// Total number Actions in running state.
 	RunningActions *int32
 
+	// Total number of Actions that have stopped.
+	StoppedActions *int32
+
 	// Total number of Actions that have succeeded.
 	SucceededActions *int32
 
-	// Total number of Actions that have failed.
-	FailedActions *int32
-
-	// Total number of Actions that have stopped.
-	StoppedActions *int32
+	// Total number of Actions that timed out.
+	TimeoutActions *int32
 
 	// Total number of Actions in the workflow run.
 	TotalActions *int32
@@ -3090,17 +3090,10 @@ type WorkflowRunStatistics struct {
 // A classifier for XML content.
 type XMLClassifier struct {
 
-	// The XML tag designating the element that contains each record in an XML document
-	// being parsed. This can't identify a self-closing element (closed by />). An
-	// empty row element that contains only attributes can be parsed as long as it ends
-	// with a closing tag (for example,  is okay, but  is not).
-	RowTag *string
-
-	// The version of this classifier.
-	Version *int64
-
-	// The time that this classifier was last updated.
-	LastUpdated *time.Time
+	// An identifier of the data format that the classifier matches.
+	//
+	// This member is required.
+	Classification *string
 
 	// The name of the classifier.
 	//
@@ -3110,8 +3103,15 @@ type XMLClassifier struct {
 	// The time that this classifier was registered.
 	CreationTime *time.Time
 
-	// An identifier of the data format that the classifier matches.
-	//
-	// This member is required.
-	Classification *string
+	// The time that this classifier was last updated.
+	LastUpdated *time.Time
+
+	// The XML tag designating the element that contains each record in an XML document
+	// being parsed. This can't identify a self-closing element (closed by />). An
+	// empty row element that contains only attributes can be parsed as long as it ends
+	// with a closing tag (for example,  is okay, but  is not).
+	RowTag *string
+
+	// The version of this classifier.
+	Version *int64
 }

@@ -67,20 +67,10 @@ type DescribeStateMachineInput struct {
 
 type DescribeStateMachineOutput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
-	// machine. (The IAM role maintains security by granting Step Functions access to
-	// AWS resources.)
+	// The date the state machine is created.
 	//
 	// This member is required.
-	RoleArn *string
-
-	// The Amazon Resource Name (ARN) that identifies the state machine.
-	//
-	// This member is required.
-	StateMachineArn *string
-
-	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
-	LoggingConfiguration *types.LoggingConfiguration
+	CreationDate *time.Time
 
 	// The Amazon States Language definition of the state machine. See Amazon States
 	// Language
@@ -88,16 +78,6 @@ type DescribeStateMachineOutput struct {
 	//
 	// This member is required.
 	Definition *string
-
-	// The date the state machine is created.
-	//
-	// This member is required.
-	CreationDate *time.Time
-
-	// The type of the state machine (STANDARD or EXPRESS).
-	//
-	// This member is required.
-	Type types.StateMachineType
 
 	// The name of the state machine. A name must not contain:
 	//
@@ -119,6 +99,26 @@ type DescribeStateMachineOutput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
+	// machine. (The IAM role maintains security by granting Step Functions access to
+	// AWS resources.)
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The Amazon Resource Name (ARN) that identifies the state machine.
+	//
+	// This member is required.
+	StateMachineArn *string
+
+	// The type of the state machine (STANDARD or EXPRESS).
+	//
+	// This member is required.
+	Type types.StateMachineType
+
+	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
+	LoggingConfiguration *types.LoggingConfiguration
 
 	// The current status of the state machine.
 	Status types.StateMachineStatus

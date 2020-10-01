@@ -66,17 +66,17 @@ type GetPersonalizedRankingInput struct {
 	// This member is required.
 	CampaignArn *string
 
-	// The user for which you want the campaign to provide a personalized ranking.
-	//
-	// This member is required.
-	UserId *string
-
 	// A list of items (itemId's) to rank. If an item was not included in the training
 	// dataset, the item is appended to the end of the reranked list. The maximum is
 	// 500.
 	//
 	// This member is required.
 	InputList []*string
+
+	// The user for which you want the campaign to provide a personalized ranking.
+	//
+	// This member is required.
+	UserId *string
 
 	// The contextual metadata to use when getting recommendations. Contextual metadata
 	// includes any interaction information that might be relevant when getting a

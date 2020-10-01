@@ -57,6 +57,20 @@ func (c *Client) DescribeEnvironmentMemberships(ctx context.Context, params *Des
 
 type DescribeEnvironmentMembershipsInput struct {
 
+	// The ID of the environment to get environment member information about.
+	EnvironmentId *string
+
+	// The maximum number of environment members to get information about.
+	MaxResults *int32
+
+	// During a previous call, if there are more than 25 items in the list, only the
+	// first 25 items are returned, along with a unique string called a next token. To
+	// get the next batch of items in the list, call this operation again, adding the
+	// next token to the call. To get all of the items in the list, keep calling this
+	// operation with each subsequent next token that is returned, until no more next
+	// tokens are returned.
+	NextToken *string
+
 	// The type of environment member permissions to get information about. Available
 	// values include:
 	//
@@ -72,24 +86,10 @@ type DescribeEnvironmentMembershipsInput struct {
 	// members are returned.
 	Permissions []types.Permissions
 
-	// The maximum number of environment members to get information about.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) of an individual environment member to get
 	// information about. If no value is specified, information about all environment
 	// members are returned.
 	UserArn *string
-
-	// During a previous call, if there are more than 25 items in the list, only the
-	// first 25 items are returned, along with a unique string called a next token. To
-	// get the next batch of items in the list, call this operation again, adding the
-	// next token to the call. To get all of the items in the list, keep calling this
-	// operation with each subsequent next token that is returned, until no more next
-	// tokens are returned.
-	NextToken *string
-
-	// The ID of the environment to get environment member information about.
-	EnvironmentId *string
 }
 
 type DescribeEnvironmentMembershipsOutput struct {

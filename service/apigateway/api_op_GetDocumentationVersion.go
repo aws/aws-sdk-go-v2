@@ -58,23 +58,23 @@ func (c *Client) GetDocumentationVersion(ctx context.Context, params *GetDocumen
 // Gets a documentation snapshot of an API.
 type GetDocumentationVersionInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	Template *bool
-
 	// [Required] The version identifier of the to-be-retrieved documentation snapshot.
 	//
 	// This member is required.
 	DocumentationVersion *string
 
-	Title *string
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
+	Template *bool
 
 	TemplateSkipList []*string
 
-	Name *string
+	Title *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -84,11 +84,11 @@ type GetDocumentationVersionInput struct {
 // DocumentationPart (), DocumentationVersions ()
 type GetDocumentationVersionOutput struct {
 
-	// The description of the API documentation snapshot.
-	Description *string
-
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
+	// The description of the API documentation snapshot.
+	Description *string
 
 	// The version identifier of the API documentation snapshot.
 	Version *string

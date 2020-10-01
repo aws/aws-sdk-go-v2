@@ -57,20 +57,21 @@ func (c *Client) GetVpcLinks(ctx context.Context, params *GetVpcLinksInput, optF
 
 // Gets the VpcLinks () collection under the caller's account in a selected region.
 type GetVpcLinksInput struct {
+
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit *int32
+
+	Name *string
+
+	// The current pagination position in the paged result set.
+	Position *string
+
 	Template *bool
 
 	TemplateSkipList []*string
 
 	Title *string
-
-	// The current pagination position in the paged result set.
-	Position *string
-
-	Name *string
-
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
-	Limit *int32
 }
 
 // The collection of VPC links under the caller's account in a region. Getting

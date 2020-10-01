@@ -58,16 +58,20 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// The time zone ID of the user.
-	TimeZoneId *string
-
-	// The given name of the user.
-	GivenName *string
-
 	// The ID of the user.
 	//
 	// This member is required.
 	UserId *string
+
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
+
+	// The given name of the user.
+	GivenName *string
+
+	// Boolean value to determine whether the user is granted Poweruser privileges.
+	GrantPoweruserPrivileges types.BooleanEnumType
 
 	// The locale of the user.
 	Locale types.LocaleType
@@ -75,15 +79,11 @@ type UpdateUserInput struct {
 	// The amount of storage for the user.
 	StorageRule *types.StorageRuleType
 
-	// Boolean value to determine whether the user is granted Poweruser privileges.
-	GrantPoweruserPrivileges types.BooleanEnumType
-
 	// The surname of the user.
 	Surname *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
+	// The time zone ID of the user.
+	TimeZoneId *string
 
 	// The type of the user.
 	Type types.UserType

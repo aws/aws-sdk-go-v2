@@ -57,15 +57,15 @@ func (c *Client) IncreaseReplicationFactor(ctx context.Context, params *Increase
 
 type IncreaseReplicationFactorInput struct {
 
-	// The new number of nodes for the DAX cluster.
-	//
-	// This member is required.
-	NewReplicationFactor *int32
-
 	// The name of the DAX cluster that will receive additional nodes.
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The new number of nodes for the DAX cluster.
+	//
+	// This member is required.
+	NewReplicationFactor *int32
 
 	// The Availability Zones (AZs) in which the cluster nodes will be created. All
 	// nodes belonging to the cluster are placed in these Availability Zones. Use this

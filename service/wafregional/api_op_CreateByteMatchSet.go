@@ -101,13 +101,13 @@ type CreateByteMatchSetInput struct {
 
 type CreateByteMatchSetOutput struct {
 
+	// A ByteMatchSet () that contains no ByteMatchTuple objects.
+	ByteMatchSet *types.ByteMatchSet
+
 	// The ChangeToken that you used to submit the CreateByteMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
-
-	// A ByteMatchSet () that contains no ByteMatchTuple objects.
-	ByteMatchSet *types.ByteMatchSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

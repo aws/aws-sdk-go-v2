@@ -60,17 +60,17 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 // Contains the inputs for the CreateAlias () operation.
 type CreateAliasInput struct {
 
-	// The identifier of the directory for which to create the alias.
-	//
-	// This member is required.
-	DirectoryId *string
-
 	// The requested alias. The alias must be unique amongst all aliases in AWS. This
 	// operation throws an EntityAlreadyExistsException error if the alias already
 	// exists.
 	//
 	// This member is required.
 	Alias *string
+
+	// The identifier of the directory for which to create the alias.
+	//
+	// This member is required.
+	DirectoryId *string
 }
 
 // Contains the results of the CreateAlias () operation.

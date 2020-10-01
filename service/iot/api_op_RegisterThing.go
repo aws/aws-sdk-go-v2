@@ -62,11 +62,6 @@ func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, 
 
 type RegisterThingInput struct {
 
-	// The parameters for provisioning a thing. See Provisioning Templates
-	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
-	// for more information.
-	Parameters map[string]*string
-
 	// The provisioning template. See Provisioning Devices That Have Device
 	// Certificates
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html)
@@ -74,15 +69,20 @@ type RegisterThingInput struct {
 	//
 	// This member is required.
 	TemplateBody *string
+
+	// The parameters for provisioning a thing. See Provisioning Templates
+	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
+	// for more information.
+	Parameters map[string]*string
 }
 
 type RegisterThingOutput struct {
 
-	// ARNs for the generated resources.
-	ResourceArns map[string]*string
-
 	// The certificate data, in PEM format.
 	CertificatePem *string
+
+	// ARNs for the generated resources.
+	ResourceArns map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,23 +62,23 @@ type ListProjectsInput struct {
 	// This member is required.
 	PortalId *string
 
-	// The token to be used for the next set of paginated results.
-	NextToken *string
-
 	// The maximum number of results to be returned per paginated request.
 	MaxResults *int32
+
+	// The token to be used for the next set of paginated results.
+	NextToken *string
 }
 
 type ListProjectsOutput struct {
-
-	// The token for the next set of results, or null if there are no additional
-	// results.
-	NextToken *string
 
 	// A list that summarizes each project in the portal.
 	//
 	// This member is required.
 	ProjectSummaries []*types.ProjectSummary
+
+	// The token for the next set of results, or null if there are no additional
+	// results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,14 +67,14 @@ type DeletePermissionInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// The AWS account that calls this action.
-	SourceAccount *string
-
 	// The AWS service or identity that will have its CA permissions revoked. At this
 	// time, the only valid service principal is acm.amazonaws.com
 	//
 	// This member is required.
 	Principal *string
+
+	// The AWS account that calls this action.
+	SourceAccount *string
 }
 
 type DeletePermissionOutput struct {

@@ -56,9 +56,10 @@ func (c *Client) DeleteProvisionedProductPlan(ctx context.Context, params *Delet
 
 type DeleteProvisionedProductPlanInput struct {
 
-	// If set to true, AWS Service Catalog stops managing the specified provisioned
-	// product even if it cannot delete the underlying resources.
-	IgnoreErrors *bool
+	// The plan identifier.
+	//
+	// This member is required.
+	PlanId *string
 
 	// The language code.
 	//
@@ -70,10 +71,9 @@ type DeleteProvisionedProductPlanInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The plan identifier.
-	//
-	// This member is required.
-	PlanId *string
+	// If set to true, AWS Service Catalog stops managing the specified provisioned
+	// product even if it cannot delete the underlying resources.
+	IgnoreErrors *bool
 }
 
 type DeleteProvisionedProductPlanOutput struct {

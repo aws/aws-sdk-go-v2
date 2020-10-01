@@ -57,15 +57,15 @@ func (c *Client) CreateCostCategoryDefinition(ctx context.Context, params *Creat
 
 type CreateCostCategoryDefinitionInput struct {
 
-	// The rule schema version in this particular Cost Category.
-	//
-	// This member is required.
-	RuleVersion types.CostCategoryRuleVersion
-
 	// The unique name of the Cost Category.
 	//
 	// This member is required.
 	Name *string
+
+	// The rule schema version in this particular Cost Category.
+	//
+	// This member is required.
+	RuleVersion types.CostCategoryRuleVersion
 
 	// The Cost Category rules used to categorize costs. For more information, see
 	// CostCategoryRule
@@ -77,11 +77,11 @@ type CreateCostCategoryDefinitionInput struct {
 
 type CreateCostCategoryDefinitionOutput struct {
 
-	// The Cost Category's effective start date.
-	EffectiveStart *string
-
 	// The unique identifier for your newly created Cost Category.
 	CostCategoryArn *string
+
+	// The Cost Category's effective start date.
+	EffectiveStart *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

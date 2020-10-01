@@ -59,12 +59,6 @@ func (c *Client) ListTypedLinkFacetAttributes(ctx context.Context, params *ListT
 
 type ListTypedLinkFacetAttributesInput struct {
 
-	// The pagination token.
-	NextToken *string
-
-	// The maximum number of results to retrieve.
-	MaxResults *int32
-
 	// The unique name of the typed link facet.
 	//
 	// This member is required.
@@ -75,6 +69,12 @@ type ListTypedLinkFacetAttributesInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	// The maximum number of results to retrieve.
+	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type ListTypedLinkFacetAttributesOutput struct {

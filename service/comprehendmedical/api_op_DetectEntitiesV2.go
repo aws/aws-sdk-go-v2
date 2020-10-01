@@ -74,13 +74,6 @@ type DetectEntitiesV2Input struct {
 
 type DetectEntitiesV2Output struct {
 
-	// Attributes extracted from the input text that couldn't be related to an entity.
-	UnmappedAttributes []*types.UnmappedAttribute
-
-	// If the result to the DetectEntitiesV2 operation was truncated, include the
-	// PaginationToken to fetch the next page of entities.
-	PaginationToken *string
-
 	// The collection of medical entities extracted from the input text and their
 	// associated information. For each entity, the response provides the entity text,
 	// the entity category, where the entity text begins and ends, and the level of
@@ -96,6 +89,13 @@ type DetectEntitiesV2Output struct {
 	//
 	// This member is required.
 	ModelVersion *string
+
+	// If the result to the DetectEntitiesV2 operation was truncated, include the
+	// PaginationToken to fetch the next page of entities.
+	PaginationToken *string
+
+	// Attributes extracted from the input text that couldn't be related to an entity.
+	UnmappedAttributes []*types.UnmappedAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

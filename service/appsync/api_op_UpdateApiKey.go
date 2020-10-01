@@ -57,22 +57,22 @@ func (c *Client) UpdateApiKey(ctx context.Context, params *UpdateApiKeyInput, op
 
 type UpdateApiKeyInput struct {
 
-	// The time from update time after which the API key expires. The date is
-	// represented as seconds since the epoch. For more information, see .
-	Expires *int64
-
 	// The ID for the GraphQL API.
 	//
 	// This member is required.
 	ApiId *string
 
-	// A description of the purpose of the API key.
-	Description *string
-
 	// The API key ID.
 	//
 	// This member is required.
 	Id *string
+
+	// A description of the purpose of the API key.
+	Description *string
+
+	// The time from update time after which the API key expires. The date is
+	// represented as seconds since the epoch. For more information, see .
+	Expires *int64
 }
 
 type UpdateApiKeyOutput struct {

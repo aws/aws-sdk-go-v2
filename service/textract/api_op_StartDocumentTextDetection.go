@@ -75,12 +75,6 @@ type StartDocumentTextDetectionInput struct {
 	// This member is required.
 	DocumentLocation *types.DocumentLocation
 
-	// An identifier that you specify that's included in the completion notification
-	// published to the Amazon SNS topic. For example, you can use JobTag to identify
-	// the type of document that the completion notification corresponds to (such as a
-	// tax form or a receipt).
-	JobTag *string
-
 	// The idempotent token that's used to identify the start request. If you use the
 	// same token with multiple StartDocumentTextDetection requests, the same JobId is
 	// returned. Use ClientRequestToken to prevent the same job from being accidentally
@@ -88,6 +82,12 @@ type StartDocumentTextDetectionInput struct {
 	// Asynchronous Operations
 	// (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
 	ClientRequestToken *string
+
+	// An identifier that you specify that's included in the completion notification
+	// published to the Amazon SNS topic. For example, you can use JobTag to identify
+	// the type of document that the completion notification corresponds to (such as a
+	// tax form or a receipt).
+	JobTag *string
 
 	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
 	// status of the operation to.

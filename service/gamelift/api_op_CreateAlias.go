@@ -90,6 +90,15 @@ type CreateAliasInput struct {
 	// This member is required.
 	Name *string
 
+	// The routing configuration, including routing type and fleet target, for the
+	// alias.
+	//
+	// This member is required.
+	RoutingStrategy *types.RoutingStrategy
+
+	// A human-readable description of the alias.
+	Description *string
+
 	// A list of labels to assign to the new alias resource. Tags are developer-defined
 	// key-value pairs. Tagging AWS resources are useful for resource management,
 	// access management and cost allocation. For more information, see  Tagging AWS
@@ -99,15 +108,6 @@ type CreateAliasInput struct {
 	// The maximum tag limit may be lower than stated. See the AWS General Reference
 	// for actual tagging limits.
 	Tags []*types.Tag
-
-	// A human-readable description of the alias.
-	Description *string
-
-	// The routing configuration, including routing type and fleet target, for the
-	// alias.
-	//
-	// This member is required.
-	RoutingStrategy *types.RoutingStrategy
 }
 
 // Represents the returned data in response to a request action.

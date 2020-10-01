@@ -57,11 +57,11 @@ func (c *Client) GenerateChangeSet(ctx context.Context, params *GenerateChangeSe
 
 type GenerateChangeSetInput struct {
 
-	// Format for the change set.
-	ChangesetFormat types.OutputFormat
-
 	// ID of the application associated with the change set.
 	AppId *string
+
+	// Format for the change set.
+	ChangesetFormat types.OutputFormat
 }
 
 type GenerateChangeSetOutput struct {

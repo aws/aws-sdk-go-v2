@@ -90,17 +90,6 @@ func (c *Client) GenerateDataKeyWithoutPlaintext(ctx context.Context, params *Ge
 
 type GenerateDataKeyWithoutPlaintextInput struct {
 
-	// Specifies the encryption context that will be used when encrypting the data key.
-	// An encryption context is a collection of non-secret key-value pairs that
-	// represents additional authenticated data. When you use an encryption context to
-	// encrypt data, you must specify the same (an exact case-sensitive match)
-	// encryption context to decrypt the data. An encryption context is optional when
-	// encrypting with a symmetric CMK, but it is highly recommended. For more
-	// information, see Encryption Context
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the AWS Key Management Service Developer Guide.
-	EncryptionContext map[string]*string
-
 	// The identifier of the symmetric customer master key (CMK) that encrypts the data
 	// key. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name,
 	// or alias ARN. When using an alias name, prefix it with "alias/". To specify a
@@ -125,6 +114,17 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Specifies the encryption context that will be used when encrypting the data key.
+	// An encryption context is a collection of non-secret key-value pairs that
+	// represents additional authenticated data. When you use an encryption context to
+	// encrypt data, you must specify the same (an exact case-sensitive match)
+	// encryption context to decrypt the data. An encryption context is optional when
+	// encrypting with a symmetric CMK, but it is highly recommended. For more
+	// information, see Encryption Context
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
+	// in the AWS Key Management Service Developer Guide.
+	EncryptionContext map[string]*string
+
 	// A list of grant tokens. For more information, see Grant Tokens
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
@@ -143,14 +143,14 @@ type GenerateDataKeyWithoutPlaintextInput struct {
 
 type GenerateDataKeyWithoutPlaintextOutput struct {
 
+	// The encrypted data key. When you use the HTTP API or the AWS CLI, the value is
+	// Base64-encoded. Otherwise, it is not Base64-encoded.
+	CiphertextBlob []byte
+
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that encrypted the data key.
 	KeyId *string
-
-	// The encrypted data key. When you use the HTTP API or the AWS CLI, the value is
-	// Base64-encoded. Otherwise, it is not Base64-encoded.
-	CiphertextBlob []byte
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

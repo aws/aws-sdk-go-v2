@@ -57,6 +57,12 @@ func (c *Client) DetachPolicy(ctx context.Context, params *DetachPolicyInput, op
 
 type DetachPolicyInput struct {
 
+	// The Amazon Resource Name (ARN) that is associated with the Directory () where
+	// both objects reside. For more information, see arns ().
+	//
+	// This member is required.
+	DirectoryArn *string
+
 	// Reference that identifies the object whose policy object will be detached.
 	//
 	// This member is required.
@@ -66,12 +72,6 @@ type DetachPolicyInput struct {
 	//
 	// This member is required.
 	PolicyReference *types.ObjectReference
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory () where
-	// both objects reside. For more information, see arns ().
-	//
-	// This member is required.
-	DirectoryArn *string
 }
 
 type DetachPolicyOutput struct {

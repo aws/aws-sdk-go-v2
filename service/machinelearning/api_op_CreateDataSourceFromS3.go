@@ -89,15 +89,6 @@ type CreateDataSourceFromS3Input struct {
 	// This member is required.
 	DataSourceId *string
 
-	// A user-supplied name or description of the DataSource.
-	DataSourceName *string
-
-	// The compute statistics for a DataSource. The statistics are generated from the
-	// observation data referenced by a DataSource. Amazon ML uses the statistics
-	// internally during MLModel training. This parameter must be set to true if the
-	// DataSource needs to be used for MLModel training.
-	ComputeStatistics *bool
-
 	// The data specification of a DataSource:
 	//
 	//     * DataLocationS3 - The Amazon S3
@@ -116,6 +107,15 @@ type CreateDataSourceFromS3Input struct {
 	//
 	// This member is required.
 	DataSpec *types.S3DataSpec
+
+	// The compute statistics for a DataSource. The statistics are generated from the
+	// observation data referenced by a DataSource. Amazon ML uses the statistics
+	// internally during MLModel training. This parameter must be set to true if the
+	// DataSource needs to be used for MLModel training.
+	ComputeStatistics *bool
+
+	// A user-supplied name or description of the DataSource.
+	DataSourceName *string
 }
 
 // Represents the output of a CreateDataSourceFromS3 operation, and is an

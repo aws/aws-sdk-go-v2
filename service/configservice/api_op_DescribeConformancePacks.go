@@ -71,12 +71,12 @@ type DescribeConformancePacksInput struct {
 
 type DescribeConformancePacksOutput struct {
 
+	// Returns a list of ConformancePackDetail objects.
+	ConformancePackDetails []*types.ConformancePackDetail
+
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
-
-	// Returns a list of ConformancePackDetail objects.
-	ConformancePackDetails []*types.ConformancePackDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

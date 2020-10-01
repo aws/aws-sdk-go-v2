@@ -56,12 +56,12 @@ func (c *Client) ListDatastores(ctx context.Context, params *ListDatastoresInput
 
 type ListDatastoresInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return in this request. The default value is
 	// 100.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListDatastoresOutput struct {

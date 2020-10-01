@@ -66,22 +66,6 @@ type DescribeAssetInput struct {
 
 type DescribeAssetOutput struct {
 
-	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
-	// specifies allowed parent/child asset relationships.
-	//
-	// This member is required.
-	AssetHierarchies []*types.AssetHierarchy
-
-	// The date the asset was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	AssetLastUpdateDate *time.Time
-
-	// The date the asset was created, in Unix epoch time.
-	//
-	// This member is required.
-	AssetCreationDate *time.Time
-
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the asset, which has the following format.
@@ -90,30 +74,46 @@ type DescribeAssetOutput struct {
 	// This member is required.
 	AssetArn *string
 
-	// The name of the asset.
+	// The date the asset was created, in Unix epoch time.
 	//
 	// This member is required.
-	AssetName *string
+	AssetCreationDate *time.Time
+
+	// A list of asset hierarchies that each contain a hierarchyId. A hierarchy
+	// specifies allowed parent/child asset relationships.
+	//
+	// This member is required.
+	AssetHierarchies []*types.AssetHierarchy
+
+	// The ID of the asset.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The date the asset was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	AssetLastUpdateDate *time.Time
 
 	// The ID of the asset model that was used to create the asset.
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// The current status of the asset, which contains a state and any error message.
+	// The name of the asset.
 	//
 	// This member is required.
-	AssetStatus *types.AssetStatus
+	AssetName *string
 
 	// The list of asset properties for the asset.
 	//
 	// This member is required.
 	AssetProperties []*types.AssetProperty
 
-	// The ID of the asset.
+	// The current status of the asset, which contains a state and any error message.
 	//
 	// This member is required.
-	AssetId *string
+	AssetStatus *types.AssetStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

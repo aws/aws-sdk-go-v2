@@ -58,12 +58,11 @@ func (c *Client) GetDimensionValues(ctx context.Context, params *GetDimensionVal
 
 type GetDimensionValuesInput struct {
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
-	NextPageToken *string
-
-	// The value that you want to search the filter values for.
-	SearchString *string
+	// The name of the dimension. Each Dimension is available for a different Context.
+	// For more information, see Context.  </p>
+	//
+	// This member is required.
+	Dimension types.Dimension
 
 	// The start and end dates for retrieving the dimension values. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
@@ -187,28 +186,15 @@ type GetDimensionValuesInput struct {
 	//     * SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan
 	Context types.Context
 
-	// The name of the dimension. Each Dimension is available for a different Context.
-	// For more information, see Context.  </p>
-	//
-	// This member is required.
-	Dimension types.Dimension
+	// The token to retrieve the next set of results. AWS provides the token when the
+	// response from a previous call has more results than the maximum page size.
+	NextPageToken *string
+
+	// The value that you want to search the filter values for.
+	SearchString *string
 }
 
 type GetDimensionValuesOutput struct {
-
-	// The number of results that AWS returned at one time.
-	//
-	// This member is required.
-	ReturnSize *int32
-
-	// The total number of search results.
-	//
-	// This member is required.
-	TotalSize *int32
-
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
-	NextPageToken *string
 
 	// The filters that you used to filter your request. Some dimensions are available
 	// only for a specific context. If you set the context to COST_AND_USAGE, you can
@@ -322,6 +308,20 @@ type GetDimensionValuesOutput struct {
 	//
 	// This member is required.
 	DimensionValues []*types.DimensionValuesWithAttributes
+
+	// The number of results that AWS returned at one time.
+	//
+	// This member is required.
+	ReturnSize *int32
+
+	// The total number of search results.
+	//
+	// This member is required.
+	TotalSize *int32
+
+	// The token for the next set of retrievable results. AWS provides the token when
+	// the response from a previous call has more results than the maximum page size.
+	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

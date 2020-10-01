@@ -57,9 +57,6 @@ func (c *Client) SearchDashboards(ctx context.Context, params *SearchDashboardsI
 
 type SearchDashboardsInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *int32
-
 	// The ID of the AWS account that contains the user whose dashboards you're
 	// searching for.
 	//
@@ -74,20 +71,23 @@ type SearchDashboardsInput struct {
 	// This member is required.
 	Filters []*types.DashboardSearchFilter
 
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
+
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 }
 
 type SearchDashboardsOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The list of dashboards owned by the user specified in Filters in your request.
 	DashboardSummaryList []*types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

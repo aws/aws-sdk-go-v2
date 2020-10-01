@@ -67,32 +67,10 @@ func (c *Client) AuthorizeSecurityGroupEgress(ctx context.Context, params *Autho
 
 type AuthorizeSecurityGroupEgressInput struct {
 
-	// Not supported. Use a set of IP permissions to specify the port.
-	ToPort *int32
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupName *string
-
-	// Not supported. Use a set of IP permissions to specify the port.
-	FromPort *int32
-
 	// The ID of the security group.
 	//
 	// This member is required.
 	GroupId *string
-
-	// Not supported. Use a set of IP permissions to specify the protocol name or
-	// number.
-	IpProtocol *string
-
-	// The sets of IP permissions. You can't specify a destination security group and a
-	// CIDR IP address range in the same set of permissions.
-	IpPermissions []*types.IpPermission
-
-	// Not supported. Use a set of IP permissions to specify a destination security
-	// group.
-	SourceSecurityGroupOwnerId *string
 
 	// Not supported. Use a set of IP permissions to specify the CIDR.
 	CidrIp *string
@@ -102,6 +80,28 @@ type AuthorizeSecurityGroupEgressInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// Not supported. Use a set of IP permissions to specify the port.
+	FromPort *int32
+
+	// The sets of IP permissions. You can't specify a destination security group and a
+	// CIDR IP address range in the same set of permissions.
+	IpPermissions []*types.IpPermission
+
+	// Not supported. Use a set of IP permissions to specify the protocol name or
+	// number.
+	IpProtocol *string
+
+	// Not supported. Use a set of IP permissions to specify a destination security
+	// group.
+	SourceSecurityGroupName *string
+
+	// Not supported. Use a set of IP permissions to specify a destination security
+	// group.
+	SourceSecurityGroupOwnerId *string
+
+	// Not supported. Use a set of IP permissions to specify the port.
+	ToPort *int32
 }
 
 type AuthorizeSecurityGroupEgressOutput struct {

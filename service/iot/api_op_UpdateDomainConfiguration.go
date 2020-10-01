@@ -64,11 +64,11 @@ type UpdateDomainConfigurationInput struct {
 	// This member is required.
 	DomainConfigurationName *string
 
-	// The status to which the domain configuration should be updated.
-	DomainConfigurationStatus types.DomainConfigurationStatus
-
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
+
+	// The status to which the domain configuration should be updated.
+	DomainConfigurationStatus types.DomainConfigurationStatus
 
 	// Removes the authorization configuration from a domain.
 	RemoveAuthorizerConfig *bool
@@ -76,11 +76,11 @@ type UpdateDomainConfigurationInput struct {
 
 type UpdateDomainConfigurationOutput struct {
 
-	// The name of the domain configuration that was updated.
-	DomainConfigurationName *string
-
 	// The ARN of the domain configuration that was updated.
 	DomainConfigurationArn *string
+
+	// The name of the domain configuration that was updated.
+	DomainConfigurationName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

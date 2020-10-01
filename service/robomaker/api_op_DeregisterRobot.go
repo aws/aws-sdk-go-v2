@@ -69,11 +69,11 @@ type DeregisterRobotInput struct {
 
 type DeregisterRobotOutput struct {
 
-	// The Amazon Resource Name (ARN) of the robot.
-	Robot *string
-
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
+
+	// The Amazon Resource Name (ARN) of the robot.
+	Robot *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

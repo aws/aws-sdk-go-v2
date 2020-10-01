@@ -63,11 +63,11 @@ type UpdateGroupQueryInput struct {
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
 
-	// Don't use this parameter. Use Group instead.
-	GroupName *string
-
 	// The name or the ARN of the resource group to query.
 	Group *string
+
+	// Don't use this parameter. Use Group instead.
+	GroupName *string
 }
 
 type UpdateGroupQueryOutput struct {

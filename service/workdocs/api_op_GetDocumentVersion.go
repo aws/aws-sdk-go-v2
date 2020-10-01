@@ -57,8 +57,10 @@ func (c *Client) GetDocumentVersion(ctx context.Context, params *GetDocumentVers
 
 type GetDocumentVersionInput struct {
 
-	// Set this to TRUE to include custom metadata in the response.
-	IncludeCustomMetadata *bool
+	// The ID of the document.
+	//
+	// This member is required.
+	DocumentId *string
 
 	// The version ID of the document.
 	//
@@ -69,23 +71,21 @@ type GetDocumentVersionInput struct {
 	// credentials to access the API.
 	AuthenticationToken *string
 
-	// The ID of the document.
-	//
-	// This member is required.
-	DocumentId *string
-
 	// A comma-separated list of values. Specify "SOURCE" to include a URL for the
 	// source document.
 	Fields *string
+
+	// Set this to TRUE to include custom metadata in the response.
+	IncludeCustomMetadata *bool
 }
 
 type GetDocumentVersionOutput struct {
 
-	// The version metadata.
-	Metadata *types.DocumentVersionMetadata
-
 	// The custom metadata on the document version.
 	CustomMetadata map[string]*string
+
+	// The version metadata.
+	Metadata *types.DocumentVersionMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

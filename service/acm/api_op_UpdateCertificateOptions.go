@@ -60,6 +60,12 @@ func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCer
 
 type UpdateCertificateOptionsInput struct {
 
+	// ARN of the requested certificate to update. This must be of the form:
+	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// This member is required.
+	CertificateArn *string
+
 	// Use to update the options for your certificate. Currently, you can specify
 	// whether to add your certificate to a transparency log. Certificate transparency
 	// makes it possible to detect SSL/TLS certificates that have been mistakenly or
@@ -68,12 +74,6 @@ type UpdateCertificateOptionsInput struct {
 	//
 	// This member is required.
 	Options *types.CertificateOptions
-
-	// ARN of the requested certificate to update. This must be of the form:
-	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
-	//
-	// This member is required.
-	CertificateArn *string
 }
 
 type UpdateCertificateOptionsOutput struct {

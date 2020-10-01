@@ -61,11 +61,11 @@ func (c *Client) GetVariables(ctx context.Context, params *GetVariablesInput, op
 
 type GetVariablesInput struct {
 
-	// The name of the variable.
-	Name *string
-
 	// The max size per page determined for the get variable request.
 	MaxResults *int32
+
+	// The name of the variable.
+	Name *string
 
 	// The next page token of the get variable request.
 	NextToken *string
@@ -73,11 +73,11 @@ type GetVariablesInput struct {
 
 type GetVariablesOutput struct {
 
-	// The names of the variables returned.
-	Variables []*types.Variable
-
 	// The next page token to be used in subsequent requests.
 	NextToken *string
+
+	// The names of the variables returned.
+	Variables []*types.Variable
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

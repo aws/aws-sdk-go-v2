@@ -65,17 +65,17 @@ func (c *Client) CreateCodeRepository(ctx context.Context, params *CreateCodeRep
 
 type CreateCodeRepositoryInput struct {
 
-	// Specifies details about the repository, including the URL where the repository
-	// is located, the default branch, and credentials to use to access the repository.
-	//
-	// This member is required.
-	GitConfig *types.GitConfig
-
 	// The name of the Git repository. The name must have 1 to 63 characters. Valid
 	// characters are a-z, A-Z, 0-9, and - (hyphen).
 	//
 	// This member is required.
 	CodeRepositoryName *string
+
+	// Specifies details about the repository, including the URL where the repository
+	// is located, the default branch, and credentials to use to access the repository.
+	//
+	// This member is required.
+	GitConfig *types.GitConfig
 }
 
 type CreateCodeRepositoryOutput struct {

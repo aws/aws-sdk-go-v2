@@ -80,9 +80,6 @@ type DescribeCommunicationsInput struct {
 	// This member is required.
 	CaseId *string
 
-	// The maximum number of results to return before paginating.
-	MaxResults *int32
-
 	// The start date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	AfterTime *string
@@ -90,6 +87,9 @@ type DescribeCommunicationsInput struct {
 	// The end date for a filtered date search on support case communications. Case
 	// communications are available for 12 months after creation.
 	BeforeTime *string
+
+	// The maximum number of results to return before paginating.
+	MaxResults *int32
 
 	// A resumption point for pagination.
 	NextToken *string

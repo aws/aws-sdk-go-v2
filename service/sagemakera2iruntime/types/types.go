@@ -41,20 +41,20 @@ type HumanLoopOutput struct {
 // Summary information about the human loop.
 type HumanLoopSummary struct {
 
-	// The name of the human loop.
-	HumanLoopName *string
-
-	// The Amazon Resource Name (ARN) of the flow definition used to configure the
-	// human loop.
-	FlowDefinitionArn *string
-
-	// The status of the human loop.
-	HumanLoopStatus HumanLoopStatus
-
 	// When Amazon Augmented AI created the human loop.
 	CreationTime *time.Time
 
 	// The reason why the human loop failed. A failure reason is returned when the
 	// status of the human loop is Failed.
 	FailureReason *string
+
+	// The Amazon Resource Name (ARN) of the flow definition used to configure the
+	// human loop.
+	FlowDefinitionArn *string
+
+	// The name of the human loop.
+	HumanLoopName *string
+
+	// The status of the human loop.
+	HumanLoopStatus HumanLoopStatus
 }

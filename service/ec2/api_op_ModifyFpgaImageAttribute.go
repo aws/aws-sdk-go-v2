@@ -57,24 +57,22 @@ func (c *Client) ModifyFpgaImageAttribute(ctx context.Context, params *ModifyFpg
 
 type ModifyFpgaImageAttributeInput struct {
 
-	// The user groups. This parameter is valid only when modifying the loadPermission
-	// attribute.
-	UserGroups []*string
-
 	// The ID of the AFI.
 	//
 	// This member is required.
 	FpgaImageId *string
-
-	// The product codes. After you add a product code to an AFI, it can't be removed.
-	// This parameter is valid only when modifying the productCodes attribute.
-	ProductCodes []*string
 
 	// The name of the attribute.
 	Attribute types.FpgaImageAttributeName
 
 	// A description for the AFI.
 	Description *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// The load permission for the AFI.
 	LoadPermission *types.LoadPermissionModifications
@@ -85,11 +83,13 @@ type ModifyFpgaImageAttributeInput struct {
 	// The operation type.
 	OperationType types.OperationType
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The product codes. After you add a product code to an AFI, it can't be removed.
+	// This parameter is valid only when modifying the productCodes attribute.
+	ProductCodes []*string
+
+	// The user groups. This parameter is valid only when modifying the loadPermission
+	// attribute.
+	UserGroups []*string
 
 	// The AWS account IDs. This parameter is valid only when modifying the
 	// loadPermission attribute.

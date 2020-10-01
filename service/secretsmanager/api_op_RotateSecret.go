@@ -113,6 +113,27 @@ func (c *Client) RotateSecret(ctx context.Context, params *RotateSecretInput, op
 
 type RotateSecretInput struct {
 
+	// Specifies the secret that you want to rotate. You can specify either the Amazon
+	// Resource Name (ARN) or the friendly name of the secret. If you specify an ARN,
+	// we generally recommend that you specify a complete ARN. You can specify a
+	// partial ARN too—for example, if you don’t include the final hyphen and six
+	// random characters that Secrets Manager adds at the end of the ARN when you
+	// created the secret. A partial ARN match can work as long as it uniquely matches
+	// only one secret. However, if your secret has a name that ends in a hyphen
+	// followed by six characters (before Secrets Manager adds the hyphen and six
+	// characters to the ARN) and you try to use that as a partial ARN, then those
+	// characters cause Secrets Manager to assume that you’re specifying a complete
+	// ARN. This confusion can cause unexpected results. To avoid this situation, we
+	// recommend that you don’t create secret names ending with a hyphen followed by
+	// six characters. If you specify an incomplete ARN without the random suffix, and
+	// instead provide the 'friendly name', you must not include the random suffix. If
+	// you do include the random suffix added by Secrets Manager, you receive either a
+	// ResourceNotFoundException or an AccessDeniedException error, depending on your
+	// permissions.
+	//
+	// This member is required.
+	SecretId *string
+
 	// (Optional) Specifies a unique identifier for the new version of the secret that
 	// helps ensure idempotency. If you use the AWS CLI or one of the AWS SDK to call
 	// this operation, then you can leave this parameter empty. The CLI or SDK
@@ -135,40 +156,19 @@ type RotateSecretInput struct {
 
 	// A structure that defines the rotation configuration for this secret.
 	RotationRules *types.RotationRulesType
-
-	// Specifies the secret that you want to rotate. You can specify either the Amazon
-	// Resource Name (ARN) or the friendly name of the secret. If you specify an ARN,
-	// we generally recommend that you specify a complete ARN. You can specify a
-	// partial ARN too—for example, if you don’t include the final hyphen and six
-	// random characters that Secrets Manager adds at the end of the ARN when you
-	// created the secret. A partial ARN match can work as long as it uniquely matches
-	// only one secret. However, if your secret has a name that ends in a hyphen
-	// followed by six characters (before Secrets Manager adds the hyphen and six
-	// characters to the ARN) and you try to use that as a partial ARN, then those
-	// characters cause Secrets Manager to assume that you’re specifying a complete
-	// ARN. This confusion can cause unexpected results. To avoid this situation, we
-	// recommend that you don’t create secret names ending with a hyphen followed by
-	// six characters. If you specify an incomplete ARN without the random suffix, and
-	// instead provide the 'friendly name', you must not include the random suffix. If
-	// you do include the random suffix added by Secrets Manager, you receive either a
-	// ResourceNotFoundException or an AccessDeniedException error, depending on your
-	// permissions.
-	//
-	// This member is required.
-	SecretId *string
 }
 
 type RotateSecretOutput struct {
 
-	// The ID of the new version of the secret created by the rotation started by this
-	// request.
-	VersionId *string
+	// The ARN of the secret.
+	ARN *string
 
 	// The friendly name of the secret.
 	Name *string
 
-	// The ARN of the secret.
-	ARN *string
+	// The ID of the new version of the secret created by the rotation started by this
+	// request.
+	VersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

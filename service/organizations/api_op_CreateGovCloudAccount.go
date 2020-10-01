@@ -161,6 +161,11 @@ func (c *Client) CreateGovCloudAccount(ctx context.Context, params *CreateGovClo
 
 type CreateGovCloudAccountInput struct {
 
+	// The friendly name of the member account.
+	//
+	// This member is required.
+	AccountName *string
+
 	// The email address of the owner to assign to the new member account in the
 	// commercial Region. This email address must not already be associated with
 	// another AWS account. You must use a valid email address to complete account
@@ -202,11 +207,6 @@ type CreateGovCloudAccountInput struct {
 	// lowercase letters, digits with no spaces, and any of the following characters:
 	// =,.@-
 	RoleName *string
-
-	// The friendly name of the member account.
-	//
-	// This member is required.
-	AccountName *string
 }
 
 type CreateGovCloudAccountOutput struct {

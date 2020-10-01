@@ -104,18 +104,18 @@ type GetVaultLockInput struct {
 // Contains the Amazon S3 Glacier response to your request.
 type GetVaultLockOutput struct {
 
-	// The state of the vault lock. InProgress or Locked.
-	State *string
-
-	// The vault lock policy as a JSON string, which uses "\" as an escape character.
-	Policy *string
+	// The UTC date and time at which the vault lock was put into the InProgress state.
+	CreationDate *string
 
 	// The UTC date and time at which the lock ID expires. This value can be null if
 	// the vault lock is in a Locked state.
 	ExpirationDate *string
 
-	// The UTC date and time at which the vault lock was put into the InProgress state.
-	CreationDate *string
+	// The vault lock policy as a JSON string, which uses "\" as an escape character.
+	Policy *string
+
+	// The state of the vault lock. InProgress or Locked.
+	State *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

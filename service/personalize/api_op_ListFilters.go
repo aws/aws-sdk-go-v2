@@ -56,15 +56,15 @@ func (c *Client) ListFilters(ctx context.Context, params *ListFiltersInput, optF
 
 type ListFiltersInput struct {
 
+	// The ARN of the dataset group that contains the filters.
+	DatasetGroupArn *string
+
 	// The maximum number of filters to return.
 	MaxResults *int32
 
 	// A token returned from the previous call to ListFilters for getting the next set
 	// of filters (if they exist).
 	NextToken *string
-
-	// The ARN of the dataset group that contains the filters.
-	DatasetGroupArn *string
 }
 
 type ListFiltersOutput struct {

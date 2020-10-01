@@ -61,6 +61,42 @@ func (c *Client) CreateInstancesFromSnapshot(ctx context.Context, params *Create
 
 type CreateInstancesFromSnapshotInput struct {
 
+	// The Availability Zone where you want to create your instances. Use the following
+	// formatting: us-east-2a (case sensitive). You can get a list of Availability
+	// Zones by using the get regions
+	// (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
+	// operation. Be sure to add the include Availability Zones parameter to your
+	// request.
+	//
+	// This member is required.
+	AvailabilityZone *string
+
+	// The bundle of specification information for your virtual private server (or
+	// instance), including the pricing plan (e.g., micro_1_0).
+	//
+	// This member is required.
+	BundleId *string
+
+	// The names for your new instances.
+	//
+	// This member is required.
+	InstanceNames []*string
+
+	// An array of objects representing the add-ons to enable for the new instance.
+	AddOns []*types.AddOnRequest
+
+	// An object containing information about one or more disk mappings.
+	AttachedDiskMapping map[string][]*types.DiskMap
+
+	// The name of the instance snapshot on which you are basing your new instances.
+	// Use the get instance snapshots operation to return information about your
+	// existing snapshots. Constraint:
+	//
+	//     * This parameter cannot be defined together
+	// with the source instance name parameter. The instance snapshot name and source
+	// instance name parameters are mutually exclusive.
+	InstanceSnapshotName *string
+
 	// The name for your key pair.
 	KeyPairName *string
 
@@ -81,12 +117,6 @@ type CreateInstancesFromSnapshotInput struct {
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	RestoreDate *string
 
-	// The bundle of specification information for your virtual private server (or
-	// instance), including the pricing plan (e.g., micro_1_0).
-	//
-	// This member is required.
-	BundleId *string
-
 	// The name of the source instance from which the source automatic snapshot was
 	// created. Constraints:
 	//
@@ -99,28 +129,6 @@ type CreateInstancesFromSnapshotInput struct {
 	// the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots).
 	SourceInstanceName *string
-
-	// The Availability Zone where you want to create your instances. Use the following
-	// formatting: us-east-2a (case sensitive). You can get a list of Availability
-	// Zones by using the get regions
-	// (http://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetRegions.html)
-	// operation. Be sure to add the include Availability Zones parameter to your
-	// request.
-	//
-	// This member is required.
-	AvailabilityZone *string
-
-	// An object containing information about one or more disk mappings.
-	AttachedDiskMapping map[string][]*types.DiskMap
-
-	// The name of the instance snapshot on which you are basing your new instances.
-	// Use the get instance snapshots operation to return information about your
-	// existing snapshots. Constraint:
-	//
-	//     * This parameter cannot be defined together
-	// with the source instance name parameter. The instance snapshot name and source
-	// instance name parameters are mutually exclusive.
-	InstanceSnapshotName *string
 
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
@@ -146,14 +154,6 @@ type CreateInstancesFromSnapshotInput struct {
 	// see the Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image).
 	UserData *string
-
-	// The names for your new instances.
-	//
-	// This member is required.
-	InstanceNames []*string
-
-	// An array of objects representing the add-ons to enable for the new instance.
-	AddOns []*types.AddOnRequest
 }
 
 type CreateInstancesFromSnapshotOutput struct {

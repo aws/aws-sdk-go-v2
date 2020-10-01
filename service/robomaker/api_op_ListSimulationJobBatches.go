@@ -57,6 +57,9 @@ func (c *Client) ListSimulationJobBatches(ctx context.Context, params *ListSimul
 
 type ListSimulationJobBatchesInput struct {
 
+	// Optional filters to limit results.
+	Filters []*types.Filter
+
 	// When this parameter is used, ListSimulationJobBatches only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
 	// results of the initial request can be seen by sending another
@@ -68,21 +71,18 @@ type ListSimulationJobBatchesInput struct {
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
-
-	// Optional filters to limit results.
-	Filters []*types.Filter
 }
 
 type ListSimulationJobBatchesOutput struct {
-
-	// A list of simulation job batch summaries.
-	SimulationJobBatchSummaries []*types.SimulationJobBatchSummary
 
 	// The nextToken value to include in a future ListSimulationJobBatches request.
 	// When the results of a ListSimulationJobBatches request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// A list of simulation job batch summaries.
+	SimulationJobBatchSummaries []*types.SimulationJobBatchSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

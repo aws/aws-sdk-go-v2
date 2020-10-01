@@ -78,6 +78,11 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 
 type UpdateJobStatusInput struct {
 
+	//
+	//
+	// This member is required.
+	AccountId *string
+
 	// The ID of the job whose status you want to update.
 	//
 	// This member is required.
@@ -91,23 +96,18 @@ type UpdateJobStatusInput struct {
 	// A description of the reason why you want to change the specified job's status.
 	// This field can be any string up to the maximum length.
 	StatusUpdateReason *string
-
-	//
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type UpdateJobStatusOutput struct {
+
+	// The ID for the job whose status was updated.
+	JobId *string
 
 	// The current status for the specified job.
 	Status types.JobStatus
 
 	// The reason that the specified job's status was updated.
 	StatusUpdateReason *string
-
-	// The ID for the job whose status was updated.
-	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

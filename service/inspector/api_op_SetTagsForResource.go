@@ -58,14 +58,14 @@ func (c *Client) SetTagsForResource(ctx context.Context, params *SetTagsForResou
 
 type SetTagsForResourceInput struct {
 
-	// A collection of key and value pairs that you want to set to the assessment
-	// template.
-	Tags []*types.Tag
-
 	// The ARN of the assessment template that you want to set tags to.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// A collection of key and value pairs that you want to set to the assessment
+	// template.
+	Tags []*types.Tag
 }
 
 type SetTagsForResourceOutput struct {

@@ -66,13 +66,13 @@ type ModifyDBSubnetGroupInput struct {
 	// This member is required.
 	DBSubnetGroupName *string
 
-	// The description for the subnet group.
-	DBSubnetGroupDescription *string
-
 	// The Amazon EC2 subnet IDs for the subnet group.
 	//
 	// This member is required.
 	SubnetIds []*string
+
+	// The description for the subnet group.
+	DBSubnetGroupDescription *string
 }
 
 type ModifyDBSubnetGroupOutput struct {

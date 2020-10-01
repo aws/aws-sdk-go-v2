@@ -58,15 +58,6 @@ func (c *Client) PutRepositoryPermissionsPolicy(ctx context.Context, params *Put
 
 type PutRepositoryPermissionsPolicyInput struct {
 
-	// Sets the revision of the resource policy that specifies permissions to access
-	// the repository. This revision is used for optimistic locking, which prevents
-	// others from overwriting your changes to the repository's resource policy.
-	PolicyRevision *string
-
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the domain containing the repository to set the resource policy on.
 	//
 	// This member is required.
@@ -82,6 +73,15 @@ type PutRepositoryPermissionsPolicyInput struct {
 	//
 	// This member is required.
 	Repository *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
+
+	// Sets the revision of the resource policy that specifies permissions to access
+	// the repository. This revision is used for optimistic locking, which prevents
+	// others from overwriting your changes to the repository's resource policy.
+	PolicyRevision *string
 }
 
 type PutRepositoryPermissionsPolicyOutput struct {

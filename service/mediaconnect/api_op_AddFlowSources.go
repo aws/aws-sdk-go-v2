@@ -58,15 +58,15 @@ func (c *Client) AddFlowSources(ctx context.Context, params *AddFlowSourcesInput
 // A request to add sources to the flow.
 type AddFlowSourcesInput struct {
 
-	// A list of sources that you want to add.
-	//
-	// This member is required.
-	Sources []*types.SetSourceRequest
-
 	// The flow that you want to mutate.
 	//
 	// This member is required.
 	FlowArn *string
+
+	// A list of sources that you want to add.
+	//
+	// This member is required.
+	Sources []*types.SetSourceRequest
 }
 
 type AddFlowSourcesOutput struct {

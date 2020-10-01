@@ -90,10 +90,17 @@ func (c *Client) ListClosedWorkflowExecutions(ctx context.Context, params *ListC
 
 type ListClosedWorkflowExecutionsInput struct {
 
-	// If specified, only executions of the type specified in the filter are returned.
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	TypeFilter *types.WorkflowTypeFilter
+	// The name of the domain that contains the workflow executions to list.
+	//
+	// This member is required.
+	Domain *string
+
+	// If specified, only workflow executions that match this close status are listed.
+	// For example, if TERMINATED is specified, then only TERMINATED workflow
+	// executions are listed. closeStatusFilter, executionFilter, typeFilter and
+	// tagFilter are mutually exclusive. You can specify at most one of these in a
+	// request.
+	CloseStatusFilter *types.CloseStatusFilter
 
 	// If specified, the workflow executions are included in the returned results based
 	// on whether their close times are within the range specified by this filter.
@@ -102,21 +109,24 @@ type ListClosedWorkflowExecutionsInput struct {
 	// must specify one of these in a request but not both.
 	CloseTimeFilter *types.ExecutionTimeFilter
 
+	// If specified, only workflow executions matching the workflow ID specified in the
+	// filter are returned. closeStatusFilter, executionFilter, typeFilter and
+	// tagFilter are mutually exclusive. You can specify at most one of these in a
+	// request.
+	ExecutionFilter *types.WorkflowExecutionFilter
+
 	// The maximum number of results that are returned per call. Use nextPageToken to
 	// obtain further pages of results.
 	MaximumPageSize *int32
 
-	// If specified, only executions that have the matching tag are listed.
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	TagFilter *types.TagFilter
-
-	// If specified, only workflow executions that match this close status are listed.
-	// For example, if TERMINATED is specified, then only TERMINATED workflow
-	// executions are listed. closeStatusFilter, executionFilter, typeFilter and
-	// tagFilter are mutually exclusive. You can specify at most one of these in a
-	// request.
-	CloseStatusFilter *types.CloseStatusFilter
+	// If NextPageToken is returned there are more results available. The value of
+	// NextPageToken is a unique pagination token for each page. Make the call again
+	// using the returned token to retrieve the next page. Keep all other arguments
+	// unchanged. Each pagination token expires after 60 seconds. Using an expired
+	// pagination token will return a 400 error: "Specified token has exceeded its
+	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
+	// how many results can be returned in a single call. </p>
+	NextPageToken *string
 
 	// When set to true, returns the results in reverse order. By default the results
 	// are returned in descending order of the start or the close time of the
@@ -130,25 +140,15 @@ type ListClosedWorkflowExecutionsInput struct {
 	// must specify one of these in a request but not both.
 	StartTimeFilter *types.ExecutionTimeFilter
 
-	// If specified, only workflow executions matching the workflow ID specified in the
-	// filter are returned. closeStatusFilter, executionFilter, typeFilter and
-	// tagFilter are mutually exclusive. You can specify at most one of these in a
-	// request.
-	ExecutionFilter *types.WorkflowExecutionFilter
+	// If specified, only executions that have the matching tag are listed.
+	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
+	TagFilter *types.TagFilter
 
-	// The name of the domain that contains the workflow executions to list.
-	//
-	// This member is required.
-	Domain *string
-
-	// If NextPageToken is returned there are more results available. The value of
-	// NextPageToken is a unique pagination token for each page. Make the call again
-	// using the returned token to retrieve the next page. Keep all other arguments
-	// unchanged. Each pagination token expires after 60 seconds. Using an expired
-	// pagination token will return a 400 error: "Specified token has exceeded its
-	// maximum lifetime".  <p>The configured <code>maximumPageSize</code> determines
-	// how many results can be returned in a single call. </p>
-	NextPageToken *string
+	// If specified, only executions of the type specified in the filter are returned.
+	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
+	TypeFilter *types.WorkflowTypeFilter
 }
 
 // Contains a paginated list of information about workflow executions.

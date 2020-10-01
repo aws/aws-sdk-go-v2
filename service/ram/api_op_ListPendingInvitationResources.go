@@ -58,14 +58,14 @@ func (c *Client) ListPendingInvitationResources(ctx context.Context, params *Lis
 
 type ListPendingInvitationResourcesInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) of the invitation.
 	//
 	// This member is required.
 	ResourceShareInvitationArn *string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string
@@ -73,12 +73,12 @@ type ListPendingInvitationResourcesInput struct {
 
 type ListPendingInvitationResourcesOutput struct {
 
-	// Information about the resources included the resource share.
-	Resources []*types.Resource
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the resources included the resource share.
+	Resources []*types.Resource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

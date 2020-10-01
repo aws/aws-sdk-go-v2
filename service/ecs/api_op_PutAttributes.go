@@ -62,16 +62,16 @@ func (c *Client) PutAttributes(ctx context.Context, params *PutAttributesInput, 
 
 type PutAttributesInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
-	// the resource to apply attributes. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string
-
 	// The attributes to apply to your resource. You can specify up to 10 custom
 	// attributes per resource. You can specify up to 10 attributes in a single call.
 	//
 	// This member is required.
 	Attributes []*types.Attribute
+
+	// The short name or full Amazon Resource Name (ARN) of the cluster that contains
+	// the resource to apply attributes. If you do not specify a cluster, the default
+	// cluster is assumed.
+	Cluster *string
 }
 
 type PutAttributesOutput struct {

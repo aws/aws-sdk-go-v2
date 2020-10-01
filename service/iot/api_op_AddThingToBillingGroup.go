@@ -58,14 +58,14 @@ type AddThingToBillingGroupInput struct {
 	// The ARN of the billing group.
 	BillingGroupArn *string
 
-	// The name of the thing to be added to the billing group.
-	ThingName *string
+	// The name of the billing group.
+	BillingGroupName *string
 
 	// The ARN of the thing to be added to the billing group.
 	ThingArn *string
 
-	// The name of the billing group.
-	BillingGroupName *string
+	// The name of the thing to be added to the billing group.
+	ThingName *string
 }
 
 type AddThingToBillingGroupOutput struct {

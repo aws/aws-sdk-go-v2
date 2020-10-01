@@ -60,18 +60,18 @@ func (c *Client) UpdateCertificateAuthority(ctx context.Context, params *UpdateC
 
 type UpdateCertificateAuthorityInput struct {
 
-	// Status of your private CA.
-	Status types.CertificateAuthorityStatus
-
-	// Revocation information for your private CA.
-	RevocationConfiguration *types.RevocationConfiguration
-
 	// Amazon Resource Name (ARN) of the private CA that issued the certificate to be
 	// revoked. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
+
+	// Revocation information for your private CA.
+	RevocationConfiguration *types.RevocationConfiguration
+
+	// Status of your private CA.
+	Status types.CertificateAuthorityStatus
 }
 
 type UpdateCertificateAuthorityOutput struct {

@@ -60,32 +60,24 @@ func (c *Client) CreateReplicationJob(ctx context.Context, params *CreateReplica
 
 type CreateReplicationJobInput struct {
 
-	// The name of the IAM role to be used by the AWS SMS.
-	RoleName *string
+	// The seed replication time.
+	//
+	// This member is required.
+	SeedReplicationTime *time.Time
 
 	// The identifier of the server.
 	//
 	// This member is required.
 	ServerId *string
 
-	//
-	RunOnce *bool
-
 	// The description of the replication job.
 	Description *string
 
-	// The time between consecutive replication runs, in hours.
-	Frequency *int32
-
-	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
-	// once the maximum number is reached and a new AMI is created.
-	NumberOfRecentAmisToKeep *int32
-
-	// The license type to be used for the AMI created by a successful replication run.
-	LicenseType types.LicenseType
-
 	// When true, the replication job produces encrypted AMIs. See also KmsKeyId below.
 	Encrypted *bool
+
+	// The time between consecutive replication runs, in hours.
+	Frequency *int32
 
 	// KMS key ID for replication jobs that produce encrypted AMIs. Can be any of the
 	// following:
@@ -103,10 +95,18 @@ type CreateReplicationJobInput struct {
 	// id is not specified, the customer's default KMS key for EBS is used.
 	KmsKeyId *string
 
-	// The seed replication time.
+	// The license type to be used for the AMI created by a successful replication run.
+	LicenseType types.LicenseType
+
+	// The maximum number of SMS-created AMIs to retain. The oldest will be deleted
+	// once the maximum number is reached and a new AMI is created.
+	NumberOfRecentAmisToKeep *int32
+
+	// The name of the IAM role to be used by the AWS SMS.
+	RoleName *string
+
 	//
-	// This member is required.
-	SeedReplicationTime *time.Time
+	RunOnce *bool
 }
 
 type CreateReplicationJobOutput struct {

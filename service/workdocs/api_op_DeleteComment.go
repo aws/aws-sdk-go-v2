@@ -61,15 +61,15 @@ type DeleteCommentInput struct {
 	// This member is required.
 	CommentId *string
 
-	// The ID of the document version.
-	//
-	// This member is required.
-	VersionId *string
-
 	// The ID of the document.
 	//
 	// This member is required.
 	DocumentId *string
+
+	// The ID of the document version.
+	//
+	// This member is required.
+	VersionId *string
 
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.

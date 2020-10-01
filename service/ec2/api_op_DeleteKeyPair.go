@@ -55,17 +55,17 @@ func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, 
 
 type DeleteKeyPairInput struct {
 
-	// The ID of the key pair.
-	KeyPairId *string
-
-	// The name of the key pair.
-	KeyName *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The name of the key pair.
+	KeyName *string
+
+	// The ID of the key pair.
+	KeyPairId *string
 }
 
 type DeleteKeyPairOutput struct {

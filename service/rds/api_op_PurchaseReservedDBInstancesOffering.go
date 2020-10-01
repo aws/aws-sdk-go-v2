@@ -58,6 +58,15 @@ func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params
 //
 type PurchaseReservedDBInstancesOfferingInput struct {
 
+	// The ID of the Reserved DB instance offering to purchase. Example:
+	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	//
+	// This member is required.
+	ReservedDBInstancesOfferingId *string
+
+	// The number of instances to reserve. Default: 1
+	DBInstanceCount *int32
+
 	// Customer-specified identifier to track this reservation. Example:
 	// myreservationID
 	ReservedDBInstanceId *string
@@ -66,15 +75,6 @@ type PurchaseReservedDBInstancesOfferingInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
-
-	// The number of instances to reserve. Default: 1
-	DBInstanceCount *int32
-
-	// The ID of the Reserved DB instance offering to purchase. Example:
-	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
-	//
-	// This member is required.
-	ReservedDBInstancesOfferingId *string
 }
 
 type PurchaseReservedDBInstancesOfferingOutput struct {

@@ -84,14 +84,17 @@ func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInp
 
 type StartSigningJobInput struct {
 
-	// The name of the signing profile.
-	ProfileName *string
-
 	// String that identifies the signing request. All calls after the first that use
 	// this token return the same response as the first call.
 	//
 	// This member is required.
 	ClientRequestToken *string
+
+	// The S3 bucket in which to save your signed object. The destination contains the
+	// name of your bucket and an optional prefix.
+	//
+	// This member is required.
+	Destination *types.Destination
 
 	// The S3 bucket that contains the object to sign or a BLOB that contains your raw
 	// code.
@@ -99,11 +102,8 @@ type StartSigningJobInput struct {
 	// This member is required.
 	Source *types.Source
 
-	// The S3 bucket in which to save your signed object. The destination contains the
-	// name of your bucket and an optional prefix.
-	//
-	// This member is required.
-	Destination *types.Destination
+	// The name of the signing profile.
+	ProfileName *string
 }
 
 type StartSigningJobOutput struct {

@@ -92,14 +92,14 @@ type RegisterUsageInput struct {
 	// This member is required.
 	ProductCode *string
 
-	// (Optional) To scope down the registration to a specific running software
-	// instance and guard against replay attacks.
-	Nonce *string
-
 	// Public Key Version provided by AWS Marketplace
 	//
 	// This member is required.
 	PublicKeyVersion *int32
+
+	// (Optional) To scope down the registration to a specific running software
+	// instance and guard against replay attacks.
+	Nonce *string
 }
 
 type RegisterUsageOutput struct {

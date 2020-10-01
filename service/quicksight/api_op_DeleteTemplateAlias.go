@@ -65,15 +65,15 @@ type DeleteTemplateAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID for the template that the specified alias is for.
-	//
-	// This member is required.
-	TemplateId *string
-
 	// The ID of the AWS account that contains the item to delete.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The ID for the template that the specified alias is for.
+	//
+	// This member is required.
+	TemplateId *string
 }
 
 type DeleteTemplateAliasOutput struct {
@@ -81,11 +81,11 @@ type DeleteTemplateAliasOutput struct {
 	// The name for the template alias.
 	AliasName *string
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the template you want to delete.
 	Arn *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// An ID for the template associated with the deletion.
 	TemplateId *string

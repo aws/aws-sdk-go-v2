@@ -64,11 +64,11 @@ type GetAssociatedRoleInput struct {
 
 type GetAssociatedRoleOutput struct {
 
-	// The ARN of the role that is associated with the group.
-	RoleArn *string
-
 	// The time when the role was associated with the group.
 	AssociatedAt *string
+
+	// The ARN of the role that is associated with the group.
+	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

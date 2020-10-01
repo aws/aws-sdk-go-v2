@@ -65,6 +65,18 @@ func (c *Client) AdminCreateUser(ctx context.Context, params *AdminCreateUserInp
 // Represents the request to create a user in the specified user pool.
 type AdminCreateUserInput struct {
 
+	// The user pool ID for the user pool where the user will be created.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// The username for the user. Must be unique within the user pool. Must be a UTF-8
+	// string between 1 and 128 characters. After the user is created, the username
+	// cannot be changed.
+	//
+	// This member is required.
+	Username *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the AdminCreateUser API
@@ -93,6 +105,11 @@ type AdminCreateUserInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
+	// Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS"
+	// if the phone number will be used. The default value is "SMS". More than one
+	// value can be specified.
+	DesiredDeliveryMediums []types.DeliveryMediumType
+
 	// This parameter is only used if the phone_number_verified or email_verified
 	// attribute is set to True. Otherwise, it is ignored. If this parameter is set to
 	// True and the phone number or email address specified in the UserAttributes
@@ -108,27 +125,16 @@ type AdminCreateUserInput struct {
 	// suppress sending the message. Only one value can be specified.
 	MessageAction types.MessageActionType
 
-	// The user's validation data. This is an array of name-value pairs that contain
-	// user attributes and attribute values that you can use for custom validation,
-	// such as restricting the types of user accounts that can be registered. For
-	// example, you might choose to allow or disallow user sign-up based on the user's
-	// domain. To configure custom validation, you must create a Pre Sign-up Lambda
-	// trigger for the user pool as described in the Amazon Cognito Developer Guide.
-	// The Lambda trigger receives the validation data and uses it in the validation
-	// process. The user's validation data is not persisted.
-	ValidationData []*types.AttributeType
-
-	// The user pool ID for the user pool where the user will be created.
-	//
-	// This member is required.
-	UserPoolId *string
-
-	// The username for the user. Must be unique within the user pool. Must be a UTF-8
-	// string between 1 and 128 characters. After the user is created, the username
-	// cannot be changed.
-	//
-	// This member is required.
-	Username *string
+	// The user's temporary password. This password must conform to the password policy
+	// that you specified when you created the user pool. The temporary password is
+	// valid only once. To complete the Admin Create User flow, the user must enter the
+	// temporary password in the sign-in page along with a new password to be used in
+	// all future sign-ins. This parameter is not required. If you do not specify a
+	// value, Amazon Cognito generates one for you. The temporary password can only be
+	// used until the user account expiration limit that you specified when you created
+	// the user pool. To reset the account after that time limit, you must call
+	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
+	TemporaryPassword *string
 
 	// An array of name-value pairs that contain user attributes and attribute values
 	// to be set for the user to be created. You can create a user without specifying
@@ -155,21 +161,15 @@ type AdminCreateUserInput struct {
 	// parameter.
 	UserAttributes []*types.AttributeType
 
-	// The user's temporary password. This password must conform to the password policy
-	// that you specified when you created the user pool. The temporary password is
-	// valid only once. To complete the Admin Create User flow, the user must enter the
-	// temporary password in the sign-in page along with a new password to be used in
-	// all future sign-ins. This parameter is not required. If you do not specify a
-	// value, Amazon Cognito generates one for you. The temporary password can only be
-	// used until the user account expiration limit that you specified when you created
-	// the user pool. To reset the account after that time limit, you must call
-	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter.
-	TemporaryPassword *string
-
-	// Specify "EMAIL" if email will be used to send the welcome message. Specify "SMS"
-	// if the phone number will be used. The default value is "SMS". More than one
-	// value can be specified.
-	DesiredDeliveryMediums []types.DeliveryMediumType
+	// The user's validation data. This is an array of name-value pairs that contain
+	// user attributes and attribute values that you can use for custom validation,
+	// such as restricting the types of user accounts that can be registered. For
+	// example, you might choose to allow or disallow user sign-up based on the user's
+	// domain. To configure custom validation, you must create a Pre Sign-up Lambda
+	// trigger for the user pool as described in the Amazon Cognito Developer Guide.
+	// The Lambda trigger receives the validation data and uses it in the validation
+	// process. The user's validation data is not persisted.
+	ValidationData []*types.AttributeType
 }
 
 // Represents the response from the server to the request to create the user.

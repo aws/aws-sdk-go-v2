@@ -71,14 +71,14 @@ type DescribeDetectorInput struct {
 
 type DescribeDetectorOutput struct {
 
-	// The status and description for each detector version.
-	DetectorVersionSummaries []*types.DetectorVersionSummary
-
 	// The detector ARN.
 	Arn *string
 
 	// The detector ID.
 	DetectorId *string
+
+	// The status and description for each detector version.
+	DetectorVersionSummaries []*types.DetectorVersionSummary
 
 	// The next token to be used for subsequent requests.
 	NextToken *string

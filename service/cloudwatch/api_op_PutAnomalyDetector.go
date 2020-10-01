@@ -65,6 +65,16 @@ type PutAnomalyDetectorInput struct {
 	// This member is required.
 	MetricName *string
 
+	// The namespace of the metric to create the anomaly detection model for.
+	//
+	// This member is required.
+	Namespace *string
+
+	// The statistic to use for the metric and the anomaly detection model.
+	//
+	// This member is required.
+	Stat *string
+
 	// The configuration specifies details about how the anomaly detection model is to
 	// be trained, including time ranges to exclude when training and updating the
 	// model. You can specify as many as 10 time ranges. The configuration can also
@@ -73,16 +83,6 @@ type PutAnomalyDetectorInput struct {
 
 	// The metric dimensions to create the anomaly detection model for.
 	Dimensions []*types.Dimension
-
-	// The statistic to use for the metric and the anomaly detection model.
-	//
-	// This member is required.
-	Stat *string
-
-	// The namespace of the metric to create the anomaly detection model for.
-	//
-	// This member is required.
-	Namespace *string
 }
 
 type PutAnomalyDetectorOutput struct {

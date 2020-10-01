@@ -77,12 +77,12 @@ type DescribeScalingPlanResourcesInput struct {
 
 type DescribeScalingPlanResourcesOutput struct {
 
-	// Information about the scalable resources.
-	ScalingPlanResources []*types.ScalingPlanResource
-
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string
+
+	// Information about the scalable resources.
+	ScalingPlanResources []*types.ScalingPlanResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

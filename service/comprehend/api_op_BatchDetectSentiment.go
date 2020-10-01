@@ -58,19 +58,19 @@ func (c *Client) BatchDetectSentiment(ctx context.Context, params *BatchDetectSe
 
 type BatchDetectSentimentInput struct {
 
-	// A list containing the text of the input documents. The list can contain a
-	// maximum of 25 documents. Each document must contain fewer that 5,000 bytes of
-	// UTF-8 encoded characters.
-	//
-	// This member is required.
-	TextList []*string
-
 	// The language of the input documents. You can specify any of the primary
 	// languages supported by Amazon Comprehend. All documents must be in the same
 	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
+
+	// A list containing the text of the input documents. The list can contain a
+	// maximum of 25 documents. Each document must contain fewer that 5,000 bytes of
+	// UTF-8 encoded characters.
+	//
+	// This member is required.
+	TextList []*string
 }
 
 type BatchDetectSentimentOutput struct {

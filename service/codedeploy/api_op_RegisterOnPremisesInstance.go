@@ -58,16 +58,16 @@ func (c *Client) RegisterOnPremisesInstance(ctx context.Context, params *Registe
 // Represents the input of the register on-premises instance operation.
 type RegisterOnPremisesInstanceInput struct {
 
+	// The name of the on-premises instance to register.
+	//
+	// This member is required.
+	InstanceName *string
+
 	// The ARN of the IAM session to associate with the on-premises instance.
 	IamSessionArn *string
 
 	// The ARN of the IAM user to associate with the on-premises instance.
 	IamUserArn *string
-
-	// The name of the on-premises instance to register.
-	//
-	// This member is required.
-	InstanceName *string
 }
 
 type RegisterOnPremisesInstanceOutput struct {

@@ -10,15 +10,15 @@ import (
 // application is made up of.
 type ApplicationComponent struct {
 
-	// The resource type. Supported resource types include EC2 instances, Auto Scaling
-	// group, Classic ELB, Application ELB, and SQS Queue.
-	ResourceType *string
-
 	// The name of the component.
 	ComponentName *string
 
 	// Indicates whether the application component is monitored.
 	Monitor *bool
+
+	// The resource type. Supported resource types include EC2 instances, Auto Scaling
+	// group, Classic ELB, Application ELB, and SQS Queue.
+	ResourceType *string
 
 	// The stack tier of the application component.
 	Tier Tier
@@ -27,19 +27,21 @@ type ApplicationComponent struct {
 // Describes the status of the application.
 type ApplicationInfo struct {
 
-	// The SNS topic provided to Application Insights that is associated to the created
-	// opsItems to receive SNS notifications for opsItem updates.
-	OpsItemSNSTopicArn *string
+	// Indicates whether Application Insights can listen to CloudWatch events for the
+	// application resources, such as instance terminated, failed deployment, and
+	// others.
+	CWEMonitorEnabled *bool
 
 	// The lifecycle of the application.
 	LifeCycle *string
 
-	// The name of the resource group used for the application.
-	ResourceGroupName *string
-
 	// Indicates whether Application Insights will create opsItems for any problem
 	// detected by Application Insights for an application.
 	OpsCenterEnabled *bool
+
+	// The SNS topic provided to Application Insights that is associated to the created
+	// opsItems to receive SNS notifications for opsItem updates.
+	OpsItemSNSTopicArn *string
 
 	// The issues on the user side that block Application Insights from successfully
 	// monitoring an application. Example remarks include:
@@ -51,10 +53,8 @@ type ApplicationInfo struct {
 	// detected 1 Unconfigured Components”
 	Remarks *string
 
-	// Indicates whether Application Insights can listen to CloudWatch events for the
-	// application resources, such as instance terminated, failed deployment, and
-	// others.
-	CWEMonitorEnabled *bool
+	// The name of the resource group used for the application.
+	ResourceGroupName *string
 }
 
 // The event information.
@@ -63,13 +63,6 @@ type ConfigurationEvent struct {
 	// The details of the event in plain text.
 	EventDetail *string
 
-	// The resource monitored by Application Insights.
-	MonitoredResourceARN *string
-
-	// The status of the configuration update event. Possible values include INFO,
-	// WARN, and ERROR.
-	EventStatus ConfigurationEventStatus
-
 	// The name of the resource Application Insights attempted to configure.
 	EventResourceName *string
 
@@ -77,20 +70,19 @@ type ConfigurationEvent struct {
 	// CLOUDWATCH_ALARM.
 	EventResourceType ConfigurationEventResourceType
 
+	// The status of the configuration update event. Possible values include INFO,
+	// WARN, and ERROR.
+	EventStatus ConfigurationEventStatus
+
 	// The timestamp of the event.
 	EventTime *time.Time
+
+	// The resource monitored by Application Insights.
+	MonitoredResourceARN *string
 }
 
 // An object that defines the log patterns that belongs to a LogPatternSet.
 type LogPattern struct {
-
-	// The name of the log pattern. A log pattern name can contains at many as 30
-	// characters, and it cannot be empty. The characters can be Unicode letters,
-	// digits or one of the following symbols: period, dash, underscore.
-	PatternSetName *string
-
-	// Rank of the log pattern.
-	Rank *int32
 
 	// A regular expression that defines the log pattern. A log pattern can contains at
 	// many as 50 characters, and it cannot be empty.
@@ -100,29 +92,54 @@ type LogPattern struct {
 	// characters, and it cannot be empty. The characters can be Unicode letters,
 	// digits or one of the following symbols: period, dash, underscore.
 	PatternName *string
+
+	// The name of the log pattern. A log pattern name can contains at many as 30
+	// characters, and it cannot be empty. The characters can be Unicode letters,
+	// digits or one of the following symbols: period, dash, underscore.
+	PatternSetName *string
+
+	// Rank of the log pattern.
+	Rank *int32
 }
 
 // Describes an anomaly or error with the application.
 type Observation struct {
 
-	// The source of the CloudWatch Event.
-	CloudWatchEventSource CloudWatchEventSource
-
 	// The detail type of the CloudWatch Event-based observation, for example, EC2
 	// Instance State-change Notification.
 	CloudWatchEventDetailType *string
 
-	// The name of the X-Ray node.
-	XRayNodeName *string
+	// The ID of the CloudWatch Event-based observation related to the detected
+	// problem.
+	CloudWatchEventId *string
 
-	// The ID of the observation type.
-	Id *string
-
-	// The source resource ARN of the observation.
-	SourceARN *string
+	// The source of the CloudWatch Event.
+	CloudWatchEventSource CloudWatchEventSource
 
 	// The CodeDeploy application to which the deployment belongs.
 	CodeDeployApplication *string
+
+	// The deployment group to which the CodeDeploy deployment belongs.
+	CodeDeployDeploymentGroup *string
+
+	// The deployment ID of the CodeDeploy-based observation related to the detected
+	// problem.
+	CodeDeployDeploymentId *string
+
+	// The instance group to which the CodeDeploy instance belongs.
+	CodeDeployInstanceGroupId *string
+
+	// The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE.
+	CodeDeployState *string
+
+	// The state of the instance, such as STOPPING or TERMINATING.
+	Ec2State *string
+
+	// The time when the observation ended, in epoch seconds.
+	EndTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
+	HealthEventArn *string
 
 	// The description of the AWS Health event provided by the service, such as Amazon
 	// EC2.
@@ -131,86 +148,69 @@ type Observation struct {
 	// The category of the AWS Health event, such as issue.
 	HealthEventTypeCategory *string
 
-	// The X-Ray request throttle percentage for this node.
-	XRayThrottlePercent *int32
-
-	// The value of the source observation metric.
-	Value *float64
-
-	// The log filter of the observation.
-	LogFilter LogFilter
-
-	// The deployment group to which the CodeDeploy deployment belongs.
-	CodeDeployDeploymentGroup *string
-
-	// The instance group to which the CodeDeploy instance belongs.
-	CodeDeployInstanceGroupId *string
-
-	// The ID of the CloudWatch Event-based observation related to the detected
-	// problem.
-	CloudWatchEventId *string
-
-	// The unit of the source observation metric.
-	Unit *string
-
-	// The time when the observation ended, in epoch seconds.
-	EndTime *time.Time
-
-	// The log text of the observation.
-	LogText *string
-
-	// The state of the instance, such as STOPPING or TERMINATING.
-	Ec2State *string
-
-	// The log group name.
-	LogGroup *string
-
-	// The X-Ray node request average latency for this node.
-	XRayRequestAverageLatency *int64
-
 	// The type of the AWS Health event, for example, AWS_EC2_POWER_CONNECTIVITY_ISSUE.
 	HealthEventTypeCode *string
 
-	// The deployment ID of the CodeDeploy-based observation related to the detected
-	// problem.
-	CodeDeployDeploymentId *string
-
-	// The name of the observation metric.
-	MetricName *string
-
 	// The service to which the AWS Health Event belongs, such as EC2.
 	HealthService *string
+
+	// The ID of the observation type.
+	Id *string
 
 	// The timestamp in the CloudWatch Logs that specifies when the matched line
 	// occurred.
 	LineTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the AWS Health Event-based observation.
-	HealthEventArn *string
+	// The log filter of the observation.
+	LogFilter LogFilter
 
-	// The status of the CodeDeploy deployment, for example SUCCESS or  FAILURE.
-	CodeDeployState *string
+	// The log group name.
+	LogGroup *string
 
-	// The type of the X-Ray node.
-	XRayNodeType *string
+	// The log text of the observation.
+	LogText *string
 
-	// The source type of the observation.
-	SourceType *string
-
-	// The X-Ray request count for this node.
-	XRayRequestCount *int32
-
-	// The time when the observation was first detected, in epoch seconds.
-	StartTime *time.Time
-
-	// The X-Ray request error percentage for this node.
-	XRayErrorPercent *int32
+	// The name of the observation metric.
+	MetricName *string
 
 	// The namespace of the observation metric.
 	MetricNamespace *string
 
+	// The source resource ARN of the observation.
+	SourceARN *string
+
+	// The source type of the observation.
+	SourceType *string
+
+	// The time when the observation was first detected, in epoch seconds.
+	StartTime *time.Time
+
+	// The unit of the source observation metric.
+	Unit *string
+
+	// The value of the source observation metric.
+	Value *float64
+
+	// The X-Ray request error percentage for this node.
+	XRayErrorPercent *int32
+
 	// The X-Ray request fault percentage for this node.
 	XRayFaultPercent *int32
+
+	// The name of the X-Ray node.
+	XRayNodeName *string
+
+	// The type of the X-Ray node.
+	XRayNodeType *string
+
+	// The X-Ray node request average latency for this node.
+	XRayRequestAverageLatency *int64
+
+	// The X-Ray request count for this node.
+	XRayRequestCount *int32
+
+	// The X-Ray request throttle percentage for this node.
+	XRayThrottlePercent *int32
 }
 
 // Describes a problem that is detected by correlating observations.
@@ -219,32 +219,32 @@ type Problem struct {
 	// The resource affected by the problem.
 	AffectedResource *string
 
-	// A detailed analysis of the problem using machine learning.
-	Insights *string
+	// The time when the problem ended, in epoch seconds.
+	EndTime *time.Time
 
 	// Feedback provided by the user about the problem.
 	Feedback map[string]FeedbackValue
 
-	// The time when the problem ended, in epoch seconds.
-	EndTime *time.Time
+	// The ID of the problem.
+	Id *string
+
+	// A detailed analysis of the problem using machine learning.
+	Insights *string
+
+	// The name of the resource group affected by the problem.
+	ResourceGroupName *string
+
+	// A measure of the level of impact of the problem.
+	SeverityLevel SeverityLevel
+
+	// The time when the problem started, in epoch seconds.
+	StartTime *time.Time
 
 	// The status of the problem.
 	Status Status
 
 	// The name of the problem.
 	Title *string
-
-	// The time when the problem started, in epoch seconds.
-	StartTime *time.Time
-
-	// The name of the resource group affected by the problem.
-	ResourceGroupName *string
-
-	// The ID of the problem.
-	Id *string
-
-	// A measure of the level of impact of the problem.
-	SeverityLevel SeverityLevel
 }
 
 // Describes observations related to the problem.

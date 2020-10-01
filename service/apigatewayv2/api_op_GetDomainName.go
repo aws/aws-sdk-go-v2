@@ -65,17 +65,17 @@ type GetDomainNameInput struct {
 
 type GetDomainNameOutput struct {
 
-	// The collection of tags associated with a domain name.
-	Tags map[string]*string
-
-	// The domain name configurations.
-	DomainNameConfigurations []*types.DomainNameConfiguration
+	// The API mapping selection expression.
+	ApiMappingSelectionExpression *string
 
 	// The name of the DomainName resource.
 	DomainName *string
 
-	// The API mapping selection expression.
-	ApiMappingSelectionExpression *string
+	// The domain name configurations.
+	DomainNameConfigurations []*types.DomainNameConfiguration
+
+	// The collection of tags associated with a domain name.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -68,6 +68,12 @@ type MedicalTranscript struct {
 // job.
 type MedicalTranscriptionJob struct {
 
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time
+
+	// A timestamp that shows when the job was created.
+	CreationTime *time.Time
+
 	// If the TranscriptionJobStatus field is FAILED, this field contains information
 	// about why the job failed. The FailureReason field contains one of the following
 	// values:
@@ -106,44 +112,16 @@ type MedicalTranscriptionJob struct {
 	// Amazon Web Services General Reference
 	FailureReason *string
 
-	// The type of speech in the transcription job. CONVERSATION is generally used for
-	// patient-physician dialogues. DICTATION is the setting for physicians speaking
-	// their notes after seeing a patient. For more information, see how-it-works-med
-	// ()
-	Type Type
-
-	// A timestamp that shows when the job was created.
-	CreationTime *time.Time
-
-	// The name for a given medical transcription job.
-	MedicalTranscriptionJobName *string
+	// The language code for the language spoken in the source audio file. US English
+	// (en-US) is the only supported language for medical transcriptions. Any other
+	// value you enter for language code results in a BadRequestException error.
+	LanguageCode LanguageCode
 
 	// Describes the input media file in a transcription request.
 	Media *Media
 
-	// An object that contains the MedicalTranscript. The MedicalTranscript contains
-	// the TranscriptFileUri.
-	Transcript *MedicalTranscript
-
-	// The medical specialty of any clinicians providing a dictation or having a
-	// conversation. PRIMARYCARE is the only available setting for this object. This
-	// specialty enables you to generate transcriptions for the following medical
-	// fields:
-	//
-	//     * Family Medicine
-	Specialty Specialty
-
-	// The completion status of a medical transcription job.
-	TranscriptionJobStatus TranscriptionJobStatus
-
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
-
-	// Object that contains object.
-	Settings *MedicalTranscriptionSetting
-
-	// A timestamp that shows when the job started processing.
-	StartTime *time.Time
+	// The format of the input media file.
+	MediaFormat MediaFormat
 
 	// The sample rate, in Hertz, of the source audio containing medical information.
 	// If you don't specify the sample rate, Amazon Transcribe Medical determines it
@@ -153,30 +131,62 @@ type MedicalTranscriptionJob struct {
 	// rate.
 	MediaSampleRateHertz *int32
 
-	// The format of the input media file.
-	MediaFormat MediaFormat
+	// The name for a given medical transcription job.
+	MedicalTranscriptionJobName *string
 
-	// The language code for the language spoken in the source audio file. US English
-	// (en-US) is the only supported language for medical transcriptions. Any other
-	// value you enter for language code results in a BadRequestException error.
-	LanguageCode LanguageCode
+	// Object that contains object.
+	Settings *MedicalTranscriptionSetting
+
+	// The medical specialty of any clinicians providing a dictation or having a
+	// conversation. PRIMARYCARE is the only available setting for this object. This
+	// specialty enables you to generate transcriptions for the following medical
+	// fields:
+	//
+	//     * Family Medicine
+	Specialty Specialty
+
+	// A timestamp that shows when the job started processing.
+	StartTime *time.Time
+
+	// An object that contains the MedicalTranscript. The MedicalTranscript contains
+	// the TranscriptFileUri.
+	Transcript *MedicalTranscript
+
+	// The completion status of a medical transcription job.
+	TranscriptionJobStatus TranscriptionJobStatus
+
+	// The type of speech in the transcription job. CONVERSATION is generally used for
+	// patient-physician dialogues. DICTATION is the setting for physicians speaking
+	// their notes after seeing a patient. For more information, see how-it-works-med
+	// ()
+	Type Type
 }
 
 // Provides summary information about a transcription job.
 type MedicalTranscriptionJobSummary struct {
 
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time
+
+	// A timestamp that shows when the medical transcription job was created.
+	CreationTime *time.Time
+
 	// If the TranscriptionJobStatus field is FAILED, a description of the error.
 	FailureReason *string
+
+	// The language of the transcript in the source audio file.
+	LanguageCode LanguageCode
+
+	// The name of a medical transcription job.
+	MedicalTranscriptionJobName *string
 
 	// Indicates the location of the transcription job's output. The CUSTOMER_BUCKET is
 	// the S3 location provided in the OutputBucketName field when the
 	OutputLocationType OutputLocationType
 
-	// The speech of the clinician in the input audio.
-	Type Type
-
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
+	// The medical specialty of the transcription job. Primary care is the only valid
+	// value.
+	Specialty Specialty
 
 	// A timestamp that shows when the job began processing.
 	StartTime *time.Time
@@ -184,30 +194,27 @@ type MedicalTranscriptionJobSummary struct {
 	// The status of the medical transcription job.
 	TranscriptionJobStatus TranscriptionJobStatus
 
-	// The name of a medical transcription job.
-	MedicalTranscriptionJobName *string
-
-	// The language of the transcript in the source audio file.
-	LanguageCode LanguageCode
-
-	// A timestamp that shows when the medical transcription job was created.
-	CreationTime *time.Time
-
-	// The medical specialty of the transcription job. Primary care is the only valid
-	// value.
-	Specialty Specialty
+	// The speech of the clinician in the input audio.
+	Type Type
 }
 
 // Optional settings for the StartMedicalTranscriptionJob () operation.
 type MedicalTranscriptionSetting struct {
 
-	// Determines whether the transcription job uses speaker recognition to identify
-	// different speakers in the input audio. Speaker recongition labels individual
-	// speakers in the audio file. If you set the ShowSpeakerLabels field to true, you
-	// must also set the maximum number of speaker labels in the MaxSpeakerLabels
-	// field. You can't set both ShowSpeakerLabels and ChannelIdentification in the
-	// same request. If you set both, your request returns a BadRequestException.
-	ShowSpeakerLabels *bool
+	// Instructs Amazon Transcribe Medical to process each audio channel separately and
+	// then merge the transcription output of each channel into a single transcription.
+	// Amazon Transcribe Medical also produces a transcription of each item detected on
+	// an audio channel, including the start time and end time of the item and
+	// alternative transcriptions of item. The alternative transcriptions also come
+	// with confidence scores provided by Amazon Transcribe Medical. You can't set both
+	// ShowSpeakerLabels and ChannelIdentification in the same request. If you set
+	// both, your request returns a BadRequestException
+	ChannelIdentification *bool
+
+	// The maximum number of alternatives that you tell the service to return. If you
+	// specify the MaxAlternatives field, you must set the ShowAlternatives field to
+	// true.
+	MaxAlternatives *int32
 
 	// The maximum number of speakers to identify in the input audio. If there are more
 	// speakers in the audio than this number, multiple speakers are identified as a
@@ -221,23 +228,16 @@ type MedicalTranscriptionSetting struct {
 	// MaxAlternatives field.
 	ShowAlternatives *bool
 
-	// The maximum number of alternatives that you tell the service to return. If you
-	// specify the MaxAlternatives field, you must set the ShowAlternatives field to
-	// true.
-	MaxAlternatives *int32
+	// Determines whether the transcription job uses speaker recognition to identify
+	// different speakers in the input audio. Speaker recongition labels individual
+	// speakers in the audio file. If you set the ShowSpeakerLabels field to true, you
+	// must also set the maximum number of speaker labels in the MaxSpeakerLabels
+	// field. You can't set both ShowSpeakerLabels and ChannelIdentification in the
+	// same request. If you set both, your request returns a BadRequestException.
+	ShowSpeakerLabels *bool
 
 	// The name of the vocabulary to use when processing a medical transcription job.
 	VocabularyName *string
-
-	// Instructs Amazon Transcribe Medical to process each audio channel separately and
-	// then merge the transcription output of each channel into a single transcription.
-	// Amazon Transcribe Medical also produces a transcription of each item detected on
-	// an audio channel, including the start time and end time of the item and
-	// alternative transcriptions of item. The alternative transcriptions also come
-	// with confidence scores provided by Amazon Transcribe Medical. You can't set both
-	// ShowSpeakerLabels and ChannelIdentification in the same request. If you set
-	// both, your request returns a BadRequestException
-	ChannelIdentification *bool
 }
 
 // Provides optional settings for the StartTranscriptionJob operation.
@@ -253,14 +253,16 @@ type Settings struct {
 	// a BadRequestException.
 	ChannelIdentification *bool
 
-	// The name of the vocabulary filter to use when transcribing the audio. The filter
-	// that you specify must have the same language code as the transcription job.
-	VocabularyFilterName *string
-
 	// The number of alternative transcriptions that the service should return. If you
 	// specify the MaxAlternatives field, you must set the ShowAlternatives field to
 	// true.
 	MaxAlternatives *int32
+
+	// The maximum number of speakers to identify in the input audio. If there are more
+	// speakers in the audio than this number, multiple speakers are identified as a
+	// single speaker. If you specify the MaxSpeakerLabels field, you must set the
+	// ShowSpeakerLabels field to true.
+	MaxSpeakerLabels *int32
 
 	// Determines whether the transcription contains alternative transcriptions. If you
 	// set the ShowAlternatives field to true, you must also set the maximum number of
@@ -275,30 +277,21 @@ type Settings struct {
 	// If you set both, your request returns a BadRequestException.
 	ShowSpeakerLabels *bool
 
-	// The maximum number of speakers to identify in the input audio. If there are more
-	// speakers in the audio than this number, multiple speakers are identified as a
-	// single speaker. If you specify the MaxSpeakerLabels field, you must set the
-	// ShowSpeakerLabels field to true.
-	MaxSpeakerLabels *int32
-
-	// The name of a vocabulary to use when processing the transcription job.
-	VocabularyName *string
-
 	// Set to mask to remove filtered text from the transcript and replace it with
 	// three asterisks ("***") as placeholder text. Set to remove to remove filtered
 	// text from the transcript without using placeholder text.
 	VocabularyFilterMethod VocabularyFilterMethod
+
+	// The name of the vocabulary filter to use when transcribing the audio. The filter
+	// that you specify must have the same language code as the transcription job.
+	VocabularyFilterName *string
+
+	// The name of a vocabulary to use when processing the transcription job.
+	VocabularyName *string
 }
 
 // Identifies the location of a transcription.
 type Transcript struct {
-
-	// The S3 object location of the the transcript. Use this URI to access the
-	// transcript. If you specified an S3 bucket in the OutputBucketName field when you
-	// created the job, this is the URI of that bucket. If you chose to store the
-	// transcript in Amazon Transcribe, this is a shareable URL that provides secure
-	// access to that location.
-	TranscriptFileUri *string
 
 	// The S3 object location of the redacted transcript.  <p>Use this URI to access
 	// the redacated transcript. If you specified an S3 bucket in the
@@ -306,6 +299,13 @@ type Transcript struct {
 	// that bucket. If you chose to store the transcript in Amazon Transcribe, this is
 	// a shareable URL that provides secure access to that location.</p>
 	RedactedTranscriptFileUri *string
+
+	// The S3 object location of the the transcript. Use this URI to access the
+	// transcript. If you specified an S3 bucket in the OutputBucketName field when you
+	// created the job, this is the URI of that bucket. If you chose to store the
+	// transcript in Amazon Transcribe, this is a shareable URL that provides secure
+	// access to that location.
+	TranscriptFileUri *string
 }
 
 // Describes an asynchronous transcription job that was created with the
@@ -315,41 +315,11 @@ type TranscriptionJob struct {
 	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time
 
-	// The status of the transcription job.
-	TranscriptionJobStatus TranscriptionJobStatus
-
-	// Optional settings for the transcription job. Use these settings to turn on
-	// speaker recognition, to set the maximum number of speakers that should be
-	// identified and to specify a custom vocabulary to use when processing the
-	// transcription job.
-	Settings *Settings
-
-	// The name of the transcription job.
-	TranscriptionJobName *string
-
-	// The language code for the input speech.
-	LanguageCode LanguageCode
-
-	// The sample rate, in Hertz, of the audio track in the input media file.
-	MediaSampleRateHertz *int32
-
-	// A timestamp that shows with the job was started processing.
-	StartTime *time.Time
-
-	// The format of the input media file.
-	MediaFormat MediaFormat
-
-	// An object that describes the output of the transcription job.
-	Transcript *Transcript
-
-	// An object that describes the input media for the transcription job.
-	Media *Media
+	// An object that describes content redaction settings for the transcription job.
+	ContentRedaction *ContentRedaction
 
 	// A timestamp that shows when the job was created.
 	CreationTime *time.Time
-
-	// An object that describes content redaction settings for the transcription job.
-	ContentRedaction *ContentRedaction
 
 	// If the TranscriptionJobStatus field is FAILED, this field contains information
 	// about why the job failed. The FailureReason field can contain one of the
@@ -390,32 +360,55 @@ type TranscriptionJob struct {
 
 	// Provides information about how a transcription job is executed.
 	JobExecutionSettings *JobExecutionSettings
+
+	// The language code for the input speech.
+	LanguageCode LanguageCode
+
+	// An object that describes the input media for the transcription job.
+	Media *Media
+
+	// The format of the input media file.
+	MediaFormat MediaFormat
+
+	// The sample rate, in Hertz, of the audio track in the input media file.
+	MediaSampleRateHertz *int32
+
+	// Optional settings for the transcription job. Use these settings to turn on
+	// speaker recognition, to set the maximum number of speakers that should be
+	// identified and to specify a custom vocabulary to use when processing the
+	// transcription job.
+	Settings *Settings
+
+	// A timestamp that shows with the job was started processing.
+	StartTime *time.Time
+
+	// An object that describes the output of the transcription job.
+	Transcript *Transcript
+
+	// The name of the transcription job.
+	TranscriptionJobName *string
+
+	// The status of the transcription job.
+	TranscriptionJobStatus TranscriptionJobStatus
 }
 
 // Provides a summary of information about a transcription job.
 type TranscriptionJobSummary struct {
 
-	// A timestamp that shows when the job was created.
-	CreationTime *time.Time
-
-	// A timestamp that shows when the job started processing.
-	StartTime *time.Time
-
-	// If the TranscriptionJobStatus field is FAILED, a description of the error.
-	FailureReason *string
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time
 
 	// The content redaction settings of the transcription job.
 	ContentRedaction *ContentRedaction
 
-	// The status of the transcription job. When the status is COMPLETED, use the
-	// GetTranscriptionJob operation to get the results of the transcription.
-	TranscriptionJobStatus TranscriptionJobStatus
+	// A timestamp that shows when the job was created.
+	CreationTime *time.Time
 
-	// The name of the transcription job.
-	TranscriptionJobName *string
+	// If the TranscriptionJobStatus field is FAILED, a description of the error.
+	FailureReason *string
 
-	// A timestamp that shows when the job was completed.
-	CompletionTime *time.Time
+	// The language code for the input speech.
+	LanguageCode LanguageCode
 
 	// Indicates the location of the output of the transcription job. If the value is
 	// CUSTOMER_BUCKET then the location is the S3 bucket specified in the
@@ -425,8 +418,15 @@ type TranscriptionJobSummary struct {
 	// GetTranscriptionJob response's TranscriptFileUri field.
 	OutputLocationType OutputLocationType
 
-	// The language code for the input speech.
-	LanguageCode LanguageCode
+	// A timestamp that shows when the job started processing.
+	StartTime *time.Time
+
+	// The name of the transcription job.
+	TranscriptionJobName *string
+
+	// The status of the transcription job. When the status is COMPLETED, use the
+	// GetTranscriptionJob operation to get the results of the transcription.
+	TranscriptionJobStatus TranscriptionJobStatus
 }
 
 // Provides information about a vocabulary filter.
@@ -435,27 +435,27 @@ type VocabularyFilterInfo struct {
 	// The language code of the words in the vocabulary filter.
 	LanguageCode LanguageCode
 
+	// The date and time that the vocabulary was last updated.
+	LastModifiedTime *time.Time
+
 	// The name of the vocabulary filter. The name must be unique in the account that
 	// holds the filter.
 	VocabularyFilterName *string
-
-	// The date and time that the vocabulary was last updated.
-	LastModifiedTime *time.Time
 }
 
 // Provides information about a custom vocabulary.
 type VocabularyInfo struct {
 
-	// The name of the vocabulary.
-	VocabularyName *string
-
 	// The language code of the vocabulary entries.
 	LanguageCode LanguageCode
+
+	// The date and time that the vocabulary was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the vocabulary.
+	VocabularyName *string
 
 	// The processing state of the vocabulary. If the state is READY you can use the
 	// vocabulary in a StartTranscriptionJob request.
 	VocabularyState VocabularyState
-
-	// The date and time that the vocabulary was last modified.
-	LastModifiedTime *time.Time
 }

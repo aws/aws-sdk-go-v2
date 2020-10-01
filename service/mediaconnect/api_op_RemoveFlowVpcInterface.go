@@ -75,12 +75,12 @@ type RemoveFlowVpcInterfaceOutput struct {
 	// The ARN of the flow that is associated with the VPC interface you removed.
 	FlowArn *string
 
-	// The name of the VPC interface that was removed.
-	VpcInterfaceName *string
-
 	// IDs of network interfaces associated with the removed VPC interface that Media
 	// Connect was unable to remove.
 	NonDeletedNetworkInterfaceIds []*string
+
+	// The name of the VPC interface that was removed.
+	VpcInterfaceName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,6 +67,11 @@ func (c *Client) PutBucketRequestPayment(ctx context.Context, params *PutBucketR
 
 type PutBucketRequestPaymentInput struct {
 
+	// The bucket name.
+	//
+	// This member is required.
+	Bucket *string
+
 	// Container for Payer.
 	//
 	// This member is required.
@@ -77,11 +82,6 @@ type PutBucketRequestPaymentInput struct {
 	// transit. For more information, see RFC 1864
 	// (http://www.ietf.org/rfc/rfc1864.txt).
 	ContentMD5 *string
-
-	// The bucket name.
-	//
-	// This member is required.
-	Bucket *string
 }
 
 type PutBucketRequestPaymentOutput struct {

@@ -67,13 +67,13 @@ type DeregisterTypeInput struct {
 	// TypeName and Type, or Arn.
 	Arn *string
 
-	// The name of the type. Conditional: You must specify either TypeName and Type, or
-	// Arn.
-	TypeName *string
-
 	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
 	// must specify either TypeName and Type, or Arn.
 	Type types.RegistryType
+
+	// The name of the type. Conditional: You must specify either TypeName and Type, or
+	// Arn.
+	TypeName *string
 
 	// The ID of a specific version of the type. The version ID is the value at the end
 	// of the Amazon Resource Name (ARN) assigned to the type version when it is

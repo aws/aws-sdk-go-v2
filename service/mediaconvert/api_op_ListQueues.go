@@ -63,12 +63,12 @@ type ListQueuesInput struct {
 	// specify, the service will list them by creation date.
 	ListBy types.QueueListBy
 
+	// Optional. Number of queues, up to twenty, that will be returned at one time.
+	MaxResults *int32
+
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of queues.
 	NextToken *string
-
-	// Optional. Number of queues, up to twenty, that will be returned at one time.
-	MaxResults *int32
 
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
@@ -77,11 +77,11 @@ type ListQueuesInput struct {
 
 type ListQueuesOutput struct {
 
-	// List of queues.
-	Queues []*types.Queue
-
 	// Use this string to request the next batch of queues.
 	NextToken *string
+
+	// List of queues.
+	Queues []*types.Queue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

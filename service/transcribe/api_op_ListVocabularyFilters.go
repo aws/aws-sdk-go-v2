@@ -56,17 +56,17 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 
 type ListVocabularyFiltersInput struct {
 
-	// If the result of the previous request to ListVocabularyFilters was truncated,
-	// include the NextToken to fetch the next set of collections.
-	NextToken *string
+	// The maximum number of filters to return in the response. If there are fewer
+	// results in the list, this response contains only the actual results.
+	MaxResults *int32
 
 	// Filters the response so that it only contains vocabulary filters whose name
 	// contains the specified string.
 	NameContains *string
 
-	// The maximum number of filters to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
-	MaxResults *int32
+	// If the result of the previous request to ListVocabularyFilters was truncated,
+	// include the NextToken to fetch the next set of collections.
+	NextToken *string
 }
 
 type ListVocabularyFiltersOutput struct {

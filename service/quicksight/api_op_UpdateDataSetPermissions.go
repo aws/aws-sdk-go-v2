@@ -78,12 +78,12 @@ type UpdateDataSetPermissionsInput struct {
 
 type UpdateDataSetPermissionsOutput struct {
 
+	// The Amazon Resource Name (ARN) of the dataset.
+	DataSetArn *string
+
 	// The ID for the dataset whose permissions you want to update. This ID is unique
 	// per AWS Region for each AWS account.
 	DataSetId *string
-
-	// The Amazon Resource Name (ARN) of the dataset.
-	DataSetArn *string
 
 	// The AWS request ID for this operation.
 	RequestId *string

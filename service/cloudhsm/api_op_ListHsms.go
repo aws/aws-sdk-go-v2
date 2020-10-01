@@ -77,12 +77,12 @@ type ListHsmsInput struct {
 // Contains the output of the ListHsms operation.
 type ListHsmsOutput struct {
 
+	// The list of ARNs that identify the HSMs.
+	HsmList []*string
+
 	// If not null, more results are available. Pass this value to ListHsms to retrieve
 	// the next set of items.
 	NextToken *string
-
-	// The list of ARNs that identify the HSMs.
-	HsmList []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

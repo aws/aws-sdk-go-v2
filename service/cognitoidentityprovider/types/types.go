@@ -19,20 +19,15 @@ type AccountTakeoverActionsType struct {
 	// Action to take for a high risk.
 	HighAction *AccountTakeoverActionType
 
-	// Action to take for a medium risk.
-	MediumAction *AccountTakeoverActionType
-
 	// Action to take for a low risk.
 	LowAction *AccountTakeoverActionType
+
+	// Action to take for a medium risk.
+	MediumAction *AccountTakeoverActionType
 }
 
 // Account takeover action type.
 type AccountTakeoverActionType struct {
-
-	// Flag specifying whether to send a notification.
-	//
-	// This member is required.
-	Notify *bool
 
 	// The event action.
 	//
@@ -49,19 +44,24 @@ type AccountTakeoverActionType struct {
 	//
 	// This member is required.
 	EventAction AccountTakeoverEventActionType
+
+	// Flag specifying whether to send a notification.
+	//
+	// This member is required.
+	Notify *bool
 }
 
 // Configuration for mitigation actions and notification for different levels of
 // risk detected for a potential account takeover.
 type AccountTakeoverRiskConfigurationType struct {
 
-	// The notify configuration used to construct email notifications.
-	NotifyConfiguration *NotifyConfigurationType
-
 	// Account takeover risk configuration actions
 	//
 	// This member is required.
 	Actions *AccountTakeoverActionsType
+
+	// The notify configuration used to construct email notifications.
+	NotifyConfiguration *NotifyConfigurationType
 }
 
 // The configuration for creating a new user profile.
@@ -71,6 +71,11 @@ type AdminCreateUserConfigType struct {
 	// False if users can sign themselves up via an app.
 	AllowAdminCreateUserOnly *bool
 
+	// The message template to be used for the welcome message to new users. See also
+	// Customizing User Invitation Messages
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization).
+	InviteMessageTemplate *MessageTemplateType
+
 	// The user account expiration limit, in days, after which the account is no longer
 	// usable. To reset the account after that time limit, you must call
 	// AdminCreateUser again, specifying "RESEND" for the MessageAction parameter. The
@@ -78,11 +83,6 @@ type AdminCreateUserConfigType struct {
 	// TemporaryPasswordValidityDays in PasswordPolicy, that value will be used and
 	// UnusedAccountValidityDays will be deprecated for that user pool.
 	UnusedAccountValidityDays *int32
-
-	// The message template to be used for the welcome message to new users. See also
-	// Customizing User Invitation Messages
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-user-invitation-message-customization).
-	InviteMessageTemplate *MessageTemplateType
 }
 
 // The Amazon Pinpoint analytics configuration for collecting metrics for a user
@@ -91,9 +91,15 @@ type AdminCreateUserConfigType struct {
 // in which the user pool resides.
 type AnalyticsConfigurationType struct {
 
-	// If UserDataShared is true, Amazon Cognito will include user data in the events
-	// it publishes to Amazon Pinpoint analytics.
-	UserDataShared *bool
+	// The application ID for an Amazon Pinpoint application.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The external ID.
+	//
+	// This member is required.
+	ExternalId *string
 
 	// The ARN of an IAM role that authorizes Amazon Cognito to publish events to
 	// Amazon Pinpoint analytics.
@@ -101,15 +107,9 @@ type AnalyticsConfigurationType struct {
 	// This member is required.
 	RoleArn *string
 
-	// The external ID.
-	//
-	// This member is required.
-	ExternalId *string
-
-	// The application ID for an Amazon Pinpoint application.
-	//
-	// This member is required.
-	ApplicationId *string
+	// If UserDataShared is true, Amazon Cognito will include user data in the events
+	// it publishes to Amazon Pinpoint analytics.
+	UserDataShared *bool
 }
 
 // An Amazon Pinpoint analytics endpoint. An endpoint uniquely identifies a mobile
@@ -138,11 +138,14 @@ type AttributeType struct {
 // The authentication result.
 type AuthenticationResultType struct {
 
-	// The token type.
-	TokenType *string
-
 	// The access token.
 	AccessToken *string
+
+	// The expiration period of the authentication result in seconds.
+	ExpiresIn *int32
+
+	// The ID token.
+	IdToken *string
 
 	// The new device metadata from an authentication result.
 	NewDeviceMetadata *NewDeviceMetadataType
@@ -150,27 +153,18 @@ type AuthenticationResultType struct {
 	// The refresh token.
 	RefreshToken *string
 
-	// The ID token.
-	IdToken *string
-
-	// The expiration period of the authentication result in seconds.
-	ExpiresIn *int32
+	// The token type.
+	TokenType *string
 }
 
 // The authentication event type.
 type AuthEventType struct {
 
-	// The event type.
-	EventType EventType
-
 	// The challenge responses.
 	ChallengeResponses []*ChallengeResponseType
 
-	// The event ID.
-	EventId *string
-
-	// The event response.
-	EventResponse EventResponseType
+	// The creation date
+	CreationDate *time.Time
 
 	// The user context data captured at the time of an event request. It provides
 	// additional information about the client from which event the request is
@@ -181,11 +175,17 @@ type AuthEventType struct {
 	// good or bad.
 	EventFeedback *EventFeedbackType
 
-	// The creation date
-	CreationDate *time.Time
+	// The event ID.
+	EventId *string
+
+	// The event response.
+	EventResponse EventResponseType
 
 	// The event risk.
 	EventRisk *EventRiskType
+
+	// The event type.
+	EventType EventType
 }
 
 // The challenge response type.
@@ -204,11 +204,11 @@ type CodeDeliveryDetailsType struct {
 	// The attribute name.
 	AttributeName *string
 
-	// The destination for the code delivery details.
-	Destination *string
-
 	// The delivery medium (email message or phone number).
 	DeliveryMedium DeliveryMediumType
+
+	// The destination for the code delivery details.
+	Destination *string
 }
 
 // The compromised credentials actions type
@@ -223,14 +223,14 @@ type CompromisedCredentialsActionsType struct {
 // The compromised credentials risk configuration type.
 type CompromisedCredentialsRiskConfigurationType struct {
 
-	// Perform the action for these events. The default is to perform all events if no
-	// event filter is specified.
-	EventFilter []EventFilterType
-
 	// The compromised credentials risk configuration actions.
 	//
 	// This member is required.
 	Actions *CompromisedCredentialsActionsType
+
+	// Perform the action for these events. The default is to perform all events if no
+	// event filter is specified.
+	EventFilter []EventFilterType
 }
 
 // Contextual user data type used for evaluating the risk of an unexpected event by
@@ -241,10 +241,6 @@ type ContextDataType struct {
 	//
 	// This member is required.
 	HttpHeaders []*HttpHeader
-
-	// Encoded data containing device fingerprinting details, collected using the
-	// Amazon Cognito context data collection library.
-	EncodedData *string
 
 	// Source IP address of your user.
 	//
@@ -260,6 +256,10 @@ type ContextDataType struct {
 	//
 	// This member is required.
 	ServerPath *string
+
+	// Encoded data containing device fingerprinting details, collected using the
+	// Amazon Cognito context data collection library.
+	EncodedData *string
 }
 
 // The configuration for a custom domain that hosts the sign-up and sign-in
@@ -276,12 +276,12 @@ type CustomDomainConfigType struct {
 // The configuration for the user pool's device tracking.
 type DeviceConfigurationType struct {
 
-	// If true, a device is only remembered on user prompt.
-	DeviceOnlyRememberedOnUserPrompt *bool
-
 	// Indicates whether a challenge is required on a new device. Only applicable to a
 	// new device.
 	ChallengeRequiredOnNewDevice *bool
+
+	// If true, a device is only remembered on user prompt.
+	DeviceOnlyRememberedOnUserPrompt *bool
 }
 
 // The device verifier against which it will be authenticated.
@@ -297,58 +297,70 @@ type DeviceSecretVerifierConfigType struct {
 // The device type.
 type DeviceType struct {
 
+	// The device attributes.
+	DeviceAttributes []*AttributeType
+
 	// The creation date of the device.
 	DeviceCreateDate *time.Time
-
-	// The date in which the device was last authenticated.
-	DeviceLastAuthenticatedDate *time.Time
 
 	// The device key.
 	DeviceKey *string
 
+	// The date in which the device was last authenticated.
+	DeviceLastAuthenticatedDate *time.Time
+
 	// The last modified date of the device.
 	DeviceLastModifiedDate *time.Time
-
-	// The device attributes.
-	DeviceAttributes []*AttributeType
 }
 
 // A container for information about a domain.
 type DomainDescriptionType struct {
 
-	// The S3 bucket where the static files for this domain are stored.
-	S3Bucket *string
-
-	// The domain string.
-	Domain *string
-
 	// The AWS account ID for the user pool owner.
 	AWSAccountId *string
-
-	// The app version.
-	Version *string
 
 	// The ARN of the CloudFront distribution.
 	CloudFrontDistribution *string
 
-	// The user pool ID.
-	UserPoolId *string
+	// The configuration for a custom domain that hosts the sign-up and sign-in
+	// webpages for your application.
+	CustomDomainConfig *CustomDomainConfigType
+
+	// The domain string.
+	Domain *string
+
+	// The S3 bucket where the static files for this domain are stored.
+	S3Bucket *string
 
 	// The domain status.
 	Status DomainStatusType
 
-	// The configuration for a custom domain that hosts the sign-up and sign-in
-	// webpages for your application.
-	CustomDomainConfig *CustomDomainConfigType
+	// The user pool ID.
+	UserPoolId *string
+
+	// The app version.
+	Version *string
 }
 
 // The email configuration type.
 type EmailConfigurationType struct {
 
-	// Identifies either the sender’s email address or the sender’s name with their
-	// email address. For example, testuser@example.com or Test User . This address
-	// will appear before the body of the email.
-	From *string
+	// The set of configuration rules that can be applied to emails sent using Amazon
+	// SES. A configuration set is applied to an email by including a reference to the
+	// configuration set in the headers of the email. Once applied, all of the rules in
+	// that configuration set are applied to the email. Configuration sets can be used
+	// to apply the following types of rules to emails:
+	//
+	//     * Event publishing –
+	// Amazon SES can track the number of send, delivery, open, click, bounce, and
+	// complaint events for each email sent. Use event publishing to send information
+	// about these events to other AWS services such as SNS and CloudWatch.
+	//
+	//     * IP
+	// pool management – When leasing dedicated IP addresses with Amazon SES, you can
+	// create groups of IP addresses, called dedicated IP pools. You can then associate
+	// the dedicated IP pools with configuration sets.
+	ConfigurationSet *string
 
 	// Specifies whether Amazon Cognito emails your users by using its built-in email
 	// functionality or your Amazon SES email configuration. Specify one of the
@@ -379,22 +391,10 @@ type EmailConfigurationType struct {
 	// in the Amazon Cognito Developer Guide.
 	EmailSendingAccount EmailSendingAccountType
 
-	// The set of configuration rules that can be applied to emails sent using Amazon
-	// SES. A configuration set is applied to an email by including a reference to the
-	// configuration set in the headers of the email. Once applied, all of the rules in
-	// that configuration set are applied to the email. Configuration sets can be used
-	// to apply the following types of rules to emails:
-	//
-	//     * Event publishing –
-	// Amazon SES can track the number of send, delivery, open, click, bounce, and
-	// complaint events for each email sent. Use event publishing to send information
-	// about these events to other AWS services such as SNS and CloudWatch.
-	//
-	//     * IP
-	// pool management – When leasing dedicated IP addresses with Amazon SES, you can
-	// create groups of IP addresses, called dedicated IP pools. You can then associate
-	// the dedicated IP pools with configuration sets.
-	ConfigurationSet *string
+	// Identifies either the sender’s email address or the sender’s name with their
+	// email address. For example, testuser@example.com or Test User . This address
+	// will appear before the body of the email.
+	From *string
 
 	// The destination to which the receiver of the email should reply to.
 	ReplyToEmailAddress *string
@@ -416,24 +416,29 @@ type EmailConfigurationType struct {
 // Specifies the user context data captured at the time of an event request.
 type EventContextDataType struct {
 
+	// The user's city.
+	City *string
+
 	// The user's country.
 	Country *string
+
+	// The user's device name.
+	DeviceName *string
 
 	// The user's IP address.
 	IpAddress *string
 
-	// The user's city.
-	City *string
-
 	// The user's time zone.
 	Timezone *string
-
-	// The user's device name.
-	DeviceName *string
 }
 
 // Specifies the event feedback type.
 type EventFeedbackType struct {
+
+	// The event feedback value.
+	//
+	// This member is required.
+	FeedbackValue FeedbackValueType
 
 	// The provider.
 	//
@@ -442,22 +447,17 @@ type EventFeedbackType struct {
 
 	// The event feedback date.
 	FeedbackDate *time.Time
-
-	// The event feedback value.
-	//
-	// This member is required.
-	FeedbackValue FeedbackValueType
 }
 
 // The event risk type.
 type EventRiskType struct {
 
-	// The risk decision.
-	RiskDecision RiskDecisionType
-
 	// Indicates whether compromised credentials were detected during an authentication
 	// event.
 	CompromisedCredentialsDetected *bool
+
+	// The risk decision.
+	RiskDecision RiskDecisionType
 
 	// The risk level.
 	RiskLevel RiskLevelType
@@ -465,6 +465,18 @@ type EventRiskType struct {
 
 // The group type.
 type GroupType struct {
+
+	// The date the group was created.
+	CreationDate *time.Time
+
+	// A string containing the description of the group.
+	Description *string
+
+	// The name of the group.
+	GroupName *string
+
+	// The date the group was last modified.
+	LastModifiedDate *time.Time
 
 	// A nonnegative integer value that specifies the precedence of this group relative
 	// to the other groups that a user can belong to in the user pool. If a user
@@ -480,37 +492,38 @@ type GroupType struct {
 	// value is null.
 	Precedence *int32
 
-	// The date the group was last modified.
-	LastModifiedDate *time.Time
-
-	// The date the group was created.
-	CreationDate *time.Time
-
-	// A string containing the description of the group.
-	Description *string
-
-	// The name of the group.
-	GroupName *string
+	// The role ARN for the group.
+	RoleArn *string
 
 	// The user pool ID for the user pool.
 	UserPoolId *string
-
-	// The role ARN for the group.
-	RoleArn *string
 }
 
 // The HTTP header.
 type HttpHeader struct {
 
-	// The header value.
-	HeaderValue *string
-
 	// The header name
 	HeaderName *string
+
+	// The header value.
+	HeaderValue *string
 }
 
 // A container for information about an identity provider.
 type IdentityProviderType struct {
+
+	// A mapping of identity provider attributes to standard and custom user pool
+	// attributes.
+	AttributeMapping map[string]*string
+
+	// The date the identity provider was created.
+	CreationDate *time.Time
+
+	// A list of identity provider identifiers.
+	IdpIdentifiers []*string
+
+	// The date the identity provider was last modified.
+	LastModifiedDate *time.Time
 
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
@@ -575,61 +588,48 @@ type IdentityProviderType struct {
 	//         * IDPSignOut optional
 	ProviderDetails map[string]*string
 
-	// A list of identity provider identifiers.
-	IdpIdentifiers []*string
-
-	// A mapping of identity provider attributes to standard and custom user pool
-	// attributes.
-	AttributeMapping map[string]*string
-
-	// The user pool ID.
-	UserPoolId *string
-
-	// The date the identity provider was last modified.
-	LastModifiedDate *time.Time
-
-	// The date the identity provider was created.
-	CreationDate *time.Time
-
 	// The identity provider name.
 	ProviderName *string
 
 	// The identity provider type.
 	ProviderType IdentityProviderTypeType
+
+	// The user pool ID.
+	UserPoolId *string
 }
 
 // Specifies the configuration for AWS Lambda triggers.
 type LambdaConfigType struct {
 
-	// A pre-registration AWS Lambda trigger.
-	PreSignUp *string
-
-	// A post-confirmation AWS Lambda trigger.
-	PostConfirmation *string
-
 	// Creates an authentication challenge.
 	CreateAuthChallenge *string
-
-	// A Lambda trigger that is invoked before token generation.
-	PreTokenGeneration *string
-
-	// A pre-authentication AWS Lambda trigger.
-	PreAuthentication *string
-
-	// The user migration Lambda config type.
-	UserMigration *string
 
 	// A custom Message AWS Lambda trigger.
 	CustomMessage *string
 
+	// Defines the authentication challenge.
+	DefineAuthChallenge *string
+
 	// A post-authentication AWS Lambda trigger.
 	PostAuthentication *string
 
+	// A post-confirmation AWS Lambda trigger.
+	PostConfirmation *string
+
+	// A pre-authentication AWS Lambda trigger.
+	PreAuthentication *string
+
+	// A pre-registration AWS Lambda trigger.
+	PreSignUp *string
+
+	// A Lambda trigger that is invoked before token generation.
+	PreTokenGeneration *string
+
+	// The user migration Lambda config type.
+	UserMigration *string
+
 	// Verifies the authentication challenge response.
 	VerifyAuthChallengeResponse *string
-
-	// Defines the authentication challenge.
-	DefineAuthChallenge *string
 }
 
 // The message template structure.
@@ -638,11 +638,11 @@ type MessageTemplateType struct {
 	// The message template for email messages.
 	EmailMessage *string
 
-	// The message template for SMS messages.
-	SMSMessage *string
-
 	// The subject line for email messages.
 	EmailSubject *string
+
+	// The message template for SMS messages.
+	SMSMessage *string
 }
 
 // This data type is no longer supported. You can use it only for SMS MFA
@@ -653,12 +653,12 @@ type MessageTemplateType struct {
 // GetUserResponse$UserMFASettingList () responses.
 type MFAOptionType struct {
 
+	// The attribute name of the MFA option type. The only valid value is phone_number.
+	AttributeName *string
+
 	// The delivery medium to send the MFA code. You can use this parameter to set only
 	// the SMS delivery medium value.
 	DeliveryMedium DeliveryMediumType
-
-	// The attribute name of the MFA option type. The only valid value is phone_number.
-	AttributeName *string
 }
 
 // The new device metadata type.
@@ -674,11 +674,6 @@ type NewDeviceMetadataType struct {
 // The notify configuration type.
 type NotifyConfigurationType struct {
 
-	// The email address that is sending the email. It must be either individually
-	// verified with Amazon SES, or from a domain that has been verified with Amazon
-	// SES.
-	From *string
-
 	// The Amazon Resource Name (ARN) of the identity that is associated with the
 	// sending authorization policy. It permits Amazon Cognito to send for the email
 	// address specified in the From parameter.
@@ -686,17 +681,22 @@ type NotifyConfigurationType struct {
 	// This member is required.
 	SourceArn *string
 
+	// Email template used when a detected risk event is blocked.
+	BlockEmail *NotifyEmailType
+
+	// The email address that is sending the email. It must be either individually
+	// verified with Amazon SES, or from a domain that has been verified with Amazon
+	// SES.
+	From *string
+
+	// The MFA email template used when MFA is challenged as part of a detected risk.
+	MfaEmail *NotifyEmailType
+
 	// The email template used when a detected risk event is allowed.
 	NoActionEmail *NotifyEmailType
 
 	// The destination to which the receiver of an email should reply to.
 	ReplyTo *string
-
-	// The MFA email template used when MFA is challenged as part of a detected risk.
-	MfaEmail *NotifyEmailType
-
-	// Email template used when a detected risk event is blocked.
-	BlockEmail *NotifyEmailType
 }
 
 // The notify email type.
@@ -717,15 +717,27 @@ type NotifyEmailType struct {
 // The minimum and maximum value of an attribute that is of the number data type.
 type NumberAttributeConstraintsType struct {
 
-	// The minimum value of an attribute that is of the number data type.
-	MinValue *string
-
 	// The maximum value of an attribute that is of the number data type.
 	MaxValue *string
+
+	// The minimum value of an attribute that is of the number data type.
+	MinValue *string
 }
 
 // The password policy type.
 type PasswordPolicyType struct {
+
+	// The minimum length of the password policy that you have set. Cannot be less than
+	// 6.
+	MinimumLength *int32
+
+	// In the password policy that you have set, refers to whether you have required
+	// users to use at least one lowercase letter in their password.
+	RequireLowercase *bool
+
+	// In the password policy that you have set, refers to whether you have required
+	// users to use at least one number in their password.
+	RequireNumbers *bool
 
 	// In the password policy that you have set, refers to whether you have required
 	// users to use at least one symbol in their password.
@@ -741,47 +753,35 @@ type PasswordPolicyType struct {
 	// TemporaryPasswordValidityDays for a user pool, you will no longer be able to set
 	// the deprecated UnusedAccountValidityDays value for that user pool.
 	TemporaryPasswordValidityDays *int32
-
-	// The minimum length of the password policy that you have set. Cannot be less than
-	// 6.
-	MinimumLength *int32
-
-	// In the password policy that you have set, refers to whether you have required
-	// users to use at least one lowercase letter in their password.
-	RequireLowercase *bool
-
-	// In the password policy that you have set, refers to whether you have required
-	// users to use at least one number in their password.
-	RequireNumbers *bool
 }
 
 // A container for identity provider details.
 type ProviderDescription struct {
-
-	// The identity provider name.
-	ProviderName *string
-
-	// The identity provider type.
-	ProviderType IdentityProviderTypeType
 
 	// The date the provider was added to the user pool.
 	CreationDate *time.Time
 
 	// The date the provider was last modified.
 	LastModifiedDate *time.Time
+
+	// The identity provider name.
+	ProviderName *string
+
+	// The identity provider type.
+	ProviderType IdentityProviderTypeType
 }
 
 // A container for information about an identity provider for a user pool.
 type ProviderUserIdentifierType struct {
-
-	// The name of the provider, for example, Facebook, Google, or Login with Amazon.
-	ProviderName *string
 
 	// The name of the provider attribute to link to, for example, NameID.
 	ProviderAttributeName *string
 
 	// The value of the provider attribute to link to, for example, xxxxx_account.
 	ProviderAttributeValue *string
+
+	// The name of the provider, for example, Facebook, Google, or Login with Amazon.
+	ProviderName *string
 }
 
 // A map containing a priority as a key, and recovery method name as a value.
@@ -802,48 +802,42 @@ type RecoveryOptionType struct {
 // A resource server scope.
 type ResourceServerScopeType struct {
 
-	// The name of the scope.
-	//
-	// This member is required.
-	ScopeName *string
-
 	// A description of the scope.
 	//
 	// This member is required.
 	ScopeDescription *string
+
+	// The name of the scope.
+	//
+	// This member is required.
+	ScopeName *string
 }
 
 // A container for information about a resource server for a user pool.
 type ResourceServerType struct {
 
-	// The user pool ID for the user pool that hosts the resource server.
-	UserPoolId *string
-
 	// The identifier for the resource server.
 	Identifier *string
+
+	// The name of the resource server.
+	Name *string
 
 	// A list of scopes that are defined for the resource server.
 	Scopes []*ResourceServerScopeType
 
-	// The name of the resource server.
-	Name *string
+	// The user pool ID for the user pool that hosts the resource server.
+	UserPoolId *string
 }
 
 // The risk configuration type.
 type RiskConfigurationType struct {
 
-	// The configuration to override the risk decision.
-	RiskExceptionConfiguration *RiskExceptionConfigurationType
-
-	// The app client ID.
-	ClientId *string
-
 	// The account takeover risk configuration object including the NotifyConfiguration
 	// object and Actions to take in the case of an account takeover.
 	AccountTakeoverRiskConfiguration *AccountTakeoverRiskConfigurationType
 
-	// The user pool ID.
-	UserPoolId *string
+	// The app client ID.
+	ClientId *string
 
 	// The compromised credentials risk configuration object including the EventFilter
 	// and the EventAction
@@ -851,6 +845,12 @@ type RiskConfigurationType struct {
 
 	// The last modified date.
 	LastModifiedDate *time.Time
+
+	// The configuration to override the risk decision.
+	RiskExceptionConfiguration *RiskExceptionConfigurationType
+
+	// The user pool ID.
+	UserPoolId *string
 }
 
 // The type of the configuration to override the risk decision.
@@ -869,16 +869,8 @@ type RiskExceptionConfigurationType struct {
 // Contains information about the schema attribute.
 type SchemaAttributeType struct {
 
-	// Specifies whether a user pool attribute is required. If the attribute is
-	// required and the user does not provide a value, registration or sign-in will
-	// fail.
-	Required *bool
-
-	// Specifies the constraints for an attribute of the string type.
-	StringAttributeConstraints *StringAttributeConstraintsType
-
-	// A schema attribute of the name type.
-	Name *string
+	// The attribute data type.
+	AttributeDataType AttributeDataType
 
 	// We recommend that you use WriteAttributes
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes)
@@ -900,11 +892,19 @@ type SchemaAttributeType struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
 	Mutable *bool
 
+	// A schema attribute of the name type.
+	Name *string
+
 	// Specifies the constraints for an attribute of the number type.
 	NumberAttributeConstraints *NumberAttributeConstraintsType
 
-	// The attribute data type.
-	AttributeDataType AttributeDataType
+	// Specifies whether a user pool attribute is required. If the attribute is
+	// required and the user does not provide a value, registration or sign-in will
+	// fail.
+	Required *bool
+
+	// Specifies the constraints for an attribute of the string type.
+	StringAttributeConstraints *StringAttributeConstraintsType
 }
 
 // The SMS configuration type that includes the settings the Cognito User Pool
@@ -912,6 +912,13 @@ type SchemaAttributeType struct {
 // account. The Cognito User Pool makes the request to the Amazon SNS Service by
 // using an AWS IAM role that you provide for your AWS account.
 type SmsConfigurationType struct {
+
+	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
+	// caller. This is the ARN of the IAM role in your AWS account which Cognito will
+	// use to send SMS messages.
+	//
+	// This member is required.
+	SnsCallerArn *string
 
 	// The external ID is a value that we recommend you use to add security to your IAM
 	// role which is used to call Amazon SNS to send SMS messages for your user pool.
@@ -921,26 +928,19 @@ type SmsConfigurationType struct {
 	// role for SMS MFA, Cognito will create a role with the required permissions and a
 	// trust policy that demonstrates use of the ExternalId.
 	ExternalId *string
-
-	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
-	// caller. This is the ARN of the IAM role in your AWS account which Cognito will
-	// use to send SMS messages.
-	//
-	// This member is required.
-	SnsCallerArn *string
 }
 
 // The SMS text message multi-factor authentication (MFA) configuration type.
 type SmsMfaConfigType struct {
-
-	// The SMS configuration.
-	SmsConfiguration *SmsConfigurationType
 
 	// The SMS authentication message that will be sent to users with the code they
 	// need to sign in. The message must contain the ‘{####}’ placeholder, which will
 	// be replaced with the code. If the message is not included, and default message
 	// will be used.
 	SmsAuthenticationMessage *string
+
+	// The SMS configuration.
+	SmsConfiguration *SmsConfigurationType
 }
 
 // The type used for enabling SMS MFA at the user level.
@@ -963,32 +963,26 @@ type SoftwareTokenMfaConfigType struct {
 // The type used for enabling software token MFA at the user level.
 type SoftwareTokenMfaSettingsType struct {
 
-	// Specifies whether software token MFA is the preferred MFA method.
-	PreferredMfa *bool
-
 	// Specifies whether software token MFA is enabled.
 	Enabled *bool
+
+	// Specifies whether software token MFA is the preferred MFA method.
+	PreferredMfa *bool
 }
 
 // The constraints associated with a string attribute.
 type StringAttributeConstraintsType struct {
 
-	// The minimum length.
-	MinLength *string
-
 	// The maximum length.
 	MaxLength *string
+
+	// The minimum length.
+	MinLength *string
 }
 
 // A container for the UI customization information for a user pool's built-in app
 // UI.
 type UICustomizationType struct {
-
-	// The client ID for the client app.
-	ClientId *string
-
-	// The logo image for the UI customization.
-	ImageUrl *string
 
 	// The CSS values in the UI customization.
 	CSS *string
@@ -996,8 +990,14 @@ type UICustomizationType struct {
 	// The CSS version number.
 	CSSVersion *string
 
+	// The client ID for the client app.
+	ClientId *string
+
 	// The creation date for the UI customization.
 	CreationDate *time.Time
+
+	// The logo image for the UI customization.
+	ImageUrl *string
 
 	// The last-modified date for the UI customization.
 	LastModifiedDate *time.Time
@@ -1020,35 +1020,40 @@ type UserContextDataType struct {
 // The user import job type.
 type UserImportJobType struct {
 
-	// The job ID for the user import job.
-	JobId *string
+	// The role ARN for the Amazon CloudWatch Logging role for the user import job. For
+	// more information, see "Creating the CloudWatch Logs IAM Role" in the Amazon
+	// Cognito Developer Guide.
+	CloudWatchLogsRoleArn *string
 
 	// The date when the user import job was completed.
 	CompletionDate *time.Time
 
-	// The user pool ID for the user pool that the users are being imported into.
-	UserPoolId *string
-
 	// The message returned when the user import job is completed.
 	CompletionMessage *string
-
-	// The date when the user import job was started.
-	StartDate *time.Time
-
-	// The pre-signed URL to be used to upload the .csv file.
-	PreSignedUrl *string
-
-	// The number of users that were successfully imported.
-	ImportedUsers *int64
-
-	// The job name for the user import job.
-	JobName *string
 
 	// The date the user import job was created.
 	CreationDate *time.Time
 
 	// The number of users that could not be imported.
 	FailedUsers *int64
+
+	// The number of users that were successfully imported.
+	ImportedUsers *int64
+
+	// The job ID for the user import job.
+	JobId *string
+
+	// The job name for the user import job.
+	JobName *string
+
+	// The pre-signed URL to be used to upload the .csv file.
+	PreSignedUrl *string
+
+	// The number of users that were skipped.
+	SkippedUsers *int64
+
+	// The date when the user import job was started.
+	StartDate *time.Time
 
 	// The status of the user import job. One of the following:
 	//
@@ -1078,13 +1083,8 @@ type UserImportJobType struct {
 	// the job cannot be started.
 	Status UserImportJobStatusType
 
-	// The role ARN for the Amazon CloudWatch Logging role for the user import job. For
-	// more information, see "Creating the CloudWatch Logs IAM Role" in the Amazon
-	// Cognito Developer Guide.
-	CloudWatchLogsRoleArn *string
-
-	// The number of users that were skipped.
-	SkippedUsers *int64
+	// The user pool ID for the user pool that the users are being imported into.
+	UserPoolId *string
 }
 
 // The username configuration type.
@@ -1134,6 +1134,75 @@ type UserPoolClientDescription struct {
 // Contains information about a user pool client.
 type UserPoolClientType struct {
 
+	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
+	// provides an authorization code as the response. This code can be exchanged for
+	// access tokens with the token endpoint. Set to implicit to specify that the
+	// client should get the access token (and, optionally, ID token, based on scopes)
+	// directly. Set to client_credentials to specify that the client should get the
+	// access token (and, optionally, ID token, based on scopes) from the token
+	// endpoint using a combination of client and client_secret.
+	AllowedOAuthFlows []OAuthFlowType
+
+	// Set to true if the client is allowed to follow the OAuth protocol when
+	// interacting with Cognito user pools.
+	AllowedOAuthFlowsUserPoolClient *bool
+
+	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
+	// openid, and profile. Possible values provided by AWS are:
+	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
+	// also supported.
+	AllowedOAuthScopes []*string
+
+	// The Amazon Pinpoint analytics configuration for the user pool client. Cognito
+	// User Pools only supports sending events to Amazon Pinpoint projects in the US
+	// East (N. Virginia) us-east-1 Region, regardless of the region in which the user
+	// pool resides.
+	AnalyticsConfiguration *AnalyticsConfigurationType
+
+	// A list of allowed redirect (callback) URLs for the identity providers. A
+	// redirect URI must:
+	//
+	//     * Be an absolute URI.
+	//
+	//     * Be registered with the
+	// authorization server.
+	//
+	//     * Not include a fragment component.
+	//
+	// See OAuth 2.0 -
+	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
+	// Cognito requires HTTPS over HTTP except for http://localhost for testing
+	// purposes only. App callback URLs such as myapp://example are also supported.
+	CallbackURLs []*string
+
+	// The ID of the client associated with the user pool.
+	ClientId *string
+
+	// The client name from the user pool request of the client type.
+	ClientName *string
+
+	// The client secret from the user pool request of the client type.
+	ClientSecret *string
+
+	// The date the user pool client was created.
+	CreationDate *time.Time
+
+	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
+	// must:
+	//
+	//     * Be an absolute URI.
+	//
+	//     * Be registered with the authorization
+	// server.
+	//
+	//     * Not include a fragment component.
+	//
+	// See OAuth 2.0 - Redirection
+	// Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito
+	// requires HTTPS over HTTP except for http://localhost for testing purposes only.
+	// App callback URLs such as myapp://example are also supported.
+	DefaultRedirectURI *string
+
 	// The authentication flows that are supported by the user pool clients. Flow names
 	// without the ALLOW_ prefix are deprecated in favor of new names with the ALLOW_
 	// prefix. Note that values with ALLOW_ prefix cannot be used along with values
@@ -1160,41 +1229,11 @@ type UserPoolClientType struct {
 	// ALLOW_REFRESH_TOKEN_AUTH: Enable authflow to refresh tokens.
 	ExplicitAuthFlows []ExplicitAuthFlowsType
 
-	// The default redirect URI. Must be in the CallbackURLs list. A redirect URI
-	// must:
-	//
-	//     * Be an absolute URI.
-	//
-	//     * Be registered with the authorization
-	// server.
-	//
-	//     * Not include a fragment component.
-	//
-	// See OAuth 2.0 - Redirection
-	// Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon Cognito
-	// requires HTTPS over HTTP except for http://localhost for testing purposes only.
-	// App callback URLs such as myapp://example are also supported.
-	DefaultRedirectURI *string
+	// The date the user pool client was last modified.
+	LastModifiedDate *time.Time
 
-	// The writeable attributes.
-	WriteAttributes []*string
-
-	// The time limit, in days, after which the refresh token is no longer valid and
-	// cannot be used.
-	RefreshTokenValidity *int32
-
-	// Set to true if the client is allowed to follow the OAuth protocol when
-	// interacting with Cognito user pools.
-	AllowedOAuthFlowsUserPoolClient *bool
-
-	// The Read-only attributes.
-	ReadAttributes []*string
-
-	// The Amazon Pinpoint analytics configuration for the user pool client. Cognito
-	// User Pools only supports sending events to Amazon Pinpoint projects in the US
-	// East (N. Virginia) us-east-1 Region, regardless of the region in which the user
-	// pool resides.
-	AnalyticsConfiguration *AnalyticsConfigurationType
+	// A list of allowed logout URLs for the identity providers.
+	LogoutURLs []*string
 
 	// Use this setting to choose which errors and responses are returned by Cognito
 	// APIs during authentication, account confirmation, and password recovery when the
@@ -1238,71 +1277,26 @@ type UserPoolClientType struct {
 	// created user pool clients if no value is provided.
 	PreventUserExistenceErrors PreventUserExistenceErrorTypes
 
-	// The client secret from the user pool request of the client type.
-	ClientSecret *string
+	// The Read-only attributes.
+	ReadAttributes []*string
 
-	// The ID of the client associated with the user pool.
-	ClientId *string
-
-	// A list of allowed logout URLs for the identity providers.
-	LogoutURLs []*string
+	// The time limit, in days, after which the refresh token is no longer valid and
+	// cannot be used.
+	RefreshTokenValidity *int32
 
 	// A list of provider names for the identity providers that are supported on this
 	// client.
 	SupportedIdentityProviders []*string
 
-	// The client name from the user pool request of the client type.
-	ClientName *string
-
-	// The allowed OAuth flows. Set to code to initiate a code grant flow, which
-	// provides an authorization code as the response. This code can be exchanged for
-	// access tokens with the token endpoint. Set to implicit to specify that the
-	// client should get the access token (and, optionally, ID token, based on scopes)
-	// directly. Set to client_credentials to specify that the client should get the
-	// access token (and, optionally, ID token, based on scopes) from the token
-	// endpoint using a combination of client and client_secret.
-	AllowedOAuthFlows []OAuthFlowType
-
 	// The user pool ID for the user pool client.
 	UserPoolId *string
 
-	// The date the user pool client was created.
-	CreationDate *time.Time
-
-	// The date the user pool client was last modified.
-	LastModifiedDate *time.Time
-
-	// A list of allowed redirect (callback) URLs for the identity providers. A
-	// redirect URI must:
-	//
-	//     * Be an absolute URI.
-	//
-	//     * Be registered with the
-	// authorization server.
-	//
-	//     * Not include a fragment component.
-	//
-	// See OAuth 2.0 -
-	// Redirection Endpoint (https://tools.ietf.org/html/rfc6749#section-3.1.2). Amazon
-	// Cognito requires HTTPS over HTTP except for http://localhost for testing
-	// purposes only. App callback URLs such as myapp://example are also supported.
-	CallbackURLs []*string
-
-	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
-	// openid, and profile. Possible values provided by AWS are:
-	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
-	// also supported.
-	AllowedOAuthScopes []*string
+	// The writeable attributes.
+	WriteAttributes []*string
 }
 
 // A user pool description.
 type UserPoolDescriptionType struct {
-
-	// The name in a user pool description.
-	Name *string
-
-	// The date the user pool description was last modified.
-	LastModifiedDate *time.Time
 
 	// The date the user pool description was created.
 	CreationDate *time.Time
@@ -1312,6 +1306,12 @@ type UserPoolDescriptionType struct {
 
 	// The AWS Lambda configuration information in a user pool description.
 	LambdaConfig *LambdaConfigType
+
+	// The date the user pool description was last modified.
+	LastModifiedDate *time.Time
+
+	// The name in a user pool description.
+	Name *string
 
 	// The user pool status in a user pool description.
 	Status StatusType
@@ -1327,36 +1327,6 @@ type UserPoolPolicyType struct {
 // A container for information about the user pool.
 type UserPoolType struct {
 
-	// The contents of the SMS verification message.
-	SmsVerificationMessage *string
-
-	// The SMS configuration.
-	SmsConfiguration *SmsConfigurationType
-
-	// A number estimating the size of the user pool.
-	EstimatedNumberOfUsers *int32
-
-	// The AWS Lambda triggers associated with the user pool.
-	LambdaConfig *LambdaConfigType
-
-	// Holds the domain prefix if the user pool has a domain associated with it.
-	Domain *string
-
-	// Specifies the attributes that are aliased in a user pool.
-	AliasAttributes []AliasAttributeType
-
-	// The name of the user pool.
-	Name *string
-
-	// The date the user pool was last modified.
-	LastModifiedDate *time.Time
-
-	// The date the user pool was created.
-	CreationDate *time.Time
-
-	// The template for verification messages.
-	VerificationMessageTemplate *VerificationMessageTemplateType
-
 	// Use this setting to define which verified available method a user can use to
 	// recover their password when they call ForgotPassword. It allows you to define a
 	// preferred method when a user has more than one method available. With this
@@ -1366,26 +1336,20 @@ type UserPoolType struct {
 	// email.
 	AccountRecoverySetting *AccountRecoverySettingType
 
-	// The subject of the email verification message.
-	EmailVerificationSubject *string
-
 	// The configuration for AdminCreateUser requests.
 	AdminCreateUserConfig *AdminCreateUserConfigType
 
-	// The reason why the SMS configuration cannot send the messages to your users.
-	SmsConfigurationFailure *string
+	// Specifies the attributes that are aliased in a user pool.
+	AliasAttributes []AliasAttributeType
 
-	// The policies associated with the user pool.
-	Policies *UserPoolPolicyType
+	// The Amazon Resource Name (ARN) for the user pool.
+	Arn *string
 
-	// The email configuration.
-	EmailConfiguration *EmailConfigurationType
+	// Specifies the attributes that are auto-verified in a user pool.
+	AutoVerifiedAttributes []VerifiedAttributeType
 
-	// You can choose to enable case sensitivity on the username input for the selected
-	// sign-in option. For example, when this is set to False, users will be able to
-	// sign in using either "username" or "Username". This configuration is immutable
-	// once it has been set. For more information, see .
-	UsernameConfiguration *UsernameConfigurationType
+	// The date the user pool was created.
+	CreationDate *time.Time
 
 	// A custom domain name that you provide to Amazon Cognito. This parameter applies
 	// only if you use a custom domain to host the sign-up and sign-in pages for your
@@ -1394,8 +1358,35 @@ type UserPoolType struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html).
 	CustomDomain *string
 
-	// A container with the schema attributes of a user pool.
-	SchemaAttributes []*SchemaAttributeType
+	// The device configuration.
+	DeviceConfiguration *DeviceConfigurationType
+
+	// Holds the domain prefix if the user pool has a domain associated with it.
+	Domain *string
+
+	// The email configuration.
+	EmailConfiguration *EmailConfigurationType
+
+	// The reason why the email configuration cannot send the messages to your users.
+	EmailConfigurationFailure *string
+
+	// The contents of the email verification message.
+	EmailVerificationMessage *string
+
+	// The subject of the email verification message.
+	EmailVerificationSubject *string
+
+	// A number estimating the size of the user pool.
+	EstimatedNumberOfUsers *int32
+
+	// The ID of the user pool.
+	Id *string
+
+	// The AWS Lambda triggers associated with the user pool.
+	LambdaConfig *LambdaConfigType
+
+	// The date the user pool was last modified.
+	LastModifiedDate *time.Time
 
 	// Can be one of the following values:
 	//
@@ -1410,45 +1401,69 @@ type UserPoolType struct {
 	// registering to create an MFA token.
 	MfaConfiguration UserPoolMfaType
 
+	// The name of the user pool.
+	Name *string
+
+	// The policies associated with the user pool.
+	Policies *UserPoolPolicyType
+
+	// A container with the schema attributes of a user pool.
+	SchemaAttributes []*SchemaAttributeType
+
+	// The contents of the SMS authentication message.
+	SmsAuthenticationMessage *string
+
+	// The SMS configuration.
+	SmsConfiguration *SmsConfigurationType
+
+	// The reason why the SMS configuration cannot send the messages to your users.
+	SmsConfigurationFailure *string
+
+	// The contents of the SMS verification message.
+	SmsVerificationMessage *string
+
+	// The status of a user pool.
+	Status StatusType
+
+	// The user pool add-ons.
+	UserPoolAddOns *UserPoolAddOnsType
+
 	// The tags that are assigned to the user pool. A tag is a label that you can apply
 	// to user pools to categorize and manage them in different ways, such as by
 	// purpose, owner, environment, or other criteria.
 	UserPoolTags map[string]*string
 
-	// The contents of the SMS authentication message.
-	SmsAuthenticationMessage *string
-
-	// The Amazon Resource Name (ARN) for the user pool.
-	Arn *string
-
-	// The ID of the user pool.
-	Id *string
-
-	// The device configuration.
-	DeviceConfiguration *DeviceConfigurationType
-
-	// The contents of the email verification message.
-	EmailVerificationMessage *string
-
 	// Specifies whether email addresses or phone numbers can be specified as usernames
 	// when a user signs up.
 	UsernameAttributes []UsernameAttributeType
 
-	// The reason why the email configuration cannot send the messages to your users.
-	EmailConfigurationFailure *string
+	// You can choose to enable case sensitivity on the username input for the selected
+	// sign-in option. For example, when this is set to False, users will be able to
+	// sign in using either "username" or "Username". This configuration is immutable
+	// once it has been set. For more information, see .
+	UsernameConfiguration *UsernameConfigurationType
 
-	// Specifies the attributes that are auto-verified in a user pool.
-	AutoVerifiedAttributes []VerifiedAttributeType
-
-	// The user pool add-ons.
-	UserPoolAddOns *UserPoolAddOnsType
-
-	// The status of a user pool.
-	Status StatusType
+	// The template for verification messages.
+	VerificationMessageTemplate *VerificationMessageTemplateType
 }
 
 // The user type.
 type UserType struct {
+
+	// A container with information about the user type attributes.
+	Attributes []*AttributeType
+
+	// Specifies whether the user is enabled.
+	Enabled *bool
+
+	// The MFA options for the user.
+	MFAOptions []*MFAOptionType
+
+	// The creation date of the user.
+	UserCreateDate *time.Time
+
+	// The last modified date of the user.
+	UserLastModifiedDate *time.Time
 
 	// The user status. Can be one of the following:
 	//
@@ -1477,28 +1492,22 @@ type UserType struct {
 
 	// The user name of the user you wish to describe.
 	Username *string
-
-	// The creation date of the user.
-	UserCreateDate *time.Time
-
-	// Specifies whether the user is enabled.
-	Enabled *bool
-
-	// A container with information about the user type attributes.
-	Attributes []*AttributeType
-
-	// The last modified date of the user.
-	UserLastModifiedDate *time.Time
-
-	// The MFA options for the user.
-	MFAOptions []*MFAOptionType
 }
 
 // The template for verification messages.
 type VerificationMessageTemplateType struct {
 
+	// The default email option.
+	DefaultEmailOption DefaultEmailOptionType
+
 	// The email message template.
 	EmailMessage *string
+
+	// The email message template for sending a confirmation link to the user.
+	EmailMessageByLink *string
+
+	// The subject line for the email message template.
+	EmailSubject *string
 
 	// The subject line for the email message template for sending a confirmation link
 	// to the user.
@@ -1506,13 +1515,4 @@ type VerificationMessageTemplateType struct {
 
 	// The SMS message template.
 	SmsMessage *string
-
-	// The email message template for sending a confirmation link to the user.
-	EmailMessageByLink *string
-
-	// The default email option.
-	DefaultEmailOption DefaultEmailOptionType
-
-	// The subject line for the email message template.
-	EmailSubject *string
 }

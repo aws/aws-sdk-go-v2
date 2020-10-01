@@ -88,13 +88,6 @@ type DeleteClusterInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// Determines whether a final snapshot of the cluster is created before Amazon
-	// Redshift deletes the cluster. If true, a final cluster snapshot is not created.
-	// If false, a final cluster snapshot is created before the cluster is deleted. The
-	// FinalClusterSnapshotIdentifier parameter must be specified if
-	// SkipFinalClusterSnapshot is false. Default: false
-	SkipFinalClusterSnapshot *bool
-
 	// The identifier of the final snapshot that is to be created immediately before
 	// deleting the cluster. If this parameter is provided, SkipFinalClusterSnapshot
 	// must be false. Constraints:
@@ -112,6 +105,13 @@ type DeleteClusterInput struct {
 	// manual snapshot is retained indefinitely. The value must be either -1 or an
 	// integer between 1 and 3,653. The default value is -1.
 	FinalClusterSnapshotRetentionPeriod *int32
+
+	// Determines whether a final snapshot of the cluster is created before Amazon
+	// Redshift deletes the cluster. If true, a final cluster snapshot is not created.
+	// If false, a final cluster snapshot is created before the cluster is deleted. The
+	// FinalClusterSnapshotIdentifier parameter must be specified if
+	// SkipFinalClusterSnapshot is false. Default: false
+	SkipFinalClusterSnapshot *bool
 }
 
 type DeleteClusterOutput struct {

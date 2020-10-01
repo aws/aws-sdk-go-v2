@@ -78,15 +78,6 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// The maximum age of a request that Lambda sends to a function for processing.
-	MaximumEventAgeInSeconds *int32
-
-	// A version number or alias name.
-	Qualifier *string
-
-	// The maximum number of times to retry when the function returns an error.
-	MaximumRetryAttempts *int32
-
 	// A destination for events after they have been sent to a function for processing.
 	// Destinations
 	//
@@ -100,13 +91,19 @@ type UpdateFunctionEventInvokeConfigInput struct {
 	//
 	//     * Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
+
+	// The maximum age of a request that Lambda sends to a function for processing.
+	MaximumEventAgeInSeconds *int32
+
+	// The maximum number of times to retry when the function returns an error.
+	MaximumRetryAttempts *int32
+
+	// A version number or alias name.
+	Qualifier *string
 }
 
 type UpdateFunctionEventInvokeConfigOutput struct {
 
-	// The maximum age of a request that Lambda sends to a function for processing.
-	MaximumEventAgeInSeconds *int32
-
 	// A destination for events after they have been sent to a function for processing.
 	// Destinations
 	//
@@ -121,14 +118,17 @@ type UpdateFunctionEventInvokeConfigOutput struct {
 	//     * Event Bus - The ARN of an Amazon EventBridge event bus.
 	DestinationConfig *types.DestinationConfig
 
+	// The Amazon Resource Name (ARN) of the function.
+	FunctionArn *string
+
 	// The date and time that the configuration was last updated.
 	LastModified *time.Time
 
+	// The maximum age of a request that Lambda sends to a function for processing.
+	MaximumEventAgeInSeconds *int32
+
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
-
-	// The Amazon Resource Name (ARN) of the function.
-	FunctionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

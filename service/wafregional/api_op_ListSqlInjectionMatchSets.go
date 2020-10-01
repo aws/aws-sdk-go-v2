@@ -64,6 +64,12 @@ func (c *Client) ListSqlInjectionMatchSets(ctx context.Context, params *ListSqlI
 // account.
 type ListSqlInjectionMatchSetsInput struct {
 
+	// Specifies the number of SqlInjectionMatchSet () objects that you want AWS WAF to
+	// return for this request. If you have more SqlInjectionMatchSet objects than the
+	// number you specify for Limit, the response includes a NextMarker value that you
+	// can use to get another batch of Rules.
+	Limit *int32
+
 	// If you specify a value for Limit and you have more SqlInjectionMatchSet ()
 	// objects than the value of Limit, AWS WAF returns a NextMarker value in the
 	// response that allows you to list another group of SqlInjectionMatchSets. For the
@@ -71,19 +77,10 @@ type ListSqlInjectionMatchSetsInput struct {
 	// NextMarker from the previous response to get information about another batch of
 	// SqlInjectionMatchSets.
 	NextMarker *string
-
-	// Specifies the number of SqlInjectionMatchSet () objects that you want AWS WAF to
-	// return for this request. If you have more SqlInjectionMatchSet objects than the
-	// number you specify for Limit, the response includes a NextMarker value that you
-	// can use to get another batch of Rules.
-	Limit *int32
 }
 
 // The response to a ListSqlInjectionMatchSets () request.
 type ListSqlInjectionMatchSetsOutput struct {
-
-	// An array of SqlInjectionMatchSetSummary () objects.
-	SqlInjectionMatchSets []*types.SqlInjectionMatchSetSummary
 
 	// If you have more SqlInjectionMatchSet () objects than the number that you
 	// specified for Limit in the request, the response includes a NextMarker value. To
@@ -91,6 +88,9 @@ type ListSqlInjectionMatchSetsOutput struct {
 	// request, and specify the NextMarker value from the response in the NextMarker
 	// value in the next request.
 	NextMarker *string
+
+	// An array of SqlInjectionMatchSetSummary () objects.
+	SqlInjectionMatchSets []*types.SqlInjectionMatchSetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

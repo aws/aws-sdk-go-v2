@@ -89,6 +89,17 @@ func (c *Client) GetMetricData(ctx context.Context, params *GetMetricDataInput, 
 
 type GetMetricDataInput struct {
 
+	// The time stamp indicating the latest data to be returned. The value specified is
+	// exclusive; results include data points up to the specified time stamp. For
+	// better performance, specify StartTime and EndTime values that align with the
+	// value of the metric's Period and sync up with the beginning and end of an hour.
+	// For example, if the Period of a metric is 5 minutes, specifying 12:05 or 12:30
+	// as EndTime can get a faster response from CloudWatch than setting 12:07 or 12:29
+	// as the EndTime.
+	//
+	// This member is required.
+	EndTime *time.Time
+
 	// The metric queries to be returned. A single GetMetricData call can include as
 	// many as 500 MetricDataQuery structures. Each of these structures can specify
 	// either a metric to retrieve, or a math expression to perform on retrieved data.
@@ -127,30 +138,19 @@ type GetMetricDataInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// Include this value, if it was returned by the previous call, to get the next set
-	// of data points.
-	NextToken *string
-
 	// The maximum number of data points the request should return before paginating.
 	// If you omit this, the default of 100,800 is used.
 	MaxDatapoints *int32
+
+	// Include this value, if it was returned by the previous call, to get the next set
+	// of data points.
+	NextToken *string
 
 	// The order in which data points should be returned. TimestampDescending returns
 	// the newest data first and paginates when the MaxDatapoints limit is reached.
 	// TimestampAscending returns the oldest data first and paginates when the
 	// MaxDatapoints limit is reached.
 	ScanBy types.ScanBy
-
-	// The time stamp indicating the latest data to be returned. The value specified is
-	// exclusive; results include data points up to the specified time stamp. For
-	// better performance, specify StartTime and EndTime values that align with the
-	// value of the metric's Period and sync up with the beginning and end of an hour.
-	// For example, if the Period of a metric is 5 minutes, specifying 12:05 or 12:30
-	// as EndTime can get a faster response from CloudWatch than setting 12:07 or 12:29
-	// as the EndTime.
-	//
-	// This member is required.
-	EndTime *time.Time
 }
 
 type GetMetricDataOutput struct {

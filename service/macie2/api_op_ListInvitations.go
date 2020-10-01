@@ -57,12 +57,12 @@ func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInp
 
 type ListInvitationsInput struct {
 
+	// The maximum number of items to include in each page of a paginated response.
+	MaxResults *int32
+
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
-
-	// The maximum number of items to include in each page of a paginated response.
-	MaxResults *int32
 }
 
 type ListInvitationsOutput struct {

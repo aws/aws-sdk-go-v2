@@ -96,24 +96,24 @@ type ListPlatformBranchesInput struct {
 	// objects. Within each SearchFilter item, the Values array is limited to 10 items.
 	Filters []*types.SearchFilter
 
+	// The maximum number of platform branch values returned in one call.
+	MaxRecords *int32
+
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
-
-	// The maximum number of platform branch values returned in one call.
-	MaxRecords *int32
 }
 
 type ListPlatformBranchesOutput struct {
 
-	// Summary information about the platform branches.
-	PlatformBranchSummaryList []*types.PlatformBranchSummary
-
 	// In a paginated request, if this value isn't null, it's the token that you can
 	// pass in a subsequent request to get the next response page.
 	NextToken *string
+
+	// Summary information about the platform branches.
+	PlatformBranchSummaryList []*types.PlatformBranchSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

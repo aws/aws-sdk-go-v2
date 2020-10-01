@@ -55,11 +55,11 @@ func (c *Client) DeleteResourcePolicy(ctx context.Context, params *DeleteResourc
 
 type DeleteResourcePolicyInput struct {
 
-	// The ARN of the AWS Glue resource for the resource policy to be deleted.
-	ResourceArn *string
-
 	// The hash value returned when this policy was set.
 	PolicyHashCondition *string
+
+	// The ARN of the AWS Glue resource for the resource policy to be deleted.
+	ResourceArn *string
 }
 
 type DeleteResourcePolicyOutput struct {

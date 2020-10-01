@@ -57,17 +57,17 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 
 type ListUsersInput struct {
 
-	// The token to use to retrieve the next page of results. The first call does not
-	// contain any tokens.
-	NextToken *string
-
-	// The maximum number of results to return in a single call.
-	MaxResults *int32
-
 	// The identifier for the organization under which the users exist.
 	//
 	// This member is required.
 	OrganizationId *string
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int32
+
+	// The token to use to retrieve the next page of results. The first call does not
+	// contain any tokens.
+	NextToken *string
 }
 
 type ListUsersOutput struct {

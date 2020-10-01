@@ -66,15 +66,16 @@ type DescribeLabelingJobInput struct {
 
 type DescribeLabelingJobOutput struct {
 
-	// The date and time that the labeling job was last updated.
-	//
-	// This member is required.
-	LastModifiedTime *time.Time
-
 	// The date and time that the labeling job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// Configuration information required for human workers to complete a labeling
+	// task.
+	//
+	// This member is required.
+	HumanTaskConfig *types.HumanTaskConfig
 
 	// Input configuration information for the labeling job, such as the Amazon S3
 	// location of the data objects and the location of the manifest file that
@@ -83,36 +84,55 @@ type DescribeLabelingJobOutput struct {
 	// This member is required.
 	InputConfig *types.LabelingJobInputConfig
 
-	// Configuration information required for human workers to complete a labeling
-	// task.
+	// A unique identifier for work done as part of a labeling job.
 	//
 	// This member is required.
-	HumanTaskConfig *types.HumanTaskConfig
+	JobReferenceCode *string
 
-	// A set of conditions for stopping a labeling job. If any of the conditions are
-	// met, the job is automatically stopped.
-	StoppingConditions *types.LabelingJobStoppingConditions
-
-	// Configuration information for automated data labeling.
-	LabelingJobAlgorithmsConfig *types.LabelingJobAlgorithmsConfig
-
-	// The processing status of the labeling job.
+	// Provides a breakdown of the number of data objects labeled by humans, the number
+	// of objects labeled by machine, the number of objects than couldn't be labeled,
+	// and the total number of objects labeled.
 	//
 	// This member is required.
-	LabelingJobStatus types.LabelingJobStatus
+	LabelCounters *types.LabelCounters
 
 	// The Amazon Resource Name (ARN) of the labeling job.
 	//
 	// This member is required.
 	LabelingJobArn *string
 
-	// If the job failed, the reason that it failed.
-	FailureReason *string
-
 	// The name assigned to the labeling job when it was created.
 	//
 	// This member is required.
 	LabelingJobName *string
+
+	// The processing status of the labeling job.
+	//
+	// This member is required.
+	LabelingJobStatus types.LabelingJobStatus
+
+	// The date and time that the labeling job was last updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The location of the job's output data and the AWS Key Management Service key ID
+	// for the key used to encrypt the output data, if any.
+	//
+	// This member is required.
+	OutputConfig *types.LabelingJobOutputConfig
+
+	// The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on
+	// your behalf during data labeling.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// If the job failed, the reason that it failed.
+	FailureReason *string
+
+	// The attribute used as the label in the output manifest file.
+	LabelAttributeName *string
 
 	// The S3 location of the JSON file that defines the categories used to label data
 	// objects. Please note the following label-category limits:
@@ -156,41 +176,21 @@ type DescribeLabelingJobOutput struct {
 	//     }
 	LabelCategoryConfigS3Uri *string
 
+	// Configuration information for automated data labeling.
+	LabelingJobAlgorithmsConfig *types.LabelingJobAlgorithmsConfig
+
+	// The location of the output produced by the labeling job.
+	LabelingJobOutput *types.LabelingJobOutput
+
+	// A set of conditions for stopping a labeling job. If any of the conditions are
+	// met, the job is automatically stopped.
+	StoppingConditions *types.LabelingJobStoppingConditions
+
 	// An array of key/value pairs. For more information, see Using Cost Allocation
 	// Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
-
-	// The location of the output produced by the labeling job.
-	LabelingJobOutput *types.LabelingJobOutput
-
-	// The attribute used as the label in the output manifest file.
-	LabelAttributeName *string
-
-	// A unique identifier for work done as part of a labeling job.
-	//
-	// This member is required.
-	JobReferenceCode *string
-
-	// Provides a breakdown of the number of data objects labeled by humans, the number
-	// of objects labeled by machine, the number of objects than couldn't be labeled,
-	// and the total number of objects labeled.
-	//
-	// This member is required.
-	LabelCounters *types.LabelCounters
-
-	// The location of the job's output data and the AWS Key Management Service key ID
-	// for the key used to encrypt the output data, if any.
-	//
-	// This member is required.
-	OutputConfig *types.LabelingJobOutputConfig
-
-	// The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on
-	// your behalf during data labeling.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

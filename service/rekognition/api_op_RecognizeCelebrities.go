@@ -91,8 +91,9 @@ type RecognizeCelebritiesInput struct {
 
 type RecognizeCelebritiesOutput struct {
 
-	// Details about each unrecognized face in the image.
-	UnrecognizedFaces []*types.ComparedFace
+	// Details about each celebrity found in the image. Amazon Rekognition can detect a
+	// maximum of 15 celebrities in an image.
+	CelebrityFaces []*types.Celebrity
 
 	// The orientation of the input image (counterclockwise direction). If your
 	// application displays the image, you can use this value to correct the
@@ -106,9 +107,8 @@ type RecognizeCelebritiesOutput struct {
 	// the image orientation. Images in .png format don't contain Exif metadata.
 	OrientationCorrection types.OrientationCorrection
 
-	// Details about each celebrity found in the image. Amazon Rekognition can detect a
-	// maximum of 15 celebrities in an image.
-	CelebrityFaces []*types.Celebrity
+	// Details about each unrecognized face in the image.
+	UnrecognizedFaces []*types.ComparedFace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -89,6 +89,13 @@ func (c *Client) UpdateCustomKeyStore(ctx context.Context, params *UpdateCustomK
 
 type UpdateCustomKeyStoreInput struct {
 
+	// Identifies the custom key store that you want to update. Enter the ID of the
+	// custom key store. To find the ID of a custom key store, use the
+	// DescribeCustomKeyStores () operation.
+	//
+	// This member is required.
+	CustomKeyStoreId *string
+
 	// Associates the custom key store with a related AWS CloudHSM cluster. Enter the
 	// cluster ID of the cluster that you used to create the custom key store or a
 	// cluster that shares a backup history and has the same cluster certificate as the
@@ -102,22 +109,15 @@ type UpdateCustomKeyStoreInput struct {
 	// operation.
 	CloudHsmClusterId *string
 
-	// Identifies the custom key store that you want to update. Enter the ID of the
-	// custom key store. To find the ID of a custom key store, use the
-	// DescribeCustomKeyStores () operation.
-	//
-	// This member is required.
-	CustomKeyStoreId *string
-
-	// Changes the friendly name of the custom key store to the value that you specify.
-	// The custom key store name must be unique in the AWS account.
-	NewCustomKeyStoreName *string
-
 	// Enter the current password of the kmsuser crypto user (CU) in the AWS CloudHSM
 	// cluster that is associated with the custom key store. This parameter tells AWS
 	// KMS the current password of the kmsuser crypto user (CU). It does not set or
 	// change the password of any users in the AWS CloudHSM cluster.
 	KeyStorePassword *string
+
+	// Changes the friendly name of the custom key store to the value that you specify.
+	// The custom key store name must be unique in the AWS account.
+	NewCustomKeyStoreName *string
 }
 
 type UpdateCustomKeyStoreOutput struct {

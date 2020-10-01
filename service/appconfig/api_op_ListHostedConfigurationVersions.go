@@ -58,32 +58,32 @@ func (c *Client) ListHostedConfigurationVersions(ctx context.Context, params *Li
 
 type ListHostedConfigurationVersionsInput struct {
 
-	// A token to start the list. Use this token to get the next set of results.
-	NextToken *string
-
 	// The application ID.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
 	// The configuration profile ID.
 	//
 	// This member is required.
 	ConfigurationProfileId *string
+
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
+
+	// A token to start the list. Use this token to get the next set of results.
+	NextToken *string
 }
 
 type ListHostedConfigurationVersionsOutput struct {
 
+	// The elements from this collection.
+	Items []*types.HostedConfigurationVersionSummary
+
 	// The token for the next set of items to return. Use this token to get the next
 	// set of results.
 	NextToken *string
-
-	// The elements from this collection.
-	Items []*types.HostedConfigurationVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

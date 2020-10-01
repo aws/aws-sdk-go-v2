@@ -57,14 +57,6 @@ func (c *Client) CreateMissionProfile(ctx context.Context, params *CreateMission
 //
 type CreateMissionProfileInput struct {
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
-	// event indicating the pass has finished.
-	ContactPostPassDurationSeconds *int32
-
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
-	// indicating an upcoming pass.
-	ContactPrePassDurationSeconds *int32
-
 	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a
 	// to Config.
 	//
@@ -83,13 +75,21 @@ type CreateMissionProfileInput struct {
 	// This member is required.
 	Name *string
 
-	// Tags assigned to a mission profile.
-	Tags map[string]*string
-
 	// ARN of a tracking Config.
 	//
 	// This member is required.
 	TrackingConfigArn *string
+
+	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// event indicating the pass has finished.
+	ContactPostPassDurationSeconds *int32
+
+	// Amount of time prior to contact start you’d like to receive a CloudWatch event
+	// indicating an upcoming pass.
+	ContactPrePassDurationSeconds *int32
+
+	// Tags assigned to a mission profile.
+	Tags map[string]*string
 }
 
 //

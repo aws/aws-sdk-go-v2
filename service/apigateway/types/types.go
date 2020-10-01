@@ -10,16 +10,16 @@ import (
 // ARN.
 type AccessLogSettings struct {
 
+	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data
+	// Firehose delivery stream to receive access logs. If you specify a Kinesis Data
+	// Firehose delivery stream, the stream name must begin with amazon-apigateway-.
+	DestinationArn *string
+
 	// A single line format of the access logs of data, as specified by selected
 	// $context variables
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#context-variable-reference).
 	// The format must include at least $context.requestId.
 	Format *string
-
-	// The Amazon Resource Name (ARN) of the CloudWatch Logs log group or Kinesis Data
-	// Firehose delivery stream to receive access logs. If you specify a Kinesis Data
-	// Firehose delivery stream, the stream name must begin with amazon-apigateway-.
-	DestinationArn *string
 }
 
 // A resource that can be distributed to callers for executing Method () resources
@@ -29,33 +29,33 @@ type AccessLogSettings struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type ApiKey struct {
 
+	// The timestamp when the API Key was created.
+	CreatedDate *time.Time
+
+	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
+	// Marketplace.
+	CustomerId *string
+
+	// The description of the API Key.
+	Description *string
+
+	// Specifies whether the API Key can be used by callers.
+	Enabled *bool
+
+	// The identifier of the API Key.
+	Id *string
+
+	// The timestamp when the API Key was last updated.
+	LastUpdatedDate *time.Time
+
 	// The name of the API Key.
 	Name *string
 
 	// A list of Stage () resources that are associated with the ApiKey () resource.
 	StageKeys []*string
 
-	// The timestamp when the API Key was created.
-	CreatedDate *time.Time
-
-	// The identifier of the API Key.
-	Id *string
-
-	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
-	// Marketplace.
-	CustomerId *string
-
-	// The timestamp when the API Key was last updated.
-	LastUpdatedDate *time.Time
-
-	// Specifies whether the API Key can be used by callers.
-	Enabled *bool
-
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The description of the API Key.
-	Description *string
 
 	// The value of the API Key.
 	Value *string
@@ -64,15 +64,15 @@ type ApiKey struct {
 // API stage name of the associated API stage in a usage plan.
 type ApiStage struct {
 
+	// API Id of the associated API stage in a usage plan.
+	ApiId *string
+
 	// API stage name of the associated API stage in a usage plan.
 	Stage *string
 
 	// Map containing method level throttling information for API stage in a usage
 	// plan.
 	Throttle map[string]*ThrottleSettings
-
-	// API Id of the associated API stage in a usage plan.
-	ApiId *string
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -83,14 +83,36 @@ type ApiStage struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)
 type Authorizer struct {
 
-	// [Required] The name of the authorizer.
-	Name *string
+	// Optional customer-defined field, used in OpenAPI imports and exports without
+	// functional impact.
+	AuthType *string
 
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, specify null.
 	AuthorizerCredentials *string
+
+	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
+	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
+	// responses. If this field is not set, the default value is 300. The maximum value
+	// is 3600, or 1 hour.
+	AuthorizerResultTtlInSeconds *int32
+
+	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
+	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
+	// example,
+	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+	// In general, the URI has this form
+	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
+	// same as the region hosting the Lambda function, path indicates that the
+	// remaining substring in the URI should be treated as the path to the resource,
+	// including the initial /. For Lambda functions, this is usually of the form
+	// /2015-03-31/functions/[FunctionARN]/invocations.
+	AuthorizerUri *string
+
+	// The identifier for the authorizer resource.
+	Id *string
 
 	// The identity source for which authorization is requested.
 	//
@@ -116,34 +138,6 @@ type Authorizer struct {
 	// optional.
 	IdentitySource *string
 
-	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
-	// authorization token submitted in a custom header, REQUEST for a Lambda function
-	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
-	// Cognito user pool.
-	Type AuthorizerType
-
-	// Specifies the authorizer's Uniform Resource Identifier (URI). For TOKEN or
-	// REQUEST authorizers, this must be a well-formed Lambda function URI, for
-	// example,
-	// arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
-	// In general, the URI has this form
-	// arn:aws:apigateway:{region}:lambda:path/{service_api}, where {region} is the
-	// same as the region hosting the Lambda function, path indicates that the
-	// remaining substring in the URI should be treated as the path to the resource,
-	// including the initial /. For Lambda functions, this is usually of the form
-	// /2015-03-31/functions/[FunctionARN]/invocations.
-	AuthorizerUri *string
-
-	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
-	// authorizer. Each element is of this format:
-	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
-	// or REQUEST authorizer, this is not defined.
-	ProviderARNs []*string
-
-	// Optional customer-defined field, used in OpenAPI imports and exports without
-	// functional impact.
-	AuthType *string
-
 	// A validation expression for the incoming identity token. For TOKEN authorizers,
 	// this value is a regular expression. For COGNITO_USER_POOLS authorizers, API
 	// Gateway will match the aud field of the incoming token from the client against
@@ -153,14 +147,20 @@ type Authorizer struct {
 	// apply to the REQUEST authorizer.
 	IdentityValidationExpression *string
 
-	// The TTL in seconds of cached authorizer results. If it equals 0, authorization
-	// caching is disabled. If it is greater than 0, API Gateway will cache authorizer
-	// responses. If this field is not set, the default value is 300. The maximum value
-	// is 3600, or 1 hour.
-	AuthorizerResultTtlInSeconds *int32
+	// [Required] The name of the authorizer.
+	Name *string
 
-	// The identifier for the authorizer resource.
-	Id *string
+	// A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS
+	// authorizer. Each element is of this format:
+	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
+	// or REQUEST authorizer, this is not defined.
+	ProviderARNs []*string
+
+	// The authorizer type. Valid values are TOKEN for a Lambda function using a single
+	// authorization token submitted in a custom header, REQUEST for a Lambda function
+	// using incoming request parameters, and COGNITO_USER_POOLS for using an Amazon
+	// Cognito user pool.
+	Type AuthorizerType
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -170,19 +170,25 @@ type Authorizer struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type BasePathMapping struct {
 
-	// The name of the associated stage.
-	Stage *string
-
 	// The base path name that callers of the API must provide as part of the URL after
 	// the domain name.
 	BasePath *string
 
 	// The string identifier of the associated RestApi ().
 	RestApiId *string
+
+	// The name of the associated stage.
+	Stage *string
 }
 
 // Configuration settings of a canary deployment.
 type CanarySettings struct {
+
+	// The ID of the canary deployment.
+	DeploymentId *string
+
+	// The percent (0-100) of traffic diverted to a canary deployment.
+	PercentTraffic *float64
 
 	// Stage variables overridden for a canary release deployment, including new stage
 	// variables introduced in the canary. These stage variables are represented as a
@@ -192,12 +198,6 @@ type CanarySettings struct {
 	// A Boolean flag to indicate whether the canary deployment uses the stage cache or
 	// not.
 	UseStageCache *bool
-
-	// The percent (0-100) of traffic diverted to a canary deployment.
-	PercentTraffic *float64
-
-	// The ID of the canary deployment.
-	DeploymentId *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -208,8 +208,17 @@ type CanarySettings struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type ClientCertificate struct {
 
+	// The identifier of the client certificate.
+	ClientCertificateId *string
+
 	// The timestamp when the client certificate was created.
 	CreatedDate *time.Time
+
+	// The description of the client certificate.
+	Description *string
+
+	// The timestamp when the client certificate will expire.
+	ExpirationDate *time.Time
 
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
@@ -217,15 +226,6 @@ type ClientCertificate struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The timestamp when the client certificate will expire.
-	ExpirationDate *time.Time
-
-	// The description of the client certificate.
-	Description *string
-
-	// The identifier of the client certificate.
-	ClientCertificateId *string
 }
 
 // An immutable representation of a RestApi () resource that can be called by users
@@ -239,22 +239,25 @@ type ClientCertificate struct {
 // AWS SDKs (https://aws.amazon.com/tools/)
 type Deployment struct {
 
-	// The date and time that the deployment resource was created.
-	CreatedDate *time.Time
-
 	// A summary of the RestApi () at the date and time that the deployment resource
 	// was created.
 	ApiSummary map[string]map[string]*MethodSnapshot
 
-	// The identifier for the deployment resource.
-	Id *string
+	// The date and time that the deployment resource was created.
+	CreatedDate *time.Time
 
 	// The description for the deployment resource.
 	Description *string
+
+	// The identifier for the deployment resource.
+	Id *string
 }
 
 // The input configuration for a canary deployment.
 type DeploymentCanarySettings struct {
+
+	// The percentage (0.0-100.0) of traffic routed to the canary deployment.
+	PercentTraffic *float64
 
 	// A stage variable overrides used for the canary release deployment. They can
 	// override existing stage variables or add new stage variables for the canary
@@ -265,9 +268,6 @@ type DeploymentCanarySettings struct {
 	// A Boolean flag to indicate whether the canary release deployment uses the stage
 	// cache or not.
 	UseStageCache *bool
-
-	// The percentage (0.0-100.0) of traffic routed to the canary deployment.
-	PercentTraffic *float64
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of
@@ -307,15 +307,6 @@ type DocumentationPart struct {
 // Specifies the target API entity to which the documentation applies.
 type DocumentationPartLocation struct {
 
-	// The URL path of the target. It is a valid field for the API entity types of
-	// RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY,
-	// RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is / for the
-	// root resource. When an applicable child entity inherits the content of another
-	// entity of the same type with more general specifications of the other location
-	// attributes, the child entity's path attribute must match that of the parent
-	// entity as a prefix.
-	Path *string
-
 	// [Required] The type of API entity to which the documentation content applies.
 	// Valid values are API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER,
 	// QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, and
@@ -325,20 +316,6 @@ type DocumentationPartLocation struct {
 	// This member is required.
 	Type DocumentationPartType
 
-	// The HTTP status code of a response. It is a valid field for the API entity types
-	// of RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is * for any
-	// status code. When an applicable child entity inherits the content of an entity
-	// of the same type with more general specifications of the other location
-	// attributes, the child entity's statusCode attribute must match that of the
-	// parent entity exactly.
-	StatusCode *string
-
-	// The name of the targeted API entity. It is a valid and required field for the
-	// API entity types of AUTHORIZER, MODEL, PATH_PARAMETER, QUERY_PARAMETER,
-	// REQUEST_HEADER, REQUEST_BODY and RESPONSE_HEADER. It is an invalid field for any
-	// other entity type.
-	Name *string
-
 	// The HTTP verb of a method. It is a valid field for the API entity types of
 	// METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE,
 	// RESPONSE_HEADER, and RESPONSE_BODY. The default value is * for any method. When
@@ -346,6 +323,29 @@ type DocumentationPartLocation struct {
 	// with more general specifications of the other location attributes, the child
 	// entity's method attribute must match that of the parent entity exactly.
 	Method *string
+
+	// The name of the targeted API entity. It is a valid and required field for the
+	// API entity types of AUTHORIZER, MODEL, PATH_PARAMETER, QUERY_PARAMETER,
+	// REQUEST_HEADER, REQUEST_BODY and RESPONSE_HEADER. It is an invalid field for any
+	// other entity type.
+	Name *string
+
+	// The URL path of the target. It is a valid field for the API entity types of
+	// RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY,
+	// RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is / for the
+	// root resource. When an applicable child entity inherits the content of another
+	// entity of the same type with more general specifications of the other location
+	// attributes, the child entity's path attribute must match that of the parent
+	// entity as a prefix.
+	Path *string
+
+	// The HTTP status code of a response. It is a valid field for the API entity types
+	// of RESPONSE, RESPONSE_HEADER, and RESPONSE_BODY. The default value is * for any
+	// status code. When an applicable child entity inherits the content of an entity
+	// of the same type with more general specifications of the other location
+	// attributes, the child entity's statusCode attribute must match that of the
+	// parent entity exactly.
+	StatusCode *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -355,11 +355,11 @@ type DocumentationPartLocation struct {
 // DocumentationPart (), DocumentationVersions ()
 type DocumentationVersion struct {
 
-	// The description of the API documentation snapshot.
-	Description *string
-
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
+	// The description of the API documentation snapshot.
+	Description *string
 
 	// The version identifier of the API documentation snapshot.
 	Version *string
@@ -378,15 +378,25 @@ type DocumentationVersion struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html)
 type DomainName struct {
 
-	// The domain name associated with the regional endpoint for this custom domain
-	// name. You set up this association by adding a DNS record that points the custom
-	// domain name to this regional domain name. The regional domain name is returned
-	// by API Gateway when you create a regional endpoint.
-	RegionalDomainName *string
+	// The reference to an AWS-managed certificate that will be used by edge-optimized
+	// endpoint for this domain name. AWS Certificate Manager is the only supported
+	// source.
+	CertificateArn *string
 
 	// The name of the certificate that will be used by edge-optimized endpoint for
 	// this domain name.
 	CertificateName *string
+
+	// The timestamp when the certificate that was used by edge-optimized endpoint for
+	// this domain name was uploaded.
+	CertificateUploadDate *time.Time
+
+	// The domain name of the Amazon CloudFront distribution associated with this
+	// custom domain name for an edge-optimized endpoint. You set up this association
+	// when adding a DNS record pointing the custom domain name to this distribution
+	// name. For more information about CloudFront distributions, see the Amazon
+	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
+	DistributionDomainName *string
 
 	// The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized
 	// endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more
@@ -399,34 +409,33 @@ type DomainName struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
-	// (). The valid values are TLS_1_0 and TLS_1_2.
-	SecurityPolicy SecurityPolicy
+	// The status of the DomainName () migration. The valid values are AVAILABLE and
+	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
+	// the existing operation is complete. If it is AVAILABLE, the domain can be
+	// updated.
+	DomainNameStatus DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
 	// DomainName () migration.
 	DomainNameStatusMessage *string
 
+	// The endpoint configuration of this DomainName () showing the endpoint types of
+	// the domain name.
+	EndpointConfiguration *EndpointConfiguration
+
 	// The reference to an AWS-managed certificate that will be used for validating the
 	// regional domain name. AWS Certificate Manager is the only supported source.
 	RegionalCertificateArn *string
-
-	// The reference to an AWS-managed certificate that will be used by edge-optimized
-	// endpoint for this domain name. AWS Certificate Manager is the only supported
-	// source.
-	CertificateArn *string
-
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
-	CertificateUploadDate *time.Time
 
 	// The name of the certificate that will be used for validating the regional domain
 	// name.
 	RegionalCertificateName *string
 
-	// The endpoint configuration of this DomainName () showing the endpoint types of
-	// the domain name.
-	EndpointConfiguration *EndpointConfiguration
+	// The domain name associated with the regional endpoint for this custom domain
+	// name. You set up this association by adding a DNS record that points the custom
+	// domain name to this regional domain name. The regional domain name is returned
+	// by API Gateway when you create a regional endpoint.
+	RegionalDomainName *string
 
 	// The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For
 	// more information, see Set up a Regional Custom Domain Name
@@ -435,21 +444,12 @@ type DomainName struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region).
 	RegionalHostedZoneId *string
 
-	// The domain name of the Amazon CloudFront distribution associated with this
-	// custom domain name for an edge-optimized endpoint. You set up this association
-	// when adding a DNS record pointing the custom domain name to this distribution
-	// name. For more information about CloudFront distributions, see the Amazon
-	// CloudFront documentation (https://aws.amazon.com/documentation/cloudfront/).
-	DistributionDomainName *string
+	// The Transport Layer Security (TLS) version + cipher suite for this DomainName
+	// (). The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The status of the DomainName () migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
-	// updated.
-	DomainNameStatus DomainNameStatus
 }
 
 // The endpoint configuration to indicate the types of endpoints an API (RestApi
@@ -516,6 +516,19 @@ type EndpointConfiguration struct {
 // Gateway Responses</a> </div>
 type GatewayResponse struct {
 
+	// A Boolean flag to indicate whether this GatewayResponse () is the default
+	// gateway response (true) or not (false). A default gateway response is one
+	// generated by API Gateway without any customization by an API developer.
+	DefaultResponse *bool
+
+	// Response parameters (paths, query strings and headers) of the GatewayResponse ()
+	// as a string-to-string map of key-value pairs.
+	ResponseParameters map[string]*string
+
+	// Response templates of the GatewayResponse () as a string-to-string map of
+	// key-value pairs.
+	ResponseTemplates map[string]*string
+
 	// The response type of the associated GatewayResponse (). Valid values are
 	//
 	//     *
@@ -566,19 +579,6 @@ type GatewayResponse struct {
 	//     * UNSUPPORTED_MEDIA_TYPE
 	ResponseType GatewayResponseType
 
-	// A Boolean flag to indicate whether this GatewayResponse () is the default
-	// gateway response (true) or not (false). A default gateway response is one
-	// generated by API Gateway without any customization by an API developer.
-	DefaultResponse *bool
-
-	// Response parameters (paths, query strings and headers) of the GatewayResponse ()
-	// as a string-to-string map of key-value pairs.
-	ResponseParameters map[string]*string
-
-	// Response templates of the GatewayResponse () as a string-to-string map of
-	// key-value pairs.
-	ResponseTemplates map[string]*string
-
 	// The HTTP status code for this GatewayResponse ().
 	StatusCode *string
 }
@@ -589,14 +589,134 @@ type GatewayResponse struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type Integration struct {
 
+	// A list of request parameters whose values API Gateway caches. To be valid values
+	// for cacheKeyParameters, these parameters must also be specified for Method
+	// ()requestParameters.
+	CacheKeyParameters []*string
+
 	// Specifies a group of related cached parameters. By default, API Gateway uses the
 	// resource ID as the cacheNamespace. You can specify the same cacheNamespace
 	// across resources to return the same cached data for requests to different
 	// resources.
 	CacheNamespace *string
 
+	// The (id
+	// (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id)) of
+	// the VpcLink () used for the integration when connectionType=VPC_LINK and
+	// undefined, otherwise.
+	ConnectionId *string
+
+	// The type of the network connection to the integration endpoint. The valid value
+	// is INTERNET for connections through the public routable internet or VPC_LINK for
+	// private connections between API Gateway and a network load balancer in a VPC.
+	// The default value is INTERNET.
+	ConnectionType ConnectionType
+
+	// Specifies how to handle request payload content type conversions. Supported
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
+	// behaviors:
+	//
+	//     * CONVERT_TO_BINARY: Converts a request payload from a
+	// Base64-encoded string to the corresponding binary blob.
+	//
+	//     * CONVERT_TO_TEXT:
+	// Converts a request payload from a binary blob to a Base64-encoded string.
+	//
+	// If
+	// this property is not defined, the request payload will be passed through from
+	// the method request to integration request without modification, provided that
+	// the passthroughBehavior is configured to support payload pass-through.
+	ContentHandling ContentHandlingStrategy
+
+	// Specifies the credentials required for the integration, if any. For AWS
+	// integrations, three options are available. To specify an IAM Role for API
+	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
+	// the caller's identity be passed through from the request, specify the string
+	// arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS
+	// services, specify null.
+	Credentials *string
+
 	// Specifies the integration's HTTP method type.
 	HttpMethod *string
+
+	// Specifies the integration's responses.
+	// Example: Get integration responses of a
+	// method
+	//
+	// Request
+	//
+	//     GET
+	// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
+	// HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	// X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256
+	// Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
+	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//
+	// Response
+	//
+	// The
+	// successful response returns 200 OK status and a payload as follows: { "_links":
+	// { "curies": { "href":
+	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
+	// "name": "integrationresponse", "templated": true }, "self": { "href":
+	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
+	// "title": "200" }, "integrationresponse:delete": { "href":
+	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	// }, "integrationresponse:update": { "href":
+	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
+	// } }, "responseParameters": { "method.response.header.Content-Type":
+	// "'application/xml'" }, "responseTemplates": { "application/json":
+	// "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in
+	// $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
+	// }, "statusCode": "200" }Creating an API
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
+	IntegrationResponses map[string]*IntegrationResponse
+
+	// Specifies how the method request body of an unmapped content type will be passed
+	// through the integration request to the back end without transformation. A
+	// content type is unmapped if no mapping template is defined in the integration or
+	// the content type does not match any of the mapped content types, as specified in
+	// requestTemplates. The valid value is one of the following:
+	//
+	//     * WHEN_NO_MATCH:
+	// passes the method request body through the integration request to the back end
+	// without transformation when the method request content type does not match any
+	// content type associated with the mapping templates defined in the integration
+	// request.
+	//
+	//     * WHEN_NO_TEMPLATES: passes the method request body through the
+	// integration request to the back end without transformation when no mapping
+	// template is defined in the integration request. If a template is defined when
+	// this option is selected, the method request of an unmapped content-type will be
+	// rejected with an HTTP 415 Unsupported Media Type response.
+	//
+	//     * NEVER: rejects
+	// the method request with an HTTP 415 Unsupported Media Type response when either
+	// the method request content type does not match any content type associated with
+	// the mapping templates defined in the integration request or no mapping template
+	// is defined in the integration request.
+	PassthroughBehavior *string
+
+	// A key-value map specifying request parameters that are passed from the method
+	// request to the back end. The key is an integration request parameter name and
+	// the associated value is a method request parameter value or static value that
+	// must be enclosed within single quotes and pre-encoded as required by the back
+	// end. The method request parameter value must match the pattern of
+	// method.request.{location}.{name}, where location is querystring, path, or header
+	// and name must be a valid and unique method request parameter name.
+	RequestParameters map[string]*string
+
+	// Represents a map of Velocity templates that are applied on the request payload
+	// based on the value of the Content-Type header sent by the client. The content
+	// type value is the key in this map, and the template (as a String) is the value.
+	RequestTemplates map[string]*string
+
+	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+	// milliseconds or 29 seconds.
+	TimeoutInMillis *int32
+
+	// Specifies the TLS configuration for an integration.
+	TlsConfig *TlsConfig
 
 	// Specifies an API method integration type. The valid value is one of the
 	// following:
@@ -632,10 +752,6 @@ type Integration struct {
 	// connect API Gateway to a network load balancer of a VPC.
 	Type IntegrationType
 
-	// Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
-	// milliseconds or 29 seconds.
-	TimeoutInMillis *int32
-
 	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
 	//
 	//     *
@@ -663,122 +779,6 @@ type Integration struct {
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string
-
-	// The type of the network connection to the integration endpoint. The valid value
-	// is INTERNET for connections through the public routable internet or VPC_LINK for
-	// private connections between API Gateway and a network load balancer in a VPC.
-	// The default value is INTERNET.
-	ConnectionType ConnectionType
-
-	// A key-value map specifying request parameters that are passed from the method
-	// request to the back end. The key is an integration request parameter name and
-	// the associated value is a method request parameter value or static value that
-	// must be enclosed within single quotes and pre-encoded as required by the back
-	// end. The method request parameter value must match the pattern of
-	// method.request.{location}.{name}, where location is querystring, path, or header
-	// and name must be a valid and unique method request parameter name.
-	RequestParameters map[string]*string
-
-	// Represents a map of Velocity templates that are applied on the request payload
-	// based on the value of the Content-Type header sent by the client. The content
-	// type value is the key in this map, and the template (as a String) is the value.
-	RequestTemplates map[string]*string
-
-	// A list of request parameters whose values API Gateway caches. To be valid values
-	// for cacheKeyParameters, these parameters must also be specified for Method
-	// ()requestParameters.
-	CacheKeyParameters []*string
-
-	// The (id
-	// (https://docs.aws.amazon.com/apigateway/api-reference/resource/vpc-link/#id)) of
-	// the VpcLink () used for the integration when connectionType=VPC_LINK and
-	// undefined, otherwise.
-	ConnectionId *string
-
-	// Specifies how the method request body of an unmapped content type will be passed
-	// through the integration request to the back end without transformation. A
-	// content type is unmapped if no mapping template is defined in the integration or
-	// the content type does not match any of the mapped content types, as specified in
-	// requestTemplates. The valid value is one of the following:
-	//
-	//     * WHEN_NO_MATCH:
-	// passes the method request body through the integration request to the back end
-	// without transformation when the method request content type does not match any
-	// content type associated with the mapping templates defined in the integration
-	// request.
-	//
-	//     * WHEN_NO_TEMPLATES: passes the method request body through the
-	// integration request to the back end without transformation when no mapping
-	// template is defined in the integration request. If a template is defined when
-	// this option is selected, the method request of an unmapped content-type will be
-	// rejected with an HTTP 415 Unsupported Media Type response.
-	//
-	//     * NEVER: rejects
-	// the method request with an HTTP 415 Unsupported Media Type response when either
-	// the method request content type does not match any content type associated with
-	// the mapping templates defined in the integration request or no mapping template
-	// is defined in the integration request.
-	PassthroughBehavior *string
-
-	// Specifies the TLS configuration for an integration.
-	TlsConfig *TlsConfig
-
-	// Specifies the credentials required for the integration, if any. For AWS
-	// integrations, three options are available. To specify an IAM Role for API
-	// Gateway to assume, use the role's Amazon Resource Name (ARN). To require that
-	// the caller's identity be passed through from the request, specify the string
-	// arn:aws:iam::\*:user/\*. To use resource-based permissions on supported AWS
-	// services, specify null.
-	Credentials *string
-
-	// Specifies how to handle request payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	//     * CONVERT_TO_BINARY: Converts a request payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	//     * CONVERT_TO_TEXT:
-	// Converts a request payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the request payload will be passed through from
-	// the method request to integration request without modification, provided that
-	// the passthroughBehavior is configured to support payload pass-through.
-	ContentHandling ContentHandlingStrategy
-
-	// Specifies the integration's responses.
-	// Example: Get integration responses of a
-	// method
-	//
-	// Request
-	//
-	//     GET
-	// /restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200
-	// HTTP/1.1 Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// X-Amz-Date: 20160607T191449Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20160607/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// The
-	// successful response returns 200 OK status and a payload as follows: { "_links":
-	// { "curies": { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-{rel}.html",
-	// "name": "integrationresponse", "templated": true }, "self": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200",
-	// "title": "200" }, "integrationresponse:delete": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// }, "integrationresponse:update": { "href":
-	// "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200"
-	// } }, "responseParameters": { "method.response.header.Content-Type":
-	// "'application/xml'" }, "responseTemplates": { "application/json":
-	// "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in
-	// $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n"
-	// }, "statusCode": "200" }Creating an API
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
-	IntegrationResponses map[string]*IntegrationResponse
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -786,6 +786,21 @@ type Integration struct {
 // back-end response. Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type IntegrationResponse struct {
+
+	// Specifies how to handle response payload content type conversions. Supported
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
+	// behaviors:
+	//
+	//     * CONVERT_TO_BINARY: Converts a response payload from a
+	// Base64-encoded string to the corresponding binary blob.
+	//
+	//     * CONVERT_TO_TEXT:
+	// Converts a response payload from a binary blob to a Base64-encoded string.
+	//
+	// If
+	// this property is not defined, the response payload will be passed through from
+	// the integration response to the method response without modification.
+	ContentHandling ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
@@ -805,10 +820,6 @@ type IntegrationResponse struct {
 	// the key and a template as the value.
 	ResponseTemplates map[string]*string
 
-	// Specifies the status code that is used to map the integration response to an
-	// existing MethodResponse ().
-	StatusCode *string
-
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
@@ -818,20 +829,9 @@ type IntegrationResponse struct {
 	// For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string
 
-	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	//     * CONVERT_TO_BINARY: Converts a response payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	//     * CONVERT_TO_TEXT:
-	// Converts a response payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the response payload will be passed through from
-	// the integration response to the method response without modification.
-	ContentHandling ContentHandlingStrategy
+	// Specifies the status code that is used to map the integration response to an
+	// existing MethodResponse ().
+	StatusCode *string
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -926,64 +926,31 @@ type IntegrationResponse struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html)
 type Method struct {
 
-	// A key-value map defining required or optional method request parameters that can
-	// be accepted by API Gateway. A key is a method request parameter name matching
-	// the pattern of method.request.{location}.{name}, where location is querystring,
-	// path, or header and name is a valid and unique parameter name. The value
-	// associated with the key is a Boolean flag indicating whether the parameter is
-	// required (true) or optional (false). The method request parameter names defined
-	// here are available in Integration () to be mapped to integration request
-	// parameters or templates.
-	RequestParameters map[string]*bool
+	// A boolean flag specifying whether a valid ApiKey () is required to invoke this
+	// method.
+	ApiKeyRequired *bool
+
+	// A list of authorization scopes configured on the method. The scopes are used
+	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation. The
+	// authorization works by matching the method scopes against the scopes parsed from
+	// the access token in the incoming request. The method invocation is authorized if
+	// any method scopes matches a claimed scope in the access token. Otherwise, the
+	// invocation is not authorized. When the method scope is configured, the client
+	// must provide an access token instead of an identity token for authorization
+	// purposes.
+	AuthorizationScopes []*string
 
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
 	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
 
-	// The method's HTTP verb.
-	HttpMethod *string
-
-	// Gets a method response associated with a given HTTP status code. The collection
-	// of method responses are encapsulated in a key-value map, where the key is a
-	// response's HTTP status code and the value is a MethodResponse () resource that
-	// specifies the response returned to the caller from the back end through the
-	// integration response.
-	// Example: Get a 200 OK response of a GET method
-	//
-	// Request
-	//
-	//
-	// GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1
-	// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
-	// Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256
-	// Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
-	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
-	//
-	// Response
-	//
-	// The
-	// successful response returns a 200 OK status code and a payload similar to the
-	// following: { "_links": { "curies": { "href":
-	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
-	// "name": "methodresponse", "templated": true }, "self": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title":
-	// "200" }, "methodresponse:delete": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" },
-	// "methodresponse:update": { "href":
-	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" } },
-	// "responseModels": { "application/json": "Empty" }, "responseParameters": {
-	// "method.response.header.operator": false, "method.response.header.operand_2":
-	// false, "method.response.header.operand_1": false }, "statusCode": "200" }AWS CLI
-	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
-	MethodResponses map[string]*MethodResponse
-
-	// The identifier of a RequestValidator () for request validation.
-	RequestValidatorId *string
-
 	// The identifier of an Authorizer () to use on this method. The authorizationType
 	// must be CUSTOM.
 	AuthorizerId *string
+
+	// The method's HTTP verb.
+	HttpMethod *string
 
 	// Gets the method's integration responsible for passing the client-submitted
 	// request to the back end and performing necessary transformations to make the
@@ -1041,29 +1008,62 @@ type Method struct {
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-integration.html)
 	MethodIntegration *Integration
 
+	// Gets a method response associated with a given HTTP status code. The collection
+	// of method responses are encapsulated in a key-value map, where the key is a
+	// response's HTTP status code and the value is a MethodResponse () resource that
+	// specifies the response returned to the caller from the back end through the
+	// integration response.
+	// Example: Get a 200 OK response of a GET method
+	//
+	// Request
+	//
+	//
+	// GET /restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200 HTTP/1.1
+	// Content-Type: application/json Host: apigateway.us-east-1.amazonaws.com
+	// Content-Length: 117 X-Amz-Date: 20160613T215008Z Authorization: AWS4-HMAC-SHA256
+	// Credential={access_key_ID}/20160613/us-east-1/apigateway/aws4_request,
+	// SignedHeaders=content-type;host;x-amz-date, Signature={sig4_hash}
+	//
+	// Response
+	//
+	// The
+	// successful response returns a 200 OK status code and a payload similar to the
+	// following: { "_links": { "curies": { "href":
+	// "https://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-{rel}.html",
+	// "name": "methodresponse", "templated": true }, "self": { "href":
+	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200", "title":
+	// "200" }, "methodresponse:delete": { "href":
+	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" },
+	// "methodresponse:update": { "href":
+	// "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/responses/200" } },
+	// "responseModels": { "application/json": "Empty" }, "responseParameters": {
+	// "method.response.header.operator": false, "method.response.header.operand_2":
+	// false, "method.response.header.operand_1": false }, "statusCode": "200" }AWS CLI
+	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method-response.html)
+	MethodResponses map[string]*MethodResponse
+
 	// A human-friendly operation identifier for the method. For example, you can
 	// assign the operationName of ListPets for the GET /pets method in the PetStore
 	// example.
 	OperationName *string
 
-	// A boolean flag specifying whether a valid ApiKey () is required to invoke this
-	// method.
-	ApiKeyRequired *bool
-
-	// A list of authorization scopes configured on the method. The scopes are used
-	// with a COGNITO_USER_POOLS authorizer to authorize the method invocation. The
-	// authorization works by matching the method scopes against the scopes parsed from
-	// the access token in the incoming request. The method invocation is authorized if
-	// any method scopes matches a claimed scope in the access token. Otherwise, the
-	// invocation is not authorized. When the method scope is configured, the client
-	// must provide an access token instead of an identity token for authorization
-	// purposes.
-	AuthorizationScopes []*string
-
 	// A key-value map specifying data schemas, represented by Model () resources, (as
 	// the mapped value) of the request payloads of given content types (as the mapping
 	// key).
 	RequestModels map[string]*string
+
+	// A key-value map defining required or optional method request parameters that can
+	// be accepted by API Gateway. A key is a method request parameter name matching
+	// the pattern of method.request.{location}.{name}, where location is querystring,
+	// path, or header and name is a valid and unique parameter name. The value
+	// associated with the key is a Boolean flag indicating whether the parameter is
+	// required (true) or optional (false). The method request parameter names defined
+	// here are available in Integration () to be mapped to integration request
+	// parameters or templates.
+	RequestParameters map[string]*bool
+
+	// The identifier of a RequestValidator () for request validation.
+	RequestValidatorId *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -1104,9 +1104,6 @@ type MethodResponse struct {
 	// Model () name as the value.
 	ResponseModels map[string]*string
 
-	// The method response's status code.
-	StatusCode *string
-
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or
@@ -1121,16 +1118,34 @@ type MethodResponse struct {
 	// the form of integration.response.body.{JSON-expression}, where JSON-expression
 	// is a valid JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
+
+	// The method response's status code.
+	StatusCode *string
 }
 
 // Specifies the method setting properties.
 type MethodSetting struct {
 
-	// Specifies whether authorization is required for a cache invalidation request.
-	// The PATCH path for this setting is
-	// /{method_setting_key}/caching/requireAuthorizationForCacheControl, and the value
-	// is a Boolean.
-	RequireAuthorizationForCacheControl *bool
+	// Specifies whether the cached responses are encrypted. The PATCH path for this
+	// setting is /{method_setting_key}/caching/dataEncrypted, and the value is a
+	// Boolean.
+	CacheDataEncrypted *bool
+
+	// Specifies the time to live (TTL), in seconds, for cached responses. The higher
+	// the TTL, the longer the response will be cached. The PATCH path for this setting
+	// is /{method_setting_key}/caching/ttlInSeconds, and the value is an integer.
+	CacheTtlInSeconds *int32
+
+	// Specifies whether responses should be cached and returned for requests. A cache
+	// cluster must be enabled on the stage for responses to be cached. The PATCH path
+	// for this setting is /{method_setting_key}/caching/enabled, and the value is a
+	// Boolean.
+	CachingEnabled *bool
+
+	// Specifies whether data trace logging is enabled for this method, which affects
+	// the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this
+	// setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
+	DataTraceEnabled *bool
 
 	// Specifies the logging level for this method, which affects the log entries
 	// pushed to Amazon CloudWatch Logs. The PATCH path for this setting is
@@ -1139,35 +1154,20 @@ type MethodSetting struct {
 	// choose INFO to include all ERROR events as well as extra informational events.
 	LoggingLevel *string
 
-	// Specifies whether data trace logging is enabled for this method, which affects
-	// the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this
-	// setting is /{method_setting_key}/logging/dataTrace, and the value is a Boolean.
-	DataTraceEnabled *bool
-
-	// Specifies whether the cached responses are encrypted. The PATCH path for this
-	// setting is /{method_setting_key}/caching/dataEncrypted, and the value is a
-	// Boolean.
-	CacheDataEncrypted *bool
-
-	// Specifies whether responses should be cached and returned for requests. A cache
-	// cluster must be enabled on the stage for responses to be cached. The PATCH path
-	// for this setting is /{method_setting_key}/caching/enabled, and the value is a
-	// Boolean.
-	CachingEnabled *bool
-
 	// Specifies whether Amazon CloudWatch metrics are enabled for this method. The
 	// PATCH path for this setting is /{method_setting_key}/metrics/enabled, and the
 	// value is a Boolean.
 	MetricsEnabled *bool
 
+	// Specifies whether authorization is required for a cache invalidation request.
+	// The PATCH path for this setting is
+	// /{method_setting_key}/caching/requireAuthorizationForCacheControl, and the value
+	// is a Boolean.
+	RequireAuthorizationForCacheControl *bool
+
 	// Specifies the throttling burst limit. The PATCH path for this setting is
 	// /{method_setting_key}/throttling/burstLimit, and the value is an integer.
 	ThrottlingBurstLimit *int32
-
-	// Specifies the time to live (TTL), in seconds, for cached responses. The higher
-	// the TTL, the longer the response will be cached. The PATCH path for this setting
-	// is /{method_setting_key}/caching/ttlInSeconds, and the value is an integer.
-	CacheTtlInSeconds *int32
 
 	// Specifies the throttling rate limit. The PATCH path for this setting is
 	// /{method_setting_key}/throttling/rateLimit, and the value is a double.
@@ -1184,13 +1184,13 @@ type MethodSetting struct {
 // Represents a summary of a Method () resource, given a particular date and time.
 type MethodSnapshot struct {
 
+	// Specifies whether the method requires a valid ApiKey ().
+	ApiKeyRequired *bool
+
 	// The method's authorization type. Valid values are NONE for open access, AWS_IAM
 	// for using AWS IAM permissions, CUSTOM for using a custom authorizer, or
 	// COGNITO_USER_POOLS for using a Cognito user pool.
 	AuthorizationType *string
-
-	// Specifies whether the method requires a valid ApiKey ().
-	ApiKeyRequired *bool
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -1203,17 +1203,17 @@ type MethodSnapshot struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
 type Model struct {
 
-	// The identifier for the model resource.
-	Id *string
-
-	// The name of the model. Must be an alphanumeric string.
-	Name *string
-
 	// The content-type for the model.
 	ContentType *string
 
 	// The description of the model.
 	Description *string
+
+	// The identifier for the model resource.
+	Id *string
+
+	// The name of the model. Must be an alphanumeric string.
+	Name *string
 
 	// The schema for the model. For application/json models, this should be JSON
 	// schema draft 4 (https://tools.ietf.org/html/draft-zyp-json-schema-04) model. Do
@@ -1229,20 +1229,6 @@ type Model struct {
 // operation is used.
 type PatchOperation struct {
 
-	// The new target value of the update operation. It is applicable for the add or
-	// replace operation. When using AWS CLI to update a property of a JSON value,
-	// enclose the JSON object with a pair of single quotes in a Linux shell, e.g.,
-	// '{"a": ...}'. In a Windows shell, see Using JSON for Parameters
-	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
-	Value *string
-
-	// An update operation to be performed with this PATCH request. The valid value can
-	// be add, remove, replace or copy. Not all valid operations are supported for a
-	// given resource. Support of the operations depends on specific operational
-	// contexts. Attempts to apply an unsupported operation on a resource will return
-	// an error message.
-	Op Op
-
 	// The copy update operation's source as identified by a JSON-Pointer value
 	// referencing the location within the targeted resource to copy the value from.
 	// For example, to promote a canary deployment, you copy the canary deployment ID
@@ -1250,6 +1236,13 @@ type PatchOperation struct {
 	// resource with "op":"copy", "from":"/canarySettings/deploymentId" and
 	// "path":"/deploymentId".
 	From *string
+
+	// An update operation to be performed with this PATCH request. The valid value can
+	// be add, remove, replace or copy. Not all valid operations are supported for a
+	// given resource. Support of the operations depends on specific operational
+	// contexts. Attempts to apply an unsupported operation on a resource will return
+	// an error message.
+	Op Op
 
 	// The op operation's target, as identified by a JSON Pointer
 	// (https://tools.ietf.org/html/draft-ietf-appsawg-json-pointer-08) value that
@@ -1261,14 +1254,17 @@ type PatchOperation struct {
 	// escaped with "~1", as shown in the example above. Each op operation can have
 	// only one path associated with it.
 	Path *string
+
+	// The new target value of the update operation. It is applicable for the add or
+	// replace operation. When using AWS CLI to update a property of a JSON value,
+	// enclose the JSON object with a pair of single quotes in a Linux shell, e.g.,
+	// '{"a": ...}'. In a Windows shell, see Using JSON for Parameters
+	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json).
+	Value *string
 }
 
 // Quotas configured for a usage plan.
 type QuotaSettings struct {
-
-	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or
-	// "MONTH".
-	Period QuotaPeriodType
 
 	// The maximum number of requests that can be made in a given time period.
 	Limit *int32
@@ -1276,6 +1272,10 @@ type QuotaSettings struct {
 	// The number of requests subtracted from the given limit in the initial time
 	// period.
 	Offset *int32
+
+	// The time period in which the limit applies. Valid values are "DAY", "WEEK" or
+	// "MONTH".
+	Period QuotaPeriodType
 }
 
 // A set of validation rules for incoming Method () requests. In OpenAPI, a
@@ -1291,6 +1291,9 @@ type RequestValidator struct {
 	// The identifier of this RequestValidator ().
 	Id *string
 
+	// The name of this RequestValidator ()
+	Name *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
@@ -1298,9 +1301,6 @@ type RequestValidator struct {
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
-
-	// The name of this RequestValidator ()
-	Name *string
 }
 
 // Represents an API resource. Create an API
@@ -1309,6 +1309,15 @@ type Resource struct {
 
 	// The resource's identifier.
 	Id *string
+
+	// The parent resource's identifier.
+	ParentId *string
+
+	// The full path for this resource.
+	Path *string
+
+	// The last path segment for this resource.
+	PathPart *string
 
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
@@ -1390,31 +1399,11 @@ type Resource struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*Method
-
-	// The parent resource's identifier.
-	ParentId *string
-
-	// The full path for this resource.
-	Path *string
-
-	// The last path segment for this resource.
-	PathPart *string
 }
 
 // Represents a REST API. Create an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type RestApi struct {
-
-	// The API's description.
-	Description *string
-
-	// A stringified JSON policy document that applies to this RestApi regardless of
-	// the caller and Method () configuration.
-	Policy *string
-
-	// The endpoint configuration of this RestApi () showing the endpoint types of the
-	// API.
-	EndpointConfiguration *EndpointConfiguration
 
 	// The source of the API key for metering requests according to a usage plan. Valid
 	// values are:
@@ -1426,29 +1415,23 @@ type RestApi struct {
 	// a custom authorizer.
 	ApiKeySource ApiKeySourceType
 
-	// The API's name.
-	Name *string
-
-	// A version identifier for the API.
-	Version *string
-
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
-
-	// The warning messages reported when failonwarnings is turned on during API
-	// import.
-	Warnings []*string
+	// The list of binary media types supported by the RestApi (). By default, the
+	// RestApi () supports only UTF-8-encoded text payloads.
+	BinaryMediaTypes []*string
 
 	// The timestamp when the API was created.
 	CreatedDate *time.Time
 
+	// The API's description.
+	Description *string
+
+	// The endpoint configuration of this RestApi () showing the endpoint types of the
+	// API.
+	EndpointConfiguration *EndpointConfiguration
+
 	// The API's identifier. This identifier is unique across all of your APIs in API
 	// Gateway.
 	Id *string
-
-	// The list of binary media types supported by the RestApi (). By default, the
-	// RestApi () supports only UTF-8-encoded text payloads.
-	BinaryMediaTypes []*string
 
 	// A nullable integer that is used to enable compression (with non-negative between
 	// 0 and 10485760 (10M) bytes, inclusive) or disable compression (with a null
@@ -1456,6 +1439,23 @@ type RestApi struct {
 	// not applied on the payload if the payload size is smaller than this value.
 	// Setting it to zero allows compression for any payload size.
 	MinimumCompressionSize *int32
+
+	// The API's name.
+	Name *string
+
+	// A stringified JSON policy document that applies to this RestApi regardless of
+	// the caller and Method () configuration.
+	Policy *string
+
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
+
+	// A version identifier for the API.
+	Version *string
+
+	// The warning messages reported when failonwarnings is turned on during API
+	// import.
+	Warnings []*string
 }
 
 // A configuration property of an SDK type.
@@ -1467,28 +1467,28 @@ type SdkConfigurationProperty struct {
 	// The description of an SdkType () configuration property.
 	Description *string
 
-	// A boolean flag of an SdkType () configuration property to indicate if the
-	// associated SDK configuration property is required (true) or not (false).
-	Required *bool
+	// The user-friendly name of an SdkType () configuration property.
+	FriendlyName *string
 
 	// The name of a an SdkType () configuration property.
 	Name *string
 
-	// The user-friendly name of an SdkType () configuration property.
-	FriendlyName *string
+	// A boolean flag of an SdkType () configuration property to indicate if the
+	// associated SDK configuration property is required (true) or not (false).
+	Required *bool
 }
 
 // A type of SDK that API Gateway can generate.
 type SdkType struct {
 
-	// The user-friendly name of an SdkType () instance.
-	FriendlyName *string
+	// A list of configuration properties of an SdkType ().
+	ConfigurationProperties []*SdkConfigurationProperty
 
 	// The description of an SdkType ().
 	Description *string
 
-	// A list of configuration properties of an SdkType ().
-	ConfigurationProperties []*SdkConfigurationProperty
+	// The user-friendly name of an SdkType () instance.
+	FriendlyName *string
 
 	// The identifier of an SdkType () instance.
 	Id *string
@@ -1499,11 +1499,44 @@ type SdkType struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-deploy-api.html)
 type Stage struct {
 
+	// Settings for logging access in this stage.
+	AccessLogSettings *AccessLogSettings
+
+	// Specifies whether a cache cluster is enabled for the stage.
+	CacheClusterEnabled *bool
+
+	// The size of the cache cluster for the stage, if enabled.
+	CacheClusterSize CacheClusterSize
+
+	// The status of the cache cluster for the stage, if enabled.
+	CacheClusterStatus CacheClusterStatus
+
+	// Settings for the canary deployment in this stage.
+	CanarySettings *CanarySettings
+
+	// The identifier of a client certificate for an API stage.
+	ClientCertificateId *string
+
+	// The timestamp when the stage was created.
+	CreatedDate *time.Time
+
 	// The identifier of the Deployment () that the stage points to.
 	DeploymentId *string
 
 	// The stage's description.
 	Description *string
+
+	// The version of the associated API documentation.
+	DocumentationVersion *string
+
+	// The timestamp when the stage last updated.
+	LastUpdatedDate *time.Time
+
+	// A map that defines the method settings for a Stage () resource. Keys (designated
+	// as /{method_setting_key below) are method paths defined as
+	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
+	// overriding all methods in the stage.
+	MethodSettings map[string]*MethodSetting
 
 	// The name of the stage is the first path segment in the Uniform Resource
 	// Identifier (URI) of a call to API Gateway. Stage names can only contain
@@ -1514,59 +1547,26 @@ type Stage struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 
-	// The status of the cache cluster for the stage, if enabled.
-	CacheClusterStatus CacheClusterStatus
-
-	// The identifier of a client certificate for an API stage.
-	ClientCertificateId *string
-
-	// Specifies whether a cache cluster is enabled for the stage.
-	CacheClusterEnabled *bool
-
-	// Settings for the canary deployment in this stage.
-	CanarySettings *CanarySettings
+	// Specifies whether active tracing with X-ray is enabled for the Stage ().
+	TracingEnabled *bool
 
 	// A map that defines the stage variables for a Stage () resource. Variable names
 	// can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]*string
 
-	// The size of the cache cluster for the stage, if enabled.
-	CacheClusterSize CacheClusterSize
-
-	// Settings for logging access in this stage.
-	AccessLogSettings *AccessLogSettings
-
-	// The version of the associated API documentation.
-	DocumentationVersion *string
-
-	// The timestamp when the stage last updated.
-	LastUpdatedDate *time.Time
-
-	// The timestamp when the stage was created.
-	CreatedDate *time.Time
-
-	// Specifies whether active tracing with X-ray is enabled for the Stage ().
-	TracingEnabled *bool
-
 	// The ARN of the WebAcl associated with the Stage ().
 	WebAclArn *string
-
-	// A map that defines the method settings for a Stage () resource. Keys (designated
-	// as /{method_setting_key below) are method paths defined as
-	// {resource_path}/{http_method} for an individual method override, or /\*/\* for
-	// overriding all methods in the stage.
-	MethodSettings map[string]*MethodSetting
 }
 
 // A reference to a unique stage identified in the format {restApiId}/{stage}.
 type StageKey struct {
 
-	// The stage name associated with the stage key.
-	StageName *string
-
 	// The string identifier of the associated RestApi ().
 	RestApiId *string
+
+	// The stage name associated with the stage key.
+	StageName *string
 }
 
 // The API request rate limits.
@@ -1601,17 +1601,17 @@ type TlsConfig struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UsagePlan struct {
 
+	// The associated API stages of a usage plan.
+	ApiStages []*ApiStage
+
+	// The description of a usage plan.
+	Description *string
+
 	// The identifier of a UsagePlan () resource.
 	Id *string
 
-	// The request throttle limits of a usage plan.
-	Throttle *ThrottleSettings
-
 	// The name of a usage plan.
 	Name *string
-
-	// The associated API stages of a usage plan.
-	ApiStages []*ApiStage
 
 	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
 	// product on AWS Marketplace.
@@ -1623,8 +1623,8 @@ type UsagePlan struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 
-	// The description of a usage plan.
-	Description *string
+	// The request throttle limits of a usage plan.
+	Throttle *ThrottleSettings
 }
 
 // Represents a usage plan key to identify a plan customer. To associate an API
@@ -1633,17 +1633,17 @@ type UsagePlan struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type UsagePlanKey struct {
 
-	// The name of a usage plan key.
-	Name *string
-
-	// The value of a usage plan key.
-	Value *string
-
 	// The Id of a usage plan key.
 	Id *string
 
+	// The name of a usage plan key.
+	Name *string
+
 	// The type of a usage plan key. Currently, the valid key type is API_KEY.
 	Type *string
+
+	// The value of a usage plan key.
+	Value *string
 }
 
 // An API Gateway VPC link for a RestApi () to access resources in an Amazon
@@ -1656,6 +1656,9 @@ type UsagePlanKey struct {
 // connectionId property to identify the VpcLink () used.
 type VpcLink struct {
 
+	// The description of the VPC link.
+	Description *string
+
 	// The identifier of the VpcLink (). It is used in an Integration () to reference
 	// this VpcLink ().
 	Id *string
@@ -1663,21 +1666,18 @@ type VpcLink struct {
 	// The name used to label and identify the VPC link.
 	Name *string
 
-	// The description of the VPC link.
-	Description *string
-
-	// A description about the VPC link status.
-	StatusMessage *string
-
-	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
-	// network load balancer must be owned by the same AWS account of the API owner.
-	TargetArns []*string
-
 	// The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING,
 	// or FAILED. Deploying an API will wait if the status is PENDING and will fail if
 	// the status is DELETING.
 	Status VpcLinkStatus
 
+	// A description about the VPC link status.
+	StatusMessage *string
+
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
+
+	// The ARN of the network load balancer of the VPC targeted by the VPC link. The
+	// network load balancer must be owned by the same AWS account of the API owner.
+	TargetArns []*string
 }

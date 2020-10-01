@@ -62,20 +62,20 @@ type ListSkillsStoreSkillsByCategoryInput struct {
 	// This member is required.
 	CategoryId *int64
 
-	// The tokens used for pagination.
-	NextToken *string
-
 	// The maximum number of skills returned per paginated calls.
 	MaxResults *int32
+
+	// The tokens used for pagination.
+	NextToken *string
 }
 
 type ListSkillsStoreSkillsByCategoryOutput struct {
 
-	// The skill store skills.
-	SkillsStoreSkills []*types.SkillsStoreSkill
-
 	// The tokens used for pagination.
 	NextToken *string
+
+	// The skill store skills.
+	SkillsStoreSkills []*types.SkillsStoreSkill
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

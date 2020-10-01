@@ -84,6 +84,19 @@ func (c *Client) ListMultipartUploads(ctx context.Context, params *ListMultipart
 
 type ListMultipartUploadsInput struct {
 
+	// Name of the bucket to which the multipart upload was initiated. When using this
+	// API with an access point, you must direct requests to the access point hostname.
+	// The access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation using an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
+	Bucket *string
+
 	// Character you use to group keys. All keys that contain the same string between
 	// the prefix, if specified, and the first occurrence of the delimiter after the
 	// prefix are grouped under a single result element, CommonPrefixes. If you don't
@@ -100,12 +113,6 @@ type ListMultipartUploadsInput struct {
 	// response.
 	EncodingType types.EncodingType
 
-	// Lists in-progress uploads only for those keys that begin with the specified
-	// prefix. You can use prefixes to separate a bucket into different grouping of
-	// keys. (You can think of using prefix to make groups in the same way you'd use a
-	// folder in a file system.)
-	Prefix *string
-
 	// Together with upload-id-marker, this parameter specifies the multipart upload
 	// after which listing should begin. If upload-id-marker is not specified, only the
 	// keys lexicographically greater than the specified key-marker will be included in
@@ -115,37 +122,38 @@ type ListMultipartUploadsInput struct {
 	// the specified <code>upload-id-marker</code>.</p>
 	KeyMarker *string
 
+	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the
+	// response body. 1,000 is the maximum number of uploads that can be returned in a
+	// response.
+	MaxUploads *int32
+
+	// Lists in-progress uploads only for those keys that begin with the specified
+	// prefix. You can use prefixes to separate a bucket into different grouping of
+	// keys. (You can think of using prefix to make groups in the same way you'd use a
+	// folder in a file system.)
+	Prefix *string
+
 	// Together with key-marker, specifies the multipart upload after which listing
 	// should begin. If key-marker is not specified, the upload-id-marker parameter is
 	// ignored. Otherwise, any multipart uploads for a key equal to the key-marker
 	// might be included in the list only if they have an upload ID lexicographically
 	// greater than the specified upload-id-marker.
 	UploadIdMarker *string
-
-	// Name of the bucket to which the multipart upload was initiated. When using this
-	// API with an access point, you must direct requests to the access point hostname.
-	// The access point hostname takes the form
-	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
-	//
-	// This member is required.
-	Bucket *string
-
-	// Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the
-	// response body. 1,000 is the maximum number of uploads that can be returned in a
-	// response.
-	MaxUploads *int32
 }
 
 type ListMultipartUploadsOutput struct {
 
-	// When a prefix is provided in the request, this field contains the specified
-	// prefix. The result contains only keys starting with the specified prefix.
-	Prefix *string
+	// Name of the bucket to which the multipart upload was initiated.
+	Bucket *string
+
+	// If you specify a delimiter in the request, then the result returns each distinct
+	// key prefix containing the delimiter in a CommonPrefixes element. The distinct
+	// key prefixes are returned in the Prefix child element.
+	CommonPrefixes []*types.CommonPrefix
+
+	// Contains the delimiter you specified in the request. If you don't specify a
+	// delimiter in your request, this element is absent from the response.
+	Delimiter *string
 
 	// Encoding type used by Amazon S3 to encode object keys in the response. If you
 	// specify encoding-type request parameter, Amazon S3 includes this element in the
@@ -154,45 +162,37 @@ type ListMultipartUploadsOutput struct {
 	// <code>Prefix</code>, <code>NextKeyMarker</code>, <code>Key</code>.</p>
 	EncodingType types.EncodingType
 
-	// Container for elements related to a particular multipart upload. A response can
-	// contain zero or more Upload elements.
-	Uploads []*types.MultipartUpload
-
-	// Name of the bucket to which the multipart upload was initiated.
-	Bucket *string
-
-	// Maximum number of multipart uploads that could have been included in the
-	// response.
-	MaxUploads *int32
-
-	// When a list is truncated, this element specifies the value that should be used
-	// for the upload-id-marker request parameter in a subsequent request.
-	NextUploadIdMarker *string
-
 	// Indicates whether the returned list of multipart uploads is truncated. A value
 	// of true indicates that the list was truncated. The list can be truncated if the
 	// number of multipart uploads exceeds the limit allowed or specified by max
 	// uploads.
 	IsTruncated *bool
 
-	// If you specify a delimiter in the request, then the result returns each distinct
-	// key prefix containing the delimiter in a CommonPrefixes element. The distinct
-	// key prefixes are returned in the Prefix child element.
-	CommonPrefixes []*types.CommonPrefix
+	// The key at or after which the listing began.
+	KeyMarker *string
+
+	// Maximum number of multipart uploads that could have been included in the
+	// response.
+	MaxUploads *int32
 
 	// When a list is truncated, this element specifies the value that should be used
 	// for the key-marker request parameter in a subsequent request.
 	NextKeyMarker *string
 
-	// The key at or after which the listing began.
-	KeyMarker *string
+	// When a list is truncated, this element specifies the value that should be used
+	// for the upload-id-marker request parameter in a subsequent request.
+	NextUploadIdMarker *string
 
-	// Contains the delimiter you specified in the request. If you don't specify a
-	// delimiter in your request, this element is absent from the response.
-	Delimiter *string
+	// When a prefix is provided in the request, this field contains the specified
+	// prefix. The result contains only keys starting with the specified prefix.
+	Prefix *string
 
 	// Upload ID after which listing began.
 	UploadIdMarker *string
+
+	// Container for elements related to a particular multipart upload. A response can
+	// contain zero or more Upload elements.
+	Uploads []*types.MultipartUpload
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

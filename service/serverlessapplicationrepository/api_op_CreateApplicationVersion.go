@@ -57,60 +57,41 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 
 type CreateApplicationVersionInput struct {
 
-	// The semantic version of the new version.
-	//
-	// This member is required.
-	SemanticVersion *string
-
-	// A link to the packaged AWS SAM template of your application.
-	TemplateUrl *string
-
-	// A link to the S3 object that contains the ZIP archive of the source code for
-	// this version of your application.Maximum size 50 MB
-	SourceCodeArchiveUrl *string
-
-	// A link to a public repository for the source code of your application, for
-	// example the URL of a specific GitHub commit.
-	SourceCodeUrl *string
-
 	// The Amazon Resource Name (ARN) of the application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The raw packaged AWS SAM template of your application.
-	TemplateBody *string
-}
-
-type CreateApplicationVersionOutput struct {
+	// The semantic version of the new version.
+	//
+	// This member is required.
+	SemanticVersion *string
 
 	// A link to the S3 object that contains the ZIP archive of the source code for
 	// this version of your application.Maximum size 50 MB
 	SourceCodeArchiveUrl *string
 
-	// A link to the packaged AWS SAM template of your application.
-	TemplateUrl *string
-
-	// An array of parameter types supported by the application.
-	ParameterDefinitions []*types.ParameterDefinition
-
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
 
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
-	SemanticVersion *string
+	// The raw packaged AWS SAM template of your application.
+	TemplateBody *string
+
+	// A link to the packaged AWS SAM template of your application.
+	TemplateUrl *string
+}
+
+type CreateApplicationVersionOutput struct {
+
+	// The application Amazon Resource Name (ARN).
+	ApplicationId *string
 
 	// The date and time this resource was created.
 	CreationTime *string
 
-	// Whether all of the AWS resources contained in this application are supported in
-	// the region in which it is being retrieved.
-	ResourcesSupported *bool
-
-	// The application Amazon Resource Name (ARN).
-	ApplicationId *string
+	// An array of parameter types supported by the application.
+	ParameterDefinitions []*types.ParameterDefinition
 
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
@@ -148,6 +129,25 @@ type CreateApplicationVersionOutput struct {
 	// application before deploying. If you don't specify this parameter for an
 	// application that requires capabilities, the call will fail.
 	RequiredCapabilities []types.Capability
+
+	// Whether all of the AWS resources contained in this application are supported in
+	// the region in which it is being retrieved.
+	ResourcesSupported *bool
+
+	// The semantic version of the application: https://semver.org/
+	// (https://semver.org/)
+	SemanticVersion *string
+
+	// A link to the S3 object that contains the ZIP archive of the source code for
+	// this version of your application.Maximum size 50 MB
+	SourceCodeArchiveUrl *string
+
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
+	SourceCodeUrl *string
+
+	// A link to the packaged AWS SAM template of your application.
+	TemplateUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

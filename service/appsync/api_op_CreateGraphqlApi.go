@@ -57,33 +57,33 @@ func (c *Client) CreateGraphqlApi(ctx context.Context, params *CreateGraphqlApiI
 
 type CreateGraphqlApiInput struct {
 
-	// A TagMap object.
-	Tags map[string]*string
+	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+	//
+	// This member is required.
+	AuthenticationType types.AuthenticationType
 
 	// A user-supplied name for the GraphqlApi.
 	//
 	// This member is required.
 	Name *string
 
+	// A list of additional authentication providers for the GraphqlApi API.
+	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
+
 	// The Amazon CloudWatch Logs configuration.
 	LogConfig *types.LogConfig
-
-	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
-	//
-	// This member is required.
-	AuthenticationType types.AuthenticationType
-
-	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
-	XrayEnabled *bool
-
-	// The Amazon Cognito user pool configuration.
-	UserPoolConfig *types.UserPoolConfig
 
 	// The OpenID Connect configuration.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
-	// A list of additional authentication providers for the GraphqlApi API.
-	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
+	// A TagMap object.
+	Tags map[string]*string
+
+	// The Amazon Cognito user pool configuration.
+	UserPoolConfig *types.UserPoolConfig
+
+	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+	XrayEnabled *bool
 }
 
 type CreateGraphqlApiOutput struct {

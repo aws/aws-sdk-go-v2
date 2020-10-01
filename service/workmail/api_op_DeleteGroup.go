@@ -56,15 +56,15 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The organization that contains the group.
-	//
-	// This member is required.
-	OrganizationId *string
-
 	// The identifier of the group to be deleted.
 	//
 	// This member is required.
 	GroupId *string
+
+	// The organization that contains the group.
+	//
+	// This member is required.
+	OrganizationId *string
 }
 
 type DeleteGroupOutput struct {

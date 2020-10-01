@@ -61,20 +61,38 @@ func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackage
 
 type GetPackageVersionReadmeInput struct {
 
+	// The name of the domain that contains the repository that contains the package
+	// version with the requested readme file.
+	//
+	// This member is required.
+	Domain *string
+
+	// A format that specifies the type of the package version with the requested
+	// readme file. The valid values are:
+	//
+	//     * npm
+	//
+	//     * pypi
+	//
+	//     * maven
+	//
+	// This member is required.
+	Format types.PackageFormat
+
 	// The name of the package version that contains the requested readme file.
 	//
 	// This member is required.
 	Package *string
 
-	// The repository that contains the package with the requested readme file.
-	//
-	// This member is required.
-	Repository *string
-
 	// A string that contains the package version (for example, 3.5.2).
 	//
 	// This member is required.
 	PackageVersion *string
+
+	// The repository that contains the package with the requested readme file.
+	//
+	// This member is required.
+	Repository *string
 
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
@@ -92,27 +110,19 @@ type GetPackageVersionReadmeInput struct {
 	// package does not contain a corresponding component, so Python packages do not
 	// have a namespace.
 	Namespace *string
+}
 
-	// A format that specifies the type of the package version with the requested
-	// readme file. The valid values are:
+type GetPackageVersionReadmeOutput struct {
+
+	// The format of the package with the requested readme file. Valid format types
+	// are:
 	//
 	//     * npm
 	//
 	//     * pypi
 	//
 	//     * maven
-	//
-	// This member is required.
 	Format types.PackageFormat
-
-	// The name of the domain that contains the repository that contains the package
-	// version with the requested readme file.
-	//
-	// This member is required.
-	Domain *string
-}
-
-type GetPackageVersionReadmeOutput struct {
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
@@ -127,27 +137,17 @@ type GetPackageVersionReadmeOutput struct {
 	// have a namespace.
 	Namespace *string
 
-	// The text of the returned readme file.
-	Readme *string
-
-	// The current revision associated with the package version.
-	VersionRevision *string
-
-	// The format of the package with the requested readme file. Valid format types
-	// are:
-	//
-	//     * npm
-	//
-	//     * pypi
-	//
-	//     * maven
-	Format types.PackageFormat
-
 	// The name of the package that contains the returned readme file.
 	Package *string
 
+	// The text of the returned readme file.
+	Readme *string
+
 	// The version of the package with the requested readme file.
 	Version *string
+
+	// The current revision associated with the package version.
+	VersionRevision *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

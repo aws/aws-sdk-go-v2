@@ -100,15 +100,6 @@ func (c *Client) GetSessionToken(ctx context.Context, params *GetSessionTokenInp
 
 type GetSessionTokenInput struct {
 
-	// The value provided by the MFA device, if MFA is required. If any policy requires
-	// the IAM user to submit an MFA code, specify this value. If MFA authentication is
-	// required, the user must provide a code when requesting a set of temporary
-	// security credentials. A user who fails to provide the code receives an "access
-	// denied" response when requesting resources that require MFA authentication. The
-	// format for this parameter, as described by its regex pattern, is a sequence of
-	// six numeric digits.
-	TokenCode *string
-
 	// The duration, in seconds, that the credentials should remain valid. Acceptable
 	// durations for IAM user sessions range from 900 seconds (15 minutes) to 129,600
 	// seconds (36 hours), with 43,200 seconds (12 hours) as the default. Sessions for
@@ -128,6 +119,15 @@ type GetSessionTokenInput struct {
 	// with no spaces. You can also include underscores or any of the following
 	// characters: =,.@:/-
 	SerialNumber *string
+
+	// The value provided by the MFA device, if MFA is required. If any policy requires
+	// the IAM user to submit an MFA code, specify this value. If MFA authentication is
+	// required, the user must provide a code when requesting a set of temporary
+	// security credentials. A user who fails to provide the code receives an "access
+	// denied" response when requesting resources that require MFA authentication. The
+	// format for this parameter, as described by its regex pattern, is a sequence of
+	// six numeric digits.
+	TokenCode *string
 }
 
 // Contains the response to a successful GetSessionToken () request, including

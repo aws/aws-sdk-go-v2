@@ -57,48 +57,48 @@ func (c *Client) CreateProvisioningTemplate(ctx context.Context, params *CreateP
 
 type CreateProvisioningTemplateInput struct {
 
-	// The description of the fleet provisioning template.
-	Description *string
-
-	// True to enable the fleet provisioning template, otherwise false.
-	Enabled *bool
-
 	// The role ARN for the role associated with the fleet provisioning template. This
 	// IoT role grants permission to provision a device.
 	//
 	// This member is required.
 	ProvisioningRoleArn *string
 
+	// The JSON formatted contents of the fleet provisioning template.
+	//
+	// This member is required.
+	TemplateBody *string
+
+	// The name of the fleet provisioning template.
+	//
+	// This member is required.
+	TemplateName *string
+
+	// The description of the fleet provisioning template.
+	Description *string
+
+	// True to enable the fleet provisioning template, otherwise false.
+	Enabled *bool
+
+	// Creates a pre-provisioning hook template.
+	PreProvisioningHook *types.ProvisioningHook
+
 	// Metadata which can be used to manage the fleet provisioning template. For URI
 	// Request parameters use format: ...key1=value1&key2=value2... For the CLI
 	// command-line parameter use format: &&tags "key1=value1&key2=value2..." For the
 	// cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []*types.Tag
-
-	// Creates a pre-provisioning hook template.
-	PreProvisioningHook *types.ProvisioningHook
-
-	// The name of the fleet provisioning template.
-	//
-	// This member is required.
-	TemplateName *string
-
-	// The JSON formatted contents of the fleet provisioning template.
-	//
-	// This member is required.
-	TemplateBody *string
 }
 
 type CreateProvisioningTemplateOutput struct {
-
-	// The name of the fleet provisioning template.
-	TemplateName *string
 
 	// The default version of the fleet provisioning template.
 	DefaultVersionId *int32
 
 	// The ARN that identifies the provisioning template.
 	TemplateArn *string
+
+	// The name of the fleet provisioning template.
+	TemplateName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

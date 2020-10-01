@@ -89,10 +89,10 @@ func (c *Client) GetShardIterator(ctx context.Context, params *GetShardIteratorI
 // Represents the input for GetShardIterator.
 type GetShardIteratorInput struct {
 
-	// The name of the Amazon Kinesis data stream.
+	// The shard ID of the Kinesis Data Streams shard to get the iterator for.
 	//
 	// This member is required.
-	StreamName *string
+	ShardId *string
 
 	// Determines how the shard iterator is used to start reading data records from the
 	// shard. The following are the valid Amazon Kinesis shard iterator types:
@@ -119,6 +119,15 @@ type GetShardIteratorInput struct {
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 
+	// The name of the Amazon Kinesis data stream.
+	//
+	// This member is required.
+	StreamName *string
+
+	// The sequence number of the data record in the shard from which to start reading.
+	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
+	StartingSequenceNumber *string
+
 	// The time stamp of the data record from which to start reading. Used with shard
 	// iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with precision
 	// in milliseconds. For example, 2016-04-04T19:58:46.480-00:00 or 1459799926.480.
@@ -127,15 +136,6 @@ type GetShardIteratorInput struct {
 	// horizon, the iterator returned is for the oldest untrimmed data record
 	// (TRIM_HORIZON).
 	Timestamp *time.Time
-
-	// The shard ID of the Kinesis Data Streams shard to get the iterator for.
-	//
-	// This member is required.
-	ShardId *string
-
-	// The sequence number of the data record in the shard from which to start reading.
-	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
-	StartingSequenceNumber *string
 }
 
 // Represents the output for GetShardIterator.

@@ -85,16 +85,16 @@ type ModifySpotFleetRequestInput struct {
 	// This member is required.
 	SpotFleetRequestId *string
 
-	// The size of the fleet.
-	TargetCapacity *int32
-
-	// The number of On-Demand Instances in the fleet.
-	OnDemandTargetCapacity *int32
-
 	// Indicates whether running Spot Instances should be terminated if the target
 	// capacity of the Spot Fleet request is decreased below the current size of the
 	// Spot Fleet.
 	ExcessCapacityTerminationPolicy types.ExcessCapacityTerminationPolicy
+
+	// The number of On-Demand Instances in the fleet.
+	OnDemandTargetCapacity *int32
+
+	// The size of the fleet.
+	TargetCapacity *int32
 }
 
 // Contains the output of ModifySpotFleetRequest.

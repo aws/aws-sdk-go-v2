@@ -71,6 +71,11 @@ type RevokeDBSecurityGroupIngressInput struct {
 	// can't be provided.
 	CIDRIP *string
 
+	// The id of the EC2 security group to revoke access from. For VPC DB security
+	// groups, EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId
+	// and either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
+	EC2SecurityGroupId *string
+
 	// The name of the EC2 security group to revoke access from. For VPC DB security
 	// groups, EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId
 	// and either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
@@ -82,11 +87,6 @@ type RevokeDBSecurityGroupIngressInput struct {
 	// EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId
 	// must be provided.
 	EC2SecurityGroupOwnerId *string
-
-	// The id of the EC2 security group to revoke access from. For VPC DB security
-	// groups, EC2SecurityGroupId must be provided. Otherwise, EC2SecurityGroupOwnerId
-	// and either EC2SecurityGroupName or EC2SecurityGroupId must be provided.
-	EC2SecurityGroupId *string
 }
 
 type RevokeDBSecurityGroupIngressOutput struct {

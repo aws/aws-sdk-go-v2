@@ -76,11 +76,6 @@ func (c *Client) ModifyIdFormat(ctx context.Context, params *ModifyIdFormatInput
 
 type ModifyIdFormatInput struct {
 
-	// Indicate whether the resource should use longer IDs (17-character IDs).
-	//
-	// This member is required.
-	UseLongIds *bool
-
 	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
 	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
 	// image | import-task | internet-gateway | network-acl | network-acl-association |
@@ -93,6 +88,11 @@ type ModifyIdFormatInput struct {
 	//
 	// This member is required.
 	Resource *string
+
+	// Indicate whether the resource should use longer IDs (17-character IDs).
+	//
+	// This member is required.
+	UseLongIds *bool
 }
 
 type ModifyIdFormatOutput struct {

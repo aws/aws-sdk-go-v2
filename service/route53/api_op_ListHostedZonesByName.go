@@ -104,13 +104,6 @@ type ListHostedZonesByNameInput struct {
 	// response.
 	DNSName *string
 
-	// The maximum number of hosted zones to be included in the response body for this
-	// request. If you have more than maxitems hosted zones, then the value of the
-	// IsTruncated element in the response is true, and the values of NextDNSName and
-	// NextHostedZoneId specify the first hosted zone in the next group of maxitems
-	// hosted zones.
-	MaxItems *string
-
 	// (Optional) For your first request to ListHostedZonesByName, do not include the
 	// hostedzoneid parameter. If you have more hosted zones than the value of
 	// maxitems, ListHostedZonesByName returns only the first maxitems hosted zones. To
@@ -119,38 +112,17 @@ type ListHostedZonesByNameInput struct {
 	// the value of hostedzoneid, specify the value of the NextHostedZoneId element
 	// from the previous response.
 	HostedZoneId *string
+
+	// The maximum number of hosted zones to be included in the response body for this
+	// request. If you have more than maxitems hosted zones, then the value of the
+	// IsTruncated element in the response is true, and the values of NextDNSName and
+	// NextHostedZoneId specify the first hosted zone in the next group of maxitems
+	// hosted zones.
+	MaxItems *string
 }
 
 // A complex type that contains the response information for the request.
 type ListHostedZonesByNameOutput struct {
-
-	// If IsTruncated is true, the value of NextHostedZoneId identifies the first
-	// hosted zone in the next group of maxitems hosted zones. Call
-	// ListHostedZonesByName again and specify the value of NextDNSName and
-	// NextHostedZoneId in the dnsname and hostedzoneid parameters, respectively. This
-	// element is present only if IsTruncated is true.
-	NextHostedZoneId *string
-
-	// The ID that Amazon Route 53 assigned to the hosted zone when you created it.
-	HostedZoneId *string
-
-	// For the second and subsequent calls to ListHostedZonesByName, DNSName is the
-	// value that you specified for the dnsname parameter in the request that produced
-	// the current response.
-	DNSName *string
-
-	// If IsTruncated is true, the value of NextDNSName is the name of the first hosted
-	// zone in the next group of maxitems hosted zones. Call ListHostedZonesByName
-	// again and specify the value of NextDNSName and NextHostedZoneId in the dnsname
-	// and hostedzoneid parameters, respectively. This element is present only if
-	// IsTruncated is true.
-	NextDNSName *string
-
-	// The value that you specified for the maxitems parameter in the call to
-	// ListHostedZonesByName that produced the current response.
-	//
-	// This member is required.
-	MaxItems *string
 
 	// A complex type that contains general information about the hosted zone.
 	//
@@ -164,6 +136,34 @@ type ListHostedZonesByNameOutput struct {
 	//
 	// This member is required.
 	IsTruncated *bool
+
+	// The value that you specified for the maxitems parameter in the call to
+	// ListHostedZonesByName that produced the current response.
+	//
+	// This member is required.
+	MaxItems *string
+
+	// For the second and subsequent calls to ListHostedZonesByName, DNSName is the
+	// value that you specified for the dnsname parameter in the request that produced
+	// the current response.
+	DNSName *string
+
+	// The ID that Amazon Route 53 assigned to the hosted zone when you created it.
+	HostedZoneId *string
+
+	// If IsTruncated is true, the value of NextDNSName is the name of the first hosted
+	// zone in the next group of maxitems hosted zones. Call ListHostedZonesByName
+	// again and specify the value of NextDNSName and NextHostedZoneId in the dnsname
+	// and hostedzoneid parameters, respectively. This element is present only if
+	// IsTruncated is true.
+	NextDNSName *string
+
+	// If IsTruncated is true, the value of NextHostedZoneId identifies the first
+	// hosted zone in the next group of maxitems hosted zones. Call
+	// ListHostedZonesByName again and specify the value of NextDNSName and
+	// NextHostedZoneId in the dnsname and hostedzoneid parameters, respectively. This
+	// element is present only if IsTruncated is true.
+	NextHostedZoneId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

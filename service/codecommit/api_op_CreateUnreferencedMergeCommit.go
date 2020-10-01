@@ -63,42 +63,35 @@ func (c *Client) CreateUnreferencedMergeCommit(ctx context.Context, params *Crea
 
 type CreateUnreferencedMergeCommitInput struct {
 
-	// The name of the repository where you want to create the unreferenced merge
-	// commit.
-	//
-	// This member is required.
-	RepositoryName *string
-
-	// The commit message for the unreferenced commit.
-	CommitMessage *string
-
-	// The merge option or strategy you want to use to merge the code.
-	//
-	// This member is required.
-	MergeOption types.MergeOptionTypeEnum
-
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
 	//
 	// This member is required.
 	DestinationCommitSpecifier *string
 
-	// The email address for the person who created the unreferenced commit.
-	Email *string
+	// The merge option or strategy you want to use to merge the code.
+	//
+	// This member is required.
+	MergeOption types.MergeOptionTypeEnum
 
-	// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
-	// resolving conflicts during a merge.
-	ConflictResolution *types.ConflictResolution
+	// The name of the repository where you want to create the unreferenced merge
+	// commit.
+	//
+	// This member is required.
+	RepositoryName *string
+
+	// The branch, tag, HEAD, or other fully qualified reference used to identify a
+	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
+	SourceCommitSpecifier *string
 
 	// The name of the author who created the unreferenced commit. This information is
 	// used as both the author and committer for the commit.
 	AuthorName *string
 
-	// Specifies which branch to use when resolving conflicts, or whether to attempt
-	// automatically merging two versions of a file. The default is NONE, which
-	// requires any conflicts to be resolved manually before the merge operation is
-	// successful.
-	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+	// The commit message for the unreferenced commit.
+	CommitMessage *string
 
 	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
 	// used, which returns a not-mergeable result if the same file has differences in
@@ -106,11 +99,18 @@ type CreateUnreferencedMergeCommitInput struct {
 	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
 
-	// The branch, tag, HEAD, or other fully qualified reference used to identify a
-	// commit (for example, a branch name or a full commit ID).
-	//
-	// This member is required.
-	SourceCommitSpecifier *string
+	// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
+	// resolving conflicts during a merge.
+	ConflictResolution *types.ConflictResolution
+
+	// Specifies which branch to use when resolving conflicts, or whether to attempt
+	// automatically merging two versions of a file. The default is NONE, which
+	// requires any conflicts to be resolved manually before the merge operation is
+	// successful.
+	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+
+	// The email address for the person who created the unreferenced commit.
+	Email *string
 
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If this is specified as true, a .gitkeep

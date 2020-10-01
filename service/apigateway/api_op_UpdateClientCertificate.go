@@ -59,7 +59,6 @@ func (c *Client) UpdateClientCertificate(ctx context.Context, params *UpdateClie
 
 // A request to change information about an ClientCertificate () resource.
 type UpdateClientCertificateInput struct {
-	TemplateSkipList []*string
 
 	// [Required] The identifier of the ClientCertificate () resource to be updated.
 	//
@@ -68,13 +67,15 @@ type UpdateClientCertificateInput struct {
 
 	Name *string
 
-	Title *string
-
-	Template *bool
-
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a client certificate used to configure client-side SSL authentication
@@ -85,8 +86,17 @@ type UpdateClientCertificateInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html)
 type UpdateClientCertificateOutput struct {
 
+	// The identifier of the client certificate.
+	ClientCertificateId *string
+
 	// The timestamp when the client certificate was created.
 	CreatedDate *time.Time
+
+	// The description of the client certificate.
+	Description *string
+
+	// The timestamp when the client certificate will expire.
+	ExpirationDate *time.Time
 
 	// The PEM-encoded public key of the client certificate, which can be used to
 	// configure certificate authentication in the integration endpoint .
@@ -94,15 +104,6 @@ type UpdateClientCertificateOutput struct {
 
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The timestamp when the client certificate will expire.
-	ExpirationDate *time.Time
-
-	// The description of the client certificate.
-	Description *string
-
-	// The identifier of the client certificate.
-	ClientCertificateId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

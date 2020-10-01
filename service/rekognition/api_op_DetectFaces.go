@@ -71,6 +71,15 @@ func (c *Client) DetectFaces(ctx context.Context, params *DetectFacesInput, optF
 
 type DetectFacesInput struct {
 
+	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
+	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
+	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
+	// need to base64-encode image bytes passed using the Bytes field. For more
+	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
+	Image *types.Image
+
 	// An array of facial attributes you want to be returned. This can be the default
 	// list of attributes or all attributes. If you don't specify a value for
 	// Attributes or if you specify ["DEFAULT"], the API returns the following subset
@@ -80,18 +89,12 @@ type DetectFacesInput struct {
 	// logical AND operator to determine which attributes to return (in this case, all
 	// attributes).
 	Attributes []types.Attribute
-
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
-	// to call Amazon Rekognition operations, passing base64-encoded image bytes is not
-	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
-	// need to base64-encode image bytes passed using the Bytes field. For more
-	// information, see Images in the Amazon Rekognition developer guide.
-	//
-	// This member is required.
-	Image *types.Image
 }
 
 type DetectFacesOutput struct {
+
+	// Details of each face found in the image.
+	FaceDetails []*types.FaceDetail
 
 	// The value of OrientationCorrection is always null. If the input image is in
 	// .jpeg format, it might contain exchangeable image file format (Exif) metadata
@@ -104,9 +107,6 @@ type DetectFacesOutput struct {
 	// information in the image Exif metadata. The bounding box coordinates aren't
 	// translated and represent the object locations before the image is rotated.
 	OrientationCorrection types.OrientationCorrection
-
-	// Details of each face found in the image.
-	FaceDetails []*types.FaceDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

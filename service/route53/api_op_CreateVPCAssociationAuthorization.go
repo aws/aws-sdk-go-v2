@@ -68,32 +68,32 @@ func (c *Client) CreateVPCAssociationAuthorization(ctx context.Context, params *
 // when a private hosted zone and a VPC were created by using different accounts.
 type CreateVPCAssociationAuthorizationInput struct {
 
-	// A complex type that contains the VPC ID and region for the VPC that you want to
-	// authorize associating with your hosted zone.
-	//
-	// This member is required.
-	VPC *types.VPC
-
 	// The ID of the private hosted zone that you want to authorize associating a VPC
 	// with.
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	// A complex type that contains the VPC ID and region for the VPC that you want to
+	// authorize associating with your hosted zone.
+	//
+	// This member is required.
+	VPC *types.VPC
 }
 
 // A complex type that contains the response information from a
 // CreateVPCAssociationAuthorization request.
 type CreateVPCAssociationAuthorizationOutput struct {
 
-	// The VPC that you authorized associating with a hosted zone.
-	//
-	// This member is required.
-	VPC *types.VPC
-
 	// The ID of the hosted zone that you authorized associating a VPC with.
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	// The VPC that you authorized associating with a hosted zone.
+	//
+	// This member is required.
+	VPC *types.VPC
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

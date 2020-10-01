@@ -60,6 +60,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) that identifies the resource for which to list
+	// the tags. Currently, the supported resources are Forecast dataset groups,
+	// datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// The tags to add to the resource. A tag is an array of key-value pairs. The
 	// following basic restrictions apply to tags:
 	//
@@ -93,13 +100,6 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) that identifies the resource for which to list
-	// the tags. Currently, the supported resources are Forecast dataset groups,
-	// datasets, dataset import jobs, predictors, forecasts, and forecast export jobs.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type TagResourceOutput struct {

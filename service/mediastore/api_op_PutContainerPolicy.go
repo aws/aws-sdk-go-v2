@@ -61,6 +61,11 @@ func (c *Client) PutContainerPolicy(ctx context.Context, params *PutContainerPol
 
 type PutContainerPolicyInput struct {
 
+	// The name of the container.
+	//
+	// This member is required.
+	ContainerName *string
+
 	// The contents of the policy, which includes the following:
 	//
 	//     * One Version
@@ -70,11 +75,6 @@ type PutContainerPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
-
-	// The name of the container.
-	//
-	// This member is required.
-	ContainerName *string
 }
 
 type PutContainerPolicyOutput struct {

@@ -65,13 +65,13 @@ func (c *Client) ActivatePipeline(ctx context.Context, params *ActivatePipelineI
 // Contains the parameters for ActivatePipeline.
 type ActivatePipelineInput struct {
 
-	// A list of parameter values to pass to the pipeline at activation.
-	ParameterValues []*types.ParameterValue
-
 	// The ID of the pipeline.
 	//
 	// This member is required.
 	PipelineId *string
+
+	// A list of parameter values to pass to the pipeline at activation.
+	ParameterValues []*types.ParameterValue
 
 	// The date and time to resume the pipeline. By default, the pipeline resumes from
 	// the last completed execution.

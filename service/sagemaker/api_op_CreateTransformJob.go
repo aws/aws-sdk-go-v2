@@ -90,21 +90,10 @@ type CreateTransformJobInput struct {
 	// This member is required.
 	ModelName *string
 
-	// Describes the results of the transform job.
+	// Describes the input source and the way the transform job consumes it.
 	//
 	// This member is required.
-	TransformOutput *types.TransformOutput
-
-	// Associates a SageMaker job as a trial component with an experiment and trial.
-	// Specified when you call the following APIs:
-	//
-	//     * CreateProcessingJob ()
-	//
-	//     *
-	// CreateTrainingJob ()
-	//
-	//     * CreateTransformJob ()
-	ExperimentConfig *types.ExperimentConfig
+	TransformInput *types.TransformInput
 
 	// The name of the transform job. The name must be unique within an AWS Region in
 	// an AWS account.
@@ -112,16 +101,16 @@ type CreateTransformJobInput struct {
 	// This member is required.
 	TransformJobName *string
 
-	// The maximum allowed size of the payload, in MB. A payload is the data portion of
-	// a record (without metadata). The value in MaxPayloadInMB must be greater than,
-	// or equal to, the size of a single record. To estimate the size of a record in
-	// MB, divide the size of your dataset by the number of records. To ensure that the
-	// records fit within the maximum payload size, we recommend using a slightly
-	// larger value. The default value is 6 MB. For cases where the payload might be
-	// arbitrarily large and is transmitted using HTTP chunked encoding, set the value
-	// to 0. This feature works only in supported algorithms. Currently, Amazon
-	// SageMaker built-in algorithms do not support HTTP chunked encoding.
-	MaxPayloadInMB *int32
+	// Describes the results of the transform job.
+	//
+	// This member is required.
+	TransformOutput *types.TransformOutput
+
+	// Describes the resources, including ML instance types and ML instance count, to
+	// use for the transform job.
+	//
+	// This member is required.
+	TransformResources *types.TransformResources
 
 	// Specifies the number of records to include in a mini-batch for an HTTP inference
 	// request. A record is a single unit of input data that inference can be made on.
@@ -132,18 +121,6 @@ type CreateTransformJobInput struct {
 	// mini-batch as can fit within the MaxPayloadInMB limit, set BatchStrategy to
 	// MultiRecord and SplitType to Line.
 	BatchStrategy types.BatchStrategy
-
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
-
-	// Describes the resources, including ML instance types and ML instance count, to
-	// use for the transform job.
-	//
-	// This member is required.
-	TransformResources *types.TransformResources
 
 	// The data structure used to specify the data to be used for inference in a batch
 	// transform job and to associate the data that is relevant to the prediction
@@ -159,14 +136,16 @@ type CreateTransformJobInput struct {
 	// key and values entries in the map.
 	Environment map[string]*string
 
-	// Configures the timeout and maximum number of retries for processing a transform
-	// job invocation.
-	ModelClientConfig *types.ModelClientConfig
-
-	// Describes the input source and the way the transform job consumes it.
+	// Associates a SageMaker job as a trial component with an experiment and trial.
+	// Specified when you call the following APIs:
 	//
-	// This member is required.
-	TransformInput *types.TransformInput
+	//     * CreateProcessingJob ()
+	//
+	//     *
+	// CreateTrainingJob ()
+	//
+	//     * CreateTransformJob ()
+	ExperimentConfig *types.ExperimentConfig
 
 	// The maximum number of parallel requests that can be sent to each instance in a
 	// transform job. If MaxConcurrentTransforms is set to 0 or left unset, Amazon
@@ -178,6 +157,27 @@ type CreateTransformJobInput struct {
 	// For built-in algorithms, you don't need to set a value for
 	// MaxConcurrentTransforms.
 	MaxConcurrentTransforms *int32
+
+	// The maximum allowed size of the payload, in MB. A payload is the data portion of
+	// a record (without metadata). The value in MaxPayloadInMB must be greater than,
+	// or equal to, the size of a single record. To estimate the size of a record in
+	// MB, divide the size of your dataset by the number of records. To ensure that the
+	// records fit within the maximum payload size, we recommend using a slightly
+	// larger value. The default value is 6 MB. For cases where the payload might be
+	// arbitrarily large and is transmitted using HTTP chunked encoding, set the value
+	// to 0. This feature works only in supported algorithms. Currently, Amazon
+	// SageMaker built-in algorithms do not support HTTP chunked encoding.
+	MaxPayloadInMB *int32
+
+	// Configures the timeout and maximum number of retries for processing a transform
+	// job invocation.
+	ModelClientConfig *types.ModelClientConfig
+
+	// (Optional) An array of key-value pairs. For more information, see Using Cost
+	// Allocation Tags
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []*types.Tag
 }
 
 type CreateTransformJobOutput struct {

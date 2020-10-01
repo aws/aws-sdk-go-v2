@@ -81,15 +81,15 @@ type GetBucketWebsiteInput struct {
 
 type GetBucketWebsiteOutput struct {
 
-	// Specifies the redirect behavior of all requests to a website endpoint of an
-	// Amazon S3 bucket.
-	RedirectAllRequestsTo *types.RedirectAllRequestsTo
-
 	// The object key name of the website error document to use for 4XX class errors.
 	ErrorDocument *types.ErrorDocument
 
 	// The name of the index document for the website (for example index.html).
 	IndexDocument *types.IndexDocument
+
+	// Specifies the redirect behavior of all requests to a website endpoint of an
+	// Amazon S3 bucket.
+	RedirectAllRequestsTo *types.RedirectAllRequestsTo
 
 	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []*types.RoutingRule

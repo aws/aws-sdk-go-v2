@@ -57,14 +57,14 @@ func (c *Client) GetDocument(ctx context.Context, params *GetDocumentInput, optF
 
 type GetDocumentInput struct {
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// The ID of the document.
 	//
 	// This member is required.
 	DocumentId *string
+
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 
 	// Set this to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata *bool

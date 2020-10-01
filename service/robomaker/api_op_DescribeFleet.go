@@ -69,26 +69,26 @@ type DescribeFleetOutput struct {
 	// The Amazon Resource Name (ARN) of the fleet.
 	Arn *string
 
+	// The time, in milliseconds since the epoch, when the fleet was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the last deployment job.
+	LastDeploymentJob *string
+
 	// The status of the last deployment.
 	LastDeploymentStatus types.DeploymentStatus
 
 	// The time of the last deployment.
 	LastDeploymentTime *time.Time
 
-	// The list of all tags added to the specified fleet.
-	Tags map[string]*string
+	// The name of the fleet.
+	Name *string
 
 	// A list of robots.
 	Robots []*types.Robot
 
-	// The Amazon Resource Name (ARN) of the last deployment job.
-	LastDeploymentJob *string
-
-	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time
-
-	// The name of the fleet.
-	Name *string
+	// The list of all tags added to the specified fleet.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

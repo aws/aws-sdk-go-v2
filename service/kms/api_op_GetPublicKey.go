@@ -119,6 +119,21 @@ type GetPublicKeyInput struct {
 
 type GetPublicKeyOutput struct {
 
+	// The type of the of the public key that was downloaded.
+	CustomerMasterKeySpec types.CustomerMasterKeySpec
+
+	// The encryption algorithms that AWS KMS supports for this key. This information
+	// is critical. If a public key encrypts data outside of AWS KMS by using an
+	// unsupported encryption algorithm, the ciphertext cannot be decrypted. This field
+	// appears in the response only when the KeyUsage of the public key is
+	// ENCRYPT_DECRYPT.
+	EncryptionAlgorithms []types.EncryptionAlgorithmSpec
+
+	// The Amazon Resource Name (key ARN
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the asymmetric CMK from which the public key was downloaded.
+	KeyId *string
+
 	// The permitted use of the public key. Valid values are ENCRYPT_DECRYPT or
 	// SIGN_VERIFY. This information is critical. If a public key with SIGN_VERIFY key
 	// usage encrypts data outside of AWS KMS, the ciphertext cannot be decrypted.
@@ -130,24 +145,9 @@ type GetPublicKeyOutput struct {
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	PublicKey []byte
 
-	// The type of the of the public key that was downloaded.
-	CustomerMasterKeySpec types.CustomerMasterKeySpec
-
 	// The signing algorithms that AWS KMS supports for this key. This field appears in
 	// the response only when the KeyUsage of the public key is SIGN_VERIFY.
 	SigningAlgorithms []types.SigningAlgorithmSpec
-
-	// The Amazon Resource Name (key ARN
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the asymmetric CMK from which the public key was downloaded.
-	KeyId *string
-
-	// The encryption algorithms that AWS KMS supports for this key. This information
-	// is critical. If a public key encrypts data outside of AWS KMS by using an
-	// unsupported encryption algorithm, the ciphertext cannot be decrypted. This field
-	// appears in the response only when the KeyUsage of the public key is
-	// ENCRYPT_DECRYPT.
-	EncryptionAlgorithms []types.EncryptionAlgorithmSpec
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -9,42 +9,39 @@ import (
 // Contains information about an AWS account that is a member of an organization.
 type Account struct {
 
-	// The method by which the account joined the organization.
-	JoinedMethod AccountJoinedMethod
-
-	// The status of the account in the organization.
-	Status AccountStatus
-
-	// The date the account became a part of the organization.
-	JoinedTimestamp *time.Time
-
 	// The Amazon Resource Name (ARN) of the account. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string
 
-	// The friendly name of the account. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
-	Name *string
+	// The email address associated with the AWS account. The regex pattern
+	// (http://wikipedia.org/wiki/regex) for this parameter is a string of characters
+	// that represents a standard internet email address.
+	Email *string
 
 	// The unique identifier (ID) of the account. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for an account ID string requires exactly 12
 	// digits.
 	Id *string
 
-	// The email address associated with the AWS account. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for this parameter is a string of characters
-	// that represents a standard internet email address.
-	Email *string
+	// The method by which the account joined the organization.
+	JoinedMethod AccountJoinedMethod
+
+	// The date the account became a part of the organization.
+	JoinedTimestamp *time.Time
+
+	// The friendly name of the account. The regex pattern
+	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
+	// string of any of the characters in the ASCII character range.
+	Name *string
+
+	// The status of the account in the organization.
+	Status AccountStatus
 }
 
 // Contains a list of child entities, either OUs or accounts.
 type Child struct {
-
-	// The type of this child entity.
-	Type ChildType
 
 	// The unique identifier (ID) of this child entity. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a child ID string requires one of the
@@ -58,25 +55,25 @@ type Child struct {
 	// string is followed by a second "-" dash and from 8 to 32 additional lower-case
 	// letters or digits.
 	Id *string
+
+	// The type of this child entity.
+	Type ChildType
 }
 
 // Contains the status about a CreateAccount () or CreateGovCloudAccount () request
 // to create an AWS account or an AWS GovCloud (US) account in an organization.
 type CreateAccountStatus struct {
 
-	// The account name given to the account when it was created.
-	AccountName *string
-
-	// The date and time that the account was created and the request completed.
-	CompletedTimestamp *time.Time
-
 	// If the account was created successfully, the unique identifier (ID) of the new
 	// account. The regex pattern (http://wikipedia.org/wiki/regex) for an account ID
 	// string requires exactly 12 digits.
 	AccountId *string
 
-	// The date and time that the request was made for the account creation.
-	RequestedTimestamp *time.Time
+	// The account name given to the account when it was created.
+	AccountName *string
+
+	// The date and time that the account was created and the request completed.
+	CompletedTimestamp *time.Time
 
 	// If the request failed, a description of the reason for the failure.
 	//
@@ -108,45 +105,48 @@ type CreateAccountStatus struct {
 	// account in the AWS GovCloud (US) Region.
 	GovCloudAccountId *string
 
-	// The status of the request.
-	State CreateAccountState
-
 	// The unique identifier (ID) that references this request. You get this value from
 	// the response of the initial CreateAccount () request to create the account. The
 	// regex pattern (http://wikipedia.org/wiki/regex) for a create account request ID
 	// string requires "car-" followed by from 8 to 32 lower-case letters or digits.
 	Id *string
+
+	// The date and time that the request was made for the account creation.
+	RequestedTimestamp *time.Time
+
+	// The status of the request.
+	State CreateAccountState
 }
 
 // Contains information about the delegated administrator.
 type DelegatedAdministrator struct {
 
-	// The friendly name of the delegated administrator's account.
-	Name *string
+	// The Amazon Resource Name (ARN) of the delegated administrator's account.
+	Arn *string
 
 	// The date when the account was made a delegated administrator.
 	DelegationEnabledDate *time.Time
-
-	// The unique identifier (ID) of the delegated administrator's account.
-	Id *string
 
 	// The email address that is associated with the delegated administrator's AWS
 	// account.
 	Email *string
 
-	// The Amazon Resource Name (ARN) of the delegated administrator's account.
-	Arn *string
+	// The unique identifier (ID) of the delegated administrator's account.
+	Id *string
+
+	// The method by which the delegated administrator's account joined the
+	// organization.
+	JoinedMethod AccountJoinedMethod
 
 	// The date when the delegated administrator's account became a part of the
 	// organization.
 	JoinedTimestamp *time.Time
 
+	// The friendly name of the delegated administrator's account.
+	Name *string
+
 	// The status of the delegated administrator's account in the organization.
 	Status AccountStatus
-
-	// The method by which the delegated administrator's account joined the
-	// organization.
-	JoinedMethod AccountJoinedMethod
 }
 
 // Contains information about the AWS service for which the account is a delegated
@@ -166,14 +166,14 @@ type DelegatedService struct {
 // attached to the account.
 type EffectivePolicy struct {
 
-	// The policy type.
-	PolicyType EffectivePolicyType
+	// The time of the last update to this policy.
+	LastUpdatedTimestamp *time.Time
 
 	// The text content of the policy.
 	PolicyContent *string
 
-	// The time of the last update to this policy.
-	LastUpdatedTimestamp *time.Time
+	// The policy type.
+	PolicyType EffectivePolicyType
 
 	// The account ID of the policy target.
 	TargetId *string
@@ -201,11 +201,25 @@ type EnabledServicePrincipal struct {
 // they are deleted.
 type Handshake struct {
 
-	// The unique identifier (ID) of a handshake. The originating account creates the
-	// ID when it initiates the handshake. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
-	// by from 8 to 32 lower-case letters or digits.
-	Id *string
+	// The type of handshake, indicating what action occurs when the recipient accepts
+	// the handshake. The following handshake types are supported:
+	//
+	//     * INVITE: This
+	// type of handshake represents a request to join an organization. It is always
+	// sent from the master account to only non-member accounts.
+	//
+	//     *
+	// ENABLE_ALL_FEATURES: This type of handshake represents a request to enable all
+	// features in an organization. It is always sent from the master account to only
+	// invited member accounts. Created accounts do not receive this because those
+	// accounts were created by the organization's master account and approval is
+	// inferred.
+	//
+	//     * APPROVE_ALL_FEATURES: This type of handshake is sent from the
+	// Organizations service when all member accounts have approved the
+	// ENABLE_ALL_FEATURES invitation. It is sent only to the master account and
+	// signals the master that it can finalize the process to enable all features.
+	Action ActionType
 
 	// The Amazon Resource Name (ARN) of a handshake. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
@@ -213,19 +227,25 @@ type Handshake struct {
 	// in the AWS Organizations User Guide.
 	Arn *string
 
-	// Additional information that is needed to process the handshake.
-	Resources []*HandshakeResource
-
-	// The date and time that the handshake request was made.
-	RequestedTimestamp *time.Time
-
-	// Information about the two accounts that are participating in the handshake.
-	Parties []*HandshakeParty
-
 	// The date and time that the handshake expires. If the recipient of the handshake
 	// request fails to respond before the specified date and time, the handshake
 	// becomes inactive and is no longer valid.
 	ExpirationTimestamp *time.Time
+
+	// The unique identifier (ID) of a handshake. The originating account creates the
+	// ID when it initiates the handshake. The regex pattern
+	// (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-" followed
+	// by from 8 to 32 lower-case letters or digits.
+	Id *string
+
+	// Information about the two accounts that are participating in the handshake.
+	Parties []*HandshakeParty
+
+	// The date and time that the handshake request was made.
+	RequestedTimestamp *time.Time
+
+	// Additional information that is needed to process the handshake.
+	Resources []*HandshakeResource
 
 	// The current state of the handshake. Use the state to trace the flow of the
 	// handshake through the process from its creation to its acceptance. The meaning
@@ -254,26 +274,6 @@ type Handshake struct {
 	// is no longer active because the originator did not receive a response of any
 	// kind from the recipient before the expiration time (15 days).
 	State HandshakeState
-
-	// The type of handshake, indicating what action occurs when the recipient accepts
-	// the handshake. The following handshake types are supported:
-	//
-	//     * INVITE: This
-	// type of handshake represents a request to join an organization. It is always
-	// sent from the master account to only non-member accounts.
-	//
-	//     *
-	// ENABLE_ALL_FEATURES: This type of handshake represents a request to enable all
-	// features in an organization. It is always sent from the master account to only
-	// invited member accounts. Created accounts do not receive this because those
-	// accounts were created by the organization's master account and approval is
-	// inferred.
-	//
-	//     * APPROVE_ALL_FEATURES: This type of handshake is sent from the
-	// Organizations service when all member accounts have approved the
-	// ENABLE_ALL_FEATURES invitation. It is sent only to the master account and
-	// signals the master that it can finalize the process to enable all features.
-	Action ActionType
 }
 
 // Specifies the criteria that are used to select the handshakes for the operation.
@@ -309,10 +309,6 @@ type HandshakeParty struct {
 // Contains additional data that is needed to process a handshake.
 type HandshakeResource struct {
 
-	// The information that is passed to the other party in the handshake. The format
-	// of the value string must match the requirements of the specified type.
-	Value *string
-
 	// When needed, contains an additional array of HandshakeResource objects.
 	Resources []*HandshakeResource
 
@@ -338,6 +334,10 @@ type HandshakeResource struct {
 	//     * NOTES - Additional text provided by
 	// the handshake initiator and intended for the recipient to read.
 	Type HandshakeResourceType
+
+	// The information that is passed to the other party in the handshake. The format
+	// of the value string must match the requirements of the specified type.
+	Value *string
 }
 
 // Contains details about an organization. An organization is a collection of
@@ -346,12 +346,11 @@ type HandshakeResource struct {
 // policies .
 type Organization struct {
 
-	// The Amazon Resource Name (ARN) of the account that is designated as the master
-	// account for the organization. For more information about ARNs in Organizations,
-	// see ARN Formats Supported by Organizations
+	// The Amazon Resource Name (ARN) of an organization. For more information about
+	// ARNs in Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
-	MasterAccountArn *string
+	Arn *string
 
 	// Do not use. This field is deprecated and doesn't provide complete information
 	// about the policies in your organization. To determine the policies that are
@@ -368,6 +367,18 @@ type Organization struct {
 	// in the AWS Organizations User Guide.
 	FeatureSet OrganizationFeatureSet
 
+	// The unique identifier (ID) of an organization. The regex pattern
+	// (http://wikipedia.org/wiki/regex) for an organization ID string requires "o-"
+	// followed by from 10 to 32 lower-case letters or digits.
+	Id *string
+
+	// The Amazon Resource Name (ARN) of the account that is designated as the master
+	// account for the organization. For more information about ARNs in Organizations,
+	// see ARN Formats Supported by Organizations
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// in the AWS Organizations User Guide.
+	MasterAccountArn *string
+
 	// The email address that is associated with the AWS account that is designated as
 	// the master account for the organization.
 	MasterAccountEmail *string
@@ -376,17 +387,6 @@ type Organization struct {
 	// pattern (http://wikipedia.org/wiki/regex) for an account ID string requires
 	// exactly 12 digits.
 	MasterAccountId *string
-
-	// The Amazon Resource Name (ARN) of an organization. For more information about
-	// ARNs in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
-	Arn *string
-
-	// The unique identifier (ID) of an organization. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for an organization ID string requires "o-"
-	// followed by from 10 to 32 lower-case letters or digits.
-	Id *string
 }
 
 // Contains details about an organizational unit (OU). An OU is a container of AWS
@@ -394,18 +394,18 @@ type Organization struct {
 // apply to all accounts contained in that OU and in any child OUs.
 type OrganizationalUnit struct {
 
+	// The Amazon Resource Name (ARN) of this OU. For more information about ARNs in
+	// Organizations, see ARN Formats Supported by Organizations
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// in the AWS Organizations User Guide.
+	Arn *string
+
 	// The unique identifier (ID) associated with this OU. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for an organizational unit ID string requires
 	// "ou-" followed by from 4 to 32 lower-case letters or digits (the ID of the root
 	// that contains the OU). This string is followed by a second "-" dash and from 8
 	// to 32 additional lower-case letters or digits.
 	Id *string
-
-	// The Amazon Resource Name (ARN) of this OU. For more information about ARNs in
-	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
-	Arn *string
 
 	// The friendly name of this OU. The regex pattern
 	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
@@ -416,9 +416,6 @@ type OrganizationalUnit struct {
 // Contains information about either a root or an organizational unit (OU) that can
 // contain OUs or accounts in an organization.
 type Parent struct {
-
-	// The type of the parent entity.
-	Type ParentType
 
 	// The unique identifier (ID) of the parent entity. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a parent ID string requires one of the
@@ -432,6 +429,9 @@ type Parent struct {
 	// of the root that the OU is in). This string is followed by a second "-" dash and
 	// from 8 to 32 additional lower-case letters or digits.
 	Id *string
+
+	// The type of the parent entity.
+	Type ParentType
 }
 
 // Contains rules to be applied to the affected accounts. Policies can be attached
@@ -450,39 +450,47 @@ type Policy struct {
 // the content of a policy, see DescribePolicy ().
 type PolicySummary struct {
 
-	// The type of policy.
-	Type PolicyType
-
-	// The friendly name of the policy. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
-	Name *string
+	// The Amazon Resource Name (ARN) of the policy. For more information about ARNs in
+	// Organizations, see ARN Formats Supported by Organizations
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// in the AWS Organizations User Guide.
+	Arn *string
 
 	// A boolean value that indicates whether the specified policy is an AWS managed
 	// policy. If true, then you can attach the policy to roots, OUs, or accounts, but
 	// you cannot edit it.
 	AwsManaged *bool
 
+	// The description of the policy.
+	Description *string
+
 	// The unique identifier (ID) of the policy. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-" followed
 	// by from 8 to 128 lower-case letters or digits.
 	Id *string
 
-	// The description of the policy.
-	Description *string
+	// The friendly name of the policy. The regex pattern
+	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
+	// string of any of the characters in the ASCII character range.
+	Name *string
 
-	// The Amazon Resource Name (ARN) of the policy. For more information about ARNs in
-	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
-	Arn *string
+	// The type of policy.
+	Type PolicyType
 }
 
 // Contains information about a root, OU, or account that a policy is attached to.
 type PolicyTargetSummary struct {
 
-	// The type of the policy target.
-	Type TargetType
+	// The Amazon Resource Name (ARN) of the policy target. For more information about
+	// ARNs in Organizations, see ARN Formats Supported by Organizations
+	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
+	// in the AWS Organizations User Guide.
+	Arn *string
+
+	// The friendly name of the policy target. The regex pattern
+	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
+	// string of any of the characters in the ASCII character range.
+	Name *string
 
 	// The unique identifier (ID) of the policy target. The regex pattern
 	// (http://wikipedia.org/wiki/regex) for a target ID string requires one of the
@@ -500,16 +508,8 @@ type PolicyTargetSummary struct {
 	// additional lower-case letters or digits.
 	TargetId *string
 
-	// The friendly name of the policy target. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the policy target. For more information about
-	// ARNs in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
-	Arn *string
+	// The type of the policy target.
+	Type TargetType
 }
 
 // Contains information about a policy type and its status in the associated root.
@@ -531,16 +531,21 @@ type PolicyTypeSummary struct {
 // policy types enabled for use in that root.
 type Root struct {
 
-	// The friendly name of the root. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the root. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
 	// in the AWS Organizations User Guide.
 	Arn *string
+
+	// The unique identifier (ID) for the root. The regex pattern
+	// (http://wikipedia.org/wiki/regex) for a root ID string requires "r-" followed by
+	// from 4 to 32 lower-case letters or digits.
+	Id *string
+
+	// The friendly name of the root. The regex pattern
+	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
+	// string of any of the characters in the ASCII character range.
+	Name *string
 
 	// The types of policies that are currently enabled for the root and therefore can
 	// be attached to the root or to its OUs or accounts. Even if a policy type is
@@ -549,11 +554,6 @@ type Root struct {
 	// Use DescribeOrganization () to see the availability of the policy types in that
 	// organization.
 	PolicyTypes []*PolicyTypeSummary
-
-	// The unique identifier (ID) for the root. The regex pattern
-	// (http://wikipedia.org/wiki/regex) for a root ID string requires "r-" followed by
-	// from 4 to 32 lower-case letters or digits.
-	Id *string
 }
 
 // A custom key-value pair associated with a resource such as an account within

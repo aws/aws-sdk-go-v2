@@ -67,18 +67,21 @@ type DescribeEventSourceInput struct {
 
 type DescribeEventSourceOutput struct {
 
+	// The ARN of the partner event source.
+	Arn *string
+
 	// The name of the SaaS partner that created the event source.
 	CreatedBy *string
 
-	// The name of the partner event source.
-	Name *string
+	// The date and time that the event source was created.
+	CreationTime *time.Time
 
 	// The date and time that the event source will expire if you do not create a
 	// matching event bus.
 	ExpirationTime *time.Time
 
-	// The ARN of the partner event source.
-	Arn *string
+	// The name of the partner event source.
+	Name *string
 
 	// The state of the event source. If it is ACTIVE, you have already created a
 	// matching event bus for this event source, and that event bus is active. If it is
@@ -86,9 +89,6 @@ type DescribeEventSourceOutput struct {
 	// is deactivated. If it is DELETED, you have created a matching event bus, but the
 	// event source has since been deleted.
 	State types.EventSourceState
-
-	// The date and time that the event source was created.
-	CreationTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

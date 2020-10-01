@@ -66,20 +66,20 @@ type GetHostInput struct {
 
 type GetHostOutput struct {
 
-	// The provider type of the requested host, such as GitHub Enterprise Server.
-	ProviderType types.ProviderType
-
-	// The VPC configuration of the requested host.
-	VpcConfiguration *types.VpcConfiguration
+	// The name of the requested host.
+	Name *string
 
 	// The endpoint of the infrastructure represented by the requested host.
 	ProviderEndpoint *string
 
+	// The provider type of the requested host, such as GitHub Enterprise Server.
+	ProviderType types.ProviderType
+
 	// The status of the requested host.
 	Status *string
 
-	// The name of the requested host.
-	Name *string
+	// The VPC configuration of the requested host.
+	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

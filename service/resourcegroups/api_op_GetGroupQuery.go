@@ -56,11 +56,11 @@ func (c *Client) GetGroupQuery(ctx context.Context, params *GetGroupQueryInput, 
 
 type GetGroupQueryInput struct {
 
-	// Don't use this parameter. Use Group instead.
-	GroupName *string
-
 	// The name or the ARN of the resource group to query.
 	Group *string
+
+	// Don't use this parameter. Use Group instead.
+	GroupName *string
 }
 
 type GetGroupQueryOutput struct {

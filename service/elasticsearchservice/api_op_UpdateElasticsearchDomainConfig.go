@@ -60,42 +60,13 @@ func (c *Client) UpdateElasticsearchDomainConfig(ctx context.Context, params *Up
 // Specifies the type and number of instances in the domain cluster.
 type UpdateElasticsearchDomainConfigInput struct {
 
-	// Specifies advanced security options.
-	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
-
-	// IAM access policy as a JSON-formatted string.
-	AccessPolicies *string
-
-	// Options to specify configuration that will be applied to the domain endpoint.
-	DomainEndpointOptions *types.DomainEndpointOptions
-
-	// Options to specify the subnets and security groups for VPC endpoint. For more
-	// information, see Creating a VPC
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
-	// in VPC Endpoints for Amazon Elasticsearch Service Domains
-	VPCOptions *types.VPCOptions
-
-	// The type and number of instances to instantiate for the domain cluster.
-	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
-
 	// The name of the Elasticsearch domain that you are updating.
 	//
 	// This member is required.
 	DomainName *string
 
-	// Option to set the time, in UTC format, for the daily automated snapshot. Default
-	// value is 0 hours.
-	SnapshotOptions *types.SnapshotOptions
-
-	// Options to specify the Cognito user and identity pools for Kibana
-	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
-	CognitoOptions *types.CognitoOptions
-
-	// Map of LogType and LogPublishingOption, each containing options to publish a
-	// given type of Elasticsearch log.
-	LogPublishingOptions map[string]*types.LogPublishingOption
+	// IAM access policy as a JSON-formatted string.
+	AccessPolicies *string
 
 	// Modifies the advanced option to allow references to indices in an HTTP request
 	// body. Must be false when configuring access to individual sub-resources. By
@@ -104,8 +75,37 @@ type UpdateElasticsearchDomainConfigInput struct {
 	// for more information.
 	AdvancedOptions map[string]*string
 
+	// Specifies advanced security options.
+	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
+
+	// Options to specify the Cognito user and identity pools for Kibana
+	// authentication. For more information, see Amazon Cognito Authentication for
+	// Kibana
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *types.CognitoOptions
+
+	// Options to specify configuration that will be applied to the domain endpoint.
+	DomainEndpointOptions *types.DomainEndpointOptions
+
 	// Specify the type and size of the EBS volume that you want to use.
 	EBSOptions *types.EBSOptions
+
+	// The type and number of instances to instantiate for the domain cluster.
+	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
+
+	// Map of LogType and LogPublishingOption, each containing options to publish a
+	// given type of Elasticsearch log.
+	LogPublishingOptions map[string]*types.LogPublishingOption
+
+	// Option to set the time, in UTC format, for the daily automated snapshot. Default
+	// value is 0 hours.
+	SnapshotOptions *types.SnapshotOptions
+
+	// Options to specify the subnets and security groups for VPC endpoint. For more
+	// information, see Creating a VPC
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html#es-creating-vpc)
+	// in VPC Endpoints for Amazon Elasticsearch Service Domains
+	VPCOptions *types.VPCOptions
 }
 
 // The result of an UpdateElasticsearchDomain request. Contains the status of the

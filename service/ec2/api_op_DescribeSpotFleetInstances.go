@@ -58,6 +58,11 @@ func (c *Client) DescribeSpotFleetInstances(ctx context.Context, params *Describ
 // Contains the parameters for DescribeSpotFleetInstances.
 type DescribeSpotFleetInstancesInput struct {
 
+	// The ID of the Spot Fleet request.
+	//
+	// This member is required.
+	SpotFleetRequestId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -71,15 +76,14 @@ type DescribeSpotFleetInstancesInput struct {
 
 	// The token for the next set of results.
 	NextToken *string
-
-	// The ID of the Spot Fleet request.
-	//
-	// This member is required.
-	SpotFleetRequestId *string
 }
 
 // Contains the output of DescribeSpotFleetInstances.
 type DescribeSpotFleetInstancesOutput struct {
+
+	// The running instances. This list is refreshed periodically and might be out of
+	// date.
+	ActiveInstances []*types.ActiveInstance
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
@@ -87,10 +91,6 @@ type DescribeSpotFleetInstancesOutput struct {
 
 	// The ID of the Spot Fleet request.
 	SpotFleetRequestId *string
-
-	// The running instances. This list is refreshed periodically and might be out of
-	// date.
-	ActiveInstances []*types.ActiveInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

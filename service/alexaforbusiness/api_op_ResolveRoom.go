@@ -71,11 +71,11 @@ type ResolveRoomInput struct {
 
 type ResolveRoomOutput struct {
 
-	// The name of the room from which the skill request was invoked.
-	RoomName *string
-
 	// The ARN of the room from which the skill request was invoked.
 	RoomArn *string
+
+	// The name of the room from which the skill request was invoked.
+	RoomName *string
 
 	// Response to get the room profile request. Required.
 	RoomSkillParameters []*types.RoomSkillParameter

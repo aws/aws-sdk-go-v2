@@ -58,11 +58,6 @@ func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, 
 
 type UpdateWebhookInput struct {
 
-	// A boolean value that specifies whether the associated GitHub repository's secret
-	// token should be updated. If you use Bitbucket for your repository, rotateSecret
-	// is ignored.
-	RotateSecret *bool
-
 	// The name of the AWS CodeBuild project.
 	//
 	// This member is required.
@@ -81,6 +76,11 @@ type UpdateWebhookInput struct {
 	// can trigger a build. A filter group must contain at least one
 	// EVENTWebhookFilter.
 	FilterGroups [][]*types.WebhookFilter
+
+	// A boolean value that specifies whether the associated GitHub repository's secret
+	// token should be updated. If you use Bitbucket for your repository, rotateSecret
+	// is ignored.
+	RotateSecret *bool
 }
 
 type UpdateWebhookOutput struct {

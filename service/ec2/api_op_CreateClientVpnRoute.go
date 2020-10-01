@@ -62,10 +62,10 @@ func (c *Client) CreateClientVpnRoute(ctx context.Context, params *CreateClientV
 
 type CreateClientVpnRouteInput struct {
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
+	// The ID of the Client VPN endpoint to which to add the route.
+	//
+	// This member is required.
+	ClientVpnEndpointId *string
 
 	// The IPv4 address range, in CIDR notation, of the route destination. For
 	// example:
@@ -91,13 +91,13 @@ type CreateClientVpnRouteInput struct {
 	// This member is required.
 	TargetVpcSubnetId *string
 
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
+
 	// A brief description of the route.
 	Description *string
-
-	// The ID of the Client VPN endpoint to which to add the route.
-	//
-	// This member is required.
-	ClientVpnEndpointId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

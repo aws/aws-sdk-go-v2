@@ -57,11 +57,6 @@ func (c *Client) CreateEnvironmentMembership(ctx context.Context, params *Create
 
 type CreateEnvironmentMembershipInput struct {
 
-	// The Amazon Resource Name (ARN) of the environment member you want to add.
-	//
-	// This member is required.
-	UserArn *string
-
 	// The ID of the environment that contains the environment member you want to add.
 	//
 	// This member is required.
@@ -78,6 +73,11 @@ type CreateEnvironmentMembershipInput struct {
 	//
 	// This member is required.
 	Permissions types.MemberPermissions
+
+	// The Amazon Resource Name (ARN) of the environment member you want to add.
+	//
+	// This member is required.
+	UserArn *string
 }
 
 type CreateEnvironmentMembershipOutput struct {

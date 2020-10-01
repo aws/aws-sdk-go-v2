@@ -59,19 +59,25 @@ func (c *Client) GetBackupSelection(ctx context.Context, params *GetBackupSelect
 
 type GetBackupSelectionInput struct {
 
+	// Uniquely identifies a backup plan.
+	//
+	// This member is required.
+	BackupPlanId *string
+
 	// Uniquely identifies the body of a request to assign a set of resources to a
 	// backup plan.
 	//
 	// This member is required.
 	SelectionId *string
-
-	// Uniquely identifies a backup plan.
-	//
-	// This member is required.
-	BackupPlanId *string
 }
 
 type GetBackupSelectionOutput struct {
+
+	// Uniquely identifies a backup plan.
+	BackupPlanId *string
+
+	// Specifies the body of a request to assign a set of resources to a backup plan.
+	BackupSelection *types.BackupSelection
 
 	// The date and time a backup selection is created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
@@ -79,19 +85,13 @@ type GetBackupSelectionOutput struct {
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
-	// Uniquely identifies the body of a request to assign a set of resources to a
-	// backup plan.
-	SelectionId *string
-
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of executing the operation twice.
 	CreatorRequestId *string
 
-	// Uniquely identifies a backup plan.
-	BackupPlanId *string
-
-	// Specifies the body of a request to assign a set of resources to a backup plan.
-	BackupSelection *types.BackupSelection
+	// Uniquely identifies the body of a request to assign a set of resources to a
+	// backup plan.
+	SelectionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

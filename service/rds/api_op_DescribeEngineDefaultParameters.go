@@ -64,6 +64,9 @@ type DescribeEngineDefaultParametersInput struct {
 	// This member is required.
 	DBParameterGroupFamily *string
 
+	// This parameter isn't currently supported.
+	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultParameters request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
@@ -75,9 +78,6 @@ type DescribeEngineDefaultParametersInput struct {
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
-
-	// This parameter isn't currently supported.
-	Filters []*types.Filter
 }
 
 type DescribeEngineDefaultParametersOutput struct {

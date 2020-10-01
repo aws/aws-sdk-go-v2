@@ -59,10 +59,6 @@ func (c *Client) GetFunction(ctx context.Context, params *GetFunctionInput, optF
 
 type GetFunctionInput struct {
 
-	// Specify a version or alias to get details about a published version of the
-	// function.
-	Qualifier *string
-
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -80,12 +76,13 @@ type GetFunctionInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// Specify a version or alias to get details about a published version of the
+	// function.
+	Qualifier *string
 }
 
 type GetFunctionOutput struct {
-
-	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html).
-	Tags map[string]*string
 
 	// The deployment package of the function or version.
 	Code *types.FunctionCodeLocation
@@ -96,6 +93,9 @@ type GetFunctionOutput struct {
 
 	// The configuration of the function or version.
 	Configuration *types.FunctionConfiguration
+
+	// The function's tags (https://docs.aws.amazon.com/lambda/latest/dg/tagging.html).
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

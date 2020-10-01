@@ -69,18 +69,18 @@ type ImportWorkspaceImageInput struct {
 	// This member is required.
 	ImageDescription *string
 
-	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
-	Tags []*types.Tag
+	// The name of the WorkSpace image.
+	//
+	// This member is required.
+	ImageName *string
 
 	// The ingestion process to be used when importing the image.
 	//
 	// This member is required.
 	IngestionProcess types.WorkspaceImageIngestionProcess
 
-	// The name of the WorkSpace image.
-	//
-	// This member is required.
-	ImageName *string
+	// The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+	Tags []*types.Tag
 }
 
 type ImportWorkspaceImageOutput struct {

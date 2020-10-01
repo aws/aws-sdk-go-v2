@@ -157,17 +157,17 @@ type CreateQueryLoggingConfigInput struct {
 
 type CreateQueryLoggingConfigOutput struct {
 
+	// The unique URL representing the new query logging configuration.
+	//
+	// This member is required.
+	Location *string
+
 	// A complex type that contains the ID for a query logging configuration, the ID of
 	// the hosted zone that you want to log queries for, and the ARN for the log group
 	// that you want Amazon Route 53 to send query logs to.
 	//
 	// This member is required.
 	QueryLoggingConfig *types.QueryLoggingConfig
-
-	// The unique URL representing the new query logging configuration.
-	//
-	// This member is required.
-	Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

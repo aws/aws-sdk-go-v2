@@ -62,9 +62,11 @@ func (c *Client) DeleteTable(ctx context.Context, params *DeleteTableInput, optF
 
 type DeleteTableInput struct {
 
-	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
-	// account ID is used by default.
-	CatalogId *string
+	// The name of the catalog database in which the table resides. For Hive
+	// compatibility, this name is entirely lowercase.
+	//
+	// This member is required.
+	DatabaseName *string
 
 	// The name of the table to be deleted. For Hive compatibility, this name is
 	// entirely lowercase.
@@ -72,11 +74,9 @@ type DeleteTableInput struct {
 	// This member is required.
 	Name *string
 
-	// The name of the catalog database in which the table resides. For Hive
-	// compatibility, this name is entirely lowercase.
-	//
-	// This member is required.
-	DatabaseName *string
+	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
+	// account ID is used by default.
+	CatalogId *string
 }
 
 type DeleteTableOutput struct {

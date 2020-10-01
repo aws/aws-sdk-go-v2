@@ -71,9 +71,6 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 
 type GetDeployablePatchSnapshotForInstanceOutput struct {
 
-	// The user-defined snapshot ID.
-	SnapshotId *string
-
 	// The ID of the instance.
 	InstanceId *string
 
@@ -83,6 +80,9 @@ type GetDeployablePatchSnapshotForInstanceOutput struct {
 
 	// A pre-signed Amazon S3 URL that can be used to download the patch snapshot.
 	SnapshotDownloadUrl *string
+
+	// The user-defined snapshot ID.
+	SnapshotId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

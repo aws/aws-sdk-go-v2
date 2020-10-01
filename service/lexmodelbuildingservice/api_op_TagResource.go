@@ -58,16 +58,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// A list of tag keys to add to the resource. If a tag key already exists, the
 	// existing value is replaced with the new value.
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type TagResourceOutput struct {

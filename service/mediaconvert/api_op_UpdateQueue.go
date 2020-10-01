@@ -57,13 +57,13 @@ func (c *Client) UpdateQueue(ctx context.Context, params *UpdateQueueInput, optF
 
 type UpdateQueueInput struct {
 
+	// The name of the queue that you are modifying.
+	//
+	// This member is required.
+	Name *string
+
 	// The new description for the queue, if you are changing it.
 	Description *string
-
-	// Pause or activate a queue by changing its status between ACTIVE and PAUSED. If
-	// you pause a queue, jobs in that queue won't begin. Jobs that are running when
-	// you pause the queue continue to run until they finish or result in an error.
-	Status types.QueueStatus
 
 	// The new details of your pricing plan for your reserved queue. When you set up a
 	// new pricing plan to replace an expired one, you enter into another 12-month
@@ -72,10 +72,10 @@ type UpdateQueueInput struct {
 	// After you make these commitments, you can't cancel them.
 	ReservationPlanSettings *types.ReservationPlanSettings
 
-	// The name of the queue that you are modifying.
-	//
-	// This member is required.
-	Name *string
+	// Pause or activate a queue by changing its status between ACTIVE and PAUSED. If
+	// you pause a queue, jobs in that queue won't begin. Jobs that are running when
+	// you pause the queue continue to run until they finish or result in an error.
+	Status types.QueueStatus
 }
 
 type UpdateQueueOutput struct {

@@ -75,11 +75,6 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 // The request object for ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
-	// Opaque pagination token returned from a previous ListTagsForResource operation
-	// (String). If a token present, the action continues the list from where the
-	// returning call left off.
-	NextToken *string
-
 	// The ARN of the Amazon FSx resource that will have its tags listed.
 	//
 	// This member is required.
@@ -90,6 +85,11 @@ type ListTagsForResourceInput struct {
 	// minimum of the MaxResults parameter specified in the request and the service's
 	// internal maximum number of items per page.
 	MaxResults *int32
+
+	// Opaque pagination token returned from a previous ListTagsForResource operation
+	// (String). If a token present, the action continues the list from where the
+	// returning call left off.
+	NextToken *string
 }
 
 // The response object for ListTagsForResource operation.

@@ -69,14 +69,6 @@ func (c *Client) DeleteObjectTagging(ctx context.Context, params *DeleteObjectTa
 
 type DeleteObjectTaggingInput struct {
 
-	// The versionId of the object that the tag-set will be removed from.
-	VersionId *string
-
-	// Name of the tag.
-	//
-	// This member is required.
-	Key *string
-
 	// The bucket name containing the objects from which to remove the tags. When using
 	// this API with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
@@ -89,6 +81,14 @@ type DeleteObjectTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// Name of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The versionId of the object that the tag-set will be removed from.
+	VersionId *string
 }
 
 type DeleteObjectTaggingOutput struct {

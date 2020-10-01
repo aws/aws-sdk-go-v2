@@ -65,11 +65,11 @@ type GetImagePipelineInput struct {
 
 type GetImagePipelineOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The image pipeline object.
 	ImagePipeline *types.ImagePipeline
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

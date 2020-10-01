@@ -79,11 +79,11 @@ type GetCachePolicyInput struct {
 
 type GetCachePolicyOutput struct {
 
-	// The current version of the cache policy.
-	ETag *string
-
 	// The cache policy.
 	CachePolicy *types.CachePolicy
+
+	// The current version of the cache policy.
+	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

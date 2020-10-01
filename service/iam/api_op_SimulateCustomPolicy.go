@@ -68,11 +68,6 @@ func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCusto
 
 type SimulateCustomPolicyInput struct {
 
-	// A list of context keys and corresponding values for the simulation to use.
-	// Whenever a context key is evaluated in one of the simulated IAM permissions
-	// policies, the corresponding value is supplied.
-	ContextEntries []*types.ContextEntry
-
 	// A list of names of API operations to evaluate in the simulation. Each operation
 	// is evaluated against each resource. Each operation must include the service
 	// identifier, such as iam:CreateUser. This operation does not support using
@@ -81,19 +76,96 @@ type SimulateCustomPolicyInput struct {
 	// This member is required.
 	ActionNames []*string
 
-	// An ARN representing the AWS account ID that specifies the owner of any simulated
-	// resource that does not identify its owner in the resource ARN. Examples of
-	// resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it
-	// is also used as the account owner of any ResourcePolicy included in the
-	// simulation. If the ResourceOwner parameter is not specified, then the owner of
-	// the resources and the resource policy defaults to the account of the identity
-	// provided in CallerArn. This parameter is required only if you specify a
-	// resource-based policy and account that owns the resource is different from the
-	// account that owns the simulated calling user CallerArn. The ARN for an account
-	// uses the following syntax: arn:aws:iam::AWS-account-ID:root. For example, to
-	// represent the account with the 112233445566 ID, use the following ARN:
-	// arn:aws:iam::112233445566-ID:root.
-	ResourceOwner *string
+	// A list of policy documents to include in the simulation. Each document is
+	// specified as a string containing the complete, valid JSON text of an IAM policy.
+	// Do not include any resource-based policies in this parameter. Any resource-based
+	// policy must be submitted with the ResourcePolicy parameter. The policies cannot
+	// be "scope-down" policies, such as you could include in a call to
+	// GetFederationToken
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html)
+	// or one of the AssumeRole
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html) API
+	// operations. In other words, do not use policies designed to restrict what a user
+	// can do while using the temporary credentials. The regex pattern
+	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
+	// characters consisting of the following:
+	//
+	//     * Any printable ASCII character
+	// ranging from the space character (\u0020) through the end of the ASCII character
+	// range
+	//
+	//     * The printable characters in the Basic Latin and Latin-1 Supplement
+	// character set (through \u00FF)
+	//
+	//     * The special characters tab (\u0009), line
+	// feed (\u000A), and carriage return (\u000D)
+	//
+	// This member is required.
+	PolicyInputList []*string
+
+	// The ARN of the IAM user that you want to use as the simulated caller of the API
+	// operations. CallerArn is required if you include a ResourcePolicy so that the
+	// policy's Principal element has a value to use in evaluating the policy. You can
+	// specify only the ARN of an IAM user. You cannot specify the ARN of an assumed
+	// role, federated user, or a service principal.
+	CallerArn *string
+
+	// A list of context keys and corresponding values for the simulation to use.
+	// Whenever a context key is evaluated in one of the simulated IAM permissions
+	// policies, the corresponding value is supplied.
+	ContextEntries []*types.ContextEntry
+
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
+	// Use this only when paginating results to indicate the maximum number of items
+	// you want in the response. If additional items exist beyond the maximum you
+	// specify, the IsTruncated response element is true. If you do not include this
+	// parameter, the number of items defaults to 100. Note that IAM might return fewer
+	// results, even when there are more results available. In that case, the
+	// IsTruncated response element returns true, and Marker contains a value to
+	// include in the subsequent call that tells the service where to continue from.
+	MaxItems *int32
+
+	// The IAM permissions boundary policy to simulate. The permissions boundary sets
+	// the maximum permissions that an IAM entity can have. You can input only one
+	// permissions boundary when you pass a policy to this operation. For more
+	// information about permissions boundaries, see Permissions Boundaries for IAM
+	// Entities
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
+	// in the IAM User Guide. The policy input is specified as a string that contains
+	// the complete, valid JSON text of a permissions boundary policy. The regex
+	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
+	// string of characters consisting of the following:
+	//
+	//     * Any printable ASCII
+	// character ranging from the space character (\u0020) through the end of the ASCII
+	// character range
+	//
+	//     * The printable characters in the Basic Latin and Latin-1
+	// Supplement character set (through \u00FF)
+	//
+	//     * The special characters tab
+	// (\u0009), line feed (\u000A), and carriage return (\u000D)
+	PermissionsBoundaryPolicyInputList []*string
+
+	// A list of ARNs of AWS resources to include in the simulation. If this parameter
+	// is not provided, then the value defaults to * (all resources). Each API in the
+	// ActionNames parameter is evaluated for each resource in this list. The
+	// simulation determines the access result (allowed or denied) of each combination
+	// and reports it in the response. The simulation does not automatically retrieve
+	// policies for the specified resources. If you want to include a resource policy
+	// in the simulation, then you must include the policy as a string in the
+	// ResourcePolicy parameter. If you include a ResourcePolicy, then it must be
+	// applicable to all of the resources included in the simulation or you receive an
+	// invalid input error. For more information about ARNs, see Amazon Resource Names
+	// (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	ResourceArns []*string
 
 	// Specifies the type of simulation to run. Different API operations that support
 	// resource-based policies require different combinations of resources. By
@@ -130,14 +202,19 @@ type SimulateCustomPolicyInput struct {
 	// security-group, network-interface, subnet, volume
 	ResourceHandlingOption *string
 
-	// Use this only when paginating results to indicate the maximum number of items
-	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true. If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true, and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
-	MaxItems *int32
+	// An ARN representing the AWS account ID that specifies the owner of any simulated
+	// resource that does not identify its owner in the resource ARN. Examples of
+	// resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it
+	// is also used as the account owner of any ResourcePolicy included in the
+	// simulation. If the ResourceOwner parameter is not specified, then the owner of
+	// the resources and the resource policy defaults to the account of the identity
+	// provided in CallerArn. This parameter is required only if you specify a
+	// resource-based policy and account that owns the resource is different from the
+	// account that owns the simulated calling user CallerArn. The ARN for an account
+	// uses the following syntax: arn:aws:iam::AWS-account-ID:root. For example, to
+	// represent the account with the 112233445566 ID, use the following ARN:
+	// arn:aws:iam::112233445566-ID:root.
+	ResourceOwner *string
 
 	// A resource-based policy to include in the simulation provided as a string. Each
 	// resource in the simulation is treated as if it had this policy attached. You can
@@ -155,88 +232,14 @@ type SimulateCustomPolicyInput struct {
 	//     * The special characters tab (\u0009), line
 	// feed (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
-
-	// A list of policy documents to include in the simulation. Each document is
-	// specified as a string containing the complete, valid JSON text of an IAM policy.
-	// Do not include any resource-based policies in this parameter. Any resource-based
-	// policy must be submitted with the ResourcePolicy parameter. The policies cannot
-	// be "scope-down" policies, such as you could include in a call to
-	// GetFederationToken
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetFederationToken.html)
-	// or one of the AssumeRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_AssumeRole.html) API
-	// operations. In other words, do not use policies designed to restrict what a user
-	// can do while using the temporary credentials. The regex pattern
-	// (http://wikipedia.org/wiki/regex) used to validate this parameter is a string of
-	// characters consisting of the following:
-	//
-	//     * Any printable ASCII character
-	// ranging from the space character (\u0020) through the end of the ASCII character
-	// range
-	//
-	//     * The printable characters in the Basic Latin and Latin-1 Supplement
-	// character set (through \u00FF)
-	//
-	//     * The special characters tab (\u0009), line
-	// feed (\u000A), and carriage return (\u000D)
-	//
-	// This member is required.
-	PolicyInputList []*string
-
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
-
-	// The ARN of the IAM user that you want to use as the simulated caller of the API
-	// operations. CallerArn is required if you include a ResourcePolicy so that the
-	// policy's Principal element has a value to use in evaluating the policy. You can
-	// specify only the ARN of an IAM user. You cannot specify the ARN of an assumed
-	// role, federated user, or a service principal.
-	CallerArn *string
-
-	// A list of ARNs of AWS resources to include in the simulation. If this parameter
-	// is not provided, then the value defaults to * (all resources). Each API in the
-	// ActionNames parameter is evaluated for each resource in this list. The
-	// simulation determines the access result (allowed or denied) of each combination
-	// and reports it in the response. The simulation does not automatically retrieve
-	// policies for the specified resources. If you want to include a resource policy
-	// in the simulation, then you must include the policy as a string in the
-	// ResourcePolicy parameter. If you include a ResourcePolicy, then it must be
-	// applicable to all of the resources included in the simulation or you receive an
-	// invalid input error. For more information about ARNs, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
-	ResourceArns []*string
-
-	// The IAM permissions boundary policy to simulate. The permissions boundary sets
-	// the maximum permissions that an IAM entity can have. You can input only one
-	// permissions boundary when you pass a policy to this operation. For more
-	// information about permissions boundaries, see Permissions Boundaries for IAM
-	// Entities
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
-	// in the IAM User Guide. The policy input is specified as a string that contains
-	// the complete, valid JSON text of a permissions boundary policy. The regex
-	// pattern (http://wikipedia.org/wiki/regex) used to validate this parameter is a
-	// string of characters consisting of the following:
-	//
-	//     * Any printable ASCII
-	// character ranging from the space character (\u0020) through the end of the ASCII
-	// character range
-	//
-	//     * The printable characters in the Basic Latin and Latin-1
-	// Supplement character set (through \u00FF)
-	//
-	//     * The special characters tab
-	// (\u0009), line feed (\u000A), and carriage return (\u000D)
-	PermissionsBoundaryPolicyInputList []*string
 }
 
 // Contains the response to a successful SimulatePrincipalPolicy () or
 // SimulateCustomPolicy () request.
 type SimulateCustomPolicyOutput struct {
+
+	// The results of the simulation.
+	EvaluationResults []*types.EvaluationResult
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -249,9 +252,6 @@ type SimulateCustomPolicyOutput struct {
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
-
-	// The results of the simulation.
-	EvaluationResults []*types.EvaluationResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

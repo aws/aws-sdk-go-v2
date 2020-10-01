@@ -66,6 +66,11 @@ type DescribeActivityInput struct {
 
 type DescribeActivityOutput struct {
 
+	// The Amazon Resource Name (ARN) that identifies the activity.
+	//
+	// This member is required.
+	ActivityArn *string
+
 	// The date the activity is created.
 	//
 	// This member is required.
@@ -91,11 +96,6 @@ type DescribeActivityOutput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The Amazon Resource Name (ARN) that identifies the activity.
-	//
-	// This member is required.
-	ActivityArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,20 +61,20 @@ func (c *Client) SendAlexaOfferToMaster(ctx context.Context, params *SendAlexaOf
 
 type SendAlexaOfferToMasterInput struct {
 
-	// The unique identifier for the sender client.
+	// The ARN of the signaling channel by which Alexa and the master peer communicate.
 	//
 	// This member is required.
-	SenderClientId *string
+	ChannelARN *string
 
 	// The base64-encoded SDP offer content.
 	//
 	// This member is required.
 	MessagePayload *string
 
-	// The ARN of the signaling channel by which Alexa and the master peer communicate.
+	// The unique identifier for the sender client.
 	//
 	// This member is required.
-	ChannelARN *string
+	SenderClientId *string
 }
 
 type SendAlexaOfferToMasterOutput struct {

@@ -62,6 +62,12 @@ func (c *Client) ListTagsForResources(ctx context.Context, params *ListTagsForRe
 // for which you want to list tags.
 type ListTagsForResourcesInput struct {
 
+	// A complex type that contains the ResourceId element for each resource for which
+	// you want to get a list of tags.
+	//
+	// This member is required.
+	ResourceIds []*string
+
 	// The type of the resources.
 	//
 	//     * The resource type for health checks is
@@ -71,12 +77,6 @@ type ListTagsForResourcesInput struct {
 	//
 	// This member is required.
 	ResourceType types.TagResourceType
-
-	// A complex type that contains the ResourceId element for each resource for which
-	// you want to get a list of tags.
-	//
-	// This member is required.
-	ResourceIds []*string
 }
 
 // A complex type containing tags for the specified resources.

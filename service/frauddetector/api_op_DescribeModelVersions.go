@@ -61,14 +61,14 @@ type DescribeModelVersionsInput struct {
 	// The maximum number of results to return.
 	MaxResults *int32
 
-	// The model version number.
-	ModelVersionNumber *string
+	// The model ID.
+	ModelId *string
 
 	// The model type.
 	ModelType types.ModelTypeEnum
 
-	// The model ID.
-	ModelId *string
+	// The model version number.
+	ModelVersionNumber *string
 
 	// The next token from the previous results.
 	NextToken *string
@@ -76,11 +76,11 @@ type DescribeModelVersionsInput struct {
 
 type DescribeModelVersionsOutput struct {
 
-	// The next token.
-	NextToken *string
-
 	// The model version details.
 	ModelVersionDetails []*types.ModelVersionDetail
+
+	// The next token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

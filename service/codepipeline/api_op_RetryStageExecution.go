@@ -68,10 +68,10 @@ type RetryStageExecutionInput struct {
 	// This member is required.
 	PipelineExecutionId *string
 
-	// The name of the failed stage to be retried.
+	// The name of the pipeline that contains the failed stage.
 	//
 	// This member is required.
-	StageName *string
+	PipelineName *string
 
 	// The scope of the retry attempt. Currently, the only supported value is
 	// FAILED_ACTIONS.
@@ -79,10 +79,10 @@ type RetryStageExecutionInput struct {
 	// This member is required.
 	RetryMode types.StageRetryMode
 
-	// The name of the pipeline that contains the failed stage.
+	// The name of the failed stage to be retried.
 	//
 	// This member is required.
-	PipelineName *string
+	StageName *string
 }
 
 // Represents the output of a RetryStageExecution action.

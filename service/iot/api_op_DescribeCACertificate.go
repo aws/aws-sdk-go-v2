@@ -67,11 +67,11 @@ type DescribeCACertificateInput struct {
 // The output from the DescribeCACertificate operation.
 type DescribeCACertificateOutput struct {
 
-	// Information about the registration configuration.
-	RegistrationConfig *types.RegistrationConfig
-
 	// The CA certificate description.
 	CertificateDescription *types.CACertificateDescription
+
+	// Information about the registration configuration.
+	RegistrationConfig *types.RegistrationConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

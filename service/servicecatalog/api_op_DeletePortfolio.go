@@ -58,6 +58,11 @@ func (c *Client) DeletePortfolio(ctx context.Context, params *DeletePortfolioInp
 
 type DeletePortfolioInput struct {
 
+	// The portfolio identifier.
+	//
+	// This member is required.
+	Id *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -67,11 +72,6 @@ type DeletePortfolioInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The portfolio identifier.
-	//
-	// This member is required.
-	Id *string
 }
 
 type DeletePortfolioOutput struct {

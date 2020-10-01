@@ -62,10 +62,6 @@ type DescribeInternetGatewaysInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
 	// One or more filters.
 	//
 	//     * attachment.state - The current state of the
@@ -93,6 +89,10 @@ type DescribeInternetGatewaysInput struct {
 
 	// One or more internet gateway IDs. Default: Describes all your internet gateways.
 	InternetGatewayIds []*string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string

@@ -76,21 +76,6 @@ func (c *Client) RegisterScalableTarget(ctx context.Context, params *RegisterSca
 
 type RegisterScalableTargetInput struct {
 
-	// The minimum value that you plan to scale in to. When a scaling policy is in
-	// effect, Application Auto Scaling can scale in (contract) as needed to the
-	// minimum capacity limit in response to changing demand. This parameter is
-	// required if you are registering a scalable target. For certain resources, the
-	// minimum value allowed is 0. This includes Lambda provisioned concurrency, Spot
-	// Fleet, ECS services, Aurora DB clusters, EMR clusters, and custom resources. For
-	// all other resources, the minimum value allowed is 1.
-	MinCapacity *int32
-
-	// The maximum value that you plan to scale out to. When a scaling policy is in
-	// effect, Application Auto Scaling can scale out (expand) as needed to the maximum
-	// capacity limit in response to changing demand. This parameter is required if you
-	// are registering a scalable target.
-	MaxCapacity *int32
-
 	// The identifier of the resource that is associated with the scalable target. This
 	// string consists of the resource type and unique identifier.
 	//
@@ -152,44 +137,6 @@ type RegisterScalableTargetInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// An embedded object that contains attributes and attribute values that are used
-	// to suspend and resume automatic scaling. Setting the value of an attribute to
-	// true suspends the specified scaling activities. Setting it to false (default)
-	// resumes the specified scaling activities. Suspension Outcomes
-	//
-	//     * For
-	// DynamicScalingInSuspended, while a suspension is in effect, all scale-in
-	// activities that are triggered by a scaling policy are suspended.
-	//
-	//     * For
-	// DynamicScalingOutSuspended, while a suspension is in effect, all scale-out
-	// activities that are triggered by a scaling policy are suspended.
-	//
-	//     * For
-	// ScheduledScalingSuspended, while a suspension is in effect, all scaling
-	// activities that involve scheduled actions are suspended.
-	//
-	// For more information,
-	// see Suspending and Resuming Scaling
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html)
-	// in the Application Auto Scaling User Guide.
-	SuspendedState *types.SuspendedState
-
-	// This parameter is required for services that do not support service-linked roles
-	// (such as Amazon EMR), and it must specify the ARN of an IAM role that allows
-	// Application Auto Scaling to modify the scalable target on your behalf. If the
-	// service supports service-linked roles, Application Auto Scaling uses a
-	// service-linked role, which it creates if it does not yet exist. For more
-	// information, see Application Auto Scaling IAM Roles
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles).
-	RoleARN *string
-
-	// The namespace of the AWS service that provides the resource. For a resource
-	// provided by your own application or service, use custom-resource instead.
-	//
-	// This member is required.
-	ServiceNamespace types.ServiceNamespace
-
 	// The scalable dimension associated with the scalable target. This string consists
 	// of the service namespace, resource type, and scaling property.
 	//
@@ -249,6 +196,59 @@ type RegisterScalableTargetInput struct {
 	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
+
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
+	ServiceNamespace types.ServiceNamespace
+
+	// The maximum value that you plan to scale out to. When a scaling policy is in
+	// effect, Application Auto Scaling can scale out (expand) as needed to the maximum
+	// capacity limit in response to changing demand. This parameter is required if you
+	// are registering a scalable target.
+	MaxCapacity *int32
+
+	// The minimum value that you plan to scale in to. When a scaling policy is in
+	// effect, Application Auto Scaling can scale in (contract) as needed to the
+	// minimum capacity limit in response to changing demand. This parameter is
+	// required if you are registering a scalable target. For certain resources, the
+	// minimum value allowed is 0. This includes Lambda provisioned concurrency, Spot
+	// Fleet, ECS services, Aurora DB clusters, EMR clusters, and custom resources. For
+	// all other resources, the minimum value allowed is 1.
+	MinCapacity *int32
+
+	// This parameter is required for services that do not support service-linked roles
+	// (such as Amazon EMR), and it must specify the ARN of an IAM role that allows
+	// Application Auto Scaling to modify the scalable target on your behalf. If the
+	// service supports service-linked roles, Application Auto Scaling uses a
+	// service-linked role, which it creates if it does not yet exist. For more
+	// information, see Application Auto Scaling IAM Roles
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles).
+	RoleARN *string
+
+	// An embedded object that contains attributes and attribute values that are used
+	// to suspend and resume automatic scaling. Setting the value of an attribute to
+	// true suspends the specified scaling activities. Setting it to false (default)
+	// resumes the specified scaling activities. Suspension Outcomes
+	//
+	//     * For
+	// DynamicScalingInSuspended, while a suspension is in effect, all scale-in
+	// activities that are triggered by a scaling policy are suspended.
+	//
+	//     * For
+	// DynamicScalingOutSuspended, while a suspension is in effect, all scale-out
+	// activities that are triggered by a scaling policy are suspended.
+	//
+	//     * For
+	// ScheduledScalingSuspended, while a suspension is in effect, all scaling
+	// activities that involve scheduled actions are suspended.
+	//
+	// For more information,
+	// see Suspending and Resuming Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html)
+	// in the Application Auto Scaling User Guide.
+	SuspendedState *types.SuspendedState
 }
 
 type RegisterScalableTargetOutput struct {

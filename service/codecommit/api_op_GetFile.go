@@ -57,6 +57,13 @@ func (c *Client) GetFile(ctx context.Context, params *GetFileInput, optFns ...fu
 
 type GetFileInput struct {
 
+	// The fully qualified path to the file, including the full name and extension of
+	// the file. For example, /examples/file.md is the fully qualified path to a file
+	// named file.md in a folder named examples.
+	//
+	// This member is required.
+	FilePath *string
+
 	// The name of the repository that contains the file.
 	//
 	// This member is required.
@@ -67,26 +74,19 @@ type GetFileInput struct {
 	// reference such as refs/heads/master. If none is provided, the head commit is
 	// used.
 	CommitSpecifier *string
-
-	// The fully qualified path to the file, including the full name and extension of
-	// the file. For example, /examples/file.md is the fully qualified path to a file
-	// named file.md in a folder named examples.
-	//
-	// This member is required.
-	FilePath *string
 }
 
 type GetFileOutput struct {
-
-	// The full commit ID of the commit that contains the content returned by GetFile.
-	//
-	// This member is required.
-	CommitId *string
 
 	// The blob ID of the object that represents the file content.
 	//
 	// This member is required.
 	BlobId *string
+
+	// The full commit ID of the commit that contains the content returned by GetFile.
+	//
+	// This member is required.
+	CommitId *string
 
 	// The base-64 encoded binary data object that represents the content of the file.
 	//

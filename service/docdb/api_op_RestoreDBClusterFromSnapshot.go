@@ -63,23 +63,6 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 // Represents the input to RestoreDBClusterFromSnapshot ().
 type RestoreDBClusterFromSnapshotInput struct {
 
-	// The tags to be assigned to the restored cluster.
-	Tags []*types.Tag
-
-	// A list of virtual private cloud (VPC) security groups that the new cluster will
-	// belong to.
-	VpcSecurityGroupIds []*string
-
-	// The name of the subnet group to use for the new cluster. Constraints: If
-	// provided, must match the name of an existing DBSubnetGroup. Example:
-	// mySubnetgroup
-	DBSubnetGroupName *string
-
-	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
-	// the cluster cannot be deleted unless it is modified and DeletionProtection is
-	// disabled. DeletionProtection protects clusters from being accidentally deleted.
-	DeletionProtection *bool
-
 	// The name of the cluster to create from the snapshot or cluster snapshot. This
 	// parameter isn't case sensitive. Constraints:
 	//
@@ -97,8 +80,11 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The version of the database engine to use for the new cluster.
-	EngineVersion *string
+	// The database engine to use for the new cluster. Default: The same as source.
+	// Constraint: Must be compatible with the engine of the source.
+	//
+	// This member is required.
+	Engine *string
 
 	// The identifier for the snapshot or cluster snapshot to restore from. You can use
 	// either the name or the Amazon Resource Name (ARN) to specify a cluster snapshot.
@@ -110,9 +96,26 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// This member is required.
 	SnapshotIdentifier *string
 
-	// The port number on which the new cluster accepts connections. Constraints: Must
-	// be a value from 1150 to 65535. Default: The same port as the original cluster.
-	Port *int32
+	// Provides the list of Amazon EC2 Availability Zones that instances in the
+	// restored DB cluster can be created in.
+	AvailabilityZones []*string
+
+	// The name of the subnet group to use for the new cluster. Constraints: If
+	// provided, must match the name of an existing DBSubnetGroup. Example:
+	// mySubnetgroup
+	DBSubnetGroupName *string
+
+	// Specifies whether this cluster can be deleted. If DeletionProtection is enabled,
+	// the cluster cannot be deleted unless it is modified and DeletionProtection is
+	// disabled. DeletionProtection protects clusters from being accidentally deleted.
+	DeletionProtection *bool
+
+	// A list of log types that must be enabled for exporting to Amazon CloudWatch
+	// Logs.
+	EnableCloudwatchLogsExports []*string
+
+	// The version of the database engine to use for the new cluster.
+	EngineVersion *string
 
 	// The AWS KMS key identifier to use when restoring an encrypted cluster from a DB
 	// snapshot or cluster snapshot. The AWS KMS key identifier is the Amazon Resource
@@ -131,19 +134,16 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// encrypted, then the restored DB cluster is not encrypted.
 	KmsKeyId *string
 
-	// Provides the list of Amazon EC2 Availability Zones that instances in the
-	// restored DB cluster can be created in.
-	AvailabilityZones []*string
+	// The port number on which the new cluster accepts connections. Constraints: Must
+	// be a value from 1150 to 65535. Default: The same port as the original cluster.
+	Port *int32
 
-	// The database engine to use for the new cluster. Default: The same as source.
-	// Constraint: Must be compatible with the engine of the source.
-	//
-	// This member is required.
-	Engine *string
+	// The tags to be assigned to the restored cluster.
+	Tags []*types.Tag
 
-	// A list of log types that must be enabled for exporting to Amazon CloudWatch
-	// Logs.
-	EnableCloudwatchLogsExports []*string
+	// A list of virtual private cloud (VPC) security groups that the new cluster will
+	// belong to.
+	VpcSecurityGroupIds []*string
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {

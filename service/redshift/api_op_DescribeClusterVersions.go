@@ -74,12 +74,8 @@ type DescribeClusterVersionsInput struct {
 	// consecutive hyphens
 	ClusterParameterGroupFamily *string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int32
+	// The specific cluster version to return. Example: 1.0
+	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterVersions () request
@@ -89,8 +85,12 @@ type DescribeClusterVersionsInput struct {
 	// request.
 	Marker *string
 
-	// The specific cluster version to return. Example: 1.0
-	ClusterVersion *string
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	MaxRecords *int32
 }
 
 // Contains the output from the DescribeClusterVersions () action.

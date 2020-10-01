@@ -9,6 +9,9 @@ import (
 // Information for one billing record.
 type BillingRecord struct {
 
+	// The date that the operation was billed, in Unix format.
+	BillDate *time.Time
+
 	// The name of the domain that the billing record applies to. If the domain name
 	// contains characters other than a-z, 0-9, and - (hyphen), such as an
 	// internationalized domain name, then this value is in Punycode. For more
@@ -17,65 +20,28 @@ type BillingRecord struct {
 	// in the Amazon Route 53 Developer Guide.
 	DomainName *string
 
+	// The ID of the invoice that is associated with the billing record.
+	InvoiceId *string
+
 	// The operation that you were charged for.
 	Operation OperationType
 
 	// The price that you were charged for the operation, in US dollars. Example value:
 	// 12.0
 	Price *float64
-
-	// The date that the operation was billed, in Unix format.
-	BillDate *time.Time
-
-	// The ID of the invoice that is associated with the billing record.
-	InvoiceId *string
 }
 
 // ContactDetail includes the following elements.
 type ContactDetail struct {
 
-	// The city of the contact's address.
-	City *string
-
 	// First line of the contact's address.
 	AddressLine1 *string
-
-	// The phone number of the contact. Constraints: Phone number must be specified in
-	// the format "+[country dialing code].[number including any area code>]". For
-	// example, a US phone number might appear as "+1.1234567890".
-	PhoneNumber *string
 
 	// Second line of contact's address, if any.
 	AddressLine2 *string
 
-	// The zip or postal code of the contact's address.
-	ZipCode *string
-
-	// Last name of contact.
-	LastName *string
-
-	// The state or province of the contact's city.
-	State *string
-
-	// Code for the country of the contact's address.
-	CountryCode CountryCode
-
-	// Name of the organization for contact types other than PERSON.
-	OrganizationName *string
-
-	// A list of name-value pairs for parameters required by certain top-level domains.
-	ExtraParams []*ExtraParam
-
-	// Fax number of the contact. Constraints: Phone number must be specified in the
-	// format "+[country dialing code].[number including any area code]". For example,
-	// a US phone number might appear as "+1.1234567890".
-	Fax *string
-
-	// First name of contact.
-	FirstName *string
-
-	// Email address of the contact.
-	Email *string
+	// The city of the contact's address.
+	City *string
 
 	// Indicates whether the contact is a person, company, association, or public
 	// organization. Note the following:
@@ -93,6 +59,40 @@ type ContactDetail struct {
 	//     * For .es domains, if you specify
 	// PERSON, you must specify INDIVIDUAL for the value of ES_LEGAL_FORM.
 	ContactType ContactType
+
+	// Code for the country of the contact's address.
+	CountryCode CountryCode
+
+	// Email address of the contact.
+	Email *string
+
+	// A list of name-value pairs for parameters required by certain top-level domains.
+	ExtraParams []*ExtraParam
+
+	// Fax number of the contact. Constraints: Phone number must be specified in the
+	// format "+[country dialing code].[number including any area code]". For example,
+	// a US phone number might appear as "+1.1234567890".
+	Fax *string
+
+	// First name of contact.
+	FirstName *string
+
+	// Last name of contact.
+	LastName *string
+
+	// Name of the organization for contact types other than PERSON.
+	OrganizationName *string
+
+	// The phone number of the contact. Constraints: Phone number must be specified in
+	// the format "+[country dialing code].[number including any area code>]". For
+	// example, a US phone number might appear as "+1.1234567890".
+	PhoneNumber *string
+
+	// The state or province of the contact's city.
+	State *string
+
+	// The zip or postal code of the contact's address.
+	ZipCode *string
 }
 
 // Information about one suggested domain name.
@@ -120,10 +120,6 @@ type DomainSuggestion struct {
 // Summary information about one domain.
 type DomainSummary struct {
 
-	// Expiration date of the domain in Unix time format and Coordinated Universal Time
-	// (UTC).
-	Expiry *time.Time
-
 	// The name of the domain that the summary information applies to.
 	//
 	// This member is required.
@@ -131,6 +127,10 @@ type DomainSummary struct {
 
 	// Indicates whether the domain is automatically renewed upon expiration.
 	AutoRenew *bool
+
+	// Expiration date of the domain in Unix time format and Coordinated Universal Time
+	// (UTC).
+	Expiry *time.Time
 
 	// Indicates whether a domain is locked from unauthorized transfer to another
 	// party.
@@ -152,11 +152,6 @@ type DomainTransferability struct {
 
 // ExtraParam includes the following elements.
 type ExtraParam struct {
-
-	// The value that corresponds with the name of an extra parameter.
-	//
-	// This member is required.
-	Value *string
 
 	// The name of an additional parameter that is required by a top-level domain. Here
 	// are the top-level domains that require additional parameters and the names of
@@ -307,6 +302,11 @@ type ExtraParam struct {
 	//
 	// This member is required.
 	Name ExtraParamName
+
+	// The value that corresponds with the name of an extra parameter.
+	//
+	// This member is required.
+	Value *string
 }
 
 // Nameserver includes the following elements.
@@ -329,35 +329,35 @@ type Nameserver struct {
 // OperationSummary includes the following elements.
 type OperationSummary struct {
 
-	// The date when the request was submitted.
+	// Identifier returned to track the requested action.
 	//
 	// This member is required.
-	SubmittedDate *time.Time
+	OperationId *string
 
 	// The current status of the requested operation in the system.
 	//
 	// This member is required.
 	Status OperationStatus
 
+	// The date when the request was submitted.
+	//
+	// This member is required.
+	SubmittedDate *time.Time
+
 	// Type of the action requested.
 	//
 	// This member is required.
 	Type OperationType
-
-	// Identifier returned to track the requested action.
-	//
-	// This member is required.
-	OperationId *string
 }
 
 // Each tag includes the following elements.
 type Tag struct {
 
-	// The value of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints:
-	// Each value can be 0-256 characters long.
-	Value *string
-
 	// The key (name) of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@"
 	// Constraints: Each key can be 1-128 characters long.
 	Key *string
+
+	// The value of a tag. Valid values: A-Z, a-z, 0-9, space, ".:/=+\-@" Constraints:
+	// Each value can be 0-256 characters long.
+	Value *string
 }

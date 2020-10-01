@@ -62,6 +62,15 @@ type UpdateJobInput struct {
 	// This member is required.
 	JobId *string
 
+	// Allows you to create criteria to abort a job.
+	AbortConfig *types.AbortConfig
+
+	// A short text description of the job.
+	Description *string
+
+	// Allows you to create a staged rollout of the job.
+	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
+
 	// Configuration information for pre-signed S3 URLs.
 	PresignedUrlConfig *types.PresignedUrlConfig
 
@@ -70,15 +79,6 @@ type UpdateJobInput struct {
 	// job execution status is not set to another terminal state before the time
 	// expires, it will be automatically set to TIMED_OUT.
 	TimeoutConfig *types.TimeoutConfig
-
-	// A short text description of the job.
-	Description *string
-
-	// Allows you to create a staged rollout of the job.
-	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
-
-	// Allows you to create criteria to abort a job.
-	AbortConfig *types.AbortConfig
 }
 
 type UpdateJobOutput struct {

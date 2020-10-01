@@ -58,10 +58,6 @@ func (c *Client) CreateFunctionDefinitionVersion(ctx context.Context, params *Cr
 // Information needed to create a function definition version.
 type CreateFunctionDefinitionVersionInput struct {
 
-	// The default configuration that applies to all Lambda functions in this function
-	// definition version. Individual Lambda functions can override these settings.
-	DefaultConfig *types.FunctionDefaultConfig
-
 	// The ID of the Lambda function definition.
 	//
 	// This member is required.
@@ -70,17 +66,21 @@ type CreateFunctionDefinitionVersionInput struct {
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 
+	// The default configuration that applies to all Lambda functions in this function
+	// definition version. Individual Lambda functions can override these settings.
+	DefaultConfig *types.FunctionDefaultConfig
+
 	// A list of Lambda functions in this function definition version.
 	Functions []*types.Function
 }
 
 type CreateFunctionDefinitionVersionOutput struct {
 
-	// The time, in milliseconds since the epoch, when the version was created.
-	CreationTimestamp *string
-
 	// The ARN of the version.
 	Arn *string
+
+	// The time, in milliseconds since the epoch, when the version was created.
+	CreationTimestamp *string
 
 	// The ID of the parent definition that the version is associated with.
 	Id *string

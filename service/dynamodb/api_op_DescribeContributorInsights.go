@@ -61,16 +61,22 @@ func (c *Client) DescribeContributorInsights(ctx context.Context, params *Descri
 
 type DescribeContributorInsightsInput struct {
 
-	// The name of the global secondary index to describe, if applicable.
-	IndexName *string
-
 	// The name of the table to describe.
 	//
 	// This member is required.
 	TableName *string
+
+	// The name of the global secondary index to describe, if applicable.
+	IndexName *string
 }
 
 type DescribeContributorInsightsOutput struct {
+
+	// List of names of the associated Alpine rules.
+	ContributorInsightsRuleList []*string
+
+	// Current Status contributor insights.
+	ContributorInsightsStatus types.ContributorInsightsStatus
 
 	// Returns information about the last failure that encountered. The most common
 	// exceptions for a FAILED status are:
@@ -91,20 +97,14 @@ type DescribeContributorInsightsOutput struct {
 	// create Amazon CloudWatch Contributor Insights rules. Please retry request.
 	FailureException *types.FailureException
 
-	// List of names of the associated Alpine rules.
-	ContributorInsightsRuleList []*string
-
-	// The name of the table being described.
-	TableName *string
-
-	// Current Status contributor insights.
-	ContributorInsightsStatus types.ContributorInsightsStatus
+	// The name of the global secondary index being described.
+	IndexName *string
 
 	// Timestamp of the last time the status was changed.
 	LastUpdateDateTime *time.Time
 
-	// The name of the global secondary index being described.
-	IndexName *string
+	// The name of the table being described.
+	TableName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

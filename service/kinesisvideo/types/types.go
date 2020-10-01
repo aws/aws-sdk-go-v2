@@ -9,26 +9,26 @@ import (
 // A structure that encapsulates a signaling channel's metadata and properties.
 type ChannelInfo struct {
 
-	// Current status of the signaling channel.
-	ChannelStatus Status
-
 	// The Amazon Resource Name (ARN) of the signaling channel.
 	ChannelARN *string
-
-	// The current version of the signaling channel.
-	Version *string
-
-	// The time at which the signaling channel was created.
-	CreationTime *time.Time
 
 	// The name of the signaling channel.
 	ChannelName *string
 
-	// A structure that contains the configuration for the SINGLE_MASTER channel type.
-	SingleMasterConfiguration *SingleMasterConfiguration
+	// Current status of the signaling channel.
+	ChannelStatus Status
 
 	// The type of the signaling channel.
 	ChannelType ChannelType
+
+	// The time at which the signaling channel was created.
+	CreationTime *time.Time
+
+	// A structure that contains the configuration for the SINGLE_MASTER channel type.
+	SingleMasterConfiguration *SingleMasterConfiguration
+
+	// The current version of the signaling channel.
+	Version *string
 }
 
 // An optional input parameter for the ListSignalingChannels API. When this
@@ -36,12 +36,12 @@ type ChannelInfo struct {
 // only the channels that satisfy a condition specified in ChannelNameCondition.
 type ChannelNameCondition struct {
 
-	// A value to compare.
-	ComparisonValue *string
-
 	// A comparison operator. Currently, you can only specify the BEGINS_WITH operator,
 	// which finds signaling channels whose names begin with a given prefix.
 	ComparisonOperator ComparisonOperator
+
+	// A value to compare.
+	ComparisonValue *string
 }
 
 // An object that describes the endpoint of the signaling channel returned by the
@@ -86,21 +86,21 @@ type SingleMasterConfiguration struct {
 // An object describing a Kinesis video stream.
 type StreamInfo struct {
 
-	// The MediaType of the stream.
-	MediaType *string
-
 	// A time stamp that indicates when the stream was created.
 	CreationTime *time.Time
+
+	// How long the stream retains data, in hours.
+	DataRetentionInHours *int32
+
+	// The name of the device that is associated with the stream.
+	DeviceName *string
 
 	// The ID of the AWS Key Management Service (AWS KMS) key that Kinesis Video
 	// Streams uses to encrypt data on the stream.
 	KmsKeyId *string
 
-	// The name of the stream.
-	StreamName *string
-
-	// The version of the stream.
-	Version *string
+	// The MediaType of the stream.
+	MediaType *string
 
 	// The status of the stream.
 	Status Status
@@ -108,11 +108,11 @@ type StreamInfo struct {
 	// The Amazon Resource Name (ARN) of the stream.
 	StreamARN *string
 
-	// The name of the device that is associated with the stream.
-	DeviceName *string
+	// The name of the stream.
+	StreamName *string
 
-	// How long the stream retains data, in hours.
-	DataRetentionInHours *int32
+	// The version of the stream.
+	Version *string
 }
 
 // Specifies the condition that streams must satisfy to be returned when you list
@@ -132,13 +132,13 @@ type StreamNameCondition struct {
 // A key and value pair that is associated with the specified signaling channel.
 type Tag struct {
 
-	// The value of the tag that is associated with the specified signaling channel.
-	//
-	// This member is required.
-	Value *string
-
 	// The key of the tag that is associated with the specified signaling channel.
 	//
 	// This member is required.
 	Key *string
+
+	// The value of the tag that is associated with the specified signaling channel.
+	//
+	// This member is required.
+	Value *string
 }

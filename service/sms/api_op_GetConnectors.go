@@ -56,23 +56,23 @@ func (c *Client) GetConnectors(ctx context.Context, params *GetConnectorsInput, 
 
 type GetConnectorsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return in a single call. The default value is
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type GetConnectorsOutput struct {
 
+	// Information about the registered connectors.
+	ConnectorList []*types.Connector
+
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// Information about the registered connectors.
-	ConnectorList []*types.Connector
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

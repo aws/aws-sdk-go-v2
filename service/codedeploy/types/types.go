@@ -17,6 +17,13 @@ type Alarm struct {
 // Information about alarms associated with the deployment group.
 type AlarmConfiguration struct {
 
+	// A list of alarms configured for the deployment group. A maximum of 10 alarms can
+	// be added to a deployment group.
+	Alarms []*Alarm
+
+	// Indicates whether the alarm configuration is enabled.
+	Enabled *bool
+
 	// Indicates whether a deployment should continue if information about the current
 	// state of alarms cannot be retrieved from Amazon CloudWatch. The default value is
 	// false.
@@ -27,37 +34,30 @@ type AlarmConfiguration struct {
 	//     * false: The deployment stops if
 	// alarm status information can't be retrieved from Amazon CloudWatch.
 	IgnorePollAlarmFailure *bool
-
-	// Indicates whether the alarm configuration is enabled.
-	Enabled *bool
-
-	// A list of alarms configured for the deployment group. A maximum of 10 alarms can
-	// be added to a deployment group.
-	Alarms []*Alarm
 }
 
 // Information about an application.
 type ApplicationInfo struct {
 
-	// The time at which the application was created.
-	CreateTime *time.Time
+	// The application ID.
+	ApplicationId *string
 
-	// True if the user has authenticated with GitHub for the specified application.
-	// Otherwise, false.
-	LinkedToGitHub *bool
+	// The application name.
+	ApplicationName *string
 
 	// The destination platform type for deployment of the application (Lambda or
 	// Server).
 	ComputePlatform ComputePlatform
 
+	// The time at which the application was created.
+	CreateTime *time.Time
+
 	// The name for a connection to a GitHub account.
 	GitHubAccountName *string
 
-	// The application name.
-	ApplicationName *string
-
-	// The application ID.
-	ApplicationId *string
+	// True if the user has authenticated with GitHub for the specified application.
+	// Otherwise, false.
+	LinkedToGitHub *bool
 }
 
 // A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
@@ -65,9 +65,6 @@ type ApplicationInfo struct {
 // revision is the same as the AppSpec file. This method replaces the deprecated
 // RawString data type.
 type AppSpecContent struct {
-
-	// The SHA256 hash value of the revision content.
-	Sha256 *string
 
 	// The YAML-formatted or JSON-formatted revision string. For an AWS Lambda
 	// deployment, the content includes a Lambda function name, the alias for its
@@ -79,6 +76,9 @@ type AppSpecContent struct {
 	// functions that run at specified hooks, such as BeforeInstall, during a
 	// deployment.
 	Content *string
+
+	// The SHA256 hash value of the revision content.
+	Sha256 *string
 }
 
 // Information about a configuration for automatically rolling back to a previous
@@ -86,22 +86,22 @@ type AppSpecContent struct {
 // successfully.
 type AutoRollbackConfiguration struct {
 
-	// The event type or types that trigger a rollback.
-	Events []AutoRollbackEvent
-
 	// Indicates whether a defined automatic rollback configuration is currently
 	// enabled.
 	Enabled *bool
+
+	// The event type or types that trigger a rollback.
+	Events []AutoRollbackEvent
 }
 
 // Information about an Auto Scaling group.
 type AutoScalingGroup struct {
 
-	// The Auto Scaling group name.
-	Name *string
-
 	// An Auto Scaling lifecycle event hook name.
 	Hook *string
+
+	// The Auto Scaling group name.
+	Name *string
 }
 
 // Information about blue/green deployment options for a deployment group.
@@ -125,14 +125,6 @@ type BlueGreenDeploymentConfiguration struct {
 // not apply to Lambda deployments.
 type BlueInstanceTerminationOption struct {
 
-	// For an Amazon EC2 deployment, the number of minutes to wait after a successful
-	// blue/green deployment before terminating instances from the original
-	// environment.  <p> For an Amazon ECS deployment, the number of minutes before
-	// deleting the original (blue) task set. During an Amazon ECS deployment,
-	// CodeDeploy shifts traffic from the original (blue) task set to a replacement
-	// (green) task set. </p> <p> The maximum setting is 2880 minutes (2 days). </p>
-	TerminationWaitTimeInMinutes *int32
-
 	// The action to take on instances in the original environment after a successful
 	// blue/green deployment.
 	//
@@ -142,6 +134,14 @@ type BlueInstanceTerminationOption struct {
 	//     * KEEP_ALIVE: Instances are left running after they
 	// are deregistered from the load balancer and removed from the deployment group.
 	Action InstanceAction
+
+	// For an Amazon EC2 deployment, the number of minutes to wait after a successful
+	// blue/green deployment before terminating instances from the original
+	// environment.  <p> For an Amazon ECS deployment, the number of minutes before
+	// deleting the original (blue) task set. During an Amazon ECS deployment,
+	// CodeDeploy shifts traffic from the original (blue) task set to a replacement
+	// (green) task set. </p> <p> The maximum setting is 2880 minutes (2 days). </p>
+	TerminationWaitTimeInMinutes *int32
 }
 
 // Information about the target to be updated by an AWS CloudFormation blue/green
@@ -149,12 +149,16 @@ type BlueInstanceTerminationOption struct {
 // CloudFormation stack update.
 type CloudFormationTarget struct {
 
-	// The percentage of production traffic that the target version of an AWS
-	// CloudFormation blue/green deployment receives.
-	TargetVersionWeight *float64
+	// The unique ID of an AWS CloudFormation blue/green deployment.
+	DeploymentId *string
 
-	// The unique ID of a deployment target that has a type of CloudFormationTarget.
-	TargetId *string
+	// The date and time when the target application was updated by an AWS
+	// CloudFormation blue/green deployment.
+	LastUpdatedAt *time.Time
+
+	// The lifecycle events of the AWS CloudFormation blue/green deployment to this
+	// target application.
+	LifecycleEvents []*LifecycleEvent
 
 	// The resource type for the AWS CloudFormation blue/green deployment.
 	ResourceType *string
@@ -162,16 +166,12 @@ type CloudFormationTarget struct {
 	// The status of an AWS CloudFormation blue/green deployment's target application.
 	Status TargetStatus
 
-	// The lifecycle events of the AWS CloudFormation blue/green deployment to this
-	// target application.
-	LifecycleEvents []*LifecycleEvent
+	// The unique ID of a deployment target that has a type of CloudFormationTarget.
+	TargetId *string
 
-	// The date and time when the target application was updated by an AWS
-	// CloudFormation blue/green deployment.
-	LastUpdatedAt *time.Time
-
-	// The unique ID of an AWS CloudFormation blue/green deployment.
-	DeploymentId *string
+	// The percentage of production traffic that the target version of an AWS
+	// CloudFormation blue/green deployment receives.
+	TargetVersionWeight *float64
 }
 
 // Information about a deployment configuration.
@@ -183,41 +183,87 @@ type DeploymentConfigInfo struct {
 	// The time at which the deployment configuration was created.
 	CreateTime *time.Time
 
+	// The deployment configuration ID.
+	DeploymentConfigId *string
+
+	// The deployment configuration name.
+	DeploymentConfigName *string
+
 	// Information about the number or percentage of minimum healthy instance.
 	MinimumHealthyHosts *MinimumHealthyHosts
 
 	// The configuration that specifies how the deployment traffic is routed. Used for
 	// deployments with a Lambda or ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig
-
-	// The deployment configuration name.
-	DeploymentConfigName *string
-
-	// The deployment configuration ID.
-	DeploymentConfigId *string
 }
 
 // Information about a deployment group.
 type DeploymentGroupInfo struct {
 
-	// The on-premises instance tags on which to filter. The deployment group includes
-	// on-premises instances with any of the specified tags.
-	OnPremisesInstanceTagFilters []*TagFilter
+	// A list of alarms associated with the deployment group.
+	AlarmConfiguration *AlarmConfiguration
+
+	// The application name.
+	ApplicationName *string
+
+	// Information about the automatic rollback configuration associated with the
+	// deployment group.
+	AutoRollbackConfiguration *AutoRollbackConfiguration
+
+	// A list of associated Auto Scaling groups.
+	AutoScalingGroups []*AutoScalingGroup
+
+	// Information about blue/green deployment options for a deployment group.
+	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration
+
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	ComputePlatform ComputePlatform
+
+	// The deployment configuration name.
+	DeploymentConfigName *string
+
+	// The deployment group ID.
+	DeploymentGroupId *string
+
+	// The deployment group name.
+	DeploymentGroupName *string
 
 	// Information about the type of deployment, either in-place or blue/green, you
 	// want to run and whether to route deployment traffic behind a load balancer.
 	DeploymentStyle *DeploymentStyle
+
+	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
+	// instances with any of the specified tags.
+	Ec2TagFilters []*EC2TagFilter
 
 	// Information about groups of tags applied to an EC2 instance. The deployment
 	// group includes only EC2 instances identified by all of the tag groups. Cannot be
 	// used in the same call as ec2TagFilters.
 	Ec2TagSet *EC2TagSet
 
-	// Information about triggers associated with the deployment group.
-	TriggerConfigurations []*TriggerConfig
+	// The target Amazon ECS services in the deployment group. This applies only to
+	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
+	// service is specified as an Amazon ECS cluster and service name pair using the
+	// format :.
+	EcsServices []*ECSService
 
-	// The application name.
-	ApplicationName *string
+	// Information about the most recent attempted deployment to the deployment group.
+	LastAttemptedDeployment *LastDeploymentInfo
+
+	// Information about the most recent successful deployment to the deployment group.
+	LastSuccessfulDeployment *LastDeploymentInfo
+
+	// Information about the load balancer to use in a deployment.
+	LoadBalancerInfo *LoadBalancerInfo
+
+	// The on-premises instance tags on which to filter. The deployment group includes
+	// on-premises instances with any of the specified tags.
+	OnPremisesInstanceTagFilters []*TagFilter
+
+	// Information about groups of tags applied to an on-premises instance. The
+	// deployment group includes only on-premises instances identified by all the tag
+	// groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
+	OnPremisesTagSet *OnPremisesTagSet
 
 	// A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to
 	// make calls to AWS services on your behalf. For more information, see Create a
@@ -226,86 +272,96 @@ type DeploymentGroupInfo struct {
 	// in the AWS CodeDeploy User Guide.
 	ServiceRoleArn *string
 
-	// The target Amazon ECS services in the deployment group. This applies only to
-	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
-	// service is specified as an Amazon ECS cluster and service name pair using the
-	// format :.
-	EcsServices []*ECSService
-
-	// Information about the automatic rollback configuration associated with the
-	// deployment group.
-	AutoRollbackConfiguration *AutoRollbackConfiguration
-
-	// Information about blue/green deployment options for a deployment group.
-	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration
-
-	// The deployment configuration name.
-	DeploymentConfigName *string
-
 	// Information about the deployment group's target revision, including type and
 	// location.
 	TargetRevision *RevisionLocation
 
-	// A list of alarms associated with the deployment group.
-	AlarmConfiguration *AlarmConfiguration
-
-	// Information about the load balancer to use in a deployment.
-	LoadBalancerInfo *LoadBalancerInfo
-
-	// The deployment group ID.
-	DeploymentGroupId *string
-
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
-	ComputePlatform ComputePlatform
-
-	// A list of associated Auto Scaling groups.
-	AutoScalingGroups []*AutoScalingGroup
-
-	// Information about the most recent successful deployment to the deployment group.
-	LastSuccessfulDeployment *LastDeploymentInfo
-
-	// The deployment group name.
-	DeploymentGroupName *string
-
-	// Information about groups of tags applied to an on-premises instance. The
-	// deployment group includes only on-premises instances identified by all the tag
-	// groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
-	OnPremisesTagSet *OnPremisesTagSet
-
-	// The Amazon EC2 tags on which to filter. The deployment group includes EC2
-	// instances with any of the specified tags.
-	Ec2TagFilters []*EC2TagFilter
-
-	// Information about the most recent attempted deployment to the deployment group.
-	LastAttemptedDeployment *LastDeploymentInfo
+	// Information about triggers associated with the deployment group.
+	TriggerConfigurations []*TriggerConfig
 }
 
 // Information about a deployment.
 type DeploymentInfo struct {
 
-	// Information about any error associated with this deployment.
-	ErrorInformation *ErrorInformation
+	// Provides information about the results of a deployment, such as whether
+	// instances in the original environment in a blue/green deployment were not
+	// terminated.
+	AdditionalDeploymentStatusInfo *string
 
-	// Information about blue/green deployment options for this deployment.
-	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration
-
-	// Messages that contain information about the status of a deployment.
-	DeploymentStatusMessages []*string
+	// The application name.
+	ApplicationName *string
 
 	// Information about the automatic rollback configuration associated with the
 	// deployment.
 	AutoRollbackConfiguration *AutoRollbackConfiguration
 
+	// Information about blue/green deployment options for this deployment.
+	BlueGreenDeploymentConfiguration *BlueGreenDeploymentConfiguration
+
+	// A timestamp that indicates when the deployment was complete.
+	CompleteTime *time.Time
+
+	// The destination platform type for the deployment (Lambda, Server, or ECS).
+	ComputePlatform ComputePlatform
+
 	// A timestamp that indicates when the deployment was created.
 	CreateTime *time.Time
 
-	// The application name.
-	ApplicationName *string
+	// The means by which the deployment was created:
+	//
+	//     * user: A user created the
+	// deployment.
+	//
+	//     * autoscaling: Amazon EC2 Auto Scaling created the
+	// deployment.
+	//
+	//     * codeDeployRollback: A rollback process created the
+	// deployment.
+	Creator DeploymentCreator
 
-	// Provides information about the results of a deployment, such as whether
-	// instances in the original environment in a blue/green deployment were not
-	// terminated.
-	AdditionalDeploymentStatusInfo *string
+	// The deployment configuration name.
+	DeploymentConfigName *string
+
+	// The deployment group name.
+	DeploymentGroupName *string
+
+	// The unique ID of a deployment.
+	DeploymentId *string
+
+	// A summary of the deployment status of the instances in the deployment.
+	DeploymentOverview *DeploymentOverview
+
+	// Messages that contain information about the status of a deployment.
+	DeploymentStatusMessages []*string
+
+	// Information about the type of deployment, either in-place or blue/green, you
+	// want to run and whether to route deployment traffic behind a load balancer.
+	DeploymentStyle *DeploymentStyle
+
+	// A comment about the deployment.
+	Description *string
+
+	// Information about any error associated with this deployment.
+	ErrorInformation *ErrorInformation
+
+	// The unique ID for an external resource (for example, a CloudFormation stack ID)
+	// that is linked to this deployment.
+	ExternalId *string
+
+	// Information about how AWS CodeDeploy handles files that already exist in a
+	// deployment target location but weren't part of the previous successful
+	// deployment.
+	//
+	//     * DISALLOW: The deployment fails. This is also the default
+	// behavior if no option is specified.
+	//
+	//     * OVERWRITE: The version of the file
+	// from the application revision currently being deployed replaces the version
+	// already on the instance.
+	//
+	//     * RETAIN: The version of the file already on the
+	// instance is kept and used as part of the new deployment.
+	FileExistsBehavior FileExistsBehavior
 
 	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic
 	// deployment lifecycle event to an instance fails, then the deployment continues
@@ -329,46 +385,24 @@ type DeploymentInfo struct {
 	// and <code>AfterBlockTraffic</code> failures should be ignored. </p>
 	IgnoreApplicationStopFailures *bool
 
-	// The deployment group name.
-	DeploymentGroupName *string
-
-	// Information about how AWS CodeDeploy handles files that already exist in a
-	// deployment target location but weren't part of the previous successful
-	// deployment.
-	//
-	//     * DISALLOW: The deployment fails. This is also the default
-	// behavior if no option is specified.
-	//
-	//     * OVERWRITE: The version of the file
-	// from the application revision currently being deployed replaces the version
-	// already on the instance.
-	//
-	//     * RETAIN: The version of the file already on the
-	// instance is kept and used as part of the new deployment.
-	FileExistsBehavior FileExistsBehavior
-
-	// The unique ID of a deployment.
-	DeploymentId *string
-
 	// Indicates whether the wait period set for the termination of instances in the
 	// original environment has started. Status is 'false' if the KEEP_ALIVE option is
 	// specified. Otherwise, 'true' as soon as the termination wait period starts.
 	InstanceTerminationWaitTimeStarted *bool
 
+	// Information about the load balancer used in the deployment.
+	LoadBalancerInfo *LoadBalancerInfo
+
+	// Information about the application revision that was deployed to the deployment
+	// group before the most recent successful deployment.
+	PreviousRevision *RevisionLocation
+
 	// Information about the location of stored application artifacts and the service
 	// from which to retrieve them.
 	Revision *RevisionLocation
 
-	// Indicates whether only instances that are not running the latest application
-	// revision are to be deployed to.
-	UpdateOutdatedInstancesOnly *bool
-
 	// Information about a deployment rollback.
 	RollbackInfo *RollbackInfo
-
-	// Information about the type of deployment, either in-place or blue/green, you
-	// want to run and whether to route deployment traffic behind a load balancer.
-	DeploymentStyle *DeploymentStyle
 
 	// A timestamp that indicates when the deployment was deployed to the deployment
 	// group. In some cases, the reported value of the start time might be later than
@@ -376,58 +410,26 @@ type DeploymentInfo struct {
 	// servers that participate in the deployment process.
 	StartTime *time.Time
 
+	// The current state of the deployment as a whole.
+	Status DeploymentStatus
+
 	// Information about the instances that belong to the replacement environment in a
 	// blue/green deployment.
 	TargetInstances *TargetInstances
 
-	// The current state of the deployment as a whole.
-	Status DeploymentStatus
-
-	// Information about the application revision that was deployed to the deployment
-	// group before the most recent successful deployment.
-	PreviousRevision *RevisionLocation
-
-	// A summary of the deployment status of the instances in the deployment.
-	DeploymentOverview *DeploymentOverview
-
-	// The destination platform type for the deployment (Lambda, Server, or ECS).
-	ComputePlatform ComputePlatform
-
-	// The means by which the deployment was created:
-	//
-	//     * user: A user created the
-	// deployment.
-	//
-	//     * autoscaling: Amazon EC2 Auto Scaling created the
-	// deployment.
-	//
-	//     * codeDeployRollback: A rollback process created the
-	// deployment.
-	Creator DeploymentCreator
-
-	// The deployment configuration name.
-	DeploymentConfigName *string
-
-	// Information about the load balancer used in the deployment.
-	LoadBalancerInfo *LoadBalancerInfo
-
-	// The unique ID for an external resource (for example, a CloudFormation stack ID)
-	// that is linked to this deployment.
-	ExternalId *string
-
-	// A timestamp that indicates when the deployment was complete.
-	CompleteTime *time.Time
-
-	// A comment about the deployment.
-	Description *string
+	// Indicates whether only instances that are not running the latest application
+	// revision are to be deployed to.
+	UpdateOutdatedInstancesOnly *bool
 }
 
 // Information about the deployment status of the instances in the deployment.
 type DeploymentOverview struct {
 
-	// The number of instances in the deployment to which revisions have been
-	// successfully deployed.
-	Succeeded *int64
+	// The number of instances in the deployment in a failed state.
+	Failed *int64
+
+	// The number of instances in which the deployment is in progress.
+	InProgress *int64
 
 	// The number of instances in the deployment in a pending state.
 	Pending *int64
@@ -439,11 +441,9 @@ type DeploymentOverview struct {
 	// The number of instances in the deployment in a skipped state.
 	Skipped *int64
 
-	// The number of instances in the deployment in a failed state.
-	Failed *int64
-
-	// The number of instances in which the deployment is in progress.
-	InProgress *int64
+	// The number of instances in the deployment to which revisions have been
+	// successfully deployed.
+	Succeeded *int64
 }
 
 // Information about how traffic is rerouted to instances in a replacement
@@ -474,47 +474,40 @@ type DeploymentReadyOption struct {
 // want to run and whether to route deployment traffic behind a load balancer.
 type DeploymentStyle struct {
 
-	// Indicates whether to run an in-place deployment or a blue/green deployment.
-	DeploymentType DeploymentType
-
 	// Indicates whether to route deployment traffic behind a load balancer.
 	DeploymentOption DeploymentOption
+
+	// Indicates whether to run an in-place deployment or a blue/green deployment.
+	DeploymentType DeploymentType
 }
 
 // Information about the deployment target.
 type DeploymentTarget struct {
-
-	// Information about the target for a deployment that uses the EC2/On-premises
-	// compute platform.
-	InstanceTarget *InstanceTarget
-
-	// The deployment type that is specific to the deployment's compute platform or
-	// deployments initiated by a CloudFormation stack update.
-	DeploymentTargetType DeploymentTargetType
 
 	// Information about the target to be updated by an AWS CloudFormation blue/green
 	// deployment. This target type is used for all deployments initiated by a
 	// CloudFormation stack update.
 	CloudFormationTarget *CloudFormationTarget
 
-	// Information about the target for a deployment that uses the AWS Lambda compute
-	// platform.
-	LambdaTarget *LambdaTarget
+	// The deployment type that is specific to the deployment's compute platform or
+	// deployments initiated by a CloudFormation stack update.
+	DeploymentTargetType DeploymentTargetType
 
 	// Information about the target for a deployment that uses the Amazon ECS compute
 	// platform.
 	EcsTarget *ECSTarget
+
+	// Information about the target for a deployment that uses the EC2/On-premises
+	// compute platform.
+	InstanceTarget *InstanceTarget
+
+	// Information about the target for a deployment that uses the AWS Lambda compute
+	// platform.
+	LambdaTarget *LambdaTarget
 }
 
 // Diagnostic information about executable scripts that are part of a deployment.
 type Diagnostics struct {
-
-	// The last portion of the diagnostic log. If available, AWS CodeDeploy returns up
-	// to the last 4 KB of the diagnostic log.
-	LogTail *string
-
-	// The name of the script.
-	ScriptName *string
 
 	// The associated error code:
 	//
@@ -537,12 +530,22 @@ type Diagnostics struct {
 	// unknown reason.
 	ErrorCode LifecycleErrorCode
 
+	// The last portion of the diagnostic log. If available, AWS CodeDeploy returns up
+	// to the last 4 KB of the diagnostic log.
+	LogTail *string
+
 	// The message associated with the error.
 	Message *string
+
+	// The name of the script.
+	ScriptName *string
 }
 
 // Information about an EC2 tag filter.
 type EC2TagFilter struct {
+
+	// The tag filter key.
+	Key *string
 
 	// The tag filter type:
 	//
@@ -553,9 +556,6 @@ type EC2TagFilter struct {
 	//
 	// * KEY_AND_VALUE: Key and value.
 	Type EC2TagFilterType
-
-	// The tag filter key.
-	Key *string
 
 	// The tag filter value.
 	Value *string
@@ -574,37 +574,37 @@ type EC2TagSet struct {
 // deployment's target.
 type ECSService struct {
 
-	// The name of the target Amazon ECS service.
-	ServiceName *string
-
 	// The name of the cluster that the Amazon ECS service is associated with.
 	ClusterName *string
+
+	// The name of the target Amazon ECS service.
+	ServiceName *string
 }
 
 // Information about the target of an Amazon ECS deployment.
 type ECSTarget struct {
 
-	// The status an Amazon ECS deployment's target ECS application.
-	Status TargetStatus
-
-	// The ECSTaskSet objects associated with the ECS target.
-	TaskSetsInfo []*ECSTaskSet
-
-	// The unique ID of a deployment target that has a type of ecsTarget.
-	TargetId *string
-
-	// The Amazon Resource Name (ARN) of the target.
-	TargetArn *string
+	// The unique ID of a deployment.
+	DeploymentId *string
 
 	// The date and time when the target Amazon ECS application was updated by a
 	// deployment.
 	LastUpdatedAt *time.Time
 
-	// The unique ID of a deployment.
-	DeploymentId *string
-
 	// The lifecycle events of the deployment to this target Amazon ECS application.
 	LifecycleEvents []*LifecycleEvent
+
+	// The status an Amazon ECS deployment's target ECS application.
+	Status TargetStatus
+
+	// The Amazon Resource Name (ARN) of the target.
+	TargetArn *string
+
+	// The unique ID of a deployment target that has a type of ecsTarget.
+	TargetId *string
+
+	// The ECSTaskSet objects associated with the ECS target.
+	TaskSetsInfo []*ECSTaskSet
 }
 
 // Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An
@@ -614,8 +614,20 @@ type ECSTarget struct {
 // containerized application in an Amazon ECS service as a task set.
 type ECSTaskSet struct {
 
+	// The number of tasks in a task set. During a deployment that uses the Amazon ECS
+	// compute type, CodeDeploy instructs Amazon ECS to create a new task set and uses
+	// this value to determine how many tasks to create. After the updated task set is
+	// created, CodeDeploy shifts traffic to the new task set.
+	DesiredCount *int64
+
 	// A unique ID of an ECSTaskSet.
 	Identifer *string
+
+	// The number of tasks in the task set that are in the PENDING status during an
+	// Amazon ECS deployment. A task in the PENDING state is preparing to enter the
+	// RUNNING state. A task set enters the PENDING status when it launches for the
+	// first time, or when it is restarted after being in the STOPPED state.
+	PendingCount *int64
 
 	// The number of tasks in the task set that are in the RUNNING status during an
 	// Amazon ECS deployment. A task in the RUNNING state is running and ready for use.
@@ -634,15 +646,6 @@ type ECSTaskSet struct {
 	// targets are being deregistered from their target group.
 	Status *string
 
-	// The number of tasks in a task set. During a deployment that uses the Amazon ECS
-	// compute type, CodeDeploy instructs Amazon ECS to create a new task set and uses
-	// this value to determine how many tasks to create. After the updated task set is
-	// created, CodeDeploy shifts traffic to the new task set.
-	DesiredCount *int64
-
-	// The percentage of traffic served by this task set.
-	TrafficWeight *float64
-
 	// The target group associated with the task set. The target group is used by AWS
 	// CodeDeploy to manage traffic to a task set.
 	TargetGroup *TargetGroupInfo
@@ -651,11 +654,8 @@ type ECSTaskSet struct {
 	// a replacement target (GREEN).
 	TaskSetLabel TargetLabel
 
-	// The number of tasks in the task set that are in the PENDING status during an
-	// Amazon ECS deployment. A task in the PENDING state is preparing to enter the
-	// RUNNING state. A task set enters the PENDING status when it launches for the
-	// first time, or when it is restarted after being in the STOPPED state.
-	PendingCount *int64
+	// The percentage of traffic served by this task set.
+	TrafficWeight *float64
 }
 
 // Information about a load balancer in Elastic Load Balancing to use in a
@@ -673,9 +673,6 @@ type ELBInfo struct {
 
 // Information about a deployment error.
 type ErrorInformation struct {
-
-	// An accompanying error message.
-	Message *string
 
 	// For more information, see Error Codes for AWS CodeDeploy
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/error-codes.html) in
@@ -727,38 +724,41 @@ type ErrorInformation struct {
 	// was missing. This error code is most likely raised if the revision is deleted
 	// after the deployment is created, but before it is started.
 	Code ErrorCode
+
+	// An accompanying error message.
+	Message *string
 }
 
 // Information about an application revision.
 type GenericRevisionInfo struct {
 
-	// When the revision was last used by AWS CodeDeploy.
-	LastUsedTime *time.Time
+	// The deployment groups for which this is the current target revision.
+	DeploymentGroups []*string
 
 	// A comment about the revision.
 	Description *string
 
-	// The deployment groups for which this is the current target revision.
-	DeploymentGroups []*string
+	// When the revision was first used by AWS CodeDeploy.
+	FirstUsedTime *time.Time
+
+	// When the revision was last used by AWS CodeDeploy.
+	LastUsedTime *time.Time
 
 	// When the revision was registered with AWS CodeDeploy.
 	RegisterTime *time.Time
-
-	// When the revision was first used by AWS CodeDeploy.
-	FirstUsedTime *time.Time
 }
 
 // Information about the location of application artifacts stored in GitHub.
 type GitHubLocation struct {
 
+	// The SHA1 commit ID of the GitHub commit that represents the bundled artifacts
+	// for the application revision.
+	CommitId *string
+
 	// The GitHub account and repository pair that stores a reference to the commit
 	// that represents the bundled artifacts for the application revision. Specified as
 	// account/repository.
 	Repository *string
-
-	// The SHA1 commit ID of the GitHub commit that represents the bundled artifacts
-	// for the application revision.
-	CommitId *string
 }
 
 // Information about the instances that belong to the replacement environment in a
@@ -779,27 +779,27 @@ type GreenFleetProvisioningOption struct {
 // Information about an on-premises instance.
 type InstanceInfo struct {
 
-	// The ARN of the IAM session associated with the on-premises instance.
-	IamSessionArn *string
-
-	// The ARN of the on-premises instance.
-	InstanceArn *string
-
-	// The tags currently associated with the on-premises instance.
-	Tags []*Tag
-
-	// The IAM user ARN associated with the on-premises instance.
-	IamUserArn *string
-
 	// If the on-premises instance was deregistered, the time at which the on-premises
 	// instance was deregistered.
 	DeregisterTime *time.Time
 
-	// The time at which the on-premises instance was registered.
-	RegisterTime *time.Time
+	// The ARN of the IAM session associated with the on-premises instance.
+	IamSessionArn *string
+
+	// The IAM user ARN associated with the on-premises instance.
+	IamUserArn *string
+
+	// The ARN of the on-premises instance.
+	InstanceArn *string
 
 	// The name of the on-premises instance.
 	InstanceName *string
+
+	// The time at which the on-premises instance was registered.
+	RegisterTime *time.Time
+
+	// The tags currently associated with the on-premises instance.
+	Tags []*Tag
 }
 
 // Information about an instance in a deployment.
@@ -811,9 +811,6 @@ type InstanceSummary struct {
 	// The instance ID.
 	InstanceId *string
 
-	// A timestamp that indicates when the instance information was last updated.
-	LastUpdatedAt *time.Time
-
 	// Information about which environment an instance belongs to in a blue/green
 	// deployment.
 	//
@@ -822,6 +819,9 @@ type InstanceSummary struct {
 	//
 	// * GREEN: The instance is part of the replacement environment.
 	InstanceType InstanceType
+
+	// A timestamp that indicates when the instance information was last updated.
+	LastUpdatedAt *time.Time
 
 	// A list of lifecycle events for this instance.
 	LifecycleEvents []*LifecycleEvent
@@ -851,27 +851,27 @@ type InstanceSummary struct {
 // EC2/On-premises compute platform.
 type InstanceTarget struct {
 
+	// The unique ID of a deployment.
+	DeploymentId *string
+
 	// A label that identifies whether the instance is an original target (BLUE) or a
 	// replacement target (GREEN).
 	InstanceLabel TargetLabel
 
-	// The lifecycle events of the deployment to this target instance.
-	LifecycleEvents []*LifecycleEvent
-
 	// The date and time when the target instance was updated by a deployment.
 	LastUpdatedAt *time.Time
 
-	// The unique ID of a deployment.
-	DeploymentId *string
+	// The lifecycle events of the deployment to this target instance.
+	LifecycleEvents []*LifecycleEvent
 
-	// The unique ID of a deployment target that has a type of instanceTarget.
-	TargetId *string
+	// The status an EC2/On-premises deployment's target instance.
+	Status TargetStatus
 
 	// The Amazon Resource Name (ARN) of the target.
 	TargetArn *string
 
-	// The status an EC2/On-premises deployment's target instance.
-	Status TargetStatus
+	// The unique ID of a deployment target that has a type of instanceTarget.
+	TargetId *string
 }
 
 // Information about a Lambda function specified in a deployment.
@@ -880,17 +880,17 @@ type LambdaFunctionInfo struct {
 	// The version of a Lambda function that production traffic points to.
 	CurrentVersion *string
 
-	// The version of a Lambda function that production traffic points to after the
-	// Lambda function is deployed.
-	TargetVersion *string
-
-	// The name of a Lambda function.
-	FunctionName *string
-
 	// The alias of a Lambda function. For more information, see AWS Lambda Function
 	// Aliases (https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html) in the
 	// AWS Lambda Developer Guide.
 	FunctionAlias *string
+
+	// The name of a Lambda function.
+	FunctionName *string
+
+	// The version of a Lambda function that production traffic points to after the
+	// Lambda function is deployed.
+	TargetVersion *string
 
 	// The percentage of production traffic that the target version of a Lambda
 	// function receives.
@@ -901,23 +901,23 @@ type LambdaFunctionInfo struct {
 // deployment.
 type LambdaTarget struct {
 
-	// The status an AWS Lambda deployment's target Lambda function.
-	Status TargetStatus
+	// The unique ID of a deployment.
+	DeploymentId *string
 
 	// A LambdaFunctionInfo object that describes a target Lambda function.
 	LambdaFunctionInfo *LambdaFunctionInfo
 
-	// The Amazon Resource Name (ARN) of the target.
-	TargetArn *string
-
-	// The unique ID of a deployment.
-	DeploymentId *string
+	// The date and time when the target Lambda function was updated by a deployment.
+	LastUpdatedAt *time.Time
 
 	// The lifecycle events of the deployment to this target Lambda function.
 	LifecycleEvents []*LifecycleEvent
 
-	// The date and time when the target Lambda function was updated by a deployment.
-	LastUpdatedAt *time.Time
+	// The status an AWS Lambda deployment's target Lambda function.
+	Status TargetStatus
+
+	// The Amazon Resource Name (ARN) of the target.
+	TargetArn *string
 
 	// The unique ID of a deployment target that has a type of lambdaTarget.
 	TargetId *string
@@ -934,16 +934,26 @@ type LastDeploymentInfo struct {
 	// The unique ID of a deployment.
 	DeploymentId *string
 
-	// The status of the most recent deployment.
-	Status DeploymentStatus
-
 	// A timestamp that indicates when the most recent deployment to the deployment
 	// group was complete.
 	EndTime *time.Time
+
+	// The status of the most recent deployment.
+	Status DeploymentStatus
 }
 
 // Information about a deployment lifecycle event.
 type LifecycleEvent struct {
+
+	// Diagnostic information about the deployment lifecycle event.
+	Diagnostics *Diagnostics
+
+	// A timestamp that indicates when the deployment lifecycle event ended.
+	EndTime *time.Time
+
+	// The deployment lifecycle event name, such as ApplicationStop, BeforeInstall,
+	// AfterInstall, ApplicationStart, or ValidateService.
+	LifecycleEventName *string
 
 	// A timestamp that indicates when the deployment lifecycle event started.
 	StartTime *time.Time
@@ -967,25 +977,17 @@ type LifecycleEvent struct {
 	//     * Unknown: The deployment
 	// lifecycle event is unknown.
 	Status LifecycleEventStatus
-
-	// The deployment lifecycle event name, such as ApplicationStop, BeforeInstall,
-	// AfterInstall, ApplicationStart, or ValidateService.
-	LifecycleEventName *string
-
-	// A timestamp that indicates when the deployment lifecycle event ended.
-	EndTime *time.Time
-
-	// Diagnostic information about the deployment lifecycle event.
-	Diagnostics *Diagnostics
 }
 
 // Information about the Elastic Load Balancing load balancer or target group used
 // in a deployment.
 type LoadBalancerInfo struct {
 
-	// The target group pair information. This is an array of TargeGroupPairInfo
-	// objects with a maximum size of one.
-	TargetGroupPairInfoList []*TargetGroupPairInfo
+	// An array that contains information about the load balancer to use for load
+	// balancing in a deployment. In Elastic Load Balancing, load balancers are used
+	// with Classic Load Balancers. Adding more than one load balancer to the array is
+	// not supported.
+	ElbInfoList []*ELBInfo
 
 	// An array that contains information about the target group to use for load
 	// balancing in a deployment. In Elastic Load Balancing, target groups are used
@@ -993,18 +995,13 @@ type LoadBalancerInfo struct {
 	// is not supported.
 	TargetGroupInfoList []*TargetGroupInfo
 
-	// An array that contains information about the load balancer to use for load
-	// balancing in a deployment. In Elastic Load Balancing, load balancers are used
-	// with Classic Load Balancers. Adding more than one load balancer to the array is
-	// not supported.
-	ElbInfoList []*ELBInfo
+	// The target group pair information. This is an array of TargeGroupPairInfo
+	// objects with a maximum size of one.
+	TargetGroupPairInfoList []*TargetGroupPairInfo
 }
 
 // Information about minimum healthy instance.
 type MinimumHealthyHosts struct {
-
-	// The minimum healthy instance value.
-	Value *int32
 
 	// The minimum healthy instance type:
 	//
@@ -1033,6 +1030,9 @@ type MinimumHealthyHosts struct {
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html)
 	// in the AWS CodeDeploy User Guide.
 	Type MinimumHealthyHostsType
+
+	// The minimum healthy instance value.
+	Value *int32
 }
 
 // Information about groups of on-premises instance tags.
@@ -1049,28 +1049,32 @@ type OnPremisesTagSet struct {
 // the AppSpec file.
 type RawString struct {
 
-	// The SHA256 hash value of the revision content.
-	Sha256 *string
-
 	// The YAML-formatted or JSON-formatted revision string. It includes information
 	// about which Lambda function to update and optional Lambda functions that
 	// validate deployment lifecycle events.
 	Content *string
+
+	// The SHA256 hash value of the revision content.
+	Sha256 *string
 }
 
 // Information about an application revision.
 type RevisionInfo struct {
 
-	// Information about the location and type of an application revision.
-	RevisionLocation *RevisionLocation
-
 	// Information about an application revision, including usage details and
 	// associated deployment groups.
 	GenericRevisionInfo *GenericRevisionInfo
+
+	// Information about the location and type of an application revision.
+	RevisionLocation *RevisionLocation
 }
 
 // Information about the location of an application revision.
 type RevisionLocation struct {
+
+	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The
+	// content is formatted as JSON or YAML and stored as a RawString.
+	AppSpecContent *AppSpecContent
 
 	// Information about the location of application artifacts stored in GitHub.
 	GitHubLocation *GitHubLocation
@@ -1092,24 +1096,16 @@ type RevisionLocation struct {
 	// as a RawString.
 	RevisionType RevisionLocationType
 
-	// The content of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The
-	// content is formatted as JSON or YAML and stored as a RawString.
-	AppSpecContent *AppSpecContent
+	// Information about the location of a revision stored in Amazon S3.
+	S3Location *S3Location
 
 	// Information about the location of an AWS Lambda deployment revision stored as a
 	// RawString.
 	String_ *RawString
-
-	// Information about the location of a revision stored in Amazon S3.
-	S3Location *S3Location
 }
 
 // Information about a deployment rollback.
 type RollbackInfo struct {
-
-	// The deployment ID of the deployment that was underway and triggered a rollback
-	// deployment because it failed or was stopped.
-	RollbackTriggeringDeploymentId *string
 
 	// The ID of the deployment rollback.
 	RollbackDeploymentId *string
@@ -1118,6 +1114,10 @@ type RollbackInfo struct {
 	// whether the deployment can't be rolled back, is in progress, failed, or
 	// succeeded).
 	RollbackMessage *string
+
+	// The deployment ID of the deployment that was underway and triggered a rollback
+	// deployment because it failed or was stopped.
+	RollbackTriggeringDeploymentId *string
 }
 
 // Information about the location of application artifacts stored in Amazon S3.
@@ -1165,6 +1165,9 @@ type Tag struct {
 // Information about an on-premises instance tag filter.
 type TagFilter struct {
 
+	// The on-premises instance tag filter key.
+	Key *string
+
 	// The on-premises instance tag filter type:
 	//
 	//     * KEY_ONLY: Key only.
@@ -1174,9 +1177,6 @@ type TagFilter struct {
 	//
 	//     * KEY_AND_VALUE: Key and value.
 	Type TagFilterType
-
-	// The on-premises instance tag filter key.
-	Key *string
 
 	// The on-premises instance tag filter value.
 	Value *string
@@ -1200,11 +1200,6 @@ type TargetGroupInfo struct {
 // ECS deployment. An optional test traffic route can be specified.
 type TargetGroupPairInfo struct {
 
-	// An optional path used by a load balancer to route test traffic after an Amazon
-	// ECS deployment. Validation can occur while test traffic is served during a
-	// deployment.
-	TestTrafficRoute *TrafficRoute
-
 	// The path used by a load balancer to route production traffic when an Amazon ECS
 	// deployment is complete.
 	ProdTrafficRoute *TrafficRoute
@@ -1213,6 +1208,11 @@ type TargetGroupPairInfo struct {
 	// second is associated with the task set that serves traffic after the deployment
 	// is complete.
 	TargetGroups []*TargetGroupInfo
+
+	// An optional path used by a load balancer to route test traffic after an Amazon
+	// ECS deployment. Validation can occur while test traffic is served during a
+	// deployment.
+	TestTrafficRoute *TrafficRoute
 }
 
 // Information about the instances to be used in the replacement environment in a
@@ -1239,13 +1239,13 @@ type TargetInstances struct {
 // versions or ECS task sets are specified in the deployment's AppSpec file.
 type TimeBasedCanary struct {
 
-	// The percentage of traffic to shift in the first increment of a TimeBasedCanary
-	// deployment.
-	CanaryPercentage *int32
-
 	// The number of minutes between the first and second traffic shifts of a
 	// TimeBasedCanary deployment.
 	CanaryInterval *int32
+
+	// The percentage of traffic to shift in the first increment of a TimeBasedCanary
+	// deployment.
+	CanaryPercentage *int32
 }
 
 // A configuration that shifts traffic from one version of a Lambda function or ECS
@@ -1254,24 +1254,24 @@ type TimeBasedCanary struct {
 // sets are specified in the deployment's AppSpec file.
 type TimeBasedLinear struct {
 
-	// The percentage of traffic that is shifted at the start of each increment of a
-	// TimeBasedLinear deployment.
-	LinearPercentage *int32
-
 	// The number of minutes between each incremental traffic shift of a
 	// TimeBasedLinear deployment.
 	LinearInterval *int32
+
+	// The percentage of traffic that is shifted at the start of each increment of a
+	// TimeBasedLinear deployment.
+	LinearPercentage *int32
 }
 
 // Information about a time range.
 type TimeRange struct {
 
+	// The end time of the time range. Specify null to leave the end time open-ended.
+	End *time.Time
+
 	// The start time of the time range. Specify null to leave the start time
 	// open-ended.
 	Start *time.Time
-
-	// The end time of the time range. Specify null to leave the end time open-ended.
-	End *time.Time
 }
 
 // Information about a listener. The listener contains the path used to route
@@ -1289,9 +1289,10 @@ type TrafficRoute struct {
 // Amazon ECS task set to another during an Amazon ECS deployment.
 type TrafficRoutingConfig struct {
 
-	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a
-	// deployment configuration.
-	Type TrafficRoutingType
+	// A configuration that shifts traffic from one version of a Lambda function or ECS
+	// task set to another in two increments. The original and target Lambda function
+	// versions or ECS task sets are specified in the deployment's AppSpec file.
+	TimeBasedCanary *TimeBasedCanary
 
 	// A configuration that shifts traffic from one version of a Lambda function or ECS
 	// task set to another in equal increments, with an equal number of minutes between
@@ -1299,14 +1300,16 @@ type TrafficRoutingConfig struct {
 	// sets are specified in the deployment's AppSpec file.
 	TimeBasedLinear *TimeBasedLinear
 
-	// A configuration that shifts traffic from one version of a Lambda function or ECS
-	// task set to another in two increments. The original and target Lambda function
-	// versions or ECS task sets are specified in the deployment's AppSpec file.
-	TimeBasedCanary *TimeBasedCanary
+	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a
+	// deployment configuration.
+	Type TrafficRoutingType
 }
 
 // Information about notification triggers for the deployment group.
 type TriggerConfig struct {
+
+	// The event type or types for which notifications are triggered.
+	TriggerEvents []TriggerEventType
 
 	// The name of the notification trigger.
 	TriggerName *string
@@ -1314,7 +1317,4 @@ type TriggerConfig struct {
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic
 	// through which notifications about deployment or instance events are sent.
 	TriggerTargetArn *string
-
-	// The event type or types for which notifications are triggered.
-	TriggerEvents []TriggerEventType
 }

@@ -90,11 +90,10 @@ func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optF
 // Represents the input for a request action.
 type AcceptMatchInput struct {
 
-	// A unique identifier for a matchmaking ticket. The ticket must be in status
-	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
+	// Player response to the proposed match.
 	//
 	// This member is required.
-	TicketId *string
+	AcceptanceType types.AcceptanceType
 
 	// A unique identifier for a player delivering the response. This parameter can
 	// include one or multiple player IDs.
@@ -102,10 +101,11 @@ type AcceptMatchInput struct {
 	// This member is required.
 	PlayerIds []*string
 
-	// Player response to the proposed match.
+	// A unique identifier for a matchmaking ticket. The ticket must be in status
+	// REQUIRES_ACCEPTANCE; otherwise this request will fail.
 	//
 	// This member is required.
-	AcceptanceType types.AcceptanceType
+	TicketId *string
 }
 
 type AcceptMatchOutput struct {

@@ -61,14 +61,6 @@ func (c *Client) DeleteGroupPolicy(ctx context.Context, params *DeleteGroupPolic
 
 type DeleteGroupPolicyInput struct {
 
-	// The name identifying the policy document to delete. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	PolicyName *string
-
 	// The name (friendly name, not ARN) identifying the group that the policy is
 	// embedded in. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -77,6 +69,14 @@ type DeleteGroupPolicyInput struct {
 	//
 	// This member is required.
 	GroupName *string
+
+	// The name identifying the policy document to delete. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	PolicyName *string
 }
 
 type DeleteGroupPolicyOutput struct {

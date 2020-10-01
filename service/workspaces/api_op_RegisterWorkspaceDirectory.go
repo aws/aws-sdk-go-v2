@@ -62,17 +62,6 @@ func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *Registe
 
 type RegisterWorkspaceDirectoryInput struct {
 
-	// The tags associated with the directory.
-	Tags []*types.Tag
-
-	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
-	// Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS
-	// account must be enabled for BYOL. If your account has not been enabled for BYOL,
-	// you will receive an InvalidParameterValuesException error. For more information
-	// about BYOL images, see Bring Your Own Windows Desktop Images
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
-	Tenancy types.Tenancy
-
 	// The identifier of the directory. You cannot register a directory if it does not
 	// have a status of Active. If the directory does not have a status of Active, you
 	// will receive an InvalidResourceStateException error. If you have already
@@ -91,14 +80,25 @@ type RegisterWorkspaceDirectoryInput struct {
 	// This member is required.
 	EnableWorkDocs *bool
 
+	// Indicates whether self-service capabilities are enabled or disabled.
+	EnableSelfService *bool
+
 	// The identifiers of the subnets for your virtual private cloud (VPC). Make sure
 	// that the subnets are in supported Availability Zones. The subnets must also be
 	// in separate Availability Zones. If these conditions are not met, you will
 	// receive an OperationNotSupportedException error.
 	SubnetIds []*string
 
-	// Indicates whether self-service capabilities are enabled or disabled.
-	EnableSelfService *bool
+	// The tags associated with the directory.
+	Tags []*types.Tag
+
+	// Indicates whether your WorkSpace directory is dedicated or shared. To use Bring
+	// Your Own License (BYOL) images, this value must be set to DEDICATED and your AWS
+	// account must be enabled for BYOL. If your account has not been enabled for BYOL,
+	// you will receive an InvalidParameterValuesException error. For more information
+	// about BYOL images, see Bring Your Own Windows Desktop Images
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
+	Tenancy types.Tenancy
 }
 
 type RegisterWorkspaceDirectoryOutput struct {

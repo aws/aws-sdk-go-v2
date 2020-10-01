@@ -59,6 +59,12 @@ func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, para
 // configuration set.
 type PutConfigurationSetSuppressionOptionsInput struct {
 
+	// The name of the configuration set that you want to change the suppression list
+	// preferences for.
+	//
+	// This member is required.
+	ConfigurationSetName *string
+
 	// A list that contains the reasons that email addresses are automatically added to
 	// the suppression list for your account. This list can contain any or all of the
 	// following:
@@ -71,12 +77,6 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	// list for your account when a message sent to that address results in a hard
 	// bounce.
 	SuppressedReasons []types.SuppressionListReason
-
-	// The name of the configuration set that you want to change the suppression list
-	// preferences for.
-	//
-	// This member is required.
-	ConfigurationSetName *string
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request

@@ -60,28 +60,21 @@ func (c *Client) DescribeEnvironmentHealth(ctx context.Context, params *Describe
 // See the example below to learn how to create a request body.
 type DescribeEnvironmentHealthInput struct {
 
-	// Specify the environment by name. You must specify either this or an
-	// EnvironmentName, or both.
-	EnvironmentName *string
+	// Specify the response elements to return. To retrieve all attributes, set to All.
+	// If no attribute names are specified, returns the name of the environment.
+	AttributeNames []types.EnvironmentHealthAttribute
 
 	// Specify the environment by ID. You must specify either this or an
 	// EnvironmentName, or both.
 	EnvironmentId *string
 
-	// Specify the response elements to return. To retrieve all attributes, set to All.
-	// If no attribute names are specified, returns the name of the environment.
-	AttributeNames []types.EnvironmentHealthAttribute
+	// Specify the environment by name. You must specify either this or an
+	// EnvironmentName, or both.
+	EnvironmentName *string
 }
 
 // Health details for an AWS Elastic Beanstalk environment.
 type DescribeEnvironmentHealthOutput struct {
-
-	// The environment's name.
-	EnvironmentName *string
-
-	// The environment's operational status. Ready, Launching, Updating, Terminating,
-	// or Terminated.
-	Status types.EnvironmentHealth
 
 	// Application request metrics for the environment.
 	ApplicationMetrics *types.ApplicationMetrics
@@ -90,21 +83,28 @@ type DescribeEnvironmentHealthOutput struct {
 	// status.
 	Causes []*string
 
-	// The date and time that the health information was retrieved.
-	RefreshedAt *time.Time
+	// The health color
+	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
+	// of the environment.
+	Color *string
 
-	// Summary health information for the instances in the environment.
-	InstancesHealth *types.InstanceHealthSummary
+	// The environment's name.
+	EnvironmentName *string
 
 	// The health status
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
 	// of the environment. For example, Ok.
 	HealthStatus *string
 
-	// The health color
-	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment.
-	Color *string
+	// Summary health information for the instances in the environment.
+	InstancesHealth *types.InstanceHealthSummary
+
+	// The date and time that the health information was retrieved.
+	RefreshedAt *time.Time
+
+	// The environment's operational status. Ready, Launching, Updating, Terminating,
+	// or Terminated.
+	Status types.EnvironmentHealth
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

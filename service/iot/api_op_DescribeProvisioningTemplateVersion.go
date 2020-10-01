@@ -70,14 +70,14 @@ type DescribeProvisioningTemplateVersionInput struct {
 
 type DescribeProvisioningTemplateVersionOutput struct {
 
-	// The JSON formatted contents of the fleet provisioning template version.
-	TemplateBody *string
-
 	// The date when the fleet provisioning template version was created.
 	CreationDate *time.Time
 
 	// True if the fleet provisioning template version is the default version.
 	IsDefaultVersion *bool
+
+	// The JSON formatted contents of the fleet provisioning template version.
+	TemplateBody *string
 
 	// The fleet provisioning template version ID.
 	VersionId *int32

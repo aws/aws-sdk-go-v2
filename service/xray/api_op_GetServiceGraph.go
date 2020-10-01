@@ -63,24 +63,24 @@ func (c *Client) GetServiceGraph(ctx context.Context, params *GetServiceGraphInp
 
 type GetServiceGraphInput struct {
 
-	// The name of a group to generate a graph based on.
-	GroupName *string
-
 	// The end of the timeframe for which to generate a graph.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The ARN of a group to generate a graph based on.
-	GroupARN *string
-
-	// Pagination token.
-	NextToken *string
-
 	// The start of the time frame for which to generate a graph.
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	// The ARN of a group to generate a graph based on.
+	GroupARN *string
+
+	// The name of a group to generate a graph based on.
+	GroupName *string
+
+	// Pagination token.
+	NextToken *string
 }
 
 type GetServiceGraphOutput struct {
@@ -90,18 +90,18 @@ type GetServiceGraphOutput struct {
 	// group's filter expression.
 	ContainsOldGroupVersions *bool
 
-	// Pagination token.
-	NextToken *string
-
 	// The end of the time frame for which the graph was generated.
 	EndTime *time.Time
 
-	// The start of the time frame for which the graph was generated.
-	StartTime *time.Time
+	// Pagination token.
+	NextToken *string
 
 	// The services that have processed a traced request during the specified time
 	// frame.
 	Services []*types.Service
+
+	// The start of the time frame for which the graph was generated.
+	StartTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

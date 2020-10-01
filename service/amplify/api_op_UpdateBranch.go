@@ -58,33 +58,19 @@ func (c *Client) UpdateBranch(ctx context.Context, params *UpdateBranchInput, op
 // The request structure for the update branch request.
 type UpdateBranchInput struct {
 
-	// Enables notifications for the branch.
-	EnableNotification *bool
-
-	// Enables pull request preview for this branch.
-	EnablePullRequestPreview *bool
-
-	// Describes the current stage for the branch.
-	Stage types.Stage
-
 	// The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
-
-	// The display name for a branch. This is used as the default domain prefix.
-	DisplayName *string
 
 	// The name for the branch.
 	//
 	// This member is required.
 	BranchName *string
 
-	// The Amplify environment name for the pull request.
-	PullRequestEnvironmentName *string
-
-	// The content Time to Live (TTL) for the website in seconds.
-	Ttl *string
+	// The Amazon Resource Name (ARN) for a backend environment that is part of an
+	// Amplify app.
+	BackendEnvironmentArn *string
 
 	// The basic authorization credentials for the branch.
 	BasicAuthCredentials *string
@@ -92,24 +78,38 @@ type UpdateBranchInput struct {
 	// The build specification (build spec) for the branch.
 	BuildSpec *string
 
-	// The environment variables for the branch.
-	EnvironmentVariables map[string]*string
+	// The description for the branch.
+	Description *string
 
-	// The Amazon Resource Name (ARN) for a backend environment that is part of an
-	// Amplify app.
-	BackendEnvironmentArn *string
+	// The display name for a branch. This is used as the default domain prefix.
+	DisplayName *string
 
 	// Enables auto building for the branch.
 	EnableAutoBuild *bool
 
-	// The framework for the branch.
-	Framework *string
-
 	// Enables basic authorization for the branch.
 	EnableBasicAuth *bool
 
-	// The description for the branch.
-	Description *string
+	// Enables notifications for the branch.
+	EnableNotification *bool
+
+	// Enables pull request preview for this branch.
+	EnablePullRequestPreview *bool
+
+	// The environment variables for the branch.
+	EnvironmentVariables map[string]*string
+
+	// The framework for the branch.
+	Framework *string
+
+	// The Amplify environment name for the pull request.
+	PullRequestEnvironmentName *string
+
+	// Describes the current stage for the branch.
+	Stage types.Stage
+
+	// The content Time to Live (TTL) for the website in seconds.
+	Ttl *string
 }
 
 // The result structure for the update branch request.

@@ -69,12 +69,12 @@ type GetBuiltinIntentInput struct {
 
 type GetBuiltinIntentOutput struct {
 
+	// The unique identifier for a built-in intent.
+	Signature *string
+
 	// An array of BuiltinIntentSlot objects, one entry for each slot type in the
 	// intent.
 	Slots []*types.BuiltinIntentSlot
-
-	// The unique identifier for a built-in intent.
-	Signature *string
 
 	// A list of locales that the intent supports.
 	SupportedLocales []types.Locale

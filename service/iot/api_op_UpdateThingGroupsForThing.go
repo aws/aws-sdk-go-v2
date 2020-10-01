@@ -61,14 +61,14 @@ type UpdateThingGroupsForThingInput struct {
 	// from the last dynamic group.
 	OverrideDynamicGroups *bool
 
+	// The groups to which the thing will be added.
+	ThingGroupsToAdd []*string
+
 	// The groups from which the thing will be removed.
 	ThingGroupsToRemove []*string
 
 	// The thing whose group memberships will be updated.
 	ThingName *string
-
-	// The groups to which the thing will be added.
-	ThingGroupsToAdd []*string
 }
 
 type UpdateThingGroupsForThingOutput struct {

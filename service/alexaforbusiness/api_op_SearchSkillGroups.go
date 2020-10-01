@@ -62,9 +62,10 @@ type SearchSkillGroupsInput struct {
 	// key is SkillGroupName.
 	Filters []*types.Filter
 
-	// The sort order to use in listing the specified set of skill groups. The
-	// supported sort key is SkillGroupName.
-	SortCriteria []*types.Sort
+	// The maximum number of results to include in the response. If more results exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
@@ -72,22 +73,21 @@ type SearchSkillGroupsInput struct {
 	// Required.
 	NextToken *string
 
-	// The maximum number of results to include in the response. If more results exist
-	// than the specified MaxResults value, a token is included in the response so that
-	// the remaining results can be retrieved.
-	MaxResults *int32
+	// The sort order to use in listing the specified set of skill groups. The
+	// supported sort key is SkillGroupName.
+	SortCriteria []*types.Sort
 }
 
 type SearchSkillGroupsOutput struct {
 
-	// The total number of skill groups returned.
-	TotalCount *int32
+	// The token returned to indicate that there is more data available.
+	NextToken *string
 
 	// The skill groups that meet the filter criteria, in sort order.
 	SkillGroups []*types.SkillGroupData
 
-	// The token returned to indicate that there is more data available.
-	NextToken *string
+	// The total number of skill groups returned.
+	TotalCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

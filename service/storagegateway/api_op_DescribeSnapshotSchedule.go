@@ -71,27 +71,27 @@ type DescribeSnapshotScheduleInput struct {
 
 type DescribeSnapshotScheduleOutput struct {
 
-	// A value that indicates the time zone of the gateway.
-	Timezone *string
-
-	// A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically
-	// by key name. Each tag is a key-value pair. For a gateway with more than 10 tags
-	// assigned, you can view all tags using the ListTagsForResource API operation.
-	Tags []*types.Tag
-
 	// The snapshot description.
 	Description *string
 
-	// The Amazon Resource Name (ARN) of the volume that was specified in the request.
-	VolumeARN *string
+	// The number of hours between snapshots.
+	RecurrenceInHours *int32
 
 	// The hour of the day at which the snapshot schedule begins represented as hh,
 	// where hh is the hour (0 to 23). The hour of the day is in the time zone of the
 	// gateway.
 	StartAt *int32
 
-	// The number of hours between snapshots.
-	RecurrenceInHours *int32
+	// A list of up to 50 tags assigned to the snapshot schedule, sorted alphabetically
+	// by key name. Each tag is a key-value pair. For a gateway with more than 10 tags
+	// assigned, you can view all tags using the ListTagsForResource API operation.
+	Tags []*types.Tag
+
+	// A value that indicates the time zone of the gateway.
+	Timezone *string
+
+	// The Amazon Resource Name (ARN) of the volume that was specified in the request.
+	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,16 +67,16 @@ func (c *Client) UpdateNotificationSettings(ctx context.Context, params *UpdateN
 
 type UpdateNotificationSettingsInput struct {
 
+	// The ID of the HIT type whose notification specification is being updated.
+	//
+	// This member is required.
+	HITTypeId *string
+
 	// Specifies whether notifications are sent for HITs of this HIT type, according to
 	// the notification specification. You must specify either the Notification
 	// parameter or the Active parameter for the call to UpdateNotificationSettings to
 	// succeed.
 	Active *bool
-
-	// The ID of the HIT type whose notification specification is being updated.
-	//
-	// This member is required.
-	HITTypeId *string
 
 	// The notification specification for the HIT type.
 	Notification *types.NotificationSpecification

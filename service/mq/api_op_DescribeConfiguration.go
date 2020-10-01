@@ -66,6 +66,33 @@ type DescribeConfigurationInput struct {
 
 type DescribeConfigurationOutput struct {
 
+	// Required. The ARN of the configuration.
+	Arn *string
+
+	// The authentication strategy associated with the configuration.
+	AuthenticationStrategy types.AuthenticationStrategy
+
+	// Required. The date and time of the configuration revision.
+	Created *time.Time
+
+	// Required. The description of the configuration.
+	Description *string
+
+	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
+	// ACTIVEMQ.
+	EngineType types.EngineType
+
+	// Required. The version of the broker engine. For a list of supported engine
+	// versions, see
+	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	EngineVersion *string
+
+	// Required. The unique ID that Amazon MQ generates for the configuration.
+	Id *string
+
+	// Required. The latest revision of the configuration.
+	LatestRevision *types.ConfigurationRevision
+
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
 	// This value must be 1-150 characters long.
@@ -73,33 +100,6 @@ type DescribeConfigurationOutput struct {
 
 	// The list of all tags associated with this configuration.
 	Tags map[string]*string
-
-	// Required. The type of broker engine. Note: Currently, Amazon MQ supports only
-	// ACTIVEMQ.
-	EngineType types.EngineType
-
-	// The authentication strategy associated with the configuration.
-	AuthenticationStrategy types.AuthenticationStrategy
-
-	// Required. The latest revision of the configuration.
-	LatestRevision *types.ConfigurationRevision
-
-	// Required. The ARN of the configuration.
-	Arn *string
-
-	// Required. The date and time of the configuration revision.
-	Created *time.Time
-
-	// Required. The version of the broker engine. For a list of supported engine
-	// versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
-	EngineVersion *string
-
-	// Required. The description of the configuration.
-	Description *string
-
-	// Required. The unique ID that Amazon MQ generates for the configuration.
-	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

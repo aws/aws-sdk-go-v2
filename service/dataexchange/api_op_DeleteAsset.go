@@ -56,6 +56,11 @@ func (c *Client) DeleteAsset(ctx context.Context, params *DeleteAssetInput, optF
 
 type DeleteAssetInput struct {
 
+	// The unique identifier for an asset.
+	//
+	// This member is required.
+	AssetId *string
+
 	// The unique identifier for a data set.
 	//
 	// This member is required.
@@ -65,11 +70,6 @@ type DeleteAssetInput struct {
 	//
 	// This member is required.
 	RevisionId *string
-
-	// The unique identifier for an asset.
-	//
-	// This member is required.
-	AssetId *string
 }
 
 type DeleteAssetOutput struct {

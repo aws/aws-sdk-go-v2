@@ -65,35 +65,19 @@ type GetMaintenanceWindowInput struct {
 
 type GetMaintenanceWindowOutput struct {
 
-	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become inactive. The maintenance window will not run after this
-	// specified time.
-	EndDate *string
+	// Whether targets must be registered with the maintenance window before tasks can
+	// be defined for those targets.
+	AllowUnassociatedTargets *bool
 
 	// The date the maintenance window was created.
 	CreatedDate *time.Time
 
-	// The ID of the created maintenance window.
-	WindowId *string
+	// The number of hours before the end of the maintenance window that Systems
+	// Manager stops scheduling new tasks for execution.
+	Cutoff *int32
 
-	// The date the maintenance window was last modified.
-	ModifiedDate *time.Time
-
-	// The number of days to wait to run a maintenance window after the scheduled CRON
-	// expression date and time.
-	ScheduleOffset *int32
-
-	// The next time the maintenance window will actually run, taking into account any
-	// specified times for the maintenance window to become active or inactive.
-	NextExecutionTime *string
-
-	// The name of the maintenance window.
-	Name *string
-
-	// The date and time, in ISO-8601 Extended format, for when the maintenance window
-	// is scheduled to become active. The maintenance window will not run before this
-	// specified time.
-	StartDate *string
+	// The description of the maintenance window.
+	Description *string
 
 	// The duration of the maintenance window in hours.
 	Duration *int32
@@ -101,25 +85,41 @@ type GetMaintenanceWindowOutput struct {
 	// Indicates whether the maintenance window is enabled.
 	Enabled *bool
 
-	// The number of hours before the end of the maintenance window that Systems
-	// Manager stops scheduling new tasks for execution.
-	Cutoff *int32
+	// The date and time, in ISO-8601 Extended format, for when the maintenance window
+	// is scheduled to become inactive. The maintenance window will not run after this
+	// specified time.
+	EndDate *string
+
+	// The date the maintenance window was last modified.
+	ModifiedDate *time.Time
+
+	// The name of the maintenance window.
+	Name *string
+
+	// The next time the maintenance window will actually run, taking into account any
+	// specified times for the maintenance window to become active or inactive.
+	NextExecutionTime *string
 
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// Whether targets must be registered with the maintenance window before tasks can
-	// be defined for those targets.
-	AllowUnassociatedTargets *bool
-
-	// The description of the maintenance window.
-	Description *string
+	// The number of days to wait to run a maintenance window after the scheduled CRON
+	// expression date and time.
+	ScheduleOffset *int32
 
 	// The time zone that the scheduled maintenance window executions are based on, in
 	// Internet Assigned Numbers Authority (IANA) format. For example:
 	// "America/Los_Angeles", "etc/UTC", or "Asia/Seoul". For more information, see the
 	// Time Zone Database (https://www.iana.org/time-zones) on the IANA website.
 	ScheduleTimezone *string
+
+	// The date and time, in ISO-8601 Extended format, for when the maintenance window
+	// is scheduled to become active. The maintenance window will not run before this
+	// specified time.
+	StartDate *string
+
+	// The ID of the created maintenance window.
+	WindowId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

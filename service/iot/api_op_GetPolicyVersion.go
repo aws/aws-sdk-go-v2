@@ -58,28 +58,25 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 // The input for the GetPolicyVersion operation.
 type GetPolicyVersionInput struct {
 
-	// The policy version ID.
-	//
-	// This member is required.
-	PolicyVersionId *string
-
 	// The name of the policy.
 	//
 	// This member is required.
 	PolicyName *string
+
+	// The policy version ID.
+	//
+	// This member is required.
+	PolicyVersionId *string
 }
 
 // The output from the GetPolicyVersion operation.
 type GetPolicyVersionOutput struct {
 
-	// The policy version ID.
-	PolicyVersionId *string
+	// The date the policy was created.
+	CreationDate *time.Time
 
-	// The policy ARN.
-	PolicyArn *string
-
-	// The policy name.
-	PolicyName *string
+	// The generation ID of the policy version.
+	GenerationId *string
 
 	// Specifies whether the policy version is the default.
 	IsDefaultVersion *bool
@@ -87,14 +84,17 @@ type GetPolicyVersionOutput struct {
 	// The date the policy was last modified.
 	LastModifiedDate *time.Time
 
-	// The generation ID of the policy version.
-	GenerationId *string
+	// The policy ARN.
+	PolicyArn *string
 
 	// The JSON document that describes the policy.
 	PolicyDocument *string
 
-	// The date the policy was created.
-	CreationDate *time.Time
+	// The policy name.
+	PolicyName *string
+
+	// The policy version ID.
+	PolicyVersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,16 +57,16 @@ func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroup
 
 type DescribeLogGroupsInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
+	Limit *int32
 
 	// The prefix to match.
 	LogGroupNamePrefix *string
 
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int32
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeLogGroupsOutput struct {

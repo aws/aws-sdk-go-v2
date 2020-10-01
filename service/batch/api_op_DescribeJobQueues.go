@@ -56,14 +56,6 @@ func (c *Client) DescribeJobQueues(ctx context.Context, params *DescribeJobQueue
 
 type DescribeJobQueuesInput struct {
 
-	// The nextToken value returned from a previous paginated DescribeJobQueues request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This value is null when there are no more results to return.
-	// This token should be treated as an opaque identifier that is only used to
-	// retrieve the next items in a list and not for other programmatic purposes.
-	NextToken *string
-
 	// A list of up to 100 queue names or full queue Amazon Resource Name (ARN)
 	// entries.
 	JobQueues []*string
@@ -76,18 +68,26 @@ type DescribeJobQueuesInput struct {
 	// parameter is not used, then DescribeJobQueues returns up to 100 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
+	// The nextToken value returned from a previous paginated DescribeJobQueues request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value. This value is null when there are no more results to return.
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
+	NextToken *string
 }
 
 type DescribeJobQueuesOutput struct {
+
+	// The list of job queues.
+	JobQueues []*types.JobQueueDetail
 
 	// The nextToken value to include in a future DescribeJobQueues request. When the
 	// results of a DescribeJobQueues request exceed maxResults, this value can be used
 	// to retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
-
-	// The list of job queues.
-	JobQueues []*types.JobQueueDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

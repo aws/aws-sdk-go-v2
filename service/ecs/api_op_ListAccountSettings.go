@@ -56,6 +56,12 @@ func (c *Client) ListAccountSettings(ctx context.Context, params *ListAccountSet
 
 type ListAccountSettingsInput struct {
 
+	// Specifies whether to return the effective settings. If true, the account
+	// settings for the root user or the default setting for the principalArn are
+	// returned. If false, the account settings for the principalArn are returned if
+	// they are set. Otherwise, no account settings are returned.
+	EffectiveSettings *bool
+
 	// The maximum number of account setting results returned by ListAccountSettings in
 	// paginated output. When this parameter is used, ListAccountSettings only returns
 	// maxResults results in a single page along with a nextToken response element. The
@@ -65,10 +71,8 @@ type ListAccountSettingsInput struct {
 	// returns up to 10 results and a nextToken value if applicable.
 	MaxResults *int32
 
-	// The ARN of the principal, which can be an IAM user, IAM role, or the root user.
-	// If this field is omitted, the account settings are listed only for the
-	// authenticated user.
-	PrincipalArn *string
+	// The name of the account setting you want to list the settings for.
+	Name types.SettingName
 
 	// The nextToken value returned from a ListAccountSettings request indicating that
 	// more results are available to fulfill the request and further calls will be
@@ -78,30 +82,26 @@ type ListAccountSettingsInput struct {
 	// purposes.
 	NextToken *string
 
+	// The ARN of the principal, which can be an IAM user, IAM role, or the root user.
+	// If this field is omitted, the account settings are listed only for the
+	// authenticated user.
+	PrincipalArn *string
+
 	// The value of the account settings with which to filter results. You must also
 	// specify an account setting name to use this parameter.
 	Value *string
-
-	// The name of the account setting you want to list the settings for.
-	Name types.SettingName
-
-	// Specifies whether to return the effective settings. If true, the account
-	// settings for the root user or the default setting for the principalArn are
-	// returned. If false, the account settings for the principalArn are returned if
-	// they are set. Otherwise, no account settings are returned.
-	EffectiveSettings *bool
 }
 
 type ListAccountSettingsOutput struct {
-
-	// The account settings for the resource.
-	Settings []*types.Setting
 
 	// The nextToken value to include in a future ListAccountSettings request. When the
 	// results of a ListAccountSettings request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
+	// The account settings for the resource.
+	Settings []*types.Setting
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,14 +55,31 @@ func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgo
 // The request representing the confirmation for a password reset.
 type ConfirmForgotPasswordInput struct {
 
-	// A keyed-hash message authentication code (HMAC) calculated using the secret key
-	// of a user pool client and username plus the client ID in the message.
-	SecretHash *string
-
 	// The app client ID of the app associated with the user pool.
 	//
 	// This member is required.
 	ClientId *string
+
+	// The confirmation code sent by a user's request to retrieve a forgotten password.
+	// For more information, see
+	//
+	// This member is required.
+	ConfirmationCode *string
+
+	// The password sent by a user's request to retrieve a forgotten password.
+	//
+	// This member is required.
+	Password *string
+
+	// The user name of the user for whom you want to enter a code to retrieve a
+	// forgotten password.
+	//
+	// This member is required.
+	Username *string
+
+	// The Amazon Pinpoint analytics metadata for collecting metrics for
+	// ConfirmForgotPassword calls.
+	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
@@ -92,31 +109,14 @@ type ConfirmForgotPasswordInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
-	// The confirmation code sent by a user's request to retrieve a forgotten password.
-	// For more information, see
-	//
-	// This member is required.
-	ConfirmationCode *string
-
-	// The user name of the user for whom you want to enter a code to retrieve a
-	// forgotten password.
-	//
-	// This member is required.
-	Username *string
+	// A keyed-hash message authentication code (HMAC) calculated using the secret key
+	// of a user pool client and username plus the client ID in the message.
+	SecretHash *string
 
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
-
-	// The password sent by a user's request to retrieve a forgotten password.
-	//
-	// This member is required.
-	Password *string
-
-	// The Amazon Pinpoint analytics metadata for collecting metrics for
-	// ConfirmForgotPassword calls.
-	AnalyticsMetadata *types.AnalyticsMetadataType
 }
 
 // The response from the server that results from a user's request to retrieve a

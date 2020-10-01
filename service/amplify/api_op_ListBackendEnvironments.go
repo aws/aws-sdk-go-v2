@@ -58,9 +58,6 @@ func (c *Client) ListBackendEnvironments(ctx context.Context, params *ListBacken
 // The request structure for the list backend environments request.
 type ListBackendEnvironmentsInput struct {
 
-	// The maximum number of records to list in a single response.
-	MaxResults *int32
-
 	// The unique ID for an Amplify app.
 	//
 	// This member is required.
@@ -68,6 +65,9 @@ type ListBackendEnvironmentsInput struct {
 
 	// The name of the backend environment
 	EnvironmentName *string
+
+	// The maximum number of records to list in a single response.
+	MaxResults *int32
 
 	// A pagination token. Set to null to start listing backend environments from the
 	// start. If a non-null pagination token is returned in a result, pass its value in

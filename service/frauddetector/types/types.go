@@ -8,24 +8,24 @@ type BatchCreateVariableError struct {
 	// The error code.
 	Code *int32
 
-	// The name.
-	Name *string
-
 	// The error message.
 	Message *string
+
+	// The name.
+	Name *string
 }
 
 // Provides the error of the batch get variable API.
 type BatchGetVariableError struct {
-
-	// The error name.
-	Name *string
 
 	// The error code.
 	Code *int32
 
 	// The error message.
 	Message *string
+
+	// The error name.
+	Name *string
 }
 
 // The model training validation messages.
@@ -41,11 +41,11 @@ type DataValidationMetrics struct {
 // The detector.
 type Detector struct {
 
+	// The detector ARN.
+	Arn *string
+
 	// Timestamp of when the detector was created.
 	CreatedTime *string
-
-	// The name of the event type.
-	EventTypeName *string
 
 	// The detector description.
 	Description *string
@@ -53,8 +53,8 @@ type Detector struct {
 	// The detector ID.
 	DetectorId *string
 
-	// The detector ARN.
-	Arn *string
+	// The name of the event type.
+	EventTypeName *string
 
 	// Timestamp of when the detector was last updated.
 	LastUpdatedTime *string
@@ -63,8 +63,8 @@ type Detector struct {
 // The summary of the detector version.
 type DetectorVersionSummary struct {
 
-	// The detector version status.
-	Status DetectorVersionStatus
+	// The detector version description.
+	Description *string
 
 	// The detector version ID.
 	DetectorVersionId *string
@@ -72,8 +72,8 @@ type DetectorVersionSummary struct {
 	// Timestamp of when the detector version was last updated.
 	LastUpdatedTime *string
 
-	// The detector version description.
-	Description *string
+	// The detector version status.
+	Status DetectorVersionStatus
 }
 
 // The entity details.
@@ -97,45 +97,45 @@ type EntityType struct {
 	// The entity type ARN.
 	Arn *string
 
-	// Timestamp of when the entity type was last updated.
-	LastUpdatedTime *string
+	// Timestamp of when the entity type was created.
+	CreatedTime *string
 
 	// The entity type description.
 	Description *string
 
+	// Timestamp of when the entity type was last updated.
+	LastUpdatedTime *string
+
 	// The entity type name.
 	Name *string
-
-	// Timestamp of when the entity type was created.
-	CreatedTime *string
 }
 
 // The event type details.
 type EventType struct {
 
-	// The event type description.
-	Description *string
-
-	// The event type name.
-	Name *string
+	// The entity type ARN.
+	Arn *string
 
 	// Timestamp of when the event type was created.
 	CreatedTime *string
 
+	// The event type description.
+	Description *string
+
 	// The event type entity types.
 	EntityTypes []*string
+
+	// The event type event variables.
+	EventVariables []*string
 
 	// The event type labels.
 	Labels []*string
 
-	// The entity type ARN.
-	Arn *string
-
 	// Timestamp of when the event type was last updated.
 	LastUpdatedTime *string
 
-	// The event type event variables.
-	EventVariables []*string
+	// The event type name.
+	Name *string
 }
 
 // Details for the external events data used for model version training.
@@ -159,26 +159,26 @@ type ExternalModel struct {
 	// The model ARN.
 	Arn *string
 
-	// The Amazon SageMaker model endpoints.
-	ModelEndpoint *string
+	// Timestamp of when the model was last created.
+	CreatedTime *string
 
 	// The input configuration.
 	InputConfiguration *ModelInputConfiguration
 
-	// Timestamp of when the model was last updated.
-	LastUpdatedTime *string
-
 	// The role used to invoke the model.
 	InvokeModelEndpointRoleArn *string
 
-	// The source of the model.
-	ModelSource ModelSource
+	// Timestamp of when the model was last updated.
+	LastUpdatedTime *string
+
+	// The Amazon SageMaker model endpoints.
+	ModelEndpoint *string
 
 	// The Amazon Fraud Detector status for the external model endpoint
 	ModelEndpointStatus ModelEndpointStatus
 
-	// Timestamp of when the model was last created.
-	CreatedTime *string
+	// The source of the model.
+	ModelSource ModelSource
 
 	// The output configuration.
 	OutputConfiguration *ModelOutputConfiguration
@@ -187,8 +187,8 @@ type ExternalModel struct {
 // The message details.
 type FieldValidationMessage struct {
 
-	// The message type.
-	Type *string
+	// The message content.
+	Content *string
 
 	// The field name.
 	FieldName *string
@@ -196,11 +196,11 @@ type FieldValidationMessage struct {
 	// The message ID.
 	Identifier *string
 
-	// The message content.
-	Content *string
-
 	// The message title.
 	Title *string
+
+	// The message type.
+	Type *string
 }
 
 // The message details.
@@ -209,11 +209,11 @@ type FileValidationMessage struct {
 	// The message content.
 	Content *string
 
-	// The message type.
-	Type *string
-
 	// The message title.
 	Title *string
+
+	// The message type.
+	Type *string
 }
 
 // The KMS key details.
@@ -226,20 +226,20 @@ type KMSKey struct {
 // The label details.
 type Label struct {
 
-	// Timestamp of when the label was last updated.
-	LastUpdatedTime *string
-
 	// The label ARN.
 	Arn *string
+
+	// Timestamp of when the event type was created.
+	CreatedTime *string
 
 	// The label description.
 	Description *string
 
+	// Timestamp of when the label was last updated.
+	LastUpdatedTime *string
+
 	// The label name.
 	Name *string
-
-	// Timestamp of when the event type was created.
-	CreatedTime *string
 }
 
 // The label schema.
@@ -260,26 +260,32 @@ type LabelSchema struct {
 // Model performance metrics data points.
 type MetricDataPoint struct {
 
+	// The false positive rate. This is the percentage of total legitimate events that
+	// are incorrectly predicted as fraud.
+	Fpr *float32
+
+	// The percentage of fraud events correctly predicted as fraudulent as compared to
+	// all events predicted as fraudulent.
+	Precision *float32
+
 	// The model threshold that specifies an acceptable fraud capture rate. For
 	// example, a threshold of 500 means any model score 500 or above is labeled as
 	// fraud.
 	Threshold *float32
 
-	// The false positive rate. This is the percentage of total legitimate events that
-	// are incorrectly predicted as fraud.
-	Fpr *float32
-
 	// The true positive rate. This is the percentage of total fraud the model detects.
 	// Also known as capture rate.
 	Tpr *float32
-
-	// The percentage of fraud events correctly predicted as fraudulent as compared to
-	// all events predicted as fraudulent.
-	Precision *float32
 }
 
 // The model.
 type Model struct {
+
+	// The ARN of the model.
+	Arn *string
+
+	// Timestamp of when the model was created.
+	CreatedTime *string
 
 	// The model description.
 	Description *string
@@ -290,17 +296,11 @@ type Model struct {
 	// Timestamp of last time the model was updated.
 	LastUpdatedTime *string
 
-	// The model type.
-	ModelType ModelTypeEnum
-
-	// The ARN of the model.
-	Arn *string
-
 	// The model ID.
 	ModelId *string
 
-	// Timestamp of when the model was created.
-	CreatedTime *string
+	// The model type.
+	ModelType ModelTypeEnum
 }
 
 // A pre-formed Amazon SageMaker model input you can include if your detector
@@ -308,20 +308,28 @@ type Model struct {
 // input configuration.
 type ModelEndpointDataBlob struct {
 
-	// The content type of the Amazon SageMaker model endpoint input data blob.
-	ContentType *string
-
 	// The byte buffer of the Amazon SageMaker model endpoint input data blob.
 	ByteBuffer []byte
+
+	// The content type of the Amazon SageMaker model endpoint input data blob.
+	ContentType *string
 }
 
 // The Amazon SageMaker model input configuration.
 type ModelInputConfiguration struct {
 
+	// The event variables.
+	//
+	// This member is required.
+	UseEventVariables *bool
+
 	// Template for constructing the CSV input-data sent to SageMaker. At
 	// event-evaluation, the placeholders for variable-names in the template will be
 	// replaced with the variable values before being sent to SageMaker.
 	CsvInputTemplate *string
+
+	// The event type name.
+	EventTypeName *string
 
 	// The format of the model input configuration. The format differs depending on if
 	// it is passed through to SageMaker or constructed by Amazon Fraud Detector.
@@ -331,18 +339,15 @@ type ModelInputConfiguration struct {
 	// event-evaluation, the placeholders for variable names in the template will be
 	// replaced with the variable values before being sent to SageMaker.
 	JsonInputTemplate *string
-
-	// The event type name.
-	EventTypeName *string
-
-	// The event variables.
-	//
-	// This member is required.
-	UseEventVariables *bool
 }
 
 // Provides the Amazon Sagemaker model output configuration.
 type ModelOutputConfiguration struct {
+
+	// The format of the model output configuration.
+	//
+	// This member is required.
+	Format ModelOutputDataFormat
 
 	// A map of CSV index values in the SageMaker response to the Amazon Fraud Detector
 	// variables.
@@ -351,21 +356,16 @@ type ModelOutputConfiguration struct {
 	// A map of JSON keys in response from SageMaker to the Amazon Fraud Detector
 	// variables.
 	JsonKeyToVariableMap map[string]*string
-
-	// The format of the model output configuration.
-	//
-	// This member is required.
-	Format ModelOutputDataFormat
 }
 
 // The fraud prediction scores.
 type ModelScores struct {
 
-	// The model's fraud prediction scores.
-	Scores map[string]*float32
-
 	// The model version.
 	ModelVersion *ModelVersion
+
+	// The model's fraud prediction scores.
+	Scores map[string]*float32
 }
 
 // The model version.
@@ -376,6 +376,11 @@ type ModelVersion struct {
 	// This member is required.
 	ModelId *string
 
+	// The model type.
+	//
+	// This member is required.
+	ModelType ModelTypeEnum
+
 	// The model version number.
 	//
 	// This member is required.
@@ -383,55 +388,50 @@ type ModelVersion struct {
 
 	// The model version ARN.
 	Arn *string
-
-	// The model type.
-	//
-	// This member is required.
-	ModelType ModelTypeEnum
 }
 
 // The details of the model version.
 type ModelVersionDetail struct {
 
-	// The model version number.
-	ModelVersionNumber *string
+	// The model version ARN.
+	Arn *string
 
 	// The timestamp when the model was created.
 	CreatedTime *string
 
-	// The status of the model version.
-	Status *string
-
-	// The model type.
-	ModelType ModelTypeEnum
+	// The event details.
+	ExternalEventsDetail *ExternalEventsDetail
 
 	// The timestamp when the model was last updated.
 	LastUpdatedTime *string
 
-	// The model version ARN.
-	Arn *string
+	// The model ID.
+	ModelId *string
+
+	// The model type.
+	ModelType ModelTypeEnum
+
+	// The model version number.
+	ModelVersionNumber *string
+
+	// The status of the model version.
+	Status *string
+
+	// The training data schema.
+	TrainingDataSchema *TrainingDataSchema
 
 	// The model version training data source.
 	TrainingDataSource TrainingDataSourceEnum
 
 	// The training results.
 	TrainingResult *TrainingResult
-
-	// The event details.
-	ExternalEventsDetail *ExternalEventsDetail
-
-	// The model ID.
-	ModelId *string
-
-	// The training data schema.
-	TrainingDataSchema *TrainingDataSchema
 }
 
 // The outcome.
 type Outcome struct {
 
-	// The timestamp when the outcome was last updated.
-	LastUpdatedTime *string
+	// The outcome ARN.
+	Arn *string
 
 	// The timestamp when the outcome was created.
 	CreatedTime *string
@@ -439,11 +439,11 @@ type Outcome struct {
 	// The outcome description.
 	Description *string
 
+	// The timestamp when the outcome was last updated.
+	LastUpdatedTime *string
+
 	// The outcome name.
 	Name *string
-
-	// The outcome ARN.
-	Arn *string
 }
 
 // A rule.
@@ -468,35 +468,35 @@ type Rule struct {
 // The details of the rule.
 type RuleDetail struct {
 
-	// The rule language.
-	Language Language
-
-	// The rule description.
-	Description *string
+	// The rule ARN.
+	Arn *string
 
 	// The timestamp of when the rule was created.
 	CreatedTime *string
 
-	// The rule ID.
-	RuleId *string
-
-	// The rule expression.
-	Expression *string
+	// The rule description.
+	Description *string
 
 	// The detector for which the rule is associated.
 	DetectorId *string
 
-	// The rule outcomes.
-	Outcomes []*string
+	// The rule expression.
+	Expression *string
 
-	// The rule ARN.
-	Arn *string
-
-	// The rule version.
-	RuleVersion *string
+	// The rule language.
+	Language Language
 
 	// Timestamp of the last time the rule was updated.
 	LastUpdatedTime *string
+
+	// The rule outcomes.
+	Outcomes []*string
+
+	// The rule ID.
+	RuleId *string
+
+	// The rule version.
+	RuleVersion *string
 }
 
 // The rule results.
@@ -512,29 +512,29 @@ type RuleResult struct {
 // A key and value pair.
 type Tag struct {
 
-	// A value assigned to a tag key.
-	//
-	// This member is required.
-	Value *string
-
 	// A tag key.
 	//
 	// This member is required.
 	Key *string
+
+	// A value assigned to a tag key.
+	//
+	// This member is required.
+	Value *string
 }
 
 // The training data schema.
 type TrainingDataSchema struct {
 
-	// The training data schema variables.
-	//
-	// This member is required.
-	ModelVariables []*string
-
 	// The label schema.
 	//
 	// This member is required.
 	LabelSchema *LabelSchema
+
+	// The training data schema variables.
+	//
+	// This member is required.
+	ModelVariables []*string
 }
 
 // The training metric details.
@@ -562,18 +562,24 @@ type TrainingResult struct {
 // The variable.
 type Variable struct {
 
-	// The default value of the variable.
-	DefaultValue *string
+	// The ARN of the variable.
+	Arn *string
+
+	// The time when the variable was created.
+	CreatedTime *string
+
+	// The data source of the variable.
+	DataSource DataSource
 
 	// The data type of the variable. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
 	DataType DataType
 
-	// The ARN of the variable.
-	Arn *string
+	// The default value of the variable.
+	DefaultValue *string
 
-	// The data source of the variable.
-	DataSource DataSource
+	// The description of the variable.
+	Description *string
 
 	// The time when variable was last updated.
 	LastUpdatedTime *string
@@ -590,25 +596,25 @@ type Variable struct {
 	// SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE |
 	// SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT
 	VariableType *string
-
-	// The time when the variable was created.
-	CreatedTime *string
-
-	// The description of the variable.
-	Description *string
 }
 
 // A variable in the list of variables for the batch create variable request.
 type VariableEntry struct {
 
-	// The name of the variable.
-	Name *string
+	// The data source of the variable.
+	DataSource *string
+
+	// The data type of the variable.
+	DataType *string
+
+	// The default value of the variable.
+	DefaultValue *string
 
 	// The description of the variable.
 	Description *string
 
-	// The data source of the variable.
-	DataSource *string
+	// The name of the variable.
+	Name *string
 
 	// The type of the variable. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
@@ -621,10 +627,4 @@ type VariableEntry struct {
 	// SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP |
 	// USERAGENT
 	VariableType *string
-
-	// The default value of the variable.
-	DefaultValue *string
-
-	// The data type of the variable.
-	DataType *string
 }

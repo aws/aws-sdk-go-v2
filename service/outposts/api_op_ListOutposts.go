@@ -56,20 +56,20 @@ func (c *Client) ListOutposts(ctx context.Context, params *ListOutpostsInput, op
 
 type ListOutpostsInput struct {
 
-	// The pagination token.
-	NextToken *string
-
 	// The maximum page size.
 	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type ListOutpostsOutput struct {
 
-	// Information about the Outposts.
-	Outposts []*types.Outpost
-
 	// The pagination token.
 	NextToken *string
+
+	// Information about the Outposts.
+	Outposts []*types.Outpost
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

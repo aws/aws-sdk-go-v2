@@ -58,42 +58,47 @@ func (c *Client) UpdateDeploymentGroup(ctx context.Context, params *UpdateDeploy
 // Represents the input of an UpdateDeploymentGroup operation.
 type UpdateDeploymentGroupInput struct {
 
-	// Information about the type of deployment, either in-place or blue/green, you
-	// want to run and whether to route deployment traffic behind a load balancer.
-	DeploymentStyle *types.DeploymentStyle
-
 	// The application name that corresponds to the deployment group to update.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// Information about blue/green deployment options for a deployment group.
-	BlueGreenDeploymentConfiguration *types.BlueGreenDeploymentConfiguration
-
-	// The replacement set of on-premises instance tags on which to filter, if you want
-	// to change them. To keep the existing tags, enter their names. To remove tags, do
-	// not enter any tag names.
-	OnPremisesInstanceTagFilters []*types.TagFilter
+	// The current name of the deployment group.
+	//
+	// This member is required.
+	CurrentDeploymentGroupName *string
 
 	// Information to add or change about Amazon CloudWatch alarms when the deployment
 	// group is updated.
 	AlarmConfiguration *types.AlarmConfiguration
 
-	// Information about the load balancer used in a deployment.
-	LoadBalancerInfo *types.LoadBalancerInfo
+	// Information for an automatic rollback configuration that is added or changed
+	// when a deployment group is updated.
+	AutoRollbackConfiguration *types.AutoRollbackConfiguration
 
 	// The replacement list of Auto Scaling groups to be included in the deployment
 	// group, if you want to change them. To keep the Auto Scaling groups, enter their
 	// names. To remove Auto Scaling groups, do not enter any Auto Scaling group names.
 	AutoScalingGroups []*string
 
-	// A replacement ARN for the service role, if you want to change it.
-	ServiceRoleArn *string
+	// Information about blue/green deployment options for a deployment group.
+	BlueGreenDeploymentConfiguration *types.BlueGreenDeploymentConfiguration
+
+	// The replacement deployment configuration name to use, if you want to change it.
+	DeploymentConfigName *string
+
+	// Information about the type of deployment, either in-place or blue/green, you
+	// want to run and whether to route deployment traffic behind a load balancer.
+	DeploymentStyle *types.DeploymentStyle
 
 	// The replacement set of Amazon EC2 tags on which to filter, if you want to change
 	// them. To keep the existing tags, enter their names. To remove tags, do not enter
 	// any tag names.
 	Ec2TagFilters []*types.EC2TagFilter
+
+	// Information about groups of tags applied to on-premises instances. The
+	// deployment group includes only EC2 instances identified by all the tag groups.
+	Ec2TagSet *types.EC2TagSet
 
 	// The target Amazon ECS services in the deployment group. This applies only to
 	// deployment groups that use the Amazon ECS compute platform. A target Amazon ECS
@@ -101,34 +106,29 @@ type UpdateDeploymentGroupInput struct {
 	// format :.
 	EcsServices []*types.ECSService
 
+	// Information about the load balancer used in a deployment.
+	LoadBalancerInfo *types.LoadBalancerInfo
+
+	// The new name of the deployment group, if you want to change it.
+	NewDeploymentGroupName *string
+
+	// The replacement set of on-premises instance tags on which to filter, if you want
+	// to change them. To keep the existing tags, enter their names. To remove tags, do
+	// not enter any tag names.
+	OnPremisesInstanceTagFilters []*types.TagFilter
+
 	// Information about an on-premises instance tag set. The deployment group includes
 	// only on-premises instances identified by all the tag groups.
 	OnPremisesTagSet *types.OnPremisesTagSet
 
-	// The current name of the deployment group.
-	//
-	// This member is required.
-	CurrentDeploymentGroupName *string
-
-	// Information for an automatic rollback configuration that is added or changed
-	// when a deployment group is updated.
-	AutoRollbackConfiguration *types.AutoRollbackConfiguration
+	// A replacement ARN for the service role, if you want to change it.
+	ServiceRoleArn *string
 
 	// Information about triggers to change when the deployment group is updated. For
 	// examples, see Edit a Trigger in a CodeDeploy Deployment Group
 	// (https://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html)
 	// in the AWS CodeDeploy User Guide.
 	TriggerConfigurations []*types.TriggerConfig
-
-	// The replacement deployment configuration name to use, if you want to change it.
-	DeploymentConfigName *string
-
-	// The new name of the deployment group, if you want to change it.
-	NewDeploymentGroupName *string
-
-	// Information about groups of tags applied to on-premises instances. The
-	// deployment group includes only EC2 instances identified by all the tag groups.
-	Ec2TagSet *types.EC2TagSet
 }
 
 // Represents the output of an UpdateDeploymentGroup operation.

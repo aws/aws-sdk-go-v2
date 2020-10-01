@@ -74,16 +74,10 @@ func (c *Client) CreateInterconnect(ctx context.Context, params *CreateInterconn
 
 type CreateInterconnectInput struct {
 
-	// The ID of the LAG.
-	LagId *string
-
 	// The port bandwidth, in Gbps. The possible values are 1 and 10.
 	//
 	// This member is required.
 	Bandwidth *string
-
-	// The name of the service provider associated with the interconnect.
-	ProviderName *string
 
 	// The name of the interconnect.
 	//
@@ -95,6 +89,12 @@ type CreateInterconnectInput struct {
 	// This member is required.
 	Location *string
 
+	// The ID of the LAG.
+	LagId *string
+
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string
+
 	// The tags to associate with the interconnect.
 	Tags []*types.Tag
 }
@@ -102,8 +102,11 @@ type CreateInterconnectInput struct {
 // Information about an interconnect.
 type CreateInterconnectOutput struct {
 
-	// The ID of the interconnect.
-	InterconnectId *string
+	// The Direct Connect endpoint on which the physical connection terminates.
+	AwsDevice *string
+
+	// The Direct Connect endpoint on which the physical connection terminates.
+	AwsDeviceV2 *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -112,8 +115,11 @@ type CreateInterconnectOutput struct {
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
 
-	// The name of the service provider associated with the interconnect.
-	ProviderName *string
+	// The ID of the interconnect.
+	InterconnectId *string
+
+	// The name of the interconnect.
+	InterconnectName *string
 
 	// The state of the interconnect. The following are the possible values:
 	//
@@ -139,32 +145,26 @@ type CreateInterconnectOutput struct {
 	// * unknown: The state of the interconnect is not available.
 	InterconnectState types.InterconnectState
 
-	// The tags associated with the interconnect.
-	Tags []*types.Tag
-
 	// Indicates whether jumbo frames (9001 MTU) are supported.
 	JumboFrameCapable *bool
-
-	// The time of the most recent call to DescribeLoa () for this connection.
-	LoaIssueTime *time.Time
 
 	// The ID of the LAG.
 	LagId *string
 
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string
-
-	// The AWS Region where the connection is located.
-	Region *string
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string
+	// The time of the most recent call to DescribeLoa () for this connection.
+	LoaIssueTime *time.Time
 
 	// The location of the connection.
 	Location *string
 
-	// The name of the interconnect.
-	InterconnectName *string
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string
+
+	// The AWS Region where the connection is located.
+	Region *string
+
+	// The tags associated with the interconnect.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

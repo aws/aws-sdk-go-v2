@@ -59,14 +59,14 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 
 type DescribeApplicationInput struct {
 
-	// Displays verbose information about a Kinesis Data Analytics application,
-	// including the application's job plan.
-	IncludeAdditionalDetails *bool
-
 	// The name of the application.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// Displays verbose information about a Kinesis Data Analytics application,
+	// including the application's job plan.
+	IncludeAdditionalDetails *bool
 }
 
 type DescribeApplicationOutput struct {

@@ -60,14 +60,6 @@ func (c *Client) CreateWorkteam(ctx context.Context, params *CreateWorkteamInput
 
 type CreateWorkteamInput struct {
 
-	// Configures notification of workers regarding available or expiring work items.
-	NotificationConfiguration *types.NotificationConfiguration
-
-	// The name of the work team. Use this name to identify the work team.
-	//
-	// This member is required.
-	WorkteamName *string
-
 	// A description of the work team.
 	//
 	// This member is required.
@@ -83,8 +75,13 @@ type CreateWorkteamInput struct {
 	// This member is required.
 	MemberDefinitions []*types.MemberDefinition
 
-	// The name of the workforce.
-	WorkforceName *string
+	// The name of the work team. Use this name to identify the work team.
+	//
+	// This member is required.
+	WorkteamName *string
+
+	// Configures notification of workers regarding available or expiring work items.
+	NotificationConfiguration *types.NotificationConfiguration
 
 	// An array of key-value pairs. For more information, see Resource Tag
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-resource-tags.html)
@@ -92,6 +89,9 @@ type CreateWorkteamInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
 	// in the AWS Billing and Cost Management User Guide.
 	Tags []*types.Tag
+
+	// The name of the workforce.
+	WorkforceName *string
 }
 
 type CreateWorkteamOutput struct {

@@ -61,18 +61,20 @@ type ListCopyJobsInput struct {
 	// specified account ID.
 	ByAccountId *string
 
+	// Returns only copy jobs that were created after the specified date.
+	ByCreatedAfter *time.Time
+
+	// Returns only copy jobs that were created before the specified date.
+	ByCreatedBefore *time.Time
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to
+	// copy from; for example,
+	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
+	ByDestinationVaultArn *string
+
 	// Returns only copy jobs that match the specified resource Amazon Resource Name
 	// (ARN).
 	ByResourceArn *string
-
-	// The maximum number of items to be returned.
-	MaxResults *int32
-
-	// Returns only copy jobs that are in the specified state.
-	ByState types.CopyJobState
-
-	// Returns only copy jobs that were created after the specified date.
-	ByCreatedAfter *time.Time
 
 	// Returns only backup jobs for the specified resources:
 	//
@@ -92,19 +94,17 @@ type ListCopyJobsInput struct {
 	//     * Storage Gateway for AWS Storage Gateway
 	ByResourceType *string
 
+	// Returns only copy jobs that are in the specified state.
+	ByState types.CopyJobState
+
+	// The maximum number of items to be returned.
+	MaxResults *int32
+
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
-
-	// Returns only copy jobs that were created before the specified date.
-	ByCreatedBefore *time.Time
-
-	// An Amazon Resource Name (ARN) that uniquely identifies a source backup vault to
-	// copy from; for example,
-	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
-	ByDestinationVaultArn *string
 }
 
 type ListCopyJobsOutput struct {

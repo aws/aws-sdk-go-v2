@@ -112,6 +112,13 @@ type SignInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Specifies the message or message digest to sign. Messages can be 0-4096 bytes.
+	// To sign a larger message, provide the message digest. If you provide a message,
+	// AWS KMS generates a hash digest of the message and then signs it.
+	//
+	// This member is required.
+	Message []byte
+
 	// Specifies the signing algorithm to use when signing the message. Choose an
 	// algorithm that is compatible with the type and size of the specified asymmetric
 	// CMK.
@@ -128,19 +135,14 @@ type SignInput struct {
 	// digest. The default value, RAW, indicates a message. To indicate a message
 	// digest, enter DIGEST.
 	MessageType types.MessageType
-
-	// Specifies the message or message digest to sign. Messages can be 0-4096 bytes.
-	// To sign a larger message, provide the message digest. If you provide a message,
-	// AWS KMS generates a hash digest of the message and then signs it.
-	//
-	// This member is required.
-	Message []byte
 }
 
 type SignOutput struct {
 
-	// The signing algorithm that was used to sign the message.
-	SigningAlgorithm types.SigningAlgorithmSpec
+	// The Amazon Resource Name (key ARN
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the asymmetric CMK that was used to sign the message.
+	KeyId *string
 
 	// The cryptographic signature that was generated for the message.
 	//
@@ -159,10 +161,8 @@ type SignOutput struct {
 	// Base64-encoded.
 	Signature []byte
 
-	// The Amazon Resource Name (key ARN
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the asymmetric CMK that was used to sign the message.
-	KeyId *string
+	// The signing algorithm that was used to sign the message.
+	SigningAlgorithm types.SigningAlgorithmSpec
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

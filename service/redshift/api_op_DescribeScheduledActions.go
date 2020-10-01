@@ -58,16 +58,16 @@ func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeS
 
 type DescribeScheduledActionsInput struct {
 
-	// The start time in UTC of the scheduled actions to retrieve. Only active
-	// scheduled actions that have invocations after this time are retrieved.
-	StartTime *time.Time
-
 	// If true, retrieve only active scheduled actions. If false, retrieve only
 	// disabled scheduled actions.
 	Active *bool
 
-	// The name of the scheduled action to retrieve.
-	ScheduledActionName *string
+	// The end time in UTC of the scheduled action to retrieve. Only active scheduled
+	// actions that have invocations before this time are retrieved.
+	EndTime *time.Time
+
+	// List of scheduled action filters.
+	Filters []*types.ScheduledActionFilter
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeScheduledActions () request
@@ -84,21 +84,18 @@ type DescribeScheduledActionsInput struct {
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The end time in UTC of the scheduled action to retrieve. Only active scheduled
-	// actions that have invocations before this time are retrieved.
-	EndTime *time.Time
+	// The name of the scheduled action to retrieve.
+	ScheduledActionName *string
+
+	// The start time in UTC of the scheduled actions to retrieve. Only active
+	// scheduled actions that have invocations after this time are retrieved.
+	StartTime *time.Time
 
 	// The type of the scheduled actions to retrieve.
 	TargetActionType types.ScheduledActionTypeValues
-
-	// List of scheduled action filters.
-	Filters []*types.ScheduledActionFilter
 }
 
 type DescribeScheduledActionsOutput struct {
-
-	// List of retrieved scheduled actions.
-	ScheduledActions []*types.ScheduledAction
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeScheduledActions () request
@@ -107,6 +104,9 @@ type DescribeScheduledActionsOutput struct {
 	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
+	// List of retrieved scheduled actions.
+	ScheduledActions []*types.ScheduledAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

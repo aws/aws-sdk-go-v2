@@ -74,6 +74,19 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 // Represents the input for a request action.
 type ListAliasesInput struct {
 
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages.
+	Limit *int32
+
+	// A descriptive label that is associated with an alias. Alias names do not need to
+	// be unique.
+	Name *string
+
+	// A token that indicates the start of the next sequential page of results. Use the
+	// token that is returned with a previous call to this action. To start at the
+	// beginning of the result set, do not specify a value.
+	NextToken *string
+
 	// The routing type to filter results on. Use this parameter to retrieve only
 	// aliases with a certain routing type. To retrieve all aliases, leave this
 	// parameter empty. Possible routing types include the following:
@@ -86,31 +99,18 @@ type ListAliasesInput struct {
 	// be used to display a message to the user. A terminal alias throws a
 	// TerminalRoutingStrategyException with the RoutingStrategy () message embedded.
 	RoutingStrategyType types.RoutingStrategyType
-
-	// A descriptive label that is associated with an alias. Alias names do not need to
-	// be unique.
-	Name *string
-
-	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int32
-
-	// A token that indicates the start of the next sequential page of results. Use the
-	// token that is returned with a previous call to this action. To start at the
-	// beginning of the result set, do not specify a value.
-	NextToken *string
 }
 
 // Represents the returned data in response to a request action.
 type ListAliasesOutput struct {
 
+	// A collection of alias resources that match the request parameters.
+	Aliases []*types.Alias
+
 	// A token that indicates where to resume retrieving results on the next call to
 	// this action. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
-
-	// A collection of alias resources that match the request parameters.
-	Aliases []*types.Alias
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,15 +66,15 @@ func (c *Client) GetSignalingChannelEndpoint(ctx context.Context, params *GetSig
 
 type GetSignalingChannelEndpointInput struct {
 
-	// A structure containing the endpoint configuration for the SINGLE_MASTER channel
-	// type.
-	SingleMasterChannelEndpointConfiguration *types.SingleMasterChannelEndpointConfiguration
-
 	// The Amazon Resource Name (ARN) of the signalling channel for which you want to
 	// get an endpoint.
 	//
 	// This member is required.
 	ChannelARN *string
+
+	// A structure containing the endpoint configuration for the SINGLE_MASTER channel
+	// type.
+	SingleMasterChannelEndpointConfiguration *types.SingleMasterChannelEndpointConfiguration
 }
 
 type GetSignalingChannelEndpointOutput struct {

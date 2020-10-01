@@ -57,15 +57,15 @@ func (c *Client) DeleteV2LoggingLevel(ctx context.Context, params *DeleteV2Loggi
 
 type DeleteV2LoggingLevelInput struct {
 
-	// The type of resource for which you are configuring logging. Must be THING_Group.
-	//
-	// This member is required.
-	TargetType types.LogTargetType
-
 	// The name of the resource for which you are configuring logging.
 	//
 	// This member is required.
 	TargetName *string
+
+	// The type of resource for which you are configuring logging. Must be THING_Group.
+	//
+	// This member is required.
+	TargetType types.LogTargetType
 }
 
 type DeleteV2LoggingLevelOutput struct {

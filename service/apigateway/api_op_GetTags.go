@@ -57,11 +57,11 @@ func (c *Client) GetTags(ctx context.Context, params *GetTagsInput, optFns ...fu
 
 // Gets the Tags () collection for a given resource.
 type GetTagsInput struct {
-	Template *bool
 
-	Title *string
-
-	TemplateSkipList []*string
+	// [Required] The ARN of a resource that can be tagged.
+	//
+	// This member is required.
+	ResourceArn *string
 
 	// (Not currently supported) The maximum number of returned results per page. The
 	// default value is 25 and the maximum value is 500.
@@ -69,14 +69,15 @@ type GetTagsInput struct {
 
 	Name *string
 
-	// [Required] The ARN of a resource that can be tagged.
-	//
-	// This member is required.
-	ResourceArn *string
-
 	// (Not currently supported) The current pagination position in the paged result
 	// set.
 	Position *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // The collection of tags. Each tag element is associated with a given resource.

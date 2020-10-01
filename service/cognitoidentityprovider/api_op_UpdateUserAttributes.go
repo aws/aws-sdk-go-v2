@@ -55,6 +55,17 @@ func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAtt
 // Represents the request to update user attributes.
 type UpdateUserAttributesInput struct {
 
+	// The access token for the request to update user attributes.
+	//
+	// This member is required.
+	AccessToken *string
+
+	// An array of name-value pairs representing user attributes. For custom
+	// attributes, you must prepend the custom: prefix to the attribute name.
+	//
+	// This member is required.
+	UserAttributes []*types.AttributeType
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -82,17 +93,6 @@ type UpdateUserAttributesInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
-
-	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name.
-	//
-	// This member is required.
-	UserAttributes []*types.AttributeType
-
-	// The access token for the request to update user attributes.
-	//
-	// This member is required.
-	AccessToken *string
 }
 
 // Represents the response from the server for the request to update user

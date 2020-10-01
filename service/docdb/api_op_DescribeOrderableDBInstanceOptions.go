@@ -58,29 +58,18 @@ func (c *Client) DescribeOrderableDBInstanceOptions(ctx context.Context, params 
 // Represents the input to DescribeOrderableDBInstanceOptions ().
 type DescribeOrderableDBInstanceOptionsInput struct {
 
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
-	Marker *string
-
-	// The virtual private cloud (VPC) filter value. Specify this parameter to show
-	// only the available VPC or non-VPC offerings.
-	Vpc *bool
-
 	// The name of the engine to retrieve instance options for.
 	//
 	// This member is required.
 	Engine *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
-
 	// The instance class filter value. Specify this parameter to show only the
 	// available offerings that match the specified instance class.
 	DBInstanceClass *string
+
+	// The engine version filter value. Specify this parameter to show only the
+	// available offerings that match the specified engine version.
+	EngineVersion *string
 
 	// This parameter is not currently supported.
 	Filters []*types.Filter
@@ -89,21 +78,32 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 	// available offerings that match the specified license model.
 	LicenseModel *string
 
-	// The engine version filter value. Specify this parameter to show only the
-	// available offerings that match the specified engine version.
-	EngineVersion *string
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to the
+	// value specified by MaxRecords.
+	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token (marker) is included in
+	// the response so that the remaining results can be retrieved. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
+
+	// The virtual private cloud (VPC) filter value. Specify this parameter to show
+	// only the available VPC or non-VPC offerings.
+	Vpc *bool
 }
 
 // Represents the output of DescribeOrderableDBInstanceOptions ().
 type DescribeOrderableDBInstanceOptionsOutput struct {
 
-	// The options that are available for a particular orderable instance.
-	OrderableDBInstanceOptions []*types.OrderableDBInstanceOption
-
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// The options that are available for a particular orderable instance.
+	OrderableDBInstanceOptions []*types.OrderableDBInstanceOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,12 +67,12 @@ type DescribeStacksInput struct {
 
 type DescribeStacksOutput struct {
 
-	// Information about the stacks.
-	Stacks []*types.Stack
-
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
+
+	// Information about the stacks.
+	Stacks []*types.Stack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

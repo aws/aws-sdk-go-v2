@@ -57,29 +57,29 @@ func (c *Client) ListAttachedPolicies(ctx context.Context, params *ListAttachedP
 
 type ListAttachedPoliciesInput struct {
 
-	// The token to retrieve the next set of results.
-	Marker *string
-
-	// When true, recursively list attached policies.
-	Recursive *bool
-
-	// The maximum number of results to be returned per request.
-	PageSize *int32
-
 	// The group or principal for which the policies will be listed.
 	//
 	// This member is required.
 	Target *string
+
+	// The token to retrieve the next set of results.
+	Marker *string
+
+	// The maximum number of results to be returned per request.
+	PageSize *int32
+
+	// When true, recursively list attached policies.
+	Recursive *bool
 }
 
 type ListAttachedPoliciesOutput struct {
 
-	// The policies.
-	Policies []*types.Policy
-
 	// The token to retrieve the next set of results, or ``null`` if there are no more
 	// results.
 	NextMarker *string
+
+	// The policies.
+	Policies []*types.Policy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -68,17 +68,17 @@ type CreateFleetInput struct {
 
 type CreateFleetOutput struct {
 
-	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time
-
-	// The list of all tags added to the fleet.
-	Tags map[string]*string
-
 	// The Amazon Resource Name (ARN) of the fleet.
 	Arn *string
 
+	// The time, in milliseconds since the epoch, when the fleet was created.
+	CreatedAt *time.Time
+
 	// The name of the fleet.
 	Name *string
+
+	// The list of all tags added to the fleet.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

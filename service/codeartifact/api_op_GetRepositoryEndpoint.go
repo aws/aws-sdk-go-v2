@@ -81,14 +81,14 @@ type GetRepositoryEndpointInput struct {
 	// This member is required.
 	Format types.PackageFormat
 
-	// The 12-digit account number of the AWS account that owns the domain that
-	// contains the repository. It does not include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the repository.
 	//
 	// This member is required.
 	Repository *string
+
+	// The 12-digit account number of the AWS account that owns the domain that
+	// contains the repository. It does not include dashes or spaces.
+	DomainOwner *string
 }
 
 type GetRepositoryEndpointOutput struct {

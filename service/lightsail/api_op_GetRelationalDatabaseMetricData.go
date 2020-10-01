@@ -61,6 +61,18 @@ func (c *Client) GetRelationalDatabaseMetricData(ctx context.Context, params *Ge
 
 type GetRelationalDatabaseMetricDataInput struct {
 
+	// The end of the time interval from which to get metric data. Constraints:
+	//
+	//     *
+	// Specified in Coordinated Universal Time (UTC).
+	//
+	//     * Specified in the Unix time
+	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
+	// UTC, then you input 1538424000 as the end time.  </li> </ul>
+	//
+	// This member is required.
+	EndTime *time.Time
+
 	// The metric for which you want to return information. Valid relational database
 	// metric names are listed below, along with the most useful statistics to include
 	// in your request, and the published unit value. All relational database metric
@@ -97,24 +109,16 @@ type GetRelationalDatabaseMetricDataInput struct {
 	// This member is required.
 	MetricName types.RelationalDatabaseMetricName
 
-	// The end of the time interval from which to get metric data. Constraints:
-	//
-	//     *
-	// Specified in Coordinated Universal Time (UTC).
-	//
-	//     * Specified in the Unix time
-	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
-	// UTC, then you input 1538424000 as the end time.  </li> </ul>
+	// The granularity, in seconds, of the returned data points. All relational
+	// database metric data is available in 1-minute (60 seconds) granularity.
 	//
 	// This member is required.
-	EndTime *time.Time
+	Period *int32
 
-	// The unit for the metric data request. Valid units depend on the metric data
-	// being requested. For the valid units with each available metric, see the
-	// metricName parameter.
+	// The name of your database from which to get metric data.
 	//
 	// This member is required.
-	Unit types.MetricUnit
+	RelationalDatabaseName *string
 
 	// The start of the time interval from which to get metric data. Constraints:
 	//
@@ -154,16 +158,12 @@ type GetRelationalDatabaseMetricDataInput struct {
 	// This member is required.
 	Statistics []types.MetricStatistic
 
-	// The name of your database from which to get metric data.
+	// The unit for the metric data request. Valid units depend on the metric data
+	// being requested. For the valid units with each available metric, see the
+	// metricName parameter.
 	//
 	// This member is required.
-	RelationalDatabaseName *string
-
-	// The granularity, in seconds, of the returned data points. All relational
-	// database metric data is available in 1-minute (60 seconds) granularity.
-	//
-	// This member is required.
-	Period *int32
+	Unit types.MetricUnit
 }
 
 type GetRelationalDatabaseMetricDataOutput struct {

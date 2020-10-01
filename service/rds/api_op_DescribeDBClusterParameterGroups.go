@@ -63,6 +63,16 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 //
 type DescribeDBClusterParameterGroupsInput struct {
 
+	// The name of a specific DB cluster parameter group to return details for.
+	// Constraints:
+	//
+	//     * If supplied, must match the name of an existing
+	// DBClusterParameterGroup.
+	DBClusterParameterGroupName *string
+
+	// This parameter isn't currently supported.
+	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
@@ -74,29 +84,19 @@ type DescribeDBClusterParameterGroupsInput struct {
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
-
-	// The name of a specific DB cluster parameter group to return details for.
-	// Constraints:
-	//
-	//     * If supplied, must match the name of an existing
-	// DBClusterParameterGroup.
-	DBClusterParameterGroupName *string
-
-	// This parameter isn't currently supported.
-	Filters []*types.Filter
 }
 
 //
 type DescribeDBClusterParameterGroupsOutput struct {
+
+	// A list of DB cluster parameter groups.
+	DBClusterParameterGroups []*types.DBClusterParameterGroup
 
 	// An optional pagination token provided by a previous
 	// DescribeDBClusterParameterGroups request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
-
-	// A list of DB cluster parameter groups.
-	DBClusterParameterGroups []*types.DBClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

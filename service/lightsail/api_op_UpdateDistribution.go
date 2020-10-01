@@ -59,8 +59,12 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 type UpdateDistributionInput struct {
 
-	// An object that describes the default cache behavior for the distribution.
-	DefaultCacheBehavior *types.CacheBehavior
+	// The name of the distribution to update.  <p>Use the
+	// <code>GetDistributions</code> action to get a list of distribution names that
+	// you can specify.</p>
+	//
+	// This member is required.
+	DistributionName *string
 
 	// An object that describes the cache behavior settings for the distribution. The
 	// cacheBehaviorSettings specified in your UpdateDistributionRequest will replace
@@ -71,6 +75,9 @@ type UpdateDistributionInput struct {
 	// distribution.
 	CacheBehaviors []*types.CacheBehaviorPerPath
 
+	// An object that describes the default cache behavior for the distribution.
+	DefaultCacheBehavior *types.CacheBehavior
+
 	// Indicates whether to enable the distribution.
 	IsEnabled *bool
 
@@ -78,13 +85,6 @@ type UpdateDistributionInput struct {
 	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
 	// serves content from the origin.</p>
 	Origin *types.InputOrigin
-
-	// The name of the distribution to update.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
-	//
-	// This member is required.
-	DistributionName *string
 }
 
 type UpdateDistributionOutput struct {

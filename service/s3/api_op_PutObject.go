@@ -111,8 +111,144 @@ func (c *Client) PutObject(ctx context.Context, params *PutObjectInput, optFns .
 
 type PutObjectInput struct {
 
+	// Bucket name to which the PUT operation was initiated. When using this API with
+	// an access point, you must direct requests to the access point hostname. The
+	// access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// operation using an access point through the AWS SDKs, you provide the access
+	// point ARN in place of the bucket name. For more information about access point
+	// ARNs, see Using Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
+	// the Amazon Simple Storage Service Developer Guide.
+	//
+	// This member is required.
+	Bucket *string
+
+	// Object key for which the PUT operation was initiated.
+	//
+	// This member is required.
+	Key *string
+
+	// The canned ACL to apply to the object. For more information, see Canned ACL
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
+	ACL types.ObjectCannedACL
+
 	// Object data.
 	Body io.Reader
+
+	// Can be used to specify caching behavior along the request/reply chain. For more
+	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9).
+	CacheControl *string
+
+	// Specifies presentational information for the object. For more information, see
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1).
+	ContentDisposition *string
+
+	// Specifies what content encodings have been applied to the object and thus what
+	// decoding mechanisms must be applied to obtain the media-type referenced by the
+	// Content-Type header field. For more information, see
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11).
+	ContentEncoding *string
+
+	// The language the content is in.
+	ContentLanguage *string
+
+	// Size of the body in bytes. This parameter is useful when the size of the body
+	// cannot be determined automatically. For more information, see
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13).
+	ContentLength *int64
+
+	// The base64-encoded 128-bit MD5 digest of the message (without the headers)
+	// according to RFC 1864. This header can be used as a message integrity check to
+	// verify that the data is the same data that was originally sent. Although it is
+	// optional, we recommend using the Content-MD5 mechanism as an end-to-end
+	// integrity check. For more information about REST request authentication, see
+	// REST Authentication
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
+	ContentMD5 *string
+
+	// A standard MIME type describing the format of the contents. For more
+	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	ContentType *string
+
+	// The date and time at which the object is no longer cacheable. For more
+	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21).
+	Expires *time.Time
+
+	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
+	GrantFullControl *string
+
+	// Allows grantee to read the object data and its metadata.
+	GrantRead *string
+
+	// Allows grantee to read the object ACL.
+	GrantReadACP *string
+
+	// Allows grantee to write the ACL for the applicable object.
+	GrantWriteACP *string
+
+	// A map of metadata to store with the object in S3.
+	Metadata map[string]*string
+
+	// Specifies whether a legal hold will be applied to this object. For more
+	// information about S3 Object Lock, see Object Lock
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
+	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
+
+	// The Object Lock mode that you want to apply to this object.
+	ObjectLockMode types.ObjectLockMode
+
+	// The date and time when you want this object's Object Lock to expire.
+	ObjectLockRetainUntilDate *time.Time
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
+
+	// Specifies the algorithm to use to when encrypting the object (for example,
+	// AES256).
+	SSECustomerAlgorithm *string
+
+	// Specifies the customer-provided encryption key for Amazon S3 to use in
+	// encrypting data. This value is used to store the object and then it is
+	// discarded; Amazon S3 does not store the encryption key. The key must be
+	// appropriate for use with the algorithm specified in the
+	// x-amz-server-side-encryption-customer-algorithm header.
+	SSECustomerKey *string
+
+	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
+	SSECustomerKeyMD5 *string
+
+	// Specifies the AWS KMS Encryption Context to use for object encryption. The value
+	// of this header is a base64-encoded UTF-8 string holding JSON with the encryption
+	// context key-value pairs.
+	SSEKMSEncryptionContext *string
+
+	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
+	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetrical
+	// customer managed customer master key (CMK) that was used for the object. If the
+	// value of x-amz-server-side-encryption is aws:kms, this header specifies the ID
+	// of the symmetric customer managed AWS KMS CMK that will be used for the object.
+	// If you specify x-amz-server-side-encryption:aws:kms, but do not provide
+	// x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the AWS managed CMK
+	// in AWS to protect the data.
+	SSEKMSKeyId *string
+
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
+	ServerSideEncryption types.ServerSideEncryption
 
 	// If you don't specify, S3 Standard is the default storage class. Amazon S3
 	// supports other storage classes.
@@ -121,11 +257,6 @@ type PutObjectInput struct {
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
 	// (For example, "Key1=Value1")
 	Tagging *string
-
-	// Specifies the AWS KMS Encryption Context to use for object encryption. The value
-	// of this header is a base64-encoded UTF-8 string holding JSON with the encryption
-	// context key-value pairs.
-	SSEKMSEncryptionContext *string
 
 	// If the bucket is configured as a website, redirects requests for this object to
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
@@ -144,152 +275,22 @@ type PutObjectInput struct {
 	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/how-to-page-redirect.html">How
 	// to Configure Website Page Redirects</a>. </p>
 	WebsiteRedirectLocation *string
-
-	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms).
-	ServerSideEncryption types.ServerSideEncryption
-
-	// The date and time at which the object is no longer cacheable. For more
-	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21).
-	Expires *time.Time
-
-	// Allows grantee to write the ACL for the applicable object.
-	GrantWriteACP *string
-
-	// Specifies the algorithm to use to when encrypting the object (for example,
-	// AES256).
-	SSECustomerAlgorithm *string
-
-	// Specifies the customer-provided encryption key for Amazon S3 to use in
-	// encrypting data. This value is used to store the object and then it is
-	// discarded; Amazon S3 does not store the encryption key. The key must be
-	// appropriate for use with the algorithm specified in the
-	// x-amz-server-side-encryption-customer-algorithm header.
-	SSECustomerKey *string
-
-	// The base64-encoded 128-bit MD5 digest of the message (without the headers)
-	// according to RFC 1864. This header can be used as a message integrity check to
-	// verify that the data is the same data that was originally sent. Although it is
-	// optional, we recommend using the Content-MD5 mechanism as an end-to-end
-	// integrity check. For more information about REST request authentication, see
-	// REST Authentication
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/RESTAuthentication.html).
-	ContentMD5 *string
-
-	// Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
-	GrantFullControl *string
-
-	// Specifies presentational information for the object. For more information, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec19.html#sec19.5.1).
-	ContentDisposition *string
-
-	// Bucket name to which the PUT operation was initiated. When using this API with
-	// an access point, you must direct requests to the access point hostname. The
-	// access point hostname takes the form
-	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// operation using an access point through the AWS SDKs, you provide the access
-	// point ARN in place of the bucket name. For more information about access point
-	// ARNs, see Using Access Points
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-access-points.html) in
-	// the Amazon Simple Storage Service Developer Guide.
-	//
-	// This member is required.
-	Bucket *string
-
-	// Allows grantee to read the object ACL.
-	GrantReadACP *string
-
-	// Specifies whether a legal hold will be applied to this object. For more
-	// information about S3 Object Lock, see Object Lock
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html).
-	ObjectLockLegalHoldStatus types.ObjectLockLegalHoldStatus
-
-	// Specifies what content encodings have been applied to the object and thus what
-	// decoding mechanisms must be applied to obtain the media-type referenced by the
-	// Content-Type header field. For more information, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11).
-	ContentEncoding *string
-
-	// A map of metadata to store with the object in S3.
-	Metadata map[string]*string
-
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
-	// The date and time when you want this object's Object Lock to expire.
-	ObjectLockRetainUntilDate *time.Time
-
-	// Can be used to specify caching behavior along the request/reply chain. For more
-	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9).
-	CacheControl *string
-
-	// Size of the body in bytes. This parameter is useful when the size of the body
-	// cannot be determined automatically. For more information, see
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13).
-	ContentLength *int64
-
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure that the
-	// encryption key was transmitted without error.
-	SSECustomerKeyMD5 *string
-
-	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
-	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetrical
-	// customer managed customer master key (CMK) that was used for the object. If the
-	// value of x-amz-server-side-encryption is aws:kms, this header specifies the ID
-	// of the symmetric customer managed AWS KMS CMK that will be used for the object.
-	// If you specify x-amz-server-side-encryption:aws:kms, but do not provide
-	// x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the AWS managed CMK
-	// in AWS to protect the data.
-	SSEKMSKeyId *string
-
-	// The Object Lock mode that you want to apply to this object.
-	ObjectLockMode types.ObjectLockMode
-
-	// Object key for which the PUT operation was initiated.
-	//
-	// This member is required.
-	Key *string
-
-	// The language the content is in.
-	ContentLanguage *string
-
-	// The canned ACL to apply to the object. For more information, see Canned ACL
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
-	ACL types.ObjectCannedACL
-
-	// A standard MIME type describing the format of the contents. For more
-	// information, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
-	ContentType *string
-
-	// Allows grantee to read the object data and its metadata.
-	GrantRead *string
 }
 
 type PutObjectOutput struct {
 
-	// Version of the object.
-	VersionId *string
+	// Entity tag for the uploaded object.
+	ETag *string
+
+	// If the expiration is configured for the object (see
+	// PutBucketLifecycleConfiguration ()), the response includes this header. It
+	// includes the expiry-date and rule-id key-value pairs that provide information
+	// about object expiration. The value of the rule-id is URL encoded.
+	Expiration *string
 
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
-
-	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
-	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-	// customer managed customer master key (CMK) that was used for the object.
-	SSEKMSKeyId *string
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header confirming the encryption algorithm used.
@@ -305,20 +306,19 @@ type PutObjectOutput struct {
 	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
+	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
+	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
+	// customer managed customer master key (CMK) that was used for the object.
+	SSEKMSKeyId *string
+
 	// If you specified server-side encryption either with an AWS KMS customer master
 	// key (CMK) or Amazon S3-managed encryption key in your PUT request, the response
 	// includes this header. It confirms the encryption algorithm that Amazon S3 used
 	// to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
-	// Entity tag for the uploaded object.
-	ETag *string
-
-	// If the expiration is configured for the object (see
-	// PutBucketLifecycleConfiguration ()), the response includes this header. It
-	// includes the expiry-date and rule-id key-value pairs that provide information
-	// about object expiration. The value of the rule-id is URL encoded.
-	Expiration *string
+	// Version of the object.
+	VersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,18 +57,18 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource that you want to retrieve tags
+	// for.
+	//
+	// This member is required.
+	ResourceARN *string
+
 	// The tags to add to the specified resource. Specifying the tag key is required.
 	// You can set the value of a tag to an empty string, but you can't set the value
 	// of a tag to null.
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the resource that you want to retrieve tags
-	// for.
-	//
-	// This member is required.
-	ResourceARN *string
 }
 
 type TagResourceOutput struct {

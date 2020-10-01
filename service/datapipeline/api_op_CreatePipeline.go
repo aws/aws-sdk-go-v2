@@ -59,13 +59,6 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 // Contains the parameters for CreatePipeline.
 type CreatePipelineInput struct {
 
-	// A list of tags to associate with the pipeline at creation. Tags let you control
-	// access to pipelines. For more information, see Controlling User Access to
-	// Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
-	// in the AWS Data Pipeline Developer Guide.
-	Tags []*types.Tag
-
 	// The name for the pipeline. You can use the same name for multiple pipelines
 	// associated with your AWS account, because AWS Data Pipeline assigns each
 	// pipeline a unique pipeline identifier.
@@ -90,6 +83,13 @@ type CreatePipelineInput struct {
 
 	// The description for the pipeline.
 	Description *string
+
+	// A list of tags to associate with the pipeline at creation. Tags let you control
+	// access to pipelines. For more information, see Controlling User Access to
+	// Pipelines
+	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// in the AWS Data Pipeline Developer Guide.
+	Tags []*types.Tag
 }
 
 // Contains the output of CreatePipeline.

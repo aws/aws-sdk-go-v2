@@ -57,19 +57,18 @@ func (c *Client) UpdateInstanceProfile(ctx context.Context, params *UpdateInstan
 
 type UpdateInstanceProfileInput struct {
 
-	// An array of strings that specifies the list of app packages that should not be
-	// cleaned up from the device after a test run is over. The list of packages is
-	// only considered if you set packageCleanup to true.
-	ExcludeAppPackagesFromCleanup []*string
-
-	// The updated choice for whether you want to reboot the device after use. The
-	// default value is true.
-	RebootAfterUse *bool
-
 	// The Amazon Resource Name (ARN) of the instance profile.
 	//
 	// This member is required.
 	Arn *string
+
+	// The updated description for your instance profile.
+	Description *string
+
+	// An array of strings that specifies the list of app packages that should not be
+	// cleaned up from the device after a test run is over. The list of packages is
+	// only considered if you set packageCleanup to true.
+	ExcludeAppPackagesFromCleanup []*string
 
 	// The updated name for your instance profile.
 	Name *string
@@ -78,8 +77,9 @@ type UpdateInstanceProfileInput struct {
 	// value is false for private devices.
 	PackageCleanup *bool
 
-	// The updated description for your instance profile.
-	Description *string
+	// The updated choice for whether you want to reboot the device after use. The
+	// default value is true.
+	RebootAfterUse *bool
 }
 
 type UpdateInstanceProfileOutput struct {

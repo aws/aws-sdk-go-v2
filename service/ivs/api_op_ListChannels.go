@@ -58,15 +58,15 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
+	// Filters the channel list to match the specified name.
+	FilterByName *string
+
 	// Maximum number of channels to return.
 	MaxResults *int32
 
 	// The first channel to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
-
-	// Filters the channel list to match the specified name.
-	FilterByName *string
 }
 
 type ListChannelsOutput struct {

@@ -64,15 +64,15 @@ type AttachPolicyInput struct {
 	// This member is required.
 	DirectoryArn *string
 
-	// The reference that is associated with the policy object.
-	//
-	// This member is required.
-	PolicyReference *types.ObjectReference
-
 	// The reference that identifies the object to which the policy will be attached.
 	//
 	// This member is required.
 	ObjectReference *types.ObjectReference
+
+	// The reference that is associated with the policy object.
+	//
+	// This member is required.
+	PolicyReference *types.ObjectReference
 }
 
 type AttachPolicyOutput struct {

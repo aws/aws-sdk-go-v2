@@ -59,23 +59,23 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 
 type ListDatasetsInput struct {
 
+	// The number of items to return in the response.
+	MaxResults *int32
+
 	// If the result of the previous request was truncated, the response includes a
 	// NextToken. To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
-
-	// The number of items to return in the response.
-	MaxResults *int32
 }
 
 type ListDatasetsOutput struct {
 
+	// An array of objects that summarize each dataset's properties.
+	Datasets []*types.DatasetSummary
+
 	// If the response is truncated, Amazon Forecast returns this token. To retrieve
 	// the next set of results, use the token in the next request.
 	NextToken *string
-
-	// An array of objects that summarize each dataset's properties.
-	Datasets []*types.DatasetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

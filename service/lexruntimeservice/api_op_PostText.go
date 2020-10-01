@@ -99,6 +99,21 @@ func (c *Client) PostText(ctx context.Context, params *PostTextInput, optFns ...
 
 type PostTextInput struct {
 
+	// The alias of the Amazon Lex bot.
+	//
+	// This member is required.
+	BotAlias *string
+
+	// The name of the Amazon Lex bot.
+	//
+	// This member is required.
+	BotName *string
+
+	// The text that the user entered (Amazon Lex interprets this text).
+	//
+	// This member is required.
+	InputText *string
+
 	// The ID of the client application user. Amazon Lex uses this to identify a user's
 	// conversation with your bot. At runtime, each request must contain the userID
 	// field. To decide the user ID to use for your application, consider the following
@@ -125,97 +140,20 @@ type PostTextInput struct {
 	// This member is required.
 	UserId *string
 
-	// The text that the user entered (Amazon Lex interprets this text).
-	//
-	// This member is required.
-	InputText *string
-
-	// The name of the Amazon Lex bot.
-	//
-	// This member is required.
-	BotName *string
-
-	// The alias of the Amazon Lex bot.
-	//
-	// This member is required.
-	BotAlias *string
-
-	// Application-specific information passed between Amazon Lex and a client
-	// application. For more information, see Setting Session Attributes
-	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
-	SessionAttributes map[string]*string
-
 	// Request-specific information passed between Amazon Lex and a client application.
 	// The namespace x-amz-lex: is reserved for special attributes. Don't create any
 	// request attributes with the prefix x-amz-lex:. For more information, see Setting
 	// Request Attributes
 	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-request-attribs).
 	RequestAttributes map[string]*string
+
+	// Application-specific information passed between Amazon Lex and a client
+	// application. For more information, see Setting Session Attributes
+	// (https://docs.aws.amazon.com/lex/latest/dg/context-mgmt.html#context-mgmt-session-attribs).
+	SessionAttributes map[string]*string
 }
 
 type PostTextOutput struct {
-
-	// The message to convey to the user. The message can come from the bot's
-	// configuration or from a Lambda function. If the intent is not configured with a
-	// Lambda function, or if the Lambda function returned Delegate as the
-	// dialogAction.type its response, Amazon Lex decides on the next course of action
-	// and selects an appropriate message from the bot's configuration based on the
-	// current interaction context. For example, if Amazon Lex isn't able to understand
-	// user input, it uses a clarification prompt message. When you create an intent
-	// you can assign messages to groups. When messages are assigned to groups Amazon
-	// Lex returns one message from each group in the response. The message field is an
-	// escaped JSON string containing the messages. For more information about the
-	// structure of the JSON string returned, see msg-prompts-formats (). If the Lambda
-	// function returns a message, Amazon Lex passes it to the client in its response.
-	Message *string
-
-	// The intent slots that Amazon Lex detected from the user input in the
-	// conversation. Amazon Lex creates a resolution list containing likely values for
-	// a slot. The value that it returns is determined by the valueSelectionStrategy
-	// selected when the slot type was created or updated. If valueSelectionStrategy is
-	// set to ORIGINAL_VALUE, the value provided by the user is returned, if the user
-	// value is similar to the slot values. If valueSelectionStrategy is set to
-	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if
-	// there is no resolution list, null. If you don't specify a
-	// valueSelectionStrategy, the default is ORIGINAL_VALUE.
-	Slots map[string]*string
-
-	// Represents the options that the user has to respond to the current prompt.
-	// Response Card can come from the bot configuration (in the Amazon Lex console,
-	// choose the settings button next to a slot) or from a code hook (Lambda
-	// function).
-	ResponseCard *types.ResponseCard
-
-	// The sentiment expressed in and utterance. When the bot is configured to send
-	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
-	// result of the analysis.
-	SentimentResponse *types.SentimentResponse
-
-	// If the dialogState value is ElicitSlot, returns the name of the slot for which
-	// Amazon Lex is eliciting a value.
-	SlotToElicit *string
-
-	// The format of the response message. One of the following values:
-	//
-	//     *
-	// PlainText - The message contains plain UTF-8 text.
-	//
-	//     * CustomPayload - The
-	// message is a custom format defined by the Lambda function.
-	//
-	//     * SSML - The
-	// message contains text formatted for voice output.
-	//
-	//     * Composite - The message
-	// contains an escaped JSON object containing one or more messages from the groups
-	// that messages were assigned to when the intent was created.
-	MessageFormat types.MessageFormatType
-
-	// A unique identifier for the session.
-	SessionId *string
-
-	// A map of key-value pairs representing the session-specific context information.
-	SessionAttributes map[string]*string
 
 	// Identifies the current state of the user interaction. Amazon Lex returns one of
 	// the following values as dialogState. The client can optionally use this
@@ -255,6 +193,68 @@ type PostTextOutput struct {
 
 	// The current user intent that Amazon Lex is aware of.
 	IntentName *string
+
+	// The message to convey to the user. The message can come from the bot's
+	// configuration or from a Lambda function. If the intent is not configured with a
+	// Lambda function, or if the Lambda function returned Delegate as the
+	// dialogAction.type its response, Amazon Lex decides on the next course of action
+	// and selects an appropriate message from the bot's configuration based on the
+	// current interaction context. For example, if Amazon Lex isn't able to understand
+	// user input, it uses a clarification prompt message. When you create an intent
+	// you can assign messages to groups. When messages are assigned to groups Amazon
+	// Lex returns one message from each group in the response. The message field is an
+	// escaped JSON string containing the messages. For more information about the
+	// structure of the JSON string returned, see msg-prompts-formats (). If the Lambda
+	// function returns a message, Amazon Lex passes it to the client in its response.
+	Message *string
+
+	// The format of the response message. One of the following values:
+	//
+	//     *
+	// PlainText - The message contains plain UTF-8 text.
+	//
+	//     * CustomPayload - The
+	// message is a custom format defined by the Lambda function.
+	//
+	//     * SSML - The
+	// message contains text formatted for voice output.
+	//
+	//     * Composite - The message
+	// contains an escaped JSON object containing one or more messages from the groups
+	// that messages were assigned to when the intent was created.
+	MessageFormat types.MessageFormatType
+
+	// Represents the options that the user has to respond to the current prompt.
+	// Response Card can come from the bot configuration (in the Amazon Lex console,
+	// choose the settings button next to a slot) or from a code hook (Lambda
+	// function).
+	ResponseCard *types.ResponseCard
+
+	// The sentiment expressed in and utterance. When the bot is configured to send
+	// utterances to Amazon Comprehend for sentiment analysis, this field contains the
+	// result of the analysis.
+	SentimentResponse *types.SentimentResponse
+
+	// A map of key-value pairs representing the session-specific context information.
+	SessionAttributes map[string]*string
+
+	// A unique identifier for the session.
+	SessionId *string
+
+	// If the dialogState value is ElicitSlot, returns the name of the slot for which
+	// Amazon Lex is eliciting a value.
+	SlotToElicit *string
+
+	// The intent slots that Amazon Lex detected from the user input in the
+	// conversation. Amazon Lex creates a resolution list containing likely values for
+	// a slot. The value that it returns is determined by the valueSelectionStrategy
+	// selected when the slot type was created or updated. If valueSelectionStrategy is
+	// set to ORIGINAL_VALUE, the value provided by the user is returned, if the user
+	// value is similar to the slot values. If valueSelectionStrategy is set to
+	// TOP_RESOLUTION Amazon Lex returns the first value in the resolution list or, if
+	// there is no resolution list, null. If you don't specify a
+	// valueSelectionStrategy, the default is ORIGINAL_VALUE.
+	Slots map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

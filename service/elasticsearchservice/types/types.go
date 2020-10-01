@@ -10,12 +10,6 @@ import (
 // the current status of those rules.
 type AccessPoliciesStatus struct {
 
-	// The status of the access policy for the Elasticsearch domain. See OptionStatus
-	// for the status information that's included.
-	//
-	// This member is required.
-	Status *OptionStatus
-
 	// The access policy configured for the Elasticsearch domain. Access policies may
 	// be resource-based, IP-based, or IAM-based. See  Configuring Access Policies
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-access-policies)for
@@ -23,6 +17,12 @@ type AccessPoliciesStatus struct {
 	//
 	// This member is required.
 	Options *string
+
+	// The status of the access policy for the Elasticsearch domain. See OptionStatus
+	// for the status information that's included.
+	//
+	// This member is required.
+	Status *OptionStatus
 }
 
 // List of limits that are specific to a given InstanceType and for each of it's
@@ -68,16 +68,16 @@ type AdditionalLimit struct {
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options).
 type AdvancedOptionsStatus struct {
 
+	// Specifies the status of advanced options for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	Options map[string]*string
+
 	// Specifies the status of OptionStatus for advanced options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
-
-	// Specifies the status of advanced options for the specified Elasticsearch domain.
-	//
-	// This member is required.
-	Options map[string]*string
 }
 
 // Specifies the advanced security configuration: whether advanced security is
@@ -97,29 +97,29 @@ type AdvancedSecurityOptions struct {
 // enabled).
 type AdvancedSecurityOptionsInput struct {
 
-	// Credentials for the master user: username and password, ARN, or both.
-	MasterUserOptions *MasterUserOptions
+	// True if advanced security is enabled.
+	Enabled *bool
 
 	// True if the internal user database is enabled.
 	InternalUserDatabaseEnabled *bool
 
-	// True if advanced security is enabled.
-	Enabled *bool
+	// Credentials for the master user: username and password, ARN, or both.
+	MasterUserOptions *MasterUserOptions
 }
 
 // Specifies the status of advanced security options for the specified
 // Elasticsearch domain.
 type AdvancedSecurityOptionsStatus struct {
 
-	// Status of the advanced security options for the specified Elasticsearch domain.
-	//
-	// This member is required.
-	Status *OptionStatus
-
 	// Specifies advanced security options for the specified Elasticsearch domain.
 	//
 	// This member is required.
 	Options *AdvancedSecurityOptions
+
+	// Status of the advanced security options for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	Status *OptionStatus
 }
 
 // Options to specify the Cognito user and identity pools for Kibana
@@ -128,11 +128,11 @@ type AdvancedSecurityOptionsStatus struct {
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
 type CognitoOptions struct {
 
-	// Specifies the Cognito identity pool ID for Kibana authentication.
-	IdentityPoolId *string
-
 	// Specifies the option to enable Cognito for Kibana authentication.
 	Enabled *bool
+
+	// Specifies the Cognito identity pool ID for Kibana authentication.
+	IdentityPoolId *string
 
 	// Specifies the role ARN that provides Elasticsearch permissions for accessing
 	// Cognito resources.
@@ -161,25 +161,28 @@ type CognitoOptionsStatus struct {
 // ElasticsearchVersion () s to which the domain can be upgraded.
 type CompatibleVersionsMap struct {
 
-	// List of supported elastic search versions.
-	TargetVersions []*string
-
 	// The current version of Elasticsearch on which a domain is.
 	SourceVersion *string
+
+	// List of supported elastic search versions.
+	TargetVersions []*string
 }
 
 // Filter to apply in DescribePackage response.
 type DescribePackagesFilter struct {
 
-	// A list of values for the specified field.
-	Value []*string
-
 	// Any field from PackageDetails.
 	Name DescribePackagesFilterName
+
+	// A list of values for the specified field.
+	Value []*string
 }
 
 // Options to configure endpoint for the Elasticsearch domain.
 type DomainEndpointOptions struct {
+
+	// Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
+	EnforceHTTPS *bool
 
 	// Specify the TLS security policy that needs to be applied to the HTTPS endpoint
 	// of Elasticsearch domain.
@@ -193,9 +196,6 @@ type DomainEndpointOptions struct {
 	//     * Policy-Min-TLS-1-2-2019-07: TLS security policy which supports
 	// only TLSv1.2
 	TLSSecurityPolicy TLSSecurityPolicy
-
-	// Specify if only HTTPS endpoint should be enabled for the Elasticsearch domain.
-	EnforceHTTPS *bool
 }
 
 // The configured endpoint options for the domain and their current status.
@@ -237,31 +237,31 @@ type DomainInformation struct {
 // Information on a package that is associated with a domain.
 type DomainPackageDetails struct {
 
-	// User specified name of the package.
-	PackageName *string
-
-	// Additional information if the package is in an error state. Null otherwise.
-	ErrorDetails *ErrorDetails
-
-	// Currently supports only TXT-DICTIONARY.
-	PackageType PackageType
-
 	// Name of the domain you've associated a package with.
 	DomainName *string
-
-	// The relative path on Amazon ES nodes, which can be used as synonym_path when the
-	// package is synonym file.
-	ReferencePath *string
-
-	// Internal ID of the package.
-	PackageID *string
-
-	// Timestamp of the most-recent update to the association status.
-	LastUpdated *time.Time
 
 	// State of the association. Values are
 	// ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.
 	DomainPackageStatus DomainPackageStatus
+
+	// Additional information if the package is in an error state. Null otherwise.
+	ErrorDetails *ErrorDetails
+
+	// Timestamp of the most-recent update to the association status.
+	LastUpdated *time.Time
+
+	// Internal ID of the package.
+	PackageID *string
+
+	// User specified name of the package.
+	PackageName *string
+
+	// Currently supports only TXT-DICTIONARY.
+	PackageType PackageType
+
+	// The relative path on Amazon ES nodes, which can be used as synonym_path when the
+	// package is synonym file.
+	ReferencePath *string
 }
 
 // Options to enable, disable, and specify the properties of EBS storage volumes.
@@ -269,17 +269,17 @@ type DomainPackageDetails struct {
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs).
 type EBSOptions struct {
 
+	// Specifies whether EBS-based storage is enabled.
+	EBSEnabled *bool
+
 	// Specifies the IOPD for a Provisioned IOPS EBS volume (SSD).
 	Iops *int32
-
-	// Specifies the volume type for EBS-based storage.
-	VolumeType VolumeType
 
 	// Integer to specify the size of an EBS volume.
 	VolumeSize *int32
 
-	// Specifies whether EBS-based storage is enabled.
-	EBSEnabled *bool
+	// Specifies the volume type for EBS-based storage.
+	VolumeType VolumeType
 }
 
 // Status of the EBS options for the specified Elasticsearch domain.
@@ -300,17 +300,8 @@ type EBSOptionsStatus struct {
 // of instances.
 type ElasticsearchClusterConfig struct {
 
-	// A boolean value to indicate whether zone awareness is enabled. See About Zone
-	// Awareness
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
-	// for more information.
-	ZoneAwarenessEnabled *bool
-
-	// True to enable warm storage.
-	WarmEnabled *bool
-
-	// The number of instances in the specified domain cluster.
-	InstanceCount *int32
+	// Total number of dedicated master nodes, active and on standby, for the cluster.
+	DedicatedMasterCount *int32
 
 	// A boolean value to indicate whether a dedicated master node is enabled. See
 	// About Dedicated Master Nodes
@@ -318,25 +309,34 @@ type ElasticsearchClusterConfig struct {
 	// for more information.
 	DedicatedMasterEnabled *bool
 
-	// The number of warm nodes in the cluster.
-	WarmCount *int32
+	// The instance type for a dedicated master node.
+	DedicatedMasterType ESPartitionInstanceType
 
-	// Specifies the zone awareness configuration for a domain when zone awareness is
-	// enabled.
-	ZoneAwarenessConfig *ZoneAwarenessConfig
-
-	// The instance type for the Elasticsearch cluster's warm nodes.
-	WarmType ESWarmPartitionInstanceType
+	// The number of instances in the specified domain cluster.
+	InstanceCount *int32
 
 	// The instance type for an Elasticsearch cluster. UltraWarm instance types are not
 	// supported for data instances.
 	InstanceType ESPartitionInstanceType
 
-	// Total number of dedicated master nodes, active and on standby, for the cluster.
-	DedicatedMasterCount *int32
+	// The number of warm nodes in the cluster.
+	WarmCount *int32
 
-	// The instance type for a dedicated master node.
-	DedicatedMasterType ESPartitionInstanceType
+	// True to enable warm storage.
+	WarmEnabled *bool
+
+	// The instance type for the Elasticsearch cluster's warm nodes.
+	WarmType ESWarmPartitionInstanceType
+
+	// Specifies the zone awareness configuration for a domain when zone awareness is
+	// enabled.
+	ZoneAwarenessConfig *ZoneAwarenessConfig
+
+	// A boolean value to indicate whether zone awareness is enabled. See About Zone
+	// Awareness
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
+	// for more information.
+	ZoneAwarenessEnabled *bool
 }
 
 // Specifies the configuration status for the specified Elasticsearch domain.
@@ -357,11 +357,39 @@ type ElasticsearchClusterConfigStatus struct {
 // The configuration of an Elasticsearch domain.
 type ElasticsearchDomainConfig struct {
 
-	// Specifies the ElasticsearchClusterConfig for the Elasticsearch domain.
-	ElasticsearchClusterConfig *ElasticsearchClusterConfigStatus
+	// IAM access policy as a JSON-formatted string.
+	AccessPolicies *AccessPoliciesStatus
+
+	// Specifies the AdvancedOptions for the domain. See Configuring Advanced Options
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
+	// for more information.
+	AdvancedOptions *AdvancedOptionsStatus
+
+	// Specifies AdvancedSecurityOptions for the domain.
+	AdvancedSecurityOptions *AdvancedSecurityOptionsStatus
+
+	// The CognitoOptions for the specified domain. For more information, see Amazon
+	// Cognito Authentication for Kibana
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *CognitoOptionsStatus
 
 	// Specifies the DomainEndpointOptions for the Elasticsearch domain.
 	DomainEndpointOptions *DomainEndpointOptionsStatus
+
+	// Specifies the EBSOptions for the Elasticsearch domain.
+	EBSOptions *EBSOptionsStatus
+
+	// Specifies the ElasticsearchClusterConfig for the Elasticsearch domain.
+	ElasticsearchClusterConfig *ElasticsearchClusterConfigStatus
+
+	// String of format X.Y to specify version for the Elasticsearch domain.
+	ElasticsearchVersion *ElasticsearchVersionStatus
+
+	// Specifies the EncryptionAtRestOptions for the Elasticsearch domain.
+	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
+
+	// Log publishing options for the given domain.
+	LogPublishingOptions *LogPublishingOptionsStatus
 
 	// Specifies the NodeToNodeEncryptionOptions for the Elasticsearch domain.
 	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptionsStatus
@@ -369,45 +397,27 @@ type ElasticsearchDomainConfig struct {
 	// Specifies the SnapshotOptions for the Elasticsearch domain.
 	SnapshotOptions *SnapshotOptionsStatus
 
-	// IAM access policy as a JSON-formatted string.
-	AccessPolicies *AccessPoliciesStatus
-
-	// Specifies AdvancedSecurityOptions for the domain.
-	AdvancedSecurityOptions *AdvancedSecurityOptionsStatus
-
-	// Specifies the AdvancedOptions for the domain. See Configuring Advanced Options
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-advanced-options)
-	// for more information.
-	AdvancedOptions *AdvancedOptionsStatus
-
-	// Log publishing options for the given domain.
-	LogPublishingOptions *LogPublishingOptionsStatus
-
-	// The CognitoOptions for the specified domain. For more information, see Amazon
-	// Cognito Authentication for Kibana
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
-	CognitoOptions *CognitoOptionsStatus
-
 	// The VPCOptions for the specified domain. For more information, see VPC Endpoints
 	// for Amazon Elasticsearch Service Domains
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 	VPCOptions *VPCDerivedInfoStatus
-
-	// Specifies the EncryptionAtRestOptions for the Elasticsearch domain.
-	EncryptionAtRestOptions *EncryptionAtRestOptionsStatus
-
-	// String of format X.Y to specify version for the Elasticsearch domain.
-	ElasticsearchVersion *ElasticsearchVersionStatus
-
-	// Specifies the EBSOptions for the Elasticsearch domain.
-	EBSOptions *EBSOptionsStatus
 }
 
 // The current status of an Elasticsearch domain.
 type ElasticsearchDomainStatus struct {
 
-	// Specifies the status of the NodeToNodeEncryptionOptions.
-	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
+	// The Amazon resource name (ARN) of an Elasticsearch domain. See Identifiers for
+	// IAM Entities
+	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
+	// in Using AWS Identity and Access Management for more information.
+	//
+	// This member is required.
+	ARN *string
+
+	// The unique identifier for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	DomainId *string
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
 	// owned by an account within an AWS region. Domain names start with a letter or
@@ -422,54 +432,23 @@ type ElasticsearchDomainStatus struct {
 	// This member is required.
 	ElasticsearchClusterConfig *ElasticsearchClusterConfig
 
-	// The domain creation status. True if the creation of an Elasticsearch domain is
-	// complete. False if domain creation is still in progress.
-	Created *bool
-
-	// The current status of the Elasticsearch domain's endpoint options.
-	DomainEndpointOptions *DomainEndpointOptions
-
-	// Specifies the status of the SnapshotOptions
-	SnapshotOptions *SnapshotOptions
-
-	// The Amazon resource name (ARN) of an Elasticsearch domain. See Identifiers for
-	// IAM Entities
-	// (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
-	// in Using AWS Identity and Access Management for more information.
-	//
-	// This member is required.
-	ARN *string
-
 	// IAM access policy as a JSON-formatted string.
 	AccessPolicies *string
-
-	// The current status of the Elasticsearch domain's advanced security options.
-	AdvancedSecurityOptions *AdvancedSecurityOptions
 
 	// Specifies the status of the AdvancedOptions
 	AdvancedOptions map[string]*string
 
-	// Log publishing options for the given domain.
-	LogPublishingOptions map[string]*LogPublishingOption
-
-	// The Elasticsearch domain endpoint that you use to submit index and search
-	// requests.
-	Endpoint *string
-
-	// The unique identifier for the specified Elasticsearch domain.
-	//
-	// This member is required.
-	DomainId *string
-
-	// Map containing the Elasticsearch domain endpoints used to submit index and
-	// search requests. Example key, value:
-	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
-	Endpoints map[string]*string
+	// The current status of the Elasticsearch domain's advanced security options.
+	AdvancedSecurityOptions *AdvancedSecurityOptions
 
 	// The CognitoOptions for the specified domain. For more information, see Amazon
 	// Cognito Authentication for Kibana
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
 	CognitoOptions *CognitoOptions
+
+	// The domain creation status. True if the creation of an Elasticsearch domain is
+	// complete. False if domain creation is still in progress.
+	Created *bool
 
 	// The domain deletion status. True if a delete request has been received for the
 	// domain but resource cleanup is still in progress. False if the domain has not
@@ -477,49 +456,70 @@ type ElasticsearchDomainStatus struct {
 	// longer returned.
 	Deleted *bool
 
+	// The current status of the Elasticsearch domain's endpoint options.
+	DomainEndpointOptions *DomainEndpointOptions
+
+	// The EBSOptions for the specified domain. See Configuring EBS-based Storage
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)
+	// for more information.
+	EBSOptions *EBSOptions
+
+	ElasticsearchVersion *string
+
+	// Specifies the status of the EncryptionAtRestOptions.
+	EncryptionAtRestOptions *EncryptionAtRestOptions
+
+	// The Elasticsearch domain endpoint that you use to submit index and search
+	// requests.
+	Endpoint *string
+
+	// Map containing the Elasticsearch domain endpoints used to submit index and
+	// search requests. Example key, value:
+	// 'vpc','vpc-endpoint-h2dsd34efgyghrtguk5gt6j2foh4.us-east-1.es.amazonaws.com'.
+	Endpoints map[string]*string
+
+	// Log publishing options for the given domain.
+	LogPublishingOptions map[string]*LogPublishingOption
+
+	// Specifies the status of the NodeToNodeEncryptionOptions.
+	NodeToNodeEncryptionOptions *NodeToNodeEncryptionOptions
+
 	// The status of the Elasticsearch domain configuration. True if Amazon
 	// Elasticsearch Service is processing configuration changes. False if the
 	// configuration is active.
 	Processing *bool
+
+	// The current status of the Elasticsearch domain's service software.
+	ServiceSoftwareOptions *ServiceSoftwareOptions
+
+	// Specifies the status of the SnapshotOptions
+	SnapshotOptions *SnapshotOptions
 
 	// The status of an Elasticsearch domain version upgrade. True if Amazon
 	// Elasticsearch Service is undergoing a version upgrade. False if the
 	// configuration is active.
 	UpgradeProcessing *bool
 
-	// Specifies the status of the EncryptionAtRestOptions.
-	EncryptionAtRestOptions *EncryptionAtRestOptions
-
-	// The current status of the Elasticsearch domain's service software.
-	ServiceSoftwareOptions *ServiceSoftwareOptions
-
 	// The VPCOptions for the specified domain. For more information, see VPC Endpoints
 	// for Amazon Elasticsearch Service Domains
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 	VPCOptions *VPCDerivedInfo
-
-	ElasticsearchVersion *string
-
-	// The EBSOptions for the specified domain. See Configuring EBS-based Storage
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs)
-	// for more information.
-	EBSOptions *EBSOptions
 }
 
 // Status of the Elasticsearch version options for the specified Elasticsearch
 // domain.
 type ElasticsearchVersionStatus struct {
 
+	// Specifies the Elasticsearch version for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	Options *string
+
 	// Specifies the status of the Elasticsearch version options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
-
-	// Specifies the Elasticsearch version for the specified Elasticsearch domain.
-	//
-	// This member is required.
-	Options *string
 }
 
 // Specifies the Encryption At Rest Options.
@@ -535,22 +535,22 @@ type EncryptionAtRestOptions struct {
 // Status of the Encryption At Rest options for the specified Elasticsearch domain.
 type EncryptionAtRestOptionsStatus struct {
 
+	// Specifies the Encryption At Rest options for the specified Elasticsearch domain.
+	//
+	// This member is required.
+	Options *EncryptionAtRestOptions
+
 	// Specifies the status of the Encryption At Rest options for the specified
 	// Elasticsearch domain.
 	//
 	// This member is required.
 	Status *OptionStatus
-
-	// Specifies the Encryption At Rest options for the specified Elasticsearch domain.
-	//
-	// This member is required.
-	Options *EncryptionAtRestOptions
 }
 
 type ErrorDetails struct {
-	ErrorType *string
-
 	ErrorMessage *string
+
+	ErrorType *string
 }
 
 // A filter used to limit results when describing inbound or outbound cross-cluster
@@ -573,11 +573,11 @@ type InboundCrossClusterSearchConnection struct {
 	// connection.
 	ConnectionStatus *InboundCrossClusterSearchConnectionStatus
 
-	// Specifies the DomainInformation () for the destination Elasticsearch domain.
-	DestinationDomainInfo *DomainInformation
-
 	// Specifies the connection id for the inbound cross-cluster search connection.
 	CrossClusterSearchConnectionId *string
+
+	// Specifies the DomainInformation () for the destination Elasticsearch domain.
+	DestinationDomainInfo *DomainInformation
 
 	// Specifies the DomainInformation () for the source Elasticsearch domain.
 	SourceDomainInfo *DomainInformation
@@ -585,6 +585,9 @@ type InboundCrossClusterSearchConnection struct {
 
 // Specifies the coonection status of an inbound cross-cluster search connection.
 type InboundCrossClusterSearchConnectionStatus struct {
+
+	// Specifies verbose information for the inbound connection status.
+	Message *string
 
 	// The state code for inbound connection. This can be one of the following:
 	//
@@ -606,20 +609,17 @@ type InboundCrossClusterSearchConnectionStatus struct {
 	//     * DELETED: Inbound connection is deleted and
 	// cannot be used further.
 	StatusCode InboundCrossClusterSearchConnectionStatusCode
-
-	// Specifies verbose information for the inbound connection status.
-	Message *string
 }
 
 // InstanceCountLimits represents the limits on number of instances that be created
 // in Amazon Elasticsearch for given InstanceType.
 type InstanceCountLimits struct {
 
-	// Minimum number of Instances that can be instantiated for given InstanceType.
-	MinimumInstanceCount *int32
-
 	// Maximum number of Instances that can be instantiated for given InstanceType.
 	MaximumInstanceCount *int32
+
+	// Minimum number of Instances that can be instantiated for given InstanceType.
+	MinimumInstanceCount *int32
 }
 
 // InstanceLimits represents the list of instance related attributes that are
@@ -637,10 +637,6 @@ type InstanceLimits struct {
 // following StorageTypes, ()InstanceLimits () and AdditionalLimits ()
 type Limits struct {
 
-	// StorageType represents the list of storage related types and attributes that are
-	// available for given InstanceType.
-	StorageTypes []*StorageType
-
 	// List of additional limits that are specific to a given InstanceType and for each
 	// of it's InstanceRole () .
 	AdditionalLimits []*AdditionalLimit
@@ -648,6 +644,10 @@ type Limits struct {
 	// InstanceLimits represents the list of instance related attributes that are
 	// available for given InstanceType.
 	InstanceLimits *InstanceLimits
+
+	// StorageType represents the list of storage related types and attributes that are
+	// available for given InstanceType.
+	StorageTypes []*StorageType
 }
 
 // Log Publishing option that is set for given domain.
@@ -662,30 +662,26 @@ type Limits struct {
 // given log type is enabled or not
 type LogPublishingOption struct {
 
-	// Specifies whether given log publishing option is enabled or not.
-	Enabled *bool
-
 	// ARN of the Cloudwatch log group to which log needs to be published.
 	CloudWatchLogsLogGroupArn *string
+
+	// Specifies whether given log publishing option is enabled or not.
+	Enabled *bool
 }
 
 // The configured log publishing options for the domain and their current status.
 type LogPublishingOptionsStatus struct {
 
+	// The log publishing options configured for the Elasticsearch domain.
+	Options map[string]*LogPublishingOption
+
 	// The status of the log publishing options for the Elasticsearch domain. See
 	// OptionStatus for the status information that's included.
 	Status *OptionStatus
-
-	// The log publishing options configured for the Elasticsearch domain.
-	Options map[string]*LogPublishingOption
 }
 
 // Credentials for the master user: username and password, ARN, or both.
 type MasterUserOptions struct {
-
-	// The master user's password, which is stored in the Amazon Elasticsearch Service
-	// domain's internal database.
-	MasterUserPassword *string
 
 	// ARN for the master user (if IAM is enabled).
 	MasterUserARN *string
@@ -693,6 +689,10 @@ type MasterUserOptions struct {
 	// The master user's username, which is stored in the Amazon Elasticsearch Service
 	// domain's internal database.
 	MasterUserName *string
+
+	// The master user's password, which is stored in the Amazon Elasticsearch Service
+	// domain's internal database.
+	MasterUserPassword *string
 }
 
 // Specifies the node-to-node encryption options.
@@ -727,12 +727,6 @@ type OptionStatus struct {
 	// This member is required.
 	CreationDate *time.Time
 
-	// Indicates whether the Elasticsearch domain is being deleted.
-	PendingDeletion *bool
-
-	// Specifies the latest version for the entity.
-	UpdateVersion *int32
-
 	// Provides the OptionState for the Elasticsearch domain.
 	//
 	// This member is required.
@@ -742,16 +736,16 @@ type OptionStatus struct {
 	//
 	// This member is required.
 	UpdateDate *time.Time
+
+	// Indicates whether the Elasticsearch domain is being deleted.
+	PendingDeletion *bool
+
+	// Specifies the latest version for the entity.
+	UpdateVersion *int32
 }
 
 // Specifies details of an outbound connection.
 type OutboundCrossClusterSearchConnection struct {
-
-	// Specifies the connection id for the outbound cross-cluster search connection.
-	CrossClusterSearchConnectionId *string
-
-	// Specifies the DomainInformation () for the source Elasticsearch domain.
-	SourceDomainInfo *DomainInformation
 
 	// Specifies the connection alias for the outbound cross-cluster search connection.
 	ConnectionAlias *string
@@ -760,8 +754,14 @@ type OutboundCrossClusterSearchConnection struct {
 	// connection.
 	ConnectionStatus *OutboundCrossClusterSearchConnectionStatus
 
+	// Specifies the connection id for the outbound cross-cluster search connection.
+	CrossClusterSearchConnectionId *string
+
 	// Specifies the DomainInformation () for the destination Elasticsearch domain.
 	DestinationDomainInfo *DomainInformation
+
+	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	SourceDomainInfo *DomainInformation
 }
 
 // Specifies the connection status of an outbound cross-cluster search connection.
@@ -801,27 +801,27 @@ type OutboundCrossClusterSearchConnectionStatus struct {
 // Basic information about a package.
 type PackageDetails struct {
 
-	// Currently supports only TXT-DICTIONARY.
-	PackageType PackageType
+	// Timestamp which tells creation date of the package.
+	CreatedAt *time.Time
 
 	// Additional information if the package is in an error state. Null otherwise.
 	ErrorDetails *ErrorDetails
 
-	// User specified name of the package.
-	PackageName *string
-
-	// Timestamp which tells creation date of the package.
-	CreatedAt *time.Time
+	// User-specified description of the package.
+	PackageDescription *string
 
 	// Internal ID of the package.
 	PackageID *string
+
+	// User specified name of the package.
+	PackageName *string
 
 	// Current state of the package. Values are
 	// COPYING/COPY_FAILED/AVAILABLE/DELETING/DELETE_FAILED
 	PackageStatus PackageStatus
 
-	// User-specified description of the package.
-	PackageDescription *string
+	// Currently supports only TXT-DICTIONARY.
+	PackageType PackageType
 }
 
 // The S3 location for importing the package specified as S3BucketName and S3Key
@@ -838,41 +838,31 @@ type PackageSource struct {
 // Elasticsearch instance, or for a reserved Elasticsearch instance offering.
 type RecurringCharge struct {
 
-	// The frequency of the recurring charge.
-	RecurringChargeFrequency *string
-
 	// The monetary amount of the recurring charge.
 	RecurringChargeAmount *float64
+
+	// The frequency of the recurring charge.
+	RecurringChargeFrequency *string
 }
 
 // Details of a reserved Elasticsearch instance.
 type ReservedElasticsearchInstance struct {
 
-	// The state of the reserved Elasticsearch instance.
-	State *string
+	// The currency code for the reserved Elasticsearch instance offering.
+	CurrencyCode *string
 
-	// The customer-specified identifier to track this reservation.
-	ReservationName *string
+	// The duration, in seconds, for which the Elasticsearch instance is reserved.
+	Duration *int32
 
-	// The time the reservation started.
-	StartTime *time.Time
+	// The number of Elasticsearch instances that have been reserved.
+	ElasticsearchInstanceCount *int32
+
+	// The Elasticsearch instance type offered by the reserved instance offering.
+	ElasticsearchInstanceType ESPartitionInstanceType
 
 	// The upfront fixed charge you will paid to purchase the specific reserved
 	// Elasticsearch instance offering.
 	FixedPrice *float64
-
-	// The currency code for the reserved Elasticsearch instance offering.
-	CurrencyCode *string
-
-	// The unique identifier for the reservation.
-	ReservedElasticsearchInstanceId *string
-
-	// The rate you are charged for each hour for the domain that is using this
-	// reserved instance.
-	UsagePrice *float64
-
-	// The duration, in seconds, for which the Elasticsearch instance is reserved.
-	Duration *int32
 
 	// The payment option as defined in the reserved Elasticsearch instance offering.
 	PaymentOption ReservedElasticsearchInstancePaymentOption
@@ -881,18 +871,42 @@ type ReservedElasticsearchInstance struct {
 	// using the instance offering.
 	RecurringCharges []*RecurringCharge
 
+	// The customer-specified identifier to track this reservation.
+	ReservationName *string
+
+	// The unique identifier for the reservation.
+	ReservedElasticsearchInstanceId *string
+
 	// The offering identifier.
 	ReservedElasticsearchInstanceOfferingId *string
 
-	// The Elasticsearch instance type offered by the reserved instance offering.
-	ElasticsearchInstanceType ESPartitionInstanceType
+	// The time the reservation started.
+	StartTime *time.Time
 
-	// The number of Elasticsearch instances that have been reserved.
-	ElasticsearchInstanceCount *int32
+	// The state of the reserved Elasticsearch instance.
+	State *string
+
+	// The rate you are charged for each hour for the domain that is using this
+	// reserved instance.
+	UsagePrice *float64
 }
 
 // Details of a reserved Elasticsearch instance offering.
 type ReservedElasticsearchInstanceOffering struct {
+
+	// The currency code for the reserved Elasticsearch instance offering.
+	CurrencyCode *string
+
+	// The duration, in seconds, for which the offering will reserve the Elasticsearch
+	// instance.
+	Duration *int32
+
+	// The Elasticsearch instance type offered by the reserved instance offering.
+	ElasticsearchInstanceType ESPartitionInstanceType
+
+	// The upfront fixed charge you will pay to purchase the specific reserved
+	// Elasticsearch instance offering.
+	FixedPrice *float64
 
 	// Payment option for the reserved Elasticsearch instance offering
 	PaymentOption ReservedElasticsearchInstancePaymentOption
@@ -904,56 +918,42 @@ type ReservedElasticsearchInstanceOffering struct {
 	// The Elasticsearch reserved instance offering identifier.
 	ReservedElasticsearchInstanceOfferingId *string
 
-	// The duration, in seconds, for which the offering will reserve the Elasticsearch
-	// instance.
-	Duration *int32
-
-	// The upfront fixed charge you will pay to purchase the specific reserved
-	// Elasticsearch instance offering.
-	FixedPrice *float64
-
-	// The currency code for the reserved Elasticsearch instance offering.
-	CurrencyCode *string
-
 	// The rate you are charged for each hour the domain that is using the offering is
 	// running.
 	UsagePrice *float64
-
-	// The Elasticsearch instance type offered by the reserved instance offering.
-	ElasticsearchInstanceType ESPartitionInstanceType
 }
 
 // The current options of an Elasticsearch domain service software options.
 type ServiceSoftwareOptions struct {
 
-	// True if you are able to update you service software version. False if you are
-	// not able to update your service software version.
-	UpdateAvailable *bool
-
-	// True if you are able to cancel your service software version update. False if
-	// you are not able to cancel your service software version.
-	Cancellable *bool
-
-	// The new service software version if one is available.
-	NewVersion *string
-
-	// The status of your service software update. This field can take the following
-	// values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
-	UpdateStatus DeploymentStatus
-
 	// Timestamp, in Epoch time, until which you can manually request a service
 	// software update. After this date, we automatically update your service software.
 	AutomatedUpdateDate *time.Time
 
-	// True if a service software is never automatically updated. False if a service
-	// software is automatically updated after AutomatedUpdateDate.
-	OptionalDeployment *bool
+	// True if you are able to cancel your service software version update. False if
+	// you are not able to cancel your service software version.
+	Cancellable *bool
 
 	// The current service software version that is present on the domain.
 	CurrentVersion *string
 
 	// The description of the UpdateStatus.
 	Description *string
+
+	// The new service software version if one is available.
+	NewVersion *string
+
+	// True if a service software is never automatically updated. False if a service
+	// software is automatically updated after AutomatedUpdateDate.
+	OptionalDeployment *bool
+
+	// True if you are able to update you service software version. False if you are
+	// not able to update your service software version.
+	UpdateAvailable *bool
+
+	// The status of your service software update. This field can take the following
+	// values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
+	UpdateStatus DeploymentStatus
 }
 
 // Specifies the time, in UTC format, when the service takes a daily automated
@@ -968,15 +968,15 @@ type SnapshotOptions struct {
 // Status of a daily automated snapshot.
 type SnapshotOptionsStatus struct {
 
-	// Specifies the status of a daily automated snapshot.
-	//
-	// This member is required.
-	Status *OptionStatus
-
 	// Specifies the daily snapshot options specified for the Elasticsearch domain.
 	//
 	// This member is required.
 	Options *SnapshotOptions
+
+	// Specifies the status of a daily automated snapshot.
+	//
+	// This member is required.
+	Status *OptionStatus
 }
 
 // StorageTypes represents the list of storage related types and their attributes
@@ -998,6 +998,9 @@ type StorageType struct {
 	// storage options.
 	StorageSubTypeName *string
 
+	// List of limits that are applicable for given storage type.
+	StorageTypeLimits []*StorageTypeLimit
+
 	// Type of the storage. List of available storage options:
 	//
 	//     * instance
@@ -1007,16 +1010,10 @@ type StorageType struct {
 	//      Elastic block
 	// storage that would be attached to the given Instance
 	StorageTypeName *string
-
-	// List of limits that are applicable for given storage type.
-	StorageTypeLimits []*StorageTypeLimit
 }
 
 // Limits that are applicable for given storage type.
 type StorageTypeLimit struct {
-
-	// Values for the StorageTypeLimit$LimitName () .
-	LimitValues []*string
 
 	// Name of storage limits that are applicable for given storage type. If
 	// StorageType () is ebs, following storage options are applicable
@@ -1037,6 +1034,9 @@ type StorageTypeLimit struct {
 	//      Minimum amount of Iops that is
 	// applicable for given storage type.It can be empty if it is not applicable.
 	LimitName *string
+
+	// Values for the StorageTypeLimit$LimitName () .
+	LimitValues []*string
 }
 
 // Specifies a key value pair for a resource tag.
@@ -1060,9 +1060,16 @@ type Tag struct {
 // History of the last 10 Upgrades and Upgrade Eligibility Checks.
 type UpgradeHistory struct {
 
+	// UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ"
+	// format.
+	StartTimestamp *time.Time
+
 	// A list of UpgradeStepItem () s representing information about each step
 	// performed as pard of a specific Upgrade or Upgrade Eligibility Check.
 	StepsList []*UpgradeStepItem
+
+	// A string that describes the update briefly
+	UpgradeName *string
 
 	// The overall status of the update. The status can take one of the following
 	// values:
@@ -1076,30 +1083,10 @@ type UpgradeHistory struct {
 	//     *
 	// Failed
 	UpgradeStatus UpgradeStatus
-
-	// A string that describes the update briefly
-	UpgradeName *string
-
-	// UTC Timestamp at which the Upgrade API call was made in "yyyy-MM-ddTHH:mm:ssZ"
-	// format.
-	StartTimestamp *time.Time
 }
 
 // Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.
 type UpgradeStepItem struct {
-
-	// The status of a particular step during an upgrade. The status can take one of
-	// the following values:
-	//
-	//     * In Progress
-	//
-	//     * Succeeded
-	//
-	//     * Succeeded with
-	// Issues
-	//
-	//     * Failed
-	UpgradeStepStatus UpgradeStatus
 
 	// A list of strings containing detailed information about the errors encountered
 	// in a particular step.
@@ -1117,16 +1104,25 @@ type UpgradeStepItem struct {
 	//
 	//     * Upgrade
 	UpgradeStep UpgradeStep
+
+	// The status of a particular step during an upgrade. The status can take one of
+	// the following values:
+	//
+	//     * In Progress
+	//
+	//     * Succeeded
+	//
+	//     * Succeeded with
+	// Issues
+	//
+	//     * Failed
+	UpgradeStepStatus UpgradeStatus
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For more
 // information, see  VPC Endpoints for Amazon Elasticsearch Service Domains
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 type VPCDerivedInfo struct {
-
-	// The VPC Id for the Elasticsearch domain. Exists only if the domain was created
-	// with VPCOptions.
-	VPCId *string
 
 	// The availability zones for the Elasticsearch domain. Exists only if the domain
 	// was created with VPCOptions.
@@ -1137,6 +1133,10 @@ type VPCDerivedInfo struct {
 
 	// Specifies the subnets for VPC endpoint.
 	SubnetIds []*string
+
+	// The VPC Id for the Elasticsearch domain. Exists only if the domain was created
+	// with VPCOptions.
+	VPCId *string
 }
 
 // Status of the VPC options for the specified Elasticsearch domain.

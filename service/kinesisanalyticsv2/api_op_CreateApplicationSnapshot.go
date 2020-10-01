@@ -56,15 +56,15 @@ func (c *Client) CreateApplicationSnapshot(ctx context.Context, params *CreateAp
 
 type CreateApplicationSnapshotInput struct {
 
-	// An identifier for the application snapshot.
-	//
-	// This member is required.
-	SnapshotName *string
-
 	// The name of an existing application
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// An identifier for the application snapshot.
+	//
+	// This member is required.
+	SnapshotName *string
 }
 
 type CreateApplicationSnapshotOutput struct {

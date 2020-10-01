@@ -68,12 +68,6 @@ func (c *Client) SetIdentityFeedbackForwardingEnabled(ctx context.Context, param
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/notifications-via-email.html).
 type SetIdentityFeedbackForwardingEnabledInput struct {
 
-	// The identity for which to set bounce and complaint notification forwarding.
-	// Examples: user@example.com, example.com.
-	//
-	// This member is required.
-	Identity *string
-
 	// Sets whether Amazon SES will forward bounce and complaint notifications as
 	// email. true specifies that Amazon SES will forward bounce and complaint
 	// notifications as email, in addition to any Amazon SNS topic publishing otherwise
@@ -83,6 +77,12 @@ type SetIdentityFeedbackForwardingEnabledInput struct {
 	//
 	// This member is required.
 	ForwardingEnabled *bool
+
+	// The identity for which to set bounce and complaint notification forwarding.
+	// Examples: user@example.com, example.com.
+	//
+	// This member is required.
+	Identity *string
 }
 
 // An empty element returned on a successful request.

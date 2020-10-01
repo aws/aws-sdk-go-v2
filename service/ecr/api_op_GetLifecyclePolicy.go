@@ -69,17 +69,17 @@ type GetLifecyclePolicyInput struct {
 
 type GetLifecyclePolicyOutput struct {
 
-	// The repository name associated with the request.
-	RepositoryName *string
+	// The time stamp of the last time that the lifecycle policy was run.
+	LastEvaluatedAt *time.Time
 
 	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string
 
-	// The time stamp of the last time that the lifecycle policy was run.
-	LastEvaluatedAt *time.Time
-
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

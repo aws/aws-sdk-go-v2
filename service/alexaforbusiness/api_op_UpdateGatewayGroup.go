@@ -62,11 +62,11 @@ type UpdateGatewayGroupInput struct {
 	// This member is required.
 	GatewayGroupArn *string
 
-	// The updated name of the gateway group.
-	Name *string
-
 	// The updated description of the gateway group.
 	Description *string
+
+	// The updated name of the gateway group.
+	Name *string
 }
 
 type UpdateGatewayGroupOutput struct {

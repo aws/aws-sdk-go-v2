@@ -61,18 +61,18 @@ func (c *Client) DeleteSigningCertificate(ctx context.Context, params *DeleteSig
 
 type DeleteSigningCertificateInput struct {
 
-	// The name of the user the signing certificate belongs to. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string
-
 	// The ID of the signing certificate to delete. The format of this parameter, as
 	// described by its regex (http://wikipedia.org/wiki/regex) pattern, is a string of
 	// characters that can be upper- or lower-cased letters or digits.
 	//
 	// This member is required.
 	CertificateId *string
+
+	// The name of the user the signing certificate belongs to. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	UserName *string
 }
 
 type DeleteSigningCertificateOutput struct {

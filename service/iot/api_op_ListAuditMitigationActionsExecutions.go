@@ -63,12 +63,6 @@ type ListAuditMitigationActionsExecutionsInput struct {
 	// This member is required.
 	FindingId *string
 
-	// The token for the next set of results.
-	NextToken *string
-
-	// The maximum number of results to return at one time. The default is 25.
-	MaxResults *int32
-
 	// Specify this filter to limit results to actions for a specific audit mitigation
 	// actions task.
 	//
@@ -77,16 +71,22 @@ type ListAuditMitigationActionsExecutionsInput struct {
 
 	// Specify this filter to limit results to those with a specific status.
 	ActionStatus types.AuditMitigationActionsExecutionStatus
+
+	// The maximum number of results to return at one time. The default is 25.
+	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListAuditMitigationActionsExecutionsOutput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// A set of task execution results based on the input parameters. Details include
 	// the mitigation action applied, start time, and task status.
 	ActionsExecutions []*types.AuditMitigationActionExecutionMetadata
+
+	// The token for the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
