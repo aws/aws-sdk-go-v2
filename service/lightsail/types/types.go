@@ -9,13 +9,13 @@ import (
 // Describes an add-on that is enabled for an Amazon Lightsail resource.
 type AddOn struct {
 
+	// The name of the add-on.
+	Name *string
+
 	// The next daily time an automatic snapshot will be created. The time shown is in
 	// HH:00 format, and in Coordinated Universal Time (UTC). The snapshot is
 	// automatically created between the time shown and up to 45 minutes after.
 	NextSnapshotTimeOfDay *string
-
-	// The name of the add-on.
-	Name *string
 
 	// The daily time when an automatic snapshot is created. The time shown is in HH:00
 	// format, and in Coordinated Universal Time (UTC). The snapshot is automatically
@@ -47,6 +47,51 @@ type AddOnRequest struct {
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms).
 type Alarm struct {
 
+	// The Amazon Resource Name (ARN) of the alarm.
+	Arn *string
+
+	// The arithmetic operation used when comparing the specified statistic and
+	// threshold.
+	ComparisonOperator ComparisonOperator
+
+	// The contact protocols for the alarm, such as Email, SMS (text messaging), or
+	// both.
+	ContactProtocols []ContactProtocol
+
+	// The timestamp when the alarm was created.
+	CreatedAt *time.Time
+
+	// The number of data points that must not within the specified threshold to
+	// trigger the alarm.
+	DatapointsToAlarm *int32
+
+	// The number of periods over which data is compared to the specified threshold.
+	EvaluationPeriods *int32
+
+	// An object that lists information about the location of the alarm.
+	Location *ResourceLocation
+
+	// The name of the metric associated with the alarm.
+	MetricName MetricName
+
+	// An object that lists information about the resource monitored by the alarm.
+	MonitoredResourceInfo *MonitoredResourceInfo
+
+	// The name of the alarm.
+	Name *string
+
+	// Indicates whether the alarm is enabled.
+	NotificationEnabled *bool
+
+	// The alarm states that trigger a notification.
+	NotificationTriggers []AlarmState
+
+	// The period, in seconds, over which the statistic is applied.
+	Period *int32
+
+	// The Lightsail resource type (e.g., Alarm).
+	ResourceType ResourceType
+
 	// The current state of the alarm. An alarm has the following possible states:
 	//
 	//
@@ -59,56 +104,6 @@ type Alarm struct {
 	//     *
 	// OK - The metric is within the defined threshold.
 	State AlarmState
-
-	// An object that lists information about the location of the alarm.
-	Location *ResourceLocation
-
-	// The value against which the specified statistic is compared.
-	Threshold *float64
-
-	// The alarm states that trigger a notification.
-	NotificationTriggers []AlarmState
-
-	// The unit of the metric associated with the alarm.
-	Unit MetricUnit
-
-	// The name of the metric associated with the alarm.
-	MetricName MetricName
-
-	// The contact protocols for the alarm, such as Email, SMS (text messaging), or
-	// both.
-	ContactProtocols []ContactProtocol
-
-	// The arithmetic operation used when comparing the specified statistic and
-	// threshold.
-	ComparisonOperator ComparisonOperator
-
-	// The number of data points that must not within the specified threshold to
-	// trigger the alarm.
-	DatapointsToAlarm *int32
-
-	// The support code. Include this code in your email to support when you have
-	// questions about your Lightsail alarm. This code enables our support team to look
-	// up your Lightsail information more easily.
-	SupportCode *string
-
-	// The Lightsail resource type (e.g., Alarm).
-	ResourceType ResourceType
-
-	// The name of the alarm.
-	Name *string
-
-	// The number of periods over which data is compared to the specified threshold.
-	EvaluationPeriods *int32
-
-	// The Amazon Resource Name (ARN) of the alarm.
-	Arn *string
-
-	// Indicates whether the alarm is enabled.
-	NotificationEnabled *bool
-
-	// The period, in seconds, over which the statistic is applied.
-	Period *int32
 
 	// The statistic for the metric associated with the alarm. The following statistics
 	// are available:
@@ -135,8 +130,13 @@ type Alarm struct {
 	// points used for the statistical calculation.
 	Statistic MetricStatistic
 
-	// The timestamp when the alarm was created.
-	CreatedAt *time.Time
+	// The support code. Include this code in your email to support when you have
+	// questions about your Lightsail alarm. This code enables our support team to look
+	// up your Lightsail information more easily.
+	SupportCode *string
+
+	// The value against which the specified statistic is compared.
+	Threshold *float64
 
 	// Specifies how the alarm handles missing data points. An alarm can treat missing
 	// data in the following ways:
@@ -156,8 +156,8 @@ type Alarm struct {
 	// missing.
 	TreatMissingData TreatMissingData
 
-	// An object that lists information about the resource monitored by the alarm.
-	MonitoredResourceInfo *MonitoredResourceInfo
+	// The unit of the metric associated with the alarm.
+	Unit MetricUnit
 }
 
 // Describes a block storage disk that is attached to an instance, and is included
@@ -221,18 +221,18 @@ type AutoSnapshotAddOnRequest struct {
 // Describes an automatic snapshot.
 type AutoSnapshotDetails struct {
 
-	// The status of the automatic snapshot.
-	Status AutoSnapshotStatus
-
-	// An array of objects that describe the block storage disks attached to the
-	// instance when the automatic snapshot was created.
-	FromAttachedDisks []*AttachedDisk
-
 	// The timestamp when the automatic snapshot was created.
 	CreatedAt *time.Time
 
 	// The date of the automatic snapshot in YYYY-MM-DD format.
 	Date *string
+
+	// An array of objects that describe the block storage disks attached to the
+	// instance when the automatic snapshot was created.
+	FromAttachedDisks []*AttachedDisk
+
+	// The status of the automatic snapshot.
+	Status AutoSnapshotStatus
 }
 
 // Describes an Availability Zone.
@@ -248,8 +248,15 @@ type AvailabilityZone struct {
 // Describes a blueprint (a virtual private server image).
 type Blueprint struct {
 
-	// The friendly name of the blueprint (e.g., Amazon Linux).
-	Name *string
+	// The ID for the virtual private server image (e.g., app_wordpress_4_4 or
+	// app_lamp_7_0).
+	BlueprintId *string
+
+	// The description of the blueprint.
+	Description *string
+
+	// The group name of the blueprint (e.g., amazon-linux).
+	Group *string
 
 	// A Boolean value indicating whether the blueprint is active. Inactive blueprints
 	// are listed to support customers with existing instances but are not necessarily
@@ -260,9 +267,18 @@ type Blueprint struct {
 	// The end-user license agreement URL for the image or blueprint.
 	LicenseUrl *string
 
-	// The version number of the operating system, application, or stack (e.g.,
-	// 2016.03.0).
-	Version *string
+	// The minimum bundle power required to run this blueprint. For example, you need a
+	// bundle with a power value of 500 or more to create an instance that uses a
+	// blueprint with a minimum power value of 500. 0 indicates that the blueprint runs
+	// on all instance sizes.
+	MinPower *int32
+
+	// The friendly name of the blueprint (e.g., Amazon Linux).
+	Name *string
+
+	// The operating system platform (either Linux/Unix-based or Windows Server-based)
+	// of the blueprint.
+	Platform InstancePlatform
 
 	// The product URL to learn more about the image or blueprint.
 	ProductUrl *string
@@ -270,39 +286,26 @@ type Blueprint struct {
 	// The type of the blueprint (e.g., os or app).
 	Type BlueprintType
 
-	// The minimum bundle power required to run this blueprint. For example, you need a
-	// bundle with a power value of 500 or more to create an instance that uses a
-	// blueprint with a minimum power value of 500. 0 indicates that the blueprint runs
-	// on all instance sizes.
-	MinPower *int32
-
-	// The group name of the blueprint (e.g., amazon-linux).
-	Group *string
+	// The version number of the operating system, application, or stack (e.g.,
+	// 2016.03.0).
+	Version *string
 
 	// The version code.
 	VersionCode *string
-
-	// The operating system platform (either Linux/Unix-based or Windows Server-based)
-	// of the blueprint.
-	Platform InstancePlatform
-
-	// The description of the blueprint.
-	Description *string
-
-	// The ID for the virtual private server image (e.g., app_wordpress_4_4 or
-	// app_lamp_7_0).
-	BlueprintId *string
 }
 
 // Describes a bundle, which is a set of specs describing your virtual private
 // server (or instance).
 type Bundle struct {
 
+	// The bundle ID (e.g., micro_1_0).
+	BundleId *string
+
 	// The number of vCPUs included in the bundle (e.g., 2).
 	CpuCount *int32
 
-	// The price in US dollars (e.g., 5.0) of the bundle.
-	Price *float32
+	// The size of the SSD (e.g., 30).
+	DiskSizeInGb *int32
 
 	// The Amazon EC2 instance type (e.g., t2.micro).
 	InstanceType *string
@@ -310,8 +313,8 @@ type Bundle struct {
 	// A Boolean value indicating whether the bundle is active.
 	IsActive *bool
 
-	// The data transfer rate per month in GB (e.g., 2000).
-	TransferPerMonthInGb *int32
+	// A friendly name for the bundle (e.g., Micro).
+	Name *string
 
 	// A numeric value that represents the power of the bundle (e.g., 500). You can use
 	// the bundle's power value in conjunction with a blueprint's minimum power value
@@ -320,11 +323,11 @@ type Bundle struct {
 	// blueprint with a minimum power value of 500.
 	Power *int32
 
-	// The size of the SSD (e.g., 30).
-	DiskSizeInGb *int32
+	// The price in US dollars (e.g., 5.0) of the bundle.
+	Price *float32
 
-	// The bundle ID (e.g., micro_1_0).
-	BundleId *string
+	// The amount of RAM in GB (e.g., 2.0).
+	RamSizeInGb *float32
 
 	// The operating system platform (Linux/Unix-based or Windows Server-based) that
 	// the bundle supports. You can only launch a WINDOWS bundle on a blueprint that
@@ -332,11 +335,8 @@ type Bundle struct {
 	// bundle.
 	SupportedPlatforms []InstancePlatform
 
-	// A friendly name for the bundle (e.g., Micro).
-	Name *string
-
-	// The amount of RAM in GB (e.g., 2.0).
-	RamSizeInGb *float32
+	// The data transfer rate per month in GB (e.g., 2000).
+	TransferPerMonthInGb *int32
 }
 
 // Describes the default cache behavior of an Amazon Lightsail content delivery
@@ -403,29 +403,6 @@ type CacheBehaviorPerPath struct {
 // that have a <code>behavior</code> of <code>cache</code>.</p>
 type CacheSettings struct {
 
-	// An object that describes the headers that are forwarded to the origin. Your
-	// content is cached based on the headers that are forwarded.
-	ForwardedHeaders *HeaderObject
-
-	// The default amount of time that objects stay in the distribution's cache before
-	// the distribution forwards another request to the origin to determine whether the
-	// content has been updated.  <note> <p>The value specified applies only when the
-	// origin does not add HTTP headers such as <code>Cache-Control max-age</code>,
-	// <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>
-	// </note>
-	DefaultTTL *int64
-
-	// An object that describes the cookies that are forwarded to the origin. Your
-	// content is cached based on the cookies that are forwarded.
-	ForwardedCookies *CookieObject
-
-	// The minimum amount of time that objects stay in the distribution's cache before
-	// the distribution forwards another request to the origin to determine whether the
-	// object has been updated.  <p>A value of <code>0</code> must be specified for
-	// <code>minimumTTL</code> if the distribution is configured to forward all headers
-	// to the origin.</p>
-	MinimumTTL *int64
-
 	// The HTTP methods that are processed and forwarded to the distribution's origin.
 	// <p>You can specify the following options:</p> <ul> <li> <p>
 	// <code>GET,HEAD</code> - The distribution forwards the <code>GET</code> and
@@ -449,6 +426,26 @@ type CacheSettings struct {
 	// <code>OPTIONS</code> methods.</p> </li> </ul>
 	CachedHTTPMethods *string
 
+	// The default amount of time that objects stay in the distribution's cache before
+	// the distribution forwards another request to the origin to determine whether the
+	// content has been updated.  <note> <p>The value specified applies only when the
+	// origin does not add HTTP headers such as <code>Cache-Control max-age</code>,
+	// <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>
+	// </note>
+	DefaultTTL *int64
+
+	// An object that describes the cookies that are forwarded to the origin. Your
+	// content is cached based on the cookies that are forwarded.
+	ForwardedCookies *CookieObject
+
+	// An object that describes the headers that are forwarded to the origin. Your
+	// content is cached based on the headers that are forwarded.
+	ForwardedHeaders *HeaderObject
+
+	// An object that describes the query strings that are forwarded to the origin.
+	// Your content is cached based on the query strings that are forwarded.
+	ForwardedQueryStrings *QueryStringObject
+
 	// The maximum amount of time that objects stay in the distribution's cache before
 	// the distribution forwards another request to the origin to determine whether the
 	// object has been updated.  <p>The value specified applies only when the origin
@@ -456,9 +453,12 @@ type CacheSettings struct {
 	// <code>Cache-Control s-maxage</code>, and <code>Expires</code> to objects.</p>
 	MaximumTTL *int64
 
-	// An object that describes the query strings that are forwarded to the origin.
-	// Your content is cached based on the query strings that are forwarded.
-	ForwardedQueryStrings *QueryStringObject
+	// The minimum amount of time that objects stay in the distribution's cache before
+	// the distribution forwards another request to the origin to determine whether the
+	// object has been updated.  <p>A value of <code>0</code> must be specified for
+	// <code>minimumTTL</code> if the distribution is configured to forward all headers
+	// to the origin.</p>
+	MinimumTTL *int64
 }
 
 // Describes the full details of an Amazon Lightsail SSL/TLS certificate.  <note>
@@ -468,31 +468,21 @@ type CacheSettings struct {
 // certificate name, domain name, and tags.</p> </note>
 type Certificate struct {
 
-	// The timestamp when the certificate was revoked. This value is present only when
-	// the certificate status is REVOKED.
-	RevokedAt *time.Time
-
-	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
-
-	// The validation status of the certificate.
-	Status CertificateStatus
-
-	// The reason the certificate was revoked. This value is present only when the
-	// certificate status is REVOKED.
-	RevocationReason *string
+	// The Amazon Resource Name (ARN) of the certificate.
+	Arn *string
 
 	// The timestamp when the certificate was created.
 	CreatedAt *time.Time
 
-	// An array of strings that specify the alternate domains (e.g., example2.com) and
-	// subdomains (e.g., blog.example.com) of the certificate.
-	SubjectAlternativeNames []*string
-
 	// The domain name of the certificate.
 	DomainName *string
+
+	// An array of objects that describe the domain validation records of the
+	// certificate.
+	DomainValidationRecords []*DomainValidationRecord
+
+	// The renewal eligibility of the certificate.
+	EligibleToRenew *string
 
 	// The number of Lightsail resources that the certificate is attached to.
 	InUseResourceCount *int32
@@ -500,8 +490,21 @@ type Certificate struct {
 	// The timestamp when the certificate was issued.
 	IssuedAt *time.Time
 
-	// The renewal eligibility of the certificate.
-	EligibleToRenew *string
+	// The certificate authority that issued the certificate.
+	IssuerCA *string
+
+	// The algorithm used to generate the key pair (the public and private key) of the
+	// certificate.
+	KeyAlgorithm *string
+
+	// The name of the certificate (e.g., my-certificate).
+	Name *string
+
+	// The timestamp when the certificate expires.
+	NotAfter *time.Time
+
+	// The timestamp when the certificate is first valid.
+	NotBefore *time.Time
 
 	// An object that describes the status of the certificate renewal managed by
 	// Lightsail.
@@ -547,48 +550,37 @@ type Certificate struct {
 	// typos that were in the failed request. </p> </li> </ul>
 	RequestFailureReason *string
 
-	// The name of the certificate (e.g., my-certificate).
-	Name *string
+	// The reason the certificate was revoked. This value is present only when the
+	// certificate status is REVOKED.
+	RevocationReason *string
 
-	// The algorithm used to generate the key pair (the public and private key) of the
-	// certificate.
-	KeyAlgorithm *string
+	// The timestamp when the certificate was revoked. This value is present only when
+	// the certificate status is REVOKED.
+	RevokedAt *time.Time
+
+	// The serial number of the certificate.
+	SerialNumber *string
+
+	// The validation status of the certificate.
+	Status CertificateStatus
+
+	// An array of strings that specify the alternate domains (e.g., example2.com) and
+	// subdomains (e.g., blog.example.com) of the certificate.
+	SubjectAlternativeNames []*string
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail certificate. This code enables our support team
 	// to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The Amazon Resource Name (ARN) of the certificate.
-	Arn *string
-
-	// The timestamp when the certificate is first valid.
-	NotBefore *time.Time
-
-	// An array of objects that describe the domain validation records of the
-	// certificate.
-	DomainValidationRecords []*DomainValidationRecord
-
-	// The certificate authority that issued the certificate.
-	IssuerCA *string
-
-	// The serial number of the certificate.
-	SerialNumber *string
-
-	// The timestamp when the certificate expires.
-	NotAfter *time.Time
-}
-
-// Describes an Amazon Lightsail SSL/TLS certificate.
-type CertificateSummary struct {
-
-	// The domain name of the certificate.
-	DomainName *string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
+}
+
+// Describes an Amazon Lightsail SSL/TLS certificate.
+type CertificateSummary struct {
 
 	// The Amazon Resource Name (ARN) of the certificate.
 	CertificateArn *string
@@ -598,6 +590,14 @@ type CertificateSummary struct {
 
 	// The name of the certificate.
 	CertificateName *string
+
+	// The domain name of the certificate.
+	DomainName *string
+
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []*Tag
 }
 
 // Describes a CloudFormation stack record created as a result of the create cloud
@@ -606,12 +606,8 @@ type CertificateSummary struct {
 // Cloud instance from an exported Lightsail instance snapshot.
 type CloudFormationStackRecord struct {
 
-	// The Lightsail resource type (e.g., CloudFormationStackRecord).
-	ResourceType ResourceType
-
-	// A list of objects describing the Availability Zone and AWS Region of the
-	// CloudFormation stack record.
-	Location *ResourceLocation
+	// The Amazon Resource Name (ARN) of the CloudFormation stack record.
+	Arn *string
 
 	// The date when the CloudFormation stack record was created.
 	CreatedAt *time.Time
@@ -621,32 +617,36 @@ type CloudFormationStackRecord struct {
 	// stack.
 	DestinationInfo *DestinationInfo
 
-	// The current state of the CloudFormation stack record.
-	State RecordState
-
-	// The Amazon Resource Name (ARN) of the CloudFormation stack record.
-	Arn *string
-
-	// A list of objects describing the source of the CloudFormation stack record.
-	SourceInfo []*CloudFormationStackRecordSourceInfo
+	// A list of objects describing the Availability Zone and AWS Region of the
+	// CloudFormation stack record.
+	Location *ResourceLocation
 
 	// The name of the CloudFormation stack record. It starts with
 	// CloudFormationStackRecord followed by a GUID.
 	Name *string
+
+	// The Lightsail resource type (e.g., CloudFormationStackRecord).
+	ResourceType ResourceType
+
+	// A list of objects describing the source of the CloudFormation stack record.
+	SourceInfo []*CloudFormationStackRecordSourceInfo
+
+	// The current state of the CloudFormation stack record.
+	State RecordState
 }
 
 // Describes the source of a CloudFormation stack record (i.e., the export snapshot
 // record).
 type CloudFormationStackRecordSourceInfo struct {
 
-	// The Lightsail resource type (e.g., ExportSnapshotRecord).
-	ResourceType CloudFormationStackRecordSourceType
+	// The Amazon Resource Name (ARN) of the export snapshot record.
+	Arn *string
 
 	// The name of the record.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the export snapshot record.
-	Arn *string
+	// The Lightsail resource type (e.g., ExportSnapshotRecord).
+	ResourceType CloudFormationStackRecordSourceType
 }
 
 // Describes a contact method. A contact method is a way to send you notifications.
@@ -657,20 +657,24 @@ type ContactMethod struct {
 	// The Amazon Resource Name (ARN) of the contact method.
 	Arn *string
 
-	// The protocol of the contact method, such as email or SMS (text messaging).
-	Protocol ContactProtocol
-
-	// The support code. Include this code in your email to support when you have
-	// questions about your Lightsail contact method. This code enables our support
-	// team to look up your Lightsail information more easily.
-	SupportCode *string
+	// The destination of the contact method, such as an email address or a mobile
+	// phone number.
+	ContactEndpoint *string
 
 	// The timestamp when the contact method was created.
 	CreatedAt *time.Time
 
-	// The destination of the contact method, such as an email address or a mobile
-	// phone number.
-	ContactEndpoint *string
+	// Describes the resource location.
+	Location *ResourceLocation
+
+	// The name of the contact method.
+	Name *string
+
+	// The protocol of the contact method, such as email or SMS (text messaging).
+	Protocol ContactProtocol
+
+	// The Lightsail resource type (e.g., ContactMethod).
+	ResourceType ResourceType
 
 	// The current status of the contact method. A contact method has the following
 	// possible status:
@@ -685,14 +689,10 @@ type ContactMethod struct {
 	// the contact method, but the verification has expired.
 	Status ContactMethodStatus
 
-	// Describes the resource location.
-	Location *ResourceLocation
-
-	// The Lightsail resource type (e.g., ContactMethod).
-	ResourceType ResourceType
-
-	// The name of the contact method.
-	Name *string
+	// The support code. Include this code in your email to support when you have
+	// questions about your Lightsail contact method. This code enables our support
+	// team to look up your Lightsail information more easily.
+	SupportCode *string
 }
 
 // Describes whether an Amazon Lightsail content delivery network (CDN)
@@ -701,87 +701,87 @@ type ContactMethod struct {
 // specified content based on the cookie values in viewer requests.</p>
 type CookieObject struct {
 
+	// The specific cookies to forward to your distribution's origin.
+	CookiesAllowList []*string
+
 	// Specifies which cookies to forward to the distribution's origin for a cache
 	// behavior: all, none, or allow-list to forward only the cookies specified in the
 	// cookiesAllowList parameter.
 	Option ForwardValues
-
-	// The specific cookies to forward to your distribution's origin.
-	CookiesAllowList []*string
 }
 
 // Describes the destination of a record.
 type DestinationInfo struct {
 
-	// The destination service of the record.
-	Service *string
-
 	// The ID of the resource created at the destination.
 	Id *string
+
+	// The destination service of the record.
+	Service *string
 }
 
 // Describes a system disk or a block storage disk.
 type Disk struct {
+
+	// An array of objects representing the add-ons enabled on the disk.
+	AddOns []*AddOn
+
+	// The Amazon Resource Name (ARN) of the disk.
+	Arn *string
+
+	// The resources to which the disk is attached.
+	AttachedTo *string
 
 	// (Deprecated) The attachment state of the disk. In releases prior to November 14,
 	// 2017, this parameter returned attached for system disks in the API response. It
 	// is now deprecated, but still included in the response. Use isAttached instead.
 	AttachmentState *string
 
+	// The date when the disk was created.
+	CreatedAt *time.Time
+
 	// (Deprecated) The number of GB in use by the disk. In releases prior to November
 	// 14, 2017, this parameter was not included in the API response. It is now
 	// deprecated.
 	GbInUse *int32
 
-	// The date when the disk was created.
-	CreatedAt *time.Time
-
 	// The input/output operations per second (IOPS) of the disk.
 	Iops *int32
 
-	// The disk path.
-	Path *string
-
-	// The resources to which the disk is attached.
-	AttachedTo *string
-
-	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
-
-	// Describes the status of the disk.
-	State DiskState
-
-	// The AWS Region and Availability Zone where the disk is located.
-	Location *ResourceLocation
+	// A Boolean value indicating whether the disk is attached.
+	IsAttached *bool
 
 	// A Boolean value indicating whether this disk is a system disk (has an operating
 	// system loaded on it).
 	IsSystemDisk *bool
 
+	// The AWS Region and Availability Zone where the disk is located.
+	Location *ResourceLocation
+
+	// The unique name of the disk.
+	Name *string
+
+	// The disk path.
+	Path *string
+
+	// The Lightsail resource type (e.g., Disk).
+	ResourceType ResourceType
+
 	// The size of the disk in GB.
 	SizeInGb *int32
 
-	// An array of objects representing the add-ons enabled on the disk.
-	AddOns []*AddOn
+	// Describes the status of the disk.
+	State DiskState
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The Amazon Resource Name (ARN) of the disk.
-	Arn *string
-
-	// The Lightsail resource type (e.g., Disk).
-	ResourceType ResourceType
-
-	// The unique name of the disk.
-	Name *string
-
-	// A Boolean value indicating whether the disk is attached.
-	IsAttached *bool
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []*Tag
 }
 
 // Describes a disk.
@@ -791,11 +791,11 @@ type DiskInfo struct {
 	// system loaded on it).
 	IsSystemDisk *bool
 
-	// The disk path.
-	Path *string
-
 	// The disk name.
 	Name *string
+
+	// The disk path.
+	Path *string
 
 	// The size of the disk in GB (e.g., 32).
 	SizeInGb *int32
@@ -804,68 +804,68 @@ type DiskInfo struct {
 // Describes a block storage disk mapping.
 type DiskMap struct {
 
-	// The original disk path exposed to the instance (for example, /dev/sdh).
-	OriginalDiskPath *string
-
 	// The new disk name (e.g., my-new-disk).
 	NewDiskName *string
+
+	// The original disk path exposed to the instance (for example, /dev/sdh).
+	OriginalDiskPath *string
 }
 
 // Describes a block storage disk snapshot.
 type DiskSnapshot struct {
+
+	// The Amazon Resource Name (ARN) of the disk snapshot.
+	Arn *string
+
+	// The date when the disk snapshot was created.
+	CreatedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the source disk from which the disk snapshot
+	// was created.
+	FromDiskArn *string
+
+	// The unique name of the source disk from which the disk snapshot was created.
+	FromDiskName *string
+
+	// The Amazon Resource Name (ARN) of the source instance from which the disk
+	// (system volume) snapshot was created.
+	FromInstanceArn *string
+
+	// The unique name of the source instance from which the disk (system volume)
+	// snapshot was created.
+	FromInstanceName *string
+
+	// A Boolean value indicating whether the snapshot was created from an automatic
+	// snapshot.
+	IsFromAutoSnapshot *bool
+
+	// The AWS Region and Availability Zone where the disk snapshot was created.
+	Location *ResourceLocation
+
+	// The name of the disk snapshot (e.g., my-disk-snapshot).
+	Name *string
+
+	// The progress of the disk snapshot operation.
+	Progress *string
+
+	// The Lightsail resource type (e.g., DiskSnapshot).
+	ResourceType ResourceType
+
+	// The size of the disk in GB.
+	SizeInGb *int32
+
+	// The status of the disk snapshot operation.
+	State DiskSnapshotState
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The AWS Region and Availability Zone where the disk snapshot was created.
-	Location *ResourceLocation
-
-	// The status of the disk snapshot operation.
-	State DiskSnapshotState
-
-	// The Lightsail resource type (e.g., DiskSnapshot).
-	ResourceType ResourceType
-
-	// The unique name of the source instance from which the disk (system volume)
-	// snapshot was created.
-	FromInstanceName *string
-
-	// The progress of the disk snapshot operation.
-	Progress *string
-
-	// The Amazon Resource Name (ARN) of the source instance from which the disk
-	// (system volume) snapshot was created.
-	FromInstanceArn *string
-
-	// The name of the disk snapshot (e.g., my-disk-snapshot).
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the disk snapshot.
-	Arn *string
-
-	// A Boolean value indicating whether the snapshot was created from an automatic
-	// snapshot.
-	IsFromAutoSnapshot *bool
-
-	// The date when the disk snapshot was created.
-	CreatedAt *time.Time
-
-	// The size of the disk in GB.
-	SizeInGb *int32
-
-	// The Amazon Resource Name (ARN) of the source disk from which the disk snapshot
-	// was created.
-	FromDiskArn *string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
-
-	// The unique name of the source disk from which the disk snapshot was created.
-	FromDiskName *string
 }
 
 // Describes a disk snapshot.
@@ -878,34 +878,41 @@ type DiskSnapshotInfo struct {
 // Describes the specifications of a distribution bundle.
 type DistributionBundle struct {
 
-	// The name of the distribution bundle.
-	Name *string
-
 	// The ID of the bundle.
 	BundleId *string
-
-	// The monthly network transfer quota of the bundle.
-	TransferPerMonthInGb *int32
 
 	// Indicates whether the bundle is active, and can be specified for a new
 	// distribution.
 	IsActive *bool
 
+	// The name of the distribution bundle.
+	Name *string
+
 	// The monthly price, in US dollars, of the bundle.
 	Price *float32
+
+	// The monthly network transfer quota of the bundle.
+	TransferPerMonthInGb *int32
 }
 
 // Describes a domain where you are storing recordsets in Lightsail.
 type Domain struct {
 
-	// The AWS Region and Availability Zones where the domain recordset was created.
-	Location *ResourceLocation
+	// The Amazon Resource Name (ARN) of the domain recordset (e.g.,
+	// arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
+	Arn *string
+
+	// The date when the domain recordset was created.
+	CreatedAt *time.Time
 
 	// An array of key-value pairs containing information about the domain entries.
 	DomainEntries []*DomainEntry
 
-	// The date when the domain recordset was created.
-	CreatedAt *time.Time
+	// The AWS Region and Availability Zones where the domain recordset was created.
+	Location *ResourceLocation
+
+	// The name of the domain.
+	Name *string
 
 	// The resource type.
 	ResourceType ResourceType
@@ -915,30 +922,22 @@ type Domain struct {
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The name of the domain.
-	Name *string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
-
-	// The Amazon Resource Name (ARN) of the domain recordset (e.g.,
-	// arn:aws:lightsail:global:123456789101:Domain/824cede0-abc7-4f84-8dbc-12345EXAMPLE).
-	Arn *string
 }
 
 // Describes a domain recordset entry.
 type DomainEntry struct {
 
-	// The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load
-	// balancers, the value looks like
-	// ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure
-	// to also set isAlias to true when setting up an A record for a load balancer.
-	Target *string
-
 	// The ID of the domain recordset entry.
 	Id *string
+
+	// When true, specifies whether the domain entry is an alias used by the Lightsail
+	// load balancer. You can include an alias (A type) record in your request, which
+	// points to a load balancer DNS name and routes traffic to your load balancer
+	IsAlias *bool
 
 	// The name of the domain.
 	Name *string
@@ -947,10 +946,11 @@ type DomainEntry struct {
 	// 2017, this parameter was not included in the API response. It is now deprecated.
 	Options map[string]*string
 
-	// When true, specifies whether the domain entry is an alias used by the Lightsail
-	// load balancer. You can include an alias (A type) record in your request, which
-	// points to a load balancer DNS name and routes traffic to your load balancer
-	IsAlias *bool
+	// The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load
+	// balancers, the value looks like
+	// ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure
+	// to also set isAlias to true when setting up an A record for a load balancer.
+	Target *string
 
 	// The type of domain entry, such as address (A), canonical name (CNAME), mail
 	// exchanger (MX), name server (NS), start of authority (SOA), service locator
@@ -992,20 +992,11 @@ type ExportSnapshotRecord struct {
 	// The Amazon Resource Name (ARN) of the export snapshot record.
 	Arn *string
 
-	// A list of objects describing the source of the export snapshot record.
-	SourceInfo *ExportSnapshotRecordSourceInfo
-
-	// The state of the export snapshot record.
-	State RecordState
-
-	// A list of objects describing the destination of the export snapshot record.
-	DestinationInfo *DestinationInfo
-
 	// The date when the export snapshot record was created.
 	CreatedAt *time.Time
 
-	// The Lightsail resource type (e.g., ExportSnapshotRecord).
-	ResourceType ResourceType
+	// A list of objects describing the destination of the export snapshot record.
+	DestinationInfo *DestinationInfo
 
 	// The AWS Region and Availability Zone where the export snapshot record is
 	// located.
@@ -1013,31 +1004,40 @@ type ExportSnapshotRecord struct {
 
 	// The export snapshot record name.
 	Name *string
+
+	// The Lightsail resource type (e.g., ExportSnapshotRecord).
+	ResourceType ResourceType
+
+	// A list of objects describing the source of the export snapshot record.
+	SourceInfo *ExportSnapshotRecordSourceInfo
+
+	// The state of the export snapshot record.
+	State RecordState
 }
 
 // Describes the source of an export snapshot record.
 type ExportSnapshotRecordSourceInfo struct {
 
-	// A list of objects describing an instance snapshot.
-	InstanceSnapshotInfo *InstanceSnapshotInfo
-
 	// The Amazon Resource Name (ARN) of the source instance or disk snapshot.
 	Arn *string
-
-	// The name of the snapshot's source instance or disk.
-	FromResourceName *string
-
-	// The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
-	FromResourceArn *string
 
 	// The date when the source instance or disk snapshot was created.
 	CreatedAt *time.Time
 
-	// The name of the source instance or disk snapshot.
-	Name *string
-
 	// A list of objects describing a disk snapshot.
 	DiskSnapshotInfo *DiskSnapshotInfo
+
+	// The Amazon Resource Name (ARN) of the snapshot's source instance or disk.
+	FromResourceArn *string
+
+	// The name of the snapshot's source instance or disk.
+	FromResourceName *string
+
+	// A list of objects describing an instance snapshot.
+	InstanceSnapshotInfo *InstanceSnapshotInfo
+
+	// The name of the source instance or disk snapshot.
+	Name *string
 
 	// The Lightsail resource type (e.g., InstanceSnapshot or DiskSnapshot).
 	ResourceType ExportSnapshotRecordSourceType
@@ -1075,12 +1075,15 @@ type HostKeyAttributes struct {
 	// certificates, the algorithm is always x509-cert.
 	Algorithm *string
 
-	// The returned RDP certificate is not valid after this point in time. This value
-	// is listed only for RDP certificates.
-	NotValidAfter *time.Time
-
-	// The public SSH host key or the RDP certificate.
-	PublicKey *string
+	// The SHA-1 fingerprint of the returned SSH host key or RDP certificate.
+	//
+	//     *
+	// Example of an SHA-1 SSH fingerprint: SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0
+	//
+	//     *
+	// Example of an SHA-1 RDP fingerprint:
+	// af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45
+	FingerprintSHA1 *string
 
 	// The SHA-256 fingerprint of the returned SSH host key or RDP certificate.
 	//
@@ -1093,19 +1096,16 @@ type HostKeyAttributes struct {
 	// 03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68
 	FingerprintSHA256 *string
 
-	// The SHA-1 fingerprint of the returned SSH host key or RDP certificate.
-	//
-	//     *
-	// Example of an SHA-1 SSH fingerprint: SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0
-	//
-	//     *
-	// Example of an SHA-1 RDP fingerprint:
-	// af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45
-	FingerprintSHA1 *string
+	// The returned RDP certificate is not valid after this point in time. This value
+	// is listed only for RDP certificates.
+	NotValidAfter *time.Time
 
 	// The returned RDP certificate is valid after this point in time. This value is
 	// listed only for RDP certificates.
 	NotValidBefore *time.Time
+
+	// The public SSH host key or the RDP certificate.
+	PublicKey *string
 
 	// The time that the SSH host key or RDP certificate was recorded by Lightsail.
 	WitnessedAt *time.Time
@@ -1117,92 +1117,109 @@ type HostKeyAttributes struct {
 // via a worldwide network of edge servers.</p>
 type InputOrigin struct {
 
-	// The AWS Region name of the origin resource.
-	RegionName RegionName
+	// The name of the origin resource.
+	Name *string
 
 	// The protocol that your Amazon Lightsail distribution uses when establishing a
 	// connection with your origin to pull content.
 	ProtocolPolicy OriginProtocolPolicyEnum
 
-	// The name of the origin resource.
-	Name *string
+	// The AWS Region name of the origin resource.
+	RegionName RegionName
 }
 
 // Describes an instance (a virtual private server).
 type Instance struct {
 
-	// A Boolean value indicating whether this instance has a static IP assigned to it.
-	IsStaticIp *bool
+	// An array of objects representing the add-ons enabled on the instance.
+	AddOns []*AddOn
 
-	// Information about the public ports and monthly data transfer rates for the
-	// instance.
-	Networking *InstanceNetworking
+	// The Amazon Resource Name (ARN) of the instance (e.g.,
+	// arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
+	Arn *string
+
+	// The blueprint ID (e.g., os_amlinux_2016_03).
+	BlueprintId *string
+
+	// The friendly name of the blueprint (e.g., Amazon Linux).
+	BlueprintName *string
+
+	// The bundle for the instance (e.g., micro_1_0).
+	BundleId *string
 
 	// The timestamp when the instance was created (e.g., 1479734909.17) in Unix time
 	// format.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) of the instance (e.g.,
-	// arn:aws:lightsail:us-east-2:123456789101:Instance/244ad76f-8aad-4741-809f-12345EXAMPLE).
-	Arn *string
+	// The size of the vCPU and the amount of RAM for the instance.
+	Hardware *InstanceHardware
+
+	// The IPv6 address of the instance.
+	Ipv6Address *string
+
+	// A Boolean value indicating whether this instance has a static IP assigned to it.
+	IsStaticIp *bool
+
+	// The region name and Availability Zone where the instance is located.
+	Location *ResourceLocation
+
+	// The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
+	Name *string
+
+	// Information about the public ports and monthly data transfer rates for the
+	// instance.
+	Networking *InstanceNetworking
+
+	// The private IP address of the instance.
+	PrivateIpAddress *string
+
+	// The public IP address of the instance.
+	PublicIpAddress *string
+
+	// The type of resource (usually Instance).
+	ResourceType ResourceType
+
+	// The name of the SSH key being used to connect to the instance (e.g.,
+	// LightsailDefaultKeyPair).
+	SshKeyName *string
+
+	// The status code and the state (e.g., running) for the instance.
+	State *InstanceState
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The user name for connecting to the instance (e.g., ec2-user).
-	Username *string
-
-	// The size of the vCPU and the amount of RAM for the instance.
-	Hardware *InstanceHardware
-
-	// The name the user gave the instance (e.g., Amazon_Linux-1GB-Ohio-1).
-	Name *string
-
-	// The type of resource (usually Instance).
-	ResourceType ResourceType
-
-	// The IPv6 address of the instance.
-	Ipv6Address *string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
 
-	// The private IP address of the instance.
-	PrivateIpAddress *string
-
-	// The status code and the state (e.g., running) for the instance.
-	State *InstanceState
-
-	// The region name and Availability Zone where the instance is located.
-	Location *ResourceLocation
-
-	// The public IP address of the instance.
-	PublicIpAddress *string
-
-	// The friendly name of the blueprint (e.g., Amazon Linux).
-	BlueprintName *string
-
-	// An array of objects representing the add-ons enabled on the instance.
-	AddOns []*AddOn
-
-	// The bundle for the instance (e.g., micro_1_0).
-	BundleId *string
-
-	// The name of the SSH key being used to connect to the instance (e.g.,
-	// LightsailDefaultKeyPair).
-	SshKeyName *string
-
-	// The blueprint ID (e.g., os_amlinux_2016_03).
-	BlueprintId *string
+	// The user name for connecting to the instance (e.g., ec2-user).
+	Username *string
 }
 
 // The parameters for gaining temporary access to one of your Amazon Lightsail
 // instances.
 type InstanceAccessDetails struct {
+
+	// For SSH access, the public key to use when accessing your instance For OpenSSH
+	// clients (e.g., command line SSH), you should save this value to
+	// tempkey-cert.pub.
+	CertKey *string
+
+	// For SSH access, the date on which the temporary keys expire.
+	ExpiresAt *time.Time
+
+	// Describes the public SSH host keys or the RDP certificate.
+	HostKeys []*HostKeyAttributes
+
+	// The name of this Amazon Lightsail instance.
+	InstanceName *string
+
+	// The public IP address of the Amazon Lightsail instance.
+	IpAddress *string
 
 	// For RDP access, the password for your Amazon Lightsail instance. Password will
 	// be an empty string if the password for your new instance is not ready yet. When
@@ -1215,51 +1232,31 @@ type InstanceAccessDetails struct {
 	// default.
 	Password *string
 
-	// For SSH access, the date on which the temporary keys expire.
-	ExpiresAt *time.Time
-
-	// The public IP address of the Amazon Lightsail instance.
-	IpAddress *string
-
-	// The protocol for these Amazon Lightsail instance access details.
-	Protocol InstanceAccessProtocol
-
-	// Describes the public SSH host keys or the RDP certificate.
-	HostKeys []*HostKeyAttributes
-
-	// The name of this Amazon Lightsail instance.
-	InstanceName *string
-
-	// The user name to use when logging in to the Amazon Lightsail instance.
-	Username *string
-
-	// For SSH access, the temporary private key. For OpenSSH clients (e.g., command
-	// line SSH), you should save this value to tempkey).
-	PrivateKey *string
-
 	// For a Windows Server-based instance, an object with the data you can use to
 	// retrieve your password. This is only needed if password is empty and the
 	// instance is not new (and therefore the password is not ready yet). When you
 	// create an instance, it can take up to 15 minutes for the instance to be ready.
 	PasswordData *PasswordData
 
-	// For SSH access, the public key to use when accessing your instance For OpenSSH
-	// clients (e.g., command line SSH), you should save this value to
-	// tempkey-cert.pub.
-	CertKey *string
+	// For SSH access, the temporary private key. For OpenSSH clients (e.g., command
+	// line SSH), you should save this value to tempkey).
+	PrivateKey *string
+
+	// The protocol for these Amazon Lightsail instance access details.
+	Protocol InstanceAccessProtocol
+
+	// The user name to use when logging in to the Amazon Lightsail instance.
+	Username *string
 }
 
 // Describes the Amazon Elastic Compute Cloud instance and related resources to be
 // created using the create cloud formation stack operation.
 type InstanceEntry struct {
 
-	// The name of the export snapshot record, which contains the exported Lightsail
-	// instance snapshot that will be used as the source of the new Amazon EC2
-	// instance. Use the get export snapshot records operation to get a list of export
-	// snapshot records that you can use to create a CloudFormation stack.
+	// The Availability Zone for the new Amazon EC2 instance.
 	//
 	// This member is required.
-	SourceName *string
+	AvailabilityZone *string
 
 	// The instance type (e.g., t2.micro) to use for the new Amazon EC2 instance.
 	//
@@ -1289,27 +1286,30 @@ type InstanceEntry struct {
 	// This member is required.
 	PortInfoSource PortInfoSourceType
 
+	// The name of the export snapshot record, which contains the exported Lightsail
+	// instance snapshot that will be used as the source of the new Amazon EC2
+	// instance. Use the get export snapshot records operation to get a list of export
+	// snapshot records that you can use to create a CloudFormation stack.
+	//
+	// This member is required.
+	SourceName *string
+
 	// A launch script you can create that configures a server with additional user
 	// data. For example, you might want to run apt-get -y update. Depending on the
 	// machine image you choose, the command to get software on your instance varies.
 	// Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses
 	// pkg.
 	UserData *string
-
-	// The Availability Zone for the new Amazon EC2 instance.
-	//
-	// This member is required.
-	AvailabilityZone *string
 }
 
 // Describes the hardware for the instance.
 type InstanceHardware struct {
 
-	// The disks attached to the instance.
-	Disks []*Disk
-
 	// The number of vCPUs the instance has.
 	CpuCount *int32
+
+	// The disks attached to the instance.
+	Disks []*Disk
 
 	// The amount of RAM in GB on the instance (e.g., 1.0).
 	RamSizeInGb *float32
@@ -1318,9 +1318,8 @@ type InstanceHardware struct {
 // Describes information about the health of the instance.
 type InstanceHealthSummary struct {
 
-	// The name of the Lightsail instance for which you are requesting health check
-	// data.
-	InstanceName *string
+	// Describes the overall instance health. Valid values are below.
+	InstanceHealth InstanceHealthState
 
 	// More information about the instance health. If the instanceHealth is healthy,
 	// then an instanceHealthReason value is not provided. If instanceHealth is
@@ -1377,8 +1376,9 @@ type InstanceHealthSummary struct {
 	// expired.
 	InstanceHealthReason InstanceHealthReason
 
-	// Describes the overall instance health. Valid values are below.
-	InstanceHealth InstanceHealthState
+	// The name of the Lightsail instance for which you are requesting health check
+	// data.
+	InstanceName *string
 }
 
 // Describes monthly data transfer rates and port information for an instance.
@@ -1395,21 +1395,22 @@ type InstanceNetworking struct {
 // Describes information about ports for an Amazon Lightsail instance.
 type InstancePortInfo struct {
 
+	// The access direction (inbound or outbound). Lightsail currently supports only
+	// inbound access direction.
+	AccessDirection AccessDirection
+
+	// The location from which access is allowed. For example, Anywhere (0.0.0.0/0), or
+	// Custom if a specific IP address or range of IP addresses is allowed.
+	AccessFrom *string
+
+	// The type of access (Public or Private).
+	AccessType PortAccessType
+
 	// An alias that defines access for a preconfigured range of IP addresses. The only
 	// alias currently supported is lightsail-connect, which allows IP addresses of the
 	// browser-based RDP/SSH client in the Lightsail console to connect to your
 	// instance.
 	CidrListAliases []*string
-
-	// The access direction (inbound or outbound). Lightsail currently supports only
-	// inbound access direction.
-	AccessDirection AccessDirection
-
-	// The type of access (Public or Private).
-	AccessType PortAccessType
-
-	// The common name of the port information.
-	CommonName *string
 
 	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
 	// connect to an instance through the ports, and the protocol. Lightsail supports
@@ -1419,17 +1420,8 @@ type InstancePortInfo struct {
 	// Wikipedia.
 	Cidrs []*string
 
-	// The last port in a range of open ports on an instance. Allowed ports:
-	//
-	//     * TCP
-	// and UDP - 0 to 65535
-	//
-	//     * ICMP - The ICMP code. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
-	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
-	// on Wikipedia.
-	ToPort *int32
+	// The common name of the port information.
+	CommonName *string
 
 	// The first port in a range of open ports on an instance. Allowed ports:
 	//
@@ -1442,10 +1434,6 @@ type InstancePortInfo struct {
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	FromPort *int32
-
-	// The location from which access is allowed. For example, Anywhere (0.0.0.0/0), or
-	// Custom if a specific IP address or range of IP addresses is allowed.
-	AccessFrom *string
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1474,6 +1462,18 @@ type InstancePortInfo struct {
 	// be reached. When you specify icmp as the protocol, you must specify the ICMP
 	// type using the fromPort parameter, and ICMP code using the toPort parameter.
 	Protocol NetworkProtocol
+
+	// The last port in a range of open ports on an instance. Allowed ports:
+	//
+	//     * TCP
+	// and UDP - 0 to 65535
+	//
+	//     * ICMP - The ICMP code. For example, specify 8 as the
+	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
+	// more information, see Control Messages
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
+	// on Wikipedia.
+	ToPort *int32
 }
 
 // Describes open ports on an instance, the IP addresses allowed to connect to the
@@ -1493,6 +1493,18 @@ type InstancePortState struct {
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
 	Cidrs []*string
+
+	// The first port in a range of open ports on an instance. Allowed ports:
+	//
+	//     *
+	// TCP and UDP - 0 to 65535
+	//
+	//     * ICMP - The ICMP type. For example, specify 8 as
+	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
+	// For more information, see Control Messages
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
+	// on Wikipedia.
+	FromPort *int32
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1537,22 +1549,52 @@ type InstancePortState struct {
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
 	ToPort *int32
-
-	// The first port in a range of open ports on an instance. Allowed ports:
-	//
-	//     *
-	// TCP and UDP - 0 to 65535
-	//
-	//     * ICMP - The ICMP type. For example, specify 8 as
-	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
-	// For more information, see Control Messages
-	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
-	// on Wikipedia.
-	FromPort *int32
 }
 
 // Describes an instance snapshot.
 type InstanceSnapshot struct {
+
+	// The Amazon Resource Name (ARN) of the snapshot (e.g.,
+	// arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
+	Arn *string
+
+	// The timestamp when the snapshot was created (e.g., 1479907467.024).
+	CreatedAt *time.Time
+
+	// An array of disk objects containing information about all block storage disks.
+	FromAttachedDisks []*Disk
+
+	// The blueprint ID from which you created the snapshot (e.g., os_debian_8_3). A
+	// blueprint is a virtual private server (or instance) image used to create
+	// instances quickly.
+	FromBlueprintId *string
+
+	// The bundle ID from which you created the snapshot (e.g., micro_1_0).
+	FromBundleId *string
+
+	// The Amazon Resource Name (ARN) of the instance from which the snapshot was
+	// created (e.g.,
+	// arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
+	FromInstanceArn *string
+
+	// The instance from which the snapshot was created.
+	FromInstanceName *string
+
+	// A Boolean value indicating whether the snapshot was created from an automatic
+	// snapshot.
+	IsFromAutoSnapshot *bool
+
+	// The region name and Availability Zone where you created the snapshot.
+	Location *ResourceLocation
+
+	// The name of the snapshot.
+	Name *string
+
+	// The progress of the snapshot.
+	Progress *string
+
+	// The type of resource (usually InstanceSnapshot).
+	ResourceType ResourceType
 
 	// The size in GB of the SSD.
 	SizeInGb *int32
@@ -1560,57 +1602,15 @@ type InstanceSnapshot struct {
 	// The state the snapshot is in.
 	State InstanceSnapshotState
 
-	// The timestamp when the snapshot was created (e.g., 1479907467.024).
-	CreatedAt *time.Time
-
-	// The region name and Availability Zone where you created the snapshot.
-	Location *ResourceLocation
-
-	// The type of resource (usually InstanceSnapshot).
-	ResourceType ResourceType
-
-	// A Boolean value indicating whether the snapshot was created from an automatic
-	// snapshot.
-	IsFromAutoSnapshot *bool
-
-	// The progress of the snapshot.
-	Progress *string
-
-	// The instance from which the snapshot was created.
-	FromInstanceName *string
-
-	// The Amazon Resource Name (ARN) of the instance from which the snapshot was
-	// created (e.g.,
-	// arn:aws:lightsail:us-east-2:123456789101:Instance/64b8404c-ccb1-430b-8daf-12345EXAMPLE).
-	FromInstanceArn *string
-
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The name of the snapshot.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the snapshot (e.g.,
-	// arn:aws:lightsail:us-east-2:123456789101:InstanceSnapshot/d23b5706-3322-4d83-81e5-12345EXAMPLE).
-	Arn *string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
-
-	// The blueprint ID from which you created the snapshot (e.g., os_debian_8_3). A
-	// blueprint is a virtual private server (or instance) image used to create
-	// instances quickly.
-	FromBlueprintId *string
-
-	// An array of disk objects containing information about all block storage disks.
-	FromAttachedDisks []*Disk
-
-	// The bundle ID from which you created the snapshot (e.g., micro_1_0).
-	FromBundleId *string
 }
 
 // Describes an instance snapshot.
@@ -1619,36 +1619,45 @@ type InstanceSnapshotInfo struct {
 	// The blueprint ID from which the source instance (e.g., os_debian_8_3).
 	FromBlueprintId *string
 
+	// The bundle ID from which the source instance was created (e.g., micro_1_0).
+	FromBundleId *string
+
 	// A list of objects describing the disks that were attached to the source
 	// instance.
 	FromDiskInfo []*DiskInfo
-
-	// The bundle ID from which the source instance was created (e.g., micro_1_0).
-	FromBundleId *string
 }
 
 // Describes the virtual private server (or instance) status.
 type InstanceState struct {
 
-	// The state of the instance (e.g., running or pending).
-	Name *string
-
 	// The status code for the instance.
 	Code *int32
+
+	// The state of the instance (e.g., running or pending).
+	Name *string
 }
 
 // Describes the SSH key pair.
 type KeyPair struct {
 
-	// The friendly name of the SSH key pair.
-	Name *string
+	// The Amazon Resource Name (ARN) of the key pair (e.g.,
+	// arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
+	Arn *string
+
+	// The timestamp when the key pair was created (e.g., 1479816991.349).
+	CreatedAt *time.Time
 
 	// The RSA fingerprint of the key pair.
 	Fingerprint *string
 
-	// The Amazon Resource Name (ARN) of the key pair (e.g.,
-	// arn:aws:lightsail:us-east-2:123456789101:KeyPair/05859e3d-331d-48ba-9034-12345EXAMPLE).
-	Arn *string
+	// The region name and Availability Zone where the key pair was created.
+	Location *ResourceLocation
+
+	// The friendly name of the SSH key pair.
+	Name *string
+
+	// The resource type (usually KeyPair).
+	ResourceType ResourceType
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
@@ -1659,64 +1668,10 @@ type KeyPair struct {
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
-
-	// The resource type (usually KeyPair).
-	ResourceType ResourceType
-
-	// The region name and Availability Zone where the key pair was created.
-	Location *ResourceLocation
-
-	// The timestamp when the key pair was created (e.g., 1479816991.349).
-	CreatedAt *time.Time
 }
 
 // Describes an Amazon Lightsail content delivery network (CDN) distribution.
 type LightsailDistribution struct {
-
-	// An array of objects that describe the per-path cache behavior of the
-	// distribution.
-	CacheBehaviors []*CacheBehaviorPerPath
-
-	// An object that describes the location of the distribution, such as the AWS
-	// Region and Availability Zone. Lightsail distributions are global resources that
-	// can reference an origin in any AWS Region, and distribute its content globally.
-	// However, all distributions are located in the us-east-1 Region.
-	Location *ResourceLocation
-
-	// The status of the distribution.
-	Status *string
-
-	// An object that describes the origin resource of the distribution, such as a
-	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
-	// serves content from the origin.</p>
-	Origin *Origin
-
-	// An object that describes the cache behavior settings of the distribution.
-	CacheBehaviorSettings *CacheSettings
-
-	// The public DNS of the origin.
-	OriginPublicDNS *string
-
-	// The Lightsail resource type (e.g., Distribution).
-	ResourceType ResourceType
-
-	// An object that describes the default cache behavior of the distribution.
-	DefaultCacheBehavior *CacheBehavior
-
-	// The timestamp when the distribution was created.
-	CreatedAt *time.Time
-
-	// The Amazon Resource Name (ARN) of the distribution.
-	Arn *string
-
-	// Indicates whether the distribution is enabled.
-	IsEnabled *bool
-
-	// The name of the SSL/TLS certificate attached to the distribution, if any.
-	CertificateName *string
-
-	// The domain name of the distribution.
-	DomainName *string
 
 	// Indicates whether the bundle that is currently applied to your distribution,
 	// specified using the distributionName parameter, can be changed to another
@@ -1724,58 +1679,116 @@ type LightsailDistribution struct {
 	// distribution's bundle.</p>
 	AbleToUpdateBundle *bool
 
+	// The alternate domain names of the distribution.
+	AlternativeDomainNames []*string
+
+	// The Amazon Resource Name (ARN) of the distribution.
+	Arn *string
+
+	// The ID of the bundle currently applied to the distribution.
+	BundleId *string
+
+	// An object that describes the cache behavior settings of the distribution.
+	CacheBehaviorSettings *CacheSettings
+
+	// An array of objects that describe the per-path cache behavior of the
+	// distribution.
+	CacheBehaviors []*CacheBehaviorPerPath
+
+	// The name of the SSL/TLS certificate attached to the distribution, if any.
+	CertificateName *string
+
+	// The timestamp when the distribution was created.
+	CreatedAt *time.Time
+
+	// An object that describes the default cache behavior of the distribution.
+	DefaultCacheBehavior *CacheBehavior
+
+	// The domain name of the distribution.
+	DomainName *string
+
+	// Indicates whether the distribution is enabled.
+	IsEnabled *bool
+
+	// An object that describes the location of the distribution, such as the AWS
+	// Region and Availability Zone. Lightsail distributions are global resources that
+	// can reference an origin in any AWS Region, and distribute its content globally.
+	// However, all distributions are located in the us-east-1 Region.
+	Location *ResourceLocation
+
 	// The name of the distribution.
 	Name *string
+
+	// An object that describes the origin resource of the distribution, such as a
+	// Lightsail instance or load balancer.  <p>The distribution pulls, caches, and
+	// serves content from the origin.</p>
+	Origin *Origin
+
+	// The public DNS of the origin.
+	OriginPublicDNS *string
+
+	// The Lightsail resource type (e.g., Distribution).
+	ResourceType ResourceType
+
+	// The status of the distribution.
+	Status *string
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail distribution. This code enables our support team
 	// to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The alternate domain names of the distribution.
-	AlternativeDomainNames []*string
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
-
-	// The ID of the bundle currently applied to the distribution.
-	BundleId *string
 }
 
 // Describes the Lightsail load balancer.
 type LoadBalancer struct {
 
-	// The path you specified to perform your health checks. If no path is specified,
-	// the load balancer tries to make a request to the default (root) page.
-	HealthCheckPath *string
+	// The Amazon Resource Name (ARN) of the load balancer.
+	Arn *string
+
+	// A string to string map of the configuration options for your load balancer.
+	// Valid values are listed below.
+	ConfigurationOptions map[string]*string
 
 	// The date when your load balancer was created.
 	CreatedAt *time.Time
 
-	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
-	// information about the SSL/TLS certificates. For example, if true, the
-	// certificate is attached to the load balancer.
-	TlsCertificateSummaries []*LoadBalancerTlsCertificateSummary
+	// The DNS name of your Lightsail load balancer.
+	DnsName *string
 
-	// The protocol you have enabled for your load balancer. Valid values are below.
-	// You can't just have HTTP_HTTPS, but you can have just HTTP.
-	Protocol LoadBalancerProtocol
+	// The path you specified to perform your health checks. If no path is specified,
+	// the load balancer tries to make a request to the default (root) page.
+	HealthCheckPath *string
 
 	// An array of InstanceHealthSummary objects describing the health of the load
 	// balancer.
 	InstanceHealthSummary []*InstanceHealthSummary
 
-	// The resource type (e.g., LoadBalancer.
-	ResourceType ResourceType
+	// The port where the load balancer will direct traffic to your Lightsail
+	// instances. For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
+	InstancePort *int32
+
+	// The AWS Region where your load balancer was created (e.g., us-east-2a).
+	// Lightsail automatically creates your load balancer across Availability Zones.
+	Location *ResourceLocation
 
 	// The name of the load balancer (e.g., my-load-balancer).
 	Name *string
 
-	// The port where the load balancer will direct traffic to your Lightsail
-	// instances. For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
-	InstancePort *int32
+	// The protocol you have enabled for your load balancer. Valid values are below.
+	// You can't just have HTTP_HTTPS, but you can have just HTTP.
+	Protocol LoadBalancerProtocol
+
+	// An array of public port settings for your load balancer. For HTTP, use port 80.
+	// For HTTPS, use port 443.
+	PublicPorts []*int32
+
+	// The resource type (e.g., LoadBalancer.
+	ResourceType ResourceType
 
 	// The status of your load balancer. Valid values are below.
 	State LoadBalancerState
@@ -1785,122 +1798,33 @@ type LoadBalancer struct {
 	// to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The Amazon Resource Name (ARN) of the load balancer.
-	Arn *string
-
-	// The DNS name of your Lightsail load balancer.
-	DnsName *string
-
-	// An array of public port settings for your load balancer. For HTTP, use port 80.
-	// For HTTPS, use port 443.
-	PublicPorts []*int32
-
-	// The AWS Region where your load balancer was created (e.g., us-east-2a).
-	// Lightsail automatically creates your load balancer across Availability Zones.
-	Location *ResourceLocation
-
 	// The tag keys and optional values for the resource. For more information about
 	// tags in Lightsail, see the Lightsail Dev Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 	Tags []*Tag
 
-	// A string to string map of the configuration options for your load balancer.
-	// Valid values are listed below.
-	ConfigurationOptions map[string]*string
+	// An array of LoadBalancerTlsCertificateSummary objects that provide additional
+	// information about the SSL/TLS certificates. For example, if true, the
+	// certificate is attached to the load balancer.
+	TlsCertificateSummaries []*LoadBalancerTlsCertificateSummary
 }
 
 // Describes a load balancer SSL/TLS certificate. TLS is just an updated, more
 // secure version of Secure Socket Layer (SSL).
 type LoadBalancerTlsCertificate struct {
 
-	// The issuer of the certificate.
-	Issuer *string
-
-	// The name of the entity that is associated with the public key contained in the
-	// certificate.
-	Subject *string
-
-	// The reason the certificate was revoked. This value is present only when the
-	// certificate status is REVOKED.
-	RevocationReason LoadBalancerTlsCertificateRevocationReason
-
-	// The timestamp when the SSL/TLS certificate expires.
-	NotAfter *time.Time
-
-	// An array of strings that specify the alternate domains (e.g., example2.com) and
-	// subdomains (e.g., blog.example.com) for the certificate.
-	SubjectAlternativeNames []*string
-
-	// The algorithm used to generate the key pair (the public and private key).
-	KeyAlgorithm *string
-
-	// The timestamp when the SSL/TLS certificate is first valid.
-	NotBefore *time.Time
-
-	// An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing
-	// the records.
-	DomainValidationRecords []*LoadBalancerTlsCertificateDomainValidationRecord
-
-	// The load balancer name where your SSL/TLS certificate is attached.
-	LoadBalancerName *string
+	// The Amazon Resource Name (ARN) of the SSL/TLS certificate.
+	Arn *string
 
 	// The time when you created your SSL/TLS certificate.
 	CreatedAt *time.Time
 
-	// An object that describes the status of the certificate renewal managed by
-	// Lightsail.
-	RenewalSummary *LoadBalancerTlsCertificateRenewalSummary
+	// The domain name for your SSL/TLS certificate.
+	DomainName *string
 
-	// The time when the SSL/TLS certificate was issued.
-	IssuedAt *time.Time
-
-	// The Amazon Resource Name (ARN) of the SSL/TLS certificate.
-	Arn *string
-
-	// The timestamp when the certificate was revoked. This value is present only when
-	// the certificate status is REVOKED.
-	RevokedAt *time.Time
-
-	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
-
-	// The AWS Region and Availability Zone where you created your certificate.
-	Location *ResourceLocation
-
-	// The algorithm that was used to sign the certificate.
-	SignatureAlgorithm *string
-
-	// The resource type (e.g., LoadBalancerTlsCertificate).
-	//
-	//     * Instance - A
-	// Lightsail instance (a virtual private server)
-	//
-	//     * StaticIp - A static IP
-	// address
-	//
-	//     * KeyPair - The key pair used to connect to a Lightsail instance
-	//
-	//
-	// * InstanceSnapshot - A Lightsail instance snapshot
-	//
-	//     * Domain - A DNS zone
-	//
-	//
-	// * PeeredVpc - A peered VPC
-	//
-	//     * LoadBalancer - A Lightsail load balancer
-	//
-	//
-	// * LoadBalancerTlsCertificate - An SSL/TLS certificate associated with a
-	// Lightsail load balancer
-	//
-	//     * Disk - A Lightsail block storage disk
-	//
-	//     *
-	// DiskSnapshot - A block storage disk snapshot
-	ResourceType ResourceType
+	// An array of LoadBalancerTlsCertificateDomainValidationRecord objects describing
+	// the records.
+	DomainValidationRecords []*LoadBalancerTlsCertificateDomainValidationRecord
 
 	// The validation failure reason, if any, of the certificate.  <p>The following
 	// failure reasons are possible:</p> <ul> <li> <p> <b>
@@ -1942,55 +1866,131 @@ type LoadBalancerTlsCertificate struct {
 	// typos that were in the failed request. </p> </li> </ul>
 	FailureReason LoadBalancerTlsCertificateFailureReason
 
-	// The domain name for your SSL/TLS certificate.
-	DomainName *string
+	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
+	IsAttached *bool
+
+	// The time when the SSL/TLS certificate was issued.
+	IssuedAt *time.Time
+
+	// The issuer of the certificate.
+	Issuer *string
+
+	// The algorithm used to generate the key pair (the public and private key).
+	KeyAlgorithm *string
+
+	// The load balancer name where your SSL/TLS certificate is attached.
+	LoadBalancerName *string
+
+	// The AWS Region and Availability Zone where you created your certificate.
+	Location *ResourceLocation
+
+	// The name of the SSL/TLS certificate (e.g., my-certificate).
+	Name *string
+
+	// The timestamp when the SSL/TLS certificate expires.
+	NotAfter *time.Time
+
+	// The timestamp when the SSL/TLS certificate is first valid.
+	NotBefore *time.Time
+
+	// An object that describes the status of the certificate renewal managed by
+	// Lightsail.
+	RenewalSummary *LoadBalancerTlsCertificateRenewalSummary
+
+	// The resource type (e.g., LoadBalancerTlsCertificate).
+	//
+	//     * Instance - A
+	// Lightsail instance (a virtual private server)
+	//
+	//     * StaticIp - A static IP
+	// address
+	//
+	//     * KeyPair - The key pair used to connect to a Lightsail instance
+	//
+	//
+	// * InstanceSnapshot - A Lightsail instance snapshot
+	//
+	//     * Domain - A DNS zone
+	//
+	//
+	// * PeeredVpc - A peered VPC
+	//
+	//     * LoadBalancer - A Lightsail load balancer
+	//
+	//
+	// * LoadBalancerTlsCertificate - An SSL/TLS certificate associated with a
+	// Lightsail load balancer
+	//
+	//     * Disk - A Lightsail block storage disk
+	//
+	//     *
+	// DiskSnapshot - A block storage disk snapshot
+	ResourceType ResourceType
+
+	// The reason the certificate was revoked. This value is present only when the
+	// certificate status is REVOKED.
+	RevocationReason LoadBalancerTlsCertificateRevocationReason
+
+	// The timestamp when the certificate was revoked. This value is present only when
+	// the certificate status is REVOKED.
+	RevokedAt *time.Time
 
 	// The serial number of the certificate.
 	Serial *string
 
-	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
-	IsAttached *bool
+	// The algorithm that was used to sign the certificate.
+	SignatureAlgorithm *string
 
 	// The validation status of the SSL/TLS certificate. Valid values are below.
 	Status LoadBalancerTlsCertificateStatus
+
+	// The name of the entity that is associated with the public key contained in the
+	// certificate.
+	Subject *string
+
+	// An array of strings that specify the alternate domains (e.g., example2.com) and
+	// subdomains (e.g., blog.example.com) for the certificate.
+	SubjectAlternativeNames []*string
 
 	// The support code. Include this code in your email to support when you have
 	// questions about your Lightsail load balancer or SSL/TLS certificate. This code
 	// enables our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The name of the SSL/TLS certificate (e.g., my-certificate).
-	Name *string
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []*Tag
 }
 
 // Contains information about the domain names on an SSL/TLS certificate that you
 // will use to validate domain ownership.
 type LoadBalancerTlsCertificateDomainValidationOption struct {
 
-	// The status of the domain validation. Valid values are listed below.
-	ValidationStatus LoadBalancerTlsCertificateDomainStatus
-
 	// The fully qualified domain name in the certificate request.
 	DomainName *string
+
+	// The status of the domain validation. Valid values are listed below.
+	ValidationStatus LoadBalancerTlsCertificateDomainStatus
 }
 
 // Describes the validation record of each domain name in the SSL/TLS certificate.
 type LoadBalancerTlsCertificateDomainValidationRecord struct {
 
-	// The value for that type.
-	Value *string
+	// The domain name against which your SSL/TLS certificate was validated.
+	DomainName *string
 
 	// A fully qualified domain name in the certificate. For example, example.com.
 	Name *string
-
-	// The domain name against which your SSL/TLS certificate was validated.
-	DomainName *string
 
 	// The type of validation record. For example, CNAME for domain validation.
 	Type *string
 
 	// The validation status. Valid values are listed below.
 	ValidationStatus LoadBalancerTlsCertificateDomainStatus
+
+	// The value for that type.
+	Value *string
 }
 
 // Contains information about the status of Lightsail's managed renewal for the
@@ -2043,11 +2043,11 @@ type LoadBalancerTlsCertificateRenewalSummary struct {
 // Provides a summary of SSL/TLS certificate metadata.
 type LoadBalancerTlsCertificateSummary struct {
 
-	// The name of the SSL/TLS certificate.
-	Name *string
-
 	// When true, the SSL/TLS certificate is attached to the Lightsail load balancer.
 	IsAttached *bool
+
+	// The name of the SSL/TLS certificate.
+	Name *string
 }
 
 // Describes a database log event.
@@ -2063,26 +2063,26 @@ type LogEvent struct {
 // Describes the metric data point.
 type MetricDatapoint struct {
 
+	// The average.
+	Average *float64
+
 	// The maximum.
 	Maximum *float64
 
+	// The minimum.
+	Minimum *float64
+
 	// The sample count.
 	SampleCount *float64
+
+	// The sum.
+	Sum *float64
 
 	// The timestamp (e.g., 1479816991.349).
 	Timestamp *time.Time
 
 	// The unit.
 	Unit MetricUnit
-
-	// The average.
-	Average *float64
-
-	// The minimum.
-	Minimum *float64
-
-	// The sum.
-	Sum *float64
 }
 
 // Describes resource being monitored by an alarm. An alarm is a way to monitor
@@ -2091,11 +2091,11 @@ type MetricDatapoint struct {
 // (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms).
 type MonitoredResourceInfo struct {
 
-	// The name of the Lightsail resource being monitored.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the resource being monitored.
 	Arn *string
+
+	// The name of the Lightsail resource being monitored.
+	Name *string
 
 	// The Lightsail resource type of the resource being monitored. Instances, load
 	// balancers, and relational databases are the only Lightsail resources that can
@@ -2114,20 +2114,23 @@ type MonthlyTransfer struct {
 // Describes the API operation.
 type Operation struct {
 
-	// The timestamp when the status was changed (e.g., 1479816991.349).
-	StatusChangedAt *time.Time
+	// The timestamp when the operation was initialized (e.g., 1479816991.349).
+	CreatedAt *time.Time
 
-	// The resource type.
-	ResourceType ResourceType
+	// The error code.
+	ErrorCode *string
+
+	// The error details.
+	ErrorDetails *string
 
 	// The ID of the operation.
 	Id *string
 
-	// The AWS Region and Availability Zone.
-	Location *ResourceLocation
-
 	// A Boolean value indicating whether the operation is terminal.
 	IsTerminal *bool
+
+	// The AWS Region and Availability Zone.
+	Location *ResourceLocation
 
 	// Details about the operation (e.g., Debian-1GB-Ohio-1).
 	OperationDetails *string
@@ -2138,17 +2141,14 @@ type Operation struct {
 	// The resource name.
 	ResourceName *string
 
+	// The resource type.
+	ResourceType ResourceType
+
 	// The status of the operation.
 	Status OperationStatus
 
-	// The error details.
-	ErrorDetails *string
-
-	// The timestamp when the operation was initialized (e.g., 1479816991.349).
-	CreatedAt *time.Time
-
-	// The error code.
-	ErrorCode *string
+	// The timestamp when the status was changed (e.g., 1479816991.349).
+	StatusChangedAt *time.Time
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
@@ -2157,15 +2157,15 @@ type Operation struct {
 // via a worldwide network of edge servers.</p>
 type Origin struct {
 
-	// The AWS Region name of the origin resource.
-	RegionName RegionName
+	// The name of the origin resource.
+	Name *string
 
 	// The protocol that your Amazon Lightsail distribution uses when establishing a
 	// connection with your origin to pull content.
 	ProtocolPolicy OriginProtocolPolicyEnum
 
-	// The name of the origin resource.
-	Name *string
+	// The AWS Region name of the origin resource.
+	RegionName RegionName
 
 	// The resource type of the origin resource (e.g., Instance).
 	ResourceType ResourceType
@@ -2198,11 +2198,11 @@ type PasswordData struct {
 // Describes a pending database maintenance action.
 type PendingMaintenanceAction struct {
 
-	// The effective date of the pending database maintenance action.
-	CurrentApplyDate *time.Time
-
 	// The type of pending database maintenance action.
 	Action *string
+
+	// The effective date of the pending database maintenance action.
+	CurrentApplyDate *time.Time
 
 	// Additional detail about the pending database maintenance action.
 	Description *string
@@ -2211,11 +2211,11 @@ type PendingMaintenanceAction struct {
 // Describes a pending database value modification.
 type PendingModifiedRelationalDatabaseValues struct {
 
-	// The database engine version.
-	EngineVersion *string
-
 	// A Boolean value indicating whether automated backup retention is enabled.
 	BackupRetentionEnabled *bool
+
+	// The database engine version.
+	EngineVersion *string
 
 	// The password for the master user of the database.
 	MasterUserPassword *string
@@ -2247,6 +2247,18 @@ type PortInfo struct {
 	// Wikipedia.
 	Cidrs []*string
 
+	// The first port in a range of open ports on an instance. Allowed ports:
+	//
+	//     *
+	// TCP and UDP - 0 to 65535
+	//
+	//     * ICMP - The ICMP type. For example, specify 8 as
+	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
+	// For more information, see Control Messages
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
+	// on Wikipedia.
+	FromPort *int32
+
 	// The IP protocol name. The name can be one of the following:
 	//
 	//     * tcp -
@@ -2275,18 +2287,6 @@ type PortInfo struct {
 	// type using the fromPort parameter, and ICMP code using the toPort parameter.
 	Protocol NetworkProtocol
 
-	// The first port in a range of open ports on an instance. Allowed ports:
-	//
-	//     *
-	// TCP and UDP - 0 to 65535
-	//
-	//     * ICMP - The ICMP type. For example, specify 8 as
-	// the fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping.
-	// For more information, see Control Messages
-	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
-	// on Wikipedia.
-	FromPort *int32
-
 	// The last port in a range of open ports on an instance. Allowed ports:
 	//
 	//     * TCP
@@ -2306,157 +2306,157 @@ type PortInfo struct {
 // based on the query string values in viewer requests.</p>
 type QueryStringObject struct {
 
+	// Indicates whether the distribution forwards and caches based on query strings.
+	Option *bool
+
 	// The specific query strings that the distribution forwards to the origin.
 	// <p>Your distribution will cache content based on the specified query
 	// strings.</p> <p>If the <code>option</code> parameter is true, then your
 	// distribution forwards all query strings, regardless of what you specify using
 	// the <code>queryStringsAllowList</code> parameter.</p>
 	QueryStringsAllowList []*string
-
-	// Indicates whether the distribution forwards and caches based on query strings.
-	Option *bool
 }
 
 // Describes the AWS Region.
 type Region struct {
 
+	// The Availability Zones. Follows the format us-east-2a (case-sensitive).
+	AvailabilityZones []*AvailabilityZone
+
 	// The continent code (e.g., NA, meaning North America).
 	ContinentCode *string
-
-	// The display name (e.g., Ohio).
-	DisplayName *string
-
-	// The Availability Zones for databases. Follows the format us-east-2a
-	// (case-sensitive).
-	RelationalDatabaseAvailabilityZones []*AvailabilityZone
-
-	// The region name (e.g., us-east-2).
-	Name RegionName
 
 	// The description of the AWS Region (e.g., This region is recommended to serve
 	// users in the eastern United States and eastern Canada).
 	Description *string
 
-	// The Availability Zones. Follows the format us-east-2a (case-sensitive).
-	AvailabilityZones []*AvailabilityZone
+	// The display name (e.g., Ohio).
+	DisplayName *string
+
+	// The region name (e.g., us-east-2).
+	Name RegionName
+
+	// The Availability Zones for databases. Follows the format us-east-2a
+	// (case-sensitive).
+	RelationalDatabaseAvailabilityZones []*AvailabilityZone
 }
 
 // Describes a database.
 type RelationalDatabase struct {
 
-	// The database software (for example, MySQL).
-	Engine *string
+	// The Amazon Resource Name (ARN) of the database.
+	Arn *string
 
 	// A Boolean value indicating whether automated backup retention is enabled for the
 	// database.
 	BackupRetentionEnabled *bool
 
-	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
-
-	// The database engine version (for example, 5.7.23).
-	EngineVersion *string
-
-	// The daily time range during which automated backups are created for the database
-	// (for example, 16:00-16:30).
-	PreferredBackupWindow *string
-
-	// The master user name of the database.
-	MasterUsername *string
-
-	// The Amazon Resource Name (ARN) of the database.
-	Arn *string
+	// The certificate associated with the database.
+	CaCertificateIdentifier *string
 
 	// The timestamp when the database was created. Formatted in Unix time.
 	CreatedAt *time.Time
 
-	// Describes the pending maintenance actions for the database.
-	PendingMaintenanceActions []*PendingMaintenanceAction
+	// The database software (for example, MySQL).
+	Engine *string
 
-	// The name of the master database created when the Lightsail database resource is
-	// created.
-	MasterDatabaseName *string
-
-	// Describes the secondary Availability Zone of a high availability database. The
-	// secondary database is used for failover support of a high availability database.
-	SecondaryAvailabilityZone *string
-
-	// The certificate associated with the database.
-	CaCertificateIdentifier *string
+	// The database engine version (for example, 5.7.23).
+	EngineVersion *string
 
 	// Describes the hardware of the database.
 	Hardware *RelationalDatabaseHardware
-
-	// A Boolean value indicating whether the database is publicly accessible.
-	PubliclyAccessible *bool
 
 	// The latest point in time to which the database can be restored. Formatted in
 	// Unix time.
 	LatestRestorableTime *time.Time
 
+	// The Region name and Availability Zone where the database is located.
+	Location *ResourceLocation
+
+	// The name of the master database created when the Lightsail database resource is
+	// created.
+	MasterDatabaseName *string
+
+	// The master endpoint for the database.
+	MasterEndpoint *RelationalDatabaseEndpoint
+
+	// The master user name of the database.
+	MasterUsername *string
+
+	// The unique name of the database resource in Lightsail.
+	Name *string
+
 	// The status of parameter updates for the database.
 	ParameterApplyStatus *string
 
-	// Describes the current state of the database.
-	State *string
-
-	// The blueprint ID for the database. A blueprint describes the major engine
-	// version of a database.
-	RelationalDatabaseBlueprintId *string
+	// Describes the pending maintenance actions for the database.
+	PendingMaintenanceActions []*PendingMaintenanceAction
 
 	// Describes pending database value modifications.
 	PendingModifiedValues *PendingModifiedRelationalDatabaseValues
+
+	// The daily time range during which automated backups are created for the database
+	// (for example, 16:00-16:30).
+	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on the database.
 	// In the format ddd:hh24:mi-ddd:hh24:mi. For example, Tue:17:00-Tue:17:30.
 	PreferredMaintenanceWindow *string
 
-	// The master endpoint for the database.
-	MasterEndpoint *RelationalDatabaseEndpoint
+	// A Boolean value indicating whether the database is publicly accessible.
+	PubliclyAccessible *bool
+
+	// The blueprint ID for the database. A blueprint describes the major engine
+	// version of a database.
+	RelationalDatabaseBlueprintId *string
 
 	// The bundle ID for the database. A bundle describes the performance
 	// specifications for your database.
 	RelationalDatabaseBundleId *string
+
+	// The Lightsail resource type for the database (for example, RelationalDatabase).
+	ResourceType ResourceType
+
+	// Describes the secondary Availability Zone of a high availability database. The
+	// secondary database is used for failover support of a high availability database.
+	SecondaryAvailabilityZone *string
+
+	// Describes the current state of the database.
+	State *string
 
 	// The support code for the database. Include this code in your email to support
 	// when you have questions about a database in Lightsail. This code enables our
 	// support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The Lightsail resource type for the database (for example, RelationalDatabase).
-	ResourceType ResourceType
-
-	// The Region name and Availability Zone where the database is located.
-	Location *ResourceLocation
-
-	// The unique name of the database resource in Lightsail.
-	Name *string
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []*Tag
 }
 
 // Describes a database image, or blueprint. A blueprint describes the major engine
 // version of a database.
 type RelationalDatabaseBlueprint struct {
 
-	// The database engine version for the database blueprint (for example, 5.7.23).
-	EngineVersion *string
-
-	// A Boolean value indicating whether the engine version is the default for the
-	// database blueprint.
-	IsEngineDefault *bool
-
-	// The description of the database engine version for the database blueprint.
-	EngineVersionDescription *string
+	// The ID for the database blueprint.
+	BlueprintId *string
 
 	// The database software of the database blueprint (for example, MySQL).
 	Engine RelationalDatabaseEngine
 
-	// The ID for the database blueprint.
-	BlueprintId *string
-
 	// The description of the database engine for the database blueprint.
 	EngineDescription *string
+
+	// The database engine version for the database blueprint (for example, 5.7.23).
+	EngineVersion *string
+
+	// The description of the database engine version for the database blueprint.
+	EngineVersionDescription *string
+
+	// A Boolean value indicating whether the engine version is the default for the
+	// database blueprint.
+	IsEngineDefault *bool
 }
 
 // Describes a database bundle. A bundle describes the performance specifications
@@ -2466,20 +2466,20 @@ type RelationalDatabaseBundle struct {
 	// The ID for the database bundle.
 	BundleId *string
 
-	// The name for the database bundle.
-	Name *string
-
-	// A Boolean value indicating whether the database bundle is active.
-	IsActive *bool
+	// The number of virtual CPUs (vCPUs) for the database bundle.
+	CpuCount *int32
 
 	// The size of the disk for the database bundle.
 	DiskSizeInGb *int32
 
-	// The data transfer rate per month in GB for the database bundle.
-	TransferPerMonthInGb *int32
+	// A Boolean value indicating whether the database bundle is active.
+	IsActive *bool
 
 	// A Boolean value indicating whether the database bundle is encrypted.
 	IsEncrypted *bool
+
+	// The name for the database bundle.
+	Name *string
 
 	// The cost of the database bundle in US currency.
 	Price *float32
@@ -2487,18 +2487,18 @@ type RelationalDatabaseBundle struct {
 	// The amount of RAM in GB (for example, 2.0) for the database bundle.
 	RamSizeInGb *float32
 
-	// The number of virtual CPUs (vCPUs) for the database bundle.
-	CpuCount *int32
+	// The data transfer rate per month in GB for the database bundle.
+	TransferPerMonthInGb *int32
 }
 
 // Describes an endpoint for a database.
 type RelationalDatabaseEndpoint struct {
 
-	// Specifies the port that the database is listening on.
-	Port *int32
-
 	// Specifies the DNS address of the database.
 	Address *string
+
+	// Specifies the port that the database is listening on.
+	Port *int32
 }
 
 // Describes an event for a database.
@@ -2507,53 +2507,53 @@ type RelationalDatabaseEvent struct {
 	// The timestamp when the database event was created.
 	CreatedAt *time.Time
 
-	// The database that the database event relates to.
-	Resource *string
-
 	// The category that the database event belongs to.
 	EventCategories []*string
 
 	// The message of the database event.
 	Message *string
+
+	// The database that the database event relates to.
+	Resource *string
 }
 
 // Describes the hardware of a database.
 type RelationalDatabaseHardware struct {
-
-	// The amount of RAM in GB for the database.
-	RamSizeInGb *float32
 
 	// The number of vCPUs for the database.
 	CpuCount *int32
 
 	// The size of the disk for the database.
 	DiskSizeInGb *int32
+
+	// The amount of RAM in GB for the database.
+	RamSizeInGb *float32
 }
 
 // Describes the parameters of a database.
 type RelationalDatabaseParameter struct {
 
-	// Specifies the name of the parameter.
-	ParameterName *string
-
-	// Provides a description of the parameter.
-	Description *string
-
-	// Specifies the valid data type for the parameter.
-	DataType *string
+	// Specifies the valid range of values for the parameter.
+	AllowedValues *string
 
 	// Indicates when parameter updates are applied. Can be immediate or
 	// pending-reboot.
 	ApplyMethod *string
 
-	// Specifies the valid range of values for the parameter.
-	AllowedValues *string
+	// Specifies the engine-specific parameter type.
+	ApplyType *string
+
+	// Specifies the valid data type for the parameter.
+	DataType *string
+
+	// Provides a description of the parameter.
+	Description *string
 
 	// A Boolean value indicating whether the parameter can be modified.
 	IsModifiable *bool
 
-	// Specifies the engine-specific parameter type.
-	ApplyType *string
+	// Specifies the name of the parameter.
+	ParameterName *string
 
 	// Specifies the value of the parameter.
 	ParameterValue *string
@@ -2562,32 +2562,34 @@ type RelationalDatabaseParameter struct {
 // Describes a database snapshot.
 type RelationalDatabaseSnapshot struct {
 
-	// The size of the disk in GB (for example, 32) for the database snapshot.
-	SizeInGb *int32
-
-	// The Region name and Availability Zone where the database snapshot is located.
-	Location *ResourceLocation
-
-	// The bundle ID of the database from which the database snapshot was created.
-	FromRelationalDatabaseBundleId *string
-
-	// The database engine version for the database snapshot (for example, 5.7.23).
-	EngineVersion *string
+	// The Amazon Resource Name (ARN) of the database snapshot.
+	Arn *string
 
 	// The timestamp when the database snapshot was created.
 	CreatedAt *time.Time
 
-	// The tag keys and optional values for the resource. For more information about
-	// tags in Lightsail, see the Lightsail Dev Guide
-	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
-	Tags []*Tag
+	// The software of the database snapshot (for example, MySQL)
+	Engine *string
+
+	// The database engine version for the database snapshot (for example, 5.7.23).
+	EngineVersion *string
+
+	// The Amazon Resource Name (ARN) of the database from which the database snapshot
+	// was created.
+	FromRelationalDatabaseArn *string
 
 	// The blueprint ID of the database from which the database snapshot was created. A
 	// blueprint describes the major engine version of a database.
 	FromRelationalDatabaseBlueprintId *string
 
+	// The bundle ID of the database from which the database snapshot was created.
+	FromRelationalDatabaseBundleId *string
+
 	// The name of the source database from which the database snapshot was created.
 	FromRelationalDatabaseName *string
+
+	// The Region name and Availability Zone where the database snapshot is located.
+	Location *ResourceLocation
 
 	// The name of the database snapshot.
 	Name *string
@@ -2595,31 +2597,26 @@ type RelationalDatabaseSnapshot struct {
 	// The Lightsail resource type.
 	ResourceType ResourceType
 
+	// The size of the disk in GB (for example, 32) for the database snapshot.
+	SizeInGb *int32
+
+	// The state of the database snapshot.
+	State *string
+
 	// The support code for the database snapshot. Include this code in your email to
 	// support when you have questions about a database snapshot in Lightsail. This
 	// code enables our support team to look up your Lightsail information more easily.
 	SupportCode *string
 
-	// The Amazon Resource Name (ARN) of the database snapshot.
-	Arn *string
-
-	// The state of the database snapshot.
-	State *string
-
-	// The software of the database snapshot (for example, MySQL)
-	Engine *string
-
-	// The Amazon Resource Name (ARN) of the database from which the database snapshot
-	// was created.
-	FromRelationalDatabaseArn *string
+	// The tag keys and optional values for the resource. For more information about
+	// tags in Lightsail, see the Lightsail Dev Guide
+	// (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
+	Tags []*Tag
 }
 
 // Describes the status of a SSL/TLS certificate renewal managed by Amazon
 // Lightsail.
 type RenewalSummary struct {
-
-	// The timestamp when the certificate was last updated.
-	UpdatedAt *time.Time
 
 	// An array of objects that describe the domain validation records of the
 	// certificate.
@@ -2644,6 +2641,9 @@ type RenewalSummary struct {
 
 	// The reason for the renewal status of the certificate.
 	RenewalStatusReason *string
+
+	// The timestamp when the certificate was last updated.
+	UpdatedAt *time.Time
 }
 
 // Describes the resource location.
@@ -2663,18 +2663,25 @@ type ResourceRecord struct {
 	// The name of the record.
 	Name *string
 
-	// The value for the DNS record.
-	Value *string
-
 	// The DNS record type.
 	Type *string
+
+	// The value for the DNS record.
+	Value *string
 }
 
 // Describes the static IP.
 type StaticIp struct {
 
-	// The name of the static IP (e.g., StaticIP-Ohio-EXAMPLE).
-	Name *string
+	// The Amazon Resource Name (ARN) of the static IP (e.g.,
+	// arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
+	Arn *string
+
+	// The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Ohio-1).
+	AttachedTo *string
+
+	// The timestamp when the static IP was created (e.g., 1479735304.222).
+	CreatedAt *time.Time
 
 	// The static IP address.
 	IpAddress *string
@@ -2682,26 +2689,19 @@ type StaticIp struct {
 	// A Boolean value indicating whether the static IP is attached.
 	IsAttached *bool
 
-	// The instance where the static IP is attached (e.g., Amazon_Linux-1GB-Ohio-1).
-	AttachedTo *string
-
 	// The region and Availability Zone where the static IP was created.
 	Location *ResourceLocation
 
-	// The timestamp when the static IP was created (e.g., 1479735304.222).
-	CreatedAt *time.Time
+	// The name of the static IP (e.g., StaticIP-Ohio-EXAMPLE).
+	Name *string
 
-	// The Amazon Resource Name (ARN) of the static IP (e.g.,
-	// arn:aws:lightsail:us-east-2:123456789101:StaticIp/9cbb4a9e-f8e3-4dfe-b57e-12345EXAMPLE).
-	Arn *string
+	// The resource type (usually StaticIp).
+	ResourceType ResourceType
 
 	// The support code. Include this code in your email to support when you have
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
-
-	// The resource type (usually StaticIp).
-	ResourceType ResourceType
 }
 
 // Describes a tag key and optional value assigned to an Amazon Lightsail resource.
@@ -2709,11 +2709,11 @@ type StaticIp struct {
 // (https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags).
 type Tag struct {
 
-	// The value of the tag. Constraints: Tag values accept a maximum of 256 letters,
-	// numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
-	Value *string
-
 	// The key of the tag. Constraints: Tag keys accept a maximum of 128 letters,
 	// numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
 	Key *string
+
+	// The value of the tag. Constraints: Tag values accept a maximum of 256 letters,
+	// numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
+	Value *string
 }

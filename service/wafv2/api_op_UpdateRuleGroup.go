@@ -65,25 +65,11 @@ func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInp
 
 type UpdateRuleGroupInput struct {
 
-	// The Rule () statements used to identify the web requests that you want to allow,
-	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
-	// identify matching web requests, and parameters that govern how AWS WAF handles
-	// them.
-	Rules []*types.Rule
-
-	// Specifies whether this is for an AWS CloudFront distribution or for a regional
-	// application. A regional application can be an Application Load Balancer (ALB) or
-	// an API Gateway stage. To work with CloudFront, you must also specify the Region
-	// US East (N. Virginia) as follows:
-	//
-	//     * CLI - Specify the Region when you use
-	// the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
-	//
-	//     * API and SDKs
-	// - For all calls, use the Region endpoint us-east-1.
+	// A unique identifier for the rule group. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
-	Scope types.Scope
+	Id *string
 
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
@@ -102,20 +88,34 @@ type UpdateRuleGroupInput struct {
 	// This member is required.
 	Name *string
 
+	// Specifies whether this is for an AWS CloudFront distribution or for a regional
+	// application. A regional application can be an Application Load Balancer (ALB) or
+	// an API Gateway stage. To work with CloudFront, you must also specify the Region
+	// US East (N. Virginia) as follows:
+	//
+	//     * CLI - Specify the Region when you use
+	// the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.
+	//
+	//     * API and SDKs
+	// - For all calls, use the Region endpoint us-east-1.
+	//
+	// This member is required.
+	Scope types.Scope
+
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
-	// A unique identifier for the rule group. This ID is returned in the responses to
-	// create and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
-
 	// A description of the rule group that helps with identification. You cannot
 	// change the description of a rule group after you create it.
 	Description *string
+
+	// The Rule () statements used to identify the web requests that you want to allow,
+	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
+	// identify matching web requests, and parameters that govern how AWS WAF handles
+	// them.
+	Rules []*types.Rule
 }
 
 type UpdateRuleGroupOutput struct {

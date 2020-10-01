@@ -57,14 +57,14 @@ func (c *Client) ActivateUser(ctx context.Context, params *ActivateUserInput, op
 
 type ActivateUserInput struct {
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// The ID of the user.
 	//
 	// This member is required.
 	UserId *string
+
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 }
 
 type ActivateUserOutput struct {

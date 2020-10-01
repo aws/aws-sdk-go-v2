@@ -65,17 +65,17 @@ type ResendContactReachabilityEmailInput struct {
 
 type ResendContactReachabilityEmailOutput struct {
 
-	// True if the email address for the registrant contact has already been verified,
-	// and false otherwise. If the email address has already been verified, we don't
-	// send another confirmation email.
-	IsAlreadyVerified *bool
+	// The domain name for which you requested a confirmation email.
+	DomainName *string
 
 	// The email address for the registrant contact at the time that we sent the
 	// verification email.
 	EmailAddress *string
 
-	// The domain name for which you requested a confirmation email.
-	DomainName *string
+	// True if the email address for the registrant contact has already been verified,
+	// and false otherwise. If the email address has already been verified, we don't
+	// send another confirmation email.
+	IsAlreadyVerified *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,6 +62,29 @@ func (c *Client) GetDistributionMetricData(ctx context.Context, params *GetDistr
 
 type GetDistributionMetricDataInput struct {
 
+	// The name of the distribution for which to get metric data.  <p>Use the
+	// <code>GetDistributions</code> action to get a list of distribution names that
+	// you can specify.</p>
+	//
+	// This member is required.
+	DistributionName *string
+
+	// The end of the time interval for which to get metric data. Constraints:
+	//
+	//     *
+	// Specified in Coordinated Universal Time (UTC).
+	//
+	//     * Specified in the Unix time
+	// format. For example, if you wish to use an end time of October 1, 2018, at 9 PM
+	// UTC, specify 1538427600 as the end time.
+	//
+	// You can convert a human-friendly time
+	// to Unix time format using a converter like Epoch converter
+	// (https://www.epochconverter.com/).
+	//
+	// This member is required.
+	EndTime *time.Time
+
 	// The metric for which you want to return information.  <p>Valid distribution
 	// metric names are listed below, along with the most useful
 	// <code>statistics</code> to include in your request, and the published
@@ -99,21 +122,26 @@ type GetDistributionMetricDataInput struct {
 	// This member is required.
 	MetricName types.DistributionMetricName
 
-	// The end of the time interval for which to get metric data. Constraints:
+	// The granularity, in seconds, for the metric data points that will be returned.
+	//
+	// This member is required.
+	Period *int32
+
+	// The start of the time interval for which to get metric data. Constraints:
 	//
 	//     *
 	// Specified in Coordinated Universal Time (UTC).
 	//
 	//     * Specified in the Unix time
-	// format. For example, if you wish to use an end time of October 1, 2018, at 9 PM
-	// UTC, specify 1538427600 as the end time.
+	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
+	// UTC, specify 1538424000 as the start time.
 	//
-	// You can convert a human-friendly time
-	// to Unix time format using a converter like Epoch converter
+	// You can convert a human-friendly
+	// time to Unix time format using a converter like Epoch converter
 	// (https://www.epochconverter.com/).
 	//
 	// This member is required.
-	EndTime *time.Time
+	StartTime *time.Time
 
 	// The statistic for the metric. The following statistics are available:
 	//
@@ -141,40 +169,12 @@ type GetDistributionMetricDataInput struct {
 	// This member is required.
 	Statistics []types.MetricStatistic
 
-	// The start of the time interval for which to get metric data. Constraints:
-	//
-	//     *
-	// Specified in Coordinated Universal Time (UTC).
-	//
-	//     * Specified in the Unix time
-	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
-	// UTC, specify 1538424000 as the start time.
-	//
-	// You can convert a human-friendly
-	// time to Unix time format using a converter like Epoch converter
-	// (https://www.epochconverter.com/).
-	//
-	// This member is required.
-	StartTime *time.Time
-
 	// The unit for the metric data request.  <p>Valid units depend on the metric data
 	// being requested. For the valid units with each available metric, see the
 	// <code>metricName</code> parameter.</p>
 	//
 	// This member is required.
 	Unit types.MetricUnit
-
-	// The granularity, in seconds, for the metric data points that will be returned.
-	//
-	// This member is required.
-	Period *int32
-
-	// The name of the distribution for which to get metric data.  <p>Use the
-	// <code>GetDistributions</code> action to get a list of distribution names that
-	// you can specify.</p>
-	//
-	// This member is required.
-	DistributionName *string
 }
 
 type GetDistributionMetricDataOutput struct {

@@ -67,23 +67,23 @@ type DescribeConfigurationInput struct {
 
 type DescribeConfigurationOutput struct {
 
+	// The Amazon Resource Name (ARN) of the configuration.
+	Arn *string
+
+	// The time when the configuration was created.
+	CreationTime *time.Time
+
+	// The description of the configuration.
+	Description *string
+
 	// The versions of Apache Kafka with which you can use this MSK configuration.
 	KafkaVersions []*string
 
 	// Latest revision of the configuration.
 	LatestRevision *types.ConfigurationRevision
 
-	// The description of the configuration.
-	Description *string
-
-	// The Amazon Resource Name (ARN) of the configuration.
-	Arn *string
-
 	// The name of the configuration.
 	Name *string
-
-	// The time when the configuration was created.
-	CreationTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

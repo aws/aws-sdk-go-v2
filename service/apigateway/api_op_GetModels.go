@@ -59,25 +59,25 @@ func (c *Client) GetModels(ctx context.Context, params *GetModelsInput, optFns .
 // Request to list existing Models () defined for a RestApi () resource.
 type GetModelsInput struct {
 
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
 	Name *string
 
-	TemplateSkipList []*string
-
-	Title *string
-
 	// The current pagination position in the paged result set.
 	Position *string
 
 	Template *bool
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection of Model () resources. Method (), MethodResponse (),

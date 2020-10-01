@@ -68,15 +68,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The tags to assign to the user pool.
-	//
-	// This member is required.
-	Tags map[string]*string
-
 	// The Amazon Resource Name (ARN) of the user pool to assign the tags to.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The tags to assign to the user pool.
+	//
+	// This member is required.
+	Tags map[string]*string
 }
 
 type TagResourceOutput struct {

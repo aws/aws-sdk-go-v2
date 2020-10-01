@@ -68,6 +68,11 @@ func (c *Client) GetObjectTorrent(ctx context.Context, params *GetObjectTorrentI
 
 type GetObjectTorrentInput struct {
 
+	// The name of the bucket containing the object for which to get the torrent files.
+	//
+	// This member is required.
+	Bucket *string
+
 	// The object key for which to get the information.
 	//
 	// This member is required.
@@ -80,21 +85,16 @@ type GetObjectTorrentInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
-
-	// The name of the bucket containing the object for which to get the torrent files.
-	//
-	// This member is required.
-	Bucket *string
 }
 
 type GetObjectTorrentOutput struct {
 
+	// A Bencoded dictionary as defined by the BitTorrent specification
+	Body io.ReadCloser
+
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
-
-	// A Bencoded dictionary as defined by the BitTorrent specification
-	Body io.ReadCloser
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

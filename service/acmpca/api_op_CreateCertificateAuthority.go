@@ -66,23 +66,16 @@ func (c *Client) CreateCertificateAuthority(ctx context.Context, params *CreateC
 
 type CreateCertificateAuthorityInput struct {
 
-	// Contains a Boolean value that you can use to enable a certification revocation
-	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will
-	// write the CRL, and an optional CNAME alias that you can use to hide the name of
-	// your bucket in the CRL Distribution Points extension of your CA certificate. For
-	// more information, see the CrlConfiguration () structure.
-	RevocationConfiguration *types.RevocationConfiguration
-
-	// The type of the certificate authority.
-	//
-	// This member is required.
-	CertificateAuthorityType types.CertificateAuthorityType
-
 	// Name and bit size of the private key algorithm, the name of the signing
 	// algorithm, and X.500 certificate subject information.
 	//
 	// This member is required.
 	CertificateAuthorityConfiguration *types.CertificateAuthorityConfiguration
+
+	// The type of the certificate authority.
+	//
+	// This member is required.
+	CertificateAuthorityType types.CertificateAuthorityType
 
 	// Alphanumeric string that can be used to distinguish between calls to
 	// CreateCertificateAuthority. Idempotency tokens time out after five minutes.
@@ -92,6 +85,13 @@ type CreateCertificateAuthorityInput struct {
 	// one. If you change the idempotency token for each call, however, ACM Private CA
 	// recognizes that you are requesting multiple certificates.
 	IdempotencyToken *string
+
+	// Contains a Boolean value that you can use to enable a certification revocation
+	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will
+	// write the CRL, and an optional CNAME alias that you can use to hide the name of
+	// your bucket in the CRL Distribution Points extension of your CA certificate. For
+	// more information, see the CrlConfiguration () structure.
+	RevocationConfiguration *types.RevocationConfiguration
 
 	// Key-value pairs that will be attached to the new private CA. You can associate
 	// up to 50 tags with a private CA. For information using tags with IAM to manage

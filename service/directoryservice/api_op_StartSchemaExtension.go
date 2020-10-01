@@ -56,12 +56,16 @@ func (c *Client) StartSchemaExtension(ctx context.Context, params *StartSchemaEx
 
 type StartSchemaExtensionInput struct {
 
-	// The LDIF file represented as a string. To construct the LdifContent string,
-	// precede each line as it would be formatted in an ldif file with \n. See the
-	// example request below for more details. The file size can be no larger than 1MB.
+	// If true, creates a snapshot of the directory before applying the schema
+	// extension.
 	//
 	// This member is required.
-	LdifContent *string
+	CreateSnapshotBeforeSchemaExtension *bool
+
+	// A description of the schema extension.
+	//
+	// This member is required.
+	Description *string
 
 	// The identifier of the directory for which the schema extension will be applied
 	// to.
@@ -69,16 +73,12 @@ type StartSchemaExtensionInput struct {
 	// This member is required.
 	DirectoryId *string
 
-	// A description of the schema extension.
+	// The LDIF file represented as a string. To construct the LdifContent string,
+	// precede each line as it would be formatted in an ldif file with \n. See the
+	// example request below for more details. The file size can be no larger than 1MB.
 	//
 	// This member is required.
-	Description *string
-
-	// If true, creates a snapshot of the directory before applying the schema
-	// extension.
-	//
-	// This member is required.
-	CreateSnapshotBeforeSchemaExtension *bool
+	LdifContent *string
 }
 
 type StartSchemaExtensionOutput struct {

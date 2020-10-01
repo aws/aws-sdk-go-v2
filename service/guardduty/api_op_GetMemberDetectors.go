@@ -57,29 +57,29 @@ func (c *Client) GetMemberDetectors(ctx context.Context, params *GetMemberDetect
 
 type GetMemberDetectorsInput struct {
 
-	// The detector ID for the master account.
-	//
-	// This member is required.
-	DetectorId *string
-
 	// The account ID of the member account.
 	//
 	// This member is required.
 	AccountIds []*string
+
+	// The detector ID for the master account.
+	//
+	// This member is required.
+	DetectorId *string
 }
 
 type GetMemberDetectorsOutput struct {
+
+	// An object that describes which data sources are enabled for a member account.
+	//
+	// This member is required.
+	MemberDataSourceConfigurations []*types.MemberDataSourceConfiguration
 
 	// A list of member account IDs that were unable to be processed along with an
 	// explanation for why they were not processed.
 	//
 	// This member is required.
 	UnprocessedAccounts []*types.UnprocessedAccount
-
-	// An object that describes which data sources are enabled for a member account.
-	//
-	// This member is required.
-	MemberDataSourceConfigurations []*types.MemberDataSourceConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

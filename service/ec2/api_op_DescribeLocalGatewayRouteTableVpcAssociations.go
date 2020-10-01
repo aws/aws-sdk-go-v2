@@ -57,21 +57,11 @@ func (c *Client) DescribeLocalGatewayRouteTableVpcAssociations(ctx context.Conte
 
 type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 
-	// The IDs of the associations.
-	LocalGatewayRouteTableVpcAssociationIds []*string
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The token for the next page of results.
-	NextToken *string
 
 	// One or more filters.
 	//
@@ -88,6 +78,16 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 	//
 	//     * vpc-id - The ID of the VPC.
 	Filters []*types.Filter
+
+	// The IDs of the associations.
+	LocalGatewayRouteTableVpcAssociationIds []*string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {

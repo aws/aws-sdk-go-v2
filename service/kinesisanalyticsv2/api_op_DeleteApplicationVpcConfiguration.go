@@ -56,6 +56,11 @@ func (c *Client) DeleteApplicationVpcConfiguration(ctx context.Context, params *
 
 type DeleteApplicationVpcConfigurationInput struct {
 
+	// The name of an existing application.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// The current application version ID. You can retrieve the application version ID
 	// using DescribeApplication ().
 	//
@@ -66,11 +71,6 @@ type DeleteApplicationVpcConfigurationInput struct {
 	//
 	// This member is required.
 	VpcConfigurationId *string
-
-	// The name of an existing application.
-	//
-	// This member is required.
-	ApplicationName *string
 }
 
 type DeleteApplicationVpcConfigurationOutput struct {

@@ -56,27 +56,27 @@ func (c *Client) UpdateThreatIntelSet(ctx context.Context, params *UpdateThreatI
 
 type UpdateThreatIntelSetInput struct {
 
-	// The updated Boolean value that specifies whether the ThreateIntelSet is active
-	// or not.
-	Activate *bool
-
-	// The unique ID that specifies the ThreatIntelSet that you want to update.
-	//
-	// This member is required.
-	ThreatIntelSetId *string
-
-	// The unique ID that specifies the ThreatIntelSet that you want to update.
-	Name *string
-
 	// The detectorID that specifies the GuardDuty service whose ThreatIntelSet you
 	// want to update.
 	//
 	// This member is required.
 	DetectorId *string
 
+	// The unique ID that specifies the ThreatIntelSet that you want to update.
+	//
+	// This member is required.
+	ThreatIntelSetId *string
+
+	// The updated Boolean value that specifies whether the ThreateIntelSet is active
+	// or not.
+	Activate *bool
+
 	// The updated URI of the file that contains the ThreateIntelSet. For example:
 	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	Location *string
+
+	// The unique ID that specifies the ThreatIntelSet that you want to update.
+	Name *string
 }
 
 type UpdateThreatIntelSetOutput struct {

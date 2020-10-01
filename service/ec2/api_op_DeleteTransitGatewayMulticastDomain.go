@@ -57,16 +57,16 @@ func (c *Client) DeleteTransitGatewayMulticastDomain(ctx context.Context, params
 
 type DeleteTransitGatewayMulticastDomainInput struct {
 
+	// The ID of the transit gateway multicast domain.
+	//
+	// This member is required.
+	TransitGatewayMulticastDomainId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the transit gateway multicast domain.
-	//
-	// This member is required.
-	TransitGatewayMulticastDomainId *string
 }
 
 type DeleteTransitGatewayMulticastDomainOutput struct {

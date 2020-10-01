@@ -67,9 +67,6 @@ type CopyWorkspaceImageInput struct {
 	// This member is required.
 	SourceImageId *string
 
-	// The tags for the image.
-	Tags []*types.Tag
-
 	// The identifier of the source Region.
 	//
 	// This member is required.
@@ -77,6 +74,9 @@ type CopyWorkspaceImageInput struct {
 
 	// A description of the image.
 	Description *string
+
+	// The tags for the image.
+	Tags []*types.Tag
 }
 
 type CopyWorkspaceImageOutput struct {

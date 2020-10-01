@@ -64,11 +64,6 @@ func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns
 
 type ListGrantsInput struct {
 
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string
-
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS
 	// account, you must use the key ARN. For example:
@@ -91,6 +86,11 @@ type ListGrantsInput struct {
 	// value, it must be between 1 and 100, inclusive. If you do not include a value,
 	// it defaults to 50.
 	Limit *int32
+
+	// Use this parameter in a subsequent request after you receive a response with
+	// truncated results. Set it to the value of NextMarker from the truncated response
+	// you just received.
+	Marker *string
 }
 
 type ListGrantsOutput struct {

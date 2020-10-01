@@ -57,12 +57,11 @@ func (c *Client) DescribeTransitGatewayRouteTables(ctx context.Context, params *
 
 type DescribeTransitGatewayRouteTablesInput struct {
 
-	// The IDs of the transit gateway route tables.
-	TransitGatewayRouteTableIds []*string
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// One or more filters. The possible values are:
 	//
@@ -85,24 +84,25 @@ type DescribeTransitGatewayRouteTablesInput struct {
 	// transit-gateway-route-table-id - The ID of the transit gateway route table.
 	Filters []*types.Filter
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The IDs of the transit gateway route tables.
+	TransitGatewayRouteTableIds []*string
 }
 
 type DescribeTransitGatewayRouteTablesOutput struct {
 
-	// Information about the transit gateway route tables.
-	TransitGatewayRouteTables []*types.TransitGatewayRouteTable
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the transit gateway route tables.
+	TransitGatewayRouteTables []*types.TransitGatewayRouteTable
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

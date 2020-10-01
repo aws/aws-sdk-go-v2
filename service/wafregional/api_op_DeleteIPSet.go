@@ -75,16 +75,16 @@ func (c *Client) DeleteIPSet(ctx context.Context, params *DeleteIPSetInput, optF
 
 type DeleteIPSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The IPSetId of the IPSet () that you want to delete. IPSetId is returned by
 	// CreateIPSet () and by ListIPSets ().
 	//
 	// This member is required.
 	IPSetId *string
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type DeleteIPSetOutput struct {

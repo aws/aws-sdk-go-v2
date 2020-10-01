@@ -65,12 +65,6 @@ type DeleteUsagePlanKeyInput struct {
 	// This member is required.
 	KeyId *string
 
-	Name *string
-
-	Title *string
-
-	TemplateSkipList []*string
-
 	// [Required] The Id of the UsagePlan () resource representing the usage plan
 	// containing the to-be-deleted UsagePlanKey () resource representing a plan
 	// customer.
@@ -78,7 +72,13 @@ type DeleteUsagePlanKeyInput struct {
 	// This member is required.
 	UsagePlanId *string
 
+	Name *string
+
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 type DeleteUsagePlanKeyOutput struct {

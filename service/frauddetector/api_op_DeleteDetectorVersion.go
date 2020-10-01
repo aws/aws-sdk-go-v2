@@ -57,15 +57,15 @@ func (c *Client) DeleteDetectorVersion(ctx context.Context, params *DeleteDetect
 
 type DeleteDetectorVersionInput struct {
 
-	// The ID of the detector version to delete.
-	//
-	// This member is required.
-	DetectorVersionId *string
-
 	// The ID of the parent detector for the detector version to delete.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// The ID of the detector version to delete.
+	//
+	// This member is required.
+	DetectorVersionId *string
 }
 
 type DeleteDetectorVersionOutput struct {

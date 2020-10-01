@@ -59,11 +59,6 @@ func (c *Client) UpdatePipeline(ctx context.Context, params *UpdatePipelineInput
 
 type UpdatePipelineInput struct {
 
-	// The name of the pipeline to update.
-	//
-	// This member is required.
-	PipelineName *string
-
 	// A list of "PipelineActivity" objects. Activities perform transformations on your
 	// messages, such as removing, renaming or adding message attributes; filtering
 	// messages based on attribute values; invoking your Lambda functions on messages
@@ -75,6 +70,11 @@ type UpdatePipelineInput struct {
 	//
 	// This member is required.
 	PipelineActivities []*types.PipelineActivity
+
+	// The name of the pipeline to update.
+	//
+	// This member is required.
+	PipelineName *string
 }
 
 type UpdatePipelineOutput struct {

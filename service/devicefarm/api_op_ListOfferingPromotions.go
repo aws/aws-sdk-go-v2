@@ -67,12 +67,12 @@ type ListOfferingPromotionsInput struct {
 
 type ListOfferingPromotionsOutput struct {
 
-	// Information about the offering promotions.
-	OfferingPromotions []*types.OfferingPromotion
-
 	// An identifier to be used in the next call to this operation, to return the next
 	// set of items in the list.
 	NextToken *string
+
+	// Information about the offering promotions.
+	OfferingPromotions []*types.OfferingPromotion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

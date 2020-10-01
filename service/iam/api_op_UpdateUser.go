@@ -67,15 +67,6 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// New path for the IAM user. Include this parameter only if you're changing the
-	// user's path. This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
-	// forward slash (/) by itself or a string that must begin and end with forward
-	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
-	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
-	NewPath *string
-
 	// Name of the user to update. If you're changing the name of the user, this is the
 	// original user name. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -84,6 +75,15 @@ type UpdateUserInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	// New path for the IAM user. Include this parameter only if you're changing the
+	// user's path. This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
+	// forward slash (/) by itself or a string that must begin and end with forward
+	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
+	// through the DEL character (\u007F), including most punctuation characters,
+	// digits, and upper and lowercased letters.
+	NewPath *string
 
 	// New name for the user. Include this parameter only if you're changing the user's
 	// name. IAM user, group, role, and policy names must be unique within the account.

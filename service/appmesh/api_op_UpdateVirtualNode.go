@@ -57,11 +57,6 @@ func (c *Client) UpdateVirtualNode(ctx context.Context, params *UpdateVirtualNod
 //
 type UpdateVirtualNodeInput struct {
 
-	// The name of the virtual node to update.
-	//
-	// This member is required.
-	VirtualNodeName *string
-
 	// The name of the service mesh that the virtual node resides in.
 	//
 	// This member is required.
@@ -71,6 +66,11 @@ type UpdateVirtualNodeInput struct {
 	//
 	// This member is required.
 	Spec *types.VirtualNodeSpec
+
+	// The name of the virtual node to update.
+	//
+	// This member is required.
+	VirtualNodeName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.

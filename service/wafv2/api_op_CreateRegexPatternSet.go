@@ -68,9 +68,6 @@ type CreateRegexPatternSetInput struct {
 	// This member is required.
 	Name *string
 
-	// An array of key:value pairs to associate with the resource.
-	Tags []*types.Tag
-
 	// Array of regular expression strings.
 	//
 	// This member is required.
@@ -93,6 +90,9 @@ type CreateRegexPatternSetInput struct {
 	// A description of the set that helps with identification. You cannot change the
 	// description of a set after you create it.
 	Description *string
+
+	// An array of key:value pairs to associate with the resource.
+	Tags []*types.Tag
 }
 
 type CreateRegexPatternSetOutput struct {

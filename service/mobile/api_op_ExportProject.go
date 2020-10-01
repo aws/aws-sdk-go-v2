@@ -68,10 +68,6 @@ type ExportProjectInput struct {
 // Result structure used for requests to export project configuration details.
 type ExportProjectOutput struct {
 
-	// Unique identifier for the exported snapshot of the project configuration. This
-	// snapshot identifier is included in the share URL.
-	SnapshotId *string
-
 	// URL which can be used to download the exported project configuation file(s).
 	DownloadUrl *string
 
@@ -82,6 +78,10 @@ type ExportProjectOutput struct {
 	// configuration, then you will need to create and share a new snapshot by calling
 	// this method again.
 	ShareUrl *string
+
+	// Unique identifier for the exported snapshot of the project configuration. This
+	// snapshot identifier is included in the share URL.
+	SnapshotId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

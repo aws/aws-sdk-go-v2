@@ -59,23 +59,20 @@ func (c *Client) TestInvokeMethod(ctx context.Context, params *TestInvokeMethodI
 // Make a request to simulate the execution of a Method ().
 type TestInvokeMethodInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] Specifies a test invoke method request's HTTP method.
 	//
 	// This member is required.
-	RestApiId *string
+	HttpMethod *string
 
 	// [Required] Specifies a test invoke method request's resource ID.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The headers as a map from string to list of values to simulate an incoming
-	// invocation request.
-	MultiValueHeaders map[string][]*string
-
-	// A key-value map of stage variables to simulate an invocation on a deployed Stage
-	// ().
-	StageVariables map[string]*string
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
 
 	// The simulated request body of an incoming invocation request.
 	Body *string
@@ -85,17 +82,20 @@ type TestInvokeMethodInput struct {
 	// endpoint.
 	ClientCertificateId *string
 
-	// [Required] Specifies a test invoke method request's HTTP method.
-	//
-	// This member is required.
-	HttpMethod *string
+	// A key-value map of headers to simulate an incoming invocation request.
+	Headers map[string]*string
+
+	// The headers as a map from string to list of values to simulate an incoming
+	// invocation request.
+	MultiValueHeaders map[string][]*string
 
 	// The URI path, including query string, of the simulated invocation request. Use
 	// this to specify path parameters and query string parameters.
 	PathWithQueryString *string
 
-	// A key-value map of headers to simulate an incoming invocation request.
-	Headers map[string]*string
+	// A key-value map of stage variables to simulate an invocation on a deployed Stage
+	// ().
+	StageVariables map[string]*string
 }
 
 // Represents the response of the test invoke request in the HTTP method. Test API
@@ -103,23 +103,23 @@ type TestInvokeMethodInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-test-method.html#how-to-test-method-console)
 type TestInvokeMethodOutput struct {
 
+	// The body of the HTTP response.
+	Body *string
+
 	// The headers of the HTTP response.
 	Headers map[string]*string
+
+	// The execution latency of the test invoke request.
+	Latency *int64
 
 	// The API Gateway execution log for the test invoke request.
 	Log *string
 
-	// The HTTP status code.
-	Status *int32
-
-	// The body of the HTTP response.
-	Body *string
-
 	// The headers of the HTTP response as a map from string to list of values.
 	MultiValueHeaders map[string][]*string
 
-	// The execution latency of the test invoke request.
-	Latency *int64
+	// The HTTP status code.
+	Status *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

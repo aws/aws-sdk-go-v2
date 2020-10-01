@@ -22,20 +22,6 @@ type ActiveDirectoryBackupAttributes struct {
 // file system.
 type AdministrativeAction struct {
 
-	// Time that the administrative action request was received.
-	RequestTime *time.Time
-
-	// Describes the target StorageCapacity or ThroughputCapacity value provided in the
-	// UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative
-	// actions.
-	TargetFileSystemValues *FileSystem
-
-	// Provides the percent complete of a STORAGE_OPTIMIZATION administrative action.
-	ProgressPercent *int32
-
-	// Provides information about a failed administrative action.
-	FailureDetails *AdministrativeActionFailureDetails
-
 	// Describes the type of administrative action, as follows:
 	//
 	//     *
@@ -53,6 +39,15 @@ type AdministrativeAction struct {
 	// Capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
 	AdministrativeActionType AdministrativeActionType
+
+	// Provides information about a failed administrative action.
+	FailureDetails *AdministrativeActionFailureDetails
+
+	// Provides the percent complete of a STORAGE_OPTIMIZATION administrative action.
+	ProgressPercent *int32
+
+	// Time that the administrative action request was received.
+	RequestTime *time.Time
 
 	// Describes the status of the administrative action, as follows:
 	//
@@ -75,6 +70,11 @@ type AdministrativeAction struct {
 	// Capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
 	Status Status
+
+	// Describes the target StorageCapacity or ThroughputCapacity value provided in the
+	// UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative
+	// actions.
+	TargetFileSystemValues *FileSystem
 }
 
 // Provides information about a failed administrative action.
@@ -87,52 +87,52 @@ type AdministrativeActionFailureDetails struct {
 // A backup of an Amazon FSx for file system.
 type Backup struct {
 
-	// The time when a particular backup was created.
-	//
-	// This member is required.
-	CreationTime *time.Time
-
 	// The ID of the backup.
 	//
 	// This member is required.
 	BackupId *string
 
-	// Details explaining any failures that occur when creating a backup.
-	FailureDetails *BackupFailureDetails
-
-	// The current percent of progress of an asynchronous task.
-	ProgressPercent *int32
-
-	// Tags associated with a particular file system.
-	Tags []*Tag
-
-	// The Amazon Resource Name (ARN) for the backup resource.
-	ResourceARN *string
-
-	// The type of the file system backup.
+	// The time when a particular backup was created.
 	//
 	// This member is required.
-	Type BackupType
-
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this
-	// backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx for
-	// Lustre does not support KMS encryption.
-	KmsKeyId *string
-
-	// The configuration of the self-managed Microsoft Active Directory (AD) to which
-	// the Windows File Server instance is joined.
-	DirectoryInformation *ActiveDirectoryBackupAttributes
-
-	// The lifecycle status of the backup.
-	//
-	// This member is required.
-	Lifecycle BackupLifecycle
+	CreationTime *time.Time
 
 	// Metadata of the file system associated with the backup. This metadata is
 	// persisted even if the file system is deleted.
 	//
 	// This member is required.
 	FileSystem *FileSystem
+
+	// The lifecycle status of the backup.
+	//
+	// This member is required.
+	Lifecycle BackupLifecycle
+
+	// The type of the file system backup.
+	//
+	// This member is required.
+	Type BackupType
+
+	// The configuration of the self-managed Microsoft Active Directory (AD) to which
+	// the Windows File Server instance is joined.
+	DirectoryInformation *ActiveDirectoryBackupAttributes
+
+	// Details explaining any failures that occur when creating a backup.
+	FailureDetails *BackupFailureDetails
+
+	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt this
+	// backup of the Amazon FSx for Windows file system's data at rest. Amazon FSx for
+	// Lustre does not support KMS encryption.
+	KmsKeyId *string
+
+	// The current percent of progress of an asynchronous task.
+	ProgressPercent *int32
+
+	// The Amazon Resource Name (ARN) for the backup resource.
+	ResourceARN *string
+
+	// Tags associated with a particular file system.
+	Tags []*Tag
 }
 
 // If backup creation fails, this structure contains the details of that failure.
@@ -157,11 +157,11 @@ type CompletionReport struct {
 	// This member is required.
 	Enabled *bool
 
-	// Required if Enabled is set to true. Specifies the scope of the CompletionReport;
-	// FAILED_FILES_ONLY is the only scope currently supported. When Scope is set to
-	// FAILED_FILES_ONLY, the CompletionReport only contains information about files
-	// that the data repository task failed to process.
-	Scope ReportScope
+	// Required if Enabled is set to true. Specifies the format of the
+	// CompletionReport. REPORT_CSV_20191124 is the only format currently supported.
+	// When Format is set to REPORT_CSV_20191124, the CompletionReport is provided in
+	// CSV format, and is delivered to {path}/task-{id}/failures.csv.
+	Format ReportFormat
 
 	// Required if Enabled is set to true. Specifies the location of the report on the
 	// file system's linked S3 data repository. An absolute path that defines where the
@@ -172,100 +172,15 @@ type CompletionReport struct {
 	// ErrorCode. To learn more about a file system's ExportPath, see .
 	Path *string
 
-	// Required if Enabled is set to true. Specifies the format of the
-	// CompletionReport. REPORT_CSV_20191124 is the only format currently supported.
-	// When Format is set to REPORT_CSV_20191124, the CompletionReport is provided in
-	// CSV format, and is delivered to {path}/task-{id}/failures.csv.
-	Format ReportFormat
+	// Required if Enabled is set to true. Specifies the scope of the CompletionReport;
+	// FAILED_FILES_ONLY is the only scope currently supported. When Scope is set to
+	// FAILED_FILES_ONLY, the CompletionReport only contains information about files
+	// that the data repository task failed to process.
+	Scope ReportScope
 }
 
 // The Lustre configuration for the file system being created.
 type CreateFileSystemLustreConfiguration struct {
-
-	// Choose SCRATCH_1 and SCRATCH_2 deployment types when you need temporary storage
-	// and shorter-term processing of data. The SCRATCH_2 deployment type provides
-	// in-transit encryption of data and higher burst throughput capacity than
-	// SCRATCH_1.  <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term
-	// storage and workloads and encryption of data in transit. To learn more about
-	// deployment types, see <a
-	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html">
-	// FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is
-	// automatically enabled when you access a <code>SCRATCH_2</code> or
-	// <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a
-	// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
-	// protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>)
-	// </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and
-	// <code>PERSISTENT_1</code> deployment types is supported when accessed from
-	// supported instance types in supported AWS Regions. To learn more, <a
-	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting
-	// Data in Transit</a>.</p>
-	DeploymentType LustreDeploymentType
-
-	// (Optional) For files imported from a data repository, this value determines the
-	// stripe count and maximum amount of data per file (in MiB) stored on a single
-	// physical disk. The maximum number of disks that a single file can be striped
-	// across is limited by the total number of disks that make up the file system.
-	// <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
-	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>
-	ImportedFileChunkSize *int32
-
-	// A boolean flag indicating whether tags for the file system should be copied to
-	// backups. This value defaults to false. If it's set to true, all tags for the
-	// file system are copied to all automatic and user-initiated backups where the
-	// user doesn't specify tags. If this value is true, and you specify one or more
-	// tags, only the specified tags are copied to backups. If you specify one or more
-	// tags when creating a user-initiated backup, no tags are copied from the file
-	// system, regardless of this value. For more information, see Working with backups
-	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
-	CopyTagsToBackups *bool
-
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
-	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
-	// specifies 5 AM daily.
-	DailyAutomaticBackupStartTime *string
-
-	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
-	// The default is 0.
-	AutomaticBackupRetentionDays *int32
-
-	// (Optional) The path in Amazon S3 where the root of your Amazon FSx file system
-	// is exported. The path must use the same Amazon S3 bucket as specified in
-	// ImportPath. You can provide an optional prefix to which new and changed data is
-	// to be exported from your Amazon FSx for Lustre file system. If an ExportPath
-	// value is not provided, Amazon FSx sets a default export path,
-	// s3://import-bucket/FSxLustre[creation-timestamp]. The timestamp is in UTC
-	// format, for example s3://import-bucket/FSxLustre20181105T222312Z.  <p>The Amazon
-	// S3 export bucket must be the same as the import bucket specified by
-	// <code>ImportPath</code>. If you only specify a bucket name, such as
-	// <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to
-	// S3 bucket objects. This mapping means that the input data in S3 is overwritten
-	// on export. If you provide a custom prefix in the export path, such as
-	// <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the
-	// contents of your file system to that export prefix in the Amazon S3 bucket.</p>
-	ExportPath *string
-
-	// Required for the PERSISTENT_1 deployment type, describes the amount of read and
-	// write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system
-	// throughput capacity is calculated by multiplying ﬁle system storage capacity
-	// (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
-	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle
-	// system throughput. You pay for the amount of throughput that you provision.
-	// Valid values are 50, 100, 200.
-	PerUnitStorageThroughput *int32
-
-	// (Optional) The path to the Amazon S3 bucket (including the optional prefix) that
-	// you're using as the data repository for your Amazon FSx for Lustre file system.
-	// The root of your FSx for Lustre file system will be mapped to the root of the
-	// Amazon S3 bucket you select. An example is s3://import-bucket/optional-prefix.
-	// If you specify a prefix after the Amazon S3 bucket name, only object keys with
-	// that prefix are loaded into the file system.
-	ImportPath *string
-
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
-	// Monday and ending with Sunday.
-	WeeklyMaintenanceStartTime *string
 
 	// (Optional) Use this property to configure the AutoImport feature on the file
 	// system's linked Amazon S3 data repository. You use AutoImport to update the
@@ -293,6 +208,91 @@ type CreateFileSystemLustreConfiguration struct {
 	// import updates from your S3 bucket
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html).
 	AutoImportPolicy AutoImportPolicyType
+
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A boolean flag indicating whether tags for the file system should be copied to
+	// backups. This value defaults to false. If it's set to true, all tags for the
+	// file system are copied to all automatic and user-initiated backups where the
+	// user doesn't specify tags. If this value is true, and you specify one or more
+	// tags, only the specified tags are copied to backups. If you specify one or more
+	// tags when creating a user-initiated backup, no tags are copied from the file
+	// system, regardless of this value. For more information, see Working with backups
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
+	CopyTagsToBackups *bool
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
+	// Choose SCRATCH_1 and SCRATCH_2 deployment types when you need temporary storage
+	// and shorter-term processing of data. The SCRATCH_2 deployment type provides
+	// in-transit encryption of data and higher burst throughput capacity than
+	// SCRATCH_1.  <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term
+	// storage and workloads and encryption of data in transit. To learn more about
+	// deployment types, see <a
+	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html">
+	// FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is
+	// automatically enabled when you access a <code>SCRATCH_2</code> or
+	// <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a
+	// href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
+	// protection.html">support this feature</a>. (Default = <code>SCRATCH_1</code>)
+	// </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and
+	// <code>PERSISTENT_1</code> deployment types is supported when accessed from
+	// supported instance types in supported AWS Regions. To learn more, <a
+	// href="https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html">Encrypting
+	// Data in Transit</a>.</p>
+	DeploymentType LustreDeploymentType
+
+	// (Optional) The path in Amazon S3 where the root of your Amazon FSx file system
+	// is exported. The path must use the same Amazon S3 bucket as specified in
+	// ImportPath. You can provide an optional prefix to which new and changed data is
+	// to be exported from your Amazon FSx for Lustre file system. If an ExportPath
+	// value is not provided, Amazon FSx sets a default export path,
+	// s3://import-bucket/FSxLustre[creation-timestamp]. The timestamp is in UTC
+	// format, for example s3://import-bucket/FSxLustre20181105T222312Z.  <p>The Amazon
+	// S3 export bucket must be the same as the import bucket specified by
+	// <code>ImportPath</code>. If you only specify a bucket name, such as
+	// <code>s3://import-bucket</code>, you get a 1:1 mapping of file system objects to
+	// S3 bucket objects. This mapping means that the input data in S3 is overwritten
+	// on export. If you provide a custom prefix in the export path, such as
+	// <code>s3://import-bucket/[custom-optional-prefix]</code>, Amazon FSx exports the
+	// contents of your file system to that export prefix in the Amazon S3 bucket.</p>
+	ExportPath *string
+
+	// (Optional) The path to the Amazon S3 bucket (including the optional prefix) that
+	// you're using as the data repository for your Amazon FSx for Lustre file system.
+	// The root of your FSx for Lustre file system will be mapped to the root of the
+	// Amazon S3 bucket you select. An example is s3://import-bucket/optional-prefix.
+	// If you specify a prefix after the Amazon S3 bucket name, only object keys with
+	// that prefix are loaded into the file system.
+	ImportPath *string
+
+	// (Optional) For files imported from a data repository, this value determines the
+	// stripe count and maximum amount of data per file (in MiB) stored on a single
+	// physical disk. The maximum number of disks that a single file can be striped
+	// across is limited by the total number of disks that make up the file system.
+	// <p>The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>
+	ImportedFileChunkSize *int32
+
+	// Required for the PERSISTENT_1 deployment type, describes the amount of read and
+	// write throughput for each 1 tebibyte of storage, in MB/s/TiB. File system
+	// throughput capacity is calculated by multiplying ﬁle system storage capacity
+	// (TiB) by the PerUnitStorageThroughput (MB/s/TiB). For a 2.4 TiB ﬁle system,
+	// provisioning 50 MB/s/TiB of PerUnitStorageThroughput yields 117 MB/s of ﬁle
+	// system throughput. You pay for the amount of throughput that you provision.
+	// Valid values are 50, 100, 200.
+	PerUnitStorageThroughput *int32
+
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
+	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
+	// Monday and ending with Sunday.
+	WeeklyMaintenanceStartTime *string
 }
 
 // The configuration object for the Microsoft Windows file system used in
@@ -309,6 +309,11 @@ type CreateFileSystemWindowsConfiguration struct {
 	// the file system should join when it's created.
 	ActiveDirectoryId *string
 
+	// The number of days to retain automatic backups. The default is to retain backups
+	// for 7 days. Setting this value to 0 disables the creation of automatic backups.
+	// The maximum retention period for backups is 35 days.
+	AutomaticBackupRetentionDays *int32
+
 	// A boolean flag indicating whether tags for the file system should be copied to
 	// backups. This value defaults to false. If it's set to true, all tags for the
 	// file system are copied to all automatic and user-initiated backups where the
@@ -321,28 +326,6 @@ type CreateFileSystemWindowsConfiguration struct {
 	// The preferred time to take daily automatic backups, formatted HH:MM in the UTC
 	// time zone.
 	DailyAutomaticBackupStartTime *string
-
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
-	// Monday and ending with Sunday.
-	WeeklyMaintenanceStartTime *string
-
-	// The number of days to retain automatic backups. The default is to retain backups
-	// for 7 days. Setting this value to 0 disables the creation of automatic backups.
-	// The maximum retention period for backups is 35 days.
-	AutomaticBackupRetentionDays *int32
-
-	// Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in
-	// which you want the preferred file server to be located. For in-AWS applications,
-	// we recommend that you launch your clients in the same Availability Zone (AZ) as
-	// your preferred file server to reduce cross-AZ data transfer costs and minimize
-	// latency.
-	PreferredSubnetId *string
-
-	// The configuration that Amazon FSx uses to join the Windows File Server instance
-	// to your self-managed (including on-premises) Microsoft Active Directory (AD)
-	// directory.
-	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	// Specifies the file system deployment type, valid values are the following:
 	//
@@ -364,6 +347,23 @@ type CreateFileSystemWindowsConfiguration struct {
 	// Single-AZ and Multi-AZ File Systems
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
 	DeploymentType WindowsDeploymentType
+
+	// Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in
+	// which you want the preferred file server to be located. For in-AWS applications,
+	// we recommend that you launch your clients in the same Availability Zone (AZ) as
+	// your preferred file server to reduce cross-AZ data transfer costs and minimize
+	// latency.
+	PreferredSubnetId *string
+
+	// The configuration that Amazon FSx uses to join the Windows File Server instance
+	// to your self-managed (including on-premises) Microsoft Active Directory (AD)
+	// directory.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
+
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
+	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
+	// Monday and ending with Sunday.
+	WeeklyMaintenanceStartTime *string
 }
 
 // The data repository configuration object for Lustre file systems returned in the
@@ -395,9 +395,19 @@ type DataRepositoryConfiguration struct {
 	// import updates from your S3 bucket</a>.</p>
 	AutoImportPolicy AutoImportPolicyType
 
+	// The export path to the Amazon S3 bucket (and prefix) that you are using to store
+	// new and changed Lustre file system files in S3.
+	ExportPath *string
+
 	// Provides detailed information about the data respository if its Lifecycle is set
 	// to MISCONFIGURED.
 	FailureDetails *DataRepositoryFailureDetails
+
+	// The import path to the Amazon S3 bucket (and optional prefix) that you're using
+	// as the data repository for your FSx for Lustre file system, for example
+	// s3://import-bucket/optional-prefix. If a prefix is specified after the Amazon S3
+	// bucket name, only object keys with that prefix are loaded into the file system.
+	ImportPath *string
 
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
@@ -406,16 +416,6 @@ type DataRepositoryConfiguration struct {
 	// default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500
 	// GiB). Amazon S3 objects have a maximum size of 5 TB.</p>
 	ImportedFileChunkSize *int32
-
-	// The export path to the Amazon S3 bucket (and prefix) that you are using to store
-	// new and changed Lustre file system files in S3.
-	ExportPath *string
-
-	// The import path to the Amazon S3 bucket (and optional prefix) that you're using
-	// as the data repository for your FSx for Lustre file system, for example
-	// s3://import-bucket/optional-prefix. If a prefix is specified after the Amazon S3
-	// bucket name, only object keys with that prefix are loaded into the file system.
-	ImportPath *string
 
 	// Describes the state of the file system's S3 durable data repository, if it is
 	// configured with an S3 repository. The lifecycle can have the following values:
@@ -452,64 +452,16 @@ type DataRepositoryFailureDetails struct {
 // linked data repository.
 type DataRepositoryTask struct {
 
-	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS
-	// resources. We require an ARN when you need to specify a resource unambiguously
-	// across all of AWS. For more information, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
-	ResourceARN *string
-
-	// The type of data repository task; EXPORT_TO_REPOSITORY is the only type
-	// currently supported.
-	//
-	// This member is required.
-	Type DataRepositoryTaskType
-
-	// A list of Tag values, with a maximum of 50 elements.
-	Tags []*Tag
-
-	// Provides a report detailing the data repository task results of the files
-	// processed that match the criteria specified in the report Scope parameter. FSx
-	// delivers the report to the file system's linked data repository in Amazon S3,
-	// using the path specified in the report Path parameter. You can specify whether
-	// or not a report gets generated for a task using the Enabled parameter.
-	Report *CompletionReport
-
-	// Failure message describing why the task failed, it is populated only when
-	// Lifecycle is set to FAILED.
-	FailureDetails *DataRepositoryTaskFailureDetails
-
-	// The globally unique ID of the file system, assigned by Amazon FSx.
-	//
-	// This member is required.
-	FileSystemId *string
-
-	// Provides the status of the number of files that the task has processed
-	// successfully and failed to process.
-	Status *DataRepositoryTaskStatus
-
-	// The system-generated, unique 17-digit ID of the data repository task.
-	//
-	// This member is required.
-	TaskId *string
-
-	// The time that Amazon FSx completed processing the task, populated after the task
-	// is complete.
-	EndTime *time.Time
-
-	// An array of paths on the Amazon FSx for Lustre file system that specify the data
-	// for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY
-	// task, the paths specify which data to export to the linked data repository.
-	// (Default) If Paths is not specified, Amazon FSx uses the file system root
-	// directory.
-	Paths []*string
-
 	// The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),
 	// also known as Unix time.
 	//
 	// This member is required.
 	CreationTime *time.Time
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	//
+	// This member is required.
+	FileSystemId *string
 
 	// The lifecycle status of the data repository task, as follows:
 	//
@@ -542,8 +494,56 @@ type DataRepositoryTask struct {
 	// This member is required.
 	Lifecycle DataRepositoryTaskLifecycle
 
+	// The system-generated, unique 17-digit ID of the data repository task.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The type of data repository task; EXPORT_TO_REPOSITORY is the only type
+	// currently supported.
+	//
+	// This member is required.
+	Type DataRepositoryTaskType
+
+	// The time that Amazon FSx completed processing the task, populated after the task
+	// is complete.
+	EndTime *time.Time
+
+	// Failure message describing why the task failed, it is populated only when
+	// Lifecycle is set to FAILED.
+	FailureDetails *DataRepositoryTaskFailureDetails
+
+	// An array of paths on the Amazon FSx for Lustre file system that specify the data
+	// for the data repository task to process. For example, in an EXPORT_TO_REPOSITORY
+	// task, the paths specify which data to export to the linked data repository.
+	// (Default) If Paths is not specified, Amazon FSx uses the file system root
+	// directory.
+	Paths []*string
+
+	// Provides a report detailing the data repository task results of the files
+	// processed that match the criteria specified in the report Scope parameter. FSx
+	// delivers the report to the file system's linked data repository in Amazon S3,
+	// using the path specified in the report Path parameter. You can specify whether
+	// or not a report gets generated for a task using the Enabled parameter.
+	Report *CompletionReport
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS
+	// resources. We require an ARN when you need to specify a resource unambiguously
+	// across all of AWS. For more information, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	ResourceARN *string
+
 	// The time that Amazon FSx began processing the task.
 	StartTime *time.Time
+
+	// Provides the status of the number of files that the task has processed
+	// successfully and failed to process.
+	Status *DataRepositoryTaskStatus
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []*Tag
 }
 
 // Provides information about why a data repository task failed. Only populated
@@ -561,10 +561,6 @@ type DataRepositoryTaskFailureDetails struct {
 // the filter.
 type DataRepositoryTaskFilter struct {
 
-	// Use Values to include the specific file system IDs and task lifecycle states for
-	// the filters you are using.
-	Values []*string
-
 	// Name of the task property to use in filtering the tasks returned in the
 	// response.
 	//
@@ -575,6 +571,10 @@ type DataRepositoryTaskFilter struct {
 	// tasks with one or more specific lifecycle states, as follows: CANCELED,
 	// EXECUTING, FAILED, PENDING, and SUCCEEDED.
 	Name DataRepositoryTaskFilterName
+
+	// Use Values to include the specific file system IDs and task lifecycle states for
+	// the filters you are using.
+	Values []*string
 }
 
 // Provides the task status showing a running total of the total number of files to
@@ -601,16 +601,16 @@ type DataRepositoryTaskStatus struct {
 // in the DeleteFileSystem operation.
 type DeleteFileSystemLustreConfiguration struct {
 
-	// Set SkipFinalBackup to false if you want to take a final backup of the file
-	// system you are deleting. By default, Amazon FSx will not take a final backup on
-	// your behalf when the DeleteFileSystem operation is invoked. (Default = true)
-	SkipFinalBackup *bool
-
 	// Use if SkipFinalBackup is set to false, and you want to apply an array of tags
 	// to the final backup. If you have set the file system property CopyTagsToBackups
 	// to true, and you specify one or more FinalBackupTags when deleting a file
 	// system, Amazon FSx will not copy any existing file system tags to the backup.
 	FinalBackupTags []*Tag
+
+	// Set SkipFinalBackup to false if you want to take a final backup of the file
+	// system you are deleting. By default, Amazon FSx will not take a final backup on
+	// your behalf when the DeleteFileSystem operation is invoked. (Default = true)
+	SkipFinalBackup *bool
 }
 
 // The response object for the Amazon FSx for Lustre file system being deleted in
@@ -628,102 +628,51 @@ type DeleteFileSystemLustreResponse struct {
 // DeleteFileSystem operation.
 type DeleteFileSystemWindowsConfiguration struct {
 
+	// A set of tags for your final backup.
+	FinalBackupTags []*Tag
+
 	// By default, Amazon FSx for Windows takes a final backup on your behalf when the
 	// DeleteFileSystem operation is invoked. Doing this helps protect you from data
 	// loss, and we highly recommend taking the final backup. If you want to skip this
 	// backup, use this flag to do so.
 	SkipFinalBackup *bool
-
-	// A set of tags for your final backup.
-	FinalBackupTags []*Tag
 }
 
 // The response object for the Microsoft Windows file system used in the
 // DeleteFileSystem operation.
 type DeleteFileSystemWindowsResponse struct {
 
-	// The set of tags applied to the final backup.
-	FinalBackupTags []*Tag
-
 	// The ID of the final backup for this file system.
 	FinalBackupId *string
+
+	// The set of tags applied to the final backup.
+	FinalBackupTags []*Tag
 }
 
 // A description of a specific Amazon FSx file system.
 type FileSystem struct {
-
-	// A structure providing details of any failures that occur when creating the file
-	// system has failed.
-	FailureDetails *FileSystemFailureDetails
-
-	// The storage capacity of the file system in gigabytes (GB).
-	StorageCapacity *int32
-
-	// The IDs of the elastic network interface from which a specific file system is
-	// accessible. The elastic network interface is automatically created in the same
-	// VPC that the Amazon FSx file system was created in. For more information, see
-	// Elastic Network Interfaces
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the
-	// Amazon EC2 User Guide.  <p>For an Amazon FSx for Windows File Server file
-	// system, you can have one network interface ID. For an Amazon FSx for Lustre file
-	// system, you can have more than one.</p>
-	NetworkInterfaceIds []*string
-
-	// The system-generated, unique 17-digit ID of the file system.
-	FileSystemId *string
-
-	// Specifies the IDs of the subnets that the file system is accessible from. For
-	// Windows MULTI_AZ_1 file system deployment type, there are two subnet IDs, one
-	// for the preferred file server and one for the standby file server. The preferred
-	// file server subnet identified in the PreferredSubnetID property. All other file
-	// systems have only one subnet ID. For Lustre file systems, and Single-AZ Windows
-	// file systems, this is the ID of the subnet that contains the endpoint for the
-	// file system. For MULTI_AZ_1 Windows file systems, the endpoint for the file
-	// system is available in the PreferredSubnetID.
-	SubnetIds []*string
 
 	// A list of administrative actions for the file system that are in process or
 	// waiting to be processed. Administrative actions describe changes to the Windows
 	// file system that you have initiated using the UpdateFileSystem action.
 	AdministrativeActions []*AdministrativeAction
 
-	// The DNS name for the file system.
-	DNSName *string
-
-	// The configuration for the Amazon FSx for Lustre file system.
-	LustreConfiguration *LustreFileSystemConfiguration
-
-	// The storage type of the file system. Valid values are SSD and HDD. If set to
-	// SSD, the file system uses solid state drive storage. If set to HDD, the file
-	// system uses hard disk drive storage.
-	StorageType StorageType
-
-	// The tags to associate with the file system. For more information, see Tagging
-	// Your Amazon EC2 Resources
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
-	// Amazon EC2 User Guide.
-	Tags []*Tag
-
-	// The Amazon Resource Name (ARN) for the file system resource.
-	ResourceARN *string
-
-	// The AWS account that created the file system. If the file system was created by
-	// an AWS Identity and Access Management (IAM) user, the AWS account to which the
-	// IAM user belongs is the owner.
-	OwnerId *string
-
-	// The type of Amazon FSx file system, either LUSTRE or WINDOWS.
-	FileSystemType FileSystemType
-
-	// The configuration for this Microsoft Windows file system.
-	WindowsConfiguration *WindowsFileSystemConfiguration
-
-	// The ID of the primary VPC for the file system.
-	VpcId *string
-
 	// The time that the file system was created, in seconds (since
 	// 1970-01-01T00:00:00Z), also known as Unix time.
 	CreationTime *time.Time
+
+	// The DNS name for the file system.
+	DNSName *string
+
+	// A structure providing details of any failures that occur when creating the file
+	// system has failed.
+	FailureDetails *FileSystemFailureDetails
+
+	// The system-generated, unique 17-digit ID of the file system.
+	FileSystemId *string
+
+	// The type of Amazon FSx file system, either LUSTRE or WINDOWS.
+	FileSystemType FileSystemType
 
 	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
 	// system's data for Amazon FSx for Windows File Server file systems and persistent
@@ -757,6 +706,57 @@ type FileSystem struct {
 	//     * UPDATING indicates that the file system is
 	// undergoing a customer initiated update.
 	Lifecycle FileSystemLifecycle
+
+	// The configuration for the Amazon FSx for Lustre file system.
+	LustreConfiguration *LustreFileSystemConfiguration
+
+	// The IDs of the elastic network interface from which a specific file system is
+	// accessible. The elastic network interface is automatically created in the same
+	// VPC that the Amazon FSx file system was created in. For more information, see
+	// Elastic Network Interfaces
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html) in the
+	// Amazon EC2 User Guide.  <p>For an Amazon FSx for Windows File Server file
+	// system, you can have one network interface ID. For an Amazon FSx for Lustre file
+	// system, you can have more than one.</p>
+	NetworkInterfaceIds []*string
+
+	// The AWS account that created the file system. If the file system was created by
+	// an AWS Identity and Access Management (IAM) user, the AWS account to which the
+	// IAM user belongs is the owner.
+	OwnerId *string
+
+	// The Amazon Resource Name (ARN) for the file system resource.
+	ResourceARN *string
+
+	// The storage capacity of the file system in gigabytes (GB).
+	StorageCapacity *int32
+
+	// The storage type of the file system. Valid values are SSD and HDD. If set to
+	// SSD, the file system uses solid state drive storage. If set to HDD, the file
+	// system uses hard disk drive storage.
+	StorageType StorageType
+
+	// Specifies the IDs of the subnets that the file system is accessible from. For
+	// Windows MULTI_AZ_1 file system deployment type, there are two subnet IDs, one
+	// for the preferred file server and one for the standby file server. The preferred
+	// file server subnet identified in the PreferredSubnetID property. All other file
+	// systems have only one subnet ID. For Lustre file systems, and Single-AZ Windows
+	// file systems, this is the ID of the subnet that contains the endpoint for the
+	// file system. For MULTI_AZ_1 Windows file systems, the endpoint for the file
+	// system is available in the PreferredSubnetID.
+	SubnetIds []*string
+
+	// The tags to associate with the file system. For more information, see Tagging
+	// Your Amazon EC2 Resources
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
+	// Amazon EC2 User Guide.
+	Tags []*Tag
+
+	// The ID of the primary VPC for the file system.
+	VpcId *string
+
+	// The configuration for this Microsoft Windows file system.
+	WindowsConfiguration *WindowsFileSystemConfiguration
 }
 
 // A structure providing details of any failures that occur when creating the file
@@ -771,22 +771,39 @@ type FileSystemFailureDetails struct {
 // filters to return results that meet all applied filter requirements.
 type Filter struct {
 
+	// The name for this filter.
+	Name FilterName
+
 	// The values of the filter. These are all the values for any of the applied
 	// filters.
 	Values []*string
-
-	// The name for this filter.
-	Name FilterName
 }
 
 // The configuration for the Amazon FSx for Lustre file system.
 type LustreFileSystemConfiguration struct {
 
-	// You use the MountName value when mounting the file system. For the SCRATCH_1
-	// deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1
-	// deployment types, this value is a string that is unique within an AWS Region.
-	// </p>
-	MountName *string
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A boolean flag indicating whether tags on the file system should be copied to
+	// backups. If it's set to true, all tags on the file system are copied to all
+	// automatic backups and any user-initiated backups where the user doesn't specify
+	// any tags. If this value is true, and you specify one or more tags, only the
+	// specified tags are copied to backups. If you specify one or more tags when
+	// creating a user-initiated backup, no tags are copied from the file system,
+	// regardless of this value. (Default = false)
+	CopyTagsToBackups *bool
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
+	// The data repository configuration object for Lustre file systems returned in the
+	// response of the CreateFileSystem operation.
+	DataRepositoryConfiguration *DataRepositoryConfiguration
 
 	// The deployment type of the FSX for Lustre file system. Scratch deployment type
 	// is designed for temporary storage and shorter-term processing of data. SCRATCH_1
@@ -800,33 +817,11 @@ type LustreFileSystemConfiguration struct {
 	// (Default = SCRATCH_1)
 	DeploymentType LustreDeploymentType
 
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
-	// and ending with Sunday.
-	WeeklyMaintenanceStartTime *string
-
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
-	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
-	// specifies 5 AM daily.
-	DailyAutomaticBackupStartTime *string
-
-	// A boolean flag indicating whether tags on the file system should be copied to
-	// backups. If it's set to true, all tags on the file system are copied to all
-	// automatic backups and any user-initiated backups where the user doesn't specify
-	// any tags. If this value is true, and you specify one or more tags, only the
-	// specified tags are copied to backups. If you specify one or more tags when
-	// creating a user-initiated backup, no tags are copied from the file system,
-	// regardless of this value. (Default = false)
-	CopyTagsToBackups *bool
-
-	// The data repository configuration object for Lustre file systems returned in the
-	// response of the CreateFileSystem operation.
-	DataRepositoryConfiguration *DataRepositoryConfiguration
-
-	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
-	// The default is 0.
-	AutomaticBackupRetentionDays *int32
+	// You use the MountName value when mounting the file system. For the SCRATCH_1
+	// deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1
+	// deployment types, this value is a string that is unique within an AWS Region.
+	// </p>
+	MountName *string
 
 	// Per unit storage throughput represents the megabytes per second of read or write
 	// throughput per 1 tebibyte of storage provisioned. File system throughput
@@ -834,26 +829,31 @@ type LustreFileSystemConfiguration struct {
 	// (MB/s/TiB). This option is only valid for PERSISTENT_1 deployment types. Valid
 	// values are 50, 100, 200.
 	PerUnitStorageThroughput *int32
+
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
+	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
+	// and ending with Sunday.
+	WeeklyMaintenanceStartTime *string
 }
 
 // The configuration of the self-managed Microsoft Active Directory (AD) directory
 // to which the Windows File Server instance is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 
-	// The fully qualified domain name of the self-managed AD directory.
-	DomainName *string
-
-	// The fully qualified distinguished name of the organizational unit within the
-	// self-managed AD directory to which the Windows File Server instance is joined.
-	OrganizationalUnitDistinguishedName *string
-
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory.
 	DnsIps []*string
 
+	// The fully qualified domain name of the self-managed AD directory.
+	DomainName *string
+
 	// The name of the domain group whose members have administrative privileges for
 	// the FSx file system.
 	FileSystemAdministratorsGroup *string
+
+	// The fully qualified distinguished name of the organizational unit within the
+	// self-managed AD directory to which the Windows File Server instance is joined.
+	OrganizationalUnitDistinguishedName *string
 
 	// The user name for the service account on your self-managed AD domain that FSx
 	// uses to join to your AD domain.
@@ -864,29 +864,6 @@ type SelfManagedActiveDirectoryAttributes struct {
 // to your self-managed (including on-premises) Microsoft Active Directory (AD)
 // directory.
 type SelfManagedActiveDirectoryConfiguration struct {
-
-	// (Optional) The name of the domain group whose members are granted administrative
-	// privileges for the file system. Administrative privileges include taking
-	// ownership of files and folders, setting audit controls (audit ACLs) on files and
-	// folders, and administering the file system remotely by using the FSx Remote
-	// PowerShell. The group that you specify must already exist in your domain. If you
-	// don't provide one, your AD domain's Domain Admins group is used.
-	FileSystemAdministratorsGroup *string
-
-	// The user name for the service account on your self-managed AD domain that Amazon
-	// FSx will use to join to your AD domain. This account must have the permission to
-	// join computers to the domain in the organizational unit provided in
-	// OrganizationalUnitDistinguishedName, or in the default location of your AD
-	// domain.
-	//
-	// This member is required.
-	UserName *string
-
-	// The fully qualified domain name of the self-managed AD directory, such as
-	// corp.example.com.
-	//
-	// This member is required.
-	DomainName *string
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
 	// self-managed AD directory. The IP addresses need to be either in the same VPC
@@ -905,11 +882,34 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// This member is required.
 	DnsIps []*string
 
+	// The fully qualified domain name of the self-managed AD directory, such as
+	// corp.example.com.
+	//
+	// This member is required.
+	DomainName *string
+
 	// The password for the service account on your self-managed AD domain that Amazon
 	// FSx will use to join to your AD domain.
 	//
 	// This member is required.
 	Password *string
+
+	// The user name for the service account on your self-managed AD domain that Amazon
+	// FSx will use to join to your AD domain. This account must have the permission to
+	// join computers to the domain in the organizational unit provided in
+	// OrganizationalUnitDistinguishedName, or in the default location of your AD
+	// domain.
+	//
+	// This member is required.
+	UserName *string
+
+	// (Optional) The name of the domain group whose members are granted administrative
+	// privileges for the file system. Administrative privileges include taking
+	// ownership of files and folders, setting audit controls (audit ACLs) on files and
+	// folders, and administering the file system remotely by using the FSx Remote
+	// PowerShell. The group that you specify must already exist in your domain. If you
+	// don't provide one, your AD domain's Domain Admins group is used.
+	FileSystemAdministratorsGroup *string
 
 	// (Optional) The fully qualified distinguished name of the organizational unit
 	// within your self-managed AD directory that the Windows File Server instance will
@@ -926,19 +926,19 @@ type SelfManagedActiveDirectoryConfiguration struct {
 // to a self-managed Microsoft Active Directory (AD) directory.
 type SelfManagedActiveDirectoryConfigurationUpdates struct {
 
-	// The user name for the service account on your self-managed AD domain that Amazon
-	// FSx will use to join to your AD domain. This account must have the permission to
-	// join computers to the domain in the organizational unit provided in
-	// OrganizationalUnitDistinguishedName.
-	UserName *string
+	// A list of up to two IP addresses of DNS servers or domain controllers in the
+	// self-managed AD directory.
+	DnsIps []*string
 
 	// The password for the service account on your self-managed AD domain that Amazon
 	// FSx will use to join to your AD domain.
 	Password *string
 
-	// A list of up to two IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory.
-	DnsIps []*string
+	// The user name for the service account on your self-managed AD domain that Amazon
+	// FSx will use to join to your AD domain. This account must have the permission to
+	// join computers to the domain in the organizational unit provided in
+	// OrganizationalUnitDistinguishedName.
+	UserName *string
 }
 
 // Specifies a key-value pair for a resource tag.
@@ -962,16 +962,6 @@ type Tag struct {
 // The configuration object for Amazon FSx for Lustre file systems used in the
 // UpdateFileSystem operation.
 type UpdateFileSystemLustreConfiguration struct {
-
-	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
-	// The default is 0.
-	AutomaticBackupRetentionDays *int32
-
-	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
-	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
-	// specifies 5 AM daily.
-	DailyAutomaticBackupStartTime *string
 
 	// (Optional) Use this property to configure the AutoImport feature on the file
 	// system's linked Amazon S3 data repository. You use AutoImport to update the
@@ -1000,6 +990,16 @@ type UpdateFileSystemLustreConfiguration struct {
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html).
 	AutoImportPolicy AutoImportPolicyType
 
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
 	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
 	// and ending with Sunday.
@@ -1011,6 +1011,23 @@ type UpdateFileSystemLustreConfiguration struct {
 // provided in the request.
 type UpdateFileSystemWindowsConfiguration struct {
 
+	// The number of days to retain automatic daily backups. Setting this to zero (0)
+	// disables automatic daily backups. You can retain automatic daily backups for a
+	// maximum of 35 days. For more information, see Working with Automatic Daily
+	// Backups
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups).
+	AutomaticBackupRetentionDays *int32
+
+	// The preferred time to start the daily automatic backup, in the UTC time zone,
+	// for example, 02:00
+	DailyAutomaticBackupStartTime *string
+
+	// The configuration Amazon FSx uses to join the Windows File Server instance to
+	// the self-managed Microsoft AD directory. You cannot make a self-managed
+	// Microsoft AD update request if there is an existing self-managed Microsoft AD
+	// update request in progress.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
+
 	// Sets the target value for a file system's throughput capacity, in MB/s, that you
 	// are updating the file system to. Valid values are 8, 16, 32, 64, 128, 256, 512,
 	// 1024, 2048. You cannot make a throughput capacity update request if there is an
@@ -1019,34 +1036,34 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-throughput-capacity.html).
 	ThroughputCapacity *int32
 
-	// The configuration Amazon FSx uses to join the Windows File Server instance to
-	// the self-managed Microsoft AD directory. You cannot make a self-managed
-	// Microsoft AD update request if there is an existing self-managed Microsoft AD
-	// update request in progress.
-	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
-
-	// The preferred time to start the daily automatic backup, in the UTC time zone,
-	// for example, 02:00
-	DailyAutomaticBackupStartTime *string
-
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
 	// UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday
 	// and 7 = Sunday.
 	WeeklyMaintenanceStartTime *string
-
-	// The number of days to retain automatic daily backups. Setting this to zero (0)
-	// disables automatic daily backups. You can retain automatic daily backups for a
-	// maximum of 35 days. For more information, see Working with Automatic Daily
-	// Backups
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#automatic-backups).
-	AutomaticBackupRetentionDays *int32
 }
 
 // The configuration for this Microsoft Windows file system.
 type WindowsFileSystemConfiguration struct {
 
-	// The list of maintenance operations in progress for this file system.
-	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation
+	// The ID for an existing Microsoft Active Directory instance that the file system
+	// should join when it's created.
+	ActiveDirectoryId *string
+
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 35 days.
+	AutomaticBackupRetentionDays *int32
+
+	// A boolean flag indicating whether tags on the file system should be copied to
+	// backups. This value defaults to false. If it's set to true, all tags on the file
+	// system are copied to all automatic backups and any user-initiated backups where
+	// the user doesn't specify any tags. If this value is true, and you specify one or
+	// more tags, only the specified tags are copied to backups. If you specify one or
+	// more tags when creating a user-initiated backup, no tags are copied from the
+	// file system, regardless of this value.
+	CopyTagsToBackups *bool
+
+	// The preferred time to take daily automatic backups, in the UTC time zone.
+	DailyAutomaticBackupStartTime *string
 
 	// Specifies the file system deployment type, valid values are the following:
 	//
@@ -1067,8 +1084,8 @@ type WindowsFileSystemConfiguration struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
 	DeploymentType WindowsDeploymentType
 
-	// The preferred time to take daily automatic backups, in the UTC time zone.
-	DailyAutomaticBackupStartTime *string
+	// The list of maintenance operations in progress for this file system.
+	MaintenanceOperationsInProgress []FileSystemMaintenanceOperation
 
 	// For MULTI_AZ_1 deployment types, the IP address of the primary, or preferred,
 	// file server. Use this IP address when mounting the file system on Linux SMB
@@ -1081,22 +1098,6 @@ type WindowsFileSystemConfiguration struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/accessing-file-shares.html).
 	PreferredFileServerIp *string
 
-	// The configuration of the self-managed Microsoft Active Directory (AD) directory
-	// to which the Windows File Server instance is joined.
-	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes
-
-	// The ID for an existing Microsoft Active Directory instance that the file system
-	// should join when it's created.
-	ActiveDirectoryId *string
-
-	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
-	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
-	// and ending with Sunday.
-	WeeklyMaintenanceStartTime *string
-
-	// The throughput of an Amazon FSx file system, measured in megabytes per second.
-	ThroughputCapacity *int32
-
 	// For MULTI_AZ_1 deployment types, it specifies the ID of the subnet where the
 	// preferred file server is located. Must be one of the two subnet IDs specified in
 	// SubnetIds property. Amazon FSx serves traffic from this subnet except in the
@@ -1107,23 +1108,22 @@ type WindowsFileSystemConfiguration struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources)
 	PreferredSubnetId *string
 
-	// The number of days to retain automatic backups. Setting this to 0 disables
-	// automatic backups. You can retain automatic backups for a maximum of 35 days.
-	AutomaticBackupRetentionDays *int32
-
-	// A boolean flag indicating whether tags on the file system should be copied to
-	// backups. This value defaults to false. If it's set to true, all tags on the file
-	// system are copied to all automatic backups and any user-initiated backups where
-	// the user doesn't specify any tags. If this value is true, and you specify one or
-	// more tags, only the specified tags are copied to backups. If you specify one or
-	// more tags when creating a user-initiated backup, no tags are copied from the
-	// file system, regardless of this value.
-	CopyTagsToBackups *bool
-
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing
 	// administrative tasks on the file system using Amazon FSx Remote PowerShell. For
 	// SINGLE_AZ_1 and SINGLE_AZ_2 deployment types, this is the DNS name of the file
 	// system. This endpoint is temporarily unavailable when the file system is
 	// undergoing maintenance.
 	RemoteAdministrationEndpoint *string
+
+	// The configuration of the self-managed Microsoft Active Directory (AD) directory
+	// to which the Windows File Server instance is joined.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes
+
+	// The throughput of an Amazon FSx file system, measured in megabytes per second.
+	ThroughputCapacity *int32
+
+	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
+	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
+	// and ending with Sunday.
+	WeeklyMaintenanceStartTime *string
 }

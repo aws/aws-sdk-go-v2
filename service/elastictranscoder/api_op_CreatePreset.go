@@ -70,29 +70,29 @@ func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, op
 // The CreatePresetRequest structure.
 type CreatePresetInput struct {
 
-	// The name of the preset. We recommend that the name be unique within the AWS
-	// account, but uniqueness is not enforced.
-	//
-	// This member is required.
-	Name *string
-
-	// A description of the preset.
-	Description *string
-
 	// The container type for the output file. Valid values include flac, flv, fmp4,
 	// gif, mp3, mp4, mpg, mxf, oga, ogg, ts, and webm.
 	//
 	// This member is required.
 	Container *string
 
-	// A section of the request body that specifies the video parameters.
-	Video *types.VideoParameters
+	// The name of the preset. We recommend that the name be unique within the AWS
+	// account, but uniqueness is not enforced.
+	//
+	// This member is required.
+	Name *string
+
+	// A section of the request body that specifies the audio parameters.
+	Audio *types.AudioParameters
+
+	// A description of the preset.
+	Description *string
 
 	// A section of the request body that specifies the thumbnail parameters, if any.
 	Thumbnails *types.Thumbnails
 
-	// A section of the request body that specifies the audio parameters.
-	Audio *types.AudioParameters
+	// A section of the request body that specifies the video parameters.
+	Video *types.VideoParameters
 }
 
 // The CreatePresetResponse structure.

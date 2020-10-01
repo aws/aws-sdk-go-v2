@@ -59,23 +59,23 @@ func (c *Client) ListChangedBlocks(ctx context.Context, params *ListChangedBlock
 
 type ListChangedBlocksInput struct {
 
-	// The ID of the first snapshot to use for the comparison. The FirstSnapshotID
-	// parameter must be specified with a SecondSnapshotId parameter; otherwise, an
-	// error occurs.
-	FirstSnapshotId *string
-
-	// The token to request the next page of results.
-	NextToken *string
-
-	// The number of results to return.
-	MaxResults *int32
-
 	// The ID of the second snapshot to use for the comparison. The SecondSnapshotId
 	// parameter must be specified with a FirstSnapshotID parameter; otherwise, an
 	// error occurs.
 	//
 	// This member is required.
 	SecondSnapshotId *string
+
+	// The ID of the first snapshot to use for the comparison. The FirstSnapshotID
+	// parameter must be specified with a SecondSnapshotId parameter; otherwise, an
+	// error occurs.
+	FirstSnapshotId *string
+
+	// The number of results to return.
+	MaxResults *int32
+
+	// The token to request the next page of results.
+	NextToken *string
 
 	// The block index from which the comparison should start.  <p>The list in the
 	// response will start from this block index or the next valid block index in the
@@ -85,21 +85,21 @@ type ListChangedBlocksInput struct {
 
 type ListChangedBlocksOutput struct {
 
+	// The size of the block.
+	BlockSize *int32
+
+	// An array of objects containing information about the changed blocks.
+	ChangedBlocks []*types.ChangedBlock
+
+	// The time when the BlockToken expires.
+	ExpiryTime *time.Time
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
 
 	// The size of the volume in GB.
 	VolumeSize *int64
-
-	// The size of the block.
-	BlockSize *int32
-
-	// The time when the BlockToken expires.
-	ExpiryTime *time.Time
-
-	// An array of objects containing information about the changed blocks.
-	ChangedBlocks []*types.ChangedBlock
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,6 +69,11 @@ func (c *Client) CreateNotebookInstanceLifecycleConfig(ctx context.Context, para
 
 type CreateNotebookInstanceLifecycleConfigInput struct {
 
+	// The name of the lifecycle configuration.
+	//
+	// This member is required.
+	NotebookInstanceLifecycleConfigName *string
+
 	// A shell script that runs only once, when you create a notebook instance. The
 	// shell script must be a base64-encoded string.
 	OnCreate []*types.NotebookInstanceLifecycleHook
@@ -77,11 +82,6 @@ type CreateNotebookInstanceLifecycleConfigInput struct {
 	// when you create the notebook instance. The shell script must be a base64-encoded
 	// string.
 	OnStart []*types.NotebookInstanceLifecycleHook
-
-	// The name of the lifecycle configuration.
-	//
-	// This member is required.
-	NotebookInstanceLifecycleConfigName *string
 }
 
 type CreateNotebookInstanceLifecycleConfigOutput struct {

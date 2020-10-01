@@ -67,15 +67,15 @@ type UpdateGatewayRouteInput struct {
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual gateway that the gateway route is associated with.
-	//
-	// This member is required.
-	VirtualGatewayName *string
-
 	// The new gateway route specification to apply. This overwrites the existing data.
 	//
 	// This member is required.
 	Spec *types.GatewayRouteSpec
+
+	// The name of the virtual gateway that the gateway route is associated with.
+	//
+	// This member is required.
+	VirtualGatewayName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.

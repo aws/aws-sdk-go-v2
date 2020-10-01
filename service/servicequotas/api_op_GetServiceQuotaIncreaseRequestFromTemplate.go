@@ -57,15 +57,15 @@ func (c *Client) GetServiceQuotaIncreaseRequestFromTemplate(ctx context.Context,
 
 type GetServiceQuotaIncreaseRequestFromTemplateInput struct {
 
-	// Specifies the quota you want.
-	//
-	// This member is required.
-	QuotaCode *string
-
 	// Specifies the AWS Region for the quota that you want to use.
 	//
 	// This member is required.
 	AwsRegion *string
+
+	// Specifies the quota you want.
+	//
+	// This member is required.
+	QuotaCode *string
 
 	// Specifies the service that you want to use.
 	//

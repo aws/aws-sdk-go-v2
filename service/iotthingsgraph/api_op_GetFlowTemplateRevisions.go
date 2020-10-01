@@ -60,27 +60,27 @@ func (c *Client) GetFlowTemplateRevisions(ctx context.Context, params *GetFlowTe
 
 type GetFlowTemplateRevisionsInput struct {
 
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string
-
-	// The maximum number of results to return in the response.
-	MaxResults *int32
-
 	// The ID of the workflow. The ID should be in the following format.
 	// urn:tdm:REGION/ACCOUNT ID/default:workflow:WORKFLOWNAME
 	//
 	// This member is required.
 	Id *string
+
+	// The maximum number of results to return in the response.
+	MaxResults *int32
+
+	// The string that specifies the next page of results. Use this when you're
+	// paginating results.
+	NextToken *string
 }
 
 type GetFlowTemplateRevisionsOutput struct {
 
-	// An array of objects that provide summary data about each revision.
-	Summaries []*types.FlowTemplateSummary
-
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
+
+	// An array of objects that provide summary data about each revision.
+	Summaries []*types.FlowTemplateSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

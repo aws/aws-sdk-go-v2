@@ -80,15 +80,15 @@ type DetectDocumentTextInput struct {
 
 type DetectDocumentTextOutput struct {
 
+	// An array of Block objects that contain the text that's detected in the document.
+	Blocks []*types.Block
+
 	//
 	DetectDocumentTextModelVersion *string
 
 	// Metadata about the document. It contains the number of pages that are detected
 	// in the document.
 	DocumentMetadata *types.DocumentMetadata
-
-	// An array of Block objects that contain the text that's detected in the document.
-	Blocks []*types.Block
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

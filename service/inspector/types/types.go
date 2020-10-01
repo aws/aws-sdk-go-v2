@@ -43,8 +43,27 @@ type AgentFilter struct {
 // Used as a response element in the PreviewAgents () action.
 type AgentPreview struct {
 
+	// The ID of the EC2 instance where the agent is installed.
+	//
+	// This member is required.
+	AgentId *string
+
 	// The health status of the Amazon Inspector Agent.
 	AgentHealth AgentHealth
+
+	// The version of the Amazon Inspector Agent.
+	AgentVersion *string
+
+	// The Auto Scaling group for the EC2 instance where the agent is installed.
+	AutoScalingGroup *string
+
+	// The hostname of the EC2 instance on which the Amazon Inspector Agent is
+	// installed.
+	Hostname *string
+
+	// The IP address of the EC2 instance on which the Amazon Inspector Agent is
+	// installed.
+	Ipv4Address *string
 
 	// The kernel version of the operating system running on the EC2 instance on which
 	// the Amazon Inspector Agent is installed.
@@ -53,25 +72,6 @@ type AgentPreview struct {
 	// The operating system running on the EC2 instance on which the Amazon Inspector
 	// Agent is installed.
 	OperatingSystem *string
-
-	// The Auto Scaling group for the EC2 instance where the agent is installed.
-	AutoScalingGroup *string
-
-	// The version of the Amazon Inspector Agent.
-	AgentVersion *string
-
-	// The IP address of the EC2 instance on which the Amazon Inspector Agent is
-	// installed.
-	Ipv4Address *string
-
-	// The hostname of the EC2 instance on which the Amazon Inspector Agent is
-	// installed.
-	Hostname *string
-
-	// The ID of the EC2 instance where the agent is installed.
-	//
-	// This member is required.
-	AgentId *string
 }
 
 // A snapshot of an Amazon Inspector assessment run that contains the findings of
@@ -79,68 +79,15 @@ type AgentPreview struct {
 // () action.
 type AssessmentRun struct {
 
-	// Provides a total count of generated findings per severity.
-	//
-	// This member is required.
-	FindingCounts map[string]*int32
-
-	// The user-defined attributes that are assigned to every generated finding.
-	//
-	// This member is required.
-	UserAttributesForFindings []*Attribute
-
-	// The rules packages selected for the assessment run.
-	//
-	// This member is required.
-	RulesPackageArns []*string
-
-	// The ARN of the assessment template that is associated with the assessment run.
-	//
-	// This member is required.
-	AssessmentTemplateArn *string
-
-	// A list of notifications for the event subscriptions. A notification about a
-	// particular generated finding is added to this list only once.
-	//
-	// This member is required.
-	Notifications []*AssessmentRunNotification
-
-	// The state of the assessment run.
-	//
-	// This member is required.
-	State AssessmentRunState
-
-	// The assessment run completion time that corresponds to the rules packages
-	// evaluation completion time or failure.
-	CompletedAt *time.Time
-
-	// The last time when the assessment run's state changed.
-	//
-	// This member is required.
-	StateChangedAt *time.Time
-
-	// The auto-generated name for the assessment run.
-	//
-	// This member is required.
-	Name *string
-
 	// The ARN of the assessment run.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time when StartAssessmentRun () was called.
-	StartedAt *time.Time
-
-	// A list of the assessment run state changes.
+	// The ARN of the assessment template that is associated with the assessment run.
 	//
 	// This member is required.
-	StateChanges []*AssessmentRunStateChange
-
-	// The duration of the assessment run.
-	//
-	// This member is required.
-	DurationInSeconds *int32
+	AssessmentTemplateArn *string
 
 	// The time when StartAssessmentRun () was called.
 	//
@@ -152,34 +99,84 @@ type AssessmentRun struct {
 	//
 	// This member is required.
 	DataCollected *bool
+
+	// The duration of the assessment run.
+	//
+	// This member is required.
+	DurationInSeconds *int32
+
+	// Provides a total count of generated findings per severity.
+	//
+	// This member is required.
+	FindingCounts map[string]*int32
+
+	// The auto-generated name for the assessment run.
+	//
+	// This member is required.
+	Name *string
+
+	// A list of notifications for the event subscriptions. A notification about a
+	// particular generated finding is added to this list only once.
+	//
+	// This member is required.
+	Notifications []*AssessmentRunNotification
+
+	// The rules packages selected for the assessment run.
+	//
+	// This member is required.
+	RulesPackageArns []*string
+
+	// The state of the assessment run.
+	//
+	// This member is required.
+	State AssessmentRunState
+
+	// The last time when the assessment run's state changed.
+	//
+	// This member is required.
+	StateChangedAt *time.Time
+
+	// A list of the assessment run state changes.
+	//
+	// This member is required.
+	StateChanges []*AssessmentRunStateChange
+
+	// The user-defined attributes that are assigned to every generated finding.
+	//
+	// This member is required.
+	UserAttributesForFindings []*Attribute
+
+	// The assessment run completion time that corresponds to the rules packages
+	// evaluation completion time or failure.
+	CompletedAt *time.Time
+
+	// The time when StartAssessmentRun () was called.
+	StartedAt *time.Time
 }
 
 // Contains information about an Amazon Inspector agent. This data type is used as
 // a response element in the ListAssessmentRunAgents () action.
 type AssessmentRunAgent struct {
 
-	// The ARN of the assessment run that is associated with the agent.
+	// The current health state of the agent.
 	//
 	// This member is required.
-	AssessmentRunArn *string
+	AgentHealth AgentHealth
 
 	// The detailed health state of the agent.
 	//
 	// This member is required.
 	AgentHealthCode AgentHealthCode
 
-	// The Auto Scaling group of the EC2 instance that is specified by the agent ID.
-	AutoScalingGroup *string
-
 	// The AWS account of the EC2 instance where the agent is installed.
 	//
 	// This member is required.
 	AgentId *string
 
-	// The current health state of the agent.
+	// The ARN of the assessment run that is associated with the agent.
 	//
 	// This member is required.
-	AgentHealth AgentHealth
+	AssessmentRunArn *string
 
 	// The Amazon Inspector application data metrics that are collected by the agent.
 	//
@@ -188,25 +185,18 @@ type AssessmentRunAgent struct {
 
 	// The description for the agent health code.
 	AgentHealthDetails *string
+
+	// The Auto Scaling group of the EC2 instance that is specified by the agent ID.
+	AutoScalingGroup *string
 }
 
 // Used as the request parameter in the ListAssessmentRuns () action.
 type AssessmentRunFilter struct {
 
-	// For a record to match a filter, an explicit value or a string containing a
-	// wildcard that is specified for this data type property must match the value of
-	// the assessmentRunName property of the AssessmentRun () data type.
-	NamePattern *string
-
-	// For a record to match a filter, one of the values specified for this data type
-	// property must be the exact match of the value of the assessmentRunState property
-	// of the AssessmentRun () data type.
-	States []AssessmentRunState
-
 	// For a record to match a filter, the value that is specified for this data type
 	// property must inclusively match any value between the specified minimum and
-	// maximum values of the startTime property of the AssessmentRun () data type.
-	StartTimeRange *TimestampRange
+	// maximum values of the completedAt property of the AssessmentRun () data type.
+	CompletionTimeRange *TimestampRange
 
 	// For a record to match a filter, the value that is specified for this data type
 	// property must inclusively match any value between the specified minimum and
@@ -214,48 +204,58 @@ type AssessmentRunFilter struct {
 	// type.
 	DurationRange *DurationRange
 
+	// For a record to match a filter, an explicit value or a string containing a
+	// wildcard that is specified for this data type property must match the value of
+	// the assessmentRunName property of the AssessmentRun () data type.
+	NamePattern *string
+
 	// For a record to match a filter, the value that is specified for this data type
 	// property must be contained in the list of values of the rulesPackages property
 	// of the AssessmentRun () data type.
 	RulesPackageArns []*string
 
 	// For a record to match a filter, the value that is specified for this data type
+	// property must inclusively match any value between the specified minimum and
+	// maximum values of the startTime property of the AssessmentRun () data type.
+	StartTimeRange *TimestampRange
+
+	// For a record to match a filter, the value that is specified for this data type
 	// property must match the stateChangedAt property of the AssessmentRun () data
 	// type.
 	StateChangeTimeRange *TimestampRange
 
-	// For a record to match a filter, the value that is specified for this data type
-	// property must inclusively match any value between the specified minimum and
-	// maximum values of the completedAt property of the AssessmentRun () data type.
-	CompletionTimeRange *TimestampRange
+	// For a record to match a filter, one of the values specified for this data type
+	// property must be the exact match of the value of the assessmentRunState property
+	// of the AssessmentRun () data type.
+	States []AssessmentRunState
 }
 
 // Used as one of the elements of the AssessmentRun () data type.
 type AssessmentRunNotification struct {
-
-	// The message included in the notification.
-	Message *string
 
 	// The date of the notification.
 	//
 	// This member is required.
 	Date *time.Time
 
-	// The status code of the SNS notification.
-	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode
+	// The Boolean value that specifies whether the notification represents an error.
+	//
+	// This member is required.
+	Error *bool
 
 	// The event for which a notification is sent.
 	//
 	// This member is required.
 	Event InspectorEvent
 
+	// The message included in the notification.
+	Message *string
+
+	// The status code of the SNS notification.
+	SnsPublishStatusCode AssessmentRunNotificationSnsStatusCode
+
 	// The SNS topic to which the SNS notification is sent.
 	SnsTopicArn *string
-
-	// The Boolean value that specifies whether the notification represents an error.
-	//
-	// This member is required.
-	Error *bool
 }
 
 // Used as one of the elements of the AssessmentRun () data type.
@@ -281,6 +281,16 @@ type AssessmentTarget struct {
 	// This member is required.
 	Arn *string
 
+	// The time at which the assessment target is created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the Amazon Inspector assessment target.
+	//
+	// This member is required.
+	Name *string
+
 	// The time at which UpdateAssessmentTarget () is called.
 	//
 	// This member is required.
@@ -289,16 +299,6 @@ type AssessmentTarget struct {
 	// The ARN that specifies the resource group that is associated with the assessment
 	// target.
 	ResourceGroupArn *string
-
-	// The name of the Amazon Inspector assessment target.
-	//
-	// This member is required.
-	Name *string
-
-	// The time at which the assessment target is created.
-	//
-	// This member is required.
-	CreatedAt *time.Time
 }
 
 // Used as the request parameter in the ListAssessmentTargets () action.
@@ -315,10 +315,26 @@ type AssessmentTargetFilter struct {
 // action.
 type AssessmentTemplate struct {
 
+	// The ARN of the assessment template.
+	//
+	// This member is required.
+	Arn *string
+
+	// The number of existing assessment runs associated with this assessment template.
+	// This value can be zero or a positive integer.
+	//
+	// This member is required.
+	AssessmentRunCount *int32
+
 	// The ARN of the assessment target that corresponds to this assessment template.
 	//
 	// This member is required.
 	AssessmentTargetArn *string
+
+	// The time at which the assessment template is created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
 
 	// The duration in seconds specified for this assessment template. The default
 	// value is 3600 seconds (one hour). The maximum value is 86400 seconds (one day).
@@ -326,21 +342,10 @@ type AssessmentTemplate struct {
 	// This member is required.
 	DurationInSeconds *int32
 
-	// The Amazon Resource Name (ARN) of the most recent assessment run associated with
-	// this assessment template. This value exists only when the value of
-	// assessmentRunCount is greaterpa than zero.
-	LastAssessmentRunArn *string
-
-	// The time at which the assessment template is created.
+	// The name of the assessment template.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The number of existing assessment runs associated with this assessment template.
-	// This value can be zero or a positive integer.
-	//
-	// This member is required.
-	AssessmentRunCount *int32
+	Name *string
 
 	// The rules packages that are specified for this assessment template.
 	//
@@ -353,19 +358,19 @@ type AssessmentTemplate struct {
 	// This member is required.
 	UserAttributesForFindings []*Attribute
 
-	// The ARN of the assessment template.
-	//
-	// This member is required.
-	Arn *string
-
-	// The name of the assessment template.
-	//
-	// This member is required.
-	Name *string
+	// The Amazon Resource Name (ARN) of the most recent assessment run associated with
+	// this assessment template. This value exists only when the value of
+	// assessmentRunCount is greaterpa than zero.
+	LastAssessmentRunArn *string
 }
 
 // Used as the request parameter in the ListAssessmentTemplates () action.
 type AssessmentTemplateFilter struct {
+
+	// For a record to match a filter, the value specified for this data type property
+	// must inclusively match any value between the specified minimum and maximum
+	// values of the durationInSeconds property of the AssessmentTemplate () data type.
+	DurationRange *DurationRange
 
 	// For a record to match a filter, an explicit value or a string that contains a
 	// wildcard that is specified for this data type property must match the value of
@@ -376,44 +381,39 @@ type AssessmentTemplateFilter struct {
 	// property must be contained in the list of values of the rulesPackageArns
 	// property of the AssessmentTemplate () data type.
 	RulesPackageArns []*string
-
-	// For a record to match a filter, the value specified for this data type property
-	// must inclusively match any value between the specified minimum and maximum
-	// values of the durationInSeconds property of the AssessmentTemplate () data type.
-	DurationRange *DurationRange
 }
 
 // A collection of attributes of the host from which the finding is generated.
 type AssetAttributes struct {
 
-	// The ID of the Amazon Machine Image (AMI) that is installed on the EC2 instance
-	// where the finding is generated.
-	AmiId *string
-
-	// The hostname of the EC2 instance where the finding is generated.
-	Hostname *string
-
-	// An array of the network interfaces interacting with the EC2 instance where the
-	// finding is generated.
-	NetworkInterfaces []*NetworkInterface
+	// The schema version of this data type.
+	//
+	// This member is required.
+	SchemaVersion *int32
 
 	// The ID of the agent that is installed on the EC2 instance where the finding is
 	// generated.
 	AgentId *string
 
-	// The tags related to the EC2 instance where the finding is generated.
-	Tags []*Tag
+	// The ID of the Amazon Machine Image (AMI) that is installed on the EC2 instance
+	// where the finding is generated.
+	AmiId *string
 
 	// The Auto Scaling group of the EC2 instance where the finding is generated.
 	AutoScalingGroup *string
 
+	// The hostname of the EC2 instance where the finding is generated.
+	Hostname *string
+
 	// The list of IP v4 addresses of the EC2 instance where the finding is generated.
 	Ipv4Addresses []*string
 
-	// The schema version of this data type.
-	//
-	// This member is required.
-	SchemaVersion *int32
+	// An array of the network interfaces interacting with the EC2 instance where the
+	// finding is generated.
+	NetworkInterfaces []*NetworkInterface
+
+	// The tags related to the EC2 instance where the finding is generated.
+	Tags []*Tag
 }
 
 // This data type is used as a request parameter in the AddAttributesToFindings ()
@@ -443,48 +443,48 @@ type DurationRange struct {
 // This data type is used in the Subscription () data type.
 type EventSubscription struct {
 
-	// The time at which SubscribeToEvent () is called.
-	//
-	// This member is required.
-	SubscribedAt *time.Time
-
 	// The event for which Amazon Simple Notification Service (SNS) notifications are
 	// sent.
 	//
 	// This member is required.
 	Event InspectorEvent
+
+	// The time at which SubscribeToEvent () is called.
+	//
+	// This member is required.
+	SubscribedAt *time.Time
 }
 
 // Contains information about what was excluded from an assessment run.
 type Exclusion struct {
-
-	// The description of the exclusion.
-	//
-	// This member is required.
-	Description *string
-
-	// The AWS resources for which the exclusion pertains.
-	//
-	// This member is required.
-	Scopes []*Scope
-
-	// The system-defined attributes for the exclusion.
-	Attributes []*Attribute
-
-	// The recommendation for the exclusion.
-	//
-	// This member is required.
-	Recommendation *string
 
 	// The ARN that specifies the exclusion.
 	//
 	// This member is required.
 	Arn *string
 
+	// The description of the exclusion.
+	//
+	// This member is required.
+	Description *string
+
+	// The recommendation for the exclusion.
+	//
+	// This member is required.
+	Recommendation *string
+
+	// The AWS resources for which the exclusion pertains.
+	//
+	// This member is required.
+	Scopes []*Scope
+
 	// The name of the exclusion.
 	//
 	// This member is required.
 	Title *string
+
+	// The system-defined attributes for the exclusion.
+	Attributes []*Attribute
 }
 
 // Contains information about what is excluded from an assessment run given the
@@ -506,72 +506,38 @@ type ExclusionPreview struct {
 	// This member is required.
 	Scopes []*Scope
 
-	// The system-defined attributes for the exclusion preview.
-	Attributes []*Attribute
-
 	// The name of the exclusion preview.
 	//
 	// This member is required.
 	Title *string
+
+	// The system-defined attributes for the exclusion preview.
+	Attributes []*Attribute
 }
 
 // Includes details about the failed items.
 type FailedItemDetails struct {
+
+	// The status code of a failed item.
+	//
+	// This member is required.
+	FailureCode FailedItemErrorCode
 
 	// Indicates whether you can immediately retry a request for this item for a
 	// specified resource.
 	//
 	// This member is required.
 	Retryable *bool
-
-	// The status code of a failed item.
-	//
-	// This member is required.
-	FailureCode FailedItemErrorCode
 }
 
 // Contains information about an Amazon Inspector finding. This data type is used
 // as the response element in the DescribeFindings () action.
 type Finding struct {
 
-	// The finding severity. Values can be set to High, Medium, Low, and Informational.
-	Severity Severity
-
-	// The numeric value of the finding severity.
-	NumericSeverity *float64
-
-	// The name of the finding.
-	Title *string
-
 	// The ARN that specifies the finding.
 	//
 	// This member is required.
 	Arn *string
-
-	// The type of the host from which the finding is generated.
-	AssetType AssetType
-
-	// The schema version of this data type.
-	SchemaVersion *int32
-
-	// The ID of the finding.
-	Id *string
-
-	// The time when AddAttributesToFindings () is called.
-	//
-	// This member is required.
-	UpdatedAt *time.Time
-
-	// This data type is used in the Finding () data type.
-	ServiceAttributes *InspectorServiceAttributes
-
-	// The recommendation for the finding.
-	Recommendation *string
-
-	// The user-defined attributes that are assigned to the finding.
-	//
-	// This member is required.
-	UserAttributes []*Attribute
 
 	// The system-defined attributes for the finding.
 	//
@@ -583,24 +549,81 @@ type Finding struct {
 	// This member is required.
 	CreatedAt *time.Time
 
+	// The time when AddAttributesToFindings () is called.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The user-defined attributes that are assigned to the finding.
+	//
+	// This member is required.
+	UserAttributes []*Attribute
+
 	// A collection of attributes of the host from which the finding is generated.
 	AssetAttributes *AssetAttributes
 
-	// The data element is set to "Inspector".
-	Service *string
+	// The type of the host from which the finding is generated.
+	AssetType AssetType
 
 	// This data element is currently not used.
-	IndicatorOfCompromise *bool
+	Confidence *int32
 
 	// The description of the finding.
 	Description *string
 
+	// The ID of the finding.
+	Id *string
+
 	// This data element is currently not used.
-	Confidence *int32
+	IndicatorOfCompromise *bool
+
+	// The numeric value of the finding severity.
+	NumericSeverity *float64
+
+	// The recommendation for the finding.
+	Recommendation *string
+
+	// The schema version of this data type.
+	SchemaVersion *int32
+
+	// The data element is set to "Inspector".
+	Service *string
+
+	// This data type is used in the Finding () data type.
+	ServiceAttributes *InspectorServiceAttributes
+
+	// The finding severity. Values can be set to High, Medium, Low, and Informational.
+	Severity Severity
+
+	// The name of the finding.
+	Title *string
 }
 
 // This data type is used as a request parameter in the ListFindings () action.
 type FindingFilter struct {
+
+	// For a record to match a filter, one of the values that is specified for this
+	// data type property must be the exact match of the value of the agentId property
+	// of the Finding () data type.
+	AgentIds []*string
+
+	// For a record to match a filter, the list of values that are specified for this
+	// data type property must be contained in the list of values of the attributes
+	// property of the Finding () data type.
+	Attributes []*Attribute
+
+	// For a record to match a filter, one of the values that is specified for this
+	// data type property must be the exact match of the value of the autoScalingGroup
+	// property of the Finding () data type.
+	AutoScalingGroups []*string
+
+	// The time range during which the finding is generated.
+	CreationTimeRange *TimestampRange
+
+	// For a record to match a filter, one of the values that is specified for this
+	// data type property must be the exact match of the value of the ruleName property
+	// of the Finding () data type.
+	RuleNames []*string
 
 	// For a record to match a filter, one of the values that is specified for this
 	// data type property must be the exact match of the value of the rulesPackageArn
@@ -612,45 +635,22 @@ type FindingFilter struct {
 	// of the Finding () data type.
 	Severities []Severity
 
-	// For a record to match a filter, one of the values that is specified for this
-	// data type property must be the exact match of the value of the ruleName property
-	// of the Finding () data type.
-	RuleNames []*string
-
-	// For a record to match a filter, one of the values that is specified for this
-	// data type property must be the exact match of the value of the autoScalingGroup
-	// property of the Finding () data type.
-	AutoScalingGroups []*string
-
-	// For a record to match a filter, the list of values that are specified for this
-	// data type property must be contained in the list of values of the attributes
-	// property of the Finding () data type.
-	Attributes []*Attribute
-
-	// For a record to match a filter, one of the values that is specified for this
-	// data type property must be the exact match of the value of the agentId property
-	// of the Finding () data type.
-	AgentIds []*string
-
 	// For a record to match a filter, the value that is specified for this data type
 	// property must be contained in the list of values of the userAttributes property
 	// of the Finding () data type.
 	UserAttributes []*Attribute
-
-	// The time range during which the finding is generated.
-	CreationTimeRange *TimestampRange
 }
 
 // This data type is used in the Finding () data type.
 type InspectorServiceAttributes struct {
 
-	// The ARN of the assessment run during which the finding is generated.
-	AssessmentRunArn *string
-
 	// The schema version of this data type.
 	//
 	// This member is required.
 	SchemaVersion *int32
+
+	// The ARN of the assessment run during which the finding is generated.
+	AssessmentRunArn *string
 
 	// The ARN of the rules package that is used to generate the finding.
 	RulesPackageArn *string
@@ -661,24 +661,11 @@ type InspectorServiceAttributes struct {
 // () data type.
 type NetworkInterface struct {
 
-	// The ID of the network interface.
-	NetworkInterfaceId *string
-
-	// The ID of a subnet associated with the network interface.
-	SubnetId *string
-
-	// A list of the private IP addresses associated with the network interface.
-	// Includes the privateDnsName and privateIpAddress.
-	PrivateIpAddresses []*PrivateIp
-
-	// The ID of a VPC associated with the network interface.
-	VpcId *string
-
 	// The IP addresses associated with the network interface.
 	Ipv6Addresses []*string
 
-	// The public IP address from which the network interface is reachable.
-	PublicIp *string
+	// The ID of the network interface.
+	NetworkInterfaceId *string
 
 	// The name of a private DNS associated with the network interface.
 	PrivateDnsName *string
@@ -686,12 +673,25 @@ type NetworkInterface struct {
 	// The private IP address associated with the network interface.
 	PrivateIpAddress *string
 
+	// A list of the private IP addresses associated with the network interface.
+	// Includes the privateDnsName and privateIpAddress.
+	PrivateIpAddresses []*PrivateIp
+
 	// The name of a public DNS associated with the network interface.
 	PublicDnsName *string
+
+	// The public IP address from which the network interface is reachable.
+	PublicIp *string
 
 	// A list of the security groups associated with the network interface. Includes
 	// the groupId and groupName.
 	SecurityGroups []*SecurityGroup
+
+	// The ID of a subnet associated with the network interface.
+	SubnetId *string
+
+	// The ID of a VPC associated with the network interface.
+	VpcId *string
 }
 
 // Contains information about a private IP address associated with a network
@@ -699,11 +699,11 @@ type NetworkInterface struct {
 // () action.
 type PrivateIp struct {
 
-	// The full IP address of the network inteface.
-	PrivateIpAddress *string
-
 	// The DNS name of the private IP address.
 	PrivateDnsName *string
+
+	// The full IP address of the network inteface.
+	PrivateIpAddress *string
 }
 
 // Contains information about a resource group. The resource group defines a set of
@@ -712,21 +712,21 @@ type PrivateIp struct {
 // DescribeResourceGroups () action.
 type ResourceGroup struct {
 
-	// The tags (key and value pairs) of the resource group. This data type property is
-	// used in the CreateResourceGroup () action.
+	// The ARN of the resource group.
 	//
 	// This member is required.
-	Tags []*ResourceGroupTag
+	Arn *string
 
 	// The time at which resource group is created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ARN of the resource group.
+	// The tags (key and value pairs) of the resource group. This data type property is
+	// used in the CreateResourceGroup () action.
 	//
 	// This member is required.
-	Arn *string
+	Tags []*ResourceGroupTag
 }
 
 // This data type is used as one of the elements of the ResourceGroup () data type.
@@ -745,6 +745,11 @@ type ResourceGroupTag struct {
 // used as the response element in the DescribeRulesPackages () action.
 type RulesPackage struct {
 
+	// The ARN of the rules package.
+	//
+	// This member is required.
+	Arn *string
+
 	// The name of the rules package.
 	//
 	// This member is required.
@@ -760,11 +765,6 @@ type RulesPackage struct {
 	// This member is required.
 	Version *string
 
-	// The ARN of the rules package.
-	//
-	// This member is required.
-	Arn *string
-
 	// The description of the rules package.
 	Description *string
 }
@@ -772,11 +772,11 @@ type RulesPackage struct {
 // This data type contains key-value pairs that identify various Amazon resources.
 type Scope struct {
 
-	// The resource identifier for the specified scope type.
-	Value *string
-
 	// The type of the scope.
 	Key ScopeType
+
+	// The resource identifier for the specified scope type.
+	Value *string
 }
 
 // Contains information about a security group associated with a network interface.
@@ -784,11 +784,11 @@ type Scope struct {
 // type.
 type SecurityGroup struct {
 
-	// The name of the security group.
-	GroupName *string
-
 	// The ID of the security group.
 	GroupId *string
+
+	// The name of the security group.
+	GroupName *string
 }
 
 // This data type is used as a response element in the ListEventSubscriptions ()
@@ -800,17 +800,17 @@ type Subscription struct {
 	// This member is required.
 	EventSubscriptions []*EventSubscription
 
-	// The ARN of the Amazon Simple Notification Service (SNS) topic to which the SNS
-	// notifications are sent.
-	//
-	// This member is required.
-	TopicArn *string
-
 	// The ARN of the assessment template that is used during the event for which the
 	// SNS notification is sent.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The ARN of the Amazon Simple Notification Service (SNS) topic to which the SNS
+	// notifications are sent.
+	//
+	// This member is required.
+	TopicArn *string
 }
 
 // A key and value pair. This data type is used as a request parameter in the
@@ -818,13 +818,13 @@ type Subscription struct {
 // () action.
 type Tag struct {
 
-	// A value assigned to a tag key.
-	Value *string
-
 	// A tag key.
 	//
 	// This member is required.
 	Key *string
+
+	// A value assigned to a tag key.
+	Value *string
 }
 
 // The metadata about the Amazon Inspector application data metrics collected by
@@ -837,21 +837,21 @@ type TelemetryMetadata struct {
 	// This member is required.
 	Count *int64
 
-	// The data size of messages that the agent sends to the Amazon Inspector service.
-	DataSize *int64
-
 	// A specific type of behavioral data that is collected by the agent.
 	//
 	// This member is required.
 	MessageType *string
+
+	// The data size of messages that the agent sends to the Amazon Inspector service.
+	DataSize *int64
 }
 
 // This data type is used in the AssessmentRunFilter () data type.
 type TimestampRange struct {
 
-	// The maximum value of the timestamp range.
-	EndDate *time.Time
-
 	// The minimum value of the timestamp range.
 	BeginDate *time.Time
+
+	// The maximum value of the timestamp range.
+	EndDate *time.Time
 }

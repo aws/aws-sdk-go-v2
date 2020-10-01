@@ -57,11 +57,17 @@ func (c *Client) ListEventSourceMappings(ctx context.Context, params *ListEventS
 
 type ListEventSourceMappingsInput struct {
 
-	// A pagination token returned by a previous call.
-	Marker *string
-
-	// The maximum number of event source mappings to return.
-	MaxItems *int32
+	// The Amazon Resource Name (ARN) of the event source.
+	//
+	//     * Amazon Kinesis - The
+	// ARN of the data stream or a stream consumer.
+	//
+	//     * Amazon DynamoDB Streams -
+	// The ARN of the stream.
+	//
+	//     * Amazon Simple Queue Service - The ARN of the
+	// queue.
+	EventSourceArn *string
 
 	// The name of the Lambda function. Name formats
 	//
@@ -82,27 +88,21 @@ type ListEventSourceMappingsInput struct {
 	// characters in length.
 	FunctionName *string
 
-	// The Amazon Resource Name (ARN) of the event source.
-	//
-	//     * Amazon Kinesis - The
-	// ARN of the data stream or a stream consumer.
-	//
-	//     * Amazon DynamoDB Streams -
-	// The ARN of the stream.
-	//
-	//     * Amazon Simple Queue Service - The ARN of the
-	// queue.
-	EventSourceArn *string
+	// A pagination token returned by a previous call.
+	Marker *string
+
+	// The maximum number of event source mappings to return.
+	MaxItems *int32
 }
 
 type ListEventSourceMappingsOutput struct {
 
+	// A list of event source mappings.
+	EventSourceMappings []*types.EventSourceMappingConfiguration
+
 	// A pagination token that's returned when the response doesn't contain all event
 	// source mappings.
 	NextMarker *string
-
-	// A list of event source mappings.
-	EventSourceMappings []*types.EventSourceMappingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

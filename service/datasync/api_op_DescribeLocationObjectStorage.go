@@ -69,9 +69,16 @@ type DescribeLocationObjectStorageInput struct {
 // DescribeLocationObjectStorageResponse
 type DescribeLocationObjectStorageOutput struct {
 
+	// Optional. The access key is used if credentials are required to access the
+	// self-managed object storage server.
+	AccessKey *string
+
 	// The Amazon Resource Name (ARN) of the agents associated with the self-managed
 	// object storage server location.
 	AgentArns []*string
+
+	// The time that the self-managed object storage server agent was created.
+	CreationTime *time.Time
 
 	// The Amazon Resource Name (ARN) of the self-managed object storage server
 	// location to describe.
@@ -81,17 +88,10 @@ type DescribeLocationObjectStorageOutput struct {
 	// described.
 	LocationUri *string
 
-	// Optional. The access key is used if credentials are required to access the
-	// self-managed object storage server.
-	AccessKey *string
-
 	// The port that your self-managed object storage server accepts inbound network
 	// traffic on. The server port is set by default to TCP 80 (HTTP) or TCP 443
 	// (HTTPS).
 	ServerPort *int32
-
-	// The time that the self-managed object storage server agent was created.
-	CreationTime *time.Time
 
 	// The protocol that the object storage server uses to communicate. Valid values
 	// are HTTP or HTTPS.

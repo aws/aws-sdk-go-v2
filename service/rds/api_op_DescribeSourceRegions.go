@@ -67,31 +67,31 @@ type DescribeSourceRegionsInput struct {
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
 
-	// The source AWS Region name. For example, us-east-1. Constraints:
-	//
-	//     * Must
-	// specify a valid AWS Region name.
-	RegionName *string
-
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	// The source AWS Region name. For example, us-east-1. Constraints:
+	//
+	//     * Must
+	// specify a valid AWS Region name.
+	RegionName *string
 }
 
 // Contains the result of a successful invocation of the DescribeSourceRegions
 // action.
 type DescribeSourceRegionsOutput struct {
 
-	// A list of SourceRegion instances that contains each source AWS Region that the
-	// current AWS Region can get a read replica or a DB snapshot from.
-	SourceRegions []*types.SourceRegion
-
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// A list of SourceRegion instances that contains each source AWS Region that the
+	// current AWS Region can get a read replica or a DB snapshot from.
+	SourceRegions []*types.SourceRegion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

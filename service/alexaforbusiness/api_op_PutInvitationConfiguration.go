@@ -62,13 +62,13 @@ type PutInvitationConfigurationInput struct {
 	// This member is required.
 	OrganizationName *string
 
-	// The list of private skill IDs that you want to recommend to the user to enable
-	// in the invitation.
-	PrivateSkillIds []*string
-
 	// The email ID of the organization or individual contact that the enrolled user
 	// can use.
 	ContactEmail *string
+
+	// The list of private skill IDs that you want to recommend to the user to enable
+	// in the invitation.
+	PrivateSkillIds []*string
 }
 
 type PutInvitationConfigurationOutput struct {

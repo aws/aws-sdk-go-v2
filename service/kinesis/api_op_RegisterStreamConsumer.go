@@ -62,18 +62,18 @@ func (c *Client) RegisterStreamConsumer(ctx context.Context, params *RegisterStr
 
 type RegisterStreamConsumerInput struct {
 
+	// For a given Kinesis data stream, each consumer must have a unique name. However,
+	// consumer names don't have to be unique across data streams.
+	//
+	// This member is required.
+	ConsumerName *string
+
 	// The ARN of the Kinesis data stream that you want to register the consumer with.
 	// For more info, see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	//
 	// This member is required.
 	StreamARN *string
-
-	// For a given Kinesis data stream, each consumer must have a unique name. However,
-	// consumer names don't have to be unique across data streams.
-	//
-	// This member is required.
-	ConsumerName *string
 }
 
 type RegisterStreamConsumerOutput struct {

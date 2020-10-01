@@ -73,40 +73,37 @@ type GetMaintenanceWindowExecutionTaskInput struct {
 
 type GetMaintenanceWindowExecutionTaskOutput struct {
 
+	// The time the task execution completed.
+	EndTime *time.Time
+
 	// The defined maximum number of task executions that could be run in parallel.
 	MaxConcurrency *string
-
-	// The time the task execution started.
-	StartTime *time.Time
-
-	// The details explaining the Status. Only available for certain status values.
-	StatusDetails *string
-
-	// The role that was assumed when running the task.
-	ServiceRole *string
 
 	// The defined maximum number of task execution errors allowed before scheduling of
 	// the task execution would have been stopped.
 	MaxErrors *string
 
-	// The type of task that was run.
-	Type types.MaintenanceWindowTaskType
+	// The priority of the task.
+	Priority *int32
 
-	// The ID of the specific task execution in the maintenance window task that was
-	// retrieved.
-	TaskExecutionId *string
+	// The role that was assumed when running the task.
+	ServiceRole *string
+
+	// The time the task execution started.
+	StartTime *time.Time
 
 	// The status of the task.
 	Status types.MaintenanceWindowExecutionStatus
 
-	// The ID of the maintenance window execution that includes the task.
-	WindowExecutionId *string
+	// The details explaining the Status. Only available for certain status values.
+	StatusDetails *string
 
-	// The time the task execution completed.
-	EndTime *time.Time
+	// The ARN of the task that ran.
+	TaskArn *string
 
-	// The priority of the task.
-	Priority *int32
+	// The ID of the specific task execution in the maintenance window task that was
+	// retrieved.
+	TaskExecutionId *string
 
 	// The parameters passed to the task when it was run. TaskParameters has been
 	// deprecated. To specify parameters to pass to a task when it runs, instead use
@@ -117,8 +114,11 @@ type GetMaintenanceWindowExecutionTaskOutput struct {
 	// of strings, each string is between 1 and 255 characters
 	TaskParameters []map[string]*types.MaintenanceWindowTaskParameterValueExpression
 
-	// The ARN of the task that ran.
-	TaskArn *string
+	// The type of task that was run.
+	Type types.MaintenanceWindowTaskType
+
+	// The ID of the maintenance window execution that includes the task.
+	WindowExecutionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

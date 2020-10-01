@@ -57,13 +57,16 @@ func (c *Client) CreateTransitGatewayRoute(ctx context.Context, params *CreateTr
 
 type CreateTransitGatewayRouteInput struct {
 
+	// The CIDR range used for destination matches. Routing decisions are based on the
+	// most specific match.
+	//
+	// This member is required.
+	DestinationCidrBlock *string
+
 	// The ID of the transit gateway route table.
 	//
 	// This member is required.
 	TransitGatewayRouteTableId *string
-
-	// The ID of the attachment.
-	TransitGatewayAttachmentId *string
 
 	// Indicates whether to drop traffic that matches this route.
 	Blackhole *bool
@@ -74,11 +77,8 @@ type CreateTransitGatewayRouteInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The CIDR range used for destination matches. Routing decisions are based on the
-	// most specific match.
-	//
-	// This member is required.
-	DestinationCidrBlock *string
+	// The ID of the attachment.
+	TransitGatewayAttachmentId *string
 }
 
 type CreateTransitGatewayRouteOutput struct {

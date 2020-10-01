@@ -86,10 +86,6 @@ func (c *Client) CreateReusableDelegationSet(ctx context.Context, params *Create
 
 type CreateReusableDelegationSetInput struct {
 
-	// If you want to mark the delegation set for an existing hosted zone as reusable,
-	// the ID for that hosted zone.
-	HostedZoneId *string
-
 	// A unique string that identifies the request, and that allows you to retry failed
 	// CreateReusableDelegationSet requests without the risk of executing the operation
 	// twice. You must use a unique CallerReference string every time you submit a
@@ -98,19 +94,23 @@ type CreateReusableDelegationSetInput struct {
 	//
 	// This member is required.
 	CallerReference *string
+
+	// If you want to mark the delegation set for an existing hosted zone as reusable,
+	// the ID for that hosted zone.
+	HostedZoneId *string
 }
 
 type CreateReusableDelegationSetOutput struct {
-
-	// The unique URL representing the new reusable delegation set.
-	//
-	// This member is required.
-	Location *string
 
 	// A complex type that contains name server information.
 	//
 	// This member is required.
 	DelegationSet *types.DelegationSet
+
+	// The unique URL representing the new reusable delegation set.
+	//
+	// This member is required.
+	Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

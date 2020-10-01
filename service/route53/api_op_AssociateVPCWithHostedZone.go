@@ -80,14 +80,14 @@ type AssociateVPCWithHostedZoneInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// Optional: A comment about the association request.
-	Comment *string
-
 	// A complex type that contains information about the VPC that you want to
 	// associate with a private hosted zone.
 	//
 	// This member is required.
 	VPC *types.VPC
+
+	// Optional: A comment about the association request.
+	Comment *string
 }
 
 // A complex type that contains the response information for the

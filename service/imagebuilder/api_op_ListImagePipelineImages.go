@@ -57,9 +57,6 @@ func (c *Client) ListImagePipelineImages(ctx context.Context, params *ListImageP
 
 type ListImagePipelineImagesInput struct {
 
-	// The maximum items to return in a request.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) of the image pipeline whose images you want to
 	// view.
 	//
@@ -69,6 +66,9 @@ type ListImagePipelineImagesInput struct {
 	// The filters.
 	Filters []*types.Filter
 
+	// The maximum items to return in a request.
+	MaxResults *int32
+
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
@@ -76,16 +76,16 @@ type ListImagePipelineImagesInput struct {
 
 type ListImagePipelineImagesOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
+	// The list of images built by this pipeline.
+	ImageSummaryList []*types.ImageSummary
 
 	// The next token used for paginated responses. When this is not empty, there are
 	// additional elements that the service has not included in this request. Use this
 	// token with the next request to retrieve additional objects.
 	NextToken *string
 
-	// The list of images built by this pipeline.
-	ImageSummaryList []*types.ImageSummary
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

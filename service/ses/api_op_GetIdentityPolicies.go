@@ -69,13 +69,6 @@ func (c *Client) GetIdentityPolicies(ctx context.Context, params *GetIdentityPol
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 type GetIdentityPoliciesInput struct {
 
-	// A list of the names of policies to be retrieved. You can retrieve a maximum of
-	// 20 policies at a time. If you do not know the names of the policies that are
-	// attached to the identity, you can use ListIdentityPolicies.
-	//
-	// This member is required.
-	PolicyNames []*string
-
 	// The identity for which the policies will be retrieved. You can specify an
 	// identity by using its name or by using its Amazon Resource Name (ARN). Examples:
 	// user@example.com, example.com,
@@ -84,6 +77,13 @@ type GetIdentityPoliciesInput struct {
 	//
 	// This member is required.
 	Identity *string
+
+	// A list of the names of policies to be retrieved. You can retrieve a maximum of
+	// 20 policies at a time. If you do not know the names of the policies that are
+	// attached to the identity, you can use ListIdentityPolicies.
+	//
+	// This member is required.
+	PolicyNames []*string
 }
 
 // Represents the requested sending authorization policies.

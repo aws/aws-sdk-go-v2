@@ -71,17 +71,17 @@ type GetMergeOptionsInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
-	// used, which returns a not-mergeable result if the same file has differences in
-	// both branches. If LINE_LEVEL is specified, a conflict is considered not
-	// mergeable if the same file in both branches has differences on the same line.
-	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
-
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
 	//
 	// This member is required.
 	SourceCommitSpecifier *string
+
+	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
+	// used, which returns a not-mergeable result if the same file has differences in
+	// both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
+	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
 
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
@@ -92,27 +92,27 @@ type GetMergeOptionsInput struct {
 
 type GetMergeOptionsOutput struct {
 
-	// The merge option or strategy used to merge the code.
-	//
-	// This member is required.
-	MergeOptions []types.MergeOptionTypeEnum
-
 	// The commit ID of the merge base.
 	//
 	// This member is required.
 	BaseCommitId *string
-
-	// The commit ID of the source commit specifier that was used in the merge
-	// evaluation.
-	//
-	// This member is required.
-	SourceCommitId *string
 
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
 	//
 	// This member is required.
 	DestinationCommitId *string
+
+	// The merge option or strategy used to merge the code.
+	//
+	// This member is required.
+	MergeOptions []types.MergeOptionTypeEnum
+
+	// The commit ID of the source commit specifier that was used in the merge
+	// evaluation.
+	//
+	// This member is required.
+	SourceCommitId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

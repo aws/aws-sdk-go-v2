@@ -60,6 +60,15 @@ func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddresse
 
 type DescribeAddressesInput struct {
 
+	// [EC2-VPC] Information about the allocation IDs.
+	AllocationIds []*string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	//     *
@@ -101,18 +110,9 @@ type DescribeAddressesInput struct {
 	// assigned a tag with a specific key, regardless of the tag value.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// One or more Elastic IP addresses. Default: Describes all your Elastic IP
 	// addresses.
 	PublicIps []*string
-
-	// [EC2-VPC] Information about the allocation IDs.
-	AllocationIds []*string
 }
 
 type DescribeAddressesOutput struct {

@@ -68,12 +68,12 @@ type ListBillingGroupsInput struct {
 
 type ListBillingGroupsOutput struct {
 
+	// The list of billing groups.
+	BillingGroups []*types.GroupNameAndArn
+
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
-
-	// The list of billing groups.
-	BillingGroups []*types.GroupNameAndArn
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

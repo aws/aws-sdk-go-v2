@@ -61,6 +61,11 @@ type AssociateResourceSharePermissionInput struct {
 	// This member is required.
 	PermissionArn *string
 
+	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
+	ResourceShareArn *string
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
@@ -69,21 +74,16 @@ type AssociateResourceSharePermissionInput struct {
 	// currently associated with the resource share. Use true to replace the current
 	// permissions. Use false to add the permission to the current permission.
 	Replace *bool
-
-	// The Amazon Resource Name (ARN) of the resource share.
-	//
-	// This member is required.
-	ResourceShareArn *string
 }
 
 type AssociateResourceSharePermissionOutput struct {
 
-	// Indicates whether the request succeeded.
-	ReturnValue *bool
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Indicates whether the request succeeded.
+	ReturnValue *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

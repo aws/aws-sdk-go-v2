@@ -62,10 +62,6 @@ func (c *Client) ListSigningJobs(ctx context.Context, params *ListSigningJobsInp
 
 type ListSigningJobsInput struct {
 
-	// The ID of microcontroller platform that you specified for the distribution of
-	// your code image.
-	PlatformId *string
-
 	// Specifies the maximum number of items to return in the response. Use this
 	// parameter when paginating results. If additional items exist beyond the number
 	// you specify, the nextToken element is set in the response. Use the nextToken
@@ -78,6 +74,10 @@ type ListSigningJobsInput struct {
 	// received.
 	NextToken *string
 
+	// The ID of microcontroller platform that you specified for the distribution of
+	// your code image.
+	PlatformId *string
+
 	// The IAM principal that requested the signing job.
 	RequestedBy *string
 
@@ -87,11 +87,11 @@ type ListSigningJobsInput struct {
 
 type ListSigningJobsOutput struct {
 
-	// String for specifying the next set of paginated results.
-	NextToken *string
-
 	// A list of your signing jobs.
 	Jobs []*types.SigningJob
+
+	// String for specifying the next set of paginated results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

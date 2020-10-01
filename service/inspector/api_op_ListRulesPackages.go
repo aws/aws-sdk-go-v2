@@ -55,29 +55,29 @@ func (c *Client) ListRulesPackages(ctx context.Context, params *ListRulesPackage
 
 type ListRulesPackagesInput struct {
 
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 10. The maximum value is 500.
+	MaxResults *int32
+
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the ListRulesPackages action. Subsequent
 	// calls to the action fill nextToken in the request with the value of NextToken
 	// from the previous response to continue listing data.
 	NextToken *string
-
-	// You can use this parameter to indicate the maximum number of items you want in
-	// the response. The default value is 10. The maximum value is 500.
-	MaxResults *int32
 }
 
 type ListRulesPackagesOutput struct {
+
+	// The list of ARNs that specifies the rules packages returned by the action.
+	//
+	// This member is required.
+	RulesPackageArns []*string
 
 	// When a response is generated, if there is more data to be listed, this parameter
 	// is present in the response and contains the value to use for the nextToken
 	// parameter in a subsequent pagination request. If there is no more data to be
 	// listed, this parameter is set to null.
 	NextToken *string
-
-	// The list of ARNs that specifies the rules packages returned by the action.
-	//
-	// This member is required.
-	RulesPackageArns []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

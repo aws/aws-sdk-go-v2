@@ -56,11 +56,11 @@ func (c *Client) ListAnalyzers(ctx context.Context, params *ListAnalyzersInput, 
 // Retrieves a list of analyzers.
 type ListAnalyzersInput struct {
 
-	// A token used for pagination of results returned.
-	NextToken *string
-
 	// The maximum number of results to return in the response.
 	MaxResults *int32
+
+	// A token used for pagination of results returned.
+	NextToken *string
 
 	// The type of analyzer.
 	Type types.Type

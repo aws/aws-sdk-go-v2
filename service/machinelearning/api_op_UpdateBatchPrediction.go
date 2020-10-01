@@ -57,15 +57,15 @@ func (c *Client) UpdateBatchPrediction(ctx context.Context, params *UpdateBatchP
 
 type UpdateBatchPredictionInput struct {
 
-	// A new user-supplied name or description of the BatchPrediction.
-	//
-	// This member is required.
-	BatchPredictionName *string
-
 	// The ID assigned to the BatchPrediction during creation.
 	//
 	// This member is required.
 	BatchPredictionId *string
+
+	// A new user-supplied name or description of the BatchPrediction.
+	//
+	// This member is required.
+	BatchPredictionName *string
 }
 
 // Represents the output of an UpdateBatchPrediction operation. You can see the

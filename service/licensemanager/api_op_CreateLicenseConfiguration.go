@@ -62,6 +62,22 @@ func (c *Client) CreateLicenseConfiguration(ctx context.Context, params *CreateL
 
 type CreateLicenseConfigurationInput struct {
 
+	// Dimension used to track the license inventory.
+	//
+	// This member is required.
+	LicenseCountingType types.LicenseCountingType
+
+	// Name of the license configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// Description of the license configuration.
+	Description *string
+
+	// Number of licenses managed by the license configuration.
+	LicenseCount *int64
+
 	// Indicates whether hard or soft license enforcement is used. Exceeding a hard
 	// limit blocks the launch of new instances.
 	LicenseCountHardLimit *bool
@@ -85,22 +101,6 @@ type CreateLicenseConfigurationInput struct {
 
 	// Product information.
 	ProductInformationList []*types.ProductInformation
-
-	// Description of the license configuration.
-	Description *string
-
-	// Number of licenses managed by the license configuration.
-	LicenseCount *int64
-
-	// Name of the license configuration.
-	//
-	// This member is required.
-	Name *string
-
-	// Dimension used to track the license inventory.
-	//
-	// This member is required.
-	LicenseCountingType types.LicenseCountingType
 
 	// Tags to add to the license configuration.
 	Tags []*types.Tag

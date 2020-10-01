@@ -59,14 +59,6 @@ func (c *Client) DescribeSubscriptionFilters(ctx context.Context, params *Descri
 
 type DescribeSubscriptionFiltersInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
-	// The maximum number of items returned. If you don't specify a value, the default
-	// is up to 50 items.
-	Limit *int32
-
 	// The name of the log group.
 	//
 	// This member is required.
@@ -74,6 +66,14 @@ type DescribeSubscriptionFiltersInput struct {
 
 	// The prefix to match. If you don't specify a value, no prefix filter is applied.
 	FilterNamePrefix *string
+
+	// The maximum number of items returned. If you don't specify a value, the default
+	// is up to 50 items.
+	Limit *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeSubscriptionFiltersOutput struct {

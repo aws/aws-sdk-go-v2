@@ -60,16 +60,16 @@ func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteV
 
 type DeleteVpcPeeringConnectionInput struct {
 
+	// The ID of the VPC peering connection.
+	//
+	// This member is required.
+	VpcPeeringConnectionId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the VPC peering connection.
-	//
-	// This member is required.
-	VpcPeeringConnectionId *string
 }
 
 type DeleteVpcPeeringConnectionOutput struct {

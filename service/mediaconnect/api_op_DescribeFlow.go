@@ -67,11 +67,11 @@ type DescribeFlowInput struct {
 
 type DescribeFlowOutput struct {
 
-	// Messages that provide the state of the flow.
-	Messages *types.Messages
-
 	// The settings for a flow, including its source, outputs, and entitlements.
 	Flow *types.Flow
+
+	// Messages that provide the state of the flow.
+	Messages *types.Messages
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

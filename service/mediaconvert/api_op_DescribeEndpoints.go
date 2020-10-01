@@ -58,10 +58,6 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 // DescribeEndpointsRequest
 type DescribeEndpointsInput struct {
 
-	// Use this string, provided with the response to a previous request, to request
-	// the next batch of endpoints.
-	NextToken *string
-
 	// Optional. Max number of endpoints, up to twenty, that will be returned at one
 	// time.
 	MaxResults *int32
@@ -71,15 +67,19 @@ type DescribeEndpointsInput struct {
 	// it if one doesn't already exist. Specify GET_ONLY to return your endpoints if
 	// any exist, or an empty list if none exist.
 	Mode types.DescribeEndpointsMode
+
+	// Use this string, provided with the response to a previous request, to request
+	// the next batch of endpoints.
+	NextToken *string
 }
 
 type DescribeEndpointsOutput struct {
 
-	// Use this string to request the next batch of endpoints.
-	NextToken *string
-
 	// List of endpoints
 	Endpoints []*types.Endpoint
+
+	// Use this string to request the next batch of endpoints.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

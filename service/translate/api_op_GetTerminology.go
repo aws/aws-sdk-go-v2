@@ -57,25 +57,25 @@ func (c *Client) GetTerminology(ctx context.Context, params *GetTerminologyInput
 
 type GetTerminologyInput struct {
 
-	// The data format of the custom terminology being retrieved, either CSV or TMX.
-	//
-	// This member is required.
-	TerminologyDataFormat types.TerminologyDataFormat
-
 	// The name of the custom terminology being retrieved.
 	//
 	// This member is required.
 	Name *string
+
+	// The data format of the custom terminology being retrieved, either CSV or TMX.
+	//
+	// This member is required.
+	TerminologyDataFormat types.TerminologyDataFormat
 }
 
 type GetTerminologyOutput struct {
 
-	// The properties of the custom terminology being retrieved.
-	TerminologyProperties *types.TerminologyProperties
-
 	// The data location of the custom terminology being retrieved. The custom
 	// terminology file is returned in a presigned url that has a 30 minute expiration.
 	TerminologyDataLocation *types.TerminologyDataLocation
+
+	// The properties of the custom terminology being retrieved.
+	TerminologyProperties *types.TerminologyProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

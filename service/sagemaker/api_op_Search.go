@@ -66,9 +66,13 @@ type SearchInput struct {
 	// This member is required.
 	Resource types.ResourceType
 
-	// How SearchResults are ordered. Valid values are Ascending or Descending. The
-	// default is Descending.
-	SortOrder types.SearchSortOrder
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// If more than MaxResults resources match the specified SearchExpression, the
+	// response includes a NextToken. The NextToken can be passed to the next
+	// SearchRequest to continue retrieving results.
+	NextToken *string
 
 	// A Boolean conditional statement. Resources must satisfy this condition to be
 	// included in search results. You must provide at least one subexpression, filter,
@@ -80,24 +84,20 @@ type SearchInput struct {
 	// LastModifiedTime.
 	SortBy *string
 
-	// If more than MaxResults resources match the specified SearchExpression, the
-	// response includes a NextToken. The NextToken can be passed to the next
-	// SearchRequest to continue retrieving results.
-	NextToken *string
-
-	// The maximum number of results to return.
-	MaxResults *int32
+	// How SearchResults are ordered. Valid values are Ascending or Descending. The
+	// default is Descending.
+	SortOrder types.SearchSortOrder
 }
 
 type SearchOutput struct {
-
-	// A list of SearchRecord objects.
-	Results []*types.SearchRecord
 
 	// If the result of the previous Search request was truncated, the response
 	// includes a NextToken. To retrieve the next set of results, use the token in the
 	// next request.
 	NextToken *string
+
+	// A list of SearchRecord objects.
+	Results []*types.SearchRecord
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

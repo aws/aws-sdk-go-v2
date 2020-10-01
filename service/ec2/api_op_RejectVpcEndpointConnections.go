@@ -58,6 +58,11 @@ func (c *Client) RejectVpcEndpointConnections(ctx context.Context, params *Rejec
 
 type RejectVpcEndpointConnectionsInput struct {
 
+	// The ID of the service.
+	//
+	// This member is required.
+	ServiceId *string
+
 	// The IDs of one or more VPC endpoints.
 	//
 	// This member is required.
@@ -68,11 +73,6 @@ type RejectVpcEndpointConnectionsInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the service.
-	//
-	// This member is required.
-	ServiceId *string
 }
 
 type RejectVpcEndpointConnectionsOutput struct {

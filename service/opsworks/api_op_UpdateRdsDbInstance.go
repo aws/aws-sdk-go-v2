@@ -65,11 +65,11 @@ type UpdateRdsDbInstanceInput struct {
 	// This member is required.
 	RdsDbInstanceArn *string
 
-	// The master user name.
-	DbUser *string
-
 	// The database password.
 	DbPassword *string
+
+	// The master user name.
+	DbUser *string
 }
 
 type UpdateRdsDbInstanceOutput struct {

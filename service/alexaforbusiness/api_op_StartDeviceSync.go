@@ -75,16 +75,16 @@ func (c *Client) StartDeviceSync(ctx context.Context, params *StartDeviceSyncInp
 
 type StartDeviceSyncInput struct {
 
-	// The ARN of the room with which the device to sync is associated. Required.
-	RoomArn *string
-
-	// The ARN of the device to sync. Required.
-	DeviceArn *string
-
 	// Request structure to start the device sync. Required.
 	//
 	// This member is required.
 	Features []types.Feature
+
+	// The ARN of the device to sync. Required.
+	DeviceArn *string
+
+	// The ARN of the room with which the device to sync is associated. Required.
+	RoomArn *string
 }
 
 type StartDeviceSyncOutput struct {

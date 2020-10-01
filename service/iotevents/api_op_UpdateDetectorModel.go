@@ -58,9 +58,6 @@ func (c *Client) UpdateDetectorModel(ctx context.Context, params *UpdateDetector
 
 type UpdateDetectorModelInput struct {
 
-	// A brief description of the detector model.
-	DetectorModelDescription *string
-
 	// Information that defines how a detector operates.
 	//
 	// This member is required.
@@ -71,15 +68,18 @@ type UpdateDetectorModelInput struct {
 	// This member is required.
 	DetectorModelName *string
 
-	// Information about the order in which events are evaluated and how actions are
-	// executed.
-	EvaluationMethod types.EvaluationMethod
-
 	// The ARN of the role that grants permission to AWS IoT Events to perform its
 	// operations.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// A brief description of the detector model.
+	DetectorModelDescription *string
+
+	// Information about the order in which events are evaluated and how actions are
+	// executed.
+	EvaluationMethod types.EvaluationMethod
 }
 
 type UpdateDetectorModelOutput struct {

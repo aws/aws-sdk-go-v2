@@ -60,17 +60,17 @@ func (c *Client) ExecuteProvisionedProductPlan(ctx context.Context, params *Exec
 
 type ExecuteProvisionedProductPlanInput struct {
 
-	// The plan identifier.
-	//
-	// This member is required.
-	PlanId *string
-
 	// A unique identifier that you provide to ensure idempotency. If multiple requests
 	// differ only by the idempotency token, the same response is returned for each
 	// repeated request.
 	//
 	// This member is required.
 	IdempotencyToken *string
+
+	// The plan identifier.
+	//
+	// This member is required.
+	PlanId *string
 
 	// The language code.
 	//

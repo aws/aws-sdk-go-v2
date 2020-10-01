@@ -79,10 +79,6 @@ func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackup
 
 type CreateBackupSelectionInput struct {
 
-	// A unique string that identifies the request and allows failed requests to be
-	// retried without the risk of executing the operation twice.
-	CreatorRequestId *string
-
 	// Uniquely identifies the backup plan to be associated with the selection of
 	// resources.
 	//
@@ -93,13 +89,13 @@ type CreateBackupSelectionInput struct {
 	//
 	// This member is required.
 	BackupSelection *types.BackupSelection
+
+	// A unique string that identifies the request and allows failed requests to be
+	// retried without the risk of executing the operation twice.
+	CreatorRequestId *string
 }
 
 type CreateBackupSelectionOutput struct {
-
-	// Uniquely identifies the body of a request to assign a set of resources to a
-	// backup plan.
-	SelectionId *string
 
 	// Uniquely identifies a backup plan.
 	BackupPlanId *string
@@ -109,6 +105,10 @@ type CreateBackupSelectionOutput struct {
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
+
+	// Uniquely identifies the body of a request to assign a set of resources to a
+	// backup plan.
+	SelectionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

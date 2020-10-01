@@ -83,11 +83,6 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 // with Archives in Amazon S3 Glacier</a>.</p>
 type AbortMultipartUploadInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -101,6 +96,11 @@ type AbortMultipartUploadInput struct {
 	//
 	// This member is required.
 	UploadId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
 }
 
 type AbortMultipartUploadOutput struct {

@@ -101,6 +101,10 @@ type GetResourcePolicyOutput struct {
 	// The ARN of the secret that the resource-based policy was retrieved for.
 	ARN *string
 
+	// The friendly name of the secret that the resource-based policy was retrieved
+	// for.
+	Name *string
+
 	// A JSON-formatted string that describes the permissions that are associated with
 	// the attached secret. These permissions are combined with any permissions that
 	// are associated with the user or role that attempts to access this secret. The
@@ -110,10 +114,6 @@ type GetResourcePolicyOutput struct {
 	// (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
 	// in the AWS Secrets Manager User Guide.
 	ResourcePolicy *string
-
-	// The friendly name of the secret that the resource-based policy was retrieved
-	// for.
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -68,11 +68,16 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 
 type UpdateWebACLInput struct {
 
-	// The name of the Web ACL. You cannot change the name of a Web ACL after you
-	// create it.
+	// The action to perform if none of the Rules contained in the WebACL match.
 	//
 	// This member is required.
-	Name *string
+	DefaultAction *types.DefaultAction
+
+	// The unique identifier for the Web ACL. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
+	Id *string
 
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
@@ -84,6 +89,12 @@ type UpdateWebACLInput struct {
 	//
 	// This member is required.
 	LockToken *string
+
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
+	//
+	// This member is required.
+	Name *string
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
@@ -99,31 +110,20 @@ type UpdateWebACLInput struct {
 	// This member is required.
 	Scope types.Scope
 
-	// The action to perform if none of the Rules contained in the WebACL match.
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
 	// This member is required.
-	DefaultAction *types.DefaultAction
+	VisibilityConfig *types.VisibilityConfig
+
+	// A description of the Web ACL that helps with identification. You cannot change
+	// the description of a Web ACL after you create it.
+	Description *string
 
 	// The Rule () statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
 	// identify matching web requests, and parameters that govern how AWS WAF handles
 	// them.
 	Rules []*types.Rule
-
-	// A description of the Web ACL that helps with identification. You cannot change
-	// the description of a Web ACL after you create it.
-	Description *string
-
-	// The unique identifier for the Web ACL. This ID is returned in the responses to
-	// create and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
-
-	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
-	//
-	// This member is required.
-	VisibilityConfig *types.VisibilityConfig
 }
 
 type UpdateWebACLOutput struct {

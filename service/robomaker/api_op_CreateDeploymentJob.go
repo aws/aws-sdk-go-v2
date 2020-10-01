@@ -66,24 +66,24 @@ func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeployme
 
 type CreateDeploymentJobInput struct {
 
-	// The requested deployment configuration.
-	DeploymentConfig *types.DeploymentConfig
-
-	// The Amazon Resource Name (ARN) of the fleet to deploy.
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
 	//
 	// This member is required.
-	Fleet *string
+	ClientRequestToken *string
 
 	// The deployment application configuration.
 	//
 	// This member is required.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// The Amazon Resource Name (ARN) of the fleet to deploy.
 	//
 	// This member is required.
-	ClientRequestToken *string
+	Fleet *string
+
+	// The requested deployment configuration.
+	DeploymentConfig *types.DeploymentConfig
 
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job.
@@ -92,8 +92,17 @@ type CreateDeploymentJobInput struct {
 
 type CreateDeploymentJobOutput struct {
 
+	// The Amazon Resource Name (ARN) of the deployment job.
+	Arn *string
+
+	// The time, in milliseconds since the epoch, when the fleet was created.
+	CreatedAt *time.Time
+
 	// The deployment application configuration.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
+	// The deployment configuration.
+	DeploymentConfig *types.DeploymentConfig
 
 	// The failure code of the simulation job if it failed: BadPermissionError  <p>AWS
 	// Greengrass requires a service-level role permission to access other services.
@@ -122,14 +131,8 @@ type CreateDeploymentJobOutput struct {
 	// It might not be powered on or connected to the internet.</p> </dd> </dl>
 	FailureCode types.DeploymentJobErrorCode
 
-	// The list of all tags added to the deployment job.
-	Tags map[string]*string
-
-	// The deployment configuration.
-	DeploymentConfig *types.DeploymentConfig
-
-	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time
+	// The failure reason of the deployment job if it failed.
+	FailureReason *string
 
 	// The target fleet for the deployment job.
 	Fleet *string
@@ -137,11 +140,8 @@ type CreateDeploymentJobOutput struct {
 	// The status of the deployment job.
 	Status types.DeploymentStatus
 
-	// The Amazon Resource Name (ARN) of the deployment job.
-	Arn *string
-
-	// The failure reason of the deployment job if it failed.
-	FailureReason *string
+	// The list of all tags added to the deployment job.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

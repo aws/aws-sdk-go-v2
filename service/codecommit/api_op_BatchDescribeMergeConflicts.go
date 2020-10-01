@@ -64,8 +64,15 @@ type BatchDescribeMergeConflictsInput struct {
 	// This member is required.
 	DestinationCommitSpecifier *string
 
-	// The maximum number of merge hunks to include in the output.
-	MaxMergeHunks *int32
+	// The merge option or strategy you want to use to merge the code.
+	//
+	// This member is required.
+	MergeOption types.MergeOptionTypeEnum
+
+	// The name of the repository that contains the merge conflicts you want to review.
+	//
+	// This member is required.
+	RepositoryName *string
 
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
@@ -79,38 +86,28 @@ type BatchDescribeMergeConflictsInput struct {
 	// mergeable if the same file in both branches has differences on the same line.
 	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
-	NextToken *string
-
-	// The merge option or strategy you want to use to merge the code.
-	//
-	// This member is required.
-	MergeOption types.MergeOptionTypeEnum
-
-	// The name of the repository that contains the merge conflicts you want to review.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// Specifies which branch to use when resolving conflicts, or whether to attempt
 	// automatically merging two versions of a file. The default is NONE, which
 	// requires any conflicts to be resolved manually before the merge operation is
 	// successful.
 	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
 
-	// The maximum number of files to include in the output.
-	MaxConflictFiles *int32
-
 	// The path of the target files used to describe the conflicts. If not specified,
 	// the default is all conflict files.
 	FilePaths []*string
+
+	// The maximum number of files to include in the output.
+	MaxConflictFiles *int32
+
+	// The maximum number of merge hunks to include in the output.
+	MaxMergeHunks *int32
+
+	// An enumeration token that, when provided in a request, returns the next batch of
+	// the results.
+	NextToken *string
 }
 
 type BatchDescribeMergeConflictsOutput struct {
-
-	// The commit ID of the merge base.
-	BaseCommitId *string
 
 	// A list of conflicts for each file, including the conflict metadata and the hunks
 	// of the differences between the files.
@@ -118,25 +115,28 @@ type BatchDescribeMergeConflictsOutput struct {
 	// This member is required.
 	Conflicts []*types.Conflict
 
+	// The commit ID of the destination commit specifier that was used in the merge
+	// evaluation.
+	//
+	// This member is required.
+	DestinationCommitId *string
+
 	// The commit ID of the source commit specifier that was used in the merge
 	// evaluation.
 	//
 	// This member is required.
 	SourceCommitId *string
 
-	// An enumeration token that can be used in a request to return the next batch of
-	// the results.
-	NextToken *string
+	// The commit ID of the merge base.
+	BaseCommitId *string
 
 	// A list of any errors returned while describing the merge conflicts for each
 	// file.
 	Errors []*types.BatchDescribeMergeConflictsError
 
-	// The commit ID of the destination commit specifier that was used in the merge
-	// evaluation.
-	//
-	// This member is required.
-	DestinationCommitId *string
+	// An enumeration token that can be used in a request to return the next batch of
+	// the results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

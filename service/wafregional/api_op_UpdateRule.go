@@ -101,6 +101,17 @@ func (c *Client) UpdateRule(ctx context.Context, params *UpdateRuleInput, optFns
 
 type UpdateRuleInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
+	// The RuleId of the Rule that you want to update. RuleId is returned by CreateRule
+	// and by ListRules ().
+	//
+	// This member is required.
+	RuleId *string
+
 	// An array of RuleUpdate objects that you want to insert into or delete from a
 	// Rule (). For more information, see the applicable data types:
 	//
@@ -114,17 +125,6 @@ type UpdateRuleInput struct {
 	//
 	// This member is required.
 	Updates []*types.RuleUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
-
-	// The RuleId of the Rule that you want to update. RuleId is returned by CreateRule
-	// and by ListRules ().
-	//
-	// This member is required.
-	RuleId *string
 }
 
 type UpdateRuleOutput struct {

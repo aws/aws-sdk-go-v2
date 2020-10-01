@@ -67,15 +67,15 @@ type StopPipelineExecutionInput struct {
 	// This member is required.
 	PipelineExecutionId *string
 
-	// Use this option to stop the pipeline execution by abandoning, rather than
-	// finishing, in-progress actions. This option can lead to failed or
-	// out-of-sequence tasks.
-	Abandon *bool
-
 	// The name of the pipeline to stop.
 	//
 	// This member is required.
 	PipelineName *string
+
+	// Use this option to stop the pipeline execution by abandoning, rather than
+	// finishing, in-progress actions. This option can lead to failed or
+	// out-of-sequence tasks.
+	Abandon *bool
 
 	// Use this option to enter comments, such as the reason the pipeline was stopped.
 	Reason *string

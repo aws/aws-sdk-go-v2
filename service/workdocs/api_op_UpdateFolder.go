@@ -58,13 +58,14 @@ func (c *Client) UpdateFolder(ctx context.Context, params *UpdateFolderInput, op
 
 type UpdateFolderInput struct {
 
+	// The ID of the folder.
+	//
+	// This member is required.
+	FolderId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
-
-	// The resource state of the folder. Only ACTIVE and RECYCLED are accepted values
-	// from the API.
-	ResourceState types.ResourceStateType
 
 	// The name of the folder.
 	Name *string
@@ -72,10 +73,9 @@ type UpdateFolderInput struct {
 	// The ID of the parent folder.
 	ParentFolderId *string
 
-	// The ID of the folder.
-	//
-	// This member is required.
-	FolderId *string
+	// The resource state of the folder. Only ACTIVE and RECYCLED are accepted values
+	// from the API.
+	ResourceState types.ResourceStateType
 }
 
 type UpdateFolderOutput struct {

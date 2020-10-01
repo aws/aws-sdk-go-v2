@@ -57,17 +57,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The tags to add to the resource.
-	//
-	// This member is required.
-	TagList []*types.Tag
-
 	// The Amazon Resource Name (ARN) of the resource to return tags for. The AWS
 	// Firewall Manager resources that support tagging are policies, applications
 	// lists, and protocols lists.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The tags to add to the resource.
+	//
+	// This member is required.
+	TagList []*types.Tag
 }
 
 type TagResourceOutput struct {

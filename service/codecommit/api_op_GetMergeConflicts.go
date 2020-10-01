@@ -58,36 +58,11 @@ func (c *Client) GetMergeConflicts(ctx context.Context, params *GetMergeConflict
 
 type GetMergeConflictsInput struct {
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
-	NextToken *string
-
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
-	// used, which returns a not-mergeable result if the same file has differences in
-	// both branches. If LINE_LEVEL is specified, a conflict is considered not
-	// mergeable if the same file in both branches has differences on the same line.
-	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
-
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
 	//
 	// This member is required.
 	DestinationCommitSpecifier *string
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify a
-	// commit (for example, a branch name or a full commit ID).
-	//
-	// This member is required.
-	SourceCommitSpecifier *string
-
-	// The maximum number of files to include in the output.
-	MaxConflictFiles *int32
-
-	// Specifies which branch to use when resolving conflicts, or whether to attempt
-	// automatically merging two versions of a file. The default is NONE, which
-	// requires any conflicts to be resolved manually before the merge operation is
-	// successful.
-	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
 
 	// The merge option or strategy you want to use to merge the code.
 	//
@@ -98,9 +73,40 @@ type GetMergeConflictsInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The branch, tag, HEAD, or other fully qualified reference used to identify a
+	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
+	SourceCommitSpecifier *string
+
+	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
+	// used, which returns a not-mergeable result if the same file has differences in
+	// both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
+	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
+
+	// Specifies which branch to use when resolving conflicts, or whether to attempt
+	// automatically merging two versions of a file. The default is NONE, which
+	// requires any conflicts to be resolved manually before the merge operation is
+	// successful.
+	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
+
+	// The maximum number of files to include in the output.
+	MaxConflictFiles *int32
+
+	// An enumeration token that, when provided in a request, returns the next batch of
+	// the results.
+	NextToken *string
 }
 
 type GetMergeConflictsOutput struct {
+
+	// A list of metadata for any conflicting files. If the specified merge strategy is
+	// FAST_FORWARD_MERGE, this list is always empty.
+	//
+	// This member is required.
+	ConflictMetadataList []*types.ConflictMetadata
 
 	// The commit ID of the destination commit specifier that was used in the merge
 	// evaluation.
@@ -108,17 +114,17 @@ type GetMergeConflictsOutput struct {
 	// This member is required.
 	DestinationCommitId *string
 
-	// The commit ID of the source commit specifier that was used in the merge
-	// evaluation.
-	//
-	// This member is required.
-	SourceCommitId *string
-
 	// A Boolean value that indicates whether the code is mergeable by the specified
 	// merge option.
 	//
 	// This member is required.
 	Mergeable *bool
+
+	// The commit ID of the source commit specifier that was used in the merge
+	// evaluation.
+	//
+	// This member is required.
+	SourceCommitId *string
 
 	// The commit ID of the merge base.
 	BaseCommitId *string
@@ -126,12 +132,6 @@ type GetMergeConflictsOutput struct {
 	// An enumeration token that can be used in a request to return the next batch of
 	// the results.
 	NextToken *string
-
-	// A list of metadata for any conflicting files. If the specified merge strategy is
-	// FAST_FORWARD_MERGE, this list is always empty.
-	//
-	// This member is required.
-	ConflictMetadataList []*types.ConflictMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

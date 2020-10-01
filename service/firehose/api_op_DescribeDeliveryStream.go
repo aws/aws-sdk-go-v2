@@ -64,18 +64,18 @@ func (c *Client) DescribeDeliveryStream(ctx context.Context, params *DescribeDel
 
 type DescribeDeliveryStreamInput struct {
 
-	// The limit on the number of destinations to return. You can have one destination
-	// per delivery stream.
-	Limit *int32
+	// The name of the delivery stream.
+	//
+	// This member is required.
+	DeliveryStreamName *string
 
 	// The ID of the destination to start returning the destination information.
 	// Kinesis Data Firehose supports one destination per delivery stream.
 	ExclusiveStartDestinationId *string
 
-	// The name of the delivery stream.
-	//
-	// This member is required.
-	DeliveryStreamName *string
+	// The limit on the number of destinations to return. You can have one destination
+	// per delivery stream.
+	Limit *int32
 }
 
 type DescribeDeliveryStreamOutput struct {

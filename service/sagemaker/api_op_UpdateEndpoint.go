@@ -74,13 +74,10 @@ type UpdateEndpointInput struct {
 	// This member is required.
 	EndpointConfigName *string
 
-	// When updating endpoint resources, enables or disables the retention of variant
-	// properties, such as the instance count or the variant weight. To retain the
-	// variant properties of an endpoint when updating it, set
-	// RetainAllVariantProperties to true. To use the variant properties specified in a
-	// new EndpointConfig call when updating an endpoint, set
-	// RetainAllVariantProperties to false.
-	RetainAllVariantProperties *bool
+	// The name of the endpoint whose configuration you want to update.
+	//
+	// This member is required.
+	EndpointName *string
 
 	// When you are updating endpoint resources with
 	// UpdateEndpointInput$RetainAllVariantProperties (), whose value is set to true,
@@ -89,10 +86,13 @@ type UpdateEndpointInput struct {
 	// value for ExcludeAllVariantProperties, no variant properties are overridden.
 	ExcludeRetainedVariantProperties []*types.VariantProperty
 
-	// The name of the endpoint whose configuration you want to update.
-	//
-	// This member is required.
-	EndpointName *string
+	// When updating endpoint resources, enables or disables the retention of variant
+	// properties, such as the instance count or the variant weight. To retain the
+	// variant properties of an endpoint when updating it, set
+	// RetainAllVariantProperties to true. To use the variant properties specified in a
+	// new EndpointConfig call when updating an endpoint, set
+	// RetainAllVariantProperties to false.
+	RetainAllVariantProperties *bool
 }
 
 type UpdateEndpointOutput struct {

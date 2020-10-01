@@ -58,17 +58,17 @@ func (c *Client) GetAssessmentReport(ctx context.Context, params *GetAssessmentR
 
 type GetAssessmentReportInput struct {
 
-	// Specifies the file format (html or pdf) of the assessment report that you want
-	// to generate.
-	//
-	// This member is required.
-	ReportFileFormat types.ReportFileFormat
-
 	// The ARN that specifies the assessment run for which you want to generate a
 	// report.
 	//
 	// This member is required.
 	AssessmentRunArn *string
+
+	// Specifies the file format (html or pdf) of the assessment report that you want
+	// to generate.
+	//
+	// This member is required.
+	ReportFileFormat types.ReportFileFormat
 
 	// Specifies the type of the assessment report that you want to generate. There are
 	// two types of assessment reports: a finding report and a full report. For more

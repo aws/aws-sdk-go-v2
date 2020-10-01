@@ -58,14 +58,14 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 
 type ListMembersInput struct {
 
-	// You can use this parameter to indicate the maximum number of items you want in
-	// the response. The default value is 50. The maximum value is 50.
-	MaxResults *int32
-
 	// The unique ID of the detector the member is associated with.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 50. The maximum value is 50.
+	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the list action. For subsequent calls to
@@ -80,12 +80,12 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
+	// A list of members.
+	Members []*types.Member
+
 	// The pagination parameter to be used on the next list operation to retrieve more
 	// items.
 	NextToken *string
-
-	// A list of members.
-	Members []*types.Member
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

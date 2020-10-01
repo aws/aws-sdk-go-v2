@@ -66,23 +66,15 @@ type DescribeTrialComponentInput struct {
 
 type DescribeTrialComponentOutput struct {
 
-	// When the component started.
-	StartTime *time.Time
+	// Who created the component.
+	CreatedBy *types.UserContext
 
-	// The metrics for the component.
-	Metrics []*types.TrialComponentMetricSummary
+	// When the component was created.
+	CreationTime *time.Time
 
-	// The hyperparameters of the component.
-	Parameters map[string]*types.TrialComponentParameterValue
-
-	// Who last modified the component.
-	LastModifiedBy *types.UserContext
-
-	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
-	Source *types.TrialComponentSource
-
-	// The name of the trial component.
-	TrialComponentName *string
+	// The name of the component as displayed. If DisplayName isn't specified,
+	// TrialComponentName is displayed.
+	DisplayName *string
 
 	// When the component ended.
 	EndTime *time.Time
@@ -90,11 +82,26 @@ type DescribeTrialComponentOutput struct {
 	// The input artifacts of the component.
 	InputArtifacts map[string]*types.TrialComponentArtifact
 
+	// Who last modified the component.
+	LastModifiedBy *types.UserContext
+
+	// When the component was last modified.
+	LastModifiedTime *time.Time
+
+	// The metrics for the component.
+	Metrics []*types.TrialComponentMetricSummary
+
 	// The output artifacts of the component.
 	OutputArtifacts map[string]*types.TrialComponentArtifact
 
-	// Who created the component.
-	CreatedBy *types.UserContext
+	// The hyperparameters of the component.
+	Parameters map[string]*types.TrialComponentParameterValue
+
+	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
+	Source *types.TrialComponentSource
+
+	// When the component started.
+	StartTime *time.Time
 
 	// The status of the component. States include:
 	//
@@ -106,18 +113,11 @@ type DescribeTrialComponentOutput struct {
 	//     * Failed
 	Status *types.TrialComponentStatus
 
-	// The name of the component as displayed. If DisplayName isn't specified,
-	// TrialComponentName is displayed.
-	DisplayName *string
-
-	// When the component was last modified.
-	LastModifiedTime *time.Time
-
-	// When the component was created.
-	CreationTime *time.Time
-
 	// The Amazon Resource Name (ARN) of the trial component.
 	TrialComponentArn *string
+
+	// The name of the trial component.
+	TrialComponentName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

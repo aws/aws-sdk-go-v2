@@ -60,6 +60,10 @@ func (c *Client) DescribeInstancesHealth(ctx context.Context, params *DescribeIn
 // Parameters for a call to DescribeInstancesHealth.
 type DescribeInstancesHealthInput struct {
 
+	// Specifies the response elements you wish to receive. To retrieve all attributes,
+	// set to All. If no attribute names are specified, returns a list of instances.
+	AttributeNames []types.InstancesHealthAttribute
+
 	// Specify the AWS Elastic Beanstalk environment by ID.
 	EnvironmentId *string
 
@@ -68,10 +72,6 @@ type DescribeInstancesHealthInput struct {
 
 	// Specify the pagination token returned by a previous call.
 	NextToken *string
-
-	// Specifies the response elements you wish to receive. To retrieve all attributes,
-	// set to All. If no attribute names are specified, returns a list of instances.
-	AttributeNames []types.InstancesHealthAttribute
 }
 
 // Detailed health information about the Amazon EC2 instances in an AWS Elastic

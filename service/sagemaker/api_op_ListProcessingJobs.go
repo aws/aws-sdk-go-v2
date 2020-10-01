@@ -57,50 +57,50 @@ func (c *Client) ListProcessingJobs(ctx context.Context, params *ListProcessingJ
 
 type ListProcessingJobsInput struct {
 
-	// The field to sort results by. The default is CreationTime.
-	SortBy types.SortBy
+	// A filter that returns only processing jobs created after the specified time.
+	CreationTimeAfter *time.Time
 
 	// A filter that returns only processing jobs created after the specified time.
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only processing jobs created after the specified time.
-	CreationTimeAfter *time.Time
+	// A filter that returns only processing jobs modified after the specified time.
+	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only processing jobs modified before the specified time.
 	LastModifiedTimeBefore *time.Time
 
-	// A filter that retrieves only processing jobs with a specific status.
-	StatusEquals types.ProcessingJobStatus
+	// The maximum number of processing jobs to return in the response.
+	MaxResults *int32
 
-	// The sort order for results. The default is Ascending.
-	SortOrder types.SortOrder
+	// A string in the processing job name. This filter returns only processing jobs
+	// whose name contains the specified string.
+	NameContains *string
 
 	// If the result of the previous ListProcessingJobs request was truncated, the
 	// response includes a NextToken. To retrieve the next set of processing jobs, use
 	// the token in the next request.
 	NextToken *string
 
-	// The maximum number of processing jobs to return in the response.
-	MaxResults *int32
+	// The field to sort results by. The default is CreationTime.
+	SortBy types.SortBy
 
-	// A filter that returns only processing jobs modified after the specified time.
-	LastModifiedTimeAfter *time.Time
+	// The sort order for results. The default is Ascending.
+	SortOrder types.SortOrder
 
-	// A string in the processing job name. This filter returns only processing jobs
-	// whose name contains the specified string.
-	NameContains *string
+	// A filter that retrieves only processing jobs with a specific status.
+	StatusEquals types.ProcessingJobStatus
 }
 
 type ListProcessingJobsOutput struct {
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of processing jobs, use it in the subsequent request.
-	NextToken *string
 
 	// An array of ProcessingJobSummary objects, each listing a processing job.
 	//
 	// This member is required.
 	ProcessingJobSummaries []*types.ProcessingJobSummary
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of processing jobs, use it in the subsequent request.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

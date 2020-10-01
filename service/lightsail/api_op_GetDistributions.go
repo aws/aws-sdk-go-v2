@@ -57,17 +57,17 @@ func (c *Client) GetDistributions(ctx context.Context, params *GetDistributionsI
 
 type GetDistributionsInput struct {
 
-	// The token to advance to the next page of results from your request.  <p>To get a
-	// page token, perform an initial <code>GetDistributions</code> request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.</p>
-	PageToken *string
-
 	// The name of the distribution for which to return information.  <p>Use the
 	// <code>GetDistributions</code> action to get a list of distribution names that
 	// you can specify.</p> <p>When omitted, the response includes all of your
 	// distributions in the AWS Region where the request is made.</p>
 	DistributionName *string
+
+	// The token to advance to the next page of results from your request.  <p>To get a
+	// page token, perform an initial <code>GetDistributions</code> request. If your
+	// results are paginated, the response will return a next page token that you can
+	// specify as the page token in a subsequent request.</p>
+	PageToken *string
 }
 
 type GetDistributionsOutput struct {

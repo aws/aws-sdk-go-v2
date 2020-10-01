@@ -59,11 +59,6 @@ func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...fu
 
 type PredictInput struct {
 
-	// A map of variable name-value pairs that represent an observation.
-	//
-	// This member is required.
-	Record map[string]*string
-
 	// A unique identifier of the MLModel.
 	//
 	// This member is required.
@@ -73,6 +68,11 @@ type PredictInput struct {
 	//
 	// This member is required.
 	PredictEndpoint *string
+
+	// A map of variable name-value pairs that represent an observation.
+	//
+	// This member is required.
+	Record map[string]*string
 }
 
 type PredictOutput struct {

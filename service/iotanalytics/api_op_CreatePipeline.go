@@ -60,9 +60,6 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 
 type CreatePipelineInput struct {
 
-	// Metadata which can be used to manage the pipeline.
-	Tags []*types.Tag
-
 	// A list of "PipelineActivity" objects. Activities perform transformations on your
 	// messages, such as removing, renaming or adding message attributes; filtering
 	// messages based on attribute values; invoking your Lambda functions on messages
@@ -79,15 +76,18 @@ type CreatePipelineInput struct {
 	//
 	// This member is required.
 	PipelineName *string
+
+	// Metadata which can be used to manage the pipeline.
+	Tags []*types.Tag
 }
 
 type CreatePipelineOutput struct {
 
-	// The name of the pipeline.
-	PipelineName *string
-
 	// The ARN of the pipeline.
 	PipelineArn *string
+
+	// The name of the pipeline.
+	PipelineName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,17 +59,17 @@ func (c *Client) CancelUpdateStack(ctx context.Context, params *CancelUpdateStac
 // The input for the CancelUpdateStack () action.
 type CancelUpdateStackInput struct {
 
+	// The name or the unique stack ID that is associated with the stack.
+	//
+	// This member is required.
+	StackName *string
+
 	// A unique identifier for this CancelUpdateStack request. Specify this token if
 	// you plan to retry requests so that AWS CloudFormation knows that you're not
 	// attempting to cancel an update on a stack with the same name. You might retry
 	// CancelUpdateStack requests to ensure that AWS CloudFormation successfully
 	// received them.
 	ClientRequestToken *string
-
-	// The name or the unique stack ID that is associated with the stack.
-	//
-	// This member is required.
-	StackName *string
 }
 
 type CancelUpdateStackOutput struct {

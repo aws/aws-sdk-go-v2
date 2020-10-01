@@ -71,9 +71,11 @@ type DescribeNotificationRuleOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The date and time the notification rule was most recently updated, in timestamp
-	// format.
-	LastModifiedTimestamp *time.Time
+	// The name or email alias of the person who created the notification rule.
+	CreatedBy *string
+
+	// The date and time the notification rule was created, in timestamp format.
+	CreatedTimestamp *time.Time
 
 	// The level of detail included in the notifications for this resource. BASIC will
 	// include only the contents of the event as it would appear in AWS CloudWatch.
@@ -82,31 +84,29 @@ type DescribeNotificationRuleOutput struct {
 	// created.
 	DetailType types.DetailType
 
-	// The status of the notification rule. Valid statuses are on (sending
-	// notifications) or off (not sending notifications).
-	Status types.NotificationRuleStatus
-
 	// A list of the event types associated with the notification rule.
 	EventTypes []*types.EventTypeSummary
+
+	// The date and time the notification rule was most recently updated, in timestamp
+	// format.
+	LastModifiedTimestamp *time.Time
+
+	// The name of the notification rule.
+	Name *string
 
 	// The Amazon Resource Name (ARN) of the resource associated with the notification
 	// rule.
 	Resource *string
 
-	// The name of the notification rule.
-	Name *string
+	// The status of the notification rule. Valid statuses are on (sending
+	// notifications) or off (not sending notifications).
+	Status types.NotificationRuleStatus
 
 	// The tags associated with the notification rule.
 	Tags map[string]*string
 
-	// The date and time the notification rule was created, in timestamp format.
-	CreatedTimestamp *time.Time
-
 	// A list of the SNS topics associated with the notification rule.
 	Targets []*types.TargetSummary
-
-	// The name or email alias of the person who created the notification rule.
-	CreatedBy *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,6 +69,10 @@ type ListAcceptedPortfolioSharesInput struct {
 	// The maximum number of items to return with this call.
 	PageSize *int32
 
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
+
 	// The type of shared portfolios to list. The default is to list imported
 	// portfolios.
 	//
@@ -80,20 +84,16 @@ type ListAcceptedPortfolioSharesInput struct {
 	//
 	//     * IMPORTED - List imported portfolios
 	PortfolioShareType types.PortfolioShareType
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
 }
 
 type ListAcceptedPortfolioSharesOutput struct {
 
-	// Information about the portfolios.
-	PortfolioDetails []*types.PortfolioDetail
-
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
+	// Information about the portfolios.
+	PortfolioDetails []*types.PortfolioDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

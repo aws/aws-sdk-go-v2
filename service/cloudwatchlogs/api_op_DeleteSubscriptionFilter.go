@@ -56,15 +56,15 @@ func (c *Client) DeleteSubscriptionFilter(ctx context.Context, params *DeleteSub
 
 type DeleteSubscriptionFilterInput struct {
 
-	// The name of the log group.
-	//
-	// This member is required.
-	LogGroupName *string
-
 	// The name of the subscription filter.
 	//
 	// This member is required.
 	FilterName *string
+
+	// The name of the log group.
+	//
+	// This member is required.
+	LogGroupName *string
 }
 
 type DeleteSubscriptionFilterOutput struct {

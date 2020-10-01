@@ -57,9 +57,6 @@ func (c *Client) GetMapping(ctx context.Context, params *GetMappingInput, optFns
 
 type GetMappingInput struct {
 
-	// A list of target tables.
-	Sinks []*types.CatalogEntry
-
 	// Specifies the source table.
 	//
 	// This member is required.
@@ -67,6 +64,9 @@ type GetMappingInput struct {
 
 	// Parameters for the mapping.
 	Location *types.Location
+
+	// A list of target tables.
+	Sinks []*types.CatalogEntry
 }
 
 type GetMappingOutput struct {

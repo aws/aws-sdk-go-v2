@@ -74,6 +74,12 @@ func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplication
 //
 type AddApplicationInputInput struct {
 
+	// Name of your existing Amazon Kinesis Analytics application to which you want to
+	// add the streaming source.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// Current version of your Amazon Kinesis Analytics application. You can use the
 	// DescribeApplication
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
@@ -81,12 +87,6 @@ type AddApplicationInputInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
-
-	// Name of your existing Amazon Kinesis Analytics application to which you want to
-	// add the streaming source.
-	//
-	// This member is required.
-	ApplicationName *string
 
 	// The Input
 	// (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html) to add.

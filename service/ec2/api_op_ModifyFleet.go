@@ -79,25 +79,25 @@ func (c *Client) ModifyFleet(ctx context.Context, params *ModifyFleetInput, optF
 
 type ModifyFleetInput struct {
 
+	// The ID of the EC2 Fleet.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The size of the EC2 Fleet.
+	//
+	// This member is required.
+	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the EC2 Fleet.
-	//
-	// This member is required.
-	FleetId *string
-
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
-
-	// The size of the EC2 Fleet.
-	//
-	// This member is required.
-	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
 }
 
 type ModifyFleetOutput struct {

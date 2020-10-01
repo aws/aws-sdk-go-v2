@@ -65,6 +65,11 @@ func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionI
 
 type CreateProtectionInput struct {
 
+	// Friendly name for the Protection you are creating.
+	//
+	// This member is required.
+	Name *string
+
 	// The ARN (Amazon Resource Name) of the resource to be protected. The ARN should
 	// be in one of the following formats:
 	//
@@ -91,11 +96,6 @@ type CreateProtectionInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
-
-	// Friendly name for the Protection you are creating.
-	//
-	// This member is required.
-	Name *string
 }
 
 type CreateProtectionOutput struct {

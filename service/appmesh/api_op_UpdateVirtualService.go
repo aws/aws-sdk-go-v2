@@ -57,11 +57,6 @@ func (c *Client) UpdateVirtualService(ctx context.Context, params *UpdateVirtual
 //
 type UpdateVirtualServiceInput struct {
 
-	// The name of the virtual service to update.
-	//
-	// This member is required.
-	VirtualServiceName *string
-
 	// The name of the service mesh that the virtual service resides in.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type UpdateVirtualServiceInput struct {
 	//
 	// This member is required.
 	Spec *types.VirtualServiceSpec
+
+	// The name of the virtual service to update.
+	//
+	// This member is required.
+	VirtualServiceName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.

@@ -81,16 +81,15 @@ func (c *Client) TerminateWorkflowExecution(ctx context.Context, params *Termina
 
 type TerminateWorkflowExecutionInput struct {
 
-	// A descriptive reason for terminating the workflow execution.
-	Reason *string
-
-	// Details for terminating the workflow execution.
-	Details *string
-
 	// The domain of the workflow execution to terminate.
 	//
 	// This member is required.
 	Domain *string
+
+	// The workflowId of the workflow execution to terminate.
+	//
+	// This member is required.
+	WorkflowId *string
 
 	// If set, specifies the policy to use for the child workflow executions of the
 	// workflow execution being terminated. This policy overrides the child policy
@@ -115,10 +114,11 @@ type TerminateWorkflowExecutionInput struct {
 	// then a fault is returned.
 	ChildPolicy types.ChildPolicy
 
-	// The workflowId of the workflow execution to terminate.
-	//
-	// This member is required.
-	WorkflowId *string
+	// Details for terminating the workflow execution.
+	Details *string
+
+	// A descriptive reason for terminating the workflow execution.
+	Reason *string
 
 	// The runId of the workflow execution to terminate.
 	RunId *string

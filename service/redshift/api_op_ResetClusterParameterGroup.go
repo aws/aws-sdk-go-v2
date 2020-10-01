@@ -61,10 +61,6 @@ func (c *Client) ResetClusterParameterGroup(ctx context.Context, params *ResetCl
 //
 type ResetClusterParameterGroupInput struct {
 
-	// If true, all parameters in the specified parameter group will be reset to their
-	// default values. Default: true
-	ResetAllParameters *bool
-
 	// The name of the cluster parameter group to be reset.
 	//
 	// This member is required.
@@ -74,18 +70,22 @@ type ResetClusterParameterGroupInput struct {
 	// used, then at least one parameter name must be supplied. Constraints: A maximum
 	// of 20 parameters can be reset in a single request.
 	Parameters []*types.Parameter
+
+	// If true, all parameters in the specified parameter group will be reset to their
+	// default values. Default: true
+	ResetAllParameters *bool
 }
 
 //
 type ResetClusterParameterGroupOutput struct {
 
+	// The name of the cluster parameter group.
+	ParameterGroupName *string
+
 	// The status of the parameter group. For example, if you made a change to a
 	// parameter group name-value pair, then the change could be pending a reboot of an
 	// associated cluster.
 	ParameterGroupStatus *string
-
-	// The name of the cluster parameter group.
-	ParameterGroupName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

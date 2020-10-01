@@ -57,11 +57,6 @@ func (c *Client) GetType(ctx context.Context, params *GetTypeInput, optFns ...fu
 
 type GetTypeInput struct {
 
-	// The type name.
-	//
-	// This member is required.
-	TypeName *string
-
 	// The API ID.
 	//
 	// This member is required.
@@ -71,6 +66,11 @@ type GetTypeInput struct {
 	//
 	// This member is required.
 	Format types.TypeDefinitionFormat
+
+	// The type name.
+	//
+	// This member is required.
+	TypeName *string
 }
 
 type GetTypeOutput struct {

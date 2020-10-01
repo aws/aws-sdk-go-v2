@@ -60,21 +60,21 @@ func (c *Client) DescribeProjectVersions(ctx context.Context, params *DescribePr
 
 type DescribeProjectVersionsInput struct {
 
-	// If the previous response was incomplete (because there is more results to
-	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
-	// response. You can use this pagination token to retrieve the next set of results.
-	NextToken *string
+	// The Amazon Resource Name (ARN) of the project that contains the models you want
+	// to describe.
+	//
+	// This member is required.
+	ProjectArn *string
 
 	// The maximum number of results to return per paginated call. The largest value
 	// you can specify is 100. If you specify a value greater than 100, a
 	// ValidationException error occurs. The default value is 100.
 	MaxResults *int32
 
-	// The Amazon Resource Name (ARN) of the project that contains the models you want
-	// to describe.
-	//
-	// This member is required.
-	ProjectArn *string
+	// If the previous response was incomplete (because there is more results to
+	// retrieve), Amazon Rekognition Custom Labels returns a pagination token in the
+	// response. You can use this pagination token to retrieve the next set of results.
+	NextToken *string
 
 	// A list of model version names that you want to describe. You can add up to 10
 	// model version names to the list. If you don't specify a value, all model

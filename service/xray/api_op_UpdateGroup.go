@@ -56,14 +56,14 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 
 type UpdateGroupInput struct {
 
-	// The case-sensitive name of the group.
-	GroupName *string
-
 	// The updated filter expression defining criteria by which to group traces.
 	FilterExpression *string
 
 	// The ARN that was generated upon creation.
 	GroupARN *string
+
+	// The case-sensitive name of the group.
+	GroupName *string
 }
 
 type UpdateGroupOutput struct {

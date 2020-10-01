@@ -64,16 +64,16 @@ func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTem
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type CreateEmailTemplateInput struct {
 
-	// The name of the template you want to create.
-	//
-	// This member is required.
-	TemplateName *string
-
 	// The content of the email template, composed of a subject line, an HTML part, and
 	// a text-only part.
 	//
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent
+
+	// The name of the template you want to create.
+	//
+	// This member is required.
+	TemplateName *string
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with an

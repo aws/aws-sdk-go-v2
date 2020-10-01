@@ -58,15 +58,15 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 // Represents a request to the create project operation.
 type CreateProjectInput struct {
 
-	// Sets the execution timeout value (in minutes) for a project. All test runs in
-	// this project use the specified execution timeout value unless overridden when
-	// scheduling a run.
-	DefaultJobTimeoutMinutes *int32
-
 	// The project's name.
 	//
 	// This member is required.
 	Name *string
+
+	// Sets the execution timeout value (in minutes) for a project. All test runs in
+	// this project use the specified execution timeout value unless overridden when
+	// scheduling a run.
+	DefaultJobTimeoutMinutes *int32
 }
 
 // Represents the result of a create project request.

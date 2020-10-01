@@ -68,11 +68,11 @@ type GetDistributionConfigInput struct {
 // The returned result of the corresponding request.
 type GetDistributionConfigOutput struct {
 
-	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
-	ETag *string
-
 	// The distribution's configuration information.
 	DistributionConfig *types.DistributionConfig
+
+	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
+	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

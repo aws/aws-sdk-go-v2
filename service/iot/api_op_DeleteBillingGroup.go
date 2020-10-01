@@ -56,15 +56,15 @@ func (c *Client) DeleteBillingGroup(ctx context.Context, params *DeleteBillingGr
 
 type DeleteBillingGroupInput struct {
 
-	// The expected version of the billing group. If the version of the billing group
-	// does not match the expected version specified in the request, the
-	// DeleteBillingGroup request is rejected with a VersionConflictException.
-	ExpectedVersion *int64
-
 	// The name of the billing group.
 	//
 	// This member is required.
 	BillingGroupName *string
+
+	// The expected version of the billing group. If the version of the billing group
+	// does not match the expected version specified in the request, the
+	// DeleteBillingGroup request is rejected with a VersionConflictException.
+	ExpectedVersion *int64
 }
 
 type DeleteBillingGroupOutput struct {

@@ -60,15 +60,15 @@ func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePre
 
 type CreatePresignedDomainUrlInput struct {
 
-	// The name of the UserProfile to sign-in as.
-	//
-	// This member is required.
-	UserProfileName *string
-
 	// The domain ID.
 	//
 	// This member is required.
 	DomainId *string
+
+	// The name of the UserProfile to sign-in as.
+	//
+	// This member is required.
+	UserProfileName *string
 
 	// The session expiration duration in seconds.
 	SessionExpirationDurationInSeconds *int32

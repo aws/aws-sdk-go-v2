@@ -71,11 +71,11 @@ type DescribeDataSourceInput struct {
 
 type DescribeDataSourceOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The information on the data source.
 	DataSource *types.DataSource
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,9 +64,6 @@ func (c *Client) PutWebhook(ctx context.Context, params *PutWebhookInput, optFns
 
 type PutWebhookInput struct {
 
-	// The tags for the webhook.
-	Tags []*types.Tag
-
 	// The detail provided in an input file to create the webhook, such as the webhook
 	// name, the pipeline name, and the action name. Give the webhook a unique name
 	// that helps you identify it. You might name the webhook after the pipeline and
@@ -74,6 +71,9 @@ type PutWebhookInput struct {
 	//
 	// This member is required.
 	Webhook *types.WebhookDefinition
+
+	// The tags for the webhook.
+	Tags []*types.Tag
 }
 
 type PutWebhookOutput struct {

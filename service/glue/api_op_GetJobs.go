@@ -56,11 +56,11 @@ func (c *Client) GetJobs(ctx context.Context, params *GetJobsInput, optFns ...fu
 
 type GetJobsInput struct {
 
-	// A continuation token, if this is a continuation call.
-	NextToken *string
-
 	// The maximum size of the response.
 	MaxResults *int32
+
+	// A continuation token, if this is a continuation call.
+	NextToken *string
 }
 
 type GetJobsOutput struct {

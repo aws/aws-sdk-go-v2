@@ -61,14 +61,14 @@ func (c *Client) DescribeRaidArrays(ctx context.Context, params *DescribeRaidArr
 
 type DescribeRaidArraysInput struct {
 
+	// The instance ID. If you use this parameter, DescribeRaidArrays returns
+	// descriptions of the RAID arrays associated with the specified instance.
+	InstanceId *string
+
 	// An array of RAID array IDs. If you use this parameter, DescribeRaidArrays
 	// returns descriptions of the specified arrays. Otherwise, it returns a
 	// description of every array.
 	RaidArrayIds []*string
-
-	// The instance ID. If you use this parameter, DescribeRaidArrays returns
-	// descriptions of the RAID arrays associated with the specified instance.
-	InstanceId *string
 
 	// The stack ID.
 	StackId *string

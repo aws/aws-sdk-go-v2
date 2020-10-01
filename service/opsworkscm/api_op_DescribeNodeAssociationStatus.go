@@ -61,19 +61,23 @@ func (c *Client) DescribeNodeAssociationStatus(ctx context.Context, params *Desc
 
 type DescribeNodeAssociationStatusInput struct {
 
-	// The name of the server from which to disassociate the node.
-	//
-	// This member is required.
-	ServerName *string
-
 	// The token returned in either the AssociateNodeResponse or the
 	// DisassociateNodeResponse.
 	//
 	// This member is required.
 	NodeAssociationStatusToken *string
+
+	// The name of the server from which to disassociate the node.
+	//
+	// This member is required.
+	ServerName *string
 }
 
 type DescribeNodeAssociationStatusOutput struct {
+
+	// Attributes specific to the node association. In Puppet, the attibute
+	// PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
+	EngineAttributes []*types.EngineAttribute
 
 	// The status of the association or disassociation request. Possible values:
 	//
@@ -86,10 +90,6 @@ type DescribeNodeAssociationStatusOutput struct {
 	//     * IN_PROGRESS: The association or
 	// disassociation is still in progress.
 	NodeAssociationStatus types.NodeAssociationStatus
-
-	// Attributes specific to the node association. In Puppet, the attibute
-	// PUPPET_NODE_CERT contains the signed certificate (the result of the CSR).
-	EngineAttributes []*types.EngineAttribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

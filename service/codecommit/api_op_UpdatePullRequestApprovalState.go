@@ -58,11 +58,6 @@ func (c *Client) UpdatePullRequestApprovalState(ctx context.Context, params *Upd
 
 type UpdatePullRequestApprovalStateInput struct {
 
-	// The system-generated ID of the revision.
-	//
-	// This member is required.
-	RevisionId *string
-
 	// The approval state to associate with the user on the pull request.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type UpdatePullRequestApprovalStateInput struct {
 	//
 	// This member is required.
 	PullRequestId *string
+
+	// The system-generated ID of the revision.
+	//
+	// This member is required.
+	RevisionId *string
 }
 
 type UpdatePullRequestApprovalStateOutput struct {

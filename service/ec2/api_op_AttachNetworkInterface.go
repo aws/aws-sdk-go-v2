@@ -57,26 +57,26 @@ func (c *Client) AttachNetworkInterface(ctx context.Context, params *AttachNetwo
 // Contains the parameters for AttachNetworkInterface.
 type AttachNetworkInterfaceInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The index of the device for the network interface attachment.
+	//
+	// This member is required.
+	DeviceIndex *int32
 
 	// The ID of the instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The index of the device for the network interface attachment.
-	//
-	// This member is required.
-	DeviceIndex *int32
-
 	// The ID of the network interface.
 	//
 	// This member is required.
 	NetworkInterfaceId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 // Contains the output of AttachNetworkInterface.

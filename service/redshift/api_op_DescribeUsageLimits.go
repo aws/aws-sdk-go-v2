@@ -72,22 +72,11 @@ func (c *Client) DescribeUsageLimits(ctx context.Context, params *DescribeUsageL
 
 type DescribeUsageLimitsInput struct {
 
-	// A tag key or keys for which you want to return all matching usage limit objects
-	// that are associated with the specified key or keys. For example, suppose that
-	// you have parameter groups that are tagged with keys called owner and
-	// environment. If you specify both of these tag keys in the request, Amazon
-	// Redshift returns a response with the usage limit objects have either or both of
-	// these tag keys associated with them.
-	TagKeys []*string
+	// The identifier of the cluster for which you want to describe usage limits.
+	ClusterIdentifier *string
 
 	// The feature type for which you want to describe usage limits.
 	FeatureType types.UsageLimitFeatureType
-
-	// The identifier of the usage limit to describe.
-	UsageLimitId *string
-
-	// The identifier of the cluster for which you want to describe usage limits.
-	ClusterIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeUsageLimits () request exceed
@@ -103,6 +92,14 @@ type DescribeUsageLimitsInput struct {
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
+	// A tag key or keys for which you want to return all matching usage limit objects
+	// that are associated with the specified key or keys. For example, suppose that
+	// you have parameter groups that are tagged with keys called owner and
+	// environment. If you specify both of these tag keys in the request, Amazon
+	// Redshift returns a response with the usage limit objects have either or both of
+	// these tag keys associated with them.
+	TagKeys []*string
+
 	// A tag value or values for which you want to return all matching usage limit
 	// objects that are associated with the specified tag value or values. For example,
 	// suppose that you have parameter groups that are tagged with values called admin
@@ -110,6 +107,9 @@ type DescribeUsageLimitsInput struct {
 	// Redshift returns a response with the usage limit objects that have either or
 	// both of these tag values associated with them.
 	TagValues []*string
+
+	// The identifier of the usage limit to describe.
+	UsageLimitId *string
 }
 
 type DescribeUsageLimitsOutput struct {

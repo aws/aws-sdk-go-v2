@@ -59,12 +59,6 @@ func (c *Client) CreateDirectConnectGatewayAssociation(ctx context.Context, para
 
 type CreateDirectConnectGatewayAssociationInput struct {
 
-	// The ID of the virtual private gateway.
-	VirtualGatewayId *string
-
-	// The ID of the virtual private gateway or transit gateway.
-	GatewayId *string
-
 	// The ID of the Direct Connect gateway.
 	//
 	// This member is required.
@@ -76,6 +70,12 @@ type CreateDirectConnectGatewayAssociationInput struct {
 	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/multi-account-associate-vgw.html#allowed-prefixes)
 	// in the AWS Direct Connect User Guide.
 	AddAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
+
+	// The ID of the virtual private gateway or transit gateway.
+	GatewayId *string
+
+	// The ID of the virtual private gateway.
+	VirtualGatewayId *string
 }
 
 type CreateDirectConnectGatewayAssociationOutput struct {

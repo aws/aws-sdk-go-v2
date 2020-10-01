@@ -72,26 +72,6 @@ func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipC
 
 type ProvisionByoipCidrInput struct {
 
-	// The tags to apply to the address pool.
-	PoolTagSpecifications []*types.TagSpecification
-
-	// (IPv6 only) Indicate whether the address range will be publicly advertised to
-	// the internet. Default: true
-	PubliclyAdvertisable *bool
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// A description for the address range and the address pool.
-	Description *string
-
-	// A signed document that proves that you are authorized to bring the specified IP
-	// address range to Amazon using BYOIP.
-	CidrAuthorizationContext *types.CidrAuthorizationContext
-
 	// The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4
 	// prefix that you can specify is /24. The most specific IPv6 prefix you can
 	// specify is /56. The address range cannot overlap with another address range that
@@ -99,6 +79,26 @@ type ProvisionByoipCidrInput struct {
 	//
 	// This member is required.
 	Cidr *string
+
+	// A signed document that proves that you are authorized to bring the specified IP
+	// address range to Amazon using BYOIP.
+	CidrAuthorizationContext *types.CidrAuthorizationContext
+
+	// A description for the address range and the address pool.
+	Description *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
+	// The tags to apply to the address pool.
+	PoolTagSpecifications []*types.TagSpecification
+
+	// (IPv6 only) Indicate whether the address range will be publicly advertised to
+	// the internet. Default: true
+	PubliclyAdvertisable *bool
 }
 
 type ProvisionByoipCidrOutput struct {

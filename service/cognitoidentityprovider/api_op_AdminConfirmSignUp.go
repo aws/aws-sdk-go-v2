@@ -58,15 +58,15 @@ func (c *Client) AdminConfirmSignUp(ctx context.Context, params *AdminConfirmSig
 // Represents the request to confirm user registration.
 type AdminConfirmSignUpInput struct {
 
-	// The user name for which you want to confirm user registration.
-	//
-	// This member is required.
-	Username *string
-
 	// The user pool ID for which you want to confirm user registration.
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The user name for which you want to confirm user registration.
+	//
+	// This member is required.
+	Username *string
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. If your user pool configuration includes

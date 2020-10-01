@@ -69,12 +69,12 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type ListConfigurationSetsInput struct {
 
+	// The number of configuration sets to return.
+	MaxItems *int32
+
 	// A token returned from a previous call to ListConfigurationSets to indicate the
 	// position of the configuration set in the configuration set list.
 	NextToken *string
-
-	// The number of configuration sets to return.
-	MaxItems *int32
 }
 
 // A list of configuration sets associated with your AWS account. Configuration

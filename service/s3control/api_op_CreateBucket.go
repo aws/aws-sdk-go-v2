@@ -87,52 +87,49 @@ func (c *Client) CreateBucket(ctx context.Context, params *CreateBucketInput, op
 
 type CreateBucketInput struct {
 
-	// Specifies whether you want S3 Object Lock to be enabled for the new bucket. This
-	// is not supported by Amazon S3 on Outposts buckets.
-	ObjectLockEnabledForBucket *bool
-
-	// Allows grantee to list the objects in the bucket. This is not supported by
-	// Amazon S3 on Outposts buckets.
-	GrantRead *string
-
-	// The canned ACL to apply to the bucket. This is not supported by Amazon S3 on
-	// Outposts buckets.
-	ACL types.BucketCannedACL
-
-	// Allows grantee to create, overwrite, and delete any object in the bucket. This
-	// is not supported by Amazon S3 on Outposts buckets.
-	GrantWrite *string
-
 	// The name of the bucket.
 	//
 	// This member is required.
 	Bucket *string
 
-	// Allows grantee the read, write, read ACP, and write ACP permissions on the
-	// bucket. This is not supported by Amazon S3 on Outposts buckets.
-	GrantFullControl *string
+	// The canned ACL to apply to the bucket. This is not supported by Amazon S3 on
+	// Outposts buckets.
+	ACL types.BucketCannedACL
 
 	// The configuration information for the bucket. This is not supported by Amazon S3
 	// on Outposts buckets.
 	CreateBucketConfiguration *types.CreateBucketConfiguration
 
+	// Allows grantee the read, write, read ACP, and write ACP permissions on the
+	// bucket. This is not supported by Amazon S3 on Outposts buckets.
+	GrantFullControl *string
+
+	// Allows grantee to list the objects in the bucket. This is not supported by
+	// Amazon S3 on Outposts buckets.
+	GrantRead *string
+
 	// Allows grantee to read the bucket ACL. This is not supported by Amazon S3 on
 	// Outposts buckets.
 	GrantReadACP *string
 
-	// The ID of the Outposts where the bucket is being created. This is required by
-	// Amazon S3 on Outposts buckets.
-	OutpostId *string
+	// Allows grantee to create, overwrite, and delete any object in the bucket. This
+	// is not supported by Amazon S3 on Outposts buckets.
+	GrantWrite *string
 
 	// Allows grantee to write the ACL for the applicable bucket. This is not supported
 	// by Amazon S3 on Outposts buckets.
 	GrantWriteACP *string
+
+	// Specifies whether you want S3 Object Lock to be enabled for the new bucket. This
+	// is not supported by Amazon S3 on Outposts buckets.
+	ObjectLockEnabledForBucket *bool
+
+	// The ID of the Outposts where the bucket is being created. This is required by
+	// Amazon S3 on Outposts buckets.
+	OutpostId *string
 }
 
 type CreateBucketOutput struct {
-
-	// The location of the bucket.
-	Location *string
 
 	// The Amazon Resource Name (ARN) of the bucket. For Amazon S3 on Outposts specify
 	// the ARN of the bucket accessed in the format
@@ -142,6 +139,9 @@ type CreateBucketOutput struct {
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
 	// The value must be URL encoded.
 	BucketArn *string
+
+	// The location of the bucket.
+	Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

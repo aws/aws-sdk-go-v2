@@ -58,16 +58,11 @@ func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, op
 
 // Request to list information about a collection of resources.
 type GetResourcesInput struct {
-	Template *bool
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// A query parameter used to retrieve the specified resources embedded in the
 	// returned Resources () resource in the response. This embed parameter value is a
@@ -77,14 +72,20 @@ type GetResourcesInput struct {
 	// /restapis/{restapi_id}/resources?embed=methods.
 	Embed []*string
 
-	// The current pagination position in the paged result set.
-	Position *string
-
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
 	Name *string
+
+	// The current pagination position in the paged result set.
+	Position *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection of Resource () resources. Create an API

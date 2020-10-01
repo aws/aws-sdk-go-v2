@@ -59,16 +59,16 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 
 type ListRepositoriesInput struct {
 
-	// A prefix used to filter returned repositories. Only repositories with names that
-	// start with repositoryPrefix are returned.
-	RepositoryPrefix *string
-
 	// The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
+	// A prefix used to filter returned repositories. Only repositories with names that
+	// start with repositoryPrefix are returned.
+	RepositoryPrefix *string
 }
 
 type ListRepositoriesOutput struct {

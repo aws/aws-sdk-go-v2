@@ -64,11 +64,11 @@ type DeleteComponentInput struct {
 
 type DeleteComponentOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the component build version that was deleted.
 	ComponentBuildVersionArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

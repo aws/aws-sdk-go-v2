@@ -63,10 +63,6 @@ func (c *Client) GetRightsizingRecommendation(ctx context.Context, params *GetRi
 
 type GetRightsizingRecommendationInput struct {
 
-	// The pagination token that indicates the next set of results that you want to
-	// retrieve.
-	NextPageToken *string
-
 	// The specific service that you want recommendations for. The only valid value for
 	// GetRightsizingRecommendation is "AmazonEC2".
 	//
@@ -111,6 +107,10 @@ type GetRightsizingRecommendationInput struct {
 	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
 	Filter *types.Expression
 
+	// The pagination token that indicates the next set of results that you want to
+	// retrieve.
+	NextPageToken *string
+
 	// The number of recommendations that you want returned in a single response
 	// object.
 	PageSize *int32
@@ -118,24 +118,24 @@ type GetRightsizingRecommendationInput struct {
 
 type GetRightsizingRecommendationOutput struct {
 
-	// Recommendations to rightsize resources.
-	RightsizingRecommendations []*types.RightsizingRecommendation
-
-	// Information regarding this specific recommendation set.
-	Metadata *types.RightsizingRecommendationMetadata
-
-	// Summary of this recommendation set.
-	Summary *types.RightsizingRecommendationSummary
-
-	// The token to retrieve the next set of results.
-	NextPageToken *string
-
 	// Enables you to customize recommendations across two attributes. You can choose
 	// to view recommendations for instances within the same instance families or
 	// across different instance families. You can also choose to view your estimated
 	// savings associated with recommendations with consideration of existing Savings
 	// Plans or RI benefits, or neither.
 	Configuration *types.RightsizingRecommendationConfiguration
+
+	// Information regarding this specific recommendation set.
+	Metadata *types.RightsizingRecommendationMetadata
+
+	// The token to retrieve the next set of results.
+	NextPageToken *string
+
+	// Recommendations to rightsize resources.
+	RightsizingRecommendations []*types.RightsizingRecommendation
+
+	// Summary of this recommendation set.
+	Summary *types.RightsizingRecommendationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

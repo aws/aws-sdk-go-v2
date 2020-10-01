@@ -82,11 +82,11 @@ type AssociateTargetsWithJobInput struct {
 
 type AssociateTargetsWithJobOutput struct {
 
-	// An ARN identifying the job.
-	JobArn *string
-
 	// A short text description of the job.
 	Description *string
+
+	// An ARN identifying the job.
+	JobArn *string
 
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string

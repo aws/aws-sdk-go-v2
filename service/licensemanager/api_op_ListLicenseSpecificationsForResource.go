@@ -72,11 +72,11 @@ type ListLicenseSpecificationsForResourceInput struct {
 
 type ListLicenseSpecificationsForResourceOutput struct {
 
-	// Token for the next set of results.
-	NextToken *string
-
 	// License configurations associated with a resource.
 	LicenseSpecifications []*types.LicenseSpecification
+
+	// Token for the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

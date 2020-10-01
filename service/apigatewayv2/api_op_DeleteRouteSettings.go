@@ -56,6 +56,11 @@ func (c *Client) DeleteRouteSettings(ctx context.Context, params *DeleteRouteSet
 
 type DeleteRouteSettingsInput struct {
 
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
+
 	// The route key.
 	//
 	// This member is required.
@@ -66,11 +71,6 @@ type DeleteRouteSettingsInput struct {
 	//
 	// This member is required.
 	StageName *string
-
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
 }
 
 type DeleteRouteSettingsOutput struct {

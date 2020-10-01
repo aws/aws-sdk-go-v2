@@ -58,25 +58,23 @@ func (c *Client) UpdateCrawler(ctx context.Context, params *UpdateCrawlerInput, 
 
 type UpdateCrawlerInput struct {
 
-	// The name of the SecurityConfiguration structure to be used by this crawler.
-	CrawlerSecurityConfiguration *string
-
 	// Name of the new crawler.
 	//
 	// This member is required.
 	Name *string
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
-	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
-	// 12 * * ? *).
-	Schedule *string
+	// A list of custom classifiers that the user has registered. By default, all
+	// built-in classifiers are included in a crawl, but these custom classifiers
+	// always override the default classifiers for a given classification.
+	Classifiers []*string
 
 	// Crawler configuration information. This versioned JSON string allows users to
 	// specify aspects of a crawler's behavior. For more information, see Configuring a
 	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string
+
+	// The name of the SecurityConfiguration structure to be used by this crawler.
+	CrawlerSecurityConfiguration *string
 
 	// The AWS Glue database where results are stored, such as:
 	// arn:aws:daylight:us-east-1::database/sometable/*.
@@ -85,23 +83,25 @@ type UpdateCrawlerInput struct {
 	// A description of the new crawler.
 	Description *string
 
-	// A list of custom classifiers that the user has registered. By default, all
-	// built-in classifiers are included in a crawl, but these custom classifiers
-	// always override the default classifiers for a given classification.
-	Classifiers []*string
+	// The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the
+	// new crawler to access customer resources.
+	Role *string
+
+	// A cron expression used to specify the schedule (see Time-Based Schedules for
+	// Jobs and Crawlers
+	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html).
+	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
+	// 12 * * ? *).
+	Schedule *string
+
+	// The policy for the crawler's update and deletion behavior.
+	SchemaChangePolicy *types.SchemaChangePolicy
 
 	// The table prefix used for catalog tables that are created.
 	TablePrefix *string
 
 	// A list of targets to crawl.
 	Targets *types.CrawlerTargets
-
-	// The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the
-	// new crawler to access customer resources.
-	Role *string
-
-	// The policy for the crawler's update and deletion behavior.
-	SchemaChangePolicy *types.SchemaChangePolicy
 }
 
 type UpdateCrawlerOutput struct {

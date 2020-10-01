@@ -56,20 +56,20 @@ func (c *Client) ListSites(ctx context.Context, params *ListSitesInput, optFns .
 
 type ListSitesInput struct {
 
-	// The pagination token.
-	NextToken *string
-
 	// The maximum page size.
 	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 }
 
 type ListSitesOutput struct {
 
-	// Information about the sites.
-	Sites []*types.Site
-
 	// The pagination token.
 	NextToken *string
+
+	// Information about the sites.
+	Sites []*types.Site
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

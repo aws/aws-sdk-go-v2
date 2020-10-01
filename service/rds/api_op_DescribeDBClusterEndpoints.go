@@ -58,12 +58,6 @@ func (c *Client) DescribeDBClusterEndpoints(ctx context.Context, params *Describ
 
 type DescribeDBClusterEndpointsInput struct {
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
-
 	// The identifier of the endpoint to describe. This parameter is stored as a
 	// lowercase string.
 	DBClusterEndpointIdentifier *string
@@ -87,18 +81,24 @@ type DescribeDBClusterEndpointsInput struct {
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
 }
 
 type DescribeDBClusterEndpointsOutput struct {
+
+	// Contains the details of the endpoints associated with the cluster and matching
+	// any filter conditions.
+	DBClusterEndpoints []*types.DBClusterEndpoint
 
 	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
-
-	// Contains the details of the endpoints associated with the cluster and matching
-	// any filter conditions.
-	DBClusterEndpoints []*types.DBClusterEndpoint
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -78,27 +78,27 @@ type DescribeForecastExportJobInput struct {
 
 type DescribeForecastExportJobOutput struct {
 
-	// The Amazon Resource Name (ARN) of the exported forecast.
-	ForecastArn *string
-
 	// When the forecast export job was created.
 	CreationTime *time.Time
-
-	// The name of the forecast export job.
-	ForecastExportJobName *string
-
-	// If an error occurred, an informational message about the error.
-	Message *string
 
 	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
 	// forecast is exported.
 	Destination *types.DataDestination
 
-	// When the last successful export job finished.
-	LastModificationTime *time.Time
+	// The Amazon Resource Name (ARN) of the exported forecast.
+	ForecastArn *string
 
 	// The ARN of the forecast export job.
 	ForecastExportJobArn *string
+
+	// The name of the forecast export job.
+	ForecastExportJobName *string
+
+	// When the last successful export job finished.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
 
 	// The status of the forecast export job. States include:
 	//

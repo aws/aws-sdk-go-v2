@@ -57,27 +57,28 @@ func (c *Client) UpdateDocumentationPart(ctx context.Context, params *UpdateDocu
 
 // Updates an existing documentation part of a given API.
 type UpdateDocumentationPartInput struct {
-	TemplateSkipList []*string
 
 	// [Required] The identifier of the to-be-updated documentation part.
 	//
 	// This member is required.
 	DocumentationPartId *string
 
-	Title *string
-
-	Name *string
-
-	Template *bool
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	Name *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of

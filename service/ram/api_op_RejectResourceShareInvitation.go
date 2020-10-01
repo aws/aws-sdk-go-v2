@@ -69,12 +69,12 @@ type RejectResourceShareInvitationInput struct {
 
 type RejectResourceShareInvitationOutput struct {
 
-	// Information about the invitation.
-	ResourceShareInvitation *types.ResourceShareInvitation
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Information about the invitation.
+	ResourceShareInvitation *types.ResourceShareInvitation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

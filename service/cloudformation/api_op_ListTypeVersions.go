@@ -60,10 +60,6 @@ type ListTypeVersionsInput struct {
 	// information. Conditional: You must specify either TypeName and Type, or Arn.
 	Arn *string
 
-	// The name of the type for which you want version summary information.
-	// Conditional: You must specify either TypeName and Type, or Arn.
-	TypeName *string
-
 	// The deprecation status of the type versions that you want to get summary
 	// information about. Valid values include:
 	//
@@ -78,9 +74,11 @@ type ListTypeVersionsInput struct {
 	// The default is LIVE.
 	DeprecatedStatus types.DeprecatedStatus
 
-	// The kind of the type. Currently the only valid value is RESOURCE. Conditional:
-	// You must specify either TypeName and Type, or Arn.
-	Type types.RegistryType
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	MaxResults *int32
 
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
@@ -89,11 +87,13 @@ type ListTypeVersionsInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
-	MaxResults *int32
+	// The kind of the type. Currently the only valid value is RESOURCE. Conditional:
+	// You must specify either TypeName and Type, or Arn.
+	Type types.RegistryType
+
+	// The name of the type for which you want version summary information.
+	// Conditional: You must specify either TypeName and Type, or Arn.
+	TypeName *string
 }
 
 type ListTypeVersionsOutput struct {

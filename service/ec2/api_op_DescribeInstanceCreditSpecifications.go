@@ -73,19 +73,20 @@ func (c *Client) DescribeInstanceCreditSpecifications(ctx context.Context, param
 
 type DescribeInstanceCreditSpecificationsInput struct {
 
-	// The filters.
-	//
-	//     * instance-id - The ID of the instance.
-	Filters []*types.Filter
-
-	// The token to retrieve the next page of results.
-	NextToken *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The filters.
+	//
+	//     * instance-id - The ID of the instance.
+	Filters []*types.Filter
+
+	// The instance IDs. Default: Describes all your instances. Constraints: Maximum
+	// 1000 explicitly specified instance IDs.
+	InstanceIds []*string
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value. This
@@ -93,9 +94,8 @@ type DescribeInstanceCreditSpecificationsInput struct {
 	// instance IDs parameter in the same call.
 	MaxResults *int32
 
-	// The instance IDs. Default: Describes all your instances. Constraints: Maximum
-	// 1000 explicitly specified instance IDs.
-	InstanceIds []*string
+	// The token to retrieve the next page of results.
+	NextToken *string
 }
 
 type DescribeInstanceCreditSpecificationsOutput struct {

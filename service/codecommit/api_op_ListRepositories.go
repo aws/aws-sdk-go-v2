@@ -57,30 +57,30 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 // Represents the input of a list repositories operation.
 type ListRepositoriesInput struct {
 
-	// The criteria used to sort the results of a list repositories operation.
-	SortBy types.SortByEnum
-
-	// The order in which to sort the results of a list repositories operation.
-	Order types.OrderEnum
-
 	// An enumeration token that allows the operation to batch the results of the
 	// operation. Batch sizes are 1,000 for list repository operations. When the client
 	// sends the token back to AWS CodeCommit, another page of 1,000 records is
 	// retrieved.
 	NextToken *string
+
+	// The order in which to sort the results of a list repositories operation.
+	Order types.OrderEnum
+
+	// The criteria used to sort the results of a list repositories operation.
+	SortBy types.SortByEnum
 }
 
 // Represents the output of a list repositories operation.
 type ListRepositoriesOutput struct {
 
-	// Lists the repositories called by the list repositories operation.
-	Repositories []*types.RepositoryNameIdPair
-
 	// An enumeration token that allows the operation to batch the results of the
 	// operation. Batch sizes are 1,000 for list repository operations. When the client
 	// sends the token back to AWS CodeCommit, another page of 1,000 records is
 	// retrieved.
 	NextToken *string
+
+	// Lists the repositories called by the list repositories operation.
+	Repositories []*types.RepositoryNameIdPair
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

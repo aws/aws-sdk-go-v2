@@ -78,11 +78,11 @@ type UpdateClusterKafkaVersionInput struct {
 
 type UpdateClusterKafkaVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the cluster operation.
-	ClusterOperationArn *string
-
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the cluster operation.
+	ClusterOperationArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

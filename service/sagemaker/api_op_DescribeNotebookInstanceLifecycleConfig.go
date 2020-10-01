@@ -69,24 +69,24 @@ type DescribeNotebookInstanceLifecycleConfigInput struct {
 
 type DescribeNotebookInstanceLifecycleConfigOutput struct {
 
-	// The shell script that runs every time you start a notebook instance, including
-	// when you create the notebook instance.
-	OnStart []*types.NotebookInstanceLifecycleHook
+	// A timestamp that tells when the lifecycle configuration was created.
+	CreationTime *time.Time
 
 	// A timestamp that tells when the lifecycle configuration was last modified.
 	LastModifiedTime *time.Time
 
-	// A timestamp that tells when the lifecycle configuration was created.
-	CreationTime *time.Time
-
 	// The Amazon Resource Name (ARN) of the lifecycle configuration.
 	NotebookInstanceLifecycleConfigArn *string
+
+	// The name of the lifecycle configuration.
+	NotebookInstanceLifecycleConfigName *string
 
 	// The shell script that runs only once, when you create a notebook instance.
 	OnCreate []*types.NotebookInstanceLifecycleHook
 
-	// The name of the lifecycle configuration.
-	NotebookInstanceLifecycleConfigName *string
+	// The shell script that runs every time you start a notebook instance, including
+	// when you create the notebook instance.
+	OnStart []*types.NotebookInstanceLifecycleHook
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

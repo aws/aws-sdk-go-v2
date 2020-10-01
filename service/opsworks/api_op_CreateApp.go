@@ -63,11 +63,43 @@ func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns .
 
 type CreateAppInput struct {
 
-	// An SslConfiguration object with the SSL configuration.
-	SslConfiguration *types.SslConfiguration
+	// The app name.
+	//
+	// This member is required.
+	Name *string
 
-	// The app's short name.
-	Shortname *string
+	// The stack ID.
+	//
+	// This member is required.
+	StackId *string
+
+	// The app type. Each supported type is associated with a particular layer. For
+	// example, PHP applications are associated with a PHP layer. AWS OpsWorks Stacks
+	// deploys an application to those instances that are members of the corresponding
+	// layer. If your app isn't one of the standard types, or you prefer to implement
+	// your own Deploy recipes, specify other.
+	//
+	// This member is required.
+	Type types.AppType
+
+	// A Source object that specifies the app repository.
+	AppSource *types.Source
+
+	// One or more user-defined key/value pairs to be added to the stack attributes.
+	Attributes map[string]*string
+
+	// The app's data source.
+	DataSources []*types.DataSource
+
+	// A description of the app.
+	Description *string
+
+	// The app virtual host settings, with multiple domains separated by commas. For
+	// example: 'www.example.com, example.com'
+	Domains []*string
+
+	// Whether to enable SSL for the app.
+	EnableSsl *bool
 
 	// An array of EnvironmentVariable objects that specify environment variables to be
 	// associated with the app. After you deploy the app, these variables are defined
@@ -83,43 +115,11 @@ type CreateAppInput struct {
 	// version.
 	Environment []*types.EnvironmentVariable
 
-	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string
+	// The app's short name.
+	Shortname *string
 
-	// A Source object that specifies the app repository.
-	AppSource *types.Source
-
-	// A description of the app.
-	Description *string
-
-	// The app's data source.
-	DataSources []*types.DataSource
-
-	// The app type. Each supported type is associated with a particular layer. For
-	// example, PHP applications are associated with a PHP layer. AWS OpsWorks Stacks
-	// deploys an application to those instances that are members of the corresponding
-	// layer. If your app isn't one of the standard types, or you prefer to implement
-	// your own Deploy recipes, specify other.
-	//
-	// This member is required.
-	Type types.AppType
-
-	// The app virtual host settings, with multiple domains separated by commas. For
-	// example: 'www.example.com, example.com'
-	Domains []*string
-
-	// The stack ID.
-	//
-	// This member is required.
-	StackId *string
-
-	// The app name.
-	//
-	// This member is required.
-	Name *string
-
-	// Whether to enable SSL for the app.
-	EnableSsl *bool
+	// An SslConfiguration object with the SSL configuration.
+	SslConfiguration *types.SslConfiguration
 }
 
 // Contains the response to a CreateApp request.

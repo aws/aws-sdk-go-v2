@@ -59,6 +59,12 @@ func (c *Client) ListAccountAliases(ctx context.Context, params *ListAccountAlia
 
 type ListAccountAliasesInput struct {
 
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -67,16 +73,16 @@ type ListAccountAliasesInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
 }
 
 // Contains the response to a successful ListAccountAliases () request.
 type ListAccountAliasesOutput struct {
+
+	// A list of aliases associated with the account. AWS supports only one alias per
+	// account.
+	//
+	// This member is required.
+	AccountAliases []*string
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -85,12 +91,6 @@ type ListAccountAliasesOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
-
-	// A list of aliases associated with the account. AWS supports only one alias per
-	// account.
-	//
-	// This member is required.
-	AccountAliases []*string
 
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.

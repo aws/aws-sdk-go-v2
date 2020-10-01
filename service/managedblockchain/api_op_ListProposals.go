@@ -62,20 +62,20 @@ type ListProposalsInput struct {
 	// This member is required.
 	NetworkId *string
 
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string
-
 	// The maximum number of proposals to return.
 	MaxResults *int32
+
+	// The pagination token that indicates the next set of results to retrieve.
+	NextToken *string
 }
 
 type ListProposalsOutput struct {
 
-	// The summary of each proposal made on the network.
-	Proposals []*types.ProposalSummary
-
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
+	// The summary of each proposal made on the network.
+	Proposals []*types.ProposalSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

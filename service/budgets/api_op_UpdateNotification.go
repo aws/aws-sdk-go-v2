@@ -64,11 +64,6 @@ type UpdateNotificationInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The previous notification that is associated with a budget.
-	//
-	// This member is required.
-	OldNotification *types.Notification
-
 	// The name of the budget whose notification you want to update.
 	//
 	// This member is required.
@@ -78,6 +73,11 @@ type UpdateNotificationInput struct {
 	//
 	// This member is required.
 	NewNotification *types.Notification
+
+	// The previous notification that is associated with a budget.
+	//
+	// This member is required.
+	OldNotification *types.Notification
 }
 
 // Response of UpdateNotification

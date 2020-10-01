@@ -64,6 +64,12 @@ func (c *Client) CreateTrafficPolicyInstance(ctx context.Context, params *Create
 // want to create based on a specified traffic policy.
 type CreateTrafficPolicyInstanceInput struct {
 
+	// The ID of the hosted zone that you want Amazon Route 53 to create resource
+	// record sets in by using the configuration in a traffic policy.
+	//
+	// This member is required.
+	HostedZoneId *string
+
 	// The domain name (such as example.com) or subdomain name (such as
 	// www.example.com) for which Amazon Route 53 responds to DNS queries by using the
 	// resource record sets that Route 53 creates for this traffic policy instance.
@@ -88,27 +94,21 @@ type CreateTrafficPolicyInstanceInput struct {
 	//
 	// This member is required.
 	TrafficPolicyVersion *int32
-
-	// The ID of the hosted zone that you want Amazon Route 53 to create resource
-	// record sets in by using the configuration in a traffic policy.
-	//
-	// This member is required.
-	HostedZoneId *string
 }
 
 // A complex type that contains the response information for the
 // CreateTrafficPolicyInstance request.
 type CreateTrafficPolicyInstanceOutput struct {
 
-	// A complex type that contains settings for the new traffic policy instance.
-	//
-	// This member is required.
-	TrafficPolicyInstance *types.TrafficPolicyInstance
-
 	// A unique URL that represents a new traffic policy instance.
 	//
 	// This member is required.
 	Location *string
+
+	// A complex type that contains settings for the new traffic policy instance.
+	//
+	// This member is required.
+	TrafficPolicyInstance *types.TrafficPolicyInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

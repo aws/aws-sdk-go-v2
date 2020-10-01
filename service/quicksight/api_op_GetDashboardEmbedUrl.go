@@ -78,6 +78,21 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 
 type GetDashboardEmbedUrlInput struct {
 
+	// The ID for the AWS account that contains the dashboard that you're embedding.
+	//
+	// This member is required.
+	AwsAccountId *string
+
+	// The ID for the dashboard, also added to the IAM policy.
+	//
+	// This member is required.
+	DashboardId *string
+
+	// The authentication method that the user uses to sign in.
+	//
+	// This member is required.
+	IdentityType types.IdentityType
+
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
 	// enables the reset button.
 	ResetDisabled *bool
@@ -85,16 +100,6 @@ type GetDashboardEmbedUrlInput struct {
 	// How many minutes the session is valid. The session lifetime must be 15-600
 	// minutes.
 	SessionLifetimeInMinutes *int64
-
-	// The ID for the AWS account that contains the dashboard that you're embedding.
-	//
-	// This member is required.
-	AwsAccountId *string
-
-	// The authentication method that the user uses to sign in.
-	//
-	// This member is required.
-	IdentityType types.IdentityType
 
 	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
 	// which enables the undo/redo button.
@@ -113,11 +118,6 @@ type GetDashboardEmbedUrlInput struct {
 	// * IAM users and IAM role-based sessions authenticated through Federated Single
 	// Sign-On using SAML, OpenID Connect, or IAM federation.
 	UserArn *string
-
-	// The ID for the dashboard, also added to the IAM policy.
-	//
-	// This member is required.
-	DashboardId *string
 }
 
 type GetDashboardEmbedUrlOutput struct {

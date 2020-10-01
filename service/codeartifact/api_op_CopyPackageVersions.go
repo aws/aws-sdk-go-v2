@@ -58,65 +58,15 @@ func (c *Client) CopyPackageVersions(ctx context.Context, params *CopyPackageVer
 
 type CopyPackageVersionsInput struct {
 
-	// The name of the domain that contains the source and destination repositories.
-	//
-	// This member is required.
-	Domain *string
-
-	// The name of the repository that contains the package versions to copy.
-	//
-	// This member is required.
-	SourceRepository *string
-
-	// The name of the package that is copied.
-	//
-	// This member is required.
-	Package *string
-
-	// Set to true to copy packages from repositories that are upstream from the source
-	// repository to the destination repository. The default setting is false. For more
-	// information, see Working with upstream repositories
-	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
-	IncludeFromUpstream *bool
-
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
-	//
-	//     * The namespace of a Maven package is its
-	// groupId.
-	//
-	//     * The namespace of an npm package is its scope.
-	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
-	Namespace *string
-
-	// Set to true to overwrite a package version that already exists in the
-	// destination repository. If set to false and the package version already exists
-	// in the destination repository, the package version is returned in the
-	// failedVersions field of the response with an ALREADY_EXISTS error code.
-	AllowOverwrite *bool
-
 	// The name of the repository into which package versions are copied.
 	//
 	// This member is required.
 	DestinationRepository *string
 
-	// The versions of the package to copy. You must specify versions or
-	// versionRevisions. You cannot specify both.
-	Versions []*string
-
-	// A list of key-value pairs. The keys are package versions and the values are
-	// package version revisions. A CopyPackageVersion operation succeeds if the
-	// specified versions in the source repository match the specified package version
-	// revision. You must specify versions or versionRevisions. You cannot specify
-	// both.
-	VersionRevisions map[string]*string
+	// The name of the domain that contains the source and destination repositories.
+	//
+	// This member is required.
+	Domain *string
 
 	// The format of the package that is copied. The valid package types are:
 	//
@@ -131,12 +81,59 @@ type CopyPackageVersionsInput struct {
 	//
 	// This member is required.
 	Format types.PackageFormat
+
+	// The name of the package that is copied.
+	//
+	// This member is required.
+	Package *string
+
+	// The name of the repository that contains the package versions to copy.
+	//
+	// This member is required.
+	SourceRepository *string
+
+	// Set to true to overwrite a package version that already exists in the
+	// destination repository. If set to false and the package version already exists
+	// in the destination repository, the package version is returned in the
+	// failedVersions field of the response with an ALREADY_EXISTS error code.
+	AllowOverwrite *bool
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
+
+	// Set to true to copy packages from repositories that are upstream from the source
+	// repository to the destination repository. The default setting is false. For more
+	// information, see Working with upstream repositories
+	// (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html).
+	IncludeFromUpstream *bool
+
+	// The namespace of the package. The package component that specifies its namespace
+	// depends on its type. For example:
+	//
+	//     * The namespace of a Maven package is its
+	// groupId.
+	//
+	//     * The namespace of an npm package is its scope.
+	//
+	//     * A Python
+	// package does not contain a corresponding component, so Python packages do not
+	// have a namespace.
+	Namespace *string
+
+	// A list of key-value pairs. The keys are package versions and the values are
+	// package version revisions. A CopyPackageVersion operation succeeds if the
+	// specified versions in the source repository match the specified package version
+	// revision. You must specify versions or versionRevisions. You cannot specify
+	// both.
+	VersionRevisions map[string]*string
+
+	// The versions of the package to copy. You must specify versions or
+	// versionRevisions. You cannot specify both.
+	Versions []*string
 }
 
 type CopyPackageVersionsOutput struct {
-
-	// A list of the package versions that were successfully copied to your repository.
-	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
 
 	// A map of package versions that failed to copy and their error codes. The
 	// possible error codes are in the PackageVersionError data type. They are:
@@ -155,6 +152,9 @@ type CopyPackageVersionsOutput struct {
 	//
 	//     * SKIPPED
 	FailedVersions map[string]*types.PackageVersionError
+
+	// A list of the package versions that were successfully copied to your repository.
+	SuccessfulVersions map[string]*types.SuccessfulPackageVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

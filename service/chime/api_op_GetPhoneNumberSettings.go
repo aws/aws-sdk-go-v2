@@ -60,11 +60,11 @@ type GetPhoneNumberSettingsInput struct {
 
 type GetPhoneNumberSettingsOutput struct {
 
-	// The updated outbound calling name timestamp, in ISO 8601 format.
-	CallingNameUpdatedTimestamp *time.Time
-
 	// The default outbound calling name for the account.
 	CallingName *string
+
+	// The updated outbound calling name timestamp, in ISO 8601 format.
+	CallingNameUpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

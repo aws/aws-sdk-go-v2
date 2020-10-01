@@ -58,11 +58,6 @@ func (c *Client) UpdateDocumentationVersion(ctx context.Context, params *UpdateD
 
 // Updates an existing documentation version of an API.
 type UpdateDocumentationVersionInput struct {
-	TemplateSkipList []*string
-
-	Title *string
-
-	Template *bool
 
 	// [Required] The version identifier of the to-be-updated documentation version.
 	//
@@ -79,6 +74,12 @@ type UpdateDocumentationVersionInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -88,11 +89,11 @@ type UpdateDocumentationVersionInput struct {
 // DocumentationPart (), DocumentationVersions ()
 type UpdateDocumentationVersionOutput struct {
 
-	// The description of the API documentation snapshot.
-	Description *string
-
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
+	// The description of the API documentation snapshot.
+	Description *string
 
 	// The version identifier of the API documentation snapshot.
 	Version *string

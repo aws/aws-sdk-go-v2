@@ -62,18 +62,18 @@ type SearchIndexInput struct {
 	// This member is required.
 	QueryString *string
 
-	// The query version.
-	QueryVersion *string
-
 	// The search index name.
 	IndexName *string
+
+	// The maximum number of results to return at one time.
+	MaxResults *int32
 
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
 
-	// The maximum number of results to return at one time.
-	MaxResults *int32
+	// The query version.
+	QueryVersion *string
 }
 
 type SearchIndexOutput struct {
@@ -82,11 +82,11 @@ type SearchIndexOutput struct {
 	// additional results.
 	NextToken *string
 
-	// The things that match the search query.
-	Things []*types.ThingDocument
-
 	// The thing groups that match the search query.
 	ThingGroups []*types.ThingGroupDocument
+
+	// The things that match the search query.
+	Things []*types.ThingDocument
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

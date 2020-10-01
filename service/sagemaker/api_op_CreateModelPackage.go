@@ -63,15 +63,14 @@ func (c *Client) CreateModelPackage(ctx context.Context, params *CreateModelPack
 
 type CreateModelPackageInput struct {
 
-	// Details about the algorithm that was used to create the model package.
-	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+	// The name of the model package. The name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
+	//
+	// This member is required.
+	ModelPackageName *string
 
-	// Specifies configurations for one or more transform jobs that Amazon SageMaker
-	// runs to test the model package.
-	ValidationSpecification *types.ModelPackageValidationSpecification
-
-	// A description of the model package.
-	ModelPackageDescription *string
+	// Whether to certify the model package for listing on AWS Marketplace.
+	CertifyForMarketplace *bool
 
 	// Specifies details about inference jobs that can be run with models based on this
 	// model package, including the following:
@@ -87,14 +86,15 @@ type CreateModelPackageInput struct {
 	// the model package supports for inference.
 	InferenceSpecification *types.InferenceSpecification
 
-	// The name of the model package. The name must have 1 to 63 characters. Valid
-	// characters are a-z, A-Z, 0-9, and - (hyphen).
-	//
-	// This member is required.
-	ModelPackageName *string
+	// A description of the model package.
+	ModelPackageDescription *string
 
-	// Whether to certify the model package for listing on AWS Marketplace.
-	CertifyForMarketplace *bool
+	// Details about the algorithm that was used to create the model package.
+	SourceAlgorithmSpecification *types.SourceAlgorithmSpecification
+
+	// Specifies configurations for one or more transform jobs that Amazon SageMaker
+	// runs to test the model package.
+	ValidationSpecification *types.ModelPackageValidationSpecification
 }
 
 type CreateModelPackageOutput struct {

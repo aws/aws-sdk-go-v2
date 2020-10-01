@@ -66,15 +66,6 @@ func (c *Client) ListAttachedRolePolicies(ctx context.Context, params *ListAttac
 
 type ListAttachedRolePoliciesInput struct {
 
-	// The path prefix for filtering the results. This parameter is optional. If it is
-	// not included, it defaults to a slash (/), listing all policies. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of either a forward slash (/) by itself or a string that
-	// must begin and end with forward slashes. In addition, it can contain any ASCII
-	// character from the ! (\u0021) through the DEL character (\u007F), including most
-	// punctuation characters, digits, and upper and lowercased letters.
-	PathPrefix *string
-
 	// The name (friendly name, not ARN) of the role to list attached policies for.
 	// This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -98,6 +89,15 @@ type ListAttachedRolePoliciesInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
+	// The path prefix for filtering the results. This parameter is optional. If it is
+	// not included, it defaults to a slash (/), listing all policies. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of either a forward slash (/) by itself or a string that
+	// must begin and end with forward slashes. In addition, it can contain any ASCII
+	// character from the ! (\u0021) through the DEL character (\u007F), including most
+	// punctuation characters, digits, and upper and lowercased letters.
+	PathPrefix *string
 }
 
 // Contains the response to a successful ListAttachedRolePolicies () request.

@@ -60,10 +60,6 @@ func (c *Client) ListStackResources(ctx context.Context, params *ListStackResour
 // The input for the ListStackResource () action.
 type ListStackResourcesInput struct {
 
-	// A string that identifies the next page of stack resources that you want to
-	// retrieve.
-	NextToken *string
-
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -77,6 +73,10 @@ type ListStackResourcesInput struct {
 	//
 	// This member is required.
 	StackName *string
+
+	// A string that identifies the next page of stack resources that you want to
+	// retrieve.
+	NextToken *string
 }
 
 // The output for a ListStackResources () action.

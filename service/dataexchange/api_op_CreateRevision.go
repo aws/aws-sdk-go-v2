@@ -58,13 +58,13 @@ func (c *Client) CreateRevision(ctx context.Context, params *CreateRevisionInput
 // The request body for CreateRevision.
 type CreateRevisionInput struct {
 
-	// An optional comment about the revision.
-	Comment *string
-
 	// The unique identifier for a data set.
 	//
 	// This member is required.
 	DataSetId *string
+
+	// An optional comment about the revision.
+	Comment *string
 
 	// A revision tag is an optional label that you can assign to a revision when you
 	// create it. Each tag consists of a key and an optional value, both of which you
@@ -75,14 +75,17 @@ type CreateRevisionInput struct {
 
 type CreateRevisionOutput struct {
 
+	// The ARN for the revision
+	Arn *string
+
 	// An optional comment about the revision.
 	Comment *string
 
-	// The tags for the revision.
-	Tags map[string]*string
+	// The date and time that the revision was created, in ISO 8601 format.
+	CreatedAt *time.Time
 
-	// The ARN for the revision
-	Arn *string
+	// The unique identifier for the data set associated with this revision.
+	DataSetId *string
 
 	// To publish a revision to a data set in a product, the revision must first be
 	// finalized. Finalizing a revision tells AWS Data Exchange that your changes to
@@ -93,22 +96,19 @@ type CreateRevisionOutput struct {
 	// revisions are uniquely identified by their ARN.
 	Finalized *bool
 
-	// The unique identifier for the data set associated with this revision.
-	DataSetId *string
-
-	// The date and time that the revision was last updated, in ISO 8601 format.
-	UpdatedAt *time.Time
-
 	// The unique identifier for the revision.
 	Id *string
-
-	// The date and time that the revision was created, in ISO 8601 format.
-	CreatedAt *time.Time
 
 	// The revision ID of the owned revision corresponding to the entitled revision
 	// being viewed. This parameter is returned when a revision owner is viewing the
 	// entitled copy of its owned revision.
 	SourceId *string
+
+	// The tags for the revision.
+	Tags map[string]*string
+
+	// The date and time that the revision was last updated, in ISO 8601 format.
+	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

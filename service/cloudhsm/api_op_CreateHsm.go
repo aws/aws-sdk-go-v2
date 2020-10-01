@@ -76,32 +76,21 @@ func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns .
 // Contains the inputs for the CreateHsm operation.
 type CreateHsmInput struct {
 
-	// The identifier of the subnet in your VPC in which to place the HSM.
-	//
-	// This member is required.
-	SubnetId *string
-
-	// The IP address for the syslog monitoring server. The AWS CloudHSM service only
-	// supports one syslog monitoring server.
-	SyslogIp *string
-
 	// The ARN of an IAM role to enable the AWS CloudHSM service to allocate an ENI on
 	// your behalf.
 	//
 	// This member is required.
 	IamRoleArn *string
 
-	// The IP address to assign to the HSM's ENI. If an IP address is not specified, an
-	// IP address will be randomly chosen from the CIDR range of the subnet.
-	EniIp *string
-
-	// The external ID from IamRoleArn, if present.
-	ExternalId *string
-
 	// The SSH public key to install on the HSM.
 	//
 	// This member is required.
 	SshKey *string
+
+	// The identifier of the subnet in your VPC in which to place the HSM.
+	//
+	// This member is required.
+	SubnetId *string
 
 	// Specifies the type of subscription for the HSM.
 	//
@@ -117,6 +106,17 @@ type CreateHsmInput struct {
 	// A user-defined token to ensure idempotence. Subsequent calls to this operation
 	// with the same token will be ignored.
 	ClientToken *string
+
+	// The IP address to assign to the HSM's ENI. If an IP address is not specified, an
+	// IP address will be randomly chosen from the CIDR range of the subnet.
+	EniIp *string
+
+	// The external ID from IamRoleArn, if present.
+	ExternalId *string
+
+	// The IP address for the syslog monitoring server. The AWS CloudHSM service only
+	// supports one syslog monitoring server.
+	SyslogIp *string
 }
 
 // Contains the output of the CreateHsm operation.

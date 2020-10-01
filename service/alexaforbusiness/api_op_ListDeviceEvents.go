@@ -58,6 +58,11 @@ func (c *Client) ListDeviceEvents(ctx context.Context, params *ListDeviceEventsI
 
 type ListDeviceEventsInput struct {
 
+	// The ARN of a device.
+	//
+	// This member is required.
+	DeviceArn *string
+
 	// The event type to filter device events. If EventType isn't specified, this
 	// returns a list of all device events in reverse chronological order. If EventType
 	// is specified, this returns a list of device events for that EventType in reverse
@@ -74,20 +79,15 @@ type ListDeviceEventsInput struct {
 	// includes results beyond the token, up to the value specified by MaxResults. When
 	// the end of results is reached, the response has a value of null.
 	NextToken *string
-
-	// The ARN of a device.
-	//
-	// This member is required.
-	DeviceArn *string
 }
 
 type ListDeviceEventsOutput struct {
 
-	// The token returned to indicate that there is more data available.
-	NextToken *string
-
 	// The device events requested for the device ARN.
 	DeviceEvents []*types.DeviceEvent
+
+	// The token returned to indicate that there is more data available.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,14 +61,6 @@ func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFAD
 
 type DeactivateMFADeviceInput struct {
 
-	// The name of the user whose MFA device you want to deactivate. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	UserName *string
-
 	// The serial number that uniquely identifies the MFA device. For virtual MFA
 	// devices, the serial number is the device ARN. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
@@ -77,6 +69,14 @@ type DeactivateMFADeviceInput struct {
 	//
 	// This member is required.
 	SerialNumber *string
+
+	// The name of the user whose MFA device you want to deactivate. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	UserName *string
 }
 
 type DeactivateMFADeviceOutput struct {

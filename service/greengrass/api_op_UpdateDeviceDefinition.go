@@ -56,13 +56,13 @@ func (c *Client) UpdateDeviceDefinition(ctx context.Context, params *UpdateDevic
 
 type UpdateDeviceDefinitionInput struct {
 
-	// The name of the definition.
-	Name *string
-
 	// The ID of the device definition.
 	//
 	// This member is required.
 	DeviceDefinitionId *string
+
+	// The name of the definition.
+	Name *string
 }
 
 type UpdateDeviceDefinitionOutput struct {

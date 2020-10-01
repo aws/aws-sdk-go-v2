@@ -55,28 +55,28 @@ type XmlEmptyListsInput struct {
 }
 
 type XmlEmptyListsOutput struct {
-	StringList []*string
-
-	StringSet []*string
-
-	IntegerList []*int32
-
 	BooleanList []*bool
 
-	TimestampList []*time.Time
-
 	EnumList []types.FooEnum
+
+	FlattenedList []*string
+
+	FlattenedList2 []*string
+
+	IntegerList []*int32
 
 	// A list of lists of strings.
 	NestedStringList [][]*string
 
 	RenamedListMembers []*string
 
-	FlattenedList []*string
+	StringList []*string
 
-	FlattenedList2 []*string
+	StringSet []*string
 
 	StructureList []*types.StructureListMember
+
+	TimestampList []*time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

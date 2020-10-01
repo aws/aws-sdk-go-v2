@@ -57,6 +57,11 @@ func (c *Client) ListBudgetsForResource(ctx context.Context, params *ListBudgets
 
 type ListBudgetsForResourceInput struct {
 
+	// The resource identifier.
+	//
+	// This member is required.
+	ResourceId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -67,17 +72,12 @@ type ListBudgetsForResourceInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
 	// The maximum number of items to return with this call.
 	PageSize *int32
 
-	// The resource identifier.
-	//
-	// This member is required.
-	ResourceId *string
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type ListBudgetsForResourceOutput struct {

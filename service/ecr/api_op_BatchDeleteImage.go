@@ -81,11 +81,11 @@ type BatchDeleteImageInput struct {
 
 type BatchDeleteImageOutput struct {
 
-	// The image IDs of the deleted images.
-	ImageIds []*types.ImageIdentifier
-
 	// Any failures associated with the call.
 	Failures []*types.ImageFailure
+
+	// The image IDs of the deleted images.
+	ImageIds []*types.ImageIdentifier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

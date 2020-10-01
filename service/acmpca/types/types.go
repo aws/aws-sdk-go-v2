@@ -20,17 +20,42 @@ type ASN1Subject struct {
 	// Fully qualified domain name (FQDN) associated with the certificate subject.
 	CommonName *string
 
+	// Two-digit code that specifies the country in which the certificate subject
+	// located.
+	Country *string
+
+	// Disambiguating information for the certificate subject.
+	DistinguishedNameQualifier *string
+
+	// Typically a qualifier appended to the name of an individual. Examples include
+	// Jr. for junior, Sr. for senior, and III for third.
+	GenerationQualifier *string
+
+	// First name.
+	GivenName *string
+
 	// Concatenation that typically contains the first letter of the GivenName, the
 	// first letter of the middle name if one exists, and the first letter of the
 	// SurName.
 	Initials *string
 
-	// A title such as Mr. or Ms., which is pre-pended to the name to refer formally to
-	// the certificate subject.
-	Title *string
+	// The locality (such as a city or town) in which the certificate subject is
+	// located.
+	Locality *string
 
-	// First name.
-	GivenName *string
+	// Legal name of the organization with which the certificate subject is affiliated.
+	Organization *string
+
+	// A subdivision or unit of the organization (such as sales or finance) with which
+	// the certificate subject is affiliated.
+	OrganizationalUnit *string
+
+	// Typically a shortened version of a longer GivenName. For example, Jonathan is
+	// often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.
+	Pseudonym *string
+
+	// The certificate serial number.
+	SerialNumber *string
 
 	// State in which the subject of the certificate is located.
 	State *string
@@ -39,34 +64,9 @@ type ASN1Subject struct {
 	// ordered last. In Asian cultures the surname is typically ordered first.
 	Surname *string
 
-	// The certificate serial number.
-	SerialNumber *string
-
-	// Two-digit code that specifies the country in which the certificate subject
-	// located.
-	Country *string
-
-	// Legal name of the organization with which the certificate subject is affiliated.
-	Organization *string
-
-	// Typically a shortened version of a longer GivenName. For example, Jonathan is
-	// often shortened to John. Elizabeth is often shortened to Beth, Liz, or Eliza.
-	Pseudonym *string
-
-	// A subdivision or unit of the organization (such as sales or finance) with which
-	// the certificate subject is affiliated.
-	OrganizationalUnit *string
-
-	// Disambiguating information for the certificate subject.
-	DistinguishedNameQualifier *string
-
-	// The locality (such as a city or town) in which the certificate subject is
-	// located.
-	Locality *string
-
-	// Typically a qualifier appended to the name of an individual. Examples include
-	// Jr. for junior, Sr. for senior, and III for third.
-	GenerationQualifier *string
+	// A title such as Mr. or Ms., which is pre-pended to the name to refer formally to
+	// the certificate subject.
+	Title *string
 }
 
 // Contains information about your private certificate authority (CA). Your private
@@ -81,45 +81,45 @@ type ASN1Subject struct {
 // into AWS Certificate Manager (ACM).
 type CertificateAuthority struct {
 
-	// Status of your private CA.
-	Status CertificateAuthorityStatus
-
-	// Date and time at which your private CA was created.
-	CreatedAt *time.Time
-
 	// Amazon Resource Name (ARN) for your private certificate authority (CA). The
 	// format is  12345678-1234-1234-1234-123456789012 .
 	Arn *string
 
+	// Your private CA configuration.
+	CertificateAuthorityConfiguration *CertificateAuthorityConfiguration
+
+	// Date and time at which your private CA was created.
+	CreatedAt *time.Time
+
+	// Reason the request to create your private CA failed.
+	FailureReason FailureReason
+
+	// Date and time at which your private CA was last updated.
+	LastStateChangeAt *time.Time
+
 	// Date and time after which your private CA certificate is not valid.
 	NotAfter *time.Time
 
-	// Serial number of your private CA.
-	Serial *string
+	// Date and time before which your private CA certificate is not valid.
+	NotBefore *time.Time
 
 	// The period during which a deleted CA can be restored. For more information, see
 	// the PermanentDeletionTimeInDays parameter of the
 	// DeleteCertificateAuthorityRequest () action.
 	RestorableUntil *time.Time
 
-	// Date and time at which your private CA was last updated.
-	LastStateChangeAt *time.Time
-
-	// Reason the request to create your private CA failed.
-	FailureReason FailureReason
-
 	// Information about the certificate revocation list (CRL) created and maintained
 	// by your private CA.
 	RevocationConfiguration *RevocationConfiguration
 
-	// Date and time before which your private CA certificate is not valid.
-	NotBefore *time.Time
+	// Serial number of your private CA.
+	Serial *string
+
+	// Status of your private CA.
+	Status CertificateAuthorityStatus
 
 	// Type of your private CA.
 	Type CertificateAuthorityType
-
-	// Your private CA configuration.
-	CertificateAuthorityConfiguration *CertificateAuthorityConfiguration
 }
 
 // Contains configuration information for your private certificate authority (CA).
@@ -215,14 +215,6 @@ type CertificateAuthorityConfiguration struct {
 // -text -in crl_path -noout
 type CrlConfiguration struct {
 
-	// Name inserted into the certificate CRL Distribution Points extension that
-	// enables the use of an alias for the CRL distribution point. Use this value if
-	// you don't want the name of your S3 bucket to be public.
-	CustomCname *string
-
-	// Number of days until a certificate expires.
-	ExpirationInDays *int32
-
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
 	// enabled. You can use this value to enable certificate revocation for a new CA
 	// when you call the CreateCertificateAuthority () action or for an existing CA
@@ -230,6 +222,14 @@ type CrlConfiguration struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	// Name inserted into the certificate CRL Distribution Points extension that
+	// enables the use of an alias for the CRL distribution point. Use this value if
+	// you don't want the name of your S3 bucket to be public.
+	CustomCname *string
+
+	// Number of days until a certificate expires.
+	ExpirationInDays *int32
 
 	// Name of the S3 bucket that contains the CRL. If you do not provide a value for
 	// the CustomCname argument, the name of your S3 bucket is placed into the CRL
@@ -248,9 +248,8 @@ type CrlConfiguration struct {
 // () action, and listed with the ListPermissions () action.
 type Permission struct {
 
-	// The AWS service or entity that holds the permission. At this time, the only
-	// valid principal is acm.amazonaws.com.
-	Principal *string
+	// The private CA actions that can be performed by the designated AWS service.
+	Actions []ActionType
 
 	// The Amazon Resource Number (ARN) of the private CA from which the permission was
 	// issued.
@@ -259,14 +258,15 @@ type Permission struct {
 	// The time at which the permission was created.
 	CreatedAt *time.Time
 
-	// The ID of the account that assigned the permission.
-	SourceAccount *string
-
-	// The private CA actions that can be performed by the designated AWS service.
-	Actions []ActionType
-
 	// The name of the policy that is associated with the permission.
 	Policy *string
+
+	// The AWS service or entity that holds the permission. At this time, the only
+	// valid principal is acm.amazonaws.com.
+	Principal *string
+
+	// The ID of the account that assigned the permission.
+	SourceAccount *string
 }
 
 // Certificate revocation information used by the CreateCertificateAuthority () and

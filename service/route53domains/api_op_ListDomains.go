@@ -73,14 +73,14 @@ type ListDomainsInput struct {
 // The ListDomains response includes the following elements.
 type ListDomainsOutput struct {
 
-	// If there are more domains than you specified for MaxItems in the request, submit
-	// another request and include the value of NextPageMarker in the value of Marker.
-	NextPageMarker *string
-
 	// A summary of domains.
 	//
 	// This member is required.
 	Domains []*types.DomainSummary
+
+	// If there are more domains than you specified for MaxItems in the request, submit
+	// another request and include the value of NextPageMarker in the value of Marker.
+	NextPageMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

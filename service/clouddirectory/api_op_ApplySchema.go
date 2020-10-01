@@ -57,17 +57,17 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 
 type ApplySchemaInput struct {
 
-	// Published schema Amazon Resource Name (ARN) that needs to be copied. For more
-	// information, see arns ().
-	//
-	// This member is required.
-	PublishedSchemaArn *string
-
 	// The Amazon Resource Name (ARN) that is associated with the Directory () into
 	// which the schema is copied. For more information, see arns ().
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	// Published schema Amazon Resource Name (ARN) that needs to be copied. For more
+	// information, see arns ().
+	//
+	// This member is required.
+	PublishedSchemaArn *string
 }
 
 type ApplySchemaOutput struct {

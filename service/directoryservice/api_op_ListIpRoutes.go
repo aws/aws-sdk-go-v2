@@ -74,13 +74,13 @@ type ListIpRoutesInput struct {
 
 type ListIpRoutesOutput struct {
 
+	// A list of IpRoute ()s.
+	IpRoutesInfo []*types.IpRouteInfo
+
 	// If not null, more results are available. Pass this value for the NextToken
 	// parameter in a subsequent call to ListIpRoutes () to retrieve the next set of
 	// items.
 	NextToken *string
-
-	// A list of IpRoute ()s.
-	IpRoutesInfo []*types.IpRouteInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

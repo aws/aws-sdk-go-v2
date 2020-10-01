@@ -64,6 +64,21 @@ type ListProfileTimesInput struct {
 	// This member is required.
 	EndTime *time.Time
 
+	// The aggregation period.
+	//
+	// This member is required.
+	Period types.AggregationPeriod
+
+	// The name of the profiling group.
+	//
+	// This member is required.
+	ProfilingGroupName *string
+
+	// The start time of the time range from which to list the profiles.
+	//
+	// This member is required.
+	StartTime *time.Time
+
 	// The maximum number of profile time results returned by ListProfileTimes in
 	// paginated output. When this parameter is used, ListProfileTimes only returns
 	// maxResults results in a single page with a nextToken response element. The
@@ -82,37 +97,22 @@ type ListProfileTimesInput struct {
 	// The order (ascending or descending by start time of the profile) to use when
 	// listing profiles. Defaults to TIMESTAMP_DESCENDING.
 	OrderBy types.OrderBy
-
-	// The aggregation period.
-	//
-	// This member is required.
-	Period types.AggregationPeriod
-
-	// The name of the profiling group.
-	//
-	// This member is required.
-	ProfilingGroupName *string
-
-	// The start time of the time range from which to list the profiles.
-	//
-	// This member is required.
-	StartTime *time.Time
 }
 
 // The structure representing the listProfileTimesResponse.
 type ListProfileTimesOutput struct {
-
-	// The nextToken value to include in a future ListProfileTimes request. When the
-	// results of a ListProfileTimes request exceed maxResults, this value can be used
-	// to retrieve the next page of results. This value is null when there are no more
-	// results to return.
-	NextToken *string
 
 	// The list of start times of the available profiles for the aggregation period in
 	// the specified time range.
 	//
 	// This member is required.
 	ProfileTimes []*types.ProfileTime
+
+	// The nextToken value to include in a future ListProfileTimes request. When the
+	// results of a ListProfileTimes request exceed maxResults, this value can be used
+	// to retrieve the next page of results. This value is null when there are no more
+	// results to return.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

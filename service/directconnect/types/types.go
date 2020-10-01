@@ -9,25 +9,39 @@ import (
 // Information about the associated gateway.
 type AssociatedGateway struct {
 
-	// The type of associated gateway.
-	Type GatewayType
+	// The ID of the associated gateway.
+	Id *string
 
 	// The ID of the AWS account that owns the associated virtual private gateway or
 	// transit gateway.
 	OwnerAccount *string
 
-	// The ID of the associated gateway.
-	Id *string
-
 	// The Region where the associated gateway is located.
 	Region *string
+
+	// The type of associated gateway.
+	Type GatewayType
 }
 
 // Information about a BGP peer.
 type BGPPeer struct {
 
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration.
+	Asn *int32
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
+
+	// The Direct Connect endpoint on which the BGP peer terminates.
+	AwsDeviceV2 *string
 
 	// The ID of the BGP peer.
 	BgpPeerId *string
@@ -51,23 +65,6 @@ type BGPPeer struct {
 	// deleted and cannot be established.
 	BgpPeerState BGPPeerState
 
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration.
-	Asn *int32
-
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
-
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
-
-	// The Direct Connect endpoint on which the BGP peer terminates.
-	AwsDeviceV2 *string
-
 	// The status of the BGP peer. The following are the possible values:
 	//
 	//     * up:
@@ -80,37 +77,28 @@ type BGPPeer struct {
 	//     * unknown: The BGP peer status is not
 	// available.
 	BgpStatus BGPStatus
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
 }
 
 // Information about an AWS Direct Connect connection.
 type Connection struct {
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool
+	// The Direct Connect endpoint on which the physical connection terminates.
+	AwsDevice *string
 
 	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
 
-	// The ID of the VLAN.
-	Vlan *int32
-
-	// The name of the connection.
-	ConnectionName *string
-
-	// The AWS Region where the connection is located.
-	Region *string
-
-	// The ID of the LAG.
-	LagId *string
+	// The bandwidth of the connection.
+	Bandwidth *string
 
 	// The ID of the connection.
 	ConnectionId *string
 
-	// The tags associated with the connection.
-	Tags []*Tag
-
-	// The ID of the AWS account that owns the connection.
-	OwnerAccount *string
+	// The name of the connection.
+	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
 	//
@@ -145,36 +133,51 @@ type Connection struct {
 	// not available.
 	ConnectionState ConnectionState
 
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string
+	// Indicates whether the connection supports a secondary BGP peer in the same
+	// address family (IPv4/IPv6).
+	HasLogicalRedundancy HasLogicalRedundancy
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool
+
+	// The ID of the LAG.
+	LagId *string
+
+	// The time of the most recent call to DescribeLoa () for this connection.
+	LoaIssueTime *time.Time
+
+	// The location of the connection.
+	Location *string
+
+	// The ID of the AWS account that owns the connection.
+	OwnerAccount *string
 
 	// The name of the AWS Direct Connect service provider associated with the
 	// connection.
 	PartnerName *string
 
-	// The time of the most recent call to DescribeLoa () for this connection.
-	LoaIssueTime *time.Time
-
-	// Indicates whether the connection supports a secondary BGP peer in the same
-	// address family (IPv4/IPv6).
-	HasLogicalRedundancy HasLogicalRedundancy
-
 	// The name of the service provider associated with the connection.
 	ProviderName *string
 
-	// The bandwidth of the connection.
-	Bandwidth *string
+	// The AWS Region where the connection is located.
+	Region *string
 
-	// The location of the connection.
-	Location *string
+	// The tags associated with the connection.
+	Tags []*Tag
+
+	// The ID of the VLAN.
+	Vlan *int32
 }
 
 // Information about a Direct Connect gateway, which enables you to connect virtual
 // interfaces and virtual private gateway or transit gateways.
 type DirectConnectGateway struct {
 
-	// The error message if the state of an object failed to advance.
-	StateChangeError *string
+	// The autonomous system number (ASN) for the Amazon side of the connection.
+	AmazonSideAsn *int64
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
 
 	// The name of the Direct Connect gateway.
 	DirectConnectGatewayName *string
@@ -195,19 +198,25 @@ type DirectConnectGateway struct {
 	// deleted and cannot pass traffic.
 	DirectConnectGatewayState DirectConnectGatewayState
 
-	// The autonomous system number (ASN) for the Amazon side of the connection.
-	AmazonSideAsn *int64
-
 	// The ID of the AWS account that owns the Direct Connect gateway.
 	OwnerAccount *string
 
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
+	// The error message if the state of an object failed to advance.
+	StateChangeError *string
 }
 
 // Information about an association between a Direct Connect gateway and a virtual
 // private gateway or transit gateway.
 type DirectConnectGatewayAssociation struct {
+
+	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+	AllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
+
+	// Information about the associated gateway.
+	AssociatedGateway *AssociatedGateway
+
+	// The ID of the Direct Connect gateway association.
+	AssociationId *string
 
 	// The state of the association. The following are the possible values:
 	//
@@ -228,38 +237,44 @@ type DirectConnectGatewayAssociation struct {
 	// private gateway or transit gateway is stopped.
 	AssociationState DirectConnectGatewayAssociationState
 
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// The ID of the AWS account that owns the associated gateway.
+	DirectConnectGatewayOwnerAccount *string
+
 	// The error message if the state of an object failed to advance.
 	StateChangeError *string
+
+	// The ID of the virtual private gateway. Applies only to private virtual
+	// interfaces.
+	VirtualGatewayId *string
 
 	// The ID of the AWS account that owns the virtual private gateway.
 	VirtualGatewayOwnerAccount *string
 
 	// The AWS Region where the virtual private gateway is located.
 	VirtualGatewayRegion *string
-
-	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-	AllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
-
-	// The ID of the virtual private gateway. Applies only to private virtual
-	// interfaces.
-	VirtualGatewayId *string
-
-	// Information about the associated gateway.
-	AssociatedGateway *AssociatedGateway
-
-	// The ID of the AWS account that owns the associated gateway.
-	DirectConnectGatewayOwnerAccount *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
-	// The ID of the Direct Connect gateway association.
-	AssociationId *string
 }
 
 // Information about the proposal request to attach a virtual private gateway to a
 // Direct Connect gateway.
 type DirectConnectGatewayAssociationProposal struct {
+
+	// Information about the associated gateway.
+	AssociatedGateway *AssociatedGateway
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// The ID of the AWS account that owns the Direct Connect gateway.
+	DirectConnectGatewayOwnerAccount *string
+
+	// The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
+	ExistingAllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
+
+	// The ID of the association proposal.
+	ProposalId *string
 
 	// The state of the proposal. The following are possible values:
 	//
@@ -277,38 +292,11 @@ type DirectConnectGatewayAssociationProposal struct {
 
 	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
 	RequestedAllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
-
-	// The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
-	ExistingAllowedPrefixesToDirectConnectGateway []*RouteFilterPrefix
-
-	// The ID of the association proposal.
-	ProposalId *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
-	// Information about the associated gateway.
-	AssociatedGateway *AssociatedGateway
-
-	// The ID of the AWS account that owns the Direct Connect gateway.
-	DirectConnectGatewayOwnerAccount *string
 }
 
 // Information about an attachment between a Direct Connect gateway and a virtual
 // interface.
 type DirectConnectGatewayAttachment struct {
-
-	// The error message if the state of an object failed to advance.
-	StateChangeError *string
-
-	// The ID of the AWS account that owns the virtual interface.
-	VirtualInterfaceOwnerAccount *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string
 
 	// The state of the attachment. The following are the possible values:
 	//
@@ -327,18 +315,33 @@ type DirectConnectGatewayAttachment struct {
 	// Direct Connect gateway and virtual interface is stopped.
 	AttachmentState DirectConnectGatewayAttachmentState
 
-	// The AWS Region where the virtual interface is located.
-	VirtualInterfaceRegion *string
-
 	// The type of attachment.
 	AttachmentType DirectConnectGatewayAttachmentType
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// The error message if the state of an object failed to advance.
+	StateChangeError *string
+
+	// The ID of the virtual interface.
+	VirtualInterfaceId *string
+
+	// The ID of the AWS account that owns the virtual interface.
+	VirtualInterfaceOwnerAccount *string
+
+	// The AWS Region where the virtual interface is located.
+	VirtualInterfaceRegion *string
 }
 
 // Information about an interconnect.
 type Interconnect struct {
 
-	// The ID of the interconnect.
-	InterconnectId *string
+	// The Direct Connect endpoint on which the physical connection terminates.
+	AwsDevice *string
+
+	// The Direct Connect endpoint on which the physical connection terminates.
+	AwsDeviceV2 *string
 
 	// The bandwidth of the connection.
 	Bandwidth *string
@@ -347,8 +350,11 @@ type Interconnect struct {
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
 
-	// The name of the service provider associated with the interconnect.
-	ProviderName *string
+	// The ID of the interconnect.
+	InterconnectId *string
+
+	// The name of the interconnect.
+	InterconnectName *string
 
 	// The state of the interconnect. The following are the possible values:
 	//
@@ -374,52 +380,59 @@ type Interconnect struct {
 	// * unknown: The state of the interconnect is not available.
 	InterconnectState InterconnectState
 
-	// The tags associated with the interconnect.
-	Tags []*Tag
-
 	// Indicates whether jumbo frames (9001 MTU) are supported.
 	JumboFrameCapable *bool
-
-	// The time of the most recent call to DescribeLoa () for this connection.
-	LoaIssueTime *time.Time
 
 	// The ID of the LAG.
 	LagId *string
 
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDevice *string
-
-	// The AWS Region where the connection is located.
-	Region *string
-
-	// The Direct Connect endpoint on which the physical connection terminates.
-	AwsDeviceV2 *string
+	// The time of the most recent call to DescribeLoa () for this connection.
+	LoaIssueTime *time.Time
 
 	// The location of the connection.
 	Location *string
 
-	// The name of the interconnect.
-	InterconnectName *string
+	// The name of the service provider associated with the interconnect.
+	ProviderName *string
+
+	// The AWS Region where the connection is located.
+	Region *string
+
+	// The tags associated with the interconnect.
+	Tags []*Tag
 }
 
 // Information about a link aggregation group (LAG).
 type Lag struct {
 
-	// The name of the service provider associated with the LAG.
-	ProviderName *string
+	// Indicates whether the LAG can host other connections.
+	AllowsHostedConnections *bool
+
+	// The AWS Direct Connect endpoint that hosts the LAG.
+	AwsDevice *string
+
+	// The AWS Direct Connect endpoint that hosts the LAG.
+	AwsDeviceV2 *string
+
+	// The connections bundled by the LAG.
+	Connections []*Connection
+
+	// The individual bandwidth of the physical connections bundled by the LAG. The
+	// possible values are 1Gbps and 10Gbps.
+	ConnectionsBandwidth *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
 
-	// The AWS Direct Connect endpoint that hosts the LAG.
-	AwsDeviceV2 *string
-
-	// The AWS Direct Connect endpoint that hosts the LAG.
-	AwsDevice *string
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool
 
 	// The ID of the LAG.
 	LagId *string
+
+	// The name of the LAG.
+	LagName *string
 
 	// The state of the LAG. The following are the possible values:
 	//
@@ -444,24 +457,12 @@ type Lag struct {
 	//     * unknown: The state of the LAG is not available.
 	LagState LagState
 
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool
-
-	// Indicates whether the LAG can host other connections.
-	AllowsHostedConnections *bool
-
-	// The individual bandwidth of the physical connections bundled by the LAG. The
-	// possible values are 1Gbps and 10Gbps.
-	ConnectionsBandwidth *string
-
-	// The tags associated with the LAG.
-	Tags []*Tag
-
 	// The location of the LAG.
 	Location *string
 
-	// The name of the LAG.
-	LagName *string
+	// The minimum number of physical connections that must be operational for the LAG
+	// itself to be operational.
+	MinimumLinks *int32
 
 	// The number of physical connections bundled by the LAG, up to a maximum of 10.
 	NumberOfConnections *int32
@@ -469,15 +470,14 @@ type Lag struct {
 	// The ID of the AWS account that owns the LAG.
 	OwnerAccount *string
 
-	// The connections bundled by the LAG.
-	Connections []*Connection
+	// The name of the service provider associated with the LAG.
+	ProviderName *string
 
 	// The AWS Region where the connection is located.
 	Region *string
 
-	// The minimum number of physical connections that must be operational for the LAG
-	// itself to be operational.
-	MinimumLinks *int32
+	// The tags associated with the LAG.
+	Tags []*Tag
 }
 
 // Information about a Letter of Authorization - Connecting Facility Assignment
@@ -495,11 +495,14 @@ type Loa struct {
 // Information about an AWS Direct Connect location.
 type Location struct {
 
+	// The available port speeds for the location.
+	AvailablePortSpeeds []*string
+
 	// The name of the service provider for the location.
 	AvailableProviders []*string
 
-	// The available port speeds for the location.
-	AvailablePortSpeeds []*string
+	// The code for the location.
+	LocationCode *string
 
 	// The name of the location. This includes the name of the colocation partner and
 	// the physical site of the building.
@@ -507,38 +510,37 @@ type Location struct {
 
 	// The AWS Region for the location.
 	Region *string
-
-	// The code for the location.
-	LocationCode *string
 }
 
 // Information about a new BGP peer.
 type NewBGPPeer struct {
 
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
 
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration.
 	Asn *int32
 
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
 
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
 }
 
 // Information about a private virtual interface.
 type NewPrivateVirtualInterface struct {
 
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
+	//
+	// This member is required.
+	Asn *int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -547,67 +549,46 @@ type NewPrivateVirtualInterface struct {
 	// This member is required.
 	VirtualInterfaceName *string
 
-	// The ID of the virtual private gateway.
-	VirtualGatewayId *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
 	// The ID of the VLAN.
 	//
 	// This member is required.
 	Vlan *int32
 
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn *int32
-
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
 
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
 
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
+
 	// The tags associated with the private virtual interface.
 	Tags []*Tag
 
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
+	// The ID of the virtual private gateway.
+	VirtualGatewayId *string
 }
 
 // Information about a private virtual interface to be provisioned on a connection.
 type NewPrivateVirtualInterfaceAllocation struct {
 
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The ID of the VLAN.
-	//
-	// This member is required.
-	Vlan *int32
-
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
 	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
 	Asn *int32
-
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
-
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -616,8 +597,27 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	// This member is required.
 	VirtualInterfaceName *string
 
+	// The ID of the VLAN.
+	//
+	// This member is required.
+	Vlan *int32
+
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
+
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
 
 	// The tags associated with the private virtual interface.
 	Tags []*Tag
@@ -632,10 +632,6 @@ type NewPublicVirtualInterface struct {
 	// This member is required.
 	Asn *int32
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
-
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
 	// hyphen (-).
@@ -643,42 +639,40 @@ type NewPublicVirtualInterface struct {
 	// This member is required.
 	VirtualInterfaceName *string
 
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
-	// The tags associated with the public virtual interface.
-	Tags []*Tag
+	// The ID of the VLAN.
+	//
+	// This member is required.
+	Vlan *int32
 
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string
 
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
 
-	// The ID of the VLAN.
-	//
-	// This member is required.
-	Vlan *int32
+	// The routes to be advertised to the AWS network in this Region. Applies to public
+	// virtual interfaces.
+	RouteFilterPrefixes []*RouteFilterPrefix
+
+	// The tags associated with the public virtual interface.
+	Tags []*Tag
 }
 
 // Information about a public virtual interface to be provisioned on a connection.
 type NewPublicVirtualInterfaceAllocation struct {
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
-
-	// The ID of the VLAN.
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
 	//
 	// This member is required.
-	Vlan *int32
-
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
+	Asn *int32
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
@@ -687,29 +681,45 @@ type NewPublicVirtualInterfaceAllocation struct {
 	// This member is required.
 	VirtualInterfaceName *string
 
-	// The tags associated with the public virtual interface.
-	Tags []*Tag
+	// The ID of the VLAN.
+	//
+	// This member is required.
+	Vlan *int32
 
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
 
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	//
-	// This member is required.
-	Asn *int32
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
 
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
+	// The routes to be advertised to the AWS network in this Region. Applies to public
+	// virtual interfaces.
+	RouteFilterPrefixes []*RouteFilterPrefix
+
+	// The tags associated with the public virtual interface.
+	Tags []*Tag
 }
 
 // Information about a transit virtual interface.
 type NewTransitVirtualInterface struct {
 
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
+	Asn *int32
+
 	// The authentication key for BGP configuration. This string has a minimum length
 	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string
@@ -717,33 +727,23 @@ type NewTransitVirtualInterface struct {
 	// The IP address assigned to the customer interface.
 	CustomerAddress *string
 
-	// The ID of the VLAN.
-	Vlan *int32
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
 
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
+
+	// The tags associated with the transitive virtual interface.
+	Tags []*Tag
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
 	// hyphen (-).
 	VirtualInterfaceName *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	Asn *int32
-
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
-
-	// The tags associated with the transitive virtual interface.
-	Tags []*Tag
-
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
+	// The ID of the VLAN.
+	Vlan *int32
 }
 
 // Information about a transit virtual interface to be provisioned on a connection.
@@ -752,44 +752,44 @@ type NewTransitVirtualInterfaceAllocation struct {
 	// The address family for the BGP peer.
 	AddressFamily AddressFamily
 
-	// The tags associated with the transitive virtual interface.
-	Tags []*Tag
-
 	// The IP address assigned to the Amazon interface.
 	AmazonAddress *string
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
+	Asn *int32
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
+
+	// The tags associated with the transitive virtual interface.
+	Tags []*Tag
 
 	// The name of the virtual interface assigned by the customer network. The name has
 	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
 	// hyphen (-).
 	VirtualInterfaceName *string
 
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	Asn *int32
-
 	// The ID of the VLAN.
 	Vlan *int32
-
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
 }
 
 // Information about a tag associated with an AWS Direct Connect resource.
 type ResourceTag struct {
 
-	// The tags.
-	Tags []*Tag
-
 	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
+
+	// The tags.
+	Tags []*Tag
 }
 
 // Information about a route filter prefix that a customer can advertise through
@@ -839,11 +839,75 @@ type VirtualGateway struct {
 // Information about a virtual interface.
 type VirtualInterface struct {
 
-	// The ID of the connection.
-	ConnectionId *string
+	// The address family for the BGP peer.
+	AddressFamily AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
+
+	// The autonomous system number (ASN) for the Amazon side of the connection.
+	AmazonSideAsn *int64
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
+	Asn *int32
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
+
+	// The Direct Connect endpoint on which the virtual interface terminates.
+	AwsDeviceV2 *string
 
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []*BGPPeer
+
+	// The ID of the connection.
+	ConnectionId *string
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
+
+	// The customer router configuration.
+	CustomerRouterConfig *string
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool
+
+	// The location of the connection.
+	Location *string
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
+
+	// The ID of the AWS account that owns the virtual interface.
+	OwnerAccount *string
+
+	// The AWS Region where the virtual interface is located.
+	Region *string
+
+	// The routes to be advertised to the AWS network in this Region. Applies to public
+	// virtual interfaces.
+	RouteFilterPrefixes []*RouteFilterPrefix
+
+	// The tags associated with the virtual interface.
+	Tags []*Tag
+
+	// The ID of the virtual private gateway. Applies only to private virtual
+	// interfaces.
+	VirtualGatewayId *string
+
+	// The ID of the virtual interface.
+	VirtualInterfaceId *string
+
+	// The name of the virtual interface assigned by the customer network. The name has
+	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
+	// hyphen (-).
+	VirtualInterfaceName *string
 
 	// The state of the virtual interface. The following are the possible values:
 	//
@@ -886,99 +950,35 @@ type VirtualInterface struct {
 	// The type of virtual interface. The possible values are private and public.
 	VirtualInterfaceType *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
-	RouteFilterPrefixes []*RouteFilterPrefix
-
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
-
-	// The Direct Connect endpoint on which the virtual interface terminates.
-	AwsDeviceV2 *string
-
-	// The tags associated with the virtual interface.
-	Tags []*Tag
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool
-
-	// The ID of the AWS account that owns the virtual interface.
-	OwnerAccount *string
-
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
-	// The customer router configuration.
-	CustomerRouterConfig *string
-
-	// The location of the connection.
-	Location *string
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string
-
-	// The autonomous system number (ASN) for the Amazon side of the connection.
-	AmazonSideAsn *int64
-
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
-
-	// The ID of the virtual private gateway. Applies only to private virtual
-	// interfaces.
-	VirtualGatewayId *string
-
-	// The name of the virtual interface assigned by the customer network. The name has
-	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
-	// hyphen (-).
-	VirtualInterfaceName *string
-
 	// The ID of the VLAN.
 	Vlan *int32
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	Asn *int32
-
-	// The address family for the BGP peer.
-	AddressFamily AddressFamily
-
-	// The AWS Region where the virtual interface is located.
-	Region *string
 }
 
 // Information about the virtual interface failover test.
 type VirtualInterfaceTestHistory struct {
 
-	// The ID of the virtual interface failover test.
-	TestId *string
-
-	// The owner ID of the tested virtual interface.
-	OwnerAccount *string
-
-	// The status of the virtual interface failover test.
-	Status *string
-
-	// The time that the virtual interface moves out of the DOWN state.
-	EndTime *time.Time
-
 	// The BGP peers that were put in the DOWN state as part of the virtual interface
 	// failover test.
 	BgpPeers []*string
 
+	// The time that the virtual interface moves out of the DOWN state.
+	EndTime *time.Time
+
+	// The owner ID of the tested virtual interface.
+	OwnerAccount *string
+
 	// The time that the virtual interface moves to the DOWN state.
 	StartTime *time.Time
 
-	// The ID of the tested virtual interface.
-	VirtualInterfaceId *string
+	// The status of the virtual interface failover test.
+	Status *string
 
 	// The time that the virtual interface failover test ran in minutes.
 	TestDurationInMinutes *int32
+
+	// The ID of the virtual interface failover test.
+	TestId *string
+
+	// The ID of the tested virtual interface.
+	VirtualInterfaceId *string
 }

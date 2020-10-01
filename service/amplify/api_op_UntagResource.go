@@ -57,15 +57,15 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 // The request structure for the untag resource request.
 type UntagResourceInput struct {
 
-	// The tag keys to use to untag a resource.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The Amazon Resource Name (ARN) to use to untag a resource.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The tag keys to use to untag a resource.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 // The response for the untag resource request.

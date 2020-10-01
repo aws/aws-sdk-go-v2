@@ -59,16 +59,16 @@ func (c *Client) DeregisterFromWorkMail(ctx context.Context, params *DeregisterF
 
 type DeregisterFromWorkMailInput struct {
 
+	// The identifier for the member (user or group) to be updated.
+	//
+	// This member is required.
+	EntityId *string
+
 	// The identifier for the organization under which the Amazon WorkMail entity
 	// exists.
 	//
 	// This member is required.
 	OrganizationId *string
-
-	// The identifier for the member (user or group) to be updated.
-	//
-	// This member is required.
-	EntityId *string
 }
 
 type DeregisterFromWorkMailOutput struct {

@@ -128,10 +128,6 @@ func (c *Client) PutTargets(ctx context.Context, params *PutTargetsInput, optFns
 
 type PutTargetsInput struct {
 
-	// The name of the event bus associated with the rule. If you omit this, the
-	// default event bus is used.
-	EventBusName *string
-
 	// The name of the rule.
 	//
 	// This member is required.
@@ -141,6 +137,10 @@ type PutTargetsInput struct {
 	//
 	// This member is required.
 	Targets []*types.Target
+
+	// The name of the event bus associated with the rule. If you omit this, the
+	// default event bus is used.
+	EventBusName *string
 }
 
 type PutTargetsOutput struct {

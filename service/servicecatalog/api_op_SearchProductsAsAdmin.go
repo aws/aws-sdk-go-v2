@@ -56,29 +56,6 @@ func (c *Client) SearchProductsAsAdmin(ctx context.Context, params *SearchProduc
 
 type SearchProductsAsAdminInput struct {
 
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
-	// The portfolio identifier.
-	PortfolioId *string
-
-	// Access level of the source of the product.
-	ProductSource types.ProductSource
-
-	// The search filters. If no search filters are specified, the output includes all
-	// products to which the administrator has access.
-	Filters map[string][]*string
-
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder types.SortOrder
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
-	// The sort field. If no value is specified, the results are not sorted.
-	SortBy types.ProductViewSortBy
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -88,16 +65,39 @@ type SearchProductsAsAdminInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The search filters. If no search filters are specified, the output includes all
+	// products to which the administrator has access.
+	Filters map[string][]*string
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
+
+	// The portfolio identifier.
+	PortfolioId *string
+
+	// Access level of the source of the product.
+	ProductSource types.ProductSource
+
+	// The sort field. If no value is specified, the results are not sorted.
+	SortBy types.ProductViewSortBy
+
+	// The sort order. If no value is specified, the results are not sorted.
+	SortOrder types.SortOrder
 }
 
 type SearchProductsAsAdminOutput struct {
 
-	// Information about the product views.
-	ProductViewDetails []*types.ProductViewDetail
-
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
+	// Information about the product views.
+	ProductViewDetails []*types.ProductViewDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

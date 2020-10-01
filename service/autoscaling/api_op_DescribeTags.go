@@ -64,6 +64,10 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 
 type DescribeTagsInput struct {
 
+	// One or more filters to scope the tags to return. The maximum number of filters
+	// per filter type (for example, auto-scaling-group) is 1000.
+	Filters []*types.Filter
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
@@ -71,10 +75,6 @@ type DescribeTagsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
-
-	// One or more filters to scope the tags to return. The maximum number of filters
-	// per filter type (for example, auto-scaling-group) is 1000.
-	Filters []*types.Filter
 }
 
 type DescribeTagsOutput struct {

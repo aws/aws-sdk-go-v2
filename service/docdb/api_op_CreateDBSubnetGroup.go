@@ -64,9 +64,6 @@ type CreateDBSubnetGroupInput struct {
 	// This member is required.
 	DBSubnetGroupDescription *string
 
-	// The tags to be assigned to the subnet group.
-	Tags []*types.Tag
-
 	// The name for the subnet group. This value is stored as a lowercase string.
 	// Constraints: Must contain no more than 255 letters, numbers, periods,
 	// underscores, spaces, or hyphens. Must not be default. Example: mySubnetgroup
@@ -78,6 +75,9 @@ type CreateDBSubnetGroupInput struct {
 	//
 	// This member is required.
 	SubnetIds []*string
+
+	// The tags to be assigned to the subnet group.
+	Tags []*types.Tag
 }
 
 type CreateDBSubnetGroupOutput struct {

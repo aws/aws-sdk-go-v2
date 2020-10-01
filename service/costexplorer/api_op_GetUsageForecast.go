@@ -76,13 +76,6 @@ type GetUsageForecastInput struct {
 	// This member is required.
 	Metric types.Metric
 
-	// Cost Explorer always returns the mean forecast as a single point. You can
-	// request a prediction interval around the mean by specifying a confidence level.
-	// The higher the confidence level, the more confident Cost Explorer is about the
-	// actual value falling in the prediction interval. Higher confidence levels result
-	// in wider prediction intervals.
-	PredictionIntervalLevel *int32
-
 	// The start and end dates of the period that you want to retrieve usage forecast
 	// for. The start date is inclusive, but the end date is exclusive. For example, if
 	// start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is
@@ -95,6 +88,13 @@ type GetUsageForecastInput struct {
 	// The filters that you want to use to filter your forecast. Cost Explorer API
 	// supports all of the Cost Explorer filters.
 	Filter *types.Expression
+
+	// Cost Explorer always returns the mean forecast as a single point. You can
+	// request a prediction interval around the mean by specifying a confidence level.
+	// The higher the confidence level, the more confident Cost Explorer is about the
+	// actual value falling in the prediction interval. Higher confidence levels result
+	// in wider prediction intervals.
+	PredictionIntervalLevel *int32
 }
 
 type GetUsageForecastOutput struct {

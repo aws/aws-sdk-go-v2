@@ -59,17 +59,17 @@ func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, para
 
 type CreateCertificateAuthorityAuditReportInput struct {
 
+	// The format in which to create the report. This can be either JSON or CSV.
+	//
+	// This member is required.
+	AuditReportResponseFormat types.AuditReportResponseFormat
+
 	// The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
-
-	// The format in which to create the report. This can be either JSON or CSV.
-	//
-	// This member is required.
-	AuditReportResponseFormat types.AuditReportResponseFormat
 
 	// The name of the S3 bucket that will contain the audit report.
 	//

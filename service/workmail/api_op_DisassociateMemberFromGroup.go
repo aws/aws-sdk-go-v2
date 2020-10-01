@@ -56,6 +56,11 @@ func (c *Client) DisassociateMemberFromGroup(ctx context.Context, params *Disass
 
 type DisassociateMemberFromGroupInput struct {
 
+	// The identifier for the group from which members are removed.
+	//
+	// This member is required.
+	GroupId *string
+
 	// The identifier for the member to be removed to the group.
 	//
 	// This member is required.
@@ -65,11 +70,6 @@ type DisassociateMemberFromGroupInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
-
-	// The identifier for the group from which members are removed.
-	//
-	// This member is required.
-	GroupId *string
 }
 
 type DisassociateMemberFromGroupOutput struct {

@@ -59,29 +59,29 @@ type ListConnectionsInput struct {
 	// Filters the list of connections to those associated with a specified host.
 	HostArnFilter *string
 
-	// Filters the list of connections to those associated with a specified provider,
-	// such as Bitbucket.
-	ProviderTypeFilter types.ProviderType
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
 	// The token that was returned from the previous ListConnections call, which can be
 	// used to return the next set of connections in the list.
 	NextToken *string
 
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	// Filters the list of connections to those associated with a specified provider,
+	// such as Bitbucket.
+	ProviderTypeFilter types.ProviderType
 }
 
 type ListConnectionsOutput struct {
+
+	// A list of connections and the details for each connection, such as status,
+	// owner, and provider type.
+	Connections []*types.Connection
 
 	// A token that can be used in the next ListConnections call. To view all items in
 	// the list, continue to call this operation with each subsequent token until no
 	// more nextToken values are returned.
 	NextToken *string
-
-	// A list of connections and the details for each connection, such as status,
-	// owner, and provider type.
-	Connections []*types.Connection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

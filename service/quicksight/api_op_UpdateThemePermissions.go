@@ -106,21 +106,21 @@ func (c *Client) UpdateThemePermissions(ctx context.Context, params *UpdateTheme
 
 type UpdateThemePermissionsInput struct {
 
-	// A list of resource permissions to be revoked from the theme.
-	RevokePermissions []*types.ResourcePermission
+	// The ID of the AWS account that contains the theme.
+	//
+	// This member is required.
+	AwsAccountId *string
 
 	// The ID for the theme.
 	//
 	// This member is required.
 	ThemeId *string
 
-	// The ID of the AWS account that contains the theme.
-	//
-	// This member is required.
-	AwsAccountId *string
-
 	// A list of resource permissions to be granted for the theme.
 	GrantPermissions []*types.ResourcePermission
+
+	// A list of resource permissions to be revoked from the theme.
+	RevokePermissions []*types.ResourcePermission
 }
 
 type UpdateThemePermissionsOutput struct {
@@ -128,14 +128,14 @@ type UpdateThemePermissionsOutput struct {
 	// The resulting list of resource permissions for the theme.
 	Permissions []*types.ResourcePermission
 
-	// The ID for the theme.
-	ThemeId *string
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// The Amazon Resource Name (ARN) of the theme.
 	ThemeArn *string
 
-	// The AWS request ID for this operation.
-	RequestId *string
+	// The ID for the theme.
+	ThemeId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

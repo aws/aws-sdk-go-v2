@@ -58,13 +58,14 @@ func (c *Client) DescribeElasticGpus(ctx context.Context, params *DescribeElasti
 
 type DescribeElasticGpusInput struct {
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// The Elastic Graphics accelerator IDs.
 	ElasticGpuIds []*string
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value. This
-	// value can be between 5 and 1000.
-	MaxResults *int32
 
 	// The filters.
 	//
@@ -85,17 +86,19 @@ type DescribeElasticGpusInput struct {
 	// is associated.
 	Filters []*types.Filter
 
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value. This
+	// value can be between 5 and 1000.
+	MaxResults *int32
+
 	// The token to request the next page of results.
 	NextToken *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 }
 
 type DescribeElasticGpusOutput struct {
+
+	// Information about the Elastic Graphics accelerators.
+	ElasticGpuSet []*types.ElasticGpus
 
 	// The total number of items to return. If the total number of items available is
 	// more than the value specified in max-items then a Next-Token will be provided in
@@ -105,9 +108,6 @@ type DescribeElasticGpusOutput struct {
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// Information about the Elastic Graphics accelerators.
-	ElasticGpuSet []*types.ElasticGpus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

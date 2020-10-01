@@ -56,11 +56,11 @@ func (c *Client) ListUserProfiles(ctx context.Context, params *ListUserProfilesI
 
 type ListUserProfilesInput struct {
 
-	// The sort order for the results. The default is Ascending.
-	SortOrder types.SortOrder
-
 	// A parameter by which to filter the results.
-	UserProfileNameContains *string
+	DomainIdEquals *string
+
+	// Returns a list up to a specified limit.
+	MaxResults *int32
 
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
@@ -69,21 +69,21 @@ type ListUserProfilesInput struct {
 	// The parameter by which to sort the results. The default is CreationTime.
 	SortBy types.UserProfileSortKey
 
-	// A parameter by which to filter the results.
-	DomainIdEquals *string
+	// The sort order for the results. The default is Ascending.
+	SortOrder types.SortOrder
 
-	// Returns a list up to a specified limit.
-	MaxResults *int32
+	// A parameter by which to filter the results.
+	UserProfileNameContains *string
 }
 
 type ListUserProfilesOutput struct {
 
-	// The list of user profiles.
-	UserProfiles []*types.UserProfileDetails
-
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string
+
+	// The list of user profiles.
+	UserProfiles []*types.UserProfileDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

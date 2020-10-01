@@ -61,13 +61,6 @@ func (c *Client) DeleteGatewayResponse(ctx context.Context, params *DeleteGatewa
 // the given RestApi () and resets it with the default settings.
 type DeleteGatewayResponseInput struct {
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	Template *bool
-
 	// [Required] The response type of the associated GatewayResponse (). Valid values
 	// are
 	//
@@ -121,11 +114,18 @@ type DeleteGatewayResponseInput struct {
 	// This member is required.
 	ResponseType types.GatewayResponseType
 
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
+
+	Template *bool
+
 	TemplateSkipList []*string
 
 	Title *string
-
-	Name *string
 }
 
 type DeleteGatewayResponseOutput struct {

@@ -62,6 +62,12 @@ func (c *Client) ListRegexPatternSets(ctx context.Context, params *ListRegexPatt
 
 type ListRegexPatternSetsInput struct {
 
+	// Specifies the number of RegexPatternSet objects that you want AWS WAF to return
+	// for this request. If you have more RegexPatternSet objects than the number you
+	// specify for Limit, the response includes a NextMarker value that you can use to
+	// get another batch of RegexPatternSet objects.
+	Limit *int32
+
 	// If you specify a value for Limit and you have more RegexPatternSet objects than
 	// the value of Limit, AWS WAF returns a NextMarker value in the response that
 	// allows you to list another group of RegexPatternSet objects. For the second and
@@ -69,12 +75,6 @@ type ListRegexPatternSetsInput struct {
 	// the previous response to get information about another batch of RegexPatternSet
 	// objects.
 	NextMarker *string
-
-	// Specifies the number of RegexPatternSet objects that you want AWS WAF to return
-	// for this request. If you have more RegexPatternSet objects than the number you
-	// specify for Limit, the response includes a NextMarker value that you can use to
-	// get another batch of RegexPatternSet objects.
-	Limit *int32
 }
 
 type ListRegexPatternSetsOutput struct {

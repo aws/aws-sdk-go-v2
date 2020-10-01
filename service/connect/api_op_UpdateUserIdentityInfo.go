@@ -57,6 +57,11 @@ func (c *Client) UpdateUserIdentityInfo(ctx context.Context, params *UpdateUserI
 
 type UpdateUserIdentityInfoInput struct {
 
+	// The identity information for the user.
+	//
+	// This member is required.
+	IdentityInfo *types.UserIdentityInfo
+
 	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
@@ -66,11 +71,6 @@ type UpdateUserIdentityInfoInput struct {
 	//
 	// This member is required.
 	UserId *string
-
-	// The identity information for the user.
-	//
-	// This member is required.
-	IdentityInfo *types.UserIdentityInfo
 }
 
 type UpdateUserIdentityInfoOutput struct {

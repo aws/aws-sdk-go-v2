@@ -72,28 +72,10 @@ func (c *Client) StartDocumentAnalysis(ctx context.Context, params *StartDocumen
 
 type StartDocumentAnalysisInput struct {
 
-	// The idempotent token that you use to identify the start request. If you use the
-	// same token with multiple StartDocumentAnalysis requests, the same JobId is
-	// returned. Use ClientRequestToken to prevent the same job from being accidentally
-	// started more than once. For more information, see Calling Amazon Textract
-	// Asynchronous Operations
-	// (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
-	ClientRequestToken *string
-
-	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
-	// status of the operation to.
-	NotificationChannel *types.NotificationChannel
-
 	// The location of the document to be processed.
 	//
 	// This member is required.
 	DocumentLocation *types.DocumentLocation
-
-	// An identifier that you specify that's included in the completion notification
-	// published to the Amazon SNS topic. For example, you can use JobTag to identify
-	// the type of document that the completion notification corresponds to (such as a
-	// tax form or a receipt).
-	JobTag *string
 
 	// A list of the types of analysis to perform. Add TABLES to the list to return
 	// information about the tables that are detected in the input document. Add FORMS
@@ -104,6 +86,24 @@ type StartDocumentAnalysisInput struct {
 	//
 	// This member is required.
 	FeatureTypes []types.FeatureType
+
+	// The idempotent token that you use to identify the start request. If you use the
+	// same token with multiple StartDocumentAnalysis requests, the same JobId is
+	// returned. Use ClientRequestToken to prevent the same job from being accidentally
+	// started more than once. For more information, see Calling Amazon Textract
+	// Asynchronous Operations
+	// (https://docs.aws.amazon.com/textract/latest/dg/api-async.html).
+	ClientRequestToken *string
+
+	// An identifier that you specify that's included in the completion notification
+	// published to the Amazon SNS topic. For example, you can use JobTag to identify
+	// the type of document that the completion notification corresponds to (such as a
+	// tax form or a receipt).
+	JobTag *string
+
+	// The Amazon SNS topic ARN that you want Amazon Textract to publish the completion
+	// status of the operation to.
+	NotificationChannel *types.NotificationChannel
 }
 
 type StartDocumentAnalysisOutput struct {

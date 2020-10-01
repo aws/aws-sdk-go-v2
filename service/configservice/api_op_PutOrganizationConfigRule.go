@@ -81,20 +81,20 @@ func (c *Client) PutOrganizationConfigRule(ctx context.Context, params *PutOrgan
 
 type PutOrganizationConfigRuleInput struct {
 
-	// An OrganizationCustomRuleMetadata object.
-	OrganizationCustomRuleMetadata *types.OrganizationCustomRuleMetadata
+	// The name that you assign to an organization config rule.
+	//
+	// This member is required.
+	OrganizationConfigRuleName *string
 
 	// A comma-separated list of accounts that you want to exclude from an organization
 	// config rule.
 	ExcludedAccounts []*string
 
+	// An OrganizationCustomRuleMetadata object.
+	OrganizationCustomRuleMetadata *types.OrganizationCustomRuleMetadata
+
 	// An OrganizationManagedRuleMetadata object.
 	OrganizationManagedRuleMetadata *types.OrganizationManagedRuleMetadata
-
-	// The name that you assign to an organization config rule.
-	//
-	// This member is required.
-	OrganizationConfigRuleName *string
 }
 
 type PutOrganizationConfigRuleOutput struct {

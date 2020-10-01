@@ -57,9 +57,6 @@ func (c *Client) CreateSubscriptionDefinitionVersion(ctx context.Context, params
 
 type CreateSubscriptionDefinitionVersionInput struct {
 
-	// A list of subscriptions.
-	Subscriptions []*types.Subscription
-
 	// The ID of the subscription definition.
 	//
 	// This member is required.
@@ -67,6 +64,9 @@ type CreateSubscriptionDefinitionVersionInput struct {
 
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
+	// A list of subscriptions.
+	Subscriptions []*types.Subscription
 }
 
 type CreateSubscriptionDefinitionVersionOutput struct {

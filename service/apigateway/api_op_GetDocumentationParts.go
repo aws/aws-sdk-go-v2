@@ -58,39 +58,40 @@ func (c *Client) GetDocumentationParts(ctx context.Context, params *GetDocumenta
 // Gets the documentation parts of an API. The result may be filtered by the type,
 // name, or path of API entities (targets).
 type GetDocumentationPartsInput struct {
-	TemplateSkipList []*string
 
-	// The type of API entities of the to-be-retrieved documentation parts.
-	Type types.DocumentationPartType
-
-	Title *string
-
-	// The name of API entities of the to-be-retrieved documentation parts.
-	NameQuery *string
-
-	// The current pagination position in the paged result set.
-	Position *string
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
-
-	Name *string
 
 	// The status of the API documentation parts to retrieve. Valid values are
 	// DOCUMENTED for retrieving DocumentationPart () resources with content and
 	// UNDOCUMENTED for DocumentationPart () resources without content.
 	LocationStatus types.LocationStatusType
 
-	Template *bool
+	Name *string
+
+	// The name of API entities of the to-be-retrieved documentation parts.
+	NameQuery *string
 
 	// The path of API entities of the to-be-retrieved documentation parts.
 	Path *string
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
+	// The current pagination position in the paged result set.
+	Position *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
+
+	// The type of API entities of the to-be-retrieved documentation parts.
+	Type types.DocumentationPartType
 }
 
 // The collection of documentation parts of an API. Documenting an API

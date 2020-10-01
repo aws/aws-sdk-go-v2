@@ -62,17 +62,17 @@ func (c *Client) DescribeListenerCertificates(ctx context.Context, params *Descr
 
 type DescribeListenerCertificatesInput struct {
 
+	// The Amazon Resource Names (ARN) of the listener.
+	//
+	// This member is required.
+	ListenerArn *string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
 
 	// The maximum number of results to return with this call.
 	PageSize *int32
-
-	// The Amazon Resource Names (ARN) of the listener.
-	//
-	// This member is required.
-	ListenerArn *string
 }
 
 type DescribeListenerCertificatesOutput struct {

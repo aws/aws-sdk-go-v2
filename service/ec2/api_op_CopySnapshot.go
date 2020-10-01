@@ -70,24 +70,27 @@ func (c *Client) CopySnapshot(ctx context.Context, params *CopySnapshotInput, op
 
 type CopySnapshotInput struct {
 
+	// The ID of the Region that contains the snapshot to be copied.
+	//
+	// This member is required.
+	SourceRegion *string
+
+	// The ID of the EBS snapshot to copy.
+	//
+	// This member is required.
+	SourceSnapshotId *string
+
 	// A description for the EBS snapshot.
 	Description *string
 
-	// When you copy an encrypted source snapshot using the Amazon EC2 Query API, you
-	// must supply a pre-signed URL. This parameter is optional for unencrypted
-	// snapshots. For more information, see Query Requests
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
-	// The PresignedUrl should use the snapshot source endpoint, the CopySnapshot
-	// action, and include the SourceRegion, SourceSnapshotId, and DestinationRegion
-	// parameters. The PresignedUrl must be signed using AWS Signature Version 4.
-	// Because EBS snapshots are stored in Amazon S3, the signing algorithm for this
-	// parameter uses the same logic that is described in Authenticating Requests by
-	// Using Query Parameters (AWS Signature Version 4)
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// in the Amazon Simple Storage Service API Reference. An invalid or improperly
-	// signed PresignedUrl will cause the copy operation to fail asynchronously, and
-	// the snapshot will move to an error state.
-	PresignedUrl *string
+	// The destination Region to use in the PresignedUrl parameter of a snapshot copy
+	// operation. This parameter is only valid for specifying the destination Region in
+	// a PresignedUrl parameter, where it is required.  <p>The snapshot copy is sent to
+	// the regional endpoint that you sent the HTTP request to (for example,
+	// <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified
+	// using the <code>--region</code> parameter or the default Region in your AWS
+	// configuration file.</p>
+	DestinationRegion *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -95,10 +98,14 @@ type CopySnapshotInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the Region that contains the snapshot to be copied.
-	//
-	// This member is required.
-	SourceRegion *string
+	// To encrypt a copy of an unencrypted snapshot if encryption by default is not
+	// enabled, enable encryption using this parameter. Otherwise, omit this parameter.
+	// Encrypted snapshots are encrypted, even if you omit this parameter and
+	// encryption by default is not enabled. You cannot set this parameter to false.
+	// For more information, see Amazon EBS Encryption
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
+	Encrypted *bool
 
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
 	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
@@ -123,28 +130,21 @@ type CopySnapshotInput struct {
 	// valid, the action can appear to complete, but eventually fails.
 	KmsKeyId *string
 
-	// The destination Region to use in the PresignedUrl parameter of a snapshot copy
-	// operation. This parameter is only valid for specifying the destination Region in
-	// a PresignedUrl parameter, where it is required.  <p>The snapshot copy is sent to
-	// the regional endpoint that you sent the HTTP request to (for example,
-	// <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified
-	// using the <code>--region</code> parameter or the default Region in your AWS
-	// configuration file.</p>
-	DestinationRegion *string
-
-	// To encrypt a copy of an unencrypted snapshot if encryption by default is not
-	// enabled, enable encryption using this parameter. Otherwise, omit this parameter.
-	// Encrypted snapshots are encrypted, even if you omit this parameter and
-	// encryption by default is not enabled. You cannot set this parameter to false.
-	// For more information, see Amazon EBS Encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
-	Encrypted *bool
-
-	// The ID of the EBS snapshot to copy.
-	//
-	// This member is required.
-	SourceSnapshotId *string
+	// When you copy an encrypted source snapshot using the Amazon EC2 Query API, you
+	// must supply a pre-signed URL. This parameter is optional for unencrypted
+	// snapshots. For more information, see Query Requests
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html).
+	// The PresignedUrl should use the snapshot source endpoint, the CopySnapshot
+	// action, and include the SourceRegion, SourceSnapshotId, and DestinationRegion
+	// parameters. The PresignedUrl must be signed using AWS Signature Version 4.
+	// Because EBS snapshots are stored in Amazon S3, the signing algorithm for this
+	// parameter uses the same logic that is described in Authenticating Requests by
+	// Using Query Parameters (AWS Signature Version 4)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
+	// in the Amazon Simple Storage Service API Reference. An invalid or improperly
+	// signed PresignedUrl will cause the copy operation to fail asynchronously, and
+	// the snapshot will move to an error state.
+	PresignedUrl *string
 
 	// The tags to apply to the new snapshot.
 	TagSpecifications []*types.TagSpecification

@@ -58,15 +58,15 @@ func (c *Client) RemoveTagsFromOnPremisesInstances(ctx context.Context, params *
 // Represents the input of a RemoveTagsFromOnPremisesInstances operation.
 type RemoveTagsFromOnPremisesInstancesInput struct {
 
-	// The tag key-value pairs to remove from the on-premises instances.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The names of the on-premises instances from which to remove tags.
 	//
 	// This member is required.
 	InstanceNames []*string
+
+	// The tag key-value pairs to remove from the on-premises instances.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type RemoveTagsFromOnPremisesInstancesOutput struct {

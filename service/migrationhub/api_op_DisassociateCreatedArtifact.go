@@ -70,26 +70,26 @@ func (c *Client) DisassociateCreatedArtifact(ctx context.Context, params *Disass
 
 type DisassociateCreatedArtifactInput struct {
 
+	// An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance,
+	// RDS instance, etc.)
+	//
+	// This member is required.
+	CreatedArtifactName *string
+
 	// Unique identifier that references the migration task to be disassociated with
 	// the artifact. Do not store personal data in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string
 
-	// Optional boolean flag to indicate whether any effect should take place. Used to
-	// test if the caller has permission to make the call.
-	DryRun *bool
-
 	// The name of the ProgressUpdateStream.
 	//
 	// This member is required.
 	ProgressUpdateStream *string
 
-	// An ARN of the AWS resource related to the migration (e.g., AMI, EC2 instance,
-	// RDS instance, etc.)
-	//
-	// This member is required.
-	CreatedArtifactName *string
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
+	DryRun *bool
 }
 
 type DisassociateCreatedArtifactOutput struct {

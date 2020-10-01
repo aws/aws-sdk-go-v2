@@ -58,27 +58,28 @@ func (c *Client) UpdateRequestValidator(ctx context.Context, params *UpdateReque
 
 // Updates a RequestValidator () of a given RestApi ().
 type UpdateRequestValidatorInput struct {
-	Name *string
-
-	TemplateSkipList []*string
-
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	Title *string
 
 	// [Required] The identifier of RequestValidator () to be updated.
 	//
 	// This member is required.
 	RequestValidatorId *string
 
-	Template *bool
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
+	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A set of validation rules for incoming Method () requests. In OpenAPI, a
@@ -94,6 +95,9 @@ type UpdateRequestValidatorOutput struct {
 	// The identifier of this RequestValidator ().
 	Id *string
 
+	// The name of this RequestValidator ()
+	Name *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
@@ -101,9 +105,6 @@ type UpdateRequestValidatorOutput struct {
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
-
-	// The name of this RequestValidator ()
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

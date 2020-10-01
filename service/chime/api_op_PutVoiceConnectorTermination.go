@@ -59,15 +59,15 @@ func (c *Client) PutVoiceConnectorTermination(ctx context.Context, params *PutVo
 
 type PutVoiceConnectorTerminationInput struct {
 
-	// The Amazon Chime Voice Connector ID.
-	//
-	// This member is required.
-	VoiceConnectorId *string
-
 	// The termination setting details to add.
 	//
 	// This member is required.
 	Termination *types.Termination
+
+	// The Amazon Chime Voice Connector ID.
+	//
+	// This member is required.
+	VoiceConnectorId *string
 }
 
 type PutVoiceConnectorTerminationOutput struct {

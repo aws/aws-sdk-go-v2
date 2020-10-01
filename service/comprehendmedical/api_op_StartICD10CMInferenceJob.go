@@ -61,23 +61,6 @@ func (c *Client) StartICD10CMInferenceJob(ctx context.Context, params *StartICD1
 
 type StartICD10CMInferenceJobInput struct {
 
-	// Specifies where to send the output files.
-	//
-	// This member is required.
-	OutputDataConfig *types.OutputDataConfig
-
-	// The identifier of the job.
-	JobName *string
-
-	// The language of the input documents. All documents must be in the same language.
-	//
-	// This member is required.
-	LanguageCode types.LanguageCode
-
-	// A unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend Medical generates one.
-	ClientRequestToken *string
-
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data. For
 	// more information, see  Role-Based Permissions Required for Asynchronous
@@ -87,14 +70,31 @@ type StartICD10CMInferenceJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// An AWS Key Management Service key to encrypt your output files. If you do not
-	// specify a key, the files are written in plain text.
-	KMSKey *string
-
 	// Specifies the format and location of the input data for the job.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
+
+	// The language of the input documents. All documents must be in the same language.
+	//
+	// This member is required.
+	LanguageCode types.LanguageCode
+
+	// Specifies where to send the output files.
+	//
+	// This member is required.
+	OutputDataConfig *types.OutputDataConfig
+
+	// A unique identifier for the request. If you don't set the client request token,
+	// Amazon Comprehend Medical generates one.
+	ClientRequestToken *string
+
+	// The identifier of the job.
+	JobName *string
+
+	// An AWS Key Management Service key to encrypt your output files. If you do not
+	// specify a key, the files are written in plain text.
+	KMSKey *string
 }
 
 type StartICD10CMInferenceJobOutput struct {

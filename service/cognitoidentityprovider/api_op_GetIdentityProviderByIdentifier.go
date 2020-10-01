@@ -57,15 +57,15 @@ func (c *Client) GetIdentityProviderByIdentifier(ctx context.Context, params *Ge
 
 type GetIdentityProviderByIdentifierInput struct {
 
-	// The user pool ID.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// The identity provider ID.
 	//
 	// This member is required.
 	IdpIdentifier *string
+
+	// The user pool ID.
+	//
+	// This member is required.
+	UserPoolId *string
 }
 
 type GetIdentityProviderByIdentifierOutput struct {

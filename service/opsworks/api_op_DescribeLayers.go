@@ -61,13 +61,13 @@ func (c *Client) DescribeLayers(ctx context.Context, params *DescribeLayersInput
 
 type DescribeLayersInput struct {
 
-	// The stack ID.
-	StackId *string
-
 	// An array of layer IDs that specify the layers to be described. If you omit this
 	// parameter, DescribeLayers returns a description of every layer in the specified
 	// stack.
 	LayerIds []*string
+
+	// The stack ID.
+	StackId *string
 }
 
 // Contains the response to a DescribeLayers request.

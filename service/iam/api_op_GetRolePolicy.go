@@ -89,11 +89,6 @@ type GetRolePolicyInput struct {
 // Contains the response to a successful GetRolePolicy () request.
 type GetRolePolicyOutput struct {
 
-	// The name of the policy.
-	//
-	// This member is required.
-	PolicyName *string
-
 	// The policy document. IAM stores policies in JSON format. However, resources that
 	// were created using AWS CloudFormation templates can be formatted in YAML. AWS
 	// CloudFormation always converts a YAML policy to JSON format before submitting it
@@ -101,6 +96,11 @@ type GetRolePolicyOutput struct {
 	//
 	// This member is required.
 	PolicyDocument *string
+
+	// The name of the policy.
+	//
+	// This member is required.
+	PolicyName *string
 
 	// The role the policy is associated with.
 	//

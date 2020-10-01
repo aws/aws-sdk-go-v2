@@ -58,33 +58,33 @@ func (c *Client) GetManagedPrefixListAssociations(ctx context.Context, params *G
 
 type GetManagedPrefixListAssociationsInput struct {
 
+	// The ID of the prefix list.
+	//
+	// This member is required.
+	PrefixListId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
-	// The ID of the prefix list.
-	//
-	// This member is required.
-	PrefixListId *string
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type GetManagedPrefixListAssociationsOutput struct {
 
-	// Information about the associations.
-	PrefixListAssociations []*types.PrefixListAssociation
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the associations.
+	PrefixListAssociations []*types.PrefixListAssociation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

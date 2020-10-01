@@ -56,17 +56,22 @@ type AccessControlTranslation struct {
 // an object must match all of the predicates for the filter to apply.
 type AnalyticsAndOperator struct {
 
-	// The list of tags to use when evaluating an AND predicate.
-	Tags []*Tag
-
 	// The prefix to use when evaluating an AND predicate: The prefix that an object
 	// must have to be included in the metrics results.
 	Prefix *string
+
+	// The list of tags to use when evaluating an AND predicate.
+	Tags []*Tag
 }
 
 // Specifies the configuration and any analyses for the analytics filter of an
 // Amazon S3 bucket.
 type AnalyticsConfiguration struct {
+
+	// The ID that identifies the analytics configuration.
+	//
+	// This member is required.
+	Id *string
 
 	// Contains data related to access patterns to be collected and made available to
 	// analyze the tradeoffs between different storage classes.
@@ -78,11 +83,6 @@ type AnalyticsConfiguration struct {
 	// exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no
 	// filter is provided, all objects will be considered in any analysis.
 	Filter *AnalyticsFilter
-
-	// The ID that identifies the analytics configuration.
-	//
-	// This member is required.
-	Id *string
 }
 
 // Where to publish the analytics results.
@@ -113,24 +113,24 @@ type AnalyticsFilter struct {
 // Contains information about where to publish the analytics results.
 type AnalyticsS3BucketDestination struct {
 
-	// Specifies the file format used when exporting data to Amazon S3.
-	//
-	// This member is required.
-	Format AnalyticsS3ExportFileFormat
-
-	// The prefix to use when exporting data. The prefix is prepended to all results.
-	Prefix *string
-
 	// The Amazon Resource Name (ARN) of the bucket to which data is exported.
 	//
 	// This member is required.
 	Bucket *string
+
+	// Specifies the file format used when exporting data to Amazon S3.
+	//
+	// This member is required.
+	Format AnalyticsS3ExportFileFormat
 
 	// The account ID that owns the destination S3 bucket. If no account ID is
 	// provided, the owner is not validated before exporting data. Although this value
 	// is optional, we strongly recommend that you set it to help prevent problems if
 	// the destination bucket ownership changes.
 	BucketAccountId *string
+
+	// The prefix to use when exporting data. The prefix is prepended to all results.
+	Prefix *string
 }
 
 // In terms of implementation, a Bucket is a resource. An Amazon S3 bucket name is
@@ -201,6 +201,13 @@ type CompletedPart struct {
 // redirect request to another host where you might process the error.
 type Condition struct {
 
+	// The HTTP error code when the redirect is applied. In the event of an error, if
+	// the error code equals this value, then the specified redirect is applied.
+	// Required when parent element Condition is specified and sibling KeyPrefixEquals
+	// is not specified. If both are specified, then both must be true for the redirect
+	// to be applied.
+	HttpErrorCodeReturnedEquals *string
+
 	// The object key name prefix when the redirect is applied. For example, to
 	// redirect requests for ExamplePage.html, the key prefix will be ExamplePage.html.
 	// To redirect request for all pages with the prefix docs/, the key prefix will be
@@ -209,25 +216,18 @@ type Condition struct {
 	// not specified. If both conditions are specified, both must be true for the
 	// redirect to be applied.
 	KeyPrefixEquals *string
-
-	// The HTTP error code when the redirect is applied. In the event of an error, if
-	// the error code equals this value, then the specified redirect is applied.
-	// Required when parent element Condition is specified and sibling KeyPrefixEquals
-	// is not specified. If both are specified, then both must be true for the redirect
-	// to be applied.
-	HttpErrorCodeReturnedEquals *string
 }
 
 // Container for all response elements.
 type CopyObjectResult struct {
 
-	// Returns the date that the object was last modified.
-	LastModified *time.Time
-
 	// Returns the ETag of the new object. The ETag reflects only changes to the
 	// contents of an object, not its metadata. The source and destination ETag is
 	// identical for a successfully copied object.
 	ETag *string
+
+	// Returns the date that the object was last modified.
+	LastModified *time.Time
 }
 
 // Container for all response elements.
@@ -256,9 +256,11 @@ type CORSConfiguration struct {
 // Specifies a cross-origin access rule for an Amazon S3 bucket.
 type CORSRule struct {
 
-	// The time in seconds that your browser is to cache the preflight response for the
-	// specified resource.
-	MaxAgeSeconds *int32
+	// An HTTP method that you allow the origin to execute. Valid values are GET, PUT,
+	// HEAD, POST, and DELETE.
+	//
+	// This member is required.
+	AllowedMethods []*string
 
 	// One or more origins you want customers to be able to access the bucket from.
 	//
@@ -270,15 +272,13 @@ type CORSRule struct {
 	// OPTIONS request, Amazon S3 returns any requested headers that are allowed.
 	AllowedHeaders []*string
 
-	// An HTTP method that you allow the origin to execute. Valid values are GET, PUT,
-	// HEAD, POST, and DELETE.
-	//
-	// This member is required.
-	AllowedMethods []*string
-
 	// One or more headers in the response that you want customers to be able to access
 	// from their applications (for example, from a JavaScript XMLHttpRequest object).
 	ExposeHeaders []*string
+
+	// The time in seconds that your browser is to cache the preflight response for the
+	// specified resource.
+	MaxAgeSeconds *int32
 }
 
 // The configuration information for the bucket.
@@ -293,6 +293,20 @@ type CreateBucketConfiguration struct {
 // object is formatted.
 type CSVInput struct {
 
+	// Specifies that CSV field values may contain quoted record delimiters and such
+	// records should be allowed. Default value is FALSE. Setting this value to TRUE
+	// may lower performance.
+	AllowQuotedRecordDelimiter *bool
+
+	// A single character used to indicate that a row should be ignored when the
+	// character is present at the start of that row. You can specify any character to
+	// indicate a comment line.
+	Comments *string
+
+	// A single character used to separate individual fields in a record. You can
+	// specify an arbitrary delimiter.
+	FieldDelimiter *string
+
 	// Describes the first line of input. Valid values are:
 	//
 	//     * NONE: First line is
@@ -306,20 +320,6 @@ type CSVInput struct {
 	//     * Use: First line is a header, and you can use the header value to
 	// identify a column in an expression (SELECT "name" FROM OBJECT).
 	FileHeaderInfo FileHeaderInfo
-
-	// A single character used to indicate that a row should be ignored when the
-	// character is present at the start of that row. You can specify any character to
-	// indicate a comment line.
-	Comments *string
-
-	// Specifies that CSV field values may contain quoted record delimiters and such
-	// records should be allowed. Default value is FALSE. Setting this value to TRUE
-	// may lower performance.
-	AllowQuotedRecordDelimiter *bool
-
-	// A single character used to separate individual fields in a record. You can
-	// specify an arbitrary delimiter.
-	FieldDelimiter *string
 
 	// A single character used for escaping when the field delimiter is part of the
 	// value. For example, if the value is a, b, Amazon S3 wraps this field value in
@@ -340,18 +340,18 @@ type CSVInput struct {
 // formatted.
 type CSVOutput struct {
 
-	// The single character used for escaping the quote character inside an already
-	// escaped value.
-	QuoteEscapeCharacter *string
+	// The value used to separate individual fields in a record. You can specify an
+	// arbitrary delimiter.
+	FieldDelimiter *string
 
 	// A single character used for escaping when the field delimiter is part of the
 	// value. For example, if the value is a, b, Amazon S3 wraps this field value in
 	// quotation marks, as follows: " a , b ".
 	QuoteCharacter *string
 
-	// A single character used to separate individual records in the output. Instead of
-	// the default value, you can specify an arbitrary delimiter.
-	RecordDelimiter *string
+	// The single character used for escaping the quote character inside an already
+	// escaped value.
+	QuoteEscapeCharacter *string
 
 	// Indicates whether to use quotation marks around output fields.
 	//
@@ -362,21 +362,21 @@ type CSVOutput struct {
 	// marks for output fields when needed.
 	QuoteFields QuoteFields
 
-	// The value used to separate individual fields in a record. You can specify an
-	// arbitrary delimiter.
-	FieldDelimiter *string
+	// A single character used to separate individual records in the output. Instead of
+	// the default value, you can specify an arbitrary delimiter.
+	RecordDelimiter *string
 }
 
 // The container element for specifying the default Object Lock retention settings
 // for new objects placed in the specified bucket.
 type DefaultRetention struct {
 
+	// The number of days that you want to specify for the default retention period.
+	Days *int32
+
 	// The default Object Lock retention mode you want to apply to new objects placed
 	// in the specified bucket.
 	Mode ObjectLockRetentionMode
-
-	// The number of days that you want to specify for the default retention period.
-	Days *int32
 
 	// The number of years that you want to specify for the default retention period.
 	Years *int32
@@ -398,18 +398,18 @@ type Delete struct {
 // Information about the deleted object.
 type DeletedObject struct {
 
-	// The name of the deleted object.
-	Key *string
+	// Specifies whether the versioned object that was permanently deleted was (true)
+	// or was not (false) a delete marker. In a simple DELETE, this header indicates
+	// whether (true) or not (false) a delete marker was created.
+	DeleteMarker *bool
 
 	// The version ID of the delete marker created as a result of the DELETE operation.
 	// If you delete a specific object version, the value returned by this header is
 	// the version ID of the object version deleted.
 	DeleteMarkerVersionId *string
 
-	// Specifies whether the versioned object that was permanently deleted was (true)
-	// or was not (false) a delete marker. In a simple DELETE, this header indicates
-	// whether (true) or not (false) a delete marker was created.
-	DeleteMarker *bool
+	// The name of the deleted object.
+	Key *string
 
 	// The version ID of the deleted object.
 	VersionId *string
@@ -418,8 +418,12 @@ type DeletedObject struct {
 // Information about the delete marker.
 type DeleteMarkerEntry struct {
 
-	// Version ID of an object.
-	VersionId *string
+	// Specifies whether the object is (true) or is not (false) the latest version of
+	// an object.
+	IsLatest *bool
+
+	// The object key.
+	Key *string
 
 	// Date and time the object was last modified.
 	LastModified *time.Time
@@ -427,12 +431,8 @@ type DeleteMarkerEntry struct {
 	// The account that created the delete marker.>
 	Owner *Owner
 
-	// Specifies whether the object is (true) or is not (false) the latest version of
-	// an object.
-	IsLatest *bool
-
-	// The object key.
-	Key *string
+	// Version ID of an object.
+	VersionId *string
 }
 
 // Specifies whether Amazon S3 replicates the delete markers. If you specify a
@@ -459,23 +459,18 @@ type DeleteMarkerReplication struct {
 // for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).
 type Destination struct {
 
-	// The storage class to use when replicating objects, such as S3 Standard or
-	// reduced redundancy. By default, Amazon S3 uses the storage class of the source
-	// object to create the object replica. For valid values, see the StorageClass
-	// element of the PUT Bucket replication
-	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
-	// action in the Amazon Simple Storage Service API Reference.
-	StorageClass StorageClass
+	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store
+	// the results.
+	//
+	// This member is required.
+	Bucket *string
 
-	// A container specifying replication metrics-related settings enabling metrics and
-	// Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified
-	// together with a ReplicationTime block.
-	Metrics *Metrics
-
-	// A container specifying S3 Replication Time Control (S3 RTC), including whether
-	// S3 RTC is enabled and the time when all objects and operations on objects must
-	// be replicated. Must be specified together with a Metrics block.
-	ReplicationTime *ReplicationTime
+	// Specify this only in a cross-account scenario (where source and destination
+	// bucket owners are not the same), and you want to change replica ownership to the
+	// AWS account that owns the destination bucket. If this is not specified in the
+	// replication configuration, the replicas are owned by same AWS account that owns
+	// the source object.
+	AccessControlTranslation *AccessControlTranslation
 
 	// Destination bucket owner account ID. In a cross-account scenario, if you direct
 	// Amazon S3 to change replica ownership to the AWS account that owns the
@@ -490,22 +485,33 @@ type Destination struct {
 	// SourceSelectionCriteria is specified, you must specify this element.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store
-	// the results.
-	//
-	// This member is required.
-	Bucket *string
+	// A container specifying replication metrics-related settings enabling metrics and
+	// Amazon S3 events for S3 Replication Time Control (S3 RTC). Must be specified
+	// together with a ReplicationTime block.
+	Metrics *Metrics
 
-	// Specify this only in a cross-account scenario (where source and destination
-	// bucket owners are not the same), and you want to change replica ownership to the
-	// AWS account that owns the destination bucket. If this is not specified in the
-	// replication configuration, the replicas are owned by same AWS account that owns
-	// the source object.
-	AccessControlTranslation *AccessControlTranslation
+	// A container specifying S3 Replication Time Control (S3 RTC), including whether
+	// S3 RTC is enabled and the time when all objects and operations on objects must
+	// be replicated. Must be specified together with a Metrics block.
+	ReplicationTime *ReplicationTime
+
+	// The storage class to use when replicating objects, such as S3 Standard or
+	// reduced redundancy. By default, Amazon S3 uses the storage class of the source
+	// object to create the object replica. For valid values, see the StorageClass
+	// element of the PUT Bucket replication
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
+	// action in the Amazon Simple Storage Service API Reference.
+	StorageClass StorageClass
 }
 
 // Contains the type of server-side encryption used.
 type Encryption struct {
+
+	// The server-side encryption algorithm used when storing job results in Amazon S3
+	// (for example, AES256, aws:kms).
+	//
+	// This member is required.
+	EncryptionType ServerSideEncryption
 
 	// If the encryption type is aws:kms, this optional value can be used to specify
 	// the encryption context for the restore results.
@@ -518,12 +524,6 @@ type Encryption struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSKeyId *string
-
-	// The server-side encryption algorithm used when storing job results in Amazon S3
-	// (for example, AES256, aws:kms).
-	//
-	// This member is required.
-	EncryptionType ServerSideEncryption
 }
 
 // Specifies encryption-related information for an Amazon S3 bucket that is a
@@ -542,9 +542,6 @@ type EncryptionConfiguration struct {
 
 // Container for all error elements.
 type Error struct {
-
-	// The error key.
-	Key *string
 
 	// The error code is a string that uniquely identifies an error condition. It is
 	// meant to be read and understood by programs that detect and handle errors by
@@ -1507,6 +1504,9 @@ type Error struct {
 	//         * SOAP Fault Code Prefix: Client
 	Code *string
 
+	// The error key.
+	Key *string
+
 	// The error message contains a generic description of the error condition in
 	// English. It is intended for a human audience. Simple programs display the
 	// message directly to the end user if they encounter an error condition they don't
@@ -1568,18 +1568,20 @@ type GlacierJobParameters struct {
 // Container for grant information.
 type Grant struct {
 
-	// Specifies the permission given to the grantee.
-	Permission Permission
-
 	// The person being granted permissions.
 	Grantee *Grantee
+
+	// Specifies the permission given to the grantee.
+	Permission Permission
 }
 
 // Container for the person being granted permissions.
 type Grantee struct {
 
-	// The canonical user ID of the grantee.
-	ID *string
+	// Type of grantee
+	//
+	// This member is required.
+	Type Type
 
 	// Screen name of the grantee.
 	DisplayName *string
@@ -1612,13 +1614,11 @@ type Grantee struct {
 	// General Reference.
 	EmailAddress *string
 
+	// The canonical user ID of the grantee.
+	ID *string
+
 	// URI of the grantee group.
 	URI *string
-
-	// Type of grantee
-	//
-	// This member is required.
-	Type Type
 }
 
 // Container for the Suffix element.
@@ -1637,29 +1637,29 @@ type IndexDocument struct {
 // Container element that identifies who initiated the multipart upload.
 type Initiator struct {
 
+	// Name of the Principal.
+	DisplayName *string
+
 	// If the principal is an AWS account, it provides the Canonical User ID. If the
 	// principal is an IAM User, it provides a user ARN value.
 	ID *string
-
-	// Name of the Principal.
-	DisplayName *string
 }
 
 // Describes the serialization format of the object.
 type InputSerialization struct {
 
+	// Describes the serialization of a CSV-encoded object.
+	CSV *CSVInput
+
 	// Specifies object's compression format. Valid values: NONE, GZIP, BZIP2. Default
 	// Value: NONE.
 	CompressionType CompressionType
 
-	// Specifies Parquet as object's input serialization format.
-	Parquet *ParquetInput
-
-	// Describes the serialization of a CSV-encoded object.
-	CSV *CSVInput
-
 	// Specifies JSON as object's input serialization format.
 	JSON *JSONInput
+
+	// Specifies Parquet as object's input serialization format.
+	Parquet *ParquetInput
 }
 
 // Specifies the inventory configuration for an Amazon S3 bucket. For more
@@ -1667,9 +1667,6 @@ type InputSerialization struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html)
 // in the Amazon Simple Storage Service API Reference.
 type InventoryConfiguration struct {
-
-	// Contains the optional fields that are included in the inventory results.
-	OptionalFields []InventoryOptionalField
 
 	// Contains information about where to publish the inventory results.
 	//
@@ -1681,21 +1678,6 @@ type InventoryConfiguration struct {
 	// This member is required.
 	Id *string
 
-	// Specifies an inventory filter. The inventory only includes objects that meet the
-	// filter's criteria.
-	Filter *InventoryFilter
-
-	// Specifies the schedule for generating inventory results.
-	//
-	// This member is required.
-	Schedule *InventorySchedule
-
-	// Specifies whether the inventory is enabled or disabled. If set to True, an
-	// inventory list is generated. If set to False, no inventory list is generated.
-	//
-	// This member is required.
-	IsEnabled *bool
-
 	// Object versions to include in the inventory list. If set to All, the list
 	// includes all the object versions, which adds the version-related fields
 	// VersionId, IsLatest, and DeleteMarker to the list. If set to Current, the list
@@ -1703,6 +1685,24 @@ type InventoryConfiguration struct {
 	//
 	// This member is required.
 	IncludedObjectVersions InventoryIncludedObjectVersions
+
+	// Specifies whether the inventory is enabled or disabled. If set to True, an
+	// inventory list is generated. If set to False, no inventory list is generated.
+	//
+	// This member is required.
+	IsEnabled *bool
+
+	// Specifies the schedule for generating inventory results.
+	//
+	// This member is required.
+	Schedule *InventorySchedule
+
+	// Specifies an inventory filter. The inventory only includes objects that meet the
+	// filter's criteria.
+	Filter *InventoryFilter
+
+	// Contains the optional fields that are included in the inventory results.
+	OptionalFields []InventoryOptionalField
 }
 
 // Specifies the inventory configuration for an Amazon S3 bucket.
@@ -1719,11 +1719,11 @@ type InventoryDestination struct {
 // results.
 type InventoryEncryption struct {
 
-	// Specifies the use of SSE-S3 to encrypt delivered inventory reports.
-	SSES3 *SSES3
-
 	// Specifies the use of SSE-KMS to encrypt delivered inventory reports.
 	SSEKMS *SSEKMS
+
+	// Specifies the use of SSE-S3 to encrypt delivered inventory reports.
+	SSES3 *SSES3
 }
 
 // Specifies an inventory filter. The inventory only includes objects that meet the
@@ -1746,6 +1746,11 @@ type InventoryS3BucketDestination struct {
 	// This member is required.
 	Bucket *string
 
+	// Specifies the output format of the inventory results.
+	//
+	// This member is required.
+	Format InventoryFormat
+
 	// The account ID that owns the destination S3 bucket. If no account ID is
 	// provided, the owner is not validated before exporting data. Although this value
 	// is optional, we strongly recommend that you set it to help prevent problems if
@@ -1758,11 +1763,6 @@ type InventoryS3BucketDestination struct {
 
 	// The prefix that is prepended to all inventory results.
 	Prefix *string
-
-	// Specifies the output format of the inventory results.
-	//
-	// This member is required.
-	Format InventoryFormat
 }
 
 // Specifies the schedule for generating inventory results.
@@ -1792,16 +1792,6 @@ type JSONOutput struct {
 // A container for specifying the configuration for AWS Lambda notifications.
 type LambdaFunctionConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes
-	// when the specified event type occurs.
-	//
-	// This member is required.
-	LambdaFunctionArn *string
-
-	// An optional unique identifier for configurations in a notification
-	// configuration. If you don't provide one, Amazon S3 will assign an ID.
-	Id *string
-
 	// The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more
 	// information, see Supported Event Types
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
@@ -1810,11 +1800,21 @@ type LambdaFunctionConfiguration struct {
 	// This member is required.
 	Events []Event
 
+	// The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes
+	// when the specified event type occurs.
+	//
+	// This member is required.
+	LambdaFunctionArn *string
+
 	// Specifies object key name filtering rules. For information about key name
 	// filtering, see Configuring Event Notifications
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter
+
+	// An optional unique identifier for configurations in a notification
+	// configuration. If you don't provide one, Amazon S3 will assign an ID.
+	Id *string
 }
 
 // Container for the expiration for the lifecycle of the object.
@@ -1824,22 +1824,19 @@ type LifecycleExpiration struct {
 	// ISO 8601 Format.
 	Date *time.Time
 
+	// Indicates the lifetime, in days, of the objects that are subject to the rule.
+	// The value must be a non-zero positive integer.
+	Days *int32
+
 	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent
 	// versions. If set to true, the delete marker will be expired; if set to false the
 	// policy takes no action. This cannot be specified with Days or Date in a
 	// Lifecycle Expiration Policy.
 	ExpiredObjectDeleteMarker *bool
-
-	// Indicates the lifetime, in days, of the objects that are subject to the rule.
-	// The value must be a non-zero positive integer.
-	Days *int32
 }
 
 // A lifecycle rule for individual objects in an Amazon S3 bucket.
 type LifecycleRule struct {
-
-	// Unique identifier for the rule. The value cannot be longer than 255 characters.
-	ID *string
 
 	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is
 	// not currently being applied.
@@ -1855,6 +1852,24 @@ type LifecycleRule struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
 
+	// Specifies the expiration for the lifecycle of the object in the form of date,
+	// days and, whether the object has a delete marker.
+	Expiration *LifecycleExpiration
+
+	// The Filter is used to identify objects that a Lifecycle Rule applies to. A
+	// Filter must have exactly one of Prefix, Tag, or And specified.
+	Filter *LifecycleRuleFilter
+
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
+	ID *string
+
+	// Specifies when noncurrent object versions expire. Upon expiration, Amazon S3
+	// permanently deletes the noncurrent object versions. You set this lifecycle
+	// configuration action on a bucket that has versioning enabled (or suspended) to
+	// request that Amazon S3 delete noncurrent object versions at a specific period in
+	// the object's lifetime.
+	NoncurrentVersionExpiration *NoncurrentVersionExpiration
+
 	// Specifies the transition rule for the lifecycle rule that describes when
 	// noncurrent objects transition to a specific storage class. If your bucket is
 	// versioning-enabled (or versioning is suspended), you can set this action to
@@ -1868,21 +1883,6 @@ type LifecycleRule struct {
 
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
 	Transitions []*Transition
-
-	// The Filter is used to identify objects that a Lifecycle Rule applies to. A
-	// Filter must have exactly one of Prefix, Tag, or And specified.
-	Filter *LifecycleRuleFilter
-
-	// Specifies the expiration for the lifecycle of the object in the form of date,
-	// days and, whether the object has a delete marker.
-	Expiration *LifecycleExpiration
-
-	// Specifies when noncurrent object versions expire. Upon expiration, Amazon S3
-	// permanently deletes the noncurrent object versions. You set this lifecycle
-	// configuration action on a bucket that has versioning enabled (or suspended) to
-	// request that Amazon S3 delete noncurrent object versions at a specific period in
-	// the object's lifetime.
-	NoncurrentVersionExpiration *NoncurrentVersionExpiration
 }
 
 // This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
@@ -1890,12 +1890,12 @@ type LifecycleRule struct {
 // predicates configured inside the And operator.
 type LifecycleRuleAndOperator struct {
 
+	// Prefix identifying one or more objects to which the rule applies.
+	Prefix *string
+
 	// All of these tags must exist in the object's tag set in order for the rule to
 	// apply.
 	Tags []*Tag
-
-	// Prefix identifying one or more objects to which the rule applies.
-	Prefix *string
 }
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to. A
@@ -1989,15 +1989,15 @@ type MetricsAndOperator struct {
 // in the Amazon Simple Storage Service API Reference.
 type MetricsConfiguration struct {
 
-	// Specifies a metrics configuration filter. The metrics configuration will only
-	// include objects that meet the filter's criteria. A filter must be a prefix, a
-	// tag, or a conjunction (MetricsAndOperator).
-	Filter *MetricsFilter
-
 	// The ID used to identify the metrics configuration.
 	//
 	// This member is required.
 	Id *string
+
+	// Specifies a metrics configuration filter. The metrics configuration will only
+	// include objects that meet the filter's criteria. A filter must be a prefix, a
+	// tag, or a conjunction (MetricsAndOperator).
+	Filter *MetricsFilter
 }
 
 // Specifies a metrics configuration filter. The metrics configuration only
@@ -2005,13 +2005,13 @@ type MetricsConfiguration struct {
 // tag, or a conjunction (MetricsAndOperator).
 type MetricsFilter struct {
 
-	// The prefix used when evaluating a metrics filter.
-	Prefix *string
-
 	// A conjunction (logical AND) of predicates, which is used in evaluating a metrics
 	// filter. The operator must have at least two predicates, and an object must match
 	// all of the predicates in order for the filter to apply.
 	And *MetricsAndOperator
+
+	// The prefix used when evaluating a metrics filter.
+	Prefix *string
 
 	// The tag used when evaluating a metrics filter.
 	Tag *Tag
@@ -2020,23 +2020,23 @@ type MetricsFilter struct {
 // Container for the MultipartUpload for the Amazon S3 object.
 type MultipartUpload struct {
 
-	// Key of the object for which the multipart upload was initiated.
-	Key *string
-
-	// Upload ID that identifies the multipart upload.
-	UploadId *string
-
 	// Date and time at which the multipart upload was initiated.
 	Initiated *time.Time
-
-	// Specifies the owner of the object that is part of the multipart upload.
-	Owner *Owner
 
 	// Identifies who initiated the multipart upload.
 	Initiator *Initiator
 
+	// Key of the object for which the multipart upload was initiated.
+	Key *string
+
+	// Specifies the owner of the object that is part of the multipart upload.
+	Owner *Owner
+
 	// The class of storage used to store the object.
 	StorageClass StorageClass
+
+	// Upload ID that identifies the multipart upload.
+	UploadId *string
 }
 
 // Specifies when noncurrent object versions expire. Upon expiration, Amazon S3
@@ -2105,25 +2105,25 @@ type NotificationConfigurationFilter struct {
 // An object consists of data and its descriptive metadata.
 type Object struct {
 
-	// The owner of the object
-	Owner *Owner
-
-	// The class of storage used to store the object.
-	StorageClass ObjectStorageClass
-
-	// The date the Object was Last Modified
-	LastModified *time.Time
-
 	// The entity tag is an MD5 hash of the object. ETag reflects only changes to the
 	// contents of an object, not its metadata.
 	ETag *string
 
-	// Size in bytes of the object
-	Size *int64
-
 	// The name that you assign to an object. You use the object key to retrieve the
 	// object.
 	Key *string
+
+	// The date the Object was Last Modified
+	LastModified *time.Time
+
+	// The owner of the object
+	Owner *Owner
+
+	// Size in bytes of the object
+	Size *int64
+
+	// The class of storage used to store the object.
+	StorageClass ObjectStorageClass
 }
 
 // Object Identifier is unique value to identify objects.
@@ -2176,30 +2176,30 @@ type ObjectLockRule struct {
 // The version of an object.
 type ObjectVersion struct {
 
-	// The class of storage used to store the object.
-	StorageClass ObjectVersionStorageClass
+	// The entity tag is an MD5 hash of that version of the object.
+	ETag *string
 
 	// Specifies whether the object is (true) or is not (false) the latest version of
 	// an object.
 	IsLatest *bool
-
-	// Specifies the owner of the object.
-	Owner *Owner
-
-	// The entity tag is an MD5 hash of that version of the object.
-	ETag *string
-
-	// Version ID of an object.
-	VersionId *string
-
-	// Size in bytes of the object.
-	Size *int64
 
 	// The object key.
 	Key *string
 
 	// Date and time the object was last modified.
 	LastModified *time.Time
+
+	// Specifies the owner of the object.
+	Owner *Owner
+
+	// Size in bytes of the object.
+	Size *int64
+
+	// The class of storage used to store the object.
+	StorageClass ObjectVersionStorageClass
+
+	// Version ID of an object.
+	VersionId *string
 }
 
 // Describes the location where the restore job's output is stored.
@@ -2239,12 +2239,12 @@ type Part struct {
 	// Entity tag returned when the part was uploaded.
 	ETag *string
 
+	// Date and time at which the part was uploaded.
+	LastModified *time.Time
+
 	// Part number identifying the part. This is a positive integer between 1 and
 	// 10,000.
 	PartNumber *int32
-
-	// Date and time at which the part was uploaded.
-	LastModified *time.Time
 
 	// Size in bytes of the uploaded part data.
 	Size *int64
@@ -2266,14 +2266,6 @@ type PolicyStatus struct {
 // in the Amazon Simple Storage Service Developer Guide.
 type PublicAccessBlockConfiguration struct {
 
-	// Specifies whether Amazon S3 should restrict public bucket policies for this
-	// bucket. Setting this element to TRUE restricts access to this bucket to only AWS
-	// services and authorized users within this account if the bucket has a public
-	// policy. Enabling this setting doesn't affect previously stored bucket policies,
-	// except that public and cross-account access within any public bucket policy,
-	// including non-public delegation to specific accounts, is blocked.
-	RestrictPublicBuckets *bool
-
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
 	// this bucket and objects in this bucket. Setting this element to TRUE causes the
 	// following behavior:
@@ -2290,6 +2282,12 @@ type PublicAccessBlockConfiguration struct {
 	// Enabling this setting doesn't affect existing policies or ACLs.
 	BlockPublicAcls *bool
 
+	// Specifies whether Amazon S3 should block public bucket policies for this bucket.
+	// Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket
+	// policy if the specified bucket policy allows public access. Enabling this
+	// setting doesn't affect existing bucket policies.
+	BlockPublicPolicy *bool
+
 	// Specifies whether Amazon S3 should ignore public ACLs for this bucket and
 	// objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore
 	// all public ACLs on this bucket and objects in this bucket. Enabling this setting
@@ -2297,20 +2295,18 @@ type PublicAccessBlockConfiguration struct {
 	// public ACLs from being set.
 	IgnorePublicAcls *bool
 
-	// Specifies whether Amazon S3 should block public bucket policies for this bucket.
-	// Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket
-	// policy if the specified bucket policy allows public access. Enabling this
-	// setting doesn't affect existing bucket policies.
-	BlockPublicPolicy *bool
+	// Specifies whether Amazon S3 should restrict public bucket policies for this
+	// bucket. Setting this element to TRUE restricts access to this bucket to only AWS
+	// services and authorized users within this account if the bucket has a public
+	// policy. Enabling this setting doesn't affect previously stored bucket policies,
+	// except that public and cross-account access within any public bucket policy,
+	// including non-public delegation to specific accounts, is blocked.
+	RestrictPublicBuckets *bool
 }
 
 // Specifies the configuration for publishing messages to an Amazon Simple Queue
 // Service (Amazon SQS) queue when Amazon S3 detects specified events.
 type QueueConfiguration struct {
-
-	// An optional unique identifier for configurations in a notification
-	// configuration. If you don't provide one, Amazon S3 will assign an ID.
-	Id *string
 
 	// A collection of bucket events for which to send notifications
 	//
@@ -2328,20 +2324,26 @@ type QueueConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
 	// Amazon Simple Storage Service Developer Guide.
 	Filter *NotificationConfigurationFilter
+
+	// An optional unique identifier for configurations in a notification
+	// configuration. If you don't provide one, Amazon S3 will assign an ID.
+	Id *string
 }
 
 // Specifies how requests are redirected. In the event of an error, you can specify
 // a different error code to return.
 type Redirect struct {
 
+	// The host name to use in the redirect request.
+	HostName *string
+
+	// The HTTP redirect code to use on the response. Not required if one of the
+	// siblings is present.
+	HttpRedirectCode *string
+
 	// Protocol to use when redirecting requests. The default is the protocol that is
 	// used in the original request.
 	Protocol Protocol
-
-	// The specific object key to use in the redirect request. For example, redirect
-	// request to error.html. Not required if one of the siblings is present. Can be
-	// present only if ReplaceKeyPrefixWith is not provided.
-	ReplaceKeyWith *string
 
 	// The object key prefix to use in the redirect request. For example, to redirect
 	// requests for all pages with prefix docs/ (objects in the docs/ folder) to
@@ -2350,26 +2352,24 @@ type Redirect struct {
 	// the siblings is present. Can be present only if ReplaceKeyWith is not provided.
 	ReplaceKeyPrefixWith *string
 
-	// The host name to use in the redirect request.
-	HostName *string
-
-	// The HTTP redirect code to use on the response. Not required if one of the
-	// siblings is present.
-	HttpRedirectCode *string
+	// The specific object key to use in the redirect request. For example, redirect
+	// request to error.html. Not required if one of the siblings is present. Can be
+	// present only if ReplaceKeyPrefixWith is not provided.
+	ReplaceKeyWith *string
 }
 
 // Specifies the redirect behavior of all requests to a website endpoint of an
 // Amazon S3 bucket.
 type RedirectAllRequestsTo struct {
 
-	// Protocol to use when redirecting requests. The default is the protocol that is
-	// used in the original request.
-	Protocol Protocol
-
 	// Name of the host where requests are redirected.
 	//
 	// This member is required.
 	HostName *string
+
+	// Protocol to use when redirecting requests. The default is the protocol that is
+	// used in the original request.
+	Protocol Protocol
 }
 
 // A container for replication rules. You can add up to 1,000 rules. The maximum
@@ -2395,10 +2395,46 @@ type ReplicationConfiguration struct {
 // Specifies which Amazon S3 objects to replicate and where to store the replicas.
 type ReplicationRule struct {
 
+	// A container for information about the replication destination and its
+	// configurations including enabling the S3 Replication Time Control (S3 RTC).
+	//
+	// This member is required.
+	Destination *Destination
+
 	// Specifies whether the rule is enabled.
 	//
 	// This member is required.
 	Status ReplicationRuleStatus
+
+	// Specifies whether Amazon S3 replicates the delete markers. If you specify a
+	// Filter, you must specify this element. However, in the latest version of
+	// replication configuration (when Filter is specified), Amazon S3 doesn't
+	// replicate delete markers. Therefore, the DeleteMarkerReplication element can
+	// contain only Disabled. For an example configuration, see Basic Rule
+	// Configuration
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
+	// <note> <p> If you don't specify the <code>Filter</code> element, Amazon S3
+	// assumes that the replication configuration is the earlier version, V1. In the
+	// earlier version, Amazon S3 handled replication of delete markers differently.
+	// For more information, see <a
+	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward
+	// Compatibility</a>.</p> </note>
+	DeleteMarkerReplication *DeleteMarkerReplication
+
+	//
+	ExistingObjectReplication *ExistingObjectReplication
+
+	// A filter that identifies the subset of objects to which the replication rule
+	// applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
+	Filter *ReplicationRuleFilter
+
+	// A unique identifier for the rule. The maximum value is 255 characters.
+	ID *string
+
+	// An object key name prefix that identifies the object or objects to which the
+	// rule applies. The maximum prefix length is 1,024 characters. To include all
+	// objects in a bucket, specify an empty string.
+	Prefix *string
 
 	// The priority associated with the rule. If you specify multiple rules in a
 	// replication configuration, Amazon S3 prioritizes the rules to prevent conflicts
@@ -2417,48 +2453,12 @@ type ReplicationRule struct {
 	// Simple Storage Service Developer Guide.
 	Priority *int32
 
-	// A container for information about the replication destination and its
-	// configurations including enabling the S3 Replication Time Control (S3 RTC).
-	//
-	// This member is required.
-	Destination *Destination
-
-	// A unique identifier for the rule. The maximum value is 255 characters.
-	ID *string
-
 	// A container that describes additional filters for identifying the source objects
 	// that you want to replicate. You can choose to enable or disable the replication
 	// of these objects. Currently, Amazon S3 supports only the filter that you can
 	// specify for objects created with server-side encryption using a customer master
 	// key (CMK) stored in AWS Key Management Service (SSE-KMS).
 	SourceSelectionCriteria *SourceSelectionCriteria
-
-	// An object key name prefix that identifies the object or objects to which the
-	// rule applies. The maximum prefix length is 1,024 characters. To include all
-	// objects in a bucket, specify an empty string.
-	Prefix *string
-
-	// A filter that identifies the subset of objects to which the replication rule
-	// applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
-	Filter *ReplicationRuleFilter
-
-	//
-	ExistingObjectReplication *ExistingObjectReplication
-
-	// Specifies whether Amazon S3 replicates the delete markers. If you specify a
-	// Filter, you must specify this element. However, in the latest version of
-	// replication configuration (when Filter is specified), Amazon S3 doesn't
-	// replicate delete markers. Therefore, the DeleteMarkerReplication element can
-	// contain only Disabled. For an example configuration, see Basic Rule
-	// Configuration
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-config-min-rule-config).
-	// <note> <p> If you don't specify the <code>Filter</code> element, Amazon S3
-	// assumes that the replication configuration is the earlier version, V1. In the
-	// earlier version, Amazon S3 handled replication of delete markers differently.
-	// For more information, see <a
-	// href="https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations">Backward
-	// Compatibility</a>.</p> </note>
-	DeleteMarkerReplication *DeleteMarkerReplication
 }
 
 // A container for specifying rule filters. The filters determine the subset of
@@ -2472,12 +2472,12 @@ type ReplicationRule struct {
 // on multiple tags, wrap the Tag elements in an And tag
 type ReplicationRuleAndOperator struct {
 
-	// An array of tags containing key and value pairs.
-	Tags []*Tag
-
 	// An object key name prefix that identifies the subset of objects to which the
 	// rule applies.
 	Prefix *string
+
+	// An array of tags containing key and value pairs.
+	Tags []*Tag
 }
 
 // A filter that identifies the subset of objects to which the replication rule
@@ -2541,6 +2541,10 @@ type RequestPaymentConfiguration struct {
 // Container for restore job parameters.
 type RestoreRequest struct {
 
+	// Lifetime of the active copy in days. Do not use with restores that specify
+	// OutputLocation.
+	Days *int32
+
 	// The optional description for the job.
 	Description *string
 
@@ -2548,18 +2552,14 @@ type RestoreRequest struct {
 	// that specify OutputLocation.
 	GlacierJobParameters *GlacierJobParameters
 
-	// S3 Glacier retrieval tier at which the restore will be processed.
-	Tier Tier
-
-	// Lifetime of the active copy in days. Do not use with restores that specify
-	// OutputLocation.
-	Days *int32
-
 	// Describes the location where the restore job's output is stored.
 	OutputLocation *OutputLocation
 
 	// Describes the parameters for Select job types.
 	SelectParameters *SelectParameters
+
+	// S3 Glacier retrieval tier at which the restore will be processed.
+	Tier Tier
 
 	// Type of restore request.
 	Type RestoreRequestType
@@ -2568,18 +2568,18 @@ type RestoreRequest struct {
 // Specifies the redirect behavior and when a redirect is applied.
 type RoutingRule struct {
 
-	// A container for describing a condition that must be met for the specified
-	// redirect to apply. For example, 1. If request is for pages in the /docs folder,
-	// redirect to the /documents folder. 2. If request results in HTTP error 4xx,
-	// redirect request to another host where you might process the error.
-	Condition *Condition
-
 	// Container for redirect information. You can redirect requests to another host,
 	// to another page, or with another protocol. In the event of an error, you can
 	// specify a different error code to return.
 	//
 	// This member is required.
 	Redirect *Redirect
+
+	// A container for describing a condition that must be met for the specified
+	// redirect to apply. For example, 1. If request is for pages in the /docs folder,
+	// redirect to the /documents folder. 2. If request results in HTTP error 4xx,
+	// redirect request to another host where you might process the error.
+	Condition *Condition
 }
 
 // A container for object key name prefix and suffix filtering rules.
@@ -2594,11 +2594,18 @@ type S3KeyFilter struct {
 // request.
 type S3Location struct {
 
-	// A list of metadata to store with the restore results in S3.
-	UserMetadata []*MetadataEntry
+	// The name of the bucket where the restore results will be placed.
+	//
+	// This member is required.
+	BucketName *string
 
-	// The class of storage used to store the restore results.
-	StorageClass StorageClass
+	// The prefix that is prepended to the restore results for this request.
+	//
+	// This member is required.
+	Prefix *string
+
+	// A list of grants that control access to the staged results.
+	AccessControlList []*Grant
 
 	// The canned ACL to apply to the restore results.
 	CannedACL ObjectCannedACL
@@ -2606,21 +2613,14 @@ type S3Location struct {
 	// Contains the type of server-side encryption used.
 	Encryption *Encryption
 
-	// The prefix that is prepended to the restore results for this request.
-	//
-	// This member is required.
-	Prefix *string
-
-	// The name of the bucket where the restore results will be placed.
-	//
-	// This member is required.
-	BucketName *string
-
-	// A list of grants that control access to the staged results.
-	AccessControlList []*Grant
+	// The class of storage used to store the restore results.
+	StorageClass StorageClass
 
 	// The tag-set that is applied to the restore results.
 	Tagging *Tagging
+
+	// A list of metadata to store with the restore results in S3.
+	UserMetadata []*MetadataEntry
 }
 
 // Describes the parameters for Select job types.
@@ -2631,15 +2631,15 @@ type SelectParameters struct {
 	// This member is required.
 	Expression *string
 
-	// Describes the serialization format of the object.
-	//
-	// This member is required.
-	InputSerialization *InputSerialization
-
 	// The type of the provided expression (for example, SQL).
 	//
 	// This member is required.
 	ExpressionType ExpressionType
+
+	// Describes the serialization format of the object.
+	//
+	// This member is required.
+	InputSerialization *InputSerialization
 
 	// Describes how the results of the Select job are serialized.
 	//
@@ -2654,6 +2654,11 @@ type SelectParameters struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)
 // in the Amazon Simple Storage Service API Reference.
 type ServerSideEncryptionByDefault struct {
+
+	// Server-side encryption algorithm to use for the default encryption.
+	//
+	// This member is required.
+	SSEAlgorithm ServerSideEncryption
 
 	// AWS Key Management Service (KMS) customer master key ID to use for the default
 	// encryption. This parameter is allowed if and only if SSEAlgorithm is set to
@@ -2675,11 +2680,6 @@ type ServerSideEncryptionByDefault struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSMasterKeyID *string
-
-	// Server-side encryption algorithm to use for the default encryption.
-	//
-	// This member is required.
-	SSEAlgorithm ServerSideEncryption
 }
 
 // Specifies the default server-side-encryption configuration.
@@ -2802,22 +2802,6 @@ type TargetGrant struct {
 // specified events.
 type TopicConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3
-	// publishes a message when it detects events of the specified type.
-	//
-	// This member is required.
-	TopicArn *string
-
-	// An optional unique identifier for configurations in a notification
-	// configuration. If you don't provide one, Amazon S3 will assign an ID.
-	Id *string
-
-	// Specifies object key name filtering rules. For information about key name
-	// filtering, see Configuring Event Notifications
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
-	Filter *NotificationConfigurationFilter
-
 	// The Amazon S3 bucket event about which to send notifications. For more
 	// information, see Supported Event Types
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
@@ -2825,6 +2809,22 @@ type TopicConfiguration struct {
 	//
 	// This member is required.
 	Events []Event
+
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3
+	// publishes a message when it detects events of the specified type.
+	//
+	// This member is required.
+	TopicArn *string
+
+	// Specifies object key name filtering rules. For information about key name
+	// filtering, see Configuring Event Notifications
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
+	// Amazon Simple Storage Service Developer Guide.
+	Filter *NotificationConfigurationFilter
+
+	// An optional unique identifier for configurations in a notification
+	// configuration. If you don't provide one, Amazon S3 will assign an ID.
+	Id *string
 }
 
 // Specifies when an object transitions to a specified storage class. For more
@@ -2864,8 +2864,8 @@ type VersioningConfiguration struct {
 // Specifies website configuration parameters for an Amazon S3 bucket.
 type WebsiteConfiguration struct {
 
-	// Rules that define when a redirect is applied and the redirect behavior.
-	RoutingRules []*RoutingRule
+	// The name of the error document for the website.
+	ErrorDocument *ErrorDocument
 
 	// The name of the index document for the website.
 	IndexDocument *IndexDocument
@@ -2874,6 +2874,6 @@ type WebsiteConfiguration struct {
 	// you specify this property, you can't specify any other property.
 	RedirectAllRequestsTo *RedirectAllRequestsTo
 
-	// The name of the error document for the website.
-	ErrorDocument *ErrorDocument
+	// Rules that define when a redirect is applied and the redirect behavior.
+	RoutingRules []*RoutingRule
 }

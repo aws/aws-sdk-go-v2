@@ -57,35 +57,35 @@ func (c *Client) GetUserDefinedFunctions(ctx context.Context, params *GetUserDef
 
 type GetUserDefinedFunctionsInput struct {
 
-	// The name of the catalog database where the functions are located. If none is
-	// provided, functions from all the databases across the catalog will be returned.
-	DatabaseName *string
-
-	// A continuation token, if this is a continuation call.
-	NextToken *string
-
-	// The maximum number of functions to return in one response.
-	MaxResults *int32
-
-	// The ID of the Data Catalog where the functions to be retrieved are located. If
-	// none is provided, the AWS account ID is used by default.
-	CatalogId *string
-
 	// An optional function-name pattern string that filters the function definitions
 	// returned.
 	//
 	// This member is required.
 	Pattern *string
+
+	// The ID of the Data Catalog where the functions to be retrieved are located. If
+	// none is provided, the AWS account ID is used by default.
+	CatalogId *string
+
+	// The name of the catalog database where the functions are located. If none is
+	// provided, functions from all the databases across the catalog will be returned.
+	DatabaseName *string
+
+	// The maximum number of functions to return in one response.
+	MaxResults *int32
+
+	// A continuation token, if this is a continuation call.
+	NextToken *string
 }
 
 type GetUserDefinedFunctionsOutput struct {
 
-	// A list of requested function definitions.
-	UserDefinedFunctions []*types.UserDefinedFunction
-
 	// A continuation token, if the list of functions returned does not include the
 	// last requested function.
 	NextToken *string
+
+	// A list of requested function definitions.
+	UserDefinedFunctions []*types.UserDefinedFunction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

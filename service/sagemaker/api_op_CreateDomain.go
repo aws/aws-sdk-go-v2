@@ -69,26 +69,31 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 
 type CreateDomainInput struct {
 
-	// The ID of the Amazon Virtual Private Cloud (VPC) to use for communication with
-	// the EFS volume.
+	// The mode of authentication that members use to access the domain.
 	//
 	// This member is required.
-	VpcId *string
+	AuthMode types.AuthMode
 
 	// The default user settings.
 	//
 	// This member is required.
 	DefaultUserSettings *types.UserSettings
 
-	// The mode of authentication that members use to access the domain.
+	// A name for the domain.
 	//
 	// This member is required.
-	AuthMode types.AuthMode
+	DomainName *string
 
 	// The VPC subnets to use for communication with the EFS volume.
 	//
 	// This member is required.
 	SubnetIds []*string
+
+	// The ID of the Amazon Virtual Private Cloud (VPC) to use for communication with
+	// the EFS volume.
+	//
+	// This member is required.
+	VpcId *string
 
 	// The AWS Key Management Service (KMS) encryption key ID. Encryption with a
 	// customer master key (CMK) is not supported.
@@ -98,20 +103,15 @@ type CreateDomainInput struct {
 	// value. Tag keys must be unique per resource. Tags are searchable using the
 	// Search () API.
 	Tags []*types.Tag
-
-	// A name for the domain.
-	//
-	// This member is required.
-	DomainName *string
 }
 
 type CreateDomainOutput struct {
 
-	// The URL to the created domain.
-	Url *string
-
 	// The Amazon Resource Name (ARN) of the created domain.
 	DomainArn *string
+
+	// The URL to the created domain.
+	Url *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

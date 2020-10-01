@@ -63,18 +63,18 @@ func (c *Client) TagStream(ctx context.Context, params *TagStreamInput, optFns .
 
 type TagStreamInput struct {
 
+	// A list of tags to associate with the specified stream. Each tag is a key-value
+	// pair (the value is optional).
+	//
+	// This member is required.
+	Tags map[string]*string
+
 	// The Amazon Resource Name (ARN) of the resource that you want to add the tag or
 	// tags to.
 	StreamARN *string
 
 	// The name of the stream that you want to add the tag or tags to.
 	StreamName *string
-
-	// A list of tags to associate with the specified stream. Each tag is a key-value
-	// pair (the value is optional).
-	//
-	// This member is required.
-	Tags map[string]*string
 }
 
 type TagStreamOutput struct {

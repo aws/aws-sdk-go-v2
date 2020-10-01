@@ -66,42 +66,6 @@ type DescribeAlgorithmInput struct {
 
 type DescribeAlgorithmOutput struct {
 
-	// Whether the algorithm is certified to be listed in AWS Marketplace.
-	CertifyForMarketplace *bool
-
-	// Details about training jobs run by this algorithm.
-	//
-	// This member is required.
-	TrainingSpecification *types.TrainingSpecification
-
-	// The product identifier of the algorithm.
-	ProductId *string
-
-	// Details about inference jobs that the algorithm runs.
-	InferenceSpecification *types.InferenceSpecification
-
-	// The current status of the algorithm.
-	//
-	// This member is required.
-	AlgorithmStatus types.AlgorithmStatus
-
-	// Details about configurations for one or more training jobs that Amazon SageMaker
-	// runs to test the algorithm.
-	ValidationSpecification *types.AlgorithmValidationSpecification
-
-	// Details about the current status of the algorithm.
-	//
-	// This member is required.
-	AlgorithmStatusDetails *types.AlgorithmStatusDetails
-
-	// A brief summary about the algorithm.
-	AlgorithmDescription *string
-
-	// A timestamp specifying when the algorithm was created.
-	//
-	// This member is required.
-	CreationTime *time.Time
-
 	// The Amazon Resource Name (ARN) of the algorithm.
 	//
 	// This member is required.
@@ -111,6 +75,42 @@ type DescribeAlgorithmOutput struct {
 	//
 	// This member is required.
 	AlgorithmName *string
+
+	// The current status of the algorithm.
+	//
+	// This member is required.
+	AlgorithmStatus types.AlgorithmStatus
+
+	// Details about the current status of the algorithm.
+	//
+	// This member is required.
+	AlgorithmStatusDetails *types.AlgorithmStatusDetails
+
+	// A timestamp specifying when the algorithm was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Details about training jobs run by this algorithm.
+	//
+	// This member is required.
+	TrainingSpecification *types.TrainingSpecification
+
+	// A brief summary about the algorithm.
+	AlgorithmDescription *string
+
+	// Whether the algorithm is certified to be listed in AWS Marketplace.
+	CertifyForMarketplace *bool
+
+	// Details about inference jobs that the algorithm runs.
+	InferenceSpecification *types.InferenceSpecification
+
+	// The product identifier of the algorithm.
+	ProductId *string
+
+	// Details about configurations for one or more training jobs that Amazon SageMaker
+	// runs to test the algorithm.
+	ValidationSpecification *types.AlgorithmValidationSpecification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

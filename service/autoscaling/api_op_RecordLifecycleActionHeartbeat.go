@@ -72,23 +72,23 @@ func (c *Client) RecordLifecycleActionHeartbeat(ctx context.Context, params *Rec
 
 type RecordLifecycleActionHeartbeatInput struct {
 
-	// The ID of the instance.
-	InstanceId *string
+	// The name of the Auto Scaling group.
+	//
+	// This member is required.
+	AutoScalingGroupName *string
 
 	// The name of the lifecycle hook.
 	//
 	// This member is required.
 	LifecycleHookName *string
 
+	// The ID of the instance.
+	InstanceId *string
+
 	// A token that uniquely identifies a specific lifecycle action associated with an
 	// instance. Amazon EC2 Auto Scaling sends this token to the notification target
 	// that you specified when you created the lifecycle hook.
 	LifecycleActionToken *string
-
-	// The name of the Auto Scaling group.
-	//
-	// This member is required.
-	AutoScalingGroupName *string
 }
 
 type RecordLifecycleActionHeartbeatOutput struct {

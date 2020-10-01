@@ -58,18 +58,18 @@ func (c *Client) CreateSnapshotSchedule(ctx context.Context, params *CreateSnaps
 
 type CreateSnapshotScheduleInput struct {
 
-	// The description of the snapshot schedule.
-	ScheduleDescription *string
-
-	// The definition of the snapshot schedule. The definition is made up of schedule
-	// expressions, for example "cron(30 12 *)" or "rate(12 hours)".
-	ScheduleDefinitions []*string
-
 	//
 	DryRun *bool
 
 	//
 	NextInvocations *int32
+
+	// The definition of the snapshot schedule. The definition is made up of schedule
+	// expressions, for example "cron(30 12 *)" or "rate(12 hours)".
+	ScheduleDefinitions []*string
+
+	// The description of the snapshot schedule.
+	ScheduleDescription *string
 
 	// A unique identifier for a snapshot schedule. Only alphanumeric characters are
 	// allowed for the identifier.
@@ -83,27 +83,27 @@ type CreateSnapshotScheduleInput struct {
 // snapshots of a cluster. You can also schedule snapshots for specific dates.
 type CreateSnapshotScheduleOutput struct {
 
-	//
-	NextInvocations []*time.Time
+	// The number of clusters associated with the schedule.
+	AssociatedClusterCount *int32
 
 	// A list of clusters associated with the schedule. A maximum of 100 clusters is
 	// returned.
 	AssociatedClusters []*types.ClusterAssociatedToSchedule
 
-	// The number of clusters associated with the schedule.
-	AssociatedClusterCount *int32
+	//
+	NextInvocations []*time.Time
+
+	// A list of ScheduleDefinitions.
+	ScheduleDefinitions []*string
+
+	// The description of the schedule.
+	ScheduleDescription *string
 
 	// A unique identifier for the schedule.
 	ScheduleIdentifier *string
 
 	// An optional set of tags describing the schedule.
 	Tags []*types.Tag
-
-	// The description of the schedule.
-	ScheduleDescription *string
-
-	// A list of ScheduleDefinitions.
-	ScheduleDefinitions []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

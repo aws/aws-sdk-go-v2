@@ -57,26 +57,26 @@ func (c *Client) DescribeRoute(ctx context.Context, params *DescribeRouteInput, 
 //
 type DescribeRouteInput struct {
 
+	// The name of the service mesh that the route resides in.
+	//
+	// This member is required.
+	MeshName *string
+
 	// The name of the route to describe.
 	//
 	// This member is required.
 	RouteName *string
 
-	// The name of the service mesh that the route resides in.
+	// The name of the virtual router that the route is associated with.
 	//
 	// This member is required.
-	MeshName *string
+	VirtualRouterName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
 	// more information about mesh sharing, see Working with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	MeshOwner *string
-
-	// The name of the virtual router that the route is associated with.
-	//
-	// This member is required.
-	VirtualRouterName *string
 }
 
 //

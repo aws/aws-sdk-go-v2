@@ -6,22 +6,22 @@ package types
 // and the content of the file.
 type Attachment struct {
 
-	// The name of the attachment file.
-	FileName *string
-
 	// The content of the attachment file.
 	Data []byte
+
+	// The name of the attachment file.
+	FileName *string
 }
 
 // The file name and ID of an attachment to a case communication. You can use the
 // ID to retrieve the attachment with the DescribeAttachment () operation.
 type AttachmentDetails struct {
 
-	// The file name of the attachment.
-	FileName *string
-
 	// The ID of the attachment.
 	AttachmentId *string
+
+	// The file name of the attachment.
+	FileName *string
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It is
@@ -86,8 +86,38 @@ type AttachmentDetails struct {
 // ISO-8601 format.
 type CaseDetails struct {
 
+	// The AWS Support case ID requested or returned in the call. The case ID is an
+	// alphanumeric string formatted as shown in this example:
+	// case-12345678910-2013-c4c1d2bf33c5cf47
+	CaseId *string
+
+	// The category of problem for the AWS Support case.
+	CategoryCode *string
+
 	// The email addresses that receive copies of communication about the case.
 	CcEmailAddresses []*string
+
+	// The ID displayed for the case in the AWS Support Center. This is a numeric
+	// string.
+	DisplayId *string
+
+	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
+	// currently supports English ("en") and Japanese ("ja"). Language parameters must
+	// be passed explicitly for operations that take them.
+	Language *string
+
+	// The five most recent communications between you and AWS Support Center,
+	// including the IDs of any attachments to the communications. Also includes a
+	// nextToken that you can use to retrieve earlier communications.
+	RecentCommunications *RecentCaseCommunications
+
+	// The code for the AWS service. You can get a list of codes and the corresponding
+	// service names by calling DescribeServices ().
+	ServiceCode *string
+
+	// The code for the severity level returned by the call to DescribeSeverityLevels
+	// ().
+	SeverityCode *string
 
 	// The status of the case. Valid values:
 	//
@@ -106,44 +136,14 @@ type CaseDetails struct {
 	// work-in-progress
 	Status *string
 
-	// The code for the AWS service. You can get a list of codes and the corresponding
-	// service names by calling DescribeServices ().
-	ServiceCode *string
-
-	// The category of problem for the AWS Support case.
-	CategoryCode *string
-
-	// The time that the case was created in the AWS Support Center.
-	TimeCreated *string
-
-	// The code for the severity level returned by the call to DescribeSeverityLevels
-	// ().
-	SeverityCode *string
-
-	// The ISO 639-1 code for the language in which AWS provides support. AWS Support
-	// currently supports English ("en") and Japanese ("ja"). Language parameters must
-	// be passed explicitly for operations that take them.
-	Language *string
-
-	// The AWS Support case ID requested or returned in the call. The case ID is an
-	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
-	CaseId *string
+	// The subject line for the case in the AWS Support Center.
+	Subject *string
 
 	// The email address of the account that submitted the case.
 	SubmittedBy *string
 
-	// The five most recent communications between you and AWS Support Center,
-	// including the IDs of any attachments to the communications. Also includes a
-	// nextToken that you can use to retrieve earlier communications.
-	RecentCommunications *RecentCaseCommunications
-
-	// The subject line for the case in the AWS Support Center.
-	Subject *string
-
-	// The ID displayed for the case in the AWS Support Center. This is a numeric
-	// string.
-	DisplayId *string
+	// The time that the case was created in the AWS Support Center.
+	TimeCreated *string
 }
 
 // A JSON-formatted name/value pair that represents the category name and category
@@ -151,11 +151,11 @@ type CaseDetails struct {
 // service.
 type Category struct {
 
-	// The category name for the support case.
-	Name *string
-
 	// The category code for the support case.
 	Code *string
+
+	// The category name for the support case.
+	Name *string
 }
 
 // A communication associated with an AWS Support case. The communication consists
@@ -166,11 +166,13 @@ type Communication struct {
 	// Information about the attachments to the case communication.
 	AttachmentSet []*AttachmentDetails
 
-	// The time the communication was created.
-	TimeCreated *string
-
 	// The text of the communication between the customer and AWS Support.
 	Body *string
+
+	// The AWS Support case ID requested or returned in the call. The case ID is an
+	// alphanumeric string formatted as shown in this example:
+	// case-12345678910-2013-c4c1d2bf33c5cf47
+	CaseId *string
 
 	// The identity of the account that submitted, or responded to, the support case.
 	// Customer entries include the role or IAM user as well as the email address. For
@@ -178,20 +180,18 @@ type Communication struct {
 	// Web Services," and do not show an email address.
 	SubmittedBy *string
 
-	// The AWS Support case ID requested or returned in the call. The case ID is an
-	// alphanumeric string formatted as shown in this example:
-	// case-12345678910-2013-c4c1d2bf33c5cf47
-	CaseId *string
+	// The time the communication was created.
+	TimeCreated *string
 }
 
 // The five most recent communications associated with the case.
 type RecentCaseCommunications struct {
 
-	// A resumption point for pagination.
-	NextToken *string
-
 	// The five most recent communications associated with the case.
 	Communications []*Communication
+
+	// A resumption point for pagination.
+	NextToken *string
 }
 
 // Information about an AWS service returned by the DescribeServices () operation.
@@ -218,6 +218,10 @@ type Service struct {
 // in the AWS Support User Guide.
 type SeverityLevel struct {
 
+	// The code for case severity level. Valid values: low | normal | high | urgent |
+	// critical
+	Code *string
+
 	// The name of the severity level that corresponds to the severity level code. The
 	// values returned by the API differ from the values that are displayed in the AWS
 	// Support Center. For example, for the code "low", the API name is "Low", but the
@@ -241,10 +245,6 @@ type SeverityLevel struct {
 	// (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
 	// in the AWS Support User Guide.
 	Name *string
-
-	// The code for case severity level. Valid values: low | normal | high | urgent |
-	// critical
-	Code *string
 }
 
 // The container for summary information that relates to the category of the
@@ -259,21 +259,16 @@ type TrustedAdvisorCategorySpecificSummary struct {
 // The description and metadata for a Trusted Advisor check.
 type TrustedAdvisorCheckDescription struct {
 
-	// The display name for the Trusted Advisor check.
+	// The category of the Trusted Advisor check.
 	//
 	// This member is required.
-	Name *string
+	Category *string
 
 	// The description of the Trusted Advisor check, which includes the alert criteria
 	// and recommended operations (contains HTML markup).
 	//
 	// This member is required.
 	Description *string
-
-	// The category of the Trusted Advisor check.
-	//
-	// This member is required.
-	Category *string
 
 	// The unique identifier for the Trusted Advisor check.
 	//
@@ -288,10 +283,20 @@ type TrustedAdvisorCheckDescription struct {
 	//
 	// This member is required.
 	Metadata []*string
+
+	// The display name for the Trusted Advisor check.
+	//
+	// This member is required.
+	Name *string
 }
 
 // The refresh status of a Trusted Advisor check.
 type TrustedAdvisorCheckRefreshStatus struct {
+
+	// The unique identifier for the Trusted Advisor check.
+	//
+	// This member is required.
+	CheckId *string
 
 	// The amount of time, in milliseconds, until the Trusted Advisor check is eligible
 	// for refresh.
@@ -318,59 +323,33 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	//
 	// This member is required.
 	Status *string
-
-	// The unique identifier for the Trusted Advisor check.
-	//
-	// This member is required.
-	CheckId *string
 }
 
 // The results of a Trusted Advisor check returned by
 // DescribeTrustedAdvisorCheckResult ().
 type TrustedAdvisorCheckResult struct {
 
-	// The alert status of the check: "ok" (green), "warning" (yellow), "error" (red),
-	// or "not_available".
+	// Summary information that relates to the category of the check. Cost Optimizing
+	// is the only category that is currently supported.
 	//
 	// This member is required.
-	Status *string
+	CategorySpecificSummary *TrustedAdvisorCategorySpecificSummary
 
-	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries ().
+	// The unique identifier for the Trusted Advisor check.
 	//
 	// This member is required.
-	ResourcesSummary *TrustedAdvisorResourcesSummary
-
-	// The time of the last refresh of the check.
-	//
-	// This member is required.
-	Timestamp *string
+	CheckId *string
 
 	// The details about each resource listed in the check result.
 	//
 	// This member is required.
 	FlaggedResources []*TrustedAdvisorResourceDetail
 
-	// Summary information that relates to the category of the check. Cost Optimizing
-	// is the only category that is currently supported.
+	// Details about AWS resources that were analyzed in a call to Trusted Advisor
+	// DescribeTrustedAdvisorCheckSummaries ().
 	//
 	// This member is required.
-	CategorySpecificSummary *TrustedAdvisorCategorySpecificSummary
-
-	// The unique identifier for the Trusted Advisor check.
-	//
-	// This member is required.
-	CheckId *string
-}
-
-// A summary of a Trusted Advisor check result, including the alert status, last
-// refresh, and number of resources examined.
-type TrustedAdvisorCheckSummary struct {
-
-	// The unique identifier for the Trusted Advisor check.
-	//
-	// This member is required.
-	CheckId *string
+	ResourcesSummary *TrustedAdvisorResourcesSummary
 
 	// The alert status of the check: "ok" (green), "warning" (yellow), "error" (red),
 	// or "not_available".
@@ -378,17 +357,38 @@ type TrustedAdvisorCheckSummary struct {
 	// This member is required.
 	Status *string
 
-	// Details about AWS resources that were analyzed in a call to Trusted Advisor
-	// DescribeTrustedAdvisorCheckSummaries ().
+	// The time of the last refresh of the check.
 	//
 	// This member is required.
-	ResourcesSummary *TrustedAdvisorResourcesSummary
+	Timestamp *string
+}
+
+// A summary of a Trusted Advisor check result, including the alert status, last
+// refresh, and number of resources examined.
+type TrustedAdvisorCheckSummary struct {
 
 	// Summary information that relates to the category of the check. Cost Optimizing
 	// is the only category that is currently supported.
 	//
 	// This member is required.
 	CategorySpecificSummary *TrustedAdvisorCategorySpecificSummary
+
+	// The unique identifier for the Trusted Advisor check.
+	//
+	// This member is required.
+	CheckId *string
+
+	// Details about AWS resources that were analyzed in a call to Trusted Advisor
+	// DescribeTrustedAdvisorCheckSummaries ().
+	//
+	// This member is required.
+	ResourcesSummary *TrustedAdvisorResourcesSummary
+
+	// The alert status of the check: "ok" (green), "warning" (yellow), "error" (red),
+	// or "not_available".
+	//
+	// This member is required.
+	Status *string
 
 	// The time of the last refresh of the check.
 	//
@@ -419,23 +419,6 @@ type TrustedAdvisorCostOptimizingSummary struct {
 // Contains information about a resource identified by a Trusted Advisor check.
 type TrustedAdvisorResourceDetail struct {
 
-	// The AWS region in which the identified resource is located.
-	Region *string
-
-	// The unique identifier for the identified resource.
-	//
-	// This member is required.
-	ResourceId *string
-
-	// Specifies whether the AWS resource was ignored by Trusted Advisor because it was
-	// marked as suppressed by the user.
-	IsSuppressed *bool
-
-	// The status code for the resource identified in the Trusted Advisor check.
-	//
-	// This member is required.
-	Status *string
-
 	// Additional information about the identified resource. The exact metadata and its
 	// order can be obtained by inspecting the TrustedAdvisorCheckDescription () object
 	// returned by the call to DescribeTrustedAdvisorChecks (). Metadata contains all
@@ -444,22 +427,34 @@ type TrustedAdvisorResourceDetail struct {
 	//
 	// This member is required.
 	Metadata []*string
+
+	// The unique identifier for the identified resource.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The status code for the resource identified in the Trusted Advisor check.
+	//
+	// This member is required.
+	Status *string
+
+	// Specifies whether the AWS resource was ignored by Trusted Advisor because it was
+	// marked as suppressed by the user.
+	IsSuppressed *bool
+
+	// The AWS region in which the identified resource is located.
+	Region *string
 }
 
 // Details about AWS resources that were analyzed in a call to Trusted Advisor
 // DescribeTrustedAdvisorCheckSummaries ().
 type TrustedAdvisorResourcesSummary struct {
 
-	// The number of AWS resources ignored by Trusted Advisor because they were marked
-	// as suppressed by the user.
+	// The number of AWS resources that were flagged (listed) by the Trusted Advisor
+	// check.
 	//
 	// This member is required.
-	ResourcesSuppressed *int64
-
-	// The number of AWS resources that were analyzed by the Trusted Advisor check.
-	//
-	// This member is required.
-	ResourcesProcessed *int64
+	ResourcesFlagged *int64
 
 	// The number of AWS resources ignored by Trusted Advisor because information was
 	// unavailable.
@@ -467,9 +462,14 @@ type TrustedAdvisorResourcesSummary struct {
 	// This member is required.
 	ResourcesIgnored *int64
 
-	// The number of AWS resources that were flagged (listed) by the Trusted Advisor
-	// check.
+	// The number of AWS resources that were analyzed by the Trusted Advisor check.
 	//
 	// This member is required.
-	ResourcesFlagged *int64
+	ResourcesProcessed *int64
+
+	// The number of AWS resources ignored by Trusted Advisor because they were marked
+	// as suppressed by the user.
+	//
+	// This member is required.
+	ResourcesSuppressed *int64
 }

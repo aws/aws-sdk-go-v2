@@ -63,13 +63,13 @@ func (c *Client) ModifyVolumeAttribute(ctx context.Context, params *ModifyVolume
 
 type ModifyVolumeAttributeInput struct {
 
-	// Indicates whether the volume should be auto-enabled for I/O operations.
-	AutoEnableIO *types.AttributeBooleanValue
-
 	// The ID of the volume.
 	//
 	// This member is required.
 	VolumeId *string
+
+	// Indicates whether the volume should be auto-enabled for I/O operations.
+	AutoEnableIO *types.AttributeBooleanValue
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

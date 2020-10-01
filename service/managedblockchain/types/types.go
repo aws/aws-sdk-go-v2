@@ -18,6 +18,11 @@ type ApprovalThresholdPolicy struct {
 	// the proposal is EXPIRED and ProposalActions are not carried out.
 	ProposalDurationInHours *int32
 
+	// Determines whether the vote percentage must be greater than the
+	// ThresholdPercentage or must be greater than or equal to the ThreholdPercentage
+	// to be approved.
+	ThresholdComparator ThresholdComparator
+
 	// The percentage of votes among all members that must be YES for a proposal to be
 	// approved. For example, a ThresholdPercentage value of 50 indicates 50%. The
 	// ThresholdComparator determines the precise comparison. If a ThresholdPercentage
@@ -25,15 +30,13 @@ type ApprovalThresholdPolicy struct {
 	// ThresholdComparator value of GREATER_THAN, this indicates that 6 YES votes are
 	// required for the proposal to be approved.
 	ThresholdPercentage *int32
-
-	// Determines whether the vote percentage must be greater than the
-	// ThresholdPercentage or must be greater than or equal to the ThreholdPercentage
-	// to be approved.
-	ThresholdComparator ThresholdComparator
 }
 
 // An invitation to an AWS account to create a member and join the network.
 type Invitation struct {
+
+	// The date and time that the invitation was created.
+	CreationDate *time.Time
 
 	// The date and time that the invitation expires. This is the CreationDate plus the
 	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy. After
@@ -41,8 +44,8 @@ type Invitation struct {
 	// network using this InvitationId.
 	ExpirationDate *time.Time
 
-	// The date and time that the invitation was created.
-	CreationDate *time.Time
+	// The unique identifier for the invitation.
+	InvitationId *string
 
 	// A summary of network configuration properties.
 	NetworkSummary *NetworkSummary
@@ -65,9 +68,6 @@ type Invitation struct {
 	// * EXPIRED - The invitee neither created a member nor rejected the invitation
 	// before the ExpirationDate.
 	Status InvitationStatus
-
-	// The unique identifier for the invitation.
-	InvitationId *string
 }
 
 // An action to invite a specific AWS account to create a member and join the
@@ -97,24 +97,27 @@ type LogConfigurations struct {
 // Member configuration properties.
 type Member struct {
 
-	// The unique identifier of the member.
-	Id *string
+	// The date and time that the member was created.
+	CreationDate *time.Time
 
 	// An optional description for the member.
 	Description *string
 
-	// The name of the member.
-	Name *string
+	// Attributes relevant to a member for the blockchain framework that the Managed
+	// Blockchain network uses.
+	FrameworkAttributes *MemberFrameworkAttributes
+
+	// The unique identifier of the member.
+	Id *string
 
 	// Configuration properties for logging events associated with a member.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
 
+	// The name of the member.
+	Name *string
+
 	// The unique identifier of the network to which the member belongs.
 	NetworkId *string
-
-	// Attributes relevant to a member for the blockchain framework that the Managed
-	// Blockchain network uses.
-	FrameworkAttributes *MemberFrameworkAttributes
 
 	// The status of a member.
 	//
@@ -137,9 +140,6 @@ type Member struct {
 	// Either the AWS account that owns the member deleted it, or the member is being
 	// deleted as the result of an APPROVEDPROPOSAL to remove the member.
 	Status MemberStatus
-
-	// The date and time that the member was created.
-	CreationDate *time.Time
 }
 
 // Configuration properties of the member.
@@ -150,13 +150,13 @@ type MemberConfiguration struct {
 	// This member is required.
 	FrameworkConfiguration *MemberFrameworkConfiguration
 
-	// An optional description of the member.
-	Description *string
-
 	// The name of the member.
 	//
 	// This member is required.
 	Name *string
+
+	// An optional description of the member.
+	Description *string
 
 	//
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
@@ -232,15 +232,21 @@ type MemberLogPublishingConfiguration struct {
 // A summary of configuration properties for a member.
 type MemberSummary struct {
 
+	// The date and time that the member was created.
+	CreationDate *time.Time
+
+	// An optional description of the member.
+	Description *string
+
+	// The unique identifier of the member.
+	Id *string
+
 	// An indicator of whether the member is owned by your AWS account or a different
 	// AWS account.
 	IsOwned *bool
 
 	// The name of the member.
 	Name *string
-
-	// An optional description of the member.
-	Description *string
 
 	// The status of the member.
 	//
@@ -263,16 +269,34 @@ type MemberSummary struct {
 	// Either the AWS account that owns the member deleted it, or the member is being
 	// deleted as the result of an APPROVEDPROPOSAL to remove the member.
 	Status MemberStatus
-
-	// The unique identifier of the member.
-	Id *string
-
-	// The date and time that the member was created.
-	CreationDate *time.Time
 }
 
 // Network configuration properties.
 type Network struct {
+
+	// The date and time that the network was created.
+	CreationDate *time.Time
+
+	// Attributes of the blockchain framework for the network.
+	Description *string
+
+	// The blockchain framework that the network uses.
+	Framework Framework
+
+	// Attributes of the blockchain framework that the network uses.
+	FrameworkAttributes *NetworkFrameworkAttributes
+
+	// The version of the blockchain framework that the network uses.
+	FrameworkVersion *string
+
+	// The unique identifier of the network.
+	Id *string
+
+	// The name of the network.
+	Name *string
+
+	// The current status of the network.
+	Status NetworkStatus
 
 	// The voting rules for the network to decide if a proposal is accepted.
 	VotingPolicy *VotingPolicy
@@ -281,42 +305,18 @@ type Network struct {
 	// Members use the VPC endpoint service name to create a VPC endpoint to access
 	// network resources.
 	VpcEndpointServiceName *string
-
-	// Attributes of the blockchain framework that the network uses.
-	FrameworkAttributes *NetworkFrameworkAttributes
-
-	// The current status of the network.
-	Status NetworkStatus
-
-	// The name of the network.
-	Name *string
-
-	// The blockchain framework that the network uses.
-	Framework Framework
-
-	// The unique identifier of the network.
-	Id *string
-
-	// Attributes of the blockchain framework for the network.
-	Description *string
-
-	// The version of the blockchain framework that the network uses.
-	FrameworkVersion *string
-
-	// The date and time that the network was created.
-	CreationDate *time.Time
 }
 
 // Attributes of Hyperledger Fabric for a network.
 type NetworkFabricAttributes struct {
 
-	// The endpoint of the ordering service for the network.
-	OrderingServiceEndpoint *string
-
 	// The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more
 	// information, see Amazon Managed Blockchain Pricing
 	// (http://aws.amazon.com/managed-blockchain/pricing/).
 	Edition Edition
+
+	// The endpoint of the ordering service for the network.
+	OrderingServiceEndpoint *string
 }
 
 // Hyperledger Fabric configuration properties for the network.
@@ -351,54 +351,54 @@ type NetworkFrameworkConfiguration struct {
 // A summary of network configuration properties.
 type NetworkSummary struct {
 
-	// The unique identifier of the network.
-	Id *string
-
-	// The version of the blockchain framework that the network uses.
-	FrameworkVersion *string
-
 	// The date and time that the network was created.
 	CreationDate *time.Time
-
-	// The current status of the network.
-	Status NetworkStatus
 
 	// An optional description of the network.
 	Description *string
 
+	// The blockchain framework that the network uses.
+	Framework Framework
+
+	// The version of the blockchain framework that the network uses.
+	FrameworkVersion *string
+
+	// The unique identifier of the network.
+	Id *string
+
 	// The name of the network.
 	Name *string
 
-	// The blockchain framework that the network uses.
-	Framework Framework
+	// The current status of the network.
+	Status NetworkStatus
 }
 
 // Configuration properties of a peer node.
 type Node struct {
-
-	// The instance type of the node.
-	InstanceType *string
-
-	// The unique identifier of the node.
-	Id *string
-
-	//
-	LogPublishingConfiguration *NodeLogPublishingConfiguration
-
-	// The unique identifier of the network that the node is in.
-	NetworkId *string
-
-	// Attributes of the blockchain framework being used.
-	FrameworkAttributes *NodeFrameworkAttributes
-
-	// The unique identifier of the member to which the node belongs.
-	MemberId *string
 
 	// The Availability Zone in which the node exists.
 	AvailabilityZone *string
 
 	// The date and time that the node was created.
 	CreationDate *time.Time
+
+	// Attributes of the blockchain framework being used.
+	FrameworkAttributes *NodeFrameworkAttributes
+
+	// The unique identifier of the node.
+	Id *string
+
+	// The instance type of the node.
+	InstanceType *string
+
+	//
+	LogPublishingConfiguration *NodeLogPublishingConfiguration
+
+	// The unique identifier of the member to which the node belongs.
+	MemberId *string
+
+	// The unique identifier of the network that the node is in.
+	NetworkId *string
 
 	// The status of the node.
 	Status NodeStatus
@@ -425,24 +425,18 @@ type NodeConfiguration struct {
 // that uses Hyperledger Fabric.
 type NodeFabricAttributes struct {
 
-	// The endpoint that identifies the peer node for peer channel-based event
-	// services.
-	PeerEventEndpoint *string
-
 	// The endpoint that identifies the peer node for all services except peer
 	// channel-based event services.
 	PeerEndpoint *string
+
+	// The endpoint that identifies the peer node for peer channel-based event
+	// services.
+	PeerEventEndpoint *string
 }
 
 // Configuration properties for logging events associated with a peer node owned by
 // a member in a Managed Blockchain network.
 type NodeFabricLogPublishingConfiguration struct {
-
-	// Configuration properties for a peer node log. Peer node logs contain messages
-	// generated when your client submits transaction proposals to peer nodes, requests
-	// to join channels, enrolls an admin peer, and lists the chaincode instances on a
-	// peer node.
-	PeerLogs *LogConfigurations
 
 	// Configuration properties for logging events associated with chaincode execution
 	// on a peer node. Chaincode logs contain the results of instantiating, invoking,
@@ -450,6 +444,12 @@ type NodeFabricLogPublishingConfiguration struct {
 	// enabled, a log stream is created for all chaincodes, with an individual log
 	// stream for each chaincode.
 	ChaincodeLogs *LogConfigurations
+
+	// Configuration properties for a peer node log. Peer node logs contain messages
+	// generated when your client submits transaction proposals to peer nodes, requests
+	// to join channels, enrolls an admin peer, and lists the chaincode instances on a
+	// peer node.
+	PeerLogs *LogConfigurations
 }
 
 // Attributes relevant to a peer node on a Managed Blockchain network for the
@@ -477,6 +477,9 @@ type NodeSummary struct {
 	// The Availability Zone in which the node exists.
 	AvailabilityZone *string
 
+	// The date and time that the node was created.
+	CreationDate *time.Time
+
 	// The unique identifier of the node.
 	Id *string
 
@@ -485,41 +488,19 @@ type NodeSummary struct {
 
 	// The status of the node.
 	Status NodeStatus
-
-	// The date and time that the node was created.
-	CreationDate *time.Time
 }
 
 // Properties of a proposal on a Managed Blockchain network.
 type Proposal struct {
 
-	// The current total of NO votes cast on the proposal by members.
-	NoVoteCount *int32
+	// The actions to perform on the network if the proposal is APPROVED.
+	Actions *ProposalActions
 
 	// The date and time that the proposal was created.
 	CreationDate *time.Time
 
-	// The number of votes remaining to be cast on the proposal by members. In other
-	// words, the number of members minus the sum of YES votes and NO votes.
-	OutstandingVoteCount *int32
-
-	// The unique identifier of the member that created the proposal.
-	ProposedByMemberId *string
-
-	// The name of the member that created the proposal.
-	ProposedByMemberName *string
-
-	// The current total of YES votes cast on the proposal by members.
-	YesVoteCount *int32
-
-	// The unique identifier of the network for which the proposal is made.
-	NetworkId *string
-
 	// The description of the proposal.
 	Description *string
-
-	// The unique identifier of the proposal.
-	ProposalId *string
 
 	// The date and time that the proposal expires. This is the CreationDate plus the
 	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy. After
@@ -528,8 +509,24 @@ type Proposal struct {
 	// not carried out.
 	ExpirationDate *time.Time
 
-	// The actions to perform on the network if the proposal is APPROVED.
-	Actions *ProposalActions
+	// The unique identifier of the network for which the proposal is made.
+	NetworkId *string
+
+	// The current total of NO votes cast on the proposal by members.
+	NoVoteCount *int32
+
+	// The number of votes remaining to be cast on the proposal by members. In other
+	// words, the number of members minus the sum of YES votes and NO votes.
+	OutstandingVoteCount *int32
+
+	// The unique identifier of the proposal.
+	ProposalId *string
+
+	// The unique identifier of the member that created the proposal.
+	ProposedByMemberId *string
+
+	// The name of the member that created the proposal.
+	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
 	//
@@ -555,23 +552,48 @@ type Proposal struct {
 	// status occurs even if only one ProposalAction fails and other actions are
 	// successful.
 	Status ProposalStatus
+
+	// The current total of YES votes cast on the proposal by members.
+	YesVoteCount *int32
 }
 
 // The actions to carry out if a proposal is APPROVED.
 type ProposalActions struct {
 
+	// The actions to perform for an APPROVED proposal to invite an AWS account to
+	// create a member and join the network.
+	Invitations []*InviteAction
+
 	// The actions to perform for an APPROVED proposal to remove a member from the
 	// network, which deletes the member and all associated member resources from the
 	// network.
 	Removals []*RemoveAction
-
-	// The actions to perform for an APPROVED proposal to invite an AWS account to
-	// create a member and join the network.
-	Invitations []*InviteAction
 }
 
 // Properties of a proposal.
 type ProposalSummary struct {
+
+	// The date and time that the proposal was created.
+	CreationDate *time.Time
+
+	// The description of the proposal.
+	Description *string
+
+	// The date and time that the proposal expires. This is the CreationDate plus the
+	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy. After
+	// this date and time, if members have not cast enough votes to determine the
+	// outcome according to the voting policy, the proposal is EXPIRED and Actions are
+	// not carried out.
+	ExpirationDate *time.Time
+
+	// The unique identifier of the proposal.
+	ProposalId *string
+
+	// The unique identifier of the member that created the proposal.
+	ProposedByMemberId *string
+
+	// The name of the member that created the proposal.
+	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
 	//
@@ -595,28 +617,6 @@ type ProposalSummary struct {
 	// ACTION_FAILED - One or more of the specified ProposalActions in a proposal that
 	// was approved could not be completed because of an error.
 	Status ProposalStatus
-
-	// The date and time that the proposal was created.
-	CreationDate *time.Time
-
-	// The description of the proposal.
-	Description *string
-
-	// The date and time that the proposal expires. This is the CreationDate plus the
-	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy. After
-	// this date and time, if members have not cast enough votes to determine the
-	// outcome according to the voting policy, the proposal is EXPIRED and Actions are
-	// not carried out.
-	ExpirationDate *time.Time
-
-	// The name of the member that created the proposal.
-	ProposedByMemberName *string
-
-	// The unique identifier of the member that created the proposal.
-	ProposedByMemberId *string
-
-	// The unique identifier of the proposal.
-	ProposalId *string
 }
 
 // An action to remove a member from a Managed Blockchain network as the result of
@@ -633,14 +633,14 @@ type RemoveAction struct {
 // Properties of an individual vote that a member cast for a proposal.
 type VoteSummary struct {
 
+	// The unique identifier of the member that cast the vote.
+	MemberId *string
+
 	// The name of the member that cast the vote.
 	MemberName *string
 
 	// The vote value, either YES or NO.
 	Vote VoteValue
-
-	// The unique identifier of the member that cast the vote.
-	MemberId *string
 }
 
 // The voting rules for the network to decide if a proposal is accepted

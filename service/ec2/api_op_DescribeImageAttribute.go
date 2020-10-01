@@ -59,17 +59,6 @@ func (c *Client) DescribeImageAttribute(ctx context.Context, params *DescribeIma
 // Contains the parameters for DescribeImageAttribute.
 type DescribeImageAttributeInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
-	// The ID of the AMI.
-	//
-	// This member is required.
-	ImageId *string
-
 	// The AMI attribute. Note: Depending on your account privileges, the
 	// blockDeviceMapping attribute may return a Client.AuthFailure error. If this
 	// happens, use DescribeImages () to get information about the block device mapping
@@ -77,35 +66,46 @@ type DescribeImageAttributeInput struct {
 	//
 	// This member is required.
 	Attribute types.ImageAttributeName
+
+	// The ID of the AMI.
+	//
+	// This member is required.
+	ImageId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 // Describes an image attribute.
 type DescribeImageAttributeOutput struct {
 
-	// The RAM disk ID.
-	RamdiskId *types.AttributeValue
+	// The block device mapping entries.
+	BlockDeviceMappings []*types.BlockDeviceMapping
 
-	// The kernel ID.
-	KernelId *types.AttributeValue
+	// A description for the AMI.
+	Description *types.AttributeValue
 
 	// The ID of the AMI.
 	ImageId *string
 
-	// The block device mapping entries.
-	BlockDeviceMappings []*types.BlockDeviceMapping
-
-	// Indicates whether enhanced networking with the Intel 82599 Virtual Function
-	// interface is enabled.
-	SriovNetSupport *types.AttributeValue
-
-	// A description for the AMI.
-	Description *types.AttributeValue
+	// The kernel ID.
+	KernelId *types.AttributeValue
 
 	// The launch permissions.
 	LaunchPermissions []*types.LaunchPermission
 
 	// The product codes.
 	ProductCodes []*types.ProductCode
+
+	// The RAM disk ID.
+	RamdiskId *types.AttributeValue
+
+	// Indicates whether enhanced networking with the Intel 82599 Virtual Function
+	// interface is enabled.
+	SriovNetSupport *types.AttributeValue
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

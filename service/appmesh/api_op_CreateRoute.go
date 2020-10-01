@@ -60,15 +60,20 @@ func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optF
 //
 type CreateRouteInput struct {
 
+	// The name of the service mesh to create the route in.
+	//
+	// This member is required.
+	MeshName *string
+
 	// The name to use for the route.
 	//
 	// This member is required.
 	RouteName *string
 
-	// The name of the service mesh to create the route in.
+	// The route specification to apply.
 	//
 	// This member is required.
-	MeshName *string
+	Spec *types.RouteSpec
 
 	// The name of the virtual router in which to create the route. If the virtual
 	// router is in a shared mesh, then you must be the owner of the virtual router
@@ -76,17 +81,6 @@ type CreateRouteInput struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
-
-	// The route specification to apply.
-	//
-	// This member is required.
-	Spec *types.RouteSpec
-
-	// Optional metadata that you can apply to the route to assist with categorization
-	// and organization. Each tag consists of a key and an optional value, both of
-	// which you define. Tag keys can have a maximum character length of 128
-	// characters, and tag values can have a maximum length of 256 characters.
-	Tags []*types.TagRef
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
@@ -98,6 +92,12 @@ type CreateRouteInput struct {
 	// about mesh sharing, see Working with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	MeshOwner *string
+
+	// Optional metadata that you can apply to the route to assist with categorization
+	// and organization. Each tag consists of a key and an optional value, both of
+	// which you define. Tag keys can have a maximum character length of 128
+	// characters, and tag values can have a maximum length of 256 characters.
+	Tags []*types.TagRef
 }
 
 //

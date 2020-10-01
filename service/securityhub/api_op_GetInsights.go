@@ -73,13 +73,13 @@ type GetInsightsInput struct {
 
 type GetInsightsOutput struct {
 
-	// The pagination token to use to request the next page of results.
-	NextToken *string
-
 	// The insights returned by the operation.
 	//
 	// This member is required.
 	Insights []*types.Insight
+
+	// The pagination token to use to request the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,6 +66,11 @@ func (c *Client) SetLoadBalancerPoliciesOfListener(ctx context.Context, params *
 // Contains the parameters for SetLoadBalancePoliciesOfListener.
 type SetLoadBalancerPoliciesOfListenerInput struct {
 
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
+
 	// The external port of the load balancer.
 	//
 	// This member is required.
@@ -77,11 +82,6 @@ type SetLoadBalancerPoliciesOfListenerInput struct {
 	//
 	// This member is required.
 	PolicyNames []*string
-
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
 }
 
 // Contains the output of SetLoadBalancePoliciesOfListener.

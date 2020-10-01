@@ -61,28 +61,11 @@ func (c *Client) CreateThreatIntelSet(ctx context.Context, params *CreateThreatI
 
 type CreateThreatIntelSetInput struct {
 
-	// The idempotency token for the create request.
-	ClientToken *string
-
-	// The URI of the file that contains the ThreatIntelSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
+	// ThreatIntelSet.
 	//
 	// This member is required.
-	Location *string
-
-	// The tags to be added to a new threat list resource.
-	Tags map[string]*string
-
-	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
-	// by activity that involves IP addresses included in this ThreatIntelSet.
-	//
-	// This member is required.
-	Name *string
-
-	// The format of the file that contains the ThreatIntelSet.
-	//
-	// This member is required.
-	Format types.ThreatIntelSetFormat
+	Activate *bool
 
 	// The unique ID of the detector of the GuardDuty account that you want to create a
 	// threatIntelSet for.
@@ -90,11 +73,28 @@ type CreateThreatIntelSetInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
-	// ThreatIntelSet.
+	// The format of the file that contains the ThreatIntelSet.
 	//
 	// This member is required.
-	Activate *bool
+	Format types.ThreatIntelSetFormat
+
+	// The URI of the file that contains the ThreatIntelSet. For example:
+	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	//
+	// This member is required.
+	Location *string
+
+	// A user-friendly ThreatIntelSet name displayed in all findings that are generated
+	// by activity that involves IP addresses included in this ThreatIntelSet.
+	//
+	// This member is required.
+	Name *string
+
+	// The idempotency token for the create request.
+	ClientToken *string
+
+	// The tags to be added to a new threat list resource.
+	Tags map[string]*string
 }
 
 type CreateThreatIntelSetOutput struct {

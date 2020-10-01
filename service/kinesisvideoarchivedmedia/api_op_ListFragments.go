@@ -83,6 +83,10 @@ type ListFragmentsInput struct {
 	// This member is required.
 	StreamName *string
 
+	// Describes the timestamp range and timestamp origin for the range of fragments to
+	// return.
+	FragmentSelector *types.FragmentSelector
+
 	// The total number of fragments to return. If the total number of fragments
 	// available is more than the value specified in max-results, then a
 	// ListFragmentsOutput$NextToken () is provided in the output that you can use to
@@ -92,10 +96,6 @@ type ListFragmentsInput struct {
 	// A token to specify where to start paginating. This is the
 	// ListFragmentsOutput$NextToken () from a previously truncated response.
 	NextToken *string
-
-	// Describes the timestamp range and timestamp origin for the range of fragments to
-	// return.
-	FragmentSelector *types.FragmentSelector
 }
 
 type ListFragmentsOutput struct {

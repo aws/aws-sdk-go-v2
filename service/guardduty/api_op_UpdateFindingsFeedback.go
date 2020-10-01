@@ -62,15 +62,15 @@ type UpdateFindingsFeedbackInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// The IDs of the findings that you want to mark as useful or not useful.
-	//
-	// This member is required.
-	FindingIds []*string
-
 	// The feedback for the finding.
 	//
 	// This member is required.
 	Feedback types.Feedback
+
+	// The IDs of the findings that you want to mark as useful or not useful.
+	//
+	// This member is required.
+	FindingIds []*string
 
 	// Additional feedback about the GuardDuty findings.
 	Comments *string

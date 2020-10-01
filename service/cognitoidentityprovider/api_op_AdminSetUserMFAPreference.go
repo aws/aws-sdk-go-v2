@@ -61,9 +61,6 @@ func (c *Client) AdminSetUserMFAPreference(ctx context.Context, params *AdminSet
 
 type AdminSetUserMFAPreferenceInput struct {
 
-	// The SMS text message MFA settings.
-	SMSMfaSettings *types.SMSMfaSettingsType
-
 	// The user pool ID.
 	//
 	// This member is required.
@@ -73,6 +70,9 @@ type AdminSetUserMFAPreferenceInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	// The SMS text message MFA settings.
+	SMSMfaSettings *types.SMSMfaSettingsType
 
 	// The time-based one-time password software token MFA settings.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType

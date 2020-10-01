@@ -20,33 +20,15 @@ type AccessLogSettings struct {
 // Represents an API.
 type Api struct {
 
-	// The timestamp when the API was created.
-	CreatedDate *time.Time
-
 	// The name of the API.
 	//
 	// This member is required.
 	Name *string
 
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
-	// deployed API stage.
-	ApiEndpoint *string
-
-	// A version identifier for the API.
-	Version *string
-
-	// The warning messages reported when failonwarnings is turned on during API
-	// import.
-	Warnings []*string
-
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
-	ApiKeySelectionExpression *string
-
-	// The API ID.
-	ApiId *string
+	// The API protocol.
+	//
+	// This member is required.
+	ProtocolType ProtocolType
 
 	// The route selection expression for the API. For HTTP APIs, the
 	// routeSelectionExpression must be ${request.method} ${request.path}. If not
@@ -56,28 +38,46 @@ type Api struct {
 	// This member is required.
 	RouteSelectionExpression *string
 
-	// The API protocol.
-	//
-	// This member is required.
-	ProtocolType ProtocolType
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+	// stage name is typically appended to this URI to form a complete path to a
+	// deployed API stage.
+	ApiEndpoint *string
+
+	// The API ID.
+	ApiId *string
+
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	ApiKeySelectionExpression *string
+
+	// A CORS configuration. Supported only for HTTP APIs.
+	CorsConfiguration *Cors
+
+	// The timestamp when the API was created.
+	CreatedDate *time.Time
 
 	// The description of the API.
 	Description *string
+
+	// Avoid validating models when creating a deployment. Supported only for WebSocket
+	// APIs.
+	DisableSchemaValidation *bool
 
 	// The validation information during API import. This may include particular
 	// properties of your OpenAPI definition which are ignored during import. Supported
 	// only for HTTP APIs.
 	ImportInfo []*string
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
-	DisableSchemaValidation *bool
-
 	// A collection of tags associated with the API.
 	Tags map[string]*string
 
-	// A CORS configuration. Supported only for HTTP APIs.
-	CorsConfiguration *Cors
+	// A version identifier for the API.
+	Version *string
+
+	// The warning messages reported when failonwarnings is turned on during API
+	// import.
+	Warnings []*string
 }
 
 // Represents an API mapping.
@@ -88,20 +88,43 @@ type ApiMapping struct {
 	// This member is required.
 	ApiId *string
 
+	// The API stage.
+	//
+	// This member is required.
+	Stage *string
+
 	// The API mapping identifier.
 	ApiMappingId *string
 
 	// The API mapping key.
 	ApiMappingKey *string
-
-	// The API stage.
-	//
-	// This member is required.
-	Stage *string
 }
 
 // Represents an authorizer.
 type Authorizer struct {
+
+	// The name of the authorizer.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the required credentials as an IAM role for API Gateway to invoke the
+	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
+	// function, specify null. Supported only for REQUEST authorizers.
+	AuthorizerCredentialsArn *string
+
+	// The authorizer identifier.
+	AuthorizerId *string
+
+	// Authorizer caching is not currently supported. Don't specify this value for
+	// authorizers.
+	AuthorizerResultTtlInSeconds *int32
+
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
+	// Tokens.
+	AuthorizerType AuthorizerType
 
 	// The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this
 	// must be a well-formed Lambda function URI, for example,
@@ -114,27 +137,6 @@ type Authorizer struct {
 	// /2015-03-31/functions/[FunctionARN]/invocations. Supported only for REQUEST
 	// authorizers.
 	AuthorizerUri *string
-
-	// The authorizer identifier.
-	AuthorizerId *string
-
-	// Authorizer caching is not currently supported. Don't specify this value for
-	// authorizers.
-	AuthorizerResultTtlInSeconds *int32
-
-	// Specifies the required credentials as an IAM role for API Gateway to invoke the
-	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
-	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
-	// function, specify null. Supported only for REQUEST authorizers.
-	AuthorizerCredentialsArn *string
-
-	// The validation expression does not apply to the REQUEST authorizer.
-	IdentityValidationExpression *string
-
-	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
-	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
-	// Tokens.
-	AuthorizerType AuthorizerType
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -153,14 +155,12 @@ type Authorizer struct {
 	// "$request.header.Authorization".
 	IdentitySource []*string
 
+	// The validation expression does not apply to the REQUEST authorizer.
+	IdentityValidationExpression *string
+
 	// Represents the configuration of a JWT authorizer. Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	JwtConfiguration *JWTConfiguration
-
-	// The name of the authorizer.
-	//
-	// This member is required.
-	Name *string
 }
 
 // Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
@@ -169,12 +169,15 @@ type Authorizer struct {
 // for more information.
 type Cors struct {
 
+	// Specifies whether credentials are included in the CORS request. Supported only
+	// for HTTP APIs.
+	AllowCredentials *bool
+
+	// Represents a collection of allowed headers. Supported only for HTTP APIs.
+	AllowHeaders []*string
+
 	// Represents a collection of allowed HTTP methods. Supported only for HTTP APIs.
 	AllowMethods []*string
-
-	// The number of seconds that the browser should cache preflight request results.
-	// Supported only for HTTP APIs.
-	MaxAge *int32
 
 	// Represents a collection of allowed origins. Supported only for HTTP APIs.
 	AllowOrigins []*string
@@ -182,32 +185,29 @@ type Cors struct {
 	// Represents a collection of exposed headers. Supported only for HTTP APIs.
 	ExposeHeaders []*string
 
-	// Specifies whether credentials are included in the CORS request. Supported only
-	// for HTTP APIs.
-	AllowCredentials *bool
-
-	// Represents a collection of allowed headers. Supported only for HTTP APIs.
-	AllowHeaders []*string
+	// The number of seconds that the browser should cache preflight request results.
+	// Supported only for HTTP APIs.
+	MaxAge *int32
 }
 
 // An immutable representation of an API that can be called by users. A Deployment
 // must be associated with a Stage for it to be callable over the internet.
 type Deployment struct {
 
-	// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
-	DeploymentStatus DeploymentStatus
-
 	// Specifies whether a deployment was automatically released.
 	AutoDeployed *bool
+
+	// The date and time when the Deployment resource was created.
+	CreatedDate *time.Time
 
 	// The identifier for the deployment.
 	DeploymentId *string
 
+	// The status of the deployment: PENDING, FAILED, or SUCCEEDED.
+	DeploymentStatus DeploymentStatus
+
 	// May contain additional feedback on the status of an API deployment.
 	DeploymentStatusMessage *string
-
-	// The date and time when the Deployment resource was created.
-	CreatedDate *time.Time
 
 	// The description for the deployment.
 	Description *string
@@ -216,19 +216,19 @@ type Deployment struct {
 // Represents a domain name.
 type DomainName struct {
 
-	// The API mapping selection expression.
-	ApiMappingSelectionExpression *string
-
 	// The name of the DomainName resource.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The collection of tags associated with a domain name.
-	Tags map[string]*string
+	// The API mapping selection expression.
+	ApiMappingSelectionExpression *string
 
 	// The domain name configurations.
 	DomainNameConfigurations []*DomainNameConfiguration
+
+	// The collection of tags associated with a domain name.
+	Tags map[string]*string
 }
 
 // The domain name configuration.
@@ -237,27 +237,17 @@ type DomainNameConfiguration struct {
 	// A domain name for the API.
 	ApiGatewayDomainName *string
 
-	// The Amazon Route 53 Hosted Zone ID of the endpoint.
-	HostedZoneId *string
-
-	// The endpoint type.
-	EndpointType EndpointType
-
-	// The Transport Layer Security (TLS) version of the security policy for this
-	// domain name. The valid values are TLS_1_0 and TLS_1_2.
-	SecurityPolicy SecurityPolicy
-
-	// The timestamp when the certificate that was used by edge-optimized endpoint for
-	// this domain name was uploaded.
-	CertificateUploadDate *time.Time
+	// An AWS-managed certificate that will be used by the edge-optimized endpoint for
+	// this domain name. AWS Certificate Manager is the only supported source.
+	CertificateArn *string
 
 	// The user-friendly name of the certificate that will be used by the
 	// edge-optimized endpoint for this domain name.
 	CertificateName *string
 
-	// An optional text message containing detailed information about status of the
-	// domain name migration.
-	DomainNameStatusMessage *string
+	// The timestamp when the certificate that was used by edge-optimized endpoint for
+	// this domain name was uploaded.
+	CertificateUploadDate *time.Time
 
 	// The status of the domain name migration. The valid values are AVAILABLE and
 	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
@@ -265,27 +255,31 @@ type DomainNameConfiguration struct {
 	// updated.
 	DomainNameStatus DomainNameStatus
 
-	// An AWS-managed certificate that will be used by the edge-optimized endpoint for
-	// this domain name. AWS Certificate Manager is the only supported source.
-	CertificateArn *string
+	// An optional text message containing detailed information about status of the
+	// domain name migration.
+	DomainNameStatusMessage *string
+
+	// The endpoint type.
+	EndpointType EndpointType
+
+	// The Amazon Route 53 Hosted Zone ID of the endpoint.
+	HostedZoneId *string
+
+	// The Transport Layer Security (TLS) version of the security policy for this
+	// domain name. The valid values are TLS_1_0 and TLS_1_2.
+	SecurityPolicy SecurityPolicy
 }
 
 // Represents an integration.
 type Integration struct {
 
-	// Specifies the format of the payload sent to an integration. Required for HTTP
-	// APIs.
-	PayloadFormatVersion *string
+	// Specifies whether an integration is managed by API Gateway. If you created an
+	// API using using quick create, the resulting integration is managed by API
+	// Gateway. You can update a managed integration, but you can't delete it.
+	ApiGatewayManaged *bool
 
-	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
-	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
-	// WebSocket APIs and 30 seconds for HTTP APIs.
-	TimeoutInMillis *int32
-
-	// The TLS configuration for a private integration. If you specify a TLS
-	// configuration, private integration traffic uses the HTTPS protocol. Supported
-	// only for HTTP APIs.
-	TlsConfig *TlsConfig
+	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
+	ConnectionId *string
 
 	// The type of the network connection to the integration endpoint. Specify INTERNET
 	// for connections through the public routable internet or VPC_LINK for private
@@ -293,8 +287,15 @@ type Integration struct {
 	// INTERNET.
 	ConnectionType ConnectionType
 
-	// Represents the description of an integration.
-	Description *string
+	// Supported only for WebSocket APIs. Specifies how to handle response payload
+	// content type conversions. Supported values are CONVERT_TO_BINARY and
+	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
+	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+	// Base64-encoded string. If this property is not defined, the response payload
+	// will be passed through from the integration response to the route response or
+	// method response without modification.
+	ContentHandlingStrategy ContentHandlingStrategy
 
 	// Specifies the credentials required for the integration, if any. For AWS
 	// integrations, three options are available. To specify an IAM Role for API
@@ -304,8 +305,19 @@ type Integration struct {
 	// services, specify null.
 	CredentialsArn *string
 
+	// Represents the description of an integration.
+	Description *string
+
 	// Represents the identifier of an integration.
 	IntegrationId *string
+
+	// Specifies the integration's HTTP method type.
+	IntegrationMethod *string
+
+	// The integration response selection expression for the integration. Supported
+	// only for WebSocket APIs. See Integration Response Selection Expressions
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
+	IntegrationResponseSelectionExpression *string
 
 	// The integration type of an integration. One of the following: AWS: for
 	// integrating the route or method request with an AWS service action, including
@@ -324,35 +336,6 @@ type Integration struct {
 	// Supported only for WebSocket APIs.
 	IntegrationType IntegrationType
 
-	// The integration response selection expression for the integration. Supported
-	// only for WebSocket APIs. See Integration Response Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions).
-	IntegrationResponseSelectionExpression *string
-
-	// A key-value map specifying request parameters that are passed from the method
-	// request to the backend. The key is an integration request parameter name and the
-	// associated value is a method request parameter value or static value that must
-	// be enclosed within single quotes and pre-encoded as required by the backend. The
-	// method request parameter value must match the pattern of
-	// method.request.{location}.{name} , where {location} is querystring, path, or
-	// header; and {name} must be a valid and unique method request parameter name.
-	// Supported only for WebSocket APIs.
-	RequestParameters map[string]*string
-
-	// Supported only for WebSocket APIs. Specifies how to handle response payload
-	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
-	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
-	ContentHandlingStrategy ContentHandlingStrategy
-
-	// The template selection expression for the integration. Supported only for
-	// WebSocket APIs.
-	TemplateSelectionExpression *string
-
 	// For a Lambda integration, specify the URI of a Lambda function. For an HTTP
 	// integration, specify a fully-qualified URL. For an HTTP API private integration,
 	// specify the ARN of an Application Load Balancer listener, Network Load Balancer
@@ -363,15 +346,6 @@ type Integration struct {
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html).
 	// For private integrations, all resources must be owned by the same AWS account.
 	IntegrationUri *string
-
-	// The ID of the VPC link for a private integration. Supported only for HTTP APIs.
-	ConnectionId *string
-
-	// Represents a map of Velocity templates that are applied on the request payload
-	// based on the value of the Content-Type header sent by the client. The content
-	// type value is the key in this map, and the template (as a String) is the value.
-	// Supported only for WebSocket APIs.
-	RequestTemplates map[string]*string
 
 	// Specifies the pass-through behavior for incoming requests based on the
 	// Content-Type header in the request, and the available mapping templates
@@ -386,38 +360,48 @@ type Integration struct {
 	// Type response.
 	PassthroughBehavior PassthroughBehavior
 
-	// Specifies the integration's HTTP method type.
-	IntegrationMethod *string
+	// Specifies the format of the payload sent to an integration. Required for HTTP
+	// APIs.
+	PayloadFormatVersion *string
 
-	// Specifies whether an integration is managed by API Gateway. If you created an
-	// API using using quick create, the resulting integration is managed by API
-	// Gateway. You can update a managed integration, but you can't delete it.
-	ApiGatewayManaged *bool
+	// A key-value map specifying request parameters that are passed from the method
+	// request to the backend. The key is an integration request parameter name and the
+	// associated value is a method request parameter value or static value that must
+	// be enclosed within single quotes and pre-encoded as required by the backend. The
+	// method request parameter value must match the pattern of
+	// method.request.{location}.{name} , where {location} is querystring, path, or
+	// header; and {name} must be a valid and unique method request parameter name.
+	// Supported only for WebSocket APIs.
+	RequestParameters map[string]*string
+
+	// Represents a map of Velocity templates that are applied on the request payload
+	// based on the value of the Content-Type header sent by the client. The content
+	// type value is the key in this map, and the template (as a String) is the value.
+	// Supported only for WebSocket APIs.
+	RequestTemplates map[string]*string
+
+	// The template selection expression for the integration. Supported only for
+	// WebSocket APIs.
+	TemplateSelectionExpression *string
+
+	// Custom timeout between 50 and 29,000 milliseconds for WebSocket APIs and between
+	// 50 and 30,000 milliseconds for HTTP APIs. The default timeout is 29 seconds for
+	// WebSocket APIs and 30 seconds for HTTP APIs.
+	TimeoutInMillis *int32
+
+	// The TLS configuration for a private integration. If you specify a TLS
+	// configuration, private integration traffic uses the HTTPS protocol. Supported
+	// only for HTTP APIs.
+	TlsConfig *TlsConfig
 }
 
 // Represents an integration response.
 type IntegrationResponse struct {
 
-	// The collection of response templates for the integration response as a
-	// string-to-string map of key-value pairs. Response templates are represented as a
-	// key/value map, with a content-type as the key and a template as the value.
-	ResponseTemplates map[string]*string
-
-	// A key-value map specifying response parameters that are passed to the method
-	// response from the backend. The key is a method response header parameter name
-	// and the mapped value is an integration response header value, a static value
-	// enclosed within a pair of single quotes, or a JSON expression from the
-	// integration response body. The mapping key must match the pattern of
-	// method.response.header.{name}, where name is a valid and unique header name. The
-	// mapped non-static value must match the pattern of
-	// integration.response.header.{name} or
-	// integration.response.body.{JSON-expression}, where name is a valid and unique
-	// response header name and JSON-expression is a valid JSON expression without the
-	// $ prefix.
-	ResponseParameters map[string]*string
-
-	// The template selection expressions for the integration response.
-	TemplateSelectionExpression *string
+	// The integration response key.
+	//
+	// This member is required.
+	IntegrationResponseKey *string
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
@@ -432,10 +416,26 @@ type IntegrationResponse struct {
 	// The integration response ID.
 	IntegrationResponseId *string
 
-	// The integration response key.
-	//
-	// This member is required.
-	IntegrationResponseKey *string
+	// A key-value map specifying response parameters that are passed to the method
+	// response from the backend. The key is a method response header parameter name
+	// and the mapped value is an integration response header value, a static value
+	// enclosed within a pair of single quotes, or a JSON expression from the
+	// integration response body. The mapping key must match the pattern of
+	// method.response.header.{name}, where name is a valid and unique header name. The
+	// mapped non-static value must match the pattern of
+	// integration.response.header.{name} or
+	// integration.response.body.{JSON-expression}, where name is a valid and unique
+	// response header name and JSON-expression is a valid JSON expression without the
+	// $ prefix.
+	ResponseParameters map[string]*string
+
+	// The collection of response templates for the integration response as a
+	// string-to-string map of key-value pairs. Response templates are represented as a
+	// key/value map, with a content-type as the key and a template as the value.
+	ResponseTemplates map[string]*string
+
+	// The template selection expressions for the integration response.
+	TemplateSelectionExpression *string
 }
 
 // Represents the configuration of a JWT authorizer. Required for the JWT
@@ -465,18 +465,18 @@ type Model struct {
 	// This member is required.
 	Name *string
 
-	// The schema for the model. For application/json models, this should be JSON
-	// schema draft 4 model.
-	Schema *string
-
-	// The model identifier.
-	ModelId *string
+	// The content-type for the model, for example, "application/json".
+	ContentType *string
 
 	// The description of the model.
 	Description *string
 
-	// The content-type for the model, for example, "application/json".
-	ContentType *string
+	// The model identifier.
+	ModelId *string
+
+	// The schema for the model. For application/json models, this should be JSON
+	// schema draft 4 model.
+	Schema *string
 }
 
 // Validation constraints imposed on parameters of a request (path, query string,
@@ -495,42 +495,14 @@ type Route struct {
 	// This member is required.
 	RouteKey *string
 
-	// The target for the route.
-	Target *string
+	// Specifies whether a route is managed by API Gateway. If you created an API using
+	// quick create, the $default route is managed by API Gateway. You can't modify the
+	// $default route key.
+	ApiGatewayManaged *bool
 
 	// Specifies whether an API key is required for this route. Supported only for
 	// WebSocket APIs.
 	ApiKeyRequired *bool
-
-	// The identifier of the Authorizer resource to be associated with this route. The
-	// authorizer identifier is generated by API Gateway when you created the
-	// authorizer.
-	AuthorizerId *string
-
-	// The route ID.
-	RouteId *string
-
-	// The operation name for the route.
-	OperationName *string
-
-	// The request models for the route. Supported only for WebSocket APIs.
-	RequestModels map[string]*string
-
-	// The request parameters for the route. Supported only for WebSocket APIs.
-	RequestParameters map[string]*ParameterConstraints
-
-	// The model selection expression for the route. Supported only for WebSocket APIs.
-	ModelSelectionExpression *string
-
-	// The authorization type for the route. For WebSocket APIs, valid values are NONE
-	// for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a
-	// Lambda authorizer For HTTP APIs, valid values are NONE for open access, or JWT
-	// for using JSON Web Tokens.
-	AuthorizationType AuthorizationType
-
-	// The route response selection expression for the route. Supported only for
-	// WebSocket APIs.
-	RouteResponseSelectionExpression *string
 
 	// A list of authorization scopes configured on a route. The scopes are used with a
 	// JWT authorizer to authorize the method invocation. The authorization works by
@@ -541,42 +513,72 @@ type Route struct {
 	// access token instead of an identity token for authorization purposes.
 	AuthorizationScopes []*string
 
-	// Specifies whether a route is managed by API Gateway. If you created an API using
-	// quick create, the $default route is managed by API Gateway. You can't modify the
-	// $default route key.
-	ApiGatewayManaged *bool
+	// The authorization type for the route. For WebSocket APIs, valid values are NONE
+	// for open access, AWS_IAM for using AWS IAM permissions, and CUSTOM for using a
+	// Lambda authorizer For HTTP APIs, valid values are NONE for open access, or JWT
+	// for using JSON Web Tokens.
+	AuthorizationType AuthorizationType
+
+	// The identifier of the Authorizer resource to be associated with this route. The
+	// authorizer identifier is generated by API Gateway when you created the
+	// authorizer.
+	AuthorizerId *string
+
+	// The model selection expression for the route. Supported only for WebSocket APIs.
+	ModelSelectionExpression *string
+
+	// The operation name for the route.
+	OperationName *string
+
+	// The request models for the route. Supported only for WebSocket APIs.
+	RequestModels map[string]*string
+
+	// The request parameters for the route. Supported only for WebSocket APIs.
+	RequestParameters map[string]*ParameterConstraints
+
+	// The route ID.
+	RouteId *string
+
+	// The route response selection expression for the route. Supported only for
+	// WebSocket APIs.
+	RouteResponseSelectionExpression *string
+
+	// The target for the route.
+	Target *string
 }
 
 // Represents a route response.
 type RouteResponse struct {
 
-	// Represents the identifier of a route response.
-	RouteResponseId *string
+	// Represents the route response key of a route response.
+	//
+	// This member is required.
+	RouteResponseKey *string
 
 	// Represents the model selection expression of a route response. Supported only
 	// for WebSocket APIs.
 	ModelSelectionExpression *string
 
-	// Represents the response parameters of a route response.
-	ResponseParameters map[string]*ParameterConstraints
-
 	// Represents the response models of a route response.
 	ResponseModels map[string]*string
 
-	// Represents the route response key of a route response.
-	//
-	// This member is required.
-	RouteResponseKey *string
+	// Represents the response parameters of a route response.
+	ResponseParameters map[string]*ParameterConstraints
+
+	// Represents the identifier of a route response.
+	RouteResponseId *string
 }
 
 // Represents a collection of route settings.
 type RouteSettings struct {
 
+	// Specifies whether (true) or not (false) data trace logging is enabled for this
+	// route. This property affects the log entries pushed to Amazon CloudWatch Logs.
+	// Supported only for WebSocket APIs.
+	DataTraceEnabled *bool
+
 	// Specifies whether detailed metrics are enabled.
 	DetailedMetricsEnabled *bool
-
-	// Specifies the throttling rate limit.
-	ThrottlingRateLimit *float64
 
 	// Specifies the logging level for this route: INFO, ERROR, or OFF. This property
 	// affects the log entries pushed to Amazon CloudWatch Logs. Supported only for
@@ -586,41 +588,20 @@ type RouteSettings struct {
 	// Specifies the throttling burst limit.
 	ThrottlingBurstLimit *int32
 
-	// Specifies whether (true) or not (false) data trace logging is enabled for this
-	// route. This property affects the log entries pushed to Amazon CloudWatch Logs.
-	// Supported only for WebSocket APIs.
-	DataTraceEnabled *bool
+	// Specifies the throttling rate limit.
+	ThrottlingRateLimit *float64
 }
 
 // Represents an API stage.
 type Stage struct {
 
-	// The description of the stage.
-	Description *string
+	// The name of the stage.
+	//
+	// This member is required.
+	StageName *string
 
-	// The identifier of a client certificate for a Stage. Supported only for WebSocket
-	// APIs.
-	ClientCertificateId *string
-
-	// The timestamp when the stage was last updated.
-	LastUpdatedDate *time.Time
-
-	// Describes the status of the last deployment of a stage. Supported only for
-	// stages with autoDeploy enabled.
-	LastDeploymentStatusMessage *string
-
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
-
-	// Default route settings for the stage.
-	DefaultRouteSettings *RouteSettings
-
-	// The identifier of the Deployment that the Stage is associated with. Can't be
-	// updated if autoDeploy is enabled.
-	DeploymentId *string
-
-	// The timestamp when the stage was created.
-	CreatedDate *time.Time
+	// Settings for logging access in this stage.
+	AccessLogSettings *AccessLogSettings
 
 	// Specifies whether a stage is managed by API Gateway. If you created an API using
 	// quick create, the $default stage is managed by API Gateway. You can't modify the
@@ -631,21 +612,40 @@ type Stage struct {
 	// default value is false.
 	AutoDeploy *bool
 
+	// The identifier of a client certificate for a Stage. Supported only for WebSocket
+	// APIs.
+	ClientCertificateId *string
+
+	// The timestamp when the stage was created.
+	CreatedDate *time.Time
+
+	// Default route settings for the stage.
+	DefaultRouteSettings *RouteSettings
+
+	// The identifier of the Deployment that the Stage is associated with. Can't be
+	// updated if autoDeploy is enabled.
+	DeploymentId *string
+
+	// The description of the stage.
+	Description *string
+
+	// Describes the status of the last deployment of a stage. Supported only for
+	// stages with autoDeploy enabled.
+	LastDeploymentStatusMessage *string
+
+	// The timestamp when the stage was last updated.
+	LastUpdatedDate *time.Time
+
+	// Route settings for the stage, by routeKey.
+	RouteSettings map[string]*RouteSettings
+
 	// A map that defines the stage variables for a stage resource. Variable names can
 	// have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]*string
 
-	// The name of the stage.
-	//
-	// This member is required.
-	StageName *string
-
-	// Route settings for the stage, by routeKey.
-	RouteSettings map[string]*RouteSettings
-
-	// Settings for logging access in this stage.
-	AccessLogSettings *AccessLogSettings
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
 }
 
 // The TLS configuration for a private integration. If you specify a TLS
@@ -673,13 +673,10 @@ type TlsConfigInput struct {
 // Represents a VPC link.
 type VpcLink struct {
 
-	// The ID of the VPC link.
+	// The name of the VPC link.
 	//
 	// This member is required.
-	VpcLinkId *string
-
-	// The status of the VPC link.
-	VpcLinkStatus VpcLinkStatus
+	Name *string
 
 	// A list of security group IDs for the VPC link.
 	//
@@ -691,20 +688,23 @@ type VpcLink struct {
 	// This member is required.
 	SubnetIds []*string
 
-	// The name of the VPC link.
+	// The ID of the VPC link.
 	//
 	// This member is required.
-	Name *string
+	VpcLinkId *string
 
-	// A message summarizing the cause of the status of the VPC link.
-	VpcLinkStatusMessage *string
+	// The timestamp when the VPC link was created.
+	CreatedDate *time.Time
 
 	// Tags for the VPC link.
 	Tags map[string]*string
 
+	// The status of the VPC link.
+	VpcLinkStatus VpcLinkStatus
+
+	// A message summarizing the cause of the status of the VPC link.
+	VpcLinkStatusMessage *string
+
 	// The version of the VPC link.
 	VpcLinkVersion VpcLinkVersion
-
-	// The timestamp when the VPC link was created.
-	CreatedDate *time.Time
 }

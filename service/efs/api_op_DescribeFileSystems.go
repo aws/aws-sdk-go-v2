@@ -81,14 +81,14 @@ type DescribeFileSystemsInput struct {
 	// system.
 	CreationToken *string
 
+	// (Optional) ID of the file system whose description you want to retrieve
+	// (String).
+	FileSystemId *string
+
 	// (Optional) Opaque pagination token returned from a previous DescribeFileSystems
 	// operation (String). If present, specifies to continue the list from where the
 	// returning call had left off.
 	Marker *string
-
-	// (Optional) ID of the file system whose description you want to retrieve
-	// (String).
-	FileSystemId *string
 
 	// (Optional) Specifies the maximum number of file systems to return in the
 	// response (integer). This number is automatically set to 100. The response is
@@ -98,15 +98,15 @@ type DescribeFileSystemsInput struct {
 
 type DescribeFileSystemsOutput struct {
 
-	// Present if there are more file systems than returned in the response (String).
-	// You can use the NextMarker in the subsequent request to fetch the descriptions.
-	NextMarker *string
-
 	// An array of file system descriptions.
 	FileSystems []*types.FileSystemDescription
 
 	// Present if provided by caller in the request (String).
 	Marker *string
+
+	// Present if there are more file systems than returned in the response (String).
+	// You can use the NextMarker in the subsequent request to fetch the descriptions.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,14 +63,14 @@ type BatchReadInput struct {
 	// This member is required.
 	DirectoryArn *string
 
-	// Represents the manner and timing in which the successful write or update of an
-	// object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel types.ConsistencyLevel
-
 	// A list of operations that are part of the batch.
 	//
 	// This member is required.
 	Operations []*types.BatchReadOperation
+
+	// Represents the manner and timing in which the successful write or update of an
+	// object is reflected in a subsequent read operation of that same object.
+	ConsistencyLevel types.ConsistencyLevel
 }
 
 type BatchReadOutput struct {

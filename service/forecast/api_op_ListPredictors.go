@@ -61,14 +61,6 @@ func (c *Client) ListPredictors(ctx context.Context, params *ListPredictorsInput
 
 type ListPredictorsInput struct {
 
-	// The number of items to return in the response.
-	MaxResults *int32
-
-	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
-	// request. Tokens expire after 24 hours.
-	NextToken *string
-
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether to
 	// include or exclude the predictors that match the statement from the list,
@@ -89,6 +81,14 @@ type ListPredictorsInput struct {
 	// ACTIVE, you would specify: "Filters": [ { "Condition": "IS", "Key": "Status",
 	// "Value": "ACTIVE" } ]
 	Filters []*types.Filter
+
+	// The number of items to return in the response.
+	MaxResults *int32
+
+	// If the result of the previous request was truncated, the response includes a
+	// NextToken. To retrieve the next set of results, use the token in the next
+	// request. Tokens expire after 24 hours.
+	NextToken *string
 }
 
 type ListPredictorsOutput struct {

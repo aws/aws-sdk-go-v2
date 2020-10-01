@@ -58,18 +58,18 @@ func (c *Client) CreateGatewayGroup(ctx context.Context, params *CreateGatewayGr
 
 type CreateGatewayGroupInput struct {
 
-	// The description of the gateway group.
-	Description *string
+	// A unique, user-specified identifier for the request that ensures idempotency.
+	//
+	// This member is required.
+	ClientRequestToken *string
 
 	// The name of the gateway group.
 	//
 	// This member is required.
 	Name *string
 
-	// A unique, user-specified identifier for the request that ensures idempotency.
-	//
-	// This member is required.
-	ClientRequestToken *string
+	// The description of the gateway group.
+	Description *string
 }
 
 type CreateGatewayGroupOutput struct {

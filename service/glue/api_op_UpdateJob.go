@@ -57,15 +57,15 @@ func (c *Client) UpdateJob(ctx context.Context, params *UpdateJobInput, optFns .
 
 type UpdateJobInput struct {
 
-	// Specifies the values with which to update the job definition.
-	//
-	// This member is required.
-	JobUpdate *types.JobUpdate
-
 	// The name of the job definition to update.
 	//
 	// This member is required.
 	JobName *string
+
+	// Specifies the values with which to update the job definition.
+	//
+	// This member is required.
+	JobUpdate *types.JobUpdate
 }
 
 type UpdateJobOutput struct {

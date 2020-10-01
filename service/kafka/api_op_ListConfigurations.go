@@ -56,25 +56,25 @@ func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurati
 
 type ListConfigurationsInput struct {
 
+	// The maximum number of results to return in the response. If there are more
+	// results, the response includes a NextToken parameter.
+	MaxResults *int32
+
 	// The paginated results marker. When the result of the operation is truncated, the
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
-
-	// The maximum number of results to return in the response. If there are more
-	// results, the response includes a NextToken parameter.
-	MaxResults *int32
 }
 
 type ListConfigurationsOutput struct {
+
+	// An array of MSK configurations.
+	Configurations []*types.Configuration
 
 	// The paginated results marker. When the result of a ListConfigurations operation
 	// is truncated, the call returns NextToken in the response. To get another batch
 	// of configurations, provide this token in your next request.
 	NextToken *string
-
-	// An array of MSK configurations.
-	Configurations []*types.Configuration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

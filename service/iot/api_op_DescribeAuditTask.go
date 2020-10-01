@@ -69,21 +69,21 @@ type DescribeAuditTaskOutput struct {
 	// Detailed information about each check performed during this audit.
 	AuditDetails map[string]*types.AuditCheckDetails
 
-	// The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or
-	// "CANCELED".
-	TaskStatus types.AuditTaskStatus
-
 	// The name of the scheduled audit (only if the audit was a scheduled audit).
 	ScheduledAuditName *string
 
-	// The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
-	TaskType types.AuditTaskType
+	// The time the audit started.
+	TaskStartTime *time.Time
 
 	// Statistical information about the audit.
 	TaskStatistics *types.TaskStatistics
 
-	// The time the audit started.
-	TaskStartTime *time.Time
+	// The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or
+	// "CANCELED".
+	TaskStatus types.AuditTaskStatus
+
+	// The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+	TaskType types.AuditTaskType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

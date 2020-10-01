@@ -56,20 +56,20 @@ func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, 
 
 type DeleteSessionInput struct {
 
-	// The identifier of the user associated with the session data.
+	// The alias in use for the bot that contains the session data.
 	//
 	// This member is required.
-	UserId *string
+	BotAlias *string
 
 	// The name of the bot that contains the session data.
 	//
 	// This member is required.
 	BotName *string
 
-	// The alias in use for the bot that contains the session data.
+	// The identifier of the user associated with the session data.
 	//
 	// This member is required.
-	BotAlias *string
+	UserId *string
 }
 
 type DeleteSessionOutput struct {
@@ -77,14 +77,14 @@ type DeleteSessionOutput struct {
 	// The alias in use for the bot associated with the session data.
 	BotAlias *string
 
+	// The name of the bot associated with the session data.
+	BotName *string
+
 	// The unique identifier for the session.
 	SessionId *string
 
 	// The ID of the client application user.
 	UserId *string
-
-	// The name of the bot associated with the session data.
-	BotName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

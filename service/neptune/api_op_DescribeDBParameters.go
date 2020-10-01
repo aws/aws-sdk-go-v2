@@ -73,26 +73,26 @@ type DescribeDBParametersInput struct {
 	// beyond the marker, up to the value specified by MaxRecords.
 	Marker *string
 
-	// The parameter types to return. Default: All parameter types returned Valid
-	// Values: user | system | engine-default
-	Source *string
-
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	// The parameter types to return. Default: All parameter types returned Valid
+	// Values: user | system | engine-default
+	Source *string
 }
 
 type DescribeDBParametersOutput struct {
-
-	// A list of Parameter () values.
-	Parameters []*types.Parameter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// A list of Parameter () values.
+	Parameters []*types.Parameter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

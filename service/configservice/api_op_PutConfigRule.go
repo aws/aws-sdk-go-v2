@@ -83,13 +83,13 @@ func (c *Client) PutConfigRule(ctx context.Context, params *PutConfigRuleInput, 
 
 type PutConfigRuleInput struct {
 
-	// An array of tag object.
-	Tags []*types.Tag
-
 	// The rule that you want to add to your account.
 	//
 	// This member is required.
 	ConfigRule *types.ConfigRule
+
+	// An array of tag object.
+	Tags []*types.Tag
 }
 
 type PutConfigRuleOutput struct {

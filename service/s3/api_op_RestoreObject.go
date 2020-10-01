@@ -268,12 +268,6 @@ func (c *Client) RestoreObject(ctx context.Context, params *RestoreObjectInput, 
 
 type RestoreObjectInput struct {
 
-	// VersionId used to reference a specific version of the object.
-	VersionId *string
-
-	// Container for restore job parameters.
-	RestoreRequest *types.RestoreRequest
-
 	// The bucket name or containing the object to restore. When using this API with an
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
@@ -287,6 +281,11 @@ type RestoreObjectInput struct {
 	// This member is required.
 	Bucket *string
 
+	// Object key for which the operation was initiated.
+	//
+	// This member is required.
+	Key *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information
 	// about downloading objects from requester pays buckets, see Downloading Objects
@@ -295,21 +294,22 @@ type RestoreObjectInput struct {
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
 
-	// Object key for which the operation was initiated.
-	//
-	// This member is required.
-	Key *string
+	// Container for restore job parameters.
+	RestoreRequest *types.RestoreRequest
+
+	// VersionId used to reference a specific version of the object.
+	VersionId *string
 }
 
 type RestoreObjectOutput struct {
 
-	// Indicates the path in the provided S3 output location where Select results will
-	// be restored to.
-	RestoreOutputPath *string
-
 	// If present, indicates that the requester was successfully charged for the
 	// request.
 	RequestCharged types.RequestCharged
+
+	// Indicates the path in the provided S3 output location where Select results will
+	// be restored to.
+	RestoreOutputPath *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

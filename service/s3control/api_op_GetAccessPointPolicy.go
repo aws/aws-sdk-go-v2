@@ -66,6 +66,11 @@ func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPoin
 
 type GetAccessPointPolicyInput struct {
 
+	// The account ID for the account that owns the specified access point.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The name of the access point whose policy you want to retrieve. For Amazon S3 on
 	// Outposts specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
@@ -76,11 +81,6 @@ type GetAccessPointPolicyInput struct {
 	//
 	// This member is required.
 	Name *string
-
-	// The account ID for the account that owns the specified access point.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type GetAccessPointPolicyOutput struct {

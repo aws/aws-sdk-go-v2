@@ -60,21 +60,22 @@ func (c *Client) UpdateAccessPolicy(ctx context.Context, params *UpdateAccessPol
 
 type UpdateAccessPolicyInput struct {
 
+	// The ID of the access policy.
+	//
+	// This member is required.
+	AccessPolicyId *string
+
+	// The identity for this access policy. Choose either a user or a group but not
+	// both.
+	//
+	// This member is required.
+	AccessPolicyIdentity *types.Identity
+
 	// The permission level for this access policy. Note that a project ADMINISTRATOR
 	// is also known as a project owner.
 	//
 	// This member is required.
 	AccessPolicyPermission types.Permission
-
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
-
-	// The ID of the access policy.
-	//
-	// This member is required.
-	AccessPolicyId *string
 
 	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either
 	// portal or project but not both.
@@ -82,11 +83,10 @@ type UpdateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyResource *types.Resource
 
-	// The identity for this access policy. Choose either a user or a group but not
-	// both.
-	//
-	// This member is required.
-	AccessPolicyIdentity *types.Identity
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 }
 
 type UpdateAccessPolicyOutput struct {

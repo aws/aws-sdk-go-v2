@@ -70,9 +70,6 @@ func (c *Client) UpdateDataRetention(ctx context.Context, params *UpdateDataRete
 
 type UpdateDataRetentionInput struct {
 
-	// The name of the stream whose retention period you want to change.
-	StreamName *string
-
 	// The version of the stream whose retention period you want to change. To get the
 	// version, call either the DescribeStream or the ListStreams API.
 	//
@@ -93,6 +90,9 @@ type UpdateDataRetentionInput struct {
 	// The Amazon Resource Name (ARN) of the stream whose retention period you want to
 	// change.
 	StreamARN *string
+
+	// The name of the stream whose retention period you want to change.
+	StreamName *string
 }
 
 type UpdateDataRetentionOutput struct {

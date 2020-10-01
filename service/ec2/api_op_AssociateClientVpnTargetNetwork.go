@@ -67,6 +67,16 @@ func (c *Client) AssociateClientVpnTargetNetwork(ctx context.Context, params *As
 
 type AssociateClientVpnTargetNetworkInput struct {
 
+	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
+	ClientVpnEndpointId *string
+
+	// The ID of the subnet to associate with the Client VPN endpoint.
+	//
+	// This member is required.
+	SubnetId *string
+
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
@@ -77,16 +87,6 @@ type AssociateClientVpnTargetNetworkInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the subnet to associate with the Client VPN endpoint.
-	//
-	// This member is required.
-	SubnetId *string
-
-	// The ID of the Client VPN endpoint.
-	//
-	// This member is required.
-	ClientVpnEndpointId *string
 }
 
 type AssociateClientVpnTargetNetworkOutput struct {

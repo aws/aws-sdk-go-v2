@@ -64,15 +64,15 @@ func (c *Client) ModifyReservedInstances(ctx context.Context, params *ModifyRese
 // Contains the parameters for ModifyReservedInstances.
 type ModifyReservedInstancesInput struct {
 
-	// The configuration settings for the Reserved Instances to modify.
-	//
-	// This member is required.
-	TargetConfigurations []*types.ReservedInstancesConfiguration
-
 	// The IDs of the Reserved Instances to modify.
 	//
 	// This member is required.
 	ReservedInstancesIds []*string
+
+	// The configuration settings for the Reserved Instances to modify.
+	//
+	// This member is required.
+	TargetConfigurations []*types.ReservedInstancesConfiguration
 
 	// A unique, case-sensitive token you provide to ensure idempotency of your
 	// modification request. For more information, see Ensuring Idempotency

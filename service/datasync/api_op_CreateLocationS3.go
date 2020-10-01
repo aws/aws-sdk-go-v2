@@ -65,6 +65,11 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 // CreateLocationS3Request
 type CreateLocationS3Input struct {
 
+	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
+	//
+	// This member is required.
+	S3BucketArn *string
+
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that is used to access an Amazon S3 bucket.  <p>For detailed information
 	// about using such a role, see Creating a Location for Amazon S3 in the <i>AWS
@@ -89,11 +94,6 @@ type CreateLocationS3Input struct {
 	// The value can be an empty string. We recommend using tags to name your
 	// resources.
 	Tags []*types.TagListEntry
-
-	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
-	//
-	// This member is required.
-	S3BucketArn *string
 }
 
 // CreateLocationS3Response

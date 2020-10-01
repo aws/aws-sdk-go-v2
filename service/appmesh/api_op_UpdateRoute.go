@@ -57,25 +57,25 @@ func (c *Client) UpdateRoute(ctx context.Context, params *UpdateRouteInput, optF
 //
 type UpdateRouteInput struct {
 
-	// The name of the route to update.
-	//
-	// This member is required.
-	RouteName *string
-
 	// The name of the service mesh that the route resides in.
 	//
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual router that the route is associated with.
+	// The name of the route to update.
 	//
 	// This member is required.
-	VirtualRouterName *string
+	RouteName *string
 
 	// The new route specification to apply. This overwrites the existing data.
 	//
 	// This member is required.
 	Spec *types.RouteSpec
+
+	// The name of the virtual router that the route is associated with.
+	//
+	// This member is required.
+	VirtualRouterName *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.

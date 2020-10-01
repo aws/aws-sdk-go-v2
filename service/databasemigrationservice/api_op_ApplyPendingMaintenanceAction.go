@@ -64,12 +64,6 @@ type ApplyPendingMaintenanceActionInput struct {
 	// This member is required.
 	ApplyAction *string
 
-	// The Amazon Resource Name (ARN) of the AWS DMS resource that the pending
-	// maintenance action applies to.
-	//
-	// This member is required.
-	ReplicationInstanceArn *string
-
 	// A value that specifies the type of opt-in request, or undoes an opt-in request.
 	// You can't undo an opt-in request of type immediate. Valid values:
 	//
@@ -85,6 +79,12 @@ type ApplyPendingMaintenanceActionInput struct {
 	//
 	// This member is required.
 	OptInType *string
+
+	// The Amazon Resource Name (ARN) of the AWS DMS resource that the pending
+	// maintenance action applies to.
+	//
+	// This member is required.
+	ReplicationInstanceArn *string
 }
 
 //

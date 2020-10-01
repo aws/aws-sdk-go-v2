@@ -58,16 +58,21 @@ func (c *Client) UpdateSubscriber(ctx context.Context, params *UpdateSubscriberI
 // Request of UpdateSubscriber
 type UpdateSubscriberInput struct {
 
-	// The name of the budget whose subscriber you want to update.
-	//
-	// This member is required.
-	BudgetName *string
-
 	// The accountId that is associated with the budget whose subscriber you want to
 	// update.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the budget whose subscriber you want to update.
+	//
+	// This member is required.
+	BudgetName *string
+
+	// The updated subscriber that is associated with a budget notification.
+	//
+	// This member is required.
+	NewSubscriber *types.Subscriber
 
 	// The notification whose subscriber you want to update.
 	//
@@ -78,11 +83,6 @@ type UpdateSubscriberInput struct {
 	//
 	// This member is required.
 	OldSubscriber *types.Subscriber
-
-	// The updated subscriber that is associated with a budget notification.
-	//
-	// This member is required.
-	NewSubscriber *types.Subscriber
 }
 
 // Response of UpdateSubscriber

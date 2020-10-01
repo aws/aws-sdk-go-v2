@@ -60,6 +60,12 @@ func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context,
 
 type AddApplicationInputProcessingConfigurationInput struct {
 
+	// The name of the application to which you want to add the input processing
+	// configuration.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// The version of the application to which you want to add the input processing
 	// configuration. You can use the DescribeApplication () operation to get the
 	// current application version. If the version specified is not the current
@@ -68,11 +74,6 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
-	// The InputProcessingConfiguration () to add to the application.
-	//
-	// This member is required.
-	InputProcessingConfiguration *types.InputProcessingConfiguration
-
 	// The ID of the input configuration to add the input processing configuration to.
 	// You can get a list of the input IDs for an application using the
 	// DescribeApplication () operation.
@@ -80,18 +81,13 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	// This member is required.
 	InputId *string
 
-	// The name of the application to which you want to add the input processing
-	// configuration.
+	// The InputProcessingConfiguration () to add to the application.
 	//
 	// This member is required.
-	ApplicationName *string
+	InputProcessingConfiguration *types.InputProcessingConfiguration
 }
 
 type AddApplicationInputProcessingConfigurationOutput struct {
-
-	// The description of the preprocessor that executes on records in this input
-	// before the application's code is run.
-	InputProcessingConfigurationDescription *types.InputProcessingConfigurationDescription
 
 	// The Amazon Resource Name (ARN) of the application.
 	ApplicationARN *string
@@ -103,6 +99,10 @@ type AddApplicationInputProcessingConfigurationOutput struct {
 	// Amazon Kinesis Data Analytics assigns to each input configuration that you add
 	// to your application.
 	InputId *string
+
+	// The description of the preprocessor that executes on records in this input
+	// before the application's code is run.
+	InputProcessingConfigurationDescription *types.InputProcessingConfigurationDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

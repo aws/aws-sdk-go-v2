@@ -54,71 +54,71 @@ func (c *Client) InputAndOutputWithHeaders(ctx context.Context, params *InputAnd
 }
 
 type InputAndOutputWithHeadersInput struct {
-	HeaderString *string
+	HeaderBooleanList []*bool
 
 	HeaderByte *int8
 
-	HeaderShort *int16
+	HeaderDouble *float64
 
-	HeaderInteger *int32
+	HeaderEnum types.FooEnum
 
-	HeaderLong *int64
+	HeaderEnumList []types.FooEnum
+
+	HeaderFalseBool *bool
 
 	HeaderFloat *float32
 
-	HeaderDouble *float64
+	HeaderInteger *int32
 
-	HeaderTrueBool *bool
+	HeaderIntegerList []*int32
 
-	HeaderFalseBool *bool
+	HeaderLong *int64
+
+	HeaderShort *int16
+
+	HeaderString *string
 
 	HeaderStringList []*string
 
 	HeaderStringSet []*string
 
-	HeaderIntegerList []*int32
-
-	HeaderBooleanList []*bool
-
 	HeaderTimestampList []*time.Time
 
-	HeaderEnum types.FooEnum
-
-	HeaderEnumList []types.FooEnum
+	HeaderTrueBool *bool
 }
 
 type InputAndOutputWithHeadersOutput struct {
-	HeaderString *string
+	HeaderBooleanList []*bool
 
 	HeaderByte *int8
 
-	HeaderShort *int16
+	HeaderDouble *float64
 
-	HeaderInteger *int32
+	HeaderEnum types.FooEnum
 
-	HeaderLong *int64
+	HeaderEnumList []types.FooEnum
+
+	HeaderFalseBool *bool
 
 	HeaderFloat *float32
 
-	HeaderDouble *float64
+	HeaderInteger *int32
 
-	HeaderTrueBool *bool
+	HeaderIntegerList []*int32
 
-	HeaderFalseBool *bool
+	HeaderLong *int64
+
+	HeaderShort *int16
+
+	HeaderString *string
 
 	HeaderStringList []*string
 
 	HeaderStringSet []*string
 
-	HeaderIntegerList []*int32
-
-	HeaderBooleanList []*bool
-
 	HeaderTimestampList []*time.Time
 
-	HeaderEnum types.FooEnum
-
-	HeaderEnumList []types.FooEnum
+	HeaderTrueBool *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

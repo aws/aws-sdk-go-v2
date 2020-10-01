@@ -88,16 +88,16 @@ type CreateCampaignInput struct {
 	// This member is required.
 	MinProvisionedTPS *int32
 
-	// The Amazon Resource Name (ARN) of the solution version to deploy.
-	//
-	// This member is required.
-	SolutionVersionArn *string
-
 	// A name for the new campaign. The campaign name must be unique within your
 	// account.
 	//
 	// This member is required.
 	Name *string
+
+	// The Amazon Resource Name (ARN) of the solution version to deploy.
+	//
+	// This member is required.
+	SolutionVersionArn *string
 }
 
 type CreateCampaignOutput struct {

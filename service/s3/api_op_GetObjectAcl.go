@@ -66,22 +66,6 @@ func (c *Client) GetObjectAcl(ctx context.Context, params *GetObjectAclInput, op
 
 type GetObjectAclInput struct {
 
-	// VersionId used to reference a specific version of the object.
-	VersionId *string
-
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
-	// The key of the object for which to get the ACL information.
-	//
-	// This member is required.
-	Key *string
-
 	// The bucket name that contains the object for which to get the ACL information.
 	// When using this API with an access point, you must direct requests to the access
 	// point hostname. The access point hostname takes the form
@@ -94,19 +78,35 @@ type GetObjectAclInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The key of the object for which to get the ACL information.
+	//
+	// This member is required.
+	Key *string
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
+
+	// VersionId used to reference a specific version of the object.
+	VersionId *string
 }
 
 type GetObjectAclOutput struct {
 
-	// If present, indicates that the requester was successfully charged for the
-	// request.
-	RequestCharged types.RequestCharged
+	// A list of grants.
+	Grants []*types.Grant
 
 	// Container for the bucket owner's display name and ID.
 	Owner *types.Owner
 
-	// A list of grants.
-	Grants []*types.Grant
+	// If present, indicates that the requester was successfully charged for the
+	// request.
+	RequestCharged types.RequestCharged
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

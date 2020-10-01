@@ -58,27 +58,6 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 //
 type DescribeDBLogFilesInput struct {
 
-	// This parameter isn't currently supported.
-	Filters []*types.Filter
-
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results.
-	MaxRecords *int32
-
-	// Filters the available log files for files written since the specified date, in
-	// POSIX timestamp format with milliseconds.
-	FileLastWritten *int64
-
-	// Filters the available log files for log file names that contain the specified
-	// string.
-	FilenameContains *string
-
-	// The pagination token provided in the previous request. If this parameter is
-	// specified the response includes only records beyond the marker, up to
-	// MaxRecords.
-	Marker *string
-
 	// The customer-assigned name of the DB instance that contains the log files you
 	// want to list. Constraints:
 	//
@@ -88,18 +67,39 @@ type DescribeDBLogFilesInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
+	// Filters the available log files for files written since the specified date, in
+	// POSIX timestamp format with milliseconds.
+	FileLastWritten *int64
+
 	// Filters the available log files for files larger than the specified size.
 	FileSize *int64
+
+	// Filters the available log files for log file names that contain the specified
+	// string.
+	FilenameContains *string
+
+	// This parameter isn't currently supported.
+	Filters []*types.Filter
+
+	// The pagination token provided in the previous request. If this parameter is
+	// specified the response includes only records beyond the marker, up to
+	// MaxRecords.
+	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so you can retrieve the remaining results.
+	MaxRecords *int32
 }
 
 // The response from a call to DescribeDBLogFiles.
 type DescribeDBLogFilesOutput struct {
 
-	// A pagination token that can be used in a later DescribeDBLogFiles request.
-	Marker *string
-
 	// The DB log files returned.
 	DescribeDBLogFiles []*types.DescribeDBLogFilesDetails
+
+	// A pagination token that can be used in a later DescribeDBLogFiles request.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

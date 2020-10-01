@@ -60,9 +60,6 @@ func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyI
 
 type UpdateVocabularyInput struct {
 
-	// An array of strings containing the vocabulary entries.
-	Phrases []*string
-
 	// The language code of the vocabulary entries.
 	//
 	// This member is required.
@@ -74,6 +71,9 @@ type UpdateVocabularyInput struct {
 	//
 	// This member is required.
 	VocabularyName *string
+
+	// An array of strings containing the vocabulary entries.
+	Phrases []*string
 
 	// The S3 location of the text file that contains the definition of the custom
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
@@ -92,15 +92,15 @@ type UpdateVocabularyOutput struct {
 	// The language code of the vocabulary entries.
 	LanguageCode types.LanguageCode
 
-	// The processing state of the vocabulary. When the VocabularyState field contains
-	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
-	VocabularyState types.VocabularyState
-
 	// The date and time that the vocabulary was updated.
 	LastModifiedTime *time.Time
 
 	// The name of the vocabulary that was updated.
 	VocabularyName *string
+
+	// The processing state of the vocabulary. When the VocabularyState field contains
+	// READY the vocabulary is ready to be used in a StartTranscriptionJob request.
+	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

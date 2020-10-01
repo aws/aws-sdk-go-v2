@@ -58,19 +58,20 @@ func (c *Client) DeleteAuthorizer(ctx context.Context, params *DeleteAuthorizerI
 
 // Request to delete an existing Authorizer () resource.
 type DeleteAuthorizerInput struct {
-	Template *bool
 
 	// [Required] The identifier of the Authorizer () resource.
 	//
 	// This member is required.
 	AuthorizerId *string
 
-	Name *string
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
+
+	Name *string
+
+	Template *bool
 
 	TemplateSkipList []*string
 

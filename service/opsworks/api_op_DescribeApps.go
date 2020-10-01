@@ -61,14 +61,14 @@ func (c *Client) DescribeApps(ctx context.Context, params *DescribeAppsInput, op
 
 type DescribeAppsInput struct {
 
-	// The app stack ID. If you use this parameter, DescribeApps returns a description
-	// of the apps in the specified stack.
-	StackId *string
-
 	// An array of app IDs for the apps to be described. If you use this parameter,
 	// DescribeApps returns a description of the specified apps. Otherwise, it returns
 	// a description of every app.
 	AppIds []*string
+
+	// The app stack ID. If you use this parameter, DescribeApps returns a description
+	// of the apps in the specified stack.
+	StackId *string
 }
 
 // Contains the response to a DescribeApps request.

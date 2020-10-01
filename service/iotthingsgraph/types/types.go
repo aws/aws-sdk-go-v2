@@ -34,20 +34,20 @@ type DependencyRevision struct {
 // Describes the properties of an entity.
 type EntityDescription struct {
 
-	// The entity ID.
-	Id *string
-
 	// The entity ARN.
 	Arn *string
 
 	// The time at which the entity was created.
 	CreatedAt *time.Time
 
-	// The entity type.
-	Type EntityType
-
 	// The definition document of the entity.
 	Definition *DefinitionDocument
+
+	// The entity ID.
+	Id *string
+
+	// The entity type.
+	Type EntityType
 }
 
 // An object that filters an entity search. Multiple filters function as OR
@@ -56,14 +56,14 @@ type EntityDescription struct {
 // that use the entity specified by the value of REFERENCED_ENTITY_ID.
 type EntityFilter struct {
 
-	// An array of string values for the search filter field. Multiple values function
-	// as AND criteria in the search.
-	Value []*string
-
 	// The name of the entity search filter field. REFERENCED_ENTITY_ID filters on
 	// entities that are used by the entity in the result set. For example, you can
 	// filter on the ID of a property that is used in a state.
 	Name EntityFilterName
+
+	// An array of string values for the search filter field. Multiple values function
+	// as AND criteria in the search.
+	Value []*string
 }
 
 // An object that contains information about a flow event.
@@ -85,23 +85,23 @@ type FlowExecutionMessage struct {
 // An object that contains summary information about a flow execution.
 type FlowExecutionSummary struct {
 
-	// The ID of the flow.
-	FlowTemplateId *string
-
-	// The date and time when the flow execution summary was last updated.
-	UpdatedAt *time.Time
-
 	// The date and time when the flow execution summary was created.
 	CreatedAt *time.Time
 
 	// The ID of the flow execution.
 	FlowExecutionId *string
 
-	// The ID of the system instance that contains the flow.
-	SystemInstanceId *string
+	// The ID of the flow.
+	FlowTemplateId *string
 
 	// The current status of the flow execution.
 	Status FlowExecutionStatus
+
+	// The ID of the system instance that contains the flow.
+	SystemInstanceId *string
+
+	// The date and time when the flow execution summary was last updated.
+	UpdatedAt *time.Time
 }
 
 // An object that contains a workflow's definition and summary information.
@@ -110,66 +110,61 @@ type FlowTemplateDescription struct {
 	// A workflow's definition document.
 	Definition *DefinitionDocument
 
+	// An object that contains summary information about a workflow.
+	Summary *FlowTemplateSummary
+
 	// The version of the user's namespace against which the workflow was validated.
 	// Use this value in your system instance.
 	ValidatedNamespaceVersion *int64
-
-	// An object that contains summary information about a workflow.
-	Summary *FlowTemplateSummary
 }
 
 // An object that filters a workflow search.
 type FlowTemplateFilter struct {
+
+	// The name of the search filter field.
+	//
+	// This member is required.
+	Name FlowTemplateFilterName
 
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
 	//
 	// This member is required.
 	Value []*string
-
-	// The name of the search filter field.
-	//
-	// This member is required.
-	Name FlowTemplateFilterName
 }
 
 // An object that contains summary information about a workflow.
 type FlowTemplateSummary struct {
 
+	// The ARN of the workflow.
+	Arn *string
+
 	// The date when the workflow was created.
 	CreatedAt *time.Time
-
-	// The revision number of the workflow.
-	RevisionNumber *int64
 
 	// The ID of the workflow.
 	Id *string
 
-	// The ARN of the workflow.
-	Arn *string
+	// The revision number of the workflow.
+	RevisionNumber *int64
 }
 
 // An object that specifies whether cloud metrics are collected in a deployment
 // and, if so, what role is used to collect metrics.
 type MetricsConfiguration struct {
 
-	// The ARN of the role that is used to collect cloud metrics.
-	MetricRuleRoleArn *string
-
 	// A Boolean that specifies whether cloud metrics are collected.
 	CloudMetricEnabled *bool
+
+	// The ARN of the role that is used to collect cloud metrics.
+	MetricRuleRoleArn *string
 }
 
 // An object that contains a system instance definition and summary information.
 type SystemInstanceDescription struct {
 
-	// A list of objects that contain all of the IDs and revision numbers of workflows
-	// and systems that are used in a system instance.
-	ValidatedDependencyRevisions []*DependencyRevision
-
-	// The Amazon Simple Storage Service bucket where information about a system
-	// instance is stored.
-	S3BucketName *string
+	// A document that defines an entity.
+	Definition *DefinitionDocument
 
 	// The AWS Identity and Access Management (IAM) role that AWS IoT Things Graph
 	// assumes during flow execution in a cloud deployment. This role must have read
@@ -181,15 +176,20 @@ type SystemInstanceDescription struct {
 	// and, if so, what role is used to collect metrics.
 	MetricsConfiguration *MetricsConfiguration
 
-	// The version of the user's namespace against which the system instance was
-	// validated.
-	ValidatedNamespaceVersion *int64
+	// The Amazon Simple Storage Service bucket where information about a system
+	// instance is stored.
+	S3BucketName *string
 
 	// An object that contains summary information about a system instance.
 	Summary *SystemInstanceSummary
 
-	// A document that defines an entity.
-	Definition *DefinitionDocument
+	// A list of objects that contain all of the IDs and revision numbers of workflows
+	// and systems that are used in a system instance.
+	ValidatedDependencyRevisions []*DependencyRevision
+
+	// The version of the user's namespace against which the system instance was
+	// validated.
+	ValidatedNamespaceVersion *int64
 }
 
 // An object that filters a system instance search. Multiple filters function as OR
@@ -198,57 +198,57 @@ type SystemInstanceDescription struct {
 // specified Greengrass group that have the specified status.
 type SystemInstanceFilter struct {
 
+	// The name of the search filter field.
+	Name SystemInstanceFilterName
+
 	// An array of string values for the search filter field. Multiple values function
 	// as AND criteria in the search.
 	Value []*string
-
-	// The name of the search filter field.
-	Name SystemInstanceFilterName
 }
 
 // An object that contains summary information about a system instance.
 type SystemInstanceSummary struct {
 
-	// The ID of the Greengrass group where the system instance is deployed.
-	GreengrassGroupId *string
+	// The ARN of the system instance.
+	Arn *string
 
 	// The date when the system instance was created.
 	CreatedAt *time.Time
 
+	// The ID of the Greengrass group where the system instance is deployed.
+	GreengrassGroupId *string
+
+	// The ID of the Greengrass group where the system instance is deployed.
+	GreengrassGroupName *string
+
 	// The version of the Greengrass group where the system instance is deployed.
 	GreengrassGroupVersionId *string
-
-	// The ARN of the system instance.
-	Arn *string
-
-	// The date and time when the system instance was last updated.</p>
-	UpdatedAt *time.Time
-
-	// The status of the system instance.
-	Status SystemInstanceDeploymentStatus
 
 	// The ID of the system instance.
 	Id *string
 
+	// The status of the system instance.
+	Status SystemInstanceDeploymentStatus
+
 	// The target of the system instance.
 	Target DeploymentTarget
 
-	// The ID of the Greengrass group where the system instance is deployed.
-	GreengrassGroupName *string
+	// The date and time when the system instance was last updated.</p>
+	UpdatedAt *time.Time
 }
 
 // An object that contains a system's definition document and summary information.
 type SystemTemplateDescription struct {
-
-	// The namespace version against which the system was validated. Use this value in
-	// your system instance.
-	ValidatedNamespaceVersion *int64
 
 	// The definition document of a system.
 	Definition *DefinitionDocument
 
 	// An object that contains summary information about a system.
 	Summary *SystemTemplateSummary
+
+	// The namespace version against which the system was validated. Use this value in
+	// your system instance.
+	ValidatedNamespaceVersion *int64
 }
 
 // An object that filters a system search.
@@ -269,42 +269,42 @@ type SystemTemplateFilter struct {
 // An object that contains information about a system.
 type SystemTemplateSummary struct {
 
-	// The revision number of the system.
-	RevisionNumber *int64
-
-	// The ID of the system.
-	Id *string
-
 	// The ARN of the system.
 	Arn *string
 
 	// The date when the system was created.
 	CreatedAt *time.Time
+
+	// The ID of the system.
+	Id *string
+
+	// The revision number of the system.
+	RevisionNumber *int64
 }
 
 // Metadata assigned to an AWS IoT Things Graph resource consisting of a key-value
 // pair.
 type Tag struct {
 
-	// The optional value of the tag. The string value can be from 1 to 256 Unicode
-	// characters in length.
-	//
-	// This member is required.
-	Value *string
-
 	// The required name of the tag. The string value can be from 1 to 128 Unicode
 	// characters in length.
 	//
 	// This member is required.
 	Key *string
+
+	// The optional value of the tag. The string value can be from 1 to 256 Unicode
+	// characters in length.
+	//
+	// This member is required.
+	Value *string
 }
 
 // An AWS IoT thing.
 type Thing struct {
 
-	// The name of the thing.
-	ThingName *string
-
 	// The ARN of the thing.
 	ThingArn *string
+
+	// The name of the thing.
+	ThingName *string
 }

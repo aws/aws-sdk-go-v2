@@ -63,20 +63,6 @@ type CreateProxySessionInput struct {
 	// This member is required.
 	Capabilities []types.Capability
 
-	// The preference for proxy phone number reuse, or stickiness, between the same
-	// participants across sessions.
-	NumberSelectionBehavior types.NumberSelectionBehavior
-
-	// The name of the proxy session.
-	Name *string
-
-	// The country and area code for the proxy phone number.
-	GeoMatchParams *types.GeoMatchParams
-
-	// The preference for matching the country or area code of the proxy phone number
-	// with that of the first participant.
-	GeoMatchLevel types.GeoMatchLevel
-
 	// The participant phone numbers.
 	//
 	// This member is required.
@@ -89,6 +75,20 @@ type CreateProxySessionInput struct {
 
 	// The number of minutes allowed for the proxy session.
 	ExpiryMinutes *int32
+
+	// The preference for matching the country or area code of the proxy phone number
+	// with that of the first participant.
+	GeoMatchLevel types.GeoMatchLevel
+
+	// The country and area code for the proxy phone number.
+	GeoMatchParams *types.GeoMatchParams
+
+	// The name of the proxy session.
+	Name *string
+
+	// The preference for proxy phone number reuse, or stickiness, between the same
+	// participants across sessions.
+	NumberSelectionBehavior types.NumberSelectionBehavior
 }
 
 type CreateProxySessionOutput struct {

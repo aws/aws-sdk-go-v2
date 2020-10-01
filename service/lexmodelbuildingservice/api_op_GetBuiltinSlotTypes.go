@@ -63,11 +63,6 @@ type GetBuiltinSlotTypesInput struct {
 	// A list of locales that the slot type supports.
 	Locale types.Locale
 
-	// Substring to match in built-in slot type signatures. A slot type will be
-	// returned if any part of its signature matches the substring. For example, "xyz"
-	// matches both "xyzabc" and "abcxyz."
-	SignatureContains *string
-
 	// The maximum number of slot types to return in the response. The default is 10.
 	MaxResults *int32
 
@@ -76,17 +71,22 @@ type GetBuiltinSlotTypesInput struct {
 	// response. To fetch the next page of slot types, specify the pagination token in
 	// the next request.
 	NextToken *string
+
+	// Substring to match in built-in slot type signatures. A slot type will be
+	// returned if any part of its signature matches the substring. For example, "xyz"
+	// matches both "xyzabc" and "abcxyz."
+	SignatureContains *string
 }
 
 type GetBuiltinSlotTypesOutput struct {
 
-	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
-	// returned.
-	SlotTypes []*types.BuiltinSlotTypeMetadata
-
 	// If the response is truncated, the response includes a pagination token that you
 	// can use in your next request to fetch the next page of slot types.
 	NextToken *string
+
+	// An array of BuiltInSlotTypeMetadata objects, one entry for each slot type
+	// returned.
+	SlotTypes []*types.BuiltinSlotTypeMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

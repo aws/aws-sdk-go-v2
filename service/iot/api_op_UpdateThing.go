@@ -58,14 +58,6 @@ func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optF
 // The input for the UpdateThing operation.
 type UpdateThingInput struct {
 
-	// The name of the thing type.
-	ThingTypeName *string
-
-	// The expected version of the thing record in the registry. If the version of the
-	// record in the registry does not match the expected version specified in the
-	// request, the UpdateThing request is rejected with a VersionConflictException.
-	ExpectedVersion *int64
-
 	// The name of the thing to update. You can't change a thing's name. To change a
 	// thing's name, you must create a new thing, give it the new name, and then delete
 	// the old thing.
@@ -78,8 +70,16 @@ type UpdateThingInput struct {
 	// attributes or update existing attributes.
 	AttributePayload *types.AttributePayload
 
+	// The expected version of the thing record in the registry. If the version of the
+	// record in the registry does not match the expected version specified in the
+	// request, the UpdateThing request is rejected with a VersionConflictException.
+	ExpectedVersion *int64
+
 	// Remove a thing type association. If true, the association is removed.
 	RemoveThingType *bool
+
+	// The name of the thing type.
+	ThingTypeName *string
 }
 
 // The output from the UpdateThing operation.

@@ -60,6 +60,12 @@ func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionI
 
 type CreateConnectionInput struct {
 
+	// The name of the connection to be created. The name must be unique in the calling
+	// AWS account.
+	//
+	// This member is required.
+	ConnectionName *string
+
 	// The Amazon Resource Name (ARN) of the host associated with the connection to be
 	// created.
 	HostArn *string
@@ -68,20 +74,11 @@ type CreateConnectionInput struct {
 	// configured. The valid provider type is Bitbucket.
 	ProviderType types.ProviderType
 
-	// The name of the connection to be created. The name must be unique in the calling
-	// AWS account.
-	//
-	// This member is required.
-	ConnectionName *string
-
 	// The key-value pair to use when tagging the resource.
 	Tags []*types.Tag
 }
 
 type CreateConnectionOutput struct {
-
-	// Specifies the tags applied to the resource.
-	Tags []*types.Tag
 
 	// The Amazon Resource Name (ARN) of the connection to be created. The ARN is used
 	// as the connection reference when the connection is shared between AWS services.
@@ -89,6 +86,9 @@ type CreateConnectionOutput struct {
 	//
 	// This member is required.
 	ConnectionArn *string
+
+	// Specifies the tags applied to the resource.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

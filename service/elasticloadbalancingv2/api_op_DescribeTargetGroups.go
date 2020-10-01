@@ -61,15 +61,15 @@ func (c *Client) DescribeTargetGroups(ctx context.Context, params *DescribeTarge
 
 type DescribeTargetGroupsInput struct {
 
+	// The Amazon Resource Name (ARN) of the load balancer.
+	LoadBalancerArn *string
+
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
 
 	// The names of the target groups.
 	Names []*string
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	LoadBalancerArn *string
 
 	// The maximum number of results to return with this call.
 	PageSize *int32

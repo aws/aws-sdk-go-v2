@@ -61,22 +61,22 @@ type DescribeImageBuildersInput struct {
 	// The maximum size of each page of results.
 	MaxResults *int32
 
+	// The names of the image builders to describe.
+	Names []*string
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
-
-	// The names of the image builders to describe.
-	Names []*string
 }
 
 type DescribeImageBuildersOutput struct {
 
+	// Information about the image builders.
+	ImageBuilders []*types.ImageBuilder
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
-
-	// Information about the image builders.
-	ImageBuilders []*types.ImageBuilder
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

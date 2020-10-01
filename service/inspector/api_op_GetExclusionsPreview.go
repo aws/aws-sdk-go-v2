@@ -65,27 +65,32 @@ type GetExclusionsPreviewInput struct {
 	// This member is required.
 	AssessmentTemplateArn *string
 
-	// The locale into which you want to translate the exclusion's title, description,
-	// and recommendation.
-	Locale types.Locale
-
 	// The unique identifier associated of the exclusions preview.
 	//
 	// This member is required.
 	PreviewToken *string
+
+	// The locale into which you want to translate the exclusion's title, description,
+	// and recommendation.
+	Locale types.Locale
+
+	// You can use this parameter to indicate the maximum number of items you want in
+	// the response. The default value is 100. The maximum value is 500.
+	MaxResults *int32
 
 	// You can use this parameter when paginating results. Set the value of this
 	// parameter to null on your first call to the GetExclusionsPreviewRequest action.
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
-
-	// You can use this parameter to indicate the maximum number of items you want in
-	// the response. The default value is 100. The maximum value is 500.
-	MaxResults *int32
 }
 
 type GetExclusionsPreviewOutput struct {
+
+	// Specifies the status of the request to generate an exclusions preview.
+	//
+	// This member is required.
+	PreviewStatus types.PreviewStatus
 
 	// Information about the exclusions included in the preview.
 	ExclusionPreviews []*types.ExclusionPreview
@@ -95,11 +100,6 @@ type GetExclusionsPreviewOutput struct {
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.
 	NextToken *string
-
-	// Specifies the status of the request to generate an exclusions preview.
-	//
-	// This member is required.
-	PreviewStatus types.PreviewStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

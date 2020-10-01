@@ -58,15 +58,15 @@ func (c *Client) RebalanceSlotsInGlobalReplicationGroup(ctx context.Context, par
 
 type RebalanceSlotsInGlobalReplicationGroupInput struct {
 
-	// The name of the Global Datastore
-	//
-	// This member is required.
-	GlobalReplicationGroupId *string
-
 	// If True, redistribution is applied immediately.
 	//
 	// This member is required.
 	ApplyImmediately *bool
+
+	// The name of the Global Datastore
+	//
+	// This member is required.
+	GlobalReplicationGroupId *string
 }
 
 type RebalanceSlotsInGlobalReplicationGroupOutput struct {

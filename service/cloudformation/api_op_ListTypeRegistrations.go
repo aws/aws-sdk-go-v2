@@ -56,6 +56,12 @@ func (c *Client) ListTypeRegistrations(ctx context.Context, params *ListTypeRegi
 
 type ListTypeRegistrationsInput struct {
 
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	MaxResults *int32
+
 	// If the previous paginated request didn't return all of the remaining results,
 	// the response object's NextToken parameter value is set to a token. To retrieve
 	// the next set of results, call this action again and assign that token to the
@@ -63,39 +69,33 @@ type ListTypeRegistrationsInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the type. Conditional: You must specify either
-	// TypeName and Type, or Arn.
-	TypeArn *string
+	// The current status of the type registration request. The default is IN_PROGRESS.
+	RegistrationStatusFilter types.RegistrationStatus
 
 	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
 	// must specify either TypeName and Type, or Arn.
 	Type types.RegistryType
 
-	// The current status of the type registration request. The default is IN_PROGRESS.
-	RegistrationStatusFilter types.RegistrationStatus
+	// The Amazon Resource Name (ARN) of the type. Conditional: You must specify either
+	// TypeName and Type, or Arn.
+	TypeArn *string
 
 	// The name of the type. Conditional: You must specify either TypeName and Type, or
 	// Arn.
 	TypeName *string
-
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
-	MaxResults *int32
 }
 
 type ListTypeRegistrationsOutput struct {
-
-	// A list of type registration tokens. Use DescribeTypeRegistration () to return
-	// detailed information about a type registration request.
-	RegistrationTokenList []*string
 
 	// If the request doesn't return all of the remaining results, NextToken is set to
 	// a token. To retrieve the next set of results, call this action again and assign
 	// that token to the request object's NextToken parameter. If the request returns
 	// all results, NextToken is set to null.
 	NextToken *string
+
+	// A list of type registration tokens. Use DescribeTypeRegistration () to return
+	// detailed information about a type registration request.
+	RegistrationTokenList []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

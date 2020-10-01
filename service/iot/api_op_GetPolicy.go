@@ -71,8 +71,11 @@ type GetPolicyOutput struct {
 	// The date the policy was created.
 	CreationDate *time.Time
 
-	// The policy name.
-	PolicyName *string
+	// The default policy version ID.
+	DefaultVersionId *string
+
+	// The generation ID of the policy.
+	GenerationId *string
 
 	// The date the policy was last modified.
 	LastModifiedDate *time.Time
@@ -80,14 +83,11 @@ type GetPolicyOutput struct {
 	// The policy ARN.
 	PolicyArn *string
 
-	// The generation ID of the policy.
-	GenerationId *string
-
-	// The default policy version ID.
-	DefaultVersionId *string
-
 	// The JSON document that describes the policy.
 	PolicyDocument *string
+
+	// The policy name.
+	PolicyName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,12 +57,6 @@ func (c *Client) CreatePullRequestApprovalRule(ctx context.Context, params *Crea
 
 type CreatePullRequestApprovalRuleInput struct {
 
-	// The system-generated ID of the pull request for which you want to create the
-	// approval rule.
-	//
-	// This member is required.
-	PullRequestId *string
-
 	// The content of the approval rule, including the number of approvals needed and
 	// the structure of an approval pool defined for approvals, if any. For more
 	// information about approval pools, see the AWS CodeCommit User Guide. When you
@@ -105,6 +99,12 @@ type CreatePullRequestApprovalRuleInput struct {
 	//
 	// This member is required.
 	ApprovalRuleName *string
+
+	// The system-generated ID of the pull request for which you want to create the
+	// approval rule.
+	//
+	// This member is required.
+	PullRequestId *string
 }
 
 type CreatePullRequestApprovalRuleOutput struct {

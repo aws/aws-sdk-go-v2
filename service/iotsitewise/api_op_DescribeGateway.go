@@ -66,10 +66,10 @@ type DescribeGatewayInput struct {
 
 type DescribeGatewayOutput struct {
 
-	// The name of the gateway.
+	// The date the gateway was created, in Unix epoch time.
 	//
 	// This member is required.
-	GatewayName *string
+	CreationDate *time.Time
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -79,24 +79,6 @@ type DescribeGatewayOutput struct {
 	// This member is required.
 	GatewayArn *string
 
-	// The ID of the gateway device.
-	//
-	// This member is required.
-	GatewayId *string
-
-	// The date the gateway was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	LastUpdateDate *time.Time
-
-	// The gateway's platform.
-	GatewayPlatform *types.GatewayPlatform
-
-	// The date the gateway was created, in Unix epoch time.
-	//
-	// This member is required.
-	CreationDate *time.Time
-
 	// A list of gateway capability summaries that each contain a namespace and status.
 	// Each gateway capability defines data sources for the gateway. To retrieve a
 	// capability configuration's definition, use
@@ -105,6 +87,24 @@ type DescribeGatewayOutput struct {
 	//
 	// This member is required.
 	GatewayCapabilitySummaries []*types.GatewayCapabilitySummary
+
+	// The ID of the gateway device.
+	//
+	// This member is required.
+	GatewayId *string
+
+	// The name of the gateway.
+	//
+	// This member is required.
+	GatewayName *string
+
+	// The date the gateway was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	LastUpdateDate *time.Time
+
+	// The gateway's platform.
+	GatewayPlatform *types.GatewayPlatform
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

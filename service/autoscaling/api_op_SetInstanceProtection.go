@@ -65,16 +65,16 @@ type SetInstanceProtectionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
+	// One or more instance IDs.
+	//
+	// This member is required.
+	InstanceIds []*string
+
 	// Indicates whether the instance is protected from termination by Amazon EC2 Auto
 	// Scaling when scaling in.
 	//
 	// This member is required.
 	ProtectedFromScaleIn *bool
-
-	// One or more instance IDs.
-	//
-	// This member is required.
-	InstanceIds []*string
 }
 
 type SetInstanceProtectionOutput struct {

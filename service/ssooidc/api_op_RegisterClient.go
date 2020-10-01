@@ -55,16 +55,16 @@ func (c *Client) RegisterClient(ctx context.Context, params *RegisterClientInput
 
 type RegisterClientInput struct {
 
+	// The friendly name of the client.
+	//
+	// This member is required.
+	ClientName *string
+
 	// The type of client. The service supports only public as a client type. Anything
 	// other than public will be rejected by the service.
 	//
 	// This member is required.
 	ClientType *string
-
-	// The friendly name of the client.
-	//
-	// This member is required.
-	ClientName *string
 
 	// The list of scopes that are defined by the client. Upon authorization, this list
 	// is used to restrict permissions when granting an access token.
@@ -76,22 +76,22 @@ type RegisterClientOutput struct {
 	// The endpoint where the client can request authorization.
 	AuthorizationEndpoint *string
 
-	// A secret string generated for the client. The client will use this string to get
-	// authenticated by the service in subsequent calls.
-	ClientSecret *string
-
-	// The endpoint where the client can get an access token.
-	TokenEndpoint *string
-
 	// The unique identifier string for each client. This client uses this identifier
 	// to get authenticated by the service in subsequent calls.
 	ClientId *string
 
+	// Indicates the time at which the clientId and clientSecret were issued.
+	ClientIdIssuedAt *int64
+
+	// A secret string generated for the client. The client will use this string to get
+	// authenticated by the service in subsequent calls.
+	ClientSecret *string
+
 	// Indicates the time at which the clientId and clientSecret will become invalid.
 	ClientSecretExpiresAt *int64
 
-	// Indicates the time at which the clientId and clientSecret were issued.
-	ClientIdIssuedAt *int64
+	// The endpoint where the client can get an access token.
+	TokenEndpoint *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,11 +63,12 @@ func (c *Client) UpdateSigningCertificate(ctx context.Context, params *UpdateSig
 
 type UpdateSigningCertificateInput struct {
 
-	// The name of the IAM user the signing certificate belongs to. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
-	UserName *string
+	// The ID of the signing certificate you want to update. This parameter allows
+	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters that can consist of any upper or lowercased letter or digit.
+	//
+	// This member is required.
+	CertificateId *string
 
 	// The status you want to assign to the certificate. Active means that the
 	// certificate can be used for API calls to AWS Inactive means that the certificate
@@ -76,12 +77,11 @@ type UpdateSigningCertificateInput struct {
 	// This member is required.
 	Status types.StatusType
 
-	// The ID of the signing certificate you want to update. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters that can consist of any upper or lowercased letter or digit.
-	//
-	// This member is required.
-	CertificateId *string
+	// The name of the IAM user the signing certificate belongs to. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
+	UserName *string
 }
 
 type UpdateSigningCertificateOutput struct {

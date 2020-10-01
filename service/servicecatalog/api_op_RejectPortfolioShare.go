@@ -62,6 +62,16 @@ type RejectPortfolioShareInput struct {
 	// This member is required.
 	PortfolioId *string
 
+	// The language code.
+	//
+	//     * en - English (default)
+	//
+	//     * jp - Japanese
+	//
+	//     * zh
+	// - Chinese
+	AcceptLanguage *string
+
 	// The type of shared portfolios to reject. The default is to reject imported
 	// portfolios.
 	//
@@ -77,16 +87,6 @@ type RejectPortfolioShareInput struct {
 	// example, aws servicecatalog reject-portfolio-share --portfolio-id
 	// "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS
 	PortfolioShareType types.PortfolioShareType
-
-	// The language code.
-	//
-	//     * en - English (default)
-	//
-	//     * jp - Japanese
-	//
-	//     * zh
-	// - Chinese
-	AcceptLanguage *string
 }
 
 type RejectPortfolioShareOutput struct {

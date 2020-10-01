@@ -57,16 +57,16 @@ func (c *Client) DeleteApplicationSnapshot(ctx context.Context, params *DeleteAp
 
 type DeleteApplicationSnapshotInput struct {
 
+	// The name of an existing application.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// The creation timestamp of the application snapshot to delete. You can retrieve
 	// this value using or .
 	//
 	// This member is required.
 	SnapshotCreationTimestamp *time.Time
-
-	// The name of an existing application.
-	//
-	// This member is required.
-	ApplicationName *string
 
 	// The identifier for the snapshot delete.
 	//

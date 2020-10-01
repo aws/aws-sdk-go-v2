@@ -61,21 +61,21 @@ type DescribeExportConfigurationsInput struct {
 	// A list of continuous export IDs to search for.
 	ExportIds []*string
 
-	// The token from the previous call to describe-export-tasks.
-	NextToken *string
-
 	// A number between 1 and 100 specifying the maximum number of continuous export
 	// descriptions returned.
 	MaxResults *int32
+
+	// The token from the previous call to describe-export-tasks.
+	NextToken *string
 }
 
 type DescribeExportConfigurationsOutput struct {
 
-	// The token from the previous call to describe-export-tasks.
-	NextToken *string
-
 	//
 	ExportsInfo []*types.ExportInfo
+
+	// The token from the previous call to describe-export-tasks.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

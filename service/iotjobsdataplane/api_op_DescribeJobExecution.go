@@ -62,14 +62,14 @@ type DescribeJobExecutionInput struct {
 	// This member is required.
 	JobId *string
 
-	// Optional. A number that identifies a particular job execution on a particular
-	// device. If not specified, the latest job execution is returned.
-	ExecutionNumber *int64
-
 	// The thing name associated with the device the job execution is running on.
 	//
 	// This member is required.
 	ThingName *string
+
+	// Optional. A number that identifies a particular job execution on a particular
+	// device. If not specified, the latest job execution is returned.
+	ExecutionNumber *int64
 
 	// Optional. When set to true, the response contains the job document. The default
 	// is false.

@@ -57,6 +57,15 @@ func (c *Client) BatchModifyClusterSnapshots(ctx context.Context, params *BatchM
 
 type BatchModifyClusterSnapshotsInput struct {
 
+	// A list of snapshot identifiers you want to modify.
+	//
+	// This member is required.
+	SnapshotIdentifierList []*string
+
+	// A boolean value indicating whether to override an exception if the retention
+	// period has passed.
+	Force *bool
+
 	// The number of days that a manual snapshot is retained. If you specify the value
 	// -1, the manual snapshot is retained indefinitely. The number must be either -1
 	// or an integer between 1 and 3,653. If you decrease the manual snapshot retention
@@ -64,15 +73,6 @@ type BatchModifyClusterSnapshotsInput struct {
 	// the new retention period will return an error. If you want to suppress the
 	// errors and delete the snapshots, use the force option.
 	ManualSnapshotRetentionPeriod *int32
-
-	// A boolean value indicating whether to override an exception if the retention
-	// period has passed.
-	Force *bool
-
-	// A list of snapshot identifiers you want to modify.
-	//
-	// This member is required.
-	SnapshotIdentifierList []*string
 }
 
 type BatchModifyClusterSnapshotsOutput struct {

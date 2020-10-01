@@ -58,13 +58,6 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
-	// The tags to add to the group. A tag is key-value pair string.
-	Tags map[string]*string
-
-	// The description of the resource group. Descriptions can consist of letters,
-	// numbers, hyphens, underscores, periods, and spaces.
-	Description *string
-
 	// The name of the group, which is the identifier of the group in other operations.
 	// You can't change the name of a resource group after you create it. A resource
 	// group name can consist of letters, numbers, hyphens, periods, and underscores.
@@ -74,24 +67,28 @@ type CreateGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// The resource query that determines which AWS resources are members of this
-	// group. You can specify either a ResourceQuery or a Configuration, but not both.
-	ResourceQuery *types.ResourceQuery
-
 	// A configuration associates the resource group with an AWS service and specifies
 	// how the service can interact with the resources in the group. A configuration is
 	// an array of GroupConfigurationItem () elements. You can specify either a
 	// Configuration or a ResourceQuery in a group, but not both.
 	Configuration []*types.GroupConfigurationItem
+
+	// The description of the resource group. Descriptions can consist of letters,
+	// numbers, hyphens, underscores, periods, and spaces.
+	Description *string
+
+	// The resource query that determines which AWS resources are members of this
+	// group. You can specify either a ResourceQuery or a Configuration, but not both.
+	ResourceQuery *types.ResourceQuery
+
+	// The tags to add to the group. A tag is key-value pair string.
+	Tags map[string]*string
 }
 
 type CreateGroupOutput struct {
 
 	// The description of the resource group.
 	Group *types.Group
-
-	// The tags associated with the group.
-	Tags map[string]*string
 
 	// The service configuration associated with the resource group. AWS Resource
 	// Groups supports adding service configurations for the following resource group
@@ -106,6 +103,9 @@ type CreateGroupOutput struct {
 
 	// The resource query associated with the group.
 	ResourceQuery *types.ResourceQuery
+
+	// The tags associated with the group.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

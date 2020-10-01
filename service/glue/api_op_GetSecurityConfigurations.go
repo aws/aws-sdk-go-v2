@@ -56,20 +56,20 @@ func (c *Client) GetSecurityConfigurations(ctx context.Context, params *GetSecur
 
 type GetSecurityConfigurationsInput struct {
 
-	// A continuation token, if this is a continuation call.
-	NextToken *string
-
 	// The maximum number of results to return.
 	MaxResults *int32
+
+	// A continuation token, if this is a continuation call.
+	NextToken *string
 }
 
 type GetSecurityConfigurationsOutput struct {
 
-	// A list of security configurations.
-	SecurityConfigurations []*types.SecurityConfiguration
-
 	// A continuation token, if there are more security configurations to return.
 	NextToken *string
+
+	// A list of security configurations.
+	SecurityConfigurations []*types.SecurityConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

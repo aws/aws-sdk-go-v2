@@ -58,77 +58,77 @@ func (c *Client) UpdateBroker(ctx context.Context, params *UpdateBrokerInput, op
 // Updates the broker using the specified properties.
 type UpdateBrokerInput struct {
 
-	// The version of the broker engine. For a list of supported engine versions, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
-	EngineVersion *string
-
-	// A list of information about the configuration.
-	Configuration *types.ConfigurationId
-
-	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
-	// to brokers.
-	SecurityGroups []*string
-
-	// The metadata of the LDAP server used to authenticate and authorize connections
-	// to the broker.
-	LdapServerMetadata *types.LdapServerMetadataInput
-
-	// The authentication strategy used to secure the broker.
-	AuthenticationStrategy types.AuthenticationStrategy
-
 	// The unique ID that Amazon MQ generates for the broker.
 	//
 	// This member is required.
 	BrokerId *string
 
-	// The host instance type of the broker to upgrade to. For a list of supported
-	// instance types, see
-	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
-	HostInstanceType *string
-
-	// Enables Amazon CloudWatch logging for brokers.
-	Logs *types.Logs
+	// The authentication strategy used to secure the broker.
+	AuthenticationStrategy types.AuthenticationStrategy
 
 	// Enables automatic upgrades to new minor versions for brokers, as Apache releases
 	// the versions. The automatic upgrades occur during the maintenance window of the
 	// broker or after a manual broker reboot.
 	AutoMinorVersionUpgrade *bool
-}
 
-type UpdateBrokerOutput struct {
-
-	// The ID of the updated configuration.
+	// A list of information about the configuration.
 	Configuration *types.ConfigurationId
 
-	// Required. The unique ID that Amazon MQ generates for the broker.
-	BrokerId *string
-
-	// The list of information about logs to be enabled for the specified broker.
-	Logs *types.Logs
+	// The version of the broker engine. For a list of supported engine versions, see
+	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+	EngineVersion *string
 
 	// The host instance type of the broker to upgrade to. For a list of supported
 	// instance types, see
 	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
 	HostInstanceType *string
 
+	// The metadata of the LDAP server used to authenticate and authorize connections
+	// to the broker.
+	LdapServerMetadata *types.LdapServerMetadataInput
+
+	// Enables Amazon CloudWatch logging for brokers.
+	Logs *types.Logs
+
 	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
 	// to brokers.
 	SecurityGroups []*string
+}
+
+type UpdateBrokerOutput struct {
 
 	// The authentication strategy used to secure the broker.
 	AuthenticationStrategy types.AuthenticationStrategy
 
-	// The metadata of the LDAP server used to authenticate and authorize connections
-	// to the broker.
-	LdapServerMetadata *types.LdapServerMetadataOutput
+	// The new value of automatic upgrades to new minor version for brokers.
+	AutoMinorVersionUpgrade *bool
+
+	// Required. The unique ID that Amazon MQ generates for the broker.
+	BrokerId *string
+
+	// The ID of the updated configuration.
+	Configuration *types.ConfigurationId
 
 	// The version of the broker engine to upgrade to. For a list of supported engine
 	// versions, see
 	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
-	// The new value of automatic upgrades to new minor version for brokers.
-	AutoMinorVersionUpgrade *bool
+	// The host instance type of the broker to upgrade to. For a list of supported
+	// instance types, see
+	// https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+	HostInstanceType *string
+
+	// The metadata of the LDAP server used to authenticate and authorize connections
+	// to the broker.
+	LdapServerMetadata *types.LdapServerMetadataOutput
+
+	// The list of information about logs to be enabled for the specified broker.
+	Logs *types.Logs
+
+	// The list of security groups (1 minimum, 5 maximum) that authorizes connections
+	// to brokers.
+	SecurityGroups []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

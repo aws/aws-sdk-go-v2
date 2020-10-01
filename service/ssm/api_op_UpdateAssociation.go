@@ -70,38 +70,43 @@ type UpdateAssociationInput struct {
 	// This member is required.
 	AssociationId *string
 
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
-	AutomationTargetParameterName *string
+	// By default, when you update an association, the system runs it immediately after
+	// it is updated and then according to the schedule you specified. Specify this
+	// option if you don't want an association to run immediately after you update it.
+	// Also, if you specified this option when you created the association, you can
+	// reset it. To do so, specify the no-apply-only-at-cron-interval parameter when
+	// you update the association from the command line. This parameter forces the
+	// association to run immediately after updating it and according to the interval
+	// specified.
+	ApplyOnlyAtCronInterval *bool
 
-	// The targets of the association.
-	Targets []*types.Target
-
-	// The document version you want update for the association.
-	DocumentVersion *string
+	// The name of the association that you want to update.
+	AssociationName *string
 
 	// This parameter is provided for concurrency control purposes. You must specify
 	// the latest association version in the service. If you want to ensure that this
 	// request succeeds, either specify $LATEST, or omit this parameter.
 	AssociationVersion *string
 
+	// Specify the target for the association. This target is required for associations
+	// that use an Automation document and target resources by using rate controls.
+	AutomationTargetParameterName *string
+
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
 
-	// The name of the SSM document that contains the configuration information for the
-	// instance. You can specify Command or Automation documents. You can specify
-	// AWS-predefined documents, documents you created, or a document that is shared
-	// with you from another account. For SSM documents that are shared with you from
-	// other AWS accounts, you must specify the complete SSM document ARN, in the
-	// following format: arn:aws:ssm:region:account-id:document/document-name  For
-	// example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
-	// AWS-predefined documents and SSM documents you created in your account, you only
-	// need to specify the document name. For example, AWS-ApplyPatchBaseline or
-	// My-Document.
-	Name *string
+	// The document version you want update for the association.
+	DocumentVersion *string
 
-	// The cron expression used to schedule the association that you want to update.
-	ScheduleExpression *string
+	// The maximum number of targets allowed to run the association at the same time.
+	// You can specify a number, for example 10, or a percentage of the target set, for
+	// example 10%. The default value is 100%, which means all targets run the
+	// association at the same time. If a new instance starts and attempts to run an
+	// association while Systems Manager is running MaxConcurrency associations, the
+	// association is allowed to run. During the next association interval, the new
+	// instance will process its association within the limit specified for
+	// MaxConcurrency.
+	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops sending requests
 	// to run the association on additional targets. You can specify either an absolute
@@ -117,36 +122,28 @@ type UpdateAssociationInput struct {
 	// one at a time.
 	MaxErrors *string
 
-	// By default, when you update an association, the system runs it immediately after
-	// it is updated and then according to the schedule you specified. Specify this
-	// option if you don't want an association to run immediately after you update it.
-	// Also, if you specified this option when you created the association, you can
-	// reset it. To do so, specify the no-apply-only-at-cron-interval parameter when
-	// you update the association from the command line. This parameter forces the
-	// association to run immediately after updating it and according to the interval
-	// specified.
-	ApplyOnlyAtCronInterval *bool
+	// The name of the SSM document that contains the configuration information for the
+	// instance. You can specify Command or Automation documents. You can specify
+	// AWS-predefined documents, documents you created, or a document that is shared
+	// with you from another account. For SSM documents that are shared with you from
+	// other AWS accounts, you must specify the complete SSM document ARN, in the
+	// following format: arn:aws:ssm:region:account-id:document/document-name  For
+	// example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
+	// AWS-predefined documents and SSM documents you created in your account, you only
+	// need to specify the document name. For example, AWS-ApplyPatchBaseline or
+	// My-Document.
+	Name *string
 
-	// The name of the association that you want to update.
-	AssociationName *string
+	// An S3 bucket where you want to store the results of this request.
+	OutputLocation *types.InstanceAssociationOutputLocation
 
 	// The parameters you want to update for the association. If you create a parameter
 	// using Parameter Store, you can reference the parameter using
 	// {{ssm:parameter-name}}
 	Parameters map[string][]*string
 
-	// An S3 bucket where you want to store the results of this request.
-	OutputLocation *types.InstanceAssociationOutputLocation
-
-	// The maximum number of targets allowed to run the association at the same time.
-	// You can specify a number, for example 10, or a percentage of the target set, for
-	// example 10%. The default value is 100%, which means all targets run the
-	// association at the same time. If a new instance starts and attempts to run an
-	// association while Systems Manager is running MaxConcurrency associations, the
-	// association is allowed to run. During the next association interval, the new
-	// instance will process its association within the limit specified for
-	// MaxConcurrency.
-	MaxConcurrency *string
+	// The cron expression used to schedule the association that you want to update.
+	ScheduleExpression *string
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
@@ -158,6 +155,9 @@ type UpdateAssociationInput struct {
 	// your direct call to the PutComplianceItems () API action. By default, all
 	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
+
+	// The targets of the association.
+	Targets []*types.Target
 }
 
 type UpdateAssociationOutput struct {

@@ -100,11 +100,6 @@ func (c *Client) PutBucketInventoryConfiguration(ctx context.Context, params *Pu
 
 type PutBucketInventoryConfigurationInput struct {
 
-	// Specifies the inventory configuration.
-	//
-	// This member is required.
-	InventoryConfiguration *types.InventoryConfiguration
-
 	// The name of the bucket where the inventory configuration will be stored.
 	//
 	// This member is required.
@@ -114,6 +109,11 @@ type PutBucketInventoryConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	// Specifies the inventory configuration.
+	//
+	// This member is required.
+	InventoryConfiguration *types.InventoryConfiguration
 }
 
 type PutBucketInventoryConfigurationOutput struct {

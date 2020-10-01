@@ -65,16 +65,16 @@ type PutThirdPartyJobFailureResultInput struct {
 	// This member is required.
 	ClientToken *string
 
+	// Represents information about failure details.
+	//
+	// This member is required.
+	FailureDetails *types.FailureDetails
+
 	// The ID of the job that failed. This is the same ID returned from
 	// PollForThirdPartyJobs.
 	//
 	// This member is required.
 	JobId *string
-
-	// Represents information about failure details.
-	//
-	// This member is required.
-	FailureDetails *types.FailureDetails
 }
 
 type PutThirdPartyJobFailureResultOutput struct {

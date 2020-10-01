@@ -58,17 +58,6 @@ func (c *Client) DescribeWorkspaces(ctx context.Context, params *DescribeWorkspa
 
 type DescribeWorkspacesInput struct {
 
-	// If you received a NextToken from a previous call that was paginated, provide
-	// this token to receive the next set of results.
-	NextToken *string
-
-	// The name of the directory user. You must specify this parameter with
-	// DirectoryId.
-	UserName *string
-
-	// The maximum number of items to return.
-	Limit *int32
-
 	// The identifier of the bundle. All WorkSpaces that are created from this bundle
 	// are retrieved. You cannot combine this parameter with any other filter.
 	BundleId *string
@@ -77,6 +66,17 @@ type DescribeWorkspacesInput struct {
 	// specific directory user (see UserName). You cannot combine this parameter with
 	// any other filter.
 	DirectoryId *string
+
+	// The maximum number of items to return.
+	Limit *int32
+
+	// If you received a NextToken from a previous call that was paginated, provide
+	// this token to receive the next set of results.
+	NextToken *string
+
+	// The name of the directory user. You must specify this parameter with
+	// DirectoryId.
+	UserName *string
 
 	// The identifiers of the WorkSpaces. You cannot combine this parameter with any
 	// other filter. Because the CreateWorkspaces () operation is asynchronous, the
@@ -87,13 +87,13 @@ type DescribeWorkspacesInput struct {
 
 type DescribeWorkspacesOutput struct {
 
-	// Information about the WorkSpaces. Because CreateWorkspaces () is an asynchronous
-	// operation, some of the returned information could be incomplete.
-	Workspaces []*types.Workspace
-
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
+	// Information about the WorkSpaces. Because CreateWorkspaces () is an asynchronous
+	// operation, some of the returned information could be incomplete.
+	Workspaces []*types.Workspace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

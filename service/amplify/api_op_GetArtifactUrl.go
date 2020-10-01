@@ -66,15 +66,15 @@ type GetArtifactUrlInput struct {
 // Returns the result structure for the get artifact request.
 type GetArtifactUrlOutput struct {
 
-	// The presigned URL for the artifact.
-	//
-	// This member is required.
-	ArtifactUrl *string
-
 	// The unique ID for an artifact.
 	//
 	// This member is required.
 	ArtifactId *string
+
+	// The presigned URL for the artifact.
+	//
+	// This member is required.
+	ArtifactUrl *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

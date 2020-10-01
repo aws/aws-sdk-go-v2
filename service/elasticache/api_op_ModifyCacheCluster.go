@@ -60,20 +60,19 @@ func (c *Client) ModifyCacheCluster(ctx context.Context, params *ModifyCacheClus
 // Represents the input of a ModifyCacheCluster operation.
 type ModifyCacheClusterInput struct {
 
-	// The upgraded version of the cache engine to be run on the cache nodes.  <p>
-	// <b>Important:</b> You can upgrade to a newer engine version (see <a
-	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
-	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
-	// version. If you want to use an earlier engine version, you must delete the
-	// existing cluster and create it anew with the earlier engine version. </p>
-	EngineVersion *string
+	// The cluster identifier. This value is stored as a lowercase string.
+	//
+	// This member is required.
+	CacheClusterId *string
 
-	// A list of cache security group names to authorize on this cluster. This change
-	// is asynchronously applied as soon as possible. You can use this parameter only
-	// with clusters that are created outside of an Amazon Virtual Private Cloud
-	// (Amazon VPC). Constraints: Must contain no more than 255 alphanumeric
-	// characters. Must not be "Default".
-	CacheSecurityGroupNames []*string
+	// Specifies whether the new nodes in this Memcached cluster are all created in a
+	// single Availability Zone or created across multiple Availability Zones. Valid
+	// values: single-az | cross-az. This option is only supported for Memcached
+	// clusters. You cannot specify single-az if the Memcached cluster already has
+	// cache nodes in different Availability Zones. If cross-az is specified, existing
+	// Memcached nodes remain in their current Availability Zone. Only newly created
+	// nodes are located in different Availability Zones.
+	AZMode types.AZMode
 
 	// If true, this parameter causes the modifications in this request and any pending
 	// modifications to be applied, asynchronously and as soon as possible, regardless
@@ -84,36 +83,70 @@ type ModifyCacheClusterInput struct {
 	// newer modification. Valid values: true | false Default: false
 	ApplyImmediately *bool
 
+	// Reserved parameter. The password used to access a password protected server.
+	// This parameter must be specified with the auth-token-update parameter. Password
+	// constraints:
+	//
+	//     * Must be only printable ASCII characters
+	//
+	//     * Must be at
+	// least 16 characters and no more than 128 characters in length
+	//
+	//     * Cannot
+	// contain any of the following characters: '/', '"', or '@', '%'
+	//
+	//     For more
+	// information, see AUTH password at <a
+	// href="http://redis.io/commands/AUTH">AUTH</a>.</p>
+	AuthToken *string
+
+	// Specifies the strategy to use to update the AUTH token. This parameter must be
+	// specified with the auth-token parameter. Possible values:
+	//
+	//     * Rotate
+	//
+	//     *
+	// Set
+	//
+	// For more information, see Authenticating Users with Redis AUTH
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
+	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
+
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool
+
+	// A list of cache node IDs to be removed. A node ID is a numeric identifier (0001,
+	// 0002, etc.). This parameter is only valid when NumCacheNodes is less than the
+	// existing number of cache nodes. The number of cache node IDs supplied in this
+	// parameter must match the difference between the existing number of cache nodes
+	// in the cluster or pending cache nodes, whichever is greater, and the value of
+	// NumCacheNodes in the request. For example: If you have 3 active cache nodes, 7
+	// pending cache nodes, and the number of cache nodes in this ModifyCacheCluster
+	// call is 5, you must list 2 (7 - 5) cache node IDs to remove.
+	CacheNodeIdsToRemove []*string
+
+	// A valid cache node type that you want to scale this cluster up to.
+	CacheNodeType *string
 
 	// The name of the cache parameter group to apply to this cluster. This change is
 	// asynchronously applied as soon as possible for parameters when the
 	// ApplyImmediately parameter is specified as true for this request.
 	CacheParameterGroupName *string
 
-	// Specifies the weekly time range during which maintenance on the cluster is
-	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:
-	//
-	//     * sun
-	//
-	//     * mon
-	//
-	//     * tue
-	//
-	//     * wed
-	//
-	//     * thu
-	//
-	//     * fri
-	//
-	//
-	// * sat
-	//
-	// Example: sun:23:00-mon:01:30
-	PreferredMaintenanceWindow *string
+	// A list of cache security group names to authorize on this cluster. This change
+	// is asynchronously applied as soon as possible. You can use this parameter only
+	// with clusters that are created outside of an Amazon Virtual Private Cloud
+	// (Amazon VPC). Constraints: Must contain no more than 255 alphanumeric
+	// characters. Must not be "Default".
+	CacheSecurityGroupNames []*string
+
+	// The upgraded version of the cache engine to be run on the cache nodes.  <p>
+	// <b>Important:</b> You can upgrade to a newer engine version (see <a
+	// href="https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SelectEngine.html#VersionManagement">Selecting
+	// a Cache Engine and Version</a>), but you cannot downgrade to an earlier engine
+	// version. If you want to use an earlier engine version, you must delete the
+	// existing cluster and create it anew with the earlier engine version. </p>
+	EngineVersion *string
 
 	// The list of Availability Zones where the new Memcached cache nodes are created.
 	// This parameter is only valid when NumCacheNodes in the request is greater than
@@ -166,10 +199,9 @@ type ModifyCacheClusterInput struct {
 	// are sent. The Amazon SNS topic owner must be same as the cluster owner.
 	NotificationTopicArn *string
 
-	// Specifies the VPC Security Groups associated with the cluster. This parameter
-	// can be used only with clusters that are created in an Amazon Virtual Private
-	// Cloud (Amazon VPC).
-	SecurityGroupIds []*string
+	// The status of the Amazon SNS notification topic. Notifications are sent only if
+	// the status is active. Valid values: active | inactive
+	NotificationTopicStatus *string
 
 	// The number of cache nodes that the cluster should have. If the value for
 	// NumCacheNodes is greater than the sum of the number of current cache nodes and
@@ -199,27 +231,33 @@ type ModifyCacheClusterInput struct {
 	// to the number of cache nodes currently in the cluster.</p> </note>
 	NumCacheNodes *int32
 
-	// A list of cache node IDs to be removed. A node ID is a numeric identifier (0001,
-	// 0002, etc.). This parameter is only valid when NumCacheNodes is less than the
-	// existing number of cache nodes. The number of cache node IDs supplied in this
-	// parameter must match the difference between the existing number of cache nodes
-	// in the cluster or pending cache nodes, whichever is greater, and the value of
-	// NumCacheNodes in the request. For example: If you have 3 active cache nodes, 7
-	// pending cache nodes, and the number of cache nodes in this ModifyCacheCluster
-	// call is 5, you must list 2 (7 - 5) cache node IDs to remove.
-	CacheNodeIdsToRemove []*string
-
-	// A valid cache node type that you want to scale this cluster up to.
-	CacheNodeType *string
-
-	// The cluster identifier. This value is stored as a lowercase string.
+	// Specifies the weekly time range during which maintenance on the cluster is
+	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
+	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
+	// for ddd are:
 	//
-	// This member is required.
-	CacheClusterId *string
+	//     * sun
+	//
+	//     * mon
+	//
+	//     * tue
+	//
+	//     * wed
+	//
+	//     * thu
+	//
+	//     * fri
+	//
+	//
+	// * sat
+	//
+	// Example: sun:23:00-mon:01:30
+	PreferredMaintenanceWindow *string
 
-	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your cluster.
-	SnapshotWindow *string
+	// Specifies the VPC Security Groups associated with the cluster. This parameter
+	// can be used only with clusters that are created in an Amazon Virtual Private
+	// Cloud (Amazon VPC).
+	SecurityGroupIds []*string
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
@@ -227,47 +265,9 @@ type ModifyCacheClusterInput struct {
 	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
 	SnapshotRetentionLimit *int32
 
-	// The status of the Amazon SNS notification topic. Notifications are sent only if
-	// the status is active. Valid values: active | inactive
-	NotificationTopicStatus *string
-
-	// Specifies the strategy to use to update the AUTH token. This parameter must be
-	// specified with the auth-token parameter. Possible values:
-	//
-	//     * Rotate
-	//
-	//     *
-	// Set
-	//
-	// For more information, see Authenticating Users with Redis AUTH
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html)
-	AuthTokenUpdateStrategy types.AuthTokenUpdateStrategyType
-
-	// Reserved parameter. The password used to access a password protected server.
-	// This parameter must be specified with the auth-token-update parameter. Password
-	// constraints:
-	//
-	//     * Must be only printable ASCII characters
-	//
-	//     * Must be at
-	// least 16 characters and no more than 128 characters in length
-	//
-	//     * Cannot
-	// contain any of the following characters: '/', '"', or '@', '%'
-	//
-	//     For more
-	// information, see AUTH password at <a
-	// href="http://redis.io/commands/AUTH">AUTH</a>.</p>
-	AuthToken *string
-
-	// Specifies whether the new nodes in this Memcached cluster are all created in a
-	// single Availability Zone or created across multiple Availability Zones. Valid
-	// values: single-az | cross-az. This option is only supported for Memcached
-	// clusters. You cannot specify single-az if the Memcached cluster already has
-	// cache nodes in different Availability Zones. If cross-az is specified, existing
-	// Memcached nodes remain in their current Availability Zone. Only newly created
-	// nodes are located in different Availability Zones.
-	AZMode types.AZMode
+	// The daily time range (in UTC) during which ElastiCache begins taking a daily
+	// snapshot of your cluster.
+	SnapshotWindow *string
 }
 
 type ModifyCacheClusterOutput struct {

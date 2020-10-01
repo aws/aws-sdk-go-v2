@@ -61,6 +61,20 @@ func (c *Client) GetCurrentMetricData(ctx context.Context, params *GetCurrentMet
 
 type GetCurrentMetricDataInput struct {
 
+	// The metrics to retrieve. Specify the name and unit for each metric. The
+	// following metrics are available. For a description of each metric, see Real-time
+	// Metrics Definitions
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
+	// in the Amazon Connect Administrator Guide. AGENTS_AFTER_CONTACT_WORK Unit: COUNT
+	// AGENTS_AVAILABLE Unit: COUNT AGENTS_ERROR Unit: COUNT AGENTS_NON_PRODUCTIVE
+	// Unit: COUNT AGENTS_ON_CALL Unit: COUNT AGENTS_ON_CONTACT Unit: COUNT
+	// AGENTS_ONLINE Unit: COUNT AGENTS_STAFFED Unit: COUNT CONTACTS_IN_QUEUE Unit:
+	// COUNT CONTACTS_SCHEDULED Unit: COUNT OLDEST_CONTACT_AGE Unit: SECONDS
+	// SLOTS_ACTIVE Unit: COUNT SLOTS_AVAILABLE Unit: COUNT
+	//
+	// This member is required.
+	CurrentMetrics []*types.CurrentMetric
+
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
@@ -68,6 +82,11 @@ type GetCurrentMetricDataInput struct {
 	//
 	// This member is required.
 	Filters *types.Filters
+
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
 
 	// The grouping applied to the metrics returned. For example, when grouped by
 	// QUEUE, the metrics returned apply to each queue rather than aggregated for all
@@ -85,28 +104,12 @@ type GetCurrentMetricDataInput struct {
 	// use the token must use the same request parameters as the request that generated
 	// the token.
 	NextToken *string
-
-	// The metrics to retrieve. Specify the name and unit for each metric. The
-	// following metrics are available. For a description of each metric, see Real-time
-	// Metrics Definitions
-	// (https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html)
-	// in the Amazon Connect Administrator Guide. AGENTS_AFTER_CONTACT_WORK Unit: COUNT
-	// AGENTS_AVAILABLE Unit: COUNT AGENTS_ERROR Unit: COUNT AGENTS_NON_PRODUCTIVE
-	// Unit: COUNT AGENTS_ON_CALL Unit: COUNT AGENTS_ON_CONTACT Unit: COUNT
-	// AGENTS_ONLINE Unit: COUNT AGENTS_STAFFED Unit: COUNT CONTACTS_IN_QUEUE Unit:
-	// COUNT CONTACTS_SCHEDULED Unit: COUNT OLDEST_CONTACT_AGE Unit: SECONDS
-	// SLOTS_ACTIVE Unit: COUNT SLOTS_AVAILABLE Unit: COUNT
-	//
-	// This member is required.
-	CurrentMetrics []*types.CurrentMetric
-
-	// The identifier of the Amazon Connect instance.
-	//
-	// This member is required.
-	InstanceId *string
 }
 
 type GetCurrentMetricDataOutput struct {
+
+	// The time at which the metrics were retrieved and cached for pagination.
+	DataSnapshotTime *time.Time
 
 	// Information about the real-time metrics.
 	MetricResults []*types.CurrentMetricResult
@@ -116,9 +119,6 @@ type GetCurrentMetricDataOutput struct {
 	// requests that use the token must use the same request parameters as the request
 	// that generated the token.
 	NextToken *string
-
-	// The time at which the metrics were retrieved and cached for pagination.
-	DataSnapshotTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

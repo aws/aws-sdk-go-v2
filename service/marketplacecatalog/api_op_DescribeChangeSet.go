@@ -71,35 +71,35 @@ type DescribeChangeSetInput struct {
 
 type DescribeChangeSetOutput struct {
 
-	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
-	// transitioned to a terminal state. The change cannot transition to a different
-	// state. Null if the request is not in a terminal state.
-	EndTime *string
-
-	// The optional name provided in the StartChangeSet request. If you do not provide
-	// a name, one is set by default.
-	ChangeSetName *string
-
-	// The status of the change request.
-	Status types.ChangeStatus
-
-	// Required. The unique identifier for the change set referenced in this request.
-	ChangeSetId *string
-
-	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
-	// started.
-	StartTime *string
+	// An array of ChangeSummary objects.
+	ChangeSet []*types.ChangeSummary
 
 	// The ARN associated with the unique identifier for the change set referenced in
 	// this request.
 	ChangeSetArn *string
 
+	// Required. The unique identifier for the change set referenced in this request.
+	ChangeSetId *string
+
+	// The optional name provided in the StartChangeSet request. If you do not provide
+	// a name, one is set by default.
+	ChangeSetName *string
+
+	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
+	// transitioned to a terminal state. The change cannot transition to a different
+	// state. Null if the request is not in a terminal state.
+	EndTime *string
+
 	// Returned if there is a failure on the change set, but that failure is not
 	// related to any of the changes in the request.
 	FailureDescription *string
 
-	// An array of ChangeSummary objects.
-	ChangeSet []*types.ChangeSummary
+	// The date and time, in ISO 8601 format (2018-02-27T13:45:22Z), the request
+	// started.
+	StartTime *string
+
+	// The status of the change request.
+	Status types.ChangeStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

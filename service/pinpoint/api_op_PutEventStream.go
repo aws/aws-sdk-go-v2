@@ -58,18 +58,18 @@ func (c *Client) PutEventStream(ctx context.Context, params *PutEventStreamInput
 
 type PutEventStreamInput struct {
 
+	// The unique identifier for the application. This identifier is displayed as the
+	// Project ID on the Amazon Pinpoint console.
+	//
+	// This member is required.
+	ApplicationId *string
+
 	// Specifies the Amazon Resource Name (ARN) of an event stream to publish events to
 	// and the AWS Identity and Access Management (IAM) role to use when publishing
 	// those events.
 	//
 	// This member is required.
 	WriteEventStream *types.WriteEventStream
-
-	// The unique identifier for the application. This identifier is displayed as the
-	// Project ID on the Amazon Pinpoint console.
-	//
-	// This member is required.
-	ApplicationId *string
 }
 
 type PutEventStreamOutput struct {

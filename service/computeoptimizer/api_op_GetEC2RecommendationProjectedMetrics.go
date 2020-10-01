@@ -64,26 +64,26 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The time stamp of the first projected metrics data point to return.
+	// The Amazon Resource Name (ARN) of the instances for which to return
+	// recommendation projected metrics.
 	//
 	// This member is required.
-	StartTime *time.Time
+	InstanceArn *string
 
 	// The granularity, in seconds, of the projected metrics data points.
 	//
 	// This member is required.
 	Period *int32
 
+	// The time stamp of the first projected metrics data point to return.
+	//
+	// This member is required.
+	StartTime *time.Time
+
 	// The statistic of the projected metrics.
 	//
 	// This member is required.
 	Stat types.MetricStatistic
-
-	// The Amazon Resource Name (ARN) of the instances for which to return
-	// recommendation projected metrics.
-	//
-	// This member is required.
-	InstanceArn *string
 }
 
 type GetEC2RecommendationProjectedMetricsOutput struct {

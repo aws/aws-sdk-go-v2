@@ -57,6 +57,11 @@ func (c *Client) BatchPutMessage(ctx context.Context, params *BatchPutMessageInp
 
 type BatchPutMessageInput struct {
 
+	// The name of the channel where the messages are sent.
+	//
+	// This member is required.
+	ChannelName *string
+
 	// The list of messages to be sent. Each message has format: '{ "messageId":
 	// "string", "payload": "string"}'. Note that the field names of message payloads
 	// (data) that you send to AWS IoT Analytics:
@@ -85,11 +90,6 @@ type BatchPutMessageInput struct {
 	//
 	// This member is required.
 	Messages []*types.Message
-
-	// The name of the channel where the messages are sent.
-	//
-	// This member is required.
-	ChannelName *string
 }
 
 type BatchPutMessageOutput struct {

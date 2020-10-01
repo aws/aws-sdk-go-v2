@@ -61,9 +61,6 @@ type GetFindingsInput struct {
 	// To search for a finding based on its workflow status, use WorkflowStatus.
 	Filters *types.AwsSecurityFindingFilters
 
-	// The finding attributes used to sort the list of returned findings.
-	SortCriteria []*types.SortCriterion
-
 	// The maximum number of findings to return.
 	MaxResults *int32
 
@@ -72,17 +69,20 @@ type GetFindingsInput struct {
 	// operation, to continue listing data, set the value of this parameter to the
 	// value returned from the previous response.
 	NextToken *string
+
+	// The finding attributes used to sort the list of returned findings.
+	SortCriteria []*types.SortCriterion
 }
 
 type GetFindingsOutput struct {
-
-	// The pagination token to use to request the next page of results.
-	NextToken *string
 
 	// The findings that matched the filters specified in the request.
 	//
 	// This member is required.
 	Findings []*types.AwsSecurityFinding
+
+	// The pagination token to use to request the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

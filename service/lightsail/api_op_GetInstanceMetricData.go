@@ -61,61 +61,15 @@ func (c *Client) GetInstanceMetricData(ctx context.Context, params *GetInstanceM
 
 type GetInstanceMetricDataInput struct {
 
-	// The start time of the time period.
-	//
-	// This member is required.
-	StartTime *time.Time
-
-	// The statistic for the metric. The following statistics are available:
-	//
-	//     *
-	// Minimum - The lowest value observed during the specified period. Use this value
-	// to determine low volumes of activity for your application.
-	//
-	//     * Maximum - The
-	// highest value observed during the specified period. Use this value to determine
-	// high volumes of activity for your application.
-	//
-	//     * Sum - All values submitted
-	// for the matching metric added together. You can use this statistic to determine
-	// the total volume of a metric.
-	//
-	//     * Average - The value of Sum / SampleCount
-	// during the specified period. By comparing this statistic with the Minimum and
-	// Maximum values, you can determine the full scope of a metric and how close the
-	// average use is to the Minimum and Maximum values. This comparison helps you to
-	// know when to increase or decrease your resources.
-	//
-	//     * SampleCount - The
-	// count, or number, of data points used for the statistical calculation.
-	//
-	// This member is required.
-	Statistics []types.MetricStatistic
-
 	// The end time of the time period.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The unit for the metric data request. Valid units depend on the metric data
-	// being requested. For the valid units to specify with each available metric, see
-	// the metricName parameter.
-	//
-	// This member is required.
-	Unit types.MetricUnit
-
 	// The name of the instance for which you want to get metrics data.
 	//
 	// This member is required.
 	InstanceName *string
-
-	// The granularity, in seconds, of the returned data points. The StatusCheckFailed,
-	// StatusCheckFailed_Instance, and StatusCheckFailed_System instance metric data is
-	// available in 1-minute (60 seconds) granularity. All other instance metric data
-	// is available in 5-minute (300 seconds) granularity.
-	//
-	// This member is required.
-	Period *int32
 
 	// The metric for which you want to return information. Valid instance metric names
 	// are listed below, along with the most useful statistics to include in your
@@ -188,6 +142,52 @@ type GetInstanceMetricDataInput struct {
 	//
 	// This member is required.
 	MetricName types.InstanceMetricName
+
+	// The granularity, in seconds, of the returned data points. The StatusCheckFailed,
+	// StatusCheckFailed_Instance, and StatusCheckFailed_System instance metric data is
+	// available in 1-minute (60 seconds) granularity. All other instance metric data
+	// is available in 5-minute (300 seconds) granularity.
+	//
+	// This member is required.
+	Period *int32
+
+	// The start time of the time period.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The statistic for the metric. The following statistics are available:
+	//
+	//     *
+	// Minimum - The lowest value observed during the specified period. Use this value
+	// to determine low volumes of activity for your application.
+	//
+	//     * Maximum - The
+	// highest value observed during the specified period. Use this value to determine
+	// high volumes of activity for your application.
+	//
+	//     * Sum - All values submitted
+	// for the matching metric added together. You can use this statistic to determine
+	// the total volume of a metric.
+	//
+	//     * Average - The value of Sum / SampleCount
+	// during the specified period. By comparing this statistic with the Minimum and
+	// Maximum values, you can determine the full scope of a metric and how close the
+	// average use is to the Minimum and Maximum values. This comparison helps you to
+	// know when to increase or decrease your resources.
+	//
+	//     * SampleCount - The
+	// count, or number, of data points used for the statistical calculation.
+	//
+	// This member is required.
+	Statistics []types.MetricStatistic
+
+	// The unit for the metric data request. Valid units depend on the metric data
+	// being requested. For the valid units to specify with each available metric, see
+	// the metricName parameter.
+	//
+	// This member is required.
+	Unit types.MetricUnit
 }
 
 type GetInstanceMetricDataOutput struct {

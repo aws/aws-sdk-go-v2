@@ -63,6 +63,12 @@ func (c *Client) GetUsageStatistics(ctx context.Context, params *GetUsageStatist
 
 type GetUsageStatisticsInput struct {
 
+	// The ID of the detector that specifies the GuardDuty service whose usage
+	// statistics you want to retrieve.
+	//
+	// This member is required.
+	DetectorId *string
+
 	// Represents the criteria used for querying usage.
 	//
 	// This member is required.
@@ -73,16 +79,6 @@ type GetUsageStatisticsInput struct {
 	// This member is required.
 	UsageStatisticType types.UsageStatisticType
 
-	// The ID of the detector that specifies the GuardDuty service whose usage
-	// statistics you want to retrieve.
-	//
-	// This member is required.
-	DetectorId *string
-
-	// The currency unit you would like to view your usage statistics in. Current valid
-	// values are USD.
-	Unit *string
-
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
@@ -91,6 +87,10 @@ type GetUsageStatisticsInput struct {
 	// subsequent calls, use the NextToken value returned from the previous request to
 	// continue listing results after the first page.
 	NextToken *string
+
+	// The currency unit you would like to view your usage statistics in. Current valid
+	// values are USD.
+	Unit *string
 }
 
 type GetUsageStatisticsOutput struct {

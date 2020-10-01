@@ -60,11 +60,6 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 //
 type RemoveTagsFromResourceInput struct {
 
-	// The tag key (name) of the tag to be removed.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The Amazon RDS resource that the tags are removed from. This value is an Amazon
 	// Resource Name (ARN). For information about creating an ARN, see  Constructing an
 	// ARN for Amazon RDS
@@ -73,6 +68,11 @@ type RemoveTagsFromResourceInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	// The tag key (name) of the tag to be removed.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type RemoveTagsFromResourceOutput struct {

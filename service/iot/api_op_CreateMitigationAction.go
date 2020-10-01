@@ -59,33 +59,33 @@ func (c *Client) CreateMitigationAction(ctx context.Context, params *CreateMitig
 
 type CreateMitigationActionInput struct {
 
-	// Metadata that can be used to manage the mitigation action.
-	Tags []*types.Tag
-
 	// A friendly name for the action. Choose a friendly name that accurately describes
 	// the action (for example, EnableLoggingAction).
 	//
 	// This member is required.
 	ActionName *string
 
+	// Defines the type of action and the parameters for that action.
+	//
+	// This member is required.
+	ActionParams *types.MitigationActionParams
+
 	// The ARN of the IAM role that is used to apply the mitigation action.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Defines the type of action and the parameters for that action.
-	//
-	// This member is required.
-	ActionParams *types.MitigationActionParams
+	// Metadata that can be used to manage the mitigation action.
+	Tags []*types.Tag
 }
 
 type CreateMitigationActionOutput struct {
 
-	// A unique identifier for the new mitigation action.
-	ActionId *string
-
 	// The ARN for the new mitigation action.
 	ActionArn *string
+
+	// A unique identifier for the new mitigation action.
+	ActionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

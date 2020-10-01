@@ -89,15 +89,15 @@ type CreateRuleInput struct {
 	// This member is required.
 	Conditions []*types.RuleCondition
 
-	// The rule priority. A listener can't have multiple rules with the same priority.
-	//
-	// This member is required.
-	Priority *int32
-
 	// The Amazon Resource Name (ARN) of the listener.
 	//
 	// This member is required.
 	ListenerArn *string
+
+	// The rule priority. A listener can't have multiple rules with the same priority.
+	//
+	// This member is required.
+	Priority *int32
 }
 
 type CreateRuleOutput struct {

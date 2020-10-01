@@ -57,91 +57,6 @@ func (c *Client) PutParameter(ctx context.Context, params *PutParameterInput, op
 
 type PutParameterInput struct {
 
-	// The type of parameter that you want to add to the system. SecureString is not
-	// currently supported for AWS CloudFormation templates or in the China Regions.
-	// Items in a StringList must be separated by a comma (,). You can't use other
-	// punctuation or special character to escape items in the list. If you have a
-	// parameter value that requires a comma, then use the String data type. Specifying
-	// a parameter type is not required when updating a parameter. You must specify a
-	// parameter type when creating a parameter.
-	Type types.ParameterType
-
-	// Optional metadata that you assign to a resource. Tags enable you to categorize a
-	// resource in different ways, such as by purpose, owner, or environment. For
-	// example, you might want to tag a Systems Manager parameter to identify the type
-	// of resource to which it applies, the environment, or the type of configuration
-	// data referenced by the parameter. In this case, you could specify the following
-	// key name/value pairs:  <ul> <li> <p> <code>Key=Resource,Value=S3bucket</code>
-	// </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p>
-	// <code>Key=ParameterType,Value=LicenseKey</code> </p> </li> </ul> <note> <p>To
-	// add tags to an existing Systems Manager parameter, use the
-	// <a>AddTagsToResource</a> action.</p> </note>
-	Tags []*types.Tag
-
-	// One or more policies to apply to a parameter. This action takes a JSON array.
-	// Parameter Store supports the following policy types:  <p>Expiration: This policy
-	// deletes the parameter after it expires. When you create the policy,  you specify
-	// the expiration date. You can update the expiration date and time by updating the
-	// policy. Updating the parameter does not affect the expiration date and time.
-	// When the expiration time is reached, Parameter Store deletes the parameter.
-	// ExpirationNotification: This policy triggers an event in Amazon CloudWatch
-	// Events that notifies you about the expiration. By using this policy, you can
-	// receive notification before or after the expiration time is reached, in units of
-	// days or hours. NoChangeNotification: This policy triggers a CloudWatch event if
-	// a parameter has not been modified for a specified period of time. This policy
-	// type is useful when, for example, a secret needs to be changed within a period
-	// of time, but it has not been changed.  <p>All existing policies are preserved
-	// until you send new policies or an empty policy. For more  information about
-	// parameter policies, see Assigning parameter policies
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
-	Policies *string
-
-	// Overwrite an existing parameter. If not specified, will default to "false".
-	Overwrite *bool
-
-	// A regular expression used to validate the parameter value. For example, for
-	// String types with values restricted to numbers, you can specify the following:
-	// AllowedPattern=^\d+$
-	AllowedPattern *string
-
-	// The parameter value that you want to add to the system. Standard parameters have
-	// a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
-	//
-	// This member is required.
-	Value *string
-
-	// The KMS Key ID that you want to use to encrypt a parameter. Either the default
-	// AWS Key Management Service (AWS KMS) key automatically assigned to your AWS
-	// account or a custom key. Required for parameters that use the SecureString data
-	// type. If you don't specify a key ID, the system uses the default key associated
-	// with your AWS account.
-	//
-	//     * To use your default AWS KMS key, choose the
-	// SecureString data type, and do not specify the Key ID when you create the
-	// parameter. The system automatically populates Key ID with your default KMS
-	// key.
-	//
-	//     * To use a custom KMS key, choose the SecureString data type with the
-	// Key ID parameter.
-	KeyId *string
-
-	// The data type for a String parameter. Supported data types include plain text
-	// and Amazon Machine Image IDs. The following data type values are supported.
-	//
-	//
-	// * text
-	//
-	//     * aws:ec2:image
-	//
-	// When you create a String parameter and specify
-	// aws:ec2:image, Systems Manager validates the parameter value is in the required
-	// format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available
-	// in your AWS account. For more information, see Native parameter support for
-	// Amazon Machine Image IDs
-	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
-	// in the AWS Systems Manager User Guide.
-	DataType *string
-
 	// The fully qualified name of the parameter that you want to add to the system.
 	// The fully qualified name includes the complete hierarchy of the parameter path
 	// and name. For parameters in a hierarchy, you must include a leading forward
@@ -178,6 +93,86 @@ type PutParameterInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The parameter value that you want to add to the system. Standard parameters have
+	// a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
+	//
+	// This member is required.
+	Value *string
+
+	// A regular expression used to validate the parameter value. For example, for
+	// String types with values restricted to numbers, you can specify the following:
+	// AllowedPattern=^\d+$
+	AllowedPattern *string
+
+	// The data type for a String parameter. Supported data types include plain text
+	// and Amazon Machine Image IDs. The following data type values are supported.
+	//
+	//
+	// * text
+	//
+	//     * aws:ec2:image
+	//
+	// When you create a String parameter and specify
+	// aws:ec2:image, Systems Manager validates the parameter value is in the required
+	// format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available
+	// in your AWS account. For more information, see Native parameter support for
+	// Amazon Machine Image IDs
+	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
+	// in the AWS Systems Manager User Guide.
+	DataType *string
+
+	// Information about the parameter that you want to add to the system. Optional but
+	// recommended. Do not enter personally identifiable information in this field.
+	Description *string
+
+	// The KMS Key ID that you want to use to encrypt a parameter. Either the default
+	// AWS Key Management Service (AWS KMS) key automatically assigned to your AWS
+	// account or a custom key. Required for parameters that use the SecureString data
+	// type. If you don't specify a key ID, the system uses the default key associated
+	// with your AWS account.
+	//
+	//     * To use your default AWS KMS key, choose the
+	// SecureString data type, and do not specify the Key ID when you create the
+	// parameter. The system automatically populates Key ID with your default KMS
+	// key.
+	//
+	//     * To use a custom KMS key, choose the SecureString data type with the
+	// Key ID parameter.
+	KeyId *string
+
+	// Overwrite an existing parameter. If not specified, will default to "false".
+	Overwrite *bool
+
+	// One or more policies to apply to a parameter. This action takes a JSON array.
+	// Parameter Store supports the following policy types:  <p>Expiration: This policy
+	// deletes the parameter after it expires. When you create the policy,  you specify
+	// the expiration date. You can update the expiration date and time by updating the
+	// policy. Updating the parameter does not affect the expiration date and time.
+	// When the expiration time is reached, Parameter Store deletes the parameter.
+	// ExpirationNotification: This policy triggers an event in Amazon CloudWatch
+	// Events that notifies you about the expiration. By using this policy, you can
+	// receive notification before or after the expiration time is reached, in units of
+	// days or hours. NoChangeNotification: This policy triggers a CloudWatch event if
+	// a parameter has not been modified for a specified period of time. This policy
+	// type is useful when, for example, a secret needs to be changed within a period
+	// of time, but it has not been changed.  <p>All existing policies are preserved
+	// until you send new policies or an empty policy. For more  information about
+	// parameter policies, see Assigning parameter policies
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html).
+	Policies *string
+
+	// Optional metadata that you assign to a resource. Tags enable you to categorize a
+	// resource in different ways, such as by purpose, owner, or environment. For
+	// example, you might want to tag a Systems Manager parameter to identify the type
+	// of resource to which it applies, the environment, or the type of configuration
+	// data referenced by the parameter. In this case, you could specify the following
+	// key name/value pairs:  <ul> <li> <p> <code>Key=Resource,Value=S3bucket</code>
+	// </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p>
+	// <code>Key=ParameterType,Value=LicenseKey</code> </p> </li> </ul> <note> <p>To
+	// add tags to an existing Systems Manager parameter, use the
+	// <a>AddTagsToResource</a> action.</p> </note>
+	Tags []*types.Tag
 
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
 	// tier and an advanced tier for parameters. Standard parameters have a content
@@ -237,9 +232,14 @@ type PutParameterInput struct {
 	// in the AWS Systems Manager User Guide.
 	Tier types.ParameterTier
 
-	// Information about the parameter that you want to add to the system. Optional but
-	// recommended. Do not enter personally identifiable information in this field.
-	Description *string
+	// The type of parameter that you want to add to the system. SecureString is not
+	// currently supported for AWS CloudFormation templates or in the China Regions.
+	// Items in a StringList must be separated by a comma (,). You can't use other
+	// punctuation or special character to escape items in the list. If you have a
+	// parameter value that requires a comma, then use the String data type. Specifying
+	// a parameter type is not required when updating a parameter. You must specify a
+	// parameter type when creating a parameter.
+	Type types.ParameterType
 }
 
 type PutParameterOutput struct {

@@ -93,6 +93,11 @@ func (c *Client) UpdateShardCount(ctx context.Context, params *UpdateShardCountI
 
 type UpdateShardCountInput struct {
 
+	// The scaling type. Uniform scaling creates shards of equal size.
+	//
+	// This member is required.
+	ScalingType types.ScalingType
+
 	// The name of the stream.
 	//
 	// This member is required.
@@ -102,11 +107,6 @@ type UpdateShardCountInput struct {
 	//
 	// This member is required.
 	TargetShardCount *int32
-
-	// The scaling type. Uniform scaling creates shards of equal size.
-	//
-	// This member is required.
-	ScalingType types.ScalingType
 }
 
 type UpdateShardCountOutput struct {

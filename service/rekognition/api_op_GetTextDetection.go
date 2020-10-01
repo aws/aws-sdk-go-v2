@@ -94,28 +94,28 @@ type GetTextDetectionInput struct {
 
 type GetTextDetectionOutput struct {
 
+	// Current status of the text detection job.
+	JobStatus types.VideoJobStatus
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of text.
 	NextToken *string
 
-	// Version number of the text detection model that was used to detect text.
-	TextModelVersion *string
-
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string
-
-	// Information about a video that Amazon Rekognition analyzed. Videometadata is
-	// returned in every page of paginated responses from a Amazon Rekognition video
-	// operation.
-	VideoMetadata *types.VideoMetadata
-
-	// Current status of the text detection job.
-	JobStatus types.VideoJobStatus
 
 	// An array of text detected in the video. Each element contains the detected text,
 	// the time in milliseconds from the start of the video that the text was detected,
 	// and where it was detected on the screen.
 	TextDetections []*types.TextDetectionResult
+
+	// Version number of the text detection model that was used to detect text.
+	TextModelVersion *string
+
+	// Information about a video that Amazon Rekognition analyzed. Videometadata is
+	// returned in every page of paginated responses from a Amazon Rekognition video
+	// operation.
+	VideoMetadata *types.VideoMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

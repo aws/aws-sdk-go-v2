@@ -56,11 +56,6 @@ func (c *Client) UpdateDashboardPublishedVersion(ctx context.Context, params *Up
 
 type UpdateDashboardPublishedVersionInput struct {
 
-	// The version number of the dashboard.
-	//
-	// This member is required.
-	VersionNumber *int64
-
 	// The ID of the AWS account that contains the dashboard that you're updating.
 	//
 	// This member is required.
@@ -70,6 +65,11 @@ type UpdateDashboardPublishedVersionInput struct {
 	//
 	// This member is required.
 	DashboardId *string
+
+	// The version number of the dashboard.
+	//
+	// This member is required.
+	VersionNumber *int64
 }
 
 type UpdateDashboardPublishedVersionOutput struct {

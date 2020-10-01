@@ -71,11 +71,6 @@ func (c *Client) AddTagsToCertificate(ctx context.Context, params *AddTagsToCert
 
 type AddTagsToCertificateInput struct {
 
-	// The key-value pair that defines the tag. The tag value is optional.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// String that contains the ARN of the ACM certificate to which the tag is to be
 	// applied. This must be of the form:  <p>
 	// <code>arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012</code>
@@ -85,6 +80,11 @@ type AddTagsToCertificateInput struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	// The key-value pair that defines the tag. The tag value is optional.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type AddTagsToCertificateOutput struct {

@@ -57,15 +57,10 @@ func (c *Client) CreateCloudFormationChangeSet(ctx context.Context, params *Crea
 
 type CreateCloudFormationChangeSetInput struct {
 
-	// The UUID returned by CreateCloudFormationTemplate.Pattern:
-	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
-	TemplateId *string
-
-	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
-	// API.
-	ChangeSetName *string
+	// The Amazon Resource Name (ARN) of the application.
+	//
+	// This member is required.
+	ApplicationId *string
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
@@ -74,24 +69,6 @@ type CreateCloudFormationChangeSetInput struct {
 	//
 	// This member is required.
 	StackName *string
-
-	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
-	// API.
-	Tags []*types.Tag
-
-	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
-	// API.
-	RollbackConfiguration *types.RollbackConfiguration
-
-	// This property corresponds to the parameter of the same name for the AWS
-	// CloudFormation CreateChangeSet
-	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
-	// API.
-	ResourceTypes []*string
 
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
@@ -130,18 +107,11 @@ type CreateCloudFormationChangeSetInput struct {
 	// application that requires capabilities, the call will fail.
 	Capabilities []*string
 
-	// A list of parameter values for the parameters of the application.
-	ParameterOverrides []*types.ParameterValue
-
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
-	Description *string
-
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
-	SemanticVersion *string
+	ChangeSetName *string
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
@@ -149,33 +119,63 @@ type CreateCloudFormationChangeSetInput struct {
 	// API.
 	ClientToken *string
 
-	// The Amazon Resource Name (ARN) of the application.
-	//
-	// This member is required.
-	ApplicationId *string
+	// This property corresponds to the parameter of the same name for the AWS
+	// CloudFormation CreateChangeSet
+	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// API.
+	Description *string
 
 	// This property corresponds to the parameter of the same name for the AWS
 	// CloudFormation CreateChangeSet
 	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
 	// API.
 	NotificationArns []*string
+
+	// A list of parameter values for the parameters of the application.
+	ParameterOverrides []*types.ParameterValue
+
+	// This property corresponds to the parameter of the same name for the AWS
+	// CloudFormation CreateChangeSet
+	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// API.
+	ResourceTypes []*string
+
+	// This property corresponds to the parameter of the same name for the AWS
+	// CloudFormation CreateChangeSet
+	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// API.
+	RollbackConfiguration *types.RollbackConfiguration
+
+	// The semantic version of the application: https://semver.org/
+	// (https://semver.org/)
+	SemanticVersion *string
+
+	// This property corresponds to the parameter of the same name for the AWS
+	// CloudFormation CreateChangeSet
+	// (https://docs.aws.amazon.com/goto/WebAPI/cloudformation-2010-05-15/CreateChangeSet)
+	// API.
+	Tags []*types.Tag
+
+	// The UUID returned by CreateCloudFormationTemplate.Pattern:
+	// [0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}
+	TemplateId *string
 }
 
 type CreateCloudFormationChangeSetOutput struct {
+
+	// The application Amazon Resource Name (ARN).
+	ApplicationId *string
 
 	// The Amazon Resource Name (ARN) of the change set.Length constraints: Minimum
 	// length of 1.Pattern: ARN:[-a-zA-Z0-9:/]*
 	ChangeSetId *string
 
-	// The application Amazon Resource Name (ARN).
-	ApplicationId *string
-
-	// The unique ID of the stack.
-	StackId *string
-
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string
+
+	// The unique ID of the stack.
+	StackId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

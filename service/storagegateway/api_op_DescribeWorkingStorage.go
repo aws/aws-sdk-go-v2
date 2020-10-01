@@ -74,10 +74,6 @@ type DescribeWorkingStorageInput struct {
 // A JSON object containing the following fields:
 type DescribeWorkingStorageOutput struct {
 
-	// The total working storage in bytes allocated for the gateway. If no working
-	// storage is configured for the gateway, this field returns 0.
-	WorkingStorageAllocatedInBytes *int64
-
 	// An array of the gateway's local disk IDs that are configured as working storage.
 	// Each local disk ID is specified as a string (minimum length of 1 and maximum
 	// length of 300). If no local disks are configured as working storage, then the
@@ -87,6 +83,10 @@ type DescribeWorkingStorageOutput struct {
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
+
+	// The total working storage in bytes allocated for the gateway. If no working
+	// storage is configured for the gateway, this field returns 0.
+	WorkingStorageAllocatedInBytes *int64
 
 	// The total working storage in bytes in use by the gateway. If no working storage
 	// is configured for the gateway, this field returns 0.

@@ -65,12 +65,6 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 
 type CreateRelationalDatabaseFromSnapshotInput struct {
 
-	// Specifies the accessibility options for your new database. A value of true
-	// specifies a database that is available to resources outside of your Lightsail
-	// account. A value of false specifies a database that is available only to your
-	// Lightsail resources in the same region as your database.
-	PubliclyAccessible *bool
-
 	// The name to use for your new database. Constraints:
 	//
 	//     * Must contain from 2
@@ -82,8 +76,17 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	// This member is required.
 	RelationalDatabaseName *string
 
-	// The name of the database snapshot from which to create your new database.
-	RelationalDatabaseSnapshotName *string
+	// The Availability Zone in which to create your new database. Use the us-east-2a
+	// case-sensitive format. You can get a list of Availability Zones by using the get
+	// regions operation. Be sure to add the include relational database Availability
+	// Zones parameter to your request.
+	AvailabilityZone *string
+
+	// Specifies the accessibility options for your new database. A value of true
+	// specifies a database that is available to resources outside of your Lightsail
+	// account. A value of false specifies a database that is available only to your
+	// Lightsail resources in the same region as your database.
+	PubliclyAccessible *bool
 
 	// The bundle ID for your new database. A bundle describes the performance
 	// specifications for your database. You can get a list of database bundle IDs by
@@ -91,6 +94,9 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	// database from a snapshot, you cannot choose a bundle that is smaller than the
 	// bundle of the source database.
 	RelationalDatabaseBundleId *string
+
+	// The name of the database snapshot from which to create your new database.
+	RelationalDatabaseSnapshotName *string
 
 	// The date and time to restore your database from. Constraints:
 	//
@@ -108,18 +114,12 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	// you input 1538424000 as the restore time.
 	RestoreTime *time.Time
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
-	Tags []*types.Tag
-
 	// The name of the source database.
 	SourceRelationalDatabaseName *string
 
-	// The Availability Zone in which to create your new database. Use the us-east-2a
-	// case-sensitive format. You can get a list of Availability Zones by using the get
-	// regions operation. Be sure to add the include relational database Availability
-	// Zones parameter to your request.
-	AvailabilityZone *string
+	// The tag keys and optional values to add to the resource during create. Use the
+	// TagResource action to tag a resource after it's created.
+	Tags []*types.Tag
 
 	// Specifies whether your database is restored from the latest backup time. A value
 	// of true restores from the latest backup time. Default: false Constraints: Cannot

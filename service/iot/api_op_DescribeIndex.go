@@ -65,11 +65,11 @@ type DescribeIndexInput struct {
 
 type DescribeIndexOutput struct {
 
-	// The index status.
-	IndexStatus types.IndexStatus
-
 	// The index name.
 	IndexName *string
+
+	// The index status.
+	IndexStatus types.IndexStatus
 
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:

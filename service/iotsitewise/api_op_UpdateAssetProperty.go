@@ -64,6 +64,16 @@ func (c *Client) UpdateAssetProperty(ctx context.Context, params *UpdateAssetPro
 
 type UpdateAssetPropertyInput struct {
 
+	// The ID of the asset to be updated.
+	//
+	// This member is required.
+	AssetId *string
+
+	// The ID of the asset property to be updated.
+	//
+	// This member is required.
+	PropertyId *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
@@ -76,16 +86,6 @@ type UpdateAssetPropertyInput struct {
 	// in the AWS IoT SiteWise User Guide. If you omit this parameter, the alias is
 	// removed from the property.
 	PropertyAlias *string
-
-	// The ID of the asset property to be updated.
-	//
-	// This member is required.
-	PropertyId *string
-
-	// The ID of the asset to be updated.
-	//
-	// This member is required.
-	AssetId *string
 
 	// The MQTT notification state (enabled or disabled) for this asset property. When
 	// the notification state is enabled, AWS IoT SiteWise publishes property value

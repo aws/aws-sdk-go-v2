@@ -57,17 +57,17 @@ func (c *Client) GetDocument(ctx context.Context, params *GetDocumentInput, optF
 
 type GetDocumentInput struct {
 
+	// The name of the Systems Manager document.
+	//
+	// This member is required.
+	Name *string
+
 	// Returns the document in the specified format. The document format can be either
 	// JSON or YAML. JSON is the default format.
 	DocumentFormat types.DocumentFormat
 
 	// The document version for which you want information.
 	DocumentVersion *string
-
-	// The name of the Systems Manager document.
-	//
-	// This member is required.
-	Name *string
 
 	// An optional field specifying the version of the artifact associated with the
 	// document. For example, "Release 12, Update 6". This value is unique across all
@@ -77,31 +77,33 @@ type GetDocumentInput struct {
 
 type GetDocumentOutput struct {
 
-	// The name of the Systems Manager document.
-	Name *string
+	// A description of the document attachments, including names, locations, sizes,
+	// and so on.
+	AttachmentsContent []*types.AttachmentContent
 
-	// The document version.
-	DocumentVersion *string
+	// The contents of the Systems Manager document.
+	Content *string
+
+	// The document format, either JSON or YAML.
+	DocumentFormat types.DocumentFormat
 
 	// The document type.
 	DocumentType types.DocumentType
 
-	// The contents of the Systems Manager document.
-	Content *string
+	// The document version.
+	DocumentVersion *string
+
+	// The name of the Systems Manager document.
+	Name *string
 
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
 	Requires []*types.DocumentRequires
 
-	// A description of the document attachments, including names, locations, sizes,
-	// and so on.
-	AttachmentsContent []*types.AttachmentContent
-
-	// The version of the artifact associated with the document. For example, "Release
-	// 12, Update 6". This value is unique across all versions of a document, and
-	// cannot be changed.
-	VersionName *string
+	// The status of the Systems Manager document, such as Creating, Active, Updating,
+	// Failed, and Deleting.
+	Status types.DocumentStatus
 
 	// A message returned by AWS Systems Manager that explains the Status value. For
 	// example, a Failed status might be explained by the StatusInformation message,
@@ -109,12 +111,10 @@ type GetDocumentOutput struct {
 	// correct."
 	StatusInformation *string
 
-	// The document format, either JSON or YAML.
-	DocumentFormat types.DocumentFormat
-
-	// The status of the Systems Manager document, such as Creating, Active, Updating,
-	// Failed, and Deleting.
-	Status types.DocumentStatus
+	// The version of the artifact associated with the document. For example, "Release
+	// 12, Update 6". This value is unique across all versions of a document, and
+	// cannot be changed.
+	VersionName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

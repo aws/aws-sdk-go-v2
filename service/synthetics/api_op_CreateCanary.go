@@ -73,60 +73,18 @@ func (c *Client) CreateCanary(ctx context.Context, params *CreateCanaryInput, op
 
 type CreateCanaryInput struct {
 
-	// If this canary is to test an endpoint in a VPC, this structure contains
-	// information about the subnet and security groups of the VPC endpoint. For more
-	// information, see  Running a Canary in a VPC
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html).
-	VpcConfig *types.VpcConfigInput
-
 	// The location in Amazon S3 where Synthetics stores artifacts from the test runs
 	// of this canary. Artifacts include the log file, screenshots, and HAR files.
 	//
 	// This member is required.
 	ArtifactS3Location *string
 
-	// The number of days to retain data about successful runs of this canary. If you
-	// omit this field, the default of 31 days is used. The valid range is 1 to 455
-	// days.
-	SuccessRetentionPeriodInDays *int32
-
-	// A structure that contains the configuration for individual canary runs, such as
-	// timeout value.
-	RunConfig *types.CanaryRunConfigInput
-
-	// The number of days to retain data about failed runs of this canary. If you omit
-	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
-	FailureRetentionPeriodInDays *int32
-
-	// A structure that contains information about how often the canary is to run and
-	// when these test runs are to stop.
+	// A structure that includes the entry point from which the canary should start
+	// running your script. If the script is stored in an S3 bucket, the bucket name,
+	// key, and version are also included.
 	//
 	// This member is required.
-	Schedule *types.CanaryScheduleInput
-
-	// Specifies the runtime version to use for the canary. Currently, the only valid
-	// value is syn-1.0. For more information about runtime versions, see  Canary
-	// Runtime Versions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
-	//
-	// This member is required.
-	RuntimeVersion *string
-
-	// The name for this canary. Be sure to give it a descriptive name that
-	// distinguishes it from other canaries in your account. Do not include secrets or
-	// proprietary information in your canary names. The canary name makes up part of
-	// the canary ARN, and the ARN is included in outbound calls over the internet. For
-	// more information, see Security Considerations for Synthetics Canaries
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html).
-	//
-	// This member is required.
-	Name *string
-
-	// A list of key-value pairs to associate with the canary. You can associate as
-	// many as 50 tags with a canary. Tags can help you organize and categorize your
-	// resources. You can also use them to scope user permissions, by granting a user
-	// permission to access or change only the resources that have certain tag values.
-	Tags map[string]*string
+	Code *types.CanaryCodeInput
 
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust policy.
@@ -152,12 +110,54 @@ type CreateCanaryInput struct {
 	// This member is required.
 	ExecutionRoleArn *string
 
-	// A structure that includes the entry point from which the canary should start
-	// running your script. If the script is stored in an S3 bucket, the bucket name,
-	// key, and version are also included.
+	// The name for this canary. Be sure to give it a descriptive name that
+	// distinguishes it from other canaries in your account. Do not include secrets or
+	// proprietary information in your canary names. The canary name makes up part of
+	// the canary ARN, and the ARN is included in outbound calls over the internet. For
+	// more information, see Security Considerations for Synthetics Canaries
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/servicelens_canaries_security.html).
 	//
 	// This member is required.
-	Code *types.CanaryCodeInput
+	Name *string
+
+	// Specifies the runtime version to use for the canary. Currently, the only valid
+	// value is syn-1.0. For more information about runtime versions, see  Canary
+	// Runtime Versions
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html).
+	//
+	// This member is required.
+	RuntimeVersion *string
+
+	// A structure that contains information about how often the canary is to run and
+	// when these test runs are to stop.
+	//
+	// This member is required.
+	Schedule *types.CanaryScheduleInput
+
+	// The number of days to retain data about failed runs of this canary. If you omit
+	// this field, the default of 31 days is used. The valid range is 1 to 455 days.
+	FailureRetentionPeriodInDays *int32
+
+	// A structure that contains the configuration for individual canary runs, such as
+	// timeout value.
+	RunConfig *types.CanaryRunConfigInput
+
+	// The number of days to retain data about successful runs of this canary. If you
+	// omit this field, the default of 31 days is used. The valid range is 1 to 455
+	// days.
+	SuccessRetentionPeriodInDays *int32
+
+	// A list of key-value pairs to associate with the canary. You can associate as
+	// many as 50 tags with a canary. Tags can help you organize and categorize your
+	// resources. You can also use them to scope user permissions, by granting a user
+	// permission to access or change only the resources that have certain tag values.
+	Tags map[string]*string
+
+	// If this canary is to test an endpoint in a VPC, this structure contains
+	// information about the subnet and security groups of the VPC endpoint. For more
+	// information, see  Running a Canary in a VPC
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html).
+	VpcConfig *types.VpcConfigInput
 }
 
 type CreateCanaryOutput struct {

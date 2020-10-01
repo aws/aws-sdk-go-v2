@@ -62,15 +62,15 @@ type BatchDeletePartitionInput struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table that contains the partitions to be deleted.
-	//
-	// This member is required.
-	TableName *string
-
 	// A list of PartitionInput structures that define the partitions to be deleted.
 	//
 	// This member is required.
 	PartitionsToDelete []*types.PartitionValueList
+
+	// The name of the table that contains the partitions to be deleted.
+	//
+	// This member is required.
+	TableName *string
 
 	// The ID of the Data Catalog where the partition to be deleted resides. If none is
 	// provided, the AWS account ID is used by default.

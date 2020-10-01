@@ -121,15 +121,15 @@ type PutJobTaggingInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The set of tags to associate with the S3 Batch Operations job.
-	//
-	// This member is required.
-	Tags []*types.S3Tag
-
 	// The ID for the S3 Batch Operations job whose tags you want to replace.
 	//
 	// This member is required.
 	JobId *string
+
+	// The set of tags to associate with the S3 Batch Operations job.
+	//
+	// This member is required.
+	Tags []*types.S3Tag
 }
 
 type PutJobTaggingOutput struct {

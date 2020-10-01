@@ -59,11 +59,8 @@ func (c *Client) DescribeCacheSecurityGroups(ctx context.Context, params *Descri
 // Represents the input of a DescribeCacheSecurityGroups operation.
 type DescribeCacheSecurityGroupsInput struct {
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved.  <p>Default: 100</p>
-	// <p>Constraints: minimum 20; maximum 100.</p>
-	MaxRecords *int32
+	// The name of the cache security group to return details for.
+	CacheSecurityGroupName *string
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
@@ -71,8 +68,11 @@ type DescribeCacheSecurityGroupsInput struct {
 	// MaxRecords.
 	Marker *string
 
-	// The name of the cache security group to return details for.
-	CacheSecurityGroupName *string
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a marker is included in the response so
+	// that the remaining results can be retrieved.  <p>Default: 100</p>
+	// <p>Constraints: minimum 20; maximum 100.</p>
+	MaxRecords *int32
 }
 
 // Represents the output of a DescribeCacheSecurityGroups operation.

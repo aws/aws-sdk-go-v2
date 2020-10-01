@@ -66,41 +66,41 @@ type DescribeThingRegistrationTaskInput struct {
 
 type DescribeThingRegistrationTaskOutput struct {
 
+	// The task creation date.
+	CreationDate *time.Time
+
+	// The number of things that failed to be provisioned.
+	FailureCount *int32
+
+	// The S3 bucket that contains the input file.
+	InputFileBucket *string
+
 	// The input file key.
 	InputFileKey *string
 
 	// The date when the task was last modified.
 	LastModifiedDate *time.Time
 
-	// The status of the bulk thing provisioning task.
-	Status types.Status
-
-	// The role ARN that grants access to the input file bucket.
-	RoleArn *string
-
-	// The number of things successfully provisioned.
-	SuccessCount *int32
-
-	// The S3 bucket that contains the input file.
-	InputFileBucket *string
-
-	// The task's template.
-	TemplateBody *string
-
 	// The message.
 	Message *string
-
-	// The number of things that failed to be provisioned.
-	FailureCount *int32
 
 	// The progress of the bulk provisioning task expressed as a percentage.
 	PercentageProgress *int32
 
+	// The role ARN that grants access to the input file bucket.
+	RoleArn *string
+
+	// The status of the bulk thing provisioning task.
+	Status types.Status
+
+	// The number of things successfully provisioned.
+	SuccessCount *int32
+
 	// The task ID.
 	TaskId *string
 
-	// The task creation date.
-	CreationDate *time.Time
+	// The task's template.
+	TemplateBody *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

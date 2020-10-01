@@ -65,15 +65,15 @@ func (c *Client) GetRateBasedRuleManagedKeys(ctx context.Context, params *GetRat
 
 type GetRateBasedRuleManagedKeysInput struct {
 
-	// A null value and not currently used. Do not include this in your request.
-	NextMarker *string
-
 	// The RuleId of the RateBasedRule () for which you want to get a list of
 	// ManagedKeys. RuleId is returned by CreateRateBasedRule () and by
 	// ListRateBasedRules ().
 	//
 	// This member is required.
 	RuleId *string
+
+	// A null value and not currently used. Do not include this in your request.
+	NextMarker *string
 }
 
 type GetRateBasedRuleManagedKeysOutput struct {

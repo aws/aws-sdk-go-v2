@@ -57,6 +57,12 @@ func (c *Client) DescribeVpcEndpointConnections(ctx context.Context, params *Des
 
 type DescribeVpcEndpointConnectionsInput struct {
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// One or more filters.
 	//
 	//     * service-id - The ID of the service.
@@ -72,12 +78,6 @@ type DescribeVpcEndpointConnectionsInput struct {
 	// The ID of the endpoint.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1,000; if
@@ -90,12 +90,12 @@ type DescribeVpcEndpointConnectionsInput struct {
 
 type DescribeVpcEndpointConnectionsOutput struct {
 
-	// Information about one or more VPC endpoint connections.
-	VpcEndpointConnections []*types.VpcEndpointConnection
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about one or more VPC endpoint connections.
+	VpcEndpointConnections []*types.VpcEndpointConnection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

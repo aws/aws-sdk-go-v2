@@ -97,28 +97,6 @@ func (c *Client) UploadMultipartPart(ctx context.Context, params *UploadMultipar
 // Provides options to upload a part of an archive in a multipart upload operation.
 type UploadMultipartPartInput struct {
 
-	// The SHA256 tree hash of the data being uploaded.
-	Checksum *string
-
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
-	// The upload ID of the multipart upload.
-	//
-	// This member is required.
-	UploadId *string
-
-	// The data to upload.
-	Body io.Reader
-
-	// Identifies the range of bytes in the assembled archive that will be uploaded in
-	// this part. Amazon S3 Glacier uses this information to assemble the archive in
-	// the proper sequence. The format of this header follows RFC 2616. An example
-	// header is Content-Range:bytes 0-4194303/*.
-	Range *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -127,6 +105,28 @@ type UploadMultipartPartInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The upload ID of the multipart upload.
+	//
+	// This member is required.
+	UploadId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
+
+	// The data to upload.
+	Body io.Reader
+
+	// The SHA256 tree hash of the data being uploaded.
+	Checksum *string
+
+	// Identifies the range of bytes in the assembled archive that will be uploaded in
+	// this part. Amazon S3 Glacier uses this information to assemble the archive in
+	// the proper sequence. The format of this header follows RFC 2616. An example
+	// header is Content-Range:bytes 0-4194303/*.
+	Range *string
 }
 
 // Contains the Amazon S3 Glacier response to your request.

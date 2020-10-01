@@ -57,33 +57,33 @@ func (c *Client) ListThemeAliases(ctx context.Context, params *ListThemeAliasesI
 
 type ListThemeAliasesInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *int32
-
 	// The ID of the AWS account that contains the theme aliases that you're listing.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
-
 	// The ID for the theme.
 	//
 	// This member is required.
 	ThemeId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListThemeAliasesOutput struct {
-
-	// A structure containing the list of the theme's aliases.
-	ThemeAliasList []*types.ThemeAlias
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// A structure containing the list of the theme's aliases.
+	ThemeAliasList []*types.ThemeAlias
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

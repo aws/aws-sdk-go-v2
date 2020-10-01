@@ -57,9 +57,6 @@ func (c *Client) ListIngestions(ctx context.Context, params *ListIngestionsInput
 
 type ListIngestionsInput struct {
 
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
-
 	// The AWS account ID.
 	//
 	// This member is required.
@@ -72,6 +69,9 @@ type ListIngestionsInput struct {
 
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListIngestionsOutput struct {
@@ -79,11 +79,11 @@ type ListIngestionsOutput struct {
 	// A list of the ingestions.
 	Ingestions []*types.Ingestion
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -55,11 +55,12 @@ func (c *Client) ListDiscoverers(ctx context.Context, params *ListDiscoverersInp
 }
 
 type ListDiscoverersInput struct {
-	Limit *int32
 
 	// Specifying this limits the results to only those discoverer IDs that start with
 	// the specified prefix.
 	DiscovererIdPrefix *string
+
+	Limit *int32
 
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot

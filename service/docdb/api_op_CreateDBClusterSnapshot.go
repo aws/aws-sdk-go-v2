@@ -58,9 +58,6 @@ func (c *Client) CreateDBClusterSnapshot(ctx context.Context, params *CreateDBCl
 // Represents the input of CreateDBClusterSnapshot ().
 type CreateDBClusterSnapshotInput struct {
 
-	// The tags to be assigned to the cluster snapshot.
-	Tags []*types.Tag
-
 	// The identifier of the cluster to create a snapshot for. This parameter is not
 	// case sensitive. Constraints:
 	//
@@ -87,6 +84,9 @@ type CreateDBClusterSnapshotInput struct {
 	//
 	// This member is required.
 	DBClusterSnapshotIdentifier *string
+
+	// The tags to be assigned to the cluster snapshot.
+	Tags []*types.Tag
 }
 
 type CreateDBClusterSnapshotOutput struct {

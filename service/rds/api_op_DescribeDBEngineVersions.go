@@ -57,39 +57,28 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 
 type DescribeDBEngineVersionsInput struct {
 
-	// The database engine version to return. Example: 5.1.49
-	EngineVersion *string
-
-	// A value that indicates whether only the default version of the specified engine
-	// or engine and major version combination is returned.
-	DefaultOnly *bool
-
-	// This parameter isn't currently supported.
-	Filters []*types.Filter
-
-	// The maximum number of records to include in the response. If more than the
-	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
-	// Constraints: Minimum 20, maximum 100.
-	MaxRecords *int32
-
-	// The database engine to return.
-	Engine *string
-
-	// A value that indicates whether to include engine versions that aren't available
-	// in the list. The default is to list only available engine versions.
-	IncludeAll *bool
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
-	Marker *string
-
 	// The name of a specific DB parameter group family to return details for.
 	// Constraints:
 	//
 	//     * If supplied, must match an existing DBParameterGroupFamily.
 	DBParameterGroupFamily *string
+
+	// A value that indicates whether only the default version of the specified engine
+	// or engine and major version combination is returned.
+	DefaultOnly *bool
+
+	// The database engine to return.
+	Engine *string
+
+	// The database engine version to return. Example: 5.1.49
+	EngineVersion *string
+
+	// This parameter isn't currently supported.
+	Filters []*types.Filter
+
+	// A value that indicates whether to include engine versions that aren't available
+	// in the list. The default is to list only available engine versions.
+	IncludeAll *bool
 
 	// A value that indicates whether to list the supported character sets for each
 	// engine version. If this parameter is enabled and the requested engine supports
@@ -102,19 +91,30 @@ type DescribeDBEngineVersionsInput struct {
 	// TimeZone parameter for CreateDBInstance, the response includes a list of
 	// supported time zones for each engine version.
 	ListSupportedTimezones *bool
-}
-
-// Contains the result of a successful invocation of the DescribeDBEngineVersions
-// action.
-type DescribeDBEngineVersionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
 
+	// The maximum number of records to include in the response. If more than the
+	// MaxRecords value is available, a pagination token called a marker is included in
+	// the response so you can retrieve the remaining results. Default: 100
+	// Constraints: Minimum 20, maximum 100.
+	MaxRecords *int32
+}
+
+// Contains the result of a successful invocation of the DescribeDBEngineVersions
+// action.
+type DescribeDBEngineVersionsOutput struct {
+
 	// A list of DBEngineVersion elements.
 	DBEngineVersions []*types.DBEngineVersion
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to the
+	// value specified by MaxRecords.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

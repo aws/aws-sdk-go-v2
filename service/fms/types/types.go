@@ -9,13 +9,6 @@ import (
 // An individual AWS Firewall Manager application.
 type App struct {
 
-	// The IP protocol name or number. The name can be one of tcp, udp, or icmp. For
-	// information on possible numbers, see Protocol Numbers
-	// (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
-	//
-	// This member is required.
-	Protocol *string
-
 	// The application's name.
 	//
 	// This member is required.
@@ -25,28 +18,30 @@ type App struct {
 	//
 	// This member is required.
 	Port *int64
+
+	// The IP protocol name or number. The name can be one of tcp, udp, or icmp. For
+	// information on possible numbers, see Protocol Numbers
+	// (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml).
+	//
+	// This member is required.
+	Protocol *string
 }
 
 // An AWS Firewall Manager applications list.
 type AppsListData struct {
-
-	// A map of previous version numbers to their corresponding App object arrays.
-	PreviousAppsList map[string][]*App
 
 	// An array of applications in the AWS Firewall Manager applications list.
 	//
 	// This member is required.
 	AppsList []*App
 
-	// A unique identifier for each update to the list. When you update the list, the
-	// update token must match the token of the current version of the application
-	// list. You can retrieve the update token by getting the list.
-	ListUpdateToken *string
-
 	// The name of the AWS Firewall Manager applications list.
 	//
 	// This member is required.
 	ListName *string
+
+	// The time that the AWS Firewall Manager applications list was created.
+	CreateTime *time.Time
 
 	// The time that the AWS Firewall Manager applications list was last updated.
 	LastUpdateTime *time.Time
@@ -54,24 +49,29 @@ type AppsListData struct {
 	// The ID of the AWS Firewall Manager applications list.
 	ListId *string
 
-	// The time that the AWS Firewall Manager applications list was created.
-	CreateTime *time.Time
+	// A unique identifier for each update to the list. When you update the list, the
+	// update token must match the token of the current version of the application
+	// list. You can retrieve the update token by getting the list.
+	ListUpdateToken *string
+
+	// A map of previous version numbers to their corresponding App object arrays.
+	PreviousAppsList map[string][]*App
 }
 
 // Details of the AWS Firewall Manager applications list.
 type AppsListDataSummary struct {
 
-	// The name of the applications list.
-	ListName *string
-
-	// The ID of the applications list.
-	ListId *string
+	// An array of App objects in the AWS Firewall Manager applications list.
+	AppsList []*App
 
 	// The Amazon Resource Name (ARN) of the applications list.
 	ListArn *string
 
-	// An array of App objects in the AWS Firewall Manager applications list.
-	AppsList []*App
+	// The ID of the applications list.
+	ListId *string
+
+	// The name of the applications list.
+	ListName *string
 }
 
 // Violations for an EC2 instance resource.
@@ -99,25 +99,22 @@ type AwsEc2NetworkInterfaceViolation struct {
 // security group of the AWS Firewall Manager policy.
 type AwsVPCSecurityGroupViolation struct {
 
-	// A description of the security group that violates the policy.
-	ViolationTargetDescription *string
-
 	// List of rules specified in the security group of the AWS Firewall Manager policy
 	// that partially match the ViolationTarget rule.
 	PartialMatches []*PartialMatch
 
+	// Remediation options for the rule specified in the ViolationTarget.
+	PossibleSecurityGroupRemediationActions []*SecurityGroupRemediationAction
+
 	// The security group rule that is being evaluated.
 	ViolationTarget *string
 
-	// Remediation options for the rule specified in the ViolationTarget.
-	PossibleSecurityGroupRemediationActions []*SecurityGroupRemediationAction
+	// A description of the security group that violates the policy.
+	ViolationTargetDescription *string
 }
 
 // Details of the resource that is not protected by the policy.
 type ComplianceViolator struct {
-
-	// The reason that the resource is not protected by the policy.
-	ViolationReason ViolationReason
 
 	// The resource ID.
 	ResourceId *string
@@ -128,6 +125,9 @@ type ComplianceViolator struct {
 	// For example: AWS::ElasticLoadBalancingV2::LoadBalancer or
 	// AWS::CloudFront::Distribution.
 	ResourceType *string
+
+	// The reason that the resource is not protected by the policy.
+	ViolationReason ViolationReason
 }
 
 // Describes the compliance status for the account. An account is considered
@@ -138,75 +138,32 @@ type EvaluationResult struct {
 	// Describes an AWS account's compliance with the AWS Firewall Manager policy.
 	ComplianceStatus PolicyComplianceStatusType
 
+	// Indicates that over 100 resources are noncompliant with the AWS Firewall Manager
+	// policy.
+	EvaluationLimitExceeded *bool
+
 	// The number of resources that are noncompliant with the specified policy. For AWS
 	// WAF and Shield Advanced policies, a resource is considered noncompliant if it is
 	// not associated with the policy. For security group policies, a resource is
 	// considered noncompliant if it doesn't comply with the rules of the policy and
 	// remediation is disabled or not possible.
 	ViolatorCount *int64
-
-	// Indicates that over 100 resources are noncompliant with the AWS Firewall Manager
-	// policy.
-	EvaluationLimitExceeded *bool
 }
 
 // The reference rule that partially matches the ViolationTarget rule and violation
 // reason.
 type PartialMatch struct {
 
-	// The violation reason.
-	TargetViolationReasons []*string
-
 	// The reference rule from the master security group of the AWS Firewall Manager
 	// policy.
 	Reference *string
+
+	// The violation reason.
+	TargetViolationReasons []*string
 }
 
 // An AWS Firewall Manager policy.
 type Policy struct {
-
-	// A unique identifier for each update to the policy. When issuing a PutPolicy
-	// request, the PolicyUpdateToken in the request must match the PolicyUpdateToken
-	// of the current policy version. To get the PolicyUpdateToken of the current
-	// policy version, use a GetPolicy request.
-	PolicyUpdateToken *string
-
-	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
-	// to include in the policy. Specifying an OU is the equivalent of specifying all
-	// accounts in the OU and in any of its child OUs, including any child OUs and
-	// accounts that are added at a later time. You can specify inclusions or
-	// exclusions, but not both. If you specify an IncludeMap, AWS Firewall Manager
-	// applies the policy to all accounts specified by the IncludeMap, and does not
-	// evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
-	// then Firewall Manager applies the policy to all accounts except for those
-	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
-	// combination:
-	//
-	//     * Specify account IDs by setting the key to ACCOUNT. For
-	// example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
-	// “accountID2”]}.
-	//
-	//     * Specify OUs by setting the key to ORG_UNIT. For example,
-	// the following is a valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
-	//
-	//     *
-	// Specify accounts and OUs together in a single map, separated with a comma. For
-	// example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
-	// “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.
-	IncludeMap map[string][]*string
-
-	// The name of the AWS Firewall Manager policy.
-	//
-	// This member is required.
-	PolicyName *string
-
-	// An array of ResourceType.
-	ResourceTypeList []*string
-
-	// Details about the security service that is being used to protect the resources.
-	//
-	// This member is required.
-	SecurityServicePolicyData *SecurityServicePolicyData
 
 	// If set to True, resources with the tags that are specified in the ResourceTag
 	// array are not in scope of the policy. If set to False, and the ResourceTag array
@@ -215,11 +172,15 @@ type Policy struct {
 	// This member is required.
 	ExcludeResourceTags *bool
 
-	// The ID of the AWS Firewall Manager policy.
-	PolicyId *string
+	// The name of the AWS Firewall Manager policy.
+	//
+	// This member is required.
+	PolicyName *string
 
-	// An array of ResourceTag objects.
-	ResourceTags []*ResourceTag
+	// Indicates if the policy should be automatically applied to new resources.
+	//
+	// This member is required.
+	RemediationEnabled *bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the AWS Resource Types Reference
@@ -233,6 +194,11 @@ type Policy struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	// Details about the security service that is being used to protect the resources.
+	//
+	// This member is required.
+	SecurityServicePolicyData *SecurityServicePolicyData
 
 	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
 	// to exclude from the policy. Specifying an OU is the equivalent of specifying all
@@ -258,10 +224,44 @@ type Policy struct {
 	// “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.
 	ExcludeMap map[string][]*string
 
-	// Indicates if the policy should be automatically applied to new resources.
+	// Specifies the AWS account IDs and AWS Organizations organizational units (OUs)
+	// to include in the policy. Specifying an OU is the equivalent of specifying all
+	// accounts in the OU and in any of its child OUs, including any child OUs and
+	// accounts that are added at a later time. You can specify inclusions or
+	// exclusions, but not both. If you specify an IncludeMap, AWS Firewall Manager
+	// applies the policy to all accounts specified by the IncludeMap, and does not
+	// evaluate any ExcludeMap specifications. If you do not specify an IncludeMap,
+	// then Firewall Manager applies the policy to all accounts except for those
+	// specified by the ExcludeMap. You can specify account IDs, OUs, or a
+	// combination:
 	//
-	// This member is required.
-	RemediationEnabled *bool
+	//     * Specify account IDs by setting the key to ACCOUNT. For
+	// example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
+	// “accountID2”]}.
+	//
+	//     * Specify OUs by setting the key to ORG_UNIT. For example,
+	// the following is a valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]}.
+	//
+	//     *
+	// Specify accounts and OUs together in a single map, separated with a comma. For
+	// example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
+	// “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]}.
+	IncludeMap map[string][]*string
+
+	// The ID of the AWS Firewall Manager policy.
+	PolicyId *string
+
+	// A unique identifier for each update to the policy. When issuing a PutPolicy
+	// request, the PolicyUpdateToken in the request must match the PolicyUpdateToken
+	// of the current policy version. To get the PolicyUpdateToken of the current
+	// policy version, use a GetPolicy request.
+	PolicyUpdateToken *string
+
+	// An array of ResourceTag objects.
+	ResourceTags []*ResourceTag
+
+	// An array of ResourceType.
+	ResourceTypeList []*string
 }
 
 // Describes the noncompliant resources in a member account for a specific AWS
@@ -269,19 +269,13 @@ type Policy struct {
 // 100 resources are noncompliant, EvaluationLimitExceeded is set to True.
 type PolicyComplianceDetail struct {
 
-	// The AWS account ID.
-	MemberAccount *string
-
-	// An array of resources that aren't protected by the AWS WAF or Shield Advanced
-	// policy or that aren't in compliance with the security group policy.
-	Violators []*ComplianceViolator
+	// Indicates if over 100 resources are noncompliant with the AWS Firewall Manager
+	// policy.
+	EvaluationLimitExceeded *bool
 
 	// A timestamp that indicates when the returned information should be considered
 	// out of date.
 	ExpiredAt *time.Time
-
-	// The ID of the AWS Firewall Manager policy.
-	PolicyId *string
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be noncompliant. The details include the name of
@@ -289,12 +283,18 @@ type PolicyComplianceDetail struct {
 	// with the service.
 	IssueInfoMap map[string]*string
 
-	// Indicates if over 100 resources are noncompliant with the AWS Firewall Manager
-	// policy.
-	EvaluationLimitExceeded *bool
+	// The AWS account ID.
+	MemberAccount *string
+
+	// The ID of the AWS Firewall Manager policy.
+	PolicyId *string
 
 	// The AWS account that created the AWS Firewall Manager policy.
 	PolicyOwner *string
+
+	// An array of resources that aren't protected by the AWS WAF or Shield Advanced
+	// policy or that aren't in compliance with the security group policy.
+	Violators []*ComplianceViolator
 }
 
 // Indicates whether the account is compliant with the specified policy. An account
@@ -303,17 +303,8 @@ type PolicyComplianceDetail struct {
 // with the policy, for security group policies.
 type PolicyComplianceStatus struct {
 
-	// The member account ID.
-	MemberAccount *string
-
-	// Timestamp of the last update to the EvaluationResult objects.
-	LastUpdated *time.Time
-
 	// An array of EvaluationResult objects.
 	EvaluationResults []*EvaluationResult
-
-	// The name of the AWS Firewall Manager policy.
-	PolicyName *string
 
 	// Details about problems with dependent services, such as AWS WAF or AWS Config,
 	// that are causing a resource to be noncompliant. The details include the name of
@@ -321,8 +312,17 @@ type PolicyComplianceStatus struct {
 	// with the service.
 	IssueInfoMap map[string]*string
 
+	// Timestamp of the last update to the EvaluationResult objects.
+	LastUpdated *time.Time
+
+	// The member account ID.
+	MemberAccount *string
+
 	// The ID of the AWS Firewall Manager policy.
 	PolicyId *string
+
+	// The name of the AWS Firewall Manager policy.
+	PolicyName *string
 
 	// The AWS account that created the AWS Firewall Manager policy.
 	PolicyOwner *string
@@ -331,19 +331,17 @@ type PolicyComplianceStatus struct {
 // Details of the AWS Firewall Manager policy.
 type PolicySummary struct {
 
+	// The Amazon Resource Name (ARN) of the specified policy.
+	PolicyArn *string
+
 	// The ID of the specified policy.
 	PolicyId *string
 
+	// The name of the specified policy.
+	PolicyName *string
+
 	// Indicates if the policy should be automatically applied to new resources.
 	RemediationEnabled *bool
-
-	// The service that the policy is using to protect the resources. This specifies
-	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
-	// policy, or a security group policy.
-	SecurityServiceType SecurityServiceType
-
-	// The Amazon Resource Name (ARN) of the specified policy.
-	PolicyArn *string
 
 	// The type of resource protected by or in scope of the policy. This is in the
 	// format shown in the AWS Resource Types Reference
@@ -356,46 +354,45 @@ type PolicySummary struct {
 	// a security group usage audit policy, the value is AWS::EC2::SecurityGroup.
 	ResourceType *string
 
-	// The name of the specified policy.
-	PolicyName *string
+	// The service that the policy is using to protect the resources. This specifies
+	// the type of policy that is created, either an AWS WAF policy, a Shield Advanced
+	// policy, or a security group policy.
+	SecurityServiceType SecurityServiceType
 }
 
 // An AWS Firewall Manager protocols list.
 type ProtocolsListData struct {
 
-	// A map of previous version numbers to their corresponding protocol arrays.
-	PreviousProtocolsList map[string][]*string
+	// The name of the AWS Firewall Manager protocols list.
+	//
+	// This member is required.
+	ListName *string
 
 	// An array of protocols in the AWS Firewall Manager protocols list.
 	//
 	// This member is required.
 	ProtocolsList []*string
+
+	// The time that the AWS Firewall Manager protocols list was created.
+	CreateTime *time.Time
+
+	// The time that the AWS Firewall Manager protocols list was last updated.
+	LastUpdateTime *time.Time
+
+	// The ID of the AWS Firewall Manager protocols list.
+	ListId *string
 
 	// A unique identifier for each update to the list. When you update the list, the
 	// update token must match the token of the current version of the application
 	// list. You can retrieve the update token by getting the list.
 	ListUpdateToken *string
 
-	// The time that the AWS Firewall Manager protocols list was created.
-	CreateTime *time.Time
-
-	// The ID of the AWS Firewall Manager protocols list.
-	ListId *string
-
-	// The time that the AWS Firewall Manager protocols list was last updated.
-	LastUpdateTime *time.Time
-
-	// The name of the AWS Firewall Manager protocols list.
-	//
-	// This member is required.
-	ListName *string
+	// A map of previous version numbers to their corresponding protocol arrays.
+	PreviousProtocolsList map[string][]*string
 }
 
 // Details of the AWS Firewall Manager protocols list.
 type ProtocolsListDataSummary struct {
-
-	// An array of protocols in the AWS Firewall Manager protocols list.
-	ProtocolsList []*string
 
 	// The Amazon Resource Name (ARN) of the specified protocols list.
 	ListArn *string
@@ -405,6 +402,9 @@ type ProtocolsListDataSummary struct {
 
 	// The name of the specified protocols list.
 	ListName *string
+
+	// An array of protocols in the AWS Firewall Manager protocols list.
+	ProtocolsList []*string
 }
 
 // The resource tags that AWS Firewall Manager uses to determine if a particular
@@ -417,13 +417,13 @@ type ProtocolsListDataSummary struct {
 // (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html).
 type ResourceTag struct {
 
-	// The resource tag value.
-	Value *string
-
 	// The resource tag key.
 	//
 	// This member is required.
 	Key *string
+
+	// The resource tag value.
+	Value *string
 }
 
 // Violation detail based on resource type.
@@ -432,28 +432,28 @@ type ResourceViolation struct {
 	// Violation details for an EC2 instance.
 	AwsEc2InstanceViolation *AwsEc2InstanceViolation
 
-	// Violation details for security groups.
-	AwsVPCSecurityGroupViolation *AwsVPCSecurityGroupViolation
-
 	// Violation details for network interface.
 	AwsEc2NetworkInterfaceViolation *AwsEc2NetworkInterfaceViolation
+
+	// Violation details for security groups.
+	AwsVPCSecurityGroupViolation *AwsVPCSecurityGroupViolation
 }
 
 // Remediation option for the rule specified in the ViolationTarget.
 type SecurityGroupRemediationAction struct {
 
-	// The remediation action that will be performed.
-	RemediationActionType RemediationActionType
-
 	// Brief description of the action that will be performed.
 	Description *string
+
+	// Indicates if the current action is the default action.
+	IsDefaultAction *bool
+
+	// The remediation action that will be performed.
+	RemediationActionType RemediationActionType
 
 	// The final state of the rule specified in the ViolationTarget after it is
 	// remediated.
 	RemediationResult *SecurityGroupRuleDescription
-
-	// Indicates if the current action is the default action.
-	IsDefaultAction *bool
 }
 
 // Describes a set of permissions for a security group rule.
@@ -463,21 +463,21 @@ type SecurityGroupRuleDescription struct {
 	// type number. A value of -1 indicates all ICMP/ICMPv6 types.
 	FromPort *int64
 
-	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
-	// A value of -1 indicates all ICMP/ICMPv6 codes.
-	ToPort *int64
-
-	// The ID of the prefix list for the security group rule.
-	PrefixListId *string
+	// The IPv4 ranges for the security group rule.
+	IPV4Range *string
 
 	// The IPv6 ranges for the security group rule.
 	IPV6Range *string
 
+	// The ID of the prefix list for the security group rule.
+	PrefixListId *string
+
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number.
 	Protocol *string
 
-	// The IPv4 ranges for the security group rule.
-	IPV4Range *string
+	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
+	// A value of -1 indicates all ICMP/ICMPv6 codes.
+	ToPort *int64
 }
 
 // Details about the security service that is being used to protect the resources.
@@ -553,18 +553,26 @@ type Tag struct {
 // AWS account.
 type ViolationDetail struct {
 
-	// The resource type that the violation details were requested for.
-	//
-	// This member is required.
-	ResourceType *string
-
-	// The ResourceTag objects associated with the resource.
-	ResourceTags []*Tag
-
 	// The AWS account that the violation details were requested for.
 	//
 	// This member is required.
 	MemberAccount *string
+
+	// The ID of the AWS Firewall Manager policy that the violation details were
+	// requested for.
+	//
+	// This member is required.
+	PolicyId *string
+
+	// The resource ID that the violation details were requested for.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The resource type that the violation details were requested for.
+	//
+	// This member is required.
+	ResourceType *string
 
 	// List of violations for the requested resource.
 	//
@@ -574,14 +582,6 @@ type ViolationDetail struct {
 	// Brief description for the requested resource.
 	ResourceDescription *string
 
-	// The resource ID that the violation details were requested for.
-	//
-	// This member is required.
-	ResourceId *string
-
-	// The ID of the AWS Firewall Manager policy that the violation details were
-	// requested for.
-	//
-	// This member is required.
-	PolicyId *string
+	// The ResourceTag objects associated with the resource.
+	ResourceTags []*Tag
 }

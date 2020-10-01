@@ -63,13 +63,12 @@ func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInp
 
 type GetSSHPublicKeyInput struct {
 
-	// The name of the IAM user associated with the SSH public key. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// Specifies the public key encoding format to use in the response. To retrieve the
+	// public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format,
+	// use PEM.
 	//
 	// This member is required.
-	UserName *string
+	Encoding types.EncodingType
 
 	// The unique identifier for the SSH public key. This parameter allows (through its
 	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters that can
@@ -78,12 +77,13 @@ type GetSSHPublicKeyInput struct {
 	// This member is required.
 	SSHPublicKeyId *string
 
-	// Specifies the public key encoding format to use in the response. To retrieve the
-	// public key in ssh-rsa format, use SSH. To retrieve the public key in PEM format,
-	// use PEM.
+	// The name of the IAM user associated with the SSH public key. This parameter
+	// allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
+	// characters consisting of upper and lowercase alphanumeric characters with no
+	// spaces. You can also include any of the following characters: _+=,.@-
 	//
 	// This member is required.
-	Encoding types.EncodingType
+	UserName *string
 }
 
 // Contains the response to a successful GetSSHPublicKey () request.

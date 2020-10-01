@@ -56,11 +56,11 @@ func (c *Client) GetDeploymentTarget(ctx context.Context, params *GetDeploymentT
 
 type GetDeploymentTargetInput struct {
 
-	// The unique ID of a deployment target.
-	TargetId *string
-
 	// The unique ID of a deployment.
 	DeploymentId *string
+
+	// The unique ID of a deployment target.
+	TargetId *string
 }
 
 type GetDeploymentTargetOutput struct {

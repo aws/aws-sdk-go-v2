@@ -63,20 +63,20 @@ type GetDocumentationVersionsInput struct {
 	// This member is required.
 	RestApiId *string
 
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500.
+	Limit *int32
+
 	Name *string
 
 	// The current pagination position in the paged result set.
 	Position *string
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500.
-	Limit *int32
-
-	Title *string
+	Template *bool
 
 	TemplateSkipList []*string
 
-	Template *bool
+	Title *string
 }
 
 // The collection of documentation snapshots of an API. Use the

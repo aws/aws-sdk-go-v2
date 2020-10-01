@@ -63,10 +63,6 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 
 type DescribeProvisioningParametersInput struct {
 
-	// The identifier of the provisioning artifact. You must provide the name or ID,
-	// but not both.
-	ProvisioningArtifactId *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -77,12 +73,14 @@ type DescribeProvisioningParametersInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
+	// The path identifier of the product. This value is optional if the product has a
+	// default path, and required if the product has more than one path. To list the
+	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
+	// but not both.
+	PathId *string
+
 	// The name of the path. You must provide the name or ID, but not both.
 	PathName *string
-
-	// The name of the provisioning artifact. You must provide the name or ID, but not
-	// both.
-	ProvisioningArtifactName *string
 
 	// The product identifier. You must provide the product name or ID, but not both.
 	ProductId *string
@@ -90,17 +88,22 @@ type DescribeProvisioningParametersInput struct {
 	// The name of the product. You must provide the name or ID, but not both.
 	ProductName *string
 
-	// The path identifier of the product. This value is optional if the product has a
-	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths (). You must provide the name or ID,
+	// The identifier of the provisioning artifact. You must provide the name or ID,
 	// but not both.
-	PathId *string
+	ProvisioningArtifactId *string
+
+	// The name of the provisioning artifact. You must provide the name or ID, but not
+	// both.
+	ProvisioningArtifactName *string
 }
 
 type DescribeProvisioningParametersOutput struct {
 
 	// Information about the constraints used to provision the product.
 	ConstraintSummaries []*types.ConstraintSummary
+
+	// The output of the provisioning artifact.
+	ProvisioningArtifactOutputs []*types.ProvisioningArtifactOutput
 
 	// Information about the parameters used to provision the product.
 	ProvisioningArtifactParameters []*types.ProvisioningArtifactParameter
@@ -111,9 +114,6 @@ type DescribeProvisioningParametersOutput struct {
 
 	// Information about the TagOptions associated with the resource.
 	TagOptions []*types.TagOptionSummary
-
-	// The output of the provisioning artifact.
-	ProvisioningArtifactOutputs []*types.ProvisioningArtifactOutput
 
 	// Any additional metadata specifically related to the provisioning of the product.
 	// For example, see the Version field of the CloudFormation template.

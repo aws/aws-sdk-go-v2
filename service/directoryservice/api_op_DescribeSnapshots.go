@@ -68,14 +68,14 @@ type DescribeSnapshotsInput struct {
 	// The maximum number of objects to return.
 	Limit *int32
 
+	// The DescribeSnapshotsResult.NextToken value from a previous call to
+	// DescribeSnapshots (). Pass null if this is the first call.
+	NextToken *string
+
 	// A list of identifiers of the snapshots to obtain the information for. If this
 	// member is null or empty, all snapshots are returned using the Limit and
 	// NextToken members.
 	SnapshotIds []*string
-
-	// The DescribeSnapshotsResult.NextToken value from a previous call to
-	// DescribeSnapshots (). Pass null if this is the first call.
-	NextToken *string
 }
 
 // Contains the results of the DescribeSnapshots () operation.

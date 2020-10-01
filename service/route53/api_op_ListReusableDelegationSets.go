@@ -84,6 +84,12 @@ type ListReusableDelegationSetsOutput struct {
 	// This member is required.
 	DelegationSets []*types.DelegationSet
 
+	// A flag that indicates whether there are more reusable delegation sets to be
+	// listed.
+	//
+	// This member is required.
+	IsTruncated *bool
+
 	// For the second and subsequent calls to ListReusableDelegationSets, Marker is the
 	// value that you specified for the marker parameter in the request that produced
 	// the current response.
@@ -91,23 +97,17 @@ type ListReusableDelegationSetsOutput struct {
 	// This member is required.
 	Marker *string
 
-	// If IsTruncated is true, the value of NextMarker identifies the next reusable
-	// delegation set that Amazon Route 53 will return if you submit another
-	// ListReusableDelegationSets request and specify the value of NextMarker in the
-	// marker parameter.
-	NextMarker *string
-
-	// A flag that indicates whether there are more reusable delegation sets to be
-	// listed.
-	//
-	// This member is required.
-	IsTruncated *bool
-
 	// The value that you specified for the maxitems parameter in the call to
 	// ListReusableDelegationSets that produced the current response.
 	//
 	// This member is required.
 	MaxItems *string
+
+	// If IsTruncated is true, the value of NextMarker identifies the next reusable
+	// delegation set that Amazon Route 53 will return if you submit another
+	// ListReusableDelegationSets request and specify the value of NextMarker in the
+	// marker parameter.
+	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

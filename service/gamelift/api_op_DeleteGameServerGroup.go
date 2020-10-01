@@ -91,6 +91,12 @@ func (c *Client) DeleteGameServerGroup(ctx context.Context, params *DeleteGameSe
 
 type DeleteGameServerGroupInput struct {
 
+	// The unique identifier of the game server group to delete. Use either the
+	// GameServerGroup () name or ARN value.
+	//
+	// This member is required.
+	GameServerGroupName *string
+
 	// The type of delete to perform. Options include:
 	//
 	//     * SAFE_DELETE – Terminates
@@ -104,12 +110,6 @@ type DeleteGameServerGroupInput struct {
 	//     * RETAIN – Does a safe delete of
 	// the game server group but retains the EC2 Auto Scaling group as is.
 	DeleteOption types.GameServerGroupDeleteOption
-
-	// The unique identifier of the game server group to delete. Use either the
-	// GameServerGroup () name or ARN value.
-	//
-	// This member is required.
-	GameServerGroupName *string
 }
 
 type DeleteGameServerGroupOutput struct {

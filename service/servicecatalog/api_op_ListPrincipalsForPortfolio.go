@@ -57,8 +57,10 @@ func (c *Client) ListPrincipalsForPortfolio(ctx context.Context, params *ListPri
 
 type ListPrincipalsForPortfolioInput struct {
 
-	// The maximum number of items to return with this call.
-	PageSize *int32
+	// The portfolio identifier.
+	//
+	// This member is required.
+	PortfolioId *string
 
 	// The language code.
 	//
@@ -70,14 +72,12 @@ type ListPrincipalsForPortfolioInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
-
-	// The portfolio identifier.
-	//
-	// This member is required.
-	PortfolioId *string
 }
 
 type ListPrincipalsForPortfolioOutput struct {

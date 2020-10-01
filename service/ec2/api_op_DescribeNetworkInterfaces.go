@@ -57,19 +57,6 @@ func (c *Client) DescribeNetworkInterfaces(ctx context.Context, params *Describe
 // Contains the parameters for DescribeNetworkInterfaces.
 type DescribeNetworkInterfacesInput struct {
 
-	// The token to retrieve the next page of results.
-	NextToken *string
-
-	// One or more network interface IDs. Default: Describes all your network
-	// interfaces.
-	NetworkInterfaceIds []*string
-
-	// The maximum number of items to return for this request. The request returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	// You cannot specify this parameter and the network interface IDs parameter in the
-	// same request.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -197,6 +184,19 @@ type DescribeNetworkInterfacesInput struct {
 	//     * vpc-id - The ID of
 	// the VPC for the network interface.
 	Filters []*types.Filter
+
+	// The maximum number of items to return for this request. The request returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	// You cannot specify this parameter and the network interface IDs parameter in the
+	// same request.
+	MaxResults *int32
+
+	// One or more network interface IDs. Default: Describes all your network
+	// interfaces.
+	NetworkInterfaceIds []*string
+
+	// The token to retrieve the next page of results.
+	NextToken *string
 }
 
 // Contains the output of DescribeNetworkInterfaces.

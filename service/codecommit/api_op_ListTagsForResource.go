@@ -60,15 +60,15 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) of the resource for which you want to get
 	// information about tags, if any.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// An enumeration token that, when provided in a request, returns the next batch of
+	// the results.
+	NextToken *string
 }
 
 type ListTagsForResourceOutput struct {

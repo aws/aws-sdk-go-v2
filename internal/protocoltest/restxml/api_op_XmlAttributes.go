@@ -51,15 +51,15 @@ func (c *Client) XmlAttributes(ctx context.Context, params *XmlAttributesInput, 
 }
 
 type XmlAttributesInput struct {
-	Foo *string
-
 	Attr *string
+
+	Foo *string
 }
 
 type XmlAttributesOutput struct {
-	Foo *string
-
 	Attr *string
+
+	Foo *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -102,37 +102,11 @@ func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemI
 
 type CreateFileSystemInput struct {
 
-	// The throughput, measured in MiB/s, that you want to provision for a file system
-	// that you're creating. Valid values are 1-1024. Required if ThroughputMode is set
-	// to provisioned. The upper limit for throughput is 1024 MiB/s. You can get this
-	// limit increased by contacting AWS Support. For more information, see Amazon EFS
-	// Limits That You Can Increase
-	// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the
-	// Amazon EFS User Guide.
-	ProvisionedThroughputInMibps *float64
-
-	// A value that specifies to create one or more tags associated with the file
-	// system. Each tag is a user-defined key-value pair. Name your file system on
-	// creation by including a "Key":"Name","Value":"{value}" key-value pair.
-	Tags []*types.Tag
-
-	// The throughput mode for the file system to be created. There are two throughput
-	// modes to choose from for your file system: bursting and provisioned. If you set
-	// ThroughputMode to provisioned, you must also set a value for
-	// ProvisionedThroughPutInMibps. You can decrease your file system's throughput in
-	// Provisioned Throughput mode or change between the throughput modes as long as
-	// it’s been more than 24 hours since the last decrease or throughput mode change.
-	// For more, see Specifying Throughput with Provisioned Mode
-	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput)
-	// in the Amazon EFS User Guide.
-	ThroughputMode types.ThroughputMode
-
-	// The performance mode of the file system. We recommend generalPurpose performance
-	// mode for most file systems. File systems using the maxIO performance mode can
-	// scale to higher levels of aggregate throughput and operations per second with a
-	// tradeoff of slightly higher latencies for most file operations. The performance
-	// mode can't be changed after the file system has been created.
-	PerformanceMode types.PerformanceMode
+	// A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent
+	// creation.
+	//
+	// This member is required.
+	CreationToken *string
 
 	// A Boolean value that, if true, creates an encrypted file system. When creating
 	// an encrypted file system, you have the option of specifying
@@ -141,12 +115,6 @@ type CreateFileSystemInput struct {
 	// default CMK for Amazon EFS, /aws/elasticfilesystem, is used to protect the
 	// encrypted file system.
 	Encrypted *bool
-
-	// A string of up to 64 ASCII characters. Amazon EFS uses this to ensure idempotent
-	// creation.
-	//
-	// This member is required.
-	CreationToken *string
 
 	// The ID of the AWS KMS CMK to be used to protect the encrypted file system. This
 	// parameter is only required if you want to use a nondefault CMK. If this
@@ -172,10 +140,80 @@ type CreateFileSystemInput struct {
 	// accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file
 	// systems.
 	KmsKeyId *string
+
+	// The performance mode of the file system. We recommend generalPurpose performance
+	// mode for most file systems. File systems using the maxIO performance mode can
+	// scale to higher levels of aggregate throughput and operations per second with a
+	// tradeoff of slightly higher latencies for most file operations. The performance
+	// mode can't be changed after the file system has been created.
+	PerformanceMode types.PerformanceMode
+
+	// The throughput, measured in MiB/s, that you want to provision for a file system
+	// that you're creating. Valid values are 1-1024. Required if ThroughputMode is set
+	// to provisioned. The upper limit for throughput is 1024 MiB/s. You can get this
+	// limit increased by contacting AWS Support. For more information, see Amazon EFS
+	// Limits That You Can Increase
+	// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the
+	// Amazon EFS User Guide.
+	ProvisionedThroughputInMibps *float64
+
+	// A value that specifies to create one or more tags associated with the file
+	// system. Each tag is a user-defined key-value pair. Name your file system on
+	// creation by including a "Key":"Name","Value":"{value}" key-value pair.
+	Tags []*types.Tag
+
+	// The throughput mode for the file system to be created. There are two throughput
+	// modes to choose from for your file system: bursting and provisioned. If you set
+	// ThroughputMode to provisioned, you must also set a value for
+	// ProvisionedThroughPutInMibps. You can decrease your file system's throughput in
+	// Provisioned Throughput mode or change between the throughput modes as long as
+	// it’s been more than 24 hours since the last decrease or throughput mode change.
+	// For more, see Specifying Throughput with Provisioned Mode
+	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput)
+	// in the Amazon EFS User Guide.
+	ThroughputMode types.ThroughputMode
 }
 
 // A description of the file system.
 type CreateFileSystemOutput struct {
+
+	// The time that the file system was created, in seconds (since
+	// 1970-01-01T00:00:00Z).
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The opaque string specified in the request.
+	//
+	// This member is required.
+	CreationToken *string
+
+	// The ID of the file system, assigned by Amazon EFS.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The lifecycle phase of the file system.
+	//
+	// This member is required.
+	LifeCycleState types.LifeCycleState
+
+	// The current number of mount targets that the file system has. For more
+	// information, see CreateMountTarget ().
+	//
+	// This member is required.
+	NumberOfMountTargets *int32
+
+	// The AWS account that created the file system. If the file system was created by
+	// an IAM user, the parent account to which the user belongs is the owner.
+	//
+	// This member is required.
+	OwnerId *string
+
+	// The performance mode of the file system.
+	//
+	// This member is required.
+	PerformanceMode types.PerformanceMode
 
 	// The latest known metered size (in bytes) of data stored in the file system, in
 	// its Value field, and the time at which that size was determined in its Timestamp
@@ -190,72 +228,13 @@ type CreateFileSystemOutput struct {
 	// This member is required.
 	SizeInBytes *types.FileSystemSize
 
-	// The time that the file system was created, in seconds (since
-	// 1970-01-01T00:00:00Z).
-	//
-	// This member is required.
-	CreationTime *time.Time
-
-	// The AWS account that created the file system. If the file system was created by
-	// an IAM user, the parent account to which the user belongs is the owner.
-	//
-	// This member is required.
-	OwnerId *string
-
 	// The tags associated with the file system, presented as an array of Tag objects.
 	//
 	// This member is required.
 	Tags []*types.Tag
 
-	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget ().
-	//
-	// This member is required.
-	NumberOfMountTargets *int32
-
-	// The performance mode of the file system.
-	//
-	// This member is required.
-	PerformanceMode types.PerformanceMode
-
-	// The opaque string specified in the request.
-	//
-	// This member is required.
-	CreationToken *string
-
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
-
-	// The throughput, measured in MiB/s, that you want to provision for a file system.
-	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
-	// limit on throughput is 1024 MiB/s. You can get these limits increased by
-	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
-	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
-	// the Amazon EFS User Guide.
-	ProvisionedThroughputInMibps *float64
-
-	// The lifecycle phase of the file system.
-	//
-	// This member is required.
-	LifeCycleState types.LifeCycleState
-
-	// The ID of the file system, assigned by Amazon EFS.
-	//
-	// This member is required.
-	FileSystemId *string
-
-	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem (). If the file system has a Name tag, Amazon EFS returns
-	// the value in this field.
-	Name *string
-
-	// The throughput mode for a file system. There are two throughput modes to choose
-	// from for your file system: bursting and provisioned. If you set ThroughputMode
-	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
-	// can decrease your file system's throughput in Provisioned Throughput mode or
-	// change between the throughput modes as long as it’s been more than 24 hours
-	// since the last decrease or throughput mode change.
-	ThroughputMode types.ThroughputMode
 
 	// The Amazon Resource Name (ARN) for the EFS file system, in the format
 	// arn:aws:elasticfilesystem:region:account-id:file-system/file-system-id . Example
@@ -266,6 +245,27 @@ type CreateFileSystemOutput struct {
 	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that
 	// was used to protect the encrypted file system.
 	KmsKeyId *string
+
+	// You can add tags to a file system, including a Name tag. For more information,
+	// see CreateFileSystem (). If the file system has a Name tag, Amazon EFS returns
+	// the value in this field.
+	Name *string
+
+	// The throughput, measured in MiB/s, that you want to provision for a file system.
+	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
+	// limit on throughput is 1024 MiB/s. You can get these limits increased by
+	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
+	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
+	// the Amazon EFS User Guide.
+	ProvisionedThroughputInMibps *float64
+
+	// The throughput mode for a file system. There are two throughput modes to choose
+	// from for your file system: bursting and provisioned. If you set ThroughputMode
+	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
+	// can decrease your file system's throughput in Provisioned Throughput mode or
+	// change between the throughput modes as long as it’s been more than 24 hours
+	// since the last decrease or throughput mode change.
+	ThroughputMode types.ThroughputMode
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,16 +58,16 @@ func (c *Client) DeleteImagePermissions(ctx context.Context, params *DeleteImage
 
 type DeleteImagePermissionsInput struct {
 
+	// The name of the private image.
+	//
+	// This member is required.
+	Name *string
+
 	// The 12-digit identifier of the AWS account for which to delete image
 	// permissions.
 	//
 	// This member is required.
 	SharedAccountId *string
-
-	// The name of the private image.
-	//
-	// This member is required.
-	Name *string
 }
 
 type DeleteImagePermissionsOutput struct {

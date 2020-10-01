@@ -59,11 +59,6 @@ func (c *Client) GetUsage(ctx context.Context, params *GetUsageInput, optFns ...
 // interval.
 type GetUsageInput struct {
 
-	// The current pagination position in the paged result set.
-	Position *string
-
-	Template *bool
-
 	// [Required] The ending date (e.g., 2016-12-31) of the usage data.
 	//
 	// This member is required.
@@ -79,10 +74,6 @@ type GetUsageInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	TemplateSkipList []*string
-
-	Title *string
-
 	// The Id of the API key associated with the resultant usage data.
 	KeyId *string
 
@@ -91,6 +82,15 @@ type GetUsageInput struct {
 	Limit *int32
 
 	Name *string
+
+	// The current pagination position in the paged result set.
+	Position *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents the usage data of a usage plan. Create and Use Usage Plans
@@ -102,12 +102,6 @@ type GetUsageOutput struct {
 	// The ending date of the usage data.
 	EndDate *string
 
-	// The plan Id associated with this usage data.
-	UsagePlanId *string
-
-	// The starting date of the usage data.
-	StartDate *string
-
 	// The usage data, as daily logs of used and remaining quotas, over the specified
 	// time interval indexed over the API keys in a usage plan. For example, {...,
 	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
@@ -117,6 +111,12 @@ type GetUsageOutput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	// The starting date of the usage data.
+	StartDate *string
+
+	// The plan Id associated with this usage data.
+	UsagePlanId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,18 +59,18 @@ func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *G
 //
 type GetReservedNodeExchangeOfferingsInput struct {
 
-	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
-	MaxRecords *int32
-
-	// A value that indicates the starting point for the next set of
-	// ReservedNodeOfferings.
-	Marker *string
-
 	// A string representing the node identifier for the DC1 Reserved Node to be
 	// exchanged.
 	//
 	// This member is required.
 	ReservedNodeId *string
+
+	// A value that indicates the starting point for the next set of
+	// ReservedNodeOfferings.
+	Marker *string
+
+	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
+	MaxRecords *int32
 }
 
 type GetReservedNodeExchangeOfferingsOutput struct {

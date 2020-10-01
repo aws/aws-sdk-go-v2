@@ -76,11 +76,6 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 // Represents the input for a request action.
 type ListFleetsInput struct {
 
-	// A unique identifier for a Realtime script to return fleets for. Use this
-	// parameter to return only fleets using a specified script. Use either the script
-	// ID or ARN value. To retrieve all fleets, leave this parameter empty.
-	ScriptId *string
-
 	// A unique identifier for a build to return fleets for. Use this parameter to
 	// return only fleets using a specified build. Use either the build ID or ARN
 	// value. To retrieve all fleets, do not include either a BuildId and ScriptID
@@ -95,20 +90,25 @@ type ListFleetsInput struct {
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
+	// A unique identifier for a Realtime script to return fleets for. Use this
+	// parameter to return only fleets using a specified script. Use either the script
+	// ID or ARN value. To retrieve all fleets, leave this parameter empty.
+	ScriptId *string
 }
 
 // Represents the returned data in response to a request action.
 type ListFleetsOutput struct {
-
-	// Token that indicates where to resume retrieving results on the next call to this
-	// action. If no token is returned, these results represent the end of the list.
-	NextToken *string
 
 	// Set of fleet IDs matching the list request. You can retrieve additional
 	// information about all returned fleets by passing this result set to a call to
 	// DescribeFleetAttributes (), DescribeFleetCapacity (), or
 	// DescribeFleetUtilization ().
 	FleetIds []*string
+
+	// Token that indicates where to resume retrieving results on the next call to this
+	// action. If no token is returned, these results represent the end of the list.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

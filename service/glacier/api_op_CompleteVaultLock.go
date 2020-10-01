@@ -73,16 +73,6 @@ func (c *Client) CompleteVaultLock(ctx context.Context, params *CompleteVaultLoc
 // The input values for CompleteVaultLock.
 type CompleteVaultLockInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
-	// The lockId value is the lock ID obtained from a InitiateVaultLock () request.
-	//
-	// This member is required.
-	LockId *string
-
 	// The AccountId value is the AWS account ID. This value must match the AWS account
 	// ID associated with the credentials used to sign the request. You can either
 	// specify an AWS account ID or optionally a single '-' (hyphen), in which case
@@ -92,6 +82,16 @@ type CompleteVaultLockInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The lockId value is the lock ID obtained from a InitiateVaultLock () request.
+	//
+	// This member is required.
+	LockId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
 }
 
 type CompleteVaultLockOutput struct {

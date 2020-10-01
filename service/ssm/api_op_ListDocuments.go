@@ -61,10 +61,6 @@ type ListDocumentsInput struct {
 	// This data type is deprecated. Instead, use Filters.
 	DocumentFilterList []*types.DocumentFilter
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// One or more DocumentKeyValuesFilter objects. Use a filter to return a more
 	// specific list of results. For keys, you can specify one or more key-value pair
 	// tags that have been applied to a document. Other valid keys include Owner, Name,
@@ -76,6 +72,10 @@ type ListDocumentsInput struct {
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type ListDocumentsOutput struct {

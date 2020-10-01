@@ -59,6 +59,13 @@ func (c *Client) CreateConstraint(ctx context.Context, params *CreateConstraintI
 
 type CreateConstraintInput struct {
 
+	// A unique identifier that you provide to ensure idempotency. If multiple requests
+	// differ only by the idempotency token, the same response is returned for each
+	// repeated request.
+	//
+	// This member is required.
+	IdempotencyToken *string
+
 	// The constraint parameters, in JSON format. The syntax depends on the constraint
 	// type as follows: LAUNCH You are required to specify either the RoleArn or the
 	// LocalRoleName but can't use both. Specify the RoleArn property as follows:
@@ -88,8 +95,15 @@ type CreateConstraintInput struct {
 	// This member is required.
 	Parameters *string
 
-	// The description of the constraint.
-	Description *string
+	// The portfolio identifier.
+	//
+	// This member is required.
+	PortfolioId *string
+
+	// The product identifier.
+	//
+	// This member is required.
+	ProductId *string
 
 	// The type of constraint.
 	//
@@ -107,23 +121,6 @@ type CreateConstraintInput struct {
 	// This member is required.
 	Type *string
 
-	// A unique identifier that you provide to ensure idempotency. If multiple requests
-	// differ only by the idempotency token, the same response is returned for each
-	// repeated request.
-	//
-	// This member is required.
-	IdempotencyToken *string
-
-	// The portfolio identifier.
-	//
-	// This member is required.
-	PortfolioId *string
-
-	// The product identifier.
-	//
-	// This member is required.
-	ProductId *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -133,15 +130,18 @@ type CreateConstraintInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The description of the constraint.
+	Description *string
 }
 
 type CreateConstraintOutput struct {
 
-	// The constraint parameters.
-	ConstraintParameters *string
-
 	// Information about the constraint.
 	ConstraintDetail *types.ConstraintDetail
+
+	// The constraint parameters.
+	ConstraintParameters *string
 
 	// The status of the current request.
 	Status types.Status

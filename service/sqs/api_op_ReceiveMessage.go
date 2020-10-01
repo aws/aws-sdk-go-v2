@@ -103,44 +103,6 @@ func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput
 //
 type ReceiveMessageInput struct {
 
-	// The name of the message attribute, where N is the index.
-	//
-	//     * The name can
-	// contain alphanumeric characters and the underscore (_), hyphen (-), and period
-	// (.).
-	//
-	//     * The name is case-sensitive and must be unique among all attribute
-	// names for the message.
-	//
-	//     * The name must not start with AWS-reserved prefixes
-	// such as AWS. or Amazon. (or any casing variants).
-	//
-	//     * The name must not start
-	// or end with a period (.), and it should not have periods in succession (..).
-	//
-	//
-	// * The name can be up to 256 characters long.
-	//
-	//     <p>When using
-	// <code>ReceiveMessage</code>, you can send a list of attribute names to receive,
-	// or you can return all of the attributes by specifying <code>All</code> or
-	// <code>.*</code> in your request. You can also use all message attributes
-	// starting with a prefix, for example <code>bar.*</code>.</p>
-	MessageAttributeNames []*string
-
-	// The duration (in seconds) for which the call waits for a message to arrive in
-	// the queue before returning. If a message is available, the call returns sooner
-	// than WaitTimeSeconds. If no messages are available and the wait time expires,
-	// the call returns successfully with an empty list of messages. To avoid HTTP
-	// errors, ensure that the HTTP response timeout for ReceiveMessage requests is
-	// longer than the WaitTimeSeconds parameter. For example, with the Java SDK, you
-	// can set HTTP transport settings using the  NettyNioAsyncHttpClient
-	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html)
-	// for asynchronous clients, or the  ApacheHttpClient
-	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
-	// for synchronous clients.
-	WaitTimeSeconds *int32
-
 	// The URL of the Amazon SQS queue from which messages are received. Queue URLs and
 	// names are case-sensitive.
 	//
@@ -193,9 +155,30 @@ type ReceiveMessageInput struct {
 	// 10. Default: 1.
 	MaxNumberOfMessages *int32
 
-	// The duration (in seconds) that the received messages are hidden from subsequent
-	// retrieve requests after being retrieved by a ReceiveMessage request.
-	VisibilityTimeout *int32
+	// The name of the message attribute, where N is the index.
+	//
+	//     * The name can
+	// contain alphanumeric characters and the underscore (_), hyphen (-), and period
+	// (.).
+	//
+	//     * The name is case-sensitive and must be unique among all attribute
+	// names for the message.
+	//
+	//     * The name must not start with AWS-reserved prefixes
+	// such as AWS. or Amazon. (or any casing variants).
+	//
+	//     * The name must not start
+	// or end with a period (.), and it should not have periods in succession (..).
+	//
+	//
+	// * The name can be up to 256 characters long.
+	//
+	//     <p>When using
+	// <code>ReceiveMessage</code>, you can send a list of attribute names to receive,
+	// or you can return all of the attributes by specifying <code>All</code> or
+	// <code>.*</code> in your request. You can also use all message attributes
+	// starting with a prefix, for example <code>bar.*</code>.</p>
+	MessageAttributeNames []*string
 
 	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
 	// for deduplication of ReceiveMessage calls. If a networking issue occurs after a
@@ -252,6 +235,23 @@ type ReceiveMessageInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-receiverequestattemptid-request-parameter.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	ReceiveRequestAttemptId *string
+
+	// The duration (in seconds) that the received messages are hidden from subsequent
+	// retrieve requests after being retrieved by a ReceiveMessage request.
+	VisibilityTimeout *int32
+
+	// The duration (in seconds) for which the call waits for a message to arrive in
+	// the queue before returning. If a message is available, the call returns sooner
+	// than WaitTimeSeconds. If no messages are available and the wait time expires,
+	// the call returns successfully with an empty list of messages. To avoid HTTP
+	// errors, ensure that the HTTP response timeout for ReceiveMessage requests is
+	// longer than the WaitTimeSeconds parameter. For example, with the Java SDK, you
+	// can set HTTP transport settings using the  NettyNioAsyncHttpClient
+	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/nio/netty/NettyNioAsyncHttpClient.html)
+	// for asynchronous clients, or the  ApacheHttpClient
+	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
+	// for synchronous clients.
+	WaitTimeSeconds *int32
 }
 
 // A list of received messages.

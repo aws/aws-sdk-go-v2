@@ -62,6 +62,10 @@ type GetParameterHistoryInput struct {
 	// This member is required.
 	Name *string
 
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
+
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
@@ -69,20 +73,16 @@ type GetParameterHistoryInput struct {
 	// Return decrypted values for secure string parameters. This flag is ignored for
 	// String and StringList parameter types.
 	WithDecryption *bool
-
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
 }
 
 type GetParameterHistoryOutput struct {
 
-	// A list of parameters returned by the request.
-	Parameters []*types.ParameterHistory
-
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
+	// A list of parameters returned by the request.
+	Parameters []*types.ParameterHistory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

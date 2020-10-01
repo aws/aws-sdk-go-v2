@@ -5,16 +5,35 @@ package types
 // The output that you want to add to this flow.
 type AddOutputRequest struct {
 
+	// The protocol to use for the output.
+	//
+	// This member is required.
+	Protocol Protocol
+
+	// The range of IP addresses that should be allowed to initiate output requests to
+	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	CidrAllowList []*string
+
 	// A description of the output. This description appears only on the AWS Elemental
 	// MediaConnect console and will not be seen by the end user.
 	Description *string
+
+	// The IP address from which video will be sent to output destinations.
+	Destination *string
 
 	// The type of key used for the encryption. If no keyType is provided, the service
 	// will use the default setting (static-key).
 	Encryption *Encryption
 
-	// The name of the VPC interface attachment to use for this output.
-	VpcInterfaceAttachment *VpcInterfaceAttachment
+	// The maximum latency in milliseconds for Zixi-based streams.
+	MaxLatency *int32
+
+	// The name of the output. This value must be unique within the current flow.
+	Name *string
+
+	// The port to use when content is distributed to this output.
+	Port *int32
 
 	// The remote ID for the Zixi-pull output stream.
 	RemoteId *string
@@ -26,61 +45,12 @@ type AddOutputRequest struct {
 	// only to Zixi-based streams.
 	StreamId *string
 
-	// The port to use when content is distributed to this output.
-	Port *int32
-
-	// The protocol to use for the output.
-	//
-	// This member is required.
-	Protocol Protocol
-
-	// The IP address from which video will be sent to output destinations.
-	Destination *string
-
-	// The name of the output. This value must be unique within the current flow.
-	Name *string
-
-	// The maximum latency in milliseconds for Zixi-based streams.
-	MaxLatency *int32
-
-	// The range of IP addresses that should be allowed to initiate output requests to
-	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
-	CidrAllowList []*string
+	// The name of the VPC interface attachment to use for this output.
+	VpcInterfaceAttachment *VpcInterfaceAttachment
 }
 
 // Information about the encryption of the flow.
 type Encryption struct {
-
-	// The ARN of the secret that you created in AWS Secrets Manager to store the
-	// encryption key. This parameter is required for static key encryption and is not
-	// valid for SPEKE encryption.
-	SecretArn *string
-
-	// The type of key that is used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
-	KeyType KeyType
-
-	// An identifier for the content. The service sends this value to the key server to
-	// identify the current endpoint. The resource ID is also known as the content ID.
-	// This parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
-	ResourceId *string
-
-	// The value of one of the devices that you configured with your digital rights
-	// management (DRM) platform key provider. This parameter is required for SPEKE
-	// encryption and is not valid for static key encryption.
-	DeviceId *string
-
-	// The AWS Region that the API Gateway proxy endpoint was created in. This
-	// parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
-	Region *string
-
-	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
-	// with the key for encrypting content. This parameter is not valid for static key
-	// encryption.
-	ConstantInitializationVector *string
 
 	// The type of algorithm that is used for the encryption (such as aes128, aes192,
 	// or aes256).
@@ -94,6 +64,36 @@ type Encryption struct {
 	// This member is required.
 	RoleArn *string
 
+	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
+	// with the key for encrypting content. This parameter is not valid for static key
+	// encryption.
+	ConstantInitializationVector *string
+
+	// The value of one of the devices that you configured with your digital rights
+	// management (DRM) platform key provider. This parameter is required for SPEKE
+	// encryption and is not valid for static key encryption.
+	DeviceId *string
+
+	// The type of key that is used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key).
+	KeyType KeyType
+
+	// The AWS Region that the API Gateway proxy endpoint was created in. This
+	// parameter is required for SPEKE encryption and is not valid for static key
+	// encryption.
+	Region *string
+
+	// An identifier for the content. The service sends this value to the key server to
+	// identify the current endpoint. The resource ID is also known as the content ID.
+	// This parameter is required for SPEKE encryption and is not valid for static key
+	// encryption.
+	ResourceId *string
+
+	// The ARN of the secret that you created in AWS Secrets Manager to store the
+	// encryption key. This parameter is required for static key encryption and is not
+	// valid for SPEKE encryption.
+	SecretArn *string
+
 	// The URL from the API Gateway proxy that you set up to talk to your key server.
 	// This parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
@@ -103,13 +103,15 @@ type Encryption struct {
 // The settings for a flow entitlement.
 type Entitlement struct {
 
-	// An indication of whether the entitlement is enabled.
-	EntitlementStatus EntitlementStatus
-
 	// The ARN of the entitlement.
 	//
 	// This member is required.
 	EntitlementArn *string
+
+	// The name of the entitlement.
+	//
+	// This member is required.
+	Name *string
 
 	// The AWS account IDs that you want to share your content with. The receiving
 	// accounts (subscribers) will be allowed to create their own flow using your
@@ -118,73 +120,31 @@ type Entitlement struct {
 	// This member is required.
 	Subscribers []*string
 
-	// The name of the entitlement.
-	//
-	// This member is required.
-	Name *string
+	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	DataTransferSubscriberFeePercent *int32
+
+	// A description of the entitlement.
+	Description *string
 
 	// The type of encryption that will be used on the output that is associated with
 	// this entitlement.
 	Encryption *Encryption
 
-	// A description of the entitlement.
-	Description *string
-
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	// An indication of whether the entitlement is enabled.
+	EntitlementStatus EntitlementStatus
 }
 
 // The settings for source failover
 type FailoverConfig struct {
-	State State
 
 	// Search window time to look for dash-7 packets
 	RecoveryWindow *int32
+
+	State State
 }
 
 // The settings for a flow, including its source, outputs, and entitlements.
 type Flow struct {
-
-	// The settings for the source of the flow.
-	//
-	// This member is required.
-	Source *Source
-
-	// The name of the flow.
-	//
-	// This member is required.
-	Name *string
-
-	// The entitlements in this flow.
-	//
-	// This member is required.
-	Entitlements []*Entitlement
-
-	Sources []*Source
-
-	// The VPC Interfaces for this flow.
-	VpcInterfaces []*VpcInterface
-
-	// The IP address from which video will be sent to output destinations.
-	EgressIp *string
-
-	// The settings for source failover
-	SourceFailoverConfig *FailoverConfig
-
-	// The outputs in this flow.
-	//
-	// This member is required.
-	Outputs []*Output
-
-	// A description of the flow. This value is not used or seen outside of the current
-	// AWS Elemental MediaConnect account.
-	Description *string
-
-	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the
-	// flow.
-	//
-	// This member is required.
-	FlowArn *string
 
 	// The Availability Zone that you want to create the flow in. These options are
 	// limited to the Availability Zones within the current AWS.
@@ -192,21 +152,62 @@ type Flow struct {
 	// This member is required.
 	AvailabilityZone *string
 
+	// The entitlements in this flow.
+	//
+	// This member is required.
+	Entitlements []*Entitlement
+
+	// The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the
+	// flow.
+	//
+	// This member is required.
+	FlowArn *string
+
+	// The name of the flow.
+	//
+	// This member is required.
+	Name *string
+
+	// The outputs in this flow.
+	//
+	// This member is required.
+	Outputs []*Output
+
+	// The settings for the source of the flow.
+	//
+	// This member is required.
+	Source *Source
+
 	// The current status of the flow.
 	//
 	// This member is required.
 	Status Status
+
+	// A description of the flow. This value is not used or seen outside of the current
+	// AWS Elemental MediaConnect account.
+	Description *string
+
+	// The IP address from which video will be sent to output destinations.
+	EgressIp *string
+
+	// The settings for source failover
+	SourceFailoverConfig *FailoverConfig
+
+	Sources []*Source
+
+	// The VPC Interfaces for this flow.
+	VpcInterfaces []*VpcInterface
 }
 
 // The entitlements that you want to grant on a flow.
 type GrantEntitlementRequest struct {
 
-	// The name of the entitlement. This value must be unique within the current flow.
-	Name *string
-
-	// The type of encryption that will be used on the output that is associated with
-	// this entitlement.
-	Encryption *Encryption
+	// The AWS account IDs that you want to share your content with. The receiving
+	// accounts (subscribers) will be allowed to create their own flows using your
+	// content as the source.
+	//
+	// This member is required.
+	Subscribers []*string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
@@ -216,31 +217,31 @@ type GrantEntitlementRequest struct {
 	// user.
 	Description *string
 
+	// The type of encryption that will be used on the output that is associated with
+	// this entitlement.
+	Encryption *Encryption
+
 	// An indication of whether the new entitlement should be enabled or disabled as
 	// soon as it is created. If you don’t specify the entitlementStatus field in your
 	// request, MediaConnect sets it to ENABLED.
 	EntitlementStatus EntitlementStatus
 
-	// The AWS account IDs that you want to share your content with. The receiving
-	// accounts (subscribers) will be allowed to create their own flows using your
-	// content as the source.
-	//
-	// This member is required.
-	Subscribers []*string
+	// The name of the entitlement. This value must be unique within the current flow.
+	Name *string
 }
 
 // An entitlement that has been granted to you from other AWS accounts.
 type ListedEntitlement struct {
 
-	// The name of the entitlement.
-	//
-	// This member is required.
-	EntitlementName *string
-
 	// The ARN of the entitlement.
 	//
 	// This member is required.
 	EntitlementArn *string
+
+	// The name of the entitlement.
+	//
+	// This member is required.
+	EntitlementName *string
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
@@ -270,17 +271,17 @@ type ListedFlow struct {
 	// This member is required.
 	Name *string
 
-	// The current status of the flow.
-	//
-	// This member is required.
-	Status Status
-
 	// The type of source. This value is either owned (originated somewhere other than
 	// an AWS Elemental MediaConnect flow owned by another AWS account) or entitled
 	// (originated at an AWS Elemental MediaConnect flow owned by another AWS account).
 	//
 	// This member is required.
 	SourceType SourceType
+
+	// The current status of the flow.
+	//
+	// This member is required.
+	Status Status
 }
 
 // Messages that provide the state of the flow.
@@ -295,52 +296,61 @@ type Messages struct {
 // The settings for an output.
 type Output struct {
 
-	// The address where you want to send the output.
-	Destination *string
-
-	// The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant
-	// only for outputs that were added by creating a MediaLive input.
-	MediaLiveInputArn *string
-
-	// Attributes related to the transport stream that are used in the output.
-	Transport *Transport
+	// The name of the output. This value must be unique within the current flow.
+	//
+	// This member is required.
+	Name *string
 
 	// The ARN of the output.
 	//
 	// This member is required.
 	OutputArn *string
 
-	// The type of key used for the encryption. If no keyType is provided, the service
-	// will use the default setting (static-key).
-	Encryption *Encryption
-
-	// The name of the VPC interface attachment to use for this output.
-	VpcInterfaceAttachment *VpcInterfaceAttachment
+	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
+	DataTransferSubscriberFeePercent *int32
 
 	// A description of the output.
 	Description *string
 
-	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
-	DataTransferSubscriberFeePercent *int32
+	// The address where you want to send the output.
+	Destination *string
 
-	// The name of the output. This value must be unique within the current flow.
-	//
-	// This member is required.
-	Name *string
-
-	// The port to use when content is distributed to this output.
-	Port *int32
+	// The type of key used for the encryption. If no keyType is provided, the service
+	// will use the default setting (static-key).
+	Encryption *Encryption
 
 	// The ARN of the entitlement on the originator''s flow. This value is relevant
 	// only on entitled flows.
 	EntitlementArn *string
+
+	// The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant
+	// only for outputs that were added by creating a MediaLive input.
+	MediaLiveInputArn *string
+
+	// The port to use when content is distributed to this output.
+	Port *int32
+
+	// Attributes related to the transport stream that are used in the output.
+	Transport *Transport
+
+	// The name of the VPC interface attachment to use for this output.
+	VpcInterfaceAttachment *VpcInterfaceAttachment
 }
 
 // The settings for the source of the flow.
 type SetSourceRequest struct {
 
-	// The name of the VPC interface to use for this source.
-	VpcInterfaceName *string
+	// The type of encryption that is used on the content ingested from this source.
+	Decryption *Encryption
+
+	// A description for the source. This value is not used or seen outside of the
+	// current AWS Elemental MediaConnect account.
+	Description *string
+
+	// The ARN of the entitlement that allows you to subscribe to this flow. The
+	// entitlement is set by the flow originator, and the ARN is generated as part of
+	// the originator's flow.
+	EntitlementArn *string
 
 	// The port that the flow will be listening on for incoming content.
 	IngestPort *int32
@@ -348,98 +358,97 @@ type SetSourceRequest struct {
 	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 	MaxBitrate *int32
 
-	// The ARN of the entitlement that allows you to subscribe to this flow. The
-	// entitlement is set by the flow originator, and the ARN is generated as part of
-	// the originator's flow.
-	EntitlementArn *string
-
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
 	MaxLatency *int32
 
-	// The range of IP addresses that should be allowed to contribute content to your
-	// source. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
-	WhitelistCidr *string
-
 	// The name of the source.
 	Name *string
+
+	// The protocol that is used by the source.
+	Protocol Protocol
 
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
 
-	// The type of encryption that is used on the content ingested from this source.
-	Decryption *Encryption
+	// The name of the VPC interface to use for this source.
+	VpcInterfaceName *string
 
-	// The protocol that is used by the source.
-	Protocol Protocol
-
-	// A description for the source. This value is not used or seen outside of the
-	// current AWS Elemental MediaConnect account.
-	Description *string
+	// The range of IP addresses that should be allowed to contribute content to your
+	// source. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	WhitelistCidr *string
 }
 
 // The settings for the source of the flow.
 type Source struct {
+
+	// The name of the source.
+	//
+	// This member is required.
+	Name *string
 
 	// The ARN of the source.
 	//
 	// This member is required.
 	SourceArn *string
 
-	// The name of the source.
-	//
-	// This member is required.
-	Name *string
-
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent *int32
 
-	// The range of IP addresses that should be allowed to contribute content to your
-	// source. These IP addresses should be in the form of a Classless Inter-Domain
-	// Routing (CIDR) block; for example, 10.0.0.0/16.
-	WhitelistCidr *string
+	// The type of encryption that is used on the content ingested from this source.
+	Decryption *Encryption
 
 	// A description for the source. This value is not used or seen outside of the
 	// current AWS Elemental MediaConnect account.
 	Description *string
-
-	// The name of the VPC Interface this Source is configured with.
-	VpcInterfaceName *string
-
-	// Attributes related to the transport stream that are used in the source.
-	Transport *Transport
-
-	// The type of encryption that is used on the content ingested from this source.
-	Decryption *Encryption
 
 	// The ARN of the entitlement that allows you to subscribe to content that comes
 	// from another AWS account. The entitlement is set by the content originator and
 	// the ARN is generated as part of the originator's flow.
 	EntitlementArn *string
 
+	// The IP address that the flow will be listening on for incoming content.
+	IngestIp *string
+
 	// The port that the flow will be listening on for incoming content.
 	IngestPort *int32
 
-	// The IP address that the flow will be listening on for incoming content.
-	IngestIp *string
+	// Attributes related to the transport stream that are used in the source.
+	Transport *Transport
+
+	// The name of the VPC Interface this Source is configured with.
+	VpcInterfaceName *string
+
+	// The range of IP addresses that should be allowed to contribute content to your
+	// source. These IP addresses should be in the form of a Classless Inter-Domain
+	// Routing (CIDR) block; for example, 10.0.0.0/16.
+	WhitelistCidr *string
 }
 
 // Attributes related to the transport stream that are used in a source or output.
 type Transport struct {
 
-	// The remote ID for the Zixi-pull stream.
-	RemoteId *string
+	// The protocol that is used by the source or output.
+	//
+	// This member is required.
+	Protocol Protocol
 
 	// The range of IP addresses that should be allowed to initiate output requests to
 	// this flow. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	CidrAllowList []*string
 
+	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
+	MaxBitrate *int32
+
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
 	MaxLatency *int32
+
+	// The remote ID for the Zixi-pull stream.
+	RemoteId *string
 
 	// The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.
 	SmoothingLatency *int32
@@ -447,50 +456,33 @@ type Transport struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
-
-	// The protocol that is used by the source or output.
-	//
-	// This member is required.
-	Protocol Protocol
-
-	// The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
-	MaxBitrate *int32
 }
 
 // Information about the encryption of the flow.
 type UpdateEncryption struct {
 
-	// The AWS Region that the API Gateway proxy endpoint was created in. This
-	// parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
-	Region *string
-
-	// The ARN of the role that you created during setup (when you set up AWS Elemental
-	// MediaConnect as a trusted entity).
-	RoleArn *string
-
-	// The URL from the API Gateway proxy that you set up to talk to your key server.
-	// This parameter is required for SPEKE encryption and is not valid for static key
-	// encryption.
-	Url *string
-
 	// The type of algorithm that is used for the encryption (such as aes128, aes192,
 	// or aes256).
 	Algorithm Algorithm
 
-	// The type of key that is used for the encryption. If no keyType is provided, the
-	// service will use the default setting (static-key).
-	KeyType KeyType
+	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
+	// with the key for encrypting content. This parameter is not valid for static key
+	// encryption.
+	ConstantInitializationVector *string
 
 	// The value of one of the devices that you configured with your digital rights
 	// management (DRM) platform key provider. This parameter is required for SPEKE
 	// encryption and is not valid for static key encryption.
 	DeviceId *string
 
-	// A 128-bit, 16-byte hex value represented by a 32-character string, to be used
-	// with the key for encrypting content. This parameter is not valid for static key
+	// The type of key that is used for the encryption. If no keyType is provided, the
+	// service will use the default setting (static-key).
+	KeyType KeyType
+
+	// The AWS Region that the API Gateway proxy endpoint was created in. This
+	// parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
-	ConstantInitializationVector *string
+	Region *string
 
 	// An identifier for the content. The service sends this value to the key server to
 	// identify the current endpoint. The resource ID is also known as the content ID.
@@ -498,18 +490,28 @@ type UpdateEncryption struct {
 	// encryption.
 	ResourceId *string
 
+	// The ARN of the role that you created during setup (when you set up AWS Elemental
+	// MediaConnect as a trusted entity).
+	RoleArn *string
+
 	// The ARN of the secret that you created in AWS Secrets Manager to store the
 	// encryption key. This parameter is required for static key encryption and is not
 	// valid for SPEKE encryption.
 	SecretArn *string
+
+	// The URL from the API Gateway proxy that you set up to talk to your key server.
+	// This parameter is required for SPEKE encryption and is not valid for static key
+	// encryption.
+	Url *string
 }
 
 // The settings for source failover
 type UpdateFailoverConfig struct {
-	State State
 
 	// Recovery window time to look for dash-7 packets
 	RecoveryWindow *int32
+
+	State State
 }
 
 // The settings for a VPC Source.
@@ -525,6 +527,11 @@ type VpcInterface struct {
 	// This member is required.
 	NetworkInterfaceIds []*string
 
+	// Role Arn MediaConnect can assumes to create ENIs in customer's account
+	//
+	// This member is required.
+	RoleArn *string
+
 	// Security Group IDs to be used on ENI.
 	//
 	// This member is required.
@@ -534,11 +541,6 @@ type VpcInterface struct {
 	//
 	// This member is required.
 	SubnetId *string
-
-	// Role Arn MediaConnect can assumes to create ENIs in customer's account
-	//
-	// This member is required.
-	RoleArn *string
 }
 
 // The settings for attaching a VPC interface to an output.
@@ -551,24 +553,24 @@ type VpcInterfaceAttachment struct {
 // Desired VPC Interface for a Flow
 type VpcInterfaceRequest struct {
 
-	// Subnet must be in the AZ of the Flow
+	// The name of the VPC Interface. This value must be unique within the current
+	// flow.
 	//
 	// This member is required.
-	SubnetId *string
-
-	// Security Group IDs to be used on ENI.
-	//
-	// This member is required.
-	SecurityGroupIds []*string
+	Name *string
 
 	// Role Arn MediaConnect can assumes to create ENIs in customer's account
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The name of the VPC Interface. This value must be unique within the current
-	// flow.
+	// Security Group IDs to be used on ENI.
 	//
 	// This member is required.
-	Name *string
+	SecurityGroupIds []*string
+
+	// Subnet must be in the AZ of the Flow
+	//
+	// This member is required.
+	SubnetId *string
 }

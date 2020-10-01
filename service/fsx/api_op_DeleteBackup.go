@@ -78,11 +78,11 @@ type DeleteBackupInput struct {
 // The response object for DeleteBackup operation.
 type DeleteBackupOutput struct {
 
-	// The lifecycle of the backup. Should be DELETED.
-	Lifecycle types.BackupLifecycle
-
 	// The ID of the backup deleted.
 	BackupId *string
+
+	// The lifecycle of the backup. Should be DELETED.
+	Lifecycle types.BackupLifecycle
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

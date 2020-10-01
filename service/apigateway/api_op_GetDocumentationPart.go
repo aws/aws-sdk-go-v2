@@ -63,16 +63,16 @@ type GetDocumentationPartInput struct {
 	// This member is required.
 	DocumentationPartId *string
 
-	TemplateSkipList []*string
-
-	Template *bool
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
 	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
 
 	Title *string
 }

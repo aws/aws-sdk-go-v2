@@ -63,15 +63,15 @@ type RequestServiceQuotaIncreaseInput struct {
 	// This member is required.
 	DesiredValue *float64
 
-	// Specifies the service that you want to use.
-	//
-	// This member is required.
-	ServiceCode *string
-
 	// Specifies the service quota that you want to use.
 	//
 	// This member is required.
 	QuotaCode *string
+
+	// Specifies the service that you want to use.
+	//
+	// This member is required.
+	ServiceCode *string
 }
 
 type RequestServiceQuotaIncreaseOutput struct {

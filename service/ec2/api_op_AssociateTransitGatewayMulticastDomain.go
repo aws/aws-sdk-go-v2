@@ -70,12 +70,12 @@ type AssociateTransitGatewayMulticastDomainInput struct {
 	// The IDs of the subnets to associate with the transit gateway multicast domain.
 	SubnetIds []*string
 
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
-
 	// The ID of the transit gateway attachment to associate with the transit gateway
 	// multicast domain.
 	TransitGatewayAttachmentId *string
+
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainId *string
 }
 
 type AssociateTransitGatewayMulticastDomainOutput struct {

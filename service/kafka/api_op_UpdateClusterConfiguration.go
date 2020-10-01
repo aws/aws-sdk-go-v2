@@ -63,25 +63,25 @@ type UpdateClusterConfigurationInput struct {
 	// This member is required.
 	ClusterArn *string
 
-	// The version of the cluster that needs to be updated.
-	//
-	// This member is required.
-	CurrentVersion *string
-
 	// Represents the configuration that you want MSK to use for the brokers in a
 	// cluster.
 	//
 	// This member is required.
 	ConfigurationInfo *types.ConfigurationInfo
+
+	// The version of the cluster that needs to be updated.
+	//
+	// This member is required.
+	CurrentVersion *string
 }
 
 type UpdateClusterConfigurationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the cluster operation.
-	ClusterOperationArn *string
-
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
+
+	// The Amazon Resource Name (ARN) of the cluster operation.
+	ClusterOperationArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

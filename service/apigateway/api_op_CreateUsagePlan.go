@@ -67,20 +67,6 @@ type CreateUsagePlanInput struct {
 	// This member is required.
 	Name *string
 
-	Title *string
-
-	Template *bool
-
-	TemplateSkipList []*string
-
-	// The throttling limits of the usage plan.
-	Throttle *types.ThrottleSettings
-
-	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
-	// tag key can be up to 128 characters and must not start with aws:. The tag value
-	// can be up to 256 characters.
-	Tags map[string]*string
-
 	// The associated API stages of the usage plan.
 	ApiStages []*types.ApiStage
 
@@ -89,6 +75,20 @@ type CreateUsagePlanInput struct {
 
 	// The quota of the usage plan.
 	Quota *types.QuotaSettings
+
+	// The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The
+	// tag key can be up to 128 characters and must not start with aws:. The tag value
+	// can be up to 256 characters.
+	Tags map[string]*string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	// The throttling limits of the usage plan.
+	Throttle *types.ThrottleSettings
+
+	Title *string
 }
 
 // Represents a usage plan than can specify who can assess associated API stages
@@ -98,17 +98,17 @@ type CreateUsagePlanInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type CreateUsagePlanOutput struct {
 
+	// The associated API stages of a usage plan.
+	ApiStages []*types.ApiStage
+
+	// The description of a usage plan.
+	Description *string
+
 	// The identifier of a UsagePlan () resource.
 	Id *string
 
-	// The request throttle limits of a usage plan.
-	Throttle *types.ThrottleSettings
-
 	// The name of a usage plan.
 	Name *string
-
-	// The associated API stages of a usage plan.
-	ApiStages []*types.ApiStage
 
 	// The AWS Markeplace product identifier to associate with the usage plan as a SaaS
 	// product on AWS Marketplace.
@@ -120,8 +120,8 @@ type CreateUsagePlanOutput struct {
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
 
-	// The description of a usage plan.
-	Description *string
+	// The request throttle limits of a usage plan.
+	Throttle *types.ThrottleSettings
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

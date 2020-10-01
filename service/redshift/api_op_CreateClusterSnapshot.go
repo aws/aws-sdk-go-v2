@@ -62,14 +62,6 @@ func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateCluste
 //
 type CreateClusterSnapshotInput struct {
 
-	// The number of days that a manual snapshot is retained. If the value is -1, the
-	// manual snapshot is retained indefinitely.  <p>The value must be either -1 or an
-	// integer between 1 and 3,653.</p> <p>The default value is -1.</p>
-	ManualSnapshotRetentionPeriod *int32
-
-	// A list of tag instances.
-	Tags []*types.Tag
-
 	// The cluster identifier for which you want a snapshot.
 	//
 	// This member is required.
@@ -93,6 +85,14 @@ type CreateClusterSnapshotInput struct {
 	//
 	// This member is required.
 	SnapshotIdentifier *string
+
+	// The number of days that a manual snapshot is retained. If the value is -1, the
+	// manual snapshot is retained indefinitely.  <p>The value must be either -1 or an
+	// integer between 1 and 3,653.</p> <p>The default value is -1.</p>
+	ManualSnapshotRetentionPeriod *int32
+
+	// A list of tag instances.
+	Tags []*types.Tag
 }
 
 type CreateClusterSnapshotOutput struct {

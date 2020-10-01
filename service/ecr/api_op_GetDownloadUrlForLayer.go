@@ -61,10 +61,6 @@ func (c *Client) GetDownloadUrlForLayer(ctx context.Context, params *GetDownload
 
 type GetDownloadUrlForLayerInput struct {
 
-	// The AWS account ID associated with the registry that contains the image layer to
-	// download. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string
-
 	// The digest of the image layer to download.
 	//
 	// This member is required.
@@ -74,15 +70,19 @@ type GetDownloadUrlForLayerInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The AWS account ID associated with the registry that contains the image layer to
+	// download. If you do not specify a registry, the default registry is assumed.
+	RegistryId *string
 }
 
 type GetDownloadUrlForLayerOutput struct {
 
-	// The digest of the image layer to download.
-	LayerDigest *string
-
 	// The pre-signed Amazon S3 download URL for the requested layer.
 	DownloadUrl *string
+
+	// The digest of the image layer to download.
+	LayerDigest *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

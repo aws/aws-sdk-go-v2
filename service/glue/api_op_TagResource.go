@@ -59,17 +59,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// Tags to add to this resource.
-	//
-	// This member is required.
-	TagsToAdd map[string]*string
-
 	// The ARN of the AWS Glue resource to which to add the tags. For more information
 	// about AWS Glue resource ARNs, see the AWS Glue ARN string pattern
 	// (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id).
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// Tags to add to this resource.
+	//
+	// This member is required.
+	TagsToAdd map[string]*string
 }
 
 type TagResourceOutput struct {

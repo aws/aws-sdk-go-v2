@@ -57,15 +57,15 @@ func (c *Client) GetDatabase(ctx context.Context, params *GetDatabaseInput, optF
 
 type GetDatabaseInput struct {
 
-	// The name of the database to return.
-	//
-	// This member is required.
-	DatabaseName *string
-
 	// The name of the data catalog that contains the database to return.
 	//
 	// This member is required.
 	CatalogName *string
+
+	// The name of the database to return.
+	//
+	// This member is required.
+	DatabaseName *string
 }
 
 type GetDatabaseOutput struct {

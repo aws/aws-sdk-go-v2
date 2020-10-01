@@ -79,9 +79,6 @@ func (c *Client) StartImportLabelsTaskRun(ctx context.Context, params *StartImpo
 
 type StartImportLabelsTaskRunInput struct {
 
-	// Indicates whether to overwrite your existing labels.
-	ReplaceAllLabels *bool
-
 	// The Amazon Simple Storage Service (Amazon S3) path from where you import the
 	// labels.
 	//
@@ -92,6 +89,9 @@ type StartImportLabelsTaskRunInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	// Indicates whether to overwrite your existing labels.
+	ReplaceAllLabels *bool
 }
 
 type StartImportLabelsTaskRunOutput struct {

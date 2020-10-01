@@ -74,14 +74,14 @@ func (c *Client) EnableSecurityHub(ctx context.Context, params *EnableSecurityHu
 
 type EnableSecurityHubInput struct {
 
-	// The tags to add to the hub resource when you enable Security Hub.
-	Tags map[string]*string
-
 	// Whether to enable the security standards that Security Hub has designated as
 	// automatically enabled. If you do not provide a value for EnableDefaultStandards,
 	// it is set to true. To not enable the automatically enabled standards, set
 	// EnableDefaultStandards to false.
 	EnableDefaultStandards *bool
+
+	// The tags to add to the hub resource when you enable Security Hub.
+	Tags map[string]*string
 }
 
 type EnableSecurityHubOutput struct {

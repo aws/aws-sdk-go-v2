@@ -68,21 +68,21 @@ type DescribeLocationNfsInput struct {
 // DescribeLocationNfsResponse
 type DescribeLocationNfsOutput struct {
 
+	// The time that the NFS location was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the NFS location that was described.
+	LocationArn *string
+
 	// The URL of the source NFS location that was described.
 	LocationUri *string
 
 	// The NFS mount options that DataSync used to mount your NFS share.
 	MountOptions *types.NfsMountOptions
 
-	// The Amazon Resource Name (ARN) of the NFS location that was described.
-	LocationArn *string
-
 	// A list of Amazon Resource Names (ARNs) of agents to use for a Network File
 	// System (NFS) location.
 	OnPremConfig *types.OnPremConfig
-
-	// The time that the NFS location was created.
-	CreationTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

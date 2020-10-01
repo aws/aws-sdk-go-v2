@@ -73,11 +73,11 @@ type ListHoursOfOperationsInput struct {
 
 type ListHoursOfOperationsOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
-	NextToken *string
-
 	// Information about the hours of operation.
 	HoursOfOperationSummaryList []*types.HoursOfOperationSummary
+
+	// If there are additional results, this is the token for the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

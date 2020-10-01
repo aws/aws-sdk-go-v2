@@ -63,16 +63,16 @@ func (c *Client) DeleteStream(ctx context.Context, params *DeleteStreamInput, op
 
 type DeleteStreamInput struct {
 
+	// The Amazon Resource Name (ARN) of the stream that you want to delete.
+	//
+	// This member is required.
+	StreamARN *string
+
 	// Optional: The version of the stream that you want to delete. Specify the version
 	// as a safeguard to ensure that your are deleting the correct stream. To get the
 	// stream version, use the DescribeStream API. If not specified, only the
 	// CreationTime is checked before deleting the stream.
 	CurrentVersion *string
-
-	// The Amazon Resource Name (ARN) of the stream that you want to delete.
-	//
-	// This member is required.
-	StreamARN *string
 }
 
 type DeleteStreamOutput struct {

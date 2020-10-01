@@ -114,11 +114,6 @@ func (c *Client) Encrypt(ctx context.Context, params *EncryptInput, optFns ...fu
 
 type EncryptInput struct {
 
-	// A list of grant tokens. For more information, see Grant Tokens
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
-	GrantTokens []*string
-
 	// A unique identifier for the customer master key (CMK). To specify a CMK, use its
 	// key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an
 	// alias name, prefix it with "alias/". To specify a CMK in a different AWS
@@ -143,6 +138,11 @@ type EncryptInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Data to be encrypted.
+	//
+	// This member is required.
+	Plaintext []byte
+
 	// Specifies the encryption algorithm that AWS KMS will use to encrypt the
 	// plaintext message. The algorithm must be compatible with the CMK that you
 	// specify. This parameter is required only for asymmetric CMKs. The default value,
@@ -164,18 +164,13 @@ type EncryptInput struct {
 	// in the AWS Key Management Service Developer Guide.
 	EncryptionContext map[string]*string
 
-	// Data to be encrypted.
-	//
-	// This member is required.
-	Plaintext []byte
+	// A list of grant tokens. For more information, see Grant Tokens
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
+	// in the AWS Key Management Service Developer Guide.
+	GrantTokens []*string
 }
 
 type EncryptOutput struct {
-
-	// The Amazon Resource Name (key ARN
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the CMK that was used to encrypt the plaintext.
-	KeyId *string
 
 	// The encrypted plaintext. When you use the HTTP API or the AWS CLI, the value is
 	// Base64-encoded. Otherwise, it is not Base64-encoded.
@@ -183,6 +178,11 @@ type EncryptOutput struct {
 
 	// The encryption algorithm that was used to encrypt the plaintext.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
+
+	// The Amazon Resource Name (key ARN
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
+	// of the CMK that was used to encrypt the plaintext.
+	KeyId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

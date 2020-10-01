@@ -56,15 +56,15 @@ func (c *Client) DeleteEventsConfiguration(ctx context.Context, params *DeleteEv
 
 type DeleteEventsConfigurationInput struct {
 
-	// The bot ID.
-	//
-	// This member is required.
-	BotId *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The bot ID.
+	//
+	// This member is required.
+	BotId *string
 }
 
 type DeleteEventsConfigurationOutput struct {

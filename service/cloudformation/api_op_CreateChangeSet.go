@@ -75,16 +75,21 @@ func (c *Client) CreateChangeSet(ctx context.Context, params *CreateChangeSetInp
 // The input for the CreateChangeSet () action.
 type CreateChangeSetInput struct {
 
-	// The resources to import into your stack.
-	ResourcesToImport []*types.ResourceToImport
+	// The name of the change set. The name must be unique among all change sets that
+	// are associated with the specified stack. A change set name can contain only
+	// alphanumeric, case sensitive characters and hyphens. It must start with an
+	// alphabetic character and cannot exceed 128 characters.
+	//
+	// This member is required.
+	ChangeSetName *string
 
-	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
-	// these tags to resources in the stack. You can specify a maximum of 50 tags.
-	Tags []*types.Tag
-
-	// The rollback triggers for AWS CloudFormation to monitor during stack creation
-	// and updating operations, and for the specified monitoring period afterwards.
-	RollbackConfiguration *types.RollbackConfiguration
+	// The name or the unique ID of the stack for which you are creating a change set.
+	// AWS CloudFormation generates the change set by comparing this stack's
+	// information with the information that you submit, such as a modified template or
+	// different parameter input values.
+	//
+	// This member is required.
+	StackName *string
 
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to create the stack.
@@ -167,48 +172,32 @@ type CreateChangeSetInput struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
 	Capabilities []types.Capability
 
+	// The type of change set operation. To create a change set for a new stack,
+	// specify CREATE. To create a change set for an existing stack, specify UPDATE. To
+	// create a change set for an import operation, specify IMPORT. If you create a
+	// change set for a new stack, AWS Cloudformation creates a stack with a unique
+	// stack ID, but no template or resources. The stack will be in the
+	// REVIEW_IN_PROGRESS
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995)
+	// state until you execute the change set. By default, AWS CloudFormation specifies
+	// UPDATE. You can't use the UPDATE type to create a change set for a new stack or
+	// the CREATE type to create a change set for an existing stack.
+	ChangeSetType types.ChangeSetType
+
+	// A unique identifier for this CreateChangeSet request. Specify this token if you
+	// plan to retry requests so that AWS CloudFormation knows that you're not
+	// attempting to create another change set with the same name. You might retry
+	// CreateChangeSet requests to ensure that AWS CloudFormation successfully received
+	// them.
+	ClientToken *string
+
+	// A description to help you identify this change set.
+	Description *string
+
 	// The Amazon Resource Names (ARNs) of Amazon Simple Notification Service (Amazon
 	// SNS) topics that AWS CloudFormation associates with the stack. To remove all
 	// associated notification topics, specify an empty list.
 	NotificationARNs []*string
-
-	// The location of the file that contains the revised template. The URL must point
-	// to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS
-	// CloudFormation generates the change set by comparing this template with the
-	// stack that you specified. Conditional: You must specify only TemplateBody or
-	// TemplateURL.
-	TemplateURL *string
-
-	// The name of the change set. The name must be unique among all change sets that
-	// are associated with the specified stack. A change set name can contain only
-	// alphanumeric, case sensitive characters and hyphens. It must start with an
-	// alphabetic character and cannot exceed 128 characters.
-	//
-	// This member is required.
-	ChangeSetName *string
-
-	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
-	// role that AWS CloudFormation assumes when executing the change set. AWS
-	// CloudFormation uses the role's credentials to make calls on your behalf. AWS
-	// CloudFormation uses this role for all future operations on the stack. As long as
-	// users have permission to operate on the stack, AWS CloudFormation uses this role
-	// even if the users don't have permission to pass it. Ensure that the role grants
-	// least privilege. If you don't specify a value, AWS CloudFormation uses the role
-	// that was previously associated with the stack. If no role is available, AWS
-	// CloudFormation uses a temporary session that is generated from your user
-	// credentials.
-	RoleARN *string
-
-	// A structure that contains the body of the revised template, with a minimum
-	// length of 1 byte and a maximum length of 51,200 bytes. AWS CloudFormation
-	// generates the change set by comparing this template with the template of the
-	// stack that you specified. Conditional: You must specify only TemplateBody or
-	// TemplateURL.
-	TemplateBody *string
-
-	// Whether to reuse the template that is associated with the stack to create the
-	// change set.
-	UsePreviousTemplate *bool
 
 	// A list of Parameter structures that specify input parameters for the change set.
 	// For more information, see the Parameter () data type.
@@ -226,45 +215,56 @@ type CreateChangeSetInput struct {
 	// in the AWS CloudFormation User Guide.
 	ResourceTypes []*string
 
-	// A description to help you identify this change set.
-	Description *string
+	// The resources to import into your stack.
+	ResourcesToImport []*types.ResourceToImport
 
-	// The name or the unique ID of the stack for which you are creating a change set.
-	// AWS CloudFormation generates the change set by comparing this stack's
-	// information with the information that you submit, such as a modified template or
-	// different parameter input values.
-	//
-	// This member is required.
-	StackName *string
+	// The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM)
+	// role that AWS CloudFormation assumes when executing the change set. AWS
+	// CloudFormation uses the role's credentials to make calls on your behalf. AWS
+	// CloudFormation uses this role for all future operations on the stack. As long as
+	// users have permission to operate on the stack, AWS CloudFormation uses this role
+	// even if the users don't have permission to pass it. Ensure that the role grants
+	// least privilege. If you don't specify a value, AWS CloudFormation uses the role
+	// that was previously associated with the stack. If no role is available, AWS
+	// CloudFormation uses a temporary session that is generated from your user
+	// credentials.
+	RoleARN *string
 
-	// A unique identifier for this CreateChangeSet request. Specify this token if you
-	// plan to retry requests so that AWS CloudFormation knows that you're not
-	// attempting to create another change set with the same name. You might retry
-	// CreateChangeSet requests to ensure that AWS CloudFormation successfully received
-	// them.
-	ClientToken *string
+	// The rollback triggers for AWS CloudFormation to monitor during stack creation
+	// and updating operations, and for the specified monitoring period afterwards.
+	RollbackConfiguration *types.RollbackConfiguration
 
-	// The type of change set operation. To create a change set for a new stack,
-	// specify CREATE. To create a change set for an existing stack, specify UPDATE. To
-	// create a change set for an import operation, specify IMPORT. If you create a
-	// change set for a new stack, AWS Cloudformation creates a stack with a unique
-	// stack ID, but no template or resources. The stack will be in the
-	// REVIEW_IN_PROGRESS
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995)
-	// state until you execute the change set. By default, AWS CloudFormation specifies
-	// UPDATE. You can't use the UPDATE type to create a change set for a new stack or
-	// the CREATE type to create a change set for an existing stack.
-	ChangeSetType types.ChangeSetType
+	// Key-value pairs to associate with this stack. AWS CloudFormation also propagates
+	// these tags to resources in the stack. You can specify a maximum of 50 tags.
+	Tags []*types.Tag
+
+	// A structure that contains the body of the revised template, with a minimum
+	// length of 1 byte and a maximum length of 51,200 bytes. AWS CloudFormation
+	// generates the change set by comparing this template with the template of the
+	// stack that you specified. Conditional: You must specify only TemplateBody or
+	// TemplateURL.
+	TemplateBody *string
+
+	// The location of the file that contains the revised template. The URL must point
+	// to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS
+	// CloudFormation generates the change set by comparing this template with the
+	// stack that you specified. Conditional: You must specify only TemplateBody or
+	// TemplateURL.
+	TemplateURL *string
+
+	// Whether to reuse the template that is associated with the stack to create the
+	// change set.
+	UsePreviousTemplate *bool
 }
 
 // The output for the CreateChangeSet () action.
 type CreateChangeSetOutput struct {
 
-	// The unique ID of the stack.
-	StackId *string
-
 	// The Amazon Resource Name (ARN) of the change set.
 	Id *string
+
+	// The unique ID of the stack.
+	StackId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

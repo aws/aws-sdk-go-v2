@@ -66,20 +66,16 @@ type GetUserInput struct {
 // about the user.
 type GetUserOutput struct {
 
-	// The user name of the user you wish to retrieve from the get user request.
-	//
-	// This member is required.
-	Username *string
-
-	// The MFA options that are enabled for the user. The possible values in this list
-	// are SMS_MFA and SOFTWARE_TOKEN_MFA.
-	UserMFASettingList []*string
-
 	// An array of name-value pairs representing user attributes. For custom
 	// attributes, you must prepend the custom: prefix to the attribute name.
 	//
 	// This member is required.
 	UserAttributes []*types.AttributeType
+
+	// The user name of the user you wish to retrieve from the get user request.
+	//
+	// This member is required.
+	Username *string
 
 	// This response parameter is no longer supported. It provides information only
 	// about SMS MFA configurations. It doesn't provide information about TOTP software
@@ -90,6 +86,10 @@ type GetUserOutput struct {
 
 	// The user's preferred MFA setting.
 	PreferredMfaSetting *string
+
+	// The MFA options that are enabled for the user. The possible values in this list
+	// are SMS_MFA and SOFTWARE_TOKEN_MFA.
+	UserMFASettingList []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

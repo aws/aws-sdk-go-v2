@@ -56,6 +56,9 @@ func (c *Client) DescribeBrokerEngineTypes(ctx context.Context, params *Describe
 
 type DescribeBrokerEngineTypesInput struct {
 
+	// Filter response by engine type.
+	EngineType *string
+
 	// The maximum number of engine types that Amazon MQ can return per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults *int32
@@ -63,16 +66,9 @@ type DescribeBrokerEngineTypesInput struct {
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
-
-	// Filter response by engine type.
-	EngineType *string
 }
 
 type DescribeBrokerEngineTypesOutput struct {
-
-	// The token that specifies the next page of results Amazon MQ should return. To
-	// request the first page, leave nextToken empty.
-	NextToken *string
 
 	// List of available engine types and versions.
 	BrokerEngineTypes []*types.BrokerEngineType
@@ -80,6 +76,10 @@ type DescribeBrokerEngineTypesOutput struct {
 	// Required. The maximum number of engine types that can be returned per page (20
 	// by default). This value must be an integer from 5 to 100.
 	MaxResults *int32
+
+	// The token that specifies the next page of results Amazon MQ should return. To
+	// request the first page, leave nextToken empty.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

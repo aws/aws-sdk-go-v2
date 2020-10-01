@@ -74,15 +74,15 @@ type DescribeUploadBufferOutput struct {
 	// DiskIds array is empty.
 	DiskIds []*string
 
-	// The total number of bytes being used in the gateway's upload buffer.
-	UploadBufferUsedInBytes *int64
-
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
 	// The total number of bytes allocated in the gateway's as upload buffer.
 	UploadBufferAllocatedInBytes *int64
+
+	// The total number of bytes being used in the gateway's upload buffer.
+	UploadBufferUsedInBytes *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,14 +71,14 @@ type ListQualificationTypesInput struct {
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
+	// Specifies that only Qualification types that the Requester created are returned.
+	// If false, the operation returns all Qualification types.
+	MustBeOwnedByCaller *bool
+
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
-
-	// Specifies that only Qualification types that the Requester created are returned.
-	// If false, the operation returns all Qualification types.
-	MustBeOwnedByCaller *bool
 
 	// A text query against all of the searchable attributes of Qualification types.
 	Query *string
@@ -91,12 +91,12 @@ type ListQualificationTypesOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The list of QualificationType elements returned by the query.
-	QualificationTypes []*types.QualificationType
-
 	// The number of Qualification types on this page in the filtered results list,
 	// equivalent to the number of types this operation returns.
 	NumResults *int32
+
+	// The list of QualificationType elements returned by the query.
+	QualificationTypes []*types.QualificationType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

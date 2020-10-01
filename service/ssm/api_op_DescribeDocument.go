@@ -57,11 +57,6 @@ func (c *Client) DescribeDocument(ctx context.Context, params *DescribeDocumentI
 
 type DescribeDocumentInput struct {
 
-	// An optional field specifying the version of the artifact associated with the
-	// document. For example, "Release 12, Update 6". This value is unique across all
-	// versions of a document, and cannot be changed.
-	VersionName *string
-
 	// The name of the Systems Manager document.
 	//
 	// This member is required.
@@ -70,6 +65,11 @@ type DescribeDocumentInput struct {
 	// The document version for which you want information. Can be a specific version
 	// or the default version.
 	DocumentVersion *string
+
+	// An optional field specifying the version of the artifact associated with the
+	// document. For example, "Release 12, Update 6". This value is unique across all
+	// versions of a document, and cannot be changed.
+	VersionName *string
 }
 
 type DescribeDocumentOutput struct {

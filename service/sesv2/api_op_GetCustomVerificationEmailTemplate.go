@@ -71,22 +71,22 @@ type GetCustomVerificationEmailTemplateInput struct {
 // The following elements are returned by the service.
 type GetCustomVerificationEmailTemplateOutput struct {
 
+	// The URL that the recipient of the verification email is sent to if his or her
+	// address is not successfully verified.
+	FailureRedirectionURL *string
+
 	// The email address that the custom verification email is sent from.
 	FromEmailAddress *string
-
-	// The content of the custom verification email.
-	TemplateContent *string
 
 	// The URL that the recipient of the verification email is sent to if his or her
 	// address is successfully verified.
 	SuccessRedirectionURL *string
 
+	// The content of the custom verification email.
+	TemplateContent *string
+
 	// The name of the custom verification email template.
 	TemplateName *string
-
-	// The URL that the recipient of the verification email is sent to if his or her
-	// address is not successfully verified.
-	FailureRedirectionURL *string
 
 	// The subject line of the custom verification email.
 	TemplateSubject *string

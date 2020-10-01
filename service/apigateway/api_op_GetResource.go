@@ -59,14 +59,15 @@ func (c *Client) GetResource(ctx context.Context, params *GetResourceInput, optF
 // Request to list information about a resource.
 type GetResourceInput struct {
 
+	// [Required] The identifier for the Resource () resource.
+	//
+	// This member is required.
+	ResourceId *string
+
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
-
-	Name *string
-
-	Title *string
 
 	// A query parameter to retrieve the specified resources embedded in the returned
 	// Resource () representation in the response. This embed parameter value is a list
@@ -76,14 +77,13 @@ type GetResourceInput struct {
 	// /restapis/{restapi_id}/resources/{resource_id}?embed=methods.
 	Embed []*string
 
-	TemplateSkipList []*string
+	Name *string
 
 	Template *bool
 
-	// [Required] The identifier for the Resource () resource.
-	//
-	// This member is required.
-	ResourceId *string
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents an API resource. Create an API
@@ -92,6 +92,15 @@ type GetResourceOutput struct {
 
 	// The resource's identifier.
 	Id *string
+
+	// The parent resource's identifier.
+	ParentId *string
+
+	// The full path for this resource.
+	Path *string
+
+	// The last path segment for this resource.
+	PathPart *string
 
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
@@ -173,15 +182,6 @@ type GetResourceOutput struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*types.Method
-
-	// The parent resource's identifier.
-	ParentId *string
-
-	// The full path for this resource.
-	Path *string
-
-	// The last path segment for this resource.
-	PathPart *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

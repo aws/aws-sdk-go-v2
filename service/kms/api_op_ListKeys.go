@@ -57,20 +57,23 @@ func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...
 
 type ListKeysInput struct {
 
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string
-
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, AWS KMS does not return more than the specified number of
 	// items, but it might return fewer. This value is optional. If you include a
 	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
 	// it defaults to 100.
 	Limit *int32
+
+	// Use this parameter in a subsequent request after you receive a response with
+	// truncated results. Set it to the value of NextMarker from the truncated response
+	// you just received.
+	Marker *string
 }
 
 type ListKeysOutput struct {
+
+	// A list of customer master keys (CMKs).
+	Keys []*types.KeyListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent request.
@@ -81,9 +84,6 @@ type ListKeysOutput struct {
 	// value of the NextMarker element in thisresponse to the Marker parameter in a
 	// subsequent request.
 	Truncated *bool
-
-	// A list of customer master keys (CMKs).
-	Keys []*types.KeyListEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

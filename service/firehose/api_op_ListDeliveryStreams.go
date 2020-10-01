@@ -63,11 +63,6 @@ func (c *Client) ListDeliveryStreams(ctx context.Context, params *ListDeliverySt
 
 type ListDeliveryStreamsInput struct {
 
-	// The list of delivery streams returned by this call to ListDeliveryStreams will
-	// start with the delivery stream whose name comes alphabetically immediately after
-	// the name you specify in ExclusiveStartDeliveryStreamName.
-	ExclusiveStartDeliveryStreamName *string
-
 	// The delivery stream type. This can be one of the following values:
 	//
 	//     *
@@ -81,21 +76,26 @@ type ListDeliveryStreamsInput struct {
 	// streams of all types are returned.
 	DeliveryStreamType types.DeliveryStreamType
 
+	// The list of delivery streams returned by this call to ListDeliveryStreams will
+	// start with the delivery stream whose name comes alphabetically immediately after
+	// the name you specify in ExclusiveStartDeliveryStreamName.
+	ExclusiveStartDeliveryStreamName *string
+
 	// The maximum number of delivery streams to list. The default value is 10.
 	Limit *int32
 }
 
 type ListDeliveryStreamsOutput struct {
 
-	// Indicates whether there are more delivery streams available to list.
-	//
-	// This member is required.
-	HasMoreDeliveryStreams *bool
-
 	// The names of the delivery streams.
 	//
 	// This member is required.
 	DeliveryStreamNames []*string
+
+	// Indicates whether there are more delivery streams available to list.
+	//
+	// This member is required.
+	HasMoreDeliveryStreams *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

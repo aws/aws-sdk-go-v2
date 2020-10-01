@@ -58,17 +58,6 @@ func (c *Client) CreateRouteResponse(ctx context.Context, params *CreateRouteRes
 // Creates a new RouteResponse resource to represent a route response.
 type CreateRouteResponseInput struct {
 
-	// The route response parameters.
-	ResponseParameters map[string]*types.ParameterConstraints
-
-	// The route response key.
-	//
-	// This member is required.
-	RouteResponseKey *string
-
-	// The response models for the route response.
-	ResponseModels map[string]*string
-
 	// The API identifier.
 	//
 	// This member is required.
@@ -79,28 +68,39 @@ type CreateRouteResponseInput struct {
 	// This member is required.
 	RouteId *string
 
+	// The route response key.
+	//
+	// This member is required.
+	RouteResponseKey *string
+
 	// The model selection expression for the route response. Supported only for
 	// WebSocket APIs.
 	ModelSelectionExpression *string
+
+	// The response models for the route response.
+	ResponseModels map[string]*string
+
+	// The route response parameters.
+	ResponseParameters map[string]*types.ParameterConstraints
 }
 
 type CreateRouteResponseOutput struct {
 
+	// Represents the model selection expression of a route response. Supported only
+	// for WebSocket APIs.
+	ModelSelectionExpression *string
+
 	// Represents the response models of a route response.
 	ResponseModels map[string]*string
-
-	// Represents the identifier of a route response.
-	RouteResponseId *string
 
 	// Represents the response parameters of a route response.
 	ResponseParameters map[string]*types.ParameterConstraints
 
+	// Represents the identifier of a route response.
+	RouteResponseId *string
+
 	// Represents the route response key of a route response.
 	RouteResponseKey *string
-
-	// Represents the model selection expression of a route response. Supported only
-	// for WebSocket APIs.
-	ModelSelectionExpression *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

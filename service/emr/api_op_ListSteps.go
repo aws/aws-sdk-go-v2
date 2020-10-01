@@ -60,32 +60,32 @@ func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns .
 // This input determines which steps to list.
 type ListStepsInput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	Marker *string
-
-	// The filter to limit the step list based on certain states.
-	StepStates []types.StepState
-
 	// The identifier of the cluster for which to list the steps.
 	//
 	// This member is required.
 	ClusterId *string
 
+	// The pagination token that indicates the next set of results to retrieve.
+	Marker *string
+
 	// The filter to limit the step list based on the identifier of the steps. You can
 	// specify a maximum of ten Step IDs. The character constraint applies to the
 	// overall length of the array.
 	StepIds []*string
+
+	// The filter to limit the step list based on certain states.
+	StepStates []types.StepState
 }
 
 // This output contains the list of steps returned in reverse order. This means
 // that the last step is the first element in the list.
 type ListStepsOutput struct {
 
-	// The filtered list of steps for the cluster.
-	Steps []*types.StepSummary
-
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
+	// The filtered list of steps for the cluster.
+	Steps []*types.StepSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

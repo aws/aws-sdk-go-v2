@@ -83,6 +83,17 @@ type PromoteReadReplicaInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
+	// The number of days for which automated backups are retained. Setting this
+	// parameter to a positive number enables backups. Setting this parameter to 0
+	// disables automated backups. Default: 1 Constraints:
+	//
+	//     * Must be a value from
+	// 0 to 35.
+	//
+	//     * Can't be set to 0 if the DB instance is a source to read
+	// replicas.
+	BackupRetentionPeriod *int32
+
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
@@ -102,17 +113,6 @@ type PromoteReadReplicaInput struct {
 	//     * Must be at least 30
 	// minutes.
 	PreferredBackupWindow *string
-
-	// The number of days for which automated backups are retained. Setting this
-	// parameter to a positive number enables backups. Setting this parameter to 0
-	// disables automated backups. Default: 1 Constraints:
-	//
-	//     * Must be a value from
-	// 0 to 35.
-	//
-	//     * Can't be set to 0 if the DB instance is a source to read
-	// replicas.
-	BackupRetentionPeriod *int32
 }
 
 type PromoteReadReplicaOutput struct {

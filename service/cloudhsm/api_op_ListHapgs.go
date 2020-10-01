@@ -75,14 +75,14 @@ type ListHapgsInput struct {
 
 type ListHapgsOutput struct {
 
-	// If not null, more results are available. Pass this value to ListHapgs to
-	// retrieve the next set of items.
-	NextToken *string
-
 	// The list of high-availability partition groups.
 	//
 	// This member is required.
 	HapgList []*string
+
+	// If not null, more results are available. Pass this value to ListHapgs to
+	// retrieve the next set of items.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

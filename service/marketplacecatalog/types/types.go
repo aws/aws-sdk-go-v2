@@ -5,10 +5,12 @@ package types
 // An object that contains the ChangeType, Details, and Entity.
 type Change struct {
 
-	// The entity to be changed.
+	// Change types are single string values that describe your intention for the
+	// change. Each change type is unique for each EntityType provided in the change's
+	// scope.
 	//
 	// This member is required.
-	Entity *Entity
+	ChangeType *string
 
 	// This object contains details specific to the change type of the requested
 	// change.
@@ -16,23 +18,29 @@ type Change struct {
 	// This member is required.
 	Details *string
 
-	// Change types are single string values that describe your intention for the
-	// change. Each change type is unique for each EntityType provided in the change's
-	// scope.
+	// The entity to be changed.
 	//
 	// This member is required.
-	ChangeType *string
+	Entity *Entity
 }
 
 // A summary of a change set returned in a list of change sets when the
 // ListChangeSets action is called.
 type ChangeSetSummaryListItem struct {
 
+	// The ARN associated with the unique identifier for the change set referenced in
+	// this request.
+	ChangeSetArn *string
+
 	// The unique identifier for a change set.
 	ChangeSetId *string
 
 	// The non-unique name for the change set.
 	ChangeSetName *string
+
+	// The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was
+	// finished.
+	EndTime *string
 
 	// This object is a list of entity IDs (string) that are a part of a change set.
 	// The entity ID list is a maximum of 20 entities. It must contain at least one
@@ -43,14 +51,6 @@ type ChangeSetSummaryListItem struct {
 	// started.
 	StartTime *string
 
-	// The ARN associated with the unique identifier for the change set referenced in
-	// this request.
-	ChangeSetArn *string
-
-	// The time, in ISO 8601 format (2018-02-27T13:45:22Z), when the change set was
-	// finished.
-	EndTime *string
-
 	// The current status of the change set.
 	Status ChangeStatus
 }
@@ -58,6 +58,9 @@ type ChangeSetSummaryListItem struct {
 // This object is a container for common summary information about the change. The
 // summary doesn't contain the whole change structure.
 type ChangeSummary struct {
+
+	// The type of the change.
+	ChangeType *string
 
 	// This object contains details specific to the change type of the requested
 	// change.
@@ -68,28 +71,38 @@ type ChangeSummary struct {
 
 	// An array of ErrorDetail objects associated with the change.
 	ErrorDetailList []*ErrorDetail
-
-	// The type of the change.
-	ChangeType *string
 }
 
 // A product entity contains data that describes your product, its supported
 // features, and how it can be used or launched by your customer.
 type Entity struct {
 
-	// The identifier for the entity.
-	Identifier *string
-
 	// The type of entity.
 	//
 	// This member is required.
 	Type *string
+
+	// The identifier for the entity.
+	Identifier *string
 }
 
 // This object is a container for common summary information about the entity. The
 // summary doesn't contain the whole entity structure, but it does contain
 // information common across all entities.
 type EntitySummary struct {
+
+	// The ARN associated with the unique identifier for the entity.
+	EntityArn *string
+
+	// The unique identifier for the entity.
+	EntityId *string
+
+	// The type of the entity.
+	EntityType *string
+
+	// The last time the entity was published, using ISO 8601 format
+	// (2018-02-27T13:45:22Z).
+	LastModifiedDate *string
 
 	// The name for the entity. This value is not unique. It is defined by the seller.
 	Name *string
@@ -99,19 +112,6 @@ type EntitySummary struct {
 	// accounts only), or Restricted (the entity was published and then unpublished and
 	// only existing buyers can view it).
 	Visibility *string
-
-	// The last time the entity was published, using ISO 8601 format
-	// (2018-02-27T13:45:22Z).
-	LastModifiedDate *string
-
-	// The ARN associated with the unique identifier for the entity.
-	EntityArn *string
-
-	// The type of the entity.
-	EntityType *string
-
-	// The unique identifier for the entity.
-	EntityId *string
 }
 
 // Details about the error.
@@ -127,6 +127,10 @@ type ErrorDetail struct {
 // A filter object, used to optionally filter results from calls to the
 // ListEntities and ListChangeSets actions.
 type Filter struct {
+
+	// For ListEntities, the supported value for this is an EntityId. For
+	// ListChangeSets, the supported values are as follows:
+	Name *string
 
 	// ListEntities - This is a list of unique EntityIds.  <p>
 	// <code>ListChangeSets</code> - The supported filter names and associated
@@ -146,10 +150,6 @@ type Filter struct {
 	// <code>AfterEndTime</code> - The supported <code>ValueList</code> is a list of
 	// all change sets that ended after the filter value.</p> </li> </ul>
 	ValueList []*string
-
-	// For ListEntities, the supported value for this is an EntityId. For
-	// ListChangeSets, the supported values are as follows:
-	Name *string
 }
 
 // An object that contains two attributes, SortBy and SortOrder.

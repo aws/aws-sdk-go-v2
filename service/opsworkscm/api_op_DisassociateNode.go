@@ -69,6 +69,11 @@ type DisassociateNodeInput struct {
 	// This member is required.
 	NodeName *string
 
+	// The name of the server from which to disassociate the node.
+	//
+	// This member is required.
+	ServerName *string
+
 	// Engine attributes that are used for disassociating the node. No attributes are
 	// required for Puppet. Attributes required in a DisassociateNode request for
 	// Chef
@@ -76,11 +81,6 @@ type DisassociateNodeInput struct {
 	//     * CHEF_ORGANIZATION: The Chef organization with which the node was
 	// associated. By default only one organization named default can exist.
 	EngineAttributes []*types.EngineAttribute
-
-	// The name of the server from which to disassociate the node.
-	//
-	// This member is required.
-	ServerName *string
 }
 
 type DisassociateNodeOutput struct {

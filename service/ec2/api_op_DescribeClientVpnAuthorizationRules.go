@@ -57,6 +57,17 @@ func (c *Client) DescribeClientVpnAuthorizationRules(ctx context.Context, params
 
 type DescribeClientVpnAuthorizationRulesInput struct {
 
+	// The ID of the Client VPN endpoint.
+	//
+	// This member is required.
+	ClientVpnEndpointId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// One or more filters. Filter names and values are case-sensitive.
 	//
 	//     *
@@ -69,17 +80,6 @@ type DescribeClientVpnAuthorizationRulesInput struct {
 	// group-id - The ID of the Active Directory group to which the authorization rule
 	// grants access.
 	Filters []*types.Filter
-
-	// The ID of the Client VPN endpoint.
-	//
-	// This member is required.
-	ClientVpnEndpointId *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
 
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results can be seen by sending another request with the nextToken

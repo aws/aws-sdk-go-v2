@@ -57,15 +57,15 @@ func (c *Client) DescribeVirtualService(ctx context.Context, params *DescribeVir
 //
 type DescribeVirtualServiceInput struct {
 
-	// The name of the virtual service to describe.
-	//
-	// This member is required.
-	VirtualServiceName *string
-
 	// The name of the service mesh that the virtual service resides in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the virtual service to describe.
+	//
+	// This member is required.
+	VirtualServiceName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For

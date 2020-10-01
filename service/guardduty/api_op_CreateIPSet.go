@@ -63,28 +63,28 @@ func (c *Client) CreateIPSet(ctx context.Context, params *CreateIPSetInput, optF
 
 type CreateIPSetInput struct {
 
-	// The format of the file that contains the IPSet.
-	//
-	// This member is required.
-	Format types.IpSetFormat
-
 	// A Boolean value that indicates whether GuardDuty is to start using the uploaded
 	// IPSet.
 	//
 	// This member is required.
 	Activate *bool
 
-	// The URI of the file that contains the IPSet. For example:
-	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
-	//
-	// This member is required.
-	Location *string
-
 	// The unique ID of the detector of the GuardDuty account that you want to create
 	// an IPSet for.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// The format of the file that contains the IPSet.
+	//
+	// This member is required.
+	Format types.IpSetFormat
+
+	// The URI of the file that contains the IPSet. For example:
+	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
+	//
+	// This member is required.
+	Location *string
 
 	// The user-friendly name to identify the IPSet. Allowed characters are
 	// alphanumerics, spaces, hyphens (-), and underscores (_).

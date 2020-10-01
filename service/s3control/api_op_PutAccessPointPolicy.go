@@ -74,6 +74,12 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 
 type PutAccessPointPolicyInput struct {
 
+	// The AWS account ID for owner of the bucket associated with the specified access
+	// point.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The name of the access point that you want to associate with the specified
 	// policy. For Amazon S3 on Outposts specify the ARN of the access point accessed
 	// in the format arn:aws:s3-outposts:::outpost//accesspoint/. For example, to
@@ -93,12 +99,6 @@ type PutAccessPointPolicyInput struct {
 	//
 	// This member is required.
 	Policy *string
-
-	// The AWS account ID for owner of the bucket associated with the specified access
-	// point.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type PutAccessPointPolicyOutput struct {

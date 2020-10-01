@@ -56,16 +56,16 @@ func (c *Client) DeleteResource(ctx context.Context, params *DeleteResourceInput
 
 type DeleteResourceInput struct {
 
-	// The identifier of the resource to be deleted.
-	//
-	// This member is required.
-	ResourceId *string
-
 	// The identifier associated with the organization from which the resource is
 	// deleted.
 	//
 	// This member is required.
 	OrganizationId *string
+
+	// The identifier of the resource to be deleted.
+	//
+	// This member is required.
+	ResourceId *string
 }
 
 type DeleteResourceOutput struct {

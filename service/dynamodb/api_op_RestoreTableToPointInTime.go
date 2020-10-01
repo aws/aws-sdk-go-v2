@@ -85,21 +85,6 @@ func (c *Client) RestoreTableToPointInTime(ctx context.Context, params *RestoreT
 
 type RestoreTableToPointInTimeInput struct {
 
-	// List of local secondary indexes for the restored table. The indexes provided
-	// should match existing secondary indexes. You can choose to exclude some or all
-	// of the indexes at the time of restore.
-	LocalSecondaryIndexOverride []*types.LocalSecondaryIndex
-
-	// The DynamoDB table that will be restored. This value is an Amazon Resource Name
-	// (ARN).
-	SourceTableArn *string
-
-	// Provisioned throughput settings for the restored table.
-	ProvisionedThroughputOverride *types.ProvisionedThroughput
-
-	// The new server-side encryption settings for the restored table.
-	SSESpecificationOverride *types.SSESpecification
-
 	// The name of the new table to which it must be restored to.
 	//
 	// This member is required.
@@ -108,16 +93,31 @@ type RestoreTableToPointInTimeInput struct {
 	// The billing mode of the restored table.
 	BillingModeOverride types.BillingMode
 
-	// Name of the source table that is being restored.
-	SourceTableName *string
-
-	// Time in the past to restore the table to.
-	RestoreDateTime *time.Time
-
 	// List of global secondary indexes for the restored table. The indexes provided
 	// should match existing secondary indexes. You can choose to exclude some or all
 	// of the indexes at the time of restore.
 	GlobalSecondaryIndexOverride []*types.GlobalSecondaryIndex
+
+	// List of local secondary indexes for the restored table. The indexes provided
+	// should match existing secondary indexes. You can choose to exclude some or all
+	// of the indexes at the time of restore.
+	LocalSecondaryIndexOverride []*types.LocalSecondaryIndex
+
+	// Provisioned throughput settings for the restored table.
+	ProvisionedThroughputOverride *types.ProvisionedThroughput
+
+	// Time in the past to restore the table to.
+	RestoreDateTime *time.Time
+
+	// The new server-side encryption settings for the restored table.
+	SSESpecificationOverride *types.SSESpecification
+
+	// The DynamoDB table that will be restored. This value is an Amazon Resource Name
+	// (ARN).
+	SourceTableArn *string
+
+	// Name of the source table that is being restored.
+	SourceTableName *string
 
 	// Restore the table to the latest possible time. LatestRestorableDateTime is
 	// typically 5 minutes before the current time.

@@ -72,13 +72,16 @@ type CreateNatGatewayInput struct {
 	// This member is required.
 	AllocationId *string
 
-	// The tags to assign to the NAT gateway.
-	TagSpecifications []*types.TagSpecification
-
 	// The subnet in which to create the NAT gateway.
 	//
 	// This member is required.
 	SubnetId *string
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see How to Ensure Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Constraint: Maximum 64 ASCII characters.
+	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -86,21 +89,18 @@ type CreateNatGatewayInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	// Constraint: Maximum 64 ASCII characters.
-	ClientToken *string
+	// The tags to assign to the NAT gateway.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateNatGatewayOutput struct {
 
-	// Information about the NAT gateway.
-	NatGateway *types.NatGateway
-
 	// Unique, case-sensitive identifier to ensure the idempotency of the request. Only
 	// returned if a client token was provided in the request.
 	ClientToken *string
+
+	// Information about the NAT gateway.
+	NatGateway *types.NatGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

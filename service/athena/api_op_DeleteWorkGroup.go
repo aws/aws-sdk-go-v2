@@ -57,14 +57,14 @@ func (c *Client) DeleteWorkGroup(ctx context.Context, params *DeleteWorkGroupInp
 
 type DeleteWorkGroupInput struct {
 
-	// The option to delete the workgroup and its contents even if the workgroup
-	// contains any named queries.
-	RecursiveDeleteOption *bool
-
 	// The unique name of the workgroup to delete.
 	//
 	// This member is required.
 	WorkGroup *string
+
+	// The option to delete the workgroup and its contents even if the workgroup
+	// contains any named queries.
+	RecursiveDeleteOption *bool
 }
 
 type DeleteWorkGroupOutput struct {

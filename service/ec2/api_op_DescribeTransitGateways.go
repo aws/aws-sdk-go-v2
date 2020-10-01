@@ -63,9 +63,6 @@ type DescribeTransitGatewaysInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The IDs of the transit gateways.
-	TransitGatewayIds []*string
-
 	// One or more filters. The possible values are:
 	//
 	//     *
@@ -115,16 +112,19 @@ type DescribeTransitGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// The IDs of the transit gateways.
+	TransitGatewayIds []*string
 }
 
 type DescribeTransitGatewaysOutput struct {
 
-	// Information about the transit gateways.
-	TransitGateways []*types.TransitGateway
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the transit gateways.
+	TransitGateways []*types.TransitGateway
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

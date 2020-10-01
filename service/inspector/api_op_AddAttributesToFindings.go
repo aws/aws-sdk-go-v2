@@ -58,15 +58,15 @@ func (c *Client) AddAttributesToFindings(ctx context.Context, params *AddAttribu
 
 type AddAttributesToFindingsInput struct {
 
-	// The ARNs that specify the findings that you want to assign attributes to.
-	//
-	// This member is required.
-	FindingArns []*string
-
 	// The array of attributes that you want to assign to specified findings.
 	//
 	// This member is required.
 	Attributes []*types.Attribute
+
+	// The ARNs that specify the findings that you want to assign attributes to.
+	//
+	// This member is required.
+	FindingArns []*string
 }
 
 type AddAttributesToFindingsOutput struct {

@@ -58,13 +58,13 @@ func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns
 // A request to update flow.
 type UpdateFlowInput struct {
 
-	// The settings for source failover
-	SourceFailoverConfig *types.UpdateFailoverConfig
-
 	// The flow that you want to update.
 	//
 	// This member is required.
 	FlowArn *string
+
+	// The settings for source failover
+	SourceFailoverConfig *types.UpdateFailoverConfig
 }
 
 type UpdateFlowOutput struct {

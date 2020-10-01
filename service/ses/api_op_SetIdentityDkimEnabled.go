@@ -71,16 +71,16 @@ func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentity
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 type SetIdentityDkimEnabledInput struct {
 
-	// The identity for which DKIM signing should be enabled or disabled.
-	//
-	// This member is required.
-	Identity *string
-
 	// Sets whether DKIM signing is enabled for an identity. Set to true to enable DKIM
 	// signing for this identity; false to disable it.
 	//
 	// This member is required.
 	DkimEnabled *bool
+
+	// The identity for which DKIM signing should be enabled or disabled.
+	//
+	// This member is required.
+	Identity *string
 }
 
 // An empty element returned on a successful request.

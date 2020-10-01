@@ -56,40 +56,49 @@ func (c *Client) CreateHostedConfigurationVersion(ctx context.Context, params *C
 
 type CreateHostedConfigurationVersionInput struct {
 
+	// The application ID.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The configuration profile ID.
+	//
+	// This member is required.
+	ConfigurationProfileId *string
+
+	// The content of the configuration or the configuration data.
+	//
+	// This member is required.
+	Content []byte
+
+	// A standard MIME type describing the format of the configuration content. For
+	// more information, see Content-Type
+	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
+	//
+	// This member is required.
+	ContentType *string
+
+	// A description of the configuration.
+	Description *string
+
 	// An optional locking token used to prevent race conditions from overwriting
 	// configuration updates when creating a new version. To ensure your data is not
 	// overwritten when creating multiple hosted configuration versions in rapid
 	// succession, specify the version of the latest hosted configuration version.
 	LatestVersionNumber *int32
-
-	// The content of the configuration or the configuration data.
-	//
-	// This member is required.
-	Content []byte
-
-	// A description of the configuration.
-	Description *string
-
-	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type
-	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
-	//
-	// This member is required.
-	ContentType *string
-
-	// The configuration profile ID.
-	//
-	// This member is required.
-	ConfigurationProfileId *string
-
-	// The application ID.
-	//
-	// This member is required.
-	ApplicationId *string
 }
 
 type CreateHostedConfigurationVersionOutput struct {
 
+	// The application ID.
+	ApplicationId *string
+
+	// The configuration profile ID.
+	ConfigurationProfileId *string
+
+	// The content of the configuration or the configuration data.
+	Content []byte
+
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
 	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
@@ -98,17 +107,8 @@ type CreateHostedConfigurationVersionOutput struct {
 	// A description of the configuration.
 	Description *string
 
-	// The configuration profile ID.
-	ConfigurationProfileId *string
-
 	// The configuration version.
 	VersionNumber *int32
-
-	// The application ID.
-	ApplicationId *string
-
-	// The content of the configuration or the configuration data.
-	Content []byte
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

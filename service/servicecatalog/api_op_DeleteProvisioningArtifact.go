@@ -65,6 +65,11 @@ type DeleteProvisioningArtifactInput struct {
 	// This member is required.
 	ProductId *string
 
+	// The identifier of the provisioning artifact.
+	//
+	// This member is required.
+	ProvisioningArtifactId *string
+
 	// The language code.
 	//
 	//     * en - English (default)
@@ -74,11 +79,6 @@ type DeleteProvisioningArtifactInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
-
-	// The identifier of the provisioning artifact.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
 }
 
 type DeleteProvisioningArtifactOutput struct {

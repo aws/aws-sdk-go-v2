@@ -57,15 +57,15 @@ func (c *Client) UpdateComputeEnvironment(ctx context.Context, params *UpdateCom
 
 type UpdateComputeEnvironmentInput struct {
 
-	// Details of the compute resources managed by the compute environment. Required
-	// for a managed compute environment.
-	ComputeResources *types.ComputeResourceUpdate
-
 	// The name or full Amazon Resource Name (ARN) of the compute environment to
 	// update.
 	//
 	// This member is required.
 	ComputeEnvironment *string
+
+	// Details of the compute resources managed by the compute environment. Required
+	// for a managed compute environment.
+	ComputeResources *types.ComputeResourceUpdate
 
 	// The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to
 	// make calls to other AWS services on your behalf. If your specified role has a
@@ -86,11 +86,11 @@ type UpdateComputeEnvironmentInput struct {
 
 type UpdateComputeEnvironmentOutput struct {
 
-	// The name of the compute environment.
-	ComputeEnvironmentName *string
-
 	// The Amazon Resource Name (ARN) of the compute environment.
 	ComputeEnvironmentArn *string
+
+	// The name of the compute environment.
+	ComputeEnvironmentName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

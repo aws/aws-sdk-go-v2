@@ -126,8 +126,14 @@ type IndexFacesInput struct {
 	// This member is required.
 	CollectionId *string
 
-	// The ID you want to assign to all the faces detected in the image.
-	ExternalImageId *string
+	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
+	// to call Amazon Rekognition operations, passing base64-encoded image bytes isn't
+	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
+	// need to base64-encode image bytes passed using the Bytes field. For more
+	// information, see Images in the Amazon Rekognition developer guide.
+	//
+	// This member is required.
+	Image *types.Image
 
 	// An array of facial attributes that you want to be returned. This can be the
 	// default list of attributes or all attributes. If you don't specify a value for
@@ -139,26 +145,8 @@ type IndexFacesInput struct {
 	// attributes).
 	DetectionAttributes []types.Attribute
 
-	// The input image as base64-encoded bytes or an S3 object. If you use the AWS CLI
-	// to call Amazon Rekognition operations, passing base64-encoded image bytes isn't
-	// supported. If you are using an AWS SDK to call Amazon Rekognition, you might not
-	// need to base64-encode image bytes passed using the Bytes field. For more
-	// information, see Images in the Amazon Rekognition developer guide.
-	//
-	// This member is required.
-	Image *types.Image
-
-	// A filter that specifies a quality bar for how much filtering is done to identify
-	// faces. Filtered faces aren't indexed. If you specify AUTO, Amazon Rekognition
-	// chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes
-	// all faces that don’t meet the chosen quality bar. The default value is AUTO.
-	// The quality bar is based on a variety of common use cases. Low-quality
-	// detections can occur for a number of reasons. Some examples are an object that's
-	// misidentified as a face, a face that's too blurry, or a face with a pose that's
-	// too extreme to use. If you specify <code>NONE</code>, no filtering is performed.
-	// </p> <p>To use quality filtering, the collection you are using must be
-	// associated with version 3 of the face model or higher.</p>
-	QualityFilter types.QualityFilter
+	// The ID you want to assign to all the faces detected in the image.
+	ExternalImageId *string
 
 	// The maximum number of faces to index. The value of MaxFaces must be greater than
 	// or equal to 1. IndexFaces returns no more than 100 detected faces in an image,
@@ -172,19 +160,29 @@ type IndexFacesInput struct {
 	// size, in descending order. MaxFaces can be used with a collection associated
 	// with any version of the face model.
 	MaxFaces *int32
+
+	// A filter that specifies a quality bar for how much filtering is done to identify
+	// faces. Filtered faces aren't indexed. If you specify AUTO, Amazon Rekognition
+	// chooses the quality bar. If you specify LOW, MEDIUM, or HIGH, filtering removes
+	// all faces that don’t meet the chosen quality bar. The default value is AUTO.
+	// The quality bar is based on a variety of common use cases. Low-quality
+	// detections can occur for a number of reasons. Some examples are an object that's
+	// misidentified as a face, a face that's too blurry, or a face with a pose that's
+	// too extreme to use. If you specify <code>NONE</code>, no filtering is performed.
+	// </p> <p>To use quality filtering, the collection you are using must be
+	// associated with version 3 of the face model or higher.</p>
+	QualityFilter types.QualityFilter
 }
 
 type IndexFacesOutput struct {
 
-	// An array of faces that were detected in the image but weren't indexed. They
-	// weren't indexed because the quality filter identified them as low quality, or
-	// the MaxFaces request parameter filtered them out. To use the quality filter, you
-	// specify the QualityFilter request parameter.
-	UnindexedFaces []*types.UnindexedFace
-
 	// The version number of the face detection model that's associated with the input
 	// collection (CollectionId).
 	FaceModelVersion *string
+
+	// An array of faces detected and added to the collection. For more information,
+	// see Searching Faces in a Collection in the Amazon Rekognition Developer Guide.
+	FaceRecords []*types.FaceRecord
 
 	// If your collection is associated with a face detection model that's later than
 	// version 3.0, the value of OrientationCorrection is always null and no
@@ -207,9 +205,11 @@ type IndexFacesOutput struct {
 	// <a>DescribeCollection</a>. </p>
 	OrientationCorrection types.OrientationCorrection
 
-	// An array of faces detected and added to the collection. For more information,
-	// see Searching Faces in a Collection in the Amazon Rekognition Developer Guide.
-	FaceRecords []*types.FaceRecord
+	// An array of faces that were detected in the image but weren't indexed. They
+	// weren't indexed because the quality filter identified them as low quality, or
+	// the MaxFaces request parameter filtered them out. To use the quality filter, you
+	// specify the QualityFilter request parameter.
+	UnindexedFaces []*types.UnindexedFace
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

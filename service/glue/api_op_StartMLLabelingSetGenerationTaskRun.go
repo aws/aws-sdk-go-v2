@@ -67,16 +67,16 @@ func (c *Client) StartMLLabelingSetGenerationTaskRun(ctx context.Context, params
 
 type StartMLLabelingSetGenerationTaskRunInput struct {
 
-	// The unique identifier of the machine learning transform.
-	//
-	// This member is required.
-	TransformId *string
-
 	// The Amazon Simple Storage Service (Amazon S3) path where you generate the
 	// labeling set.
 	//
 	// This member is required.
 	OutputS3Path *string
+
+	// The unique identifier of the machine learning transform.
+	//
+	// This member is required.
+	TransformId *string
 }
 
 type StartMLLabelingSetGenerationTaskRunOutput struct {

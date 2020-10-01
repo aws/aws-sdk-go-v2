@@ -59,11 +59,15 @@ func (c *Client) CreateProfile(ctx context.Context, params *CreateProfileInput, 
 
 type CreateProfileInput struct {
 
-	// The tags for the profile.
-	Tags []*types.Tag
+	// The valid address for the room.
+	//
+	// This member is required.
+	Address *string
 
-	// The user-specified token that is used during the creation of a profile.
-	ClientRequestToken *string
+	// The distance unit to be used by devices in the profile.
+	//
+	// This member is required.
+	DistanceUnit types.DistanceUnit
 
 	// The name of a room profile.
 	//
@@ -75,21 +79,18 @@ type CreateProfileInput struct {
 	// This member is required.
 	TemperatureUnit types.TemperatureUnit
 
-	// The meeting room settings of a room profile.
-	MeetingRoomConfiguration *types.CreateMeetingRoomConfiguration
-
-	// The valid address for the room.
-	//
-	// This member is required.
-	Address *string
-
-	// Whether PSTN calling is enabled.
-	PSTNEnabled *bool
-
 	// The time zone used by a room profile.
 	//
 	// This member is required.
 	Timezone *string
+
+	// A wake word for Alexa, Echo, Amazon, or a computer.
+	//
+	// This member is required.
+	WakeWord types.WakeWord
+
+	// The user-specified token that is used during the creation of a profile.
+	ClientRequestToken *string
 
 	// The locale of the room profile. (This is currently only available to a limited
 	// preview audience.)
@@ -98,18 +99,17 @@ type CreateProfileInput struct {
 	// The maximum volume limit for a room profile.
 	MaxVolumeLimit *int32
 
+	// The meeting room settings of a room profile.
+	MeetingRoomConfiguration *types.CreateMeetingRoomConfiguration
+
+	// Whether PSTN calling is enabled.
+	PSTNEnabled *bool
+
 	// Whether room profile setup is enabled.
 	SetupModeDisabled *bool
 
-	// The distance unit to be used by devices in the profile.
-	//
-	// This member is required.
-	DistanceUnit types.DistanceUnit
-
-	// A wake word for Alexa, Echo, Amazon, or a computer.
-	//
-	// This member is required.
-	WakeWord types.WakeWord
+	// The tags for the profile.
+	Tags []*types.Tag
 }
 
 type CreateProfileOutput struct {

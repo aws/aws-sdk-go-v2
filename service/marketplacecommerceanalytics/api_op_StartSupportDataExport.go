@@ -69,18 +69,6 @@ func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSuppor
 // Container for the parameters to the StartSupportDataExport operation.
 type StartSupportDataExportInput struct {
 
-	// The start date from which to retrieve the data set in UTC. This parameter only
-	// affects the customer_support_contacts_data data set type.
-	//
-	// This member is required.
-	FromDate *time.Time
-
-	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
-	// set has been published or if an error has occurred.
-	//
-	// This member is required.
-	SnsTopicArn *string
-
 	// Specifies the data set type to be written to the output csv file. The data set
 	// types customer_support_contacts_data and test_customer_support_contacts_data
 	// both result in a csv file containing the following fields: Product Id, Product
@@ -100,6 +88,29 @@ type StartSupportDataExportInput struct {
 	// This member is required.
 	DataSetType types.SupportDataSetType
 
+	// The name (friendly name, not ARN) of the destination S3 bucket.
+	//
+	// This member is required.
+	DestinationS3BucketName *string
+
+	// The start date from which to retrieve the data set in UTC. This parameter only
+	// affects the customer_support_contacts_data data set type.
+	//
+	// This member is required.
+	FromDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the Role with an attached permissions policy
+	// to interact with the provided AWS services.
+	//
+	// This member is required.
+	RoleNameArn *string
+
+	// Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data
+	// set has been published or if an error has occurred.
+	//
+	// This member is required.
+	SnsTopicArn *string
+
 	// (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS
 	// notification message and the data set metadata file.
 	CustomerDefinedValues map[string]*string
@@ -111,17 +122,6 @@ type StartSupportDataExportInput struct {
 	// prefix directory structure does not exist, it will be created. If no prefix is
 	// provided, the data set will be published to the S3 bucket root.
 	DestinationS3Prefix *string
-
-	// The name (friendly name, not ARN) of the destination S3 bucket.
-	//
-	// This member is required.
-	DestinationS3BucketName *string
-
-	// The Amazon Resource Name (ARN) of the Role with an attached permissions policy
-	// to interact with the provided AWS services.
-	//
-	// This member is required.
-	RoleNameArn *string
 }
 
 // Container for the result of the StartSupportDataExport operation.

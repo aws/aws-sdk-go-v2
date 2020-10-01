@@ -57,13 +57,6 @@ func (c *Client) GetPartitions(ctx context.Context, params *GetPartitionsInput, 
 
 type GetPartitionsInput struct {
 
-	// A continuation token, if this is not the first call to retrieve these
-	// partitions.
-	NextToken *string
-
-	// The segment of the table's partitions to scan in this request.
-	Segment *types.Segment
-
 	// The name of the catalog database where the partitions reside.
 	//
 	// This member is required.
@@ -74,8 +67,9 @@ type GetPartitionsInput struct {
 	// This member is required.
 	TableName *string
 
-	// The maximum number of partitions to return in a single response.
-	MaxResults *int32
+	// The ID of the Data Catalog where the partitions in question reside. If none is
+	// provided, the AWS account ID is used by default.
+	CatalogId *string
 
 	// An expression that filters the partitions to be returned. The expression uses
 	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
@@ -123,9 +117,15 @@ type GetPartitionsInput struct {
 	// compatible with the catalog partitions.  <p> <i>Sample API Call</i>: </p>
 	Expression *string
 
-	// The ID of the Data Catalog where the partitions in question reside. If none is
-	// provided, the AWS account ID is used by default.
-	CatalogId *string
+	// The maximum number of partitions to return in a single response.
+	MaxResults *int32
+
+	// A continuation token, if this is not the first call to retrieve these
+	// partitions.
+	NextToken *string
+
+	// The segment of the table's partitions to scan in this request.
+	Segment *types.Segment
 }
 
 type GetPartitionsOutput struct {

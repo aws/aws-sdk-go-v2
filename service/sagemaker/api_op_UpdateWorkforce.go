@@ -66,16 +66,16 @@ func (c *Client) UpdateWorkforce(ctx context.Context, params *UpdateWorkforceInp
 
 type UpdateWorkforceInput struct {
 
-	// Use this parameter to update your OIDC Identity Provider (IdP) configuration for
-	// a workforce made using your own IdP.
-	OidcConfig *types.OidcConfig
-
 	// The name of the private workforce whose access you want to restrict.
 	// WorkforceName is automatically set to default when a workforce is created and
 	// cannot be modified.
 	//
 	// This member is required.
 	WorkforceName *string
+
+	// Use this parameter to update your OIDC Identity Provider (IdP) configuration for
+	// a workforce made using your own IdP.
+	OidcConfig *types.OidcConfig
 
 	// A list of one to ten worker IP address ranges (CIDRs
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)) that can be

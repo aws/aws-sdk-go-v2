@@ -98,11 +98,11 @@ type GetRateBasedStatementManagedKeysInput struct {
 
 type GetRateBasedStatementManagedKeysOutput struct {
 
-	// The keys that are of Internet Protocol version 6 (IPv6).
-	ManagedKeysIPV6 *types.RateBasedStatementManagedKeysIPSet
-
 	// The keys that are of Internet Protocol version 4 (IPv4).
 	ManagedKeysIPV4 *types.RateBasedStatementManagedKeysIPSet
+
+	// The keys that are of Internet Protocol version 6 (IPv6).
+	ManagedKeysIPV6 *types.RateBasedStatementManagedKeysIPSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

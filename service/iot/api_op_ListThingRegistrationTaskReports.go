@@ -57,21 +57,21 @@ func (c *Client) ListThingRegistrationTaskReports(ctx context.Context, params *L
 
 type ListThingRegistrationTaskReportsInput struct {
 
-	// The maximum number of results to return per request.
-	MaxResults *int32
-
-	// The token to retrieve the next set of results.
-	NextToken *string
+	// The type of task report.
+	//
+	// This member is required.
+	ReportType types.ReportType
 
 	// The id of the task.
 	//
 	// This member is required.
 	TaskId *string
 
-	// The type of task report.
-	//
-	// This member is required.
-	ReportType types.ReportType
+	// The maximum number of results to return per request.
+	MaxResults *int32
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListThingRegistrationTaskReportsOutput struct {

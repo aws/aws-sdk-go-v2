@@ -88,55 +88,55 @@ func (c *Client) CountClosedWorkflowExecutions(ctx context.Context, params *Coun
 
 type CountClosedWorkflowExecutionsInput struct {
 
-	// If specified, only workflow executions that meet the start time criteria of the
-	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
-	// You must specify one of these in a request but not both.
-	StartTimeFilter *types.ExecutionTimeFilter
-
 	// The name of the domain containing the workflow executions to count.
 	//
 	// This member is required.
 	Domain *string
-
-	// If specified, only workflow executions matching the WorkflowId in the filter are
-	// counted. closeStatusFilter, executionFilter, typeFilter and tagFilter are
-	// mutually exclusive. You can specify at most one of these in a request.
-	ExecutionFilter *types.WorkflowExecutionFilter
-
-	// If specified, indicates the type of the workflow executions to be counted.
-	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
-	// exclusive. You can specify at most one of these in a request.
-	TypeFilter *types.WorkflowTypeFilter
-
-	// If specified, only workflow executions that meet the close time criteria of the
-	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
-	// You must specify one of these in a request but not both.
-	CloseTimeFilter *types.ExecutionTimeFilter
-
-	// If specified, only executions that have a tag that matches the filter are
-	// counted. closeStatusFilter, executionFilter, typeFilter and tagFilter are
-	// mutually exclusive. You can specify at most one of these in a request.
-	TagFilter *types.TagFilter
 
 	// If specified, only workflow executions that match this close status are counted.
 	// This filter has an affect only if executionStatus is specified as CLOSED.
 	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	CloseStatusFilter *types.CloseStatusFilter
+
+	// If specified, only workflow executions that meet the close time criteria of the
+	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
+	// You must specify one of these in a request but not both.
+	CloseTimeFilter *types.ExecutionTimeFilter
+
+	// If specified, only workflow executions matching the WorkflowId in the filter are
+	// counted. closeStatusFilter, executionFilter, typeFilter and tagFilter are
+	// mutually exclusive. You can specify at most one of these in a request.
+	ExecutionFilter *types.WorkflowExecutionFilter
+
+	// If specified, only workflow executions that meet the start time criteria of the
+	// filter are counted. startTimeFilter and closeTimeFilter are mutually exclusive.
+	// You must specify one of these in a request but not both.
+	StartTimeFilter *types.ExecutionTimeFilter
+
+	// If specified, only executions that have a tag that matches the filter are
+	// counted. closeStatusFilter, executionFilter, typeFilter and tagFilter are
+	// mutually exclusive. You can specify at most one of these in a request.
+	TagFilter *types.TagFilter
+
+	// If specified, indicates the type of the workflow executions to be counted.
+	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
+	// exclusive. You can specify at most one of these in a request.
+	TypeFilter *types.WorkflowTypeFilter
 }
 
 // Contains the count of workflow executions returned from
 // CountOpenWorkflowExecutions () or CountClosedWorkflowExecutions ()
 type CountClosedWorkflowExecutionsOutput struct {
 
-	// If set to true, indicates that the actual count was more than the maximum
-	// supported by this API and the count returned is the truncated value.
-	Truncated *bool
-
 	// The number of workflow executions.
 	//
 	// This member is required.
 	Count *int32
+
+	// If set to true, indicates that the actual count was more than the maximum
+	// supported by this API and the count returned is the truncated value.
+	Truncated *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

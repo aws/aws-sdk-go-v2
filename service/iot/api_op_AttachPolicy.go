@@ -56,17 +56,17 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 
 type AttachPolicyInput struct {
 
+	// The name of the policy to attach.
+	//
+	// This member is required.
+	PolicyName *string
+
 	// The identity
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html) to
 	// which the policy is attached.
 	//
 	// This member is required.
 	Target *string
-
-	// The name of the policy to attach.
-	//
-	// This member is required.
-	PolicyName *string
 }
 
 type AttachPolicyOutput struct {

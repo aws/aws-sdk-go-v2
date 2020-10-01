@@ -58,8 +58,10 @@ func (c *Client) UpdateRuleVersion(ctx context.Context, params *UpdateRuleVersio
 
 type UpdateRuleVersionInput struct {
 
-	// The tags to assign to the rule version.
-	Tags []*types.Tag
+	// The rule expression.
+	//
+	// This member is required.
+	Expression *string
 
 	// The language.
 	//
@@ -71,18 +73,16 @@ type UpdateRuleVersionInput struct {
 	// This member is required.
 	Outcomes []*string
 
-	// The rule expression.
-	//
-	// This member is required.
-	Expression *string
-
-	// The description.
-	Description *string
-
 	// The rule to update.
 	//
 	// This member is required.
 	Rule *types.Rule
+
+	// The description.
+	Description *string
+
+	// The tags to assign to the rule version.
+	Tags []*types.Tag
 }
 
 type UpdateRuleVersionOutput struct {

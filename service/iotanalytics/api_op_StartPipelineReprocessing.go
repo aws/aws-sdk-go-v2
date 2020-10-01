@@ -57,13 +57,13 @@ func (c *Client) StartPipelineReprocessing(ctx context.Context, params *StartPip
 
 type StartPipelineReprocessingInput struct {
 
-	// The end time (exclusive) of raw message data that is reprocessed.
-	EndTime *time.Time
-
 	// The name of the pipeline on which to start reprocessing.
 	//
 	// This member is required.
 	PipelineName *string
+
+	// The end time (exclusive) of raw message data that is reprocessed.
+	EndTime *time.Time
 
 	// The start time (inclusive) of raw message data that is reprocessed.
 	StartTime *time.Time

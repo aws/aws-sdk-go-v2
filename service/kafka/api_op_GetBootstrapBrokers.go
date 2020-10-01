@@ -64,11 +64,11 @@ type GetBootstrapBrokersInput struct {
 
 type GetBootstrapBrokersOutput struct {
 
-	// A string containing one or more DNS names (or IP) and TLS port pairs.
-	BootstrapBrokerStringTls *string
-
 	// A string containing one or more hostname:port pairs.
 	BootstrapBrokerString *string
+
+	// A string containing one or more DNS names (or IP) and TLS port pairs.
+	BootstrapBrokerStringTls *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

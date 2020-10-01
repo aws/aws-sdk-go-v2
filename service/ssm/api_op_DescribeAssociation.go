@@ -69,11 +69,11 @@ type DescribeAssociationInput struct {
 	// versions for a specific association, use ListAssociationVersions ().
 	AssociationVersion *string
 
-	// The name of the Systems Manager document.
-	Name *string
-
 	// The instance ID.
 	InstanceId *string
+
+	// The name of the Systems Manager document.
+	Name *string
 }
 
 type DescribeAssociationOutput struct {

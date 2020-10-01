@@ -59,34 +59,34 @@ func (c *Client) ListExperiments(ctx context.Context, params *ListExperimentsInp
 
 type ListExperimentsInput struct {
 
-	// The sort order. The default value is Descending.
-	SortOrder types.SortOrder
+	// A filter that returns only experiments created after the specified time.
+	CreatedAfter *time.Time
 
 	// A filter that returns only experiments created before the specified time.
 	CreatedBefore *time.Time
 
-	// A filter that returns only experiments created after the specified time.
-	CreatedAfter *time.Time
-
-	// The property used to sort results. The default value is CreationTime.
-	SortBy types.SortExperimentsBy
+	// The maximum number of experiments to return in the response. The default value
+	// is 10.
+	MaxResults *int32
 
 	// If the previous call to ListExperiments didn't return the full set of
 	// experiments, the call returns a token for getting the next set of experiments.
 	NextToken *string
 
-	// The maximum number of experiments to return in the response. The default value
-	// is 10.
-	MaxResults *int32
+	// The property used to sort results. The default value is CreationTime.
+	SortBy types.SortExperimentsBy
+
+	// The sort order. The default value is Descending.
+	SortOrder types.SortOrder
 }
 
 type ListExperimentsOutput struct {
 
-	// A token for getting the next set of experiments, if there are any.
-	NextToken *string
-
 	// A list of the summaries of your experiments.
 	ExperimentSummaries []*types.ExperimentSummary
+
+	// A token for getting the next set of experiments, if there are any.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

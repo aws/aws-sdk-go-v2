@@ -74,23 +74,23 @@ type ListIAMPolicyAssignmentsForUserInput struct {
 	// This member is required.
 	UserName *string
 
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
-
 	// The maximum number of results to be returned per request.
 	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListIAMPolicyAssignmentsForUserOutput struct {
+
+	// The active assignments for this user.
+	ActiveAssignments []*types.ActiveIAMPolicyAssignment
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// The AWS request ID for this operation.
 	RequestId *string
-
-	// The active assignments for this user.
-	ActiveAssignments []*types.ActiveIAMPolicyAssignment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

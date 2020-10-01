@@ -56,21 +56,21 @@ func (c *Client) ListTestGridProjects(ctx context.Context, params *ListTestGridP
 
 type ListTestGridProjectsInput struct {
 
-	// From a response, used to continue a paginated listing.
-	NextToken *string
-
 	// Return no more than this number of results.
 	MaxResult *int32
+
+	// From a response, used to continue a paginated listing.
+	NextToken *string
 }
 
 type ListTestGridProjectsOutput struct {
 
-	// The list of TestGridProjects, based on a ListTestGridProjectsRequest ().
-	TestGridProjects []*types.TestGridProject
-
 	// Used for pagination. Pass into ListTestGridProjects () to get more results in a
 	// paginated request.
 	NextToken *string
+
+	// The list of TestGridProjects, based on a ListTestGridProjectsRequest ().
+	TestGridProjects []*types.TestGridProject
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

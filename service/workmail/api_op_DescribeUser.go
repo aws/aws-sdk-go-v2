@@ -75,12 +75,25 @@ type DescribeUserOutput struct {
 	// UNIX epoch time format.
 	DisabledDate *time.Time
 
+	// The display name of the user.
+	DisplayName *string
+
+	// The email of the user.
+	Email *string
+
 	// The date and time at which the user was enabled for Amazon WorkMail usage, in
 	// UNIX epoch time format.
 	EnabledDate *time.Time
 
-	// The email of the user.
-	Email *string
+	// The name for the user.
+	Name *string
+
+	// The state of a user: enabled (registered to Amazon WorkMail) or disabled
+	// (deregistered or never registered to WorkMail).
+	State types.EntityState
+
+	// The identifier for the described user.
+	UserId *string
 
 	// In certain cases, other entities are modeled as users. If interoperability is
 	// enabled, resources are imported into Amazon WorkMail as users. Because different
@@ -89,19 +102,6 @@ type DescribeUserOutput struct {
 	// role) and the directory administrators. The values are USER, RESOURCE, and
 	// SYSTEM_USER.
 	UserRole types.UserRole
-
-	// The state of a user: enabled (registered to Amazon WorkMail) or disabled
-	// (deregistered or never registered to WorkMail).
-	State types.EntityState
-
-	// The name for the user.
-	Name *string
-
-	// The identifier for the described user.
-	UserId *string
-
-	// The display name of the user.
-	DisplayName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

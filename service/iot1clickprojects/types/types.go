@@ -21,6 +21,11 @@ type DeviceTemplate struct {
 // An object describing a project's placement.
 type PlacementDescription struct {
 
+	// The user-defined attributes associated with the placement.
+	//
+	// This member is required.
+	Attributes map[string]*string
+
 	// The date when the placement was initially created, in UNIX epoch time format.
 	//
 	// This member is required.
@@ -31,21 +36,16 @@ type PlacementDescription struct {
 	// This member is required.
 	PlacementName *string
 
-	// The user-defined attributes associated with the placement.
+	// The name of the project containing the placement.
 	//
 	// This member is required.
-	Attributes map[string]*string
+	ProjectName *string
 
 	// The date when the placement was last updated, in UNIX epoch time format. If the
 	// placement was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
-
-	// The name of the project containing the placement.
-	//
-	// This member is required.
-	ProjectName *string
 }
 
 // An object providing summary information for a particular placement.
@@ -56,33 +56,33 @@ type PlacementSummary struct {
 	// This member is required.
 	CreatedDate *time.Time
 
-	// The date when the placement was last updated, in UNIX epoch time format. If the
-	// placement was not updated, then createdDate and updatedDate are the same.
+	// The name of the placement being summarized.
 	//
 	// This member is required.
-	UpdatedDate *time.Time
+	PlacementName *string
 
 	// The name of the project containing the placement.
 	//
 	// This member is required.
 	ProjectName *string
 
-	// The name of the placement being summarized.
+	// The date when the placement was last updated, in UNIX epoch time format. If the
+	// placement was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
-	PlacementName *string
+	UpdatedDate *time.Time
 }
 
 // An object defining the template for a placement.
 type PlacementTemplate struct {
 
-	// An object specifying the DeviceTemplate () for all placements using this
-	// (PlacementTemplate ()) template.
-	DeviceTemplates map[string]*DeviceTemplate
-
 	// The default attributes (key/value pairs) to be applied to all placements using
 	// this template.
 	DefaultAttributes map[string]*string
+
+	// An object specifying the DeviceTemplate () for all placements using this
+	// (PlacementTemplate ()) template.
+	DeviceTemplates map[string]*DeviceTemplate
 }
 
 // An object providing detailed information for a particular project associated
@@ -99,47 +99,47 @@ type ProjectDescription struct {
 	// This member is required.
 	ProjectName *string
 
-	// The tags (metadata key/value pairs) associated with the project.
-	Tags map[string]*string
-
-	// The ARN of the project.
-	Arn *string
-
 	// The date when the project was last updated, in UNIX epoch time format. If the
 	// project was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
+
+	// The ARN of the project.
+	Arn *string
 
 	// The description of the project.
 	Description *string
 
 	// An object describing the project's placement specifications.
 	PlacementTemplate *PlacementTemplate
+
+	// The tags (metadata key/value pairs) associated with the project.
+	Tags map[string]*string
 }
 
 // An object providing summary information for a particular project for an
 // associated AWS account and region.
 type ProjectSummary struct {
 
-	// The ARN of the project.
-	Arn *string
+	// The date when the project was originally created, in UNIX epoch time format.
+	//
+	// This member is required.
+	CreatedDate *time.Time
 
 	// The name of the project being summarized.
 	//
 	// This member is required.
 	ProjectName *string
 
-	// The date when the project was originally created, in UNIX epoch time format.
-	//
-	// This member is required.
-	CreatedDate *time.Time
-
 	// The date when the project was last updated, in UNIX epoch time format. If the
 	// project was not updated, then createdDate and updatedDate are the same.
 	//
 	// This member is required.
 	UpdatedDate *time.Time
+
+	// The ARN of the project.
+	Arn *string
 
 	// The tags (metadata key/value pairs) associated with the project.
 	Tags map[string]*string

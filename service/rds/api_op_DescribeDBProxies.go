@@ -57,11 +57,11 @@ func (c *Client) DescribeDBProxies(ctx context.Context, params *DescribeDBProxie
 
 type DescribeDBProxiesInput struct {
 
-	// This parameter is not currently supported.
-	Filters []*types.Filter
-
 	// The name of the DB proxy.
 	DBProxyName *string
+
+	// This parameter is not currently supported.
+	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the

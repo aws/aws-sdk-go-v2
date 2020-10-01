@@ -57,11 +57,11 @@ func (c *Client) UpdateTemplateActiveVersion(ctx context.Context, params *Update
 
 type UpdateTemplateActiveVersionInput struct {
 
-	// The type of channel that the message template is designed for. Valid values are:
-	// EMAIL, PUSH, SMS, and VOICE.
+	// Specifies which version of a message template to use as the active version of
+	// the template.
 	//
 	// This member is required.
-	TemplateType *string
+	TemplateActiveVersionRequest *types.TemplateActiveVersionRequest
 
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
@@ -71,11 +71,11 @@ type UpdateTemplateActiveVersionInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// Specifies which version of a message template to use as the active version of
-	// the template.
+	// The type of channel that the message template is designed for. Valid values are:
+	// EMAIL, PUSH, SMS, and VOICE.
 	//
 	// This member is required.
-	TemplateActiveVersionRequest *types.TemplateActiveVersionRequest
+	TemplateType *string
 }
 
 type UpdateTemplateActiveVersionOutput struct {

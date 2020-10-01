@@ -103,22 +103,6 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 
 type CompleteMultipartUploadInput struct {
 
-	// ID for the initiated multipart upload.
-	//
-	// This member is required.
-	UploadId *string
-
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
-	// The container for the multipart upload request information.
-	MultipartUpload *types.CompletedMultipartUpload
-
 	// Name of the bucket to which the multipart upload was initiated.
 	//
 	// This member is required.
@@ -128,16 +112,43 @@ type CompleteMultipartUploadInput struct {
 	//
 	// This member is required.
 	Key *string
+
+	// ID for the initiated multipart upload.
+	//
+	// This member is required.
+	UploadId *string
+
+	// The container for the multipart upload request information.
+	MultipartUpload *types.CompletedMultipartUpload
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
 }
 
 type CompleteMultipartUploadOutput struct {
 
+	// The name of the bucket that contains the newly created object.
+	Bucket *string
+
+	// Entity tag that identifies the newly created object's data. Objects with
+	// different object data will have different entity tags. The entity tag is an
+	// opaque string. The entity tag may or may not be an MD5 digest of the object
+	// data. If the entity tag is not an MD5 digest of the object data, it will contain
+	// one or more nonhexadecimal characters and/or will consist of less than 32 or
+	// more than 32 hexadecimal digits.
+	ETag *string
+
+	// If the object expiration is configured, this will contain the expiration date
+	// (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
+	Expiration *string
+
 	// The object key of the newly created object.
 	Key *string
-
-	// Version ID of the newly created object, in case the bucket has versioning turned
-	// on.
-	VersionId *string
 
 	// The URI that identifies the newly created object.
 	Location *string
@@ -157,20 +168,9 @@ type CompleteMultipartUploadOutput struct {
 	// encryption algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
-	// If the object expiration is configured, this will contain the expiration date
-	// (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
-	Expiration *string
-
-	// Entity tag that identifies the newly created object's data. Objects with
-	// different object data will have different entity tags. The entity tag is an
-	// opaque string. The entity tag may or may not be an MD5 digest of the object
-	// data. If the entity tag is not an MD5 digest of the object data, it will contain
-	// one or more nonhexadecimal characters and/or will consist of less than 32 or
-	// more than 32 hexadecimal digits.
-	ETag *string
-
-	// The name of the bucket that contains the newly created object.
-	Bucket *string
+	// Version ID of the newly created object, in case the bucket has versioning turned
+	// on.
+	VersionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

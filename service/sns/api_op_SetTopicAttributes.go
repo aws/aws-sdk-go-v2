@@ -57,14 +57,6 @@ func (c *Client) SetTopicAttributes(ctx context.Context, params *SetTopicAttribu
 // Input for SetTopicAttributes action.
 type SetTopicAttributesInput struct {
 
-	// The ARN of the topic to modify.
-	//
-	// This member is required.
-	TopicArn *string
-
-	// The new value for the attribute.
-	AttributeValue *string
-
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// SetTopicAttributes action uses:
@@ -102,6 +94,14 @@ type SetTopicAttributesInput struct {
 	//
 	// This member is required.
 	AttributeName *string
+
+	// The ARN of the topic to modify.
+	//
+	// This member is required.
+	TopicArn *string
+
+	// The new value for the attribute.
+	AttributeValue *string
 }
 
 type SetTopicAttributesOutput struct {

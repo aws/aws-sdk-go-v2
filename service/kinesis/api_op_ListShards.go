@@ -63,6 +63,13 @@ func (c *Client) ListShards(ctx context.Context, params *ListShardsInput, optFns
 
 type ListShardsInput struct {
 
+	// Specify this parameter to indicate that you want to list the shards starting
+	// with the shard whose ID immediately follows ExclusiveStartShardId. If you don't
+	// specify this parameter, the default behavior is for ListShards to list the
+	// shards starting with the first one in the stream. You cannot specify this
+	// parameter if you specify NextToken.
+	ExclusiveStartShardId *string
+
 	// The maximum number of shards to return in a single call to ListShards. The
 	// minimum value you can specify for this parameter is 1, and the maximum is 1,000,
 	// which is also the default. When the number of shards to be listed is greater
@@ -93,13 +100,6 @@ type ListShardsInput struct {
 	// to specify which of the two streams you want to list the shards for. You cannot
 	// specify this parameter if you specify the NextToken parameter.
 	StreamCreationTimestamp *time.Time
-
-	// Specify this parameter to indicate that you want to list the shards starting
-	// with the shard whose ID immediately follows ExclusiveStartShardId. If you don't
-	// specify this parameter, the default behavior is for ListShards to list the
-	// shards starting with the first one in the stream. You cannot specify this
-	// parameter if you specify NextToken.
-	ExclusiveStartShardId *string
 
 	// The name of the data stream whose shards you want to list. You cannot specify
 	// this parameter if you specify the NextToken parameter.

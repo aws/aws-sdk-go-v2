@@ -62,15 +62,15 @@ type UpdateAccountSettingsInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// Email address used to send notifications regarding administration of QuickSight.
-	NotificationEmail *string
-
 	// The default namespace for this AWS Account. Currently, the default is default.
 	// IAM users who register for the first time with QuickSight provide an email that
 	// becomes associated with the default namespace.
 	//
 	// This member is required.
 	DefaultNamespace *string
+
+	// Email address used to send notifications regarding administration of QuickSight.
+	NotificationEmail *string
 }
 
 type UpdateAccountSettingsOutput struct {

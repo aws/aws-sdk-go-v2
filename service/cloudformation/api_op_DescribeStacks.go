@@ -59,6 +59,9 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 // The input for DescribeStacks () action.
 type DescribeStacksInput struct {
 
+	// A string that identifies the next page of stacks that you want to retrieve.
+	NextToken *string
+
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -70,9 +73,6 @@ type DescribeStacksInput struct {
 	//
 	// Default: There is no default value.
 	StackName *string
-
-	// A string that identifies the next page of stacks that you want to retrieve.
-	NextToken *string
 }
 
 // The output for a DescribeStacks () action.

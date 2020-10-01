@@ -84,10 +84,6 @@ func (c *Client) CreatePlayerSession(ctx context.Context, params *CreatePlayerSe
 // Represents the input for a request action.
 type CreatePlayerSessionInput struct {
 
-	// Developer-defined information related to a player. Amazon GameLift does not use
-	// this data, so it can be formatted as needed for use in the game.
-	PlayerData *string
-
 	// A unique identifier for the game session to add a player to.
 	//
 	// This member is required.
@@ -97,6 +93,10 @@ type CreatePlayerSessionInput struct {
 	//
 	// This member is required.
 	PlayerId *string
+
+	// Developer-defined information related to a player. Amazon GameLift does not use
+	// this data, so it can be formatted as needed for use in the game.
+	PlayerData *string
 }
 
 // Represents the returned data in response to a request action.

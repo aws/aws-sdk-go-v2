@@ -76,12 +76,6 @@ type DescribeCodeRepositoryOutput struct {
 	// This member is required.
 	CodeRepositoryName *string
 
-	// Configuration details about the repository, including the URL where the
-	// repository is located, the default branch, and the Amazon Resource Name (ARN) of
-	// the AWS Secrets Manager secret that contains the credentials used to access the
-	// repository.
-	GitConfig *types.GitConfig
-
 	// The date and time that the repository was created.
 	//
 	// This member is required.
@@ -91,6 +85,12 @@ type DescribeCodeRepositoryOutput struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	// Configuration details about the repository, including the URL where the
+	// repository is located, the default branch, and the Amazon Resource Name (ARN) of
+	// the AWS Secrets Manager secret that contains the credentials used to access the
+	// repository.
+	GitConfig *types.GitConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

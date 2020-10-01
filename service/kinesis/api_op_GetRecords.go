@@ -107,21 +107,26 @@ func (c *Client) GetRecords(ctx context.Context, params *GetRecordsInput, optFns
 // Represents the input for GetRecords ().
 type GetRecordsInput struct {
 
-	// The maximum number of records to return. Specify a value of up to 10,000. If you
-	// specify a value that is greater than 10,000, GetRecords () throws
-	// InvalidArgumentException.
-	Limit *int32
-
 	// The position in the shard from which you want to start sequentially reading data
 	// records. A shard iterator specifies this position using the sequence number of a
 	// data record in the shard.
 	//
 	// This member is required.
 	ShardIterator *string
+
+	// The maximum number of records to return. Specify a value of up to 10,000. If you
+	// specify a value that is greater than 10,000, GetRecords () throws
+	// InvalidArgumentException.
+	Limit *int32
 }
 
 // Represents the output for GetRecords ().
 type GetRecordsOutput struct {
+
+	// The data records retrieved from the shard.
+	//
+	// This member is required.
+	Records []*types.Record
 
 	// The number of milliseconds the GetRecords () response is from the tip of the
 	// stream, indicating how far behind current time the consumer is. A value of zero
@@ -133,11 +138,6 @@ type GetRecordsOutput struct {
 	// records. If set to null, the shard has been closed and the requested iterator
 	// does not return any more data.
 	NextShardIterator *string
-
-	// The data records retrieved from the shard.
-	//
-	// This member is required.
-	Records []*types.Record
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

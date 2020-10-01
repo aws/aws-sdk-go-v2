@@ -77,17 +77,6 @@ type DescribePublishingDestinationOutput struct {
 	// This member is required.
 	DestinationId *string
 
-	// The time, in epoch millisecond format, at which GuardDuty was first unable to
-	// publish findings to the destination.
-	//
-	// This member is required.
-	PublishingFailureStartTimestamp *int64
-
-	// The status of the publishing destination.
-	//
-	// This member is required.
-	Status types.PublishingStatus
-
 	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
 	// the publishing destination.
 	//
@@ -99,6 +88,17 @@ type DescribePublishingDestinationOutput struct {
 	//
 	// This member is required.
 	DestinationType types.DestinationType
+
+	// The time, in epoch millisecond format, at which GuardDuty was first unable to
+	// publish findings to the destination.
+	//
+	// This member is required.
+	PublishingFailureStartTimestamp *int64
+
+	// The status of the publishing destination.
+	//
+	// This member is required.
+	Status types.PublishingStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,15 +57,6 @@ func (c *Client) DisassociateDiscoveredResource(ctx context.Context, params *Dis
 
 type DisassociateDiscoveredResourceInput struct {
 
-	// The name of the ProgressUpdateStream.
-	//
-	// This member is required.
-	ProgressUpdateStream *string
-
-	// Optional boolean flag to indicate whether any effect should take place. Used to
-	// test if the caller has permission to make the call.
-	DryRun *bool
-
 	// ConfigurationId of the Application Discovery Service resource to be
 	// disassociated.
 	//
@@ -77,6 +68,15 @@ type DisassociateDiscoveredResourceInput struct {
 	//
 	// This member is required.
 	MigrationTaskName *string
+
+	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
+	ProgressUpdateStream *string
+
+	// Optional boolean flag to indicate whether any effect should take place. Used to
+	// test if the caller has permission to make the call.
+	DryRun *bool
 }
 
 type DisassociateDiscoveredResourceOutput struct {

@@ -63,6 +63,11 @@ func (c *Client) DeleteAnalysisScheme(ctx context.Context, params *DeleteAnalysi
 // delete.
 type DeleteAnalysisSchemeInput struct {
 
+	// The name of the analysis scheme you want to delete.
+	//
+	// This member is required.
+	AnalysisSchemeName *string
+
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
@@ -70,11 +75,6 @@ type DeleteAnalysisSchemeInput struct {
 	//
 	// This member is required.
 	DomainName *string
-
-	// The name of the analysis scheme you want to delete.
-	//
-	// This member is required.
-	AnalysisSchemeName *string
 }
 
 // The result of a DeleteAnalysisScheme request. Contains the status of the deleted

@@ -62,13 +62,13 @@ func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, op
 
 type UpdateVolumeInput struct {
 
-	// The new mount point.
-	MountPoint *string
-
 	// The volume ID.
 	//
 	// This member is required.
 	VolumeId *string
+
+	// The new mount point.
+	MountPoint *string
 
 	// The new name.
 	Name *string

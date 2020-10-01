@@ -60,11 +60,6 @@ func (c *Client) DescribeSessions(ctx context.Context, params *DescribeSessionsI
 
 type DescribeSessionsInput struct {
 
-	// The authentication method. Specify API for a user authenticated using a
-	// streaming URL or SAML for a SAML federated user. The default is to authenticate
-	// users using a streaming URL.
-	AuthenticationType types.AuthenticationType
-
 	// The name of the fleet. This value is case-sensitive.
 	//
 	// This member is required.
@@ -75,16 +70,21 @@ type DescribeSessionsInput struct {
 	// This member is required.
 	StackName *string
 
-	// The user identifier.
-	UserId *string
+	// The authentication method. Specify API for a user authenticated using a
+	// streaming URL or SAML for a SAML federated user. The default is to authenticate
+	// users using a streaming URL.
+	AuthenticationType types.AuthenticationType
+
+	// The size of each page of results. The default value is 20 and the maximum value
+	// is 50.
+	Limit *int32
 
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
-	// The size of each page of results. The default value is 20 and the maximum value
-	// is 50.
-	Limit *int32
+	// The user identifier.
+	UserId *string
 }
 
 type DescribeSessionsOutput struct {

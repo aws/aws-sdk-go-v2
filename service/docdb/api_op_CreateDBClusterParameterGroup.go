@@ -72,14 +72,6 @@ func (c *Client) CreateDBClusterParameterGroup(ctx context.Context, params *Crea
 // Represents the input of CreateDBClusterParameterGroup ().
 type CreateDBClusterParameterGroupInput struct {
 
-	// The description for the cluster parameter group.
-	//
-	// This member is required.
-	Description *string
-
-	// The tags to be assigned to the cluster parameter group.
-	Tags []*types.Tag
-
 	// The name of the cluster parameter group. Constraints:
 	//
 	//     * Must not match the
@@ -95,6 +87,14 @@ type CreateDBClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	DBParameterGroupFamily *string
+
+	// The description for the cluster parameter group.
+	//
+	// This member is required.
+	Description *string
+
+	// The tags to be assigned to the cluster parameter group.
+	Tags []*types.Tag
 }
 
 type CreateDBClusterParameterGroupOutput struct {

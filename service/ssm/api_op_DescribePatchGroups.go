@@ -56,13 +56,6 @@ func (c *Client) DescribePatchGroups(ctx context.Context, params *DescribePatchG
 
 type DescribePatchGroupsInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
-	// The maximum number of patch groups to return (per page).
-	MaxResults *int32
-
 	// One or more filters. Use a filter to return a more specific list of results. For
 	// DescribePatchGroups,valid filter keys include the following:
 	//
@@ -80,6 +73,13 @@ type DescribePatchGroupsInput struct {
 	//         *
 	// --filters Key=OPERATING_SYSTEM,Values=AMAZON_LINUX_2
 	Filters []*types.PatchOrchestratorFilter
+
+	// The maximum number of patch groups to return (per page).
+	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribePatchGroupsOutput struct {

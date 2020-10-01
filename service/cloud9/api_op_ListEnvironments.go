@@ -55,6 +55,9 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 
 type ListEnvironmentsInput struct {
 
+	// The maximum number of environments to get identifiers for.
+	MaxResults *int32
+
 	// During a previous call, if there are more than 25 items in the list, only the
 	// first 25 items are returned, along with a unique string called a next token. To
 	// get the next batch of items in the list, call this operation again, adding the
@@ -62,21 +65,18 @@ type ListEnvironmentsInput struct {
 	// operation with each subsequent next token that is returned, until no more next
 	// tokens are returned.
 	NextToken *string
-
-	// The maximum number of environments to get identifiers for.
-	MaxResults *int32
 }
 
 type ListEnvironmentsOutput struct {
+
+	// The list of environment identifiers.
+	EnvironmentIds []*string
 
 	// If there are more than 25 items in the list, only the first 25 items are
 	// returned, along with a unique string called a next token. To get the next batch
 	// of items in the list, call this operation again, adding the next token to the
 	// call.
 	NextToken *string
-
-	// The list of environment identifiers.
-	EnvironmentIds []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

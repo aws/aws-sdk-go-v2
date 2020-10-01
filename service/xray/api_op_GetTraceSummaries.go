@@ -73,6 +73,19 @@ type GetTraceSummariesInput struct {
 	// This member is required.
 	EndTime *time.Time
 
+	// The start of the time frame for which to retrieve traces.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// Specify a filter expression to retrieve trace summaries for services or requests
+	// that meet certain requirements.
+	FilterExpression *string
+
+	// Specify the pagination token returned by a previous request to retrieve the next
+	// page of results.
+	NextToken *string
+
 	// Set to true to get summaries for only a subset of available traces.
 	Sampling *bool
 
@@ -80,29 +93,12 @@ type GetTraceSummariesInput struct {
 	// parameters are Name and Value.
 	SamplingStrategy *types.SamplingStrategy
 
-	// Specify the pagination token returned by a previous request to retrieve the next
-	// page of results.
-	NextToken *string
-
-	// Specify a filter expression to retrieve trace summaries for services or requests
-	// that meet certain requirements.
-	FilterExpression *string
-
 	// A parameter to indicate whether to query trace summaries by TraceId or Event
 	// time.
 	TimeRangeType types.TimeRangeType
-
-	// The start of the time frame for which to retrieve traces.
-	//
-	// This member is required.
-	StartTime *time.Time
 }
 
 type GetTraceSummariesOutput struct {
-
-	// Trace IDs and annotations for traces that were found in the specified time
-	// frame.
-	TraceSummaries []*types.TraceSummary
 
 	// The start time of this page of results.
 	ApproximateTime *time.Time
@@ -111,6 +107,10 @@ type GetTraceSummariesOutput struct {
 	// this token to retrieve the next page. The first page contains the most most
 	// recent results, closest to the end of the time frame.
 	NextToken *string
+
+	// Trace IDs and annotations for traces that were found in the specified time
+	// frame.
+	TraceSummaries []*types.TraceSummary
 
 	// The total number of traces processed, including traces that did not match the
 	// specified filter expression.

@@ -59,6 +59,11 @@ func (c *Client) DisassociateGlobalReplicationGroup(ctx context.Context, params 
 
 type DisassociateGlobalReplicationGroupInput struct {
 
+	// The name of the Global Datastore
+	//
+	// This member is required.
+	GlobalReplicationGroupId *string
+
 	// The name of the secondary cluster you wish to remove from the Global Datastore
 	//
 	// This member is required.
@@ -68,11 +73,6 @@ type DisassociateGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	ReplicationGroupRegion *string
-
-	// The name of the Global Datastore
-	//
-	// This member is required.
-	GlobalReplicationGroupId *string
 }
 
 type DisassociateGlobalReplicationGroupOutput struct {

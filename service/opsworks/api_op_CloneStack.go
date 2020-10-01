@@ -63,6 +63,26 @@ func (c *Client) CloneStack(ctx context.Context, params *CloneStackInput, optFns
 
 type CloneStackInput struct {
 
+	// The stack AWS Identity and Access Management (IAM) role, which allows AWS
+	// OpsWorks Stacks to work with AWS resources on your behalf. You must set this
+	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you
+	// create a stack by using the AWS OpsWorks Stacks console, it creates the role for
+	// you. You can obtain an existing stack's IAM ARN programmatically by calling
+	// DescribePermissions (). For more information about IAM ARNs, see Using
+	// Identifiers
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html). You
+	// must set this parameter to a valid service role ARN or the action will fail;
+	// there is no default value. You can specify the source stack's service role ARN,
+	// if you prefer, but you must do so explicitly.
+	//
+	// This member is required.
+	ServiceRoleArn *string
+
+	// The source stack ID.
+	//
+	// This member is required.
+	SourceStackId *string
+
 	// The default AWS OpsWorks Stacks agent version. You have the following options:
 	//
 	//
@@ -83,8 +103,55 @@ type CloneStackInput struct {
 	// the stack's default setting.
 	AgentVersion *string
 
-	// Whether to use custom cookbooks.
-	UseCustomCookbooks *bool
+	// A list of stack attributes and values as key/value pairs to be added to the
+	// cloned stack.
+	Attributes map[string]*string
+
+	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
+	// Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
+	// Stack
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	ChefConfiguration *types.ChefConfiguration
+
+	// A list of source stack app IDs to be included in the cloned stack.
+	CloneAppIds []*string
+
+	// Whether to clone the source stack's permissions.
+	ClonePermissions *bool
+
+	// The configuration manager. When you clone a stack we recommend that you use the
+	// configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux
+	// stacks, or 12.2 for Windows stacks. The default value for Linux stacks is
+	// currently 12.
+	ConfigurationManager *types.StackConfigurationManager
+
+	// Contains the information required to retrieve an app or cookbook from a
+	// repository. For more information, see Adding Apps
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
+	// or Cookbooks and Recipes
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
+	CustomCookbooksSource *types.Source
+
+	// A string that contains user-defined, custom JSON. It is used to override the
+	// corresponding default stack configuration JSON values. The string should be in
+	// the following format: "{\"key1\": \"value1\", \"key2\": \"value2\",...}" For
+	// more information about custom JSON, see Use Custom JSON to Modify the Stack
+	// Configuration Attributes
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
+	CustomJson *string
+
+	// The cloned stack's default Availability Zone, which must be in the specified
+	// region. For more information, see Regions and Endpoints
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html). If you also specify
+	// a value for DefaultSubnetId, the subnet must be in the same zone. For more
+	// information, see the VpcId parameter description.
+	DefaultAvailabilityZone *string
+
+	// The Amazon Resource Name (ARN) of an IAM profile that is the default profile for
+	// all of the stack's EC2 instances. For more information about IAM ARNs, see Using
+	// Identifiers
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
+	DefaultInstanceProfileArn *string
 
 	// The stack's operating system, which must be set to one of the following.
 	//
@@ -120,66 +187,11 @@ type CloneStackInput struct {
 	// cannot change from Linux to Windows or Windows to Linux.
 	DefaultOs *string
 
-	// The stack AWS Identity and Access Management (IAM) role, which allows AWS
-	// OpsWorks Stacks to work with AWS resources on your behalf. You must set this
-	// parameter to the Amazon Resource Name (ARN) for an existing IAM role. If you
-	// create a stack by using the AWS OpsWorks Stacks console, it creates the role for
-	// you. You can obtain an existing stack's IAM ARN programmatically by calling
-	// DescribePermissions (). For more information about IAM ARNs, see Using
-	// Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html). You
-	// must set this parameter to a valid service role ARN or the action will fail;
-	// there is no default value. You can specify the source stack's service role ARN,
-	// if you prefer, but you must do so explicitly.
-	//
-	// This member is required.
-	ServiceRoleArn *string
-
-	// The Amazon Resource Name (ARN) of an IAM profile that is the default profile for
-	// all of the stack's EC2 instances. For more information about IAM ARNs, see Using
-	// Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html).
-	DefaultInstanceProfileArn *string
-
-	// A list of stack attributes and values as key/value pairs to be added to the
-	// cloned stack.
-	Attributes map[string]*string
-
-	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
-	// stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security
-	// groups, one for each layer, which are associated with layers by default. With
-	// UseOpsworksSecurityGroups you can instead provide your own custom security
-	// groups. UseOpsworksSecurityGroups has the following settings:
-	//
-	//     * True - AWS
-	// OpsWorks Stacks automatically associates the appropriate built-in security group
-	// with each layer (default setting). You can associate additional security groups
-	// with a layer after you create it but you cannot delete the built-in security
-	// group.
-	//
-	//     * False - AWS OpsWorks Stacks does not associate built-in security
-	// groups with layers. You must create appropriate Amazon Elastic Compute Cloud
-	// (Amazon EC2) security groups and associate a security group with each layer that
-	// you create. However, you can still manually associate a built-in security group
-	// with a layer on creation; custom security groups are required only for those
-	// layers that need custom settings.
-	//
-	// For more information, see Create a New Stack
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
-	UseOpsworksSecurityGroups *bool
-
-	// A string that contains user-defined, custom JSON. It is used to override the
-	// corresponding default stack configuration JSON values. The string should be in
-	// the following format: "{\"key1\": \"value1\", \"key2\": \"value2\",...}" For
-	// more information about custom JSON, see Use Custom JSON to Modify the Stack
-	// Configuration Attributes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
-	CustomJson *string
-
-	// The cloned stack AWS region, such as "ap-northeast-2". For more information
-	// about AWS regions, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
-	Region *string
+	// The default root device type. This value is used by default for all instances in
+	// the cloned stack, but you can override it when you create an instance. For more
+	// information, see Storage for the Root Device
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
+	DefaultRootDeviceType types.RootDeviceType
 
 	// A default Amazon EC2 key pair name. The default value is none. If you specify a
 	// key pair name, AWS OpsWorks installs the public key on the instance and you can
@@ -200,60 +212,6 @@ type CloneStackInput struct {
 	// information on default values and when this parameter is required, see the VpcId
 	// parameter description.
 	DefaultSubnetId *string
-
-	// Contains the information required to retrieve an app or cookbook from a
-	// repository. For more information, see Adding Apps
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-	// or Cookbooks and Recipes
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook.html).
-	CustomCookbooksSource *types.Source
-
-	// The configuration manager. When you clone a stack we recommend that you use the
-	// configuration manager to specify the Chef version: 12, 11.10, or 11.4 for Linux
-	// stacks, or 12.2 for Windows stacks. The default value for Linux stacks is
-	// currently 12.
-	ConfigurationManager *types.StackConfigurationManager
-
-	// A list of source stack app IDs to be included in the cloned stack.
-	CloneAppIds []*string
-
-	// The default root device type. This value is used by default for all instances in
-	// the cloned stack, but you can override it when you create an instance. For more
-	// information, see Storage for the Root Device
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device).
-	DefaultRootDeviceType types.RootDeviceType
-
-	// The ID of the VPC that the cloned stack is to be launched into. It must be in
-	// the specified region. All instances are launched into this VPC, and you cannot
-	// change the ID later.
-	//
-	//     * If your account supports EC2 Classic, the default
-	// value is no VPC.
-	//
-	//     * If your account does not support EC2 Classic, the
-	// default value is the default VPC for the specified region.
-	//
-	// If the VPC ID
-	// corresponds to a default VPC and you have specified either the
-	// DefaultAvailabilityZone or the DefaultSubnetId parameter only, AWS OpsWorks
-	// Stacks infers the value of the other parameter. If you specify neither
-	// parameter, AWS OpsWorks Stacks sets these parameters to the first valid
-	// Availability Zone for the specified region and the corresponding default VPC
-	// subnet ID, respectively. If you specify a nondefault VPC ID, note the
-	// following:
-	//
-	//     * It must belong to a VPC in your account that is in the
-	// specified region.
-	//
-	//     * You must specify a value for DefaultSubnetId.
-	//
-	// For more
-	// information about how to use AWS OpsWorks Stacks with a VPC, see Running a Stack
-	// in a VPC
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html).
-	// For more information about default VPC and EC2 Classic, see Supported Platforms
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
-	VpcId *string
 
 	// The stack's host name theme, with spaces are replaced by underscores. The theme
 	// is used to generate host names for the stack's instances. By default,
@@ -290,29 +248,71 @@ type CloneStackInput struct {
 	// theme.
 	HostnameTheme *string
 
-	// A ChefConfiguration object that specifies whether to enable Berkshelf and the
-	// Berkshelf version on Chef 11.10 stacks. For more information, see Create a New
-	// Stack
-	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
-	ChefConfiguration *types.ChefConfiguration
-
 	// The cloned stack name.
 	Name *string
 
-	// Whether to clone the source stack's permissions.
-	ClonePermissions *bool
+	// The cloned stack AWS region, such as "ap-northeast-2". For more information
+	// about AWS regions, see Regions and Endpoints
+	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
+	Region *string
 
-	// The source stack ID.
+	// Whether to use custom cookbooks.
+	UseCustomCookbooks *bool
+
+	// Whether to associate the AWS OpsWorks Stacks built-in security groups with the
+	// stack's layers. AWS OpsWorks Stacks provides a standard set of built-in security
+	// groups, one for each layer, which are associated with layers by default. With
+	// UseOpsworksSecurityGroups you can instead provide your own custom security
+	// groups. UseOpsworksSecurityGroups has the following settings:
 	//
-	// This member is required.
-	SourceStackId *string
+	//     * True - AWS
+	// OpsWorks Stacks automatically associates the appropriate built-in security group
+	// with each layer (default setting). You can associate additional security groups
+	// with a layer after you create it but you cannot delete the built-in security
+	// group.
+	//
+	//     * False - AWS OpsWorks Stacks does not associate built-in security
+	// groups with layers. You must create appropriate Amazon Elastic Compute Cloud
+	// (Amazon EC2) security groups and associate a security group with each layer that
+	// you create. However, you can still manually associate a built-in security group
+	// with a layer on creation; custom security groups are required only for those
+	// layers that need custom settings.
+	//
+	// For more information, see Create a New Stack
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-creating.html).
+	UseOpsworksSecurityGroups *bool
 
-	// The cloned stack's default Availability Zone, which must be in the specified
-	// region. For more information, see Regions and Endpoints
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html). If you also specify
-	// a value for DefaultSubnetId, the subnet must be in the same zone. For more
-	// information, see the VpcId parameter description.
-	DefaultAvailabilityZone *string
+	// The ID of the VPC that the cloned stack is to be launched into. It must be in
+	// the specified region. All instances are launched into this VPC, and you cannot
+	// change the ID later.
+	//
+	//     * If your account supports EC2 Classic, the default
+	// value is no VPC.
+	//
+	//     * If your account does not support EC2 Classic, the
+	// default value is the default VPC for the specified region.
+	//
+	// If the VPC ID
+	// corresponds to a default VPC and you have specified either the
+	// DefaultAvailabilityZone or the DefaultSubnetId parameter only, AWS OpsWorks
+	// Stacks infers the value of the other parameter. If you specify neither
+	// parameter, AWS OpsWorks Stacks sets these parameters to the first valid
+	// Availability Zone for the specified region and the corresponding default VPC
+	// subnet ID, respectively. If you specify a nondefault VPC ID, note the
+	// following:
+	//
+	//     * It must belong to a VPC in your account that is in the
+	// specified region.
+	//
+	//     * You must specify a value for DefaultSubnetId.
+	//
+	// For more
+	// information about how to use AWS OpsWorks Stacks with a VPC, see Running a Stack
+	// in a VPC
+	// (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-vpc.html).
+	// For more information about default VPC and EC2 Classic, see Supported Platforms
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
+	VpcId *string
 }
 
 // Contains the response to a CloneStack request.

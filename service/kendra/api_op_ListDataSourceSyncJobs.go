@@ -67,13 +67,13 @@ type ListDataSourceSyncJobsInput struct {
 	// This member is required.
 	IndexId *string
 
-	// If the result of the previous request to GetDataSourceSyncJobHistory was
-	// truncated, include the NextToken to fetch the next set of jobs.
-	NextToken *string
-
 	// The maximum number of synchronization jobs to return in the response. If there
 	// are fewer results in the list, this response contains only the actual results.
 	MaxResults *int32
+
+	// If the result of the previous request to GetDataSourceSyncJobHistory was
+	// truncated, include the NextToken to fetch the next set of jobs.
+	NextToken *string
 
 	// When specified, the synchronization jobs returned in the list are limited to
 	// jobs between the specified dates.

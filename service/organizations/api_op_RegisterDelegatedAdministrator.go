@@ -65,17 +65,17 @@ func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *Reg
 
 type RegisterDelegatedAdministratorInput struct {
 
-	// The service principal of the AWS service for which you want to make the member
-	// account a delegated administrator.
-	//
-	// This member is required.
-	ServicePrincipal *string
-
 	// The account ID number of the member account in the organization to register as a
 	// delegated administrator.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The service principal of the AWS service for which you want to make the member
+	// account a delegated administrator.
+	//
+	// This member is required.
+	ServicePrincipal *string
 }
 
 type RegisterDelegatedAdministratorOutput struct {

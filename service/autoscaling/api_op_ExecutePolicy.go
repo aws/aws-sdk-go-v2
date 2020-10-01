@@ -57,14 +57,17 @@ func (c *Client) ExecutePolicy(ctx context.Context, params *ExecutePolicyInput, 
 
 type ExecutePolicyInput struct {
 
-	// The metric value to compare to BreachThreshold. This enables you to execute a
-	// policy of type StepScaling and determine which step adjustment to use. For
-	// example, if the breach threshold is 50 and you want to use a step adjustment
-	// with a lower bound of 0 and an upper bound of 10, you can set the metric value
-	// to 59. If you specify a metric value that doesn't correspond to a step
-	// adjustment for the policy, the call returns an error. Required if the policy
-	// type is StepScaling and not supported otherwise.
-	MetricValue *float64
+	// The name or ARN of the policy.
+	//
+	// This member is required.
+	PolicyName *string
+
+	// The name of the Auto Scaling group.
+	AutoScalingGroupName *string
+
+	// The breach threshold for the alarm. Required if the policy type is StepScaling
+	// and not supported otherwise.
+	BreachThreshold *float64
 
 	// Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to
 	// complete before executing the policy. Valid only if the policy type is
@@ -73,17 +76,14 @@ type ExecutePolicyInput struct {
 	// the Amazon EC2 Auto Scaling User Guide.
 	HonorCooldown *bool
 
-	// The name of the Auto Scaling group.
-	AutoScalingGroupName *string
-
-	// The name or ARN of the policy.
-	//
-	// This member is required.
-	PolicyName *string
-
-	// The breach threshold for the alarm. Required if the policy type is StepScaling
-	// and not supported otherwise.
-	BreachThreshold *float64
+	// The metric value to compare to BreachThreshold. This enables you to execute a
+	// policy of type StepScaling and determine which step adjustment to use. For
+	// example, if the breach threshold is 50 and you want to use a step adjustment
+	// with a lower bound of 0 and an upper bound of 10, you can set the metric value
+	// to 59. If you specify a metric value that doesn't correspond to a step
+	// adjustment for the policy, the call returns an error. Required if the policy
+	// type is StepScaling and not supported otherwise.
+	MetricValue *float64
 }
 
 type ExecutePolicyOutput struct {

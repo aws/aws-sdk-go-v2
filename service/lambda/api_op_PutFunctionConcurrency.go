@@ -67,11 +67,6 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 
 type PutFunctionConcurrencyInput struct {
 
-	// The number of simultaneous executions to reserve for the function.
-	//
-	// This member is required.
-	ReservedConcurrentExecutions *int32
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -89,6 +84,11 @@ type PutFunctionConcurrencyInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// The number of simultaneous executions to reserve for the function.
+	//
+	// This member is required.
+	ReservedConcurrentExecutions *int32
 }
 
 type PutFunctionConcurrencyOutput struct {

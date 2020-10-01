@@ -79,10 +79,18 @@ func (c *Client) UpdateMaintenanceWindowTask(ctx context.Context, params *Update
 
 type UpdateMaintenanceWindowTaskInput struct {
 
-	// If True, then all fields that are required by the
-	// RegisterTaskWithMaintenanceWndow action are also required for this API request.
-	// Optional fields that are not specified are set to null.
-	Replace *bool
+	// The maintenance window ID that contains the task to modify.
+	//
+	// This member is required.
+	WindowId *string
+
+	// The task ID to modify.
+	//
+	// This member is required.
+	WindowTaskId *string
+
+	// The new task description to specify.
+	Description *string
 
 	// The new logging location in Amazon S3 to specify. LoggingInfo has been
 	// deprecated. To specify an S3 bucket to contain logs, instead use the
@@ -92,41 +100,25 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// MaintenanceWindowTaskInvocationParameters ().
 	LoggingInfo *types.LoggingInfo
 
-	// The new task description to specify.
-	Description *string
+	// The new MaxConcurrency value you want to specify. MaxConcurrency is the number
+	// of targets that are allowed to run this task in parallel.
+	MaxConcurrency *string
 
 	// The new MaxErrors value to specify. MaxErrors is the maximum number of errors
 	// that are allowed before the task stops being scheduled.
 	MaxErrors *string
 
-	// The task ARN to modify.
-	TaskArn *string
-
 	// The new task name to specify.
 	Name *string
-
-	// The targets (either instances or tags) to modify. Instances are specified using
-	// Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using
-	// Key=tag_name,Values=tag_value.
-	Targets []*types.Target
-
-	// The maintenance window ID that contains the task to modify.
-	//
-	// This member is required.
-	WindowId *string
 
 	// The new task priority to specify. The lower the number, the higher the priority.
 	// Tasks that have the same priority are scheduled in parallel.
 	Priority *int32
 
-	// The parameters to modify. TaskParameters has been deprecated. To specify
-	// parameters to pass to a task when it runs, instead use the Parameters option in
-	// the TaskInvocationParameters structure. For information about how Systems
-	// Manager handles these options for the supported maintenance window task types,
-	// see MaintenanceWindowTaskInvocationParameters (). The map has the following
-	// format: Key: string, between 1 and 255 characters Value: an array of strings,
-	// each string is between 1 and 255 characters
-	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+	// If True, then all fields that are required by the
+	// RegisterTaskWithMaintenanceWndow action are also required for this API request.
+	// Optional fields that are not specified are set to null.
+	Replace *bool
 
 	// The ARN of the IAM service role for Systems Manager to assume when running a
 	// maintenance window task. If you do not specify a service role ARN, Systems
@@ -145,47 +137,29 @@ type UpdateMaintenanceWindowTaskInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
 
-	// The task ID to modify.
-	//
-	// This member is required.
-	WindowTaskId *string
+	// The targets (either instances or tags) to modify. Instances are specified using
+	// Key=instanceids,Values=instanceID_1,instanceID_2. Tags are specified using
+	// Key=tag_name,Values=tag_value.
+	Targets []*types.Target
+
+	// The task ARN to modify.
+	TaskArn *string
 
 	// The parameters that the task should use during execution. Populate only the
 	// fields that match the task type. All other fields should be empty.
 	TaskInvocationParameters *types.MaintenanceWindowTaskInvocationParameters
 
-	// The new MaxConcurrency value you want to specify. MaxConcurrency is the number
-	// of targets that are allowed to run this task in parallel.
-	MaxConcurrency *string
-}
-
-type UpdateMaintenanceWindowTaskOutput struct {
-
-	// The ID of the maintenance window that was updated.
-	WindowId *string
-
-	// The updated task name.
-	Name *string
-
-	// The updated parameter values.
-	TaskInvocationParameters *types.MaintenanceWindowTaskInvocationParameters
-
-	// The updated priority value.
-	Priority *int32
-
-	// The updated parameter values. TaskParameters has been deprecated. To specify
+	// The parameters to modify. TaskParameters has been deprecated. To specify
 	// parameters to pass to a task when it runs, instead use the Parameters option in
 	// the TaskInvocationParameters structure. For information about how Systems
 	// Manager handles these options for the supported maintenance window task types,
-	// see MaintenanceWindowTaskInvocationParameters ().
+	// see MaintenanceWindowTaskInvocationParameters (). The map has the following
+	// format: Key: string, between 1 and 255 characters Value: an array of strings,
+	// each string is between 1 and 255 characters
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+}
 
-	// The updated target values.
-	Targets []*types.Target
-
-	// The ARN of the IAM service role to use to publish Amazon Simple Notification
-	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
-	ServiceRoleArn *string
+type UpdateMaintenanceWindowTaskOutput struct {
 
 	// The updated task description.
 	Description *string
@@ -197,14 +171,40 @@ type UpdateMaintenanceWindowTaskOutput struct {
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
 	LoggingInfo *types.LoggingInfo
 
+	// The updated MaxConcurrency value.
+	MaxConcurrency *string
+
 	// The updated MaxErrors value.
 	MaxErrors *string
+
+	// The updated task name.
+	Name *string
+
+	// The updated priority value.
+	Priority *int32
+
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+	ServiceRoleArn *string
+
+	// The updated target values.
+	Targets []*types.Target
 
 	// The updated task ARN value.
 	TaskArn *string
 
-	// The updated MaxConcurrency value.
-	MaxConcurrency *string
+	// The updated parameter values.
+	TaskInvocationParameters *types.MaintenanceWindowTaskInvocationParameters
+
+	// The updated parameter values. TaskParameters has been deprecated. To specify
+	// parameters to pass to a task when it runs, instead use the Parameters option in
+	// the TaskInvocationParameters structure. For information about how Systems
+	// Manager handles these options for the supported maintenance window task types,
+	// see MaintenanceWindowTaskInvocationParameters ().
+	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
+
+	// The ID of the maintenance window that was updated.
+	WindowId *string
 
 	// The task ID of the maintenance window that was updated.
 	WindowTaskId *string

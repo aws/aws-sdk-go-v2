@@ -58,6 +58,11 @@ func (c *Client) ListTagsForDeliveryStream(ctx context.Context, params *ListTags
 
 type ListTagsForDeliveryStreamInput struct {
 
+	// The name of the delivery stream whose tags you want to list.
+	//
+	// This member is required.
+	DeliveryStreamName *string
+
 	// The key to use as the starting point for the list of tags. If you set this
 	// parameter, ListTagsForDeliveryStream gets all tags that occur after
 	// ExclusiveStartTagKey.
@@ -68,20 +73,9 @@ type ListTagsForDeliveryStreamInput struct {
 	// response. To list additional tags, set ExclusiveStartTagKey to the last key in
 	// the response.
 	Limit *int32
-
-	// The name of the delivery stream whose tags you want to list.
-	//
-	// This member is required.
-	DeliveryStreamName *string
 }
 
 type ListTagsForDeliveryStreamOutput struct {
-
-	// A list of tags associated with DeliveryStreamName, starting with the first tag
-	// after ExclusiveStartTagKey and up to the specified Limit.
-	//
-	// This member is required.
-	Tags []*types.Tag
 
 	// If this is true in the response, more tags are available. To list the remaining
 	// tags, set ExclusiveStartTagKey to the key of the last tag returned and call
@@ -89,6 +83,12 @@ type ListTagsForDeliveryStreamOutput struct {
 	//
 	// This member is required.
 	HasMoreTags *bool
+
+	// A list of tags associated with DeliveryStreamName, starting with the first tag
+	// after ExclusiveStartTagKey and up to the specified Limit.
+	//
+	// This member is required.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

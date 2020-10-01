@@ -63,11 +63,11 @@ type UpdateMultiplexInput struct {
 	// This member is required.
 	MultiplexId *string
 
-	// Name of the multiplex.
-	Name *string
-
 	// The new settings for a multiplex.
 	MultiplexSettings *types.MultiplexSettings
+
+	// Name of the multiplex.
+	Name *string
 }
 
 // Placeholder documentation for UpdateMultiplexResponse

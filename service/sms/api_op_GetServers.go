@@ -63,27 +63,27 @@ type GetServersInput struct {
 	// NextToken value.
 	MaxResults *int32
 
-	// List of VmServerAddress objects
-	VmServerAddressList []*types.VmServerAddress
-
 	// The token for the next set of results.
 	NextToken *string
+
+	// List of VmServerAddress objects
+	VmServerAddressList []*types.VmServerAddress
 }
 
 type GetServersOutput struct {
 
-	// The status of the server catalog.
-	ServerCatalogStatus types.ServerCatalogStatus
+	// The time when the server was last modified.
+	LastModifiedOn *time.Time
 
 	// The token required to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
 
+	// The status of the server catalog.
+	ServerCatalogStatus types.ServerCatalogStatus
+
 	// Information about the servers.
 	ServerList []*types.Server
-
-	// The time when the server was last modified.
-	LastModifiedOn *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

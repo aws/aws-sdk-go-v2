@@ -70,12 +70,12 @@ type DescribeChannelInput struct {
 
 type DescribeChannelOutput struct {
 
+	// An object that contains information about the channel.
+	Channel *types.Channel
+
 	// Statistics about the channel. Included if the 'includeStatistics' parameter is
 	// set to true in the request.
 	Statistics *types.ChannelStatistics
-
-	// An object that contains information about the channel.
-	Channel *types.Channel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

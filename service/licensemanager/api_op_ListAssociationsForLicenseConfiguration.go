@@ -65,20 +65,20 @@ type ListAssociationsForLicenseConfigurationInput struct {
 	// This member is required.
 	LicenseConfigurationArn *string
 
-	// Token for the next set of results.
-	NextToken *string
-
 	// Maximum number of results to return in a single call.
 	MaxResults *int32
+
+	// Token for the next set of results.
+	NextToken *string
 }
 
 type ListAssociationsForLicenseConfigurationOutput struct {
 
-	// Token for the next set of results.
-	NextToken *string
-
 	// Information about the associations for the license configuration.
 	LicenseConfigurationAssociations []*types.LicenseConfigurationAssociation
+
+	// Token for the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

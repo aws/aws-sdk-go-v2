@@ -57,9 +57,6 @@ func (c *Client) CreateProfilingGroup(ctx context.Context, params *CreateProfili
 // The structure representing the createProfiliingGroupRequest.
 type CreateProfilingGroupInput struct {
 
-	// The agent orchestration configuration.
-	AgentOrchestrationConfig *types.AgentOrchestrationConfig
-
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. This parameter specifies a unique identifier for the new profiling
 	// group that helps ensure idempotency.
@@ -67,12 +64,15 @@ type CreateProfilingGroupInput struct {
 	// This member is required.
 	ClientToken *string
 
-	ComputePlatform types.ComputePlatform
-
 	// The name of the profiling group.
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	// The agent orchestration configuration.
+	AgentOrchestrationConfig *types.AgentOrchestrationConfig
+
+	ComputePlatform types.ComputePlatform
 }
 
 // The structure representing the createProfilingGroupResponse.

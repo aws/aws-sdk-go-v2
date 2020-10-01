@@ -57,13 +57,13 @@ func (c *Client) UpdateDeviceState(ctx context.Context, params *UpdateDeviceStat
 
 type UpdateDeviceStateInput struct {
 
-	// If true, the device is enabled. If false, the device is disabled.
-	Enabled *bool
-
 	// The unique identifier of the device.
 	//
 	// This member is required.
 	DeviceId *string
+
+	// If true, the device is enabled. If false, the device is disabled.
+	Enabled *bool
 }
 
 type UpdateDeviceStateOutput struct {

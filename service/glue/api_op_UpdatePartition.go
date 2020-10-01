@@ -57,24 +57,10 @@ func (c *Client) UpdatePartition(ctx context.Context, params *UpdatePartitionInp
 
 type UpdatePartitionInput struct {
 
-	// List of partition key values that define the partition to update.
-	//
-	// This member is required.
-	PartitionValueList []*string
-
-	// The ID of the Data Catalog where the partition to be updated resides. If none is
-	// provided, the AWS account ID is used by default.
-	CatalogId *string
-
 	// The name of the catalog database in which the table in question resides.
 	//
 	// This member is required.
 	DatabaseName *string
-
-	// The name of the table in which the partition to be updated is located.
-	//
-	// This member is required.
-	TableName *string
 
 	// The new partition object to update the partition to.  <p>The <code>Values</code>
 	// property can't be changed. If you want to change the partition key values for a
@@ -82,6 +68,20 @@ type UpdatePartitionInput struct {
 	//
 	// This member is required.
 	PartitionInput *types.PartitionInput
+
+	// List of partition key values that define the partition to update.
+	//
+	// This member is required.
+	PartitionValueList []*string
+
+	// The name of the table in which the partition to be updated is located.
+	//
+	// This member is required.
+	TableName *string
+
+	// The ID of the Data Catalog where the partition to be updated resides. If none is
+	// provided, the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type UpdatePartitionOutput struct {

@@ -72,16 +72,24 @@ type GetCostAndUsageInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
-	NextPageToken *string
-
 	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
 	// and LINKED_ACCOUNT and get the costs that are associated with that account's
 	// usage of that service. You can nest Expression objects to define any combination
 	// of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *types.Expression
+
+	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
+	// isn't set, the response object doesn't include the Granularity, either MONTHLY
+	// or DAILY, or HOURLY.
+	Granularity types.Granularity
+
+	// You can group AWS costs using up to two different groups, either dimensions, tag
+	// keys, or both. When you group by tag key, you get all tag values, including
+	// empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME,
+	// LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY,
+	// RECORD_TYPE, and USAGE_TYPE.
+	GroupBy []*types.GroupDefinition
 
 	// Which metrics are returned in the query. For more information about blended and
 	// unblended rates, see Why does the "blended" annotation appear on some line items
@@ -97,17 +105,9 @@ type GetCostAndUsageInput struct {
 	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
 	Metrics []*string
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
-	// isn't set, the response object doesn't include the Granularity, either MONTHLY
-	// or DAILY, or HOURLY.
-	Granularity types.Granularity
-
-	// You can group AWS costs using up to two different groups, either dimensions, tag
-	// keys, or both. When you group by tag key, you get all tag values, including
-	// empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME,
-	// LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY,
-	// RECORD_TYPE, and USAGE_TYPE.
-	GroupBy []*types.GroupDefinition
+	// The token to retrieve the next set of results. AWS provides the token when the
+	// response from a previous call has more results than the maximum page size.
+	NextPageToken *string
 }
 
 type GetCostAndUsageOutput struct {

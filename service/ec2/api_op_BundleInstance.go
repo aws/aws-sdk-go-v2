@@ -61,11 +61,10 @@ func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput
 // Contains the parameters for BundleInstance.
 type BundleInstanceInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The ID of the instance to bundle. Type: String Default: None Required: Yes
+	//
+	// This member is required.
+	InstanceId *string
 
 	// The bucket in which to store the AMI. You can specify a bucket that you already
 	// own or a new bucket that Amazon EC2 creates on your behalf. If you specify a
@@ -74,10 +73,11 @@ type BundleInstanceInput struct {
 	// This member is required.
 	Storage *types.Storage
 
-	// The ID of the instance to bundle. Type: String Default: None Required: Yes
-	//
-	// This member is required.
-	InstanceId *string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 // Contains the output of BundleInstance.

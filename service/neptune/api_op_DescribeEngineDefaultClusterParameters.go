@@ -64,14 +64,14 @@ type DescribeEngineDefaultClusterParametersInput struct {
 	// This member is required.
 	DBParameterGroupFamily *string
 
+	// This parameter is not currently supported.
+	Filters []*types.Filter
+
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultClusterParameters request. If this parameter is specified,
 	// the response includes only records beyond the marker, up to the value specified
 	// by MaxRecords.
 	Marker *string
-
-	// This parameter is not currently supported.
-	Filters []*types.Filter
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is

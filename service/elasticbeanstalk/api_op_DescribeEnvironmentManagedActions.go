@@ -57,11 +57,11 @@ func (c *Client) DescribeEnvironmentManagedActions(ctx context.Context, params *
 // Request to list an environment's upcoming and in-progress managed actions.
 type DescribeEnvironmentManagedActionsInput struct {
 
-	// The name of the target environment.
-	EnvironmentName *string
-
 	// The environment ID of the target environment.
 	EnvironmentId *string
+
+	// The name of the target environment.
+	EnvironmentName *string
 
 	// To show only actions with a particular status, specify a status.
 	Status types.ActionStatus

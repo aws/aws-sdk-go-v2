@@ -65,16 +65,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The list of key-value pairs to associate with the canary.
-	//
-	// This member is required.
-	Tags map[string]*string
-
 	// The ARN of the canary that you're adding tags to. The ARN format of a canary is
 	// arn:aws:synthetics:Region:account-id:canary:canary-name .
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The list of key-value pairs to associate with the canary.
+	//
+	// This member is required.
+	Tags map[string]*string
 }
 
 type TagResourceOutput struct {

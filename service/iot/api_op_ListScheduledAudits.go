@@ -56,11 +56,11 @@ func (c *Client) ListScheduledAudits(ctx context.Context, params *ListScheduledA
 
 type ListScheduledAuditsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListScheduledAuditsOutput struct {

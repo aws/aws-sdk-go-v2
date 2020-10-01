@@ -58,12 +58,6 @@ func (c *Client) ListNodegroups(ctx context.Context, params *ListNodegroupsInput
 
 type ListNodegroupsInput struct {
 
-	// The nextToken value returned from a previous paginated ListNodegroups request
-	// where maxResults was used and the results exceeded the value of that parameter.
-	// Pagination continues from the end of the previous results that returned the
-	// nextToken value.
-	NextToken *string
-
 	// The name of the Amazon EKS cluster that you would like to list node groups in.
 	//
 	// This member is required.
@@ -77,18 +71,24 @@ type ListNodegroupsInput struct {
 	// If you don't use this parameter, ListNodegroups returns up to 100 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
+
+	// The nextToken value returned from a previous paginated ListNodegroups request
+	// where maxResults was used and the results exceeded the value of that parameter.
+	// Pagination continues from the end of the previous results that returned the
+	// nextToken value.
+	NextToken *string
 }
 
 type ListNodegroupsOutput struct {
-
-	// A list of all of the node groups associated with the specified cluster.
-	Nodegroups []*string
 
 	// The nextToken value to include in a future ListNodegroups request. When the
 	// results of a ListNodegroups request exceed maxResults, you can use this value to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
+
+	// A list of all of the node groups associated with the specified cluster.
+	Nodegroups []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

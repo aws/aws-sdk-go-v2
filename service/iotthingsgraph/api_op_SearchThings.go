@@ -71,22 +71,22 @@ type SearchThingsInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// The string that specifies the next page of results. Use this when you're
-	// paginating results.
-	NextToken *string
-
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
+
+	// The string that specifies the next page of results. Use this when you're
+	// paginating results.
+	NextToken *string
 }
 
 type SearchThingsOutput struct {
 
-	// An array of things in the result set.
-	Things []*types.Thing
-
 	// The string to specify as nextToken when you request the next page of results.
 	NextToken *string
+
+	// An array of things in the result set.
+	Things []*types.Thing
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -32,9 +32,9 @@ type ChangedBlock struct {
 // Describes a tag.
 type Tag struct {
 
-	// The value of the tag.
-	Value *string
-
 	// The key of the tag.
 	Key *string
+
+	// The value of the tag.
+	Value *string
 }

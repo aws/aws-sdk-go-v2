@@ -57,31 +57,31 @@ func (c *Client) DescribeSharedDirectories(ctx context.Context, params *Describe
 
 type DescribeSharedDirectoriesInput struct {
 
-	// A list of identifiers of all shared directories in your account.
-	SharedDirectoryIds []*string
+	// Returns the identifier of the directory in the directory owner account.
+	//
+	// This member is required.
+	OwnerDirectoryId *string
+
+	// The number of shared directories to return in the response object.
+	Limit *int32
 
 	// The DescribeSharedDirectoriesResult.NextToken value from a previous call to
 	// DescribeSharedDirectories (). Pass null if this is the first call.
 	NextToken *string
 
-	// The number of shared directories to return in the response object.
-	Limit *int32
-
-	// Returns the identifier of the directory in the directory owner account.
-	//
-	// This member is required.
-	OwnerDirectoryId *string
+	// A list of identifiers of all shared directories in your account.
+	SharedDirectoryIds []*string
 }
 
 type DescribeSharedDirectoriesOutput struct {
-
-	// A list of all shared directories in your account.
-	SharedDirectories []*types.SharedDirectory
 
 	// If not null, token that indicates that more results are available. Pass this
 	// value for the NextToken parameter in a subsequent call to
 	// DescribeSharedDirectories () to retrieve the next set of items.
 	NextToken *string
+
+	// A list of all shared directories in your account.
+	SharedDirectories []*types.SharedDirectory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,10 +64,6 @@ type ListWorkerBlocksInput struct {
 
 type ListWorkerBlocksOutput struct {
 
-	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
-	// for blocking.
-	WorkerBlocks []*types.WorkerBlock
-
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
@@ -76,6 +72,10 @@ type ListWorkerBlocksOutput struct {
 	// The number of assignments on the page in the filtered results list, equivalent
 	// to the number of assignments returned by this call.
 	NumResults *int32
+
+	// The list of WorkerBlocks, containing the collection of Worker IDs and reasons
+	// for blocking.
+	WorkerBlocks []*types.WorkerBlock
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

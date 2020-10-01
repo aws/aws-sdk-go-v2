@@ -64,12 +64,12 @@ type DeleteDistributionConfigurationInput struct {
 
 type DeleteDistributionConfigurationOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the distribution configuration that was
 	// deleted.
 	DistributionConfigurationArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

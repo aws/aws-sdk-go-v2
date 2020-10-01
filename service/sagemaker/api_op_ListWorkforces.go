@@ -57,6 +57,12 @@ func (c *Client) ListWorkforces(ctx context.Context, params *ListWorkforcesInput
 
 type ListWorkforcesInput struct {
 
+	// The maximum number of workforces returned in the response.
+	MaxResults *int32
+
+	// A filter you can use to search for workforces using part of the workforce name.
+	NameContains *string
+
 	// A token to resume pagination.
 	NextToken *string
 
@@ -65,23 +71,17 @@ type ListWorkforcesInput struct {
 
 	// Sort workforces in ascending or descending order.
 	SortOrder types.SortOrder
-
-	// The maximum number of workforces returned in the response.
-	MaxResults *int32
-
-	// A filter you can use to search for workforces using part of the workforce name.
-	NameContains *string
 }
 
 type ListWorkforcesOutput struct {
-
-	// A token to resume pagination.
-	NextToken *string
 
 	// A list containing information about your workforce.
 	//
 	// This member is required.
 	Workforces []*types.Workforce
+
+	// A token to resume pagination.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

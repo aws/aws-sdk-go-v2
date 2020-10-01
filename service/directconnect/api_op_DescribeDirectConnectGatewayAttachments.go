@@ -79,11 +79,11 @@ type DescribeDirectConnectGatewayAttachmentsInput struct {
 
 type DescribeDirectConnectGatewayAttachmentsOutput struct {
 
-	// The token to retrieve the next page.
-	NextToken *string
-
 	// The attachments.
 	DirectConnectGatewayAttachments []*types.DirectConnectGatewayAttachment
+
+	// The token to retrieve the next page.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

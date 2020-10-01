@@ -67,25 +67,25 @@ type GetVocabularyInput struct {
 
 type GetVocabularyOutput struct {
 
-	// The date and time that the vocabulary was last modified.
-	LastModifiedTime *time.Time
-
 	// The S3 location where the vocabulary is stored. Use this URI to get the contents
 	// of the vocabulary. The URI is available for a limited time.
 	DownloadUri *string
 
-	// The processing state of the vocabulary.
-	VocabularyState types.VocabularyState
-
-	// The name of the vocabulary to return.
-	VocabularyName *string
+	// If the VocabularyState field is FAILED, this field contains information about
+	// why the job failed.
+	FailureReason *string
 
 	// The language code of the vocabulary entries.
 	LanguageCode types.LanguageCode
 
-	// If the VocabularyState field is FAILED, this field contains information about
-	// why the job failed.
-	FailureReason *string
+	// The date and time that the vocabulary was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the vocabulary to return.
+	VocabularyName *string
+
+	// The processing state of the vocabulary.
+	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

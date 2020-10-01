@@ -14,42 +14,11 @@ import (
 // and assigned tags or metadata.
 type DescribedServer struct {
 
-	// Defines the type of endpoint that your file transfer protocol-enabled server is
-	// connected to. If your server is connected to a VPC endpoint, your server isn't
-	// accessible over the public internet.
-	EndpointType EndpointType
-
 	// Specifies the unique Amazon Resource Name (ARN) for a file transfer
 	// protocol-enabled server to be described.
 	//
 	// This member is required.
 	Arn *string
-
-	// Specifies information to call a customer-supplied authentication API. This field
-	// is not populated when the IdentityProviderType of a file transfer
-	// protocol-enabled server is SERVICE_MANAGED.
-	IdentityProviderDetails *IdentityProviderDetails
-
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
-	// transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon
-	// S3 events. When set, user activity can be viewed in your CloudWatch logs.
-	LoggingRole *string
-
-	// Specifies the key-value pairs that you can use to search for and group file
-	// transfer protocol-enabled servers that were assigned to the server that was
-	// described.
-	Tags []*Tag
-
-	// Specifies the number of users that are assigned to a file transfer
-	// protocol-enabled server you specified with the ServerId.
-	UserCount *int32
-
-	// Specifies the mode of authentication method enabled for this service. A value of
-	// SERVICE_MANAGED means that you are using this file transfer protocol-enabled
-	// server to store and access user credentials within the service. A value of
-	// API_GATEWAY indicates that you have integrated an API Gateway endpoint that will
-	// be invoked for authenticating your user into the service.
-	IdentityProviderType IdentityProviderType
 
 	// Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required
 	// when Protocols is set to FTPS.
@@ -59,20 +28,32 @@ type DescribedServer struct {
 	// for your file transfer protocol-enabled server.
 	EndpointDetails *EndpointDetails
 
-	// Specifies the condition of a file transfer protocol-enabled server for the
-	// server that was described. A value of ONLINE indicates that the server can
-	// accept jobs and transfer files. A State value of OFFLINE means that the server
-	// cannot perform file transfer operations.  <p>The states of <code>STARTING</code>
-	// and <code>STOPPING</code> indicate that the server is in an intermediate state,
-	// either not fully able to respond, or not fully offline. The values of
-	// <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error
-	// condition.</p>
-	State State
+	// Defines the type of endpoint that your file transfer protocol-enabled server is
+	// connected to. If your server is connected to a VPC endpoint, your server isn't
+	// accessible over the public internet.
+	EndpointType EndpointType
 
 	// Specifies the Base64-encoded SHA256 fingerprint of the server's host key. This
 	// value is equivalent to the output of the ssh-keygen -l -f my-new-server-key
 	// command.
 	HostKeyFingerprint *string
+
+	// Specifies information to call a customer-supplied authentication API. This field
+	// is not populated when the IdentityProviderType of a file transfer
+	// protocol-enabled server is SERVICE_MANAGED.
+	IdentityProviderDetails *IdentityProviderDetails
+
+	// Specifies the mode of authentication method enabled for this service. A value of
+	// SERVICE_MANAGED means that you are using this file transfer protocol-enabled
+	// server to store and access user credentials within the service. A value of
+	// API_GATEWAY indicates that you have integrated an API Gateway endpoint that will
+	// be invoked for authenticating your user into the service.
+	IdentityProviderType IdentityProviderType
+
+	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
+	// transfer protocol-enabled server to turn on Amazon CloudWatch logging for Amazon
+	// S3 events. When set, user activity can be viewed in your CloudWatch logs.
+	LoggingRole *string
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
 	// protocol client can connect to your server's endpoint. The available protocols
@@ -86,10 +67,40 @@ type DescribedServer struct {
 	// Specifies the unique system-assigned identifier for a file transfer
 	// protocol-enabled server that you instantiate.
 	ServerId *string
+
+	// Specifies the condition of a file transfer protocol-enabled server for the
+	// server that was described. A value of ONLINE indicates that the server can
+	// accept jobs and transfer files. A State value of OFFLINE means that the server
+	// cannot perform file transfer operations.  <p>The states of <code>STARTING</code>
+	// and <code>STOPPING</code> indicate that the server is in an intermediate state,
+	// either not fully able to respond, or not fully offline. The values of
+	// <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error
+	// condition.</p>
+	State State
+
+	// Specifies the key-value pairs that you can use to search for and group file
+	// transfer protocol-enabled servers that were assigned to the server that was
+	// described.
+	Tags []*Tag
+
+	// Specifies the number of users that are assigned to a file transfer
+	// protocol-enabled server you specified with the ServerId.
+	UserCount *int32
 }
 
 // Returns properties of the user that you want to describe.
 type DescribedUser struct {
+
+	// Specifies the unique Amazon Resource Name (ARN) for the user that was requested
+	// to be described.
+	//
+	// This member is required.
+	Arn *string
+
+	// Specifies the landing directory (or folder), which is the location that files
+	// are written to or read from in an Amazon S3 bucket, for the described user. An
+	// example is your-Amazon-S3-bucket-name>/home/username .
+	HomeDirectory *string
 
 	// Specifies the logical directory mappings that specify what Amazon S3 paths and
 	// keys should be visible to your user and how you want to make them visible. You
@@ -114,24 +125,6 @@ type DescribedUser struct {
 	// Specifies the name of the policy in use for the described user.
 	Policy *string
 
-	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
-	// described user.
-	SshPublicKeys []*SshPublicKey
-
-	// Specifies the landing directory (or folder), which is the location that files
-	// are written to or read from in an Amazon S3 bucket, for the described user. An
-	// example is your-Amazon-S3-bucket-name>/home/username .
-	HomeDirectory *string
-
-	// Specifies the name of the user that was requested to be described. User names
-	// are used for authentication purposes. This is the string that will be used by
-	// your user when they log in to your file transfer protocol-enabled server.
-	UserName *string
-
-	// Specifies the key-value pairs for the user requested. Tag can be used to search
-	// for and group users for a variety of purposes.
-	Tags []*Tag
-
 	// Specifies the IAM role that controls your users' access to your Amazon S3
 	// bucket. The policies attached to this role will determine the level of access
 	// you want to provide your users when transferring files into and out of your
@@ -140,11 +133,18 @@ type DescribedUser struct {
 	// resources when servicing your users' transfer requests.
 	Role *string
 
-	// Specifies the unique Amazon Resource Name (ARN) for the user that was requested
-	// to be described.
-	//
-	// This member is required.
-	Arn *string
+	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
+	// described user.
+	SshPublicKeys []*SshPublicKey
+
+	// Specifies the key-value pairs for the user requested. Tag can be used to search
+	// for and group users for a variety of purposes.
+	Tags []*Tag
+
+	// Specifies the name of the user that was requested to be described. User names
+	// are used for authentication purposes. This is the string that will be used by
+	// your user when they log in to your file transfer protocol-enabled server.
+	UserName *string
 }
 
 // The virtual private cloud (VPC) endpoint settings that are configured for your
@@ -154,6 +154,12 @@ type DescribedUser struct {
 // server's endpoint.
 type EndpointDetails struct {
 
+	// A list of address allocation IDs that are required to attach an Elastic IP
+	// address to your file transfer protocol-enabled server's endpoint. This is only
+	// valid in the UpdateServer API.  <note> <p>This property can only be use when
+	// <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
+	AddressAllocationIds []*string
+
 	// A list of subnet IDs that are required to host your file transfer
 	// protocol-enabled server endpoint in your VPC.  <note> <p>This property can only
 	// be used when <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
@@ -162,12 +168,6 @@ type EndpointDetails struct {
 	// The ID of the VPC endpoint.  <note> <p>This property can only be used when
 	// <code>EndpointType</code> is set to <code>VPC_ENDPOINT</code>.</p> </note>
 	VpcEndpointId *string
-
-	// A list of address allocation IDs that are required to attach an Elastic IP
-	// address to your file transfer protocol-enabled server's endpoint. This is only
-	// valid in the UpdateServer API.  <note> <p>This property can only be use when
-	// <code>EndpointType</code> is set to <code>VPC</code>.</p> </note>
-	AddressAllocationIds []*string
 
 	// The VPC ID of the VPC in which a file transfer protocol-enabled server's
 	// endpoint will be hosted.  <note> <p>This property can only be used when
@@ -179,15 +179,15 @@ type EndpointDetails struct {
 // HomeDirectoryMappings.
 type HomeDirectoryMapEntry struct {
 
-	// Represents the map target that is used in a HomeDirectorymapEntry.
-	//
-	// This member is required.
-	Target *string
-
 	// Represents an entry and a target for HomeDirectoryMappings.
 	//
 	// This member is required.
 	Entry *string
+
+	// Represents the map target that is used in a HomeDirectorymapEntry.
+	//
+	// This member is required.
+	Target *string
 }
 
 // Returns information related to the type of user authentication that is in use
@@ -195,20 +195,41 @@ type HomeDirectoryMapEntry struct {
 // method of authentication.
 type IdentityProviderDetails struct {
 
-	// Provides the location of the service endpoint used to authenticate users.
-	Url *string
-
 	// Provides the type of InvocationRole used to authenticate the user account.
 	InvocationRole *string
+
+	// Provides the location of the service endpoint used to authenticate users.
+	Url *string
 }
 
 // Returns properties of a file transfer protocol-enabled server that was
 // specified.
 type ListedServer struct {
 
-	// Specifies the number of users that are assigned to a file transfer
-	// protocol-enabled server you specified with the ServerId.
-	UserCount *int32
+	// Specifies the unique Amazon Resource Name (ARN) for a file transfer
+	// protocol-enabled server to be listed.
+	//
+	// This member is required.
+	Arn *string
+
+	// Specifies the type of VPC endpoint that your file transfer protocol-enabled
+	// server is connected to. If your server is connected to a VPC endpoint, your
+	// server isn't accessible over the public internet.
+	EndpointType EndpointType
+
+	// Specifies the authentication method used to validate a user for a file transfer
+	// protocol-enabled server that was specified. This can include Secure Shell (SSH),
+	// user name and password combinations, or your own custom authentication method.
+	// Valid values include SERVICE_MANAGED or API_GATEWAY.
+	IdentityProviderType IdentityProviderType
+
+	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
+	// transfer protocol-enabled server to turn on Amazon CloudWatch logging.
+	LoggingRole *string
+
+	// Specifies the unique system assigned identifier for a file transfer
+	// protocol-enabled servers that were listed.
+	ServerId *string
 
 	// Specifies the condition of a file transfer protocol-enabled server for the
 	// server that was described. A value of ONLINE indicates that the server can
@@ -220,34 +241,23 @@ type ListedServer struct {
 	// condition.</p>
 	State State
 
-	// Specifies the type of VPC endpoint that your file transfer protocol-enabled
-	// server is connected to. If your server is connected to a VPC endpoint, your
-	// server isn't accessible over the public internet.
-	EndpointType EndpointType
-
-	// Specifies the AWS Identity and Access Management (IAM) role that allows a file
-	// transfer protocol-enabled server to turn on Amazon CloudWatch logging.
-	LoggingRole *string
-
-	// Specifies the unique system assigned identifier for a file transfer
-	// protocol-enabled servers that were listed.
-	ServerId *string
-
-	// Specifies the authentication method used to validate a user for a file transfer
-	// protocol-enabled server that was specified. This can include Secure Shell (SSH),
-	// user name and password combinations, or your own custom authentication method.
-	// Valid values include SERVICE_MANAGED or API_GATEWAY.
-	IdentityProviderType IdentityProviderType
-
-	// Specifies the unique Amazon Resource Name (ARN) for a file transfer
-	// protocol-enabled server to be listed.
-	//
-	// This member is required.
-	Arn *string
+	// Specifies the number of users that are assigned to a file transfer
+	// protocol-enabled server you specified with the ServerId.
+	UserCount *int32
 }
 
 // Returns properties of the user that you specify.
 type ListedUser struct {
+
+	// Provides the unique Amazon Resource Name (ARN) for the user that you want to
+	// learn about.
+	//
+	// This member is required.
+	Arn *string
+
+	// Specifies the location that files are written to or read from an Amazon S3
+	// bucket for the user you specify by their ARN.
+	HomeDirectory *string
 
 	// Specifies the type of landing directory (folder) you mapped for your users' home
 	// directory. If you set it to PATH, the user will see the absolute Amazon S3
@@ -255,10 +265,6 @@ type ListedUser struct {
 	// LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how
 	// you want to make Amazon S3 paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
-
-	// Specifies the name of the user whose ARN was specified. User names are used for
-	// authentication purposes.
-	UserName *string
 
 	// Specifies the role that is in use by this user. A role is an AWS Identity and
 	// Access Management (IAM) entity that, in this case, allows a file transfer
@@ -270,15 +276,9 @@ type ListedUser struct {
 	// Specifies the number of SSH public keys stored for the user you specified.
 	SshPublicKeyCount *int32
 
-	// Provides the unique Amazon Resource Name (ARN) for the user that you want to
-	// learn about.
-	//
-	// This member is required.
-	Arn *string
-
-	// Specifies the location that files are written to or read from an Amazon S3
-	// bucket for the user you specify by their ARN.
-	HomeDirectory *string
+	// Specifies the name of the user whose ARN was specified. User names are used for
+	// authentication purposes.
+	UserName *string
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated
@@ -287,12 +287,6 @@ type ListedUser struct {
 // imported, the public key contents, and the public key ID. A user can store more
 // than one SSH public key associated with their user name on a specific server.
 type SshPublicKey struct {
-
-	// Specifies the SshPublicKeyId parameter contains the identifier of the public
-	// key.
-	//
-	// This member is required.
-	SshPublicKeyId *string
 
 	// Specifies the date that the public key was added to the user account.
 	//
@@ -303,6 +297,12 @@ type SshPublicKey struct {
 	//
 	// This member is required.
 	SshPublicKeyBody *string
+
+	// Specifies the SshPublicKeyId parameter contains the identifier of the public
+	// key.
+	//
+	// This member is required.
+	SshPublicKeyId *string
 }
 
 // Creates a key-value pair for a specific resource. Tags are metadata that you can

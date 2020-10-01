@@ -140,11 +140,11 @@ type CompleteMultipartUploadInput struct {
 // (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html).
 type CompleteMultipartUploadOutput struct {
 
-	// The checksum of the archive computed by Amazon S3 Glacier.
-	Checksum *string
-
 	// The ID of the archive. This value is also included as part of the location.
 	ArchiveId *string
+
+	// The checksum of the archive computed by Amazon S3 Glacier.
+	Checksum *string
 
 	// The relative URI path of the newly added archive resource.
 	Location *string

@@ -61,16 +61,16 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, pa
 // operation.
 type DescribeElasticsearchInstanceTypeLimitsInput struct {
 
+	// Version of Elasticsearch for which Limits () are needed.
+	//
+	// This member is required.
+	ElasticsearchVersion *string
+
 	// The instance type for an Elasticsearch cluster for which Elasticsearch Limits ()
 	// are needed.
 	//
 	// This member is required.
 	InstanceType types.ESPartitionInstanceType
-
-	// Version of Elasticsearch for which Limits () are needed.
-	//
-	// This member is required.
-	ElasticsearchVersion *string
 
 	// DomainName represents the name of the Domain that we are trying to modify. This
 	// should be present only if we are querying for Elasticsearch Limits () for

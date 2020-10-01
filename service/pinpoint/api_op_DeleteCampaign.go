@@ -57,16 +57,16 @@ func (c *Client) DeleteCampaign(ctx context.Context, params *DeleteCampaignInput
 
 type DeleteCampaignInput struct {
 
-	// The unique identifier for the campaign.
-	//
-	// This member is required.
-	CampaignId *string
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The unique identifier for the campaign.
+	//
+	// This member is required.
+	CampaignId *string
 }
 
 type DeleteCampaignOutput struct {

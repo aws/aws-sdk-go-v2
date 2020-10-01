@@ -62,6 +62,11 @@ type CreateCustomMetadataInput struct {
 	// This member is required.
 	CustomMetadata map[string]*string
 
+	// The ID of the resource.
+	//
+	// This member is required.
+	ResourceId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
@@ -69,11 +74,6 @@ type CreateCustomMetadataInput struct {
 	// The ID of the version, if the custom metadata is being added to a document
 	// version.
 	VersionId *string
-
-	// The ID of the resource.
-	//
-	// This member is required.
-	ResourceId *string
 }
 
 type CreateCustomMetadataOutput struct {

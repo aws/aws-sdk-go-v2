@@ -85,15 +85,15 @@ func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns .
 
 type PutRecordInput struct {
 
-	// The record.
-	//
-	// This member is required.
-	Record *types.Record
-
 	// The name of the delivery stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
+
+	// The record.
+	//
+	// This member is required.
+	Record *types.Record
 }
 
 type PutRecordOutput struct {

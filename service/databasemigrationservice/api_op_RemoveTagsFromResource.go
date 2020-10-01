@@ -57,16 +57,16 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 // Removes one or more tags from an AWS DMS resource.
 type RemoveTagsFromResourceInput struct {
 
-	// The tag key (name) of the tag to be removed.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// An AWS DMS resource from which you want to remove tag(s). The value for this
 	// parameter is an Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The tag key (name) of the tag to be removed.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 //

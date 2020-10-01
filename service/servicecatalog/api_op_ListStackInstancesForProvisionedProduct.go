@@ -64,13 +64,6 @@ type ListStackInstancesForProvisionedProductInput struct {
 	// This member is required.
 	ProvisionedProductId *string
 
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -80,16 +73,23 @@ type ListStackInstancesForProvisionedProductInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 }
 
 type ListStackInstancesForProvisionedProductOutput struct {
 
-	// List of stack instances.
-	StackInstances []*types.StackInstance
-
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
 	NextPageToken *string
+
+	// List of stack instances.
+	StackInstances []*types.StackInstance
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

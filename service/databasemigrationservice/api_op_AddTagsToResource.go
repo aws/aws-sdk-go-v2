@@ -61,17 +61,17 @@ func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourc
 // Associates a set of tags with an AWS DMS resource.
 type AddTagsToResourceInput struct {
 
-	// One or more tags to be assigned to the resource.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// Identifies the AWS DMS resource to which tags should be added. The value for
 	// this parameter is an Amazon Resource Name (ARN). For AWS DMS, you can tag a
 	// replication instance, an endpoint, or a replication task.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// One or more tags to be assigned to the resource.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 //

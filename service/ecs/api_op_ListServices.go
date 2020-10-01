@@ -56,6 +56,14 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 
 type ListServicesInput struct {
 
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// services to list. If you do not specify a cluster, the default cluster is
+	// assumed.
+	Cluster *string
+
+	// The launch type for the services to list.
+	LaunchType types.LaunchType
+
 	// The maximum number of service results returned by ListServices in paginated
 	// output. When this parameter is used, ListServices only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
@@ -64,11 +72,6 @@ type ListServicesInput struct {
 	// If this parameter is not used, then ListServices returns up to 10 results and a
 	// nextToken value if applicable.
 	MaxResults *int32
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// services to list. If you do not specify a cluster, the default cluster is
-	// assumed.
-	Cluster *string
 
 	// The nextToken value returned from a ListServices request indicating that more
 	// results are available to fulfill the request and further calls will be needed.
@@ -80,9 +83,6 @@ type ListServicesInput struct {
 
 	// The scheduling strategy for services to list.
 	SchedulingStrategy types.SchedulingStrategy
-
-	// The launch type for the services to list.
-	LaunchType types.LaunchType
 }
 
 type ListServicesOutput struct {

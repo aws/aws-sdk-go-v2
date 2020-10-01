@@ -59,12 +59,6 @@ func (c *Client) ListHealthChecks(ctx context.Context, params *ListHealthChecksI
 // current AWS account.
 type ListHealthChecksInput struct {
 
-	// The maximum number of health checks that you want ListHealthChecks to return in
-	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
-	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
-	// 100 health checks.
-	MaxItems *string
-
 	// If the value of IsTruncated in the previous response was true, you have more
 	// health checks. To get another group, submit another ListHealthChecks request.
 	// For the value of marker, specify the value of NextMarker from the previous
@@ -72,6 +66,12 @@ type ListHealthChecksInput struct {
 	// return if you submit another request. If the value of IsTruncated in the
 	// previous response was false, there are no more health checks to get.
 	Marker *string
+
+	// The maximum number of health checks that you want ListHealthChecks to return in
+	// response to the current request. Amazon Route 53 returns a maximum of 100 items.
+	// If you set MaxItems to a value greater than 100, Route 53 returns only the first
+	// 100 health checks.
+	MaxItems *string
 }
 
 // A complex type that contains the response to a ListHealthChecks request.
@@ -91,6 +91,12 @@ type ListHealthChecksOutput struct {
 	// This member is required.
 	IsTruncated *bool
 
+	// For the second and subsequent calls to ListHealthChecks, Marker is the value
+	// that you specified for the marker parameter in the previous request.
+	//
+	// This member is required.
+	Marker *string
+
 	// The value that you specified for the maxitems parameter in the call to
 	// ListHealthChecks that produced the current response.
 	//
@@ -101,12 +107,6 @@ type ListHealthChecksOutput struct {
 	// check that Amazon Route 53 returns if you submit another ListHealthChecks
 	// request and specify the value of NextMarker in the marker parameter.
 	NextMarker *string
-
-	// For the second and subsequent calls to ListHealthChecks, Marker is the value
-	// that you specified for the marker parameter in the previous request.
-	//
-	// This member is required.
-	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

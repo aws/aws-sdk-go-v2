@@ -56,16 +56,17 @@ func (c *Client) GetSdkTypes(ctx context.Context, params *GetSdkTypesInput, optF
 
 // Get the SdkTypes () collection.
 type GetSdkTypesInput struct {
-	Template *bool
-
-	Name *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
+	Name *string
+
 	// The current pagination position in the paged result set.
 	Position *string
+
+	Template *bool
 
 	TemplateSkipList []*string
 

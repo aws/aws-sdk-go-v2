@@ -103,18 +103,6 @@ type CreateHostedZoneInput struct {
 	// This member is required.
 	CallerReference *string
 
-	// (Optional) A complex type that contains the following optional values:
-	//
-	//     *
-	// For public and private hosted zones, an optional comment
-	//
-	//     * For private
-	// hosted zones, an optional PrivateZone element
-	//
-	// If you don't specify a comment or
-	// the PrivateZone element, omit HostedZoneConfig and the other elements.
-	HostedZoneConfig *types.HostedZoneConfig
-
 	// The name of the domain. Specify a fully qualified domain name, for example,
 	// www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the
 	// domain name is fully qualified. This means that Route 53 treats www.example.com
@@ -127,6 +115,25 @@ type CreateHostedZoneInput struct {
 	// This member is required.
 	Name *string
 
+	// If you want to associate a reusable delegation set with this hosted zone, the ID
+	// that Amazon Route 53 assigned to the reusable delegation set when you created
+	// it. For more information about reusable delegation sets, see
+	// CreateReusableDelegationSet
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
+	DelegationSetId *string
+
+	// (Optional) A complex type that contains the following optional values:
+	//
+	//     *
+	// For public and private hosted zones, an optional comment
+	//
+	//     * For private
+	// hosted zones, an optional PrivateZone element
+	//
+	// If you don't specify a comment or
+	// the PrivateZone element, omit HostedZoneConfig and the other elements.
+	HostedZoneConfig *types.HostedZoneConfig
+
 	// (Private hosted zones only) A complex type that contains information about the
 	// Amazon VPC that you're associating with this hosted zone. You can specify only
 	// one Amazon VPC when you create a private hosted zone. To associate additional
@@ -134,41 +141,34 @@ type CreateHostedZoneInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AssociateVPCWithHostedZone.html)
 	// after you create a hosted zone.
 	VPC *types.VPC
-
-	// If you want to associate a reusable delegation set with this hosted zone, the ID
-	// that Amazon Route 53 assigned to the reusable delegation set when you created
-	// it. For more information about reusable delegation sets, see
-	// CreateReusableDelegationSet
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateReusableDelegationSet.html).
-	DelegationSetId *string
 }
 
 // A complex type containing the response information for the hosted zone.
 type CreateHostedZoneOutput struct {
-
-	// A complex type that contains general information about the hosted zone.
-	//
-	// This member is required.
-	HostedZone *types.HostedZone
 
 	// A complex type that contains information about the CreateHostedZone request.
 	//
 	// This member is required.
 	ChangeInfo *types.ChangeInfo
 
-	// A complex type that contains information about an Amazon VPC that you associated
-	// with this hosted zone.
-	VPC *types.VPC
+	// A complex type that describes the name servers for this hosted zone.
+	//
+	// This member is required.
+	DelegationSet *types.DelegationSet
+
+	// A complex type that contains general information about the hosted zone.
+	//
+	// This member is required.
+	HostedZone *types.HostedZone
 
 	// The unique URL representing the new hosted zone.
 	//
 	// This member is required.
 	Location *string
 
-	// A complex type that describes the name servers for this hosted zone.
-	//
-	// This member is required.
-	DelegationSet *types.DelegationSet
+	// A complex type that contains information about an Amazon VPC that you associated
+	// with this hosted zone.
+	VPC *types.VPC
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

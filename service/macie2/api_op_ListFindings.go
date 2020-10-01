@@ -56,18 +56,18 @@ func (c *Client) ListFindings(ctx context.Context, params *ListFindingsInput, op
 
 type ListFindingsInput struct {
 
+	// The criteria to use to filter the results.
+	FindingCriteria *types.FindingCriteria
+
 	// The maximum number of items to include in each page of the response.
 	MaxResults *int32
-
-	// The criteria to use to sort the results.
-	SortCriteria *types.SortCriteria
 
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
 
-	// The criteria to use to filter the results.
-	FindingCriteria *types.FindingCriteria
+	// The criteria to use to sort the results.
+	SortCriteria *types.SortCriteria
 }
 
 type ListFindingsOutput struct {

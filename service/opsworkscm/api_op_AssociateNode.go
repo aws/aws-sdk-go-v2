@@ -90,15 +90,15 @@ type AssociateNodeInput struct {
 	// This member is required.
 	EngineAttributes []*types.EngineAttribute
 
-	// The name of the server with which to associate the node.
-	//
-	// This member is required.
-	ServerName *string
-
 	// The name of the node.
 	//
 	// This member is required.
 	NodeName *string
+
+	// The name of the server with which to associate the node.
+	//
+	// This member is required.
+	ServerName *string
 }
 
 type AssociateNodeOutput struct {

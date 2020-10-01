@@ -66,10 +66,24 @@ func (c *Client) CreateIdentityPool(ctx context.Context, params *CreateIdentityP
 // Input to the CreateIdentityPool action.
 type CreateIdentityPoolInput struct {
 
+	// TRUE if the identity pool supports unauthenticated logins.
+	//
+	// This member is required.
+	AllowUnauthenticatedIdentities *bool
+
 	// A string that you provide.
 	//
 	// This member is required.
 	IdentityPoolName *string
+
+	// Enables or disables the Basic (Classic) authentication flow. For more
+	// information, see Identity Pools (Federated Identities) Authentication Flow
+	// (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
+	// in the Amazon Cognito Developer Guide.
+	AllowClassicFlow *bool
+
+	// An array of Amazon Cognito user pools and their client IDs.
+	CognitoIdentityProviders []*types.CognitoIdentityProvider
 
 	// The "domain" by which Cognito will refer to your users. This name acts as a
 	// placeholder that allows your backend and the Cognito service to communicate
@@ -79,14 +93,10 @@ type CreateIdentityPoolInput struct {
 	// parameter.
 	DeveloperProviderName *string
 
-	// An array of Amazon Cognito user pools and their client IDs.
-	CognitoIdentityProviders []*types.CognitoIdentityProvider
-
-	// Enables or disables the Basic (Classic) authentication flow. For more
-	// information, see Identity Pools (Federated Identities) Authentication Flow
-	// (https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flow.html)
-	// in the Amazon Cognito Developer Guide.
-	AllowClassicFlow *bool
+	// Tags to assign to the identity pool. A tag is a label that you can apply to
+	// identity pools to categorize and manage them in different ways, such as by
+	// purpose, owner, environment, or other criteria.
+	IdentityPoolTags map[string]*string
 
 	// A list of OpendID Connect provider ARNs.
 	OpenIdConnectProviderARNs []*string
@@ -95,22 +105,27 @@ type CreateIdentityPoolInput struct {
 	// pool.
 	SamlProviderARNs []*string
 
-	// Tags to assign to the identity pool. A tag is a label that you can apply to
-	// identity pools to categorize and manage them in different ways, such as by
-	// purpose, owner, environment, or other criteria.
-	IdentityPoolTags map[string]*string
-
 	// Optional key:value pairs mapping provider names to provider app IDs.
 	SupportedLoginProviders map[string]*string
+}
+
+// An object representing an Amazon Cognito identity pool.
+type CreateIdentityPoolOutput struct {
 
 	// TRUE if the identity pool supports unauthenticated logins.
 	//
 	// This member is required.
 	AllowUnauthenticatedIdentities *bool
-}
 
-// An object representing an Amazon Cognito identity pool.
-type CreateIdentityPoolOutput struct {
+	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
+	IdentityPoolId *string
+
+	// A string that you provide.
+	//
+	// This member is required.
+	IdentityPoolName *string
 
 	// Enables or disables the Basic (Classic) authentication flow. For more
 	// information, see Identity Pools (Federated Identities) Authentication Flow
@@ -121,38 +136,23 @@ type CreateIdentityPoolOutput struct {
 	// A list representing an Amazon Cognito user pool and its client ID.
 	CognitoIdentityProviders []*types.CognitoIdentityProvider
 
-	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
-	// pool.
-	SamlProviderARNs []*string
-
-	// A list of OpendID Connect provider ARNs.
-	OpenIdConnectProviderARNs []*string
+	// The "domain" by which Cognito will refer to your users.
+	DeveloperProviderName *string
 
 	// The tags that are assigned to the identity pool. A tag is a label that you can
 	// apply to identity pools to categorize and manage them in different ways, such as
 	// by purpose, owner, environment, or other criteria.
 	IdentityPoolTags map[string]*string
 
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// This member is required.
-	IdentityPoolId *string
+	// A list of OpendID Connect provider ARNs.
+	OpenIdConnectProviderARNs []*string
 
-	// The "domain" by which Cognito will refer to your users.
-	DeveloperProviderName *string
-
-	// A string that you provide.
-	//
-	// This member is required.
-	IdentityPoolName *string
+	// An array of Amazon Resource Names (ARNs) of the SAML provider for your identity
+	// pool.
+	SamlProviderARNs []*string
 
 	// Optional key:value pairs mapping provider names to provider app IDs.
 	SupportedLoginProviders map[string]*string
-
-	// TRUE if the identity pool supports unauthenticated logins.
-	//
-	// This member is required.
-	AllowUnauthenticatedIdentities *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

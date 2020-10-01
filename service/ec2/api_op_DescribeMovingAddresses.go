@@ -65,6 +65,12 @@ type DescribeMovingAddressesInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// One or more filters.
+	//
+	//     * moving-status - The status of the Elastic IP address
+	// (MovingToVpc | RestoringToClassic).
+	Filters []*types.Filter
+
 	// The maximum number of results to return for the request in a single page. The
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1000; if
@@ -72,27 +78,21 @@ type DescribeMovingAddressesInput struct {
 	// Default: If no value is provided, the default is 1000.
 	MaxResults *int32
 
-	// One or more filters.
-	//
-	//     * moving-status - The status of the Elastic IP address
-	// (MovingToVpc | RestoringToClassic).
-	Filters []*types.Filter
+	// The token for the next page of results.
+	NextToken *string
 
 	// One or more Elastic IP addresses.
 	PublicIps []*string
-
-	// The token for the next page of results.
-	NextToken *string
 }
 
 type DescribeMovingAddressesOutput struct {
 
+	// The status for each Elastic IP address.
+	MovingAddressStatuses []*types.MovingAddressStatus
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// The status for each Elastic IP address.
-	MovingAddressStatuses []*types.MovingAddressStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

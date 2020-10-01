@@ -61,20 +61,6 @@ func (c *Client) StartRxNormInferenceJob(ctx context.Context, params *StartRxNor
 
 type StartRxNormInferenceJobInput struct {
 
-	// Specifies where to send the output files.
-	//
-	// This member is required.
-	OutputDataConfig *types.OutputDataConfig
-
-	// Specifies the format and location of the input data for the job.
-	//
-	// This member is required.
-	InputDataConfig *types.InputDataConfig
-
-	// An AWS Key Management Service key to encrypt your output files. If you do not
-	// specify a key, the files are written in plain text.
-	KMSKey *string
-
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data. For
 	// more information, see  Role-Based Permissions Required for Asynchronous
@@ -84,10 +70,20 @@ type StartRxNormInferenceJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
+	// Specifies the format and location of the input data for the job.
+	//
+	// This member is required.
+	InputDataConfig *types.InputDataConfig
+
 	// The language of the input documents. All documents must be in the same language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
+
+	// Specifies where to send the output files.
+	//
+	// This member is required.
+	OutputDataConfig *types.OutputDataConfig
 
 	// A unique identifier for the request. If you don't set the client request token,
 	// Amazon Comprehend Medical generates one.
@@ -95,6 +91,10 @@ type StartRxNormInferenceJobInput struct {
 
 	// The identifier of the job.
 	JobName *string
+
+	// An AWS Key Management Service key to encrypt your output files. If you do not
+	// specify a key, the files are written in plain text.
+	KMSKey *string
 }
 
 type StartRxNormInferenceJobOutput struct {

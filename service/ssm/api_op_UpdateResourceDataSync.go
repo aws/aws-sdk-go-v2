@@ -63,6 +63,11 @@ func (c *Client) UpdateResourceDataSync(ctx context.Context, params *UpdateResou
 
 type UpdateResourceDataSyncInput struct {
 
+	// The name of the resource data sync you want to update.
+	//
+	// This member is required.
+	SyncName *string
+
 	// Specify information about the data sources to synchronize.
 	//
 	// This member is required.
@@ -72,11 +77,6 @@ type UpdateResourceDataSyncInput struct {
 	//
 	// This member is required.
 	SyncType *string
-
-	// The name of the resource data sync you want to update.
-	//
-	// This member is required.
-	SyncName *string
 }
 
 type UpdateResourceDataSyncOutput struct {

@@ -57,34 +57,34 @@ func (c *Client) ListTemplateAliases(ctx context.Context, params *ListTemplateAl
 
 type ListTemplateAliasesInput struct {
 
-	// The maximum number of results to be returned per request.
-	MaxResults *int32
-
-	// The token for the next set of results, or null if there are no more results.
-	NextToken *string
+	// The ID of the AWS account that contains the template aliases that you're
+	// listing.
+	//
+	// This member is required.
+	AwsAccountId *string
 
 	// The ID for the template.
 	//
 	// This member is required.
 	TemplateId *string
 
-	// The ID of the AWS account that contains the template aliases that you're
-	// listing.
-	//
-	// This member is required.
-	AwsAccountId *string
+	// The maximum number of results to be returned per request.
+	MaxResults *int32
+
+	// The token for the next set of results, or null if there are no more results.
+	NextToken *string
 }
 
 type ListTemplateAliasesOutput struct {
-
-	// A structure containing the list of the template's aliases.
-	TemplateAliasList []*types.TemplateAlias
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// A structure containing the list of the template's aliases.
+	TemplateAliasList []*types.TemplateAlias
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

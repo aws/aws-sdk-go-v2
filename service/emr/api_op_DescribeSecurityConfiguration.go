@@ -66,14 +66,14 @@ type DescribeSecurityConfigurationInput struct {
 
 type DescribeSecurityConfigurationOutput struct {
 
+	// The date and time the security configuration was created
+	CreationDateTime *time.Time
+
 	// The name of the security configuration.
 	Name *string
 
 	// The security configuration details in JSON format.
 	SecurityConfiguration *string
-
-	// The date and time the security configuration was created
-	CreationDateTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

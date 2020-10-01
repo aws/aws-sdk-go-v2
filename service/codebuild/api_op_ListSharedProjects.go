@@ -61,13 +61,13 @@ type ListSharedProjectsInput struct {
 	// value is 100.
 	MaxResults *int32
 
-	// The order in which to list shared build projects. Valid values include:
-	//
-	//     *
-	// ASCENDING: List in ascending order.
-	//
-	//     * DESCENDING: List in descending order.
-	SortOrder types.SortOrderType
+	// During a previous call, the maximum number of items that can be returned is the
+	// value specified in maxResults. If there more items in the list, then a unique
+	// string called a nextToken is returned. To get the next batch of items in the
+	// list, call this operation again, adding the next token to the call. To get all
+	// of the items in the list, keep calling this operation with each subsequent next
+	// token that is returned, until no more next tokens are returned.
+	NextToken *string
 
 	// The criterion to be used to list build projects shared with the current AWS
 	// account or user. Valid values include:
@@ -79,21 +79,17 @@ type ListSharedProjectsInput struct {
 	// changed.
 	SortBy types.SharedResourceSortByType
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults. If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
-	NextToken *string
+	// The order in which to list shared build projects. Valid values include:
+	//
+	//     *
+	// ASCENDING: List in ascending order.
+	//
+	//     * DESCENDING: List in descending order.
+	SortOrder types.SortOrderType
 }
 
 type ListSharedProjectsOutput struct {
 
-	// The list of ARNs for the build projects shared with the current AWS account or
-	// user.
-	Projects []*string
-
 	// During a previous call, the maximum number of items that can be returned is the
 	// value specified in maxResults. If there more items in the list, then a unique
 	// string called a nextToken is returned. To get the next batch of items in the
@@ -101,6 +97,10 @@ type ListSharedProjectsOutput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
+	// The list of ARNs for the build projects shared with the current AWS account or
+	// user.
+	Projects []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

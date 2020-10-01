@@ -81,11 +81,6 @@ func (c *Client) DescribeVault(ctx context.Context, params *DescribeVaultInput, 
 // Provides options for retrieving metadata for a specific vault in Amazon Glacier.
 type DescribeVaultInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -94,36 +89,41 @@ type DescribeVaultInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
 }
 
 // Contains the Amazon S3 Glacier response to your request.
 type DescribeVaultOutput struct {
 
-	// Total size, in bytes, of the archives in the vault as of the last inventory
-	// date. This field will return null if an inventory has not yet run on the vault,
-	// for example if you just created the vault.
-	SizeInBytes *int64
+	// The Universal Coordinated Time (UTC) date when the vault was created. This value
+	// should be a string in the ISO 8601 date format, for example
+	// 2012-03-20T17:03:43.221Z.
+	CreationDate *string
 
 	// The Universal Coordinated Time (UTC) date when Amazon S3 Glacier completed the
 	// last vault inventory. This value should be a string in the ISO 8601 date format,
 	// for example 2012-03-20T17:03:43.221Z.
 	LastInventoryDate *string
 
-	// The name of the vault.
-	VaultName *string
-
-	// The Amazon Resource Name (ARN) of the vault.
-	VaultARN *string
-
 	// The number of archives in the vault as of the last inventory date. This field
 	// will return null if an inventory has not yet run on the vault, for example if
 	// you just created the vault.
 	NumberOfArchives *int64
 
-	// The Universal Coordinated Time (UTC) date when the vault was created. This value
-	// should be a string in the ISO 8601 date format, for example
-	// 2012-03-20T17:03:43.221Z.
-	CreationDate *string
+	// Total size, in bytes, of the archives in the vault as of the last inventory
+	// date. This field will return null if an inventory has not yet run on the vault,
+	// for example if you just created the vault.
+	SizeInBytes *int64
+
+	// The Amazon Resource Name (ARN) of the vault.
+	VaultARN *string
+
+	// The name of the vault.
+	VaultName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

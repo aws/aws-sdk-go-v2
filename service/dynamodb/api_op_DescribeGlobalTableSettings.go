@@ -70,11 +70,11 @@ type DescribeGlobalTableSettingsInput struct {
 
 type DescribeGlobalTableSettingsOutput struct {
 
-	// The Region-specific settings for the global table.
-	ReplicaSettings []*types.ReplicaSettingsDescription
-
 	// The name of the global table.
 	GlobalTableName *string
+
+	// The Region-specific settings for the global table.
+	ReplicaSettings []*types.ReplicaSettingsDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

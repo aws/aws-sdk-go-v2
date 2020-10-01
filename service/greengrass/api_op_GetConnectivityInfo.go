@@ -65,11 +65,11 @@ type GetConnectivityInfoInput struct {
 
 type GetConnectivityInfoOutput struct {
 
-	// A message about the connectivity info request.
-	Message *string
-
 	// Connectivity info list.
 	ConnectivityInfo []*types.ConnectivityInfo
+
+	// A message about the connectivity info request.
+	Message *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

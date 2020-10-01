@@ -57,12 +57,17 @@ func (c *Client) ListTrainingJobs(ctx context.Context, params *ListTrainingJobsI
 
 type ListTrainingJobsInput struct {
 
+	// A filter that returns only training jobs created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time
+
 	// A filter that returns only training jobs created before the specified time
 	// (timestamp).
 	CreationTimeBefore *time.Time
 
-	// The field to sort results by. The default is CreationTime.
-	SortBy types.SortBy
+	// A filter that returns only training jobs modified after the specified time
+	// (timestamp).
+	LastModifiedTimeAfter *time.Time
 
 	// A filter that returns only training jobs modified before the specified time
 	// (timestamp).
@@ -71,40 +76,35 @@ type ListTrainingJobsInput struct {
 	// The maximum number of training jobs to return in the response.
 	MaxResults *int32
 
-	// A filter that returns only training jobs modified after the specified time
-	// (timestamp).
-	LastModifiedTimeAfter *time.Time
-
-	// A filter that retrieves only training jobs with a specific status.
-	StatusEquals types.TrainingJobStatus
+	// A string in the training job name. This filter returns only training jobs whose
+	// name contains the specified string.
+	NameContains *string
 
 	// If the result of the previous ListTrainingJobs request was truncated, the
 	// response includes a NextToken. To retrieve the next set of training jobs, use
 	// the token in the next request.
 	NextToken *string
 
+	// The field to sort results by. The default is CreationTime.
+	SortBy types.SortBy
+
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
 
-	// A filter that returns only training jobs created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time
-
-	// A string in the training job name. This filter returns only training jobs whose
-	// name contains the specified string.
-	NameContains *string
+	// A filter that retrieves only training jobs with a specific status.
+	StatusEquals types.TrainingJobStatus
 }
 
 type ListTrainingJobsOutput struct {
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of training jobs, use it in the subsequent request.
-	NextToken *string
 
 	// An array of TrainingJobSummary objects, each listing a training job.
 	//
 	// This member is required.
 	TrainingJobSummaries []*types.TrainingJobSummary
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of training jobs, use it in the subsequent request.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

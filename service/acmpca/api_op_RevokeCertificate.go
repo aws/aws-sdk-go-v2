@@ -71,11 +71,6 @@ type RevokeCertificateInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// Specifies why you revoked the certificate.
-	//
-	// This member is required.
-	RevocationReason types.RevocationReason
-
 	// Serial number of the certificate to be revoked. This must be in hexadecimal
 	// format. You can retrieve the serial number by calling GetCertificate () with the
 	// Amazon Resource Name (ARN) of the certificate you want and the ARN of your
@@ -89,6 +84,11 @@ type RevokeCertificateInput struct {
 	//
 	// This member is required.
 	CertificateSerial *string
+
+	// Specifies why you revoked the certificate.
+	//
+	// This member is required.
+	RevocationReason types.RevocationReason
 }
 
 type RevokeCertificateOutput struct {

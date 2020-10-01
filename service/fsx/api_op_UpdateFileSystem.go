@@ -90,10 +90,19 @@ func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemI
 // The request object for the UpdateFileSystem operation.
 type UpdateFileSystemInput struct {
 
+	// Identifies the file system that you are updating.
+	//
+	// This member is required.
+	FileSystemId *string
+
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// updates. This string is automatically filled on your behalf when you use the AWS
 	// Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
+	// The configuration object for Amazon FSx for Lustre file systems used in the
+	// UpdateFileSystem operation.
+	LustreConfiguration *types.UpdateFileSystemLustreConfiguration
 
 	// Use this parameter to increase the storage capacity of an Amazon FSx for Windows
 	// File Server file system. Specifies the storage capacity target value, GiB, for
@@ -106,17 +115,8 @@ type UpdateFileSystemInput struct {
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html).
 	StorageCapacity *int32
 
-	// Identifies the file system that you are updating.
-	//
-	// This member is required.
-	FileSystemId *string
-
 	// The configuration updates for an Amazon FSx for Windows File Server file system.
 	WindowsConfiguration *types.UpdateFileSystemWindowsConfiguration
-
-	// The configuration object for Amazon FSx for Lustre file systems used in the
-	// UpdateFileSystem operation.
-	LustreConfiguration *types.UpdateFileSystemLustreConfiguration
 }
 
 // The response object for the UpdateFileSystem operation.

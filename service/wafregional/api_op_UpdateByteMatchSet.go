@@ -106,6 +106,17 @@ func (c *Client) UpdateByteMatchSet(ctx context.Context, params *UpdateByteMatch
 
 type UpdateByteMatchSetInput struct {
 
+	// The ByteMatchSetId of the ByteMatchSet () that you want to update.
+	// ByteMatchSetId is returned by CreateByteMatchSet () and by ListByteMatchSets ().
+	//
+	// This member is required.
+	ByteMatchSetId *string
+
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// An array of ByteMatchSetUpdate objects that you want to insert into or delete
 	// from a ByteMatchSet (). For more information, see the applicable data types:
 	//
@@ -120,17 +131,6 @@ type UpdateByteMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.ByteMatchSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
-
-	// The ByteMatchSetId of the ByteMatchSet () that you want to update.
-	// ByteMatchSetId is returned by CreateByteMatchSet () and by ListByteMatchSets ().
-	//
-	// This member is required.
-	ByteMatchSetId *string
 }
 
 type UpdateByteMatchSetOutput struct {

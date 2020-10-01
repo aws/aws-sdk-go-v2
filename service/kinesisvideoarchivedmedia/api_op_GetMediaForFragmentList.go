@@ -80,16 +80,16 @@ func (c *Client) GetMediaForFragmentList(ctx context.Context, params *GetMediaFo
 
 type GetMediaForFragmentListInput struct {
 
-	// The name of the stream from which to retrieve fragment media.
-	//
-	// This member is required.
-	StreamName *string
-
 	// A list of the numbers of fragments for which to retrieve media. You retrieve
 	// these values with ListFragments ().
 	//
 	// This member is required.
 	Fragments []*string
+
+	// The name of the stream from which to retrieve fragment media.
+	//
+	// This member is required.
+	StreamName *string
 }
 
 type GetMediaForFragmentListOutput struct {

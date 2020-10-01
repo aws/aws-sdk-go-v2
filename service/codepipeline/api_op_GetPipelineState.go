@@ -70,22 +70,22 @@ type GetPipelineStateInput struct {
 // Represents the output of a GetPipelineState action.
 type GetPipelineStateOutput struct {
 
-	// The date and time the pipeline was last updated, in timestamp format.
-	Updated *time.Time
-
-	// A list of the pipeline stage output information, including stage name, state,
-	// most recent run details, whether the stage is disabled, and other data.
-	StageStates []*types.StageState
-
 	// The date and time the pipeline was created, in timestamp format.
 	Created *time.Time
+
+	// The name of the pipeline for which you want to get the state.
+	PipelineName *string
 
 	// The version number of the pipeline. A newly created pipeline is always assigned
 	// a version number of 1.
 	PipelineVersion *int32
 
-	// The name of the pipeline for which you want to get the state.
-	PipelineName *string
+	// A list of the pipeline stage output information, including stage name, state,
+	// most recent run details, whether the stage is disabled, and other data.
+	StageStates []*types.StageState
+
+	// The date and time the pipeline was last updated, in timestamp format.
+	Updated *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

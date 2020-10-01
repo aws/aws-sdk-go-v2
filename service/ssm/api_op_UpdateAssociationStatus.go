@@ -58,11 +58,6 @@ func (c *Client) UpdateAssociationStatus(ctx context.Context, params *UpdateAsso
 
 type UpdateAssociationStatusInput struct {
 
-	// The name of the Systems Manager document.
-	//
-	// This member is required.
-	Name *string
-
 	// The association status.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type UpdateAssociationStatusInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The name of the Systems Manager document.
+	//
+	// This member is required.
+	Name *string
 }
 
 type UpdateAssociationStatusOutput struct {

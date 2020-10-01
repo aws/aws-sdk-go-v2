@@ -57,13 +57,13 @@ func (c *Client) ListThingGroupsForThing(ctx context.Context, params *ListThingG
 
 type ListThingGroupsForThingInput struct {
 
-	// The maximum number of results to return at one time.
-	MaxResults *int32
-
 	// The thing name.
 	//
 	// This member is required.
 	ThingName *string
+
+	// The maximum number of results to return at one time.
+	MaxResults *int32
 
 	// The token to retrieve the next set of results.
 	NextToken *string

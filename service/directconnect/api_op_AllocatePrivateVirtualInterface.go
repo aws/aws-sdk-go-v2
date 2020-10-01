@@ -65,25 +65,89 @@ type AllocatePrivateVirtualInterfaceInput struct {
 	// This member is required.
 	ConnectionId *string
 
-	// The ID of the AWS account that owns the virtual private interface.
-	//
-	// This member is required.
-	OwnerAccount *string
-
 	// Information about the private virtual interface.
 	//
 	// This member is required.
 	NewPrivateVirtualInterfaceAllocation *types.NewPrivateVirtualInterfaceAllocation
+
+	// The ID of the AWS account that owns the virtual private interface.
+	//
+	// This member is required.
+	OwnerAccount *string
 }
 
 // Information about a virtual interface.
 type AllocatePrivateVirtualInterfaceOutput struct {
 
-	// The ID of the connection.
-	ConnectionId *string
+	// The address family for the BGP peer.
+	AddressFamily types.AddressFamily
+
+	// The IP address assigned to the Amazon interface.
+	AmazonAddress *string
+
+	// The autonomous system number (ASN) for the Amazon side of the connection.
+	AmazonSideAsn *int64
+
+	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
+	// configuration. The valid values are 1-2147483647.
+	Asn *int32
+
+	// The authentication key for BGP configuration. This string has a minimum length
+	// of 6 characters and and a maximun lenth of 80 characters.
+	AuthKey *string
+
+	// The Direct Connect endpoint on which the virtual interface terminates.
+	AwsDeviceV2 *string
 
 	// The BGP peers configured on this virtual interface.
 	BgpPeers []*types.BGPPeer
+
+	// The ID of the connection.
+	ConnectionId *string
+
+	// The IP address assigned to the customer interface.
+	CustomerAddress *string
+
+	// The customer router configuration.
+	CustomerRouterConfig *string
+
+	// The ID of the Direct Connect gateway.
+	DirectConnectGatewayId *string
+
+	// Indicates whether jumbo frames (9001 MTU) are supported.
+	JumboFrameCapable *bool
+
+	// The location of the connection.
+	Location *string
+
+	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
+	// 9001. The default value is 1500.
+	Mtu *int32
+
+	// The ID of the AWS account that owns the virtual interface.
+	OwnerAccount *string
+
+	// The AWS Region where the virtual interface is located.
+	Region *string
+
+	// The routes to be advertised to the AWS network in this Region. Applies to public
+	// virtual interfaces.
+	RouteFilterPrefixes []*types.RouteFilterPrefix
+
+	// The tags associated with the virtual interface.
+	Tags []*types.Tag
+
+	// The ID of the virtual private gateway. Applies only to private virtual
+	// interfaces.
+	VirtualGatewayId *string
+
+	// The ID of the virtual interface.
+	VirtualInterfaceId *string
+
+	// The name of the virtual interface assigned by the customer network. The name has
+	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
+	// hyphen (-).
+	VirtualInterfaceName *string
 
 	// The state of the virtual interface. The following are the possible values:
 	//
@@ -126,72 +190,8 @@ type AllocatePrivateVirtualInterfaceOutput struct {
 	// The type of virtual interface. The possible values are private and public.
 	VirtualInterfaceType *string
 
-	// The routes to be advertised to the AWS network in this Region. Applies to public
-	// virtual interfaces.
-	RouteFilterPrefixes []*types.RouteFilterPrefix
-
-	// The authentication key for BGP configuration. This string has a minimum length
-	// of 6 characters and and a maximun lenth of 80 characters.
-	AuthKey *string
-
-	// The Direct Connect endpoint on which the virtual interface terminates.
-	AwsDeviceV2 *string
-
-	// The tags associated with the virtual interface.
-	Tags []*types.Tag
-
-	// Indicates whether jumbo frames (9001 MTU) are supported.
-	JumboFrameCapable *bool
-
-	// The ID of the AWS account that owns the virtual interface.
-	OwnerAccount *string
-
-	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
-	// 9001. The default value is 1500.
-	Mtu *int32
-
-	// The IP address assigned to the customer interface.
-	CustomerAddress *string
-
-	// The ID of the Direct Connect gateway.
-	DirectConnectGatewayId *string
-
-	// The customer router configuration.
-	CustomerRouterConfig *string
-
-	// The location of the connection.
-	Location *string
-
-	// The ID of the virtual interface.
-	VirtualInterfaceId *string
-
-	// The autonomous system number (ASN) for the Amazon side of the connection.
-	AmazonSideAsn *int64
-
-	// The IP address assigned to the Amazon interface.
-	AmazonAddress *string
-
-	// The ID of the virtual private gateway. Applies only to private virtual
-	// interfaces.
-	VirtualGatewayId *string
-
-	// The name of the virtual interface assigned by the customer network. The name has
-	// a maximum of 100 characters. The following are valid characters: a-z, 0-9 and a
-	// hyphen (-).
-	VirtualInterfaceName *string
-
 	// The ID of the VLAN.
 	Vlan *int32
-
-	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
-	Asn *int32
-
-	// The address family for the BGP peer.
-	AddressFamily types.AddressFamily
-
-	// The AWS Region where the virtual interface is located.
-	Region *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

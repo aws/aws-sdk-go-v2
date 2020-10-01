@@ -57,11 +57,11 @@ func (c *Client) ListPublishedSchemaArns(ctx context.Context, params *ListPublis
 
 type ListPublishedSchemaArnsInput struct {
 
-	// The pagination token.
-	NextToken *string
-
 	// The maximum number of results to retrieve.
 	MaxResults *int32
+
+	// The pagination token.
+	NextToken *string
 
 	// The response for ListPublishedSchemaArns when this parameter is used will list
 	// all minor version ARNs for a major version.

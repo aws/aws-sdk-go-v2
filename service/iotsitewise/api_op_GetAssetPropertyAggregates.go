@@ -70,17 +70,10 @@ func (c *Client) GetAssetPropertyAggregates(ctx context.Context, params *GetAsse
 
 type GetAssetPropertyAggregatesInput struct {
 
-	// The ID of the asset property.
-	PropertyId *string
-
-	// The exclusive start of the range from which to query historical data, expressed
-	// in seconds in Unix epoch time.
+	// The data aggregating function.
 	//
 	// This member is required.
-	StartDate *time.Time
-
-	// The maximum number of results to be returned per paginated request.
-	MaxResults *int32
+	AggregateTypes []types.AggregateType
 
 	// The inclusive end of the range from which to query historical data, expressed in
 	// seconds in Unix epoch time.
@@ -88,13 +81,25 @@ type GetAssetPropertyAggregatesInput struct {
 	// This member is required.
 	EndDate *time.Time
 
-	// The data aggregating function.
+	// The time interval over which to aggregate data.
 	//
 	// This member is required.
-	AggregateTypes []types.AggregateType
+	Resolution *string
+
+	// The exclusive start of the range from which to query historical data, expressed
+	// in seconds in Unix epoch time.
+	//
+	// This member is required.
+	StartDate *time.Time
 
 	// The ID of the asset.
 	AssetId *string
+
+	// The maximum number of results to be returned per paginated request.
+	MaxResults *int32
+
+	// The token to be used for the next set of paginated results.
+	NextToken *string
 
 	// The property alias that identifies the property, such as an OPC-UA server data
 	// stream path (for example, /company/windfarm/3/turbine/7/temperature). For more
@@ -103,19 +108,14 @@ type GetAssetPropertyAggregatesInput struct {
 	// in the AWS IoT SiteWise User Guide.
 	PropertyAlias *string
 
-	// The time interval over which to aggregate data.
-	//
-	// This member is required.
-	Resolution *string
-
-	// The token to be used for the next set of paginated results.
-	NextToken *string
-
-	// The chronological sorting order of the requested information.
-	TimeOrdering types.TimeOrdering
+	// The ID of the asset property.
+	PropertyId *string
 
 	// The quality by which to filter asset data.
 	Qualities []types.Quality
+
+	// The chronological sorting order of the requested information.
+	TimeOrdering types.TimeOrdering
 }
 
 type GetAssetPropertyAggregatesOutput struct {

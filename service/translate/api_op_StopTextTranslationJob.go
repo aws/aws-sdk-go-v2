@@ -71,12 +71,12 @@ type StopTextTranslationJobInput struct {
 
 type StopTextTranslationJobOutput struct {
 
+	// The job ID of the stopped batch translation job.
+	JobId *string
+
 	// The status of the designated job. Upon successful completion, the job's status
 	// will be STOPPED.
 	JobStatus types.JobStatus
-
-	// The job ID of the stopped batch translation job.
-	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

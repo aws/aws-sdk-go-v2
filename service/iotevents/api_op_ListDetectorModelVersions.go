@@ -63,21 +63,21 @@ type ListDetectorModelVersionsInput struct {
 	// This member is required.
 	DetectorModelName *string
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return at one time.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListDetectorModelVersionsOutput struct {
 
+	// Summary information about the detector model versions.
+	DetectorModelVersionSummaries []*types.DetectorModelVersionSummary
+
 	// A token to retrieve the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
-
-	// Summary information about the detector model versions.
-	DetectorModelVersionSummaries []*types.DetectorModelVersionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

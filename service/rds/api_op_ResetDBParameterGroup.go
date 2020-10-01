@@ -64,11 +64,6 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 //
 type ResetDBParameterGroupInput struct {
 
-	// A value that indicates whether to reset all parameters in the DB parameter group
-	// to default values. By default, all parameters in the DB parameter group are
-	// reset to default values.
-	ResetAllParameters *bool
-
 	// The name of the DB parameter group. Constraints:
 	//
 	//     * Must match the name of
@@ -89,6 +84,11 @@ type ResetDBParameterGroupInput struct {
 	// static parameters, and changes are applied when DB instance reboots. Oracle
 	// Valid Values (for Apply method): pending-reboot
 	Parameters []*types.Parameter
+
+	// A value that indicates whether to reset all parameters in the DB parameter group
+	// to default values. By default, all parameters in the DB parameter group are
+	// reset to default values.
+	ResetAllParameters *bool
 }
 
 // Contains the result of a successful invocation of the ModifyDBParameterGroup or

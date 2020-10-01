@@ -62,11 +62,6 @@ func (c *Client) StopContactRecording(ctx context.Context, params *StopContactRe
 
 type StopContactRecordingInput struct {
 
-	// The identifier of the Amazon Connect instance.
-	//
-	// This member is required.
-	InstanceId *string
-
 	// The identifier of the contact.
 	//
 	// This member is required.
@@ -77,6 +72,11 @@ type StopContactRecordingInput struct {
 	//
 	// This member is required.
 	InitialContactId *string
+
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
 }
 
 type StopContactRecordingOutput struct {

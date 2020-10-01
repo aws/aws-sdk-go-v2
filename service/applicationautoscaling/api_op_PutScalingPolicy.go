@@ -84,16 +84,10 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 
 type PutScalingPolicyInput struct {
 
-	// The policy type. This parameter is required if you are creating a scaling
-	// policy. The following policy types are supported: TargetTrackingScaling—Not
-	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
-	// Comprehend, Lambda, or Amazon Keyspaces (for Apache Cassandra). For more
-	// information, see Target Tracking Scaling Policies
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
-	// and Step Scaling Policies
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
-	// in the Application Auto Scaling User Guide.
-	PolicyType types.PolicyType
+	// The name of the scaling policy.
+	//
+	// This member is required.
+	PolicyName *string
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
@@ -156,11 +150,6 @@ type PutScalingPolicyInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// A target tracking scaling policy. Includes support for predefined or customized
-	// metrics. This parameter is required if you are creating a policy and the policy
-	// type is TargetTrackingScaling.
-	TargetTrackingScalingPolicyConfiguration *types.TargetTrackingScalingPolicyConfiguration
-
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
 	//
@@ -221,20 +210,31 @@ type PutScalingPolicyInput struct {
 	// This member is required.
 	ScalableDimension types.ScalableDimension
 
-	// A step scaling policy. This parameter is required if you are creating a policy
-	// and the policy type is StepScaling.
-	StepScalingPolicyConfiguration *types.StepScalingPolicyConfiguration
-
-	// The name of the scaling policy.
-	//
-	// This member is required.
-	PolicyName *string
-
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
+	// The policy type. This parameter is required if you are creating a scaling
+	// policy. The following policy types are supported: TargetTrackingScaling—Not
+	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
+	// Comprehend, Lambda, or Amazon Keyspaces (for Apache Cassandra). For more
+	// information, see Target Tracking Scaling Policies
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
+	// and Step Scaling Policies
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
+	// in the Application Auto Scaling User Guide.
+	PolicyType types.PolicyType
+
+	// A step scaling policy. This parameter is required if you are creating a policy
+	// and the policy type is StepScaling.
+	StepScalingPolicyConfiguration *types.StepScalingPolicyConfiguration
+
+	// A target tracking scaling policy. Includes support for predefined or customized
+	// metrics. This parameter is required if you are creating a policy and the policy
+	// type is TargetTrackingScaling.
+	TargetTrackingScalingPolicyConfiguration *types.TargetTrackingScalingPolicyConfiguration
 }
 
 type PutScalingPolicyOutput struct {

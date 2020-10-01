@@ -58,16 +58,16 @@ func (c *Client) UpdateVoiceChannel(ctx context.Context, params *UpdateVoiceChan
 
 type UpdateVoiceChannelInput struct {
 
-	// Specifies the status and settings of the voice channel for an application.
-	//
-	// This member is required.
-	VoiceChannelRequest *types.VoiceChannelRequest
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// Specifies the status and settings of the voice channel for an application.
+	//
+	// This member is required.
+	VoiceChannelRequest *types.VoiceChannelRequest
 }
 
 type UpdateVoiceChannelOutput struct {

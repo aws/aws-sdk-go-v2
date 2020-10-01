@@ -60,15 +60,15 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 // The input for the ListChangeSets () action.
 type ListChangeSetsInput struct {
 
-	// A string (provided by the ListChangeSets () response output) that identifies the
-	// next page of change sets that you want to retrieve.
-	NextToken *string
-
 	// The name or the Amazon Resource Name (ARN) of the stack for which you want to
 	// list change sets.
 	//
 	// This member is required.
 	StackName *string
+
+	// A string (provided by the ListChangeSets () response output) that identifies the
+	// next page of change sets that you want to retrieve.
+	NextToken *string
 }
 
 // The output for the ListChangeSets () action.

@@ -56,22 +56,22 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
+	// The maximum number of results to be returned per request.
+	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// The maximum number of results to be returned per request.
-	MaxResults *string
 }
 
 type ListGroupsOutput struct {
 
+	// Information about a group.
+	Groups []*types.GroupInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// Information about a group.
-	Groups []*types.GroupInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

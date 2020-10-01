@@ -72,14 +72,14 @@ type ListDashboardsInput struct {
 
 type ListDashboardsOutput struct {
 
-	// The token for the next set of results, or null if there are no additional
-	// results.
-	NextToken *string
-
 	// A list that summarizes each dashboard in the project.
 	//
 	// This member is required.
 	DashboardSummaries []*types.DashboardSummary
+
+	// The token for the next set of results, or null if there are no additional
+	// results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -61,23 +61,16 @@ func (c *Client) ListContainerInstances(ctx context.Context, params *ListContain
 
 type ListContainerInstancesInput struct {
 
-	// Filters the container instances by status. For example, if you specify the
-	// DRAINING status, the results include only container instances that have been set
-	// to DRAINING using UpdateContainerInstancesState (). If you do not specify this
-	// parameter, the default is to include container instances set to all states other
-	// than INACTIVE.
-	Status types.ContainerInstanceStatus
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// container instances to list. If you do not specify a cluster, the default
+	// cluster is assumed.
+	Cluster *string
 
 	// You can filter the results of a ListContainerInstances operation with cluster
 	// query language statements. For more information, see Cluster Query Language
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Filter *string
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// container instances to list. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string
 
 	// The maximum number of container instance results returned by
 	// ListContainerInstances in paginated output. When this parameter is used,
@@ -96,19 +89,26 @@ type ListContainerInstancesInput struct {
 	// is only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
+	// Filters the container instances by status. For example, if you specify the
+	// DRAINING status, the results include only container instances that have been set
+	// to DRAINING using UpdateContainerInstancesState (). If you do not specify this
+	// parameter, the default is to include container instances set to all states other
+	// than INACTIVE.
+	Status types.ContainerInstanceStatus
 }
 
 type ListContainerInstancesOutput struct {
+
+	// The list of container instances with full ARN entries for each container
+	// instance associated with the specified cluster.
+	ContainerInstanceArns []*string
 
 	// The nextToken value to include in a future ListContainerInstances request. When
 	// the results of a ListContainerInstances request exceed maxResults, this value
 	// can be used to retrieve the next page of results. This value is null when there
 	// are no more results to return.
 	NextToken *string
-
-	// The list of container instances with full ARN entries for each container
-	// instance associated with the specified cluster.
-	ContainerInstanceArns []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

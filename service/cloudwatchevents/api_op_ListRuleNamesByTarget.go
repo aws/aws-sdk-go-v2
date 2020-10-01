@@ -57,30 +57,30 @@ func (c *Client) ListRuleNamesByTarget(ctx context.Context, params *ListRuleName
 
 type ListRuleNamesByTargetInput struct {
 
-	// The maximum number of results to return.
-	Limit *int32
-
-	// The token returned by a previous call to retrieve the next set of results.
-	NextToken *string
+	// The Amazon Resource Name (ARN) of the target resource.
+	//
+	// This member is required.
+	TargetArn *string
 
 	// Limits the results to show only the rules associated with the specified event
 	// bus.
 	EventBusName *string
 
-	// The Amazon Resource Name (ARN) of the target resource.
-	//
-	// This member is required.
-	TargetArn *string
+	// The maximum number of results to return.
+	Limit *int32
+
+	// The token returned by a previous call to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListRuleNamesByTargetOutput struct {
 
-	// The names of the rules that can invoke the given target.
-	RuleNames []*string
-
 	// Indicates whether there are additional results to retrieve. If there are no more
 	// results, the value is null.
 	NextToken *string
+
+	// The names of the rules that can invoke the given target.
+	RuleNames []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

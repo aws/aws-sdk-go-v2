@@ -61,19 +61,11 @@ func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexP
 
 type UpdateRegexPatternSetInput struct {
 
-	// A description of the set that helps with identification. You cannot change the
-	// description of a set after you create it.
-	Description *string
-
-	//
+	// A unique identifier for the set. This ID is returned in the responses to create
+	// and list commands. You provide it to operations like update and delete.
 	//
 	// This member is required.
-	RegularExpressionList []*types.Regex
-
-	// The name of the set. You cannot change the name after you create the set.
-	//
-	// This member is required.
-	Name *string
+	Id *string
 
 	// A token used for optimistic locking. AWS WAF returns a token to your get and
 	// list requests, to mark the state of the entity at the time of the request. To
@@ -86,11 +78,15 @@ type UpdateRegexPatternSetInput struct {
 	// This member is required.
 	LockToken *string
 
-	// A unique identifier for the set. This ID is returned in the responses to create
-	// and list commands. You provide it to operations like update and delete.
+	// The name of the set. You cannot change the name after you create the set.
 	//
 	// This member is required.
-	Id *string
+	Name *string
+
+	//
+	//
+	// This member is required.
+	RegularExpressionList []*types.Regex
 
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
@@ -105,6 +101,10 @@ type UpdateRegexPatternSetInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
+
+	// A description of the set that helps with identification. You cannot change the
+	// description of a set after you create it.
+	Description *string
 }
 
 type UpdateRegexPatternSetOutput struct {

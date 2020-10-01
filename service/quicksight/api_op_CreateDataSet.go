@@ -57,8 +57,10 @@ func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, 
 
 type CreateDataSetInput struct {
 
-	// The row-level security configuration for the data that you want to create.
-	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
+	// The AWS account ID.
+	//
+	// This member is required.
+	AwsAccountId *string
 
 	// An ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
@@ -66,61 +68,59 @@ type CreateDataSetInput struct {
 	// This member is required.
 	DataSetId *string
 
-	// A list of resource permissions on the dataset.
-	Permissions []*types.ResourcePermission
-
-	// Configures the combination and transformation of the data from the physical
-	// tables.
-	LogicalTableMap map[string]*types.LogicalTable
-
 	// Indicates whether you want to import the data into SPICE.
 	//
 	// This member is required.
 	ImportMode types.DataSetImportMode
-
-	// Groupings of columns that work together in certain QuickSight features.
-	// Currently, only geospatial hierarchy is supported.
-	ColumnGroups []*types.ColumnGroup
-
-	// Contains a map of the key-value pairs for the resource tag or tags assigned to
-	// the dataset.
-	Tags []*types.Tag
-
-	// Declares the physical tables that are available in the underlying data sources.
-	//
-	// This member is required.
-	PhysicalTableMap map[string]*types.PhysicalTable
 
 	// The display name for the dataset.
 	//
 	// This member is required.
 	Name *string
 
-	// The AWS account ID.
+	// Declares the physical tables that are available in the underlying data sources.
 	//
 	// This member is required.
-	AwsAccountId *string
+	PhysicalTableMap map[string]*types.PhysicalTable
+
+	// Groupings of columns that work together in certain QuickSight features.
+	// Currently, only geospatial hierarchy is supported.
+	ColumnGroups []*types.ColumnGroup
+
+	// Configures the combination and transformation of the data from the physical
+	// tables.
+	LogicalTableMap map[string]*types.LogicalTable
+
+	// A list of resource permissions on the dataset.
+	Permissions []*types.ResourcePermission
+
+	// The row-level security configuration for the data that you want to create.
+	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
+
+	// Contains a map of the key-value pairs for the resource tag or tags assigned to
+	// the dataset.
+	Tags []*types.Tag
 }
 
 type CreateDataSetOutput struct {
 
-	// The ID of the ingestion, which is triggered as a result of dataset creation if
-	// the import mode is SPICE.
-	IngestionId *string
-
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The AWS request ID for this operation.
-	RequestId *string
+	// The ID for the dataset that you want to create. This ID is unique per AWS Region
+	// for each AWS account.
+	DataSetId *string
 
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if
 	// the import mode is SPICE.
 	IngestionArn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per AWS Region
-	// for each AWS account.
-	DataSetId *string
+	// The ID of the ingestion, which is triggered as a result of dataset creation if
+	// the import mode is SPICE.
+	IngestionId *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

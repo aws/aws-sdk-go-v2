@@ -71,6 +71,13 @@ func (c *Client) UpdateOriginRequestPolicy(ctx context.Context, params *UpdateOr
 
 type UpdateOriginRequestPolicyInput struct {
 
+	// The unique identifier for the origin request policy that you are updating. The
+	// identifier is returned in a cache behavior’s OriginRequestPolicyId field in the
+	// response to GetDistributionConfig.
+	//
+	// This member is required.
+	Id *string
+
 	// An origin request policy configuration.
 	//
 	// This member is required.
@@ -80,13 +87,6 @@ type UpdateOriginRequestPolicyInput struct {
 	// returned in the origin request policy’s ETag field in the response to
 	// GetOriginRequestPolicyConfig.
 	IfMatch *string
-
-	// The unique identifier for the origin request policy that you are updating. The
-	// identifier is returned in a cache behavior’s OriginRequestPolicyId field in the
-	// response to GetDistributionConfig.
-	//
-	// This member is required.
-	Id *string
 }
 
 type UpdateOriginRequestPolicyOutput struct {

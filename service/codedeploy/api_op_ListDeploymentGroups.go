@@ -75,13 +75,13 @@ type ListDeploymentGroupsOutput struct {
 	// The application name.
 	ApplicationName *string
 
+	// A list of deployment group names.
+	DeploymentGroups []*string
+
 	// If a large amount of information is returned, an identifier is also returned. It
 	// can be used in a subsequent list deployment groups call to return the next set
 	// of deployment groups in the list.
 	NextToken *string
-
-	// A list of deployment group names.
-	DeploymentGroups []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

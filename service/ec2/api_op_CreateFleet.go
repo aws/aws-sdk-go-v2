@@ -62,24 +62,15 @@ func (c *Client) CreateFleet(ctx context.Context, params *CreateFleetInput, optF
 
 type CreateFleetInput struct {
 
-	// The start date and time of the request, in UTC format (for example,
-	// YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request
-	// immediately.
-	ValidFrom *time.Time
+	// The configuration for the EC2 Fleet.
+	//
+	// This member is required.
+	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
 
-	// Describes the configuration of Spot Instances in an EC2 Fleet.
-	SpotOptions *types.SpotOptionsRequest
-
-	// The type of the request. By default, the EC2 Fleet places an asynchronous
-	// request for your desired capacity, and maintains it by replenishing interrupted
-	// Spot Instances (maintain). A value of instant places a synchronous one-time
-	// request, and returns errors for any instances that could not be launched. A
-	// value of request places an asynchronous one-time request without maintaining
-	// capacity or submitting requests in alternative capacity pools if capacity is
-	// unavailable. For more information, see EC2 Fleet Request Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type)
-	// in the Amazon Elastic Compute Cloud User Guide.
-	Type types.FleetType
+	// The number of units to request.
+	//
+	// This member is required.
+	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see Ensuring Idempotency
@@ -92,13 +83,18 @@ type CreateFleetInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// Indicates whether running instances should be terminated if the total target
+	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
+
+	// Describes the configuration of On-Demand Instances in an EC2 Fleet.
+	OnDemandOptions *types.OnDemandOptionsRequest
+
 	// Indicates whether EC2 Fleet should replace unhealthy instances.
 	ReplaceUnhealthyInstances *bool
 
-	// The configuration for the EC2 Fleet.
-	//
-	// This member is required.
-	LaunchTemplateConfigs []*types.FleetLaunchTemplateConfigRequest
+	// Describes the configuration of Spot Instances in an EC2 Fleet.
+	SpotOptions *types.SpotOptionsRequest
 
 	// The key-value pair for tagging the EC2 Fleet request on creation. The value for
 	// ResourceType must be fleet, otherwise the fleet request fails. To tag instances
@@ -108,21 +104,25 @@ type CreateFleetInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#tag-resources).
 	TagSpecifications []*types.TagSpecification
 
-	// The number of units to request.
-	//
-	// This member is required.
-	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
-
-	// Indicates whether running instances should be terminated if the total target
-	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
-	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
-
-	// Describes the configuration of On-Demand Instances in an EC2 Fleet.
-	OnDemandOptions *types.OnDemandOptionsRequest
-
 	// Indicates whether running instances should be terminated when the EC2 Fleet
 	// expires.
 	TerminateInstancesWithExpiration *bool
+
+	// The type of the request. By default, the EC2 Fleet places an asynchronous
+	// request for your desired capacity, and maintains it by replenishing interrupted
+	// Spot Instances (maintain). A value of instant places a synchronous one-time
+	// request, and returns errors for any instances that could not be launched. A
+	// value of request places an asynchronous one-time request without maintaining
+	// capacity or submitting requests in alternative capacity pools if capacity is
+	// unavailable. For more information, see EC2 Fleet Request Types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-configuration-strategies.html#ec2-fleet-request-type)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	Type types.FleetType
+
+	// The start date and time of the request, in UTC format (for example,
+	// YYYY-MM-DDTHH:MM:SSZ). The default is to start fulfilling the request
+	// immediately.
+	ValidFrom *time.Time
 
 	// The end date and time of the request, in UTC format (for example,
 	// YYYY-MM-DDTHH:MM:SSZ). At this point, no new EC2 Fleet requests are placed or

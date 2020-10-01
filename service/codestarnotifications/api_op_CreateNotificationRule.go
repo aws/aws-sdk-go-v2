@@ -61,24 +61,6 @@ func (c *Client) CreateNotificationRule(ctx context.Context, params *CreateNotif
 
 type CreateNotificationRuleInput struct {
 
-	// A list of tags to apply to this notification rule. Key names cannot start with
-	// "aws".
-	Tags map[string]*string
-
-	// A list of event types associated with this notification rule. For a list of
-	// allowed events, see EventTypeSummary ().
-	//
-	// This member is required.
-	EventTypeIds []*string
-
-	// A unique, client-generated idempotency token that, when provided in a request,
-	// ensures the request cannot be repeated with a changed parameter. If a request
-	// with the same parameters is received and a token is included, the request
-	// returns information about the initial request that used that token. The AWS SDKs
-	// prepopulate client request tokens. If you are using an AWS SDK, an idempotency
-	// token is created for you.
-	ClientRequestToken *string
-
 	// The level of detail to include in the notifications for this resource. BASIC
 	// will include only the contents of the event as it would appear in AWS
 	// CloudWatch. FULL will include any supplemental information provided by AWS
@@ -88,6 +70,18 @@ type CreateNotificationRuleInput struct {
 	// This member is required.
 	DetailType types.DetailType
 
+	// A list of event types associated with this notification rule. For a list of
+	// allowed events, see EventTypeSummary ().
+	//
+	// This member is required.
+	EventTypeIds []*string
+
+	// The name for the notification rule. Notifictaion rule names must be unique in
+	// your AWS account.
+	//
+	// This member is required.
+	Name *string
+
 	// The Amazon Resource Name (ARN) of the resource to associate with the
 	// notification rule. Supported resources include pipelines in AWS CodePipeline,
 	// repositories in AWS CodeCommit, and build projects in AWS CodeBuild.
@@ -95,21 +89,27 @@ type CreateNotificationRuleInput struct {
 	// This member is required.
 	Resource *string
 
-	// The status of the notification rule. The default value is ENABLED. If the status
-	// is set to DISABLED, notifications aren't sent for the notification rule.
-	Status types.NotificationRuleStatus
-
 	// A list of Amazon Resource Names (ARNs) of SNS topics to associate with the
 	// notification rule.
 	//
 	// This member is required.
 	Targets []*types.Target
 
-	// The name for the notification rule. Notifictaion rule names must be unique in
-	// your AWS account.
-	//
-	// This member is required.
-	Name *string
+	// A unique, client-generated idempotency token that, when provided in a request,
+	// ensures the request cannot be repeated with a changed parameter. If a request
+	// with the same parameters is received and a token is included, the request
+	// returns information about the initial request that used that token. The AWS SDKs
+	// prepopulate client request tokens. If you are using an AWS SDK, an idempotency
+	// token is created for you.
+	ClientRequestToken *string
+
+	// The status of the notification rule. The default value is ENABLED. If the status
+	// is set to DISABLED, notifications aren't sent for the notification rule.
+	Status types.NotificationRuleStatus
+
+	// A list of tags to apply to this notification rule. Key names cannot start with
+	// "aws".
+	Tags map[string]*string
 }
 
 type CreateNotificationRuleOutput struct {

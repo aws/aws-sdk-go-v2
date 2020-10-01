@@ -65,27 +65,27 @@ func (c *Client) GetGatewayResponses(ctx context.Context, params *GetGatewayResp
 // supported response types.
 type GetGatewayResponsesInput struct {
 
-	// The maximum number of returned results per page. The default value is 25 and the
-	// maximum value is 500. The GatewayResponses () collection does not support
-	// pagination and the limit does not apply here.
-	Limit *int32
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	// The maximum number of returned results per page. The default value is 25 and the
+	// maximum value is 500. The GatewayResponses () collection does not support
+	// pagination and the limit does not apply here.
+	Limit *int32
+
 	Name *string
-
-	TemplateSkipList []*string
-
-	Title *string
 
 	// The current pagination position in the paged result set. The GatewayResponse ()
 	// collection does not support pagination and the position does not apply here.
 	Position *string
 
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // The collection of the GatewayResponse () instances of a RestApi () as a

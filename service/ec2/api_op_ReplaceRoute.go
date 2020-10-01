@@ -66,28 +66,16 @@ type ReplaceRouteInput struct {
 	// This member is required.
 	RouteTableId *string
 
-	// The ID of a transit gateway.
-	TransitGatewayId *string
+	// The IPv4 CIDR address block used for the destination match. The value that you
+	// provide must match the CIDR of an existing route in the table.
+	DestinationCidrBlock *string
 
 	// The IPv6 CIDR address block used for the destination match. The value that you
 	// provide must match the CIDR of an existing route in the table.
 	DestinationIpv6CidrBlock *string
 
-	// The ID of the local gateway.
-	LocalGatewayId *string
-
-	// Specifies whether to reset the local route to its default target (local).
-	LocalTarget *bool
-
-	// The IPv4 CIDR address block used for the destination match. The value that you
-	// provide must match the CIDR of an existing route in the table.
-	DestinationCidrBlock *string
-
 	// The ID of the prefix list for the route.
 	DestinationPrefixListId *string
-
-	// The ID of an internet gateway or virtual private gateway.
-	GatewayId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -98,17 +86,29 @@ type ReplaceRouteInput struct {
 	// [IPv6 traffic only] The ID of an egress-only internet gateway.
 	EgressOnlyInternetGatewayId *string
 
-	// The ID of a VPC peering connection.
-	VpcPeeringConnectionId *string
+	// The ID of an internet gateway or virtual private gateway.
+	GatewayId *string
 
-	// The ID of a network interface.
-	NetworkInterfaceId *string
+	// The ID of a NAT instance in your VPC.
+	InstanceId *string
+
+	// The ID of the local gateway.
+	LocalGatewayId *string
+
+	// Specifies whether to reset the local route to its default target (local).
+	LocalTarget *bool
 
 	// [IPv4 traffic only] The ID of a NAT gateway.
 	NatGatewayId *string
 
-	// The ID of a NAT instance in your VPC.
-	InstanceId *string
+	// The ID of a network interface.
+	NetworkInterfaceId *string
+
+	// The ID of a transit gateway.
+	TransitGatewayId *string
+
+	// The ID of a VPC peering connection.
+	VpcPeeringConnectionId *string
 }
 
 type ReplaceRouteOutput struct {

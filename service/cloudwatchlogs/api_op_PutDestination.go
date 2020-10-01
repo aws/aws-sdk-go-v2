@@ -70,11 +70,6 @@ func (c *Client) PutDestination(ctx context.Context, params *PutDestinationInput
 
 type PutDestinationInput struct {
 
-	// The ARN of an Amazon Kinesis stream to which to deliver matching log events.
-	//
-	// This member is required.
-	TargetArn *string
-
 	// A name for the destination.
 	//
 	// This member is required.
@@ -85,6 +80,11 @@ type PutDestinationInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The ARN of an Amazon Kinesis stream to which to deliver matching log events.
+	//
+	// This member is required.
+	TargetArn *string
 }
 
 type PutDestinationOutput struct {

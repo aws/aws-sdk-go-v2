@@ -58,9 +58,6 @@ func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateA
 
 type CreateAccountCustomizationInput struct {
 
-	// The namespace associated with the customization that you're creating.
-	Namespace *string
-
 	// The customizations you're adding to the QuickSight subscription for the AWS
 	// account. For example, you could add a default theme by setting
 	// AccountCustomization to the midnight theme
@@ -74,22 +71,25 @@ type CreateAccountCustomizationInput struct {
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The namespace associated with the customization that you're creating.
+	Namespace *string
 }
 
 type CreateAccountCustomizationOutput struct {
-
-	// The AWS request ID for this operation.
-	RequestId *string
 
 	// The customizations you're adding to the QuickSight subscription for the AWS
 	// account.
 	AccountCustomization *types.AccountCustomization
 
+	// The ID for the AWS account that you want to customize QuickSight for.
+	AwsAccountId *string
+
 	// The namespace associated with the customization you're creating.
 	Namespace *string
 
-	// The ID for the AWS account that you want to customize QuickSight for.
-	AwsAccountId *string
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

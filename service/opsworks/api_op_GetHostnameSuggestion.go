@@ -70,11 +70,11 @@ type GetHostnameSuggestionInput struct {
 // Contains the response to a GetHostnameSuggestion request.
 type GetHostnameSuggestionOutput struct {
 
-	// The layer ID.
-	LayerId *string
-
 	// The generated host name.
 	Hostname *string
+
+	// The layer ID.
+	LayerId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

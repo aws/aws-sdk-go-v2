@@ -68,10 +68,10 @@ type DescribeHumanTaskUiInput struct {
 
 type DescribeHumanTaskUiOutput struct {
 
-	// The name of the human task user interface (worker task template).
+	// The timestamp when the human task user interface was created.
 	//
 	// This member is required.
-	HumanTaskUiName *string
+	CreationTime *time.Time
 
 	// The Amazon Resource Name (ARN) of the human task user interface (worker task
 	// template).
@@ -79,10 +79,10 @@ type DescribeHumanTaskUiOutput struct {
 	// This member is required.
 	HumanTaskUiArn *string
 
-	// The timestamp when the human task user interface was created.
+	// The name of the human task user interface (worker task template).
 	//
 	// This member is required.
-	CreationTime *time.Time
+	HumanTaskUiName *string
 
 	// Container for user interface template information.
 	//

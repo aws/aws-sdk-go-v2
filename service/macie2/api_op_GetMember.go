@@ -74,18 +74,16 @@ type GetMemberOutput struct {
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
 
+	// The email address for the account.
+	Email *string
+
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
 	// membership invitation was last sent to the account. This value is null if a
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
-	// The date and time, in UTC and extended ISO 8601 format, of the most recent
-	// change to the status of the relationship between the account and the master
-	// account.
-	UpdatedAt *time.Time
-
-	// The email address for the account.
-	Email *string
+	// The AWS account ID for the master account.
+	MasterAccountId *string
 
 	// The current status of the relationship between the account and the master
 	// account.
@@ -95,8 +93,10 @@ type GetMemberOutput struct {
 	// associated with the member account in Amazon Macie.
 	Tags map[string]*string
 
-	// The AWS account ID for the master account.
-	MasterAccountId *string
+	// The date and time, in UTC and extended ISO 8601 format, of the most recent
+	// change to the status of the relationship between the account and the master
+	// account.
+	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

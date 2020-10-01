@@ -65,14 +65,14 @@ func (c *Client) GetRecords(ctx context.Context, params *GetRecordsInput, optFns
 // Represents the input of a GetRecords operation.
 type GetRecordsInput struct {
 
-	// The maximum number of records to return from the shard. The upper limit is 1000.
-	Limit *int32
-
 	// A shard iterator that was retrieved from a previous GetShardIterator operation.
 	// This iterator can be used to access the stream records in this shard.
 	//
 	// This member is required.
 	ShardIterator *string
+
+	// The maximum number of records to return from the shard. The upper limit is 1000.
+	Limit *int32
 }
 
 // Represents the output of a GetRecords operation.

@@ -60,22 +60,22 @@ type ListPermissionsInput struct {
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
+	// The token for the next page of results.
+	NextToken *string
+
 	// Specifies the resource type for which to list permissions. For example, to list
 	// only permissions that apply to EC2 subnets, specify ec2:Subnet.
 	ResourceType *string
-
-	// The token for the next page of results.
-	NextToken *string
 }
 
 type ListPermissionsOutput struct {
 
-	// Information about the permissions.
-	Permissions []*types.ResourceSharePermissionSummary
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the permissions.
+	Permissions []*types.ResourceSharePermissionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

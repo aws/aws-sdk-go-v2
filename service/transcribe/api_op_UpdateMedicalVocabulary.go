@@ -60,18 +60,6 @@ func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedi
 
 type UpdateMedicalVocabularyInput struct {
 
-	// The Amazon S3 location of the text file containing the definition of the custom
-	// vocabulary. The URI must be in the same AWS region as the API endpoint you are
-	// calling. You can see the fields you need to enter for you Amazon S3 location in
-	// the example URI here:  https://s3..amazonaws.com///  For example:
-	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
-	// information about S3 object names, see Object Keys
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
-	// in the Amazon S3 Developer Guide. For more information about custom vocabularies
-	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
-	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
-	VocabularyFileUri *string
-
 	// The language code of the entries in the updated vocabulary. US English (en-US)
 	// is the only valid language code in Amazon Transcribe Medical.
 	//
@@ -84,6 +72,18 @@ type UpdateMedicalVocabularyInput struct {
 	//
 	// This member is required.
 	VocabularyName *string
+
+	// The Amazon S3 location of the text file containing the definition of the custom
+	// vocabulary. The URI must be in the same AWS region as the API endpoint you are
+	// calling. You can see the fields you need to enter for you Amazon S3 location in
+	// the example URI here:  https://s3..amazonaws.com///  For example:
+	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
+	// information about S3 object names, see Object Keys
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// in the Amazon S3 Developer Guide. For more information about custom vocabularies
+	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
+	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
+	VocabularyFileUri *string
 }
 
 type UpdateMedicalVocabularyOutput struct {
@@ -92,11 +92,11 @@ type UpdateMedicalVocabularyOutput struct {
 	// English (en-US) is the only language supported in Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
-	// The name of the updated vocabulary.
-	VocabularyName *string
-
 	// The date and time the vocabulary was updated.
 	LastModifiedTime *time.Time
+
+	// The name of the updated vocabulary.
+	VocabularyName *string
 
 	// The processing state of the update to the vocabulary. When the VocabularyState
 	// field is READY the vocabulary is ready to be used in a

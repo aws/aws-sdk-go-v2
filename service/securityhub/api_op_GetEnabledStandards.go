@@ -56,14 +56,14 @@ func (c *Client) GetEnabledStandards(ctx context.Context, params *GetEnabledStan
 
 type GetEnabledStandardsInput struct {
 
+	// The maximum number of results to return in the response.
+	MaxResults *int32
+
 	// The token that is required for pagination. On your first call to the
 	// GetEnabledStandards operation, set the value of this parameter to NULL. For
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
-
-	// The maximum number of results to return in the response.
-	MaxResults *int32
 
 	// The list of the standards subscription ARNs for the standards to retrieve.
 	StandardsSubscriptionArns []*string
@@ -71,12 +71,12 @@ type GetEnabledStandardsInput struct {
 
 type GetEnabledStandardsOutput struct {
 
+	// The pagination token to use to request the next page of results.
+	NextToken *string
+
 	// The list of StandardsSubscriptions objects that include information about the
 	// enabled standards.
 	StandardsSubscriptions []*types.StandardsSubscription
-
-	// The pagination token to use to request the next page of results.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

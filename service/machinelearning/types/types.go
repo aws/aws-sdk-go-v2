@@ -11,6 +11,58 @@ import (
 // Prediction.
 type BatchPrediction struct {
 
+	// The ID of the DataSource that points to the group of observations to predict.
+	BatchPredictionDataSourceId *string
+
+	// The ID assigned to the BatchPrediction at creation. This value should be
+	// identical to the value of the BatchPredictionID in the request.
+	BatchPredictionId *string
+
+	// Long integer type that is a 64-bit signed number.
+	ComputeTime *int64
+
+	// The time that the BatchPrediction was created. The time is expressed in epoch
+	// time.
+	CreatedAt *time.Time
+
+	// The AWS user account that invoked the BatchPrediction. The account type can be
+	// either an AWS root account or an AWS Identity and Access Management (IAM) user
+	// account.
+	CreatedByIamUser *string
+
+	// A timestamp represented in epoch time.
+	FinishedAt *time.Time
+
+	// The location of the data file or directory in Amazon Simple Storage Service
+	// (Amazon S3).
+	InputDataLocationS3 *string
+
+	// Long integer type that is a 64-bit signed number.
+	InvalidRecordCount *int64
+
+	// The time of the most recent edit to the BatchPrediction. The time is expressed
+	// in epoch time.
+	LastUpdatedAt *time.Time
+
+	// The ID of the MLModel that generated predictions for the BatchPrediction
+	// request.
+	MLModelId *string
+
+	// A description of the most recent details about processing the batch prediction
+	// request.
+	Message *string
+
+	// A user-supplied name or description of the BatchPrediction.
+	Name *string
+
+	// The location of an Amazon S3 bucket or directory to receive the operation
+	// results. The following substrings are not allowed in the s3 key portion of the
+	// outputURI field: ':', '//', '/./', '/../'.
+	OutputUri *string
+
+	// A timestamp represented in epoch time.
+	StartedAt *time.Time
+
 	// The status of the BatchPrediction. This element can have one of the following
 	// values:
 	//
@@ -32,58 +84,6 @@ type BatchPrediction struct {
 
 	// Long integer type that is a 64-bit signed number.
 	TotalRecordCount *int64
-
-	// The time of the most recent edit to the BatchPrediction. The time is expressed
-	// in epoch time.
-	LastUpdatedAt *time.Time
-
-	// A description of the most recent details about processing the batch prediction
-	// request.
-	Message *string
-
-	// The time that the BatchPrediction was created. The time is expressed in epoch
-	// time.
-	CreatedAt *time.Time
-
-	// Long integer type that is a 64-bit signed number.
-	InvalidRecordCount *int64
-
-	// The location of an Amazon S3 bucket or directory to receive the operation
-	// results. The following substrings are not allowed in the s3 key portion of the
-	// outputURI field: ':', '//', '/./', '/../'.
-	OutputUri *string
-
-	// The ID of the MLModel that generated predictions for the BatchPrediction
-	// request.
-	MLModelId *string
-
-	// The ID of the DataSource that points to the group of observations to predict.
-	BatchPredictionDataSourceId *string
-
-	// A user-supplied name or description of the BatchPrediction.
-	Name *string
-
-	// The location of the data file or directory in Amazon Simple Storage Service
-	// (Amazon S3).
-	InputDataLocationS3 *string
-
-	// Long integer type that is a 64-bit signed number.
-	ComputeTime *int64
-
-	// A timestamp represented in epoch time.
-	FinishedAt *time.Time
-
-	// The ID assigned to the BatchPrediction at creation. This value should be
-	// identical to the value of the BatchPredictionID in the request.
-	BatchPredictionId *string
-
-	// A timestamp represented in epoch time.
-	StartedAt *time.Time
-
-	// The AWS user account that invoked the BatchPrediction. The account type can be
-	// either an AWS root account or an AWS Identity and Access Management (IAM) user
-	// account.
-	CreatedByIamUser *string
 }
 
 // Represents the output of the GetDataSource operation. The content consists of
@@ -91,42 +91,65 @@ type BatchPrediction struct {
 // DataSource.
 type DataSource struct {
 
+	// The parameter is true if statistics need to be generated from the observation
+	// data.
+	ComputeStatistics *bool
+
+	// Long integer type that is a 64-bit signed number.
+	ComputeTime *int64
+
+	// The time that the DataSource was created. The time is expressed in epoch time.
+	CreatedAt *time.Time
+
+	// The AWS user account from which the DataSource was created. The account type can
+	// be either an AWS root account or an AWS Identity and Access Management (IAM)
+	// user account.
+	CreatedByIamUser *string
+
 	// The location and name of the data in Amazon Simple Storage Service (Amazon S3)
 	// that is used by a DataSource.
 	DataLocationS3 *string
-
-	// The number of data files referenced by the DataSource.
-	NumberOfFiles *int64
-
-	// Describes the DataSource details specific to Amazon Redshift.
-	RedshiftMetadata *RedshiftMetadata
 
 	// A JSON string that represents the splitting and rearrangement requirement used
 	// when this DataSource was created.
 	DataRearrangement *string
 
-	// Long integer type that is a 64-bit signed number.
-	ComputeTime *int64
-
-	// A timestamp represented in epoch time.
-	FinishedAt *time.Time
-
-	// The parameter is true if statistics need to be generated from the observation
-	// data.
-	ComputeStatistics *bool
-
 	// The total number of observations contained in the data files that the DataSource
 	// references.
 	DataSizeInBytes *int64
 
-	// The datasource details that are specific to Amazon RDS.
-	RDSMetadata *RDSMetadata
+	// The ID that is assigned to the DataSource during creation.
+	DataSourceId *string
 
 	// A timestamp represented in epoch time.
-	StartedAt *time.Time
+	FinishedAt *time.Time
+
+	// The time of the most recent edit to the BatchPrediction. The time is expressed
+	// in epoch time.
+	LastUpdatedAt *time.Time
 
 	// A description of the most recent details about creating the DataSource.
 	Message *string
+
+	// A user-supplied name or description of the DataSource.
+	Name *string
+
+	// The number of data files referenced by the DataSource.
+	NumberOfFiles *int64
+
+	// The datasource details that are specific to Amazon RDS.
+	RDSMetadata *RDSMetadata
+
+	// Describes the DataSource details specific to Amazon Redshift.
+	RedshiftMetadata *RedshiftMetadata
+
+	// The Amazon Resource Name (ARN) of an AWS IAM Role
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
+	// such as the following: arn:aws:iam::account:role/rolename.
+	RoleARN *string
+
+	// A timestamp represented in epoch time.
+	StartedAt *time.Time
 
 	// The current status of the DataSource. This element can have one of the following
 	// values:
@@ -145,35 +168,48 @@ type DataSource struct {
 	//
 	// * DELETED - The DataSource is marked as deleted. It is not usable.
 	Status EntityStatus
-
-	// The Amazon Resource Name (ARN) of an AWS IAM Role
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts),
-	// such as the following: arn:aws:iam::account:role/rolename.
-	RoleARN *string
-
-	// The ID that is assigned to the DataSource during creation.
-	DataSourceId *string
-
-	// A user-supplied name or description of the DataSource.
-	Name *string
-
-	// The AWS user account from which the DataSource was created. The account type can
-	// be either an AWS root account or an AWS Identity and Access Management (IAM)
-	// user account.
-	CreatedByIamUser *string
-
-	// The time of the most recent edit to the BatchPrediction. The time is expressed
-	// in epoch time.
-	LastUpdatedAt *time.Time
-
-	// The time that the DataSource was created. The time is expressed in epoch time.
-	CreatedAt *time.Time
 }
 
 // Represents the output of GetEvaluation operation. The content consists of the
 // detailed metadata and data file information and the current status of the
 // Evaluation.
 type Evaluation struct {
+
+	// Long integer type that is a 64-bit signed number.
+	ComputeTime *int64
+
+	// The time that the Evaluation was created. The time is expressed in epoch time.
+	CreatedAt *time.Time
+
+	// The AWS user account that invoked the evaluation. The account type can be either
+	// an AWS root account or an AWS Identity and Access Management (IAM) user account.
+	CreatedByIamUser *string
+
+	// The ID of the DataSource that is used to evaluate the MLModel.
+	EvaluationDataSourceId *string
+
+	// The ID that is assigned to the Evaluation at creation.
+	EvaluationId *string
+
+	// A timestamp represented in epoch time.
+	FinishedAt *time.Time
+
+	// The location and name of the data in Amazon Simple Storage Server (Amazon S3)
+	// that is used in the evaluation.
+	InputDataLocationS3 *string
+
+	// The time of the most recent edit to the Evaluation. The time is expressed in
+	// epoch time.
+	LastUpdatedAt *time.Time
+
+	// The ID of the MLModel that is the focus of the evaluation.
+	MLModelId *string
+
+	// A description of the most recent details about evaluating the MLModel.
+	Message *string
+
+	// A user-supplied name or description of the Evaluation.
+	Name *string
 
 	// Measurements of how well the MLModel performed, using observations referenced by
 	// the DataSource. One of the following metrics is returned, based on the type of
@@ -195,34 +231,8 @@ type Evaluation struct {
 	// (https://docs.aws.amazon.com/machine-learning/latest/dg).
 	PerformanceMetrics *PerformanceMetrics
 
-	// The time that the Evaluation was created. The time is expressed in epoch time.
-	CreatedAt *time.Time
-
-	// The ID of the MLModel that is the focus of the evaluation.
-	MLModelId *string
-
-	// The time of the most recent edit to the Evaluation. The time is expressed in
-	// epoch time.
-	LastUpdatedAt *time.Time
-
-	// The ID of the DataSource that is used to evaluate the MLModel.
-	EvaluationDataSourceId *string
-
-	// The AWS user account that invoked the evaluation. The account type can be either
-	// an AWS root account or an AWS Identity and Access Management (IAM) user account.
-	CreatedByIamUser *string
-
-	// A user-supplied name or description of the Evaluation.
-	Name *string
-
-	// Long integer type that is a 64-bit signed number.
-	ComputeTime *int64
-
-	// A description of the most recent details about evaluating the MLModel.
-	Message *string
-
-	// The ID that is assigned to the Evaluation at creation.
-	EvaluationId *string
+	// A timestamp represented in epoch time.
+	StartedAt *time.Time
 
 	// The status of the evaluation. This element can have one of the following
 	// values:
@@ -241,35 +251,79 @@ type Evaluation struct {
 	//     *
 	// DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status EntityStatus
-
-	// The location and name of the data in Amazon Simple Storage Server (Amazon S3)
-	// that is used in the evaluation.
-	InputDataLocationS3 *string
-
-	// A timestamp represented in epoch time.
-	StartedAt *time.Time
-
-	// A timestamp represented in epoch time.
-	FinishedAt *time.Time
 }
 
 // Represents the output of a GetMLModel operation. The content consists of the
 // detailed metadata and the current status of the MLModel.
 type MLModel struct {
 
+	// The algorithm used to train the MLModel. The following algorithm is supported:
+	//
+	//
+	// * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
+	// gradient of the loss function.
+	Algorithm Algorithm
+
+	// Long integer type that is a 64-bit signed number.
+	ComputeTime *int64
+
 	// The time that the MLModel was created. The time is expressed in epoch time.
 	CreatedAt *time.Time
 
-	// A timestamp represented in epoch time.
-	StartedAt *time.Time
+	// The AWS user account from which the MLModel was created. The account type can be
+	// either an AWS root account or an AWS Identity and Access Management (IAM) user
+	// account.
+	CreatedByIamUser *string
 
-	// The ID of the training DataSource. The CreateMLModel operation uses the
-	// TrainingDataSourceId.
-	TrainingDataSourceId *string
+	// The current endpoint of the MLModel.
+	EndpointInfo *RealtimeEndpointInfo
+
+	// A timestamp represented in epoch time.
+	FinishedAt *time.Time
+
+	// The location of the data file or directory in Amazon Simple Storage Service
+	// (Amazon S3).
+	InputDataLocationS3 *string
 
 	// The time of the most recent edit to the MLModel. The time is expressed in epoch
 	// time.
 	LastUpdatedAt *time.Time
+
+	// The ID assigned to the MLModel at creation.
+	MLModelId *string
+
+	// Identifies the MLModel category. The following are the available types:
+	//
+	//     *
+	// REGRESSION - Produces a numeric result. For example, "What price should a house
+	// be listed at?"
+	//
+	//     * BINARY - Produces one of two possible results. For
+	// example, "Is this a child-friendly web site?".
+	//
+	//     * MULTICLASS - Produces one
+	// of several possible results. For example, "Is this a HIGH-, LOW-, or MEDIUM-risk
+	// trade?".
+	MLModelType MLModelType
+
+	// A description of the most recent details about accessing the MLModel.
+	Message *string
+
+	// A user-supplied name or description of the MLModel.
+	Name *string
+
+	// The score threshold for the MLModel.
+	ScoreThreshold *float32
+
+	// The time of the most recent edit to the ScoreThreshold. The time is expressed in
+	// epoch time.
+	ScoreThresholdLastUpdatedAt *time.Time
+
+	// Long integer type that is a 64-bit signed number.
+	SizeInBytes *int64
+
+	// A timestamp represented in epoch time.
+	StartedAt *time.Time
 
 	// The current status of an MLModel. This element can have one of the following
 	// values:
@@ -289,31 +343,9 @@ type MLModel struct {
 	// * DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status EntityStatus
 
-	// A user-supplied name or description of the MLModel.
-	Name *string
-
-	// The ID assigned to the MLModel at creation.
-	MLModelId *string
-
-	// A description of the most recent details about accessing the MLModel.
-	Message *string
-
-	// Identifies the MLModel category. The following are the available types:
-	//
-	//     *
-	// REGRESSION - Produces a numeric result. For example, "What price should a house
-	// be listed at?"
-	//
-	//     * BINARY - Produces one of two possible results. For
-	// example, "Is this a child-friendly web site?".
-	//
-	//     * MULTICLASS - Produces one
-	// of several possible results. For example, "Is this a HIGH-, LOW-, or MEDIUM-risk
-	// trade?".
-	MLModelType MLModelType
-
-	// The current endpoint of the MLModel.
-	EndpointInfo *RealtimeEndpointInfo
+	// The ID of the training DataSource. The CreateMLModel operation uses the
+	// TrainingDataSourceId.
+	TrainingDataSourceId *string
 
 	// A list of the training parameters in the MLModel. The list is implemented as a
 	// map of key-value pairs. The following is the current set of training
@@ -350,38 +382,6 @@ type MLModel struct {
 	// normalization. This parameter can't be used when L1 is specified. Use this
 	// parameter sparingly.
 	TrainingParameters map[string]*string
-
-	// Long integer type that is a 64-bit signed number.
-	SizeInBytes *int64
-
-	// The time of the most recent edit to the ScoreThreshold. The time is expressed in
-	// epoch time.
-	ScoreThresholdLastUpdatedAt *time.Time
-
-	// The algorithm used to train the MLModel. The following algorithm is supported:
-	//
-	//
-	// * SGD -- Stochastic gradient descent. The goal of SGD is to minimize the
-	// gradient of the loss function.
-	Algorithm Algorithm
-
-	// The location of the data file or directory in Amazon Simple Storage Service
-	// (Amazon S3).
-	InputDataLocationS3 *string
-
-	// The score threshold for the MLModel.
-	ScoreThreshold *float32
-
-	// A timestamp represented in epoch time.
-	FinishedAt *time.Time
-
-	// Long integer type that is a 64-bit signed number.
-	ComputeTime *int64
-
-	// The AWS user account from which the MLModel was created. The account type can be
-	// either an AWS root account or an AWS Identity and Access Management (IAM) user
-	// account.
-	CreatedByIamUser *string
 }
 
 // Measurements of how well the MLModel performed on known observations. One of the
@@ -425,11 +425,11 @@ type Prediction struct {
 	// The prediction label for either a BINARY or MULTICLASSMLModel.
 	PredictedLabel *string
 
-	// The prediction value for REGRESSIONMLModel.
-	PredictedValue *float32
-
 	// Provides the raw classification score corresponding to each label.
 	PredictedScores map[string]*float32
+
+	// The prediction value for REGRESSIONMLModel.
+	PredictedValue *float32
 }
 
 // The database details of an Amazon RDS database.
@@ -468,21 +468,16 @@ type RDSDatabaseCredentials struct {
 // DataSource.
 type RDSDataSpec struct {
 
-	// The subnet ID to be used to access a VPC-based RDS DB instance. This attribute
-	// is used by Data Pipeline to carry out the copy task from Amazon RDS to Amazon
-	// S3.
+	// The AWS Identity and Access Management (IAM) credentials that are used connect
+	// to the Amazon RDS database.
 	//
 	// This member is required.
-	SubnetId *string
+	DatabaseCredentials *RDSDatabaseCredentials
 
-	// The role (DataPipelineDefaultRole) assumed by AWS Data Pipeline service to
-	// monitor the progress of the copy task from Amazon RDS to Amazon S3. For more
-	// information, see Role templates
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
-	// for data pipelines.
+	// Describes the DatabaseName and InstanceIdentifier of an Amazon RDS database.
 	//
 	// This member is required.
-	ServiceRole *string
+	DatabaseInformation *RDSDatabase
 
 	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon Elastic Compute
 	// Cloud (Amazon EC2) instance to carry out the copy operation from Amazon RDS to
@@ -493,6 +488,12 @@ type RDSDataSpec struct {
 	// This member is required.
 	ResourceRole *string
 
+	// The Amazon S3 location for staging Amazon RDS data. The data retrieved from
+	// Amazon RDS using SelectSqlQuery is stored in this location.
+	//
+	// This member is required.
+	S3StagingLocation *string
+
 	// The security group IDs to be used to access a VPC-based RDS DB instance. Ensure
 	// that there are appropriate ingress rules set up to allow access to the RDS DB
 	// instance. This attribute is used by Data Pipeline to carry out the copy
@@ -500,6 +501,87 @@ type RDSDataSpec struct {
 	//
 	// This member is required.
 	SecurityGroupIds []*string
+
+	// The query that is used to retrieve the observation data for the DataSource.
+	//
+	// This member is required.
+	SelectSqlQuery *string
+
+	// The role (DataPipelineDefaultRole) assumed by AWS Data Pipeline service to
+	// monitor the progress of the copy task from Amazon RDS to Amazon S3. For more
+	// information, see Role templates
+	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
+	// for data pipelines.
+	//
+	// This member is required.
+	ServiceRole *string
+
+	// The subnet ID to be used to access a VPC-based RDS DB instance. This attribute
+	// is used by Data Pipeline to carry out the copy task from Amazon RDS to Amazon
+	// S3.
+	//
+	// This member is required.
+	SubnetId *string
+
+	// A JSON string that represents the splitting and rearrangement processing to be
+	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
+	// of the input data is used to create the Datasource.  <p>There are multiple
+	// parameters that control what data is used to create a datasource:</p> <ul> <li>
+	// <p> <b> <code>percentBegin</code> </b> </p> <p>Use <code>percentBegin</code> to
+	// indicate the beginning of the range of the data used to create the Datasource.
+	// If you do not include <code>percentBegin</code> and <code>percentEnd</code>,
+	// Amazon ML includes all of the data when creating the datasource.</p> </li> <li>
+	// <p> <b> <code>percentEnd</code> </b> </p> <p>Use <code>percentEnd</code> to
+	// indicate the end of the range of the data used to create the Datasource. If you
+	// do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML
+	// includes all of the data when creating the datasource.</p> </li> <li> <p> <b>
+	// <code>complement</code> </b> </p> <p>The <code>complement</code> parameter
+	// instructs Amazon ML to use the data that is not included in the range of
+	// <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The
+	// <code>complement</code> parameter is useful if you need to create complementary
+	// datasources for training and evaluation. To create a complementary datasource,
+	// use the same values for <code>percentBegin</code> and <code>percentEnd</code>,
+	// along with the <code>complement</code> parameter.</p> <p>For example, the
+	// following two datasources do not share any data, and can be used to train and
+	// evaluate a model. The first datasource has 25 percent of the data, and the
+	// second one has 75 percent of the data.</p> <p>Datasource for evaluation:
+	// <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code> </p>
+	// <p>Datasource for training: <code>{"splitting":{"percentBegin":0,
+	// "percentEnd":25, "complement":"true"}}</code> </p> </li> <li> <p> <b>
+	// <code>strategy</code> </b> </p> <p>To change how Amazon ML splits the data for a
+	// datasource, use the <code>strategy</code> parameter.</p> <p>The default value
+	// for the <code>strategy</code> parameter is <code>sequential</code>, meaning that
+	// Amazon ML takes all of the data records between the <code>percentBegin</code>
+	// and <code>percentEnd</code> parameters for the datasource, in the order that the
+	// records appear in the input data.</p> <p>The following two
+	// <code>DataRearrangement</code> lines are examples of sequentially ordered
+	// training and evaluation datasources:</p> <p>Datasource for evaluation:
+	// <code>{"splitting":{"percentBegin":70, "percentEnd":100,
+	// "strategy":"sequential"}}</code> </p> <p>Datasource for training:
+	// <code>{"splitting":{"percentBegin":70, "percentEnd":100,
+	// "strategy":"sequential", "complement":"true"}}</code> </p> <p>To randomly split
+	// the input data into the proportions indicated by the percentBegin and percentEnd
+	// parameters, set the <code>strategy</code> parameter to <code>random</code> and
+	// provide a string that is used as the seed value for the random data splitting
+	// (for example, you can use the S3 path to your data as the random seed string).
+	// If you choose the random split strategy, Amazon ML assigns each row of data a
+	// pseudo-random number between 0 and 100, and then selects the rows that have an
+	// assigned number between <code>percentBegin</code> and <code>percentEnd</code>.
+	// Pseudo-random numbers are assigned using both the input seed string value and
+	// the byte offset as a seed, so changing the data results in a different split.
+	// Any existing ordering is preserved. The random splitting strategy ensures that
+	// variables in the training and evaluation data are distributed similarly. It is
+	// useful in the cases where the input data may have an implicit sort order, which
+	// would otherwise result in training and evaluation datasources containing
+	// non-similar data records.</p> <p>The following two
+	// <code>DataRearrangement</code> lines are examples of non-sequentially ordered
+	// training and evaluation datasources:</p> <p>Datasource for evaluation:
+	// <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
+	// "strategyParams": {"randomSeed":"RANDOMSEED"}}}</code> </p> <p>Datasource for
+	// training: <code>{"splitting":{"percentBegin":70, "percentEnd":100,
+	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"},
+	// "complement":"true"}}</code> </p> </li> </ul>
+	DataRearrangement *string
 
 	// A JSON string that represents the schema for an Amazon RDS DataSource. The
 	// DataSchema defines the structure of the observation data in the data file(s)
@@ -521,92 +603,23 @@ type RDSDataSpec struct {
 
 	// The Amazon S3 location of the DataSchema.
 	DataSchemaUri *string
-
-	// A JSON string that represents the splitting and rearrangement processing to be
-	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
-	// of the input data is used to create the Datasource.  <p>There are multiple
-	// parameters that control what data is used to create a datasource:</p> <ul> <li>
-	// <p> <b> <code>percentBegin</code> </b> </p> <p>Use <code>percentBegin</code> to
-	// indicate the beginning of the range of the data used to create the Datasource.
-	// If you do not include <code>percentBegin</code> and <code>percentEnd</code>,
-	// Amazon ML includes all of the data when creating the datasource.</p> </li> <li>
-	// <p> <b> <code>percentEnd</code> </b> </p> <p>Use <code>percentEnd</code> to
-	// indicate the end of the range of the data used to create the Datasource. If you
-	// do not include <code>percentBegin</code> and <code>percentEnd</code>, Amazon ML
-	// includes all of the data when creating the datasource.</p> </li> <li> <p> <b>
-	// <code>complement</code> </b> </p> <p>The <code>complement</code> parameter
-	// instructs Amazon ML to use the data that is not included in the range of
-	// <code>percentBegin</code> to <code>percentEnd</code> to create a datasource. The
-	// <code>complement</code> parameter is useful if you need to create complementary
-	// datasources for training and evaluation. To create a complementary datasource,
-	// use the same values for <code>percentBegin</code> and <code>percentEnd</code>,
-	// along with the <code>complement</code> parameter.</p> <p>For example, the
-	// following two datasources do not share any data, and can be used to train and
-	// evaluate a model. The first datasource has 25 percent of the data, and the
-	// second one has 75 percent of the data.</p> <p>Datasource for evaluation:
-	// <code>{"splitting":{"percentBegin":0, "percentEnd":25}}</code> </p>
-	// <p>Datasource for training: <code>{"splitting":{"percentBegin":0,
-	// "percentEnd":25, "complement":"true"}}</code> </p> </li> <li> <p> <b>
-	// <code>strategy</code> </b> </p> <p>To change how Amazon ML splits the data for a
-	// datasource, use the <code>strategy</code> parameter.</p> <p>The default value
-	// for the <code>strategy</code> parameter is <code>sequential</code>, meaning that
-	// Amazon ML takes all of the data records between the <code>percentBegin</code>
-	// and <code>percentEnd</code> parameters for the datasource, in the order that the
-	// records appear in the input data.</p> <p>The following two
-	// <code>DataRearrangement</code> lines are examples of sequentially ordered
-	// training and evaluation datasources:</p> <p>Datasource for evaluation:
-	// <code>{"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"sequential"}}</code> </p> <p>Datasource for training:
-	// <code>{"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"sequential", "complement":"true"}}</code> </p> <p>To randomly split
-	// the input data into the proportions indicated by the percentBegin and percentEnd
-	// parameters, set the <code>strategy</code> parameter to <code>random</code> and
-	// provide a string that is used as the seed value for the random data splitting
-	// (for example, you can use the S3 path to your data as the random seed string).
-	// If you choose the random split strategy, Amazon ML assigns each row of data a
-	// pseudo-random number between 0 and 100, and then selects the rows that have an
-	// assigned number between <code>percentBegin</code> and <code>percentEnd</code>.
-	// Pseudo-random numbers are assigned using both the input seed string value and
-	// the byte offset as a seed, so changing the data results in a different split.
-	// Any existing ordering is preserved. The random splitting strategy ensures that
-	// variables in the training and evaluation data are distributed similarly. It is
-	// useful in the cases where the input data may have an implicit sort order, which
-	// would otherwise result in training and evaluation datasources containing
-	// non-similar data records.</p> <p>The following two
-	// <code>DataRearrangement</code> lines are examples of non-sequentially ordered
-	// training and evaluation datasources:</p> <p>Datasource for evaluation:
-	// <code>{"splitting":{"percentBegin":70, "percentEnd":100, "strategy":"random",
-	// "strategyParams": {"randomSeed":"RANDOMSEED"}}}</code> </p> <p>Datasource for
-	// training: <code>{"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"},
-	// "complement":"true"}}</code> </p> </li> </ul>
-	DataRearrangement *string
-
-	// The query that is used to retrieve the observation data for the DataSource.
-	//
-	// This member is required.
-	SelectSqlQuery *string
-
-	// The AWS Identity and Access Management (IAM) credentials that are used connect
-	// to the Amazon RDS database.
-	//
-	// This member is required.
-	DatabaseCredentials *RDSDatabaseCredentials
-
-	// The Amazon S3 location for staging Amazon RDS data. The data retrieved from
-	// Amazon RDS using SelectSqlQuery is stored in this location.
-	//
-	// This member is required.
-	S3StagingLocation *string
-
-	// Describes the DatabaseName and InstanceIdentifier of an Amazon RDS database.
-	//
-	// This member is required.
-	DatabaseInformation *RDSDatabase
 }
 
 // The datasource details that are specific to Amazon RDS.
 type RDSMetadata struct {
+
+	// The ID of the Data Pipeline instance that is used to carry to copy data from
+	// Amazon RDS to Amazon S3. You can use the ID to find details about the instance
+	// in the Data Pipeline console.
+	DataPipelineId *string
+
+	// The database details required to connect to an Amazon RDS.
+	Database *RDSDatabase
+
+	// The username to be used by Amazon ML to connect to database on an Amazon RDS
+	// instance. The username should have sufficient permissions to execute an
+	// RDSSelectSqlQuery query.
+	DatabaseUserName *string
 
 	// The role (DataPipelineDefaultResourceRole) assumed by an Amazon EC2 instance to
 	// carry out the copy task from Amazon RDS to Amazon S3. For more information, see
@@ -615,33 +628,24 @@ type RDSMetadata struct {
 	// for data pipelines.
 	ResourceRole *string
 
+	// The SQL query that is supplied during CreateDataSourceFromRDS (). Returns only
+	// if Verbose is true in GetDataSourceInput.
+	SelectSqlQuery *string
+
 	// The role (DataPipelineDefaultRole) assumed by the Data Pipeline service to
 	// monitor the progress of the copy task from Amazon RDS to Amazon S3. For more
 	// information, see Role templates
 	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	ServiceRole *string
-
-	// The username to be used by Amazon ML to connect to database on an Amazon RDS
-	// instance. The username should have sufficient permissions to execute an
-	// RDSSelectSqlQuery query.
-	DatabaseUserName *string
-
-	// The ID of the Data Pipeline instance that is used to carry to copy data from
-	// Amazon RDS to Amazon S3. You can use the ID to find details about the instance
-	// in the Data Pipeline console.
-	DataPipelineId *string
-
-	// The SQL query that is supplied during CreateDataSourceFromRDS (). Returns only
-	// if Verbose is true in GetDataSourceInput.
-	SelectSqlQuery *string
-
-	// The database details required to connect to an Amazon RDS.
-	Database *RDSDatabase
 }
 
 // Describes the real-time endpoint information for an MLModel.
 type RealtimeEndpointInfo struct {
+
+	// The time that the request to create the real-time endpoint for the MLModel was
+	// received. The time is expressed in epoch time.
+	CreatedAt *time.Time
 
 	// The current status of the real-time endpoint for the MLModel. This element can
 	// have one of the following values:
@@ -663,10 +667,6 @@ type RealtimeEndpointInfo struct {
 	// The maximum processing rate for the real-time endpoint for MLModel, measured in
 	// incoming requests per second.
 	PeakRequestsPerSecond *int32
-
-	// The time that the request to create the real-time endpoint for the MLModel was
-	// received. The time is expressed in epoch time.
-	CreatedAt *time.Time
 }
 
 // Describes the database details required to connect to an Amazon Redshift
@@ -688,15 +688,6 @@ type RedshiftDatabase struct {
 // Redshift cluster.
 type RedshiftDatabaseCredentials struct {
 
-	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to a
-	// database on an Amazon Redshift cluster. The username should have sufficient
-	// permissions to execute the RedshiftSelectSqlQuery query. The username should be
-	// valid for an Amazon Redshift USER
-	// (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
-	//
-	// This member is required.
-	Username *string
-
 	// A password to be used by Amazon ML to connect to a database on an Amazon
 	// Redshift cluster. The password should have sufficient permissions to execute a
 	// RedshiftSelectSqlQuery query. The password should be valid for an Amazon
@@ -705,10 +696,43 @@ type RedshiftDatabaseCredentials struct {
 	//
 	// This member is required.
 	Password *string
+
+	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to a
+	// database on an Amazon Redshift cluster. The username should have sufficient
+	// permissions to execute the RedshiftSelectSqlQuery query. The username should be
+	// valid for an Amazon Redshift USER
+	// (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
+	//
+	// This member is required.
+	Username *string
 }
 
 // Describes the data specification of an Amazon Redshift DataSource.
 type RedshiftDataSpec struct {
+
+	// Describes AWS Identity and Access Management (IAM) credentials that are used
+	// connect to the Amazon Redshift database.
+	//
+	// This member is required.
+	DatabaseCredentials *RedshiftDatabaseCredentials
+
+	// Describes the DatabaseName and ClusterIdentifier for an Amazon Redshift
+	// DataSource.
+	//
+	// This member is required.
+	DatabaseInformation *RedshiftDatabase
+
+	// Describes an Amazon S3 location to store the result set of the SelectSqlQuery
+	// query.
+	//
+	// This member is required.
+	S3StagingLocation *string
+
+	// Describes the SQL Query to execute on an Amazon Redshift database for an Amazon
+	// Redshift DataSource.
+	//
+	// This member is required.
+	SelectSqlQuery *string
 
 	// A JSON string that represents the splitting and rearrangement processing to be
 	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
@@ -770,33 +794,6 @@ type RedshiftDataSpec struct {
 	// "complement":"true"}}</code> </p> </li> </ul>
 	DataRearrangement *string
 
-	// Describes the SQL Query to execute on an Amazon Redshift database for an Amazon
-	// Redshift DataSource.
-	//
-	// This member is required.
-	SelectSqlQuery *string
-
-	// Describes the schema location for an Amazon Redshift DataSource.
-	DataSchemaUri *string
-
-	// Describes AWS Identity and Access Management (IAM) credentials that are used
-	// connect to the Amazon Redshift database.
-	//
-	// This member is required.
-	DatabaseCredentials *RedshiftDatabaseCredentials
-
-	// Describes the DatabaseName and ClusterIdentifier for an Amazon Redshift
-	// DataSource.
-	//
-	// This member is required.
-	DatabaseInformation *RedshiftDatabase
-
-	// Describes an Amazon S3 location to store the result set of the SelectSqlQuery
-	// query.
-	//
-	// This member is required.
-	S3StagingLocation *string
-
 	// A JSON string that represents the schema for an Amazon Redshift DataSource. The
 	// DataSchema defines the structure of the observation data in the data file(s)
 	// referenced in the DataSource. A DataSchema is not required if you specify a
@@ -814,18 +811,13 @@ type RedshiftDataSpec struct {
 	// "attributeType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedAttributeNames": [
 	// "F6" ] }
 	DataSchema *string
+
+	// Describes the schema location for an Amazon Redshift DataSource.
+	DataSchemaUri *string
 }
 
 // Describes the DataSource details specific to Amazon Redshift.
 type RedshiftMetadata struct {
-
-	// The SQL query that is specified during CreateDataSourceFromRedshift (). Returns
-	// only if Verbose is true in GetDataSourceInput.
-	SelectSqlQuery *string
-
-	// Describes the database details required to connect to an Amazon Redshift
-	// database.
-	RedshiftDatabase *RedshiftDatabase
 
 	// A username to be used by Amazon Machine Learning (Amazon ML)to connect to a
 	// database on an Amazon Redshift cluster. The username should have sufficient
@@ -833,10 +825,25 @@ type RedshiftMetadata struct {
 	// valid for an Amazon Redshift USER
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_CREATE_USER.html).
 	DatabaseUserName *string
+
+	// Describes the database details required to connect to an Amazon Redshift
+	// database.
+	RedshiftDatabase *RedshiftDatabase
+
+	// The SQL query that is specified during CreateDataSourceFromRedshift (). Returns
+	// only if Verbose is true in GetDataSourceInput.
+	SelectSqlQuery *string
 }
 
 // Describes the data specification of a DataSource.
 type S3DataSpec struct {
+
+	// The location of the data file(s) used by a DataSource. The URI specifies a data
+	// file or an Amazon Simple Storage Service (Amazon S3) directory or bucket
+	// containing data files.
+	//
+	// This member is required.
+	DataLocationS3 *string
 
 	// A JSON string that represents the splitting and rearrangement processing to be
 	// applied to a DataSource. If the DataRearrangement parameter is not provided, all
@@ -898,10 +905,6 @@ type S3DataSpec struct {
 	// "complement":"true"}}</code> </p> </li> </ul>
 	DataRearrangement *string
 
-	// Describes the schema location in Amazon S3. You must provide either the
-	// DataSchema or the DataSchemaLocationS3.
-	DataSchemaLocationS3 *string
-
 	// A JSON string that represents the schema for an Amazon S3 DataSource. The
 	// DataSchema defines the structure of the observation data in the data file(s)
 	// referenced in the DataSource. You must provide either the DataSchema or the
@@ -920,12 +923,9 @@ type S3DataSpec struct {
 	// "F6" ] }
 	DataSchema *string
 
-	// The location of the data file(s) used by a DataSource. The URI specifies a data
-	// file or an Amazon Simple Storage Service (Amazon S3) directory or bucket
-	// containing data files.
-	//
-	// This member is required.
-	DataLocationS3 *string
+	// Describes the schema location in Amazon S3. You must provide either the
+	// DataSchema or the DataSchemaLocationS3.
+	DataSchemaLocationS3 *string
 }
 
 // A custom key-value pair associated with an ML object, such as an ML model.

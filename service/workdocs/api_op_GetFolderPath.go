@@ -61,6 +61,11 @@ func (c *Client) GetFolderPath(ctx context.Context, params *GetFolderPathInput, 
 
 type GetFolderPathInput struct {
 
+	// The ID of the folder.
+	//
+	// This member is required.
+	FolderId *string
+
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
@@ -69,16 +74,11 @@ type GetFolderPathInput struct {
 	// parent folders.
 	Fields *string
 
-	// This value is not supported.
-	Marker *string
-
-	// The ID of the folder.
-	//
-	// This member is required.
-	FolderId *string
-
 	// The maximum number of levels in the hierarchy to return.
 	Limit *int32
+
+	// This value is not supported.
+	Marker *string
 }
 
 type GetFolderPathOutput struct {

@@ -82,6 +82,11 @@ type SynthesizeSpeechInput struct {
 	// This member is required.
 	VoiceId types.VoiceId
 
+	// Specifies the engine (standard or neural) for Amazon Polly to use when
+	// processing input text for speech synthesis. Using a voice that is not supported
+	// for the engine selected will result in an error.
+	Engine types.Engine
+
 	// Optional language code for the Synthesize Speech request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
@@ -93,18 +98,18 @@ type SynthesizeSpeechInput struct {
 	// Aditi will use Indian English rather than Hindi.
 	LanguageCode types.LanguageCode
 
-	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
-	// "8000", "16000", "22050", and "24000". The default value for standard voices is
-	// "22050". The default value for neural voices is "24000". Valid values for pcm
-	// are "8000" and "16000" The default value is "16000".
-	SampleRate *string
-
 	// List of one or more pronunciation lexicon names you want the service to apply
 	// during synthesis. Lexicons are applied only if the language of the lexicon is
 	// the same as the language of the voice. For information about storing lexicons,
 	// see PutLexicon
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_PutLexicon.html).
 	LexiconNames []*string
+
+	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis are
+	// "8000", "16000", "22050", and "24000". The default value for standard voices is
+	// "22050". The default value for neural voices is "24000". Valid values for pcm
+	// are "8000" and "16000" The default value is "16000".
+	SampleRate *string
 
 	// The type of speech marks returned for the input text.
 	SpeechMarkTypes []types.SpeechMarkType
@@ -113,11 +118,6 @@ type SynthesizeSpeechInput struct {
 	// plain text. For more information, see Using SSML
 	// (https://docs.aws.amazon.com/polly/latest/dg/ssml.html).
 	TextType types.TextType
-
-	// Specifies the engine (standard or neural) for Amazon Polly to use when
-	// processing input text for speech synthesis. Using a voice that is not supported
-	// for the engine selected will result in an error.
-	Engine types.Engine
 }
 
 type SynthesizeSpeechOutput struct {

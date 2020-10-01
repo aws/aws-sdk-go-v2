@@ -74,11 +74,11 @@ type GetOriginRequestPolicyConfigInput struct {
 
 type GetOriginRequestPolicyConfigOutput struct {
 
-	// The origin request policy configuration.
-	OriginRequestPolicyConfig *types.OriginRequestPolicyConfig
-
 	// The current version of the origin request policy.
 	ETag *string
+
+	// The origin request policy configuration.
+	OriginRequestPolicyConfig *types.OriginRequestPolicyConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

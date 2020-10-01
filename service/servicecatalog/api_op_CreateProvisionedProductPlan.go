@@ -72,31 +72,6 @@ type CreateProvisionedProductPlanInput struct {
 	// This member is required.
 	IdempotencyToken *string
 
-	// A user-friendly name for the provisioned product. This value must be unique for
-	// the AWS account and cannot be updated after the product is provisioned.
-	//
-	// This member is required.
-	ProvisionedProductName *string
-
-	// One or more tags. If the plan is for an existing provisioned product, the
-	// product must have a RESOURCE_UPDATE constraint with
-	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
-	Tags []*types.Tag
-
-	// The path identifier of the product. This value is optional if the product has a
-	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths ().
-	PathId *string
-
-	// Parameters specified by the administrator that are required for provisioning the
-	// product.
-	ProvisioningParameters []*types.UpdateProvisioningParameter
-
-	// The product identifier.
-	//
-	// This member is required.
-	ProductId *string
-
 	// The name of the plan.
 	//
 	// This member is required.
@@ -106,6 +81,22 @@ type CreateProvisionedProductPlanInput struct {
 	//
 	// This member is required.
 	PlanType types.ProvisionedProductPlanType
+
+	// The product identifier.
+	//
+	// This member is required.
+	ProductId *string
+
+	// A user-friendly name for the provisioned product. This value must be unique for
+	// the AWS account and cannot be updated after the product is provisioned.
+	//
+	// This member is required.
+	ProvisionedProductName *string
+
+	// The identifier of the provisioning artifact.
+	//
+	// This member is required.
+	ProvisioningArtifactId *string
 
 	// The language code.
 	//
@@ -117,32 +108,41 @@ type CreateProvisionedProductPlanInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The identifier of the provisioning artifact.
-	//
-	// This member is required.
-	ProvisioningArtifactId *string
-
 	// Passed to CloudFormation. The SNS topic ARNs to which to publish stack-related
 	// events.
 	NotificationArns []*string
+
+	// The path identifier of the product. This value is optional if the product has a
+	// default path, and required if the product has more than one path. To list the
+	// paths for a product, use ListLaunchPaths ().
+	PathId *string
+
+	// Parameters specified by the administrator that are required for provisioning the
+	// product.
+	ProvisioningParameters []*types.UpdateProvisioningParameter
+
+	// One or more tags. If the plan is for an existing provisioned product, the
+	// product must have a RESOURCE_UPDATE constraint with
+	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
+	Tags []*types.Tag
 }
 
 type CreateProvisionedProductPlanOutput struct {
 
+	// The plan identifier.
+	PlanId *string
+
 	// The name of the plan.
 	PlanName *string
+
+	// The product identifier.
+	ProvisionProductId *string
 
 	// The user-friendly name of the provisioned product.
 	ProvisionedProductName *string
 
 	// The identifier of the provisioning artifact.
 	ProvisioningArtifactId *string
-
-	// The plan identifier.
-	PlanId *string
-
-	// The product identifier.
-	ProvisionProductId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

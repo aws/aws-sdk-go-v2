@@ -68,15 +68,15 @@ func (c *Client) RestoreServer(ctx context.Context, params *RestoreServerInput, 
 
 type RestoreServerInput struct {
 
-	// The name of the server that you want to restore.
-	//
-	// This member is required.
-	ServerName *string
-
 	// The ID of the backup that you want to use to restore a server.
 	//
 	// This member is required.
 	BackupId *string
+
+	// The name of the server that you want to restore.
+	//
+	// This member is required.
+	ServerName *string
 
 	// The type of instance to restore. Valid values must be specified in the following
 	// format: ^([cm][34]|t2).* For example, m5.large. Valid values are m5.large,

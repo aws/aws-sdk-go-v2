@@ -57,30 +57,31 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// The tags to use with this job. You may use tags to limit access to the job. For
-	// more information about tags in AWS Glue, see AWS Tags in AWS Glue
-	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
-	// guide.
-	Tags map[string]*string
-
-	// Glue version determines the versions of Apache Spark and Python that AWS Glue
-	// supports. The Python version indicates the version supported for jobs of type
-	// Spark.  <p>For more information about the available AWS Glue versions and
-	// corresponding Spark and Python versions, see <a
-	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
-	// in the developer guide.</p> <p>Jobs that are created without specifying a Glue
-	// version default to Glue 0.9.</p>
-	GlueVersion *string
-
-	// The number of workers of a defined workerType that are allocated when a job
-	// runs.  <p>The maximum number of workers you can define are 299 for
-	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
-	NumberOfWorkers *int32
-
 	// The JobCommand that executes this job.
 	//
 	// This member is required.
 	Command *types.JobCommand
+
+	// The name you assign to this job definition. It must be unique in your account.
+	//
+	// This member is required.
+	Name *string
+
+	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
+	//
+	// This member is required.
+	Role *string
+
+	// This parameter is deprecated. Use MaxCapacity instead.  <p>The number of AWS
+	// Glue data processing units (DPUs) to allocate to this Job. You can allocate from
+	// 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
+	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
+	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
+	// pricing page</a>.</p>
+	AllocatedCapacity *int32
+
+	// The connections used for this job.
+	Connections *types.ConnectionsList
 
 	// The default arguments for this job. You can specify arguments here that your own
 	// job-execution script consumes, as well as arguments that AWS Glue itself
@@ -93,58 +94,24 @@ type CreateJobInput struct {
 	// topic in the developer guide.
 	DefaultArguments map[string]*string
 
-	// The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
-	//
-	// This member is required.
-	Role *string
-
-	// The job timeout in minutes. This is the maximum time that a job run can consume
-	// resources before it is terminated and enters TIMEOUT status. The default is
-	// 2,880 minutes (48 hours).
-	Timeout *int32
+	// Description of the job being defined.
+	Description *string
 
 	// An ExecutionProperty specifying the maximum number of concurrent runs allowed
 	// for this job.
 	ExecutionProperty *types.ExecutionProperty
 
-	// This parameter is deprecated. Use MaxCapacity instead.  <p>The number of AWS
-	// Glue data processing units (DPUs) to allocate to this Job. You can allocate from
-	// 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing
-	// power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the <a href="https://aws.amazon.com/glue/pricing/">AWS Glue
-	// pricing page</a>.</p>
-	AllocatedCapacity *int32
-
-	// The type of predefined worker that is allocated when a job runs. Accepts a value
-	// of Standard, G.1X, or G.2X.
-	//
-	//     * For the Standard worker type, each worker
-	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
-	//
-	//
-	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
-	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
-	// for memory-intensive jobs.
-	//
-	//     * For the G.2X worker type, each worker maps to
-	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
-	// worker. We recommend this worker type for memory-intensive jobs.
-	WorkerType types.WorkerType
-
-	// The maximum number of times to retry this job if it fails.
-	MaxRetries *int32
+	// Glue version determines the versions of Apache Spark and Python that AWS Glue
+	// supports. The Python version indicates the version supported for jobs of type
+	// Spark.  <p>For more information about the available AWS Glue versions and
+	// corresponding Spark and Python versions, see <a
+	// href="https://docs.aws.amazon.com/glue/latest/dg/add-job.html">Glue version</a>
+	// in the developer guide.</p> <p>Jobs that are created without specifying a Glue
+	// version default to Glue 0.9.</p>
+	GlueVersion *string
 
 	// This field is reserved for future use.
 	LogUri *string
-
-	// The name of the SecurityConfiguration structure to be used with this job.
-	SecurityConfiguration *string
-
-	// The connections used for this job.
-	Connections *types.ConnectionsList
-
-	// Non-overridable arguments for this job, specified as name-value pairs.
-	NonOverridableArguments map[string]*string
 
 	// The number of AWS Glue data processing units (DPUs) that can be allocated when
 	// this job runs. A DPU is a relative measure of processing power that consists of
@@ -162,16 +129,49 @@ type CreateJobInput struct {
 	// allocation.</p> </li> </ul>
 	MaxCapacity *float64
 
-	// Description of the job being defined.
-	Description *string
+	// The maximum number of times to retry this job if it fails.
+	MaxRetries *int32
 
-	// The name you assign to this job definition. It must be unique in your account.
-	//
-	// This member is required.
-	Name *string
+	// Non-overridable arguments for this job, specified as name-value pairs.
+	NonOverridableArguments map[string]*string
 
 	// Specifies configuration properties of a job notification.
 	NotificationProperty *types.NotificationProperty
+
+	// The number of workers of a defined workerType that are allocated when a job
+	// runs.  <p>The maximum number of workers you can define are 299 for
+	// <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	NumberOfWorkers *int32
+
+	// The name of the SecurityConfiguration structure to be used with this job.
+	SecurityConfiguration *string
+
+	// The tags to use with this job. You may use tags to limit access to the job. For
+	// more information about tags in AWS Glue, see AWS Tags in AWS Glue
+	// (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the developer
+	// guide.
+	Tags map[string]*string
+
+	// The job timeout in minutes. This is the maximum time that a job run can consume
+	// resources before it is terminated and enters TIMEOUT status. The default is
+	// 2,880 minutes (48 hours).
+	Timeout *int32
+
+	// The type of predefined worker that is allocated when a job runs. Accepts a value
+	// of Standard, G.1X, or G.2X.
+	//
+	//     * For the Standard worker type, each worker
+	// provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.
+	//
+	//
+	// * For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory,
+	// 64 GB disk), and provides 1 executor per worker. We recommend this worker type
+	// for memory-intensive jobs.
+	//
+	//     * For the G.2X worker type, each worker maps to
+	// 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per
+	// worker. We recommend this worker type for memory-intensive jobs.
+	WorkerType types.WorkerType
 }
 
 type CreateJobOutput struct {

@@ -59,13 +59,6 @@ func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInp
 
 type ListKeyPoliciesInput struct {
 
-	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
-	// it defaults to 100. Only one policy can be attached to a key.
-	Limit *int32
-
 	// A unique identifier for the customer master key (CMK). Specify the key ID or the
 	// Amazon Resource Name (ARN) of the CMK. For example:
 	//
@@ -81,6 +74,13 @@ type ListKeyPoliciesInput struct {
 	// This member is required.
 	KeyId *string
 
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, AWS KMS does not return more than the specified number of
+	// items, but it might return fewer. This value is optional. If you include a
+	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
+	// it defaults to 100. Only one policy can be attached to a key.
+	Limit *int32
+
 	// Use this parameter in a subsequent request after you receive a response with
 	// truncated results. Set it to the value of NextMarker from the truncated response
 	// you just received.
@@ -88,6 +88,10 @@ type ListKeyPoliciesInput struct {
 }
 
 type ListKeyPoliciesOutput struct {
+
+	// When Truncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent request.
+	NextMarker *string
 
 	// A list of key policy names. The only valid value is default.
 	PolicyNames []*string
@@ -97,10 +101,6 @@ type ListKeyPoliciesOutput struct {
 	// value of the NextMarker element in thisresponse to the Marker parameter in a
 	// subsequent request.
 	Truncated *bool
-
-	// When Truncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent request.
-	NextMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

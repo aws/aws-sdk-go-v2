@@ -81,14 +81,14 @@ type ListFargateProfilesInput struct {
 
 type ListFargateProfilesOutput struct {
 
+	// A list of all of the Fargate profiles associated with the specified cluster.
+	FargateProfileNames []*string
+
 	// The nextToken value to include in a future ListFargateProfiles request. When the
 	// results of a ListFargateProfiles request exceed maxResults, you can use this
 	// value to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
-
-	// A list of all of the Fargate profiles associated with the specified cluster.
-	FargateProfileNames []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

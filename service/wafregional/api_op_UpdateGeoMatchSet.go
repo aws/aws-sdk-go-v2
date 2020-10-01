@@ -89,6 +89,17 @@ func (c *Client) UpdateGeoMatchSet(ctx context.Context, params *UpdateGeoMatchSe
 
 type UpdateGeoMatchSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
+	// The GeoMatchSetId of the GeoMatchSet () that you want to update. GeoMatchSetId
+	// is returned by CreateGeoMatchSet () and by ListGeoMatchSets ().
+	//
+	// This member is required.
+	GeoMatchSetId *string
+
 	// An array of GeoMatchSetUpdate objects that you want to insert into or delete
 	// from an GeoMatchSet (). For more information, see the applicable data types:
 	//
@@ -102,17 +113,6 @@ type UpdateGeoMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.GeoMatchSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
-
-	// The GeoMatchSetId of the GeoMatchSet () that you want to update. GeoMatchSetId
-	// is returned by CreateGeoMatchSet () and by ListGeoMatchSets ().
-	//
-	// This member is required.
-	GeoMatchSetId *string
 }
 
 type UpdateGeoMatchSetOutput struct {

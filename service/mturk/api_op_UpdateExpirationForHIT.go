@@ -59,15 +59,15 @@ func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpir
 
 type UpdateExpirationForHITInput struct {
 
-	// The HIT to update.
-	//
-	// This member is required.
-	HITId *string
-
 	// The date and time at which you want the HIT to expire
 	//
 	// This member is required.
 	ExpireAt *time.Time
+
+	// The HIT to update.
+	//
+	// This member is required.
+	HITId *string
 }
 
 type UpdateExpirationForHITOutput struct {

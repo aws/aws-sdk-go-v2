@@ -56,22 +56,22 @@ func (c *Client) ListDatasets(ctx context.Context, params *ListDatasetsInput, op
 
 type ListDatasetsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return in this request. The default value is
 	// 100.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListDatasetsOutput struct {
 
+	// A list of "DatasetSummary" objects.
+	DatasetSummaries []*types.DatasetSummary
+
 	// The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
-
-	// A list of "DatasetSummary" objects.
-	DatasetSummaries []*types.DatasetSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

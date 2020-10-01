@@ -63,13 +63,13 @@ type DeleteRestApiInput struct {
 	// This member is required.
 	RestApiId *string
 
-	Template *bool
+	Name *string
 
-	Title *string
+	Template *bool
 
 	TemplateSkipList []*string
 
-	Name *string
+	Title *string
 }
 
 type DeleteRestApiOutput struct {

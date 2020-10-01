@@ -65,20 +65,20 @@ func (c *Client) CopyImage(ctx context.Context, params *CopyImageInput, optFns .
 // Contains the parameters for CopyImage.
 type CopyImageInput struct {
 
-	// The name of the Region that contains the AMI to copy.
+	// The name of the new AMI in the destination Region.
 	//
 	// This member is required.
-	SourceRegion *string
+	Name *string
 
 	// The ID of the AMI to copy.
 	//
 	// This member is required.
 	SourceImageId *string
 
-	// The name of the new AMI in the destination Region.
+	// The name of the Region that contains the AMI to copy.
 	//
 	// This member is required.
-	Name *string
+	SourceRegion *string
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
 	// request. For more information, see How to Ensure Idempotency
@@ -86,14 +86,23 @@ type CopyImageInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	ClientToken *string
 
+	// A description for the new AMI in the destination Region.
+	Description *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// A description for the new AMI in the destination Region.
-	Description *string
+	// Specifies whether the destination snapshots of the copied image should be
+	// encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot
+	// create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is
+	// used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK
+	// using KmsKeyId. For more information, see Amazon EBS Encryption
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
+	Encrypted *bool
 
 	// An identifier for the symmetric AWS Key Management Service (AWS KMS) customer
 	// master key (CMK) to use when creating the encrypted volume. This parameter is
@@ -121,15 +130,6 @@ type CopyImageInput struct {
 	// failure. The specified CMK must exist in the Region that the snapshot is being
 	// copied to. Amazon EBS does not support asymmetric CMKs.
 	KmsKeyId *string
-
-	// Specifies whether the destination snapshots of the copied image should be
-	// encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot
-	// create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is
-	// used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK
-	// using KmsKeyId. For more information, see Amazon EBS Encryption
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
-	Encrypted *bool
 }
 
 // Contains the output of CopyImage.

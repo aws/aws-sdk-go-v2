@@ -57,33 +57,18 @@ func (c *Client) ListOfferings(ctx context.Context, params *ListOfferingsInput, 
 // Placeholder documentation for ListOfferingsRequest
 type ListOfferingsInput struct {
 
-	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
-	Codec *string
-
 	// Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
 	ChannelClass *string
-
-	// Filter by offering duration, e.g. '12'
-	Duration *string
-
-	// Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
-	Resolution *string
-
-	// Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'
-	MaximumFramerate *string
 
 	// Filter to offerings that match the configuration of an existing channel, e.g.
 	// '2345678' (a channel ID)
 	ChannelConfiguration *string
 
-	// Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
-	ResourceType *string
+	// Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
+	Codec *string
 
-	// Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
-	VideoQuality *string
-
-	// Placeholder documentation for __string
-	NextToken *string
+	// Filter by offering duration, e.g. '12'
+	Duration *string
 
 	// Placeholder documentation for MaxResults
 	MaxResults *int32
@@ -91,18 +76,33 @@ type ListOfferingsInput struct {
 	// Filter by bitrate, 'MAX_10_MBPS', 'MAX_20_MBPS', or 'MAX_50_MBPS'
 	MaximumBitrate *string
 
+	// Filter by framerate, 'MAX_30_FPS' or 'MAX_60_FPS'
+	MaximumFramerate *string
+
+	// Placeholder documentation for __string
+	NextToken *string
+
+	// Filter by resolution, 'SD', 'HD', 'FHD', or 'UHD'
+	Resolution *string
+
+	// Filter by resource type, 'INPUT', 'OUTPUT', 'MULTIPLEX', or 'CHANNEL'
+	ResourceType *string
+
 	// Filter by special feature, 'ADVANCED_AUDIO' or 'AUDIO_NORMALIZATION'
 	SpecialFeature *string
+
+	// Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
+	VideoQuality *string
 }
 
 // Placeholder documentation for ListOfferingsResponse
 type ListOfferingsOutput struct {
 
-	// List of offerings
-	Offerings []*types.Offering
-
 	// Token to retrieve the next page of results
 	NextToken *string
+
+	// List of offerings
+	Offerings []*types.Offering
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

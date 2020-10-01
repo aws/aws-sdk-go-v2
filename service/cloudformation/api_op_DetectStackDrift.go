@@ -77,13 +77,13 @@ func (c *Client) DetectStackDrift(ctx context.Context, params *DetectStackDriftI
 
 type DetectStackDriftInput struct {
 
-	// The logical names of any resources you want to use as filters.
-	LogicalResourceIds []*string
-
 	// The name of the stack for which you want to detect drift.
 	//
 	// This member is required.
 	StackName *string
+
+	// The logical names of any resources you want to use as filters.
+	LogicalResourceIds []*string
 }
 
 type DetectStackDriftOutput struct {

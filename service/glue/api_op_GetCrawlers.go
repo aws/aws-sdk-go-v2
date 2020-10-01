@@ -65,12 +65,12 @@ type GetCrawlersInput struct {
 
 type GetCrawlersOutput struct {
 
+	// A list of crawler metadata.
+	Crawlers []*types.Crawler
+
 	// A continuation token, if the returned list has not reached the end of those
 	// defined in this customer account.
 	NextToken *string
-
-	// A list of crawler metadata.
-	Crawlers []*types.Crawler
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

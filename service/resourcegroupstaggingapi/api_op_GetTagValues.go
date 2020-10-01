@@ -57,11 +57,6 @@ func (c *Client) GetTagValues(ctx context.Context, params *GetTagValuesInput, op
 
 type GetTagValuesInput struct {
 
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken, use
-	// that string for this value to request an additional page of data.
-	PaginationToken *string
-
 	// The key for which you want to list all existing values in the specified Region
 	// for the AWS account.
 	//
@@ -69,6 +64,11 @@ type GetTagValuesInput struct {
 	Key *string
 
 	MaxResults *int32
+
+	// A string that indicates that additional data is available. Leave this value
+	// empty for your initial request. If the response includes a PaginationToken, use
+	// that string for this value to request an additional page of data.
+	PaginationToken *string
 }
 
 type GetTagValuesOutput struct {

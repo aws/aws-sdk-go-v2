@@ -57,6 +57,11 @@ func (c *Client) CreateDBProxy(ctx context.Context, params *CreateDBProxyInput, 
 
 type CreateDBProxyInput struct {
 
+	// The authorization mechanism that the proxy uses.
+	//
+	// This member is required.
+	Auth []*types.UserAuthConfig
+
 	// The identifier for the proxy. This name must be unique for all proxies owned by
 	// your AWS account in the specified AWS Region. An identifier must begin with a
 	// letter and must contain only ASCII letters, digits, and hyphens; it can't end
@@ -65,31 +70,6 @@ type CreateDBProxyInput struct {
 	// This member is required.
 	DBProxyName *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
-	// secrets in AWS Secrets Manager.
-	//
-	// This member is required.
-	RoleArn *string
-
-	// The number of seconds that a connection to the proxy can be inactive before the
-	// proxy disconnects it. You can set this value higher or lower than the connection
-	// timeout limit for the associated database.
-	IdleClientTimeout *int32
-
-	// One or more VPC subnet IDs to associate with the new proxy.
-	//
-	// This member is required.
-	VpcSubnetIds []*string
-
-	// A Boolean parameter that specifies whether Transport Layer Security (TLS)
-	// encryption is required for connections to the proxy. By enabling this setting,
-	// you can enforce encrypted TLS connections to the proxy.
-	RequireTLS *bool
-
-	// An optional set of key-value pairs to associate arbitrary data of your choosing
-	// with the proxy.
-	Tags []*types.Tag
-
 	// The kinds of databases that the proxy can connect to. This value determines
 	// which database network protocol the proxy recognizes when it interprets network
 	// traffic to and from the database. The engine family applies to MySQL and
@@ -97,6 +77,17 @@ type CreateDBProxyInput struct {
 	//
 	// This member is required.
 	EngineFamily types.EngineFamily
+
+	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
+	// secrets in AWS Secrets Manager.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// One or more VPC subnet IDs to associate with the new proxy.
+	//
+	// This member is required.
+	VpcSubnetIds []*string
 
 	// Whether the proxy includes detailed information about SQL statements in its
 	// logs. This information helps you to debug issues involving SQL behavior or the
@@ -107,10 +98,19 @@ type CreateDBProxyInput struct {
 	// in the logs.
 	DebugLogging *bool
 
-	// The authorization mechanism that the proxy uses.
-	//
-	// This member is required.
-	Auth []*types.UserAuthConfig
+	// The number of seconds that a connection to the proxy can be inactive before the
+	// proxy disconnects it. You can set this value higher or lower than the connection
+	// timeout limit for the associated database.
+	IdleClientTimeout *int32
+
+	// A Boolean parameter that specifies whether Transport Layer Security (TLS)
+	// encryption is required for connections to the proxy. By enabling this setting,
+	// you can enforce encrypted TLS connections to the proxy.
+	RequireTLS *bool
+
+	// An optional set of key-value pairs to associate arbitrary data of your choosing
+	// with the proxy.
+	Tags []*types.Tag
 
 	// One or more VPC security group IDs to associate with the new proxy.
 	VpcSecurityGroupIds []*string

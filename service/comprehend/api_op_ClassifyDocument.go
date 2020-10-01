@@ -58,15 +58,15 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 
 type ClassifyDocumentInput struct {
 
-	// The document text to be analyzed.
-	//
-	// This member is required.
-	Text *string
-
 	// The Amazon Resource Number (ARN) of the endpoint.
 	//
 	// This member is required.
 	EndpointArn *string
+
+	// The document text to be analyzed.
+	//
+	// This member is required.
+	Text *string
 }
 
 type ClassifyDocumentOutput struct {

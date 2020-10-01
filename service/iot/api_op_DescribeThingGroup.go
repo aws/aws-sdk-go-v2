@@ -65,32 +65,32 @@ type DescribeThingGroupInput struct {
 
 type DescribeThingGroupOutput struct {
 
-	// The dynamic thing group query version.
-	QueryVersion *string
-
-	// The thing group ID.
-	ThingGroupId *string
-
 	// The dynamic thing group index name.
 	IndexName *string
 
-	// The thing group ARN.
-	ThingGroupArn *string
+	// The dynamic thing group search query string.
+	QueryString *string
 
-	// The name of the thing group.
-	ThingGroupName *string
-
-	// Thing group metadata.
-	ThingGroupMetadata *types.ThingGroupMetadata
-
-	// The thing group properties.
-	ThingGroupProperties *types.ThingGroupProperties
+	// The dynamic thing group query version.
+	QueryVersion *string
 
 	// The dynamic thing group status.
 	Status types.DynamicGroupStatus
 
-	// The dynamic thing group search query string.
-	QueryString *string
+	// The thing group ARN.
+	ThingGroupArn *string
+
+	// The thing group ID.
+	ThingGroupId *string
+
+	// Thing group metadata.
+	ThingGroupMetadata *types.ThingGroupMetadata
+
+	// The name of the thing group.
+	ThingGroupName *string
+
+	// The thing group properties.
+	ThingGroupProperties *types.ThingGroupProperties
 
 	// The version of the thing group.
 	Version *int64

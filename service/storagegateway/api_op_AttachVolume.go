@@ -61,10 +61,29 @@ func (c *Client) AttachVolume(ctx context.Context, params *AttachVolumeInput, op
 // AttachVolumeInput
 type AttachVolumeInput struct {
 
+	// The Amazon Resource Name (ARN) of the gateway that you want to attach the volume
+	// to.
+	//
+	// This member is required.
+	GatewayARN *string
+
+	// The network interface of the gateway on which to expose the iSCSI target. Only
+	// IPv4 addresses are accepted. Use DescribeGatewayInformation () to get a list of
+	// the network interfaces available on a gateway.  <p>Valid Values: A valid IP
+	// address.</p>
+	//
+	// This member is required.
+	NetworkInterfaceId *string
+
 	// The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
 	//
 	// This member is required.
 	VolumeARN *string
+
+	// The unique device ID or other distinguishing data that identifies the local disk
+	// used to create the volume. This value is only required when you are attaching a
+	// stored volume.
+	DiskId *string
 
 	// The name of the iSCSI target used by an initiator to connect to a volume and
 	// used as a suffix for the target ARN. For example, specifying TargetName as
@@ -74,36 +93,17 @@ type AttachVolumeInput struct {
 	// specify a value, Storage Gateway uses the value that was previously used for
 	// this volume as the new target name.</p>
 	TargetName *string
-
-	// The Amazon Resource Name (ARN) of the gateway that you want to attach the volume
-	// to.
-	//
-	// This member is required.
-	GatewayARN *string
-
-	// The unique device ID or other distinguishing data that identifies the local disk
-	// used to create the volume. This value is only required when you are attaching a
-	// stored volume.
-	DiskId *string
-
-	// The network interface of the gateway on which to expose the iSCSI target. Only
-	// IPv4 addresses are accepted. Use DescribeGatewayInformation () to get a list of
-	// the network interfaces available on a gateway.  <p>Valid Values: A valid IP
-	// address.</p>
-	//
-	// This member is required.
-	NetworkInterfaceId *string
 }
 
 // AttachVolumeOutput
 type AttachVolumeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
-	VolumeARN *string
-
 	// The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI
 	// name for the initiator that was used to connect to the target.
 	TargetARN *string
+
+	// The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
+	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

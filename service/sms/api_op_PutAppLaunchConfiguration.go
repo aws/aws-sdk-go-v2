@@ -56,15 +56,15 @@ func (c *Client) PutAppLaunchConfiguration(ctx context.Context, params *PutAppLa
 
 type PutAppLaunchConfigurationInput struct {
 
-	// Launch configurations for server groups in the application.
-	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
+	// ID of the application associated with the launch configuration.
+	AppId *string
 
 	// Name of service role in the customer's account that Amazon CloudFormation uses
 	// to launch the application.
 	RoleName *string
 
-	// ID of the application associated with the launch configuration.
-	AppId *string
+	// Launch configurations for server groups in the application.
+	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
 }
 
 type PutAppLaunchConfigurationOutput struct {

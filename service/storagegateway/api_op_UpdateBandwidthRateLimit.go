@@ -69,9 +69,6 @@ func (c *Client) UpdateBandwidthRateLimit(ctx context.Context, params *UpdateBan
 // </li> </ul>
 type UpdateBandwidthRateLimitInput struct {
 
-	// The average upload bandwidth rate limit in bits per second.
-	AverageUploadRateLimitInBitsPerSec *int64
-
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	//
@@ -80,6 +77,9 @@ type UpdateBandwidthRateLimitInput struct {
 
 	// The average download bandwidth rate limit in bits per second.
 	AverageDownloadRateLimitInBitsPerSec *int64
+
+	// The average upload bandwidth rate limit in bits per second.
+	AverageUploadRateLimitInBitsPerSec *int64
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose

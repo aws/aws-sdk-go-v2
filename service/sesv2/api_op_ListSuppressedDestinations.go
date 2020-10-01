@@ -87,15 +87,15 @@ type ListSuppressedDestinationsInput struct {
 // A list of suppressed email addresses.
 type ListSuppressedDestinationsOutput struct {
 
-	// A list of summaries, each containing a summary for a suppressed email
-	// destination.
-	SuppressedDestinationSummaries []*types.SuppressedDestinationSummary
-
 	// A token that indicates that there are additional email addresses on the
 	// suppression list for your account. To view additional suppressed addresses,
 	// issue another request to ListSuppressedDestinations, and pass this token in the
 	// NextToken parameter.
 	NextToken *string
+
+	// A list of summaries, each containing a summary for a suppressed email
+	// destination.
+	SuppressedDestinationSummaries []*types.SuppressedDestinationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

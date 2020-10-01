@@ -55,6 +55,56 @@ func (c *Client) InitiateAuth(ctx context.Context, params *InitiateAuthInput, op
 // Initiates the authentication request.
 type InitiateAuthInput struct {
 
+	// The authentication flow for this call to execute. The API action will depend on
+	// this value. For example:
+	//
+	//     * REFRESH_TOKEN_AUTH will take in a valid refresh
+	// token and return new tokens.
+	//
+	//     * USER_SRP_AUTH will take in USERNAME and
+	// SRP_A and return the SRP variables to be used for next challenge execution.
+	//
+	//
+	// * USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the next
+	// challenge or tokens.
+	//
+	// Valid values include:
+	//
+	//     * USER_SRP_AUTH: Authentication
+	// flow for the Secure Remote Password (SRP) protocol.
+	//
+	//     *
+	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication flow for refreshing the access
+	// token and ID token by supplying a valid refresh token.
+	//
+	//     * CUSTOM_AUTH:
+	// Custom authentication flow.
+	//
+	//     * USER_PASSWORD_AUTH: Non-SRP authentication
+	// flow; USERNAME and PASSWORD are passed directly. If a user migration Lambda
+	// trigger is set, this flow will invoke the user migration Lambda if the USERNAME
+	// is not found in the user pool.
+	//
+	//     * ADMIN_USER_PASSWORD_AUTH: Admin-based user
+	// password authentication. This replaces the ADMIN_NO_SRP_AUTH authentication
+	// flow. In this flow, Cognito receives the password in the request instead of
+	// using the SRP process to verify passwords.
+	//
+	// ADMIN_NO_SRP_AUTH is not a valid
+	// value.
+	//
+	// This member is required.
+	AuthFlow types.AuthFlowType
+
+	// The app client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth
+	// calls.
+	AnalyticsMetadata *types.AnalyticsMetadataType
+
 	// The authentication parameters. These are inputs corresponding to the AuthFlow
 	// that you are invoking. The required values depend on the value of AuthFlow:
 	//
@@ -110,76 +160,20 @@ type InitiateAuthInput struct {
 	// </li> </ul> </note>
 	ClientMetadata map[string]*string
 
-	// The Amazon Pinpoint analytics metadata for collecting metrics for InitiateAuth
-	// calls.
-	AnalyticsMetadata *types.AnalyticsMetadataType
-
-	// The app client ID.
-	//
-	// This member is required.
-	ClientId *string
-
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
-
-	// The authentication flow for this call to execute. The API action will depend on
-	// this value. For example:
-	//
-	//     * REFRESH_TOKEN_AUTH will take in a valid refresh
-	// token and return new tokens.
-	//
-	//     * USER_SRP_AUTH will take in USERNAME and
-	// SRP_A and return the SRP variables to be used for next challenge execution.
-	//
-	//
-	// * USER_PASSWORD_AUTH will take in USERNAME and PASSWORD and return the next
-	// challenge or tokens.
-	//
-	// Valid values include:
-	//
-	//     * USER_SRP_AUTH: Authentication
-	// flow for the Secure Remote Password (SRP) protocol.
-	//
-	//     *
-	// REFRESH_TOKEN_AUTH/REFRESH_TOKEN: Authentication flow for refreshing the access
-	// token and ID token by supplying a valid refresh token.
-	//
-	//     * CUSTOM_AUTH:
-	// Custom authentication flow.
-	//
-	//     * USER_PASSWORD_AUTH: Non-SRP authentication
-	// flow; USERNAME and PASSWORD are passed directly. If a user migration Lambda
-	// trigger is set, this flow will invoke the user migration Lambda if the USERNAME
-	// is not found in the user pool.
-	//
-	//     * ADMIN_USER_PASSWORD_AUTH: Admin-based user
-	// password authentication. This replaces the ADMIN_NO_SRP_AUTH authentication
-	// flow. In this flow, Cognito receives the password in the request instead of
-	// using the SRP process to verify passwords.
-	//
-	// ADMIN_NO_SRP_AUTH is not a valid
-	// value.
-	//
-	// This member is required.
-	AuthFlow types.AuthFlowType
 }
 
 // Initiates the authentication response.
 type InitiateAuthOutput struct {
 
-	// The session which should be passed both ways in challenge-response calls to the
-	// service. If the or API call determines that the caller needs to go through
-	// another challenge, they return a session with other challenge parameters. This
-	// session should be passed as it is to the next RespondToAuthChallenge API call.
-	Session *string
-
-	// The challenge parameters. These are returned to you in the InitiateAuth response
-	// if you need to pass another challenge. The responses in this parameter should be
-	// used to compute inputs to the next call (RespondToAuthChallenge). All challenges
-	// require USERNAME and SECRET_HASH (if applicable).
-	ChallengeParameters map[string]*string
+	// The result of the authentication response. This is only returned if the caller
+	// does not need to pass another challenge. If the caller does need to pass another
+	// challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session
+	// are returned.
+	AuthenticationResult *types.AuthenticationResultType
 
 	// The name of the challenge which you are responding to with this call. This is
 	// returned to you in the AdminInitiateAuth response if you need to pass another
@@ -211,11 +205,17 @@ type InitiateAuthOutput struct {
 	// and any other required attributes.
 	ChallengeName types.ChallengeNameType
 
-	// The result of the authentication response. This is only returned if the caller
-	// does not need to pass another challenge. If the caller does need to pass another
-	// challenge before it gets tokens, ChallengeName, ChallengeParameters, and Session
-	// are returned.
-	AuthenticationResult *types.AuthenticationResultType
+	// The challenge parameters. These are returned to you in the InitiateAuth response
+	// if you need to pass another challenge. The responses in this parameter should be
+	// used to compute inputs to the next call (RespondToAuthChallenge). All challenges
+	// require USERNAME and SECRET_HASH (if applicable).
+	ChallengeParameters map[string]*string
+
+	// The session which should be passed both ways in challenge-response calls to the
+	// service. If the or API call determines that the caller needs to go through
+	// another challenge, they return a session with other challenge parameters. This
+	// session should be passed as it is to the next RespondToAuthChallenge API call.
+	Session *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

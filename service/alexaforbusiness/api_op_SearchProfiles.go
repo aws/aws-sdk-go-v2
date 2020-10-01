@@ -61,10 +61,6 @@ type SearchProfilesInput struct {
 	// keys are ProfileName and Address. Required.
 	Filters []*types.Filter
 
-	// The sort order to use in listing the specified set of room profiles. Supported
-	// sort keys are ProfileName and Address.
-	SortCriteria []*types.Sort
-
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
@@ -74,6 +70,10 @@ type SearchProfilesInput struct {
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
+	// The sort order to use in listing the specified set of room profiles. Supported
+	// sort keys are ProfileName and Address.
+	SortCriteria []*types.Sort
 }
 
 type SearchProfilesOutput struct {
@@ -81,11 +81,11 @@ type SearchProfilesOutput struct {
 	// The token returned to indicate that there is more data available.
 	NextToken *string
 
-	// The total number of room profiles returned.
-	TotalCount *int32
-
 	// The profiles that meet the specified set of filter criteria, in sort order.
 	Profiles []*types.ProfileData
+
+	// The total number of room profiles returned.
+	TotalCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

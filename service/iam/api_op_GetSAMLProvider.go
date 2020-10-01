@@ -73,14 +73,14 @@ type GetSAMLProviderInput struct {
 // Contains the response to a successful GetSAMLProvider () request.
 type GetSAMLProviderOutput struct {
 
-	// The expiration date and time for the SAML provider.
-	ValidUntil *time.Time
+	// The date and time when the SAML provider was created.
+	CreateDate *time.Time
 
 	// The XML metadata document that includes information about an identity provider.
 	SAMLMetadataDocument *string
 
-	// The date and time when the SAML provider was created.
-	CreateDate *time.Time
+	// The expiration date and time for the SAML provider.
+	ValidUntil *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

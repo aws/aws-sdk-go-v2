@@ -56,11 +56,11 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 
 type GetGroupInput struct {
 
-	// The case-sensitive name of the group.
-	GroupName *string
-
 	// The ARN of the group that was generated on creation.
 	GroupARN *string
+
+	// The case-sensitive name of the group.
+	GroupName *string
 }
 
 type GetGroupOutput struct {

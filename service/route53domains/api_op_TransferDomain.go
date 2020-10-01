@@ -93,49 +93,10 @@ func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput
 // The TransferDomain request includes the following elements.
 type TransferDomainInput struct {
 
-	// The number of years that you want to register the domain for. Domains are
-	// registered for a minimum of one year. The maximum period depends on the
-	// top-level domain. Default: 1
+	// Provides detailed contact information.
 	//
 	// This member is required.
-	DurationInYears *int32
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact. Default: true
-	PrivacyProtectTechContact *bool
-
-	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Autorenewal only takes effect after the account is charged. Default:
-	// true
-	AutoRenew *bool
-
-	// Contains details for the host and glue IP addresses.
-	Nameservers []*types.Nameserver
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the registrant contact (domain
-	// owner). Default: true
-	PrivacyProtectRegistrantContact *bool
-
-	// The authorization code for the domain. You get this value from the current
-	// registrar.
-	AuthCode *string
-
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact. Default: true
-	PrivacyProtectAdminContact *bool
-
-	// Reserved for future use.
-	IdnLangCode *string
+	AdminContact *types.ContactDetail
 
 	// The name of the domain that you want to transfer to Route 53. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
@@ -158,10 +119,12 @@ type TransferDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Provides detailed contact information.
+	// The number of years that you want to register the domain for. Domains are
+	// registered for a minimum of one year. The maximum period depends on the
+	// top-level domain. Default: 1
 	//
 	// This member is required.
-	AdminContact *types.ContactDetail
+	DurationInYears *int32
 
 	// Provides detailed contact information.
 	//
@@ -172,6 +135,43 @@ type TransferDomainInput struct {
 	//
 	// This member is required.
 	TechContact *types.ContactDetail
+
+	// The authorization code for the domain. You get this value from the current
+	// registrar.
+	AuthCode *string
+
+	// Indicates whether the domain will be automatically renewed (true) or not
+	// (false). Autorenewal only takes effect after the account is charged. Default:
+	// true
+	AutoRenew *bool
+
+	// Reserved for future use.
+	IdnLangCode *string
+
+	// Contains details for the host and glue IP addresses.
+	Nameservers []*types.Nameserver
+
+	// Whether you want to conceal contact information from WHOIS queries. If you
+	// specify true, WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
+	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// return the information that you entered for the admin contact. Default: true
+	PrivacyProtectAdminContact *bool
+
+	// Whether you want to conceal contact information from WHOIS queries. If you
+	// specify true, WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
+	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// return the information that you entered for the registrant contact (domain
+	// owner). Default: true
+	PrivacyProtectRegistrantContact *bool
+
+	// Whether you want to conceal contact information from WHOIS queries. If you
+	// specify true, WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
+	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// return the information that you entered for the technical contact. Default: true
+	PrivacyProtectTechContact *bool
 }
 
 // The TransferDomain response includes the following element.

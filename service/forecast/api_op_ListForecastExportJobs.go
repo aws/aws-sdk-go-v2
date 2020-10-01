@@ -61,14 +61,6 @@ func (c *Client) ListForecastExportJobs(ctx context.Context, params *ListForecas
 
 type ListForecastExportJobsInput struct {
 
-	// The number of items to return in the response.
-	MaxResults *int32
-
-	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
-	// request. Tokens expire after 24 hours.
-	NextToken *string
-
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT, which specifies whether to
 	// include or exclude the forecast export jobs that match the statement from the
@@ -90,6 +82,14 @@ type ListForecastExportJobsInput struct {
 	// "Condition": "IS", "Key": "ForecastArn", "Value":
 	// "arn:aws:forecast:us-west-2::forecast/electricityforecast" } ]
 	Filters []*types.Filter
+
+	// The number of items to return in the response.
+	MaxResults *int32
+
+	// If the result of the previous request was truncated, the response includes a
+	// NextToken. To retrieve the next set of results, use the token in the next
+	// request. Tokens expire after 24 hours.
+	NextToken *string
 }
 
 type ListForecastExportJobsOutput struct {

@@ -56,22 +56,22 @@ func (c *Client) ListResourceDefinitions(ctx context.Context, params *ListResour
 
 type ListResourceDefinitionsInput struct {
 
+	// The maximum number of results to be returned per request.
+	MaxResults *string
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// The maximum number of results to be returned per request.
-	MaxResults *string
 }
 
 type ListResourceDefinitionsOutput struct {
 
+	// Information about a definition.
+	Definitions []*types.DefinitionInformation
+
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
-
-	// Information about a definition.
-	Definitions []*types.DefinitionInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,11 +59,6 @@ func (c *Client) EvaluateExpression(ctx context.Context, params *EvaluateExpress
 // Contains the parameters for EvaluateExpression.
 type EvaluateExpressionInput struct {
 
-	// The ID of the pipeline.
-	//
-	// This member is required.
-	PipelineId *string
-
 	// The expression to evaluate.
 	//
 	// This member is required.
@@ -73,6 +68,11 @@ type EvaluateExpressionInput struct {
 	//
 	// This member is required.
 	ObjectId *string
+
+	// The ID of the pipeline.
+	//
+	// This member is required.
+	PipelineId *string
 }
 
 // Contains the output of EvaluateExpression.

@@ -57,6 +57,15 @@ func (c *Client) CreateSite(ctx context.Context, params *CreateSiteInput, optFns
 
 type CreateSiteInput struct {
 
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
+
+	// A description of your site. Length Constraints: Maximum length of 256
+	// characters.
+	Description *string
+
 	// The site location. This information is used for visualization in the Network
 	// Manager console. If you specify the address, the latitude and longitude are
 	// automatically calculated.
@@ -72,15 +81,6 @@ type CreateSiteInput struct {
 
 	// The tags to apply to the resource during creation.
 	Tags []*types.Tag
-
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
-
-	// A description of your site. Length Constraints: Maximum length of 256
-	// characters.
-	Description *string
 }
 
 type CreateSiteOutput struct {

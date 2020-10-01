@@ -65,14 +65,6 @@ func (c *Client) RemoveTagsFromVault(ctx context.Context, params *RemoveTagsFrom
 // The input value for RemoveTagsFromVaultInput.
 type RemoveTagsFromVaultInput struct {
 
-	// The name of the vault.
-	//
-	// This member is required.
-	VaultName *string
-
-	// A list of tag keys. Each corresponding tag is removed from the vault.
-	TagKeys []*string
-
 	// The AccountId value is the AWS account ID of the account that owns the vault.
 	// You can either specify an AWS account ID or optionally a single '-' (hyphen), in
 	// which case Amazon S3 Glacier uses the AWS account ID associated with the
@@ -81,6 +73,14 @@ type RemoveTagsFromVaultInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the vault.
+	//
+	// This member is required.
+	VaultName *string
+
+	// A list of tag keys. Each corresponding tag is removed from the vault.
+	TagKeys []*string
 }
 
 type RemoveTagsFromVaultOutput struct {

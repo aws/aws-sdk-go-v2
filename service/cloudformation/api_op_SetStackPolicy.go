@@ -57,6 +57,11 @@ func (c *Client) SetStackPolicy(ctx context.Context, params *SetStackPolicyInput
 // The input for the SetStackPolicy () action.
 type SetStackPolicyInput struct {
 
+	// The name or unique stack ID that you want to associate a policy with.
+	//
+	// This member is required.
+	StackName *string
+
 	// Structure containing the stack policy body. For more information, go to  Prevent
 	// Updates to Stack Resources
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html)
@@ -69,11 +74,6 @@ type SetStackPolicyInput struct {
 	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
 	// not both.
 	StackPolicyURL *string
-
-	// The name or unique stack ID that you want to associate a policy with.
-	//
-	// This member is required.
-	StackName *string
 }
 
 type SetStackPolicyOutput struct {

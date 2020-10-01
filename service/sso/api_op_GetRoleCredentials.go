@@ -55,11 +55,6 @@ func (c *Client) GetRoleCredentials(ctx context.Context, params *GetRoleCredenti
 
 type GetRoleCredentialsInput struct {
 
-	// The identifier for the AWS account that is assigned to the user.
-	//
-	// This member is required.
-	AccountId *string
-
 	// The token issued by the CreateToken API call. For more information, see
 	// CreateToken
 	// (https://docs.aws.amazon.com/singlesignon/latest/OIDCAPIReference/API_CreateToken.html)
@@ -67,6 +62,11 @@ type GetRoleCredentialsInput struct {
 	//
 	// This member is required.
 	AccessToken *string
+
+	// The identifier for the AWS account that is assigned to the user.
+	//
+	// This member is required.
+	AccountId *string
 
 	// The friendly name of the role that is assigned to the user.
 	//

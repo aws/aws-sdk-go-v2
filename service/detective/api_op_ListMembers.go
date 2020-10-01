@@ -58,11 +58,6 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 
 type ListMembersInput struct {
 
-	// For requests to retrieve the next page of member account results, the pagination
-	// token that was returned with the previous page of results. The initial request
-	// does not include a pagination token.
-	NextToken *string
-
 	// The ARN of the behavior graph for which to retrieve the list of member accounts.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type ListMembersInput struct {
 	// be less than the overall limit on the number of results to return, which is
 	// currently 200.
 	MaxResults *int32
+
+	// For requests to retrieve the next page of member account results, the pagination
+	// token that was returned with the previous page of results. The initial request
+	// does not include a pagination token.
+	NextToken *string
 }
 
 type ListMembersOutput struct {

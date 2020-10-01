@@ -78,11 +78,11 @@ type UpdateContributorInsightsOutput struct {
 	// The status of contributor insights
 	ContributorInsightsStatus types.ContributorInsightsStatus
 
-	// The name of the table.
-	TableName *string
-
 	// The name of the global secondary index, if applicable.
 	IndexName *string
+
+	// The name of the table.
+	TableName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

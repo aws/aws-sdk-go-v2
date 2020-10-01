@@ -22,8 +22,10 @@ type AccessPoint struct {
 	// This member is required.
 	Bucket *string
 
-	// The ARN for the access point.
-	AccessPointArn *string
+	// The name of this access point.
+	//
+	// This member is required.
+	Name *string
 
 	// Indicates whether this access point allows access from the public internet. If
 	// VpcConfiguration is specified for this access point, then NetworkOrigin is VPC,
@@ -34,14 +36,12 @@ type AccessPoint struct {
 	// This member is required.
 	NetworkOrigin NetworkOrigin
 
+	// The ARN for the access point.
+	AccessPointArn *string
+
 	// The virtual private cloud (VPC) configuration for this access point, if one
 	// exists.
 	VpcConfiguration *VpcConfiguration
-
-	// The name of this access point.
-	//
-	// This member is required.
-	Name *string
 }
 
 // The container for the bucket configuration. This is not supported by Amazon S3
@@ -58,34 +58,55 @@ type CreateBucketConfiguration struct {
 // a Describe Job request.
 type JobDescriptor struct {
 
-	// The configuration information for the specified job's manifest object.
-	Manifest *JobManifest
-
-	// Describes the total number of tasks that the specified job has run, the number
-	// of tasks that succeeded, and the number of tasks that failed.
-	ProgressSummary *JobProgressSummary
-
 	// Indicates whether confirmation is required before Amazon S3 begins running the
 	// specified job. Confirmation is required only for jobs created through the Amazon
 	// S3 console.
 	ConfirmationRequired *bool
 
+	// A timestamp indicating when this job was created.
+	CreationTime *time.Time
+
+	// The description for this job, if one was provided in this job's Create Job
+	// request.
+	Description *string
+
+	// If the specified job failed, this field contains information describing the
+	// failure.
+	FailureReasons []*JobFailure
+
 	// The Amazon Resource Name (ARN) for this job.
 	JobArn *string
 
+	// The ID for the specified job.
+	JobId *string
+
+	// The configuration information for the specified job's manifest object.
+	Manifest *JobManifest
+
+	// The operation that the specified job is configured to run on the objects listed
+	// in the manifest.
+	Operation *JobOperation
+
 	// The priority of the specified job.
 	Priority *int32
+
+	// Describes the total number of tasks that the specified job has run, the number
+	// of tasks that succeeded, and the number of tasks that failed.
+	ProgressSummary *JobProgressSummary
 
 	// Contains the configuration information for the job-completion report if you
 	// requested one in the Create Job request.
 	Report *JobReport
 
+	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
+	// role assigned to run the tasks for this job.
+	RoleArn *string
+
 	// The current status of the specified job.
 	Status JobStatus
 
-	// A timestamp indicating when this job terminated. A job's termination date is the
-	// date and time when it succeeded, failed, or was canceled.
-	TerminationDate *time.Time
+	// The reason for updating the job.
+	StatusUpdateReason *string
 
 	// The reason why the specified job was suspended. A job is only suspended if you
 	// create it through the Amazon S3 console. When you create the job, it enters the
@@ -93,51 +114,41 @@ type JobDescriptor struct {
 	// it automatically exits the Suspended state.
 	SuspendedCause *string
 
-	// The description for this job, if one was provided in this job's Create Job
-	// request.
-	Description *string
-
-	// The operation that the specified job is configured to run on the objects listed
-	// in the manifest.
-	Operation *JobOperation
-
-	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
-	// role assigned to run the tasks for this job.
-	RoleArn *string
-
 	// The timestamp when this job was suspended, if it has been suspended.
 	SuspendedDate *time.Time
 
-	// If the specified job failed, this field contains information describing the
-	// failure.
-	FailureReasons []*JobFailure
-
-	// The reason for updating the job.
-	StatusUpdateReason *string
-
-	// A timestamp indicating when this job was created.
-	CreationTime *time.Time
-
-	// The ID for the specified job.
-	JobId *string
+	// A timestamp indicating when this job terminated. A job's termination date is the
+	// date and time when it succeeded, failed, or was canceled.
+	TerminationDate *time.Time
 }
 
 // If this job failed, this element indicates why the job failed.
 type JobFailure struct {
 
-	// The failure reason, if any, for the specified job.
-	FailureReason *string
-
 	// The failure code, if any, for the specified job.
 	FailureCode *string
+
+	// The failure reason, if any, for the specified job.
+	FailureReason *string
 }
 
 // Contains the configuration and status information for a single job retrieved as
 // part of a job list.
 type JobListDescriptor struct {
 
+	// A timestamp indicating when the specified job was created.
+	CreationTime *time.Time
+
+	// The user-specified description that was included in the specified job's Create
+	// Job request.
+	Description *string
+
 	// The ID for the specified job.
 	JobId *string
+
+	// The operation that the specified job is configured to run on each object listed
+	// in the manifest.
+	Operation OperationName
 
 	// The current priority for the specified job.
 	Priority *int32
@@ -146,23 +157,12 @@ type JobListDescriptor struct {
 	// of tasks that succeeded, and the number of tasks that failed.
 	ProgressSummary *JobProgressSummary
 
-	// The user-specified description that was included in the specified job's Create
-	// Job request.
-	Description *string
-
-	// The operation that the specified job is configured to run on each object listed
-	// in the manifest.
-	Operation OperationName
-
-	// A timestamp indicating when the specified job was created.
-	CreationTime *time.Time
+	// The specified job's current status.
+	Status JobStatus
 
 	// A timestamp indicating when the specified job terminated. A job's termination
 	// date is the date and time when it succeeded, failed, or was canceled.
 	TerminationDate *time.Time
-
-	// The specified job's current status.
-	Status JobStatus
 }
 
 // Contains the configuration information for a job's manifest.
@@ -217,6 +217,22 @@ type JobManifestSpec struct {
 // the Amazon Simple Storage Service Developer Guide.
 type JobOperation struct {
 
+	// Directs the specified job to invoke an AWS Lambda function on each object in the
+	// manifest.
+	LambdaInvoke *LambdaInvokeOperation
+
+	// Directs the specified job to run an Initiate Glacier Restore call on each object
+	// in the manifest.
+	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
+
+	// Directs the specified job to run a PUT Object acl call on each object in the
+	// manifest.
+	S3PutObjectAcl *S3SetObjectAclOperation
+
+	// Directs the specified job to run a PUT Copy object call on each object in the
+	// manifest.
+	S3PutObjectCopy *S3CopyObjectOperation
+
 	// Contains the configuration for an S3 Object Lock legal hold operation that an S3
 	// Batch Operations job passes each object through to the underlying
 	// PutObjectLegalHold API. For more information, see Using S3 Object Lock legal
@@ -224,18 +240,6 @@ type JobOperation struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
 	// the Amazon Simple Storage Service Developer Guide.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
-
-	// Directs the specified job to run a PUT Copy object call on each object in the
-	// manifest.
-	S3PutObjectCopy *S3CopyObjectOperation
-
-	// Directs the specified job to run an Initiate Glacier Restore call on each object
-	// in the manifest.
-	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
-
-	// Directs the specified job to run a PUT Object tagging call on each object in the
-	// manifest.
-	S3PutObjectTagging *S3SetObjectTaggingOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
 	// an S3 Batch Operations job. Batch Operations passes each value through to the
@@ -245,13 +249,9 @@ type JobOperation struct {
 	// in the Amazon Simple Storage Service Developer Guide.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
-	// Directs the specified job to invoke an AWS Lambda function on each object in the
+	// Directs the specified job to run a PUT Object tagging call on each object in the
 	// manifest.
-	LambdaInvoke *LambdaInvokeOperation
-
-	// Directs the specified job to run a PUT Object acl call on each object in the
-	// manifest.
-	S3PutObjectAcl *S3SetObjectAclOperation
+	S3PutObjectTagging *S3SetObjectTaggingOperation
 }
 
 // Describes the total number of tasks that the specified job has started, the
@@ -259,29 +259,17 @@ type JobOperation struct {
 type JobProgressSummary struct {
 
 	//
+	NumberOfTasksFailed *int64
+
+	//
 	NumberOfTasksSucceeded *int64
 
 	//
 	TotalNumberOfTasks *int64
-
-	//
-	NumberOfTasksFailed *int64
 }
 
 // Contains the configuration parameters for a job-completion report.
 type JobReport struct {
-
-	// The format of the specified job-completion report.
-	Format JobReportFormat
-
-	// Indicates whether the job-completion report will include details of all tasks or
-	// only failed tasks.
-	ReportScope JobReportScope
-
-	// An optional prefix to describe where in the specified bucket the job-completion
-	// report will be stored. Amazon S3 stores the job-completion report at
-	// /job-/report.json.
-	Prefix *string
 
 	// Indicates whether the specified job will generate a job-completion report.
 	//
@@ -291,6 +279,18 @@ type JobReport struct {
 	// The Amazon Resource Name (ARN) for the bucket where specified job-completion
 	// report will be stored.
 	Bucket *string
+
+	// The format of the specified job-completion report.
+	Format JobReportFormat
+
+	// An optional prefix to describe where in the specified bucket the job-completion
+	// report will be stored. Amazon S3 stores the job-completion report at
+	// /job-/report.json.
+	Prefix *string
+
+	// Indicates whether the job-completion report will include details of all tasks or
+	// only failed tasks.
+	ReportScope JobReportScope
 }
 
 // Contains the configuration parameters for a Lambda Invoke operation.
@@ -311,12 +311,6 @@ type LifecycleConfiguration struct {
 // The container of the Outposts bucket lifecycle expiration.
 type LifecycleExpiration struct {
 
-	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent
-	// versions. If set to true, the delete marker will be expired. If set to false,
-	// the policy takes no action. This cannot be specified with Days or Date in a
-	// Lifecycle Expiration Policy.
-	ExpiredObjectDeleteMarker *bool
-
 	// Indicates at what date the object is to be deleted. Should be in GMT ISO 8601
 	// format.
 	Date *time.Time
@@ -324,36 +318,16 @@ type LifecycleExpiration struct {
 	// Indicates the lifetime, in days, of the objects that are subject to the rule.
 	// The value must be a non-zero positive integer.
 	Days *int32
+
+	// Indicates whether Amazon S3 will remove a delete marker with no noncurrent
+	// versions. If set to true, the delete marker will be expired. If set to false,
+	// the policy takes no action. This cannot be specified with Days or Date in a
+	// Lifecycle Expiration Policy.
+	ExpiredObjectDeleteMarker *bool
 }
 
 // The container for the Outposts bucket lifecycle rule.
 type LifecycleRule struct {
-
-	// Unique identifier for the rule. The value cannot be longer than 255 characters.
-	ID *string
-
-	// The container for the filter of lifecycle rule.
-	Filter *LifecycleRuleFilter
-
-	// Specifies the expiration for the lifecycle of the object in the form of date,
-	// days and, whether the object has a delete marker.
-	Expiration *LifecycleExpiration
-
-	// Specifies when an Amazon S3 object transitions to a specified storage class.
-	// This is not supported by Amazon S3 on Outposts buckets.
-	Transitions []*Transition
-
-	// The noncurrent version expiration of the lifecycle rule. This is not supported
-	// by Amazon S3 on Outposts buckets.
-	NoncurrentVersionExpiration *NoncurrentVersionExpiration
-
-	// Specifies the transition rule for the lifecycle rule that describes when
-	// noncurrent objects transition to a specific storage class. If your bucket is
-	// versioning-enabled (or versioning is suspended), you can set this action to
-	// request that Amazon S3 transition noncurrent object versions to a specific
-	// storage class at a set period in the object's lifetime. This is not supported by
-	// Amazon S3 on Outposts buckets.
-	NoncurrentVersionTransitions []*NoncurrentVersionTransition
 
 	// If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is
 	// not currently being applied.
@@ -368,30 +342,56 @@ type LifecycleRule struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
 	// in the Amazon Simple Storage Service Developer Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
+
+	// Specifies the expiration for the lifecycle of the object in the form of date,
+	// days and, whether the object has a delete marker.
+	Expiration *LifecycleExpiration
+
+	// The container for the filter of lifecycle rule.
+	Filter *LifecycleRuleFilter
+
+	// Unique identifier for the rule. The value cannot be longer than 255 characters.
+	ID *string
+
+	// The noncurrent version expiration of the lifecycle rule. This is not supported
+	// by Amazon S3 on Outposts buckets.
+	NoncurrentVersionExpiration *NoncurrentVersionExpiration
+
+	// Specifies the transition rule for the lifecycle rule that describes when
+	// noncurrent objects transition to a specific storage class. If your bucket is
+	// versioning-enabled (or versioning is suspended), you can set this action to
+	// request that Amazon S3 transition noncurrent object versions to a specific
+	// storage class at a set period in the object's lifetime. This is not supported by
+	// Amazon S3 on Outposts buckets.
+	NoncurrentVersionTransitions []*NoncurrentVersionTransition
+
+	// Specifies when an Amazon S3 object transitions to a specified storage class.
+	// This is not supported by Amazon S3 on Outposts buckets.
+	Transitions []*Transition
 }
 
 // The container for the Outposts bucket lifecycle rule and operator.
 type LifecycleRuleAndOperator struct {
 
+	// Prefix identifying one or more objects to which the rule applies.
+	Prefix *string
+
 	// All of these tags must exist in the object's tag set in order for the rule to
 	// apply.
 	Tags []*S3Tag
-
-	// Prefix identifying one or more objects to which the rule applies.
-	Prefix *string
 }
 
 // The container for the filter of the lifecycle rule.
 type LifecycleRuleFilter struct {
 
-	//
-	Tag *S3Tag
+	// The container for the AND condition for the lifecycle rule.
+	And *LifecycleRuleAndOperator
 
 	// Prefix identifying one or more objects to which the rule applies.
 	Prefix *string
 
-	// The container for the AND condition for the lifecycle rule.
-	And *LifecycleRuleAndOperator
+	//
+	Tag *S3Tag
 }
 
 // The container of the noncurrent version expiration.
@@ -440,22 +440,6 @@ type PolicyStatus struct {
 // Amazon S3 on Outposts.
 type PublicAccessBlockConfiguration struct {
 
-	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
-	// in this account. Setting this element to TRUE restricts access to buckets with
-	// public policies to only AWS services and authorized users within this account.
-	// Enabling this setting doesn't affect previously stored bucket policies, except
-	// that public and cross-account access within any public bucket policy, including
-	// non-public delegation to specific accounts, is blocked. This is not supported
-	// for Amazon S3 on Outposts.
-	RestrictPublicBuckets *bool
-
-	// Specifies whether Amazon S3 should block public bucket policies for buckets in
-	// this account. Setting this element to TRUE causes Amazon S3 to reject calls to
-	// PUT Bucket policy if the specified bucket policy allows public access. Enabling
-	// this setting doesn't affect existing bucket policies. This is not supported for
-	// Amazon S3 on Outposts.
-	BlockPublicPolicy *bool
-
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
 	// buckets in this account. Setting this element to TRUE causes the following
 	// behavior:
@@ -473,12 +457,28 @@ type PublicAccessBlockConfiguration struct {
 	// not supported for Amazon S3 on Outposts.
 	BlockPublicAcls *bool
 
+	// Specifies whether Amazon S3 should block public bucket policies for buckets in
+	// this account. Setting this element to TRUE causes Amazon S3 to reject calls to
+	// PUT Bucket policy if the specified bucket policy allows public access. Enabling
+	// this setting doesn't affect existing bucket policies. This is not supported for
+	// Amazon S3 on Outposts.
+	BlockPublicPolicy *bool
+
 	// Specifies whether Amazon S3 should ignore public ACLs for buckets in this
 	// account. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs
 	// on buckets in this account and any objects that they contain. Enabling this
 	// setting doesn't affect the persistence of any existing ACLs and doesn't prevent
 	// new public ACLs from being set. This is not supported for Amazon S3 on Outposts.
 	IgnorePublicAcls *bool
+
+	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
+	// in this account. Setting this element to TRUE restricts access to buckets with
+	// public policies to only AWS services and authorized users within this account.
+	// Enabling this setting doesn't affect previously stored bucket policies, except
+	// that public and cross-account access within any public bucket policy, including
+	// non-public delegation to specific accounts, is blocked. This is not supported
+	// for Amazon S3 on Outposts.
+	RestrictPublicBuckets *bool
 }
 
 // The container for the regional bucket.
@@ -487,45 +487,45 @@ type RegionalBucket struct {
 	//
 	//
 	// This member is required.
-	PublicAccessBlockEnabled *bool
+	Bucket *string
+
+	// The creation date of the regional bucket
+	//
+	// This member is required.
+	CreationDate *time.Time
 
 	//
 	//
 	// This member is required.
-	Bucket *string
+	PublicAccessBlockEnabled *bool
 
 	// The Amazon Resource Name (ARN) for the regional bucket.
 	BucketArn *string
 
 	// The AWS Outposts ID of the regional bucket.
 	OutpostId *string
-
-	// The creation date of the regional bucket
-	//
-	// This member is required.
-	CreationDate *time.Time
 }
 
 //
 type S3AccessControlList struct {
 
 	//
-	Grants []*S3Grant
-
-	//
 	//
 	// This member is required.
 	Owner *S3ObjectOwner
+
+	//
+	Grants []*S3Grant
 }
 
 //
 type S3AccessControlPolicy struct {
 
 	//
-	CannedAccessControlList S3CannedAccessControlList
+	AccessControlList *S3AccessControlList
 
 	//
-	AccessControlList *S3AccessControlList
+	CannedAccessControlList S3CannedAccessControlList
 }
 
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
@@ -535,26 +535,44 @@ type S3AccessControlPolicy struct {
 type S3CopyObjectOperation struct {
 
 	//
-	SSEAwsKmsKeyId *string
-
-	// The retention mode to be applied to all objects in the Batch Operations job.
-	ObjectLockMode S3ObjectLockMode
-
-	//
 	AccessControlGrants []*S3Grant
 
 	//
-	RedirectLocation *string
+	CannedAccessControlList S3CannedAccessControlList
+
+	//
+	MetadataDirective S3MetadataDirective
+
+	//
+	ModifiedSinceConstraint *time.Time
+
+	//
+	NewObjectMetadata *S3ObjectMetadata
+
+	//
+	NewObjectTagging []*S3Tag
+
+	// The legal hold status to be applied to all objects in the Batch Operations job.
+	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus
+
+	// The retention mode to be applied to all objects in the Batch Operations job.
+	ObjectLockMode S3ObjectLockMode
 
 	// The date when the applied object retention configuration expires on all objects
 	// in the Batch Operations job.
 	ObjectLockRetainUntilDate *time.Time
 
-	// The legal hold status to be applied to all objects in the Batch Operations job.
-	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus
+	//
+	RedirectLocation *string
 
 	//
-	MetadataDirective S3MetadataDirective
+	RequesterPays *bool
+
+	//
+	SSEAwsKmsKeyId *string
+
+	//
+	StorageClass S3StorageClass
 
 	//
 	TargetKeyPrefix *string
@@ -563,25 +581,7 @@ type S3CopyObjectOperation struct {
 	TargetResource *string
 
 	//
-	NewObjectMetadata *S3ObjectMetadata
-
-	//
-	CannedAccessControlList S3CannedAccessControlList
-
-	//
-	NewObjectTagging []*S3Tag
-
-	//
-	ModifiedSinceConstraint *time.Time
-
-	//
 	UnModifiedSinceConstraint *time.Time
-
-	//
-	RequesterPays *bool
-
-	//
-	StorageClass S3StorageClass
 }
 
 //
@@ -598,13 +598,13 @@ type S3Grant struct {
 type S3Grantee struct {
 
 	//
-	TypeIdentifier S3GranteeTypeIdentifier
-
-	//
 	DisplayName *string
 
 	//
 	Identifier *string
+
+	//
+	TypeIdentifier S3GranteeTypeIdentifier
 }
 
 // Contains the configuration parameters for an Initiate Glacier Restore job. S3
@@ -636,37 +636,37 @@ type S3ObjectLockLegalHold struct {
 type S3ObjectMetadata struct {
 
 	//
-	ContentEncoding *string
+	CacheControl *string
 
 	//
 	ContentDisposition *string
 
 	//
-	ContentType *string
+	ContentEncoding *string
+
+	//
+	ContentLanguage *string
 
 	//
 	ContentLength *int64
 
 	//
-	CacheControl *string
+	ContentMD5 *string
+
+	//
+	ContentType *string
 
 	//
 	HttpExpiresDate *time.Time
+
+	//
+	RequesterCharged *bool
 
 	//
 	SSEAlgorithm S3SSEAlgorithm
 
 	//
 	UserMetadata map[string]*string
-
-	//
-	ContentMD5 *string
-
-	//
-	ContentLanguage *string
-
-	//
-	RequesterCharged *bool
 }
 
 //
@@ -687,13 +687,13 @@ type S3ObjectOwner struct {
 // in the Amazon Simple Storage Service Developer Guide.
 type S3Retention struct {
 
-	// The date when the applied Object Lock retention will expire on all objects set
-	// by the Batch Operations job.
-	RetainUntilDate *time.Time
-
 	// The Object Lock retention mode to be applied to all objects in the Batch
 	// Operations job.
 	Mode S3ObjectLockRetentionMode
+
+	// The date when the applied Object Lock retention will expire on all objects set
+	// by the Batch Operations job.
+	RetainUntilDate *time.Time
 }
 
 // Contains the configuration parameters for a Set Object ACL operation. S3 Batch
@@ -729,10 +729,6 @@ type S3SetObjectLegalHoldOperation struct {
 // in the Amazon Simple Storage Service Developer Guide.
 type S3SetObjectRetentionOperation struct {
 
-	// Indicates if the action should be applied to objects in the Batch Operations job
-	// even if they have Object Lock  GOVERNANCE type in place.
-	BypassGovernanceRetention *bool
-
 	// Contains the Object Lock retention mode to be applied to all objects in the
 	// Batch Operations job. For more information, see Using S3 Object Lock retention
 	// with S3 Batch Operations
@@ -741,6 +737,10 @@ type S3SetObjectRetentionOperation struct {
 	//
 	// This member is required.
 	Retention *S3Retention
+
+	// Indicates if the action should be applied to objects in the Batch Operations job
+	// even if they have Object Lock  GOVERNANCE type in place.
+	BypassGovernanceRetention *bool
 }
 
 // Contains the configuration parameters for a Set Object Tagging operation. S3
@@ -760,12 +760,12 @@ type S3Tag struct {
 	//
 	//
 	// This member is required.
-	Value *string
+	Key *string
 
 	//
 	//
 	// This member is required.
-	Key *string
+	Value *string
 }
 
 //
@@ -788,12 +788,12 @@ type Transition struct {
 	// value must be in ISO 8601 format. The time is always midnight UTC.
 	Date *time.Time
 
-	// The storage class to which you want the object to transition.
-	StorageClass TransitionStorageClass
-
 	// Indicates the number of days after creation when objects are transitioned to the
 	// specified storage class. The value must be a positive integer.
 	Days *int32
+
+	// The storage class to which you want the object to transition.
+	StorageClass TransitionStorageClass
 }
 
 // The virtual private cloud (VPC) configuration for an access point.

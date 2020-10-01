@@ -69,33 +69,6 @@ type ListPackageVersionDependenciesInput struct {
 	// This member is required.
 	Domain *string
 
-	// The name of the package versions' package.
-	//
-	// This member is required.
-	Package *string
-
-	// A string that contains the package version (for example, 3.5.2).
-	//
-	// This member is required.
-	PackageVersion *string
-
-	// The namespace of the package. The package component that specifies its namespace
-	// depends on its type. For example:
-	//
-	//     * The namespace of a Maven package is its
-	// groupId.
-	//
-	//     * The namespace of an npm package is its scope.
-	//
-	//     * A Python
-	// package does not contain a corresponding component, so Python packages do not
-	// have a namespace.
-	Namespace *string
-
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string
-
 	// The format of the package with the requested dependencies. The valid package
 	// types are:
 	//
@@ -110,6 +83,16 @@ type ListPackageVersionDependenciesInput struct {
 	// This member is required.
 	Format types.PackageFormat
 
+	// The name of the package versions' package.
+	//
+	// This member is required.
+	Package *string
+
+	// A string that contains the package version (for example, 3.5.2).
+	//
+	// This member is required.
+	PackageVersion *string
+
 	// The name of the repository that contains the requested package version.
 	//
 	// This member is required.
@@ -118,9 +101,6 @@ type ListPackageVersionDependenciesInput struct {
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
-}
-
-type ListPackageVersionDependenciesOutput struct {
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
@@ -135,6 +115,18 @@ type ListPackageVersionDependenciesOutput struct {
 	// have a namespace.
 	Namespace *string
 
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string
+}
+
+type ListPackageVersionDependenciesOutput struct {
+
+	// The returned list of PackageDependency
+	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
+	// objects.
+	Dependencies []*types.PackageDependency
+
 	// A format that specifies the type of the package that contains the returned
 	// dependencies. The valid values are:
 	//
@@ -145,14 +137,22 @@ type ListPackageVersionDependenciesOutput struct {
 	//     * maven
 	Format types.PackageFormat
 
+	// The namespace of the package. The package component that specifies its namespace
+	// depends on its type. For example:
+	//
+	//     * The namespace of a Maven package is its
+	// groupId.
+	//
+	//     * The namespace of an npm package is its scope.
+	//
+	//     * A Python
+	// package does not contain a corresponding component, so Python packages do not
+	// have a namespace.
+	Namespace *string
+
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
-
-	// The returned list of PackageDependency
-	// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
-	// objects.
-	Dependencies []*types.PackageDependency
 
 	// The name of the package that contains the returned package versions
 	// dependencies.

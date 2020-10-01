@@ -73,8 +73,17 @@ type UpdateConfigurationInput struct {
 
 type UpdateConfigurationOutput struct {
 
+	// Required. The Amazon Resource Name (ARN) of the configuration.
+	Arn *string
+
 	// Required. The date and time of the configuration.
 	Created *time.Time
+
+	// Required. The unique ID that Amazon MQ generates for the configuration.
+	Id *string
+
+	// The latest revision of the configuration.
+	LatestRevision *types.ConfigurationRevision
 
 	// Required. The name of the configuration. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
@@ -84,15 +93,6 @@ type UpdateConfigurationOutput struct {
 	// The list of the first 20 warnings about the configuration XML elements or
 	// attributes that were sanitized.
 	Warnings []*types.SanitizationWarning
-
-	// Required. The Amazon Resource Name (ARN) of the configuration.
-	Arn *string
-
-	// Required. The unique ID that Amazon MQ generates for the configuration.
-	Id *string
-
-	// The latest revision of the configuration.
-	LatestRevision *types.ConfigurationRevision
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

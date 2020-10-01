@@ -58,18 +58,18 @@ func (c *Client) AcceptReservedNodeExchange(ctx context.Context, params *AcceptR
 
 type AcceptReservedNodeExchangeInput struct {
 
+	// A string representing the node identifier of the DC1 Reserved Node to be
+	// exchanged.
+	//
+	// This member is required.
+	ReservedNodeId *string
+
 	// The unique identifier of the DC2 Reserved Node offering to be used for the
 	// exchange. You can obtain the value for the parameter by calling
 	// GetReservedNodeExchangeOfferings ()
 	//
 	// This member is required.
 	TargetReservedNodeOfferingId *string
-
-	// A string representing the node identifier of the DC1 Reserved Node to be
-	// exchanged.
-	//
-	// This member is required.
-	ReservedNodeId *string
 }
 
 type AcceptReservedNodeExchangeOutput struct {

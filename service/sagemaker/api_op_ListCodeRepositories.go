@@ -57,47 +57,42 @@ func (c *Client) ListCodeRepositories(ctx context.Context, params *ListCodeRepos
 
 type ListCodeRepositoriesInput struct {
 
-	// A filter that returns only Git repositories that were last modified after the
+	// A filter that returns only Git repositories that were created after the
 	// specified time.
-	LastModifiedTimeAfter *time.Time
-
-	// A string in the Git repositories name. This filter returns only repositories
-	// whose name contains the specified string.
-	NameContains *string
-
-	// A filter that returns only Git repositories that were last modified before the
-	// specified time.
-	LastModifiedTimeBefore *time.Time
+	CreationTimeAfter *time.Time
 
 	// A filter that returns only Git repositories that were created before the
 	// specified time.
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only Git repositories that were created after the
+	// A filter that returns only Git repositories that were last modified after the
 	// specified time.
-	CreationTimeAfter *time.Time
+	LastModifiedTimeAfter *time.Time
 
-	// The sort order for results. The default is Ascending.
-	SortOrder types.CodeRepositorySortOrder
-
-	// If the result of a ListCodeRepositoriesOutput request was truncated, the
-	// response includes a NextToken. To get the next set of Git repositories, use the
-	// token in the next request.
-	NextToken *string
+	// A filter that returns only Git repositories that were last modified before the
+	// specified time.
+	LastModifiedTimeBefore *time.Time
 
 	// The maximum number of Git repositories to return in the response.
 	MaxResults *int32
 
-	// The field to sort results by. The default is Name.
-	SortBy types.CodeRepositorySortBy
-}
-
-type ListCodeRepositoriesOutput struct {
+	// A string in the Git repositories name. This filter returns only repositories
+	// whose name contains the specified string.
+	NameContains *string
 
 	// If the result of a ListCodeRepositoriesOutput request was truncated, the
 	// response includes a NextToken. To get the next set of Git repositories, use the
 	// token in the next request.
 	NextToken *string
+
+	// The field to sort results by. The default is Name.
+	SortBy types.CodeRepositorySortBy
+
+	// The sort order for results. The default is Ascending.
+	SortOrder types.CodeRepositorySortOrder
+}
+
+type ListCodeRepositoriesOutput struct {
 
 	// Gets a list of summaries of the Git repositories. Each summary specifies the
 	// following values for the repository:
@@ -118,6 +113,11 @@ type ListCodeRepositoriesOutput struct {
 	//
 	// This member is required.
 	CodeRepositorySummaryList []*types.CodeRepositorySummary
+
+	// If the result of a ListCodeRepositoriesOutput request was truncated, the
+	// response includes a NextToken. To get the next set of Git repositories, use the
+	// token in the next request.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

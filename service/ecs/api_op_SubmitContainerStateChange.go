@@ -57,30 +57,30 @@ func (c *Client) SubmitContainerStateChange(ctx context.Context, params *SubmitC
 
 type SubmitContainerStateChangeInput struct {
 
-	// The network bindings of the container.
-	NetworkBindings []*types.NetworkBinding
+	// The short name or full ARN of the cluster that hosts the container.
+	Cluster *string
 
 	// The name of the container.
 	ContainerName *string
 
+	// The exit code returned for the state change request.
+	ExitCode *int32
+
+	// The network bindings of the container.
+	NetworkBindings []*types.NetworkBinding
+
 	// The reason for the state change request.
 	Reason *string
 
-	// The task ID or full Amazon Resource Name (ARN) of the task that hosts the
-	// container.
-	Task *string
-
-	// The short name or full ARN of the cluster that hosts the container.
-	Cluster *string
-
-	// The exit code returned for the state change request.
-	ExitCode *int32
+	// The ID of the Docker container.
+	RuntimeId *string
 
 	// The status of the state change request.
 	Status *string
 
-	// The ID of the Docker container.
-	RuntimeId *string
+	// The task ID or full Amazon Resource Name (ARN) of the task that hosts the
+	// container.
+	Task *string
 }
 
 type SubmitContainerStateChangeOutput struct {

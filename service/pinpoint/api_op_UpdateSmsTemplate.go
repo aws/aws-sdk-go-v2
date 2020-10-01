@@ -58,14 +58,11 @@ func (c *Client) UpdateSmsTemplate(ctx context.Context, params *UpdateSmsTemplat
 
 type UpdateSmsTemplateInput struct {
 
-	// Specifies whether to save the updates as a new version of the message template.
-	// Valid values are: true, save the updates as a new version; and, false, save the
-	// updates to (overwrite) the latest existing version of the template. If you don't
-	// specify a value for this parameter, Amazon Pinpoint saves the updates to
-	// (overwrites) the latest existing version of the template. If you specify a value
-	// of true for this parameter, don't specify a value for the version parameter.
-	// Otherwise, an error will occur.
-	CreateNewVersion *bool
+	// Specifies the content and settings for a message template that can be used in
+	// text messages that are sent through the SMS channel.
+	//
+	// This member is required.
+	SMSTemplateRequest *types.SMSTemplateRequest
 
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
@@ -74,6 +71,15 @@ type UpdateSmsTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	// Specifies whether to save the updates as a new version of the message template.
+	// Valid values are: true, save the updates as a new version; and, false, save the
+	// updates to (overwrite) the latest existing version of the template. If you don't
+	// specify a value for this parameter, Amazon Pinpoint saves the updates to
+	// (overwrites) the latest existing version of the template. If you specify a value
+	// of true for this parameter, don't specify a value for the version parameter.
+	// Otherwise, an error will occur.
+	CreateNewVersion *bool
 
 	// The unique identifier for the version of the message template to update,
 	// retrieve information about, or delete. To retrieve identifiers and other
@@ -95,12 +101,6 @@ type UpdateSmsTemplateInput struct {
 	//     * For a delete operation, deletes the template, including all
 	// versions of the template.
 	Version *string
-
-	// Specifies the content and settings for a message template that can be used in
-	// text messages that are sent through the SMS channel.
-	//
-	// This member is required.
-	SMSTemplateRequest *types.SMSTemplateRequest
 }
 
 type UpdateSmsTemplateOutput struct {

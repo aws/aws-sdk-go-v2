@@ -87,9 +87,15 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html).
 type SendEmailInput struct {
 
-	// The reply-to email address(es) for the message. If the recipient replies to the
-	// message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string
+	// The destination for this email, composed of To:, CC:, and BCC: fields.
+	//
+	// This member is required.
+	Destination *types.Destination
+
+	// The message to be sent.
+	//
+	// This member is required.
+	Message *types.Message
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
@@ -117,25 +123,12 @@ type SendEmailInput struct {
 	// This member is required.
 	Source *string
 
-	// This parameter is used only for sending authorization. It is the ARN of the
-	// identity that is associated with the sending authorization policy that permits
-	// you to send for the email address specified in the Source parameter. For
-	// example, if the owner of example.com (which has ARN
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
-	// that authorizes you to send from user@example.com, then you would specify the
-	// SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// Source to be user@example.com. For more information about sending authorization,
-	// see the Amazon SES Developer Guide
-	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
-	SourceArn *string
-
 	// The name of the configuration set to use when you send an email using SendEmail.
 	ConfigurationSetName *string
 
-	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using SendEmail. Tags correspond to characteristics of the email that you
-	// define, so that you can publish email sending events.
-	Tags []*types.MessageTag
+	// The reply-to email address(es) for the message. If the recipient replies to the
+	// message, each reply-to address will receive the reply.
+	ReplyToAddresses []*string
 
 	// The email address that bounces and complaints will be forwarded to when feedback
 	// forwarding is enabled. If the message cannot be delivered to the recipient, then
@@ -145,11 +138,6 @@ type SendEmailInput struct {
 	// individually verified with Amazon SES, or from a domain that has been verified
 	// with Amazon SES.
 	ReturnPath *string
-
-	// The message to be sent.
-	//
-	// This member is required.
-	Message *types.Message
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -163,10 +151,22 @@ type SendEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	ReturnPathArn *string
 
-	// The destination for this email, composed of To:, CC:, and BCC: fields.
-	//
-	// This member is required.
-	Destination *types.Destination
+	// This parameter is used only for sending authorization. It is the ARN of the
+	// identity that is associated with the sending authorization policy that permits
+	// you to send for the email address specified in the Source parameter. For
+	// example, if the owner of example.com (which has ARN
+	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
+	// that authorizes you to send from user@example.com, then you would specify the
+	// SourceArn to be arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
+	// Source to be user@example.com. For more information about sending authorization,
+	// see the Amazon SES Developer Guide
+	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
+	SourceArn *string
+
+	// A list of tags, in the form of name/value pairs, to apply to an email that you
+	// send using SendEmail. Tags correspond to characteristics of the email that you
+	// define, so that you can publish email sending events.
+	Tags []*types.MessageTag
 }
 
 // Represents a unique message ID.

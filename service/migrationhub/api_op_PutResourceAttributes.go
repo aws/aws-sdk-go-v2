@@ -75,16 +75,16 @@ func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceA
 
 type PutResourceAttributesInput struct {
 
-	// The name of the ProgressUpdateStream.
-	//
-	// This member is required.
-	ProgressUpdateStream *string
-
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
 	//
 	// This member is required.
 	MigrationTaskName *string
+
+	// The name of the ProgressUpdateStream.
+	//
+	// This member is required.
+	ProgressUpdateStream *string
 
 	// Information about the resource that is being migrated. This data will be used to
 	// map the task to a resource in the Application Discovery Service repository.

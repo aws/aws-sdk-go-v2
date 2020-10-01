@@ -99,6 +99,26 @@ func (c *Client) PutRule(ctx context.Context, params *PutRuleInput, optFns ...fu
 
 type PutRuleInput struct {
 
+	// The name of the rule that you are creating or updating.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the rule.
+	Description *string
+
+	// The event bus to associate with this rule. If you omit this, the default event
+	// bus is used.
+	EventBusName *string
+
+	// The event pattern. For more information, see Events and Event Patterns
+	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
+	// in the Amazon EventBridge User Guide.
+	EventPattern *string
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+	RoleArn *string
+
 	// The scheduling expression. For example, "cron(0 20 * * ? *)" or "rate(5
 	// minutes)".
 	ScheduleExpression *string
@@ -106,28 +126,8 @@ type PutRuleInput struct {
 	// Indicates whether the rule is enabled or disabled.
 	State types.RuleState
 
-	// A description of the rule.
-	Description *string
-
-	// The event pattern. For more information, see Events and Event Patterns
-	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
-	EventPattern *string
-
-	// The event bus to associate with this rule. If you omit this, the default event
-	// bus is used.
-	EventBusName *string
-
 	// The list of key-value pairs to associate with the rule.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the IAM role associated with the rule.
-	RoleArn *string
-
-	// The name of the rule that you are creating or updating.
-	//
-	// This member is required.
-	Name *string
 }
 
 type PutRuleOutput struct {

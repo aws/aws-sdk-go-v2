@@ -73,11 +73,11 @@ type SetUserPoolMfaConfigInput struct {
 	// MFA will be required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
-	// The software token MFA configuration.
-	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
-
 	// The SMS text message MFA configuration.
 	SmsMfaConfiguration *types.SmsMfaConfigType
+
+	// The software token MFA configuration.
+	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 }
 
 type SetUserPoolMfaConfigOutput struct {
@@ -93,11 +93,11 @@ type SetUserPoolMfaConfigOutput struct {
 	// MFA will be required only for individual users who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
-	// The software token MFA configuration.
-	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
-
 	// The SMS text message MFA configuration.
 	SmsMfaConfiguration *types.SmsMfaConfigType
+
+	// The software token MFA configuration.
+	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

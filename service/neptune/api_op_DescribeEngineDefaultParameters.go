@@ -58,13 +58,13 @@ func (c *Client) DescribeEngineDefaultParameters(ctx context.Context, params *De
 
 type DescribeEngineDefaultParametersInput struct {
 
-	// Not currently supported.
-	Filters []*types.Filter
-
 	// The name of the DB parameter group family.
 	//
 	// This member is required.
 	DBParameterGroupFamily *string
+
+	// Not currently supported.
+	Filters []*types.Filter
 
 	// An optional pagination token provided by a previous
 	// DescribeEngineDefaultParameters request. If this parameter is specified, the

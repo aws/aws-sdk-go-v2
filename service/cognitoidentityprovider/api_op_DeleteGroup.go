@@ -57,15 +57,15 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The user pool ID for the user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// The name of the group.
 	//
 	// This member is required.
 	GroupName *string
+
+	// The user pool ID for the user pool.
+	//
+	// This member is required.
+	UserPoolId *string
 }
 
 type DeleteGroupOutput struct {

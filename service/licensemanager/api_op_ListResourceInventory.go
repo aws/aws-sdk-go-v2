@@ -57,12 +57,6 @@ func (c *Client) ListResourceInventory(ctx context.Context, params *ListResource
 
 type ListResourceInventoryInput struct {
 
-	// Maximum number of results to return in a single call.
-	MaxResults *int32
-
-	// Token for the next set of results.
-	NextToken *string
-
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
 	//
@@ -83,15 +77,21 @@ type ListResourceInventoryInput struct {
 	//     * resource_id -
 	// The ID of the resource. Logical operators are EQUALS | NOT_EQUALS.
 	Filters []*types.InventoryFilter
+
+	// Maximum number of results to return in a single call.
+	MaxResults *int32
+
+	// Token for the next set of results.
+	NextToken *string
 }
 
 type ListResourceInventoryOutput struct {
 
-	// Information about the resources.
-	ResourceInventoryList []*types.ResourceInventory
-
 	// Token for the next set of results.
 	NextToken *string
+
+	// Information about the resources.
+	ResourceInventoryList []*types.ResourceInventory
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

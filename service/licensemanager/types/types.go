@@ -16,11 +16,11 @@ type AutomatedDiscoveryInformation struct {
 // Details about license consumption.
 type ConsumedLicenseSummary struct {
 
-	// Resource type of the resource consuming a license.
-	ResourceType ResourceType
-
 	// Number of licenses consumed by the resource.
 	ConsumedLicenses *int64
+
+	// Resource type of the resource consuming a license.
+	ResourceType ResourceType
 }
 
 // A filter name and value pair that is used to return more specific results from a
@@ -38,18 +38,18 @@ type Filter struct {
 // An inventory filter.
 type InventoryFilter struct {
 
-	// Value of the filter.
-	Value *string
+	// Condition of the filter.
+	//
+	// This member is required.
+	Condition InventoryFilterCondition
 
 	// Name of the filter.
 	//
 	// This member is required.
 	Name *string
 
-	// Condition of the filter.
-	//
-	// This member is required.
-	Condition InventoryFilterCondition
+	// Value of the filter.
+	Value *string
 }
 
 // A license configuration is an abstraction of a customer license agreement that
@@ -60,8 +60,14 @@ type InventoryFilter struct {
 // the number of licenses purchased and used.
 type LicenseConfiguration struct {
 
-	// Number of available licenses as a hard limit.
-	LicenseCountHardLimit *bool
+	// Automated discovery information.
+	AutomatedDiscoveryInformation *AutomatedDiscoveryInformation
+
+	// Summaries for licenses consumed by various resources.
+	ConsumedLicenseSummaryList []*ConsumedLicenseSummary
+
+	// Number of licenses consumed.
+	ConsumedLicenses *int64
 
 	// Description of the license configuration.
 	Description *string
@@ -69,38 +75,32 @@ type LicenseConfiguration struct {
 	// Amazon Resource Name (ARN) of the license configuration.
 	LicenseConfigurationArn *string
 
-	// Number of licenses consumed.
-	ConsumedLicenses *int64
-
 	// Unique ID of the license configuration.
 	LicenseConfigurationId *string
 
-	// Summaries for licenses consumed by various resources.
-	ConsumedLicenseSummaryList []*ConsumedLicenseSummary
+	// Number of licenses managed by the license configuration.
+	LicenseCount *int64
+
+	// Number of available licenses as a hard limit.
+	LicenseCountHardLimit *bool
 
 	// Dimension to use to track the license inventory.
 	LicenseCountingType LicenseCountingType
+
+	// License rules.
+	LicenseRules []*string
+
+	// Summaries for managed resources.
+	ManagedResourceSummaryList []*ManagedResourceSummary
+
+	// Name of the license configuration.
+	Name *string
 
 	// Account ID of the license configuration's owner.
 	OwnerAccountId *string
 
 	// Product information.
 	ProductInformationList []*ProductInformation
-
-	// Name of the license configuration.
-	Name *string
-
-	// Summaries for managed resources.
-	ManagedResourceSummaryList []*ManagedResourceSummary
-
-	// License rules.
-	LicenseRules []*string
-
-	// Number of licenses managed by the license configuration.
-	LicenseCount *int64
-
-	// Automated discovery information.
-	AutomatedDiscoveryInformation *AutomatedDiscoveryInformation
 
 	// Status of the license configuration.
 	Status *string
@@ -109,17 +109,17 @@ type LicenseConfiguration struct {
 // Describes an association with a license configuration.
 type LicenseConfigurationAssociation struct {
 
-	// ID of the AWS account that owns the resource consuming licenses.
-	ResourceOwnerId *string
+	// Time when the license configuration was associated with the resource.
+	AssociationTime *time.Time
 
 	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
+	// ID of the AWS account that owns the resource consuming licenses.
+	ResourceOwnerId *string
+
 	// Type of server resource.
 	ResourceType ResourceType
-
-	// Time when the license configuration was associated with the resource.
-	AssociationTime *time.Time
 }
 
 // Details about the usage of a resource associated with a license configuration.
@@ -131,24 +131,21 @@ type LicenseConfigurationUsage struct {
 	// Number of licenses consumed by the resource.
 	ConsumedLicenses *int64
 
-	// ID of the account that owns the resource.
-	ResourceOwnerId *string
-
 	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
 
-	// Type of resource.
-	ResourceType ResourceType
+	// ID of the account that owns the resource.
+	ResourceOwnerId *string
 
 	// Status of the resource.
 	ResourceStatus *string
+
+	// Type of resource.
+	ResourceType ResourceType
 }
 
 // Describes the failure of a license operation.
 type LicenseOperationFailure struct {
-
-	// Name of the operation.
-	OperationName *string
 
 	// Error message.
 	ErrorMessage *string
@@ -156,20 +153,23 @@ type LicenseOperationFailure struct {
 	// Failure time.
 	FailureTime *time.Time
 
-	// ID of the AWS account that owns the resource.
-	ResourceOwnerId *string
+	// Reserved.
+	MetadataList []*Metadata
 
-	// Amazon Resource Name (ARN) of the resource.
-	ResourceArn *string
+	// Name of the operation.
+	OperationName *string
 
 	// The requester is "License Manager Automated Discovery".
 	OperationRequestedBy *string
 
+	// Amazon Resource Name (ARN) of the resource.
+	ResourceArn *string
+
+	// ID of the AWS account that owns the resource.
+	ResourceOwnerId *string
+
 	// Resource type.
 	ResourceType ResourceType
-
-	// Reserved.
-	MetadataList []*Metadata
 }
 
 // Details for associating a license configuration with a resource.
@@ -195,10 +195,10 @@ type ManagedResourceSummary struct {
 type Metadata struct {
 
 	// Reserved.
-	Value *string
+	Name *string
 
 	// Reserved.
-	Name *string
+	Value *string
 }
 
 // Configuration information for AWS Organizations.
@@ -253,22 +253,25 @@ type ProductInformationFilter struct {
 	// This member is required.
 	ProductInformationFilterComparator *string
 
-	// Filter value.
-	//
-	// This member is required.
-	ProductInformationFilterValue []*string
-
 	// Filter name.
 	//
 	// This member is required.
 	ProductInformationFilterName *string
+
+	// Filter value.
+	//
+	// This member is required.
+	ProductInformationFilterValue []*string
 }
 
 // Details about a resource.
 type ResourceInventory struct {
 
-	// ID of the account that owns the resource.
-	ResourceOwningAccountId *string
+	// Platform of the resource.
+	Platform *string
+
+	// Platform version of the resource in the inventory.
+	PlatformVersion *string
 
 	// Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
@@ -276,14 +279,11 @@ type ResourceInventory struct {
 	// ID of the resource.
 	ResourceId *string
 
+	// ID of the account that owns the resource.
+	ResourceOwningAccountId *string
+
 	// Type of resource.
 	ResourceType ResourceType
-
-	// Platform version of the resource in the inventory.
-	PlatformVersion *string
-
-	// Platform of the resource.
-	Platform *string
 }
 
 // Details about a tag for a license configuration.

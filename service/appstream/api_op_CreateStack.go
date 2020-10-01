@@ -58,41 +58,40 @@ func (c *Client) CreateStack(ctx context.Context, params *CreateStackInput, optF
 
 type CreateStackInput struct {
 
-	// The URL that users are redirected to after their streaming session ends.
-	RedirectURL *string
-
-	// The actions that are enabled or disabled for users during their streaming
-	// sessions. By default, these actions are enabled.
-	UserSettings []*types.UserSetting
-
-	// The stack name to display.
-	DisplayName *string
+	// The name of the stack.
+	//
+	// This member is required.
+	Name *string
 
 	// The list of interface VPC endpoint (interface endpoint) objects. Users of the
 	// stack can connect to AppStream 2.0 only through the specified endpoints.
 	AccessEndpoints []*types.AccessEndpoint
+
+	// The persistent application settings for users of a stack. When these settings
+	// are enabled, changes that users make to applications and Windows settings are
+	// automatically saved after each session and applied to the next session.
+	ApplicationSettings *types.ApplicationSettings
+
+	// The description to display.
+	Description *string
+
+	// The stack name to display.
+	DisplayName *string
 
 	// The domains where AppStream 2.0 streaming sessions can be embedded in an iframe.
 	// You must approve the domains that you want to host embedded AppStream 2.0
 	// streaming sessions.
 	EmbedHostDomains []*string
 
-	// The name of the stack.
-	//
-	// This member is required.
-	Name *string
-
 	// The URL that users are redirected to after they click the Send Feedback link. If
 	// no URL is specified, no Send Feedback link is displayed.
 	FeedbackURL *string
 
+	// The URL that users are redirected to after their streaming session ends.
+	RedirectURL *string
+
 	// The storage connectors to enable.
 	StorageConnectors []*types.StorageConnector
-
-	// The persistent application settings for users of a stack. When these settings
-	// are enabled, changes that users make to applications and Windows settings are
-	// automatically saved after each session and applied to the next session.
-	ApplicationSettings *types.ApplicationSettings
 
 	// The tags to associate with the stack. A tag is a key-value pair, and the value
 	// is optional. For example, Environment=Test. If you do not specify a value,
@@ -104,8 +103,9 @@ type CreateStackInput struct {
 	// Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 	Tags map[string]*string
 
-	// The description to display.
-	Description *string
+	// The actions that are enabled or disabled for users during their streaming
+	// sessions. By default, these actions are enabled.
+	UserSettings []*types.UserSetting
 }
 
 type CreateStackOutput struct {

@@ -67,32 +67,41 @@ func (c *Client) CreateTrafficMirrorSession(ctx context.Context, params *CreateT
 
 type CreateTrafficMirrorSessionInput struct {
 
-	// The description of the Traffic Mirror session.
-	Description *string
+	// The ID of the source network interface.
+	//
+	// This member is required.
+	NetworkInterfaceId *string
+
+	// The session number determines the order in which sessions are evaluated when an
+	// interface is used by multiple sessions. The first session with a matching filter
+	// is the one that mirrors the packets. Valid values are 1-32766.
+	//
+	// This member is required.
+	SessionNumber *int32
+
+	// The ID of the Traffic Mirror filter.
+	//
+	// This member is required.
+	TrafficMirrorFilterId *string
+
+	// The ID of the Traffic Mirror target.
+	//
+	// This member is required.
+	TrafficMirrorTargetId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
-	// The ID of the source network interface.
-	//
-	// This member is required.
-	NetworkInterfaceId *string
-
-	// The tags to assign to a Traffic Mirror session.
-	TagSpecifications []*types.TagSpecification
+	// The description of the Traffic Mirror session.
+	Description *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The VXLAN ID for the Traffic Mirror session. For more information about the
-	// VXLAN protocol, see RFC 7348 (https://tools.ietf.org/html/rfc7348). If you do
-	// not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
-	VirtualNetworkId *int32
 
 	// The number of bytes in each packet to mirror. These are bytes after the VXLAN
 	// header. Do not specify this parameter when you want to mirror the entire packet.
@@ -103,22 +112,13 @@ type CreateTrafficMirrorSessionInput struct {
 	// number of bytes in each packet to mirror.
 	PacketLength *int32
 
-	// The session number determines the order in which sessions are evaluated when an
-	// interface is used by multiple sessions. The first session with a matching filter
-	// is the one that mirrors the packets. Valid values are 1-32766.
-	//
-	// This member is required.
-	SessionNumber *int32
+	// The tags to assign to a Traffic Mirror session.
+	TagSpecifications []*types.TagSpecification
 
-	// The ID of the Traffic Mirror target.
-	//
-	// This member is required.
-	TrafficMirrorTargetId *string
-
-	// The ID of the Traffic Mirror filter.
-	//
-	// This member is required.
-	TrafficMirrorFilterId *string
+	// The VXLAN ID for the Traffic Mirror session. For more information about the
+	// VXLAN protocol, see RFC 7348 (https://tools.ietf.org/html/rfc7348). If you do
+	// not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
+	VirtualNetworkId *int32
 }
 
 type CreateTrafficMirrorSessionOutput struct {

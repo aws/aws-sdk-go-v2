@@ -62,26 +62,26 @@ func (c *Client) ModifyVpnTunnelOptions(ctx context.Context, params *ModifyVpnTu
 
 type ModifyVpnTunnelOptionsInput struct {
 
+	// The tunnel options to modify.
+	//
+	// This member is required.
+	TunnelOptions *types.ModifyVpnTunnelOptionsSpecification
+
 	// The ID of the AWS Site-to-Site VPN connection.
 	//
 	// This member is required.
 	VpnConnectionId *string
 
-	// The tunnel options to modify.
+	// The external IP address of the VPN tunnel.
 	//
 	// This member is required.
-	TunnelOptions *types.ModifyVpnTunnelOptionsSpecification
+	VpnTunnelOutsideIpAddress *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The external IP address of the VPN tunnel.
-	//
-	// This member is required.
-	VpnTunnelOutsideIpAddress *string
 }
 
 type ModifyVpnTunnelOptionsOutput struct {

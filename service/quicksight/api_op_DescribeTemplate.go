@@ -62,6 +62,11 @@ type DescribeTemplateInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// The ID for the template.
+	//
+	// This member is required.
+	TemplateId *string
+
 	// The alias of the template that you want to describe. If you name a specific
 	// alias, you describe the version that the alias points to. You can specify the
 	// latest version of the template by providing the keyword $LATEST in the AliasName
@@ -71,20 +76,15 @@ type DescribeTemplateInput struct {
 	// (Optional) The number for the version to describe. If a VersionNumber parameter
 	// value isn't provided, the latest version of the template is described.
 	VersionNumber *int64
-
-	// The ID for the template.
-	//
-	// This member is required.
-	TemplateId *string
 }
 
 type DescribeTemplateOutput struct {
 
-	// The template structure for the object you want to describe.
-	Template *types.Template
-
 	// The AWS request ID for this operation.
 	RequestId *string
+
+	// The template structure for the object you want to describe.
+	Template *types.Template
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

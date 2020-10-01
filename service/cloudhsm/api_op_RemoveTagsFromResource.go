@@ -68,16 +68,16 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 
 type RemoveTagsFromResourceInput struct {
 
+	// The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// The tag key or keys to remove. Specify only the tag key to remove (not the
 	// value). To overwrite the value for an existing tag, use AddTagsToResource ().
 	//
 	// This member is required.
 	TagKeyList []*string
-
-	// The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type RemoveTagsFromResourceOutput struct {

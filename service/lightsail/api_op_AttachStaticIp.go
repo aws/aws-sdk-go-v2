@@ -57,15 +57,15 @@ func (c *Client) AttachStaticIp(ctx context.Context, params *AttachStaticIpInput
 
 type AttachStaticIpInput struct {
 
-	// The name of the static IP.
-	//
-	// This member is required.
-	StaticIpName *string
-
 	// The instance name to which you want to attach the static IP address.
 	//
 	// This member is required.
 	InstanceName *string
+
+	// The name of the static IP.
+	//
+	// This member is required.
+	StaticIpName *string
 }
 
 type AttachStaticIpOutput struct {

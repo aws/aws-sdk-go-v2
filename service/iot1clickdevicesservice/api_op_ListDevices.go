@@ -56,24 +56,24 @@ func (c *Client) ListDevices(ctx context.Context, params *ListDevicesInput, optF
 
 type ListDevicesInput struct {
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// The type of the device, such as "button".
 	DeviceType *string
 
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
 	MaxResults *int32
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListDevicesOutput struct {
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// A list of devices.
 	Devices []*types.DeviceDescription
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

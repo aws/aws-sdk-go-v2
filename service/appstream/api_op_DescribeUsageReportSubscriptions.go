@@ -56,22 +56,22 @@ func (c *Client) DescribeUsageReportSubscriptions(ctx context.Context, params *D
 
 type DescribeUsageReportSubscriptionsInput struct {
 
+	// The maximum size of each page of results.
+	MaxResults *int32
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
-
-	// The maximum size of each page of results.
-	MaxResults *int32
 }
 
 type DescribeUsageReportSubscriptionsOutput struct {
 
-	// Information about the usage report subscription.
-	UsageReportSubscriptions []*types.UsageReportSubscription
-
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
+
+	// Information about the usage report subscription.
+	UsageReportSubscriptions []*types.UsageReportSubscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

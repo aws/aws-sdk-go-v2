@@ -57,29 +57,30 @@ func (c *Client) CreateDocumentationVersion(ctx context.Context, params *CreateD
 
 // Creates a new documentation version of a given API.
 type CreateDocumentationVersionInput struct {
-	Title *string
-
-	Name *string
-
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
-
-	TemplateSkipList []*string
-
-	Template *bool
-
-	// The stage name to be associated with the new documentation snapshot.
-	StageName *string
 
 	// [Required] The version identifier of the new snapshot.
 	//
 	// This member is required.
 	DocumentationVersion *string
 
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
+
 	// A description about the new documentation snapshot.
 	Description *string
+
+	Name *string
+
+	// The stage name to be associated with the new documentation snapshot.
+	StageName *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -89,11 +90,11 @@ type CreateDocumentationVersionInput struct {
 // DocumentationPart (), DocumentationVersions ()
 type CreateDocumentationVersionOutput struct {
 
-	// The description of the API documentation snapshot.
-	Description *string
-
 	// The date when the API documentation snapshot is created.
 	CreatedDate *time.Time
+
+	// The description of the API documentation snapshot.
+	Description *string
 
 	// The version identifier of the API documentation snapshot.
 	Version *string

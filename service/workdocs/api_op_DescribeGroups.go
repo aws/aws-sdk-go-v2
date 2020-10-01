@@ -63,29 +63,29 @@ type DescribeGroupsInput struct {
 	// This member is required.
 	SearchQuery *string
 
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
+
 	// The maximum number of items to return with this call.
 	Limit *int32
-
-	// The ID of the organization.
-	OrganizationId *string
 
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
+	// The ID of the organization.
+	OrganizationId *string
 }
 
 type DescribeGroupsOutput struct {
 
+	// The list of groups.
+	Groups []*types.GroupMetadata
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
-
-	// The list of groups.
-	Groups []*types.GroupMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,9 +62,12 @@ func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns
 
 type StartQueryInput struct {
 
-	// The log group on which to perform the query. A StartQuery operation must include
-	// a logGroupNames or a logGroupName parameter, but not both.
-	LogGroupName *string
+	// The end of the time range to query. The range is inclusive, so the specified end
+	// time is included in the query. Specified as epoch time, the number of seconds
+	// since January 1, 1970, 00:00:00 UTC.
+	//
+	// This member is required.
+	EndTime *int64
 
 	// The query string to use. For more information, see CloudWatch Logs Insights
 	// Query Syntax
@@ -72,13 +75,6 @@ type StartQueryInput struct {
 	//
 	// This member is required.
 	QueryString *string
-
-	// The end of the time range to query. The range is inclusive, so the specified end
-	// time is included in the query. Specified as epoch time, the number of seconds
-	// since January 1, 1970, 00:00:00 UTC.
-	//
-	// This member is required.
-	EndTime *int64
 
 	// The beginning of the time range to query. The range is inclusive, so the
 	// specified start time is included in the query. Specified as epoch time, the
@@ -91,6 +87,10 @@ type StartQueryInput struct {
 	// uses the fields command, only the specified fields and their values are
 	// returned. The default is 1000.
 	Limit *int32
+
+	// The log group on which to perform the query. A StartQuery operation must include
+	// a logGroupNames or a logGroupName parameter, but not both.
+	LogGroupName *string
 
 	// The list of log groups to be queried. You can include up to 20 log groups. A
 	// StartQuery operation must include a logGroupNames or a logGroupName parameter,

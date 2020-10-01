@@ -62,12 +62,12 @@ type UpdateMeshInput struct {
 	// This member is required.
 	MeshName *string
 
-	// The service mesh specification to apply.
-	Spec *types.MeshSpec
-
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
 	ClientToken *string
+
+	// The service mesh specification to apply.
+	Spec *types.MeshSpec
 }
 
 //

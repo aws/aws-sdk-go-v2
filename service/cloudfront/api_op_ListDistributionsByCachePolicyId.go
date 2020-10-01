@@ -63,6 +63,11 @@ func (c *Client) ListDistributionsByCachePolicyId(ctx context.Context, params *L
 
 type ListDistributionsByCachePolicyIdInput struct {
 
+	// The ID of the cache policy whose associated distribution IDs you want to list.
+	//
+	// This member is required.
+	CachePolicyId *string
+
 	// Use this field when paginating results to indicate where to begin in your list
 	// of distribution IDs. The response includes distribution IDs in the list that
 	// occur after the marker. To get the next page of the list, set this field’s value
@@ -71,11 +76,6 @@ type ListDistributionsByCachePolicyIdInput struct {
 
 	// The maximum number of distribution IDs that you want in the response.
 	MaxItems *string
-
-	// The ID of the cache policy whose associated distribution IDs you want to list.
-	//
-	// This member is required.
-	CachePolicyId *string
 }
 
 type ListDistributionsByCachePolicyIdOutput struct {

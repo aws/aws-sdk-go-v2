@@ -88,16 +88,16 @@ type GetGeoLocationInput struct {
 	//     * SA: South America
 	ContinentCode *string
 
+	// Amazon Route 53 uses the two-letter country codes that are specified in ISO
+	// standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+	CountryCode *string
+
 	// For SubdivisionCode, Amazon Route 53 supports only states of the United States.
 	// For a list of state abbreviations, see Appendix B: Two–Letter State and
 	// Possession Abbreviations (https://pe.usps.com/text/pub28/28apb.htm) on the
 	// United States Postal Service website. If you specify subdivisioncode, you must
 	// also specify US for CountryCode.
 	SubdivisionCode *string
-
-	// Amazon Route 53 uses the two-letter country codes that are specified in ISO
-	// standard 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-	CountryCode *string
 }
 
 // A complex type that contains the response information for the specified

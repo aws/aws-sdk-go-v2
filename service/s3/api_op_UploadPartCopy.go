@@ -130,42 +130,21 @@ func (c *Client) UploadPartCopy(ctx context.Context, params *UploadPartCopyInput
 
 type UploadPartCopyInput struct {
 
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure that the
-	// encryption key was transmitted without error.
-	SSECustomerKeyMD5 *string
-
-	// Upload ID identifying the multipart upload whose part is being copied.
-	//
-	// This member is required.
-	UploadId *string
-
-	// Copies the object if it hasn't been modified since the specified time.
-	CopySourceIfUnmodifiedSince *time.Time
-
-	// Copies the object if its entity tag (ETag) is different than the specified ETag.
-	CopySourceIfNoneMatch *string
-
 	// The bucket name.
 	//
 	// This member is required.
 	Bucket *string
 
-	// Copies the object if its entity tag (ETag) matches the specified tag.
-	CopySourceIfMatch *string
+	// The name of the source bucket and key name of the source object, separated by a
+	// slash (/). Must be URL-encoded.
+	//
+	// This member is required.
+	CopySource *string
 
-	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
-	// Amazon S3 uses this header for a message integrity check to ensure that the
-	// encryption key was transmitted without error.
-	CopySourceSSECustomerKeyMD5 *string
+	// Object key for which the multipart upload was initiated.
+	//
+	// This member is required.
+	Key *string
 
 	// Part number of part being copied. This is a positive integer between 1 and
 	// 10,000.
@@ -173,17 +152,51 @@ type UploadPartCopyInput struct {
 	// This member is required.
 	PartNumber *int32
 
-	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt
-	// the source object. The encryption key provided in this header must be one that
-	// was used when the source object was created.
-	CopySourceSSECustomerKey *string
+	// Upload ID identifying the multipart upload whose part is being copied.
+	//
+	// This member is required.
+	UploadId *string
+
+	// Copies the object if its entity tag (ETag) matches the specified tag.
+	CopySourceIfMatch *string
+
+	// Copies the object if it has been modified since the specified time.
+	CopySourceIfModifiedSince *time.Time
+
+	// Copies the object if its entity tag (ETag) is different than the specified ETag.
+	CopySourceIfNoneMatch *string
+
+	// Copies the object if it hasn't been modified since the specified time.
+	CopySourceIfUnmodifiedSince *time.Time
+
+	// The range of bytes to copy from the source object. The range value must use the
+	// form bytes=first-last, where the first and last are the zero-based byte offsets
+	// to copy. For example, bytes=0-9 indicates that you want to copy the first 10
+	// bytes of the source. You can copy a range only if the source object is greater
+	// than 5 MB.
+	CopySourceRange *string
 
 	// Specifies the algorithm to use when decrypting the source object (for example,
 	// AES256).
 	CopySourceSSECustomerAlgorithm *string
 
-	// Copies the object if it has been modified since the specified time.
-	CopySourceIfModifiedSince *time.Time
+	// Specifies the customer-provided encryption key for Amazon S3 to use to decrypt
+	// the source object. The encryption key provided in this header must be one that
+	// was used when the source object was created.
+	CopySourceSSECustomerKey *string
+
+	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
+	CopySourceSSECustomerKeyMD5 *string
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
 
 	// Specifies the algorithm to use to when encrypting the object (for example,
 	// AES256).
@@ -197,55 +210,42 @@ type UploadPartCopyInput struct {
 	// encryption key specified in the initiate multipart upload request.
 	SSECustomerKey *string
 
-	// The range of bytes to copy from the source object. The range value must use the
-	// form bytes=first-last, where the first and last are the zero-based byte offsets
-	// to copy. For example, bytes=0-9 indicates that you want to copy the first 10
-	// bytes of the source. You can copy a range only if the source object is greater
-	// than 5 MB.
-	CopySourceRange *string
-
-	// The name of the source bucket and key name of the source object, separated by a
-	// slash (/). Must be URL-encoded.
-	//
-	// This member is required.
-	CopySource *string
-
-	// Object key for which the multipart upload was initiated.
-	//
-	// This member is required.
-	Key *string
+	// Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321.
+	// Amazon S3 uses this header for a message integrity check to ensure that the
+	// encryption key was transmitted without error.
+	SSECustomerKeyMD5 *string
 }
 
 type UploadPartCopyOutput struct {
+
+	// Container for all response elements.
+	CopyPartResult *types.CopyPartResult
+
+	// The version of the source object that was copied, if you have enabled versioning
+	// on the source bucket.
+	CopySourceVersionId *string
+
+	// If present, indicates that the requester was successfully charged for the
+	// request.
+	RequestCharged types.RequestCharged
+
+	// If server-side encryption with a customer-provided encryption key was requested,
+	// the response will include this header confirming the encryption algorithm used.
+	SSECustomerAlgorithm *string
 
 	// If server-side encryption with a customer-provided encryption key was requested,
 	// the response will include this header to provide round-trip message integrity
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// The server-side encryption algorithm used when storing this object in Amazon S3
-	// (for example, AES256, aws:kms).
-	ServerSideEncryption types.ServerSideEncryption
-
 	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
 	// symmetric customer managed customer master key (CMK) that was used for the
 	// object.
 	SSEKMSKeyId *string
 
-	// Container for all response elements.
-	CopyPartResult *types.CopyPartResult
-
-	// If present, indicates that the requester was successfully charged for the
-	// request.
-	RequestCharged types.RequestCharged
-
-	// The version of the source object that was copied, if you have enabled versioning
-	// on the source bucket.
-	CopySourceVersionId *string
-
-	// If server-side encryption with a customer-provided encryption key was requested,
-	// the response will include this header confirming the encryption algorithm used.
-	SSECustomerAlgorithm *string
+	// The server-side encryption algorithm used when storing this object in Amazon S3
+	// (for example, AES256, aws:kms).
+	ServerSideEncryption types.ServerSideEncryption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

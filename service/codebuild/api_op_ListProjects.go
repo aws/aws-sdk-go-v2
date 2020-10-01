@@ -57,6 +57,14 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 
 type ListProjectsInput struct {
 
+	// During a previous call, if there are more than 100 items in the list, only the
+	// first 100 items are returned, along with a unique string called a nextToken. To
+	// get the next batch of items in the list, call this operation again, adding the
+	// next token to the call. To get all of the items in the list, keep calling this
+	// operation with each subsequent next token that is returned, until no more next
+	// tokens are returned.
+	NextToken *string
+
 	// The criterion to be used to list build project names. Valid values include:
 	//
 	//
@@ -72,14 +80,6 @@ type ListProjectsInput struct {
 	// sortOrder to specify in what order to list the build project names based on the
 	// preceding criteria.
 	SortBy types.ProjectSortByType
-
-	// During a previous call, if there are more than 100 items in the list, only the
-	// first 100 items are returned, along with a unique string called a nextToken. To
-	// get the next batch of items in the list, call this operation again, adding the
-	// next token to the call. To get all of the items in the list, keep calling this
-	// operation with each subsequent next token that is returned, until no more next
-	// tokens are returned.
-	NextToken *string
 
 	// The order in which to list build projects. Valid values include:
 	//

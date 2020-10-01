@@ -66,15 +66,15 @@ func (c *Client) UpdateBudget(ctx context.Context, params *UpdateBudgetInput, op
 // Request of UpdateBudget
 type UpdateBudgetInput struct {
 
-	// The budget that you want to update your budget to.
-	//
-	// This member is required.
-	NewBudget *types.Budget
-
 	// The accountId that is associated with the budget that you want to update.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The budget that you want to update your budget to.
+	//
+	// This member is required.
+	NewBudget *types.Budget
 }
 
 // Response of UpdateBudget

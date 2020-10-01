@@ -73,18 +73,18 @@ type ListCreatedArtifactsInput struct {
 	// This member is required.
 	MigrationTaskName *string
 
-	// If a NextToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
-	NextToken *string
-
-	// Maximum number of results to be returned per page.
-	MaxResults *int32
-
 	// The name of the ProgressUpdateStream.
 	//
 	// This member is required.
 	ProgressUpdateStream *string
+
+	// Maximum number of results to be returned per page.
+	MaxResults *int32
+
+	// If a NextToken was returned by a previous call, there are more results
+	// available. To retrieve the next page of results, make the call again using the
+	// returned token in NextToken.
+	NextToken *string
 }
 
 type ListCreatedArtifactsOutput struct {

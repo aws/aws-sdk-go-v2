@@ -83,11 +83,6 @@ type AdminLinkProviderForUserInput struct {
 	// This member is required.
 	DestinationUser *types.ProviderUserIdentifierType
 
-	// The user pool ID for the user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// An external identity provider account for a user who does not currently exist
 	// yet in the user pool. This user must be a federated user (for example, a SAML or
 	// Facebook user), not another native user. If the SourceUser is a federated social
@@ -107,6 +102,11 @@ type AdminLinkProviderForUserInput struct {
 	//
 	// This member is required.
 	SourceUser *types.ProviderUserIdentifierType
+
+	// The user pool ID for the user pool.
+	//
+	// This member is required.
+	UserPoolId *string
 }
 
 type AdminLinkProviderForUserOutput struct {

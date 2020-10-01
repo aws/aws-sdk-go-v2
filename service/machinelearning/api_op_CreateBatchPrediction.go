@@ -68,10 +68,21 @@ func (c *Client) CreateBatchPrediction(ctx context.Context, params *CreateBatchP
 
 type CreateBatchPredictionInput struct {
 
+	// The ID of the DataSource that points to the group of observations to predict.
+	//
+	// This member is required.
+	BatchPredictionDataSourceId *string
+
 	// A user-supplied ID that uniquely identifies the BatchPrediction.
 	//
 	// This member is required.
 	BatchPredictionId *string
+
+	// The ID of the MLModel that will generate predictions for the group of
+	// observations.
+	//
+	// This member is required.
+	MLModelId *string
 
 	// The location of an Amazon Simple Storage Service (Amazon S3) bucket or directory
 	// to store the batch prediction results. The following substrings are not allowed
@@ -86,17 +97,6 @@ type CreateBatchPredictionInput struct {
 	// A user-supplied name or description of the BatchPrediction. BatchPredictionName
 	// can only use the UTF-8 character set.
 	BatchPredictionName *string
-
-	// The ID of the DataSource that points to the group of observations to predict.
-	//
-	// This member is required.
-	BatchPredictionDataSourceId *string
-
-	// The ID of the MLModel that will generate predictions for the group of
-	// observations.
-	//
-	// This member is required.
-	MLModelId *string
 }
 
 // Represents the output of a CreateBatchPrediction operation, and is an

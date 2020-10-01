@@ -68,11 +68,11 @@ type PutProtocolsListInput struct {
 
 type PutProtocolsListOutput struct {
 
-	// The Amazon Resource Name (ARN) of the protocols list.
-	ProtocolsListArn *string
-
 	// The details of the AWS Firewall Manager protocols list.
 	ProtocolsList *types.ProtocolsListData
+
+	// The Amazon Resource Name (ARN) of the protocols list.
+	ProtocolsListArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

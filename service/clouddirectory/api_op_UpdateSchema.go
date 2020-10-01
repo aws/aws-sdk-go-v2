@@ -57,16 +57,16 @@ func (c *Client) UpdateSchema(ctx context.Context, params *UpdateSchemaInput, op
 
 type UpdateSchemaInput struct {
 
+	// The name of the schema.
+	//
+	// This member is required.
+	Name *string
+
 	// The Amazon Resource Name (ARN) of the development schema. For more information,
 	// see arns ().
 	//
 	// This member is required.
 	SchemaArn *string
-
-	// The name of the schema.
-	//
-	// This member is required.
-	Name *string
 }
 
 type UpdateSchemaOutput struct {

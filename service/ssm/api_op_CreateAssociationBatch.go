@@ -70,11 +70,11 @@ type CreateAssociationBatchInput struct {
 
 type CreateAssociationBatchOutput struct {
 
-	// Information about the associations that succeeded.
-	Successful []*types.AssociationDescription
-
 	// Information about the associations that failed.
 	Failed []*types.FailedCreateAssociation
+
+	// Information about the associations that succeeded.
+	Successful []*types.AssociationDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

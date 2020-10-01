@@ -64,11 +64,6 @@ func (c *Client) AssociateWebACL(ctx context.Context, params *AssociateWebACLInp
 
 type AssociateWebACLInput struct {
 
-	// A unique identifier (ID) for the web ACL.
-	//
-	// This member is required.
-	WebACLId *string
-
 	// The ARN (Amazon Resource Name) of the resource to be protected, either an
 	// application load balancer or Amazon API Gateway stage. The ARN should be in one
 	// of the following formats:
@@ -82,6 +77,11 @@ type AssociateWebACLInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// A unique identifier (ID) for the web ACL.
+	//
+	// This member is required.
+	WebACLId *string
 }
 
 type AssociateWebACLOutput struct {

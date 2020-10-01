@@ -58,18 +58,18 @@ func (c *Client) BatchDisassociateApprovalRuleTemplateFromRepositories(ctx conte
 
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesInput struct {
 
+	// The name of the template that you want to disassociate from one or more
+	// repositories.
+	//
+	// This member is required.
+	ApprovalRuleTemplateName *string
+
 	// The repository names that you want to disassociate from the approval rule
 	// template. The length constraint limit is for each string in the array. The array
 	// itself can be empty.
 	//
 	// This member is required.
 	RepositoryNames []*string
-
-	// The name of the template that you want to disassociate from one or more
-	// repositories.
-	//
-	// This member is required.
-	ApprovalRuleTemplateName *string
 }
 
 type BatchDisassociateApprovalRuleTemplateFromRepositoriesOutput struct {

@@ -57,16 +57,16 @@ func (c *Client) PutMetadata(ctx context.Context, params *PutMetadataInput, optF
 
 type PutMetadataInput struct {
 
-	// Metadata to insert into the stream. Maximum: 1 KB per request.
-	//
-	// This member is required.
-	Metadata *string
-
 	// ARN of the channel into which metadata is inserted. This channel must have an
 	// active stream.
 	//
 	// This member is required.
 	ChannelArn *string
+
+	// Metadata to insert into the stream. Maximum: 1 KB per request.
+	//
+	// This member is required.
+	Metadata *string
 }
 
 type PutMetadataOutput struct {

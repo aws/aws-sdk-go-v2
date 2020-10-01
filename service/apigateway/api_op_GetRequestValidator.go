@@ -63,18 +63,18 @@ type GetRequestValidatorInput struct {
 	// This member is required.
 	RequestValidatorId *string
 
-	Template *bool
-
-	Name *string
-
-	Title *string
-
-	TemplateSkipList []*string
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
+
+	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A set of validation rules for incoming Method () requests. In OpenAPI, a
@@ -90,6 +90,9 @@ type GetRequestValidatorOutput struct {
 	// The identifier of this RequestValidator ().
 	Id *string
 
+	// The name of this RequestValidator ()
+	Name *string
+
 	// A Boolean flag to indicate whether to validate a request body according to the
 	// configured Model () schema.
 	ValidateRequestBody *bool
@@ -97,9 +100,6 @@ type GetRequestValidatorOutput struct {
 	// A Boolean flag to indicate whether to validate request parameters (true) or not
 	// (false).
 	ValidateRequestParameters *bool
-
-	// The name of this RequestValidator ()
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

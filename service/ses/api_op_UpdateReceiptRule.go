@@ -63,15 +63,15 @@ func (c *Client) UpdateReceiptRule(ctx context.Context, params *UpdateReceiptRul
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type UpdateReceiptRuleInput struct {
 
-	// The name of the receipt rule set that the receipt rule belongs to.
-	//
-	// This member is required.
-	RuleSetName *string
-
 	// A data structure that contains the updated receipt rule information.
 	//
 	// This member is required.
 	Rule *types.ReceiptRule
+
+	// The name of the receipt rule set that the receipt rule belongs to.
+	//
+	// This member is required.
+	RuleSetName *string
 }
 
 // An empty element returned on a successful request.

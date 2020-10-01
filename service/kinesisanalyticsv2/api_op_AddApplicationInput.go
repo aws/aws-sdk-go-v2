@@ -63,11 +63,6 @@ func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplication
 
 type AddApplicationInputInput struct {
 
-	// The Input () to add.
-	//
-	// This member is required.
-	Input *types.Input
-
 	// The name of your existing application to which you want to add the streaming
 	// source.
 	//
@@ -79,18 +74,23 @@ type AddApplicationInputInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	// The Input () to add.
+	//
+	// This member is required.
+	Input *types.Input
 }
 
 type AddApplicationInputOutput struct {
 
-	// Describes the application input configuration. </p>
-	InputDescriptions []*types.InputDescription
+	// The Amazon Resource Name (ARN) of the application.
+	ApplicationARN *string
 
 	// Provides the current application version.
 	ApplicationVersionId *int64
 
-	// The Amazon Resource Name (ARN) of the application.
-	ApplicationARN *string
+	// Describes the application input configuration. </p>
+	InputDescriptions []*types.InputDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

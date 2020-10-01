@@ -72,11 +72,11 @@ type CreatePipelineInput struct {
 // Represents the output of a CreatePipeline action.
 type CreatePipelineOutput struct {
 
-	// Specifies the tags applied to the pipeline.
-	Tags []*types.Tag
-
 	// Represents the structure of actions and stages to be performed in the pipeline.
 	Pipeline *types.PipelineDeclaration
+
+	// Specifies the tags applied to the pipeline.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

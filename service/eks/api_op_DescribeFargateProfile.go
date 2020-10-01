@@ -57,15 +57,15 @@ func (c *Client) DescribeFargateProfile(ctx context.Context, params *DescribeFar
 
 type DescribeFargateProfileInput struct {
 
-	// The name of the Fargate profile to describe.
-	//
-	// This member is required.
-	FargateProfileName *string
-
 	// The name of the Amazon EKS cluster associated with the Fargate profile.
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The name of the Fargate profile to describe.
+	//
+	// This member is required.
+	FargateProfileName *string
 }
 
 type DescribeFargateProfileOutput struct {

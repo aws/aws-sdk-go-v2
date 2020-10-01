@@ -59,16 +59,11 @@ func (c *Client) CreateNotification(ctx context.Context, params *CreateNotificat
 // Request of CreateNotification
 type CreateNotificationInput struct {
 
-	// A list of subscribers that you want to associate with the notification. Each
-	// notification can have one SNS subscriber and up to 10 email subscribers.
+	// The accountId that is associated with the budget that you want to create a
+	// notification for.
 	//
 	// This member is required.
-	Subscribers []*types.Subscriber
-
-	// The notification that you want to create.
-	//
-	// This member is required.
-	Notification *types.Notification
+	AccountId *string
 
 	// The name of the budget that you want AWS to notify you about. Budget names must
 	// be unique within an account.
@@ -76,11 +71,16 @@ type CreateNotificationInput struct {
 	// This member is required.
 	BudgetName *string
 
-	// The accountId that is associated with the budget that you want to create a
-	// notification for.
+	// The notification that you want to create.
 	//
 	// This member is required.
-	AccountId *string
+	Notification *types.Notification
+
+	// A list of subscribers that you want to associate with the notification. Each
+	// notification can have one SNS subscriber and up to 10 email subscribers.
+	//
+	// This member is required.
+	Subscribers []*types.Subscriber
 }
 
 // Response of CreateNotification

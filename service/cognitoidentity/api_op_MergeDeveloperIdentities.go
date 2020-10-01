@@ -83,16 +83,16 @@ type MergeDeveloperIdentitiesInput struct {
 	// This member is required.
 	DeveloperProviderName *string
 
+	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
+	IdentityPoolId *string
+
 	// User identifier for the source user. The value should be a
 	// DeveloperUserIdentifier.
 	//
 	// This member is required.
 	SourceUserIdentifier *string
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// This member is required.
-	IdentityPoolId *string
 }
 
 // Returned in response to a successful MergeDeveloperIdentities action.

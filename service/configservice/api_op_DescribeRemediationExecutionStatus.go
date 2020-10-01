@@ -60,32 +60,32 @@ func (c *Client) DescribeRemediationExecutionStatus(ctx context.Context, params 
 
 type DescribeRemediationExecutionStatusInput struct {
 
-	// A list of resource keys to be processed with the current request. Each element
-	// in the list consists of the resource type and resource ID.
-	ResourceKeys []*types.ResourceKey
-
-	// The nextToken string returned on a previous page that you use to get the next
-	// page of results in a paginated response.
-	NextToken *string
+	// A list of AWS Config rule names.
+	//
+	// This member is required.
+	ConfigRuleName *string
 
 	// The maximum number of RemediationExecutionStatuses returned on each page. The
 	// default is maximum. If you specify 0, AWS Config uses the default.
 	Limit *int32
 
-	// A list of AWS Config rule names.
-	//
-	// This member is required.
-	ConfigRuleName *string
+	// The nextToken string returned on a previous page that you use to get the next
+	// page of results in a paginated response.
+	NextToken *string
+
+	// A list of resource keys to be processed with the current request. Each element
+	// in the list consists of the resource type and resource ID.
+	ResourceKeys []*types.ResourceKey
 }
 
 type DescribeRemediationExecutionStatusOutput struct {
 
-	// Returns a list of remediation execution statuses objects.
-	RemediationExecutionStatuses []*types.RemediationExecutionStatus
-
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
+	// Returns a list of remediation execution statuses objects.
+	RemediationExecutionStatuses []*types.RemediationExecutionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

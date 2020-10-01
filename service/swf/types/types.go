@@ -16,24 +16,29 @@ type ActivityTaskCanceledEventAttributes struct {
 	// This member is required.
 	ScheduledEventId *int64
 
-	// If set, contains the ID of the last ActivityTaskCancelRequested event recorded
-	// for this activity task. This information can be useful for diagnosing problems
-	// by tracing back the chain of events leading up to this event.
-	LatestCancelRequestedEventId *int64
-
-	// Details of the cancellation.
-	Details *string
-
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// Details of the cancellation.
+	Details *string
+
+	// If set, contains the ID of the last ActivityTaskCancelRequested event recorded
+	// for this activity task. This information can be useful for diagnosing problems
+	// by tracing back the chain of events leading up to this event.
+	LatestCancelRequestedEventId *int64
 }
 
 // Provides the details of the ActivityTaskCancelRequested event.
 type ActivityTaskCancelRequestedEventAttributes struct {
+
+	// The unique ID of the task.
+	//
+	// This member is required.
+	ActivityId *string
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RequestCancelActivityTask decision for this cancellation
@@ -42,11 +47,6 @@ type ActivityTaskCancelRequestedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
-
-	// The unique ID of the task.
-	//
-	// This member is required.
-	ActivityId *string
 }
 
 // Provides the details of the ActivityTaskCompleted event.
@@ -59,29 +59,19 @@ type ActivityTaskCompletedEventAttributes struct {
 	// This member is required.
 	ScheduledEventId *int64
 
-	// The results of the activity task.
-	Result *string
-
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
 	// the chain of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// The results of the activity task.
+	Result *string
 }
 
 // Provides the details of the ActivityTaskFailed event.
 type ActivityTaskFailedEventAttributes struct {
-
-	// The ID of the ActivityTaskStarted event recorded when this activity task was
-	// started. This information can be useful for diagnosing problems by tracing back
-	// the chain of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-
-	// The reason provided for the failure.
-	Reason *string
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
 	// task was scheduled. This information can be useful for diagnosing problems by
@@ -90,31 +80,27 @@ type ActivityTaskFailedEventAttributes struct {
 	// This member is required.
 	ScheduledEventId *int64
 
+	// The ID of the ActivityTaskStarted event recorded when this activity task was
+	// started. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
+
 	// The details of the failure.
 	Details *string
+
+	// The reason provided for the failure.
+	Reason *string
 }
 
 // Provides the details of the ActivityTaskScheduled event.
 type ActivityTaskScheduledEventAttributes struct {
 
-	// The priority to assign to the scheduled activity task. If set, this overrides
-	// any default priority value that was assigned when the activity type was
-	// registered. Valid values are integers that range from Java's Integer.MIN_VALUE
-	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher
-	// priority. For more information about setting task priority, see Setting Task
-	// Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// workflow tasks. This data isn't sent to the activity.
-	Control *string
-
-	// The task list in which the activity task has been scheduled.
+	// The unique ID of the activity task.
 	//
 	// This member is required.
-	TaskList *TaskList
+	ActivityId *string
 
 	// The type of the activity task.
 	//
@@ -129,16 +115,14 @@ type ActivityTaskScheduledEventAttributes struct {
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
 
-	// The maximum amount of time a worker may take to process the activity task.
-	StartToCloseTimeout *string
-
-	// The input provided to the activity task.
-	Input *string
-
-	// The unique ID of the activity task.
+	// The task list in which the activity task has been scheduled.
 	//
 	// This member is required.
-	ActivityId *string
+	TaskList *TaskList
+
+	// Data attached to the event that can be used by the decider in subsequent
+	// workflow tasks. This data isn't sent to the activity.
+	Control *string
 
 	// The maximum time before which the worker processing this task must report
 	// progress by calling RecordActivityTaskHeartbeat (). If the timeout is exceeded,
@@ -146,20 +130,32 @@ type ActivityTaskScheduledEventAttributes struct {
 	// attempts to record a heartbeat or return a result, it is ignored.
 	HeartbeatTimeout *string
 
+	// The input provided to the activity task.
+	Input *string
+
+	// The maximum amount of time for this activity task.
+	ScheduleToCloseTimeout *string
+
 	// The maximum amount of time the activity task can wait to be assigned to a
 	// worker.
 	ScheduleToStartTimeout *string
 
-	// The maximum amount of time for this activity task.
-	ScheduleToCloseTimeout *string
+	// The maximum amount of time a worker may take to process the activity task.
+	StartToCloseTimeout *string
+
+	// The priority to assign to the scheduled activity task. If set, this overrides
+	// any default priority value that was assigned when the activity type was
+	// registered. Valid values are integers that range from Java's Integer.MIN_VALUE
+	// (-2147483648) to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher
+	// priority. For more information about setting task priority, see Setting Task
+	// Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
 }
 
 // Provides the details of the ActivityTaskStarted event.
 type ActivityTaskStartedEventAttributes struct {
-
-	// Identity of the worker that was assigned this task. This aids diagnostics when
-	// problems arise. The form of this identity is user defined.
-	Identity *string
 
 	// The ID of the ActivityTaskScheduled event that was recorded when this activity
 	// task was scheduled. This information can be useful for diagnosing problems by
@@ -167,10 +163,21 @@ type ActivityTaskStartedEventAttributes struct {
 	//
 	// This member is required.
 	ScheduledEventId *int64
+
+	// Identity of the worker that was assigned this task. This aids diagnostics when
+	// problems arise. The form of this identity is user defined.
+	Identity *string
 }
 
 // Provides the details of the ActivityTaskTimedOut event.
 type ActivityTaskTimedOutEventAttributes struct {
+
+	// The ID of the ActivityTaskScheduled event that was recorded when this activity
+	// task was scheduled. This information can be useful for diagnosing problems by
+	// tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	ScheduledEventId *int64
 
 	// The ID of the ActivityTaskStarted event recorded when this activity task was
 	// started. This information can be useful for diagnosing problems by tracing back
@@ -179,21 +186,14 @@ type ActivityTaskTimedOutEventAttributes struct {
 	// This member is required.
 	StartedEventId *int64
 
-	// The ID of the ActivityTaskScheduled event that was recorded when this activity
-	// task was scheduled. This information can be useful for diagnosing problems by
-	// tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	ScheduledEventId *int64
-
-	// Contains the content of the details parameter for the last call made by the
-	// activity to RecordActivityTaskHeartbeat.
-	Details *string
-
 	// The type of the timeout that caused this event.
 	//
 	// This member is required.
 	TimeoutType ActivityTaskTimeoutType
+
+	// Contains the content of the details parameter for the last call made by the
+	// activity to RecordActivityTaskHeartbeat.
+	Details *string
 }
 
 // Represents an activity type.
@@ -227,33 +227,11 @@ type ActivityTypeConfiguration struct {
 	// use NONE to specify unlimited duration.
 	DefaultTaskHeartbeatTimeout *string
 
-	// The default maximum duration for tasks of an activity type specified when
-	// registering the activity type. You can override this default when scheduling a
-	// task through the ScheduleActivityTaskDecision (). The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
-	// unlimited duration.
-	DefaultTaskStartToCloseTimeout *string
-
 	// The default task list specified for this activity type at registration. This
 	// default is used if a task list isn't provided when a task is scheduled through
 	// the ScheduleActivityTaskDecision (). You can override the default registered
 	// task list when scheduling a task through the ScheduleActivityTaskDecision ().
 	DefaultTaskList *TaskList
-
-	// The default maximum duration, specified when registering the activity type, that
-	// a task of an activity type can wait before being assigned to a worker. You can
-	// override this default when scheduling a task through the
-	// ScheduleActivityTaskDecision (). The duration is specified in seconds, an
-	// integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
-	DefaultTaskScheduleToStartTimeout *string
-
-	// The default maximum duration, specified when registering the activity type, for
-	// tasks of this activity type. You can override this default when scheduling a
-	// task through the ScheduleActivityTaskDecision (). The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
-	// unlimited duration.
-	DefaultTaskScheduleToCloseTimeout *string
 
 	// The default task priority for tasks of this activity type, specified at
 	// registration. If not set, then 0 is used as the default priority. This default
@@ -264,21 +242,32 @@ type ActivityTypeConfiguration struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string
+
+	// The default maximum duration, specified when registering the activity type, for
+	// tasks of this activity type. You can override this default when scheduling a
+	// task through the ScheduleActivityTaskDecision (). The duration is specified in
+	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// unlimited duration.
+	DefaultTaskScheduleToCloseTimeout *string
+
+	// The default maximum duration, specified when registering the activity type, that
+	// a task of an activity type can wait before being assigned to a worker. You can
+	// override this default when scheduling a task through the
+	// ScheduleActivityTaskDecision (). The duration is specified in seconds, an
+	// integer greater than or equal to 0. You can use NONE to specify unlimited
+	// duration.
+	DefaultTaskScheduleToStartTimeout *string
+
+	// The default maximum duration for tasks of an activity type specified when
+	// registering the activity type. You can override this default when scheduling a
+	// task through the ScheduleActivityTaskDecision (). The duration is specified in
+	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// unlimited duration.
+	DefaultTaskStartToCloseTimeout *string
 }
 
 // Detailed information about an activity type.
 type ActivityTypeInfo struct {
-
-	// The description of the activity type provided in RegisterActivityType ().
-	Description *string
-
-	// The current status of the activity type.
-	//
-	// This member is required.
-	Status RegistrationStatus
-
-	// If DEPRECATED, the date and time DeprecateActivityType () was called.
-	DeprecationDate *time.Time
 
 	// The ActivityType () type structure representing the activity type.
 	//
@@ -290,6 +279,17 @@ type ActivityTypeInfo struct {
 	//
 	// This member is required.
 	CreationDate *time.Time
+
+	// The current status of the activity type.
+	//
+	// This member is required.
+	Status RegistrationStatus
+
+	// If DEPRECATED, the date and time DeprecateActivityType () was called.
+	DeprecationDate *time.Time
+
+	// The description of the activity type provided in RegisterActivityType ().
+	Description *string
 }
 
 // Provides the details of the CancelTimer decision. Access Control You can use IAM
@@ -376,14 +376,6 @@ type CancelWorkflowExecutionDecisionAttributes struct {
 // Provides the details of the CancelWorkflowExecutionFailed event.
 type CancelWorkflowExecutionFailedEventAttributes struct {
 
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the CancelWorkflowExecution decision for this cancellation
-	// request. This information can be useful for diagnosing problems by tracing back
-	// the chain of events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
 	// decision failed because it lacked sufficient permissions. For details and
@@ -393,15 +385,18 @@ type CancelWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause CancelWorkflowExecutionFailedCause
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the CancelWorkflowExecution decision for this cancellation
+	// request. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
 }
 
 // Provide details of the ChildWorkflowExecutionCanceled event.
 type ChildWorkflowExecutionCanceledEventAttributes struct {
-
-	// The type of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
 	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
@@ -411,41 +406,29 @@ type ChildWorkflowExecutionCanceledEventAttributes struct {
 	// This member is required.
 	InitiatedEventId *int64
 
-	// Details of the cancellation (if provided).
-	Details *string
+	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
+	// workflow execution was started. This information can be useful for diagnosing
+	// problems by tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
 
 	// The child workflow execution that was canceled.
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
 
-	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
-	// workflow execution was started. This information can be useful for diagnosing
-	// problems by tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-}
-
-// Provides the details of the ChildWorkflowExecutionCompleted event.
-type ChildWorkflowExecutionCompletedEventAttributes struct {
-
-	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
-	// workflow execution was started. This information can be useful for diagnosing
-	// problems by tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-
 	// The type of the child workflow execution.
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
 
-	// The child workflow execution that was completed.
-	//
-	// This member is required.
-	WorkflowExecution *WorkflowExecution
+	// Details of the cancellation (if provided).
+	Details *string
+}
+
+// Provides the details of the ChildWorkflowExecutionCompleted event.
+type ChildWorkflowExecutionCompletedEventAttributes struct {
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
 	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
@@ -454,6 +437,23 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 	//
 	// This member is required.
 	InitiatedEventId *int64
+
+	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
+	// workflow execution was started. This information can be useful for diagnosing
+	// problems by tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
+
+	// The child workflow execution that was completed.
+	//
+	// This member is required.
+	WorkflowExecution *WorkflowExecution
+
+	// The type of the child workflow execution.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
 
 	// The result of the child workflow execution.
 	Result *string
@@ -462,18 +462,6 @@ type ChildWorkflowExecutionCompletedEventAttributes struct {
 // Provides the details of the ChildWorkflowExecutionFailed event.
 type ChildWorkflowExecutionFailedEventAttributes struct {
 
-	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
-	// workflow execution was started. This information can be useful for diagnosing
-	// problems by tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-
-	// The type of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
-
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
 	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the chain
@@ -482,48 +470,55 @@ type ChildWorkflowExecutionFailedEventAttributes struct {
 	// This member is required.
 	InitiatedEventId *int64
 
-	// The reason for the failure (if provided).
-	Reason *string
-
-	// The details of the failure (if provided).
-	Details *string
+	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
+	// workflow execution was started. This information can be useful for diagnosing
+	// problems by tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
 
 	// The child workflow execution that failed.
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
-}
-
-// Provides the details of the ChildWorkflowExecutionStarted event.
-type ChildWorkflowExecutionStartedEventAttributes struct {
 
 	// The type of the child workflow execution.
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
+
+	// The details of the failure (if provided).
+	Details *string
+
+	// The reason for the failure (if provided).
+	Reason *string
+}
+
+// Provides the details of the ChildWorkflowExecutionStarted event.
+type ChildWorkflowExecutionStartedEventAttributes struct {
+
+	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
+	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
+	//
+	// This member is required.
+	InitiatedEventId *int64
 
 	// The child workflow execution that was started.
 	//
 	// This member is required.
 	WorkflowExecution *WorkflowExecution
 
-	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
-	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
+	// The type of the child workflow execution.
 	//
 	// This member is required.
-	InitiatedEventId *int64
+	WorkflowType *WorkflowType
 }
 
 // Provides the details of the ChildWorkflowExecutionTerminated event.
 type ChildWorkflowExecutionTerminatedEventAttributes struct {
 
-	// The child workflow execution that was terminated.
-	//
-	// This member is required.
-	WorkflowExecution *WorkflowExecution
-
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
 	// StartChildWorkflowExecutionDecision () to start this child workflow execution.
 	// This information can be useful for diagnosing problems by tracing back the chain
@@ -531,11 +526,6 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	//
 	// This member is required.
 	InitiatedEventId *int64
-
-	// The type of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
 
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
@@ -543,6 +533,16 @@ type ChildWorkflowExecutionTerminatedEventAttributes struct {
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// The child workflow execution that was terminated.
+	//
+	// This member is required.
+	WorkflowExecution *WorkflowExecution
+
+	// The type of the child workflow execution.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
 }
 
 // Provides the details of the ChildWorkflowExecutionTimedOut event.
@@ -556,17 +556,17 @@ type ChildWorkflowExecutionTimedOutEventAttributes struct {
 	// This member is required.
 	InitiatedEventId *int64
 
-	// The type of the timeout that caused the child workflow execution to time out.
-	//
-	// This member is required.
-	TimeoutType WorkflowExecutionTimeoutType
-
 	// The ID of the ChildWorkflowExecutionStarted event recorded when this child
 	// workflow execution was started. This information can be useful for diagnosing
 	// problems by tracing back the chain of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// The type of the timeout that caused the child workflow execution to time out.
+	//
+	// This member is required.
+	TimeoutType WorkflowExecutionTimeoutType
 
 	// The child workflow execution that timed out.
 	//
@@ -670,56 +670,6 @@ type CompleteWorkflowExecutionFailedEventAttributes struct {
 // in the Amazon SWF Developer Guide.
 type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 
-	// The list of tags to associate with the new workflow execution. A maximum of 5
-	// tags can be specified. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
-	// specifying a TagFilter ().
-	TagList []*string
-
-	// The input provided to the new workflow execution.
-	Input *string
-
-	// The IAM role to attach to the new (continued) execution.
-	LambdaRole *string
-
-	// If set, specifies the total duration for this workflow execution. This overrides
-	// the defaultExecutionStartToCloseTimeout specified when registering the workflow
-	// type. The duration is specified in seconds, an integer greater than or equal to
-	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
-	// timeout for this workflow execution must be specified either as a default for
-	// the workflow type or through this field. If neither this field is set nor a
-	// default execution start-to-close timeout was specified at registration time then
-	// a fault is returned.
-	ExecutionStartToCloseTimeout *string
-
-	// The version of the workflow to start.
-	WorkflowTypeVersion *string
-
-	// The task priority that, if set, specifies the priority for the decision tasks
-	// for this workflow execution. This overrides the defaultTaskPriority specified
-	// when registering the workflow type. Valid values are integers that range from
-	// Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
-	// numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
-
-	// The task list to use for the decisions of the new (continued) workflow
-	// execution.
-	TaskList *TaskList
-
-	// Specifies the maximum duration of decision tasks for the new workflow execution.
-	// This parameter overrides the defaultTaskStartToCloseTimout specified when
-	// registering the workflow type using RegisterWorkflowType (). The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A task start-to-close timeout for the new workflow
-	// execution must be specified either as a default for the workflow type or through
-	// this parameter. If neither this parameter is set nor a default task
-	// start-to-close timeout was specified at registration time then a fault is
-	// returned.
-	TaskStartToCloseTimeout *string
-
 	// If set, specifies the policy to use for the child workflow executions of the new
 	// execution if it is terminated by calling the TerminateWorkflowExecution ()
 	// action explicitly or due to an expired timeout. This policy overrides the
@@ -743,6 +693,56 @@ type ContinueAsNewWorkflowExecutionDecisionAttributes struct {
 	// parameter is set nor a default child policy was specified at registration time
 	// then a fault is returned.
 	ChildPolicy ChildPolicy
+
+	// If set, specifies the total duration for this workflow execution. This overrides
+	// the defaultExecutionStartToCloseTimeout specified when registering the workflow
+	// type. The duration is specified in seconds, an integer greater than or equal to
+	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
+	// timeout for this workflow execution must be specified either as a default for
+	// the workflow type or through this field. If neither this field is set nor a
+	// default execution start-to-close timeout was specified at registration time then
+	// a fault is returned.
+	ExecutionStartToCloseTimeout *string
+
+	// The input provided to the new workflow execution.
+	Input *string
+
+	// The IAM role to attach to the new (continued) execution.
+	LambdaRole *string
+
+	// The list of tags to associate with the new workflow execution. A maximum of 5
+	// tags can be specified. You can list workflow executions with a specific tag by
+	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
+	// specifying a TagFilter ().
+	TagList []*string
+
+	// The task list to use for the decisions of the new (continued) workflow
+	// execution.
+	TaskList *TaskList
+
+	// The task priority that, if set, specifies the priority for the decision tasks
+	// for this workflow execution. This overrides the defaultTaskPriority specified
+	// when registering the workflow type. Valid values are integers that range from
+	// Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
+	// numbers indicate higher priority. For more information about setting task
+	// priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
+
+	// Specifies the maximum duration of decision tasks for the new workflow execution.
+	// This parameter overrides the defaultTaskStartToCloseTimout specified when
+	// registering the workflow type using RegisterWorkflowType (). The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration. A task start-to-close timeout for the new workflow
+	// execution must be specified either as a default for the workflow type or through
+	// this parameter. If neither this parameter is set nor a default task
+	// start-to-close timeout was specified at registration time then a fault is
+	// returned.
+	TaskStartToCloseTimeout *string
+
+	// The version of the workflow to start.
+	WorkflowTypeVersion *string
 }
 
 // Provides the details of the ContinueAsNewWorkflowExecutionFailed event.
@@ -912,58 +912,58 @@ type ContinueAsNewWorkflowExecutionFailedEventAttributes struct {
 // <a>StartChildWorkflowExecutionDecisionAttributes</a> </code> </p> </li> </ul>
 type Decision struct {
 
-	// Provides the details of the FailWorkflowExecution decision. It isn't set for
-	// other decision types.
-	FailWorkflowExecutionDecisionAttributes *FailWorkflowExecutionDecisionAttributes
-
 	// Specifies the type of the decision.
 	//
 	// This member is required.
 	DecisionType DecisionType
 
-	// Provides the details of the SignalExternalWorkflowExecution decision. It isn't
-	// set for other decision types.
-	SignalExternalWorkflowExecutionDecisionAttributes *SignalExternalWorkflowExecutionDecisionAttributes
+	// Provides the details of the CancelTimer decision. It isn't set for other
+	// decision types.
+	CancelTimerDecisionAttributes *CancelTimerDecisionAttributes
 
 	// Provides the details of the CancelWorkflowExecution decision. It isn't set for
 	// other decision types.
 	CancelWorkflowExecutionDecisionAttributes *CancelWorkflowExecutionDecisionAttributes
 
-	// Provides the details of the StartChildWorkflowExecution decision. It isn't set
-	// for other decision types.
-	StartChildWorkflowExecutionDecisionAttributes *StartChildWorkflowExecutionDecisionAttributes
-
-	// Provides the details of the CancelTimer decision. It isn't set for other
-	// decision types.
-	CancelTimerDecisionAttributes *CancelTimerDecisionAttributes
-
-	// Provides the details of the ScheduleLambdaFunction decision. It isn't set for
+	// Provides the details of the CompleteWorkflowExecution decision. It isn't set for
 	// other decision types.
-	ScheduleLambdaFunctionDecisionAttributes *ScheduleLambdaFunctionDecisionAttributes
+	CompleteWorkflowExecutionDecisionAttributes *CompleteWorkflowExecutionDecisionAttributes
 
 	// Provides the details of the ContinueAsNewWorkflowExecution decision. It isn't
 	// set for other decision types.
 	ContinueAsNewWorkflowExecutionDecisionAttributes *ContinueAsNewWorkflowExecutionDecisionAttributes
 
-	// Provides the details of the ScheduleActivityTask decision. It isn't set for
+	// Provides the details of the FailWorkflowExecution decision. It isn't set for
 	// other decision types.
-	ScheduleActivityTaskDecisionAttributes *ScheduleActivityTaskDecisionAttributes
+	FailWorkflowExecutionDecisionAttributes *FailWorkflowExecutionDecisionAttributes
+
+	// Provides the details of the RecordMarker decision. It isn't set for other
+	// decision types.
+	RecordMarkerDecisionAttributes *RecordMarkerDecisionAttributes
 
 	// Provides the details of the RequestCancelActivityTask decision. It isn't set for
 	// other decision types.
 	RequestCancelActivityTaskDecisionAttributes *RequestCancelActivityTaskDecisionAttributes
 
-	// Provides the details of the CompleteWorkflowExecution decision. It isn't set for
-	// other decision types.
-	CompleteWorkflowExecutionDecisionAttributes *CompleteWorkflowExecutionDecisionAttributes
-
 	// Provides the details of the RequestCancelExternalWorkflowExecution decision. It
 	// isn't set for other decision types.
 	RequestCancelExternalWorkflowExecutionDecisionAttributes *RequestCancelExternalWorkflowExecutionDecisionAttributes
 
-	// Provides the details of the RecordMarker decision. It isn't set for other
-	// decision types.
-	RecordMarkerDecisionAttributes *RecordMarkerDecisionAttributes
+	// Provides the details of the ScheduleActivityTask decision. It isn't set for
+	// other decision types.
+	ScheduleActivityTaskDecisionAttributes *ScheduleActivityTaskDecisionAttributes
+
+	// Provides the details of the ScheduleLambdaFunction decision. It isn't set for
+	// other decision types.
+	ScheduleLambdaFunctionDecisionAttributes *ScheduleLambdaFunctionDecisionAttributes
+
+	// Provides the details of the SignalExternalWorkflowExecution decision. It isn't
+	// set for other decision types.
+	SignalExternalWorkflowExecutionDecisionAttributes *SignalExternalWorkflowExecutionDecisionAttributes
+
+	// Provides the details of the StartChildWorkflowExecution decision. It isn't set
+	// for other decision types.
+	StartChildWorkflowExecutionDecisionAttributes *StartChildWorkflowExecutionDecisionAttributes
 
 	// Provides the details of the StartTimer decision. It isn't set for other decision
 	// types.
@@ -973,13 +973,6 @@ type Decision struct {
 // Provides the details of the DecisionTaskCompleted event.
 type DecisionTaskCompletedEventAttributes struct {
 
-	// The ID of the DecisionTaskStarted event recorded when this decision task was
-	// started. This information can be useful for diagnosing problems by tracing back
-	// the chain of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
 	// task was scheduled. This information can be useful for diagnosing problems by
 	// tracing back the chain of events leading up to this event.
@@ -987,20 +980,19 @@ type DecisionTaskCompletedEventAttributes struct {
 	// This member is required.
 	ScheduledEventId *int64
 
+	// The ID of the DecisionTaskStarted event recorded when this decision task was
+	// started. This information can be useful for diagnosing problems by tracing back
+	// the chain of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
+
 	// User defined context for the workflow execution.
 	ExecutionContext *string
 }
 
 // Provides details about the DecisionTaskScheduled event.
 type DecisionTaskScheduledEventAttributes struct {
-
-	// A task priority that, if set, specifies the priority for this decision task.
-	// Valid values are integers that range from Java's Integer.MIN_VALUE (-2147483648)
-	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
 
 	// The name of the task list in which the decision task was scheduled.
 	//
@@ -1012,14 +1004,18 @@ type DecisionTaskScheduledEventAttributes struct {
 	// an integer greater than or equal to 0. You can use NONE to specify unlimited
 	// duration.
 	StartToCloseTimeout *string
+
+	// A task priority that, if set, specifies the priority for this decision task.
+	// Valid values are integers that range from Java's Integer.MIN_VALUE (-2147483648)
+	// to Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
+	// more information about setting task priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
 }
 
 // Provides the details of the DecisionTaskStarted event.
 type DecisionTaskStartedEventAttributes struct {
-
-	// Identity of the decider making the request. This enables diagnostic tracing when
-	// problems arise. The form of this identity is user defined.
-	Identity *string
 
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
 	// task was scheduled. This information can be useful for diagnosing problems by
@@ -1027,15 +1023,14 @@ type DecisionTaskStartedEventAttributes struct {
 	//
 	// This member is required.
 	ScheduledEventId *int64
+
+	// Identity of the decider making the request. This enables diagnostic tracing when
+	// problems arise. The form of this identity is user defined.
+	Identity *string
 }
 
 // Provides the details of the DecisionTaskTimedOut event.
 type DecisionTaskTimedOutEventAttributes struct {
-
-	// The type of timeout that expired before the decision task could be completed.
-	//
-	// This member is required.
-	TimeoutType DecisionTaskTimeoutType
 
 	// The ID of the DecisionTaskScheduled event that was recorded when this decision
 	// task was scheduled. This information can be useful for diagnosing problems by
@@ -1050,6 +1045,11 @@ type DecisionTaskTimedOutEventAttributes struct {
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// The type of timeout that expired before the decision task could be completed.
+	//
+	// This member is required.
+	TimeoutType DecisionTaskTimeoutType
 }
 
 // Contains the configuration settings of a domain.
@@ -1064,6 +1064,11 @@ type DomainConfiguration struct {
 // Contains general information about a domain.
 type DomainInfo struct {
 
+	// The name of the domain. This name is unique within the account.
+	//
+	// This member is required.
+	Name *string
+
 	// The status of the domain:
 	//
 	//     * REGISTERED – The domain is properly registered
@@ -1077,16 +1082,11 @@ type DomainInfo struct {
 	// This member is required.
 	Status RegistrationStatus
 
-	// The description of the domain provided through RegisterDomain ().
-	Description *string
-
 	// The ARN of the domain.
 	Arn *string
 
-	// The name of the domain. This name is unique within the account.
-	//
-	// This member is required.
-	Name *string
+	// The description of the domain provided through RegisterDomain ().
+	Description *string
 }
 
 // Used to filter the workflow executions in visibility APIs by various time-based
@@ -1125,11 +1125,6 @@ type ExternalWorkflowExecutionCancelRequestedEventAttributes struct {
 // Provides the details of the ExternalWorkflowExecutionSignaled event.
 type ExternalWorkflowExecutionSignaledEventAttributes struct {
 
-	// The external workflow execution that the signal was delivered to.
-	//
-	// This member is required.
-	WorkflowExecution *WorkflowExecution
-
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
 	// the SignalExternalWorkflowExecution decision to request this signal. This
 	// information can be useful for diagnosing problems by tracing back the chain of
@@ -1137,6 +1132,11 @@ type ExternalWorkflowExecutionSignaledEventAttributes struct {
 	//
 	// This member is required.
 	InitiatedEventId *int64
+
+	// The external workflow execution that the signal was delivered to.
+	//
+	// This member is required.
+	WorkflowExecution *WorkflowExecution
 }
 
 // Provides the details of the FailWorkflowExecution decision. Access Control You
@@ -1171,14 +1171,6 @@ type FailWorkflowExecutionDecisionAttributes struct {
 // Provides the details of the FailWorkflowExecutionFailed event.
 type FailWorkflowExecutionFailedEventAttributes struct {
 
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the FailWorkflowExecution decision to fail this execution. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
 	// decision failed because it lacked sufficient permissions. For details and
@@ -1188,6 +1180,14 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause FailWorkflowExecutionFailedCause
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the FailWorkflowExecution decision to fail this execution. This
+	// information can be useful for diagnosing problems by tracing back the chain of
+	// events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
 }
 
 // Event within a workflow execution. A history event can be one of these types:
@@ -1364,279 +1364,286 @@ type FailWorkflowExecutionFailedEventAttributes struct {
 // was exceeded.
 type HistoryEvent struct {
 
-	// If the event is of type ChildWorkflowExecutionTimedOut then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	ChildWorkflowExecutionTimedOutEventAttributes *ChildWorkflowExecutionTimedOutEventAttributes
-
-	// If the event is of type WorkflowExecutionStarted then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionStartedEventAttributes *WorkflowExecutionStartedEventAttributes
-
-	// If the event is of type ExternalWorkflowExecutionSignaled then this member is
-	// set and provides detailed information about the event. It isn't set for other
-	// event types.
-	ExternalWorkflowExecutionSignaledEventAttributes *ExternalWorkflowExecutionSignaledEventAttributes
-
-	// If the event is of type CancelTimerFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	CancelTimerFailedEventAttributes *CancelTimerFailedEventAttributes
-
-	// If the event is of type ContinueAsNewWorkflowExecutionFailed then this member is
-	// set and provides detailed information about the event. It isn't set for other
-	// event types.
-	ContinueAsNewWorkflowExecutionFailedEventAttributes *ContinueAsNewWorkflowExecutionFailedEventAttributes
-
-	// If the event is of type ActivityTaskCanceled then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	ActivityTaskCanceledEventAttributes *ActivityTaskCanceledEventAttributes
-
-	// Provides the details of the LambdaFunctionStarted event. It isn't set for other
-	// event types.
-	LambdaFunctionStartedEventAttributes *LambdaFunctionStartedEventAttributes
-
-	// If the event is of type ChildWorkflowExecutionCanceled then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	ChildWorkflowExecutionCanceledEventAttributes *ChildWorkflowExecutionCanceledEventAttributes
-
-	// If the event is of type RequestCancelExternalWorkflowExecutionFailed then this
-	// member is set and provides detailed information about the event. It isn't set
-	// for other event types.
-	RequestCancelExternalWorkflowExecutionFailedEventAttributes *RequestCancelExternalWorkflowExecutionFailedEventAttributes
-
-	// If the event is of type WorkflowExecutionContinuedAsNew then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionContinuedAsNewEventAttributes *WorkflowExecutionContinuedAsNewEventAttributes
-
-	// If the event is of type ChildWorkflowExecutionCompleted then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	ChildWorkflowExecutionCompletedEventAttributes *ChildWorkflowExecutionCompletedEventAttributes
-
-	// Provides the details of the StartLambdaFunctionFailed event. It isn't set for
-	// other event types.
-	StartLambdaFunctionFailedEventAttributes *StartLambdaFunctionFailedEventAttributes
-
-	// If the event is of type TimerStarted then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	TimerStartedEventAttributes *TimerStartedEventAttributes
-
-	// If the event is of type ChildWorkflowExecutionStarted then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	ChildWorkflowExecutionStartedEventAttributes *ChildWorkflowExecutionStartedEventAttributes
-
-	// If the event is of type RequestCancelExternalWorkflowExecutionInitiated then
-	// this member is set and provides detailed information about the event. It isn't
-	// set for other event types.
-	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
-
-	// If the event is of type WorkflowExecutionCancelRequested then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionCancelRequestedEventAttributes *WorkflowExecutionCancelRequestedEventAttributes
-
-	// Provides the details of the LambdaFunctionCompleted event. It isn't set for
-	// other event types.
-	LambdaFunctionCompletedEventAttributes *LambdaFunctionCompletedEventAttributes
-
 	// The system generated ID of the event. This ID uniquely identifies the event with
 	// in the workflow execution history.
 	//
 	// This member is required.
 	EventId *int64
 
-	// If the event is of type SignalExternalWorkflowExecutionFailed then this member
-	// is set and provides detailed information about the event. It isn't set for other
-	// event types.
-	SignalExternalWorkflowExecutionFailedEventAttributes *SignalExternalWorkflowExecutionFailedEventAttributes
-
-	// If the event is of type CompleteWorkflowExecutionFailed then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	CompleteWorkflowExecutionFailedEventAttributes *CompleteWorkflowExecutionFailedEventAttributes
-
-	// Provides the details of the LambdaFunctionTimedOut event. It isn't set for other
-	// event types.
-	LambdaFunctionTimedOutEventAttributes *LambdaFunctionTimedOutEventAttributes
-
-	// Provides the details of the LambdaFunctionScheduled event. It isn't set for
-	// other event types.
-	LambdaFunctionScheduledEventAttributes *LambdaFunctionScheduledEventAttributes
-
-	// If the event is of type ActivityTaskFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	ActivityTaskFailedEventAttributes *ActivityTaskFailedEventAttributes
-
-	// If the event is of type DecisionTaskStarted then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	DecisionTaskStartedEventAttributes *DecisionTaskStartedEventAttributes
-
-	// If the event is of type DecisionTaskCompleted then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	DecisionTaskCompletedEventAttributes *DecisionTaskCompletedEventAttributes
-
-	// If the event is of type DecisionTaskFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	RecordMarkerFailedEventAttributes *RecordMarkerFailedEventAttributes
-
-	// If the event is of type WorkflowExecutionTimedOut then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionTimedOutEventAttributes *WorkflowExecutionTimedOutEventAttributes
-
-	// If the event is of type DecisionTaskScheduled then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	DecisionTaskScheduledEventAttributes *DecisionTaskScheduledEventAttributes
-
-	// If the event is of type DecisionTaskTimedOut then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	DecisionTaskTimedOutEventAttributes *DecisionTaskTimedOutEventAttributes
-
-	// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
-	// other event types.
-	ScheduleLambdaFunctionFailedEventAttributes *ScheduleLambdaFunctionFailedEventAttributes
-
-	// If the event is of type StartTimerFailed then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	StartTimerFailedEventAttributes *StartTimerFailedEventAttributes
-
-	// If the event is of type WorkflowExecutionSignaled then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionSignaledEventAttributes *WorkflowExecutionSignaledEventAttributes
-
-	// If the event is of type TimerCanceled then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	TimerCanceledEventAttributes *TimerCanceledEventAttributes
-
-	// If the event is of type RequestCancelActivityTaskFailed then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	RequestCancelActivityTaskFailedEventAttributes *RequestCancelActivityTaskFailedEventAttributes
-
-	// If the event is of type WorkflowExecutionCanceled then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionCanceledEventAttributes *WorkflowExecutionCanceledEventAttributes
-
-	// If the event is of type ScheduleActivityTaskFailed then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	ScheduleActivityTaskFailedEventAttributes *ScheduleActivityTaskFailedEventAttributes
-
-	// If the event is of type ActivityTaskcancelRequested then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	ActivityTaskCancelRequestedEventAttributes *ActivityTaskCancelRequestedEventAttributes
-
-	// If the event is of type TimerFired then this member is set and provides detailed
-	// information about the event. It isn't set for other event types.
-	TimerFiredEventAttributes *TimerFiredEventAttributes
-
-	// If the event is of type ChildWorkflowExecutionTerminated then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	ChildWorkflowExecutionTerminatedEventAttributes *ChildWorkflowExecutionTerminatedEventAttributes
-
-	// If the event is of type StartChildWorkflowExecutionFailed then this member is
-	// set and provides detailed information about the event. It isn't set for other
-	// event types.
-	StartChildWorkflowExecutionFailedEventAttributes *StartChildWorkflowExecutionFailedEventAttributes
+	// The date and time when the event occurred.
+	//
+	// This member is required.
+	EventTimestamp *time.Time
 
 	// The type of the history event.
 	//
 	// This member is required.
 	EventType EventType
 
-	// Provides the details of the LambdaFunctionFailed event. It isn't set for other
-	// event types.
-	LambdaFunctionFailedEventAttributes *LambdaFunctionFailedEventAttributes
-
-	// If the event is of type CancelWorkflowExecutionFailed then this member is set
-	// and provides detailed information about the event. It isn't set for other event
-	// types.
-	CancelWorkflowExecutionFailedEventAttributes *CancelWorkflowExecutionFailedEventAttributes
-
-	// If the event is of type WorkflowExecutionTerminated then this member is set and
+	// If the event is of type ActivityTaskcancelRequested then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
-	WorkflowExecutionTerminatedEventAttributes *WorkflowExecutionTerminatedEventAttributes
+	ActivityTaskCancelRequestedEventAttributes *ActivityTaskCancelRequestedEventAttributes
 
-	// If the event is of type MarkerRecorded then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	MarkerRecordedEventAttributes *MarkerRecordedEventAttributes
-
-	// If the event is of type StartChildWorkflowExecutionInitiated then this member is
-	// set and provides detailed information about the event. It isn't set for other
-	// event types.
-	StartChildWorkflowExecutionInitiatedEventAttributes *StartChildWorkflowExecutionInitiatedEventAttributes
-
-	// If the event is of type ActivityTaskStarted then this member is set and provides
-	// detailed information about the event. It isn't set for other event types.
-	ActivityTaskStartedEventAttributes *ActivityTaskStartedEventAttributes
-
-	// If the event is of type FailWorkflowExecutionFailed then this member is set and
+	// If the event is of type ActivityTaskCanceled then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
-	FailWorkflowExecutionFailedEventAttributes *FailWorkflowExecutionFailedEventAttributes
-
-	// The date and time when the event occurred.
-	//
-	// This member is required.
-	EventTimestamp *time.Time
-
-	// If the event is of type ExternalWorkflowExecutionCancelRequested then this
-	// member is set and provides detailed information about the event. It isn't set
-	// for other event types.
-	ExternalWorkflowExecutionCancelRequestedEventAttributes *ExternalWorkflowExecutionCancelRequestedEventAttributes
-
-	// If the event is of type ActivityTaskScheduled then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	ActivityTaskScheduledEventAttributes *ActivityTaskScheduledEventAttributes
-
-	// If the event is of type SignalExternalWorkflowExecutionInitiated then this
-	// member is set and provides detailed information about the event. It isn't set
-	// for other event types.
-	SignalExternalWorkflowExecutionInitiatedEventAttributes *SignalExternalWorkflowExecutionInitiatedEventAttributes
+	ActivityTaskCanceledEventAttributes *ActivityTaskCanceledEventAttributes
 
 	// If the event is of type ActivityTaskCompleted then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
 	ActivityTaskCompletedEventAttributes *ActivityTaskCompletedEventAttributes
 
-	// If the event is of type WorkflowExecutionCompleted then this member is set and
-	// provides detailed information about the event. It isn't set for other event
-	// types.
-	WorkflowExecutionCompletedEventAttributes *WorkflowExecutionCompletedEventAttributes
+	// If the event is of type ActivityTaskFailed then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	ActivityTaskFailedEventAttributes *ActivityTaskFailedEventAttributes
 
-	// If the event is of type WorkflowExecutionFailed then this member is set and
+	// If the event is of type ActivityTaskScheduled then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
-	WorkflowExecutionFailedEventAttributes *WorkflowExecutionFailedEventAttributes
+	ActivityTaskScheduledEventAttributes *ActivityTaskScheduledEventAttributes
+
+	// If the event is of type ActivityTaskStarted then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	ActivityTaskStartedEventAttributes *ActivityTaskStartedEventAttributes
+
+	// If the event is of type ActivityTaskTimedOut then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	ActivityTaskTimedOutEventAttributes *ActivityTaskTimedOutEventAttributes
+
+	// If the event is of type CancelTimerFailed then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	CancelTimerFailedEventAttributes *CancelTimerFailedEventAttributes
+
+	// If the event is of type CancelWorkflowExecutionFailed then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	CancelWorkflowExecutionFailedEventAttributes *CancelWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type ChildWorkflowExecutionCanceled then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	ChildWorkflowExecutionCanceledEventAttributes *ChildWorkflowExecutionCanceledEventAttributes
+
+	// If the event is of type ChildWorkflowExecutionCompleted then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	ChildWorkflowExecutionCompletedEventAttributes *ChildWorkflowExecutionCompletedEventAttributes
 
 	// If the event is of type ChildWorkflowExecutionFailed then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
 	ChildWorkflowExecutionFailedEventAttributes *ChildWorkflowExecutionFailedEventAttributes
 
-	// If the event is of type ActivityTaskTimedOut then this member is set and
+	// If the event is of type ChildWorkflowExecutionStarted then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	ChildWorkflowExecutionStartedEventAttributes *ChildWorkflowExecutionStartedEventAttributes
+
+	// If the event is of type ChildWorkflowExecutionTerminated then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	ChildWorkflowExecutionTerminatedEventAttributes *ChildWorkflowExecutionTerminatedEventAttributes
+
+	// If the event is of type ChildWorkflowExecutionTimedOut then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	ChildWorkflowExecutionTimedOutEventAttributes *ChildWorkflowExecutionTimedOutEventAttributes
+
+	// If the event is of type CompleteWorkflowExecutionFailed then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	CompleteWorkflowExecutionFailedEventAttributes *CompleteWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type ContinueAsNewWorkflowExecutionFailed then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
+	ContinueAsNewWorkflowExecutionFailedEventAttributes *ContinueAsNewWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type DecisionTaskCompleted then this member is set and
 	// provides detailed information about the event. It isn't set for other event
 	// types.
-	ActivityTaskTimedOutEventAttributes *ActivityTaskTimedOutEventAttributes
+	DecisionTaskCompletedEventAttributes *DecisionTaskCompletedEventAttributes
+
+	// If the event is of type DecisionTaskScheduled then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	DecisionTaskScheduledEventAttributes *DecisionTaskScheduledEventAttributes
+
+	// If the event is of type DecisionTaskStarted then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	DecisionTaskStartedEventAttributes *DecisionTaskStartedEventAttributes
+
+	// If the event is of type DecisionTaskTimedOut then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	DecisionTaskTimedOutEventAttributes *DecisionTaskTimedOutEventAttributes
+
+	// If the event is of type ExternalWorkflowExecutionCancelRequested then this
+	// member is set and provides detailed information about the event. It isn't set
+	// for other event types.
+	ExternalWorkflowExecutionCancelRequestedEventAttributes *ExternalWorkflowExecutionCancelRequestedEventAttributes
+
+	// If the event is of type ExternalWorkflowExecutionSignaled then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
+	ExternalWorkflowExecutionSignaledEventAttributes *ExternalWorkflowExecutionSignaledEventAttributes
+
+	// If the event is of type FailWorkflowExecutionFailed then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	FailWorkflowExecutionFailedEventAttributes *FailWorkflowExecutionFailedEventAttributes
+
+	// Provides the details of the LambdaFunctionCompleted event. It isn't set for
+	// other event types.
+	LambdaFunctionCompletedEventAttributes *LambdaFunctionCompletedEventAttributes
+
+	// Provides the details of the LambdaFunctionFailed event. It isn't set for other
+	// event types.
+	LambdaFunctionFailedEventAttributes *LambdaFunctionFailedEventAttributes
+
+	// Provides the details of the LambdaFunctionScheduled event. It isn't set for
+	// other event types.
+	LambdaFunctionScheduledEventAttributes *LambdaFunctionScheduledEventAttributes
+
+	// Provides the details of the LambdaFunctionStarted event. It isn't set for other
+	// event types.
+	LambdaFunctionStartedEventAttributes *LambdaFunctionStartedEventAttributes
+
+	// Provides the details of the LambdaFunctionTimedOut event. It isn't set for other
+	// event types.
+	LambdaFunctionTimedOutEventAttributes *LambdaFunctionTimedOutEventAttributes
+
+	// If the event is of type MarkerRecorded then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	MarkerRecordedEventAttributes *MarkerRecordedEventAttributes
+
+	// If the event is of type DecisionTaskFailed then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	RecordMarkerFailedEventAttributes *RecordMarkerFailedEventAttributes
+
+	// If the event is of type RequestCancelActivityTaskFailed then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	RequestCancelActivityTaskFailedEventAttributes *RequestCancelActivityTaskFailedEventAttributes
+
+	// If the event is of type RequestCancelExternalWorkflowExecutionFailed then this
+	// member is set and provides detailed information about the event. It isn't set
+	// for other event types.
+	RequestCancelExternalWorkflowExecutionFailedEventAttributes *RequestCancelExternalWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type RequestCancelExternalWorkflowExecutionInitiated then
+	// this member is set and provides detailed information about the event. It isn't
+	// set for other event types.
+	RequestCancelExternalWorkflowExecutionInitiatedEventAttributes *RequestCancelExternalWorkflowExecutionInitiatedEventAttributes
+
+	// If the event is of type ScheduleActivityTaskFailed then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	ScheduleActivityTaskFailedEventAttributes *ScheduleActivityTaskFailedEventAttributes
+
+	// Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
+	// other event types.
+	ScheduleLambdaFunctionFailedEventAttributes *ScheduleLambdaFunctionFailedEventAttributes
+
+	// If the event is of type SignalExternalWorkflowExecutionFailed then this member
+	// is set and provides detailed information about the event. It isn't set for other
+	// event types.
+	SignalExternalWorkflowExecutionFailedEventAttributes *SignalExternalWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type SignalExternalWorkflowExecutionInitiated then this
+	// member is set and provides detailed information about the event. It isn't set
+	// for other event types.
+	SignalExternalWorkflowExecutionInitiatedEventAttributes *SignalExternalWorkflowExecutionInitiatedEventAttributes
+
+	// If the event is of type StartChildWorkflowExecutionFailed then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
+	StartChildWorkflowExecutionFailedEventAttributes *StartChildWorkflowExecutionFailedEventAttributes
+
+	// If the event is of type StartChildWorkflowExecutionInitiated then this member is
+	// set and provides detailed information about the event. It isn't set for other
+	// event types.
+	StartChildWorkflowExecutionInitiatedEventAttributes *StartChildWorkflowExecutionInitiatedEventAttributes
+
+	// Provides the details of the StartLambdaFunctionFailed event. It isn't set for
+	// other event types.
+	StartLambdaFunctionFailedEventAttributes *StartLambdaFunctionFailedEventAttributes
+
+	// If the event is of type StartTimerFailed then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	StartTimerFailedEventAttributes *StartTimerFailedEventAttributes
+
+	// If the event is of type TimerCanceled then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	TimerCanceledEventAttributes *TimerCanceledEventAttributes
+
+	// If the event is of type TimerFired then this member is set and provides detailed
+	// information about the event. It isn't set for other event types.
+	TimerFiredEventAttributes *TimerFiredEventAttributes
+
+	// If the event is of type TimerStarted then this member is set and provides
+	// detailed information about the event. It isn't set for other event types.
+	TimerStartedEventAttributes *TimerStartedEventAttributes
+
+	// If the event is of type WorkflowExecutionCancelRequested then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionCancelRequestedEventAttributes *WorkflowExecutionCancelRequestedEventAttributes
+
+	// If the event is of type WorkflowExecutionCanceled then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionCanceledEventAttributes *WorkflowExecutionCanceledEventAttributes
+
+	// If the event is of type WorkflowExecutionCompleted then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionCompletedEventAttributes *WorkflowExecutionCompletedEventAttributes
+
+	// If the event is of type WorkflowExecutionContinuedAsNew then this member is set
+	// and provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionContinuedAsNewEventAttributes *WorkflowExecutionContinuedAsNewEventAttributes
+
+	// If the event is of type WorkflowExecutionFailed then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionFailedEventAttributes *WorkflowExecutionFailedEventAttributes
+
+	// If the event is of type WorkflowExecutionSignaled then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionSignaledEventAttributes *WorkflowExecutionSignaledEventAttributes
+
+	// If the event is of type WorkflowExecutionStarted then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionStartedEventAttributes *WorkflowExecutionStartedEventAttributes
+
+	// If the event is of type WorkflowExecutionTerminated then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionTerminatedEventAttributes *WorkflowExecutionTerminatedEventAttributes
+
+	// If the event is of type WorkflowExecutionTimedOut then this member is set and
+	// provides detailed information about the event. It isn't set for other event
+	// types.
+	WorkflowExecutionTimedOutEventAttributes *WorkflowExecutionTimedOutEventAttributes
 }
 
 // Provides the details of the LambdaFunctionCompleted event. It isn't set for
 // other event types.
 type LambdaFunctionCompletedEventAttributes struct {
+
+	// The ID of the LambdaFunctionScheduled event that was recorded when this Lambda
+	// task was scheduled. To help diagnose issues, use this information to trace back
+	// the chain of events leading up to this event.
+	//
+	// This member is required.
+	ScheduledEventId *int64
 
 	// The ID of the LambdaFunctionStarted event recorded when this activity task
 	// started. To help diagnose issues, use this information to trace back the chain
@@ -1647,21 +1654,18 @@ type LambdaFunctionCompletedEventAttributes struct {
 
 	// The results of the Lambda task.
 	Result *string
-
-	// The ID of the LambdaFunctionScheduled event that was recorded when this Lambda
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
-	//
-	// This member is required.
-	ScheduledEventId *int64
 }
 
 // Provides the details of the LambdaFunctionFailed event. It isn't set for other
 // event types.
 type LambdaFunctionFailedEventAttributes struct {
 
-	// The details of the failure.
-	Details *string
+	// The ID of the LambdaFunctionScheduled event that was recorded when this activity
+	// task was scheduled. To help diagnose issues, use this information to trace back
+	// the chain of events leading up to this event.
+	//
+	// This member is required.
+	ScheduledEventId *int64
 
 	// The ID of the LambdaFunctionStarted event recorded when this activity task
 	// started. To help diagnose issues, use this information to trace back the chain
@@ -1670,30 +1674,16 @@ type LambdaFunctionFailedEventAttributes struct {
 	// This member is required.
 	StartedEventId *int64
 
+	// The details of the failure.
+	Details *string
+
 	// The reason provided for the failure.
 	Reason *string
-
-	// The ID of the LambdaFunctionScheduled event that was recorded when this activity
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
-	//
-	// This member is required.
-	ScheduledEventId *int64
 }
 
 // Provides the details of the LambdaFunctionScheduled event. It isn't set for
 // other event types.
 type LambdaFunctionScheduledEventAttributes struct {
-
-	// The maximum amount of time a worker can take to process the Lambda task.
-	StartToCloseTimeout *string
-
-	// The input provided to the Lambda task.
-	Input *string
-
-	// Data attached to the event that the decider can use in subsequent workflow
-	// tasks. This data isn't sent to the Lambda task.
-	Control *string
 
 	// The ID of the LambdaFunctionCompleted event corresponding to the decision that
 	// resulted in scheduling this activity task. To help diagnose issues, use this
@@ -1711,6 +1701,16 @@ type LambdaFunctionScheduledEventAttributes struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Data attached to the event that the decider can use in subsequent workflow
+	// tasks. This data isn't sent to the Lambda task.
+	Control *string
+
+	// The input provided to the Lambda task.
+	Input *string
+
+	// The maximum amount of time a worker can take to process the Lambda task.
+	StartToCloseTimeout *string
 }
 
 // Provides the details of the LambdaFunctionStarted event. It isn't set for other
@@ -1800,6 +1800,16 @@ type RecordMarkerDecisionAttributes struct {
 // Provides the details of the RecordMarkerFailed event.
 type RecordMarkerFailedEventAttributes struct {
 
+	// The cause of the failure. This information is generated by the system and can be
+	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
+	// decision failed because it lacked sufficient permissions. For details and
+	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
+	// in the Amazon SWF Developer Guide.
+	//
+	// This member is required.
+	Cause RecordMarkerFailedCause
+
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RecordMarkerFailed decision for this cancellation request.
 	// This information can be useful for diagnosing problems by tracing back the chain
@@ -1812,16 +1822,6 @@ type RecordMarkerFailedEventAttributes struct {
 	//
 	// This member is required.
 	MarkerName *string
-
-	// The cause of the failure. This information is generated by the system and can be
-	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
-	// decision failed because it lacked sufficient permissions. For details and
-	// example IAM policies, see Using IAM to Manage Access to Amazon SWF Workflows
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-	// in the Amazon SWF Developer Guide.
-	//
-	// This member is required.
-	Cause RecordMarkerFailedCause
 }
 
 // Provides the details of the RequestCancelActivityTask decision. Access Control
@@ -1917,35 +1917,6 @@ type RequestCancelExternalWorkflowExecutionDecisionAttributes struct {
 // Provides the details of the RequestCancelExternalWorkflowExecutionFailed event.
 type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 
-	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event
-	// corresponding to the RequestCancelExternalWorkflowExecution decision to cancel
-	// this external workflow execution. This information can be useful for diagnosing
-	// problems by tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	InitiatedEventId *int64
-
-	// The runId of the external workflow execution.
-	RunId *string
-
-	// The workflowId of the external workflow to which the cancel request was to be
-	// delivered.
-	//
-	// This member is required.
-	WorkflowId *string
-
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the RequestCancelExternalWorkflowExecution decision for this
-	// cancellation request. This information can be useful for diagnosing problems by
-	// tracing back the chain of events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
-	// The data attached to the event that the decider can use in subsequent workflow
-	// tasks. This data isn't sent to the workflow execution.
-	Control *string
-
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
 	// decision failed because it lacked sufficient permissions. For details and
@@ -1955,23 +1926,6 @@ type RequestCancelExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause RequestCancelExternalWorkflowExecutionFailedCause
-}
-
-// Provides the details of the RequestCancelExternalWorkflowExecutionInitiated
-// event.
-type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
-
-	// The runId of the external workflow execution to be canceled.
-	RunId *string
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// workflow tasks.
-	Control *string
-
-	// The workflowId of the external workflow execution to be canceled.
-	//
-	// This member is required.
-	WorkflowId *string
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the RequestCancelExternalWorkflowExecution decision for this
@@ -1980,6 +1934,52 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
+
+	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event
+	// corresponding to the RequestCancelExternalWorkflowExecution decision to cancel
+	// this external workflow execution. This information can be useful for diagnosing
+	// problems by tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	InitiatedEventId *int64
+
+	// The workflowId of the external workflow to which the cancel request was to be
+	// delivered.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The data attached to the event that the decider can use in subsequent workflow
+	// tasks. This data isn't sent to the workflow execution.
+	Control *string
+
+	// The runId of the external workflow execution.
+	RunId *string
+}
+
+// Provides the details of the RequestCancelExternalWorkflowExecutionInitiated
+// event.
+type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the RequestCancelExternalWorkflowExecution decision for this
+	// cancellation request. This information can be useful for diagnosing problems by
+	// tracing back the chain of events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
+
+	// The workflowId of the external workflow execution to be canceled.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// Data attached to the event that can be used by the decider in subsequent
+	// workflow tasks.
+	Control *string
+
+	// The runId of the external workflow execution to be canceled.
+	RunId *string
 }
 
 // Tags are key-value pairs that can be associated with Amazon SWF state machines
@@ -1987,13 +1987,13 @@ type RequestCancelExternalWorkflowExecutionInitiatedEventAttributes struct {
 // these symbols: _ . : / = + - @.
 type ResourceTag struct {
 
-	// The value of a tag.
-	Value *string
-
 	// The key of a tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value of a tag.
+	Value *string
 }
 
 // Provides the details of the ScheduleActivityTask decision. Access Control You
@@ -2028,10 +2028,22 @@ type ResourceTag struct {
 // in the Amazon SWF Developer Guide.
 type ScheduleActivityTaskDecisionAttributes struct {
 
+	// The activityId of the activity task. The specified string must not start or end
+	// with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
+	// or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not
+	// contain the literal string arn.
+	//
+	// This member is required.
+	ActivityId *string
+
 	// The type of the activity task to schedule.
 	//
 	// This member is required.
 	ActivityType *ActivityType
+
+	// Data attached to the event that can be used by the decider in subsequent
+	// workflow tasks. This data isn't sent to the activity.
+	Control *string
 
 	// If set, specifies the maximum time before which a worker processing a task of
 	// this type must report progress by calling RecordActivityTaskHeartbeat (). If the
@@ -2043,6 +2055,9 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// unlimited duration.
 	HeartbeatTimeout *string
 
+	// The input provided to the activity task.
+	Input *string
+
 	// The maximum duration for this activity task. The duration is specified in
 	// seconds, an integer greater than or equal to 0. You can use NONE to specify
 	// unlimited duration. A schedule-to-close timeout for this activity task must be
@@ -2051,15 +2066,15 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// at registration time then a fault is returned.
 	ScheduleToCloseTimeout *string
 
-	// If set, specifies the priority with which the activity task is to be assigned to
-	// a worker. This overrides the defaultTaskPriority specified when registering the
-	// activity type using RegisterActivityType (). Valid values are integers that
-	// range from Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE
-	// (2147483647). Higher numbers indicate higher priority. For more information
-	// about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
+	// If set, specifies the maximum duration the activity task can wait to be assigned
+	// to a worker. This overrides the default schedule-to-start timeout specified when
+	// registering the activity type using RegisterActivityType (). The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration. A schedule-to-start timeout for this activity task
+	// must be specified either as a default for the activity type or through this
+	// field. If neither this field is set nor a default schedule-to-start timeout was
+	// specified at registration time then a fault is returned.
+	ScheduleToStartTimeout *string
 
 	// If set, specifies the maximum duration a worker may take to process this
 	// activity task. This overrides the default start-to-close timeout specified when
@@ -2082,34 +2097,29 @@ type ScheduleActivityTaskDecisionAttributes struct {
 	// arn.
 	TaskList *TaskList
 
-	// If set, specifies the maximum duration the activity task can wait to be assigned
-	// to a worker. This overrides the default schedule-to-start timeout specified when
-	// registering the activity type using RegisterActivityType (). The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A schedule-to-start timeout for this activity task
-	// must be specified either as a default for the activity type or through this
-	// field. If neither this field is set nor a default schedule-to-start timeout was
-	// specified at registration time then a fault is returned.
-	ScheduleToStartTimeout *string
-
-	// The input provided to the activity task.
-	Input *string
-
-	// The activityId of the activity task. The specified string must not start or end
-	// with whitespace. It must not contain a : (colon), / (slash), | (vertical bar),
-	// or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not
-	// contain the literal string arn.
-	//
-	// This member is required.
-	ActivityId *string
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// workflow tasks. This data isn't sent to the activity.
-	Control *string
+	// If set, specifies the priority with which the activity task is to be assigned to
+	// a worker. This overrides the defaultTaskPriority specified when registering the
+	// activity type using RegisterActivityType (). Valid values are integers that
+	// range from Java's Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE
+	// (2147483647). Higher numbers indicate higher priority. For more information
+	// about setting task priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
 }
 
 // Provides the details of the ScheduleActivityTaskFailed event.
 type ScheduleActivityTaskFailedEventAttributes struct {
+
+	// The activityId provided in the ScheduleActivityTask decision that failed.
+	//
+	// This member is required.
+	ActivityId *string
+
+	// The activity type provided in the ScheduleActivityTask decision that failed.
+	//
+	// This member is required.
+	ActivityType *ActivityType
 
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
@@ -2128,28 +2138,11 @@ type ScheduleActivityTaskFailedEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
-
-	// The activity type provided in the ScheduleActivityTask decision that failed.
-	//
-	// This member is required.
-	ActivityType *ActivityType
-
-	// The activityId provided in the ScheduleActivityTask decision that failed.
-	//
-	// This member is required.
-	ActivityId *string
 }
 
 // Decision attributes specified in scheduleLambdaFunctionDecisionAttributes within
 // the list of decisions decisions passed to RespondDecisionTaskCompleted ().
 type ScheduleLambdaFunctionDecisionAttributes struct {
-
-	// The optional input data to be supplied to the Lambda function.
-	Input *string
-
-	// The data attached to the event that the decider can use in subsequent workflow
-	// tasks. This data isn't sent to the Lambda task.
-	Control *string
 
 	// A string that identifies the Lambda function execution in the event history.
 	//
@@ -2161,6 +2154,13 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 	// This member is required.
 	Name *string
 
+	// The data attached to the event that the decider can use in subsequent workflow
+	// tasks. This data isn't sent to the Lambda task.
+	Control *string
+
+	// The optional input data to be supplied to the Lambda function.
+	Input *string
+
 	// The timeout value, in seconds, after which the Lambda function is considered to
 	// be failed once it has started. This can be any integer from 1-300 (1s-5m). If no
 	// value is supplied, than a default value of 300s is assumed.
@@ -2170,13 +2170,6 @@ type ScheduleLambdaFunctionDecisionAttributes struct {
 // Provides the details of the ScheduleLambdaFunctionFailed event. It isn't set for
 // other event types.
 type ScheduleLambdaFunctionFailedEventAttributes struct {
-
-	// The ID of the LambdaFunctionCompleted event corresponding to the decision that
-	// resulted in scheduling this Lambda task. To help diagnose issues, use this
-	// information to trace back the chain of events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
 
 	// The cause of the failure. To help diagnose issues, use this information to trace
 	// back the chain of events leading up to this event. If cause is set to
@@ -2188,6 +2181,13 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause ScheduleLambdaFunctionFailedCause
+
+	// The ID of the LambdaFunctionCompleted event corresponding to the decision that
+	// resulted in scheduling this Lambda task. To help diagnose issues, use this
+	// information to trace back the chain of events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
 
 	// The ID provided in the ScheduleLambdaFunction decision that failed.
 	//
@@ -2222,13 +2222,16 @@ type ScheduleLambdaFunctionFailedEventAttributes struct {
 // in the Amazon SWF Developer Guide.
 type SignalExternalWorkflowExecutionDecisionAttributes struct {
 
+	// The name of the signal.The target workflow execution uses the signal name and
+	// input to process the signal.
+	//
+	// This member is required.
+	SignalName *string
+
 	// The workflowId of the workflow execution to be signaled.
 	//
 	// This member is required.
 	WorkflowId *string
-
-	// The runId of the workflow execution to be signaled.
-	RunId *string
 
 	// The data attached to the event that can be used by the decider in subsequent
 	// decision tasks.
@@ -2238,37 +2241,12 @@ type SignalExternalWorkflowExecutionDecisionAttributes struct {
 	// uses the signal name and input data to process the signal.
 	Input *string
 
-	// The name of the signal.The target workflow execution uses the signal name and
-	// input to process the signal.
-	//
-	// This member is required.
-	SignalName *string
+	// The runId of the workflow execution to be signaled.
+	RunId *string
 }
 
 // Provides the details of the SignalExternalWorkflowExecutionFailed event.
 type SignalExternalWorkflowExecutionFailedEventAttributes struct {
-
-	// The data attached to the event that the decider can use in subsequent workflow
-	// tasks. This data isn't sent to the workflow execution.
-	Control *string
-
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the SignalExternalWorkflowExecution decision for this signal.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
-	// The runId of the external workflow execution that the signal was being delivered
-	// to.
-	RunId *string
-
-	// The workflowId of the external workflow execution that the signal was being
-	// delivered to.
-	//
-	// This member is required.
-	WorkflowId *string
 
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
@@ -2280,6 +2258,14 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	// This member is required.
 	Cause SignalExternalWorkflowExecutionFailedCause
 
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the SignalExternalWorkflowExecution decision for this signal.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
+
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
 	// the SignalExternalWorkflowExecution decision to request this signal. This
 	// information can be useful for diagnosing problems by tracing back the chain of
@@ -2287,20 +2273,32 @@ type SignalExternalWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	InitiatedEventId *int64
+
+	// The workflowId of the external workflow execution that the signal was being
+	// delivered to.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The data attached to the event that the decider can use in subsequent workflow
+	// tasks. This data isn't sent to the workflow execution.
+	Control *string
+
+	// The runId of the external workflow execution that the signal was being delivered
+	// to.
+	RunId *string
 }
 
 // Provides the details of the SignalExternalWorkflowExecutionInitiated event.
 type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 
-	// The runId of the external workflow execution to send the signal to.
-	RunId *string
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// decision tasks.
-	Control *string
-
-	// The input provided to the signal.
-	Input *string
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the SignalExternalWorkflowExecution decision for this signal.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
 
 	// The name of the signal.
 	//
@@ -2312,13 +2310,15 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 	// This member is required.
 	WorkflowId *string
 
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the SignalExternalWorkflowExecution decision for this signal.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
+	// Data attached to the event that can be used by the decider in subsequent
+	// decision tasks.
+	Control *string
+
+	// The input provided to the signal.
+	Input *string
+
+	// The runId of the external workflow execution to send the signal to.
+	RunId *string
 }
 
 // Provides the details of the StartChildWorkflowExecution decision. Access Control
@@ -2356,56 +2356,6 @@ type SignalExternalWorkflowExecutionInitiatedEventAttributes struct {
 // in the Amazon SWF Developer Guide.
 type StartChildWorkflowExecutionDecisionAttributes struct {
 
-	// Specifies the maximum duration of decision tasks for this workflow execution.
-	// This parameter overrides the defaultTaskStartToCloseTimout specified when
-	// registering the workflow type using RegisterWorkflowType (). The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration. A task start-to-close timeout for this workflow
-	// execution must be specified either as a default for the workflow type or through
-	// this parameter. If neither this parameter is set nor a default task
-	// start-to-close timeout was specified at registration time then a fault is
-	// returned.
-	TaskStartToCloseTimeout *string
-
-	// The type of the workflow execution to be started.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
-
-	// The data attached to the event that can be used by the decider in subsequent
-	// workflow tasks. This data isn't sent to the child workflow execution.
-	Control *string
-
-	// A task priority that, if set, specifies the priority for a decision task of this
-	// workflow execution. This overrides the defaultTaskPriority specified when
-	// registering the workflow type. Valid values are integers that range from Java's
-	// Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
-	// numbers indicate higher priority. For more information about setting task
-	// priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
-
-	// The total duration for this workflow execution. This overrides the
-	// defaultExecutionStartToCloseTimeout specified when registering the workflow
-	// type. The duration is specified in seconds, an integer greater than or equal to
-	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
-	// timeout for this workflow execution must be specified either as a default for
-	// the workflow type or through this parameter. If neither this parameter is set
-	// nor a default execution start-to-close timeout was specified at registration
-	// time then a fault is returned.
-	ExecutionStartToCloseTimeout *string
-
-	// The name of the task list to be used for decision tasks of the child workflow
-	// execution. A task list for this workflow execution must be specified either as a
-	// default for the workflow type or through this parameter. If neither this
-	// parameter is set nor a default task list was specified at registration time then
-	// a fault is returned. The specified string must not start or end with whitespace.
-	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
-	// characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the
-	// literal string arn.
-	TaskList *TaskList
-
 	// The workflowId of the workflow execution. The specified string must not start or
 	// end with whitespace. It must not contain a : (colon), / (slash), | (vertical
 	// bar), or any control characters (\u0000-\u001f | \u007f-\u009f). Also, it must
@@ -2414,17 +2364,10 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// This member is required.
 	WorkflowId *string
 
-	// The IAM role attached to the child workflow execution.
-	LambdaRole *string
-
-	// The input to be provided to the workflow execution.
-	Input *string
-
-	// The list of tags to associate with the child workflow execution. A maximum of 5
-	// tags can be specified. You can list workflow executions with a specific tag by
-	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
-	// specifying a TagFilter ().
-	TagList []*string
+	// The type of the workflow execution to be started.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
 
 	// If set, specifies the policy to use for the child workflow executions if the
 	// workflow execution being started is terminated by calling the
@@ -2449,23 +2392,67 @@ type StartChildWorkflowExecutionDecisionAttributes struct {
 	// parameter is set nor a default child policy was specified at registration time
 	// then a fault is returned.
 	ChildPolicy ChildPolicy
+
+	// The data attached to the event that can be used by the decider in subsequent
+	// workflow tasks. This data isn't sent to the child workflow execution.
+	Control *string
+
+	// The total duration for this workflow execution. This overrides the
+	// defaultExecutionStartToCloseTimeout specified when registering the workflow
+	// type. The duration is specified in seconds, an integer greater than or equal to
+	// 0. You can use NONE to specify unlimited duration. An execution start-to-close
+	// timeout for this workflow execution must be specified either as a default for
+	// the workflow type or through this parameter. If neither this parameter is set
+	// nor a default execution start-to-close timeout was specified at registration
+	// time then a fault is returned.
+	ExecutionStartToCloseTimeout *string
+
+	// The input to be provided to the workflow execution.
+	Input *string
+
+	// The IAM role attached to the child workflow execution.
+	LambdaRole *string
+
+	// The list of tags to associate with the child workflow execution. A maximum of 5
+	// tags can be specified. You can list workflow executions with a specific tag by
+	// calling ListOpenWorkflowExecutions () or ListClosedWorkflowExecutions () and
+	// specifying a TagFilter ().
+	TagList []*string
+
+	// The name of the task list to be used for decision tasks of the child workflow
+	// execution. A task list for this workflow execution must be specified either as a
+	// default for the workflow type or through this parameter. If neither this
+	// parameter is set nor a default task list was specified at registration time then
+	// a fault is returned. The specified string must not start or end with whitespace.
+	// It must not contain a : (colon), / (slash), | (vertical bar), or any control
+	// characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain the
+	// literal string arn.
+	TaskList *TaskList
+
+	// A task priority that, if set, specifies the priority for a decision task of this
+	// workflow execution. This overrides the defaultTaskPriority specified when
+	// registering the workflow type. Valid values are integers that range from Java's
+	// Integer.MIN_VALUE (-2147483648) to Integer.MAX_VALUE (2147483647). Higher
+	// numbers indicate higher priority. For more information about setting task
+	// priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
+
+	// Specifies the maximum duration of decision tasks for this workflow execution.
+	// This parameter overrides the defaultTaskStartToCloseTimout specified when
+	// registering the workflow type using RegisterWorkflowType (). The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration. A task start-to-close timeout for this workflow
+	// execution must be specified either as a default for the workflow type or through
+	// this parameter. If neither this parameter is set nor a default task
+	// start-to-close timeout was specified at registration time then a fault is
+	// returned.
+	TaskStartToCloseTimeout *string
 }
 
 // Provides the details of the StartChildWorkflowExecutionFailed event.
 type StartChildWorkflowExecutionFailedEventAttributes struct {
-
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision () to request this
-	// child workflow execution. This information can be useful for diagnosing problems
-	// by tracing back the chain of events.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
-	// The workflowId of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowId *string
 
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. When cause is set to OPERATION_NOT_PERMITTED,
@@ -2476,6 +2463,14 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause StartChildWorkflowExecutionFailedCause
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the StartChildWorkflowExecutionDecision () to request this
+	// child workflow execution. This information can be useful for diagnosing problems
+	// by tracing back the chain of events.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
 
 	// When the cause is WORKFLOW_ALREADY_RUNNING, initiatedEventId is the ID of the
 	// StartChildWorkflowExecutionInitiated event that corresponds to the
@@ -2488,75 +2483,24 @@ type StartChildWorkflowExecutionFailedEventAttributes struct {
 	// This member is required.
 	InitiatedEventId *int64
 
-	// The data attached to the event that the decider can use in subsequent workflow
-	// tasks. This data isn't sent to the child workflow execution.
-	Control *string
+	// The workflowId of the child workflow execution.
+	//
+	// This member is required.
+	WorkflowId *string
 
 	// The workflow type provided in the StartChildWorkflowExecutionDecision () that
 	// failed.
 	//
 	// This member is required.
 	WorkflowType *WorkflowType
+
+	// The data attached to the event that the decider can use in subsequent workflow
+	// tasks. This data isn't sent to the child workflow execution.
+	Control *string
 }
 
 // Provides the details of the StartChildWorkflowExecutionInitiated event.
 type StartChildWorkflowExecutionInitiatedEventAttributes struct {
-
-	// The list of tags to associated with the child workflow execution.
-	TagList []*string
-
-	// The inputs provided to the child workflow execution.
-	Input *string
-
-	// The IAM role to attach to the child workflow execution.
-	LambdaRole *string
-
-	// The maximum duration for the child workflow execution. If the workflow execution
-	// isn't closed within this duration, it is timed out and force-terminated. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
-	ExecutionStartToCloseTimeout *string
-
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartChildWorkflowExecutionDecision () to request this
-	// child workflow execution. This information can be useful for diagnosing problems
-	// by tracing back the cause of events.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
-
-	// The workflowId of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowId *string
-
-	// The priority assigned for the decision tasks for this workflow execution. Valid
-	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
-	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
-	// more information about setting task priority, see Setting Task Priority
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
-	// in the Amazon SWF Developer Guide.
-	TaskPriority *string
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// decision tasks. This data isn't sent to the activity.
-	Control *string
-
-	// The name of the task list used for the decision tasks of the child workflow
-	// execution.
-	//
-	// This member is required.
-	TaskList *TaskList
-
-	// The type of the child workflow execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
-
-	// The maximum duration allowed for the decision tasks for this workflow execution.
-	// The duration is specified in seconds, an integer greater than or equal to 0. You
-	// can use NONE to specify unlimited duration.
-	TaskStartToCloseTimeout *string
 
 	// The policy to use for the child workflow executions if this execution gets
 	// terminated by explicitly calling the TerminateWorkflowExecution () action or due
@@ -2576,19 +2520,67 @@ type StartChildWorkflowExecutionInitiatedEventAttributes struct {
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the StartChildWorkflowExecutionDecision () to request this
+	// child workflow execution. This information can be useful for diagnosing problems
+	// by tracing back the cause of events.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
+
+	// The name of the task list used for the decision tasks of the child workflow
+	// execution.
+	//
+	// This member is required.
+	TaskList *TaskList
+
+	// The workflowId of the child workflow execution.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	// The type of the child workflow execution.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
+
+	// Data attached to the event that can be used by the decider in subsequent
+	// decision tasks. This data isn't sent to the activity.
+	Control *string
+
+	// The maximum duration for the child workflow execution. If the workflow execution
+	// isn't closed within this duration, it is timed out and force-terminated. The
+	// duration is specified in seconds, an integer greater than or equal to 0. You can
+	// use NONE to specify unlimited duration.
+	ExecutionStartToCloseTimeout *string
+
+	// The inputs provided to the child workflow execution.
+	Input *string
+
+	// The IAM role to attach to the child workflow execution.
+	LambdaRole *string
+
+	// The list of tags to associated with the child workflow execution.
+	TagList []*string
+
+	// The priority assigned for the decision tasks for this workflow execution. Valid
+	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
+	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
+	// more information about setting task priority, see Setting Task Priority
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
+	// in the Amazon SWF Developer Guide.
+	TaskPriority *string
+
+	// The maximum duration allowed for the decision tasks for this workflow execution.
+	// The duration is specified in seconds, an integer greater than or equal to 0. You
+	// can use NONE to specify unlimited duration.
+	TaskStartToCloseTimeout *string
 }
 
 // Provides the details of the StartLambdaFunctionFailed event. It isn't set for
 // other event types.
 type StartLambdaFunctionFailedEventAttributes struct {
-
-	// The ID of the ActivityTaskScheduled event that was recorded when this activity
-	// task was scheduled. To help diagnose issues, use this information to trace back
-	// the chain of events leading up to this event.
-	ScheduledEventId *int64
-
-	// A description that can help diagnose the cause of the fault.
-	Message *string
 
 	// The cause of the failure. To help diagnose issues, use this information to trace
 	// back the chain of events leading up to this event. If cause is set to
@@ -2598,6 +2590,14 @@ type StartLambdaFunctionFailedEventAttributes struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
 	// in the Amazon SWF Developer Guide.
 	Cause StartLambdaFunctionFailedCause
+
+	// A description that can help diagnose the cause of the fault.
+	Message *string
+
+	// The ID of the ActivityTaskScheduled event that was recorded when this activity
+	// task was scheduled. To help diagnose issues, use this information to trace back
+	// the chain of events leading up to this event.
+	ScheduledEventId *int64
 }
 
 // Provides the details of the StartTimer decision. Access Control You can use IAM
@@ -2622,6 +2622,12 @@ type StartLambdaFunctionFailedEventAttributes struct {
 // in the Amazon SWF Developer Guide.
 type StartTimerDecisionAttributes struct {
 
+	// The duration to wait before firing the timer. The duration is specified in
+	// seconds, an integer greater than or equal to 0.
+	//
+	// This member is required.
+	StartToFireTimeout *string
+
 	// The unique ID of the timer. The specified string must not start or end with
 	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or any
 	// control characters (\u0000-\u001f | \u007f-\u009f). Also, it must not contain
@@ -2630,12 +2636,6 @@ type StartTimerDecisionAttributes struct {
 	// This member is required.
 	TimerId *string
 
-	// The duration to wait before firing the timer. The duration is specified in
-	// seconds, an integer greater than or equal to 0.
-	//
-	// This member is required.
-	StartToFireTimeout *string
-
 	// The data attached to the event that can be used by the decider in subsequent
 	// workflow tasks.
 	Control *string
@@ -2643,19 +2643,6 @@ type StartTimerDecisionAttributes struct {
 
 // Provides the details of the StartTimerFailed event.
 type StartTimerFailedEventAttributes struct {
-
-	// The timerId provided in the StartTimer decision that failed.
-	//
-	// This member is required.
-	TimerId *string
-
-	// The ID of the DecisionTaskCompleted event corresponding to the decision task
-	// that resulted in the StartTimer decision for this activity task. This
-	// information can be useful for diagnosing problems by tracing back the chain of
-	// events leading up to this event.
-	//
-	// This member is required.
-	DecisionTaskCompletedEventId *int64
 
 	// The cause of the failure. This information is generated by the system and can be
 	// useful for diagnostic purposes. If cause is set to OPERATION_NOT_PERMITTED, the
@@ -2666,6 +2653,19 @@ type StartTimerFailedEventAttributes struct {
 	//
 	// This member is required.
 	Cause StartTimerFailedCause
+
+	// The ID of the DecisionTaskCompleted event corresponding to the decision task
+	// that resulted in the StartTimer decision for this activity task. This
+	// information can be useful for diagnosing problems by tracing back the chain of
+	// events leading up to this event.
+	//
+	// This member is required.
+	DecisionTaskCompletedEventId *int64
+
+	// The timerId provided in the StartTimer decision that failed.
+	//
+	// This member is required.
+	TimerId *string
 }
 
 // Used to filter the workflow executions in visibility APIs based on a tag.
@@ -2691,13 +2691,6 @@ type TaskList struct {
 // Provides the details of the TimerCanceled event.
 type TimerCanceledEventAttributes struct {
 
-	// The ID of the TimerStarted event that was recorded when this timer was started.
-	// This information can be useful for diagnosing problems by tracing back the chain
-	// of events leading up to this event.
-	//
-	// This member is required.
-	StartedEventId *int64
-
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the CancelTimer decision to cancel this timer. This information
 	// can be useful for diagnosing problems by tracing back the chain of events
@@ -2705,6 +2698,13 @@ type TimerCanceledEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
+
+	// The ID of the TimerStarted event that was recorded when this timer was started.
+	// This information can be useful for diagnosing problems by tracing back the chain
+	// of events leading up to this event.
+	//
+	// This member is required.
+	StartedEventId *int64
 
 	// The unique ID of the timer that was canceled.
 	//
@@ -2715,30 +2715,21 @@ type TimerCanceledEventAttributes struct {
 // Provides the details of the TimerFired event.
 type TimerFiredEventAttributes struct {
 
-	// The unique ID of the timer that fired.
-	//
-	// This member is required.
-	TimerId *string
-
 	// The ID of the TimerStarted event that was recorded when this timer was started.
 	// This information can be useful for diagnosing problems by tracing back the chain
 	// of events leading up to this event.
 	//
 	// This member is required.
 	StartedEventId *int64
+
+	// The unique ID of the timer that fired.
+	//
+	// This member is required.
+	TimerId *string
 }
 
 // Provides the details of the TimerStarted event.
 type TimerStartedEventAttributes struct {
-
-	// Data attached to the event that can be used by the decider in subsequent
-	// workflow tasks.
-	Control *string
-
-	// The unique ID of the timer that was started.
-	//
-	// This member is required.
-	TimerId *string
 
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the StartTimer decision for this activity task. This
@@ -2753,6 +2744,15 @@ type TimerStartedEventAttributes struct {
 	//
 	// This member is required.
 	StartToFireTimeout *string
+
+	// The unique ID of the timer that was started.
+	//
+	// This member is required.
+	TimerId *string
+
+	// Data attached to the event that can be used by the decider in subsequent
+	// workflow tasks.
+	Control *string
 }
 
 // Represents a workflow execution.
@@ -2787,6 +2787,12 @@ type WorkflowExecutionCanceledEventAttributes struct {
 // Provides the details of the WorkflowExecutionCancelRequested event.
 type WorkflowExecutionCancelRequestedEventAttributes struct {
 
+	// If set, indicates that the request to cancel the workflow execution was
+	// automatically generated, and specifies the cause. This happens if the parent
+	// workflow execution times out or is terminated, and the child policy is set to
+	// cancel child executions.
+	Cause WorkflowExecutionCancelRequestedCause
+
 	// The ID of the RequestCancelExternalWorkflowExecutionInitiated event
 	// corresponding to the RequestCancelExternalWorkflowExecution decision to cancel
 	// this workflow execution.The source event with this ID can be found in the
@@ -2797,12 +2803,6 @@ type WorkflowExecutionCancelRequestedEventAttributes struct {
 
 	// The external workflow execution for which the cancellation was requested.
 	ExternalWorkflowExecution *WorkflowExecution
-
-	// If set, indicates that the request to cancel the workflow execution was
-	// automatically generated, and specifies the cause. This happens if the parent
-	// workflow execution times out or is terminated, and the child policy is set to
-	// cancel child executions.
-	Cause WorkflowExecutionCancelRequestedCause
 }
 
 // Provides the details of the WorkflowExecutionCompleted event.
@@ -2845,8 +2845,17 @@ type WorkflowExecutionConfiguration struct {
 	// This member is required.
 	ChildPolicy ChildPolicy
 
-	// The IAM role attached to the child workflow execution.
-	LambdaRole *string
+	// The total duration for this workflow execution. The duration is specified in
+	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// unlimited duration.
+	//
+	// This member is required.
+	ExecutionStartToCloseTimeout *string
+
+	// The task list used for the decision tasks generated for this workflow execution.
+	//
+	// This member is required.
+	TaskList *TaskList
 
 	// The maximum duration allowed for decision tasks for this workflow execution. The
 	// duration is specified in seconds, an integer greater than or equal to 0. You can
@@ -2855,6 +2864,9 @@ type WorkflowExecutionConfiguration struct {
 	// This member is required.
 	TaskStartToCloseTimeout *string
 
+	// The IAM role attached to the child workflow execution.
+	LambdaRole *string
+
 	// The priority assigned to decision tasks for this workflow execution. Valid
 	// values are integers that range from Java's Integer.MIN_VALUE (-2147483648) to
 	// Integer.MAX_VALUE (2147483647). Higher numbers indicate higher priority. For
@@ -2862,18 +2874,6 @@ type WorkflowExecutionConfiguration struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	TaskPriority *string
-
-	// The task list used for the decision tasks generated for this workflow execution.
-	//
-	// This member is required.
-	TaskList *TaskList
-
-	// The total duration for this workflow execution. The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
-	// unlimited duration.
-	//
-	// This member is required.
-	ExecutionStartToCloseTimeout *string
 }
 
 // Provides the details of the WorkflowExecutionContinuedAsNew event.
@@ -2898,20 +2898,6 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// This member is required.
 	ChildPolicy ChildPolicy
 
-	// The workflow type of this execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
-
-	// The maximum duration of decision tasks for the new workflow execution. The
-	// duration is specified in seconds, an integer greater than or equal to 0. You can
-	// use NONE to specify unlimited duration.
-	TaskStartToCloseTimeout *string
-
-	// The priority of the task to use for the decisions of the new (continued)
-	// workflow execution.
-	TaskPriority *string
-
 	// The ID of the DecisionTaskCompleted event corresponding to the decision task
 	// that resulted in the ContinueAsNewWorkflowExecution decision that started this
 	// execution. This information can be useful for diagnosing problems by tracing
@@ -2919,17 +2905,6 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	//
 	// This member is required.
 	DecisionTaskCompletedEventId *int64
-
-	// The input provided to the new workflow execution.
-	Input *string
-
-	// The IAM role to attach to the new (continued) workflow execution.
-	LambdaRole *string
-
-	// The total duration allowed for the new workflow execution. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration.
-	ExecutionStartToCloseTimeout *string
 
 	// The runId of the new workflow execution.
 	//
@@ -2942,8 +2917,33 @@ type WorkflowExecutionContinuedAsNewEventAttributes struct {
 	// This member is required.
 	TaskList *TaskList
 
+	// The workflow type of this execution.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
+
+	// The total duration allowed for the new workflow execution. The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration.
+	ExecutionStartToCloseTimeout *string
+
+	// The input provided to the new workflow execution.
+	Input *string
+
+	// The IAM role to attach to the new (continued) workflow execution.
+	LambdaRole *string
+
 	// The list of tags associated with the new workflow execution.
 	TagList []*string
+
+	// The priority of the task to use for the decisions of the new (continued)
+	// workflow execution.
+	TaskPriority *string
+
+	// The maximum duration of decision tasks for the new workflow execution. The
+	// duration is specified in seconds, an integer greater than or equal to 0. You can
+	// use NONE to specify unlimited duration.
+	TaskStartToCloseTimeout *string
 }
 
 // Provides the details of the WorkflowExecutionFailed event.
@@ -2976,6 +2976,29 @@ type WorkflowExecutionFilter struct {
 // Contains information about a workflow execution.
 type WorkflowExecutionInfo struct {
 
+	// The workflow execution this information is about.
+	//
+	// This member is required.
+	Execution *WorkflowExecution
+
+	// The current status of the execution.
+	//
+	// This member is required.
+	ExecutionStatus ExecutionStatus
+
+	// The time when the execution was started.
+	//
+	// This member is required.
+	StartTimestamp *time.Time
+
+	// The type of the workflow execution.
+	//
+	// This member is required.
+	WorkflowType *WorkflowType
+
+	// Set to true if a cancellation is requested for this workflow execution.
+	CancelRequested *bool
+
 	// If the execution status is closed then this specifies how the execution was
 	// closed:
 	//
@@ -2999,59 +3022,33 @@ type WorkflowExecutionInfo struct {
 	// execution was started to carry on the workflow.
 	CloseStatus CloseStatus
 
+	// The time when the workflow execution was closed. Set only if the execution
+	// status is CLOSED.
+	CloseTimestamp *time.Time
+
 	// If this workflow execution is a child of another execution then contains the
 	// workflow execution that started this execution.
 	Parent *WorkflowExecution
-
-	// The current status of the execution.
-	//
-	// This member is required.
-	ExecutionStatus ExecutionStatus
-
-	// The type of the workflow execution.
-	//
-	// This member is required.
-	WorkflowType *WorkflowType
-
-	// Set to true if a cancellation is requested for this workflow execution.
-	CancelRequested *bool
-
-	// The time when the execution was started.
-	//
-	// This member is required.
-	StartTimestamp *time.Time
-
-	// The workflow execution this information is about.
-	//
-	// This member is required.
-	Execution *WorkflowExecution
 
 	// The list of tags associated with the workflow execution. Tags can be used to
 	// identify and list workflow executions of interest through the visibility APIs. A
 	// workflow execution can have a maximum of 5 tags.
 	TagList []*string
-
-	// The time when the workflow execution was closed. Set only if the execution
-	// status is CLOSED.
-	CloseTimestamp *time.Time
 }
 
 // Contains the counts of open tasks, child workflow executions and timers for a
 // workflow execution.
 type WorkflowExecutionOpenCounts struct {
 
-	// The count of timers started by this workflow execution that have not fired yet.
-	//
-	// This member is required.
-	OpenTimers *int32
-
 	// The count of activity tasks whose status is OPEN.
 	//
 	// This member is required.
 	OpenActivityTasks *int32
 
-	// The count of Lambda tasks whose status is OPEN.
-	OpenLambdaFunctions *int32
+	// The count of child workflow executions whose status is OPEN.
+	//
+	// This member is required.
+	OpenChildWorkflowExecutions *int32
 
 	// The count of decision tasks whose status is OPEN. A workflow execution can have
 	// at most one open decision task.
@@ -3059,14 +3056,23 @@ type WorkflowExecutionOpenCounts struct {
 	// This member is required.
 	OpenDecisionTasks *int32
 
-	// The count of child workflow executions whose status is OPEN.
+	// The count of timers started by this workflow execution that have not fired yet.
 	//
 	// This member is required.
-	OpenChildWorkflowExecutions *int32
+	OpenTimers *int32
+
+	// The count of Lambda tasks whose status is OPEN.
+	OpenLambdaFunctions *int32
 }
 
 // Provides the details of the WorkflowExecutionSignaled event.
 type WorkflowExecutionSignaledEventAttributes struct {
+
+	// The name of the signal received. The decider can use the signal name and inputs
+	// to determine how to the process the signal.
+	//
+	// This member is required.
+	SignalName *string
 
 	// The ID of the SignalExternalWorkflowExecutionInitiated event corresponding to
 	// the SignalExternalWorkflow decision to signal this workflow execution.The source
@@ -3080,12 +3086,6 @@ type WorkflowExecutionSignaledEventAttributes struct {
 	// sent by another workflow execution.
 	ExternalWorkflowExecution *WorkflowExecution
 
-	// The name of the signal received. The decider can use the signal name and inputs
-	// to determine how to the process the signal.
-	//
-	// This member is required.
-	SignalName *string
-
 	// The inputs provided with the signal. The decider can use the signal name and
 	// inputs to determine how to process the signal.
 	Input *string
@@ -3093,17 +3093,6 @@ type WorkflowExecutionSignaledEventAttributes struct {
 
 // Provides details of WorkflowExecutionStarted event.
 type WorkflowExecutionStartedEventAttributes struct {
-
-	// The IAM role attached to the workflow execution.
-	LambdaRole *string
-
-	// If this workflow execution was started due to a ContinueAsNewWorkflowExecution
-	// decision, then it contains the runId of the previous workflow execution that was
-	// closed and continued as this execution.
-	ContinuedExecutionRunId *string
-
-	// The input provided to the workflow execution.
-	Input *string
 
 	// The policy to use for the child workflow executions if this workflow execution
 	// is terminated, by calling the TerminateWorkflowExecution () action explicitly or
@@ -3124,18 +3113,6 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// This member is required.
 	ChildPolicy ChildPolicy
 
-	// The priority of the decision tasks in the workflow execution.
-	TaskPriority *string
-
-	// The maximum duration of decision tasks for this workflow type. The duration is
-	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
-	// specify unlimited duration.
-	TaskStartToCloseTimeout *string
-
-	// The source workflow execution that started this workflow execution. The member
-	// isn't set if the workflow execution was not started by a workflow.
-	ParentWorkflowExecution *WorkflowExecution
-
 	// The name of the task list for scheduling the decision tasks for this workflow
 	// execution.
 	//
@@ -3147,10 +3124,21 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// This member is required.
 	WorkflowType *WorkflowType
 
+	// If this workflow execution was started due to a ContinueAsNewWorkflowExecution
+	// decision, then it contains the runId of the previous workflow execution that was
+	// closed and continued as this execution.
+	ContinuedExecutionRunId *string
+
 	// The maximum duration for this workflow execution. The duration is specified in
 	// seconds, an integer greater than or equal to 0. You can use NONE to specify
 	// unlimited duration.
 	ExecutionStartToCloseTimeout *string
+
+	// The input provided to the workflow execution.
+	Input *string
+
+	// The IAM role attached to the workflow execution.
+	LambdaRole *string
 
 	// The ID of the StartChildWorkflowExecutionInitiated event corresponding to the
 	// StartChildWorkflowExecutionDecision () to start this workflow execution. The
@@ -3159,9 +3147,21 @@ type WorkflowExecutionStartedEventAttributes struct {
 	// back the chain of events leading up to this event.
 	ParentInitiatedEventId *int64
 
+	// The source workflow execution that started this workflow execution. The member
+	// isn't set if the workflow execution was not started by a workflow.
+	ParentWorkflowExecution *WorkflowExecution
+
 	// The list of tags associated with this workflow execution. An execution can have
 	// up to 5 tags.
 	TagList []*string
+
+	// The priority of the decision tasks in the workflow execution.
+	TaskPriority *string
+
+	// The maximum duration of decision tasks for this workflow type. The duration is
+	// specified in seconds, an integer greater than or equal to 0. You can use NONE to
+	// specify unlimited duration.
+	TaskStartToCloseTimeout *string
 }
 
 // Provides the details of the WorkflowExecutionTerminated event.
@@ -3189,20 +3189,15 @@ type WorkflowExecutionTerminatedEventAttributes struct {
 	// is terminated and the child policy is set to terminate child executions.
 	Cause WorkflowExecutionTerminatedCause
 
-	// The reason provided for the termination.
-	Reason *string
-
 	// The details provided for the termination.
 	Details *string
+
+	// The reason provided for the termination.
+	Reason *string
 }
 
 // Provides the details of the WorkflowExecutionTimedOut event.
 type WorkflowExecutionTimedOutEventAttributes struct {
-
-	// The type of timeout that caused this event.
-	//
-	// This member is required.
-	TimeoutType WorkflowExecutionTimeoutType
 
 	// The policy used for the child workflow executions of this workflow execution.
 	// The supported child policies are:
@@ -3220,54 +3215,31 @@ type WorkflowExecutionTimedOutEventAttributes struct {
 	//
 	// This member is required.
 	ChildPolicy ChildPolicy
+
+	// The type of timeout that caused this event.
+	//
+	// This member is required.
+	TimeoutType WorkflowExecutionTimeoutType
 }
 
 // Represents a workflow type.
 type WorkflowType struct {
-
-	// The version of the workflow type. The combination of workflow type name and
-	// version must be unique with in a domain.
-	//
-	// This member is required.
-	Version *string
 
 	// The name of the workflow type. The combination of workflow type name and version
 	// must be unique with in a domain.
 	//
 	// This member is required.
 	Name *string
+
+	// The version of the workflow type. The combination of workflow type name and
+	// version must be unique with in a domain.
+	//
+	// This member is required.
+	Version *string
 }
 
 // The configuration settings of a workflow type.
 type WorkflowTypeConfiguration struct {
-
-	// The default maximum duration, specified when registering the workflow type, that
-	// a decision task for executions of this workflow type might take before returning
-	// completion or failure. If the task doesn'tdo close in the specified time then
-	// the task is automatically timed out and rescheduled. If the decider eventually
-	// reports a completion or failure, it is ignored. This default can be overridden
-	// when starting a workflow execution using the StartWorkflowExecution () action or
-	// the StartChildWorkflowExecutionDecision (). The duration is specified in
-	// seconds, an integer greater than or equal to 0. You can use NONE to specify
-	// unlimited duration.
-	DefaultTaskStartToCloseTimeout *string
-
-	// The default maximum duration, specified when registering the workflow type, for
-	// executions of this workflow type. This default can be overridden when starting a
-	// workflow execution using the StartWorkflowExecution () action or the
-	// StartChildWorkflowExecutionDecision (). The duration is specified in seconds, an
-	// integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
-	DefaultExecutionStartToCloseTimeout *string
-
-	// The default IAM role attached to this workflow type. Executions of this workflow
-	// type need IAM roles to invoke Lambda functions. If you don't specify an IAM role
-	// when starting this workflow type, the default Lambda role is attached to the
-	// execution. For more information, see
-	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
-	// in the Amazon SWF Developer Guide.
-	DefaultLambdaRole *string
 
 	// The default policy to use for the child workflow executions when a workflow
 	// execution of this type is terminated, by calling the TerminateWorkflowExecution
@@ -3288,6 +3260,23 @@ type WorkflowTypeConfiguration struct {
 	// continue to run.
 	DefaultChildPolicy ChildPolicy
 
+	// The default maximum duration, specified when registering the workflow type, for
+	// executions of this workflow type. This default can be overridden when starting a
+	// workflow execution using the StartWorkflowExecution () action or the
+	// StartChildWorkflowExecutionDecision (). The duration is specified in seconds, an
+	// integer greater than or equal to 0. You can use NONE to specify unlimited
+	// duration.
+	DefaultExecutionStartToCloseTimeout *string
+
+	// The default IAM role attached to this workflow type. Executions of this workflow
+	// type need IAM roles to invoke Lambda functions. If you don't specify an IAM role
+	// when starting this workflow type, the default Lambda role is attached to the
+	// execution. For more information, see
+	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// in the Amazon SWF Developer Guide.
+	DefaultLambdaRole *string
+
 	// The default task list, specified when registering the workflow type, for
 	// decisions tasks scheduled for workflow executions of this type. This default can
 	// be overridden when starting a workflow execution using the
@@ -3304,23 +3293,44 @@ type WorkflowTypeConfiguration struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string
+
+	// The default maximum duration, specified when registering the workflow type, that
+	// a decision task for executions of this workflow type might take before returning
+	// completion or failure. If the task doesn'tdo close in the specified time then
+	// the task is automatically timed out and rescheduled. If the decider eventually
+	// reports a completion or failure, it is ignored. This default can be overridden
+	// when starting a workflow execution using the StartWorkflowExecution () action or
+	// the StartChildWorkflowExecutionDecision (). The duration is specified in
+	// seconds, an integer greater than or equal to 0. You can use NONE to specify
+	// unlimited duration.
+	DefaultTaskStartToCloseTimeout *string
 }
 
 // Used to filter workflow execution query results by type. Each parameter, if
 // specified, defines a rule that must be satisfied by each returned result.
 type WorkflowTypeFilter struct {
 
-	// Version of the workflow type.
-	Version *string
-
 	// Name of the workflow type.
 	//
 	// This member is required.
 	Name *string
+
+	// Version of the workflow type.
+	Version *string
 }
 
 // Contains information about a workflow type.
 type WorkflowTypeInfo struct {
+
+	// The date when this type was registered.
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// The current status of the workflow type.
+	//
+	// This member is required.
+	Status RegistrationStatus
 
 	// The workflow type this information is about.
 	//
@@ -3331,16 +3341,6 @@ type WorkflowTypeInfo struct {
 	// deprecated.
 	DeprecationDate *time.Time
 
-	// The date when this type was registered.
-	//
-	// This member is required.
-	CreationDate *time.Time
-
 	// The description of the type registered through RegisterWorkflowType ().
 	Description *string
-
-	// The current status of the workflow type.
-	//
-	// This member is required.
-	Status RegistrationStatus
 }

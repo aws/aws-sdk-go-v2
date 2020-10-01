@@ -65,8 +65,23 @@ func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelI
 
 type CreateAssetModelInput struct {
 
+	// A unique, friendly name for the asset model.
+	//
+	// This member is required.
+	AssetModelName *string
+
 	// A description for the asset model.
 	AssetModelDescription *string
+
+	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
+	// model whose assets can be children of any other assets created from this asset
+	// model. For more information, see Asset Hierarchies
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
+	// in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per
+	// asset model. For more information, see Quotas
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
+	// AWS IoT SiteWise User Guide.
+	AssetModelHierarchies []*types.AssetModelHierarchyDefinition
 
 	// The property definitions of the asset model. For more information, see Asset
 	// Properties
@@ -82,26 +97,11 @@ type CreateAssetModelInput struct {
 	// request is required.
 	ClientToken *string
 
-	// A unique, friendly name for the asset model.
-	//
-	// This member is required.
-	AssetModelName *string
-
 	// A list of key-value pairs that contain metadata for the asset model. For more
 	// information, see Tagging your AWS IoT SiteWise resources
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the AWS IoT SiteWise User Guide.
 	Tags map[string]*string
-
-	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
-	// model whose assets can be children of any other assets created from this asset
-	// model. For more information, see Asset Hierarchies
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the AWS IoT SiteWise User Guide. You can specify up to 10 hierarchies per
-	// asset model. For more information, see Quotas
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html) in the
-	// AWS IoT SiteWise User Guide.
-	AssetModelHierarchies []*types.AssetModelHierarchyDefinition
 }
 
 type CreateAssetModelOutput struct {
@@ -114,17 +114,17 @@ type CreateAssetModelOutput struct {
 	// This member is required.
 	AssetModelArn *string
 
-	// The status of the asset model, which contains a state (CREATING after
-	// successfully calling this operation) and any error message.
-	//
-	// This member is required.
-	AssetModelStatus *types.AssetModelStatus
-
 	// The ID of the asset model. You can use this ID when you call other AWS IoT
 	// SiteWise APIs.
 	//
 	// This member is required.
 	AssetModelId *string
+
+	// The status of the asset model, which contains a state (CREATING after
+	// successfully calling this operation) and any error message.
+	//
+	// This member is required.
+	AssetModelStatus *types.AssetModelStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

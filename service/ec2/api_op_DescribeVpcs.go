@@ -117,12 +117,12 @@ type DescribeVpcsInput struct {
 	//     * vpc-id - The ID of the VPC.
 	Filters []*types.Filter
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// One or more VPC IDs. Default: Describes all your VPCs.
 	VpcIds []*string
@@ -130,12 +130,12 @@ type DescribeVpcsInput struct {
 
 type DescribeVpcsOutput struct {
 
-	// Information about one or more VPCs.
-	Vpcs []*types.Vpc
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about one or more VPCs.
+	Vpcs []*types.Vpc
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

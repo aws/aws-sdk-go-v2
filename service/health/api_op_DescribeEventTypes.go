@@ -64,19 +64,9 @@ type DescribeEventTypesInput struct {
 	// the only supported value at this time.
 	Locale *string
 
-	// If the results of a search are large, only a portion of the results are
-	// returned, and a nextToken pagination token is returned in the response. To
-	// retrieve the next batch of results, reissue the search request and include the
-	// returned token. When all results have been returned, the response does not
-	// contain a pagination token value.
-	NextToken *string
-
 	// The maximum number of items to return in one batch, between 10 and 100,
 	// inclusive.
 	MaxResults *int32
-}
-
-type DescribeEventTypesOutput struct {
 
 	// If the results of a search are large, only a portion of the results are
 	// returned, and a nextToken pagination token is returned in the response. To
@@ -84,12 +74,22 @@ type DescribeEventTypesOutput struct {
 	// returned token. When all results have been returned, the response does not
 	// contain a pagination token value.
 	NextToken *string
+}
+
+type DescribeEventTypesOutput struct {
 
 	// A list of event types that match the filter criteria. Event types have a
 	// category (issue, accountNotification, or scheduledChange), a service (for
 	// example, EC2, RDS, DATAPIPELINE, BILLING), and a code (in the format
 	// AWS_SERVICE_DESCRIPTION ; for example, AWS_EC2_SYSTEM_MAINTENANCE_EVENT).
 	EventTypes []*types.EventType
+
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next batch of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

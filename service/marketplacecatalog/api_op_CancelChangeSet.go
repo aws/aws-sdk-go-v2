@@ -59,25 +59,25 @@ func (c *Client) CancelChangeSet(ctx context.Context, params *CancelChangeSetInp
 
 type CancelChangeSetInput struct {
 
+	// Required. The catalog related to the request. Fixed value: AWSMarketplace.
+	//
+	// This member is required.
+	Catalog *string
+
 	// Required. The unique identifier of the StartChangeSet request that you want to
 	// cancel.
 	//
 	// This member is required.
 	ChangeSetId *string
-
-	// Required. The catalog related to the request. Fixed value: AWSMarketplace.
-	//
-	// This member is required.
-	Catalog *string
 }
 
 type CancelChangeSetOutput struct {
 
-	// The unique identifier for the change set referenced in this request.
-	ChangeSetId *string
-
 	// The ARN associated with the change set referenced in this request.
 	ChangeSetArn *string
+
+	// The unique identifier for the change set referenced in this request.
+	ChangeSetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

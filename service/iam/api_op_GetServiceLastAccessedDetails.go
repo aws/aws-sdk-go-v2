@@ -109,6 +109,12 @@ type GetServiceLastAccessedDetailsInput struct {
 	// This member is required.
 	JobId *string
 
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -117,15 +123,17 @@ type GetServiceLastAccessedDetailsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
 }
 
 type GetServiceLastAccessedDetailsOutput struct {
+
+	// The date and time, in ISO 8601 date-time format
+	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
+	// failed. This field is null if the job is still in progress, as indicated by a
+	// job status value of IN_PROGRESS.
+	//
+	// This member is required.
+	JobCompletionDate *time.Time
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the report job was created.
@@ -133,16 +141,19 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// This member is required.
 	JobCreationDate *time.Time
 
+	// The status of the job.
+	//
+	// This member is required.
+	JobStatus types.JobStatusType
+
 	// A ServiceLastAccessed object that contains details about the most recent attempt
 	// to access the service.
 	//
 	// This member is required.
 	ServicesLastAccessed []*types.ServiceLastAccessed
 
-	// The status of the job.
-	//
-	// This member is required.
-	JobStatus types.JobStatusType
+	// An object that contains details about the reason the operation failed.
+	Error *types.ErrorDetails
 
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
@@ -160,17 +171,6 @@ type GetServiceLastAccessedDetailsOutput struct {
 	// When IsTruncated is true, this element is present and contains the value to use
 	// for the Marker parameter in a subsequent pagination request.
 	Marker *string
-
-	// The date and time, in ISO 8601 date-time format
-	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
-	// failed. This field is null if the job is still in progress, as indicated by a
-	// job status value of IN_PROGRESS.
-	//
-	// This member is required.
-	JobCompletionDate *time.Time
-
-	// An object that contains details about the reason the operation failed.
-	Error *types.ErrorDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

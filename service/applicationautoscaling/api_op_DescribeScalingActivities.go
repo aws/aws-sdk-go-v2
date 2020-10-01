@@ -59,6 +59,23 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 
 type DescribeScalingActivitiesInput struct {
 
+	// The namespace of the AWS service that provides the resource. For a resource
+	// provided by your own application or service, use custom-resource instead.
+	//
+	// This member is required.
+	ServiceNamespace types.ServiceNamespace
+
+	// The maximum number of scalable targets. This value can be between 1 and 50. The
+	// default value is 50. If this parameter is used, the operation returns up to
+	// MaxResults results at a time, along with a NextToken value. To get the next set
+	// of results, include the NextToken value in a subsequent call. If this parameter
+	// is not used, the operation returns up to 50 results and a NextToken value, if
+	// applicable.
+	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
+
 	// The identifier of the resource associated with the scaling activity. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
 	// dimension, you must also specify a resource ID.
@@ -177,33 +194,16 @@ type DescribeScalingActivitiesInput struct {
 	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	// Amazon Keyspaces table.
 	ScalableDimension types.ScalableDimension
-
-	// The token for the next set of results.
-	NextToken *string
-
-	// The namespace of the AWS service that provides the resource. For a resource
-	// provided by your own application or service, use custom-resource instead.
-	//
-	// This member is required.
-	ServiceNamespace types.ServiceNamespace
-
-	// The maximum number of scalable targets. This value can be between 1 and 50. The
-	// default value is 50. If this parameter is used, the operation returns up to
-	// MaxResults results at a time, along with a NextToken value. To get the next set
-	// of results, include the NextToken value in a subsequent call. If this parameter
-	// is not used, the operation returns up to 50 results and a NextToken value, if
-	// applicable.
-	MaxResults *int32
 }
 
 type DescribeScalingActivitiesOutput struct {
 
-	// A list of scaling activity objects.
-	ScalingActivities []*types.ScalingActivity
-
 	// The token required to get the next set of results. This value is null if there
 	// are no more results to return.
 	NextToken *string
+
+	// A list of scaling activity objects.
+	ScalingActivities []*types.ScalingActivity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

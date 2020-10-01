@@ -59,16 +59,6 @@ func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberI
 // Request of CreateSubscriber
 type CreateSubscriberInput struct {
 
-	// The notification that you want to create a subscriber for.
-	//
-	// This member is required.
-	Notification *types.Notification
-
-	// The subscriber that you want to associate with a budget notification.
-	//
-	// This member is required.
-	Subscriber *types.Subscriber
-
 	// The accountId that is associated with the budget that you want to create a
 	// subscriber for.
 	//
@@ -80,6 +70,16 @@ type CreateSubscriberInput struct {
 	//
 	// This member is required.
 	BudgetName *string
+
+	// The notification that you want to create a subscriber for.
+	//
+	// This member is required.
+	Notification *types.Notification
+
+	// The subscriber that you want to associate with a budget notification.
+	//
+	// This member is required.
+	Subscriber *types.Subscriber
 }
 
 // Response of CreateSubscriber

@@ -78,13 +78,13 @@ type ListPipelineExecutionsInput struct {
 // Represents the output of a ListPipelineExecutions action.
 type ListPipelineExecutionsOutput struct {
 
-	// A list of executions in the history of a pipeline.
-	PipelineExecutionSummaries []*types.PipelineExecutionSummary
-
 	// A token that can be used in the next ListPipelineExecutions call. To view all
 	// items in the list, continue to call this operation with each subsequent token
 	// until no more nextToken values are returned.
 	NextToken *string
+
+	// A list of executions in the history of a pipeline.
+	PipelineExecutionSummaries []*types.PipelineExecutionSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

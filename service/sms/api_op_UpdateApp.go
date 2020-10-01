@@ -56,23 +56,23 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 
 type UpdateAppInput struct {
 
-	// Name of the service role in the customer's account used by AWS SMS.
-	RoleName *string
+	// ID of the application to update.
+	AppId *string
+
+	// New description of the application.
+	Description *string
 
 	// New name of the application.
 	Name *string
 
-	// ID of the application to update.
-	AppId *string
+	// Name of the service role in the customer's account used by AWS SMS.
+	RoleName *string
 
 	// List of server groups in the application to update.
 	ServerGroups []*types.ServerGroup
 
 	// List of tags to associate with the application.
 	Tags []*types.Tag
-
-	// New description of the application.
-	Description *string
 }
 
 type UpdateAppOutput struct {
@@ -80,11 +80,11 @@ type UpdateAppOutput struct {
 	// Summary description of the application.
 	AppSummary *types.AppSummary
 
-	// List of tags associated with the application.
-	Tags []*types.Tag
-
 	// List of updated server groups in the application.
 	ServerGroups []*types.ServerGroup
+
+	// List of tags associated with the application.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

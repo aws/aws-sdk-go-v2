@@ -73,22 +73,6 @@ func (c *Client) ListSecretVersionIds(ctx context.Context, params *ListSecretVer
 
 type ListSecretVersionIdsInput struct {
 
-	// (Optional) Limits the number of results you want to include in the response. If
-	// you don't include this parameter, it defaults to a value that's specific to the
-	// operation. If additional items exist beyond the maximum you specify, the
-	// NextToken response element is present and has a value (isn't null). Include that
-	// value as the NextToken request parameter in the next call to the operation to
-	// get the next part of the results. Note that Secrets Manager might return fewer
-	// results than the maximum even when there are more results available. You should
-	// check NextToken after every operation to ensure that you receive all of the
-	// results.
-	MaxResults *int32
-
-	// (Optional) Specifies that you want the results to include versions that do not
-	// have any staging labels attached to them. Such versions are considered
-	// deprecated and are subject to deletion by Secrets Manager as needed.
-	IncludeDeprecated *bool
-
 	// The identifier for the secret containing the versions you want to list. You can
 	// specify either the Amazon Resource Name (ARN) or the friendly name of the
 	// secret. If you specify an ARN, we generally recommend that you specify a
@@ -109,6 +93,22 @@ type ListSecretVersionIdsInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	// (Optional) Specifies that you want the results to include versions that do not
+	// have any staging labels attached to them. Such versions are considered
+	// deprecated and are subject to deletion by Secrets Manager as needed.
+	IncludeDeprecated *bool
+
+	// (Optional) Limits the number of results you want to include in the response. If
+	// you don't include this parameter, it defaults to a value that's specific to the
+	// operation. If additional items exist beyond the maximum you specify, the
+	// NextToken response element is present and has a value (isn't null). Include that
+	// value as the NextToken request parameter in the next call to the operation to
+	// get the next part of the results. Note that Secrets Manager might return fewer
+	// results than the maximum even when there are more results available. You should
+	// check NextToken after every operation to ensure that you receive all of the
+	// results.
+	MaxResults *int32
 
 	// (Optional) Use this parameter in a request if you receive a NextToken response
 	// in a previous request indicating there's more output available. In a subsequent

@@ -88,15 +88,15 @@ type PutBucketMetricsConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// Specifies the metrics configuration.
-	//
-	// This member is required.
-	MetricsConfiguration *types.MetricsConfiguration
-
 	// The ID used to identify the metrics configuration.
 	//
 	// This member is required.
 	Id *string
+
+	// Specifies the metrics configuration.
+	//
+	// This member is required.
+	MetricsConfiguration *types.MetricsConfiguration
 }
 
 type PutBucketMetricsConfigurationOutput struct {

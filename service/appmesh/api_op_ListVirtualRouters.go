@@ -62,12 +62,6 @@ type ListVirtualRoutersInput struct {
 	// This member is required.
 	MeshName *string
 
-	// The nextToken value returned from a previous paginated ListVirtualRouters
-	// request where limit was used and the results exceeded the value of that
-	// parameter. Pagination continues from the end of the previous results that
-	// returned the nextToken value.
-	NextToken *string
-
 	// The maximum number of results returned by ListVirtualRouters in paginated
 	// output. When you use this parameter, ListVirtualRouters returns only limit
 	// results in a single page along with a nextToken response element. You can see
@@ -82,6 +76,12 @@ type ListVirtualRoutersInput struct {
 	// more information about mesh sharing, see Working with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	MeshOwner *string
+
+	// The nextToken value returned from a previous paginated ListVirtualRouters
+	// request where limit was used and the results exceeded the value of that
+	// parameter. Pagination continues from the end of the previous results that
+	// returned the nextToken value.
+	NextToken *string
 }
 
 //

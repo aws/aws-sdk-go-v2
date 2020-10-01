@@ -89,22 +89,10 @@ func (c *Client) RegisterWorkflowType(ctx context.Context, params *RegisterWorkf
 
 type RegisterWorkflowTypeInput struct {
 
-	// The default IAM role attached to this workflow type. Executions of this workflow
-	// type need IAM roles to invoke Lambda functions. If you don't specify an IAM role
-	// when you start this workflow type, the default Lambda role is attached to the
-	// execution. For more information, see
-	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
-	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
-	// in the Amazon SWF Developer Guide.
-	DefaultLambdaRole *string
-
-	// If set, specifies the default maximum duration of decision tasks for this
-	// workflow type. This default can be overridden when starting a workflow execution
-	// using the StartWorkflowExecution () action or the
-	// StartChildWorkflowExecutionDecision (). The duration is specified in seconds, an
-	// integer greater than or equal to 0. You can use NONE to specify unlimited
-	// duration.
-	DefaultTaskStartToCloseTimeout *string
+	// The name of the domain in which to register the workflow type.
+	//
+	// This member is required.
+	Domain *string
 
 	// The name of the workflow type.  <p>The specified string must not start or end
 	// with whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
@@ -115,8 +103,17 @@ type RegisterWorkflowTypeInput struct {
 	// This member is required.
 	Name *string
 
-	// Textual description of the workflow type.
-	Description *string
+	// The version of the workflow type. The workflow type consists of the name and
+	// version, the combination of which must be unique within the domain. To get a
+	// list of all currently registered workflow types, use the ListWorkflowTypes ()
+	// action.  <p>The specified string must not start or end with whitespace. It must
+	// not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code>
+	// (vertical bar), or any control characters (<code>\u0000-\u001f</code> |
+	// <code>\u007f-\u009f</code>). Also, it must not <i>be</i> the literal string
+	// <code>arn</code>.</p>
+	//
+	// This member is required.
+	Version *string
 
 	// If set, specifies the default policy to use for the child workflow executions
 	// when a workflow execution of this type is terminated, by calling the
@@ -147,22 +144,14 @@ type RegisterWorkflowTypeInput struct {
 	// limit always causes the workflow execution to time out.</p>
 	DefaultExecutionStartToCloseTimeout *string
 
-	// The version of the workflow type. The workflow type consists of the name and
-	// version, the combination of which must be unique within the domain. To get a
-	// list of all currently registered workflow types, use the ListWorkflowTypes ()
-	// action.  <p>The specified string must not start or end with whitespace. It must
-	// not contain a <code>:</code> (colon), <code>/</code> (slash), <code>|</code>
-	// (vertical bar), or any control characters (<code>\u0000-\u001f</code> |
-	// <code>\u007f-\u009f</code>). Also, it must not <i>be</i> the literal string
-	// <code>arn</code>.</p>
-	//
-	// This member is required.
-	Version *string
-
-	// The name of the domain in which to register the workflow type.
-	//
-	// This member is required.
-	Domain *string
+	// The default IAM role attached to this workflow type. Executions of this workflow
+	// type need IAM roles to invoke Lambda functions. If you don't specify an IAM role
+	// when you start this workflow type, the default Lambda role is attached to the
+	// execution. For more information, see
+	// https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html
+	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/lambda-task.html)
+	// in the Amazon SWF Developer Guide.
+	DefaultLambdaRole *string
 
 	// If set, specifies the default task list to use for scheduling decision tasks for
 	// executions of this workflow type. This default is used only if a task list isn't
@@ -178,6 +167,17 @@ type RegisterWorkflowTypeInput struct {
 	// (https://docs.aws.amazon.com/amazonswf/latest/developerguide/programming-priority.html)
 	// in the Amazon SWF Developer Guide.
 	DefaultTaskPriority *string
+
+	// If set, specifies the default maximum duration of decision tasks for this
+	// workflow type. This default can be overridden when starting a workflow execution
+	// using the StartWorkflowExecution () action or the
+	// StartChildWorkflowExecutionDecision (). The duration is specified in seconds, an
+	// integer greater than or equal to 0. You can use NONE to specify unlimited
+	// duration.
+	DefaultTaskStartToCloseTimeout *string
+
+	// Textual description of the workflow type.
+	Description *string
 }
 
 type RegisterWorkflowTypeOutput struct {

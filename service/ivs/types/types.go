@@ -9,11 +9,11 @@ import (
 // Error related to a specific channel, specified by its ARN.
 type BatchError struct {
 
-	// Error code.
-	Code *string
-
 	// Channel ARN.
 	Arn *string
+
+	// Error code.
+	Code *string
 
 	// Error message, determined by the application.
 	Message *string
@@ -22,8 +22,24 @@ type BatchError struct {
 // Object specifying a channel.
 type Channel struct {
 
+	// Channel ARN.
+	Arn *string
+
+	// Channel ingest endpoint, part of the definition of an ingest server, used when
+	// you set up streaming software.
+	IngestEndpoint *string
+
+	// Channel latency mode. Default: LOW.
+	LatencyMode ChannelLatencyMode
+
+	// Channel name.
+	Name *string
+
 	// Channel playback URL.
 	PlaybackUrl *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]*string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
@@ -41,22 +57,6 @@ type Channel struct {
 	//
 	// Default: STANDARD.
 	Type ChannelType
-
-	// Channel ingest endpoint, part of the definition of an ingest server, used when
-	// you set up streaming software.
-	IngestEndpoint *string
-
-	// Channel ARN.
-	Arn *string
-
-	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
-
-	// Channel name.
-	Name *string
-
-	// Channel latency mode. Default: LOW.
-	LatencyMode ChannelLatencyMode
 }
 
 // Summary information about a channel.
@@ -68,80 +68,80 @@ type ChannelSummary struct {
 	// Channel latency mode. Default: LOW.
 	LatencyMode ChannelLatencyMode
 
-	// Array of 1-50 maps, each of the form string:string (key:value).
-	Tags map[string]*string
-
 	// Channel name.
 	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]*string
 }
 
 // Specifies a live video stream that has been ingested and distributed.
 type Stream struct {
 
-	// ISO-8601 formatted timestamp of the stream’s start.
-	StartTime *time.Time
+	// Channel ARN for the stream.
+	ChannelArn *string
+
+	// The stream’s health.
+	Health StreamHealth
 
 	// URL of the video master manifest, required by the video player to play the HLS
 	// stream.
 	PlaybackUrl *string
 
+	// ISO-8601 formatted timestamp of the stream’s start.
+	StartTime *time.Time
+
 	// The stream’s state.
 	State StreamState
 
 	// Number of current viewers of the stream.
 	ViewerCount *int64
-
-	// Channel ARN for the stream.
-	ChannelArn *string
-
-	// The stream’s health.
-	Health StreamHealth
 }
 
 // Object specifying a stream key.
 type StreamKey struct {
 
-	// Channel ARN for the stream.
-	ChannelArn *string
-
 	// Stream-key ARN.
 	Arn *string
 
-	// Stream-key value.
-	Value *string
+	// Channel ARN for the stream.
+	ChannelArn *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value)
 	Tags map[string]*string
+
+	// Stream-key value.
+	Value *string
 }
 
 // Summary information about a stream key.
 type StreamKeySummary struct {
 
+	// Stream-key ARN.
+	Arn *string
+
 	// Channel ARN for the stream.
 	ChannelArn *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value)
 	Tags map[string]*string
-
-	// Stream-key ARN.
-	Arn *string
 }
 
 // Summary information about a stream.
 type StreamSummary struct {
 
-	// The stream’s state.
-	State StreamState
+	// Channel ARN for the stream.
+	ChannelArn *string
 
 	// The stream’s health.
 	Health StreamHealth
 
-	// Channel ARN for the stream.
-	ChannelArn *string
+	// ISO-8601 formatted timestamp of the stream’s start.
+	StartTime *time.Time
+
+	// The stream’s state.
+	State StreamState
 
 	// Number of current viewers of the stream.
 	ViewerCount *int64
-
-	// ISO-8601 formatted timestamp of the stream’s start.
-	StartTime *time.Time
 }

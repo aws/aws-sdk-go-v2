@@ -57,9 +57,6 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Reserved for future use.
-	NextToken *string
-
 	// Identifier (ID) of the directory for which you want to retrieve tags.
 	//
 	// This member is required.
@@ -67,6 +64,9 @@ type ListTagsForResourceInput struct {
 
 	// Reserved for future use.
 	Limit *int32
+
+	// Reserved for future use.
+	NextToken *string
 }
 
 type ListTagsForResourceOutput struct {

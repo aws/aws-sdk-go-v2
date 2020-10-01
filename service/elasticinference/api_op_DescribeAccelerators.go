@@ -57,6 +57,9 @@ func (c *Client) DescribeAccelerators(ctx context.Context, params *DescribeAccel
 
 type DescribeAcceleratorsInput struct {
 
+	// The IDs of the accelerators to describe.
+	AcceleratorIds []*string
+
 	// One or more filters. Filter names and values are case-sensitive. Valid filter
 	// names are: accelerator-types: can provide a list of accelerator type names to
 	// filter for. instance-id: can provide a list of EC2 instance ids to filter for.
@@ -72,9 +75,6 @@ type DescribeAcceleratorsInput struct {
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
-
-	// The IDs of the accelerators to describe.
-	AcceleratorIds []*string
 }
 
 type DescribeAcceleratorsOutput struct {

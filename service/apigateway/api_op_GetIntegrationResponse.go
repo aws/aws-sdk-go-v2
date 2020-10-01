@@ -59,33 +59,33 @@ func (c *Client) GetIntegrationResponse(ctx context.Context, params *GetIntegrat
 // Represents a get integration response request.
 type GetIntegrationResponseInput struct {
 
-	// [Required] Specifies a get integration response request's status code.
+	// [Required] Specifies a get integration response request's HTTP method.
 	//
 	// This member is required.
-	StatusCode *string
+	HttpMethod *string
 
 	// [Required] Specifies a get integration response request's resource identifier.
 	//
 	// This member is required.
 	ResourceId *string
 
-	Template *bool
-
-	Title *string
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
-	TemplateSkipList []*string
-
-	// [Required] Specifies a get integration response request's HTTP method.
+	// [Required] Specifies a get integration response request's status code.
 	//
 	// This member is required.
-	HttpMethod *string
+	StatusCode *string
 
 	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -93,6 +93,21 @@ type GetIntegrationResponseInput struct {
 // back-end response. Creating an API
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html)
 type GetIntegrationResponseOutput struct {
+
+	// Specifies how to handle response payload content type conversions. Supported
+	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
+	// behaviors:
+	//
+	//     * CONVERT_TO_BINARY: Converts a response payload from a
+	// Base64-encoded string to the corresponding binary blob.
+	//
+	//     * CONVERT_TO_TEXT:
+	// Converts a response payload from a binary blob to a Base64-encoded string.
+	//
+	// If
+	// this property is not defined, the response payload will be passed through from
+	// the integration response to the method response without modification.
+	ContentHandling types.ContentHandlingStrategy
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the back end. The key is a method response header parameter name
@@ -112,10 +127,6 @@ type GetIntegrationResponseOutput struct {
 	// the key and a template as the value.
 	ResponseTemplates map[string]*string
 
-	// Specifies the status code that is used to map the integration response to an
-	// existing MethodResponse ().
-	StatusCode *string
-
 	// Specifies the regular expression (regex) pattern used to choose an integration
 	// response based on the response from the back end. For example, if the success
 	// response returns nothing and the error response returns some string, you could
@@ -125,20 +136,9 @@ type GetIntegrationResponseOutput struct {
 	// For all other HTTP and AWS back ends, the HTTP status code is matched.
 	SelectionPattern *string
 
-	// Specifies how to handle response payload content type conversions. Supported
-	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following
-	// behaviors:
-	//
-	//     * CONVERT_TO_BINARY: Converts a response payload from a
-	// Base64-encoded string to the corresponding binary blob.
-	//
-	//     * CONVERT_TO_TEXT:
-	// Converts a response payload from a binary blob to a Base64-encoded string.
-	//
-	// If
-	// this property is not defined, the response payload will be passed through from
-	// the integration response to the method response without modification.
-	ContentHandling types.ContentHandlingStrategy
+	// Specifies the status code that is used to map the integration response to an
+	// existing MethodResponse ().
+	StatusCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

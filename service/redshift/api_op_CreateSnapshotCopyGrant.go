@@ -83,12 +83,12 @@ type CreateSnapshotCopyGrantInput struct {
 	// This member is required.
 	SnapshotCopyGrantName *string
 
-	// A list of tag instances.
-	Tags []*types.Tag
-
 	// The unique identifier of the customer master key (CMK) to which to grant Amazon
 	// Redshift permission. If no key is specified, the default key is used.
 	KmsKeyId *string
+
+	// A list of tag instances.
+	Tags []*types.Tag
 }
 
 type CreateSnapshotCopyGrantOutput struct {

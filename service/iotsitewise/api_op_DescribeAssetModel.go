@@ -66,6 +66,24 @@ type DescribeAssetModelInput struct {
 
 type DescribeAssetModelOutput struct {
 
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// the asset model, which has the following format.
+	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	//
+	// This member is required.
+	AssetModelArn *string
+
+	// The date the asset model was created, in Unix epoch time.
+	//
+	// This member is required.
+	AssetModelCreationDate *time.Time
+
+	// The asset model's description.
+	//
+	// This member is required.
+	AssetModelDescription *string
+
 	// A list of asset model hierarchies that each contain a childAssetModelId and a
 	// hierarchyId (named id). A hierarchy specifies allowed parent/child asset
 	// relationships for an asset model.
@@ -78,44 +96,26 @@ type DescribeAssetModelOutput struct {
 	// This member is required.
 	AssetModelId *string
 
-	// The name of the asset model.
-	//
-	// This member is required.
-	AssetModelName *string
-
 	// The date the asset model was last updated, in Unix epoch time.
 	//
 	// This member is required.
 	AssetModelLastUpdateDate *time.Time
 
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the asset model, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	// The name of the asset model.
 	//
 	// This member is required.
-	AssetModelArn *string
+	AssetModelName *string
 
 	// The list of asset properties for the asset model.
 	//
 	// This member is required.
 	AssetModelProperties []*types.AssetModelProperty
 
-	// The asset model's description.
-	//
-	// This member is required.
-	AssetModelDescription *string
-
 	// The current status of the asset model, which contains a state and any error
 	// message.
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
-
-	// The date the asset model was created, in Unix epoch time.
-	//
-	// This member is required.
-	AssetModelCreationDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -71,17 +71,17 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 // Represents the input for DescribeStream.
 type DescribeStreamInput struct {
 
-	// The maximum number of shards to return in a single call. The default value is
-	// 100. If you specify a value greater than 100, at most 100 shards are returned.
-	Limit *int32
-
-	// The shard ID of the shard to start with.
-	ExclusiveStartShardId *string
-
 	// The name of the stream to describe.
 	//
 	// This member is required.
 	StreamName *string
+
+	// The shard ID of the shard to start with.
+	ExclusiveStartShardId *string
+
+	// The maximum number of shards to return in a single call. The default value is
+	// 100. If you specify a value greater than 100, at most 100 shards are returned.
+	Limit *int32
 }
 
 // Represents the output for DescribeStream.

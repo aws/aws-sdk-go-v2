@@ -57,16 +57,16 @@ func (c *Client) BatchGetCommits(ctx context.Context, params *BatchGetCommitsInp
 
 type BatchGetCommitsInput struct {
 
-	// The name of the repository that contains the commits.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// The full commit IDs of the commits to get information about. You must supply the
 	// full SHA IDs of each commit. You cannot use shortened SHA IDs.
 	//
 	// This member is required.
 	CommitIds []*string
+
+	// The name of the repository that contains the commits.
+	//
+	// This member is required.
+	RepositoryName *string
 }
 
 type BatchGetCommitsOutput struct {

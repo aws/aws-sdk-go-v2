@@ -58,16 +58,6 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 
 type ListPhoneNumbersInput struct {
 
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string
-
-	// The type of phone number.
-	PhoneNumberTypes []types.PhoneNumberType
-
-	// The ISO country code.
-	PhoneNumberCountryCodes []types.PhoneNumberCountryCode
-
 	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
@@ -75,15 +65,25 @@ type ListPhoneNumbersInput struct {
 
 	// The maximimum number of results to return per page.
 	MaxResults *int32
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string
+
+	// The ISO country code.
+	PhoneNumberCountryCodes []types.PhoneNumberCountryCode
+
+	// The type of phone number.
+	PhoneNumberTypes []types.PhoneNumberType
 }
 
 type ListPhoneNumbersOutput struct {
 
-	// Information about the phone numbers.
-	PhoneNumberSummaryList []*types.PhoneNumberSummary
-
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string
+
+	// Information about the phone numbers.
+	PhoneNumberSummaryList []*types.PhoneNumberSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

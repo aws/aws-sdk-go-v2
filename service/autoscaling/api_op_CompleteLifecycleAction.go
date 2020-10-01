@@ -82,16 +82,6 @@ func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLi
 
 type CompleteLifecycleActionInput struct {
 
-	// A universally unique identifier (UUID) that identifies a specific lifecycle
-	// action associated with an instance. Amazon EC2 Auto Scaling sends this token to
-	// the notification target you specified when you created the lifecycle hook.
-	LifecycleActionToken *string
-
-	// The name of the lifecycle hook.
-	//
-	// This member is required.
-	LifecycleHookName *string
-
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
@@ -103,8 +93,18 @@ type CompleteLifecycleActionInput struct {
 	// This member is required.
 	LifecycleActionResult *string
 
+	// The name of the lifecycle hook.
+	//
+	// This member is required.
+	LifecycleHookName *string
+
 	// The ID of the instance.
 	InstanceId *string
+
+	// A universally unique identifier (UUID) that identifies a specific lifecycle
+	// action associated with an instance. Amazon EC2 Auto Scaling sends this token to
+	// the notification target you specified when you created the lifecycle hook.
+	LifecycleActionToken *string
 }
 
 type CompleteLifecycleActionOutput struct {

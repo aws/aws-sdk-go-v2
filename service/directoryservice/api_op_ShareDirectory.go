@@ -75,6 +75,13 @@ type ShareDirectoryInput struct {
 	// This member is required.
 	DirectoryId *string
 
+	// The method used when sharing a directory to determine whether the directory
+	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
+	// account by sending a directory sharing request (HANDSHAKE).
+	//
+	// This member is required.
+	ShareMethod types.ShareMethod
+
 	// Identifier for the directory consumer account with whom the directory is to be
 	// shared.
 	//
@@ -85,13 +92,6 @@ type ShareDirectoryInput struct {
 	// consumer. The request includes a typed message to help the directory consumer
 	// administrator determine whether to approve or reject the share invitation.
 	ShareNotes *string
-
-	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
-	// account by sending a directory sharing request (HANDSHAKE).
-	//
-	// This member is required.
-	ShareMethod types.ShareMethod
 }
 
 type ShareDirectoryOutput struct {

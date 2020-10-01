@@ -57,31 +57,31 @@ func (c *Client) UpdateResourceShare(ctx context.Context, params *UpdateResource
 
 type UpdateResourceShareInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource share.
+	//
+	// This member is required.
+	ResourceShareArn *string
+
+	// Indicates whether principals outside your AWS organization can be associated
+	// with a resource share.
+	AllowExternalPrincipals *bool
+
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
 	// The name of the resource share.
 	Name *string
-
-	// Indicates whether principals outside your AWS organization can be associated
-	// with a resource share.
-	AllowExternalPrincipals *bool
-
-	// The Amazon Resource Name (ARN) of the resource share.
-	//
-	// This member is required.
-	ResourceShareArn *string
 }
 
 type UpdateResourceShareOutput struct {
 
-	// Information about the resource share.
-	ResourceShare *types.ResourceShare
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Information about the resource share.
+	ResourceShare *types.ResourceShare
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

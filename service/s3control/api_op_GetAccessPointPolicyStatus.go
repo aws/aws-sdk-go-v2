@@ -62,15 +62,15 @@ func (c *Client) GetAccessPointPolicyStatus(ctx context.Context, params *GetAcce
 
 type GetAccessPointPolicyStatusInput struct {
 
-	// The name of the access point whose policy status you want to retrieve.
-	//
-	// This member is required.
-	Name *string
-
 	// The account ID for the account that owns the specified access point.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the access point whose policy status you want to retrieve.
+	//
+	// This member is required.
+	Name *string
 }
 
 type GetAccessPointPolicyStatusOutput struct {

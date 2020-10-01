@@ -58,11 +58,11 @@ type GetServiceRoleForAccountInput struct {
 
 type GetServiceRoleForAccountOutput struct {
 
-	// The ARN of the role which is associated with the account.
-	RoleArn *string
-
 	// The time when the service role was associated with the account.
 	AssociatedAt *string
+
+	// The ARN of the role which is associated with the account.
+	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

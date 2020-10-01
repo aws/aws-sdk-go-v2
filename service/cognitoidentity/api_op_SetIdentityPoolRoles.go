@@ -60,16 +60,16 @@ func (c *Client) SetIdentityPoolRoles(ctx context.Context, params *SetIdentityPo
 // Input to the SetIdentityPoolRoles action.
 type SetIdentityPoolRolesInput struct {
 
+	// An identity pool ID in the format REGION:GUID.
+	//
+	// This member is required.
+	IdentityPoolId *string
+
 	// The map of roles associated with this pool. For a given role, the key will be
 	// either "authenticated" or "unauthenticated" and the value will be the Role ARN.
 	//
 	// This member is required.
 	Roles map[string]*string
-
-	// An identity pool ID in the format REGION:GUID.
-	//
-	// This member is required.
-	IdentityPoolId *string
 
 	// How users for a specific identity provider are to mapped to roles. This is a
 	// string to RoleMapping () object map. The string identifies the identity

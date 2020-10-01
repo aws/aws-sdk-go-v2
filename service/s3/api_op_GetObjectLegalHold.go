@@ -61,11 +61,6 @@ func (c *Client) GetObjectLegalHold(ctx context.Context, params *GetObjectLegalH
 
 type GetObjectLegalHoldInput struct {
 
-	// The key name for the object whose Legal Hold status you want to retrieve.
-	//
-	// This member is required.
-	Key *string
-
 	// The bucket name containing the object whose Legal Hold status you want to
 	// retrieve. When using this API with an access point, you must direct requests to
 	// the access point hostname. The access point hostname takes the form
@@ -78,6 +73,11 @@ type GetObjectLegalHoldInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// The key name for the object whose Legal Hold status you want to retrieve.
+	//
+	// This member is required.
+	Key *string
 
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. For information

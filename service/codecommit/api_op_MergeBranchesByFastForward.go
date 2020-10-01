@@ -62,6 +62,11 @@ type MergeBranchesByFastForwardInput struct {
 	// This member is required.
 	DestinationCommitSpecifier *string
 
+	// The name of the repository where you want to merge two branches.
+	//
+	// This member is required.
+	RepositoryName *string
+
 	// The branch, tag, HEAD, or other fully qualified reference used to identify a
 	// commit (for example, a branch name or a full commit ID).
 	//
@@ -70,11 +75,6 @@ type MergeBranchesByFastForwardInput struct {
 
 	// The branch where the merge is applied.
 	TargetBranch *string
-
-	// The name of the repository where you want to merge two branches.
-	//
-	// This member is required.
-	RepositoryName *string
 }
 
 type MergeBranchesByFastForwardOutput struct {

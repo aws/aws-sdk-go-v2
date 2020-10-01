@@ -59,13 +59,13 @@ func (c *Client) DeleteTrust(ctx context.Context, params *DeleteTrustInput, optF
 // Microsoft AD directory and the external domain.
 type DeleteTrustInput struct {
 
-	// Delete a conditional forwarder as part of a DeleteTrustRequest.
-	DeleteAssociatedConditionalForwarder *bool
-
 	// The Trust ID of the trust relationship to be deleted.
 	//
 	// This member is required.
 	TrustId *string
+
+	// Delete a conditional forwarder as part of a DeleteTrustRequest.
+	DeleteAssociatedConditionalForwarder *bool
 }
 
 // The result of a DeleteTrust request.

@@ -65,9 +65,6 @@ type CreateFilterInput struct {
 	// This member is required.
 	DetectorId *string
 
-	// The idempotency token for the create request.
-	ClientToken *string
-
 	// Represents the criteria to be used in the filter for querying findings. You can
 	// only use the following attributes to query findings:
 	//
@@ -217,24 +214,27 @@ type CreateFilterInput struct {
 	// This member is required.
 	FindingCriteria *types.FindingCriteria
 
-	// The description of the filter.
-	Description *string
-
-	// Specifies the action that is to be applied to the findings that match the
-	// filter.
-	Action types.FilterAction
-
 	// The name of the filter.
 	//
 	// This member is required.
 	Name *string
 
-	// The tags to be added to a new filter resource.
-	Tags map[string]*string
+	// Specifies the action that is to be applied to the findings that match the
+	// filter.
+	Action types.FilterAction
+
+	// The idempotency token for the create request.
+	ClientToken *string
+
+	// The description of the filter.
+	Description *string
 
 	// Specifies the position of the filter in the list of current filters. Also
 	// specifies the order in which this filter is applied to the findings.
 	Rank *int32
+
+	// The tags to be added to a new filter resource.
+	Tags map[string]*string
 }
 
 type CreateFilterOutput struct {

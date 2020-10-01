@@ -59,10 +59,6 @@ func (c *Client) DescribeQueries(ctx context.Context, params *DescribeQueriesInp
 
 type DescribeQueriesInput struct {
 
-	// Limits the returned queries to only those that have the specified status. Valid
-	// values are Cancelled, Complete, Failed, Running, and Scheduled.
-	Status types.QueryStatus
-
 	// Limits the returned queries to only those for the specified log group.
 	LogGroupName *string
 
@@ -71,15 +67,19 @@ type DescribeQueriesInput struct {
 
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
+
+	// Limits the returned queries to only those that have the specified status. Valid
+	// values are Cancelled, Complete, Failed, Running, and Scheduled.
+	Status types.QueryStatus
 }
 
 type DescribeQueriesOutput struct {
 
-	// The list of queries that match the request.
-	Queries []*types.QueryInfo
-
 	// The token for the next set of items to return. The token expires after 24 hours.
 	NextToken *string
+
+	// The list of queries that match the request.
+	Queries []*types.QueryInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,12 +57,6 @@ func (c *Client) GetFindingStatistics(ctx context.Context, params *GetFindingSta
 
 type GetFindingStatisticsInput struct {
 
-	// The maximum number of items to include in each page of the response.
-	Size *int32
-
-	// The criteria to use to sort the query results.
-	SortCriteria *types.FindingStatisticsSortCriteria
-
 	// The finding property to use to group the query results. Valid values are:
 	//
 	//     *
@@ -84,6 +78,12 @@ type GetFindingStatisticsInput struct {
 
 	// The criteria to use to filter the query results.
 	FindingCriteria *types.FindingCriteria
+
+	// The maximum number of items to include in each page of the response.
+	Size *int32
+
+	// The criteria to use to sort the query results.
+	SortCriteria *types.FindingStatisticsSortCriteria
 }
 
 type GetFindingStatisticsOutput struct {

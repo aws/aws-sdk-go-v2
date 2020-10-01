@@ -67,20 +67,8 @@ type GetLayerVersionByArnInput struct {
 
 type GetLayerVersionByArnOutput struct {
 
-	// The layer's software license.
-	LicenseInfo *string
-
 	// The layer's compatible runtimes.
 	CompatibleRuntimes []types.Runtime
-
-	// The description of the version.
-	Description *string
-
-	// The ARN of the layer version.
-	LayerVersionArn *string
-
-	// The version number.
-	Version *int64
 
 	// Details about the layer version.
 	Content *types.LayerVersionContentOutput
@@ -89,8 +77,20 @@ type GetLayerVersionByArnOutput struct {
 	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
 	CreatedDate *string
 
+	// The description of the version.
+	Description *string
+
 	// The ARN of the layer.
 	LayerArn *string
+
+	// The ARN of the layer version.
+	LayerVersionArn *string
+
+	// The layer's software license.
+	LicenseInfo *string
+
+	// The version number.
+	Version *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -103,22 +103,18 @@ func (c *Client) PutRecordBatch(ctx context.Context, params *PutRecordBatchInput
 
 type PutRecordBatchInput struct {
 
-	// One or more records.
-	//
-	// This member is required.
-	Records []*types.Record
-
 	// The name of the delivery stream.
 	//
 	// This member is required.
 	DeliveryStreamName *string
+
+	// One or more records.
+	//
+	// This member is required.
+	Records []*types.Record
 }
 
 type PutRecordBatchOutput struct {
-
-	// Indicates whether server-side encryption (SSE) was enabled during this
-	// operation.
-	Encrypted *bool
 
 	// The number of records that might have failed processing. This number might be
 	// greater than 0 even if the PutRecordBatch () call succeeds. Check FailedPutCount
@@ -132,6 +128,10 @@ type PutRecordBatchOutput struct {
 	//
 	// This member is required.
 	RequestResponses []*types.PutRecordBatchResponseEntry
+
+	// Indicates whether server-side encryption (SSE) was enabled during this
+	// operation.
+	Encrypted *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

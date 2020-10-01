@@ -61,26 +61,14 @@ func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params 
 
 type GetScalingPlanResourceForecastDataInput struct {
 
-	// The name of the scaling plan.
+	// The exclusive end time of the time range for the forecast data to get. The
+	// maximum time duration between the start and end time is seven days. Although
+	// this parameter can accept a date and time that is more than two days in the
+	// future, the availability of forecast data has limits. AWS Auto Scaling only
+	// issues forecasts for periods of two days in advance.
 	//
 	// This member is required.
-	ScalingPlanName *string
-
-	// The scalable dimension for the resource.
-	//
-	// This member is required.
-	ScalableDimension types.ScalableDimension
-
-	// The inclusive start time of the time range for the forecast data to get. The
-	// date and time can be at most 56 days before the current date and time.
-	//
-	// This member is required.
-	StartTime *time.Time
-
-	// The version number of the scaling plan.
-	//
-	// This member is required.
-	ScalingPlanVersion *int64
+	EndTime *time.Time
 
 	// The type of forecast data to get.
 	//
@@ -101,20 +89,6 @@ type GetScalingPlanResourceForecastDataInput struct {
 	//
 	// This member is required.
 	ForecastDataType types.ForecastDataType
-
-	// The exclusive end time of the time range for the forecast data to get. The
-	// maximum time duration between the start and end time is seven days. Although
-	// this parameter can accept a date and time that is more than two days in the
-	// future, the availability of forecast data has limits. AWS Auto Scaling only
-	// issues forecasts for periods of two days in advance.
-	//
-	// This member is required.
-	EndTime *time.Time
-
-	// The namespace of the AWS service.
-	//
-	// This member is required.
-	ServiceNamespace types.ServiceNamespace
 
 	// The ID of the resource. This string consists of the resource type and unique
 	// identifier.
@@ -145,6 +119,32 @@ type GetScalingPlanResourceForecastDataInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The scalable dimension for the resource.
+	//
+	// This member is required.
+	ScalableDimension types.ScalableDimension
+
+	// The name of the scaling plan.
+	//
+	// This member is required.
+	ScalingPlanName *string
+
+	// The version number of the scaling plan.
+	//
+	// This member is required.
+	ScalingPlanVersion *int64
+
+	// The namespace of the AWS service.
+	//
+	// This member is required.
+	ServiceNamespace types.ServiceNamespace
+
+	// The inclusive start time of the time range for the forecast data to get. The
+	// date and time can be at most 56 days before the current date and time.
+	//
+	// This member is required.
+	StartTime *time.Time
 }
 
 type GetScalingPlanResourceForecastDataOutput struct {

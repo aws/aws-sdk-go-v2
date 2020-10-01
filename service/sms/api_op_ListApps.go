@@ -56,9 +56,6 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 
 type ListAppsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	//
 	AppIds []*string
 
@@ -66,6 +63,9 @@ type ListAppsInput struct {
 	// 50. To retrieve the remaining results, make another call with the returned
 	// NextToken value.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 }
 
 type ListAppsOutput struct {

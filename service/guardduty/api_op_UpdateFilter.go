@@ -57,18 +57,16 @@ func (c *Client) UpdateFilter(ctx context.Context, params *UpdateFilterInput, op
 
 type UpdateFilterInput struct {
 
-	// Represents the criteria to be used in the filter for querying findings.
-	FindingCriteria *types.FindingCriteria
-
-	// Specifies the position of the filter in the list of current filters. Also
-	// specifies the order in which this filter is applied to the findings.
-	Rank *int32
-
 	// The unique ID of the detector that specifies the GuardDuty service where you
 	// want to update a filter.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// The name of the filter.
+	//
+	// This member is required.
+	FilterName *string
 
 	// Specifies the action that is to be applied to the findings that match the
 	// filter.
@@ -77,10 +75,12 @@ type UpdateFilterInput struct {
 	// The description of the filter.
 	Description *string
 
-	// The name of the filter.
-	//
-	// This member is required.
-	FilterName *string
+	// Represents the criteria to be used in the filter for querying findings.
+	FindingCriteria *types.FindingCriteria
+
+	// Specifies the position of the filter in the list of current filters. Also
+	// specifies the order in which this filter is applied to the findings.
+	Rank *int32
 }
 
 type UpdateFilterOutput struct {

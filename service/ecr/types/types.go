@@ -9,32 +9,32 @@ import (
 // This data type is used in the ImageScanFinding () data type.
 type Attribute struct {
 
-	// The value assigned to the attribute key.
-	Value *string
-
 	// The attribute key.
 	//
 	// This member is required.
 	Key *string
+
+	// The value assigned to the attribute key.
+	Value *string
 }
 
 // An object representing authorization data for an Amazon ECR registry.
 type AuthorizationData struct {
+
+	// A base64-encoded string that contains authorization data for the specified
+	// Amazon ECR registry. When the string is decoded, it is presented in the format
+	// user:password for private registry authentication using docker login.
+	AuthorizationToken *string
+
+	// The Unix time in seconds and milliseconds when the authorization token expires.
+	// Authorization tokens are valid for 12 hours.
+	ExpiresAt *time.Time
 
 	// The registry URL to use for this authorization token in a docker login command.
 	// The Amazon ECR registry URL format is
 	// https://aws_account_id.dkr.ecr.region.amazonaws.com. For example,
 	// https://012345678910.dkr.ecr.us-east-1.amazonaws.com..
 	ProxyEndpoint *string
-
-	// The Unix time in seconds and milliseconds when the authorization token expires.
-	// Authorization tokens are valid for 12 hours.
-	ExpiresAt *time.Time
-
-	// A base64-encoded string that contains authorization data for the specified
-	// Amazon ECR registry. When the string is decoded, it is presented in the format
-	// user:password for private registry authentication using docker login.
-	AuthorizationToken *string
 }
 
 // An object representing a filter on a DescribeImages () operation.
@@ -87,36 +87,37 @@ type EncryptionConfiguration struct {
 // An object representing an Amazon ECR image.
 type Image struct {
 
-	// The name of the repository associated with the image.
-	RepositoryName *string
+	// An object containing the image tag and image digest associated with an image.
+	ImageId *ImageIdentifier
 
 	// The image manifest associated with the image.
 	ImageManifest *string
 
-	// The AWS account ID associated with the registry containing the image.
-	RegistryId *string
-
 	// The media type associated with the image manifest.
 	ImageManifestMediaType *string
 
-	// An object containing the image tag and image digest associated with an image.
-	ImageId *ImageIdentifier
+	// The AWS account ID associated with the registry containing the image.
+	RegistryId *string
+
+	// The name of the repository associated with the image.
+	RepositoryName *string
 }
 
 // An object that describes an image returned by a DescribeImages () operation.
 type ImageDetail struct {
 
-	// The list of tags associated with this image.
-	ImageTags []*string
+	// The sha256 digest of the image manifest.
+	ImageDigest *string
 
-	// The name of the repository to which this image belongs.
-	RepositoryName *string
+	// The date and time, expressed in standard JavaScript date format, at which the
+	// current image was pushed to the repository.
+	ImagePushedAt *time.Time
+
+	// A summary of the last completed image scan.
+	ImageScanFindingsSummary *ImageScanFindingsSummary
 
 	// The current state of the scan.
 	ImageScanStatus *ImageScanStatus
-
-	// The sha256 digest of the image manifest.
-	ImageDigest *string
 
 	// The size, in bytes, of the image in the repository. If the image is a manifest
 	// list, this will be the max size of all manifests in the list. Beginning with
@@ -126,38 +127,37 @@ type ImageDetail struct {
 	// sizes returned by DescribeImages ().
 	ImageSizeInBytes *int64
 
-	// The date and time, expressed in standard JavaScript date format, at which the
-	// current image was pushed to the repository.
-	ImagePushedAt *time.Time
+	// The list of tags associated with this image.
+	ImageTags []*string
 
 	// The AWS account ID associated with the registry to which this image belongs.
 	RegistryId *string
 
-	// A summary of the last completed image scan.
-	ImageScanFindingsSummary *ImageScanFindingsSummary
+	// The name of the repository to which this image belongs.
+	RepositoryName *string
 }
 
 // An object representing an Amazon ECR image failure.
 type ImageFailure struct {
 
-	// The image ID associated with the failure.
-	ImageId *ImageIdentifier
+	// The code associated with the failure.
+	FailureCode ImageFailureCode
 
 	// The reason for the failure.
 	FailureReason *string
 
-	// The code associated with the failure.
-	FailureCode ImageFailureCode
+	// The image ID associated with the failure.
+	ImageId *ImageIdentifier
 }
 
 // An object with identifying information for an Amazon ECR image.
 type ImageIdentifier struct {
 
-	// The tag used for the image.
-	ImageTag *string
-
 	// The sha256 digest of the image manifest.
 	ImageDigest *string
+
+	// The tag used for the image.
+	ImageTag *string
 }
 
 // Contains information about an image scan finding.
@@ -166,8 +166,8 @@ type ImageScanFinding struct {
 	// A collection of attributes of the host from which the finding is generated.
 	Attributes []*Attribute
 
-	// A link containing additional details about the security vulnerability.
-	Uri *string
+	// The description of the finding.
+	Description *string
 
 	// The name associated with the finding, usually a CVE number.
 	Name *string
@@ -175,8 +175,8 @@ type ImageScanFinding struct {
 	// The finding severity.
 	Severity FindingSeverity
 
-	// The description of the finding.
-	Description *string
+	// A link containing additional details about the security vulnerability.
+	Uri *string
 }
 
 // The details of an image scan.
@@ -185,14 +185,14 @@ type ImageScanFindings struct {
 	// The image vulnerability counts, sorted by severity.
 	FindingSeverityCounts map[string]*int32
 
+	// The findings from the image scan.
+	Findings []*ImageScanFinding
+
 	// The time of the last completed image scan.
 	ImageScanCompletedAt *time.Time
 
 	// The time when the vulnerability data was last scanned.
 	VulnerabilitySourceUpdatedAt *time.Time
-
-	// The findings from the image scan.
-	Findings []*ImageScanFinding
 }
 
 // A summary of the last completed image scan.
@@ -201,11 +201,11 @@ type ImageScanFindingsSummary struct {
 	// The image vulnerability counts, sorted by severity.
 	FindingSeverityCounts map[string]*int32
 
-	// The time when the vulnerability data was last scanned.
-	VulnerabilitySourceUpdatedAt *time.Time
-
 	// The time of the last completed image scan.
 	ImageScanCompletedAt *time.Time
+
+	// The time when the vulnerability data was last scanned.
+	VulnerabilitySourceUpdatedAt *time.Time
 }
 
 // The image scanning configuration for a repository.
@@ -221,21 +221,21 @@ type ImageScanningConfiguration struct {
 // The current status of an image scan.
 type ImageScanStatus struct {
 
-	// The current state of an image scan.
-	Status ScanStatus
-
 	// The description of the image scan status.
 	Description *string
+
+	// The current state of an image scan.
+	Status ScanStatus
 }
 
 // An object representing an Amazon ECR image layer.
 type Layer struct {
 
-	// The sha256 digest of the image layer.
-	LayerDigest *string
-
 	// The availability status of the image layer.
 	LayerAvailability LayerAvailability
+
+	// The sha256 digest of the image layer.
+	LayerDigest *string
 
 	// The size, in bytes, of the image layer.
 	LayerSize *int64
@@ -249,14 +249,14 @@ type Layer struct {
 // An object representing an Amazon ECR image layer failure.
 type LayerFailure struct {
 
+	// The failure code associated with the failure.
+	FailureCode LayerFailureCode
+
 	// The reason for the failure.
 	FailureReason *string
 
 	// The layer digest associated with the failure.
 	LayerDigest *string
-
-	// The failure code associated with the failure.
-	FailureCode LayerFailureCode
 }
 
 // The filter for the lifecycle policy preview.
@@ -278,12 +278,12 @@ type LifecyclePolicyPreviewResult struct {
 	// The sha256 digest of the image manifest.
 	ImageDigest *string
 
-	// The list of tags associated with this image.
-	ImageTags []*string
-
 	// The date and time, expressed in standard JavaScript date format, at which the
 	// current image was pushed to the repository.
 	ImagePushedAt *time.Time
+
+	// The list of tags associated with this image.
+	ImageTags []*string
 }
 
 // The summary of the lifecycle policy preview request.
@@ -314,16 +314,18 @@ type Repository struct {
 	// The date and time, in JavaScript date format, when the repository was created.
 	CreatedAt *time.Time
 
-	// The image scanning configuration for a repository.
-	ImageScanningConfiguration *ImageScanningConfiguration
-
-	// The URI for the repository. You can use this URI for container image push and
-	// pull operations.
-	RepositoryUri *string
-
 	// The encryption configuration for the repository. This determines how the
 	// contents of your repository are encrypted at rest.
 	EncryptionConfiguration *EncryptionConfiguration
+
+	// The image scanning configuration for a repository.
+	ImageScanningConfiguration *ImageScanningConfiguration
+
+	// The tag mutability setting for the repository.
+	ImageTagMutability ImageTagMutability
+
+	// The AWS account ID associated with the registry that contains the repository.
+	RegistryId *string
 
 	// The Amazon Resource Name (ARN) that identifies the repository. The ARN contains
 	// the arn:aws:ecr namespace, followed by the region of the repository, AWS account
@@ -331,14 +333,12 @@ type Repository struct {
 	// example, arn:aws:ecr:region:012345678910:repository/test.
 	RepositoryArn *string
 
-	// The AWS account ID associated with the registry that contains the repository.
-	RegistryId *string
-
 	// The name of the repository.
 	RepositoryName *string
 
-	// The tag mutability setting for the repository.
-	ImageTagMutability ImageTagMutability
+	// The URI for the repository. You can use this URI for container image push and
+	// pull operations.
+	RepositoryUri *string
 }
 
 // The metadata that you apply to a resource to help you categorize and organize

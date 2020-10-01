@@ -105,14 +105,14 @@ type CreateDhcpOptionsInput struct {
 	// This member is required.
 	DhcpConfigurations []*types.NewDhcpConfiguration
 
-	// The tags to assign to the DHCP option.
-	TagSpecifications []*types.TagSpecification
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The tags to assign to the DHCP option.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateDhcpOptionsOutput struct {

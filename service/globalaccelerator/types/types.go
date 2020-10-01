@@ -11,20 +11,8 @@ import (
 // groups, each of which includes endpoints, such as load balancers.
 type Accelerator struct {
 
-	// The name of the accelerator. The name must contain only alphanumeric characters
-	// or hyphens (-), and must not begin or end with a hyphen.
-	Name *string
-
-	// Describes the deployment status of the accelerator.
-	Status AcceleratorStatus
-
-	// Indicates whether the accelerator is enabled. The value is true or false. The
-	// default value is true. If the value is set to true, the accelerator cannot be
-	// deleted. If set to false, accelerator can be deleted.
-	Enabled *bool
-
-	// The date and time that the accelerator was last modified.
-	LastModifiedTime *time.Time
+	// The Amazon Resource Name (ARN) of the accelerator.
+	AcceleratorArn *string
 
 	// The date and time that the accelerator was created.
 	CreatedTime *time.Time
@@ -39,30 +27,30 @@ type Accelerator struct {
 	// in the AWS Global Accelerator Developer Guide.
 	DnsName *string
 
+	// Indicates whether the accelerator is enabled. The value is true or false. The
+	// default value is true. If the value is set to true, the accelerator cannot be
+	// deleted. If set to false, accelerator can be deleted.
+	Enabled *bool
+
 	// The value for the address type must be IPv4.
 	IpAddressType IpAddressType
 
 	// The static IP addresses that Global Accelerator associates with the accelerator.
 	IpSets []*IpSet
 
-	// The Amazon Resource Name (ARN) of the accelerator.
-	AcceleratorArn *string
+	// The date and time that the accelerator was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the accelerator. The name must contain only alphanumeric characters
+	// or hyphens (-), and must not begin or end with a hyphen.
+	Name *string
+
+	// Describes the deployment status of the accelerator.
+	Status AcceleratorStatus
 }
 
 // Attributes of an accelerator.
 type AcceleratorAttributes struct {
-
-	// The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute
-	// is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow
-	// logs are stored in the root of the bucket. If you specify slash (/) for the S3
-	// bucket prefix, the log file bucket folder structure will include a double slash
-	// (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
-	FlowLogsS3Prefix *string
-
-	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
-	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
-	// grants AWS Global Accelerator permission to write to the bucket.
-	FlowLogsS3Bucket *string
 
 	// Indicates whether flow logs are enabled. The default value is false. If the
 	// value is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more
@@ -70,6 +58,18 @@ type AcceleratorAttributes struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
 	// in the AWS Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool
+
+	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
+	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
+	// grants AWS Global Accelerator permission to write to the bucket.
+	FlowLogsS3Bucket *string
+
+	// The prefix for the location in the Amazon S3 bucket for the flow logs. Attribute
+	// is required if FlowLogsEnabled is true. If you don’t specify a prefix, the flow
+	// logs are stored in the root of the bucket. If you specify slash (/) for the S3
+	// bucket prefix, the log file bucket folder structure will include a double slash
+	// (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+	FlowLogsS3Prefix *string
 }
 
 // Information about an IP address range that is provisioned for use with your AWS
@@ -140,14 +140,14 @@ type ByoipCidr struct {
 // Accelerator through bring your own IP address (BYOIP).
 type ByoipCidrEvent struct {
 
-	// A timestamp when you make a status change for an IP address range that you bring
-	// to AWS Global Accelerator through bring your own IP address (BYOIP).
-	Timestamp *time.Time
-
 	// A string that contains an Event message describing changes that you make in the
 	// status of an IP address range that you bring to AWS Global Accelerator through
 	// bring your own IP address (BYOIP).
 	Message *string
+
+	// A timestamp when you make a status change for an IP address range that you bring
+	// to AWS Global Accelerator through bring your own IP address (BYOIP).
+	Timestamp *time.Time
 }
 
 // Provides authorization for Amazon to bring a specific IP address range to a
@@ -171,23 +171,6 @@ type CidrAuthorizationContext struct {
 // A complex type for endpoints.
 type EndpointConfiguration struct {
 
-	// The weight associated with the endpoint. When you add weights to endpoints, you
-	// configure AWS Global Accelerator to route traffic based on proportions that you
-	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
-	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
-	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
-	// is routed to the last endpoint. For more information, see Endpoint Weights
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
-	// in the AWS Global Accelerator Developer Guide.
-	Weight *int32
-
-	// An ID for the endpoint. If the endpoint is a Network Load Balancer or
-	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
-	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
-	// address allocation ID. For EC2 instances, this is the EC2 instance ID. An
-	// Application Load Balancer can be either internal or internet-facing.
-	EndpointId *string
-
 	// Indicates whether client IP address preservation is enabled for an Application
 	// Load Balancer endpoint. The value is true or false. The default value is true
 	// for new accelerators. If the value is set to true, the client's IP address is
@@ -198,6 +181,23 @@ type EndpointConfiguration struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/preserve-client-ip-address.html)
 	// in the AWS Global Accelerator Developer Guide.
 	ClientIPPreservationEnabled *bool
+
+	// An ID for the endpoint. If the endpoint is a Network Load Balancer or
+	// Application Load Balancer, this is the Amazon Resource Name (ARN) of the
+	// resource. If the endpoint is an Elastic IP address, this is the Elastic IP
+	// address allocation ID. For EC2 instances, this is the EC2 instance ID. An
+	// Application Load Balancer can be either internal or internet-facing.
+	EndpointId *string
+
+	// The weight associated with the endpoint. When you add weights to endpoints, you
+	// configure AWS Global Accelerator to route traffic based on proportions that you
+	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
+	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
+	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
+	// is routed to the last endpoint. For more information, see Endpoint Weights
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
+	// in the AWS Global Accelerator Developer Guide.
+	Weight *int32
 }
 
 // A complex type for an endpoint. Each endpoint group can include one or more
@@ -221,16 +221,6 @@ type EndpointDescription struct {
 	// address allocation ID. For EC2 instances, this is the EC2 instance ID. An
 	// Application Load Balancer can be either internal or internet-facing.
 	EndpointId *string
-
-	// The weight associated with the endpoint. When you add weights to endpoints, you
-	// configure AWS Global Accelerator to route traffic based on proportions that you
-	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
-	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
-	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
-	// is routed to the last endpoint. For more information, see Endpoint Weights
-	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
-	// in the AWS Global Accelerator Developer Guide.
-	Weight *int32
 
 	// The reason code associated with why the endpoint is not healthy. If the endpoint
 	// state is healthy, a reason code is not provided. If the endpoint state is
@@ -256,11 +246,30 @@ type EndpointDescription struct {
 
 	// The health status of the endpoint.
 	HealthState HealthState
+
+	// The weight associated with the endpoint. When you add weights to endpoints, you
+	// configure AWS Global Accelerator to route traffic based on proportions that you
+	// specify. For example, you might specify endpoint weights of 4, 5, 5, and 6
+	// (sum=20). The result is that 4/20 of your traffic, on average, is routed to the
+	// first endpoint, 5/20 is routed both to the second and third endpoints, and 6/20
+	// is routed to the last endpoint. For more information, see Endpoint Weights
+	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
+	// in the AWS Global Accelerator Developer Guide.
+	Weight *int32
 }
 
 // A complex type for the endpoint group. An AWS Region can have only one endpoint
 // group for a specific listener.
 type EndpointGroup struct {
+
+	// The list of endpoint objects.
+	EndpointDescriptions []*EndpointDescription
+
+	// The Amazon Resource Name (ARN) of the endpoint group.
+	EndpointGroupArn *string
+
+	// The AWS Region that this endpoint group belongs.
+	EndpointGroupRegion *string
 
 	// The time—10 seconds or 30 seconds—between health checks for each endpoint. The
 	// default value is 30.
@@ -271,29 +280,20 @@ type EndpointGroup struct {
 	// default is slash (/).
 	HealthCheckPath *string
 
-	// The AWS Region that this endpoint group belongs.
-	EndpointGroupRegion *string
-
-	// The list of endpoint objects.
-	EndpointDescriptions []*EndpointDescription
-
 	// The port that Global Accelerator uses to perform health checks on endpoints that
 	// are part of this endpoint group.  <p>The default port is the port for the
 	// listener that this endpoint group is associated with. If the listener port is a
 	// list, Global Accelerator uses the first specified port in the list of ports.</p>
 	HealthCheckPort *int32
 
-	// The number of consecutive health checks required to set the state of a healthy
-	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
-	// value is 3.
-	ThresholdCount *int32
-
 	// The protocol that Global Accelerator uses to perform health checks on endpoints
 	// that are part of this endpoint group. The default value is TCP.
 	HealthCheckProtocol HealthCheckProtocol
 
-	// The Amazon Resource Name (ARN) of the endpoint group.
-	EndpointGroupArn *string
+	// The number of consecutive health checks required to set the state of a healthy
+	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
+	// value is 3.
+	ThresholdCount *int32
 
 	// The percentage of traffic to send to an AWS Region. Additional traffic is
 	// distributed to other endpoint groups for this listener. Use this action to
@@ -306,12 +306,12 @@ type EndpointGroup struct {
 // A complex type for the set of IP addresses for an accelerator.
 type IpSet struct {
 
-	// The types of IP addresses included in this IP set.
-	IpFamily *string
-
 	// The array of IP addresses in the IP address set. An IP address set can have a
 	// maximum of two IP addresses.
 	IpAddresses []*string
+
+	// The types of IP addresses included in this IP set.
+	IpFamily *string
 }
 
 // A complex type for a listener.
@@ -334,24 +334,24 @@ type Listener struct {
 	// select the hash value. The default value is NONE.
 	ClientAffinity ClientAffinity
 
-	// The protocol for the connections from clients to the accelerator.
-	Protocol Protocol
-
 	// The Amazon Resource Name (ARN) of the listener.
 	ListenerArn *string
 
 	// The list of port ranges for the connections from clients to the accelerator.
 	PortRanges []*PortRange
+
+	// The protocol for the connections from clients to the accelerator.
+	Protocol Protocol
 }
 
 // A complex type for a range of ports for a listener.
 type PortRange struct {
 
-	// The last port in the range of ports, inclusive.
-	ToPort *int32
-
 	// The first port in the range of ports, inclusive.
 	FromPort *int32
+
+	// The last port in the range of ports, inclusive.
+	ToPort *int32
 }
 
 // A complex type that contains a Tag key and Tag value.

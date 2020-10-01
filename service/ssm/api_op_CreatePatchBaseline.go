@@ -61,27 +61,10 @@ func (c *Client) CreatePatchBaseline(ctx context.Context, params *CreatePatchBas
 
 type CreatePatchBaselineInput struct {
 
-	// A description of the patch baseline.
-	Description *string
-
-	// User-provided idempotency token.
-	ClientToken *string
-
-	// Defines the operating system the patch baseline applies to. The Default value is
-	// WINDOWS.
-	OperatingSystem types.OperatingSystem
-
 	// The name of the patch baseline.
 	//
 	// This member is required.
 	Name *string
-
-	// A list of explicitly rejected patches for the baseline. For information about
-	// accepted formats for lists of approved patches and rejected patches, see About
-	// package name formats for approved and rejected patch lists
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
-	// in the AWS Systems Manager User Guide.
-	RejectedPatches []*string
 
 	// A set of rules used to include patches in the baseline.
 	ApprovalRules *types.PatchRuleGroup
@@ -92,6 +75,36 @@ type CreatePatchBaselineInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
 	// in the AWS Systems Manager User Guide.
 	ApprovedPatches []*string
+
+	// Defines the compliance level for approved patches. This means that if an
+	// approved patch is reported as missing, this is the severity of the compliance
+	// violation. The default value is UNSPECIFIED.
+	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
+
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool
+
+	// User-provided idempotency token.
+	ClientToken *string
+
+	// A description of the patch baseline.
+	Description *string
+
+	// A set of global filters used to include patches in the baseline.
+	GlobalFilters *types.PatchFilterGroup
+
+	// Defines the operating system the patch baseline applies to. The Default value is
+	// WINDOWS.
+	OperatingSystem types.OperatingSystem
+
+	// A list of explicitly rejected patches for the baseline. For information about
+	// accepted formats for lists of approved patches and rejected patches, see About
+	// package name formats for approved and rejected patch lists
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// in the AWS Systems Manager User Guide.
+	RejectedPatches []*string
 
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
@@ -112,11 +125,6 @@ type CreatePatchBaselineInput struct {
 	// operating systems and source repositories. Applies to Linux instances only.
 	Sources []*types.PatchSource
 
-	// Defines the compliance level for approved patches. This means that if an
-	// approved patch is reported as missing, this is the severity of the compliance
-	// violation. The default value is UNSPECIFIED.
-	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
-
 	// Optional metadata that you assign to a resource. Tags enable you to categorize a
 	// resource in different ways, such as by purpose, owner, or environment. For
 	// example, you might want to tag a patch baseline to identify the severity level
@@ -131,14 +139,6 @@ type CreatePatchBaselineInput struct {
 	// To add tags to an
 	// existing patch baseline, use the AddTagsToResource () action.
 	Tags []*types.Tag
-
-	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is 'false'. Applies
-	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
-
-	// A set of global filters used to include patches in the baseline.
-	GlobalFilters *types.PatchFilterGroup
 }
 
 type CreatePatchBaselineOutput struct {

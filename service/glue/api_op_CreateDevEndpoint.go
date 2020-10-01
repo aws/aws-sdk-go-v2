@@ -58,53 +58,29 @@ func (c *Client) CreateDevEndpoint(ctx context.Context, params *CreateDevEndpoin
 
 type CreateDevEndpointInput struct {
 
-	// The subnet ID for the new DevEndpoint to use.
-	SubnetId *string
-
-	// The name of the SecurityConfiguration structure to be used with this
-	// DevEndpoint.
-	SecurityConfiguration *string
-
-	// The public key to be used by this DevEndpoint for authentication. This attribute
-	// is provided for backward compatibility because the recommended attribute to use
-	// is public keys.
-	PublicKey *string
-
 	// The name to be assigned to the new DevEndpoint.
 	//
 	// This member is required.
 	EndpointName *string
-
-	// A list of public keys to be used by the development endpoints for
-	// authentication. The use of this attribute is preferred over a single public key
-	// because the public keys allow you to have a different private key per client.
-	// <note> <p>If you previously created an endpoint with a public key, you must
-	// remove that key to be able to set a list of public keys. Call the
-	// <code>UpdateDevEndpoint</code> API with the public key content in the
-	// <code>deletePublicKeys</code> attribute, and the list of new keys in the
-	// <code>addPublicKeys</code> attribute.</p> </note>
-	PublicKeys []*string
 
 	// The IAM role for the DevEndpoint.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this
-	// DevEndpoint.
-	NumberOfNodes *int32
-
-	// Security group IDs for the security groups to be used by the new DevEndpoint.
-	SecurityGroupIds []*string
-
-	// The tags to use with this DevEndpoint. You may use tags to limit access to the
-	// DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS
-	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
-	// developer guide.
-	Tags map[string]*string
-
 	// A map of arguments used to configure the DevEndpoint.
 	Arguments map[string]*string
+
+	// The path to one or more Java .jar files in an S3 bucket that should be loaded in
+	// your DevEndpoint.
+	ExtraJarsS3Path *string
+
+	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
+	// loaded in your DevEndpoint. Multiple values must be complete paths separated by
+	// a comma. You can only use pure Python libraries with a DevEndpoint. Libraries
+	// that rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
+	// data analysis library, are not yet supported.
+	ExtraPythonLibsS3Path *string
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for running your
@@ -119,12 +95,45 @@ type CreateDevEndpointInput struct {
 	// defaults to Python 2.</p>
 	GlueVersion *string
 
-	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
-	// loaded in your DevEndpoint. Multiple values must be complete paths separated by
-	// a comma. You can only use pure Python libraries with a DevEndpoint. Libraries
-	// that rely on C extensions, such as the pandas (http://pandas.pydata.org/) Python
-	// data analysis library, are not yet supported.
-	ExtraPythonLibsS3Path *string
+	// The number of AWS Glue Data Processing Units (DPUs) to allocate to this
+	// DevEndpoint.
+	NumberOfNodes *int32
+
+	// The number of workers of a defined workerType that are allocated to the
+	// development endpoint.  <p>The maximum number of workers you can define are 299
+	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
+	NumberOfWorkers *int32
+
+	// The public key to be used by this DevEndpoint for authentication. This attribute
+	// is provided for backward compatibility because the recommended attribute to use
+	// is public keys.
+	PublicKey *string
+
+	// A list of public keys to be used by the development endpoints for
+	// authentication. The use of this attribute is preferred over a single public key
+	// because the public keys allow you to have a different private key per client.
+	// <note> <p>If you previously created an endpoint with a public key, you must
+	// remove that key to be able to set a list of public keys. Call the
+	// <code>UpdateDevEndpoint</code> API with the public key content in the
+	// <code>deletePublicKeys</code> attribute, and the list of new keys in the
+	// <code>addPublicKeys</code> attribute.</p> </note>
+	PublicKeys []*string
+
+	// The name of the SecurityConfiguration structure to be used with this
+	// DevEndpoint.
+	SecurityConfiguration *string
+
+	// Security group IDs for the security groups to be used by the new DevEndpoint.
+	SecurityGroupIds []*string
+
+	// The subnet ID for the new DevEndpoint to use.
+	SubnetId *string
+
+	// The tags to use with this DevEndpoint. You may use tags to limit access to the
+	// DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS
+	// Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in the
+	// developer guide.
+	Tags map[string]*string
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
@@ -146,38 +155,9 @@ type CreateDevEndpointInput struct {
 	// G.2XWorkerType configuration, the Spark drivers for the development endpoint
 	// will run on 4 vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType types.WorkerType
-
-	// The path to one or more Java .jar files in an S3 bucket that should be loaded in
-	// your DevEndpoint.
-	ExtraJarsS3Path *string
-
-	// The number of workers of a defined workerType that are allocated to the
-	// development endpoint.  <p>The maximum number of workers you can define are 299
-	// for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>
-	NumberOfWorkers *int32
 }
 
 type CreateDevEndpointOutput struct {
-
-	// The AWS Availability Zone where this DevEndpoint is located.
-	AvailabilityZone *string
-
-	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
-	// DevEndpoint.
-	NumberOfNodes *int32
-
-	// The Apache Zeppelin port for the remote Apache Spark interpreter.
-	ZeppelinRemoteSparkInterpreterPort *int32
-
-	// The reason for a current failure in this DevEndpoint.
-	FailureReason *string
-
-	// The paths to one or more Python libraries in an S3 bucket that will be loaded in
-	// your DevEndpoint.
-	ExtraPythonLibsS3Path *string
-
-	// The current status of the new DevEndpoint.
-	Status *string
 
 	// The map of arguments used to configure this DevEndpoint.  <p>Valid arguments
 	// are:</p> <ul> <li> <p> <code>"--enable-glue-datacatalog": ""</code> </p> </li>
@@ -189,47 +169,67 @@ type CreateDevEndpointOutput struct {
 	// defaults to Python 2.</p>
 	Arguments map[string]*string
 
-	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
-	VpcId *string
+	// The AWS Availability Zone where this DevEndpoint is located.
+	AvailabilityZone *string
 
 	// The point in time at which this DevEndpoint was created.
 	CreatedTimestamp *time.Time
+
+	// The name assigned to the new DevEndpoint.
+	EndpointName *string
+
+	// Path to one or more Java .jar files in an S3 bucket that will be loaded in your
+	// DevEndpoint.
+	ExtraJarsS3Path *string
+
+	// The paths to one or more Python libraries in an S3 bucket that will be loaded in
+	// your DevEndpoint.
+	ExtraPythonLibsS3Path *string
+
+	// The reason for a current failure in this DevEndpoint.
+	FailureReason *string
 
 	// Glue version determines the versions of Apache Spark and Python that AWS Glue
 	// supports. The Python version indicates the version supported for running your
 	// ETL scripts on development endpoints.
 	GlueVersion *string
 
+	// The number of AWS Glue Data Processing Units (DPUs) allocated to this
+	// DevEndpoint.
+	NumberOfNodes *int32
+
 	// The number of workers of a defined workerType that are allocated to the
 	// development endpoint.
 	NumberOfWorkers *int32
 
-	// Path to one or more Java .jar files in an S3 bucket that will be loaded in your
-	// DevEndpoint.
-	ExtraJarsS3Path *string
+	// The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint.
+	RoleArn *string
 
 	// The name of the SecurityConfiguration structure being used with this
 	// DevEndpoint.
 	SecurityConfiguration *string
 
-	// The address of the YARN endpoint used by this DevEndpoint.
-	YarnEndpointAddress *string
+	// The security groups assigned to the new DevEndpoint.
+	SecurityGroupIds []*string
+
+	// The current status of the new DevEndpoint.
+	Status *string
+
+	// The subnet ID assigned to the new DevEndpoint.
+	SubnetId *string
+
+	// The ID of the virtual private cloud (VPC) used by this DevEndpoint.
+	VpcId *string
 
 	// The type of predefined worker that is allocated to the development endpoint. May
 	// be a value of Standard, G.1X, or G.2X.
 	WorkerType types.WorkerType
 
-	// The name assigned to the new DevEndpoint.
-	EndpointName *string
+	// The address of the YARN endpoint used by this DevEndpoint.
+	YarnEndpointAddress *string
 
-	// The Amazon Resource Name (ARN) of the role assigned to the new DevEndpoint.
-	RoleArn *string
-
-	// The subnet ID assigned to the new DevEndpoint.
-	SubnetId *string
-
-	// The security groups assigned to the new DevEndpoint.
-	SecurityGroupIds []*string
+	// The Apache Zeppelin port for the remote Apache Spark interpreter.
+	ZeppelinRemoteSparkInterpreterPort *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

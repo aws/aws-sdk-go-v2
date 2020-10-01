@@ -71,11 +71,11 @@ type DeleteQueuedReservedInstancesInput struct {
 
 type DeleteQueuedReservedInstancesOutput struct {
 
-	// Information about the queued purchases that were successfully deleted.
-	SuccessfulQueuedPurchaseDeletions []*types.SuccessfulQueuedPurchaseDeletion
-
 	// Information about the queued purchases that could not be deleted.
 	FailedQueuedPurchaseDeletions []*types.FailedQueuedPurchaseDeletion
+
+	// Information about the queued purchases that were successfully deleted.
+	SuccessfulQueuedPurchaseDeletions []*types.SuccessfulQueuedPurchaseDeletion
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

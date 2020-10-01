@@ -58,9 +58,6 @@ func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optF
 
 type ListMembersInput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string
-
 	// The unique identifier of the network for which to list members.
 	//
 	// This member is required.
@@ -71,11 +68,14 @@ type ListMembersInput struct {
 	// If omitted, all members are listed.
 	IsOwned *bool
 
+	// The maximum number of members to return in the request.
+	MaxResults *int32
+
 	// The optional name of the member to list.
 	Name *string
 
-	// The maximum number of members to return in the request.
-	MaxResults *int32
+	// The pagination token that indicates the next set of results to retrieve.
+	NextToken *string
 
 	// An optional status specifier. If provided, only members currently in this status
 	// are listed.
@@ -84,12 +84,12 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
-	NextToken *string
-
 	// An array of MemberSummary objects. Each object contains details about a network
 	// member.
 	Members []*types.MemberSummary
+
+	// The pagination token that indicates the next set of results to retrieve.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

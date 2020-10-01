@@ -68,14 +68,14 @@ type DescribeLoaInput struct {
 	// This member is required.
 	ConnectionId *string
 
+	// The standard media type for the LOA-CFA document. The only supported value is
+	// application/pdf.
+	LoaContentType types.LoaContentType
+
 	// The name of the service provider who establishes connectivity on your behalf. If
 	// you specify this parameter, the LOA-CFA lists the provider name alongside your
 	// company name as the requester of the cross connect.
 	ProviderName *string
-
-	// The standard media type for the LOA-CFA document. The only supported value is
-	// application/pdf.
-	LoaContentType types.LoaContentType
 }
 
 // Information about a Letter of Authorization - Connecting Facility Assignment

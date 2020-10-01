@@ -79,6 +79,17 @@ func (c *Client) UpdateRuleGroup(ctx context.Context, params *UpdateRuleGroupInp
 
 type UpdateRuleGroupInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
+	// The RuleGroupId of the RuleGroup () that you want to update. RuleGroupId is
+	// returned by CreateRuleGroup () and by ListRuleGroups ().
+	//
+	// This member is required.
+	RuleGroupId *string
+
 	// An array of RuleGroupUpdate objects that you want to insert into or delete from
 	// a RuleGroup (). You can only insert REGULAR rules into a rule group.
 	// ActivatedRule|OverrideAction applies only when updating or adding a RuleGroup to
@@ -87,17 +98,6 @@ type UpdateRuleGroupInput struct {
 	//
 	// This member is required.
 	Updates []*types.RuleGroupUpdate
-
-	// The RuleGroupId of the RuleGroup () that you want to update. RuleGroupId is
-	// returned by CreateRuleGroup () and by ListRuleGroups ().
-	//
-	// This member is required.
-	RuleGroupId *string
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type UpdateRuleGroupOutput struct {

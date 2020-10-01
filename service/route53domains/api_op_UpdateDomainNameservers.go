@@ -68,9 +68,6 @@ func (c *Client) UpdateDomainNameservers(ctx context.Context, params *UpdateDoma
 // successfully, the domain registrant will be notified by email.
 type UpdateDomainNameserversInput struct {
 
-	// The authorization key for .fi domains
-	FIAuthKey *string
-
 	// The name of the domain that you want to change name servers for.
 	//
 	// This member is required.
@@ -80,6 +77,9 @@ type UpdateDomainNameserversInput struct {
 	//
 	// This member is required.
 	Nameservers []*types.Nameserver
+
+	// The authorization key for .fi domains
+	FIAuthKey *string
 }
 
 // The UpdateDomainNameservers response includes the following element.

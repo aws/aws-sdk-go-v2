@@ -64,15 +64,15 @@ type GetCampaignVersionInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The unique version number (Version property) for the campaign version.
-	//
-	// This member is required.
-	Version *string
-
 	// The unique identifier for the campaign.
 	//
 	// This member is required.
 	CampaignId *string
+
+	// The unique version number (Version property) for the campaign version.
+	//
+	// This member is required.
+	Version *string
 }
 
 type GetCampaignVersionOutput struct {

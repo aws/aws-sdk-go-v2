@@ -69,24 +69,24 @@ type DescribeClustersInput struct {
 	// specified state.
 	Filters map[string][]*string
 
-	// The NextToken value that you received in the previous response. Use this value
-	// to get more clusters.
-	NextToken *string
-
 	// The maximum number of clusters to return in the response. When there are more
 	// clusters than the number you specify, the response contains a NextToken value.
 	MaxResults *int32
+
+	// The NextToken value that you received in the previous response. Use this value
+	// to get more clusters.
+	NextToken *string
 }
 
 type DescribeClustersOutput struct {
+
+	// A list of clusters.
+	Clusters []*types.Cluster
 
 	// An opaque string that indicates that the response contains only a subset of
 	// clusters. Use this value in a subsequent DescribeClusters request to get more
 	// clusters.
 	NextToken *string
-
-	// A list of clusters.
-	Clusters []*types.Cluster
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,12 +72,12 @@ type ListFunctionDefinitionVersionsInput struct {
 
 type ListFunctionDefinitionVersionsOutput struct {
 
-	// Information about a version.
-	Versions []*types.VersionInformation
-
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
+	// Information about a version.
+	Versions []*types.VersionInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

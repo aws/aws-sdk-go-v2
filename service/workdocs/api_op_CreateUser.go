@@ -63,36 +63,36 @@ type CreateUserInput struct {
 	// This member is required.
 	GivenName *string
 
+	// The password of the user.
+	//
+	// This member is required.
+	Password *string
+
 	// The surname of the user.
 	//
 	// This member is required.
 	Surname *string
-
-	// The ID of the organization.
-	OrganizationId *string
 
 	// The login name of the user.
 	//
 	// This member is required.
 	Username *string
 
-	// The time zone ID of the user.
-	TimeZoneId *string
-
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
 
-	// The amount of storage for the user.
-	StorageRule *types.StorageRuleType
-
 	// The email address of the user.
 	EmailAddress *string
 
-	// The password of the user.
-	//
-	// This member is required.
-	Password *string
+	// The ID of the organization.
+	OrganizationId *string
+
+	// The amount of storage for the user.
+	StorageRule *types.StorageRuleType
+
+	// The time zone ID of the user.
+	TimeZoneId *string
 }
 
 type CreateUserOutput struct {

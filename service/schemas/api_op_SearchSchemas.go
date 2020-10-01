@@ -68,12 +68,12 @@ type SearchSchemasInput struct {
 	// This member is required.
 	RegistryName *string
 
+	Limit *int32
+
 	// The token that specifies the next page of results to return. To request the
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
-
-	Limit *int32
 }
 
 type SearchSchemasOutput struct {

@@ -62,9 +62,6 @@ type GetLinkAttributesInput struct {
 	// This member is required.
 	AttributeNames []*string
 
-	// The consistency level at which to retrieve the attributes on a typed link.
-	ConsistencyLevel types.ConsistencyLevel
-
 	// The Amazon Resource Name (ARN) that is associated with the Directory where the
 	// typed link resides. For more information, see arns () or Typed Links
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/directory_objects_links.html#directory_objects_links_typedlink).
@@ -76,6 +73,9 @@ type GetLinkAttributesInput struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
+
+	// The consistency level at which to retrieve the attributes on a typed link.
+	ConsistencyLevel types.ConsistencyLevel
 }
 
 type GetLinkAttributesOutput struct {

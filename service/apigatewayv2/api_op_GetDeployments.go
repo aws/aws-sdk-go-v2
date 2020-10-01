@@ -57,27 +57,27 @@ func (c *Client) GetDeployments(ctx context.Context, params *GetDeploymentsInput
 
 type GetDeploymentsInput struct {
 
-	// The next page of elements from this collection. Not valid for the last element
-	// of the collection.
-	NextToken *string
-
-	// The maximum number of elements to be returned for this resource.
-	MaxResults *string
-
 	// The API identifier.
 	//
 	// This member is required.
 	ApiId *string
-}
 
-type GetDeploymentsOutput struct {
+	// The maximum number of elements to be returned for this resource.
+	MaxResults *string
 
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
+}
+
+type GetDeploymentsOutput struct {
 
 	// The elements from this collection.
 	Items []*types.Deployment
+
+	// The next page of elements from this collection. Not valid for the last element
+	// of the collection.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

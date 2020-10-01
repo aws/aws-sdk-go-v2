@@ -65,14 +65,14 @@ type DescribeIdentityProviderConfigurationInput struct {
 
 type DescribeIdentityProviderConfigurationOutput struct {
 
-	// The SAML metadata document uploaded to the user’s identity provider.
-	ServiceProviderSamlMetadata *string
+	// The SAML metadata document provided by the user’s identity provider.
+	IdentityProviderSamlMetadata *string
 
 	// The type of identity provider.
 	IdentityProviderType types.IdentityProviderType
 
-	// The SAML metadata document provided by the user’s identity provider.
-	IdentityProviderSamlMetadata *string
+	// The SAML metadata document uploaded to the user’s identity provider.
+	ServiceProviderSamlMetadata *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

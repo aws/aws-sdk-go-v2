@@ -73,12 +73,12 @@ type DescribeLoadBalancersInput struct {
 // Contains the parameters for DescribeLoadBalancers.
 type DescribeLoadBalancersOutput struct {
 
+	// Information about the load balancers.
+	LoadBalancerDescriptions []*types.LoadBalancerDescription
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	NextMarker *string
-
-	// Information about the load balancers.
-	LoadBalancerDescriptions []*types.LoadBalancerDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

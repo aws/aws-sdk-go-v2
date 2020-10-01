@@ -62,24 +62,24 @@ func (c *Client) DisassociateTrialComponent(ctx context.Context, params *Disasso
 
 type DisassociateTrialComponentInput struct {
 
-	// The name of the trial to disassociate from.
-	//
-	// This member is required.
-	TrialName *string
-
 	// The name of the component to disassociate from the trial.
 	//
 	// This member is required.
 	TrialComponentName *string
+
+	// The name of the trial to disassociate from.
+	//
+	// This member is required.
+	TrialName *string
 }
 
 type DisassociateTrialComponentOutput struct {
 
-	// The ARN of the trial component.
-	TrialComponentArn *string
-
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
+
+	// The ARN of the trial component.
+	TrialComponentArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -70,15 +70,15 @@ type BatchGetImageInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the registry that contains the images to
-	// describe. If you do not specify a registry, the default registry is assumed.
-	RegistryId *string
-
 	// The accepted media types for the request. Valid values:
 	// application/vnd.docker.distribution.manifest.v1+json |
 	// application/vnd.docker.distribution.manifest.v2+json |
 	// application/vnd.oci.image.manifest.v1+json
 	AcceptedMediaTypes []*string
+
+	// The AWS account ID associated with the registry that contains the images to
+	// describe. If you do not specify a registry, the default registry is assumed.
+	RegistryId *string
 }
 
 type BatchGetImageOutput struct {

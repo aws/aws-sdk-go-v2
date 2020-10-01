@@ -62,27 +62,27 @@ func (c *Client) SelectResourceConfig(ctx context.Context, params *SelectResourc
 
 type SelectResourceConfigInput struct {
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
-	NextToken *string
-
-	// The maximum number of query results returned on each page.
-	Limit *int32
-
 	// The SQL query SELECT command.
 	//
 	// This member is required.
 	Expression *string
-}
 
-type SelectResourceConfigOutput struct {
-
-	// Returns the QueryInfo object.
-	QueryInfo *types.QueryInfo
+	// The maximum number of query results returned on each page.
+	Limit *int32
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
+}
+
+type SelectResourceConfigOutput struct {
+
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
+	NextToken *string
+
+	// Returns the QueryInfo object.
+	QueryInfo *types.QueryInfo
 
 	// Returns the results for the SQL query.
 	Results []*string

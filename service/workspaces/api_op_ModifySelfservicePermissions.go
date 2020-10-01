@@ -60,15 +60,15 @@ func (c *Client) ModifySelfservicePermissions(ctx context.Context, params *Modif
 
 type ModifySelfservicePermissionsInput struct {
 
-	// The permissions to enable or disable self-service capabilities.
-	//
-	// This member is required.
-	SelfservicePermissions *types.SelfservicePermissions
-
 	// The identifier of the directory.
 	//
 	// This member is required.
 	ResourceId *string
+
+	// The permissions to enable or disable self-service capabilities.
+	//
+	// This member is required.
+	SelfservicePermissions *types.SelfservicePermissions
 }
 
 type ModifySelfservicePermissionsOutput struct {

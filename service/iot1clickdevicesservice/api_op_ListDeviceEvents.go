@@ -64,10 +64,6 @@ type ListDeviceEventsInput struct {
 	// This member is required.
 	DeviceId *string
 
-	// The maximum number of results to return per request. If not set, a default value
-	// of 100 is used.
-	MaxResults *int32
-
 	// The start date for the device event query, in ISO8061 format. For example,
 	// 2018-03-28T15:45:12.880Z
 	//
@@ -79,6 +75,10 @@ type ListDeviceEventsInput struct {
 	//
 	// This member is required.
 	ToTimeStamp *time.Time
+
+	// The maximum number of results to return per request. If not set, a default value
+	// of 100 is used.
+	MaxResults *int32
 
 	// The token to retrieve the next set of results.
 	NextToken *string

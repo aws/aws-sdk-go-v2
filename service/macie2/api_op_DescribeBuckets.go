@@ -57,8 +57,8 @@ func (c *Client) DescribeBuckets(ctx context.Context, params *DescribeBucketsInp
 
 type DescribeBucketsInput struct {
 
-	// The criteria to use to sort the query results.
-	SortCriteria *types.BucketSortCriteria
+	// The criteria to use to filter the query results.
+	Criteria map[string]*types.BucketCriteriaAdditionalProperties
 
 	// The maximum number of items to include in each page of the response. The default
 	// value is 50.
@@ -68,8 +68,8 @@ type DescribeBucketsInput struct {
 	// paginated response.
 	NextToken *string
 
-	// The criteria to use to filter the query results.
-	Criteria map[string]*types.BucketCriteriaAdditionalProperties
+	// The criteria to use to sort the query results.
+	SortCriteria *types.BucketSortCriteria
 }
 
 type DescribeBucketsOutput struct {

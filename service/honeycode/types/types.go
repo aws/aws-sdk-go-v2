@@ -5,15 +5,15 @@ package types
 // Metadata for column in the table.
 type ColumnMetadata struct {
 
-	// The name of the column.
-	//
-	// This member is required.
-	Name *string
-
 	// The format of the column.
 	//
 	// This member is required.
 	Format Format
+
+	// The name of the column.
+	//
+	// This member is required.
+	Name *string
 }
 
 // The data in a particular data cell defined on the screen.
@@ -34,13 +34,13 @@ type DataItem struct {
 // A single row in the ResultSet.
 type ResultRow struct {
 
-	// The ID for a particular row.
-	RowId *string
-
 	// List of all the data cells in a row.
 	//
 	// This member is required.
 	DataItems []*DataItem
+
+	// The ID for a particular row.
+	RowId *string
 }
 
 // ResultSet contains the results of the request for a single block or list defined

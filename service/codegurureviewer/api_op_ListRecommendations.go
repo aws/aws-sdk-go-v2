@@ -57,9 +57,6 @@ func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommenda
 
 type ListRecommendationsInput struct {
 
-	// The maximum number of results that are returned per call. The default is 100.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) of the CodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
@@ -67,17 +64,20 @@ type ListRecommendationsInput struct {
 	// This member is required.
 	CodeReviewArn *string
 
+	// The maximum number of results that are returned per call. The default is 100.
+	MaxResults *int32
+
 	// Pagination token.
 	NextToken *string
 }
 
 type ListRecommendationsOutput struct {
 
-	// List of recommendations for the requested code review.
-	RecommendationSummaries []*types.RecommendationSummary
-
 	// Pagination token.
 	NextToken *string
+
+	// List of recommendations for the requested code review.
+	RecommendationSummaries []*types.RecommendationSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

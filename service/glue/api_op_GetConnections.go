@@ -56,6 +56,13 @@ func (c *Client) GetConnections(ctx context.Context, params *GetConnectionsInput
 
 type GetConnectionsInput struct {
 
+	// The ID of the Data Catalog in which the connections reside. If none is provided,
+	// the AWS account ID is used by default.
+	CatalogId *string
+
+	// A filter that controls which connections are returned.
+	Filter *types.GetConnectionsFilter
+
 	// Allows you to retrieve the connection metadata without returning the password.
 	// For instance, the AWS Glue console uses this flag to retrieve the connection,
 	// and does not display the password. Set this parameter when the caller might not
@@ -63,28 +70,21 @@ type GetConnectionsInput struct {
 	// permission to access the rest of the connection properties.
 	HidePassword *bool
 
-	// A continuation token, if this is a continuation call.
-	NextToken *string
-
 	// The maximum number of connections to return in one response.
 	MaxResults *int32
 
-	// A filter that controls which connections are returned.
-	Filter *types.GetConnectionsFilter
-
-	// The ID of the Data Catalog in which the connections reside. If none is provided,
-	// the AWS account ID is used by default.
-	CatalogId *string
+	// A continuation token, if this is a continuation call.
+	NextToken *string
 }
 
 type GetConnectionsOutput struct {
 
+	// A list of requested connection definitions.
+	ConnectionList []*types.Connection
+
 	// A continuation token, if the list of connections returned does not include the
 	// last of the filtered connections.
 	NextToken *string
-
-	// A list of requested connection definitions.
-	ConnectionList []*types.Connection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -74,15 +74,15 @@ func (c *Client) PutDeliverabilityDashboardOption(ctx context.Context, params *P
 // (http://aws.amazon.com/pinpoint/pricing/).
 type PutDeliverabilityDashboardOptionInput struct {
 
-	// An array of objects, one for each verified domain that you use to send email and
-	// enabled the Deliverability dashboard for.
-	SubscribedDomains []*types.DomainDeliverabilityTrackingOption
-
 	// Specifies whether to enable the Deliverability dashboard for your Amazon
 	// Pinpoint account. To enable the dashboard, set this value to true.
 	//
 	// This member is required.
 	DashboardEnabled *bool
+
+	// An array of objects, one for each verified domain that you use to send email and
+	// enabled the Deliverability dashboard for.
+	SubscribedDomains []*types.DomainDeliverabilityTrackingOption
 }
 
 // A response that indicates whether the Deliverability dashboard is enabled for

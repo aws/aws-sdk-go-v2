@@ -59,13 +59,13 @@ func (c *Client) DescribeAggregateComplianceByConfigRules(ctx context.Context, p
 
 type DescribeAggregateComplianceByConfigRulesInput struct {
 
-	// Filters the results by ConfigRuleComplianceFilters object.
-	Filters *types.ConfigRuleComplianceFilters
-
 	// The name of the configuration aggregator.
 	//
 	// This member is required.
 	ConfigurationAggregatorName *string
+
+	// Filters the results by ConfigRuleComplianceFilters object.
+	Filters *types.ConfigRuleComplianceFilters
 
 	// The maximum number of evaluation results returned on each page. The default is
 	// maximum. If you specify 0, AWS Config uses the default.
@@ -78,12 +78,12 @@ type DescribeAggregateComplianceByConfigRulesInput struct {
 
 type DescribeAggregateComplianceByConfigRulesOutput struct {
 
+	// Returns a list of AggregateComplianceByConfigRule object.
+	AggregateComplianceByConfigRules []*types.AggregateComplianceByConfigRule
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
-
-	// Returns a list of AggregateComplianceByConfigRule object.
-	AggregateComplianceByConfigRules []*types.AggregateComplianceByConfigRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

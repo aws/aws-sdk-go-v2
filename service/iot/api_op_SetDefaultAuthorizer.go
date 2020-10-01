@@ -65,11 +65,11 @@ type SetDefaultAuthorizerInput struct {
 
 type SetDefaultAuthorizerOutput struct {
 
-	// The authorizer name.
-	AuthorizerName *string
-
 	// The authorizer ARN.
 	AuthorizerArn *string
+
+	// The authorizer name.
+	AuthorizerName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

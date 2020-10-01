@@ -56,11 +56,15 @@ func (c *Client) DescribeSnapshotSchedules(ctx context.Context, params *Describe
 
 type DescribeSnapshotSchedulesInput struct {
 
-	// A unique identifier for a snapshot schedule.
-	ScheduleIdentifier *string
+	// The unique identifier for the cluster whose snapshot schedules you want to view.
+	ClusterIdentifier *string
 
-	// The key value for a snapshot schedule tag.
-	TagKeys []*string
+	// A value that indicates the starting point for the next set of response records
+	// in a subsequent request. If a value is returned in a response, you can retrieve
+	// the next set of records by providing this returned marker value in the marker
+	// parameter and retrying the command. If the marker field is empty, all response
+	// records have been retrieved for the request.
+	Marker *string
 
 	// The maximum number or response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
@@ -68,31 +72,27 @@ type DescribeSnapshotSchedulesInput struct {
 	// records by retrying the command with the returned marker value.
 	MaxRecords *int32
 
-	// The unique identifier for the cluster whose snapshot schedules you want to view.
-	ClusterIdentifier *string
+	// A unique identifier for a snapshot schedule.
+	ScheduleIdentifier *string
+
+	// The key value for a snapshot schedule tag.
+	TagKeys []*string
 
 	// The value corresponding to the key of the snapshot schedule tag.
 	TagValues []*string
-
-	// A value that indicates the starting point for the next set of response records
-	// in a subsequent request. If a value is returned in a response, you can retrieve
-	// the next set of records by providing this returned marker value in the marker
-	// parameter and retrying the command. If the marker field is empty, all response
-	// records have been retrieved for the request.
-	Marker *string
 }
 
 type DescribeSnapshotSchedulesOutput struct {
 
-	// A list of SnapshotSchedules.
-	SnapshotSchedules []*types.SnapshotSchedule
-
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
 	// the next set of records by providing this returned marker value in the marker
 	// parameter and retrying the command. If the marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
+	// A list of SnapshotSchedules.
+	SnapshotSchedules []*types.SnapshotSchedule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

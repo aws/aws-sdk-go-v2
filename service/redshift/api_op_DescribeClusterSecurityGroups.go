@@ -68,13 +68,10 @@ func (c *Client) DescribeClusterSecurityGroups(ctx context.Context, params *Desc
 //
 type DescribeClusterSecurityGroupsInput struct {
 
-	// A tag value or values for which you want to return all matching cluster security
-	// groups that are associated with the specified tag value or values. For example,
-	// suppose that you have security groups that are tagged with values called admin
-	// and test. If you specify both of these tag values in the request, Amazon
-	// Redshift returns a response with the security groups that have either or both of
-	// these tag values associated with them.
-	TagValues []*string
+	// The name of a cluster security group for which you are requesting details. You
+	// can specify either the Marker parameter or a ClusterSecurityGroupName parameter,
+	// but not both. Example: securitygroup1
+	ClusterSecurityGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
 	// response records. When the results of a DescribeClusterSecurityGroups () request
@@ -85,6 +82,13 @@ type DescribeClusterSecurityGroupsInput struct {
 	// parameter or the Marker parameter, but not both.
 	Marker *string
 
+	// The maximum number of response records to return in each call. If the number of
+	// remaining response records exceeds the specified MaxRecords value, a value is
+	// returned in a marker field of the response. You can retrieve the next set of
+	// records by retrying the command with the returned marker value. Default: 100
+	// Constraints: minimum 20, maximum 100.
+	MaxRecords *int32
+
 	// A tag key or keys for which you want to return all matching cluster security
 	// groups that are associated with the specified key or keys. For example, suppose
 	// that you have security groups that are tagged with keys called owner and
@@ -93,21 +97,20 @@ type DescribeClusterSecurityGroupsInput struct {
 	// these tag keys associated with them.
 	TagKeys []*string
 
-	// The maximum number of response records to return in each call. If the number of
-	// remaining response records exceeds the specified MaxRecords value, a value is
-	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
-	// Constraints: minimum 20, maximum 100.
-	MaxRecords *int32
-
-	// The name of a cluster security group for which you are requesting details. You
-	// can specify either the Marker parameter or a ClusterSecurityGroupName parameter,
-	// but not both. Example: securitygroup1
-	ClusterSecurityGroupName *string
+	// A tag value or values for which you want to return all matching cluster security
+	// groups that are associated with the specified tag value or values. For example,
+	// suppose that you have security groups that are tagged with values called admin
+	// and test. If you specify both of these tag values in the request, Amazon
+	// Redshift returns a response with the security groups that have either or both of
+	// these tag values associated with them.
+	TagValues []*string
 }
 
 //
 type DescribeClusterSecurityGroupsOutput struct {
+
+	// A list of ClusterSecurityGroup () instances.
+	ClusterSecurityGroups []*types.ClusterSecurityGroup
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -115,9 +118,6 @@ type DescribeClusterSecurityGroupsOutput struct {
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
-
-	// A list of ClusterSecurityGroup () instances.
-	ClusterSecurityGroups []*types.ClusterSecurityGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

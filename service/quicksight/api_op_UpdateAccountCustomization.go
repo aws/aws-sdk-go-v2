@@ -58,6 +58,11 @@ func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateA
 
 type UpdateAccountCustomizationInput struct {
 
+	// The customizations you want to update in QuickSight.
+	//
+	// This member is required.
+	AccountCustomization *types.AccountCustomization
+
 	// The ID for the AWS account that you want to update QuickSight customizations
 	// for.
 	//
@@ -66,17 +71,9 @@ type UpdateAccountCustomizationInput struct {
 
 	// The namespace associated with the customization that you're updating.
 	Namespace *string
-
-	// The customizations you want to update in QuickSight.
-	//
-	// This member is required.
-	AccountCustomization *types.AccountCustomization
 }
 
 type UpdateAccountCustomizationOutput struct {
-
-	// The AWS request ID for this operation.
-	RequestId *string
 
 	// The customizations associated with your QuickSight subscription.
 	AccountCustomization *types.AccountCustomization
@@ -87,6 +84,9 @@ type UpdateAccountCustomizationOutput struct {
 
 	// The namespace associated with the customization that you're updating.
 	Namespace *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

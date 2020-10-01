@@ -65,25 +65,6 @@ func (c *Client) DescribeSpotPriceHistory(ctx context.Context, params *DescribeS
 // Contains the parameters for DescribeSpotPriceHistory.
 type DescribeSpotPriceHistoryInput struct {
 
-	// The date and time, up to the current date, from which to stop retrieving the
-	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	EndTime *time.Time
-
-	// Filters the results by the specified instance types.
-	InstanceTypes []types.InstanceType
-
-	// The date and time, up to the past 90 days, from which to start retrieving the
-	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
-	StartTime *time.Time
-
-	// The token for the next set of results.
-	NextToken *string
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 1 and 1000. The default value is 1000. To retrieve the remaining
-	// results, make another call with the returned NextToken value.
-	MaxResults *int32
-
 	// Filters the results by the specified Availability Zone.
 	AvailabilityZone *string
 
@@ -92,6 +73,10 @@ type DescribeSpotPriceHistoryInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The date and time, up to the current date, from which to stop retrieving the
+	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	EndTime *time.Time
 
 	// One or more filters.
 	//
@@ -114,8 +99,23 @@ type DescribeSpotPriceHistoryInput struct {
 	// wildcards (* and ?). Greater than or less than comparison is not supported.
 	Filters []*types.Filter
 
+	// Filters the results by the specified instance types.
+	InstanceTypes []types.InstanceType
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 1 and 1000. The default value is 1000. To retrieve the remaining
+	// results, make another call with the returned NextToken value.
+	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
+
 	// Filters the results by the specified basic product descriptions.
 	ProductDescriptions []*string
+
+	// The date and time, up to the past 90 days, from which to start retrieving the
+	// price history data, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ).
+	StartTime *time.Time
 }
 
 // Contains the output of DescribeSpotPriceHistory.

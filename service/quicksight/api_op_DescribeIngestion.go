@@ -62,15 +62,15 @@ type DescribeIngestionInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// An ID for the ingestion.
-	//
-	// This member is required.
-	IngestionId *string
-
 	// The ID of the dataset used in the ingestion.
 	//
 	// This member is required.
 	DataSetId *string
+
+	// An ID for the ingestion.
+	//
+	// This member is required.
+	IngestionId *string
 }
 
 type DescribeIngestionOutput struct {

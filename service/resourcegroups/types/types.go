@@ -29,15 +29,15 @@ type FailedResource struct {
 // resource types can be included in the group.
 type Group struct {
 
-	// The name of the resource group.
-	//
-	// This member is required.
-	Name *string
-
 	// The ARN of the resource group.
 	//
 	// This member is required.
 	GroupArn *string
+
+	// The name of the resource group.
+	//
+	// This member is required.
+	Name *string
 
 	// The description of the resource group.
 	Description *string
@@ -49,18 +49,18 @@ type Group struct {
 // configuration when you create the group.
 type GroupConfiguration struct {
 
-	// The current status of an attempt to update the group configuration.
-	Status GroupConfigurationStatus
+	// The configuration currently associated with the group and in effect.
+	Configuration []*GroupConfigurationItem
+
+	// If present, the reason why a request to update the group configuration failed.
+	FailureReason *string
 
 	// If present, the new configuration that is in the process of being applied to the
 	// group.
 	ProposedConfiguration []*GroupConfigurationItem
 
-	// If present, the reason why a request to update the group configuration failed.
-	FailureReason *string
-
-	// The configuration currently associated with the group and in effect.
-	Configuration []*GroupConfigurationItem
+	// The current status of an attempt to update the group configuration.
+	Status GroupConfigurationStatus
 }
 
 // An item in a group configuration. A group configuration can have one or more
@@ -140,11 +140,11 @@ type GroupFilter struct {
 // The unique identifiers for a resource group.
 type GroupIdentifier struct {
 
-	// The name of the resource group.
-	GroupName *string
-
 	// The ARN of the resource group.
 	GroupArn *string
+
+	// The name of the resource group.
+	GroupName *string
 }
 
 // A mapping of a query attached to a resource group that determines the AWS
@@ -172,16 +172,16 @@ type GroupQuery struct {
 // operation, but the resulting group might have no member resources.
 type QueryError struct {
 
+	// Possible values are CLOUDFORMATION_STACK_INACTIVE and
+	// CLOUDFORMATION_STACK_NOT_EXISTING.
+	ErrorCode QueryErrorCode
+
 	// A message that explains the ErrorCode value. Messages might state that the
 	// specified CloudFormation stack does not exist (or no longer exists). For
 	// CLOUDFORMATION_STACK_INACTIVE, the message typically states that the
 	// CloudFormation stack has a status that is not (or no longer) active, such as
 	// CREATE_FAILED.
 	Message *string
-
-	// Possible values are CLOUDFORMATION_STACK_INACTIVE and
-	// CLOUDFORMATION_STACK_NOT_EXISTING.
-	ErrorCode QueryErrorCode
 }
 
 // A filter name and value pair that is used to obtain more specific results from a
@@ -203,11 +203,11 @@ type ResourceFilter struct {
 // The ARN of a resource, and its resource type.
 type ResourceIdentifier struct {
 
-	// The resource type of a resource, such as AWS::EC2::Instance.
-	ResourceType *string
-
 	// The ARN of a resource.
 	ResourceArn *string
+
+	// The resource type of a resource, such as AWS::EC2::Instance.
+	ResourceType *string
 }
 
 // The query that is used to define a resource group or a search for resources.

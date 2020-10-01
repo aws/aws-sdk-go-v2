@@ -73,9 +73,8 @@ func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optF
 
 type SendCommandInput struct {
 
-	// Command to start a new session. A session token is obtained as part of the
-	// response.
-	StartSession *types.StartSessionRequest
+	// Command to abort the current transaction.
+	AbortTransaction *types.AbortTransactionRequest
 
 	// Command to commit the specified transaction.
 	CommitTransaction *types.CommitTransactionRequest
@@ -83,11 +82,8 @@ type SendCommandInput struct {
 	// Command to end the current session.
 	EndSession *types.EndSessionRequest
 
-	// Command to start a new transaction.
-	StartTransaction *types.StartTransactionRequest
-
-	// Command to abort the current transaction.
-	AbortTransaction *types.AbortTransactionRequest
+	// Command to execute a statement in the specified transaction.
+	ExecuteStatement *types.ExecuteStatementRequest
 
 	// Command to fetch a page.
 	FetchPage *types.FetchPageRequest
@@ -98,20 +94,30 @@ type SendCommandInput struct {
 	// that is issued during the current session.
 	SessionToken *string
 
-	// Command to execute a statement in the specified transaction.
-	ExecuteStatement *types.ExecuteStatementRequest
+	// Command to start a new session. A session token is obtained as part of the
+	// response.
+	StartSession *types.StartSessionRequest
+
+	// Command to start a new transaction.
+	StartTransaction *types.StartTransactionRequest
 }
 
 type SendCommandOutput struct {
 
+	// Contains the details of the aborted transaction.
+	AbortTransaction *types.AbortTransactionResult
+
+	// Contains the details of the committed transaction.
+	CommitTransaction *types.CommitTransactionResult
+
 	// Contains the details of the ended session.
 	EndSession *types.EndSessionResult
 
+	// Contains the details of the executed statement.
+	ExecuteStatement *types.ExecuteStatementResult
+
 	// Contains the details of the fetched page.
 	FetchPage *types.FetchPageResult
-
-	// Contains the details of the aborted transaction.
-	AbortTransaction *types.AbortTransactionResult
 
 	// Contains the details of the started session that includes a session token. This
 	// SessionToken is required for every subsequent command that is issued during the
@@ -120,12 +126,6 @@ type SendCommandOutput struct {
 
 	// Contains the details of the started transaction.
 	StartTransaction *types.StartTransactionResult
-
-	// Contains the details of the committed transaction.
-	CommitTransaction *types.CommitTransactionResult
-
-	// Contains the details of the executed statement.
-	ExecuteStatement *types.ExecuteStatementResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

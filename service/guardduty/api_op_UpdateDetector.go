@@ -57,13 +57,13 @@ func (c *Client) UpdateDetector(ctx context.Context, params *UpdateDetectorInput
 
 type UpdateDetectorInput struct {
 
-	// An object that describes which data sources will be updated.
-	DataSources *types.DataSourceConfigurations
-
 	// The unique ID of the detector to update.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// An object that describes which data sources will be updated.
+	DataSources *types.DataSourceConfigurations
 
 	// Specifies whether the detector is enabled or not enabled.
 	Enable *bool

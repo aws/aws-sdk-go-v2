@@ -91,9 +91,6 @@ type StartTextTranslationJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// The name of the batch translation job to be performed.
-	JobName *string
-
 	// The language code of the input language. For a list of language codes, see
 	// what-is-languages (). Amazon Translate does not automatically detect a source
 	// language during batch translation jobs.
@@ -101,14 +98,17 @@ type StartTextTranslationJobInput struct {
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The name of the terminology to use in the batch translation job. For a list of
-	// available terminologies, use the ListTerminologies () operation.
-	TerminologyNames []*string
-
 	// The language code of the output language.
 	//
 	// This member is required.
 	TargetLanguageCodes []*string
+
+	// The name of the batch translation job to be performed.
+	JobName *string
+
+	// The name of the terminology to use in the batch translation job. For a list of
+	// available terminologies, use the ListTerminologies () operation.
+	TerminologyNames []*string
 }
 
 type StartTextTranslationJobOutput struct {

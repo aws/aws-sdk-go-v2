@@ -75,14 +75,17 @@ type SyncDeploymentJobInput struct {
 
 type SyncDeploymentJobOutput struct {
 
-	// The status of the synchronization job.
-	Status types.DeploymentStatus
+	// The Amazon Resource Name (ARN) of the synchronization request.
+	Arn *string
 
-	// The failure reason if the job fails.
-	FailureReason *string
+	// The time, in milliseconds since the epoch, when the fleet was created.
+	CreatedAt *time.Time
 
 	// Information about the deployment application configurations.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
+
+	// Information about the deployment configuration.
+	DeploymentConfig *types.DeploymentConfig
 
 	// The failure code if the job fails: InternalServiceError Internal service error.
 	// RobotApplicationCrash Robot application exited abnormally.
@@ -102,17 +105,14 @@ type SyncDeploymentJobOutput struct {
 	// for SimulationApplication does not match value during version creation.
 	FailureCode types.DeploymentJobErrorCode
 
+	// The failure reason if the job fails.
+	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
 
-	// Information about the deployment configuration.
-	DeploymentConfig *types.DeploymentConfig
-
-	// The Amazon Resource Name (ARN) of the synchronization request.
-	Arn *string
-
-	// The time, in milliseconds since the epoch, when the fleet was created.
-	CreatedAt *time.Time
+	// The status of the synchronization job.
+	Status types.DeploymentStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

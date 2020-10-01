@@ -92,44 +92,10 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// Enable or disable exporting the Kubernetes control plane logs for your cluster
-	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
-	// CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs
-	// (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) in
-	// the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and data
-	// scanning rates apply to exported control plane logs. For more information, see
-	// Amazon CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
-	Logging *types.Logging
-
 	// The unique name to give to your cluster.
 	//
 	// This member is required.
 	Name *string
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
-	ClientRequestToken *string
-
-	// The encryption configuration for the cluster.
-	EncryptionConfig []*types.EncryptionConfig
-
-	// The metadata to apply to the cluster to assist with categorization and
-	// organization. Each tag consists of a key and an optional value, both of which
-	// you define.
-	Tags map[string]*string
-
-	// The desired Kubernetes version for your cluster. If you don't specify a value
-	// here, the latest version available in Amazon EKS is used.
-	Version *string
-
-	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
-	// Amazon EKS to make calls to other AWS API operations on your behalf. For more
-	// information, see Amazon EKS Service IAM Role
-	// (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html) in the
-	// Amazon EKS User Guide .
-	//
-	// This member is required.
-	RoleArn *string
 
 	// The VPC configuration used by the cluster control plane. Amazon EKS VPC
 	// resources have specific requirements to work properly with Kubernetes. For more
@@ -143,6 +109,40 @@ type CreateClusterInput struct {
 	//
 	// This member is required.
 	ResourcesVpcConfig *types.VpcConfigRequest
+
+	// The Amazon Resource Name (ARN) of the IAM role that provides permissions for
+	// Amazon EKS to make calls to other AWS API operations on your behalf. For more
+	// information, see Amazon EKS Service IAM Role
+	// (https://docs.aws.amazon.com/eks/latest/userguide/service_IAM_role.html) in the
+	// Amazon EKS User Guide .
+	//
+	// This member is required.
+	RoleArn *string
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request.
+	ClientRequestToken *string
+
+	// The encryption configuration for the cluster.
+	EncryptionConfig []*types.EncryptionConfig
+
+	// Enable or disable exporting the Kubernetes control plane logs for your cluster
+	// to CloudWatch Logs. By default, cluster control plane logs aren't exported to
+	// CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs
+	// (https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html) in
+	// the Amazon EKS User Guide . CloudWatch Logs ingestion, archive storage, and data
+	// scanning rates apply to exported control plane logs. For more information, see
+	// Amazon CloudWatch Pricing (http://aws.amazon.com/cloudwatch/pricing/).
+	Logging *types.Logging
+
+	// The metadata to apply to the cluster to assist with categorization and
+	// organization. Each tag consists of a key and an optional value, both of which
+	// you define.
+	Tags map[string]*string
+
+	// The desired Kubernetes version for your cluster. If you don't specify a value
+	// here, the latest version available in Amazon EKS is used.
+	Version *string
 }
 
 type CreateClusterOutput struct {

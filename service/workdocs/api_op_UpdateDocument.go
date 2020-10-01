@@ -63,18 +63,18 @@ type UpdateDocumentInput struct {
 	// This member is required.
 	DocumentId *string
 
-	// The resource state of the document. Only ACTIVE and RECYCLED are supported.
-	ResourceState types.ResourceStateType
-
-	// The ID of the parent folder.
-	ParentFolderId *string
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 
 	// The name of the document.
 	Name *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
+	// The ID of the parent folder.
+	ParentFolderId *string
+
+	// The resource state of the document. Only ACTIVE and RECYCLED are supported.
+	ResourceState types.ResourceStateType
 }
 
 type UpdateDocumentOutput struct {

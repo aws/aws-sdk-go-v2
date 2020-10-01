@@ -57,32 +57,32 @@ func (c *Client) DescribeDataSourcePermissions(ctx context.Context, params *Desc
 
 type DescribeDataSourcePermissionsInput struct {
 
-	// The ID of the data source. This ID is unique per AWS Region for each AWS
-	// account.
-	//
-	// This member is required.
-	DataSourceId *string
-
 	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
+	//
+	// This member is required.
+	DataSourceId *string
 }
 
 type DescribeDataSourcePermissionsOutput struct {
+
+	// The Amazon Resource Name (ARN) of the data source.
+	DataSourceArn *string
 
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
 	DataSourceId *string
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
-	// The Amazon Resource Name (ARN) of the data source.
-	DataSourceArn *string
-
 	// A list of resource permissions on the data source.
 	Permissions []*types.ResourcePermission
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

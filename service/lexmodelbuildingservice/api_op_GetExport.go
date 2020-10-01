@@ -62,11 +62,6 @@ type GetExportInput struct {
 	// This member is required.
 	ExportType types.ExportType
 
-	// The version of the bot to export.
-	//
-	// This member is required.
-	Version *string
-
 	// The name of the bot to export.
 	//
 	// This member is required.
@@ -76,24 +71,14 @@ type GetExportInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	// The version of the bot to export.
+	//
+	// This member is required.
+	Version *string
 }
 
 type GetExportOutput struct {
-
-	// The name of the bot being exported.
-	Name *string
-
-	// The format of the exported data.
-	ExportType types.ExportType
-
-	// An S3 pre-signed URL that provides the location of the exported resource. The
-	// exported resource is a ZIP archive that contains the exported resource in JSON
-	// format. The structure of the archive may change. Your code should not rely on
-	// the archive structure.
-	Url *string
-
-	// The type of the exported resource.
-	ResourceType types.ResourceType
 
 	// The status of the export.
 	//
@@ -106,12 +91,27 @@ type GetExportOutput struct {
 	// completed.
 	ExportStatus types.ExportStatus
 
-	// The version of the bot being exported.
-	Version *string
+	// The format of the exported data.
+	ExportType types.ExportType
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to export the
 	// resource.
 	FailureReason *string
+
+	// The name of the bot being exported.
+	Name *string
+
+	// The type of the exported resource.
+	ResourceType types.ResourceType
+
+	// An S3 pre-signed URL that provides the location of the exported resource. The
+	// exported resource is a ZIP archive that contains the exported resource in JSON
+	// format. The structure of the archive may change. Your code should not rely on
+	// the archive structure.
+	Url *string
+
+	// The version of the bot being exported.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

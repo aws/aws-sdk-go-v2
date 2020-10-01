@@ -62,9 +62,6 @@ func (c *Client) AuthorizeClientVpnIngress(ctx context.Context, params *Authoriz
 
 type AuthorizeClientVpnIngressInput struct {
 
-	// A brief description of the authorization rule.
-	Description *string
-
 	// The ID of the Client VPN endpoint.
 	//
 	// This member is required.
@@ -76,26 +73,29 @@ type AuthorizeClientVpnIngressInput struct {
 	// This member is required.
 	TargetNetworkCidr *string
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the group to grant access to, for example, the Active Directory group
 	// or identity provider (IdP) group. Required if AuthorizeAllGroups is false or not
 	// specified.
 	AccessGroupId *string
+
+	// Indicates whether to grant access to all clients. Specify true to grant all
+	// clients who successfully establish a VPN connection access to the network. Must
+	// be set to true if AccessGroupId is not specified.
+	AuthorizeAllGroups *bool
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
-	// Indicates whether to grant access to all clients. Specify true to grant all
-	// clients who successfully establish a VPN connection access to the network. Must
-	// be set to true if AccessGroupId is not specified.
-	AuthorizeAllGroups *bool
+	// A brief description of the authorization rule.
+	Description *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type AuthorizeClientVpnIngressOutput struct {

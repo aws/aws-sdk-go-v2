@@ -66,19 +66,6 @@ func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfi
 
 type PutResourceConfigInput struct {
 
-	// Unique identifier of the resource.
-	//
-	// This member is required.
-	ResourceId *string
-
-	// Version of the schema registered for the ResourceType in AWS CloudFormation.
-	//
-	// This member is required.
-	SchemaVersionId *string
-
-	// Tags associated with the resource.
-	Tags map[string]*string
-
 	// The configuration object of the resource in valid JSON format. It must match the
 	// schema registered with AWS CloudFormation. The configuration JSON must not
 	// exceed 64 KB.
@@ -86,8 +73,10 @@ type PutResourceConfigInput struct {
 	// This member is required.
 	Configuration *string
 
-	// Name of the resource.
-	ResourceName *string
+	// Unique identifier of the resource.
+	//
+	// This member is required.
+	ResourceId *string
 
 	// The type of the resource. The custom resource type must be registered with AWS
 	// CloudFormation. You cannot use the organization names “aws”, “amzn”, “amazon”,
@@ -96,6 +85,17 @@ type PutResourceConfigInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	// Version of the schema registered for the ResourceType in AWS CloudFormation.
+	//
+	// This member is required.
+	SchemaVersionId *string
+
+	// Name of the resource.
+	ResourceName *string
+
+	// Tags associated with the resource.
+	Tags map[string]*string
 }
 
 type PutResourceConfigOutput struct {

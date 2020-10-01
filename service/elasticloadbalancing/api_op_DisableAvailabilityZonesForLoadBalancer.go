@@ -66,15 +66,15 @@ func (c *Client) DisableAvailabilityZonesForLoadBalancer(ctx context.Context, pa
 // Contains the parameters for DisableAvailabilityZonesForLoadBalancer.
 type DisableAvailabilityZonesForLoadBalancerInput struct {
 
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
-
 	// The Availability Zones.
 	//
 	// This member is required.
 	AvailabilityZones []*string
+
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
 }
 
 // Contains the output for DisableAvailabilityZonesForLoadBalancer.

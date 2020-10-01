@@ -63,16 +63,16 @@ func (c *Client) ListTagsOfResource(ctx context.Context, params *ListTagsOfResou
 
 type ListTagsOfResourceInput struct {
 
-	// An optional string that, if supplied, must be copied from the output of a
-	// previous call to ListTagOfResource. When provided in this manner, this API
-	// fetches the next page of results.
-	NextToken *string
-
 	// The Amazon DynamoDB resource with tags to be listed. This value is an Amazon
 	// Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// An optional string that, if supplied, must be copied from the output of a
+	// previous call to ListTagOfResource. When provided in this manner, this API
+	// fetches the next page of results.
+	NextToken *string
 }
 
 type ListTagsOfResourceOutput struct {

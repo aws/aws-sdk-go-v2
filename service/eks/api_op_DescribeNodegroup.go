@@ -57,15 +57,15 @@ func (c *Client) DescribeNodegroup(ctx context.Context, params *DescribeNodegrou
 
 type DescribeNodegroupInput struct {
 
-	// The name of the node group to describe.
-	//
-	// This member is required.
-	NodegroupName *string
-
 	// The name of the Amazon EKS cluster associated with the node group.
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The name of the node group to describe.
+	//
+	// This member is required.
+	NodegroupName *string
 }
 
 type DescribeNodegroupOutput struct {

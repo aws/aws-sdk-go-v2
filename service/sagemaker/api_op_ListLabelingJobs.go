@@ -57,6 +57,25 @@ func (c *Client) ListLabelingJobs(ctx context.Context, params *ListLabelingJobsI
 
 type ListLabelingJobsInput struct {
 
+	// A filter that returns only labeling jobs created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time
+
+	// A filter that returns only labeling jobs created before the specified time
+	// (timestamp).
+	CreationTimeBefore *time.Time
+
+	// A filter that returns only labeling jobs modified after the specified time
+	// (timestamp).
+	LastModifiedTimeAfter *time.Time
+
+	// A filter that returns only labeling jobs modified before the specified time
+	// (timestamp).
+	LastModifiedTimeBefore *time.Time
+
+	// The maximum number of labeling jobs to return in each page of the response.
+	MaxResults *int32
+
 	// A string in the labeling job name. This filter returns only labeling jobs whose
 	// name contains the specified string.
 	NameContains *string
@@ -66,10 +85,6 @@ type ListLabelingJobsInput struct {
 	// the token in the next request.
 	NextToken *string
 
-	// A filter that returns only labeling jobs created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time
-
 	// The field to sort results by. The default is CreationTime.
 	SortBy types.SortBy
 
@@ -78,31 +93,16 @@ type ListLabelingJobsInput struct {
 
 	// A filter that retrieves only labeling jobs with a specific status.
 	StatusEquals types.LabelingJobStatus
-
-	// A filter that returns only labeling jobs modified after the specified time
-	// (timestamp).
-	LastModifiedTimeAfter *time.Time
-
-	// The maximum number of labeling jobs to return in each page of the response.
-	MaxResults *int32
-
-	// A filter that returns only labeling jobs created before the specified time
-	// (timestamp).
-	CreationTimeBefore *time.Time
-
-	// A filter that returns only labeling jobs modified before the specified time
-	// (timestamp).
-	LastModifiedTimeBefore *time.Time
 }
 
 type ListLabelingJobsOutput struct {
 
+	// An array of LabelingJobSummary objects, each describing a labeling job.
+	LabelingJobSummaryList []*types.LabelingJobSummary
+
 	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
 	// the next set of labeling jobs, use it in the subsequent request.
 	NextToken *string
-
-	// An array of LabelingJobSummary objects, each describing a labeling job.
-	LabelingJobSummaryList []*types.LabelingJobSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

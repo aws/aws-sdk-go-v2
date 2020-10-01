@@ -62,18 +62,18 @@ type ListDiscoveredResourcesInput struct {
 	// This member is required.
 	MigrationTaskName *string
 
-	// If a NextToken was returned by a previous call, there are more results
-	// available. To retrieve the next page of results, make the call again using the
-	// returned token in NextToken.
-	NextToken *string
-
-	// The maximum number of results returned per page.
-	MaxResults *int32
-
 	// The name of the ProgressUpdateStream.
 	//
 	// This member is required.
 	ProgressUpdateStream *string
+
+	// The maximum number of results returned per page.
+	MaxResults *int32
+
+	// If a NextToken was returned by a previous call, there are more results
+	// available. To retrieve the next page of results, make the call again using the
+	// returned token in NextToken.
+	NextToken *string
 }
 
 type ListDiscoveredResourcesOutput struct {

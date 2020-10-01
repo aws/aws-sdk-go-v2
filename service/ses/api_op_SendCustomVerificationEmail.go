@@ -71,14 +71,14 @@ type SendCustomVerificationEmailInput struct {
 	// This member is required.
 	EmailAddress *string
 
-	// Name of a configuration set to use when sending the verification email.
-	ConfigurationSetName *string
-
 	// The name of the custom verification email template to use when sending the
 	// verification email.
 	//
 	// This member is required.
 	TemplateName *string
+
+	// Name of a configuration set to use when sending the verification email.
+	ConfigurationSetName *string
 }
 
 // The response received when attempting to send the custom verification email.

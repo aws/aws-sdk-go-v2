@@ -58,29 +58,29 @@ func (c *Client) GetTransitGatewayRegistrations(ctx context.Context, params *Get
 
 type GetTransitGatewayRegistrationsInput struct {
 
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
-	// 10.
-	TransitGatewayArns []*string
-
 	// The ID of the global network.
 	//
 	// This member is required.
 	GlobalNetworkId *string
 
+	// The maximum number of results to return.
+	MaxResults *int32
+
 	// The token for the next page of results.
 	NextToken *string
+
+	// The Amazon Resource Names (ARNs) of one or more transit gateways. The maximum is
+	// 10.
+	TransitGatewayArns []*string
 }
 
 type GetTransitGatewayRegistrationsOutput struct {
 
-	// The transit gateway registrations.
-	TransitGatewayRegistrations []*types.TransitGatewayRegistration
-
 	// The token for the next page of results.
 	NextToken *string
+
+	// The transit gateway registrations.
+	TransitGatewayRegistrations []*types.TransitGatewayRegistration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

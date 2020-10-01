@@ -58,14 +58,14 @@ func (c *Client) ConfigureAgent(ctx context.Context, params *ConfigureAgentInput
 type ConfigureAgentInput struct {
 
 	//
-	FleetInstanceId *string
-
-	Metadata map[string]*string
-
-	//
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	//
+	FleetInstanceId *string
+
+	Metadata map[string]*string
 }
 
 // The structure representing the configureAgentResponse.

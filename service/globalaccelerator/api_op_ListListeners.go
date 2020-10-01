@@ -64,23 +64,23 @@ type ListListenersInput struct {
 	// This member is required.
 	AcceleratorArn *string
 
-	// The token for the next set of results. You receive this token from a previous
-	// call.
-	NextToken *string
-
 	// The number of listener objects that you want to return with this call. The
 	// default value is 10.
 	MaxResults *int32
+
+	// The token for the next set of results. You receive this token from a previous
+	// call.
+	NextToken *string
 }
 
 type ListListenersOutput struct {
 
+	// The list of listeners for an accelerator.
+	Listeners []*types.Listener
+
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
-
-	// The list of listeners for an accelerator.
-	Listeners []*types.Listener
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -62,29 +62,29 @@ func (c *Client) ListRules(ctx context.Context, params *ListRulesInput, optFns .
 
 type ListRulesInput struct {
 
+	// Specifies the number of Rules that you want AWS WAF to return for this request.
+	// If you have more Rules than the number that you specify for Limit, the response
+	// includes a NextMarker value that you can use to get another batch of Rules.
+	Limit *int32
+
 	// If you specify a value for Limit and you have more Rules than the value of
 	// Limit, AWS WAF returns a NextMarker value in the response that allows you to
 	// list another group of Rules. For the second and subsequent ListRules requests,
 	// specify the value of NextMarker from the previous response to get information
 	// about another batch of Rules.
 	NextMarker *string
-
-	// Specifies the number of Rules that you want AWS WAF to return for this request.
-	// If you have more Rules than the number that you specify for Limit, the response
-	// includes a NextMarker value that you can use to get another batch of Rules.
-	Limit *int32
 }
 
 type ListRulesOutput struct {
-
-	// An array of RuleSummary () objects.
-	Rules []*types.RuleSummary
 
 	// If you have more Rules than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more Rules, submit
 	// another ListRules request, and specify the NextMarker value from the response in
 	// the NextMarker value in the next request.
 	NextMarker *string
+
+	// An array of RuleSummary () objects.
+	Rules []*types.RuleSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

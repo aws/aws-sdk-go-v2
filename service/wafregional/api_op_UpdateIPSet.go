@@ -117,6 +117,11 @@ func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optF
 
 type UpdateIPSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The IPSetId of the IPSet () that you want to update. IPSetId is returned by
 	// CreateIPSet () and by ListIPSets ().
 	//
@@ -137,11 +142,6 @@ type UpdateIPSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.IPSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type UpdateIPSetOutput struct {

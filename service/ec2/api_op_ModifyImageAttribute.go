@@ -64,29 +64,17 @@ func (c *Client) ModifyImageAttribute(ctx context.Context, params *ModifyImageAt
 // Contains the parameters for ModifyImageAttribute.
 type ModifyImageAttributeInput struct {
 
-	// The value of the attribute being modified. This parameter can be used only when
-	// the Attribute parameter is description or productCodes.
-	Value *string
-
-	// The operation type. This parameter can be used only when the Attribute parameter
-	// is launchPermission.
-	OperationType types.OperationType
-
 	// The ID of the AMI.
 	//
 	// This member is required.
 	ImageId *string
 
-	// A new description for the AMI.
-	Description *types.AttributeValue
-
-	// The DevPay product codes. After you add a product code to an AMI, it can't be
-	// removed.
-	ProductCodes []*string
-
 	// The name of the attribute to modify. The valid values are description,
 	// launchPermission, and productCodes.
 	Attribute *string
+
+	// A new description for the AMI.
+	Description *types.AttributeValue
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -94,16 +82,28 @@ type ModifyImageAttributeInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// A new launch permission for the AMI.
+	LaunchPermission *types.LaunchPermissionModifications
+
+	// The operation type. This parameter can be used only when the Attribute parameter
+	// is launchPermission.
+	OperationType types.OperationType
+
+	// The DevPay product codes. After you add a product code to an AMI, it can't be
+	// removed.
+	ProductCodes []*string
+
 	// The user groups. This parameter can be used only when the Attribute parameter is
 	// launchPermission.
 	UserGroups []*string
 
-	// A new launch permission for the AMI.
-	LaunchPermission *types.LaunchPermissionModifications
-
 	// The AWS account IDs. This parameter can be used only when the Attribute
 	// parameter is launchPermission.
 	UserIds []*string
+
+	// The value of the attribute being modified. This parameter can be used only when
+	// the Attribute parameter is description or productCodes.
+	Value *string
 }
 
 type ModifyImageAttributeOutput struct {

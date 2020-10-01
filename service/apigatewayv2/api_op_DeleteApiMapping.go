@@ -56,15 +56,15 @@ func (c *Client) DeleteApiMapping(ctx context.Context, params *DeleteApiMappingI
 
 type DeleteApiMappingInput struct {
 
-	// The domain name.
-	//
-	// This member is required.
-	DomainName *string
-
 	// The API mapping identifier.
 	//
 	// This member is required.
 	ApiMappingId *string
+
+	// The domain name.
+	//
+	// This member is required.
+	DomainName *string
 }
 
 type DeleteApiMappingOutput struct {

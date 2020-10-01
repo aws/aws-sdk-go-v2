@@ -63,11 +63,11 @@ type ListMultiplexProgramsInput struct {
 	// This member is required.
 	MultiplexId *string
 
-	// The token to retrieve the next page of results.
-	NextToken *string
-
 	// The maximum number of items to return.
 	MaxResults *int32
+
+	// The token to retrieve the next page of results.
+	NextToken *string
 }
 
 // Placeholder documentation for ListMultiplexProgramsResponse

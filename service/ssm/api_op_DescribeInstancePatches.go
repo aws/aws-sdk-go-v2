@@ -63,13 +63,13 @@ type DescribeInstancePatchesInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of patches to return (per page).
-	MaxResults *int32
-
 	// An array of structures. Each entry in the array is a structure containing a Key,
 	// Value combination. Valid values for Key are Classification | KBId | Severity |
 	// State.
 	Filters []*types.PatchOrchestratorFilter
+
+	// The maximum number of patches to return (per page).
+	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)

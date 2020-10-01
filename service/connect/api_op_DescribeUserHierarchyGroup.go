@@ -57,15 +57,15 @@ func (c *Client) DescribeUserHierarchyGroup(ctx context.Context, params *Describ
 
 type DescribeUserHierarchyGroupInput struct {
 
-	// The identifier of the Amazon Connect instance.
-	//
-	// This member is required.
-	InstanceId *string
-
 	// The identifier of the hierarchy group.
 	//
 	// This member is required.
 	HierarchyGroupId *string
+
+	// The identifier of the Amazon Connect instance.
+	//
+	// This member is required.
+	InstanceId *string
 }
 
 type DescribeUserHierarchyGroupOutput struct {

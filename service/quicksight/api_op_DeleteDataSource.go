@@ -71,15 +71,15 @@ type DeleteDataSourceInput struct {
 
 type DeleteDataSourceOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the data source that you deleted.
 	Arn *string
 
 	// The ID of the data source. This ID is unique per AWS Region for each AWS
 	// account.
 	DataSourceId *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

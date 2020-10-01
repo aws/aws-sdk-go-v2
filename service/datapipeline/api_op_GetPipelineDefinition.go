@@ -60,28 +60,28 @@ func (c *Client) GetPipelineDefinition(ctx context.Context, params *GetPipelineD
 // Contains the parameters for GetPipelineDefinition.
 type GetPipelineDefinitionInput struct {
 
-	// The version of the pipeline definition to retrieve. Set this parameter to latest
-	// (default) to use the last definition saved to the pipeline or active to use the
-	// last definition that was activated.
-	Version *string
-
 	// The ID of the pipeline.
 	//
 	// This member is required.
 	PipelineId *string
+
+	// The version of the pipeline definition to retrieve. Set this parameter to latest
+	// (default) to use the last definition saved to the pipeline or active to use the
+	// last definition that was activated.
+	Version *string
 }
 
 // Contains the output of GetPipelineDefinition.
 type GetPipelineDefinitionOutput struct {
 
-	// The objects defined in the pipeline.
-	PipelineObjects []*types.PipelineObject
+	// The parameter objects used in the pipeline definition.
+	ParameterObjects []*types.ParameterObject
 
 	// The parameter values used in the pipeline definition.
 	ParameterValues []*types.ParameterValue
 
-	// The parameter objects used in the pipeline definition.
-	ParameterObjects []*types.ParameterObject
+	// The objects defined in the pipeline.
+	PipelineObjects []*types.PipelineObject
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

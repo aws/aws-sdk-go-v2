@@ -60,14 +60,6 @@ func (c *Client) DescribeStaleSecurityGroups(ctx context.Context, params *Descri
 
 type DescribeStaleSecurityGroupsInput struct {
 
-	// The maximum number of items to return for this request. The request returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
-	// The token for the next set of items to return. (You received this token from a
-	// prior call.)
-	NextToken *string
-
 	// The ID of the VPC.
 	//
 	// This member is required.
@@ -78,16 +70,24 @@ type DescribeStaleSecurityGroupsInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The maximum number of items to return for this request. The request returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// prior call.)
+	NextToken *string
 }
 
 type DescribeStaleSecurityGroupsOutput struct {
 
-	// Information about the stale security groups.
-	StaleSecurityGroupSet []*types.StaleSecurityGroup
-
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
+
+	// Information about the stale security groups.
+	StaleSecurityGroupSet []*types.StaleSecurityGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

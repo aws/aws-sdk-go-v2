@@ -64,14 +64,14 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// The application name.
-	Name *string
+	// The description of the application.
+	Description *string
 
 	// The application ID.
 	Id *string
 
-	// The description of the application.
-	Description *string
+	// The application name.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

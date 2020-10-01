@@ -57,13 +57,10 @@ func (c *Client) UpdateTheme(ctx context.Context, params *UpdateThemeInput, optF
 
 type UpdateThemeInput struct {
 
-	// The theme configuration, which contains the theme display properties.
-	Configuration *types.ThemeConfiguration
-
-	// The ID for the theme.
+	// The ID of the AWS account that contains the theme that you're updating.
 	//
 	// This member is required.
-	ThemeId *string
+	AwsAccountId *string
 
 	// The theme ID, defined by Amazon QuickSight, that a custom theme inherits from.
 	// All themes initially inherit from a default QuickSight theme.
@@ -71,36 +68,39 @@ type UpdateThemeInput struct {
 	// This member is required.
 	BaseThemeId *string
 
-	// A description of the theme version that you're updating Every time that you call
-	// UpdateTheme, you create a new version of the theme. Each version of the theme
-	// maintains a description of the version in VersionDescription.
-	VersionDescription *string
+	// The ID for the theme.
+	//
+	// This member is required.
+	ThemeId *string
+
+	// The theme configuration, which contains the theme display properties.
+	Configuration *types.ThemeConfiguration
 
 	// The name for the theme.
 	Name *string
 
-	// The ID of the AWS account that contains the theme that you're updating.
-	//
-	// This member is required.
-	AwsAccountId *string
+	// A description of the theme version that you're updating Every time that you call
+	// UpdateTheme, you create a new version of the theme. Each version of the theme
+	// maintains a description of the version in VersionDescription.
+	VersionDescription *string
 }
 
 type UpdateThemeOutput struct {
 
-	// The ID for the theme.
-	ThemeId *string
-
-	// The AWS request ID for this operation.
-	RequestId *string
-
-	// The Amazon Resource Name (ARN) for the new version of the theme.
-	VersionArn *string
+	// The Amazon Resource Name (ARN) for the theme.
+	Arn *string
 
 	// The creation status of the theme.
 	CreationStatus types.ResourceStatus
 
-	// The Amazon Resource Name (ARN) for the theme.
-	Arn *string
+	// The AWS request ID for this operation.
+	RequestId *string
+
+	// The ID for the theme.
+	ThemeId *string
+
+	// The Amazon Resource Name (ARN) for the new version of the theme.
+	VersionArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

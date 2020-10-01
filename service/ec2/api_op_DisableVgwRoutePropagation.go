@@ -58,12 +58,6 @@ func (c *Client) DisableVgwRoutePropagation(ctx context.Context, params *Disable
 // Contains the parameters for DisableVgwRoutePropagation.
 type DisableVgwRoutePropagationInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the virtual private gateway.
 	//
 	// This member is required.
@@ -73,6 +67,12 @@ type DisableVgwRoutePropagationInput struct {
 	//
 	// This member is required.
 	RouteTableId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type DisableVgwRoutePropagationOutput struct {

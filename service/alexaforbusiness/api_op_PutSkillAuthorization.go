@@ -58,6 +58,12 @@ func (c *Client) PutSkillAuthorization(ctx context.Context, params *PutSkillAuth
 
 type PutSkillAuthorizationInput struct {
 
+	// The authorization result specific to OAUTH code grant output. "Code” must be
+	// populated in the AuthorizationResult map to establish the authorization.
+	//
+	// This member is required.
+	AuthorizationResult map[string]*string
+
 	// The unique identifier of a skill.
 	//
 	// This member is required.
@@ -65,12 +71,6 @@ type PutSkillAuthorizationInput struct {
 
 	// The room that the skill is authorized for.
 	RoomArn *string
-
-	// The authorization result specific to OAUTH code grant output. "Code” must be
-	// populated in the AuthorizationResult map to establish the authorization.
-	//
-	// This member is required.
-	AuthorizationResult map[string]*string
 }
 
 type PutSkillAuthorizationOutput struct {

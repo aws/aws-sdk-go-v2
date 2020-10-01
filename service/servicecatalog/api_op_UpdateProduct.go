@@ -72,41 +72,41 @@ type UpdateProductInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The updated description of the product.
-	Description *string
-
-	// The updated support description for the product.
-	SupportDescription *string
-
-	// The updated support URL for the product.
-	SupportUrl *string
-
-	// The updated product name.
-	Name *string
-
 	// The tags to add to the product.
 	AddTags []*types.Tag
 
-	// The updated owner of the product.
-	Owner *string
-
-	// The updated support email for the product.
-	SupportEmail *string
+	// The updated description of the product.
+	Description *string
 
 	// The updated distributor of the product.
 	Distributor *string
 
+	// The updated product name.
+	Name *string
+
+	// The updated owner of the product.
+	Owner *string
+
 	// The tags to remove from the product.
 	RemoveTags []*string
+
+	// The updated support description for the product.
+	SupportDescription *string
+
+	// The updated support email for the product.
+	SupportEmail *string
+
+	// The updated support URL for the product.
+	SupportUrl *string
 }
 
 type UpdateProductOutput struct {
 
-	// Information about the tags associated with the product.
-	Tags []*types.Tag
-
 	// Information about the product view.
 	ProductViewDetail *types.ProductViewDetail
+
+	// Information about the tags associated with the product.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,9 +60,6 @@ func (c *Client) GetReservationUtilization(ctx context.Context, params *GetReser
 
 type GetReservationUtilizationInput struct {
 
-	// Groups only by SUBSCRIPTION_ID. Metadata is included.
-	GroupBy []*types.GroupDefinition
-
 	// Sets the start and end dates for retrieving RI utilization. The start date is
 	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
 	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
@@ -70,10 +67,6 @@ type GetReservationUtilizationInput struct {
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
-
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
-	NextPageToken *string
 
 	// Filters utilization data by dimensions. You can filter by the following
 	// dimensions:
@@ -116,6 +109,13 @@ type GetReservationUtilizationInput struct {
 	// The GetReservationUtilization operation supports only DAILY and MONTHLY
 	// granularities.
 	Granularity types.Granularity
+
+	// Groups only by SUBSCRIPTION_ID. Metadata is included.
+	GroupBy []*types.GroupDefinition
+
+	// The token to retrieve the next set of results. AWS provides the token when the
+	// response from a previous call has more results than the maximum page size.
+	NextPageToken *string
 }
 
 type GetReservationUtilizationOutput struct {
@@ -125,12 +125,12 @@ type GetReservationUtilizationOutput struct {
 	// This member is required.
 	UtilizationsByTime []*types.UtilizationByTime
 
-	// The total amount of time that you used your RIs.
-	Total *types.ReservationAggregates
-
 	// The token for the next set of retrievable results. AWS provides the token when
 	// the response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
+	// The total amount of time that you used your RIs.
+	Total *types.ReservationAggregates
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -60,25 +60,25 @@ func (c *Client) CreateSnapshots(ctx context.Context, params *CreateSnapshotsInp
 
 type CreateSnapshotsInput struct {
 
+	// The instance to specify which volumes should be included in the snapshots.
+	//
+	// This member is required.
+	InstanceSpecification *types.InstanceSpecification
+
+	// Copies the tags from the specified volume to corresponding snapshot.
+	CopyTagsFromSource types.CopyTagsFromSource
+
+	// A description propagated to every snapshot specified by the instance.
+	Description *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// Copies the tags from the specified volume to corresponding snapshot.
-	CopyTagsFromSource types.CopyTagsFromSource
-
 	// Tags to apply to every snapshot specified by the instance.
 	TagSpecifications []*types.TagSpecification
-
-	// The instance to specify which volumes should be included in the snapshots.
-	//
-	// This member is required.
-	InstanceSpecification *types.InstanceSpecification
-
-	// A description propagated to every snapshot specified by the instance.
-	Description *string
 }
 
 type CreateSnapshotsOutput struct {

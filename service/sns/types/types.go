@@ -23,11 +23,6 @@ type Endpoint struct {
 // (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html).
 type MessageAttributeValue struct {
 
-	// Strings are Unicode with UTF8 binary encoding. For a list of code values, see
-	// ASCII Printable Characters
-	// (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
-	StringValue *string
-
 	// Amazon SNS supports the following logical data types: String, String.Array,
 	// Number, and Binary. For more information, see Message Attribute Data Types
 	// (https://docs.aws.amazon.com/sns/latest/dg/SNSMessageAttributes.html#SNSMessageAttributes.DataTypes).
@@ -38,6 +33,11 @@ type MessageAttributeValue struct {
 	// Binary type attributes can store any binary data, for example, compressed data,
 	// encrypted data, or images.
 	BinaryValue []byte
+
+	// Strings are Unicode with UTF8 binary encoding. For a list of code values, see
+	// ASCII Printable Characters
+	// (https://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
+	StringValue *string
 }
 
 // Platform application object.
@@ -53,17 +53,17 @@ type PlatformApplication struct {
 // A wrapper type for the attributes of an Amazon SNS subscription.
 type Subscription struct {
 
-	// The subscription's protocol.
-	Protocol *string
+	// The subscription's endpoint (format depends on the protocol).
+	Endpoint *string
 
 	// The subscription's owner.
 	Owner *string
 
+	// The subscription's protocol.
+	Protocol *string
+
 	// The subscription's ARN.
 	SubscriptionArn *string
-
-	// The subscription's endpoint (format depends on the protocol).
-	Endpoint *string
 
 	// The ARN of the subscription's topic.
 	TopicArn *string

@@ -57,16 +57,6 @@ func (c *Client) GetTransitGatewayMulticastDomainAssociations(ctx context.Contex
 
 type GetTransitGatewayMulticastDomainAssociationsInput struct {
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
-	// The ID of the transit gateway multicast domain.
-	TransitGatewayMulticastDomainId *string
-
-	// The token for the next page of results.
-	NextToken *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -88,6 +78,16 @@ type GetTransitGatewayMulticastDomainAssociationsInput struct {
 	// <code>transit-gateway-attachment-id</code> - The id of the transit gateway
 	// attachment.</p> </li> </ul>
 	Filters []*types.Filter
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
+	// The ID of the transit gateway multicast domain.
+	TransitGatewayMulticastDomainId *string
 }
 
 type GetTransitGatewayMulticastDomainAssociationsOutput struct {

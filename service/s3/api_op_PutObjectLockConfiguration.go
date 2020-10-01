@@ -74,9 +74,6 @@ type PutObjectLockConfigurationInput struct {
 	// The MD5 hash for the request body.
 	ContentMD5 *string
 
-	// A token to allow Object Lock to be enabled for an existing bucket.
-	Token *string
-
 	// The Object Lock configuration that you want to apply to the specified bucket.
 	ObjectLockConfiguration *types.ObjectLockConfiguration
 
@@ -87,6 +84,9 @@ type PutObjectLockConfigurationInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 Developer Guide.
 	RequestPayer types.RequestPayer
+
+	// A token to allow Object Lock to be enabled for an existing bucket.
+	Token *string
 }
 
 type PutObjectLockConfigurationOutput struct {

@@ -77,9 +77,6 @@ func (c *Client) CreateSecurityGroup(ctx context.Context, params *CreateSecurity
 
 type CreateSecurityGroupInput struct {
 
-	// The tags to assign to the security group.
-	TagSpecifications []*types.TagSpecification
-
 	// A description for the security group. This is informational only. Constraints:
 	// Up to 255 characters in length Constraints for EC2-Classic: ASCII characters
 	// Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and ._-:/()#,@[]+=&;{}!$*
@@ -94,14 +91,17 @@ type CreateSecurityGroupInput struct {
 	// This member is required.
 	GroupName *string
 
-	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
-	VpcId *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The tags to assign to the security group.
+	TagSpecifications []*types.TagSpecification
+
+	// [EC2-VPC] The ID of the VPC. Required for EC2-VPC.
+	VpcId *string
 }
 
 type CreateSecurityGroupOutput struct {

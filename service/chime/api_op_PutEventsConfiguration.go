@@ -59,12 +59,6 @@ func (c *Client) PutEventsConfiguration(ctx context.Context, params *PutEventsCo
 
 type PutEventsConfigurationInput struct {
 
-	// Lambda function ARN that allows the bot to receive outgoing events.
-	LambdaFunctionArn *string
-
-	// HTTPS endpoint that allows the bot to receive outgoing events.
-	OutboundEventsHTTPSEndpoint *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
@@ -74,6 +68,12 @@ type PutEventsConfigurationInput struct {
 	//
 	// This member is required.
 	BotId *string
+
+	// Lambda function ARN that allows the bot to receive outgoing events.
+	LambdaFunctionArn *string
+
+	// HTTPS endpoint that allows the bot to receive outgoing events.
+	OutboundEventsHTTPSEndpoint *string
 }
 
 type PutEventsConfigurationOutput struct {

@@ -58,11 +58,6 @@ func (c *Client) SubscribeToEvent(ctx context.Context, params *SubscribeToEventI
 
 type SubscribeToEventInput struct {
 
-	// The ARN of the SNS topic to which the SNS notifications are sent.
-	//
-	// This member is required.
-	TopicArn *string
-
 	// The event for which you want to receive SNS notifications.
 	//
 	// This member is required.
@@ -73,6 +68,11 @@ type SubscribeToEventInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The ARN of the SNS topic to which the SNS notifications are sent.
+	//
+	// This member is required.
+	TopicArn *string
 }
 
 type SubscribeToEventOutput struct {

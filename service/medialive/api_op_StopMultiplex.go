@@ -68,17 +68,14 @@ type StopMultiplexInput struct {
 // Placeholder documentation for StopMultiplexResponse
 type StopMultiplexOutput struct {
 
+	// The unique arn of the multiplex.
+	Arn *string
+
+	// A list of availability zones for the multiplex.
+	AvailabilityZones []*string
+
 	// A list of the multiplex output destinations.
 	Destinations []*types.MultiplexOutputDestination
-
-	// The number of programs in the multiplex.
-	ProgramCount *int32
-
-	// The current state of the multiplex.
-	State types.MultiplexState
-
-	// The name of the multiplex.
-	Name *string
 
 	// The unique id of the multiplex.
 	Id *string
@@ -86,14 +83,17 @@ type StopMultiplexOutput struct {
 	// Configuration for a multiplex event.
 	MultiplexSettings *types.MultiplexSettings
 
-	// The unique arn of the multiplex.
-	Arn *string
+	// The name of the multiplex.
+	Name *string
 
 	// The number of currently healthy pipelines.
 	PipelinesRunningCount *int32
 
-	// A list of availability zones for the multiplex.
-	AvailabilityZones []*string
+	// The number of programs in the multiplex.
+	ProgramCount *int32
+
+	// The current state of the multiplex.
+	State types.MultiplexState
 
 	// A collection of key-value pairs.
 	Tags map[string]*string

@@ -61,34 +61,34 @@ func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput
 
 type ListChangeSetsInput struct {
 
+	// The catalog related to the request. Fixed value: AWSMarketplace
+	//
+	// This member is required.
+	Catalog *string
+
+	// An array of filter objects.
+	FilterList []*types.Filter
+
+	// The maximum number of results returned by a single call. This value must be
+	// provided in the next call to retrieve the next set of results. By default, this
+	// value is 20.
+	MaxResults *int32
+
 	// The token value retrieved from a previous call to access the next page of
 	// results.
 	NextToken *string
 
 	// An object that contains two attributes, SortBy and SortOrder.
 	Sort *types.Sort
-
-	// An array of filter objects.
-	FilterList []*types.Filter
-
-	// The catalog related to the request. Fixed value: AWSMarketplace
-	//
-	// This member is required.
-	Catalog *string
-
-	// The maximum number of results returned by a single call. This value must be
-	// provided in the next call to retrieve the next set of results. By default, this
-	// value is 20.
-	MaxResults *int32
 }
 
 type ListChangeSetsOutput struct {
 
-	// The value of the next token, if it exists. Null if there are no more results.
-	NextToken *string
-
 	// Array of ChangeSetSummaryListItem objects.
 	ChangeSetSummaryList []*types.ChangeSetSummaryListItem
+
+	// The value of the next token, if it exists. Null if there are no more results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

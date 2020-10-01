@@ -61,11 +61,11 @@ func (c *Client) GetEntityTypes(ctx context.Context, params *GetEntityTypesInput
 
 type GetEntityTypesInput struct {
 
-	// The name.
-	Name *string
-
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
+	// The name.
+	Name *string
 
 	// The next token for the subsequent request.
 	NextToken *string
@@ -73,11 +73,11 @@ type GetEntityTypesInput struct {
 
 type GetEntityTypesOutput struct {
 
-	// The next page token.
-	NextToken *string
-
 	// An array of entity types.
 	EntityTypes []*types.EntityType
+
+	// The next page token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

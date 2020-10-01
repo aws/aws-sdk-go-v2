@@ -56,24 +56,24 @@ func (c *Client) GetApiMapping(ctx context.Context, params *GetApiMappingInput, 
 
 type GetApiMappingInput struct {
 
+	// The API mapping identifier.
+	//
+	// This member is required.
+	ApiMappingId *string
+
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
-
-	// The API mapping identifier.
-	//
-	// This member is required.
-	ApiMappingId *string
 }
 
 type GetApiMappingOutput struct {
 
-	// The API mapping identifier.
-	ApiMappingId *string
-
 	// The API identifier.
 	ApiId *string
+
+	// The API mapping identifier.
+	ApiMappingId *string
 
 	// The API mapping key.
 	ApiMappingKey *string

@@ -70,13 +70,13 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// A map of tag keys and values associated with the specified signaling channel.
-	Tags map[string]*string
-
 	// If you specify this parameter and the result of a ListTagsForResource call is
 	// truncated, the response includes a token that you can use in the next request to
 	// fetch the next set of tags.
 	NextToken *string
+
+	// A map of tag keys and values associated with the specified signaling channel.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

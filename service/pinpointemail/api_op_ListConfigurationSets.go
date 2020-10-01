@@ -62,15 +62,15 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 // account in the current AWS Region.
 type ListConfigurationSetsInput struct {
 
+	// A token returned from a previous call to ListConfigurationSets to indicate the
+	// position in the list of configuration sets.
+	NextToken *string
+
 	// The number of results to show in a single call to ListConfigurationSets. If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
 	// additional results.
 	PageSize *int32
-
-	// A token returned from a previous call to ListConfigurationSets to indicate the
-	// position in the list of configuration sets.
-	NextToken *string
 }
 
 // A list of configuration sets in your Amazon Pinpoint account in the current AWS

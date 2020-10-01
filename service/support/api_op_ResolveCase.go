@@ -74,11 +74,11 @@ type ResolveCaseInput struct {
 // The status of the case returned by the ResolveCase () operation.
 type ResolveCaseOutput struct {
 
-	// The status of the case when the ResolveCase () request was sent.
-	InitialCaseStatus *string
-
 	// The status of the case after the ResolveCase () request was processed.
 	FinalCaseStatus *string
+
+	// The status of the case when the ResolveCase () request was sent.
+	InitialCaseStatus *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

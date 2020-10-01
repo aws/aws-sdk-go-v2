@@ -58,15 +58,15 @@ func (c *Client) UpdateProject(ctx context.Context, params *UpdateProjectInput, 
 // Request structure used for requests to update project configuration.
 type UpdateProjectInput struct {
 
-	// ZIP or YAML file which contains project configuration to be updated. This should
-	// be the contents of the file downloaded from the URL provided in an export
-	// project operation.
-	Contents []byte
-
 	// Unique project identifier.
 	//
 	// This member is required.
 	ProjectId *string
+
+	// ZIP or YAML file which contains project configuration to be updated. This should
+	// be the contents of the file downloaded from the URL provided in an export
+	// project operation.
+	Contents []byte
 }
 
 // Result structure used for requests to updated project configuration.

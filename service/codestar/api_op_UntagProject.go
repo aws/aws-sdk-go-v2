@@ -56,15 +56,15 @@ func (c *Client) UntagProject(ctx context.Context, params *UntagProjectInput, op
 
 type UntagProjectInput struct {
 
-	// The tags to remove from the project.
-	//
-	// This member is required.
-	Tags []*string
-
 	// The ID of the project to remove tags from.
 	//
 	// This member is required.
 	Id *string
+
+	// The tags to remove from the project.
+	//
+	// This member is required.
+	Tags []*string
 }
 
 type UntagProjectOutput struct {

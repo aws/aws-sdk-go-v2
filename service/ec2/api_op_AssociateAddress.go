@@ -76,6 +76,9 @@ func (c *Client) AssociateAddress(ctx context.Context, params *AssociateAddressI
 
 type AssociateAddressInput struct {
 
+	// [EC2-VPC] The allocation ID. This is required for EC2-VPC.
+	AllocationId *string
+
 	// [EC2-VPC] For a VPC in an EC2-Classic account, specify true to allow an Elastic
 	// IP address that is already associated with an instance or network interface to
 	// be reassociated with the specified instance or network interface. Otherwise, the
@@ -83,16 +86,6 @@ type AssociateAddressInput struct {
 	// automatic, therefore you can specify false to ensure the operation fails if the
 	// Elastic IP address is already associated with another resource.
 	AllowReassociation *bool
-
-	// [EC2-VPC] The primary or secondary private IP address to associate with the
-	// Elastic IP address. If no private IP address is specified, the Elastic IP
-	// address is associated with the primary private IP address.
-	PrivateIpAddress *string
-
-	// [EC2-VPC] The ID of the network interface. If the instance has more than one
-	// network interface, you must specify a network interface ID. For EC2-VPC, you can
-	// specify either the instance ID or the network interface ID, but not both.
-	NetworkInterfaceId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -106,12 +99,19 @@ type AssociateAddressInput struct {
 	// interface is attached.
 	InstanceId *string
 
+	// [EC2-VPC] The ID of the network interface. If the instance has more than one
+	// network interface, you must specify a network interface ID. For EC2-VPC, you can
+	// specify either the instance ID or the network interface ID, but not both.
+	NetworkInterfaceId *string
+
+	// [EC2-VPC] The primary or secondary private IP address to associate with the
+	// Elastic IP address. If no private IP address is specified, the Elastic IP
+	// address is associated with the primary private IP address.
+	PrivateIpAddress *string
+
 	// The Elastic IP address to associate with the instance. This is required for
 	// EC2-Classic.
 	PublicIp *string
-
-	// [EC2-VPC] The allocation ID. This is required for EC2-VPC.
-	AllocationId *string
 }
 
 type AssociateAddressOutput struct {

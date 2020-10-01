@@ -67,62 +67,62 @@ type DeleteReservationInput struct {
 // Placeholder documentation for DeleteReservationResponse
 type DeleteReservationOutput struct {
 
-	// Unique offering ID, e.g. '87654321'
-	OfferingId *string
-
-	// Reservation UTC start date and time in ISO-8601 format, e.g.
-	// '2018-03-01T00:00:00'
-	Start *string
-
-	// Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
-	End *string
-
 	// Unique reservation ARN, e.g.
 	// 'arn:aws:medialive:us-west-2:123456789012:reservation:1234567'
 	Arn *string
 
+	// Number of reserved resources
+	Count *int32
+
+	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
+	CurrencyCode *string
+
+	// Lease duration, e.g. '12'
+	Duration *int32
+
+	// Units for duration, e.g. 'MONTHS'
+	DurationUnits types.OfferingDurationUnits
+
+	// Reservation UTC end date and time in ISO-8601 format, e.g. '2019-03-01T00:00:00'
+	End *string
+
 	// One-time charge for each reserved resource, e.g. '0.0' for a NO_UPFRONT offering
 	FixedPrice *float64
 
-	// AWS region, e.g. 'us-west-2'
-	Region *string
-
-	// A collection of key-value pairs
-	Tags map[string]*string
+	// User specified reservation name
+	Name *string
 
 	// Offering description, e.g. 'HD AVC output at 10-20 Mbps, 30 fps, and standard VQ
 	// in US West (Oregon)'
 	OfferingDescription *string
 
-	// Unique reservation ID, e.g. '1234567'
-	ReservationId *string
-
-	// Currency code for usagePrice and fixedPrice in ISO-4217 format, e.g. 'USD'
-	CurrencyCode *string
-
-	// Units for duration, e.g. 'MONTHS'
-	DurationUnits types.OfferingDurationUnits
-
-	// Current state of reservation, e.g. 'ACTIVE'
-	State types.ReservationState
-
-	// User specified reservation name
-	Name *string
-
-	// Lease duration, e.g. '12'
-	Duration *int32
-
-	// Recurring usage charge for each reserved resource, e.g. '157.0'
-	UsagePrice *float64
+	// Unique offering ID, e.g. '87654321'
+	OfferingId *string
 
 	// Offering type, e.g. 'NO_UPFRONT'
 	OfferingType types.OfferingType
 
-	// Number of reserved resources
-	Count *int32
+	// AWS region, e.g. 'us-west-2'
+	Region *string
+
+	// Unique reservation ID, e.g. '1234567'
+	ReservationId *string
 
 	// Resource configuration details
 	ResourceSpecification *types.ReservationResourceSpecification
+
+	// Reservation UTC start date and time in ISO-8601 format, e.g.
+	// '2018-03-01T00:00:00'
+	Start *string
+
+	// Current state of reservation, e.g. 'ACTIVE'
+	State types.ReservationState
+
+	// A collection of key-value pairs
+	Tags map[string]*string
+
+	// Recurring usage charge for each reserved resource, e.g. '157.0'
+	UsagePrice *float64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

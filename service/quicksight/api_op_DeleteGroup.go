@@ -56,11 +56,6 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The namespace. Currently, you should set this to default.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The ID for the AWS account that the group is in. Currently, you use the ID for
 	// the AWS account that contains your Amazon QuickSight account.
 	//
@@ -71,6 +66,11 @@ type DeleteGroupInput struct {
 	//
 	// This member is required.
 	GroupName *string
+
+	// The namespace. Currently, you should set this to default.
+	//
+	// This member is required.
+	Namespace *string
 }
 
 type DeleteGroupOutput struct {

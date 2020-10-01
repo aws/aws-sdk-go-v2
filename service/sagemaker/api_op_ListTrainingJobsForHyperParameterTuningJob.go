@@ -58,10 +58,10 @@ func (c *Client) ListTrainingJobsForHyperParameterTuningJob(ctx context.Context,
 
 type ListTrainingJobsForHyperParameterTuningJobInput struct {
 
-	// The field to sort results by. The default is Name. If the value of this field is
-	// FinalObjectiveMetricValue, any training jobs that did not return an objective
-	// metric are not listed.
-	SortBy types.TrainingJobSortByOptions
+	// The name of the tuning job whose training jobs you want to list.
+	//
+	// This member is required.
+	HyperParameterTuningJobName *string
 
 	// The maximum number of training jobs to return. The default value is 10.
 	MaxResults *int32
@@ -71,13 +71,13 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 	// training jobs, use the token in the next request.
 	NextToken *string
 
+	// The field to sort results by. The default is Name. If the value of this field is
+	// FinalObjectiveMetricValue, any training jobs that did not return an objective
+	// metric are not listed.
+	SortBy types.TrainingJobSortByOptions
+
 	// The sort order for results. The default is Ascending.
 	SortOrder types.SortOrder
-
-	// The name of the tuning job whose training jobs you want to list.
-	//
-	// This member is required.
-	HyperParameterTuningJobName *string
 
 	// A filter that returns only training jobs with the specified status.
 	StatusEquals types.TrainingJobStatus

@@ -57,13 +57,6 @@ func (c *Client) UpdateConfigurationProfile(ctx context.Context, params *UpdateC
 
 type UpdateConfigurationProfileInput struct {
 
-	// The name of the configuration profile.
-	Name *string
-
-	// The ARN of an IAM role with permission to access the configuration at the
-	// specified LocationUri.
-	RetrievalRoleArn *string
-
 	// The application ID.
 	//
 	// This member is required.
@@ -77,6 +70,13 @@ type UpdateConfigurationProfileInput struct {
 	// A description of the configuration profile.
 	Description *string
 
+	// The name of the configuration profile.
+	Name *string
+
+	// The ARN of an IAM role with permission to access the configuration at the
+	// specified LocationUri.
+	RetrievalRoleArn *string
+
 	// A list of methods for validating the configuration.
 	Validators []*types.Validator
 }
@@ -86,24 +86,24 @@ type UpdateConfigurationProfileOutput struct {
 	// The application ID.
 	ApplicationId *string
 
+	// The configuration profile description.
+	Description *string
+
+	// The configuration profile ID.
+	Id *string
+
+	// The URI location of the configuration.
+	LocationUri *string
+
 	// The name of the configuration profile.
 	Name *string
-
-	// A list of methods for validating the configuration.
-	Validators []*types.Validator
 
 	// The ARN of an IAM role with permission to access the configuration at the
 	// specified LocationUri.
 	RetrievalRoleArn *string
 
-	// The URI location of the configuration.
-	LocationUri *string
-
-	// The configuration profile ID.
-	Id *string
-
-	// The configuration profile description.
-	Description *string
+	// A list of methods for validating the configuration.
+	Validators []*types.Validator
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

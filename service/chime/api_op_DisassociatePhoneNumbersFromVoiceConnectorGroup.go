@@ -58,15 +58,15 @@ func (c *Client) DisassociatePhoneNumbersFromVoiceConnectorGroup(ctx context.Con
 
 type DisassociatePhoneNumbersFromVoiceConnectorGroupInput struct {
 
-	// The Amazon Chime Voice Connector group ID.
-	//
-	// This member is required.
-	VoiceConnectorGroupId *string
-
 	// List of phone numbers, in E.164 format.
 	//
 	// This member is required.
 	E164PhoneNumbers []*string
+
+	// The Amazon Chime Voice Connector group ID.
+	//
+	// This member is required.
+	VoiceConnectorGroupId *string
 }
 
 type DisassociatePhoneNumbersFromVoiceConnectorGroupOutput struct {

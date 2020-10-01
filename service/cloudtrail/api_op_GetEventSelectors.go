@@ -101,11 +101,11 @@ type GetEventSelectorsInput struct {
 
 type GetEventSelectorsOutput struct {
 
-	// The specified trail ARN that has the event selectors.
-	TrailARN *string
-
 	// The event selectors that are configured for the trail.
 	EventSelectors []*types.EventSelector
+
+	// The specified trail ARN that has the event selectors.
+	TrailARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

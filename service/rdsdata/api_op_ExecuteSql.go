@@ -66,16 +66,10 @@ type ExecuteSqlInput struct {
 	// This member is required.
 	AwsSecretStoreArn *string
 
-	// The name of the database.
-	Database *string
-
 	// The ARN of the Aurora Serverless DB cluster.
 	//
 	// This member is required.
 	DbClusterOrInstanceArn *string
-
-	// The name of the database schema.
-	Schema *string
 
 	// One or more SQL statements to run on the DB cluster. You can separate SQL
 	// statements from each other with a semicolon (;). Any valid SQL statement is
@@ -83,6 +77,12 @@ type ExecuteSqlInput struct {
 	//
 	// This member is required.
 	SqlStatements *string
+
+	// The name of the database.
+	Database *string
+
+	// The name of the database schema.
+	Schema *string
 }
 
 // The response elements represent the output of a request to run one or more SQL

@@ -58,10 +58,32 @@ func (c *Client) GetEventPrediction(ctx context.Context, params *GetEventPredict
 
 type GetEventPredictionInput struct {
 
+	// The detector ID.
+	//
+	// This member is required.
+	DetectorId *string
+
+	// The entity type (associated with the detector's event type) and specific entity
+	// ID representing who performed the event. If an entity id is not available, use
+	// "UNKNOWN."
+	//
+	// This member is required.
+	Entities []*types.Entity
+
 	// The unique ID used to identify the event.
 	//
 	// This member is required.
 	EventId *string
+
+	// Timestamp that defines when the event under evaluation occurred.
+	//
+	// This member is required.
+	EventTimestamp *string
+
+	// The event type associated with the detector specified for the prediction.
+	//
+	// This member is required.
+	EventTypeName *string
 
 	// Names of the event type's variables you defined in Amazon Fraud Detector to
 	// represent data elements and their corresponding values for the event you are
@@ -75,28 +97,6 @@ type GetEventPredictionInput struct {
 
 	// The Amazon SageMaker model endpoint input data blobs.
 	ExternalModelEndpointDataBlobs map[string]*types.ModelEndpointDataBlob
-
-	// The event type associated with the detector specified for the prediction.
-	//
-	// This member is required.
-	EventTypeName *string
-
-	// Timestamp that defines when the event under evaluation occurred.
-	//
-	// This member is required.
-	EventTimestamp *string
-
-	// The detector ID.
-	//
-	// This member is required.
-	DetectorId *string
-
-	// The entity type (associated with the detector's event type) and specific entity
-	// ID representing who performed the event. If an entity id is not available, use
-	// "UNKNOWN."
-	//
-	// This member is required.
-	Entities []*types.Entity
 }
 
 type GetEventPredictionOutput struct {

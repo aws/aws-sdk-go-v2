@@ -75,13 +75,6 @@ func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateD
 // The UpdateDomainContactPrivacy request includes the following elements.
 type UpdateDomainContactPrivacyInput struct {
 
-	// Whether you want to conceal contact information from WHOIS queries. If you
-	// specify true, WHOIS ("who is") queries return contact information either for
-	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
-	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the admin contact.
-	AdminPrivacy *bool
-
 	// The name of the domain that you want to update the privacy setting for.
 	//
 	// This member is required.
@@ -91,8 +84,8 @@ type UpdateDomainContactPrivacyInput struct {
 	// specify true, WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
-	// return the information that you entered for the technical contact.
-	TechPrivacy *bool
+	// return the information that you entered for the admin contact.
+	AdminPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true, WHOIS ("who is") queries return contact information either for
@@ -101,6 +94,13 @@ type UpdateDomainContactPrivacyInput struct {
 	// return the information that you entered for the registrant contact (domain
 	// owner).
 	RegistrantPrivacy *bool
+
+	// Whether you want to conceal contact information from WHOIS queries. If you
+	// specify true, WHOIS ("who is") queries return contact information either for
+	// Amazon Registrar (for .com, .net, and .org domains) or for our registrar
+	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
+	// return the information that you entered for the technical contact.
+	TechPrivacy *bool
 }
 
 // The UpdateDomainContactPrivacy response includes the following element.

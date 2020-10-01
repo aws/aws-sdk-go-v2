@@ -59,28 +59,28 @@ func (c *Client) GetCommentsForPullRequest(ctx context.Context, params *GetComme
 
 type GetCommentsForPullRequestInput struct {
 
-	// The full commit ID of the commit in the destination branch that was the tip of
-	// the branch at the time the pull request was created.
-	BeforeCommitId *string
+	// The system-generated ID of the pull request. To get this ID, use
+	// ListPullRequests ().
+	//
+	// This member is required.
+	PullRequestId *string
 
 	// The full commit ID of the commit in the source branch that was the tip of the
 	// branch at the time the comment was made.
 	AfterCommitId *string
 
-	// An enumeration token that, when provided in a request, returns the next batch of
-	// the results.
-	NextToken *string
+	// The full commit ID of the commit in the destination branch that was the tip of
+	// the branch at the time the pull request was created.
+	BeforeCommitId *string
 
 	// A non-zero, non-negative integer used to limit the number of returned results.
 	// The default is 100 comments. You can return up to 500 comments with a single
 	// request.
 	MaxResults *int32
 
-	// The system-generated ID of the pull request. To get this ID, use
-	// ListPullRequests ().
-	//
-	// This member is required.
-	PullRequestId *string
+	// An enumeration token that, when provided in a request, returns the next batch of
+	// the results.
+	NextToken *string
 
 	// The name of the repository that contains the pull request.
 	RepositoryName *string

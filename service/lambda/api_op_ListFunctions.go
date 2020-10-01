@@ -63,8 +63,9 @@ type ListFunctionsInput struct {
 	// Set to ALL to include entries for all published versions of each function.
 	FunctionVersion types.FunctionVersion
 
-	// The maximum number of functions to return.
-	MaxItems *int32
+	// Specify the pagination token that's returned by a previous request to retrieve
+	// the next page of results.
+	Marker *string
 
 	// For Lambda@Edge functions, the AWS Region of the master function. For example,
 	// us-east-1 filters the list of functions to only include Lambda@Edge functions
@@ -72,9 +73,8 @@ type ListFunctionsInput struct {
 	// must set FunctionVersion to ALL.
 	MasterRegion *string
 
-	// Specify the pagination token that's returned by a previous request to retrieve
-	// the next page of results.
-	Marker *string
+	// The maximum number of functions to return.
+	MaxItems *int32
 }
 
 // A list of Lambda functions.

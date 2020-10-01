@@ -59,28 +59,25 @@ func (c *Client) PutExternalModel(ctx context.Context, params *PutExternalModelI
 
 type PutExternalModelInput struct {
 
-	// The IAM role used to invoke the model endpoint.
-	//
-	// This member is required.
-	InvokeModelEndpointRoleArn *string
-
-	// The model endpoint’s status in Amazon Fraud Detector.
-	//
-	// This member is required.
-	ModelEndpointStatus types.ModelEndpointStatus
-
 	// The model endpoint input configuration.
 	//
 	// This member is required.
 	InputConfiguration *types.ModelInputConfiguration
+
+	// The IAM role used to invoke the model endpoint.
+	//
+	// This member is required.
+	InvokeModelEndpointRoleArn *string
 
 	// The model endpoints name.
 	//
 	// This member is required.
 	ModelEndpoint *string
 
-	// A collection of key and value pairs.
-	Tags []*types.Tag
+	// The model endpoint’s status in Amazon Fraud Detector.
+	//
+	// This member is required.
+	ModelEndpointStatus types.ModelEndpointStatus
 
 	// The source of the model.
 	//
@@ -91,6 +88,9 @@ type PutExternalModelInput struct {
 	//
 	// This member is required.
 	OutputConfiguration *types.ModelOutputConfiguration
+
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 }
 
 type PutExternalModelOutput struct {

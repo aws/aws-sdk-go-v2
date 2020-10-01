@@ -71,13 +71,13 @@ func (c *Client) ModifyMountTargetSecurityGroups(ctx context.Context, params *Mo
 //
 type ModifyMountTargetSecurityGroupsInput struct {
 
-	// An array of up to five VPC security group IDs.
-	SecurityGroups []*string
-
 	// The ID of the mount target whose security groups you want to modify.
 	//
 	// This member is required.
 	MountTargetId *string
+
+	// An array of up to five VPC security group IDs.
+	SecurityGroups []*string
 }
 
 type ModifyMountTargetSecurityGroupsOutput struct {

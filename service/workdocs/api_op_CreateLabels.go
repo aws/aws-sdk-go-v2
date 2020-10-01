@@ -56,10 +56,6 @@ func (c *Client) CreateLabels(ctx context.Context, params *CreateLabelsInput, op
 
 type CreateLabelsInput struct {
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
-
 	// List of labels to add to the resource.
 	//
 	// This member is required.
@@ -69,6 +65,10 @@ type CreateLabelsInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 }
 
 type CreateLabelsOutput struct {

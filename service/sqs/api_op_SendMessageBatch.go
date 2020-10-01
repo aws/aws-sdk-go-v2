@@ -93,16 +93,16 @@ type SendMessageBatchInput struct {
 // BatchResultErrorEntry () tag if the message fails.
 type SendMessageBatchOutput struct {
 
-	// A list of SendMessageBatchResultEntry () items.
-	//
-	// This member is required.
-	Successful []*types.SendMessageBatchResultEntry
-
 	// A list of BatchResultErrorEntry () items with error details about each message
 	// that can't be enqueued.
 	//
 	// This member is required.
 	Failed []*types.BatchResultErrorEntry
+
+	// A list of SendMessageBatchResultEntry () items.
+	//
+	// This member is required.
+	Successful []*types.SendMessageBatchResultEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

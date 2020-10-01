@@ -60,9 +60,6 @@ func (c *Client) CheckDomainAvailability(ctx context.Context, params *CheckDomai
 // The CheckDomainAvailability request contains the following elements.
 type CheckDomainAvailabilityInput struct {
 
-	// Reserved for future use.
-	IdnLangCode *string
-
 	// The name of the domain that you want to get availability for. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
 	// supported TLDs, see Domains that You Can Register with Amazon Route 53
@@ -91,6 +88,9 @@ type CheckDomainAvailabilityInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// Reserved for future use.
+	IdnLangCode *string
 }
 
 // The CheckDomainAvailability response includes the following elements.

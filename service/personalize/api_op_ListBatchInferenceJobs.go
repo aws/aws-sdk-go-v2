@@ -71,12 +71,12 @@ type ListBatchInferenceJobsInput struct {
 
 type ListBatchInferenceJobsOutput struct {
 
+	// A list containing information on each job that is returned.
+	BatchInferenceJobs []*types.BatchInferenceJobSummary
+
 	// The token to use to retreive the next page of results. The value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// A list containing information on each job that is returned.
-	BatchInferenceJobs []*types.BatchInferenceJobSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

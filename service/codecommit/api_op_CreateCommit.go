@@ -57,27 +57,10 @@ func (c *Client) CreateCommit(ctx context.Context, params *CreateCommitInput, op
 
 type CreateCommitInput struct {
 
-	// The commit message you want to include in the commit. Commit messages are
-	// limited to 256 KB. If no message is specified, a default message is used.
-	CommitMessage *string
-
-	// The ID of the commit that is the parent of the commit you create. Not required
-	// if this is an empty repository.
-	ParentCommitId *string
-
-	// The files to add or update in this commit.
-	PutFiles []*types.PutFileEntry
-
 	// The name of the branch where you create the commit.
 	//
 	// This member is required.
 	BranchName *string
-
-	// The email address of the person who created the commit.
-	Email *string
-
-	// The file modes to update for files in this commit.
-	SetFileModes []*types.SetFileModeEntry
 
 	// The name of the repository where you create the commit.
 	//
@@ -88,28 +71,45 @@ type CreateCommitInput struct {
 	// the author and committer for the commit.
 	AuthorName *string
 
+	// The commit message you want to include in the commit. Commit messages are
+	// limited to 256 KB. If no message is specified, a default message is used.
+	CommitMessage *string
+
 	// The files to delete in this commit. These files still exist in earlier commits.
 	DeleteFiles []*types.DeleteFileEntry
+
+	// The email address of the person who created the commit.
+	Email *string
 
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If true, a ..gitkeep file is created for
 	// empty folders. The default is false.
 	KeepEmptyFolders *bool
+
+	// The ID of the commit that is the parent of the commit you create. Not required
+	// if this is an empty repository.
+	ParentCommitId *string
+
+	// The files to add or update in this commit.
+	PutFiles []*types.PutFileEntry
+
+	// The file modes to update for files in this commit.
+	SetFileModes []*types.SetFileModeEntry
 }
 
 type CreateCommitOutput struct {
 
+	// The full commit ID of the commit that contains your committed file changes.
+	CommitId *string
+
 	// The files added as part of the committed file changes.
 	FilesAdded []*types.FileMetadata
-
-	// The files updated as part of the commited file changes.
-	FilesUpdated []*types.FileMetadata
 
 	// The files deleted as part of the committed file changes.
 	FilesDeleted []*types.FileMetadata
 
-	// The full commit ID of the commit that contains your committed file changes.
-	CommitId *string
+	// The files updated as part of the commited file changes.
+	FilesUpdated []*types.FileMetadata
 
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// commited file changes.

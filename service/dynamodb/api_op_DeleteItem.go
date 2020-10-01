@@ -68,18 +68,19 @@ func (c *Client) DeleteItem(ctx context.Context, params *DeleteItemInput, optFns
 // Represents the input of a DeleteItem operation.
 type DeleteItemInput struct {
 
-	// One or more values that can be substituted in an expression. Use the : (colon)
-	// character in an expression to dereference an attribute value. For example,
-	// suppose that you wanted to check whether the value of the ProductStatus
-	// attribute was one of the following: Available | Backordered | Discontinued You
-	// would first need to specify ExpressionAttributeValues as follows: {
-	// ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
-	// ":disc":{"S":"Discontinued"} } You could then use these values in an expression,
-	// such as this: ProductStatus IN (:avail, :back, :disc) For more information on
-	// expression attribute values, see Condition Expressions
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ExpressionAttributeValues map[string]*types.AttributeValue
+	// A map of attribute names to AttributeValue objects, representing the primary key
+	// of the item to delete. For the primary key, you must provide all of the
+	// attributes. For example, with a simple primary key, you only need to provide a
+	// value for the partition key. For a composite primary key, you must provide
+	// values for both the partition key and the sort key.
+	//
+	// This member is required.
+	Key map[string]*types.AttributeValue
+
+	// The name of the table from which to delete the item.
+	//
+	// This member is required.
+	TableName *string
 
 	// A condition that must be satisfied in order for a conditional DeleteItem to
 	// succeed. An expression can contain any of the following:
@@ -100,58 +101,17 @@ type DeleteItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionExpression *string
 
-	// A map of attribute names to AttributeValue objects, representing the primary key
-	// of the item to delete. For the primary key, you must provide all of the
-	// attributes. For example, with a simple primary key, you only need to provide a
-	// value for the partition key. For a composite primary key, you must provide
-	// values for both the partition key and the sort key.
-	//
-	// This member is required.
-	Key map[string]*types.AttributeValue
-
-	// This is a legacy parameter. Use ConditionExpression instead. For more
-	// information, see Expected
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
-	// in the Amazon DynamoDB Developer Guide.
-	Expected map[string]*types.ExpectedAttributeValue
-
 	// This is a legacy parameter. Use ConditionExpression instead. For more
 	// information, see ConditionalOperator
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.ConditionalOperator.html)
 	// in the Amazon DynamoDB Developer Guide.
 	ConditionalOperator types.ConditionalOperator
 
-	// Determines the level of detail about provisioned throughput consumption that is
-	// returned in the response:
-	//
-	//     * INDEXES - The response includes the aggregate
-	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
-	// table and secondary index that was accessed. Note that some operations, such as
-	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
-	// specifying INDEXES will only return ConsumedCapacity information for table(s).
-	//
-	//
-	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
-	// operation.
-	//
-	//     * NONE - No ConsumedCapacity details are included in the
-	// response.
-	ReturnConsumedCapacity types.ReturnConsumedCapacity
-
-	// Use ReturnValues if you want to get the item attributes as they appeared before
-	// they were deleted. For DeleteItem, the valid values are:
-	//
-	//     * NONE - If
-	// ReturnValues is not specified, or if its value is NONE, then nothing is
-	// returned. (This setting is the default for ReturnValues.)
-	//
-	//     * ALL_OLD - The
-	// content of the old item is returned.
-	//
-	// The ReturnValues parameter is used by
-	// several DynamoDB operations; however, DeleteItem does not recognize any values
-	// other than NONE or ALL_OLD.
-	ReturnValues types.ReturnValue
+	// This is a legacy parameter. Use ConditionExpression instead. For more
+	// information, see Expected
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.Expected.html)
+	// in the Amazon DynamoDB Developer Guide.
+	Expected map[string]*types.ExpectedAttributeValue
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -194,20 +154,74 @@ type DeleteItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
 
+	// One or more values that can be substituted in an expression. Use the : (colon)
+	// character in an expression to dereference an attribute value. For example,
+	// suppose that you wanted to check whether the value of the ProductStatus
+	// attribute was one of the following: Available | Backordered | Discontinued You
+	// would first need to specify ExpressionAttributeValues as follows: {
+	// ":avail":{"S":"Available"}, ":back":{"S":"Backordered"},
+	// ":disc":{"S":"Discontinued"} } You could then use these values in an expression,
+	// such as this: ProductStatus IN (:avail, :back, :disc) For more information on
+	// expression attribute values, see Condition Expressions
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.SpecifyingConditions.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ExpressionAttributeValues map[string]*types.AttributeValue
+
+	// Determines the level of detail about provisioned throughput consumption that is
+	// returned in the response:
+	//
+	//     * INDEXES - The response includes the aggregate
+	// ConsumedCapacity for the operation, together with ConsumedCapacity for each
+	// table and secondary index that was accessed. Note that some operations, such as
+	// GetItem and BatchGetItem, do not access any indexes at all. In these cases,
+	// specifying INDEXES will only return ConsumedCapacity information for table(s).
+	//
+	//
+	// * TOTAL - The response includes only the aggregate ConsumedCapacity for the
+	// operation.
+	//
+	//     * NONE - No ConsumedCapacity details are included in the
+	// response.
+	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
 	// Determines whether item collection metrics are returned. If set to SIZE, the
 	// response includes statistics about item collections, if any, that were modified
 	// during the operation are returned in the response. If set to NONE (the default),
 	// no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
 
-	// The name of the table from which to delete the item.
+	// Use ReturnValues if you want to get the item attributes as they appeared before
+	// they were deleted. For DeleteItem, the valid values are:
 	//
-	// This member is required.
-	TableName *string
+	//     * NONE - If
+	// ReturnValues is not specified, or if its value is NONE, then nothing is
+	// returned. (This setting is the default for ReturnValues.)
+	//
+	//     * ALL_OLD - The
+	// content of the old item is returned.
+	//
+	// The ReturnValues parameter is used by
+	// several DynamoDB operations; however, DeleteItem does not recognize any values
+	// other than NONE or ALL_OLD.
+	ReturnValues types.ReturnValue
 }
 
 // Represents the output of a DeleteItem operation.
 type DeleteItemOutput struct {
+
+	// A map of attribute names to AttributeValue objects, representing the item as it
+	// appeared before the DeleteItem operation. This map appears in the response only
+	// if ReturnValues was specified as ALL_OLD in the request.
+	Attributes map[string]*types.AttributeValue
+
+	// The capacity units consumed by the DeleteItem operation. The data returned
+	// includes the total provisioned throughput consumed, along with statistics for
+	// the table and any indexes involved in the operation. ConsumedCapacity is only
+	// returned if the ReturnConsumedCapacity parameter was specified. For more
+	// information, see Provisioned Mode
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ConsumedCapacity *types.ConsumedCapacity
 
 	// Information about item collections, if any, that were affected by the DeleteItem
 	// operation. ItemCollectionMetrics is only returned if the
@@ -228,20 +242,6 @@ type DeleteItemOutput struct {
 	// subject to change over time; therefore, do not rely on the precision or accuracy
 	// of the estimate.
 	ItemCollectionMetrics *types.ItemCollectionMetrics
-
-	// A map of attribute names to AttributeValue objects, representing the item as it
-	// appeared before the DeleteItem operation. This map appears in the response only
-	// if ReturnValues was specified as ALL_OLD in the request.
-	Attributes map[string]*types.AttributeValue
-
-	// The capacity units consumed by the DeleteItem operation. The data returned
-	// includes the total provisioned throughput consumed, along with statistics for
-	// the table and any indexes involved in the operation. ConsumedCapacity is only
-	// returned if the ReturnConsumedCapacity parameter was specified. For more
-	// information, see Provisioned Mode
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ProvisionedThroughputIntro.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ConsumedCapacity *types.ConsumedCapacity
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

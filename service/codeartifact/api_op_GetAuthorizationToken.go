@@ -72,26 +72,26 @@ func (c *Client) GetAuthorizationToken(ctx context.Context, params *GetAuthoriza
 
 type GetAuthorizationTokenInput struct {
 
+	// The name of the domain that is in scope for the generated authorization token.
+	//
+	// This member is required.
+	Domain *string
+
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
 
 	// The time, in seconds, that the generated authorization token is valid.
 	DurationSeconds *int64
-
-	// The name of the domain that is in scope for the generated authorization token.
-	//
-	// This member is required.
-	Domain *string
 }
 
 type GetAuthorizationTokenOutput struct {
 
-	// A timestamp that specifies the date and time the authorization token expires.
-	Expiration *time.Time
-
 	// The returned authentication token.
 	AuthorizationToken *string
+
+	// A timestamp that specifies the date and time the authorization token expires.
+	Expiration *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

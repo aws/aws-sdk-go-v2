@@ -66,17 +66,11 @@ type DescribeDeploymentJobInput struct {
 
 type DescribeDeploymentJobOutput struct {
 
-	// The deployment job failure code.
-	FailureCode types.DeploymentJobErrorCode
+	// The Amazon Resource Name (ARN) of the deployment job.
+	Arn *string
 
-	// The status of the deployment job.
-	Status types.DeploymentStatus
-
-	// A short description of the reason why the deployment job failed.
-	FailureReason *string
-
-	// The list of all tags added to the specified deployment job.
-	Tags map[string]*string
+	// The time, in milliseconds since the epoch, when the deployment job was created.
+	CreatedAt *time.Time
 
 	// The deployment application configuration.
 	DeploymentApplicationConfigs []*types.DeploymentApplicationConfig
@@ -84,17 +78,23 @@ type DescribeDeploymentJobOutput struct {
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
+	// The deployment job failure code.
+	FailureCode types.DeploymentJobErrorCode
+
+	// A short description of the reason why the deployment job failed.
+	FailureReason *string
+
 	// The Amazon Resource Name (ARN) of the fleet.
 	Fleet *string
-
-	// The Amazon Resource Name (ARN) of the deployment job.
-	Arn *string
 
 	// A list of robot deployment summaries.
 	RobotDeploymentSummary []*types.RobotDeployment
 
-	// The time, in milliseconds since the epoch, when the deployment job was created.
-	CreatedAt *time.Time
+	// The status of the deployment job.
+	Status types.DeploymentStatus
+
+	// The list of all tags added to the specified deployment job.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

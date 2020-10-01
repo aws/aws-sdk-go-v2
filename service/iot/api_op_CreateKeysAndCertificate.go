@@ -72,15 +72,15 @@ type CreateKeysAndCertificateOutput struct {
 	// The ARN of the certificate.
 	CertificateArn *string
 
-	// The generated key pair.
-	KeyPair *types.KeyPair
-
 	// The ID of the certificate. AWS IoT issues a default subject name for the
 	// certificate (for example, AWS IoT Certificate).
 	CertificateId *string
 
 	// The certificate data, in PEM format.
 	CertificatePem *string
+
+	// The generated key pair.
+	KeyPair *types.KeyPair
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

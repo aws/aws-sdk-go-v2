@@ -57,23 +57,20 @@ func (c *Client) ListAlgorithms(ctx context.Context, params *ListAlgorithmsInput
 
 type ListAlgorithmsInput struct {
 
-	// The sort order for the results. The default is Ascending.
-	SortOrder types.SortOrder
-
-	// A string in the algorithm name. This filter returns only algorithms whose name
-	// contains the specified string.
-	NameContains *string
+	// A filter that returns only algorithms created after the specified time
+	// (timestamp).
+	CreationTimeAfter *time.Time
 
 	// A filter that returns only algorithms created before the specified time
 	// (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only algorithms created after the specified time
-	// (timestamp).
-	CreationTimeAfter *time.Time
-
 	// The maximum number of algorithms to return in the response.
 	MaxResults *int32
+
+	// A string in the algorithm name. This filter returns only algorithms whose name
+	// contains the specified string.
+	NameContains *string
 
 	// If the response to a previous ListAlgorithms request was truncated, the response
 	// includes a NextToken. To retrieve the next set of algorithms, use the token in
@@ -82,18 +79,21 @@ type ListAlgorithmsInput struct {
 
 	// The parameter by which to sort the results. The default is CreationTime.
 	SortBy types.AlgorithmSortBy
+
+	// The sort order for the results. The default is Ascending.
+	SortOrder types.SortOrder
 }
 
 type ListAlgorithmsOutput struct {
-
-	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
-	// the next set of algorithms, use it in the subsequent request.
-	NextToken *string
 
 	// >An array of AlgorithmSummary objects, each of which lists an algorithm.
 	//
 	// This member is required.
 	AlgorithmSummaryList []*types.AlgorithmSummary
+
+	// If the response is truncated, Amazon SageMaker returns this token. To retrieve
+	// the next set of algorithms, use it in the subsequent request.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,8 +63,41 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 // Represents the input to CopyDBClusterSnapshot ().
 type CopyDBClusterSnapshotInput struct {
 
-	// The tags to be assigned to the cluster snapshot.
-	Tags []*types.Tag
+	// The identifier of the cluster snapshot to copy. This parameter is not case
+	// sensitive. You can't copy an encrypted, shared cluster snapshot from one AWS
+	// Region to another. Constraints:
+	//
+	//     * Must specify a valid system snapshot in
+	// the "available" state.
+	//
+	//     * If the source snapshot is in the same AWS Region
+	// as the copy, specify a valid snapshot identifier.
+	//
+	//     * If the source snapshot
+	// is in a different AWS Region than the copy, specify a valid cluster snapshot
+	// ARN.
+	//
+	// Example: my-cluster-snapshot1
+	//
+	// This member is required.
+	SourceDBClusterSnapshotIdentifier *string
+
+	// The identifier of the new cluster snapshot to create from the source cluster
+	// snapshot. This parameter is not case sensitive. Constraints:
+	//
+	//     * Must contain
+	// from 1 to 63 letters, numbers, or hyphens.
+	//
+	//     * The first character must be a
+	// letter.
+	//
+	//     * Cannot end with a hyphen or contain two consecutive
+	// hyphens.
+	//
+	// Example: my-cluster-snapshot2
+	//
+	// This member is required.
+	TargetDBClusterSnapshotIdentifier *string
 
 	// Set to true to copy all tags from the source cluster snapshot to the target
 	// cluster snapshot, and otherwise false. The default is false.
@@ -85,25 +118,6 @@ type CopyDBClusterSnapshotInput struct {
 	// another Region. If you copy an unencrypted cluster snapshot and specify a value
 	// for the KmsKeyId parameter, an error is returned.
 	KmsKeyId *string
-
-	// The identifier of the cluster snapshot to copy. This parameter is not case
-	// sensitive. You can't copy an encrypted, shared cluster snapshot from one AWS
-	// Region to another. Constraints:
-	//
-	//     * Must specify a valid system snapshot in
-	// the "available" state.
-	//
-	//     * If the source snapshot is in the same AWS Region
-	// as the copy, specify a valid snapshot identifier.
-	//
-	//     * If the source snapshot
-	// is in a different AWS Region than the copy, specify a valid cluster snapshot
-	// ARN.
-	//
-	// Example: my-cluster-snapshot1
-	//
-	// This member is required.
-	SourceDBClusterSnapshotIdentifier *string
 
 	// The URL that contains a Signature Version 4 signed request for the
 	// CopyDBClusterSnapshot API action in the AWS Region that contains the source
@@ -132,22 +146,8 @@ type CopyDBClusterSnapshotInput struct {
 	// arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115.
 	PreSignedUrl *string
 
-	// The identifier of the new cluster snapshot to create from the source cluster
-	// snapshot. This parameter is not case sensitive. Constraints:
-	//
-	//     * Must contain
-	// from 1 to 63 letters, numbers, or hyphens.
-	//
-	//     * The first character must be a
-	// letter.
-	//
-	//     * Cannot end with a hyphen or contain two consecutive
-	// hyphens.
-	//
-	// Example: my-cluster-snapshot2
-	//
-	// This member is required.
-	TargetDBClusterSnapshotIdentifier *string
+	// The tags to be assigned to the cluster snapshot.
+	Tags []*types.Tag
 }
 
 type CopyDBClusterSnapshotOutput struct {

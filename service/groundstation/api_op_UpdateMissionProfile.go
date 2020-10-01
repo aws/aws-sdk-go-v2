@@ -57,6 +57,11 @@ func (c *Client) UpdateMissionProfile(ctx context.Context, params *UpdateMission
 //
 type UpdateMissionProfileInput struct {
 
+	// UUID of a mission profile.
+	//
+	// This member is required.
+	MissionProfileId *string
+
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch
 	// event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int32
@@ -73,11 +78,6 @@ type UpdateMissionProfileInput struct {
 	// contact. AWS Ground Station will not present you with contacts shorter than this
 	// duration.
 	MinimumViableContactDurationSeconds *int32
-
-	// UUID of a mission profile.
-	//
-	// This member is required.
-	MissionProfileId *string
 
 	// Name of a mission profile.
 	Name *string

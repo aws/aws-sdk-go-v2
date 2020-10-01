@@ -63,21 +63,48 @@ type UpdatePackageVersionsStatusInput struct {
 	// This member is required.
 	Domain *string
 
+	// A format that specifies the type of the package with the statuses to update. The
+	// valid values are:
+	//
+	//     * npm
+	//
+	//     * pypi
+	//
+	//     * maven
+	//
+	// This member is required.
+	Format types.PackageFormat
+
+	// The name of the package with the version statuses to update.
+	//
+	// This member is required.
+	Package *string
+
+	// The repository that contains the package versions with the status you want to
+	// update.
+	//
+	// This member is required.
+	Repository *string
+
+	// The status you want to change the package version status to.
+	//
+	// This member is required.
+	TargetStatus types.PackageVersionStatus
+
 	// An array of strings that specify the versions of the package with the statuses
 	// to update.
 	//
 	// This member is required.
 	Versions []*string
 
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
+
 	// The package version’s expected status before it is updated. If expectedStatus is
 	// provided, the package version's status is updated only if its status at the time
 	// UpdatePackageVersionsStatus is called matches expectedStatus.
 	ExpectedStatus types.PackageVersionStatus
-
-	// The name of the package with the version statuses to update.
-	//
-	// This member is required.
-	Package *string
 
 	// The namespace of the package. The package component that specifies its namespace
 	// depends on its type. For example:
@@ -96,33 +123,6 @@ type UpdatePackageVersionsStatusInput struct {
 	// package version (for example, 3.5.2), and the map value is the package version
 	// revision.
 	VersionRevisions map[string]*string
-
-	// A format that specifies the type of the package with the statuses to update. The
-	// valid values are:
-	//
-	//     * npm
-	//
-	//     * pypi
-	//
-	//     * maven
-	//
-	// This member is required.
-	Format types.PackageFormat
-
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
-	// The repository that contains the package versions with the status you want to
-	// update.
-	//
-	// This member is required.
-	Repository *string
-
-	// The status you want to change the package version status to.
-	//
-	// This member is required.
-	TargetStatus types.PackageVersionStatus
 }
 
 type UpdatePackageVersionsStatusOutput struct {

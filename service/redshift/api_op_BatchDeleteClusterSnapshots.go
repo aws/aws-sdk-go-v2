@@ -65,11 +65,11 @@ type BatchDeleteClusterSnapshotsInput struct {
 
 type BatchDeleteClusterSnapshotsOutput struct {
 
-	// A list of the snapshot identifiers that were deleted.
-	Resources []*string
-
 	// A list of any errors returned.
 	Errors []*types.SnapshotErrorMessage
+
+	// A list of the snapshot identifiers that were deleted.
+	Resources []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

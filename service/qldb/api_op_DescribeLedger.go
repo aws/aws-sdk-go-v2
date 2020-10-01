@@ -66,16 +66,13 @@ type DescribeLedgerInput struct {
 
 type DescribeLedgerOutput struct {
 
-	// The name of the ledger.
-	Name *string
+	// The Amazon Resource Name (ARN) for the ledger.
+	Arn *string
 
 	// The date and time, in epoch time format, when the ledger was created. (Epoch
 	// time format is the number of seconds elapsed since 12:00:00 AM January 1, 1970
 	// UTC.)
 	CreationDateTime *time.Time
-
-	// The current status of the ledger.
-	State types.LedgerState
 
 	// The flag that prevents a ledger from being deleted by any user. If not provided
 	// on ledger creation, this feature is enabled (true) by default. If deletion
@@ -86,8 +83,11 @@ type DescribeLedgerOutput struct {
 	// ledger.
 	DeletionProtection *bool
 
-	// The Amazon Resource Name (ARN) for the ledger.
-	Arn *string
+	// The name of the ledger.
+	Name *string
+
+	// The current status of the ledger.
+	State types.LedgerState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

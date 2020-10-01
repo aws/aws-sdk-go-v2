@@ -74,12 +74,6 @@ type UpdateSnapshotScheduleInput struct {
 	// This member is required.
 	RecurrenceInHours *int32
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes () operation
-	// to return a list of gateway volumes.
-	//
-	// This member is required.
-	VolumeARN *string
-
 	// The hour of the day at which the snapshot schedule begins represented as hh,
 	// where hh is the hour (0 to 23). The hour of the day is in the time zone of the
 	// gateway.
@@ -87,15 +81,21 @@ type UpdateSnapshotScheduleInput struct {
 	// This member is required.
 	StartAt *int32
 
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes () operation
+	// to return a list of gateway volumes.
+	//
+	// This member is required.
+	VolumeARN *string
+
+	// Optional description of the snapshot that overwrites the existing description.
+	Description *string
+
 	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
 	// key-value pair.  <note> <p>Valid characters for key and value are letters,
 	// spaces, and numbers representable in UTF-8 format, and the following special
 	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
 	// characters, and the maximum length for a tag's value is 256.</p> </note>
 	Tags []*types.Tag
-
-	// Optional description of the snapshot that overwrites the existing description.
-	Description *string
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the updated storage

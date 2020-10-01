@@ -61,35 +61,35 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 //
 type DescribeDBSubnetGroupsInput struct {
 
+	// The name of the DB subnet group to return details for.
+	DBSubnetGroupName *string
+
 	// This parameter isn't currently supported.
 	Filters []*types.Filter
 
-	// The name of the DB subnet group to return details for.
-	DBSubnetGroupName *string
+	// An optional pagination token provided by a previous DescribeDBSubnetGroups
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
-
-	// An optional pagination token provided by a previous DescribeDBSubnetGroups
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string
 }
 
 // Contains the result of a successful invocation of the DescribeDBSubnetGroups
 // action.
 type DescribeDBSubnetGroupsOutput struct {
 
+	// A list of DBSubnetGroup instances.
+	DBSubnetGroups []*types.DBSubnetGroup
+
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
-
-	// A list of DBSubnetGroup instances.
-	DBSubnetGroups []*types.DBSubnetGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

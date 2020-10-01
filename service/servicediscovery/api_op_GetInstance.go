@@ -57,15 +57,15 @@ func (c *Client) GetInstance(ctx context.Context, params *GetInstanceInput, optF
 
 type GetInstanceInput struct {
 
-	// The ID of the service that the instance is associated with.
-	//
-	// This member is required.
-	ServiceId *string
-
 	// The ID of the instance that you want to get information about.
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The ID of the service that the instance is associated with.
+	//
+	// This member is required.
+	ServiceId *string
 }
 
 type GetInstanceOutput struct {

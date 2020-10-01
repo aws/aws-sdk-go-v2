@@ -62,15 +62,15 @@ type GetAppLaunchConfigurationInput struct {
 
 type GetAppLaunchConfigurationOutput struct {
 
-	// List of launch configurations for server groups in this application.
-	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
+	// ID of the application associated with the launch configuration.
+	AppId *string
 
 	// Name of the service role in the customer's account that Amazon CloudFormation
 	// uses to launch the application.
 	RoleName *string
 
-	// ID of the application associated with the launch configuration.
-	AppId *string
+	// List of launch configurations for server groups in this application.
+	ServerGroupLaunchConfigurations []*types.ServerGroupLaunchConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

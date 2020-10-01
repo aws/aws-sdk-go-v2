@@ -74,12 +74,12 @@ type GetOfferingStatusOutput struct {
 	// When specified, gets the offering status for the current period.
 	Current map[string]*types.OfferingStatus
 
+	// When specified, gets the offering status for the next period.
+	NextPeriod map[string]*types.OfferingStatus
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
-
-	// When specified, gets the offering status for the next period.
-	NextPeriod map[string]*types.OfferingStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

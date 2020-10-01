@@ -58,30 +58,27 @@ type AdminAccount struct {
 // affected resource.
 type ApiCallDetails struct {
 
-	// The most recent date and time, in UTC and extended ISO 8601 format, when the
-	// specified operation (api) was invoked and produced the finding.
-	LastSeen *time.Time
-
-	// The first date and time, in UTC and extended ISO 8601 format, when any operation
-	// was invoked and produced the finding.
-	FirstSeen *time.Time
+	// The name of the operation that was invoked most recently and produced the
+	// finding.
+	Api *string
 
 	// The URL of the AWS service that provides the operation, for example:
 	// s3.amazonaws.com.
 	ApiServiceName *string
 
-	// The name of the operation that was invoked most recently and produced the
-	// finding.
-	Api *string
+	// The first date and time, in UTC and extended ISO 8601 format, when any operation
+	// was invoked and produced the finding.
+	FirstSeen *time.Time
+
+	// The most recent date and time, in UTC and extended ISO 8601 format, when the
+	// specified operation (api) was invoked and produced the finding.
+	LastSeen *time.Time
 }
 
 // Provides information about an identity that performed an action on an affected
 // resource by using temporary security credentials. The credentials were obtained
 // using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.
 type AssumedRole struct {
-
-	// The unique identifier for the entity that was used to get the credentials.
-	PrincipalId *string
 
 	// The AWS access key ID that identifies the credentials.
 	AccessKeyId *string
@@ -90,13 +87,16 @@ type AssumedRole struct {
 	// get the credentials.
 	AccountId *string
 
-	// The details of the session that was created for the credentials, including the
-	// entity that issued the session.
-	SessionContext *SessionContext
-
 	// The Amazon Resource Name (ARN) of the entity that was used to get the
 	// credentials.
 	Arn *string
+
+	// The unique identifier for the entity that was used to get the credentials.
+	PrincipalId *string
+
+	// The details of the session that was created for the credentials, including the
+	// entity that issued the session.
+	SessionContext *SessionContext
 }
 
 // Provides information about an AWS account and entity that performed an action on
@@ -104,11 +104,11 @@ type AssumedRole struct {
 // account other than your own account.
 type AwsAccount struct {
 
-	// The unique identifier for the entity that performed the action.
-	PrincipalId *string
-
 	// The unique identifier for the AWS account.
 	AccountId *string
+
+	// The unique identifier for the entity that performed the action.
+	PrincipalId *string
 }
 
 // Provides information about an AWS service that performed an action on an
@@ -125,20 +125,20 @@ type BatchGetCustomDataIdentifierSummary struct {
 	// The Amazon Resource Name (ARN) of the custom data identifier.
 	Arn *string
 
-	// The unique identifier for the custom data identifier.
-	Id *string
+	// The date and time, in UTC and extended ISO 8601 format, when the custom data
+	// identifier was created.
+	CreatedAt *time.Time
 
 	// Specifies whether the custom data identifier was deleted. If you delete a custom
 	// data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft
 	// deletes the identifier.
 	Deleted *bool
 
-	// The date and time, in UTC and extended ISO 8601 format, when the custom data
-	// identifier was created.
-	CreatedAt *time.Time
-
 	// The custom description of the custom data identifier.
 	Description *string
+
+	// The unique identifier for the custom data identifier.
+	Id *string
 
 	// The custom name of the custom data identifier.
 	Name *string
@@ -151,19 +151,19 @@ type BatchGetCustomDataIdentifierSummary struct {
 // in the Amazon Simple Storage Service Developer Guide.
 type BlockPublicAccess struct {
 
-	// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
-	RestrictPublicBuckets *bool
-
 	// Specifies whether Amazon S3 blocks public access control lists (ACLs) for the
 	// bucket and objects in the bucket.
 	BlockPublicAcls *bool
+
+	// Specifies whether Amazon S3 blocks public bucket policies for the bucket.
+	BlockPublicPolicy *bool
 
 	// Specifies whether Amazon S3 ignores public ACLs for the bucket and objects in
 	// the bucket.
 	IgnorePublicAcls *bool
 
-	// Specifies whether Amazon S3 blocks public bucket policies for the bucket.
-	BlockPublicPolicy *bool
+	// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
+	RestrictPublicBuckets *bool
 }
 
 // Provides information about the number of S3 buckets that are publicly accessible
@@ -193,13 +193,13 @@ type BucketCountByEncryptionType struct {
 	// encryption.
 	KmsManaged *int64
 
-	// The total number of buckets that don't encrypt objects by default. Default
-	// encryption is disabled for these buckets.
-	Unencrypted *int64
-
 	// The total number of buckets that use an Amazon S3-managed key to encrypt
 	// objects. These buckets use Amazon S3-managed (SSE-S3) encryption.
 	S3Managed *int64
+
+	// The total number of buckets that don't encrypt objects by default. Default
+	// encryption is disabled for these buckets.
+	Unencrypted *int64
 }
 
 // Provides information about the number of S3 buckets that are shared with other
@@ -210,12 +210,12 @@ type BucketCountBySharedAccessType struct {
 	// of the same Amazon Macie organization.
 	External *int64
 
-	// The total number of buckets that aren't shared with any other AWS accounts.
-	NotShared *int64
-
 	// The total number of buckets that are shared with an AWS account that's part of
 	// the same Amazon Macie organization.
 	Internal *int64
+
+	// The total number of buckets that aren't shared with any other AWS accounts.
+	NotShared *int64
 }
 
 // Specifies the operator to use in an attribute-based condition that filters the
@@ -225,25 +225,25 @@ type BucketCriteriaAdditionalProperties struct {
 	// An equal to condition to apply to a specified attribute value for buckets.
 	Eq []*string
 
-	// The prefix of the buckets to include in the results.
-	Prefix *string
+	// A greater than condition to apply to a specified attribute value for buckets.
+	Gt *int64
+
+	// A greater than or equal to condition to apply to a specified attribute value for
+	// buckets.
+	Gte *int64
+
+	// A less than condition to apply to a specified attribute value for buckets.
+	Lt *int64
 
 	// A less than or equal to condition to apply to a specified attribute value for
 	// buckets.
 	Lte *int64
 
-	// A greater than condition to apply to a specified attribute value for buckets.
-	Gt *int64
-
-	// A less than condition to apply to a specified attribute value for buckets.
-	Lt *int64
-
 	// A not equal to condition to apply to a specified attribute value for buckets.
 	Neq []*string
 
-	// A greater than or equal to condition to apply to a specified attribute value for
-	// buckets.
-	Gte *int64
+	// The prefix of the buckets to include in the results.
+	Prefix *string
 }
 
 // Provides information about bucket-level permissions settings for an S3 bucket.
@@ -264,16 +264,47 @@ type BucketLevelPermissions struct {
 // Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
 type BucketMetadata struct {
 
-	// The total number of objects in the bucket.
-	ObjectCount *int64
+	// The unique identifier for the AWS account that's associated with the bucket.
+	AccountId *string
+
+	// The Amazon Resource Name (ARN) of the bucket.
+	BucketArn *string
+
+	// The date and time, in UTC and extended ISO 8601 format, when the bucket was
+	// created.
+	BucketCreatedAt *time.Time
+
+	// The name of the bucket.
+	BucketName *string
 
 	// The total number of objects that Amazon Macie can analyze in the bucket. These
 	// objects use a file format, file extension, or content type that Amazon Macie
 	// supports.
 	ClassifiableObjectCount *int64
 
-	// The total storage size, in bytes, of the bucket.
-	SizeInBytes *int64
+	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last
+	// analyzed the bucket.
+	LastUpdated *time.Time
+
+	// The total number of objects in the bucket.
+	ObjectCount *int64
+
+	// The total number of objects that are in the bucket, grouped by server-side
+	// encryption type. This includes a grouping that reports the total number of
+	// objects that aren't encrypted or use client-side encryption.
+	ObjectCountByEncryptionType *ObjectCountByEncryptionType
+
+	// Specifies whether the bucket is publicly accessible. If this value is true, an
+	// access control list (ACL), bucket policy, or block public access settings allow
+	// the bucket to be accessed by the general public.
+	PublicAccess *BucketPublicAccess
+
+	// The AWS Region that hosts the bucket.
+	Region *string
+
+	// Specifies whether the bucket is configured to replicate one or more objects to
+	// buckets for other AWS accounts and, if so, which accounts.
+	ReplicationDetails *ReplicationDetails
 
 	// Specifies whether the bucket is shared with another AWS account. Valid values
 	// are:
@@ -288,46 +319,15 @@ type BucketMetadata struct {
 	// NOT_SHARED - The bucket isn't shared with other AWS accounts.
 	SharedAccess SharedAccess
 
-	// The name of the bucket.
-	BucketName *string
-
-	// The total number of objects that are in the bucket, grouped by server-side
-	// encryption type. This includes a grouping that reports the total number of
-	// objects that aren't encrypted or use client-side encryption.
-	ObjectCountByEncryptionType *ObjectCountByEncryptionType
-
-	// Specifies whether the bucket is configured to replicate one or more objects to
-	// buckets for other AWS accounts and, if so, which accounts.
-	ReplicationDetails *ReplicationDetails
-
-	// The AWS Region that hosts the bucket.
-	Region *string
-
-	// The date and time, in UTC and extended ISO 8601 format, when the bucket was
-	// created.
-	BucketCreatedAt *time.Time
+	// The total storage size, in bytes, of the bucket.
+	SizeInBytes *int64
 
 	// The total compressed storage size, in bytes, of the bucket.
 	SizeInBytesCompressed *int64
 
-	// The unique identifier for the AWS account that's associated with the bucket.
-	AccountId *string
-
-	// The Amazon Resource Name (ARN) of the bucket.
-	BucketArn *string
-
 	// An array that specifies the tags (keys and values) that are associated with the
 	// bucket.
 	Tags []*KeyValuePair
-
-	// Specifies whether the bucket is publicly accessible. If this value is true, an
-	// access control list (ACL), bucket policy, or block public access settings allow
-	// the bucket to be accessed by the general public.
-	PublicAccess *BucketPublicAccess
-
-	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie last
-	// analyzed the bucket.
-	LastUpdated *time.Time
 
 	// Specifies whether versioning is enabled for the bucket.
 	Versioning *bool
@@ -336,11 +336,11 @@ type BucketMetadata struct {
 // The account-level and bucket-level permissions settings for an S3 bucket.
 type BucketPermissionConfiguration struct {
 
-	// The bucket-level permissions settings for the bucket.
-	BucketLevelPermissions *BucketLevelPermissions
-
 	// The account-level permissions settings that apply to the bucket.
 	AccountLevelPermissions *AccountLevelPermissions
+
+	// The bucket-level permissions settings for the bucket.
+	BucketLevelPermissions *BucketLevelPermissions
 }
 
 // Provides information about the permissions settings of a bucket policy for an S3
@@ -389,19 +389,19 @@ type BucketSortCriteria struct {
 // classification job that produced the finding.
 type ClassificationDetails struct {
 
-	// The Amazon Resource Name (ARN) of the classification job that produced the
-	// finding.
-	JobArn *string
-
 	// The Amazon Resource Name (ARN) of the file that contains the detailed record,
 	// including offsets, for the finding.
 	DetailedResultsLocation *string
 
-	// The status and detailed results of the finding.
-	Result *ClassificationResult
+	// The Amazon Resource Name (ARN) of the classification job that produced the
+	// finding.
+	JobArn *string
 
 	// The unique identifier for the classification job that produced the finding.
 	JobId *string
+
+	// The status and detailed results of the finding.
+	Result *ClassificationResult
 }
 
 // Specifies where to store data classification results, and the encryption
@@ -418,24 +418,24 @@ type ClassificationExportConfiguration struct {
 // types and number of occurrences of the sensitive data that was found.
 type ClassificationResult struct {
 
-	// The category and number of occurrences of the sensitive data that produced the
-	// finding.
-	SensitiveData []*SensitiveDataItem
+	// The number of occurrences of the data that produced the finding, and the custom
+	// data identifiers that detected the data.
+	CustomDataIdentifiers *CustomDataIdentifiers
 
 	// The type of content, expressed as a MIME type, that the finding applies to. For
 	// example, application/gzip, for a GNU Gzip compressed archive file, or
 	// application/pdf, for an Adobe PDF file.
 	MimeType *string
 
+	// The category and number of occurrences of the sensitive data that produced the
+	// finding.
+	SensitiveData []*SensitiveDataItem
+
 	// The total size, in bytes, of the data that the finding applies to.
 	SizeClassified *int64
 
 	// The status of the finding.
 	Status *ClassificationResultStatus
-
-	// The number of occurrences of the data that produced the finding, and the custom
-	// data identifiers that detected the data.
-	CustomDataIdentifiers *CustomDataIdentifiers
 }
 
 // Provides information about the status of a sensitive data finding.
@@ -457,22 +457,22 @@ type CriterionAdditionalProperties struct {
 	// An equal to condition to apply to a specified property value for findings.
 	Eq []*string
 
-	// A less than or equal to condition to apply to a specified property value for
-	// findings.
-	Lte *int64
-
 	// A greater than condition to apply to a specified property value for findings.
 	Gt *int64
-
-	// A less than condition to apply to a specified property value for findings.
-	Lt *int64
-
-	// A not equal to condition to apply to a specified property value for findings.
-	Neq []*string
 
 	// A greater than or equal to condition to apply to a specified property value for
 	// findings.
 	Gte *int64
+
+	// A less than condition to apply to a specified property value for findings.
+	Lt *int64
+
+	// A less than or equal to condition to apply to a specified property value for
+	// findings.
+	Lte *int64
+
+	// A not equal to condition to apply to a specified property value for findings.
+	Neq []*string
 }
 
 // Provides information about the number of occurrences of the data that produced a
@@ -492,8 +492,12 @@ type CustomDataIdentifiers struct {
 // Provides information about a custom data identifier.
 type CustomDataIdentifierSummary struct {
 
-	// The custom name of the custom data identifier.
-	Name *string
+	// The Amazon Resource Name (ARN) of the custom data identifier.
+	Arn *string
+
+	// The date and time, in UTC and extended ISO 8601 format, when the custom data
+	// identifier was created.
+	CreatedAt *time.Time
 
 	// The custom description of the custom data identifier.
 	Description *string
@@ -501,12 +505,8 @@ type CustomDataIdentifierSummary struct {
 	// The unique identifier for the custom data identifier.
 	Id *string
 
-	// The Amazon Resource Name (ARN) of the custom data identifier.
-	Arn *string
-
-	// The date and time, in UTC and extended ISO 8601 format, when the custom data
-	// identifier was created.
-	CreatedAt *time.Time
+	// The custom name of the custom data identifier.
+	Name *string
 }
 
 // Provides information about a custom data identifier that produced a sensitive
@@ -514,15 +514,15 @@ type CustomDataIdentifierSummary struct {
 // finding.
 type CustomDetection struct {
 
+	// The Amazon Resource Name (ARN) of the custom data identifier.
+	Arn *string
+
 	// The total number of occurrences of the data that the custom data identifier
 	// detected for the finding.
 	Count *int64
 
 	// The name of the custom data identifier.
 	Name *string
-
-	// The Amazon Resource Name (ARN) of the custom data identifier.
-	Arn *string
 }
 
 // Specifies that a classification job runs once a day, every day. This is an empty
@@ -556,9 +556,8 @@ type DomainDetails struct {
 // STS) API.
 type FederatedUser struct {
 
-	// The details of the session that was created for the credentials, including the
-	// entity that issued the session.
-	SessionContext *SessionContext
+	// The AWS access key ID that identifies the credentials.
+	AccessKeyId *string
 
 	// The unique identifier for the AWS account that owns the entity that was used to
 	// get the credentials.
@@ -571,76 +570,77 @@ type FederatedUser struct {
 	// The unique identifier for the entity that was used to get the credentials.
 	PrincipalId *string
 
-	// The AWS access key ID that identifies the credentials.
-	AccessKeyId *string
+	// The details of the session that was created for the credentials, including the
+	// entity that issued the session.
+	SessionContext *SessionContext
 }
 
 // Provides information about a finding.
 type Finding struct {
 
-	// The unique identifier for the finding. This is a random string that Amazon Macie
-	// generates and assigns to a finding when it creates the finding.
-	Id *string
+	// The unique identifier for the AWS account that the finding applies to. This is
+	// typically the account that owns the affected resource.
+	AccountId *string
 
-	// The date and time, in UTC and extended ISO 8601 format, when the finding was
-	// last updated. For sensitive data findings, this value is the same as the value
-	// for the createdAt property. Sensitive data findings aren't updated.
-	UpdatedAt *time.Time
-
-	// The details of a sensitive data finding. This value is null for a policy
-	// finding.
-	ClassificationDetails *ClassificationDetails
+	// Specifies whether the finding is archived.
+	Archived *bool
 
 	// The category of the finding. Possible values are: CLASSIFICATION, for a
 	// sensitive data finding; and, POLICY, for a policy finding.
 	Category FindingCategory
 
-	// The resources that the finding applies to.
-	ResourcesAffected *ResourcesAffected
+	// The details of a sensitive data finding. This value is null for a policy
+	// finding.
+	ClassificationDetails *ClassificationDetails
+
+	// The total number of occurrences of this finding.
+	Count *int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when the finding was
 	// created.
 	CreatedAt *time.Time
 
+	// The description of the finding.
+	Description *string
+
+	// The unique identifier for the finding. This is a random string that Amazon Macie
+	// generates and assigns to a finding when it creates the finding.
+	Id *string
+
 	// The AWS partition that Amazon Macie created the finding in.
 	Partition *string
 
-	// The version of the schema that was used to define the data structures in the
+	// The details of a policy finding. This value is null for a sensitive data
 	// finding.
-	SchemaVersion *string
-
-	// The brief description of the finding.
-	Title *string
-
-	// The total number of occurrences of this finding.
-	Count *int64
+	PolicyDetails *PolicyDetails
 
 	// The AWS Region that Amazon Macie created the finding in.
 	Region *string
 
-	// The unique identifier for the AWS account that the finding applies to. This is
-	// typically the account that owns the affected resource.
-	AccountId *string
+	// The resources that the finding applies to.
+	ResourcesAffected *ResourcesAffected
 
 	// Specifies whether the finding is a sample finding. A sample finding is a finding
 	// that uses example data to demonstrate what a finding might contain.
 	Sample *bool
 
-	// The description of the finding.
-	Description *string
-
-	// The type of the finding.
-	Type FindingType
+	// The version of the schema that was used to define the data structures in the
+	// finding.
+	SchemaVersion *string
 
 	// The severity of the finding.
 	Severity *Severity
 
-	// Specifies whether the finding is archived.
-	Archived *bool
+	// The brief description of the finding.
+	Title *string
 
-	// The details of a policy finding. This value is null for a sensitive data
-	// finding.
-	PolicyDetails *PolicyDetails
+	// The type of the finding.
+	Type FindingType
+
+	// The date and time, in UTC and extended ISO 8601 format, when the finding was
+	// last updated. For sensitive data findings, this value is the same as the value
+	// for the createdAt property. Sensitive data findings aren't updated.
+	UpdatedAt *time.Time
 }
 
 // Provides information about an action that occurred for a resource and produced a
@@ -692,14 +692,14 @@ type FindingsFilterListItem struct {
 	// don't perform any action on the findings.
 	Action FindingsFilterAction
 
-	// The custom name of the filter.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the filter.
 	Arn *string
 
 	// The unique identifier for the filter.
 	Id *string
+
+	// The custom name of the filter.
+	Name *string
 
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the filter.
@@ -725,31 +725,31 @@ type FindingStatisticsSortCriteria struct {
 // data about findings.
 type GroupCount struct {
 
+	// The total number of findings in the group of query results.
+	Count *int64
+
 	// The name of the property that defines the group in the query results, as
 	// specified by the groupBy property in the query request.
 	GroupKey *string
-
-	// The total number of findings in the group of query results.
-	Count *int64
 }
 
 // Provides information about an AWS Identity and Access Management (IAM) user who
 // performed an action on an affected resource.
 type IamUser struct {
 
-	// The user name of the IAM user who performed the action.
-	UserName *string
+	// The unique identifier for the AWS account that's associated with the IAM user
+	// who performed the action.
+	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the principal that performed the action. The
 	// last section of the ARN contains the name of the user who performed the action.
 	Arn *string
 
-	// The unique identifier for the AWS account that's associated with the IAM user
-	// who performed the action.
-	AccountId *string
-
 	// The unique identifier for the IAM user who performed the action.
 	PrincipalId *string
+
+	// The user name of the IAM user who performed the action.
+	UserName *string
 }
 
 // Provides information about an Amazon Macie membership invitation that was
@@ -759,6 +759,10 @@ type Invitation struct {
 	// The AWS account ID for the account that sent the invitation.
 	AccountId *string
 
+	// The unique identifier for the invitation. Amazon Macie uses this identifier to
+	// validate the inviter account with the invitee account.
+	InvitationId *string
+
 	// The date and time, in UTC and extended ISO 8601 format, when the invitation was
 	// sent.
 	InvitedAt *time.Time
@@ -767,30 +771,26 @@ type Invitation struct {
 	// (inviter account) and the account that received the invitation (invitee
 	// account).
 	RelationshipStatus RelationshipStatus
-
-	// The unique identifier for the invitation. Amazon Macie uses this identifier to
-	// validate the inviter account with the invitee account.
-	InvitationId *string
 }
 
 // Provides information about the IP address of the device that an entity used to
 // perform an action on an affected resource.
 type IpAddressDetails struct {
 
+	// The Internet Protocol version 4 (IPv4) address of the device.
+	IpAddressV4 *string
+
 	// The city that the IP address originated from.
 	IpCity *IpCity
-
-	// The geographic coordinates of the location that the IP address originated from.
-	IpGeoLocation *IpGeoLocation
 
 	// The country that the IP address originated from.
 	IpCountry *IpCountry
 
+	// The geographic coordinates of the location that the IP address originated from.
+	IpGeoLocation *IpGeoLocation
+
 	// The registered owner of the IP address.
 	IpOwner *IpOwner
-
-	// The Internet Protocol version 4 (IPv4) address of the device.
-	IpAddressV4 *string
 }
 
 // Provides information about the city that an IP address originated from.
@@ -815,55 +815,55 @@ type IpCountry struct {
 // originated from.
 type IpGeoLocation struct {
 
-	// The longitude coordinate of the location, rounded to four decimal places.
-	Lon *float64
-
 	// The latitude coordinate of the location, rounded to four decimal places.
 	Lat *float64
+
+	// The longitude coordinate of the location, rounded to four decimal places.
+	Lon *float64
 }
 
 // Provides information about the registered owner of an IP address.
 type IpOwner struct {
 
-	// The name of the internet service provider (ISP) that owned the IP address.
-	Isp *string
-
 	// The autonomous system number (ASN) for the autonomous system that included the
 	// IP address.
 	Asn *string
 
-	// The name of the organization that owned the IP address.
-	Org *string
-
 	// The organization identifier that's associated with the autonomous system number
 	// (ASN) for the autonomous system that included the IP address.
 	AsnOrg *string
+
+	// The name of the internet service provider (ISP) that owned the IP address.
+	Isp *string
+
+	// The name of the organization that owned the IP address.
+	Org *string
 }
 
 // Specifies the recurrence pattern for running a classification job.
 type JobScheduleFrequency struct {
 
-	// Specifies a weekly recurrence pattern for running the job.
-	WeeklySchedule *WeeklySchedule
+	// Specifies a daily recurrence pattern for running the job.
+	DailySchedule *DailySchedule
 
 	// Specifies a monthly recurrence pattern for running the job.
 	MonthlySchedule *MonthlySchedule
 
-	// Specifies a daily recurrence pattern for running the job.
-	DailySchedule *DailySchedule
+	// Specifies a weekly recurrence pattern for running the job.
+	WeeklySchedule *WeeklySchedule
 }
 
 // Specifies a property- or tag-based condition that defines criteria for including
 // or excluding objects from a classification job.
 type JobScopeTerm struct {
 
-	// A tag-based condition that defines the operator and a tag key or tag keys and
-	// values for including or excluding an object from the job.
-	TagScopeTerm *TagScopeTerm
-
 	// A property-based condition that defines a property, operator, and one or more
 	// values for including or excluding an object from the job.
 	SimpleScopeTerm *SimpleScopeTerm
+
+	// A tag-based condition that defines the operator and a tag key or tag keys and
+	// values for including or excluding an object from the job.
+	TagScopeTerm *TagScopeTerm
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
@@ -879,18 +879,12 @@ type JobScopingBlock struct {
 // the job.
 type JobSummary struct {
 
+	// The S3 buckets that the job is configured to analyze.
+	BucketDefinitions []*S3BucketDefinitionForJob
+
 	// The date and time, in UTC and extended ISO 8601 format, when the job was
 	// created.
 	CreatedAt *time.Time
-
-	// The schedule for running the job. Possible values are:
-	//
-	//     * ONE_TIME - The job
-	// ran or will run only once.
-	//
-	//     * SCHEDULED - The job runs on a daily, weekly,
-	// or monthly basis.
-	JobType JobType
 
 	// The unique identifier for the job.
 	JobId *string
@@ -917,24 +911,30 @@ type JobSummary struct {
 	// job is in progress.
 	JobStatus JobStatus
 
+	// The schedule for running the job. Possible values are:
+	//
+	//     * ONE_TIME - The job
+	// ran or will run only once.
+	//
+	//     * SCHEDULED - The job runs on a daily, weekly,
+	// or monthly basis.
+	JobType JobType
+
 	// The custom name of the job.
 	Name *string
-
-	// The S3 buckets that the job is configured to analyze.
-	BucketDefinitions []*S3BucketDefinitionForJob
 }
 
 // Provides information about the tags that are associated with an S3 bucket or
 // object. Each tag consists of a required tag key and an associated tag value.
 type KeyValuePair struct {
 
-	// One part of a key-value pair that comprises a tag. A tag value acts as a
-	// descriptor for a tag key. A tag value can be empty or null.
-	Value *string
-
 	// One part of a key-value pair that comprises a tag. A tag key is a general label
 	// that acts as a category for more specific tag values.
 	Key *string
+
+	// One part of a key-value pair that comprises a tag. A tag value acts as a
+	// descriptor for a tag key. A tag value can be empty or null.
+	Value *string
 }
 
 // Specifies criteria for filtering the results of a request for information about
@@ -955,11 +955,11 @@ type ListJobsFilterCriteria struct {
 // and one or more values.
 type ListJobsFilterTerm struct {
 
-	// The property to use to filter the results.
-	Key ListJobsFilterKey
-
 	// The operator to use to filter the results.
 	Comparator JobComparator
+
+	// The property to use to filter the results.
+	Key ListJobsFilterKey
 
 	// An array that lists one or more values to use to filter the results.
 	Values []*string
@@ -969,48 +969,48 @@ type ListJobsFilterTerm struct {
 // classification jobs.
 type ListJobsSortCriteria struct {
 
+	// The property to sort the results by.
+	AttributeName ListJobsSortAttributeName
+
 	// The sort order to apply to the results, based on the value for the property
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
-
-	// The property to sort the results by.
-	AttributeName ListJobsSortAttributeName
 }
 
 // Provides information about an account that's associated with an Amazon Macie
 // master account.
 type Member struct {
 
-	// A map of key-value pairs that identifies the tags (keys and values) that are
-	// associated with the account in Amazon Macie.
-	Tags map[string]*string
+	// The AWS account ID for the account.
+	AccountId *string
 
-	// The current status of the relationship between the account and the master
-	// account.
-	RelationshipStatus RelationshipStatus
+	// The Amazon Resource Name (ARN) of the account.
+	Arn *string
 
 	// The email address for the account.
 	Email *string
-
-	// The AWS account ID for the master account.
-	MasterAccountId *string
-
-	// The AWS account ID for the account.
-	AccountId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when an Amazon Macie
 	// membership invitation was last sent to the account. This value is null if a
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
+	// The AWS account ID for the master account.
+	MasterAccountId *string
+
+	// The current status of the relationship between the account and the master
+	// account.
+	RelationshipStatus RelationshipStatus
+
+	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// associated with the account in Amazon Macie.
+	Tags map[string]*string
+
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
 	// change to the status of the relationship between the account and the master
 	// account.
 	UpdatedAt *time.Time
-
-	// The Amazon Resource Name (ARN) of the account.
-	Arn *string
 }
 
 // Specifies a monthly recurrence pattern for running a classification job.
@@ -1026,31 +1026,31 @@ type MonthlySchedule struct {
 // aren't encrypted.
 type ObjectCountByEncryptionType struct {
 
-	// The total number of objects that aren't encrypted or use client-side encryption.
-	Unencrypted *int64
-
 	// The total number of objects that are encrypted using a customer-managed key. The
 	// objects use customer-provided server-side (SSE-C) encryption.
 	CustomerManaged *int64
-
-	// The total number of objects that are encrypted using an Amazon S3-managed key.
-	// The objects use Amazon S3-managed (SSE-S3) encryption.
-	S3Managed *int64
 
 	// The total number of objects that are encrypted using an AWS Key Management
 	// Service (AWS KMS) customer master key (CMK). The objects use AWS KMS AWS-managed
 	// (AWS-KMS) encryption or AWS KMS customer-managed (SSE-KMS) encryption.
 	KmsManaged *int64
+
+	// The total number of objects that are encrypted using an Amazon S3-managed key.
+	// The objects use Amazon S3-managed (SSE-S3) encryption.
+	S3Managed *int64
+
+	// The total number of objects that aren't encrypted or use client-side encryption.
+	Unencrypted *int64
 }
 
 // Provides the details of a policy finding.
 type PolicyDetails struct {
 
-	// The entity that performed the action that produced the finding.
-	Actor *FindingActor
-
 	// The action that produced the finding.
 	Action *FindingAction
+
+	// The entity that performed the action that produced the finding.
+	Actor *FindingActor
 }
 
 // Provides information about settings that define whether one or more objects in
@@ -1086,9 +1086,6 @@ type ResourcesAffected struct {
 // Provides information about an S3 bucket that a finding applies to.
 type S3Bucket struct {
 
-	// The display name and account identifier for the user who owns the bucket.
-	Owner *S3BucketOwner
-
 	// The Amazon Resource Name (ARN) of the bucket.
 	Arn *string
 
@@ -1096,15 +1093,18 @@ type S3Bucket struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The permissions settings that determine whether the bucket is publicly
-	// accessible.
-	PublicAccess *BucketPublicAccess
+	// The server-side encryption settings for the bucket.
+	DefaultServerSideEncryption *ServerSideEncryption
 
 	// The name of the bucket.
 	Name *string
 
-	// The server-side encryption settings for the bucket.
-	DefaultServerSideEncryption *ServerSideEncryption
+	// The display name and account identifier for the user who owns the bucket.
+	Owner *S3BucketOwner
+
+	// The permissions settings that determine whether the bucket is publicly
+	// accessible.
+	PublicAccess *BucketPublicAccess
 
 	// The tags that are associated with the bucket.
 	Tags []*KeyValuePair
@@ -1114,23 +1114,23 @@ type S3Bucket struct {
 // analyzes.
 type S3BucketDefinitionForJob struct {
 
-	// An array that lists the names of the buckets.
-	Buckets []*string
-
 	// The unique identifier for the AWS account that owns one or more of the buckets.
 	// If specified, the job analyzes objects in all the buckets that are owned by the
 	// account and meet other conditions specified for the job.
 	AccountId *string
+
+	// An array that lists the names of the buckets.
+	Buckets []*string
 }
 
 // Provides information about the user who owns an S3 bucket.
 type S3BucketOwner struct {
 
-	// The AWS account ID for the user who owns the bucket.
-	Id *string
-
 	// The display name of the user who owns the bucket.
 	DisplayName *string
+
+	// The AWS account ID for the user who owns the bucket.
+	Id *string
 }
 
 // Specifies an S3 bucket to store data classification results in, and the
@@ -1142,16 +1142,16 @@ type S3Destination struct {
 	// This member is required.
 	BucketName *string
 
-	// The path prefix to use in the path to the location in the bucket. This prefix
-	// specifies where to store classification results in the bucket.
-	KeyPrefix *string
-
 	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) to use for encryption of the results. This must be the
 	// ARN of an existing CMK that's in the same AWS Region as the bucket.
 	//
 	// This member is required.
 	KmsKeyArn *string
+
+	// The path prefix to use in the path to the location in the bucket. This prefix
+	// specifies where to store classification results in the bucket.
+	KeyPrefix *string
 }
 
 // Specifies which S3 buckets contain the objects that a classification job
@@ -1172,43 +1172,43 @@ type S3Object struct {
 	// The Amazon Resource Name (ARN) of the bucket that contains the object.
 	BucketArn *string
 
-	// The file extension of the object. If the object doesn't have a file extension,
-	// this value is "".
-	Extension *string
-
-	// The identifier for the affected version of the object.
-	VersionId *string
-
 	// The entity tag (ETag) that identifies the affected version of the object. If the
 	// object was overwritten or changed after Amazon Macie produced the finding, this
 	// value might be different from the current ETag for the object.
 	ETag *string
 
-	// The path to the object, including the full key (name).
-	Path *string
+	// The file extension of the object. If the object doesn't have a file extension,
+	// this value is "".
+	Extension *string
 
-	// The total storage size, in bytes, of the object.
-	Size *int64
-
-	// Specifies whether the object is publicly accessible due to the combination of
-	// permissions settings that apply to the object.
-	PublicAccess *bool
-
-	// The storage class of the object.
-	StorageClass StorageClass
+	// The full key (name) that's assigned to the object.
+	Key *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the object was last
 	// modified.
 	LastModified *time.Time
 
+	// The path to the object, including the full key (name).
+	Path *string
+
+	// Specifies whether the object is publicly accessible due to the combination of
+	// permissions settings that apply to the object.
+	PublicAccess *bool
+
 	// The server-side encryption settings for the object.
 	ServerSideEncryption *ServerSideEncryption
+
+	// The total storage size, in bytes, of the object.
+	Size *int64
+
+	// The storage class of the object.
+	StorageClass StorageClass
 
 	// The tags that are associated with the object.
 	Tags []*KeyValuePair
 
-	// The full key (name) that's assigned to the object.
-	Key *string
+	// The identifier for the affected version of the object.
+	VersionId *string
 }
 
 // Specifies one or more property- and tag-based conditions that refine the scope
@@ -1229,9 +1229,6 @@ type Scoping struct {
 // sensitive data that produced a finding.
 type SensitiveDataItem struct {
 
-	// The total number of occurrences of the sensitive data that was detected.
-	TotalCount *int64
-
 	// The category of sensitive data that was detected. For example:
 	// FINANCIAL_INFORMATION, for financial information such as credit card numbers;
 	// PERSONAL_INFORMATION, for personally identifiable information such as full names
@@ -1243,6 +1240,9 @@ type SensitiveDataItem struct {
 	// object reports the number of occurrences of a specific type of sensitive data
 	// that was detected.
 	Detections []*DefaultDetection
+
+	// The total number of occurrences of the sensitive data that was detected.
+	TotalCount *int64
 }
 
 // Provides information about the server-side encryption settings for an S3 bucket
@@ -1291,12 +1291,12 @@ type SessionContext struct {
 // were issued to an entity.
 type SessionContextAttributes struct {
 
+	// The date and time, in UTC and ISO 8601 format, when the credentials were issued.
+	CreationDate *time.Time
+
 	// Specifies whether the credentials were authenticated with a multi-factor
 	// authentication (MFA) device.
 	MfaAuthenticated *bool
-
-	// The date and time, in UTC and ISO 8601 format, when the credentials were issued.
-	CreationDate *time.Time
 }
 
 // Provides information about the source and type of temporary security credentials
@@ -1307,6 +1307,13 @@ type SessionIssuer struct {
 	// get the credentials.
 	AccountId *string
 
+	// The Amazon Resource Name (ARN) of the source account, IAM user, or role that was
+	// used to get the credentials.
+	Arn *string
+
+	// The unique identifier for the entity that was used to get the credentials.
+	PrincipalId *string
+
 	// The source of the temporary security credentials, such as Root, IAMUser, or
 	// Role.
 	Type *string
@@ -1315,13 +1322,6 @@ type SessionIssuer struct {
 	// null if the credentials were obtained from a root account that doesn't have an
 	// alias.
 	UserName *string
-
-	// The Amazon Resource Name (ARN) of the source account, IAM user, or role that was
-	// used to get the credentials.
-	Arn *string
-
-	// The unique identifier for the entity that was used to get the credentials.
-	PrincipalId *string
 }
 
 // Provides the numeric score and textual representation of a severity value.
@@ -1342,11 +1342,11 @@ type SimpleScopeTerm struct {
 	// The operator to use in the condition.
 	Comparator JobComparator
 
-	// An array that lists one or more values to use in the condition.
-	Values []*string
-
 	// The property to use in the condition.
 	Key ScopeFilterKey
+
+	// An array that lists one or more values to use in the condition.
+	Values []*string
 }
 
 // Specifies criteria for sorting the results of a request for information about
@@ -1378,28 +1378,28 @@ type Statistics struct {
 // excluded from a classification job.
 type TagScopeTerm struct {
 
-	// The tag key and value pairs to use in the condition.
-	TagValues []*TagValuePair
+	// The operator to use in the condition.
+	Comparator JobComparator
 
 	// The tag key to use in the condition.
 	Key *string
 
+	// The tag key and value pairs to use in the condition.
+	TagValues []*TagValuePair
+
 	// The type of object to apply the condition to.
 	Target TagTarget
-
-	// The operator to use in the condition.
-	Comparator JobComparator
 }
 
 // Specifies a tag key and value, as a pair, to use in a tag-based condition for a
 // classification job.
 type TagValuePair struct {
 
-	// The tag value, associated with the specified tag key, to use in the condition.
-	Value *string
-
 	// The value for the tag key to use in the condition.
 	Key *string
+
+	// The tag value, associated with the specified tag key, to use in the condition.
+	Value *string
 }
 
 // Provides information about an account-related request that hasn't been
@@ -1409,11 +1409,11 @@ type UnprocessedAccount struct {
 	// The AWS account ID for the account that the request applies to.
 	AccountId *string
 
-	// The reason why the request hasn't been processed.
-	ErrorMessage *string
-
 	// The source of the issue or delay in processing the request.
 	ErrorCode ErrorCode
+
+	// The reason why the request hasn't been processed.
+	ErrorMessage *string
 }
 
 // Provides data for a specific usage metric and the corresponding quota for an
@@ -1421,12 +1421,12 @@ type UnprocessedAccount struct {
 // during the past 30 days.
 type UsageByAccount struct {
 
-	// The estimated value for the metric.
-	EstimatedCost *string
-
 	// The type of currency that the value for the metric (estimatedCost) is reported
 	// in.
 	Currency Currency
+
+	// The estimated value for the metric.
+	EstimatedCost *string
 
 	// The current value for the quota that corresponds to the metric specified by the
 	// type field.
@@ -1441,12 +1441,12 @@ type UsageByAccount struct {
 // Provides quota and aggregated usage data for an account.
 type UsageRecord struct {
 
+	// The unique identifier for the AWS account that the data applies to.
+	AccountId *string
+
 	// The date and time, in UTC and extended ISO 8601 format, when the free trial
 	// started for the account.
 	FreeTrialStartDate *time.Time
-
-	// The unique identifier for the AWS account that the data applies to.
-	AccountId *string
 
 	// An array of objects that contains usage data and quotas for the account. Each
 	// object contains the data for a specific usage metric and the corresponding
@@ -1457,6 +1457,14 @@ type UsageRecord struct {
 // Specifies a condition for filtering the results of a query for account quotas
 // and usage data.
 type UsageStatisticsFilter struct {
+
+	// The operator to use in the condition. If the value for the key property is
+	// accountId, this value must be CONTAINS. If the value for the key property is any
+	// other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.
+	Comparator UsageStatisticsFilterComparator
+
+	// The field to use in the condition.
+	Key UsageStatisticsFilterKey
 
 	// An array that lists values to use in the condition, based on the value for the
 	// field specified by the key property. If the value for the key property is
@@ -1477,14 +1485,6 @@ type UsageStatisticsFilter struct {
 	// A string that represents the current, estimated month-to-date cost for an
 	// account.
 	Values []*string
-
-	// The field to use in the condition.
-	Key UsageStatisticsFilterKey
-
-	// The operator to use in the condition. If the value for the key property is
-	// accountId, this value must be CONTAINS. If the value for the key property is any
-	// other supported field, this value can be EQ, GT, GTE, LT, LTE, or NE.
-	Comparator UsageStatisticsFilterComparator
 }
 
 // Specifies criteria for sorting the results of a query for account quotas and
@@ -1531,16 +1531,9 @@ type UserIdentity struct {
 	// details of that account.
 	AwsAccount *AwsAccount
 
-	// The type of entity that performed the action.
-	Type UserIdentityType
-
 	// If the action was performed by an AWS account that belongs to an AWS service,
 	// the name of the service.
 	AwsService *AwsService
-
-	// If the action was performed using the credentials for an AWS Identity and Access
-	// Management (IAM) user, the name and other details about the user.
-	IamUser *IamUser
 
 	// If the action was performed with temporary security credentials that were
 	// obtained using the GetFederationToken operation of the AWS Security Token
@@ -1548,9 +1541,16 @@ type UserIdentity struct {
 	// the identity.
 	FederatedUser *FederatedUser
 
+	// If the action was performed using the credentials for an AWS Identity and Access
+	// Management (IAM) user, the name and other details about the user.
+	IamUser *IamUser
+
 	// If the action was performed using the credentials for your AWS account, the
 	// details of your account.
 	Root *UserIdentityRoot
+
+	// The type of entity that performed the action.
+	Type UserIdentityType
 }
 
 // Provides information about an AWS account and entity that performed an action on
@@ -1558,16 +1558,16 @@ type UserIdentity struct {
 // AWS account.
 type UserIdentityRoot struct {
 
-	// The unique identifier for the entity that performed the action.
-	PrincipalId *string
+	// The unique identifier for the AWS account.
+	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the principal that performed the action. The
 	// last section of the ARN contains the name of the user or role that performed the
 	// action.
 	Arn *string
 
-	// The unique identifier for the AWS account.
-	AccountId *string
+	// The unique identifier for the entity that performed the action.
+	PrincipalId *string
 }
 
 // Specifies a weekly recurrence pattern for running a classification job.

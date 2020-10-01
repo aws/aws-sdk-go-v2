@@ -58,12 +58,6 @@ func (c *Client) DetachInternetGateway(ctx context.Context, params *DetachIntern
 
 type DetachInternetGatewayInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the internet gateway.
 	//
 	// This member is required.
@@ -73,6 +67,12 @@ type DetachInternetGatewayInput struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type DetachInternetGatewayOutput struct {

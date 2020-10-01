@@ -76,12 +76,6 @@ func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, op
 
 type TagResourcesInput struct {
 
-	// The tags that you want to add to the specified resources. A tag consists of a
-	// key and a value that you define.
-	//
-	// This member is required.
-	Tags map[string]*string
-
 	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
 	// For more information, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
@@ -90,6 +84,12 @@ type TagResourcesInput struct {
 	//
 	// This member is required.
 	ResourceARNList []*string
+
+	// The tags that you want to add to the specified resources. A tag consists of a
+	// key and a value that you define.
+	//
+	// This member is required.
+	Tags map[string]*string
 }
 
 type TagResourcesOutput struct {

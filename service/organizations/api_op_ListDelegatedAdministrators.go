@@ -70,17 +70,17 @@ type ListDelegatedAdministratorsInput struct {
 	// results.
 	MaxResults *int32
 
-	// Specifies a service principal name. If specified, then the operation lists the
-	// delegated administrators only for the specified service. If you don't specify a
-	// service principal, the operation lists all delegated administrators for all
-	// services in your organization.
-	ServicePrincipal *string
-
 	// The parameter for receiving additional results if you receive a NextToken
 	// response in a previous request. A NextToken response indicates that more output
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
+	// Specifies a service principal name. If specified, then the operation lists the
+	// delegated administrators only for the specified service. If you don't specify a
+	// service principal, the operation lists all delegated administrators for all
+	// services in your organization.
+	ServicePrincipal *string
 }
 
 type ListDelegatedAdministratorsOutput struct {

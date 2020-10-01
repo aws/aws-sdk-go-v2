@@ -60,9 +60,10 @@ func (c *Client) DeleteLaunchTemplateVersions(ctx context.Context, params *Delet
 
 type DeleteLaunchTemplateVersionsInput struct {
 
-	// The ID of the launch template. You must specify either the launch template ID or
-	// launch template name in the request.
-	LaunchTemplateId *string
+	// The version numbers of one or more launch template versions to delete.
+	//
+	// This member is required.
+	Versions []*string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -70,23 +71,22 @@ type DeleteLaunchTemplateVersionsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// The ID of the launch template. You must specify either the launch template ID or
+	// launch template name in the request.
+	LaunchTemplateId *string
+
 	// The name of the launch template. You must specify either the launch template ID
 	// or launch template name in the request.
 	LaunchTemplateName *string
-
-	// The version numbers of one or more launch template versions to delete.
-	//
-	// This member is required.
-	Versions []*string
 }
 
 type DeleteLaunchTemplateVersionsOutput struct {
 
-	// Information about the launch template versions that could not be deleted.
-	UnsuccessfullyDeletedLaunchTemplateVersions []*types.DeleteLaunchTemplateVersionsResponseErrorItem
-
 	// Information about the launch template versions that were successfully deleted.
 	SuccessfullyDeletedLaunchTemplateVersions []*types.DeleteLaunchTemplateVersionsResponseSuccessItem
+
+	// Information about the launch template versions that could not be deleted.
+	UnsuccessfullyDeletedLaunchTemplateVersions []*types.DeleteLaunchTemplateVersionsResponseErrorItem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

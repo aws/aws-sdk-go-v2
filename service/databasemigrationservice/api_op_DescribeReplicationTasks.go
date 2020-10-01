@@ -59,6 +59,15 @@ func (c *Client) DescribeReplicationTasks(ctx context.Context, params *DescribeR
 //
 type DescribeReplicationTasksInput struct {
 
+	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
+	// replication-task-id | migration-type | endpoint-arn | replication-instance-arn
+	Filters []*types.Filter
+
+	// An optional pagination token provided by a previous request. If this parameter
+	// is specified, the response includes only records beyond the marker, up to the
+	// value specified by MaxRecords.
+	Marker *string
+
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
@@ -69,27 +78,18 @@ type DescribeReplicationTasksInput struct {
 	// reduce overhead when setting information is too large. To use this option,
 	// choose true; otherwise, choose false (the default).
 	WithoutSettings *bool
-
-	// Filters applied to replication tasks. Valid filter names: replication-task-arn |
-	// replication-task-id | migration-type | endpoint-arn | replication-instance-arn
-	Filters []*types.Filter
-
-	// An optional pagination token provided by a previous request. If this parameter
-	// is specified, the response includes only records beyond the marker, up to the
-	// value specified by MaxRecords.
-	Marker *string
 }
 
 //
 type DescribeReplicationTasksOutput struct {
 
-	// A description of the replication tasks.
-	ReplicationTasks []*types.ReplicationTask
-
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// A description of the replication tasks.
+	ReplicationTasks []*types.ReplicationTask
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -53,15 +53,15 @@ func (c *Client) StreamingTraits(ctx context.Context, params *StreamingTraitsInp
 }
 
 type StreamingTraitsInput struct {
-	Foo *string
-
 	Blob io.Reader
+
+	Foo *string
 }
 
 type StreamingTraitsOutput struct {
-	Foo *string
-
 	Blob io.ReadCloser
+
+	Foo *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

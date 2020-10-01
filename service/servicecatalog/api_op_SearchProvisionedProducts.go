@@ -57,16 +57,6 @@ func (c *Client) SearchProvisionedProducts(ctx context.Context, params *SearchPr
 
 type SearchProvisionedProductsInput struct {
 
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder types.SortOrder
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -77,9 +67,8 @@ type SearchProvisionedProductsInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The sort field. If no value is specified, the results are not sorted. The valid
-	// values are arn, id, name, and lastRecordId.
-	SortBy *string
+	// The access level to use to obtain results. The default is User.
+	AccessLevelFilter *types.AccessLevelFilter
 
 	// The search filters. When the key is SearchQuery, the searchable fields are arn,
 	// createdTime, id, lastRecordId, idempotencyToken, name, physicalId, productId,
@@ -87,21 +76,32 @@ type SearchProvisionedProductsInput struct {
 	// "SearchQuery":["status:AVAILABLE"]
 	Filters map[string][]*string
 
-	// The access level to use to obtain results. The default is User.
-	AccessLevelFilter *types.AccessLevelFilter
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
+
+	// The sort field. If no value is specified, the results are not sorted. The valid
+	// values are arn, id, name, and lastRecordId.
+	SortBy *string
+
+	// The sort order. If no value is specified, the results are not sorted.
+	SortOrder types.SortOrder
 }
 
 type SearchProvisionedProductsOutput struct {
 
-	// The number of provisioned products found.
-	TotalResultsCount *int32
+	// The page token to use to retrieve the next set of results. If there are no
+	// additional results, this value is null.
+	NextPageToken *string
 
 	// Information about the provisioned products.
 	ProvisionedProducts []*types.ProvisionedProductAttribute
 
-	// The page token to use to retrieve the next set of results. If there are no
-	// additional results, this value is null.
-	NextPageToken *string
+	// The number of provisioned products found.
+	TotalResultsCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

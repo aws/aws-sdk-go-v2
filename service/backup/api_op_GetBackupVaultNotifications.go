@@ -72,10 +72,6 @@ type GetBackupVaultNotificationsOutput struct {
 	// example, arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
 	BackupVaultArn *string
 
-	// An ARN that uniquely identifies an Amazon Simple Notification Service (Amazon
-	// SNS) topic; for example, arn:aws:sns:us-west-2:111122223333:MyTopic.
-	SNSTopicArn *string
-
 	// An array of events that indicate the status of jobs to back up resources to the
 	// backup vault.
 	BackupVaultEvents []types.BackupVaultEvent
@@ -85,6 +81,10 @@ type GetBackupVaultNotificationsOutput struct {
 	// Region where they are created. They consist of lowercase letters, numbers, and
 	// hyphens.
 	BackupVaultName *string
+
+	// An ARN that uniquely identifies an Amazon Simple Notification Service (Amazon
+	// SNS) topic; for example, arn:aws:sns:us-west-2:111122223333:MyTopic.
+	SNSTopicArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -86,17 +86,17 @@ func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingP
 // Represents the input for a request action.
 type DeleteScalingPolicyInput struct {
 
-	// A descriptive label that is associated with a scaling policy. Policy names do
-	// not need to be unique.
-	//
-	// This member is required.
-	Name *string
-
 	// A unique identifier for a fleet to be deleted. You can use either the fleet ID
 	// or ARN value.
 	//
 	// This member is required.
 	FleetId *string
+
+	// A descriptive label that is associated with a scaling policy. Policy names do
+	// not need to be unique.
+	//
+	// This member is required.
+	Name *string
 }
 
 type DeleteScalingPolicyOutput struct {

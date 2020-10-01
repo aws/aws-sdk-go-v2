@@ -61,15 +61,15 @@ func (c *Client) CloseInstancePublicPorts(ctx context.Context, params *CloseInst
 
 type CloseInstancePublicPortsInput struct {
 
-	// An object to describe the ports to close for the specified instance.
-	//
-	// This member is required.
-	PortInfo *types.PortInfo
-
 	// The name of the instance for which to close ports.
 	//
 	// This member is required.
 	InstanceName *string
+
+	// An object to describe the ports to close for the specified instance.
+	//
+	// This member is required.
+	PortInfo *types.PortInfo
 }
 
 type CloseInstancePublicPortsOutput struct {

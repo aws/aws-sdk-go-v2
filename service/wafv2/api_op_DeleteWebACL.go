@@ -79,6 +79,12 @@ type DeleteWebACLInput struct {
 	// This member is required.
 	LockToken *string
 
+	// The name of the Web ACL. You cannot change the name of a Web ACL after you
+	// create it.
+	//
+	// This member is required.
+	Name *string
+
 	// Specifies whether this is for an AWS CloudFront distribution or for a regional
 	// application. A regional application can be an Application Load Balancer (ALB) or
 	// an API Gateway stage. To work with CloudFront, you must also specify the Region
@@ -92,12 +98,6 @@ type DeleteWebACLInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
-
-	// The name of the Web ACL. You cannot change the name of a Web ACL after you
-	// create it.
-	//
-	// This member is required.
-	Name *string
 }
 
 type DeleteWebACLOutput struct {

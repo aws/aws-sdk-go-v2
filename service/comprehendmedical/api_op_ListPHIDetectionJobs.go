@@ -71,11 +71,11 @@ type ListPHIDetectionJobsInput struct {
 
 type ListPHIDetectionJobsOutput struct {
 
-	// Identifies the next page of results to return.
-	NextToken *string
-
 	// A list containing the properties of each job returned.
 	ComprehendMedicalAsyncJobPropertiesList []*types.ComprehendMedicalAsyncJobProperties
+
+	// Identifies the next page of results to return.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,8 +58,11 @@ func (c *Client) DescribePrefixLists(ctx context.Context, params *DescribePrefix
 
 type DescribePrefixListsInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// One or more filters.
 	//
@@ -69,15 +72,12 @@ type DescribePrefixListsInput struct {
 	// prefix-list-name: The name of a prefix list.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// One or more prefix list IDs.
 	PrefixListIds []*string
@@ -85,12 +85,12 @@ type DescribePrefixListsInput struct {
 
 type DescribePrefixListsOutput struct {
 
-	// All available prefix lists.
-	PrefixLists []*types.PrefixList
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// All available prefix lists.
+	PrefixLists []*types.PrefixList
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

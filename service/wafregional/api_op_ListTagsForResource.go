@@ -71,24 +71,24 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 type ListTagsForResourceInput struct {
 
 	//
-	NextMarker *string
-
-	//
 	//
 	// This member is required.
 	ResourceARN *string
 
 	//
 	Limit *int32
+
+	//
+	NextMarker *string
 }
 
 type ListTagsForResourceOutput struct {
 
 	//
-	TagInfoForResource *types.TagInfoForResource
+	NextMarker *string
 
 	//
-	NextMarker *string
+	TagInfoForResource *types.TagInfoForResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

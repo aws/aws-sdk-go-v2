@@ -63,12 +63,6 @@ func (c *Client) ComposeEnvironments(ctx context.Context, params *ComposeEnviron
 // Request to create or update a group of environments.
 type ComposeEnvironmentsInput struct {
 
-	// A list of version labels, specifying one or more application source bundles that
-	// belong to the target application. Each source bundle must include an environment
-	// manifest that specifies the name of the environment and the name of the solution
-	// stack to use, and optionally can specify environment links to create.
-	VersionLabels []*string
-
 	// The name of the application to which the specified source bundles belong.
 	ApplicationName *string
 
@@ -78,6 +72,12 @@ type ComposeEnvironmentsInput struct {
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
 	// for details.
 	GroupName *string
+
+	// A list of version labels, specifying one or more application source bundles that
+	// belong to the target application. Each source bundle must include an environment
+	// manifest that specifies the name of the environment and the name of the solution
+	// stack to use, and optionally can specify environment links to create.
+	VersionLabels []*string
 }
 
 // Result message containing a list of environment descriptions.

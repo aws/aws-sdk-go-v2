@@ -62,30 +62,30 @@ func (c *Client) ListRuleGroups(ctx context.Context, params *ListRuleGroupsInput
 
 type ListRuleGroupsInput struct {
 
+	// Specifies the number of RuleGroups that you want AWS WAF to return for this
+	// request. If you have more RuleGroups than the number that you specify for Limit,
+	// the response includes a NextMarker value that you can use to get another batch
+	// of RuleGroups.
+	Limit *int32
+
 	// If you specify a value for Limit and you have more RuleGroups than the value of
 	// Limit, AWS WAF returns a NextMarker value in the response that allows you to
 	// list another group of RuleGroups. For the second and subsequent ListRuleGroups
 	// requests, specify the value of NextMarker from the previous response to get
 	// information about another batch of RuleGroups.
 	NextMarker *string
-
-	// Specifies the number of RuleGroups that you want AWS WAF to return for this
-	// request. If you have more RuleGroups than the number that you specify for Limit,
-	// the response includes a NextMarker value that you can use to get another batch
-	// of RuleGroups.
-	Limit *int32
 }
 
 type ListRuleGroupsOutput struct {
-
-	// An array of RuleGroup () objects.
-	RuleGroups []*types.RuleGroupSummary
 
 	// If you have more RuleGroups than the number that you specified for Limit in the
 	// request, the response includes a NextMarker value. To list more RuleGroups,
 	// submit another ListRuleGroups request, and specify the NextMarker value from the
 	// response in the NextMarker value in the next request.
 	NextMarker *string
+
+	// An array of RuleGroup () objects.
+	RuleGroups []*types.RuleGroupSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,30 +58,18 @@ func (c *Client) DescribeDevice(ctx context.Context, params *DescribeDeviceInput
 
 type DescribeDeviceInput struct {
 
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
-
 	// A unique identifier for a registered user's device.
 	//
 	// This member is required.
 	DeviceId *string
+
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
 }
 
 type DescribeDeviceOutput struct {
-
-	// The operating system patch level of the device.
-	PatchLevel *string
-
-	// The user name associated with the device.
-	Username *string
-
-	// The operating system of the device.
-	OperatingSystem *string
-
-	// The current state of the device.
-	Status types.DeviceStatus
 
 	// The date that the device first signed in to Amazon WorkLink.
 	FirstAccessedTime *time.Time
@@ -89,14 +77,26 @@ type DescribeDeviceOutput struct {
 	// The date that the device last accessed Amazon WorkLink.
 	LastAccessedTime *time.Time
 
-	// The model of the device.
-	Model *string
-
 	// The manufacturer of the device.
 	Manufacturer *string
 
+	// The model of the device.
+	Model *string
+
+	// The operating system of the device.
+	OperatingSystem *string
+
 	// The operating system version of the device.
 	OperatingSystemVersion *string
+
+	// The operating system patch level of the device.
+	PatchLevel *string
+
+	// The current state of the device.
+	Status types.DeviceStatus
+
+	// The user name associated with the device.
+	Username *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

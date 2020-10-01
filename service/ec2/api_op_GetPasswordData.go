@@ -88,12 +88,12 @@ type GetPasswordDataOutput struct {
 	// The ID of the Windows instance.
 	InstanceId *string
 
-	// The time the data was last updated.
-	Timestamp *time.Time
-
 	// The password of the instance. Returns an empty string if the password is not
 	// available.
 	PasswordData *string
+
+	// The time the data was last updated.
+	Timestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

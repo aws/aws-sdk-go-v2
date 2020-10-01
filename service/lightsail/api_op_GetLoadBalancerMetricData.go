@@ -61,10 +61,15 @@ func (c *Client) GetLoadBalancerMetricData(ctx context.Context, params *GetLoadB
 
 type GetLoadBalancerMetricDataInput struct {
 
-	// The granularity, in seconds, of the returned data points.
+	// The end time of the period.
 	//
 	// This member is required.
-	Period *int32
+	EndTime *time.Time
+
+	// The name of the load balancer.
+	//
+	// This member is required.
+	LoadBalancerName *string
 
 	// The metric for which you want to return information. Valid load balancer metric
 	// names are listed below, along with the most useful statistics to include in your
@@ -145,6 +150,11 @@ type GetLoadBalancerMetricDataInput struct {
 	// This member is required.
 	MetricName types.LoadBalancerMetricName
 
+	// The granularity, in seconds, of the returned data points.
+	//
+	// This member is required.
+	Period *int32
+
 	// The start time of the period.
 	//
 	// This member is required.
@@ -175,16 +185,6 @@ type GetLoadBalancerMetricDataInput struct {
 	//
 	// This member is required.
 	Statistics []types.MetricStatistic
-
-	// The name of the load balancer.
-	//
-	// This member is required.
-	LoadBalancerName *string
-
-	// The end time of the period.
-	//
-	// This member is required.
-	EndTime *time.Time
 
 	// The unit for the metric data request. Valid units depend on the metric data
 	// being requested. For the valid units with each available metric, see the

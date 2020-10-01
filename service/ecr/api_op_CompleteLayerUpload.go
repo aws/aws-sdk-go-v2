@@ -62,40 +62,40 @@ func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerU
 
 type CompleteLayerUploadInput struct {
 
-	// The name of the repository to associate with the image layer.
-	//
-	// This member is required.
-	RepositoryName *string
-
-	// The AWS account ID associated with the registry to which to upload layers. If
-	// you do not specify a registry, the default registry is assumed.
-	RegistryId *string
-
 	// The sha256 digest of the image layer.
 	//
 	// This member is required.
 	LayerDigests []*string
+
+	// The name of the repository to associate with the image layer.
+	//
+	// This member is required.
+	RepositoryName *string
 
 	// The upload ID from a previous InitiateLayerUpload () operation to associate with
 	// the image layer.
 	//
 	// This member is required.
 	UploadId *string
+
+	// The AWS account ID associated with the registry to which to upload layers. If
+	// you do not specify a registry, the default registry is assumed.
+	RegistryId *string
 }
 
 type CompleteLayerUploadOutput struct {
-
-	// The upload ID associated with the layer.
-	UploadId *string
-
-	// The repository name associated with the request.
-	RepositoryName *string
 
 	// The sha256 digest of the image layer.
 	LayerDigest *string
 
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
+
+	// The upload ID associated with the layer.
+	UploadId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

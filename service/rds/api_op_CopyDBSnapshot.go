@@ -64,25 +64,6 @@ func (c *Client) CopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput
 //
 type CopyDBSnapshotInput struct {
 
-	// The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon
-	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
-	// encryption key.  <p>If you copy an encrypted DB snapshot from your AWS account,
-	// you can specify a value for this parameter to encrypt the copy with a new KMS
-	// encryption key. If you don't specify a value for this parameter, then the copy
-	// of the DB snapshot is encrypted with the same KMS key as the source DB snapshot.
-	// </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS
-	// account, then you must specify a value for this parameter. </p> <p>If you
-	// specify this parameter when you copy an unencrypted snapshot, the copy is
-	// encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region,
-	// then you must specify a KMS key for the destination AWS Region. KMS encryption
-	// keys are specific to the AWS Region that they are created in, and you can't use
-	// encryption keys from one AWS Region in another AWS Region. </p>
-	KmsKeyId *string
-
-	// A value that indicates whether to copy all tags from the source DB snapshot to
-	// the target DB snapshot. By default, tags are not copied.
-	CopyTags *bool
-
 	// The identifier for the source DB snapshot.  <p>If the source snapshot is in the
 	// same AWS Region as the copy, specify a valid DB snapshot identifier. For
 	// example, you might specify <code>rds:mysql-instance1-snapshot-20130805</code>.
@@ -110,6 +91,35 @@ type CopyDBSnapshotInput struct {
 	//
 	// This member is required.
 	TargetDBSnapshotIdentifier *string
+
+	// A value that indicates whether to copy all tags from the source DB snapshot to
+	// the target DB snapshot. By default, tags are not copied.
+	CopyTags *bool
+
+	// The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the Amazon
+	// Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS
+	// encryption key.  <p>If you copy an encrypted DB snapshot from your AWS account,
+	// you can specify a value for this parameter to encrypt the copy with a new KMS
+	// encryption key. If you don't specify a value for this parameter, then the copy
+	// of the DB snapshot is encrypted with the same KMS key as the source DB snapshot.
+	// </p> <p>If you copy an encrypted DB snapshot that is shared from another AWS
+	// account, then you must specify a value for this parameter. </p> <p>If you
+	// specify this parameter when you copy an unencrypted snapshot, the copy is
+	// encrypted. </p> <p>If you copy an encrypted snapshot to a different AWS Region,
+	// then you must specify a KMS key for the destination AWS Region. KMS encryption
+	// keys are specific to the AWS Region that they are created in, and you can't use
+	// encryption keys from one AWS Region in another AWS Region. </p>
+	KmsKeyId *string
+
+	// The name of an option group to associate with the copy of the snapshot.
+	// <p>Specify this option if you are copying a snapshot from one AWS Region to
+	// another, and your DB instance uses a nondefault option group. If your source DB
+	// instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server,
+	// you must specify this option when copying across AWS Regions. For more
+	// information, see <a
+	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option
+	// Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>
+	OptionGroupName *string
 
 	// The URL that contains a Signature Version 4 signed request for the
 	// CopyDBSnapshot API action in the source AWS Region that contains the source DB
@@ -156,16 +166,6 @@ type CopyDBSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []*types.Tag
-
-	// The name of an option group to associate with the copy of the snapshot.
-	// <p>Specify this option if you are copying a snapshot from one AWS Region to
-	// another, and your DB instance uses a nondefault option group. If your source DB
-	// instance uses Transparent Data Encryption for Oracle or Microsoft SQL Server,
-	// you must specify this option when copying across AWS Regions. For more
-	// information, see <a
-	// href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_CopySnapshot.html#USER_CopySnapshot.Options">Option
-	// Group Considerations</a> in the <i>Amazon RDS User Guide.</i> </p>
-	OptionGroupName *string
 }
 
 type CopyDBSnapshotOutput struct {

@@ -59,6 +59,11 @@ func (c *Client) UpdatePullRequestApprovalRuleContent(ctx context.Context, param
 
 type UpdatePullRequestApprovalRuleContentInput struct {
 
+	// The name of the approval rule you want to update.
+	//
+	// This member is required.
+	ApprovalRuleName *string
+
 	// The updated content for the approval rule. When you update the content of the
 	// approval rule, you can specify approvers in an approval pool in one of two
 	// ways:
@@ -95,19 +100,14 @@ type UpdatePullRequestApprovalRuleContentInput struct {
 	// This member is required.
 	NewRuleContent *string
 
-	// The name of the approval rule you want to update.
-	//
-	// This member is required.
-	ApprovalRuleName *string
-
-	// The SHA-256 hash signature for the content of the approval rule. You can
-	// retrieve this information by using GetPullRequest ().
-	ExistingRuleContentSha256 *string
-
 	// The system-generated ID of the pull request.
 	//
 	// This member is required.
 	PullRequestId *string
+
+	// The SHA-256 hash signature for the content of the approval rule. You can
+	// retrieve this information by using GetPullRequest ().
+	ExistingRuleContentSha256 *string
 }
 
 type UpdatePullRequestApprovalRuleContentOutput struct {

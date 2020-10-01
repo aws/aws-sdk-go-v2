@@ -61,20 +61,20 @@ func (c *Client) UpdateLoadBalancerAttribute(ctx context.Context, params *Update
 
 type UpdateLoadBalancerAttributeInput struct {
 
-	// The name of the load balancer that you want to modify (e.g., my-load-balancer.
+	// The name of the attribute you want to update. Valid values are below.
 	//
 	// This member is required.
-	LoadBalancerName *string
+	AttributeName types.LoadBalancerAttributeName
 
 	// The value that you want to specify for the attribute name.
 	//
 	// This member is required.
 	AttributeValue *string
 
-	// The name of the attribute you want to update. Valid values are below.
+	// The name of the load balancer that you want to modify (e.g., my-load-balancer.
 	//
 	// This member is required.
-	AttributeName types.LoadBalancerAttributeName
+	LoadBalancerName *string
 }
 
 type UpdateLoadBalancerAttributeOutput struct {

@@ -59,13 +59,11 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 //
 type ApplyPendingMaintenanceActionInput struct {
 
-	// The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance
-	// action applies to. For information about creating an ARN, see  Constructing an
-	// RDS Amazon Resource Name (ARN)
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
+	// The pending maintenance action to apply to this resource. Valid values:
+	// system-update, db-upgrade, hardware-maintenance, ca-certificate-rotation
 	//
 	// This member is required.
-	ResourceIdentifier *string
+	ApplyAction *string
 
 	// A value that specifies the type of opt-in request, or undoes an opt-in request.
 	// An opt-in request of type immediate can't be undone. Valid values:
@@ -83,11 +81,13 @@ type ApplyPendingMaintenanceActionInput struct {
 	// This member is required.
 	OptInType *string
 
-	// The pending maintenance action to apply to this resource. Valid values:
-	// system-update, db-upgrade, hardware-maintenance, ca-certificate-rotation
+	// The RDS Amazon Resource Name (ARN) of the resource that the pending maintenance
+	// action applies to. For information about creating an ARN, see  Constructing an
+	// RDS Amazon Resource Name (ARN)
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing).
 	//
 	// This member is required.
-	ApplyAction *string
+	ResourceIdentifier *string
 }
 
 type ApplyPendingMaintenanceActionOutput struct {

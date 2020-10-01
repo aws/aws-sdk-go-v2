@@ -56,15 +56,15 @@ func (c *Client) UpdateGateway(ctx context.Context, params *UpdateGatewayInput, 
 
 type UpdateGatewayInput struct {
 
-	// A unique, friendly name for the gateway.
-	//
-	// This member is required.
-	GatewayName *string
-
 	// The ID of the gateway to update.
 	//
 	// This member is required.
 	GatewayId *string
+
+	// A unique, friendly name for the gateway.
+	//
+	// This member is required.
+	GatewayName *string
 }
 
 type UpdateGatewayOutput struct {

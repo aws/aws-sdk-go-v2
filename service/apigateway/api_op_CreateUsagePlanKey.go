@@ -58,13 +58,16 @@ func (c *Client) CreateUsagePlanKey(ctx context.Context, params *CreateUsagePlan
 // The POST request to create a usage plan key for adding an existing API key to a
 // usage plan.
 type CreateUsagePlanKeyInput struct {
-	Template *bool
 
-	Name *string
+	// [Required] The identifier of a UsagePlanKey () resource for a plan customer.
+	//
+	// This member is required.
+	KeyId *string
 
-	TemplateSkipList []*string
-
-	Title *string
+	// [Required] The type of a UsagePlanKey () resource for a plan customer.
+	//
+	// This member is required.
+	KeyType *string
 
 	// [Required] The Id of the UsagePlan () resource representing the usage plan
 	// containing the to-be-created UsagePlanKey () resource representing a plan
@@ -73,15 +76,13 @@ type CreateUsagePlanKeyInput struct {
 	// This member is required.
 	UsagePlanId *string
 
-	// [Required] The type of a UsagePlanKey () resource for a plan customer.
-	//
-	// This member is required.
-	KeyType *string
+	Name *string
 
-	// [Required] The identifier of a UsagePlanKey () resource for a plan customer.
-	//
-	// This member is required.
-	KeyId *string
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a usage plan key to identify a plan customer. To associate an API
@@ -90,17 +91,17 @@ type CreateUsagePlanKeyInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html)
 type CreateUsagePlanKeyOutput struct {
 
-	// The name of a usage plan key.
-	Name *string
-
-	// The value of a usage plan key.
-	Value *string
-
 	// The Id of a usage plan key.
 	Id *string
 
+	// The name of a usage plan key.
+	Name *string
+
 	// The type of a usage plan key. Currently, the valid key type is API_KEY.
 	Type *string
+
+	// The value of a usage plan key.
+	Value *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

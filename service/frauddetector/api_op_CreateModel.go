@@ -57,9 +57,6 @@ func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optF
 
 type CreateModelInput struct {
 
-	// A collection of key and value pairs.
-	Tags []*types.Tag
-
 	// The name of the event type.
 	//
 	// This member is required.
@@ -77,6 +74,9 @@ type CreateModelInput struct {
 
 	// The model description.
 	Description *string
+
+	// A collection of key and value pairs.
+	Tags []*types.Tag
 }
 
 type CreateModelOutput struct {

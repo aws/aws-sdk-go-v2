@@ -56,11 +56,11 @@ func (c *Client) PutAppReplicationConfiguration(ctx context.Context, params *Put
 
 type PutAppReplicationConfigurationInput struct {
 
-	// Replication configurations for server groups in the application.
-	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
-
 	// ID of the application tassociated with the replication configuration.
 	AppId *string
+
+	// Replication configurations for server groups in the application.
+	ServerGroupReplicationConfigurations []*types.ServerGroupReplicationConfiguration
 }
 
 type PutAppReplicationConfigurationOutput struct {

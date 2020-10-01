@@ -83,18 +83,18 @@ func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput
 // <a>CreateSnapshotInput$VolumeARN</a> </p> </li> </ul>
 type CreateSnapshotInput struct {
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes () operation
-	// to return a list of gateway volumes.
-	//
-	// This member is required.
-	VolumeARN *string
-
 	// Textual description of the snapshot that appears in the Amazon EC2 console,
 	// Elastic Block Store snapshots panel in the Description field, and in the AWS
 	// Storage Gateway snapshot Details pane, Description field.
 	//
 	// This member is required.
 	SnapshotDescription *string
+
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes () operation
+	// to return a list of gateway volumes.
+	//
+	// This member is required.
+	VolumeARN *string
 
 	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
 	// key-value pair.  <note> <p>Valid characters for key and value are letters,

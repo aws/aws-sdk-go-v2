@@ -68,6 +68,21 @@ func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPoin
 
 type CreateAccessPointInput struct {
 
+	// A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent
+	// creation.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The ID of the EFS file system that the access point provides access to.
+	//
+	// This member is required.
+	FileSystemId *string
+
+	// The operating system user and group applied to all file system requests made
+	// using the access point.
+	PosixUser *types.PosixUser
+
 	// Specifies the directory on the Amazon EFS file system that the access point
 	// exposes as the root directory of your file system to NFS clients using the
 	// access point. The clients using the access point can only access the root
@@ -76,21 +91,6 @@ type CreateAccessPointInput struct {
 	// access point. When specifying a RootDirectory, you need to provide the Path, and
 	// the CreationInfo is optional.
 	RootDirectory *types.RootDirectory
-
-	// The ID of the EFS file system that the access point provides access to.
-	//
-	// This member is required.
-	FileSystemId *string
-
-	// A string of up to 64 ASCII characters that Amazon EFS uses to ensure idempotent
-	// creation.
-	//
-	// This member is required.
-	ClientToken *string
-
-	// The operating system user and group applied to all file system requests made
-	// using the access point.
-	PosixUser *types.PosixUser
 
 	// Creates tags associated with the access point. Each tag is a key-value pair.
 	Tags []*types.Tag
@@ -102,11 +102,14 @@ type CreateAccessPointOutput struct {
 	// The unique Amazon Resource Name (ARN) associated with the access point.
 	AccessPointArn *string
 
-	// Identified the AWS account that owns the access point resource.
-	OwnerId *string
-
 	// The ID of the access point, assigned by Amazon EFS.
 	AccessPointId *string
+
+	// The opaque string specified in the request to ensure idempotent creation.
+	ClientToken *string
+
+	// The ID of the EFS file system that the access point applies to.
+	FileSystemId *string
 
 	// Identifies the lifecycle phase of the access point.
 	LifeCycleState types.LifeCycleState
@@ -114,23 +117,20 @@ type CreateAccessPointOutput struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// The ID of the EFS file system that the access point applies to.
-	FileSystemId *string
-
-	// The tags associated with the access point, presented as an array of Tag objects.
-	Tags []*types.Tag
-
-	// The directory on the Amazon EFS file system that the access point exposes as the
-	// root directory to NFS clients using the access point.
-	RootDirectory *types.RootDirectory
-
-	// The opaque string specified in the request to ensure idempotent creation.
-	ClientToken *string
+	// Identified the AWS account that owns the access point resource.
+	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group
 	// IDs on the access point that is used for all file operations by NFS clients
 	// using the access point.
 	PosixUser *types.PosixUser
+
+	// The directory on the Amazon EFS file system that the access point exposes as the
+	// root directory to NFS clients using the access point.
+	RootDirectory *types.RootDirectory
+
+	// The tags associated with the access point, presented as an array of Tag objects.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

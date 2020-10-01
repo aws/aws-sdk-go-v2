@@ -58,23 +58,6 @@ func (c *Client) CreateLocationEfs(ctx context.Context, params *CreateLocationEf
 // CreateLocationEfsRequest
 type CreateLocationEfsInput struct {
 
-	// A subdirectory in the location’s path. This subdirectory in the EFS file system
-	// is used to read data from the EFS source location or write data to the EFS
-	// destination. By default, AWS DataSync uses the root directory. Subdirectory must
-	// be specified with forward slashes. For example, /path/to/folder.
-	Subdirectory *string
-
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
-	// location.
-	Tags []*types.TagListEntry
-
-	// The Amazon Resource Name (ARN) for the Amazon EFS file system.
-	//
-	// This member is required.
-	EfsFilesystemArn *string
-
 	// The subnet and security group that the Amazon EFS file system uses. The security
 	// group that you provide needs to be able to communicate with the security group
 	// on the mount target in the subnet specified. The exact relationship between
@@ -96,6 +79,23 @@ type CreateLocationEfsInput struct {
 	//
 	// This member is required.
 	Ec2Config *types.Ec2Config
+
+	// The Amazon Resource Name (ARN) for the Amazon EFS file system.
+	//
+	// This member is required.
+	EfsFilesystemArn *string
+
+	// A subdirectory in the location’s path. This subdirectory in the EFS file system
+	// is used to read data from the EFS source location or write data to the EFS
+	// destination. By default, AWS DataSync uses the root directory. Subdirectory must
+	// be specified with forward slashes. For example, /path/to/folder.
+	Subdirectory *string
+
+	// The key-value pair that represents a tag that you want to add to the resource.
+	// The value can be an empty string. This value helps you manage, filter, and
+	// search for your resources. We recommend that you create a name tag for your
+	// location.
+	Tags []*types.TagListEntry
 }
 
 // CreateLocationEfs

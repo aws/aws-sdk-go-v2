@@ -57,15 +57,15 @@ func (c *Client) UpdateApplicationResourceLifecycle(ctx context.Context, params 
 
 type UpdateApplicationResourceLifecycleInput struct {
 
-	// The lifecycle configuration.
-	//
-	// This member is required.
-	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
-
 	// The name of the application.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// The lifecycle configuration.
+	//
+	// This member is required.
+	ResourceLifecycleConfig *types.ApplicationResourceLifecycleConfig
 }
 
 type UpdateApplicationResourceLifecycleOutput struct {

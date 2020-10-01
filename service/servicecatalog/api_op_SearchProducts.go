@@ -56,17 +56,6 @@ func (c *Client) SearchProducts(ctx context.Context, params *SearchProductsInput
 
 type SearchProductsInput struct {
 
-	// The search filters. If no search filters are specified, the output includes all
-	// products to which the caller has access.
-	Filters map[string][]*string
-
-	// The page token for the next set of results. To retrieve the first set of
-	// results, use null.
-	PageToken *string
-
-	// The maximum number of items to return with this call.
-	PageSize *int32
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -77,17 +66,25 @@ type SearchProductsInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The sort order. If no value is specified, the results are not sorted.
-	SortOrder types.SortOrder
+	// The search filters. If no search filters are specified, the output includes all
+	// products to which the caller has access.
+	Filters map[string][]*string
+
+	// The maximum number of items to return with this call.
+	PageSize *int32
+
+	// The page token for the next set of results. To retrieve the first set of
+	// results, use null.
+	PageToken *string
 
 	// The sort field. If no value is specified, the results are not sorted.
 	SortBy types.ProductViewSortBy
+
+	// The sort order. If no value is specified, the results are not sorted.
+	SortOrder types.SortOrder
 }
 
 type SearchProductsOutput struct {
-
-	// Information about the product views.
-	ProductViewSummaries []*types.ProductViewSummary
 
 	// The page token to use to retrieve the next set of results. If there are no
 	// additional results, this value is null.
@@ -95,6 +92,9 @@ type SearchProductsOutput struct {
 
 	// The product view aggregations.
 	ProductViewAggregations map[string][]*types.ProductViewAggregationValue
+
+	// Information about the product views.
+	ProductViewSummaries []*types.ProductViewSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

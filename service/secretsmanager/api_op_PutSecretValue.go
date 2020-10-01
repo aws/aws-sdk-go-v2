@@ -152,33 +152,6 @@ type PutSecretValueInput struct {
 	// This member is required.
 	SecretId *string
 
-	// (Optional) Specifies binary data that you want to encrypt and store in the new
-	// version of the secret. To use this parameter in the command-line tools, we
-	// recommend that you store your binary data in a file and then use the appropriate
-	// technique for your tool to pass the contents of the file as a parameter. Either
-	// SecretBinary or SecretString must have a value, but not both. They cannot both
-	// be empty.  <p>This parameter is not accessible if the secret using the Secrets
-	// Manager console.</p> <p></p>
-	SecretBinary []byte
-
-	// (Optional) Specifies text data that you want to encrypt and store in this new
-	// version of the secret. Either SecretString or SecretBinary must have a value,
-	// but not both. They cannot both be empty.  <p>If you create this secret by using
-	// the Secrets Manager console then Secrets Manager puts the protected secret text
-	// in only the <code>SecretString</code> parameter. The Secrets Manager console
-	// stores the information as a JSON structure of key/value pairs that the default
-	// Lambda rotation function knows how to parse.</p> <p>For storing multiple values,
-	// we recommend that you use a JSON text string argument and specify key/value
-	// pairs. For information on how to format a JSON parameter for the various command
-	// line tool environments, see <a
-	// href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using
-	// JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.</p> <p> For
-	// example:</p> <p> <code>[{"username":"bob"},{"password":"abc123xyz456"}]</code>
-	// </p> <p>If your command-line tool or SDK requires quotation marks around the
-	// parameter, you should use single quotes to avoid confusion with the double
-	// quotes required in the JSON text.</p>
-	SecretString *string
-
 	// (Optional) Specifies a unique identifier for the new version of the secret. If
 	// you use the AWS CLI or one of the AWS SDK to call this operation, then you can
 	// leave this parameter empty. The CLI or SDK generates a random UUID for you and
@@ -209,6 +182,33 @@ type PutSecretValueInput struct {
 	// value becomes the VersionId of the new version.
 	ClientRequestToken *string
 
+	// (Optional) Specifies binary data that you want to encrypt and store in the new
+	// version of the secret. To use this parameter in the command-line tools, we
+	// recommend that you store your binary data in a file and then use the appropriate
+	// technique for your tool to pass the contents of the file as a parameter. Either
+	// SecretBinary or SecretString must have a value, but not both. They cannot both
+	// be empty.  <p>This parameter is not accessible if the secret using the Secrets
+	// Manager console.</p> <p></p>
+	SecretBinary []byte
+
+	// (Optional) Specifies text data that you want to encrypt and store in this new
+	// version of the secret. Either SecretString or SecretBinary must have a value,
+	// but not both. They cannot both be empty.  <p>If you create this secret by using
+	// the Secrets Manager console then Secrets Manager puts the protected secret text
+	// in only the <code>SecretString</code> parameter. The Secrets Manager console
+	// stores the information as a JSON structure of key/value pairs that the default
+	// Lambda rotation function knows how to parse.</p> <p>For storing multiple values,
+	// we recommend that you use a JSON text string argument and specify key/value
+	// pairs. For information on how to format a JSON parameter for the various command
+	// line tool environments, see <a
+	// href="https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json">Using
+	// JSON for Parameters</a> in the <i>AWS CLI User Guide</i>.</p> <p> For
+	// example:</p> <p> <code>[{"username":"bob"},{"password":"abc123xyz456"}]</code>
+	// </p> <p>If your command-line tool or SDK requires quotation marks around the
+	// parameter, you should use single quotes to avoid confusion with the double
+	// quotes required in the JSON text.</p>
+	SecretString *string
+
 	// (Optional) Specifies a list of staging labels that are attached to this version
 	// of the secret. These staging labels are used to track the versions through the
 	// rotation process by the Lambda rotation function. A staging label must be unique
@@ -222,20 +222,20 @@ type PutSecretValueInput struct {
 
 type PutSecretValueOutput struct {
 
-	// The unique identifier of the version of the secret you just created or updated.
-	VersionId *string
-
 	// The Amazon Resource Name (ARN) for the secret for which you just created a
 	// version.
 	ARN *string
+
+	// The friendly name of the secret for which you just created or updated a version.
+	Name *string
+
+	// The unique identifier of the version of the secret you just created or updated.
+	VersionId *string
 
 	// The list of staging labels that are currently attached to this version of the
 	// secret. Staging labels are used to track a version as it progresses through the
 	// secret rotation process.
 	VersionStages []*string
-
-	// The friendly name of the secret for which you just created or updated a version.
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

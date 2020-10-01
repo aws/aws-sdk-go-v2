@@ -90,61 +90,31 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// A list of EC2 VPC security groups to associate with this DB instance. Default:
-	// The default EC2 VPC security group for the DB subnet group's VPC.
-	VpcSecurityGroupIds []*string
-
-	// The DB subnet group name to use for the new instance. Constraints: If supplied,
-	// must match the name of an existing DBSubnetGroup. Example: mySubnetgroup
-	DBSubnetGroupName *string
-
-	// The password for the given ARN from the key store in order to access the device.
-	TdeCredentialPassword *string
-
-	// License model information for the restored DB instance. Default: Same as source.
-	// Valid values: license-included | bring-your-own-license | general-public-license
-	LicenseModel *string
-
-	// A value that indicates whether the DB instance is a Multi-AZ deployment.
-	// Constraint: You can't specify the AvailabilityZone parameter if the DB instance
-	// is a Multi-AZ deployment.
-	MultiAZ *bool
-
-	// The ARN from the key store with which to associate the instance for TDE
-	// encryption.
-	TdeCredentialArn *string
-
-	// The database engine to use for the new instance. Default: The same as source
-	// Constraint: Must be compatible with the engine of the source. For example, you
-	// can restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.  <p>Valid
-	// Values:</p> <ul> <li> <p> <code>mariadb</code> </p> </li> <li> <p>
-	// <code>mysql</code> </p> </li> <li> <p> <code>oracle-ee</code> </p> </li> <li>
-	// <p> <code>oracle-se2</code> </p> </li> <li> <p> <code>oracle-se1</code> </p>
-	// </li> <li> <p> <code>oracle-se</code> </p> </li> <li> <p> <code>postgres</code>
-	// </p> </li> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p>
-	// <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p>
-	// </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>
-	Engine *string
-
-	// Specify the name of the IAM role to be used when making API calls to the
-	// Directory Service.
-	DomainIAMRoleName *string
-
-	// Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O
-	// operations per second. If this parameter isn't specified, the IOPS value is
-	// taken from the backup. If this parameter is set to 0, the new instance is
-	// converted to a non-PIOPS instance. The conversion takes additional time, though
-	// your DB instance is available for connections before the conversion starts. The
-	// provisioned IOPS value must follow the requirements for your database engine.
-	// For more information, see Amazon RDS Provisioned IOPS Storage to Improve
-	// Performance
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
-	// in the Amazon RDS User Guide. Constraints: Must be an integer greater than 1000.
-	Iops *int32
+	// The identifier for the DB snapshot to restore from. Constraints:
+	//
+	//     * Must
+	// match the identifier of an existing DBSnapshot.
+	//
+	//     * If you are restoring from
+	// a shared manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the
+	// shared DB snapshot.
+	//
+	// This member is required.
+	DBSnapshotIdentifier *string
 
 	// A value that indicates whether minor version upgrades are applied automatically
 	// to the DB instance during the maintenance window.
 	AutoMinorVersionUpgrade *bool
+
+	// The Availability Zone (AZ) where the DB instance will be created. Default: A
+	// random, system-chosen Availability Zone. Constraint: You can't specify the
+	// AvailabilityZone parameter if the DB instance is a Multi-AZ deployment. Example:
+	// us-east-1a
+	AvailabilityZone *string
+
+	// A value that indicates whether to copy all tags from the restored DB instance to
+	// snapshots of the DB instance. By default, tags are not copied.
+	CopyTagsToSnapshot *bool
 
 	// The compute and memory capacity of the Amazon RDS DB instance, for example,
 	// db.m4.large. Not all DB instance classes are available in all AWS Regions, or
@@ -155,9 +125,9 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// DB instance.
 	DBInstanceClass *string
 
-	// A value that indicates whether to copy all tags from the restored DB instance to
-	// snapshots of the DB instance. By default, tags are not copied.
-	CopyTagsToSnapshot *bool
+	// The database name for the restored DB instance. This parameter doesn't apply to
+	// the MySQL, PostgreSQL, or MariaDB engines.
+	DBName *string
 
 	// The name of the DB parameter group to associate with this DB instance. If you do
 	// not specify a value for DBParameterGroupName, then the default DBParameterGroup
@@ -175,10 +145,16 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// with a hyphen or contain two consecutive hyphens.
 	DBParameterGroupName *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
-	Tags []*types.Tag
+	// The DB subnet group name to use for the new instance. Constraints: If supplied,
+	// must match the name of an existing DBSubnetGroup. Example: mySubnetgroup
+	DBSubnetGroupName *string
+
+	// A value that indicates whether the DB instance has deletion protection enabled.
+	// The database can't be deleted when deletion protection is enabled. By default,
+	// deletion protection is disabled. For more information, see  Deleting a DB
+	// Instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
+	DeletionProtection *bool
 
 	// Specify the Active Directory directory ID to restore the DB instance in. The
 	// domain must be created prior to this operation. Currently, only Microsoft SQL
@@ -196,37 +172,9 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// the Amazon RDS User Guide.
 	Domain *string
 
-	// The Availability Zone (AZ) where the DB instance will be created. Default: A
-	// random, system-chosen Availability Zone. Constraint: You can't specify the
-	// AvailabilityZone parameter if the DB instance is a Multi-AZ deployment. Example:
-	// us-east-1a
-	AvailabilityZone *string
-
-	// The database name for the restored DB instance. This parameter doesn't apply to
-	// the MySQL, PostgreSQL, or MariaDB engines.
-	DBName *string
-
-	// The name of the option group to be used for the restored DB instance.
-	// <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE,
-	// can't be removed from an option group, and that option group can't be removed
-	// from a DB instance once it is associated with a DB instance</p>
-	OptionGroupName *string
-
-	// A value that indicates whether the DB instance has deletion protection enabled.
-	// The database can't be deleted when deletion protection is enabled. By default,
-	// deletion protection is disabled. For more information, see  Deleting a DB
-	// Instance
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html).
-	DeletionProtection *bool
-
-	// The number of CPU cores and the number of threads per core for the DB instance
-	// class of the DB instance.
-	ProcessorFeatures []*types.ProcessorFeature
-
-	// Specifies the storage type to be associated with the DB instance. Valid values:
-	// standard | gp2 | io1 If you specify io1, you must also include a value for the
-	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
-	StorageType *string
+	// Specify the name of the IAM role to be used when making API calls to the
+	// Directory Service.
+	DomainIAMRoleName *string
 
 	// The list of logs that the restored DB instance is to export to CloudWatch Logs.
 	// The values in the list depend on the DB engine being used. For more information,
@@ -234,22 +182,6 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_LogAccess.html#USER_LogAccess.Procedural.UploadtoCloudWatch)
 	// in the Amazon Aurora User Guide.
 	EnableCloudwatchLogsExports []*string
-
-	// A value that indicates whether the DB instance class of the DB instance uses its
-	// default processor features.
-	UseDefaultProcessorFeatures *bool
-
-	// The identifier for the DB snapshot to restore from. Constraints:
-	//
-	//     * Must
-	// match the identifier of an existing DBSnapshot.
-	//
-	//     * If you are restoring from
-	// a shared manual DB snapshot, the DBSnapshotIdentifier must be the ARN of the
-	// shared DB snapshot.
-	//
-	// This member is required.
-	DBSnapshotIdentifier *string
 
 	// A value that indicates whether to enable mapping of AWS Identity and Access
 	// Management (IAM) accounts to database accounts. By default, mapping is disabled.
@@ -259,6 +191,53 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// IAM Database Authentication for MySQL and PostgreSQL</a> in the <i>Amazon RDS
 	// User Guide.</i> </p>
 	EnableIAMDatabaseAuthentication *bool
+
+	// The database engine to use for the new instance. Default: The same as source
+	// Constraint: Must be compatible with the engine of the source. For example, you
+	// can restore a MariaDB 10.1 DB instance from a MySQL 5.6 snapshot.  <p>Valid
+	// Values:</p> <ul> <li> <p> <code>mariadb</code> </p> </li> <li> <p>
+	// <code>mysql</code> </p> </li> <li> <p> <code>oracle-ee</code> </p> </li> <li>
+	// <p> <code>oracle-se2</code> </p> </li> <li> <p> <code>oracle-se1</code> </p>
+	// </li> <li> <p> <code>oracle-se</code> </p> </li> <li> <p> <code>postgres</code>
+	// </p> </li> <li> <p> <code>sqlserver-ee</code> </p> </li> <li> <p>
+	// <code>sqlserver-se</code> </p> </li> <li> <p> <code>sqlserver-ex</code> </p>
+	// </li> <li> <p> <code>sqlserver-web</code> </p> </li> </ul>
+	Engine *string
+
+	// Specifies the amount of provisioned IOPS for the DB instance, expressed in I/O
+	// operations per second. If this parameter isn't specified, the IOPS value is
+	// taken from the backup. If this parameter is set to 0, the new instance is
+	// converted to a non-PIOPS instance. The conversion takes additional time, though
+	// your DB instance is available for connections before the conversion starts. The
+	// provisioned IOPS value must follow the requirements for your database engine.
+	// For more information, see Amazon RDS Provisioned IOPS Storage to Improve
+	// Performance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Storage.html#USER_PIOPS)
+	// in the Amazon RDS User Guide. Constraints: Must be an integer greater than 1000.
+	Iops *int32
+
+	// License model information for the restored DB instance. Default: Same as source.
+	// Valid values: license-included | bring-your-own-license | general-public-license
+	LicenseModel *string
+
+	// A value that indicates whether the DB instance is a Multi-AZ deployment.
+	// Constraint: You can't specify the AvailabilityZone parameter if the DB instance
+	// is a Multi-AZ deployment.
+	MultiAZ *bool
+
+	// The name of the option group to be used for the restored DB instance.
+	// <p>Permanent options, such as the TDE option for Oracle Advanced Security TDE,
+	// can't be removed from an option group, and that option group can't be removed
+	// from a DB instance once it is associated with a DB instance</p>
+	OptionGroupName *string
+
+	// The port number on which the database accepts connections. Default: The same
+	// port as the original DB instance Constraints: Value must be 1150-65535
+	Port *int32
+
+	// The number of CPU cores and the number of threads per core for the DB instance
+	// class of the DB instance.
+	ProcessorFeatures []*types.ProcessorFeature
 
 	// A value that indicates whether the DB instance is publicly accessible. When the
 	// DB instance is publicly accessible, its DNS endpoint resolves to the private IP
@@ -271,9 +250,30 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// CreateDBInstance ().
 	PubliclyAccessible *bool
 
-	// The port number on which the database accepts connections. Default: The same
-	// port as the original DB instance Constraints: Value must be 1150-65535
-	Port *int32
+	// Specifies the storage type to be associated with the DB instance. Valid values:
+	// standard | gp2 | io1 If you specify io1, you must also include a value for the
+	// Iops parameter. Default: io1 if the Iops parameter is specified, otherwise gp2
+	StorageType *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	Tags []*types.Tag
+
+	// The ARN from the key store with which to associate the instance for TDE
+	// encryption.
+	TdeCredentialArn *string
+
+	// The password for the given ARN from the key store in order to access the device.
+	TdeCredentialPassword *string
+
+	// A value that indicates whether the DB instance class of the DB instance uses its
+	// default processor features.
+	UseDefaultProcessorFeatures *bool
+
+	// A list of EC2 VPC security groups to associate with this DB instance. Default:
+	// The default EC2 VPC security group for the DB subnet group's VPC.
+	VpcSecurityGroupIds []*string
 }
 
 type RestoreDBInstanceFromDBSnapshotOutput struct {

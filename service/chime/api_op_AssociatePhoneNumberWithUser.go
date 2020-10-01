@@ -56,15 +56,15 @@ func (c *Client) AssociatePhoneNumberWithUser(ctx context.Context, params *Assoc
 
 type AssociatePhoneNumberWithUserInput struct {
 
-	// The phone number, in E.164 format.
-	//
-	// This member is required.
-	E164PhoneNumber *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The phone number, in E.164 format.
+	//
+	// This member is required.
+	E164PhoneNumber *string
 
 	// The user ID.
 	//

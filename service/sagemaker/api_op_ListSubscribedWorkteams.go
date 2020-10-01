@@ -58,17 +58,17 @@ func (c *Client) ListSubscribedWorkteams(ctx context.Context, params *ListSubscr
 
 type ListSubscribedWorkteamsInput struct {
 
-	// If the result of the previous ListSubscribedWorkteams request was truncated, the
-	// response includes a NextToken. To retrieve the next set of labeling jobs, use
-	// the token in the next request.
-	NextToken *string
+	// The maximum number of work teams to return in each page of the response.
+	MaxResults *int32
 
 	// A string in the work team name. This filter returns only work teams whose name
 	// contains the specified string.
 	NameContains *string
 
-	// The maximum number of work teams to return in each page of the response.
-	MaxResults *int32
+	// If the result of the previous ListSubscribedWorkteams request was truncated, the
+	// response includes a NextToken. To retrieve the next set of labeling jobs, use
+	// the token in the next request.
+	NextToken *string
 }
 
 type ListSubscribedWorkteamsOutput struct {

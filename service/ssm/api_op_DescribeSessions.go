@@ -63,6 +63,9 @@ type DescribeSessionsInput struct {
 	// This member is required.
 	State types.SessionState
 
+	// One or more filters to limit the type of sessions returned by the request.
+	Filters []*types.SessionFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
@@ -70,19 +73,16 @@ type DescribeSessionsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
-
-	// One or more filters to limit the type of sessions returned by the request.
-	Filters []*types.SessionFilter
 }
 
 type DescribeSessionsOutput struct {
 
-	// A list of sessions meeting the request parameters.
-	Sessions []*types.Session
-
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	// A list of sessions meeting the request parameters.
+	Sessions []*types.Session
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,9 +56,6 @@ func (c *Client) UpdateRoleAlias(ctx context.Context, params *UpdateRoleAliasInp
 
 type UpdateRoleAliasInput struct {
 
-	// The role ARN.
-	RoleArn *string
-
 	// The role alias to update.
 	//
 	// This member is required.
@@ -66,15 +63,18 @@ type UpdateRoleAliasInput struct {
 
 	// The number of seconds the credential will be valid.
 	CredentialDurationSeconds *int32
+
+	// The role ARN.
+	RoleArn *string
 }
 
 type UpdateRoleAliasOutput struct {
 
-	// The role alias ARN.
-	RoleAliasArn *string
-
 	// The role alias.
 	RoleAlias *string
+
+	// The role alias ARN.
+	RoleAliasArn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,6 +58,24 @@ func (c *Client) GetTimeSeriesServiceStatistics(ctx context.Context, params *Get
 
 type GetTimeSeriesServiceStatisticsInput struct {
 
+	// The end of the time frame for which to aggregate statistics.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The start of the time frame for which to aggregate statistics.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// A filter expression defining entities that will be aggregated for statistics.
+	// Supports ID, service, and edge functions. If no selector expression is
+	// specified, edge statistics are returned.
+	EntitySelectorExpression *string
+
+	// The ARN of the group for which to pull statistics from.
+	GroupARN *string
+
 	// The case-sensitive name of the group for which to pull statistics from.
 	GroupName *string
 
@@ -66,38 +84,20 @@ type GetTimeSeriesServiceStatisticsInput struct {
 
 	// Aggregation period in seconds.
 	Period *int32
-
-	// The ARN of the group for which to pull statistics from.
-	GroupARN *string
-
-	// The start of the time frame for which to aggregate statistics.
-	//
-	// This member is required.
-	StartTime *time.Time
-
-	// The end of the time frame for which to aggregate statistics.
-	//
-	// This member is required.
-	EndTime *time.Time
-
-	// A filter expression defining entities that will be aggregated for statistics.
-	// Supports ID, service, and edge functions. If no selector expression is
-	// specified, edge statistics are returned.
-	EntitySelectorExpression *string
 }
 
 type GetTimeSeriesServiceStatisticsOutput struct {
+
+	// A flag indicating whether or not a group's filter expression has been
+	// consistent, or if a returned aggregation may show statistics from an older
+	// version of the group's filter expression.
+	ContainsOldGroupVersions *bool
 
 	// Pagination token.
 	NextToken *string
 
 	// The collection of statistics.
 	TimeSeriesServiceStatistics []*types.TimeSeriesServiceStatistics
-
-	// A flag indicating whether or not a group's filter expression has been
-	// consistent, or if a returned aggregation may show statistics from an older
-	// version of the group's filter expression.
-	ContainsOldGroupVersions *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

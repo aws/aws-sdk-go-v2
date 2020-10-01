@@ -64,18 +64,18 @@ type GetModelTemplateInput struct {
 	// This member is required.
 	ModelName *string
 
-	Template *bool
-
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	Name *string
+
+	Template *bool
+
 	TemplateSkipList []*string
 
 	Title *string
-
-	Name *string
 }
 
 // Represents a mapping template used to transform a payload. Mapping Templates

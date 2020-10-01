@@ -76,23 +76,23 @@ type QueryForecastInput struct {
 	// This member is required.
 	Filters map[string]*string
 
-	// If the result of the previous request was truncated, the response includes a
-	// NextToken. To retrieve the next set of results, use the token in the next
-	// request. Tokens expire after 24 hours.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) of the forecast to query.
 	//
 	// This member is required.
 	ForecastArn *string
 
-	// The start date for the forecast. Specify the date using this format:
-	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.
-	StartDate *string
-
 	// The end date for the forecast. Specify the date using this format:
 	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T20:00:00.
 	EndDate *string
+
+	// If the result of the previous request was truncated, the response includes a
+	// NextToken. To retrieve the next set of results, use the token in the next
+	// request. Tokens expire after 24 hours.
+	NextToken *string
+
+	// The start date for the forecast. Specify the date using this format:
+	// yyyy-MM-dd'T'HH:mm:ss (ISO 8601 format). For example, 2015-01-01T08:00:00.
+	StartDate *string
 }
 
 type QueryForecastOutput struct {

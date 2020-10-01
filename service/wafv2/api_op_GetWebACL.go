@@ -61,6 +61,12 @@ func (c *Client) GetWebACL(ctx context.Context, params *GetWebACLInput, optFns .
 
 type GetWebACLInput struct {
 
+	// The unique identifier for the Web ACL. This ID is returned in the responses to
+	// create and list commands. You provide it to operations like update and delete.
+	//
+	// This member is required.
+	Id *string
+
 	// The name of the Web ACL. You cannot change the name of a Web ACL after you
 	// create it.
 	//
@@ -80,12 +86,6 @@ type GetWebACLInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
-
-	// The unique identifier for the Web ACL. This ID is returned in the responses to
-	// create and list commands. You provide it to operations like update and delete.
-	//
-	// This member is required.
-	Id *string
 }
 
 type GetWebACLOutput struct {

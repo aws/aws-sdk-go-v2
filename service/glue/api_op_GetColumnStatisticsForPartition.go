@@ -57,11 +57,6 @@ func (c *Client) GetColumnStatisticsForPartition(ctx context.Context, params *Ge
 
 type GetColumnStatisticsForPartitionInput struct {
 
-	// The name of the partitions' table.
-	//
-	// This member is required.
-	TableName *string
-
 	// A list of the column names.
 	//
 	// This member is required.
@@ -76,6 +71,11 @@ type GetColumnStatisticsForPartitionInput struct {
 	//
 	// This member is required.
 	PartitionValues []*string
+
+	// The name of the partitions' table.
+	//
+	// This member is required.
+	TableName *string
 
 	// The ID of the Data Catalog where the partitions in question reside. If none is
 	// supplied, the AWS account ID is used by default.

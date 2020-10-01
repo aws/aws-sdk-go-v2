@@ -82,15 +82,15 @@ func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *Pu
 
 type PutBucketLifecycleConfigurationInput struct {
 
-	// The name of the bucket for which to set the configuration.
-	//
-	// This member is required.
-	Bucket *string
-
 	// The AWS account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The name of the bucket for which to set the configuration.
+	//
+	// This member is required.
+	Bucket *string
 
 	// Container for lifecycle rules. You can add as many as 1,000 rules.
 	LifecycleConfiguration *types.LifecycleConfiguration

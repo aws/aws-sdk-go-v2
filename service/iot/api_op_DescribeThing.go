@@ -66,17 +66,11 @@ type DescribeThingInput struct {
 // The output from the DescribeThing operation.
 type DescribeThingOutput struct {
 
-	// The ARN of the thing to describe.
-	ThingArn *string
-
-	// The thing type name.
-	ThingTypeName *string
+	// The thing attributes.
+	Attributes map[string]*string
 
 	// The name of the billing group the thing belongs to.
 	BillingGroupName *string
-
-	// The name of the thing.
-	ThingName *string
 
 	// The default MQTT client ID. For a typical device, the thing name is also used as
 	// the default MQTT client ID. Although we don’t require a mapping between a
@@ -87,16 +81,22 @@ type DescribeThingOutput struct {
 	// certificate model or shadows.
 	DefaultClientId *string
 
-	// The thing attributes.
-	Attributes map[string]*string
+	// The ARN of the thing to describe.
+	ThingArn *string
+
+	// The ID of the thing to describe.
+	ThingId *string
+
+	// The name of the thing.
+	ThingName *string
+
+	// The thing type name.
+	ThingTypeName *string
 
 	// The current version of the thing record in the registry. To avoid unintentional
 	// changes to the information in the registry, you can pass the version information
 	// in the expectedVersion parameter of the UpdateThing and DeleteThing calls.
 	Version *int64
-
-	// The ID of the thing to describe.
-	ThingId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

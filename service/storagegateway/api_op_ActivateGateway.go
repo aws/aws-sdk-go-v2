@@ -71,29 +71,6 @@ func (c *Client) ActivateGateway(ctx context.Context, params *ActivateGatewayInp
 // <a>ActivateGatewayInput$TapeDriveType</a> </p> </li> </ul>
 type ActivateGatewayInput struct {
 
-	// A value that defines the type of gateway to activate. The type specified is
-	// critical to all later functions of the gateway and cannot be changed after
-	// activation. The default value is CACHED.  <p>Valid Values: <code>STORED</code> |
-	// <code>CACHED</code> | <code>VTL</code> | <code>FILE_S3</code> </p>
-	GatewayType *string
-
-	// A value that indicates the AWS Region where you want to store your data. The
-	// gateway AWS Region specified must be the same AWS Region as the AWS Region in
-	// your Host header in the request. For more information about available AWS
-	// Regions and endpoints for AWS Storage Gateway, see AWS Storage Gateway endpoints
-	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS
-	// General Reference.  <p>Valid Values: See <a
-	// href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway
-	// endpoints and quotas</a> in the <i>AWS General Reference</i>. </p>
-	//
-	// This member is required.
-	GatewayRegion *string
-
-	// The value that indicates the type of medium changer to use for tape gateway.
-	// This field is optional.  <p>Valid Values: <code>STK-L700</code> |
-	// <code>AWS-Gateway-VTL</code> </p>
-	MediumChangerType *string
-
 	// Your gateway activation key. You can obtain the activation key by sending an
 	// HTTP GET request with redirects enabled to the gateway IP address (port 80). The
 	// redirect URL returned in the response provides you the activation key for your
@@ -107,9 +84,22 @@ type ActivateGatewayInput struct {
 	// This member is required.
 	ActivationKey *string
 
-	// The value that indicates the type of tape drive to use for tape gateway. This
-	// field is optional.  <p>Valid Values: <code>IBM-ULT3580-TD5</code> </p>
-	TapeDriveType *string
+	// The name you configured for your gateway.
+	//
+	// This member is required.
+	GatewayName *string
+
+	// A value that indicates the AWS Region where you want to store your data. The
+	// gateway AWS Region specified must be the same AWS Region as the AWS Region in
+	// your Host header in the request. For more information about available AWS
+	// Regions and endpoints for AWS Storage Gateway, see AWS Storage Gateway endpoints
+	// and quotas (https://docs.aws.amazon.com/general/latest/gr/sg.html) in the AWS
+	// General Reference.  <p>Valid Values: See <a
+	// href="https://docs.aws.amazon.com/general/latest/gr/sg.html">AWS Storage Gateway
+	// endpoints and quotas</a> in the <i>AWS General Reference</i>. </p>
+	//
+	// This member is required.
+	GatewayRegion *string
 
 	// A value that indicates the time zone you want to set for the gateway. The time
 	// zone is of the format "GMT-hr:mm" or "GMT+hr:mm". For example, GMT-4:00
@@ -120,10 +110,16 @@ type ActivateGatewayInput struct {
 	// This member is required.
 	GatewayTimezone *string
 
-	// The name you configured for your gateway.
-	//
-	// This member is required.
-	GatewayName *string
+	// A value that defines the type of gateway to activate. The type specified is
+	// critical to all later functions of the gateway and cannot be changed after
+	// activation. The default value is CACHED.  <p>Valid Values: <code>STORED</code> |
+	// <code>CACHED</code> | <code>VTL</code> | <code>FILE_S3</code> </p>
+	GatewayType *string
+
+	// The value that indicates the type of medium changer to use for tape gateway.
+	// This field is optional.  <p>Valid Values: <code>STK-L700</code> |
+	// <code>AWS-Gateway-VTL</code> </p>
+	MediumChangerType *string
 
 	// A list of up to 50 tags that you can assign to the gateway. Each tag is a
 	// key-value pair.  <note> <p>Valid characters for key and value are letters,
@@ -132,6 +128,10 @@ type ActivateGatewayInput struct {
 	// characters, and the maximum length for a tag's value is 256 characters.</p>
 	// </note>
 	Tags []*types.Tag
+
+	// The value that indicates the type of tape drive to use for tape gateway. This
+	// field is optional.  <p>Valid Values: <code>IBM-ULT3580-TD5</code> </p>
+	TapeDriveType *string
 }
 
 // AWS Storage Gateway returns the Amazon Resource Name (ARN) of the activated

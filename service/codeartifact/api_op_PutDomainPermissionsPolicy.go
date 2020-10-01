@@ -57,15 +57,6 @@ func (c *Client) PutDomainPermissionsPolicy(ctx context.Context, params *PutDoma
 
 type PutDomainPermissionsPolicyInput struct {
 
-	// The current revision of the resource policy to be set. This revision is used for
-	// optimistic locking, which prevents others from overwriting your changes to the
-	// domain's resource policy.
-	PolicyRevision *string
-
-	// The 12-digit account number of the AWS account that owns the domain. It does not
-	// include dashes or spaces.
-	DomainOwner *string
-
 	// The name of the domain on which to set the resource policy.
 	//
 	// This member is required.
@@ -76,6 +67,15 @@ type PutDomainPermissionsPolicyInput struct {
 	//
 	// This member is required.
 	PolicyDocument *string
+
+	// The 12-digit account number of the AWS account that owns the domain. It does not
+	// include dashes or spaces.
+	DomainOwner *string
+
+	// The current revision of the resource policy to be set. This revision is used for
+	// optimistic locking, which prevents others from overwriting your changes to the
+	// domain's resource policy.
+	PolicyRevision *string
 }
 
 type PutDomainPermissionsPolicyOutput struct {

@@ -56,14 +56,14 @@ func (c *Client) ImportSnapshot(ctx context.Context, params *ImportSnapshotInput
 
 type ImportSnapshotInput struct {
 
-	// The name of the role to use when not using the default role, 'vmimport'.
-	RoleName *string
-
-	// The description string for the import snapshot task.
-	Description *string
+	// The client-specific data.
+	ClientData *types.ClientData
 
 	// Token to enable idempotency for VM import requests.
 	ClientToken *string
+
+	// The description string for the import snapshot task.
+	Description *string
 
 	// Information about the disk container.
 	DiskContainer *types.SnapshotDiskContainer
@@ -73,12 +73,6 @@ type ImportSnapshotInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The tags to apply to the snapshot being imported.
-	TagSpecifications []*types.TagSpecification
-
-	// The client-specific data.
-	ClientData *types.ClientData
 
 	// Specifies whether the destination snapshot of the imported image should be
 	// encrypted. The default CMK for EBS is used unless you specify a non-default AWS
@@ -120,6 +114,12 @@ type ImportSnapshotInput struct {
 	// failure. The specified CMK must exist in the Region that the snapshot is being
 	// copied to. Amazon EBS does not support asymmetric CMKs.
 	KmsKeyId *string
+
+	// The name of the role to use when not using the default role, 'vmimport'.
+	RoleName *string
+
+	// The tags to apply to the snapshot being imported.
+	TagSpecifications []*types.TagSpecification
 }
 
 type ImportSnapshotOutput struct {
@@ -127,14 +127,14 @@ type ImportSnapshotOutput struct {
 	// A description of the import snapshot task.
 	Description *string
 
-	// Any tags assigned to the snapshot being imported.
-	Tags []*types.Tag
+	// The ID of the import snapshot task.
+	ImportTaskId *string
 
 	// Information about the import snapshot task.
 	SnapshotTaskDetail *types.SnapshotTaskDetail
 
-	// The ID of the import snapshot task.
-	ImportTaskId *string
+	// Any tags assigned to the snapshot being imported.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

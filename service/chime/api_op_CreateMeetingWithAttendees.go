@@ -66,22 +66,17 @@ func (c *Client) CreateMeetingWithAttendees(ctx context.Context, params *CreateM
 
 type CreateMeetingWithAttendeesInput struct {
 
-	// The configuration for resource targets to receive notifications when Amazon
-	// Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports
-	// resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
-	NotificationsConfiguration *types.MeetingNotificationConfiguration
-
 	// The unique identifier for the client request. Use a different token for
 	// different meetings.
 	//
 	// This member is required.
 	ClientRequestToken *string
 
-	// The external meeting ID.
-	ExternalMeetingId *string
-
 	// The request containing the attendees to create.
 	Attendees []*types.CreateAttendeeRequestItem
+
+	// The external meeting ID.
+	ExternalMeetingId *string
 
 	// The Region in which to create the meeting. Default: us-east-1. Available values:
 	// ap-northeast-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1,
@@ -92,18 +87,23 @@ type CreateMeetingWithAttendeesInput struct {
 	// Reserved.
 	MeetingHostId *string
 
+	// The configuration for resource targets to receive notifications when Amazon
+	// Chime SDK meeting and attendee events occur. The Amazon Chime SDK supports
+	// resource targets located in the US East (N. Virginia) AWS Region (us-east-1).
+	NotificationsConfiguration *types.MeetingNotificationConfiguration
+
 	// The tag key-value pairs.
 	Tags []*types.Tag
 }
 
 type CreateMeetingWithAttendeesOutput struct {
 
+	// The attendee information, including attendees IDs and join tokens.
+	Attendees []*types.Attendee
+
 	// If the action fails for one or more of the attendees in the request, a list of
 	// the attendees is returned, along with error codes and error messages.
 	Errors []*types.CreateAttendeeError
-
-	// The attendee information, including attendees IDs and join tokens.
-	Attendees []*types.Attendee
 
 	// A meeting created using the Amazon Chime SDK.
 	Meeting *types.Meeting

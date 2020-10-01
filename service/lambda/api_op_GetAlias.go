@@ -86,25 +86,25 @@ type GetAliasInput struct {
 // (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html).
 type GetAliasOutput struct {
 
-	// The routing configuration
-	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
-	// of the alias.
-	RoutingConfig *types.AliasRoutingConfiguration
-
-	// The name of the alias.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the alias.
 	AliasArn *string
 
-	// A unique identifier that changes when you update the alias.
-	RevisionId *string
+	// A description of the alias.
+	Description *string
 
 	// The function version that the alias invokes.
 	FunctionVersion *string
 
-	// A description of the alias.
-	Description *string
+	// The name of the alias.
+	Name *string
+
+	// A unique identifier that changes when you update the alias.
+	RevisionId *string
+
+	// The routing configuration
+	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
+	// of the alias.
+	RoutingConfig *types.AliasRoutingConfiguration
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

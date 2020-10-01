@@ -59,8 +59,36 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 
 type CopyDBClusterSnapshotInput struct {
 
-	// The tags to assign to the new DB cluster snapshot copy.
-	Tags []*types.Tag
+	// The identifier of the DB cluster snapshot to copy. This parameter is not
+	// case-sensitive. You can't copy from one AWS Region to another. Constraints:
+	//
+	//
+	// * Must specify a valid system snapshot in the "available" state.
+	//
+	//     * Specify
+	// a valid DB snapshot identifier.
+	//
+	// Example: my-cluster-snapshot1
+	//
+	// This member is required.
+	SourceDBClusterSnapshotIdentifier *string
+
+	// The identifier of the new DB cluster snapshot to create from the source DB
+	// cluster snapshot. This parameter is not case-sensitive. Constraints:
+	//
+	//     * Must
+	// contain from 1 to 63 letters, numbers, or hyphens.
+	//
+	//     * First character must
+	// be a letter.
+	//
+	//     * Cannot end with a hyphen or contain two consecutive
+	// hyphens.
+	//
+	// Example: my-cluster-snapshot2
+	//
+	// This member is required.
+	TargetDBClusterSnapshotIdentifier *string
 
 	// True to copy all tags from the source DB cluster snapshot to the target DB
 	// cluster snapshot, and otherwise false. The default is false.
@@ -82,39 +110,11 @@ type CopyDBClusterSnapshotInput struct {
 	// parameter, an error is returned.</p>
 	KmsKeyId *string
 
-	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case-sensitive. You can't copy from one AWS Region to another. Constraints:
-	//
-	//
-	// * Must specify a valid system snapshot in the "available" state.
-	//
-	//     * Specify
-	// a valid DB snapshot identifier.
-	//
-	// Example: my-cluster-snapshot1
-	//
-	// This member is required.
-	SourceDBClusterSnapshotIdentifier *string
-
 	// Not currently supported.
 	PreSignedUrl *string
 
-	// The identifier of the new DB cluster snapshot to create from the source DB
-	// cluster snapshot. This parameter is not case-sensitive. Constraints:
-	//
-	//     * Must
-	// contain from 1 to 63 letters, numbers, or hyphens.
-	//
-	//     * First character must
-	// be a letter.
-	//
-	//     * Cannot end with a hyphen or contain two consecutive
-	// hyphens.
-	//
-	// Example: my-cluster-snapshot2
-	//
-	// This member is required.
-	TargetDBClusterSnapshotIdentifier *string
+	// The tags to assign to the new DB cluster snapshot copy.
+	Tags []*types.Tag
 }
 
 type CopyDBClusterSnapshotOutput struct {

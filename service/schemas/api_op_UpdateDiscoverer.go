@@ -57,19 +57,16 @@ func (c *Client) UpdateDiscoverer(ctx context.Context, params *UpdateDiscovererI
 
 type UpdateDiscovererInput struct {
 
-	// The description of the discoverer to update.
-	Description *string
-
 	// The ID of the discoverer.
 	//
 	// This member is required.
 	DiscovererId *string
+
+	// The description of the discoverer to update.
+	Description *string
 }
 
 type UpdateDiscovererOutput struct {
-
-	// Tags associated with the resource.
-	Tags map[string]*string
 
 	// The description of the discoverer.
 	Description *string
@@ -77,14 +74,17 @@ type UpdateDiscovererOutput struct {
 	// The ARN of the discoverer.
 	DiscovererArn *string
 
-	// The state of the discoverer.
-	State types.DiscovererState
+	// The ID of the discoverer.
+	DiscovererId *string
 
 	// The ARN of the event bus.
 	SourceArn *string
 
-	// The ID of the discoverer.
-	DiscovererId *string
+	// The state of the discoverer.
+	State types.DiscovererState
+
+	// Tags associated with the resource.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -77,6 +77,11 @@ func (c *Client) UpdateTrafficPolicyInstance(ctx context.Context, params *Update
 // want to update based on a specified traffic policy instance.
 type UpdateTrafficPolicyInstanceInput struct {
 
+	// The ID of the traffic policy instance that you want to update.
+	//
+	// This member is required.
+	Id *string
+
 	// The TTL that you want Amazon Route 53 to assign to all of the updated resource
 	// record sets.
 	//
@@ -94,11 +99,6 @@ type UpdateTrafficPolicyInstanceInput struct {
 	//
 	// This member is required.
 	TrafficPolicyVersion *int32
-
-	// The ID of the traffic policy instance that you want to update.
-	//
-	// This member is required.
-	Id *string
 }
 
 // A complex type that contains information about the resource record sets that

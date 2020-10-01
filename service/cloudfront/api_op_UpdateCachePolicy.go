@@ -70,9 +70,10 @@ func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolic
 
 type UpdateCachePolicyInput struct {
 
-	// The version of the cache policy that you are updating. The version is returned
-	// in the cache policy’s ETag field in the response to GetCachePolicyConfig.
-	IfMatch *string
+	// A cache policy configuration.
+	//
+	// This member is required.
+	CachePolicyConfig *types.CachePolicyConfig
 
 	// The unique identifier for the cache policy that you are updating. The identifier
 	// is returned in a cache behavior’s CachePolicyId field in the response to
@@ -81,19 +82,18 @@ type UpdateCachePolicyInput struct {
 	// This member is required.
 	Id *string
 
-	// A cache policy configuration.
-	//
-	// This member is required.
-	CachePolicyConfig *types.CachePolicyConfig
+	// The version of the cache policy that you are updating. The version is returned
+	// in the cache policy’s ETag field in the response to GetCachePolicyConfig.
+	IfMatch *string
 }
 
 type UpdateCachePolicyOutput struct {
 
-	// The current version of the cache policy.
-	ETag *string
-
 	// A cache policy.
 	CachePolicy *types.CachePolicy
+
+	// The current version of the cache policy.
+	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

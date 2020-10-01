@@ -83,15 +83,44 @@ type DescribeDatasetImportJobInput struct {
 
 type DescribeDatasetImportJobOutput struct {
 
+	// When the dataset import job was created.
+	CreationTime *time.Time
+
 	// The size of the dataset in gigabytes (GB) after the import job has finished.
 	DataSize *float64
 
-	// Statistical information about each field in the input data.
-	FieldStatistics map[string]*types.Statistics
+	// The location of the training data to import and an AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the data. If
+	// encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
+	DataSource *types.DataSource
 
 	// The Amazon Resource Name (ARN) of the dataset that the training data was
 	// imported to.
 	DatasetArn *string
+
+	// The ARN of the dataset import job.
+	DatasetImportJobArn *string
+
+	// The name of the dataset import job.
+	DatasetImportJobName *string
+
+	// Statistical information about each field in the input data.
+	FieldStatistics map[string]*types.Statistics
+
+	// The last time that the dataset was modified. The time depends on the status of
+	// the job, as follows:
+	//
+	//     * CREATE_PENDING - The same time as CreationTime.
+	//
+	//
+	// * CREATE_IN_PROGRESS - The current timestamp.
+	//
+	//     * ACTIVE or CREATE_FAILED -
+	// When the job finished or failed.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
 
 	// The status of the dataset import job. The status is reflected in the status of
 	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
@@ -116,35 +145,6 @@ type DescribeDatasetImportJobOutput struct {
 	//     * "yyyy-MM-dd HH:mm:ss" For the following data frequencies: H, 30min,
 	// 15min, and 1min; and optionally, for: Y, M, W, and D
 	TimestampFormat *string
-
-	// The ARN of the dataset import job.
-	DatasetImportJobArn *string
-
-	// If an error occurred, an informational message about the error.
-	Message *string
-
-	// The location of the training data to import and an AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the data. If
-	// encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
-	DataSource *types.DataSource
-
-	// When the dataset import job was created.
-	CreationTime *time.Time
-
-	// The name of the dataset import job.
-	DatasetImportJobName *string
-
-	// The last time that the dataset was modified. The time depends on the status of
-	// the job, as follows:
-	//
-	//     * CREATE_PENDING - The same time as CreationTime.
-	//
-	//
-	// * CREATE_IN_PROGRESS - The current timestamp.
-	//
-	//     * ACTIVE or CREATE_FAILED -
-	// When the job finished or failed.
-	LastModificationTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

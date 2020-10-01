@@ -69,11 +69,11 @@ type DeleteClusterInput struct {
 
 type DeleteClusterOutput struct {
 
-	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
-	State types.ClusterState
-
 	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
+
+	// The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+	State types.ClusterState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

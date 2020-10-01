@@ -58,26 +58,26 @@ func (c *Client) ListDatasetContents(ctx context.Context, params *ListDatasetCon
 
 type ListDatasetContentsInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The name of the data set whose contents information you want to list.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// A filter to limit results to those data set contents whose creation is scheduled
-	// on or after the given time. See the field triggers.schedule in the CreateDataset
-	// request. (timestamp)
-	ScheduledOnOrAfter *time.Time
-
 	// The maximum number of results to return in this request.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
 
 	// A filter to limit results to those data set contents whose creation is scheduled
 	// before the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
 	ScheduledBefore *time.Time
+
+	// A filter to limit results to those data set contents whose creation is scheduled
+	// on or after the given time. See the field triggers.schedule in the CreateDataset
+	// request. (timestamp)
+	ScheduledOnOrAfter *time.Time
 }
 
 type ListDatasetContentsOutput struct {

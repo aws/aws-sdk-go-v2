@@ -57,16 +57,16 @@ func (c *Client) DeleteAccessLogSettings(ctx context.Context, params *DeleteAcce
 
 type DeleteAccessLogSettingsInput struct {
 
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
+
 	// The stage name. Stage names can only contain alphanumeric characters, hyphens,
 	// and underscores. Maximum length is 128 characters.
 	//
 	// This member is required.
 	StageName *string
-
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
 }
 
 type DeleteAccessLogSettingsOutput struct {

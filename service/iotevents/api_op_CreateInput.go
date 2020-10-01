@@ -57,21 +57,21 @@ func (c *Client) CreateInput(ctx context.Context, params *CreateInputInput, optF
 
 type CreateInputInput struct {
 
-	// A brief description of the input.
-	InputDescription *string
+	// The definition of the input.
+	//
+	// This member is required.
+	InputDefinition *types.InputDefinition
 
 	// The name you want to give to the input.
 	//
 	// This member is required.
 	InputName *string
 
+	// A brief description of the input.
+	InputDescription *string
+
 	// Metadata that can be used to manage the input.
 	Tags []*types.Tag
-
-	// The definition of the input.
-	//
-	// This member is required.
-	InputDefinition *types.InputDefinition
 }
 
 type CreateInputOutput struct {

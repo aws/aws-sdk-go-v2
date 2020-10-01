@@ -85,16 +85,16 @@ type DescribeDomainInput struct {
 // Contains details of a domain.
 type DescribeDomainOutput struct {
 
-	// The basic information about a domain, such as its name, status, and description.
-	//
-	// This member is required.
-	DomainInfo *types.DomainInfo
-
 	// The domain configuration. Currently, this includes only the domain's retention
 	// period.
 	//
 	// This member is required.
 	Configuration *types.DomainConfiguration
+
+	// The basic information about a domain, such as its name, status, and description.
+	//
+	// This member is required.
+	DomainInfo *types.DomainInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

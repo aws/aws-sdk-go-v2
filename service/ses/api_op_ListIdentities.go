@@ -61,12 +61,12 @@ func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput
 // verification status.
 type ListIdentitiesInput struct {
 
-	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
-	MaxItems *int32
-
 	// The type of the identities to list. Possible values are "EmailAddress" and
 	// "Domain". If this parameter is omitted, then all identities will be listed.
 	IdentityType types.IdentityType
+
+	// The maximum number of identities per page. Possible values are 1-1000 inclusive.
+	MaxItems *int32
 
 	// The token to use for pagination.
 	NextToken *string
@@ -76,13 +76,13 @@ type ListIdentitiesInput struct {
 // account, regardless of verification status.
 type ListIdentitiesOutput struct {
 
-	// The token used for pagination.
-	NextToken *string
-
 	// A list of identities.
 	//
 	// This member is required.
 	Identities []*string
+
+	// The token used for pagination.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

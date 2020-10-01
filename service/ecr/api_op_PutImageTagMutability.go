@@ -83,11 +83,11 @@ type PutImageTagMutabilityOutput struct {
 	// The image tag mutability setting for the repository.
 	ImageTagMutability types.ImageTagMutability
 
-	// The repository name associated with the request.
-	RepositoryName *string
-
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

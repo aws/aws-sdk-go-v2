@@ -70,11 +70,17 @@ func (c *Client) CreateCachediSCSIVolume(ctx context.Context, params *CreateCach
 
 type CreateCachediSCSIVolumeInput struct {
 
-	// The ARN for an existing volume. Specifying this ARN makes the new volume into an
-	// exact copy of the specified existing volume's latest recovery point. The
-	// VolumeSizeInBytes value for this new volume must be equal to or larger than the
-	// size of the existing volume, in bytes.
-	SourceVolumeARN *string
+	// A unique identifier that you use to retry a request. If you retry a request, use
+	// the same ClientToken you specified in the initial request.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
+	// to return a list of gateways for your account and AWS Region.
+	//
+	// This member is required.
+	GatewayARN *string
 
 	// The network interface of the gateway on which to expose the iSCSI target. Only
 	// IPv4 addresses are accepted. Use DescribeGatewayInformation () to get a list of
@@ -83,27 +89,6 @@ type CreateCachediSCSIVolumeInput struct {
 	//
 	// This member is required.
 	NetworkInterfaceId *string
-
-	// A unique identifier that you use to retry a request. If you retry a request, use
-	// the same ClientToken you specified in the initial request.
-	//
-	// This member is required.
-	ClientToken *string
-
-	// The size of the volume in bytes.
-	//
-	// This member is required.
-	VolumeSizeInBytes *int64
-
-	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
-	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
-	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
-	KMSKey *string
-
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
-	KMSEncrypted *bool
 
 	// The name of the iSCSI target used by an initiator to connect to a volume and
 	// used as a suffix for the target ARN. For example, specifying TargetName as
@@ -116,13 +101,20 @@ type CreateCachediSCSIVolumeInput struct {
 	// This member is required.
 	TargetName *string
 
-	// A list of up to 50 tags that you can assign to a cached volume. Each tag is a
-	// key-value pair.  <note> <p>Valid characters for key and value are letters,
-	// spaces, and numbers that you can represent in UTF-8 format, and the following
-	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256 characters.</p>
-	// </note>
-	Tags []*types.Tag
+	// The size of the volume in bytes.
+	//
+	// This member is required.
+	VolumeSizeInBytes *int64
+
+	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
+	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
+	// <code>true</code> | <code>false</code> </p>
+	KMSEncrypted *bool
+
+	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
+	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
+	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
+	KMSKey *string
 
 	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new
 	// cached volume. Specify this field if you want to create the iSCSI storage volume
@@ -132,21 +124,29 @@ type CreateCachediSCSIVolumeInput struct {
 	// in the Amazon Elastic Compute Cloud API Reference.
 	SnapshotId *string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
-	// to return a list of gateways for your account and AWS Region.
-	//
-	// This member is required.
-	GatewayARN *string
+	// The ARN for an existing volume. Specifying this ARN makes the new volume into an
+	// exact copy of the specified existing volume's latest recovery point. The
+	// VolumeSizeInBytes value for this new volume must be equal to or larger than the
+	// size of the existing volume, in bytes.
+	SourceVolumeARN *string
+
+	// A list of up to 50 tags that you can assign to a cached volume. Each tag is a
+	// key-value pair.  <note> <p>Valid characters for key and value are letters,
+	// spaces, and numbers that you can represent in UTF-8 format, and the following
+	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
+	// characters, and the maximum length for a tag's value is 256 characters.</p>
+	// </note>
+	Tags []*types.Tag
 }
 
 type CreateCachediSCSIVolumeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the configured volume.
-	VolumeARN *string
-
 	// The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI
 	// name that initiators can use to connect to the target.
 	TargetARN *string
+
+	// The Amazon Resource Name (ARN) of the configured volume.
+	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

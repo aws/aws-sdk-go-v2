@@ -57,6 +57,12 @@ func (c *Client) CreateEmailTemplate(ctx context.Context, params *CreateEmailTem
 
 type CreateEmailTemplateInput struct {
 
+	// Specifies the content and settings for a message template that can be used in
+	// messages that are sent through the email channel.
+	//
+	// This member is required.
+	EmailTemplateRequest *types.EmailTemplateRequest
+
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
 	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
@@ -64,12 +70,6 @@ type CreateEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
-
-	// Specifies the content and settings for a message template that can be used in
-	// messages that are sent through the email channel.
-	//
-	// This member is required.
-	EmailTemplateRequest *types.EmailTemplateRequest
 }
 
 type CreateEmailTemplateOutput struct {

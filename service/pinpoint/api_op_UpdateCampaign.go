@@ -57,16 +57,16 @@ func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput
 
 type UpdateCampaignInput struct {
 
-	// The unique identifier for the campaign.
-	//
-	// This member is required.
-	CampaignId *string
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The unique identifier for the campaign.
+	//
+	// This member is required.
+	CampaignId *string
 
 	// Specifies the configuration and other settings for a campaign.
 	//

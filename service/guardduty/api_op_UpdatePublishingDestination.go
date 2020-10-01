@@ -58,10 +58,6 @@ func (c *Client) UpdatePublishingDestination(ctx context.Context, params *Update
 
 type UpdatePublishingDestinationInput struct {
 
-	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
-	// the publishing destination.
-	DestinationProperties *types.DestinationProperties
-
 	// The ID of the publishing destination to update.
 	//
 	// This member is required.
@@ -71,6 +67,10 @@ type UpdatePublishingDestinationInput struct {
 	//
 	// This member is required.
 	DetectorId *string
+
+	// A DestinationProperties object that includes the DestinationArn and KmsKeyArn of
+	// the publishing destination.
+	DestinationProperties *types.DestinationProperties
 }
 
 type UpdatePublishingDestinationOutput struct {

@@ -67,11 +67,11 @@ type SetUserMFAPreferenceInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// The time-based one-time password software token MFA settings.
-	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
-
 	// The SMS text message multi-factor authentication (MFA) settings.
 	SMSMfaSettings *types.SMSMfaSettingsType
+
+	// The time-based one-time password software token MFA settings.
+	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 }
 
 type SetUserMFAPreferenceOutput struct {

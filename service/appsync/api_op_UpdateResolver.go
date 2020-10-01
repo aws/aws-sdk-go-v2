@@ -57,10 +57,31 @@ func (c *Client) UpdateResolver(ctx context.Context, params *UpdateResolverInput
 
 type UpdateResolverInput struct {
 
+	// The API ID.
+	//
+	// This member is required.
+	ApiId *string
+
+	// The new field name.
+	//
+	// This member is required.
+	FieldName *string
+
 	// The new request mapping template.
 	//
 	// This member is required.
 	RequestMappingTemplate *string
+
+	// The new type name.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The caching configuration for the resolver.
+	CachingConfig *types.CachingConfig
+
+	// The new data source name.
+	DataSourceName *string
 
 	// The resolver type.
 	//
@@ -74,35 +95,14 @@ type UpdateResolverInput struct {
 	// multiple data sources.
 	Kind types.ResolverKind
 
-	// The new data source name.
-	DataSourceName *string
-
 	// The PipelineConfig.
 	PipelineConfig *types.PipelineConfig
-
-	// The SyncConfig for a resolver attached to a versioned datasource.
-	SyncConfig *types.SyncConfig
-
-	// The new type name.
-	//
-	// This member is required.
-	TypeName *string
-
-	// The API ID.
-	//
-	// This member is required.
-	ApiId *string
 
 	// The new response mapping template.
 	ResponseMappingTemplate *string
 
-	// The caching configuration for the resolver.
-	CachingConfig *types.CachingConfig
-
-	// The new field name.
-	//
-	// This member is required.
-	FieldName *string
+	// The SyncConfig for a resolver attached to a versioned datasource.
+	SyncConfig *types.SyncConfig
 }
 
 type UpdateResolverOutput struct {

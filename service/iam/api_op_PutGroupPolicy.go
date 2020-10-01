@@ -69,14 +69,6 @@ func (c *Client) PutGroupPolicy(ctx context.Context, params *PutGroupPolicyInput
 
 type PutGroupPolicyInput struct {
 
-	// The name of the policy document. This parameter allows (through its regex
-	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
-	// upper and lowercase alphanumeric characters with no spaces. You can also include
-	// any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	PolicyName *string
-
 	// The name of the group to associate the policy with. This parameter allows
 	// (through its regex pattern (http://wikipedia.org/wiki/regex)) a string of
 	// characters consisting of upper and lowercase alphanumeric characters with no
@@ -104,6 +96,14 @@ type PutGroupPolicyInput struct {
 	//
 	// This member is required.
 	PolicyDocument *string
+
+	// The name of the policy document. This parameter allows (through its regex
+	// pattern (http://wikipedia.org/wiki/regex)) a string of characters consisting of
+	// upper and lowercase alphanumeric characters with no spaces. You can also include
+	// any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	PolicyName *string
 }
 
 type PutGroupPolicyOutput struct {

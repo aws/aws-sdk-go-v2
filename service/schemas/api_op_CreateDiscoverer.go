@@ -57,13 +57,13 @@ func (c *Client) CreateDiscoverer(ctx context.Context, params *CreateDiscovererI
 
 type CreateDiscovererInput struct {
 
-	// A description for the discoverer.
-	Description *string
-
 	// The ARN of the event bus.
 	//
 	// This member is required.
 	SourceArn *string
+
+	// A description for the discoverer.
+	Description *string
 
 	// Tags associated with the resource.
 	Tags map[string]*string
@@ -71,8 +71,8 @@ type CreateDiscovererInput struct {
 
 type CreateDiscovererOutput struct {
 
-	// Tags associated with the resource.
-	Tags map[string]*string
+	// The description of the discoverer.
+	Description *string
 
 	// The ARN of the discoverer.
 	DiscovererArn *string
@@ -80,14 +80,14 @@ type CreateDiscovererOutput struct {
 	// The ID of the discoverer.
 	DiscovererId *string
 
-	// The description of the discoverer.
-	Description *string
-
 	// The ARN of the event bus.
 	SourceArn *string
 
 	// The state of the discoverer.
 	State types.DiscovererState
+
+	// Tags associated with the resource.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -133,14 +133,16 @@ func (c *Client) PutBucketAcl(ctx context.Context, params *PutBucketAclInput, op
 
 type PutBucketAclInput struct {
 
+	// The bucket to which to apply the ACL.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The canned ACL to apply to the bucket.
+	ACL types.BucketCannedACL
+
 	// Contains the elements that set the ACL permissions for an object per grantee.
 	AccessControlPolicy *types.AccessControlPolicy
-
-	// Allows grantee to list the objects in the bucket.
-	GrantRead *string
-
-	// Allows grantee to read the bucket ACL.
-	GrantReadACP *string
 
 	// The base64-encoded 128-bit MD5 digest of the data. This header must be used as a
 	// message integrity check to verify that the request body was not corrupted in
@@ -148,20 +150,18 @@ type PutBucketAclInput struct {
 	// (http://www.ietf.org/rfc/rfc1864.txt)
 	ContentMD5 *string
 
-	// The canned ACL to apply to the bucket.
-	ACL types.BucketCannedACL
-
-	// Allows grantee to create, overwrite, and delete any object in the bucket.
-	GrantWrite *string
-
-	// The bucket to which to apply the ACL.
-	//
-	// This member is required.
-	Bucket *string
-
 	// Allows grantee the read, write, read ACP, and write ACP permissions on the
 	// bucket.
 	GrantFullControl *string
+
+	// Allows grantee to list the objects in the bucket.
+	GrantRead *string
+
+	// Allows grantee to read the bucket ACL.
+	GrantReadACP *string
+
+	// Allows grantee to create, overwrite, and delete any object in the bucket.
+	GrantWrite *string
 
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string

@@ -68,10 +68,6 @@ func (c *Client) DescribeIndexFields(ctx context.Context, params *DescribeIndexF
 // the Deployed option to true.
 type DescribeIndexFieldsInput struct {
 
-	// A list of the index fields you want to describe. If not specified, information
-	// is returned for all configured index fields.
-	FieldNames []*string
-
 	// The name of the domain you want to describe.
 	//
 	// This member is required.
@@ -80,6 +76,10 @@ type DescribeIndexFieldsInput struct {
 	// Whether to display the deployed configuration (true) or include any pending
 	// changes (false). Defaults to false.
 	Deployed *bool
+
+	// A list of the index fields you want to describe. If not specified, information
+	// is returned for all configured index fields.
+	FieldNames []*string
 }
 
 // The result of a DescribeIndexFields request. Contains the index fields

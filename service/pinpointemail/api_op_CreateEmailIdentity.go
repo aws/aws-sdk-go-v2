@@ -87,12 +87,6 @@ type CreateEmailIdentityInput struct {
 // identity is an email address, this object is empty.
 type CreateEmailIdentityOutput struct {
 
-	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
-	// only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide
-	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
-	VerifiedForSendingStatus *bool
-
 	// An object that contains information about the DKIM attributes for the identity.
 	// This object includes the tokens that you use to create the CNAME records that
 	// are required to complete the DKIM verification process.
@@ -100,6 +94,12 @@ type CreateEmailIdentityOutput struct {
 
 	// The email identity type.
 	IdentityType types.IdentityType
+
+	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
+	// only send email from verified email addresses or domains. For more information
+	// about verifying identities, see the Amazon Pinpoint User Guide
+	// (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html).
+	VerifiedForSendingStatus *bool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

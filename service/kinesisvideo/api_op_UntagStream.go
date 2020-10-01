@@ -58,13 +58,13 @@ func (c *Client) UntagStream(ctx context.Context, params *UntagStreamInput, optF
 
 type UntagStreamInput struct {
 
-	// The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
-	StreamARN *string
-
 	// A list of the keys of the tags that you want to remove.
 	//
 	// This member is required.
 	TagKeyList []*string
+
+	// The Amazon Resource Name (ARN) of the stream that you want to remove tags from.
+	StreamARN *string
 
 	// The name of the stream that you want to remove tags from.
 	StreamName *string

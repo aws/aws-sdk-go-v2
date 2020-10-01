@@ -72,18 +72,18 @@ type DescribeDataSetPermissionsInput struct {
 
 type DescribeDataSetPermissionsOutput struct {
 
-	// A list of resource permissions on the dataset.
-	Permissions []*types.ResourcePermission
-
 	// The Amazon Resource Name (ARN) of the dataset.
 	DataSetArn *string
-
-	// The AWS request ID for this operation.
-	RequestId *string
 
 	// The ID for the dataset that you want to create. This ID is unique per AWS Region
 	// for each AWS account.
 	DataSetId *string
+
+	// A list of resource permissions on the dataset.
+	Permissions []*types.ResourcePermission
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

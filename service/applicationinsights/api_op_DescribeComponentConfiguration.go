@@ -70,16 +70,16 @@ type DescribeComponentConfigurationInput struct {
 
 type DescribeComponentConfigurationOutput struct {
 
-	// The tier of the application component. Supported tiers include DOT_NET_CORE,
-	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT
-	Tier types.Tier
+	// The configuration settings of the component. The value is the escaped JSON of
+	// the configuration.
+	ComponentConfiguration *string
 
 	// Indicates whether the application component is monitored.
 	Monitor *bool
 
-	// The configuration settings of the component. The value is the escaped JSON of
-	// the configuration.
-	ComponentConfiguration *string
+	// The tier of the application component. Supported tiers include DOT_NET_CORE,
+	// DOT_NET_WORKER, DOT_NET_WEB, SQL_SERVER, and DEFAULT
+	Tier types.Tier
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,17 +59,21 @@ func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatc
 
 type CreateBatchInferenceJobInput struct {
 
+	// The Amazon S3 path that leads to the input file to base your recommendations on.
+	// The input material must be in JSON format.
+	//
+	// This member is required.
+	JobInput *types.BatchInferenceJobInput
+
+	// The name of the batch inference job to create.
+	//
+	// This member is required.
+	JobName *string
+
 	// The path to the Amazon S3 bucket where the job's output will be stored.
 	//
 	// This member is required.
 	JobOutput *types.BatchInferenceJobOutput
-
-	// The number of recommendations to retreive.
-	NumResults *int32
-
-	// The ARN of the filter to apply to the batch inference job. For more information
-	// on using filters, see Using Filters with Amazon Personalize.
-	FilterArn *string
 
 	// The ARN of the Amazon Identity and Access Management role that has permissions
 	// to read and write to your input and out Amazon S3 buckets respectively.
@@ -77,22 +81,18 @@ type CreateBatchInferenceJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The name of the batch inference job to create.
-	//
-	// This member is required.
-	JobName *string
-
-	// The Amazon S3 path that leads to the input file to base your recommendations on.
-	// The input material must be in JSON format.
-	//
-	// This member is required.
-	JobInput *types.BatchInferenceJobInput
-
 	// The Amazon Resource Name (ARN) of the solution version that will be used to
 	// generate the batch inference recommendations.
 	//
 	// This member is required.
 	SolutionVersionArn *string
+
+	// The ARN of the filter to apply to the batch inference job. For more information
+	// on using filters, see Using Filters with Amazon Personalize.
+	FilterArn *string
+
+	// The number of recommendations to retreive.
+	NumResults *int32
 }
 
 type CreateBatchInferenceJobOutput struct {

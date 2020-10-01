@@ -67,22 +67,10 @@ type CreateManagedPrefixListInput struct {
 	// This member is required.
 	AddressFamily *string
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
-	// request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	// Constraints: Up to 255 UTF-8 characters in length.
-	ClientToken *string
-
-	// One or more entries for the prefix list.
-	Entries []*types.AddPrefixListEntry
-
 	// The maximum number of entries for the prefix list.
 	//
 	// This member is required.
 	MaxEntries *int32
-
-	// The tags to apply to the prefix list during creation.
-	TagSpecifications []*types.TagSpecification
 
 	// A name for the prefix list. Constraints: Up to 255 characters in length. The
 	// name cannot start with com.amazonaws.
@@ -90,11 +78,23 @@ type CreateManagedPrefixListInput struct {
 	// This member is required.
 	PrefixListName *string
 
+	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	// request. For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	// Constraints: Up to 255 UTF-8 characters in length.
+	ClientToken *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// One or more entries for the prefix list.
+	Entries []*types.AddPrefixListEntry
+
+	// The tags to apply to the prefix list during creation.
+	TagSpecifications []*types.TagSpecification
 }
 
 type CreateManagedPrefixListOutput struct {

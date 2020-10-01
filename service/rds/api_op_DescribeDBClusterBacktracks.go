@@ -62,6 +62,34 @@ func (c *Client) DescribeDBClusterBacktracks(ctx context.Context, params *Descri
 //
 type DescribeDBClusterBacktracksInput struct {
 
+	// The DB cluster identifier of the DB cluster to be described. This parameter is
+	// stored as a lowercase string. Constraints:
+	//
+	//     * Must contain from 1 to 63
+	// alphanumeric characters or hyphens.
+	//
+	//     * First character must be a letter.
+	//
+	//
+	// * Can't end with a hyphen or contain two consecutive hyphens.
+	//
+	// Example:
+	// my-cluster1
+	//
+	// This member is required.
+	DBClusterIdentifier *string
+
+	// If specified, this value is the backtrack identifier of the backtrack to be
+	// described. Constraints:
+	//
+	//     * Must contain a valid universally unique
+	// identifier (UUID). For more information about UUIDs, see A Universally Unique
+	// Identifier (UUID) URN Namespace (http://www.ietf.org/rfc/rfc4122.txt).
+	//
+	// Example:
+	// 123e4567-e89b-12d3-a456-426655440000
+	BacktrackIdentifier *string
+
 	// A filter that specifies one or more DB clusters to describe. Supported filters
 	// include the following:
 	//
@@ -85,56 +113,28 @@ type DescribeDBClusterBacktracksInput struct {
 	// information about only the backtracks identified by these values.
 	Filters []*types.Filter
 
-	// If specified, this value is the backtrack identifier of the backtrack to be
-	// described. Constraints:
-	//
-	//     * Must contain a valid universally unique
-	// identifier (UUID). For more information about UUIDs, see A Universally Unique
-	// Identifier (UUID) URN Namespace (http://www.ietf.org/rfc/rfc4122.txt).
-	//
-	// Example:
-	// 123e4567-e89b-12d3-a456-426655440000
-	BacktrackIdentifier *string
-
-	// The DB cluster identifier of the DB cluster to be described. This parameter is
-	// stored as a lowercase string. Constraints:
-	//
-	//     * Must contain from 1 to 63
-	// alphanumeric characters or hyphens.
-	//
-	//     * First character must be a letter.
-	//
-	//
-	// * Can't end with a hyphen or contain two consecutive hyphens.
-	//
-	// Example:
-	// my-cluster1
-	//
-	// This member is required.
-	DBClusterIdentifier *string
+	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by MaxRecords.
+	Marker *string
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so you can retrieve the remaining results. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
-
-	// An optional pagination token provided by a previous DescribeDBClusterBacktracks
-	// request. If this parameter is specified, the response includes only records
-	// beyond the marker, up to the value specified by MaxRecords.
-	Marker *string
 }
 
 // Contains the result of a successful invocation of the
 // DescribeDBClusterBacktracks action.
 type DescribeDBClusterBacktracksOutput struct {
 
+	// Contains a list of backtracks for the user.
+	DBClusterBacktracks []*types.DBClusterBacktrack
+
 	// A pagination token that can be used in a later DescribeDBClusterBacktracks
 	// request.
 	Marker *string
-
-	// Contains a list of backtracks for the user.
-	DBClusterBacktracks []*types.DBClusterBacktrack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

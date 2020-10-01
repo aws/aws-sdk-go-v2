@@ -85,10 +85,11 @@ func (c *Client) CreateLabelingJob(ctx context.Context, params *CreateLabelingJo
 
 type CreateLabelingJobInput struct {
 
-	// A set of conditions for stopping the labeling job. If any of the conditions are
-	// met, the job is automatically stopped. You can use these conditions to control
-	// the cost of data labeling.
-	StoppingConditions *types.LabelingJobStoppingConditions
+	// Configures the labeling task and how it is presented to workers; including, but
+	// not limited to price, keywords, and batch size (task count).
+	//
+	// This member is required.
+	HumanTaskConfig *types.HumanTaskConfig
 
 	// Input data for the labeling job, such as the Amazon S3 location of the data
 	// objects and the location of the manifest file that describes the data objects.
@@ -96,11 +97,15 @@ type CreateLabelingJobInput struct {
 	// This member is required.
 	InputConfig *types.LabelingJobInputConfig
 
-	// Configures the labeling task and how it is presented to workers; including, but
-	// not limited to price, keywords, and batch size (task count).
+	// The attribute name to use for the label in the output manifest file. This is the
+	// key for the key/value pair formed with the label that a worker assigns to the
+	// object. The name can't end with "-metadata". If you are running a semantic
+	// segmentation labeling job, the attribute name must end with "-ref". If you are
+	// running any other kind of labeling job, the attribute name must not end with
+	// "-ref".
 	//
 	// This member is required.
-	HumanTaskConfig *types.HumanTaskConfig
+	LabelAttributeName *string
 
 	// The name of the labeling job. This name is used to identify the job in a list of
 	// labeling jobs.
@@ -108,11 +113,18 @@ type CreateLabelingJobInput struct {
 	// This member is required.
 	LabelingJobName *string
 
-	// An array of key/value pairs. For more information, see Using Cost Allocation
-	// Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
-	// in the AWS Billing and Cost Management User Guide.
-	Tags []*types.Tag
+	// The location of the output data and the AWS Key Management Service key ID for
+	// the key used to encrypt the output data, if any.
+	//
+	// This member is required.
+	OutputConfig *types.LabelingJobOutputConfig
+
+	// The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks
+	// on your behalf during data labeling. You must grant this role the necessary
+	// permissions so that Amazon SageMaker can successfully complete data labeling.
+	//
+	// This member is required.
+	RoleArn *string
 
 	// The S3 URL of the file that defines the categories used to label the data
 	// objects. For 3D point cloud task types, see Create a Labeling Category
@@ -157,31 +169,19 @@ type CreateLabelingJobInput struct {
 	//     }
 	LabelCategoryConfigS3Uri *string
 
-	// The Amazon Resource Number (ARN) that Amazon SageMaker assumes to perform tasks
-	// on your behalf during data labeling. You must grant this role the necessary
-	// permissions so that Amazon SageMaker can successfully complete data labeling.
-	//
-	// This member is required.
-	RoleArn *string
-
-	// The attribute name to use for the label in the output manifest file. This is the
-	// key for the key/value pair formed with the label that a worker assigns to the
-	// object. The name can't end with "-metadata". If you are running a semantic
-	// segmentation labeling job, the attribute name must end with "-ref". If you are
-	// running any other kind of labeling job, the attribute name must not end with
-	// "-ref".
-	//
-	// This member is required.
-	LabelAttributeName *string
-
 	// Configures the information required to perform automated data labeling.
 	LabelingJobAlgorithmsConfig *types.LabelingJobAlgorithmsConfig
 
-	// The location of the output data and the AWS Key Management Service key ID for
-	// the key used to encrypt the output data, if any.
-	//
-	// This member is required.
-	OutputConfig *types.LabelingJobOutputConfig
+	// A set of conditions for stopping the labeling job. If any of the conditions are
+	// met, the job is automatically stopped. You can use these conditions to control
+	// the cost of data labeling.
+	StoppingConditions *types.LabelingJobStoppingConditions
+
+	// An array of key/value pairs. For more information, see Using Cost Allocation
+	// Tags
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-what)
+	// in the AWS Billing and Cost Management User Guide.
+	Tags []*types.Tag
 }
 
 type CreateLabelingJobOutput struct {

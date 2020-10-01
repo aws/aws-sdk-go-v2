@@ -69,15 +69,16 @@ func (c *Client) ListAssignmentsForHIT(ctx context.Context, params *ListAssignme
 }
 
 type ListAssignmentsForHITInput struct {
-	MaxResults *int32
-
-	// The status of the assignments to return: Submitted | Approved | Rejected
-	AssignmentStatuses []types.AssignmentStatus
 
 	// The ID of the HIT.
 	//
 	// This member is required.
 	HITId *string
+
+	// The status of the assignments to return: Submitted | Approved | Rejected
+	AssignmentStatuses []types.AssignmentStatus
+
+	MaxResults *int32
 
 	// Pagination token
 	NextToken *string

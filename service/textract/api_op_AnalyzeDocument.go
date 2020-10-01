@@ -94,10 +94,6 @@ type AnalyzeDocumentInput struct {
 	// This member is required.
 	Document *types.Document
 
-	// Sets the configuration for the human in the loop workflow for analyzing
-	// documents.
-	HumanLoopConfig *types.HumanLoopConfig
-
 	// A list of the types of analysis to perform. Add TABLES to the list to return
 	// information about the tables that are detected in the input document. Add FORMS
 	// to return detected form data. To perform both types of analysis, add TABLES and
@@ -107,21 +103,25 @@ type AnalyzeDocumentInput struct {
 	//
 	// This member is required.
 	FeatureTypes []types.FeatureType
+
+	// Sets the configuration for the human in the loop workflow for analyzing
+	// documents.
+	HumanLoopConfig *types.HumanLoopConfig
 }
 
 type AnalyzeDocumentOutput struct {
 
-	// The items that are detected and analyzed by AnalyzeDocument.
-	Blocks []*types.Block
-
-	// Shows the results of the human in the loop evaluation.
-	HumanLoopActivationOutput *types.HumanLoopActivationOutput
-
 	// The version of the model used to analyze the document.
 	AnalyzeDocumentModelVersion *string
 
+	// The items that are detected and analyzed by AnalyzeDocument.
+	Blocks []*types.Block
+
 	// Metadata about the analyzed document. An example is the number of pages.
 	DocumentMetadata *types.DocumentMetadata
+
+	// Shows the results of the human in the loop evaluation.
+	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,12 +59,6 @@ func (c *Client) AttachInternetGateway(ctx context.Context, params *AttachIntern
 
 type AttachInternetGatewayInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The ID of the internet gateway.
 	//
 	// This member is required.
@@ -74,6 +68,12 @@ type AttachInternetGatewayInput struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type AttachInternetGatewayOutput struct {

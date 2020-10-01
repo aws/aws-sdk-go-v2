@@ -78,17 +78,17 @@ type GetReusableDelegationSetLimitInput struct {
 // A complex type that contains the requested limit.
 type GetReusableDelegationSetLimitOutput struct {
 
-	// The current setting for the limit on hosted zones that you can associate with
-	// the specified reusable delegation set.
-	//
-	// This member is required.
-	Limit *types.ReusableDelegationSetLimit
-
 	// The current number of hosted zones that you can associate with the specified
 	// reusable delegation set.
 	//
 	// This member is required.
 	Count *int64
+
+	// The current setting for the limit on hosted zones that you can associate with
+	// the specified reusable delegation set.
+	//
+	// This member is required.
+	Limit *types.ReusableDelegationSetLimit
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,16 +59,16 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 
 type DeleteNamespaceInput struct {
 
-	// The namespace that you want to delete.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The ID for the AWS account that you want to delete the QuickSight namespace
 	// from.
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The namespace that you want to delete.
+	//
+	// This member is required.
+	Namespace *string
 }
 
 type DeleteNamespaceOutput struct {

@@ -69,27 +69,27 @@ type DescribeDomainConfigurationOutput struct {
 	// An object that specifies the authorization service for a domain.
 	AuthorizerConfig *types.AuthorizerConfig
 
-	// The name of the domain.
-	DomainName *string
+	// The ARN of the domain configuration.
+	DomainConfigurationArn *string
+
+	// The name of the domain configuration.
+	DomainConfigurationName *string
 
 	// A Boolean value that specifies the current state of the domain configuration.
 	DomainConfigurationStatus types.DomainConfigurationStatus
+
+	// The name of the domain.
+	DomainName *string
+
+	// The type of the domain.
+	DomainType types.DomainType
 
 	// A list containing summary information about the server certificate included in
 	// the domain configuration.
 	ServerCertificates []*types.ServerCertificateSummary
 
-	// The ARN of the domain configuration.
-	DomainConfigurationArn *string
-
-	// The type of the domain.
-	DomainType types.DomainType
-
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType
-
-	// The name of the domain configuration.
-	DomainConfigurationName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

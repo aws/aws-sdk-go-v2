@@ -58,11 +58,6 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 
 // Request to change information about a Resource () resource.
 type UpdateResourceInput struct {
-	TemplateSkipList []*string
-
-	Template *bool
-
-	Title *string
 
 	// [Required] The identifier of the Resource () resource.
 	//
@@ -79,6 +74,12 @@ type UpdateResourceInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents an API resource. Create an API
@@ -87,6 +88,15 @@ type UpdateResourceOutput struct {
 
 	// The resource's identifier.
 	Id *string
+
+	// The parent resource's identifier.
+	ParentId *string
+
+	// The full path for this resource.
+	Path *string
+
+	// The last path segment for this resource.
+	PathPart *string
 
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
@@ -168,15 +178,6 @@ type UpdateResourceOutput struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*types.Method
-
-	// The parent resource's identifier.
-	ParentId *string
-
-	// The full path for this resource.
-	Path *string
-
-	// The last path segment for this resource.
-	PathPart *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

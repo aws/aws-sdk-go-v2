@@ -67,10 +67,11 @@ type CreateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyIdentity *types.Identity
 
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
+	// The permission level for this access policy. Note that a project ADMINISTRATOR
+	// is also known as a project owner.
+	//
+	// This member is required.
+	AccessPolicyPermission types.Permission
 
 	// The AWS IoT SiteWise Monitor resource for this access policy. Choose either
 	// portal or project but not both.
@@ -78,11 +79,10 @@ type CreateAccessPolicyInput struct {
 	// This member is required.
 	AccessPolicyResource *types.Resource
 
-	// The permission level for this access policy. Note that a project ADMINISTRATOR
-	// is also known as a project owner.
-	//
-	// This member is required.
-	AccessPolicyPermission types.Permission
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the access policy. For more
 	// information, see Tagging your AWS IoT SiteWise resources
@@ -93,11 +93,6 @@ type CreateAccessPolicyInput struct {
 
 type CreateAccessPolicyOutput struct {
 
-	// The ID of the access policy.
-	//
-	// This member is required.
-	AccessPolicyId *string
-
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the access policy, which has the following format.
@@ -105,6 +100,11 @@ type CreateAccessPolicyOutput struct {
 	//
 	// This member is required.
 	AccessPolicyArn *string
+
+	// The ID of the access policy.
+	//
+	// This member is required.
+	AccessPolicyId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

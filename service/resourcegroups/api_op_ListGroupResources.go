@@ -58,12 +58,6 @@ func (c *Client) ListGroupResources(ctx context.Context, params *ListGroupResour
 
 type ListGroupResourcesInput struct {
 
-	// The name or the ARN of the resource group
-	Group *string
-
-	// Don't use this parameter. Use Group instead.
-	GroupName *string
-
 	// Filters, formatted as ResourceFilter () objects, that you want to apply to a
 	// ListGroupResources operation. Filters the results to include only those of the
 	// specified resource types.
@@ -87,11 +81,11 @@ type ListGroupResourcesInput struct {
 	// types for the query type (tag-based or AWS CloudFormation stack-based queries).
 	Filters []*types.ResourceFilter
 
-	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value provided by a previous call's
-	// NextToken response to indicate where the output should continue from.
-	NextToken *string
+	// The name or the ARN of the resource group
+	Group *string
+
+	// Don't use this parameter. Use Group instead.
+	GroupName *string
 
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
@@ -103,6 +97,12 @@ type ListGroupResourcesInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
+	// The parameter for receiving additional results if you receive a NextToken
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value provided by a previous call's
+	// NextToken response to indicate where the output should continue from.
+	NextToken *string
 }
 
 type ListGroupResourcesOutput struct {

@@ -67,23 +67,11 @@ type DescribeInputDeviceInput struct {
 // Placeholder documentation for DescribeInputDeviceResponse
 type DescribeInputDeviceOutput struct {
 
-	// The network MAC address of the input device.
-	MacAddress *string
-
 	// The unique ARN of the input device.
 	Arn *string
 
 	// The state of the connection between the input device and AWS.
 	ConnectionState types.InputDeviceConnectionState
-
-	// The unique ID of the input device.
-	Id *string
-
-	// The network settings for the input device.
-	NetworkSettings *types.InputDeviceNetworkSettings
-
-	// The unique serial number of the input device.
-	SerialNumber *string
 
 	// The status of the action to synchronize the device configuration. If you change
 	// the configuration of the input device (for example, the maximum bitrate),
@@ -92,14 +80,26 @@ type DescribeInputDeviceOutput struct {
 	// means that it has not updated its configuration.
 	DeviceSettingsSyncState types.DeviceSettingsSyncState
 
-	// The type of the input device.
-	Type types.InputDeviceType
-
 	// Settings that describe an input device that is type HD.
 	HdDeviceSettings *types.InputDeviceHdSettings
 
+	// The unique ID of the input device.
+	Id *string
+
+	// The network MAC address of the input device.
+	MacAddress *string
+
 	// A name that you specify for the input device.
 	Name *string
+
+	// The network settings for the input device.
+	NetworkSettings *types.InputDeviceNetworkSettings
+
+	// The unique serial number of the input device.
+	SerialNumber *string
+
+	// The type of the input device.
+	Type types.InputDeviceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

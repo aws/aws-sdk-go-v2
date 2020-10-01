@@ -77,6 +77,12 @@ type CreateRobotApplicationVersionOutput struct {
 	// updated.
 	LastUpdatedAt *time.Time
 
+	// The name of the robot application.
+	Name *string
+
+	// The revision id of the robot application.
+	RevisionId *string
+
 	// The robot software suite (ROS distribution) used by the robot application.
 	RobotSoftwareSuite *types.RobotSoftwareSuite
 
@@ -85,12 +91,6 @@ type CreateRobotApplicationVersionOutput struct {
 
 	// The version of the robot application.
 	Version *string
-
-	// The name of the robot application.
-	Name *string
-
-	// The revision id of the robot application.
-	RevisionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

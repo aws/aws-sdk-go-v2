@@ -57,16 +57,6 @@ func (c *Client) DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations
 
 type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput struct {
 
-	// The IDs of the associations.
-	LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds []*string
-
-	// The token for the next page of results.
-	NextToken *string
-
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -89,6 +79,16 @@ type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsInput struct
 	//
 	//     * state - The state of the association.
 	Filters []*types.Filter
+
+	// The IDs of the associations.
+	LocalGatewayRouteTableVirtualInterfaceGroupAssociationIds []*string
+
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociationsOutput struct {

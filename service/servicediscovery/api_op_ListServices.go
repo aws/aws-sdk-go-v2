@@ -58,15 +58,15 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 
 type ListServicesInput struct {
 
-	// The maximum number of services that you want AWS Cloud Map to return in the
-	// response to a ListServices request. If you don't specify a value for MaxResults,
-	// AWS Cloud Map returns up to 100 services.
-	MaxResults *int32
-
 	// A complex type that contains specifications for the namespaces that you want to
 	// list services for. If you specify more than one filter, an operation must match
 	// all filters to be returned by ListServices.
 	Filters []*types.ServiceFilter
+
+	// The maximum number of services that you want AWS Cloud Map to return in the
+	// response to a ListServices request. If you don't specify a value for MaxResults,
+	// AWS Cloud Map returns up to 100 services.
+	MaxResults *int32
 
 	// For the first ListServices request, omit this value. If the response contains
 	// NextToken, submit another ListServices request to get the next group of results.

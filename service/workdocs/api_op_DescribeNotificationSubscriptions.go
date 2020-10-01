@@ -57,10 +57,6 @@ func (c *Client) DescribeNotificationSubscriptions(ctx context.Context, params *
 
 type DescribeNotificationSubscriptionsInput struct {
 
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string
-
 	// The ID of the organization.
 	//
 	// This member is required.
@@ -68,16 +64,20 @@ type DescribeNotificationSubscriptionsInput struct {
 
 	// The maximum number of items to return with this call.
 	Limit *int32
+
+	// The marker for the next set of results. (You received this marker from a
+	// previous call.)
+	Marker *string
 }
 
 type DescribeNotificationSubscriptionsOutput struct {
 
-	// The subscriptions.
-	Subscriptions []*types.Subscription
-
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
+
+	// The subscriptions.
+	Subscriptions []*types.Subscription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

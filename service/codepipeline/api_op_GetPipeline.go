@@ -60,15 +60,15 @@ func (c *Client) GetPipeline(ctx context.Context, params *GetPipelineInput, optF
 // Represents the input of a GetPipeline action.
 type GetPipelineInput struct {
 
-	// The version number of the pipeline. If you do not specify a version, defaults to
-	// the current version.
-	Version *int32
-
 	// The name of the pipeline for which you want to get information. Pipeline names
 	// must be unique under an AWS user account.
 	//
 	// This member is required.
 	Name *string
+
+	// The version number of the pipeline. If you do not specify a version, defaults to
+	// the current version.
+	Version *int32
 }
 
 // Represents the output of a GetPipeline action.

@@ -58,9 +58,6 @@ func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *De
 
 type DeleteFunctionEventInvokeConfigInput struct {
 
-	// A version number or alias name.
-	Qualifier *string
-
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	//     * Function
@@ -78,6 +75,9 @@ type DeleteFunctionEventInvokeConfigInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	// A version number or alias name.
+	Qualifier *string
 }
 
 type DeleteFunctionEventInvokeConfigOutput struct {

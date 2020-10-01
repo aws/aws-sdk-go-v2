@@ -62,24 +62,24 @@ type ListPlacementsInput struct {
 	// This member is required.
 	ProjectName *string
 
-	// The token to retrieve the next set of results.
-	NextToken *string
-
 	// The maximum number of results to return per request. If not set, a default value
 	// of 100 is used.
 	MaxResults *int32
+
+	// The token to retrieve the next set of results.
+	NextToken *string
 }
 
 type ListPlacementsOutput struct {
-
-	// The token used to retrieve the next set of results - will be effectively empty
-	// if there are no further results.
-	NextToken *string
 
 	// An object listing the requested placements.
 	//
 	// This member is required.
 	Placements []*types.PlacementSummary
+
+	// The token used to retrieve the next set of results - will be effectively empty
+	// if there are no further results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

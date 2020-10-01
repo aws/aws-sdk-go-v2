@@ -57,28 +57,6 @@ func (c *Client) CreateIdentityProvider(ctx context.Context, params *CreateIdent
 
 type CreateIdentityProviderInput struct {
 
-	// The user pool ID.
-	//
-	// This member is required.
-	UserPoolId *string
-
-	// The identity provider type.
-	//
-	// This member is required.
-	ProviderType types.IdentityProviderTypeType
-
-	// A mapping of identity provider attributes to standard and custom user pool
-	// attributes.
-	AttributeMapping map[string]*string
-
-	// A list of identity provider identifiers.
-	IdpIdentifiers []*string
-
-	// The identity provider name.
-	//
-	// This member is required.
-	ProviderName *string
-
 	// The identity provider details. The following list describes the provider detail
 	// keys for each identity provider type.
 	//
@@ -143,6 +121,28 @@ type CreateIdentityProviderInput struct {
 	//
 	// This member is required.
 	ProviderDetails map[string]*string
+
+	// The identity provider name.
+	//
+	// This member is required.
+	ProviderName *string
+
+	// The identity provider type.
+	//
+	// This member is required.
+	ProviderType types.IdentityProviderTypeType
+
+	// The user pool ID.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// A mapping of identity provider attributes to standard and custom user pool
+	// attributes.
+	AttributeMapping map[string]*string
+
+	// A list of identity provider identifiers.
+	IdpIdentifiers []*string
 }
 
 type CreateIdentityProviderOutput struct {

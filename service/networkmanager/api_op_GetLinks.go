@@ -59,6 +59,20 @@ func (c *Client) GetLinks(ctx context.Context, params *GetLinksInput, optFns ...
 
 type GetLinksInput struct {
 
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
+
+	// One or more link IDs. The maximum is 10.
+	LinkIds []*string
+
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
+
 	// The link provider.
 	Provider *string
 
@@ -67,29 +81,15 @@ type GetLinksInput struct {
 
 	// The link type.
 	Type *string
-
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
-
-	// The token for the next page of results.
-	NextToken *string
-
-	// The maximum number of results to return.
-	MaxResults *int32
-
-	// One or more link IDs. The maximum is 10.
-	LinkIds []*string
 }
 
 type GetLinksOutput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The links.
 	Links []*types.Link
+
+	// The token for the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

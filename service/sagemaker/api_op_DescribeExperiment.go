@@ -66,33 +66,33 @@ type DescribeExperimentInput struct {
 
 type DescribeExperimentOutput struct {
 
+	// Who created the experiment.
+	CreatedBy *types.UserContext
+
 	// When the experiment was created.
 	CreationTime *time.Time
 
-	// When the experiment was last modified.
-	LastModifiedTime *time.Time
+	// The description of the experiment.
+	Description *string
 
 	// The name of the experiment as displayed. If DisplayName isn't specified,
 	// ExperimentName is displayed.
 	DisplayName *string
 
-	// Who last modified the experiment.
-	LastModifiedBy *types.UserContext
-
-	// The ARN of the source and, optionally, the type.
-	Source *types.ExperimentSource
-
-	// Who created the experiment.
-	CreatedBy *types.UserContext
-
-	// The description of the experiment.
-	Description *string
+	// The Amazon Resource Name (ARN) of the experiment.
+	ExperimentArn *string
 
 	// The name of the experiment.
 	ExperimentName *string
 
-	// The Amazon Resource Name (ARN) of the experiment.
-	ExperimentArn *string
+	// Who last modified the experiment.
+	LastModifiedBy *types.UserContext
+
+	// When the experiment was last modified.
+	LastModifiedTime *time.Time
+
+	// The ARN of the source and, optionally, the type.
+	Source *types.ExperimentSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

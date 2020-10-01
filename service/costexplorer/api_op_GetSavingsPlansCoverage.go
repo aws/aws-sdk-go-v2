@@ -100,26 +100,26 @@ type GetSavingsPlansCoverageInput struct {
 	// category is also supported.
 	Filter *types.Expression
 
-	// The token to retrieve the next set of results. Amazon Web Services provides the
-	// token when the response from a previous call has more results than the maximum
-	// page size.
-	NextToken *string
+	// The granularity of the Amazon Web Services cost data for your Savings Plans.
+	// Granularity can't be set if GroupBy is set. The GetSavingsPlansCoverage
+	// operation supports only DAILY and MONTHLY granularities.
+	Granularity types.Granularity
+
+	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
+	GroupBy []*types.GroupDefinition
 
 	// The number of items to be returned in a response. The default is 20, with a
 	// minimum value of 1.
 	MaxResults *int32
 
-	// You can group the data using the attributes INSTANCE_FAMILY, REGION, or SERVICE.
-	GroupBy []*types.GroupDefinition
-
 	// The measurement that you want your Savings Plans coverage reported in. The only
 	// valid value is SpendCoveredBySavingsPlans.
 	Metrics []*string
 
-	// The granularity of the Amazon Web Services cost data for your Savings Plans.
-	// Granularity can't be set if GroupBy is set. The GetSavingsPlansCoverage
-	// operation supports only DAILY and MONTHLY granularities.
-	Granularity types.Granularity
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
+	NextToken *string
 }
 
 type GetSavingsPlansCoverageOutput struct {

@@ -79,13 +79,33 @@ type CreateVolumeInput struct {
 	// This member is required.
 	AvailabilityZone *string
 
-	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
-	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
-	// Magnetic volumes. Default: gp2
-	VolumeType types.VolumeType
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
-	// The tags to apply to the volume during creation.
-	TagSpecifications []*types.TagSpecification
+	// Specifies whether the volume should be encrypted. The effect of setting the
+	// encryption state to true depends on the volume origin (new or from a snapshot),
+	// starting encryption state, ownership, and whether encryption by default is
+	// enabled. For more information, see Encryption by Default
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
+	// in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes
+	// must be attached to instances that support Amazon EBS encryption. For more
+	// information, see Supported Instance Types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
+	Encrypted *bool
+
+	// The number of I/O operations per second (IOPS) to provision for the volume, with
+	// a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most
+	// Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+	// Other instance families guarantee performance up to 32,000 IOPS. For more
+	// information, see Amazon EBS Volume Types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
+	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
+	// Provisioned IOPS SSD (io1) volumes.
+	Iops *int32
 
 	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
 	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
@@ -110,37 +130,6 @@ type CreateVolumeInput struct {
 	// valid, the action can appear to complete, but eventually fails.
 	KmsKeyId *string
 
-	// The number of I/O operations per second (IOPS) to provision for the volume, with
-	// a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most
-	// Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-	// Other instance families guarantee performance up to 32,000 IOPS. For more
-	// information, see Amazon EBS Volume Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon Elastic Compute Cloud User Guide. This parameter is valid only for
-	// Provisioned IOPS SSD (io1) volumes.
-	Iops *int32
-
-	// The Amazon Resource Name (ARN) of the Outpost.
-	OutpostArn *string
-
-	// Specifies whether the volume should be encrypted. The effect of setting the
-	// encryption state to true depends on the volume origin (new or from a snapshot),
-	// starting encryption state, ownership, and whether encryption by default is
-	// enabled. For more information, see Encryption by Default
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-by-default)
-	// in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes
-	// must be attached to instances that support Amazon EBS encryption. For more
-	// information, see Supported Instance Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances).
-	Encrypted *bool
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// Specifies whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach,
 	// you can attach the volume to up to 16 Nitro-based instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances)
@@ -150,9 +139,8 @@ type CreateVolumeInput struct {
 	// the Amazon Elastic Compute Cloud User Guide.
 	MultiAttachEnabled *bool
 
-	// The snapshot from which to create the volume. You must specify either a snapshot
-	// ID or a volume size.
-	SnapshotId *string
+	// The Amazon Resource Name (ARN) of the Outpost.
+	OutpostArn *string
 
 	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
 	// volume size. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for
@@ -161,47 +149,25 @@ type CreateVolumeInput struct {
 	// you're creating the volume from a snapshot and don't specify a volume size, the
 	// default is the snapshot size.
 	Size *int32
+
+	// The snapshot from which to create the volume. You must specify either a snapshot
+	// ID or a volume size.
+	SnapshotId *string
+
+	// The tags to apply to the volume during creation.
+	TagSpecifications []*types.TagSpecification
+
+	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
+	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
+	// Magnetic volumes. Default: gp2
+	VolumeType types.VolumeType
 }
 
 // Describes a volume.
 type CreateVolumeOutput struct {
 
-	// Indicates whether the volume is encrypted.
-	Encrypted *bool
-
-	// Any tags assigned to the volume.
-	Tags []*types.Tag
-
-	// Indicates whether Amazon EBS Multi-Attach is enabled.
-	MultiAttachEnabled *bool
-
-	// The Amazon Resource Name (ARN) of the Outpost.
-	OutpostArn *string
-
-	// The size of the volume, in GiBs.
-	Size *int32
-
-	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
-	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
-	// Magnetic volumes.
-	VolumeType types.VolumeType
-
-	// Indicates whether the volume was created using fast snapshot restore.
-	FastRestored *bool
-
 	// Information about the volume attachments.
 	Attachments []*types.VolumeAttachment
-
-	// The snapshot from which the volume was created, if applicable.
-	SnapshotId *string
-
-	// The volume state.
-	State types.VolumeState
-
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
-	// customer master key (CMK) that was used to protect the volume encryption key for
-	// the volume.
-	KmsKeyId *string
 
 	// The Availability Zone for the volume.
 	AvailabilityZone *string
@@ -209,8 +175,11 @@ type CreateVolumeOutput struct {
 	// The time stamp when volume creation was initiated.
 	CreateTime *time.Time
 
-	// The ID of the volume.
-	VolumeId *string
+	// Indicates whether the volume is encrypted.
+	Encrypted *bool
+
+	// Indicates whether the volume was created using fast snapshot restore.
+	FastRestored *bool
 
 	// The number of I/O operations per second (IOPS) that the volume supports. For
 	// Provisioned IOPS SSD volumes, this represents the number of IOPS that are
@@ -226,6 +195,37 @@ type CreateVolumeOutput struct {
 	// parameter is required for requests to create io1 volumes; it is not used in
 	// requests to create gp2, st1, sc1, or standard volumes.
 	Iops *int32
+
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption key for
+	// the volume.
+	KmsKeyId *string
+
+	// Indicates whether Amazon EBS Multi-Attach is enabled.
+	MultiAttachEnabled *bool
+
+	// The Amazon Resource Name (ARN) of the Outpost.
+	OutpostArn *string
+
+	// The size of the volume, in GiBs.
+	Size *int32
+
+	// The snapshot from which the volume was created, if applicable.
+	SnapshotId *string
+
+	// The volume state.
+	State types.VolumeState
+
+	// Any tags assigned to the volume.
+	Tags []*types.Tag
+
+	// The ID of the volume.
+	VolumeId *string
+
+	// The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned
+	// IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for
+	// Magnetic volumes.
+	VolumeType types.VolumeType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

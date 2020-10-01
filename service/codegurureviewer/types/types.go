@@ -23,38 +23,41 @@ type CodeCommitRepository struct {
 // Information about a code review.
 type CodeReview struct {
 
-	// The reason for the state of the code review.
-	StateReason *string
+	// The Amazon Resource Name (ARN) of the CodeReview
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
+	CodeReviewArn *string
 
-	// The type of code review.
-	Type Type
+	// The time, in milliseconds since the epoch, when the code review was created.
+	CreatedTimeStamp *time.Time
+
+	// The time, in milliseconds since the epoch, when the code review was last
+	// updated.
+	LastUpdatedTimeStamp *time.Time
+
+	// The statistics from the code review.
+	Metrics *Metrics
+
+	// The name of the code review.
+	Name *string
 
 	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
 	// account ID of the account that owns the repository. For a GitHub or Bitbucket
 	// repository, this is the username for the account that owns the repository.
 	Owner *string
 
-	// The type of the source code for the code review.
-	SourceCodeType *SourceCodeType
-
-	// The time, in milliseconds since the epoch, when the code review was last
-	// updated.
-	LastUpdatedTimeStamp *time.Time
-
 	// The type of repository that contains the reviewed code (for example, GitHub or
 	// Bitbucket).
 	ProviderType ProviderType
 
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
-	CodeReviewArn *string
-
 	// The pull request ID for the code review.
 	PullRequestId *string
 
-	// The name of the code review.
-	Name *string
+	// The name of the repository.
+	RepositoryName *string
+
+	// The type of the source code for the code review.
+	SourceCodeType *SourceCodeType
 
 	// The valid code review states are:
 	//
@@ -70,21 +73,47 @@ type CodeReview struct {
 	// is being deleted.
 	State JobState
 
-	// The statistics from the code review.
-	Metrics *Metrics
+	// The reason for the state of the code review.
+	StateReason *string
 
-	// The time, in milliseconds since the epoch, when the code review was created.
-	CreatedTimeStamp *time.Time
-
-	// The name of the repository.
-	RepositoryName *string
+	// The type of code review.
+	Type Type
 }
 
 // Information about the summary of the code review.
 type CodeReviewSummary struct {
 
+	// The Amazon Resource Name (ARN) of the CodeReview
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
+	// object.
+	CodeReviewArn *string
+
+	// The time, in milliseconds since the epoch, when the code review was created.
+	CreatedTimeStamp *time.Time
+
+	// The time, in milliseconds since the epoch, when the code review was last
+	// updated.
+	LastUpdatedTimeStamp *time.Time
+
+	// The statistics from the code review.
+	MetricsSummary *MetricsSummary
+
+	// The name of the code review.
+	Name *string
+
+	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
+	// account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
+	Owner *string
+
 	// The provider type of the repository association.
 	ProviderType ProviderType
+
+	// The pull request ID for the code review.
+	PullRequestId *string
+
+	// The name of the repository.
+	RepositoryName *string
 
 	// The state of the code review. The valid code review states are:
 	//
@@ -100,52 +129,26 @@ type CodeReviewSummary struct {
 	// Deleting: The code review is being deleted.
 	State JobState
 
-	// The statistics from the code review.
-	MetricsSummary *MetricsSummary
-
-	// The pull request ID for the code review.
-	PullRequestId *string
-
-	// The Amazon Resource Name (ARN) of the CodeReview
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
-	CodeReviewArn *string
-
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
-	Owner *string
-
 	// The type of the code review.
 	Type Type
-
-	// The time, in milliseconds since the epoch, when the code review was created.
-	CreatedTimeStamp *time.Time
-
-	// The name of the code review.
-	Name *string
-
-	// The time, in milliseconds since the epoch, when the code review was last
-	// updated.
-	LastUpdatedTimeStamp *time.Time
-
-	// The name of the repository.
-	RepositoryName *string
 }
 
 // The commit diff for the pull request.
 type CommitDiffSourceCodeType struct {
 
-	// The SHA of the source commit.
-	SourceCommit *string
-
 	// The SHA of the destination commit.
 	DestinationCommit *string
+
+	// The SHA of the source commit.
+	SourceCommit *string
 }
 
 // Information about the statistics from the code review.
 type Metrics struct {
 
+	// Total number of recommendations found in the code review.
+	FindingsCount *int64
+
 	// Lines of code metered in the code review. For the initial code review pull
 	// request and all subsequent revisions, this includes all lines of code in the
 	// files added to the pull request. In subsequent revisions, for files that already
@@ -158,14 +161,14 @@ type Metrics struct {
 	// lines), the new file (200 lines) and the 25 changed lines of code for a total of
 	// 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64
-
-	// Total number of recommendations found in the code review.
-	FindingsCount *int64
 }
 
 // Information about metrics summaries.
 type MetricsSummary struct {
 
+	// Total number of recommendations found in the code review.
+	FindingsCount *int64
+
 	// Lines of code metered in the code review. For the initial code review pull
 	// request and all subsequent revisions, this includes all lines of code in the
 	// files added to the pull request. In subsequent revisions, for files that already
@@ -178,29 +181,29 @@ type MetricsSummary struct {
 	// lines), the new file (200 lines) and the 25 changed lines of code for a total of
 	// 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64
-
-	// Total number of recommendations found in the code review.
-	FindingsCount *int64
 }
 
 // Information about the recommendation feedback.
 type RecommendationFeedback struct {
-
-	// The recommendation ID that can be used to track the provided recommendations.
-	// Later on it can be used to collect the feedback.
-	RecommendationId *string
-
-	// The time at which the feedback was created.
-	CreatedTimeStamp *time.Time
 
 	// The Amazon Resource Name (ARN) of the CodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
 	// object.
 	CodeReviewArn *string
 
+	// The time at which the feedback was created.
+	CreatedTimeStamp *time.Time
+
+	// The time at which the feedback was last updated.
+	LastUpdatedTimeStamp *time.Time
+
 	// List for storing reactions. Reactions are utf-8 text code for emojis. You can
 	// send an empty list to clear off all your feedback.
 	Reactions []Reaction
+
+	// The recommendation ID that can be used to track the provided recommendations.
+	// Later on it can be used to collect the feedback.
+	RecommendationId *string
 
 	// The ID of the user that made the API call. The UserId is an IAM principal that
 	// can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more
@@ -208,9 +211,6 @@ type RecommendationFeedback struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
 	UserId *string
-
-	// The time at which the feedback was last updated.
-	LastUpdatedTimeStamp *time.Time
 }
 
 // Information about recommendation feedback summaries.
@@ -234,25 +234,25 @@ type RecommendationFeedbackSummary struct {
 // Information about recommendations.
 type RecommendationSummary struct {
 
-	// Name of the file on which a recommendation is provided.
-	FilePath *string
-
 	// A description of the recommendation generated by CodeGuru Reviewer for the lines
 	// of code between the start line and the end line.
 	Description *string
-
-	// Start line from where the recommendation is applicable in the source commit or
-	// source branch.
-	StartLine *int32
-
-	// The recommendation ID that can be used to track the provided recommendations.
-	// Later on it can be used to collect the feedback.
-	RecommendationId *string
 
 	// Last line where the recommendation is applicable in the source commit or source
 	// branch. For a single line comment the start line and end line values are the
 	// same.
 	EndLine *int32
+
+	// Name of the file on which a recommendation is provided.
+	FilePath *string
+
+	// The recommendation ID that can be used to track the provided recommendations.
+	// Later on it can be used to collect the feedback.
+	RecommendationId *string
+
+	// Start line from where the recommendation is applicable in the source commit or
+	// source branch.
+	StartLine *int32
 }
 
 // Information about an associated AWS CodeCommit repository or an associated
@@ -261,14 +261,14 @@ type RecommendationSummary struct {
 // GitHub repository.
 type Repository struct {
 
-	// Information about a GitHub Enterprise Server repository.
-	GitHubEnterpriseServer *ThirdPartySourceRepository
-
 	// Information about a Bitbucket repository.
 	Bitbucket *ThirdPartySourceRepository
 
 	// Information about an AWS CodeCommit repository.
 	CodeCommit *CodeCommitRepository
+
+	// Information about a GitHub Enterprise Server repository.
+	GitHubEnterpriseServer *ThirdPartySourceRepository
 }
 
 // Information about a repository association. The DescribeRepositoryAssociation
@@ -279,19 +279,35 @@ type RepositoryAssociation struct {
 	// The Amazon Resource Name (ARN) identifying the repository association.
 	AssociationArn *string
 
-	// The time, in milliseconds since the epoch, when the repository association was
-	// last updated.
-	LastUpdatedTimeStamp *time.Time
+	// The ID of the repository association.
+	AssociationId *string
+
+	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
+	// format is
+	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
+	// For more information, see Connection
+	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// in the AWS CodeStar Connections API Reference.
+	ConnectionArn *string
 
 	// The time, in milliseconds since the epoch, when the repository association was
 	// created.
 	CreatedTimeStamp *time.Time
 
+	// The time, in milliseconds since the epoch, when the repository association was
+	// last updated.
+	LastUpdatedTimeStamp *time.Time
+
+	// The name of the repository.
+	Name *string
+
+	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
+	// account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
+	Owner *string
+
 	// The provider type of the repository association.
 	ProviderType ProviderType
-
-	// A description of why the repository association is in the current state.
-	StateReason *string
 
 	// The state of the repository association. The valid repository association states
 	// are:
@@ -319,24 +335,8 @@ type RepositoryAssociation struct {
 	// access.
 	State RepositoryAssociationState
 
-	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
-	// format is
-	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
-	// For more information, see Connection
-	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
-	// in the AWS CodeStar Connections API Reference.
-	ConnectionArn *string
-
-	// The name of the repository.
-	Name *string
-
-	// The ID of the repository association.
-	AssociationId *string
-
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
-	Owner *string
+	// A description of why the repository association is in the current state.
+	StateReason *string
 }
 
 // Summary information about a repository association. The
@@ -345,6 +345,37 @@ type RepositoryAssociation struct {
 // operation returns a list of RepositoryAssociationSummary objects.
 type RepositoryAssociationSummary struct {
 
+	// The Amazon Resource Name (ARN) of the RepositoryAssociation
+	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
+	// object.
+	AssociationArn *string
+
+	// The repository association ID.
+	AssociationId *string
+
+	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
+	// format is
+	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
+	// For more information, see Connection
+	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
+	// in the AWS CodeStar Connections API Reference.
+	ConnectionArn *string
+
+	// The time, in milliseconds since the epoch, since the repository association was
+	// last updated.
+	LastUpdatedTimeStamp *time.Time
+
+	// The name of the repository association.
+	Name *string
+
+	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
+	// account ID of the account that owns the repository. For a GitHub or Bitbucket
+	// repository, this is the username for the account that owns the repository.
+	Owner *string
+
+	// The provider type of the repository association.
+	ProviderType ProviderType
+
 	// The state of the repository association. The valid repository association states
 	// are:
 	//
@@ -370,37 +401,6 @@ type RepositoryAssociationSummary struct {
 	// Reviewer is removing the repository's pull request notifications and source code
 	// access.
 	State RepositoryAssociationState
-
-	// The repository association ID.
-	AssociationId *string
-
-	// The provider type of the repository association.
-	ProviderType ProviderType
-
-	// The name of the repository association.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation
-	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object.
-	AssociationArn *string
-
-	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
-	// format is
-	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
-	// For more information, see Connection
-	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
-	// in the AWS CodeStar Connections API Reference.
-	ConnectionArn *string
-
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub or Bitbucket
-	// repository, this is the username for the account that owns the repository.
-	Owner *string
-
-	// The time, in milliseconds since the epoch, since the repository association was
-	// last updated.
-	LastUpdatedTimeStamp *time.Time
 }
 
 // Information about the source code type.
@@ -414,17 +414,6 @@ type SourceCodeType struct {
 // Reviewer.
 type ThirdPartySourceRepository struct {
 
-	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
-	// repository, this is the username for the account that owns the repository.
-	//
-	// This member is required.
-	Owner *string
-
-	// The name of the third party source repository.
-	//
-	// This member is required.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
 	// format is
 	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
@@ -434,4 +423,15 @@ type ThirdPartySourceRepository struct {
 	//
 	// This member is required.
 	ConnectionArn *string
+
+	// The name of the third party source repository.
+	//
+	// This member is required.
+	Name *string
+
+	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
+	// repository, this is the username for the account that owns the repository.
+	//
+	// This member is required.
+	Owner *string
 }

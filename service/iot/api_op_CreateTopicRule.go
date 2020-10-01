@@ -60,15 +60,15 @@ func (c *Client) CreateTopicRule(ctx context.Context, params *CreateTopicRuleInp
 // The input for the CreateTopicRule operation.
 type CreateTopicRuleInput struct {
 
-	// The rule payload.
-	//
-	// This member is required.
-	TopicRulePayload *types.TopicRulePayload
-
 	// The name of the rule.
 	//
 	// This member is required.
 	RuleName *string
+
+	// The rule payload.
+	//
+	// This member is required.
+	TopicRulePayload *types.TopicRulePayload
 
 	// Metadata which can be used to manage the topic rule. For URI Request parameters
 	// use format: ...key1=value1&key2=value2... For the CLI command-line parameter use

@@ -69,28 +69,28 @@ type GetTransitGatewayAttachmentPropagationsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
+	// One or more filters. The possible values are:
+	//
+	//     *
+	// transit-gateway-route-table-id - The ID of the transit gateway route table.
+	Filters []*types.Filter
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string
-
-	// One or more filters. The possible values are:
-	//
-	//     *
-	// transit-gateway-route-table-id - The ID of the transit gateway route table.
-	Filters []*types.Filter
 }
 
 type GetTransitGatewayAttachmentPropagationsOutput struct {
 
-	// Information about the propagation route tables.
-	TransitGatewayAttachmentPropagations []*types.TransitGatewayAttachmentPropagation
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the propagation route tables.
+	TransitGatewayAttachmentPropagations []*types.TransitGatewayAttachmentPropagation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

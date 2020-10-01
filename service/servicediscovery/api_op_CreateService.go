@@ -86,25 +86,6 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 
 type CreateServiceInput struct {
 
-	// The tags to add to the service. Each tag consists of a key and an optional
-	// value, both of which you define. Tag keys can have a maximum character length of
-	// 128 characters, and tag values can have a maximum length of 256 characters.
-	Tags []*types.Tag
-
-	// A description for the service.
-	Description *string
-
-	// A complex type that contains information about the Amazon Route 53 records that
-	// you want AWS Cloud Map to create when you register an instance.
-	DnsConfig *types.DnsConfig
-
-	// A complex type that contains information about an optional custom health check.
-	// If you specify a health check configuration, you can specify either
-	// HealthCheckCustomConfig or HealthCheckConfig but not both. You can't add,
-	// update, or delete a HealthCheckCustomConfig configuration from an existing
-	// service.
-	HealthCheckCustomConfig *types.HealthCheckCustomConfig
-
 	// The name that you want to assign to the service. If you want AWS Cloud Map to
 	// create an SRV record when you register an instance, and if you're using a system
 	// that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
@@ -123,8 +104,17 @@ type CreateServiceInput struct {
 	// This member is required.
 	Name *string
 
-	// The ID of the namespace that you want to use to create the service.
-	NamespaceId *string
+	// A unique string that identifies the request and that allows failed CreateService
+	// requests to be retried without the risk of executing the operation twice.
+	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	CreatorRequestId *string
+
+	// A description for the service.
+	Description *string
+
+	// A complex type that contains information about the Amazon Route 53 records that
+	// you want AWS Cloud Map to create when you register an instance.
+	DnsConfig *types.DnsConfig
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional Route 53 health check. If you specify settings for a health check,
@@ -135,10 +125,20 @@ type CreateServiceInput struct {
 	// (http://aws.amazon.com/cloud-map/pricing/).
 	HealthCheckConfig *types.HealthCheckConfig
 
-	// A unique string that identifies the request and that allows failed CreateService
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
-	CreatorRequestId *string
+	// A complex type that contains information about an optional custom health check.
+	// If you specify a health check configuration, you can specify either
+	// HealthCheckCustomConfig or HealthCheckConfig but not both. You can't add,
+	// update, or delete a HealthCheckCustomConfig configuration from an existing
+	// service.
+	HealthCheckCustomConfig *types.HealthCheckCustomConfig
+
+	// The ID of the namespace that you want to use to create the service.
+	NamespaceId *string
+
+	// The tags to add to the service. Each tag consists of a key and an optional
+	// value, both of which you define. Tag keys can have a maximum character length of
+	// 128 characters, and tag values can have a maximum length of 256 characters.
+	Tags []*types.Tag
 }
 
 type CreateServiceOutput struct {

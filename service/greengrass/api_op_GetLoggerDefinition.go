@@ -64,29 +64,29 @@ type GetLoggerDefinitionInput struct {
 
 type GetLoggerDefinitionOutput struct {
 
+	// The ARN of the definition.
+	Arn *string
+
 	// The time, in milliseconds since the epoch, when the definition was created.
 	CreationTimestamp *string
-
-	// The name of the definition.
-	Name *string
-
-	// The ARN of the latest version associated with the definition.
-	LatestVersionArn *string
-
-	// Tag(s) attached to the resource arn.
-	Tags map[string]*string
 
 	// The ID of the definition.
 	Id *string
 
-	// The ARN of the definition.
-	Arn *string
+	// The time, in milliseconds since the epoch, when the definition was last updated.
+	LastUpdatedTimestamp *string
 
 	// The ID of the latest version associated with the definition.
 	LatestVersion *string
 
-	// The time, in milliseconds since the epoch, when the definition was last updated.
-	LastUpdatedTimestamp *string
+	// The ARN of the latest version associated with the definition.
+	LatestVersionArn *string
+
+	// The name of the definition.
+	Name *string
+
+	// Tag(s) attached to the resource arn.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

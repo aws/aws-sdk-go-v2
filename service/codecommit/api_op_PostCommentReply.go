@@ -65,17 +65,17 @@ type PostCommentReplyInput struct {
 	// This member is required.
 	Content *string
 
-	// A unique, client-generated idempotency token that, when provided in a request,
-	// ensures the request cannot be repeated with a changed parameter. If a request is
-	// received with the same parameters and a token is included, the request returns
-	// information about the initial request that used that token.
-	ClientRequestToken *string
-
 	// The system-generated ID of the comment to which you want to reply. To get this
 	// ID, use GetCommentsForComparedCommit () or GetCommentsForPullRequest ().
 	//
 	// This member is required.
 	InReplyTo *string
+
+	// A unique, client-generated idempotency token that, when provided in a request,
+	// ensures the request cannot be repeated with a changed parameter. If a request is
+	// received with the same parameters and a token is included, the request returns
+	// information about the initial request that used that token.
+	ClientRequestToken *string
 }
 
 type PostCommentReplyOutput struct {

@@ -58,17 +58,17 @@ func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns
 
 type GetMembersInput struct {
 
-	// The unique ID of the detector of the GuardDuty account whose members you want to
-	// retrieve.
-	//
-	// This member is required.
-	DetectorId *string
-
 	// A list of account IDs of the GuardDuty member accounts that you want to
 	// describe.
 	//
 	// This member is required.
 	AccountIds []*string
+
+	// The unique ID of the detector of the GuardDuty account whose members you want to
+	// retrieve.
+	//
+	// This member is required.
+	DetectorId *string
 }
 
 type GetMembersOutput struct {

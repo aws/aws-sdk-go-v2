@@ -91,6 +91,11 @@ func (c *Client) PutBucketLogging(ctx context.Context, params *PutBucketLoggingI
 
 type PutBucketLoggingInput struct {
 
+	// The name of the bucket for which to set the logging parameters.
+	//
+	// This member is required.
+	Bucket *string
+
 	// Container for logging status information.
 	//
 	// This member is required.
@@ -98,11 +103,6 @@ type PutBucketLoggingInput struct {
 
 	// The MD5 hash of the PutBucketLogging request body.
 	ContentMD5 *string
-
-	// The name of the bucket for which to set the logging parameters.
-	//
-	// This member is required.
-	Bucket *string
 }
 
 type PutBucketLoggingOutput struct {

@@ -71,17 +71,17 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 
 type AddTagsInput struct {
 
+	// The Amazon Resource Name (ARN) of the resource that you want to tag.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// An array of Tag objects. Each tag is a key-value pair. Only the key parameter is
 	// required. If you don't specify a value, Amazon SageMaker sets the value to an
 	// empty string.
 	//
 	// This member is required.
 	Tags []*types.Tag
-
-	// The Amazon Resource Name (ARN) of the resource that you want to tag.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type AddTagsOutput struct {

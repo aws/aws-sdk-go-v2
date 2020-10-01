@@ -84,11 +84,68 @@ type DescribePredictorInput struct {
 
 type DescribePredictorOutput struct {
 
-	// If an error occurred, an informational message about the error.
-	Message *string
+	// The Amazon Resource Name (ARN) of the algorithm used for model training.
+	AlgorithmArn *string
 
 	// When PerformAutoML is specified, the ARN of the chosen algorithm.
 	AutoMLAlgorithmArns []*string
+
+	// When the model training task was created.
+	CreationTime *time.Time
+
+	// An array of the ARNs of the dataset import jobs used to import training data for
+	// the predictor.
+	DatasetImportJobArns []*string
+
+	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the key.
+	EncryptionConfig *types.EncryptionConfig
+
+	// Used to override the default evaluation parameters of the specified algorithm.
+	// Amazon Forecast evaluates a predictor by splitting a dataset into training data
+	// and testing data. The evaluation parameters define how to perform the split and
+	// the number of iterations.
+	EvaluationParameters *types.EvaluationParameters
+
+	// The featurization configuration.
+	FeaturizationConfig *types.FeaturizationConfig
+
+	// The number of time-steps of the forecast. The forecast horizon is also called
+	// the prediction length.
+	ForecastHorizon *int32
+
+	// The hyperparameter override values for the algorithm.
+	HPOConfig *types.HyperParameterTuningJobConfig
+
+	// Describes the dataset group that contains the data to use to train the
+	// predictor.
+	InputDataConfig *types.InputDataConfig
+
+	// Initially, the same as CreationTime (when the status is CREATE_PENDING). This
+	// value is updated when training starts (when the status changes to
+	// CREATE_IN_PROGRESS), and when training has completed (when the status changes to
+	// ACTIVE) or fails (when the status changes to CREATE_FAILED).
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// Whether the predictor is set to perform AutoML.
+	PerformAutoML *bool
+
+	// Whether the predictor is set to perform hyperparameter optimization (HPO).
+	PerformHPO *bool
+
+	// The ARN of the predictor.
+	PredictorArn *string
+
+	// Details on the the status and results of the backtests performed to evaluate the
+	// accuracy of the predictor. You specify the number of backtests to perform when
+	// you call the operation.
+	PredictorExecutionDetails *types.PredictorExecutionDetails
+
+	// The name of the predictor.
+	PredictorName *string
 
 	// The status of the predictor. States include:
 	//
@@ -107,68 +164,11 @@ type DescribePredictorOutput struct {
 	// predictor to create a forecast.
 	Status *string
 
-	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the key.
-	EncryptionConfig *types.EncryptionConfig
-
-	// The Amazon Resource Name (ARN) of the algorithm used for model training.
-	AlgorithmArn *string
-
-	// Describes the dataset group that contains the data to use to train the
-	// predictor.
-	InputDataConfig *types.InputDataConfig
-
-	// Details on the the status and results of the backtests performed to evaluate the
-	// accuracy of the predictor. You specify the number of backtests to perform when
-	// you call the operation.
-	PredictorExecutionDetails *types.PredictorExecutionDetails
-
-	// The name of the predictor.
-	PredictorName *string
-
-	// The featurization configuration.
-	FeaturizationConfig *types.FeaturizationConfig
-
-	// An array of the ARNs of the dataset import jobs used to import training data for
-	// the predictor.
-	DatasetImportJobArns []*string
-
 	// The default training parameters or overrides selected during model training. If
 	// using the AutoML algorithm or if HPO is turned on while using the DeepAR+
 	// algorithms, the optimized values for the chosen hyperparameters are returned.
 	// For more information, see aws-forecast-choosing-recipes ().
 	TrainingParameters map[string]*string
-
-	// The number of time-steps of the forecast. The forecast horizon is also called
-	// the prediction length.
-	ForecastHorizon *int32
-
-	// The hyperparameter override values for the algorithm.
-	HPOConfig *types.HyperParameterTuningJobConfig
-
-	// The ARN of the predictor.
-	PredictorArn *string
-
-	// Whether the predictor is set to perform AutoML.
-	PerformAutoML *bool
-
-	// When the model training task was created.
-	CreationTime *time.Time
-
-	// Initially, the same as CreationTime (when the status is CREATE_PENDING). This
-	// value is updated when training starts (when the status changes to
-	// CREATE_IN_PROGRESS), and when training has completed (when the status changes to
-	// ACTIVE) or fails (when the status changes to CREATE_FAILED).
-	LastModificationTime *time.Time
-
-	// Whether the predictor is set to perform hyperparameter optimization (HPO).
-	PerformHPO *bool
-
-	// Used to override the default evaluation parameters of the specified algorithm.
-	// Amazon Forecast evaluates a predictor by splitting a dataset into training data
-	// and testing data. The evaluation parameters define how to perform the split and
-	// the number of iterations.
-	EvaluationParameters *types.EvaluationParameters
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

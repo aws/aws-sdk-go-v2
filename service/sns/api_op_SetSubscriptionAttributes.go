@@ -58,11 +58,6 @@ func (c *Client) SetSubscriptionAttributes(ctx context.Context, params *SetSubsc
 // Input for SetSubscriptionAttributes action.
 type SetSubscriptionAttributesInput struct {
 
-	// The ARN of the subscription to modify.
-	//
-	// This member is required.
-	SubscriptionArn *string
-
 	// A map of attributes with their corresponding values. The following lists the
 	// names, descriptions, and values of the special request parameters that the
 	// SetTopicAttributes action uses:
@@ -89,6 +84,11 @@ type SetSubscriptionAttributesInput struct {
 	//
 	// This member is required.
 	AttributeName *string
+
+	// The ARN of the subscription to modify.
+	//
+	// This member is required.
+	SubscriptionArn *string
 
 	// The new value for the attribute in JSON format.
 	AttributeValue *string

@@ -70,11 +70,21 @@ type GetIPSetInput struct {
 
 type GetIPSetOutput struct {
 
+	// The format of the file that contains the IPSet.
+	//
+	// This member is required.
+	Format types.IpSetFormat
+
 	// The URI of the file that contains the IPSet. For example:
 	// https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key.
 	//
 	// This member is required.
 	Location *string
+
+	// The user-friendly name for the IPSet.
+	//
+	// This member is required.
+	Name *string
 
 	// The status of IPSet file that was uploaded.
 	//
@@ -83,16 +93,6 @@ type GetIPSetOutput struct {
 
 	// The tags of the IPSet resource.
 	Tags map[string]*string
-
-	// The user-friendly name for the IPSet.
-	//
-	// This member is required.
-	Name *string
-
-	// The format of the file that contains the IPSet.
-	//
-	// This member is required.
-	Format types.IpSetFormat
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

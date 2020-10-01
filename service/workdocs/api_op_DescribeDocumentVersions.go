@@ -58,39 +58,39 @@ func (c *Client) DescribeDocumentVersions(ctx context.Context, params *DescribeD
 
 type DescribeDocumentVersionsInput struct {
 
-	// A comma-separated list of values. Specify "INITIALIZED" to include incomplete
-	// versions.
-	Include *string
-
 	// The ID of the document.
 	//
 	// This member is required.
 	DocumentId *string
 
-	// The marker for the next set of results. (You received this marker from a
-	// previous call.)
-	Marker *string
-
-	// The maximum number of versions to return with this call.
-	Limit *int32
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 
 	// Specify "SOURCE" to include initialized versions and a URL for the source
 	// document.
 	Fields *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
+	// A comma-separated list of values. Specify "INITIALIZED" to include incomplete
+	// versions.
+	Include *string
+
+	// The maximum number of versions to return with this call.
+	Limit *int32
+
+	// The marker for the next set of results. (You received this marker from a
+	// previous call.)
+	Marker *string
 }
 
 type DescribeDocumentVersionsOutput struct {
 
+	// The document versions.
+	DocumentVersions []*types.DocumentVersionMetadata
+
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
-
-	// The document versions.
-	DocumentVersions []*types.DocumentVersionMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

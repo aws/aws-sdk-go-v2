@@ -57,15 +57,15 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 // Contains the parameters for RemoveTags.
 type RemoveTagsInput struct {
 
-	// The keys of the tags to remove.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// The ID of the pipeline.
 	//
 	// This member is required.
 	PipelineId *string
+
+	// The keys of the tags to remove.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 // Contains the output of RemoveTags.

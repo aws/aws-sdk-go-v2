@@ -62,11 +62,11 @@ type GetSamplingStatisticSummariesInput struct {
 
 type GetSamplingStatisticSummariesOutput struct {
 
-	// Information about the number of requests instrumented for each sampling rule.
-	SamplingStatisticSummaries []*types.SamplingStatisticSummary
-
 	// Pagination token.
 	NextToken *string
+
+	// Information about the number of requests instrumented for each sampling rule.
+	SamplingStatisticSummaries []*types.SamplingStatisticSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

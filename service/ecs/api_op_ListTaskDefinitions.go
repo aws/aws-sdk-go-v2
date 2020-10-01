@@ -58,6 +58,20 @@ func (c *Client) ListTaskDefinitions(ctx context.Context, params *ListTaskDefini
 
 type ListTaskDefinitionsInput struct {
 
+	// The full family name with which to filter the ListTaskDefinitions results.
+	// Specifying a familyPrefix limits the listed task definitions to task definition
+	// revisions that belong to that family.
+	FamilyPrefix *string
+
+	// The maximum number of task definition results returned by ListTaskDefinitions in
+	// paginated output. When this parameter is used, ListTaskDefinitions only returns
+	// maxResults results in a single page along with a nextToken response element. The
+	// remaining results of the initial request can be seen by sending another
+	// ListTaskDefinitions request with the returned nextToken value. This value can be
+	// between 1 and 100. If this parameter is not used, then ListTaskDefinitions
+	// returns up to 100 results and a nextToken value if applicable.
+	MaxResults *int32
+
 	// The nextToken value returned from a ListTaskDefinitions request indicating that
 	// more results are available to fulfill the request and further calls will be
 	// needed. If maxResults was provided, it is possible the number of results to be
@@ -80,33 +94,19 @@ type ListTaskDefinitionsInput struct {
 	// active task or service still references them. If you paginate the resulting
 	// output, be sure to keep the status value constant in each subsequent request.
 	Status types.TaskDefinitionStatus
-
-	// The maximum number of task definition results returned by ListTaskDefinitions in
-	// paginated output. When this parameter is used, ListTaskDefinitions only returns
-	// maxResults results in a single page along with a nextToken response element. The
-	// remaining results of the initial request can be seen by sending another
-	// ListTaskDefinitions request with the returned nextToken value. This value can be
-	// between 1 and 100. If this parameter is not used, then ListTaskDefinitions
-	// returns up to 100 results and a nextToken value if applicable.
-	MaxResults *int32
-
-	// The full family name with which to filter the ListTaskDefinitions results.
-	// Specifying a familyPrefix limits the listed task definitions to task definition
-	// revisions that belong to that family.
-	FamilyPrefix *string
 }
 
 type ListTaskDefinitionsOutput struct {
-
-	// The list of task definition Amazon Resource Name (ARN) entries for the
-	// ListTaskDefinitions request.
-	TaskDefinitionArns []*string
 
 	// The nextToken value to include in a future ListTaskDefinitions request. When the
 	// results of a ListTaskDefinitions request exceed maxResults, this value can be
 	// used to retrieve the next page of results. This value is null when there are no
 	// more results to return.
 	NextToken *string
+
+	// The list of task definition Amazon Resource Name (ARN) entries for the
+	// ListTaskDefinitions request.
+	TaskDefinitionArns []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

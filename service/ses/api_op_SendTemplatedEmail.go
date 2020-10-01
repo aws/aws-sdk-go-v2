@@ -103,9 +103,11 @@ func (c *Client) SendTemplatedEmail(ctx context.Context, params *SendTemplatedEm
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-personalized-email-api.html).
 type SendTemplatedEmailInput struct {
 
-	// The reply-to email address(es) for the message. If the recipient replies to the
-	// message, each reply-to address will receive the reply.
-	ReplyToAddresses []*string
+	// The destination for this email, composed of To:, CC:, and BCC: fields. A
+	// Destination can include up to 50 recipients across these three fields.
+	//
+	// This member is required.
+	Destination *types.Destination
 
 	// The email address that is sending the email. This email address must be either
 	// individually verified with Amazon SES, or from a domain that has been verified
@@ -138,17 +140,29 @@ type SendTemplatedEmailInput struct {
 	// This member is required.
 	Template *string
 
+	// A list of replacement values to apply to the template. This parameter is a JSON
+	// object, typically consisting of key-value pairs in which the keys correspond to
+	// replacement tags in the email template.
+	//
+	// This member is required.
+	TemplateData *string
+
 	// The name of the configuration set to use when you send an email using
 	// SendTemplatedEmail.
 	ConfigurationSetName *string
 
-	// A list of tags, in the form of name/value pairs, to apply to an email that you
-	// send using SendTemplatedEmail. Tags correspond to characteristics of the email
-	// that you define, so that you can publish email sending events.
-	Tags []*types.MessageTag
+	// The reply-to email address(es) for the message. If the recipient replies to the
+	// message, each reply-to address will receive the reply.
+	ReplyToAddresses []*string
 
-	// The ARN of the template to use when sending this email.
-	TemplateArn *string
+	// The email address that bounces and complaints will be forwarded to when feedback
+	// forwarding is enabled. If the message cannot be delivered to the recipient, then
+	// an error message will be returned from the recipient's ISP; this message will
+	// then be forwarded to the email address specified by the ReturnPath parameter.
+	// The ReturnPath parameter is never overwritten. This email address must be either
+	// individually verified with Amazon SES, or from a domain that has been verified
+	// with Amazon SES.
+	ReturnPath *string
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
@@ -162,12 +176,6 @@ type SendTemplatedEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	ReturnPathArn *string
 
-	// The destination for this email, composed of To:, CC:, and BCC: fields. A
-	// Destination can include up to 50 recipients across these three fields.
-	//
-	// This member is required.
-	Destination *types.Destination
-
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to send for the email address specified in the Source parameter. For
@@ -180,21 +188,13 @@ type SendTemplatedEmailInput struct {
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html).
 	SourceArn *string
 
-	// A list of replacement values to apply to the template. This parameter is a JSON
-	// object, typically consisting of key-value pairs in which the keys correspond to
-	// replacement tags in the email template.
-	//
-	// This member is required.
-	TemplateData *string
+	// A list of tags, in the form of name/value pairs, to apply to an email that you
+	// send using SendTemplatedEmail. Tags correspond to characteristics of the email
+	// that you define, so that you can publish email sending events.
+	Tags []*types.MessageTag
 
-	// The email address that bounces and complaints will be forwarded to when feedback
-	// forwarding is enabled. If the message cannot be delivered to the recipient, then
-	// an error message will be returned from the recipient's ISP; this message will
-	// then be forwarded to the email address specified by the ReturnPath parameter.
-	// The ReturnPath parameter is never overwritten. This email address must be either
-	// individually verified with Amazon SES, or from a domain that has been verified
-	// with Amazon SES.
-	ReturnPath *string
+	// The ARN of the template to use when sending this email.
+	TemplateArn *string
 }
 
 type SendTemplatedEmailOutput struct {

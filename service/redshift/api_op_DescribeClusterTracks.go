@@ -56,9 +56,6 @@ func (c *Client) DescribeClusterTracks(ctx context.Context, params *DescribeClus
 
 type DescribeClusterTracksInput struct {
 
-	// An integer value for the maximum number of maintenance tracks to return.
-	MaxRecords *int32
-
 	// The name of the maintenance track.
 	MaintenanceTrackName *string
 
@@ -69,17 +66,20 @@ type DescribeClusterTracksInput struct {
 	// providing the returned marker value in the Marker parameter and retrying the
 	// request.
 	Marker *string
+
+	// An integer value for the maximum number of maintenance tracks to return.
+	MaxRecords *int32
 }
 
 type DescribeClusterTracksOutput struct {
+
+	// A list of maintenance tracks output by the DescribeClusterTracks operation.
+	MaintenanceTracks []*types.MaintenanceTrack
 
 	// The starting point to return a set of response tracklist records. You can
 	// retrieve the next set of response records by providing the returned marker value
 	// in the Marker parameter and retrying the request.
 	Marker *string
-
-	// A list of maintenance tracks output by the DescribeClusterTracks operation.
-	MaintenanceTracks []*types.MaintenanceTrack
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

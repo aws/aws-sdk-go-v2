@@ -58,6 +58,11 @@ func (c *Client) RestoreManagedPrefixListVersion(ctx context.Context, params *Re
 
 type RestoreManagedPrefixListVersionInput struct {
 
+	// The current version number for the prefix list.
+	//
+	// This member is required.
+	CurrentVersion *int64
+
 	// The ID of the prefix list.
 	//
 	// This member is required.
@@ -67,11 +72,6 @@ type RestoreManagedPrefixListVersionInput struct {
 	//
 	// This member is required.
 	PreviousVersion *int64
-
-	// The current version number for the prefix list.
-	//
-	// This member is required.
-	CurrentVersion *int64
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

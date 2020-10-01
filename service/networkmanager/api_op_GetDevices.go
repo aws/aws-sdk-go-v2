@@ -65,14 +65,14 @@ type GetDevicesInput struct {
 	// One or more device IDs. The maximum is 10.
 	DeviceIds []*string
 
-	// The ID of the site.
-	SiteId *string
-
 	// The maximum number of results to return.
 	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// The ID of the site.
+	SiteId *string
 }
 
 type GetDevicesOutput struct {

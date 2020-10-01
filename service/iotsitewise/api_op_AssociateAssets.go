@@ -61,6 +61,11 @@ func (c *Client) AssociateAssets(ctx context.Context, params *AssociateAssetsInp
 
 type AssociateAssetsInput struct {
 
+	// The ID of the parent asset.
+	//
+	// This member is required.
+	AssetId *string
+
 	// The ID of the child asset to be associated.
 	//
 	// This member is required.
@@ -79,11 +84,6 @@ type AssociateAssetsInput struct {
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
-
-	// The ID of the parent asset.
-	//
-	// This member is required.
-	AssetId *string
 }
 
 type AssociateAssetsOutput struct {

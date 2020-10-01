@@ -71,18 +71,18 @@ func (c *Client) ModifyDBSnapshotAttribute(ctx context.Context, params *ModifyDB
 //
 type ModifyDBSnapshotAttributeInput struct {
 
+	// The name of the DB snapshot attribute to modify. To manage authorization for
+	// other AWS accounts to copy or restore a manual DB snapshot, set this value to
+	// restore. To view the list of attributes available to modify, use the
+	// DescribeDBSnapshotAttributes () API action.
+	//
+	// This member is required.
+	AttributeName *string
+
 	// The identifier for the DB snapshot to modify the attributes for.
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
-
-	// A list of DB snapshot attributes to remove from the attribute specified by
-	// AttributeName. To remove authorization for other AWS accounts to copy or restore
-	// a manual snapshot, set this list to include one or more AWS account identifiers,
-	// or all to remove authorization for any AWS account to copy or restore the DB
-	// snapshot. If you specify all, an AWS account whose account ID is explicitly
-	// added to the restore attribute can still copy or restore the manual DB snapshot.
-	ValuesToRemove []*string
 
 	// A list of DB snapshot attributes to add to the attribute specified by
 	// AttributeName. To authorize other AWS accounts to copy or restore a manual
@@ -92,13 +92,13 @@ type ModifyDBSnapshotAttributeInput struct {
 	// available to all AWS accounts.
 	ValuesToAdd []*string
 
-	// The name of the DB snapshot attribute to modify. To manage authorization for
-	// other AWS accounts to copy or restore a manual DB snapshot, set this value to
-	// restore. To view the list of attributes available to modify, use the
-	// DescribeDBSnapshotAttributes () API action.
-	//
-	// This member is required.
-	AttributeName *string
+	// A list of DB snapshot attributes to remove from the attribute specified by
+	// AttributeName. To remove authorization for other AWS accounts to copy or restore
+	// a manual snapshot, set this list to include one or more AWS account identifiers,
+	// or all to remove authorization for any AWS account to copy or restore the DB
+	// snapshot. If you specify all, an AWS account whose account ID is explicitly
+	// added to the restore attribute can still copy or restore the manual DB snapshot.
+	ValuesToRemove []*string
 }
 
 type ModifyDBSnapshotAttributeOutput struct {

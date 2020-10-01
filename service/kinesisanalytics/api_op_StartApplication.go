@@ -73,6 +73,11 @@ func (c *Client) StartApplication(ctx context.Context, params *StartApplicationI
 //
 type StartApplicationInput struct {
 
+	// Name of the application.
+	//
+	// This member is required.
+	ApplicationName *string
+
 	// Identifies the specific input, by ID, that the application starts consuming.
 	// Amazon Kinesis Analytics starts reading the streaming source associated with the
 	// input. You can also specify where in the streaming source you want Amazon
@@ -80,11 +85,6 @@ type StartApplicationInput struct {
 	//
 	// This member is required.
 	InputConfigurations []*types.InputConfiguration
-
-	// Name of the application.
-	//
-	// This member is required.
-	ApplicationName *string
 }
 
 //

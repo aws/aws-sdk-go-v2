@@ -60,9 +60,6 @@ func (c *Client) UpdateThingShadow(ctx context.Context, params *UpdateThingShado
 // The input for the UpdateThingShadow operation.
 type UpdateThingShadowInput struct {
 
-	// The name of the shadow.
-	ShadowName *string
-
 	// The state information, in JSON format.
 	//
 	// This member is required.
@@ -72,6 +69,9 @@ type UpdateThingShadowInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	// The name of the shadow.
+	ShadowName *string
 }
 
 // The output from the UpdateThingShadow operation.

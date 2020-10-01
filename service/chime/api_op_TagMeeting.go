@@ -57,15 +57,15 @@ func (c *Client) TagMeeting(ctx context.Context, params *TagMeetingInput, optFns
 
 type TagMeetingInput struct {
 
-	// The tag key-value pairs.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The Amazon Chime SDK meeting ID.
 	//
 	// This member is required.
 	MeetingId *string
+
+	// The tag key-value pairs.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagMeetingOutput struct {

@@ -63,6 +63,22 @@ func (c *Client) ListAttributes(ctx context.Context, params *ListAttributesInput
 
 type ListAttributesInput struct {
 
+	// The type of the target with which to list attributes.
+	//
+	// This member is required.
+	TargetType types.TargetType
+
+	// The name of the attribute with which to filter the results.
+	AttributeName *string
+
+	// The value of the attribute with which to filter results. You must also specify
+	// an attribute name to use this parameter.
+	AttributeValue *string
+
+	// The short name or full Amazon Resource Name (ARN) of the cluster to list
+	// attributes. If you do not specify a cluster, the default cluster is assumed.
+	Cluster *string
+
 	// The maximum number of cluster results returned by ListAttributes in paginated
 	// output. When this parameter is used, ListAttributes only returns maxResults
 	// results in a single page along with a nextToken response element. The remaining
@@ -79,34 +95,18 @@ type ListAttributesInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster to list
-	// attributes. If you do not specify a cluster, the default cluster is assumed.
-	Cluster *string
-
-	// The name of the attribute with which to filter the results.
-	AttributeName *string
-
-	// The value of the attribute with which to filter results. You must also specify
-	// an attribute name to use this parameter.
-	AttributeValue *string
-
-	// The type of the target with which to list attributes.
-	//
-	// This member is required.
-	TargetType types.TargetType
 }
 
 type ListAttributesOutput struct {
+
+	// A list of attribute objects that meet the criteria of the request.
+	Attributes []*types.Attribute
 
 	// The nextToken value to include in a future ListAttributes request. When the
 	// results of a ListAttributes request exceed maxResults, this value can be used to
 	// retrieve the next page of results. This value is null when there are no more
 	// results to return.
 	NextToken *string
-
-	// A list of attribute objects that meet the criteria of the request.
-	Attributes []*types.Attribute
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

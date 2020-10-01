@@ -67,32 +67,32 @@ type DescribeProvisioningArtifactInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The identifier of the provisioning artifact.
-	ProvisioningArtifactId *string
-
 	// The product identifier.
 	ProductId *string
 
 	// The product name.
 	ProductName *string
 
-	// Indicates whether a verbose level of detail is enabled.
-	Verbose *bool
+	// The identifier of the provisioning artifact.
+	ProvisioningArtifactId *string
 
 	// The provisioning artifact name.
 	ProvisioningArtifactName *string
+
+	// Indicates whether a verbose level of detail is enabled.
+	Verbose *bool
 }
 
 type DescribeProvisioningArtifactOutput struct {
-
-	// The status of the current request.
-	Status types.Status
 
 	// The URL of the CloudFormation template in Amazon S3.
 	Info map[string]*string
 
 	// Information about the provisioning artifact.
 	ProvisioningArtifactDetail *types.ProvisioningArtifactDetail
+
+	// The status of the current request.
+	Status types.Status
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

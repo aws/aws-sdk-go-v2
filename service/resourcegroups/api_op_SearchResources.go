@@ -85,16 +85,16 @@ type SearchResourcesInput struct {
 
 type SearchResourcesOutput struct {
 
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode are
-	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
-	QueryErrors []*types.QueryError
-
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
+
+	// A list of QueryError objects. Each error is an object that contains ErrorCode
+	// and Message structures. Possible values for ErrorCode are
+	// CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+	QueryErrors []*types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you
 	// specified.

@@ -70,12 +70,12 @@ type DescribeStreamInput struct {
 	// This member is required.
 	StreamArn *string
 
-	// The maximum number of shard objects to return. The upper limit is 100.
-	Limit *int32
-
 	// The shard ID of the first item that this operation will evaluate. Use the value
 	// that was returned for LastEvaluatedShardId in the previous operation.
 	ExclusiveStartShardId *string
+
+	// The maximum number of shard objects to return. The upper limit is 100.
+	Limit *int32
 }
 
 // Represents the output of a DescribeStream operation.

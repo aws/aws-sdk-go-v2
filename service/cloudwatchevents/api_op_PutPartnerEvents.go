@@ -66,13 +66,13 @@ type PutPartnerEventsInput struct {
 
 type PutPartnerEventsOutput struct {
 
-	// The number of events from this operation that could not be written to the
-	// partner event bus.
-	FailedEntryCount *int32
-
 	// The list of events from this operation that were successfully written to the
 	// partner event bus.
 	Entries []*types.PutPartnerEventsResultEntry
+
+	// The number of events from this operation that could not be written to the
+	// partner event bus.
+	FailedEntryCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

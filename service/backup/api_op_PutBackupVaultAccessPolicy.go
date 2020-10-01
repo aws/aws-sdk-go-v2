@@ -58,9 +58,6 @@ func (c *Client) PutBackupVaultAccessPolicy(ctx context.Context, params *PutBack
 
 type PutBackupVaultAccessPolicyInput struct {
 
-	// The backup vault access policy document in JSON format.
-	Policy *string
-
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
 	// AWS Region where they are created. They consist of lowercase letters, numbers,
@@ -68,6 +65,9 @@ type PutBackupVaultAccessPolicyInput struct {
 	//
 	// This member is required.
 	BackupVaultName *string
+
+	// The backup vault access policy document in JSON format.
+	Policy *string
 }
 
 type PutBackupVaultAccessPolicyOutput struct {

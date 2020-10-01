@@ -56,34 +56,34 @@ func (c *Client) ListApps(ctx context.Context, params *ListAppsInput, optFns ...
 
 type ListAppsInput struct {
 
+	// A parameter to search for the domain ID.
+	DomainIdEquals *string
+
+	// Returns a list up to a specified limit.
+	MaxResults *int32
+
+	// If the previous response was truncated, you will receive this token. Use it in
+	// your next request to receive the next set of results.
+	NextToken *string
+
+	// The parameter by which to sort the results. The default is CreationTime.
+	SortBy types.AppSortKey
+
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
 
 	// A parameter to search by user profile name.
 	UserProfileNameEquals *string
-
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
-	NextToken *string
-
-	// Returns a list up to a specified limit.
-	MaxResults *int32
-
-	// The parameter by which to sort the results. The default is CreationTime.
-	SortBy types.AppSortKey
-
-	// A parameter to search for the domain ID.
-	DomainIdEquals *string
 }
 
 type ListAppsOutput struct {
 
+	// The list of apps.
+	Apps []*types.AppDetails
+
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string
-
-	// The list of apps.
-	Apps []*types.AppDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

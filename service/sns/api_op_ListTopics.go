@@ -66,12 +66,12 @@ type ListTopicsInput struct {
 // Response for ListTopics action.
 type ListTopicsOutput struct {
 
-	// A list of topic ARNs.
-	Topics []*types.Topic
-
 	// Token to pass along to the next ListTopics request. This element is returned if
 	// there are additional topics to retrieve.
 	NextToken *string
+
+	// A list of topic ARNs.
+	Topics []*types.Topic
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -65,17 +65,17 @@ type GetResourcePolicyInput struct {
 
 type GetResourcePolicyOutput struct {
 
+	// The date and time at which the policy was created.
+	CreateTime *time.Time
+
 	// Contains the hash value associated with this policy.
 	PolicyHash *string
-
-	// The date and time at which the policy was last updated.
-	UpdateTime *time.Time
 
 	// Contains the requested policy document, in JSON format.
 	PolicyInJson *string
 
-	// The date and time at which the policy was created.
-	CreateTime *time.Time
+	// The date and time at which the policy was last updated.
+	UpdateTime *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

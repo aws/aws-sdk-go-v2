@@ -57,33 +57,33 @@ func (c *Client) UpdateGraphqlApi(ctx context.Context, params *UpdateGraphqlApiI
 
 type UpdateGraphqlApiInput struct {
 
-	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
-	LogConfig *types.LogConfig
-
-	// A list of additional authentication providers for the GraphqlApi API.
-	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
-
-	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
-	XrayEnabled *bool
-
-	// The new Amazon Cognito user pool configuration for the GraphqlApi object.
-	UserPoolConfig *types.UserPoolConfig
-
-	// The new authentication type for the GraphqlApi object.
-	AuthenticationType types.AuthenticationType
-
-	// The OpenID Connect configuration for the GraphqlApi object.
-	OpenIDConnectConfig *types.OpenIDConnectConfig
+	// The API ID.
+	//
+	// This member is required.
+	ApiId *string
 
 	// The new name for the GraphqlApi object.
 	//
 	// This member is required.
 	Name *string
 
-	// The API ID.
-	//
-	// This member is required.
-	ApiId *string
+	// A list of additional authentication providers for the GraphqlApi API.
+	AdditionalAuthenticationProviders []*types.AdditionalAuthenticationProvider
+
+	// The new authentication type for the GraphqlApi object.
+	AuthenticationType types.AuthenticationType
+
+	// The Amazon CloudWatch Logs configuration for the GraphqlApi object.
+	LogConfig *types.LogConfig
+
+	// The OpenID Connect configuration for the GraphqlApi object.
+	OpenIDConnectConfig *types.OpenIDConnectConfig
+
+	// The new Amazon Cognito user pool configuration for the GraphqlApi object.
+	UserPoolConfig *types.UserPoolConfig
+
+	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
+	XrayEnabled *bool
 }
 
 type UpdateGraphqlApiOutput struct {

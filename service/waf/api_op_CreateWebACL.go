@@ -97,16 +97,17 @@ func (c *Client) CreateWebACL(ctx context.Context, params *CreateWebACLInput, op
 
 type CreateWebACLInput struct {
 
-	// A friendly name or description of the WebACL (). You can't change Name after you
-	// create the WebACL.
-	//
-	// This member is required.
-	Name *string
-
 	// The value returned by the most recent call to GetChangeToken ().
 	//
 	// This member is required.
 	ChangeToken *string
+
+	// The action that you want AWS WAF to take when a request doesn't match the
+	// criteria specified in any of the Rule objects that are associated with the
+	// WebACL.
+	//
+	// This member is required.
+	DefaultAction *types.WafAction
 
 	// A friendly name or description for the metrics for this WebACL.The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128
@@ -117,26 +118,25 @@ type CreateWebACLInput struct {
 	// This member is required.
 	MetricName *string
 
-	//
-	Tags []*types.Tag
-
-	// The action that you want AWS WAF to take when a request doesn't match the
-	// criteria specified in any of the Rule objects that are associated with the
-	// WebACL.
+	// A friendly name or description of the WebACL (). You can't change Name after you
+	// create the WebACL.
 	//
 	// This member is required.
-	DefaultAction *types.WafAction
+	Name *string
+
+	//
+	Tags []*types.Tag
 }
 
 type CreateWebACLOutput struct {
-
-	// The WebACL () returned in the CreateWebACL response.
-	WebACL *types.WebACL
 
 	// The ChangeToken that you used to submit the CreateWebACL request. You can also
 	// use this value to query the status of the request. For more information, see
 	// GetChangeTokenStatus ().
 	ChangeToken *string
+
+	// The WebACL () returned in the CreateWebACL response.
+	WebACL *types.WebACL
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

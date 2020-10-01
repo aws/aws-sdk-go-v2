@@ -61,12 +61,12 @@ func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformV
 
 type ListPlatformVersionsInput struct {
 
-	// The maximum number of platform version values returned in one call.
-	MaxRecords *int32
-
 	// Criteria for restricting the resulting list of platform versions. The filter is
 	// interpreted as a logical conjunction (AND) of the separate PlatformFilter terms.
 	Filters []*types.PlatformFilter
+
+	// The maximum number of platform version values returned in one call.
+	MaxRecords *int32
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to

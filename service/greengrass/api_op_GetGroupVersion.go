@@ -74,20 +74,20 @@ type GetGroupVersionInput struct {
 
 type GetGroupVersionOutput struct {
 
-	// The ID of the group version.
-	Version *string
-
-	// Information about the group version definition.
-	Definition *types.GroupVersion
-
 	// The ARN of the group version.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the group version was created.
 	CreationTimestamp *string
 
+	// Information about the group version definition.
+	Definition *types.GroupVersion
+
 	// The ID of the group that the version is associated with.
 	Id *string
+
+	// The ID of the group version.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

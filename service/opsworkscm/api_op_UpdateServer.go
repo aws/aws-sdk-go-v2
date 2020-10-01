@@ -57,11 +57,6 @@ func (c *Client) UpdateServer(ctx context.Context, params *UpdateServerInput, op
 
 type UpdateServerInput struct {
 
-	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
-	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
-	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
-	PreferredBackupWindow *string
-
 	// The name of the server to update.
 	//
 	// This member is required.
@@ -70,14 +65,19 @@ type UpdateServerInput struct {
 	// Sets the number of automated backups that you want to keep.
 	BackupRetentionCount *int32
 
+	// Setting DisableAutomatedBackup to true disables automated or scheduled backups.
+	// Automated backups are enabled by default.
+	DisableAutomatedBackup *bool
+
+	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
+	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
+	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
+	PreferredBackupWindow *string
+
 	// DDD:HH:MM (weekly start time) or HH:MM (daily start time). Time windows always
 	// use coordinated universal time (UTC). Valid strings for day of week (DDD) are:
 	// Mon, Tue, Wed, Thr, Fri, Sat, or Sun.
 	PreferredMaintenanceWindow *string
-
-	// Setting DisableAutomatedBackup to true disables automated or scheduled backups.
-	// Automated backups are enabled by default.
-	DisableAutomatedBackup *bool
 }
 
 type UpdateServerOutput struct {

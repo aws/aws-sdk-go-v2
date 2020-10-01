@@ -77,12 +77,12 @@ type GetHostReservationPurchasePreviewOutput struct {
 	// specified. At this time, the only supported currency is USD.
 	CurrencyCode types.CurrencyCodeValues
 
-	// The potential total hourly price of the reservation per hour.
-	TotalHourlyPrice *string
-
 	// The purchase information of the Dedicated Host reservation and the Dedicated
 	// Hosts associated with it.
 	Purchase []*types.Purchase
+
+	// The potential total hourly price of the reservation per hour.
+	TotalHourlyPrice *string
 
 	// The potential total upfront price. This is billed immediately.
 	TotalUpfrontPrice *string

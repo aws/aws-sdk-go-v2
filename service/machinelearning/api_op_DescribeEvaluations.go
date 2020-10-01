@@ -57,29 +57,9 @@ func (c *Client) DescribeEvaluations(ctx context.Context, params *DescribeEvalua
 
 type DescribeEvaluationsInput struct {
 
-	// The ID of the page in the paginated results.
-	NextToken *string
-
-	// The greater than or equal to operator. The Evaluation results will have
-	// FilterVariable values that are greater than or equal to the value specified with
-	// GE.
-	GE *string
-
-	// A two-value parameter that determines the sequence of the resulting list of
-	// Evaluation.
-	//
-	//     * asc - Arranges the list in ascending order (A-Z, 0-9).
-	//
-	//     *
-	// dsc - Arranges the list in descending order (Z-A, 9-0).
-	//
-	// Results are sorted by
-	// FilterVariable.
-	SortOrder types.SortOrder
-
-	// The greater than operator. The Evaluation results will have FilterVariable
-	// values that are greater than the value specified with GT.
-	GT *string
+	// The equal to operator. The Evaluation results will have FilterVariable values
+	// that exactly match the value specified with EQ.
+	EQ *string
 
 	// Use one of the following variable to filter a list of Evaluation objects:
 	//
@@ -107,19 +87,14 @@ type DescribeEvaluationsInput struct {
 	// bucket or directory.
 	FilterVariable types.EvaluationFilterVariable
 
-	// A string that is found at the beginning of a variable, such as Name or Id. For
-	// example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer. To
-	// search for this Evaluation, select Name for the FilterVariable and any of the
-	// following strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li>
-	// <p>2014-09-09</p> </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
-	Prefix *string
+	// The greater than or equal to operator. The Evaluation results will have
+	// FilterVariable values that are greater than or equal to the value specified with
+	// GE.
+	GE *string
 
-	// The equal to operator. The Evaluation results will have FilterVariable values
-	// that exactly match the value specified with EQ.
-	EQ *string
-
-	// The maximum number of Evaluation to include in the result.
-	Limit *int32
+	// The greater than operator. The Evaluation results will have FilterVariable
+	// values that are greater than the value specified with GT.
+	GT *string
 
 	// The less than or equal to operator. The Evaluation results will have
 	// FilterVariable values that are less than or equal to the value specified with
@@ -130,21 +105,46 @@ type DescribeEvaluationsInput struct {
 	// that are less than the value specified with LT.
 	LT *string
 
+	// The maximum number of Evaluation to include in the result.
+	Limit *int32
+
 	// The not equal to operator. The Evaluation results will have FilterVariable
 	// values not equal to the value specified with NE.
 	NE *string
+
+	// The ID of the page in the paginated results.
+	NextToken *string
+
+	// A string that is found at the beginning of a variable, such as Name or Id. For
+	// example, an Evaluation could have the Name2014-09-09-HolidayGiftMailer. To
+	// search for this Evaluation, select Name for the FilterVariable and any of the
+	// following strings for the Prefix:  <ul> <li> <p>2014-09</p> </li> <li>
+	// <p>2014-09-09</p> </li> <li> <p>2014-09-09-Holiday</p> </li> </ul>
+	Prefix *string
+
+	// A two-value parameter that determines the sequence of the resulting list of
+	// Evaluation.
+	//
+	//     * asc - Arranges the list in ascending order (A-Z, 0-9).
+	//
+	//     *
+	// dsc - Arranges the list in descending order (Z-A, 9-0).
+	//
+	// Results are sorted by
+	// FilterVariable.
+	SortOrder types.SortOrder
 }
 
 // Represents the query results from a DescribeEvaluations operation. The content
 // is essentially a list of Evaluation.
 type DescribeEvaluationsOutput struct {
 
-	// A list of Evaluation that meet the search criteria.
-	Results []*types.Evaluation
-
 	// The ID of the next page in the paginated results that indicates at least one
 	// more page follows.
 	NextToken *string
+
+	// A list of Evaluation that meet the search criteria.
+	Results []*types.Evaluation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

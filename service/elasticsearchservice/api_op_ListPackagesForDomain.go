@@ -74,12 +74,12 @@ type ListPackagesForDomainInput struct {
 // Container for response parameters to ListPackagesForDomain () operation.
 type ListPackagesForDomainOutput struct {
 
+	// List of DomainPackageDetails objects.
+	DomainPackageDetailsList []*types.DomainPackageDetails
+
 	// Pagination token that needs to be supplied to the next call to get the next page
 	// of results.
 	NextToken *string
-
-	// List of DomainPackageDetails objects.
-	DomainPackageDetailsList []*types.DomainPackageDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

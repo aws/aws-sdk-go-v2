@@ -60,17 +60,17 @@ func (c *Client) RegisterTransitGateway(ctx context.Context, params *RegisterTra
 
 type RegisterTransitGatewayInput struct {
 
+	// The ID of the global network.
+	//
+	// This member is required.
+	GlobalNetworkId *string
+
 	// The Amazon Resource Name (ARN) of the transit gateway. For more information, see
 	// Resources Defined by Amazon EC2
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazonec2.html#amazonec2-resources-for-iam-policies).
 	//
 	// This member is required.
 	TransitGatewayArn *string
-
-	// The ID of the global network.
-	//
-	// This member is required.
-	GlobalNetworkId *string
 }
 
 type RegisterTransitGatewayOutput struct {

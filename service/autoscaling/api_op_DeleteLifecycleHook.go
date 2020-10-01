@@ -58,15 +58,15 @@ func (c *Client) DeleteLifecycleHook(ctx context.Context, params *DeleteLifecycl
 
 type DeleteLifecycleHookInput struct {
 
-	// The name of the lifecycle hook.
-	//
-	// This member is required.
-	LifecycleHookName *string
-
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
+
+	// The name of the lifecycle hook.
+	//
+	// This member is required.
+	LifecycleHookName *string
 }
 
 type DeleteLifecycleHookOutput struct {

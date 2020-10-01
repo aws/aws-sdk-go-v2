@@ -73,12 +73,12 @@ type ListWebsiteCertificateAuthoritiesInput struct {
 
 type ListWebsiteCertificateAuthoritiesOutput struct {
 
-	// Information about the certificates.
-	WebsiteCertificateAuthorities []*types.WebsiteCaSummary
-
 	// The pagination token used to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
+
+	// Information about the certificates.
+	WebsiteCertificateAuthorities []*types.WebsiteCaSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

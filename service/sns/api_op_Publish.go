@@ -124,25 +124,8 @@ type PublishInput struct {
 	// This member is required.
 	Message *string
 
-	// Optional parameter to be used as the "Subject" line when the message is
-	// delivered to email endpoints. This field will also be included, if present, in
-	// the standard JSON messages delivered to other endpoints. Constraints: Subjects
-	// must be ASCII text that begins with a letter, number, or punctuation mark; must
-	// not include line breaks or control characters; and must be less than 100
-	// characters long.
-	Subject *string
-
-	// If you don't specify a value for the TargetArn parameter, you must specify a
-	// value for the PhoneNumber or TopicArn parameters.
-	TargetArn *string
-
 	// Message attributes for Publish action.
 	MessageAttributes map[string]*types.MessageAttributeValue
-
-	// The phone number to which you want to deliver an SMS message. Use E.164 format.
-	// If you don't specify a value for the PhoneNumber parameter, you must specify a
-	// value for the TargetArn or TopicArn parameters.
-	PhoneNumber *string
 
 	// Set MessageStructure to json if you want to send a different message for each
 	// protocol. For example, using one publish action, you can send a short message to
@@ -159,6 +142,23 @@ type PublishInput struct {
 	// keys that define the message you want to send to a specific transport protocol
 	// (e.g., "http"). Valid value: json
 	MessageStructure *string
+
+	// The phone number to which you want to deliver an SMS message. Use E.164 format.
+	// If you don't specify a value for the PhoneNumber parameter, you must specify a
+	// value for the TargetArn or TopicArn parameters.
+	PhoneNumber *string
+
+	// Optional parameter to be used as the "Subject" line when the message is
+	// delivered to email endpoints. This field will also be included, if present, in
+	// the standard JSON messages delivered to other endpoints. Constraints: Subjects
+	// must be ASCII text that begins with a letter, number, or punctuation mark; must
+	// not include line breaks or control characters; and must be less than 100
+	// characters long.
+	Subject *string
+
+	// If you don't specify a value for the TargetArn parameter, you must specify a
+	// value for the PhoneNumber or TopicArn parameters.
+	TargetArn *string
 
 	// The topic you want to publish to. If you don't specify a value for the TopicArn
 	// parameter, you must specify a value for the PhoneNumber or TargetArn parameters.

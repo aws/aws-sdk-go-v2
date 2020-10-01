@@ -59,6 +59,21 @@ func (c *Client) CreateApi(ctx context.Context, params *CreateApiInput, optFns .
 // Creates a new Api resource to represent an API.
 type CreateApiInput struct {
 
+	// The name of the API.
+	//
+	// This member is required.
+	Name *string
+
+	// The API protocol.
+	//
+	// This member is required.
+	ProtocolType types.ProtocolType
+
+	// An API key selection expression. Supported only for WebSocket APIs. See API Key
+	// Selection Expressions
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
+	ApiKeySelectionExpression *string
+
 	// A CORS configuration. Supported only for HTTP APIs. See Configuring CORS
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
 	// for more information.
@@ -73,11 +88,12 @@ type CreateApiInput struct {
 	// HTTP integrations. Supported only for HTTP APIs.
 	CredentialsArn *string
 
-	// A version identifier for the API.
-	Version *string
-
 	// The description of the API.
 	Description *string
+
+	// Avoid validating models when creating a deployment. Supported only for WebSocket
+	// APIs.
+	DisableSchemaValidation *bool
 
 	// This property is part of quick create. If you don't specify a routeKey, a
 	// default route of $default is created. The $default route acts as a catch-all for
@@ -85,6 +101,15 @@ type CreateApiInput struct {
 	// can't be modified. You can add routes after creating the API, and you can update
 	// the route keys of additional routes. Supported only for HTTP APIs.
 	RouteKey *string
+
+	// The route selection expression for the API. For HTTP APIs, the
+	// routeSelectionExpression must be ${request.method} ${request.path}. If not
+	// provided, this will be the default for HTTP APIs. This property is required for
+	// WebSocket APIs.
+	RouteSelectionExpression *string
+
+	// The collection of tags. Each tag element is associated with a given resource.
+	Tags map[string]*string
 
 	// This property is part of quick create. Quick create produces an API with an
 	// integration, a default catch-all route, and a default stage which is configured
@@ -94,53 +119,33 @@ type CreateApiInput struct {
 	// HTTP APIs.
 	Target *string
 
-	// Avoid validating models when creating a deployment. Supported only for WebSocket
-	// APIs.
-	DisableSchemaValidation *bool
+	// A version identifier for the API.
+	Version *string
+}
 
-	// The collection of tags. Each tag element is associated with a given resource.
-	Tags map[string]*string
+type CreateApiOutput struct {
 
-	// The name of the API.
-	//
-	// This member is required.
-	Name *string
+	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+	// stage name is typically appended to this URI to form a complete path to a
+	// deployed API stage.
+	ApiEndpoint *string
+
+	// The API ID.
+	ApiId *string
 
 	// An API key selection expression. Supported only for WebSocket APIs. See API Key
 	// Selection Expressions
 	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
 	ApiKeySelectionExpression *string
 
-	// The route selection expression for the API. For HTTP APIs, the
-	// routeSelectionExpression must be ${request.method} ${request.path}. If not
-	// provided, this will be the default for HTTP APIs. This property is required for
-	// WebSocket APIs.
-	RouteSelectionExpression *string
+	// A CORS configuration. Supported only for HTTP APIs.
+	CorsConfiguration *types.Cors
 
-	// The API protocol.
-	//
-	// This member is required.
-	ProtocolType types.ProtocolType
-}
+	// The timestamp when the API was created.
+	CreatedDate *time.Time
 
-type CreateApiOutput struct {
-
-	// The name of the API.
-	Name *string
-
-	// The API protocol.
-	ProtocolType types.ProtocolType
-
-	// The route selection expression for the API. For HTTP APIs, the
-	// routeSelectionExpression must be ${request.method} ${request.path}. If not
-	// provided, this will be the default for HTTP APIs. This property is required for
-	// WebSocket APIs.
-	RouteSelectionExpression *string
-
-	// The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
-	// stage name is typically appended to this URI to form a complete path to a
-	// deployed API stage.
-	ApiEndpoint *string
+	// The description of the API.
+	Description *string
 
 	// Avoid validating models when creating a deployment. Supported only for WebSocket
 	// APIs.
@@ -151,32 +156,27 @@ type CreateApiOutput struct {
 	// only for HTTP APIs.
 	ImportInfo []*string
 
-	// The description of the API.
-	Description *string
+	// The name of the API.
+	Name *string
 
-	// The warning messages reported when failonwarnings is turned on during API
-	// import.
-	Warnings []*string
+	// The API protocol.
+	ProtocolType types.ProtocolType
 
-	// The API ID.
-	ApiId *string
-
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions
-	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions).
-	ApiKeySelectionExpression *string
-
-	// A version identifier for the API.
-	Version *string
-
-	// A CORS configuration. Supported only for HTTP APIs.
-	CorsConfiguration *types.Cors
+	// The route selection expression for the API. For HTTP APIs, the
+	// routeSelectionExpression must be ${request.method} ${request.path}. If not
+	// provided, this will be the default for HTTP APIs. This property is required for
+	// WebSocket APIs.
+	RouteSelectionExpression *string
 
 	// A collection of tags associated with the API.
 	Tags map[string]*string
 
-	// The timestamp when the API was created.
-	CreatedDate *time.Time
+	// A version identifier for the API.
+	Version *string
+
+	// The warning messages reported when failonwarnings is turned on during API
+	// import.
+	Warnings []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

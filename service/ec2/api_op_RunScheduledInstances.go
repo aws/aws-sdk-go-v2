@@ -68,12 +68,6 @@ func (c *Client) RunScheduledInstances(ctx context.Context, params *RunScheduled
 // Contains the parameters for RunScheduledInstances.
 type RunScheduledInstancesInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The launch specification. You must match the instance type, Availability Zone,
 	// network, and platform of the schedule that you purchased.
 	//
@@ -85,13 +79,19 @@ type RunScheduledInstancesInput struct {
 	// This member is required.
 	ScheduledInstanceId *string
 
-	// The number of instances. Default: 1
-	InstanceCount *int32
-
 	// Unique, case-sensitive identifier that ensures the idempotency of the request.
 	// For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
+	// The number of instances. Default: 1
+	InstanceCount *int32
 }
 
 // Contains the output of RunScheduledInstances.

@@ -115,6 +115,11 @@ func (c *Client) UpdateWebACL(ctx context.Context, params *UpdateWebACLInput, op
 
 type UpdateWebACLInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The WebACLId of the WebACL () that you want to update. WebACLId is returned by
 	// CreateWebACL () and by ListWebACLs ().
 	//
@@ -141,11 +146,6 @@ type UpdateWebACLInput struct {
 	//
 	//     * WafAction (): Contains Type
 	Updates []*types.WebACLUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type UpdateWebACLOutput struct {

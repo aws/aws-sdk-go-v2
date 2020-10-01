@@ -57,6 +57,11 @@ func (c *Client) CreateLocalGatewayRouteTableVpcAssociation(ctx context.Context,
 
 type CreateLocalGatewayRouteTableVpcAssociationInput struct {
 
+	// The ID of the local gateway route table.
+	//
+	// This member is required.
+	LocalGatewayRouteTableId *string
+
 	// The ID of the VPC.
 	//
 	// This member is required.
@@ -67,11 +72,6 @@ type CreateLocalGatewayRouteTableVpcAssociationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The ID of the local gateway route table.
-	//
-	// This member is required.
-	LocalGatewayRouteTableId *string
 
 	// The tags to assign to the local gateway route table VPC association.
 	TagSpecifications []*types.TagSpecification

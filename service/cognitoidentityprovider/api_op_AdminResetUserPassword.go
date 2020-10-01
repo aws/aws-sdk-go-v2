@@ -71,6 +71,11 @@ type AdminResetUserPasswordInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// The user name of the user whose password you wish to reset.
+	//
+	// This member is required.
+	Username *string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -98,11 +103,6 @@ type AdminResetUserPasswordInput struct {
 	//     * Amazon Cognito does not encrypt the the
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
-
-	// The user name of the user whose password you wish to reset.
-	//
-	// This member is required.
-	Username *string
 }
 
 // Represents the response from the server to reset a user password as an

@@ -76,6 +76,43 @@ func (c *Client) UpdateStackInstances(ctx context.Context, params *UpdateStackIn
 
 type UpdateStackInstancesInput struct {
 
+	// The names of one or more Regions in which you want to update parameter values
+	// for stack instances. The overridden parameter values will be applied to all
+	// stack instances in the specified accounts and Regions.
+	//
+	// This member is required.
+	Regions []*string
+
+	// The name or unique ID of the stack set associated with the stack instances.
+	//
+	// This member is required.
+	StackSetName *string
+
+	// [Self-managed permissions] The names of one or more AWS accounts for which you
+	// want to update parameter values for stack instances. The overridden parameter
+	// values will be applied to all stack instances in the specified accounts and
+	// Regions. You can specify Accounts or DeploymentTargets, but not both.
+	Accounts []*string
+
+	// [Service-managed permissions] The AWS Organizations accounts for which you want
+	// to update parameter values for stack instances. If your update targets OUs, the
+	// overridden parameter values only apply to the accounts that are currently in the
+	// target OUs and their child OUs. Accounts added to the target OUs and their child
+	// OUs in the future won't use the overridden values. You can specify Accounts or
+	// DeploymentTargets, but not both.
+	DeploymentTargets *types.DeploymentTargets
+
+	// The unique identifier for this stack set operation. The operation ID also
+	// functions as an idempotency token, to ensure that AWS CloudFormation performs
+	// the stack set operation only once, even if you retry the request multiple times.
+	// You might retry stack set operation requests to ensure that AWS CloudFormation
+	// successfully received them. If you don't specify an operation ID, the SDK
+	// generates one automatically.
+	OperationId *string
+
+	// Preferences for how AWS CloudFormation performs this stack set operation.
+	OperationPreferences *types.StackSetOperationPreferences
+
 	// A list of input parameters whose values you want to update for the specified
 	// stack instances. Any overridden parameter values will be applied to all stack
 	// instances in the specified accounts and Regions. When specifying parameters and
@@ -114,43 +151,6 @@ type UpdateStackInstancesInput struct {
 	// specified in the stack set. Once a stack instance has been updated with the new
 	// parameter, you can then override the parameter value using UpdateStackInstances.
 	ParameterOverrides []*types.Parameter
-
-	// Preferences for how AWS CloudFormation performs this stack set operation.
-	OperationPreferences *types.StackSetOperationPreferences
-
-	// [Service-managed permissions] The AWS Organizations accounts for which you want
-	// to update parameter values for stack instances. If your update targets OUs, the
-	// overridden parameter values only apply to the accounts that are currently in the
-	// target OUs and their child OUs. Accounts added to the target OUs and their child
-	// OUs in the future won't use the overridden values. You can specify Accounts or
-	// DeploymentTargets, but not both.
-	DeploymentTargets *types.DeploymentTargets
-
-	// The names of one or more Regions in which you want to update parameter values
-	// for stack instances. The overridden parameter values will be applied to all
-	// stack instances in the specified accounts and Regions.
-	//
-	// This member is required.
-	Regions []*string
-
-	// The name or unique ID of the stack set associated with the stack instances.
-	//
-	// This member is required.
-	StackSetName *string
-
-	// [Self-managed permissions] The names of one or more AWS accounts for which you
-	// want to update parameter values for stack instances. The overridden parameter
-	// values will be applied to all stack instances in the specified accounts and
-	// Regions. You can specify Accounts or DeploymentTargets, but not both.
-	Accounts []*string
-
-	// The unique identifier for this stack set operation. The operation ID also
-	// functions as an idempotency token, to ensure that AWS CloudFormation performs
-	// the stack set operation only once, even if you retry the request multiple times.
-	// You might retry stack set operation requests to ensure that AWS CloudFormation
-	// successfully received them. If you don't specify an operation ID, the SDK
-	// generates one automatically.
-	OperationId *string
 }
 
 type UpdateStackInstancesOutput struct {

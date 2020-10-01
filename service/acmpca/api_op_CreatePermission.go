@@ -70,15 +70,6 @@ type CreatePermissionInput struct {
 	// This member is required.
 	Actions []types.ActionType
 
-	// The AWS service or identity that receives the permission. At this time, the only
-	// valid principal is acm.amazonaws.com.
-	//
-	// This member is required.
-	Principal *string
-
-	// The ID of the calling account.
-	SourceAccount *string
-
 	// The Amazon Resource Name (ARN) of the CA that grants the permissions. You can
 	// find the ARN by calling the ListCertificateAuthorities () action. This must have
 	// the following form:
@@ -87,6 +78,15 @@ type CreatePermissionInput struct {
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
+
+	// The AWS service or identity that receives the permission. At this time, the only
+	// valid principal is acm.amazonaws.com.
+	//
+	// This member is required.
+	Principal *string
+
+	// The ID of the calling account.
+	SourceAccount *string
 }
 
 type CreatePermissionOutput struct {

@@ -66,6 +66,11 @@ func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstance
 
 type StartInstanceRefreshInput struct {
 
+	// The name of the Auto Scaling group.
+	//
+	// This member is required.
+	AutoScalingGroupName *string
+
 	// Set of preferences associated with the instance refresh request. If not
 	// provided, the default values are used. For MinHealthyPercentage, the default
 	// value is 90. For InstanceWarmup, the default is to use the value specified for
@@ -74,11 +79,6 @@ type StartInstanceRefreshInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html)
 	// in the Amazon EC2 Auto Scaling API Reference.
 	Preferences *types.RefreshPreferences
-
-	// The name of the Auto Scaling group.
-	//
-	// This member is required.
-	AutoScalingGroupName *string
 
 	// The strategy to use for the instance refresh. The only valid value is Rolling. A
 	// rolling update is an update that is applied to all instances in an Auto Scaling

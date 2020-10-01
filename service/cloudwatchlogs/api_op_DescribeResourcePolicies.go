@@ -56,12 +56,12 @@ func (c *Client) DescribeResourcePolicies(ctx context.Context, params *DescribeR
 
 type DescribeResourcePoliciesInput struct {
 
-	// The token for the next set of items to return. The token expires after 24 hours.
-	NextToken *string
-
 	// The maximum number of resource policies to be displayed with one call of this
 	// API.
 	Limit *int32
+
+	// The token for the next set of items to return. The token expires after 24 hours.
+	NextToken *string
 }
 
 type DescribeResourcePoliciesOutput struct {

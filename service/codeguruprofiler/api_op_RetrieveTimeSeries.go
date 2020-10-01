@@ -55,13 +55,13 @@ func (c *Client) RetrieveTimeSeries(ctx context.Context, params *RetrieveTimeSer
 }
 
 type RetrieveTimeSeriesInput struct {
+	ProfilingGroupName *string
+
 	EndTime *time.Time
 
 	FrameMetrics []*types.FrameMetric
 
 	Period *string
-
-	ProfilingGroupName *string
 
 	StartTime *time.Time
 

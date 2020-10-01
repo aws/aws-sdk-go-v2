@@ -80,6 +80,11 @@ type CreateDatasetImportJobInput struct {
 	// This member is required.
 	DataSource *types.DataSource
 
+	// The ARN of the dataset that receives the imported data.
+	//
+	// This member is required.
+	DatasetArn *string
+
 	// The name for the dataset import job.
 	//
 	// This member is required.
@@ -90,11 +95,6 @@ type CreateDatasetImportJobInput struct {
 	//
 	// This member is required.
 	RoleArn *string
-
-	// The ARN of the dataset that receives the imported data.
-	//
-	// This member is required.
-	DatasetArn *string
 }
 
 type CreateDatasetImportJobOutput struct {

@@ -59,14 +59,14 @@ func (c *Client) DisconnectParticipant(ctx context.Context, params *DisconnectPa
 
 type DisconnectParticipantInput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string
-
 	// The authentication token associated with the participant's connection.
 	//
 	// This member is required.
 	ConnectionToken *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
 }
 
 type DisconnectParticipantOutput struct {

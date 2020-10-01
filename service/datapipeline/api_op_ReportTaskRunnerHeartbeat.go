@@ -60,9 +60,6 @@ func (c *Client) ReportTaskRunnerHeartbeat(ctx context.Context, params *ReportTa
 // Contains the parameters for ReportTaskRunnerHeartbeat.
 type ReportTaskRunnerHeartbeatInput struct {
 
-	// The public DNS name of the task runner.
-	Hostname *string
-
 	// The ID of the task runner. This value should be unique across your AWS account.
 	// In the case of AWS Data Pipeline Task Runner launched on a resource managed by
 	// AWS Data Pipeline, the web service provides a unique identifier when it launches
@@ -71,6 +68,9 @@ type ReportTaskRunnerHeartbeatInput struct {
 	//
 	// This member is required.
 	TaskrunnerId *string
+
+	// The public DNS name of the task runner.
+	Hostname *string
 
 	// The type of task the task runner is configured to accept and process. The worker
 	// group is set as a field on objects in the pipeline when they are created. You

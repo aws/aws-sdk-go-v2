@@ -60,26 +60,26 @@ func (c *Client) CreateDistributionConfiguration(ctx context.Context, params *Cr
 
 type CreateDistributionConfigurationInput struct {
 
-	// The description of the distribution configuration.
-	Description *string
-
 	// The idempotency token of the distribution configuration.
 	//
 	// This member is required.
 	ClientToken *string
+
+	// The distributions of the distribution configuration.
+	//
+	// This member is required.
+	Distributions []*types.Distribution
 
 	// The name of the distribution configuration.
 	//
 	// This member is required.
 	Name *string
 
+	// The description of the distribution configuration.
+	Description *string
+
 	// The tags of the distribution configuration.
 	Tags map[string]*string
-
-	// The distributions of the distribution configuration.
-	//
-	// This member is required.
-	Distributions []*types.Distribution
 }
 
 type CreateDistributionConfigurationOutput struct {
@@ -87,12 +87,12 @@ type CreateDistributionConfigurationOutput struct {
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the distribution configuration that was
 	// created by this request.
 	DistributionConfigurationArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

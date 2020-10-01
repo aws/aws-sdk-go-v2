@@ -71,9 +71,6 @@ type PutBotAliasInput struct {
 	// This member is required.
 	BotVersion *string
 
-	// A description of the alias.
-	Description *string
-
 	// The name of the alias. The name is not case sensitive.
 	//
 	// This member is required.
@@ -87,38 +84,41 @@ type PutBotAliasInput struct {
 	// match the $LATEST version, you get a PreconditionFailedException exception.
 	Checksum *string
 
-	// A list of tags to add to the bot alias. You can only add tags when you create an
-	// alias, you can't use the PutBotAlias operation to update the tags on a bot
-	// alias. To update tags, use the TagResource operation.
-	Tags []*types.Tag
-
 	// Settings for conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsRequest
-}
-
-type PutBotAliasOutput struct {
 
 	// A description of the alias.
 	Description *string
 
-	// The settings that determine how Amazon Lex uses conversation logs for the alias.
-	ConversationLogs *types.ConversationLogsResponse
+	// A list of tags to add to the bot alias. You can only add tags when you create an
+	// alias, you can't use the PutBotAlias operation to update the tags on a bot
+	// alias. To update tags, use the TagResource operation.
+	Tags []*types.Tag
+}
 
-	// The date that the bot alias was updated. When you create a resource, the
-	// creation date and the last updated date are the same.
-	LastUpdatedDate *time.Time
+type PutBotAliasOutput struct {
 
 	// The name of the bot that the alias points to.
 	BotName *string
-
-	// The date that the bot alias was created.
-	CreatedDate *time.Time
 
 	// The version of the bot that the alias points to.
 	BotVersion *string
 
 	// The checksum for the current version of the alias.
 	Checksum *string
+
+	// The settings that determine how Amazon Lex uses conversation logs for the alias.
+	ConversationLogs *types.ConversationLogsResponse
+
+	// The date that the bot alias was created.
+	CreatedDate *time.Time
+
+	// A description of the alias.
+	Description *string
+
+	// The date that the bot alias was updated. When you create a resource, the
+	// creation date and the last updated date are the same.
+	LastUpdatedDate *time.Time
 
 	// The name of the alias.
 	Name *string

@@ -63,12 +63,6 @@ func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *
 //
 type RevokeClusterSecurityGroupIngressInput struct {
 
-	// The AWS account number of the owner of the security group specified in the
-	// EC2SecurityGroupName parameter. The AWS access key ID is not an acceptable
-	// value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName must also
-	// be provided. and CIDRIP cannot be provided. Example: 111122223333
-	EC2SecurityGroupOwnerId *string
-
 	// The name of the security Group from which to revoke the ingress rule.
 	//
 	// This member is required.
@@ -83,6 +77,12 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	// EC2SecurityGroupName is specified, EC2SecurityGroupOwnerId must also be provided
 	// and CIDRIP cannot be provided.
 	EC2SecurityGroupName *string
+
+	// The AWS account number of the owner of the security group specified in the
+	// EC2SecurityGroupName parameter. The AWS access key ID is not an acceptable
+	// value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName must also
+	// be provided. and CIDRIP cannot be provided. Example: 111122223333
+	EC2SecurityGroupOwnerId *string
 }
 
 type RevokeClusterSecurityGroupIngressOutput struct {

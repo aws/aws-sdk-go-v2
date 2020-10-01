@@ -80,6 +80,25 @@ type IssueCertificateInput struct {
 	// This member is required.
 	Csr []byte
 
+	// The name of the algorithm that will be used to sign the certificate to be
+	// issued.
+	//
+	// This member is required.
+	SigningAlgorithm types.SigningAlgorithm
+
+	// The type of the validity period.
+	//
+	// This member is required.
+	Validity *types.Validity
+
+	// Custom string that can be used to distinguish between calls to the
+	// IssueCertificate action. Idempotency tokens time out after one hour. Therefore,
+	// if you call IssueCertificate multiple times with the same idempotency token
+	// within 5 minutes, ACM Private CA recognizes that you are requesting only one
+	// certificate and will issue only one. If you change the idempotency token for
+	// each call, PCA recognizes that you are requesting multiple certificates.
+	IdempotencyToken *string
+
 	// Specifies a custom configuration template to use when issuing a certificate. If
 	// this parameter is not provided, ACM Private CA defaults to the
 	// EndEntityCertificate/V1 template. The following service-owned TemplateArn values
@@ -107,25 +126,6 @@ type IssueCertificateInput struct {
 	// Templates
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html).
 	TemplateArn *string
-
-	// The type of the validity period.
-	//
-	// This member is required.
-	Validity *types.Validity
-
-	// Custom string that can be used to distinguish between calls to the
-	// IssueCertificate action. Idempotency tokens time out after one hour. Therefore,
-	// if you call IssueCertificate multiple times with the same idempotency token
-	// within 5 minutes, ACM Private CA recognizes that you are requesting only one
-	// certificate and will issue only one. If you change the idempotency token for
-	// each call, PCA recognizes that you are requesting multiple certificates.
-	IdempotencyToken *string
-
-	// The name of the algorithm that will be used to sign the certificate to be
-	// issued.
-	//
-	// This member is required.
-	SigningAlgorithm types.SigningAlgorithm
 }
 
 type IssueCertificateOutput struct {

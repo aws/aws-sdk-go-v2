@@ -108,18 +108,18 @@ type CancelRotateSecretInput struct {
 
 type CancelRotateSecretOutput struct {
 
+	// The ARN of the secret for which rotation was canceled.
+	ARN *string
+
+	// The friendly name of the secret for which rotation was canceled.
+	Name *string
+
 	// The unique identifier of the version of the secret created during the rotation.
 	// This version might not be complete, and should be evaluated for possible
 	// deletion. At the very least, you should remove the VersionStage value AWSPENDING
 	// to enable this version to be deleted. Failing to clean up a cancelled rotation
 	// can block you from successfully starting future rotations.
 	VersionId *string
-
-	// The ARN of the secret for which rotation was canceled.
-	ARN *string
-
-	// The friendly name of the secret for which rotation was canceled.
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -72,26 +72,12 @@ func (c *Client) CreateStateMachine(ctx context.Context, params *CreateStateMach
 
 type CreateStateMachineInput struct {
 
-	// Tags to be added when creating a state machine. An array of key-value pairs. For
-	// more information, see Using Cost Allocation Tags
-	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management User Guide, and Controlling Access Using
-	// IAM Tags
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
-	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
-	// = + - @.
-	Tags []*types.Tag
-
-	// Determines whether a Standard or Express state machine is created. The default
-	// is STANDARD. You cannot update the type of a state machine once it has been
-	// created.
-	Type types.StateMachineType
-
-	// Defines what execution history events are logged and where they are logged. By
-	// default, the level is set to OFF. For more information see Log Levels
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
-	// in the AWS Step Functions User Guide.
-	LoggingConfiguration *types.LoggingConfiguration
+	// The Amazon States Language definition of the state machine. See Amazon States
+	// Language
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
+	//
+	// This member is required.
+	Definition *string
 
 	// The name of the state machine. A name must not contain:
 	//
@@ -119,12 +105,26 @@ type CreateStateMachineInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language
-	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html).
-	//
-	// This member is required.
-	Definition *string
+	// Defines what execution history events are logged and where they are logged. By
+	// default, the level is set to OFF. For more information see Log Levels
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
+	// in the AWS Step Functions User Guide.
+	LoggingConfiguration *types.LoggingConfiguration
+
+	// Tags to be added when creating a state machine. An array of key-value pairs. For
+	// more information, see Using Cost Allocation Tags
+	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+	// in the AWS Billing and Cost Management User Guide, and Controlling Access Using
+	// IAM Tags
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
+	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
+	// = + - @.
+	Tags []*types.Tag
+
+	// Determines whether a Standard or Express state machine is created. The default
+	// is STANDARD. You cannot update the type of a state machine once it has been
+	// created.
+	Type types.StateMachineType
 }
 
 type CreateStateMachineOutput struct {

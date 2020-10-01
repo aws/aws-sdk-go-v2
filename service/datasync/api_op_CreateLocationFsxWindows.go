@@ -57,19 +57,10 @@ func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLoc
 
 type CreateLocationFsxWindowsInput struct {
 
-	// The Amazon Resource Names (ARNs) of the security groups that are to use to
-	// configure the FSx for Windows file system.
-	//
-	// This member is required.
-	SecurityGroupArns []*string
-
 	// The Amazon Resource Name (ARN) for the FSx for Windows file system.
 	//
 	// This member is required.
 	FsxFilesystemArn *string
-
-	// The name of the Windows domain that the FSx for Windows server belongs to.
-	Domain *string
 
 	// The password of the user who has the permissions to access files and folders in
 	// the FSx for Windows file system.
@@ -77,11 +68,11 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	Password *string
 
-	// The key-value pair that represents a tag that you want to add to the resource.
-	// The value can be an empty string. This value helps you manage, filter, and
-	// search for your resources. We recommend that you create a name tag for your
-	// location.
-	Tags []*types.TagListEntry
+	// The Amazon Resource Names (ARNs) of the security groups that are to use to
+	// configure the FSx for Windows file system.
+	//
+	// This member is required.
+	SecurityGroupArns []*string
 
 	// The user who has the permissions to access files and folders in the FSx for
 	// Windows file system.
@@ -89,10 +80,19 @@ type CreateLocationFsxWindowsInput struct {
 	// This member is required.
 	User *string
 
+	// The name of the Windows domain that the FSx for Windows server belongs to.
+	Domain *string
+
 	// A subdirectory in the location’s path. This subdirectory in the Amazon FSx for
 	// Windows file system is used to read data from the Amazon FSx for Windows source
 	// location or write data to the FSx for Windows destination.
 	Subdirectory *string
+
+	// The key-value pair that represents a tag that you want to add to the resource.
+	// The value can be an empty string. This value helps you manage, filter, and
+	// search for your resources. We recommend that you create a name tag for your
+	// location.
+	Tags []*types.TagListEntry
 }
 
 type CreateLocationFsxWindowsOutput struct {

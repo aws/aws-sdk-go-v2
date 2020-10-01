@@ -63,6 +63,14 @@ func (c *Client) ListGroupPolicies(ctx context.Context, params *ListGroupPolicie
 
 type ListGroupPoliciesInput struct {
 
+	// The name of the group to list policies for. This parameter allows (through its
+	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
+	// consisting of upper and lowercase alphanumeric characters with no spaces. You
+	// can also include any of the following characters: _+=,.@-
+	//
+	// This member is required.
+	GroupName *string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -77,14 +85,6 @@ type ListGroupPoliciesInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// The name of the group to list policies for. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex)) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
-	//
-	// This member is required.
-	GroupName *string
 }
 
 // Contains the response to a successful ListGroupPolicies () request.
@@ -98,10 +98,6 @@ type ListGroupPoliciesOutput struct {
 	// This member is required.
 	PolicyNames []*string
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
-
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -109,6 +105,10 @@ type ListGroupPoliciesOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

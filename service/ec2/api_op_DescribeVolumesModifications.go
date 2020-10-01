@@ -65,6 +65,12 @@ func (c *Client) DescribeVolumesModifications(ctx context.Context, params *Descr
 
 type DescribeVolumesModificationsInput struct {
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// The filters.
 	//
 	//     * modification-state - The current modification state
@@ -101,18 +107,12 @@ type DescribeVolumesModificationsInput struct {
 	// of the volume.
 	Filters []*types.Filter
 
-	// The nextToken value returned by a previous paginated request.
-	NextToken *string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The maximum number of results (up to a limit of 500) to be returned in a
 	// paginated request.
 	MaxResults *int32
+
+	// The nextToken value returned by a previous paginated request.
+	NextToken *string
 
 	// The IDs of the volumes.
 	VolumeIds []*string
@@ -120,11 +120,11 @@ type DescribeVolumesModificationsInput struct {
 
 type DescribeVolumesModificationsOutput struct {
 
-	// Information about the volume modifications.
-	VolumesModifications []*types.VolumeModification
-
 	// Token for pagination, null if there are no more results
 	NextToken *string
+
+	// Information about the volume modifications.
+	VolumesModifications []*types.VolumeModification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

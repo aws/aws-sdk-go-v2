@@ -57,14 +57,14 @@ func (c *Client) DescribeEffectiveInstanceAssociations(ctx context.Context, para
 
 type DescribeEffectiveInstanceAssociationsInput struct {
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
 	// The instance ID for which you want to view all associations.
 	//
 	// This member is required.
 	InstanceId *string
+
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)

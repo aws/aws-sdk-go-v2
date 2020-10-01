@@ -62,8 +62,15 @@ func (c *Client) CreateLaunchTemplate(ctx context.Context, params *CreateLaunchT
 
 type CreateLaunchTemplateInput struct {
 
-	// The tags to apply to the launch template during creation.
-	TagSpecifications []*types.TagSpecification
+	// The information for the launch template.
+	//
+	// This member is required.
+	LaunchTemplateData *types.RequestLaunchTemplateData
+
+	// A name for the launch template.
+	//
+	// This member is required.
+	LaunchTemplateName *string
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. For more information, see Ensuring Idempotency
@@ -71,21 +78,14 @@ type CreateLaunchTemplateInput struct {
 	// Constraint: Maximum 128 ASCII characters.
 	ClientToken *string
 
-	// A name for the launch template.
-	//
-	// This member is required.
-	LaunchTemplateName *string
-
-	// The information for the launch template.
-	//
-	// This member is required.
-	LaunchTemplateData *types.RequestLaunchTemplateData
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The tags to apply to the launch template during creation.
+	TagSpecifications []*types.TagSpecification
 
 	// A description for the first version of the launch template.
 	VersionDescription *string

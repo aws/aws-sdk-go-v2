@@ -58,6 +58,11 @@ func (c *Client) DescribeVpcAttribute(ctx context.Context, params *DescribeVpcAt
 
 type DescribeVpcAttributeInput struct {
 
+	// The VPC attribute.
+	//
+	// This member is required.
+	Attribute types.VpcAttributeName
+
 	// The ID of the VPC.
 	//
 	// This member is required.
@@ -68,27 +73,22 @@ type DescribeVpcAttributeInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The VPC attribute.
-	//
-	// This member is required.
-	Attribute types.VpcAttributeName
 }
 
 type DescribeVpcAttributeOutput struct {
 
-	// The ID of the VPC.
-	VpcId *string
+	// Indicates whether the instances launched in the VPC get DNS hostnames. If this
+	// attribute is true, instances in the VPC get DNS hostnames; otherwise, they do
+	// not.
+	EnableDnsHostnames *types.AttributeBooleanValue
 
 	// Indicates whether DNS resolution is enabled for the VPC. If this attribute is
 	// true, the Amazon DNS server resolves DNS hostnames for your instances to their
 	// corresponding IP addresses; otherwise, it does not.
 	EnableDnsSupport *types.AttributeBooleanValue
 
-	// Indicates whether the instances launched in the VPC get DNS hostnames. If this
-	// attribute is true, instances in the VPC get DNS hostnames; otherwise, they do
-	// not.
-	EnableDnsHostnames *types.AttributeBooleanValue
+	// The ID of the VPC.
+	VpcId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

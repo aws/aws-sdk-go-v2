@@ -72,12 +72,12 @@ type StopDominantLanguageDetectionJobInput struct {
 
 type StopDominantLanguageDetectionJobOutput struct {
 
+	// The identifier of the dominant language detection job to stop.
+	JobId *string
+
 	// Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was
 	// previously stopped with the StopDominantLanguageDetectionJob operation.
 	JobStatus types.JobStatus
-
-	// The identifier of the dominant language detection job to stop.
-	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

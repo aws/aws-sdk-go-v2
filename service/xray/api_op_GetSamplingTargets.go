@@ -72,11 +72,11 @@ type GetSamplingTargetsOutput struct {
 	// should call GetSamplingRules () to get the latest version.
 	LastRuleModification *time.Time
 
-	// Information about SamplingStatisticsDocument () that X-Ray could not process.
-	UnprocessedStatistics []*types.UnprocessedStatistics
-
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []*types.SamplingTargetDocument
+
+	// Information about SamplingStatisticsDocument () that X-Ray could not process.
+	UnprocessedStatistics []*types.UnprocessedStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -70,16 +70,16 @@ type GetEmailTemplateInput struct {
 // The following element is returned by the service.
 type GetEmailTemplateOutput struct {
 
-	// The name of the template you want to retrieve.
-	//
-	// This member is required.
-	TemplateName *string
-
 	// The content of the email template, composed of a subject line, an HTML part, and
 	// a text-only part.
 	//
 	// This member is required.
 	TemplateContent *types.EmailTemplateContent
+
+	// The name of the template you want to retrieve.
+	//
+	// This member is required.
+	TemplateName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

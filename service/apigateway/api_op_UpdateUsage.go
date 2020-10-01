@@ -61,28 +61,28 @@ func (c *Client) UpdateUsage(ctx context.Context, params *UpdateUsageInput, optF
 // usage plan associated with a specified API key.
 type UpdateUsageInput struct {
 
-	// [Required] The Id of the usage plan associated with the usage data.
-	//
-	// This member is required.
-	UsagePlanId *string
-
-	TemplateSkipList []*string
-
-	Title *string
-
 	// [Required] The identifier of the API key associated with the usage plan in which
 	// a temporary extension is granted to the remaining quota.
 	//
 	// This member is required.
 	KeyId *string
 
-	Name *string
+	// [Required] The Id of the usage plan associated with the usage data.
+	//
+	// This member is required.
+	UsagePlanId *string
 
-	Template *bool
+	Name *string
 
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents the usage data of a usage plan. Create and Use Usage Plans
@@ -94,12 +94,6 @@ type UpdateUsageOutput struct {
 	// The ending date of the usage data.
 	EndDate *string
 
-	// The plan Id associated with this usage data.
-	UsagePlanId *string
-
-	// The starting date of the usage data.
-	StartDate *string
-
 	// The usage data, as daily logs of used and remaining quotas, over the specified
 	// time interval indexed over the API keys in a usage plan. For example, {...,
 	// "values" : { "{api_key}" : [ [0, 100], [10, 90], [100, 10]]}, where {api_key}
@@ -109,6 +103,12 @@ type UpdateUsageOutput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	// The starting date of the usage data.
+	StartDate *string
+
+	// The plan Id associated with this usage data.
+	UsagePlanId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

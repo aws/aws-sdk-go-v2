@@ -93,10 +93,6 @@ type ListInstanceProfilesForRoleOutput struct {
 	// This member is required.
 	InstanceProfiles []*types.InstanceProfile
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
-
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -104,6 +100,10 @@ type ListInstanceProfilesForRoleOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,17 +58,17 @@ func (c *Client) GetMembers(ctx context.Context, params *GetMembersInput, optFns
 
 type GetMembersInput struct {
 
-	// The ARN of the behavior graph for which to request the member details.
-	//
-	// This member is required.
-	GraphArn *string
-
 	// The list of AWS account identifiers for the member account for which to return
 	// member details. You cannot use GetMembers to retrieve information about member
 	// accounts that were removed from the behavior graph.
 	//
 	// This member is required.
 	AccountIds []*string
+
+	// The ARN of the behavior graph for which to request the member details.
+	//
+	// This member is required.
+	GraphArn *string
 }
 
 type GetMembersOutput struct {

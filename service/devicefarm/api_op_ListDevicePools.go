@@ -58,15 +58,6 @@ func (c *Client) ListDevicePools(ctx context.Context, params *ListDevicePoolsInp
 // Represents the result of a list device pools request.
 type ListDevicePoolsInput struct {
 
-	// The device pools' type. Allowed values include:
-	//
-	//     * CURATED: A device pool
-	// that is created and managed by AWS Device Farm.
-	//
-	//     * PRIVATE: A device pool
-	// that is created and managed by the device pool developer.
-	Type types.DevicePoolType
-
 	// The project ARN.
 	//
 	// This member is required.
@@ -75,6 +66,15 @@ type ListDevicePoolsInput struct {
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
+
+	// The device pools' type. Allowed values include:
+	//
+	//     * CURATED: A device pool
+	// that is created and managed by AWS Device Farm.
+	//
+	//     * PRIVATE: A device pool
+	// that is created and managed by the device pool developer.
+	Type types.DevicePoolType
 }
 
 // Represents the result of a list device pools request.

@@ -57,16 +57,16 @@ func (c *Client) DeleteJourney(ctx context.Context, params *DeleteJourneyInput, 
 
 type DeleteJourneyInput struct {
 
-	// The unique identifier for the journey.
-	//
-	// This member is required.
-	JourneyId *string
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The unique identifier for the journey.
+	//
+	// This member is required.
+	JourneyId *string
 }
 
 type DeleteJourneyOutput struct {

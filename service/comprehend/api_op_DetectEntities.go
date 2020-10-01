@@ -58,6 +58,12 @@ func (c *Client) DetectEntities(ctx context.Context, params *DetectEntitiesInput
 
 type DetectEntitiesInput struct {
 
+	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
+	// encoded characters.
+	//
+	// This member is required.
+	Text *string
+
 	// The Amazon Resource Name of an endpoint that is associated with a custom entity
 	// recognition model. Provide an endpoint if you want to detect entities by using
 	// your own custom model instead of the default model that is used by Amazon
@@ -72,12 +78,6 @@ type DetectEntitiesInput struct {
 	// model, Amazon Comprehend uses the language of your custom model, and it ignores
 	// any language code that you specify here.
 	LanguageCode types.LanguageCode
-
-	// A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8
-	// encoded characters.
-	//
-	// This member is required.
-	Text *string
 }
 
 type DetectEntitiesOutput struct {

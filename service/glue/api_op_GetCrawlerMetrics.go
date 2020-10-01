@@ -68,12 +68,12 @@ type GetCrawlerMetricsInput struct {
 
 type GetCrawlerMetricsOutput struct {
 
+	// A list of metrics for the specified crawler.
+	CrawlerMetricsList []*types.CrawlerMetrics
+
 	// A continuation token, if the returned list does not contain the last metric
 	// available.
 	NextToken *string
-
-	// A list of metrics for the specified crawler.
-	CrawlerMetricsList []*types.CrawlerMetrics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

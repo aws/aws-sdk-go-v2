@@ -58,11 +58,24 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 // Represents the input of a CreateDeployment operation.
 type CreateDeploymentInput struct {
 
+	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
+	// account.
+	//
+	// This member is required.
+	ApplicationName *string
+
+	// Configuration information for an automatic rollback that is added when a
+	// deployment is created.
+	AutoRollbackConfiguration *types.AutoRollbackConfiguration
+
 	// The name of a deployment configuration associated with the IAM user or AWS
 	// account. If not specified, the value configured in the deployment group is used
 	// as the default. If the deployment group does not have a deployment configuration
 	// associated with it, CodeDeployDefault.OneAtATime is used by default.
 	DeploymentConfigName *string
+
+	// The name of the deployment group.
+	DeploymentGroupName *string
 
 	// A comment about the deployment.
 	Description *string
@@ -82,10 +95,6 @@ type CreateDeploymentInput struct {
 	//     * RETAIN: The version of the file already on the instance is
 	// kept and used as part of the new deployment.
 	FileExistsBehavior types.FileExistsBehavior
-
-	// Information about the instances that belong to the replacement environment in a
-	// blue/green deployment.
-	TargetInstances *types.TargetInstances
 
 	// If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic
 	// deployment lifecycle event to an instance fails, then the deployment continues
@@ -109,25 +118,16 @@ type CreateDeploymentInput struct {
 	// and <code>AfterBlockTraffic</code> failures should be ignored. </p>
 	IgnoreApplicationStopFailures *bool
 
-	// Indicates whether to deploy to all instances or only to instances that are not
-	// running the latest application revision.
-	UpdateOutdatedInstancesOnly *bool
-
-	// The name of the deployment group.
-	DeploymentGroupName *string
-
-	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
-	// account.
-	//
-	// This member is required.
-	ApplicationName *string
-
 	// The type and location of the revision to deploy.
 	Revision *types.RevisionLocation
 
-	// Configuration information for an automatic rollback that is added when a
-	// deployment is created.
-	AutoRollbackConfiguration *types.AutoRollbackConfiguration
+	// Information about the instances that belong to the replacement environment in a
+	// blue/green deployment.
+	TargetInstances *types.TargetInstances
+
+	// Indicates whether to deploy to all instances or only to instances that are not
+	// running the latest application revision.
+	UpdateOutdatedInstancesOnly *bool
 }
 
 // Represents the output of a CreateDeployment operation.

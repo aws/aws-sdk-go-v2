@@ -57,14 +57,14 @@ func (c *Client) ListDocumentVersions(ctx context.Context, params *ListDocumentV
 
 type ListDocumentVersionsInput struct {
 
-	// The maximum number of items to return for this call. The call also returns a
-	// token that you can specify in a subsequent call to get the next set of results.
-	MaxResults *int32
-
 	// The name of the document. You can specify an Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	Name *string
+
+	// The maximum number of items to return for this call. The call also returns a
+	// token that you can specify in a subsequent call to get the next set of results.
+	MaxResults *int32
 
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
@@ -73,12 +73,12 @@ type ListDocumentVersionsInput struct {
 
 type ListDocumentVersionsOutput struct {
 
+	// The document versions.
+	DocumentVersions []*types.DocumentVersionInfo
+
 	// The token to use when requesting the next set of items. If there are no
 	// additional items to return, the string is empty.
 	NextToken *string
-
-	// The document versions.
-	DocumentVersions []*types.DocumentVersionInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

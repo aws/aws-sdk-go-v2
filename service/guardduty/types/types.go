@@ -21,31 +21,31 @@ type AccessControlList struct {
 // Contains information about the access keys.
 type AccessKeyDetails struct {
 
+	// The access key ID of the user.
+	AccessKeyId *string
+
+	// The principal ID of the user.
+	PrincipalId *string
+
 	// The name of the user.
 	UserName *string
 
 	// The type of the user.
 	UserType *string
-
-	// The principal ID of the user.
-	PrincipalId *string
-
-	// The access key ID of the user.
-	AccessKeyId *string
 }
 
 // Contains information about the account.
 type AccountDetail struct {
 
-	// The email address of the member account.
-	//
-	// This member is required.
-	Email *string
-
 	// The member account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The email address of the member account.
+	//
+	// This member is required.
+	Email *string
 }
 
 // Contains information about the account level permissions on the S3 bucket.
@@ -58,50 +58,50 @@ type AccountLevelPermissions struct {
 // Contains information about actions.
 type Action struct {
 
+	// The GuardDuty finding activity type.
+	ActionType *string
+
 	// Information about the AWS_API_CALL action described in this finding.
 	AwsApiCallAction *AwsApiCallAction
+
+	// Information about the DNS_REQUEST action described in this finding.
+	DnsRequestAction *DnsRequestAction
 
 	// Information about the NETWORK_CONNECTION action described in this finding.
 	NetworkConnectionAction *NetworkConnectionAction
 
 	// Information about the PORT_PROBE action described in this finding.
 	PortProbeAction *PortProbeAction
-
-	// The GuardDuty finding activity type.
-	ActionType *string
-
-	// Information about the DNS_REQUEST action described in this finding.
-	DnsRequestAction *DnsRequestAction
 }
 
 // The account within the organization specified as the GuardDuty delegated
 // administrator.
 type AdminAccount struct {
 
-	// Indicates whether the account is enabled as the delegated administrator.
-	AdminStatus AdminStatus
-
 	// The AWS account ID for the account.
 	AdminAccountId *string
+
+	// Indicates whether the account is enabled as the delegated administrator.
+	AdminStatus AdminStatus
 }
 
 // Contains information about the API operation.
 type AwsApiCallAction struct {
+
+	// The AWS API name.
+	Api *string
+
+	// The AWS API caller type.
+	CallerType *string
+
+	// The domain information for the AWS API call.
+	DomainDetails *DomainDetails
 
 	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails
 
 	// The AWS service name whose API was invoked.
 	ServiceName *string
-
-	// The AWS API caller type.
-	CallerType *string
-
-	// The AWS API name.
-	Api *string
-
-	// The domain information for the AWS API call.
-	DomainDetails *DomainDetails
 }
 
 // Contains information on how the bucker owner's S3 Block Public Access settings
@@ -110,17 +110,17 @@ type AwsApiCallAction struct {
 // for more information.
 type BlockPublicAccess struct {
 
-	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
-	BlockPublicPolicy *bool
-
-	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
-	RestrictPublicBuckets *bool
-
 	// Indicates if S3 Block Public Access is set to BlockPublicAcls.
 	BlockPublicAcls *bool
 
+	// Indicates if S3 Block Public Access is set to BlockPublicPolicy.
+	BlockPublicPolicy *bool
+
 	// Indicates if S3 Block Public Access is set to IgnorePublicAcls.
 	IgnorePublicAcls *bool
+
+	// Indicates if S3 Block Public Access is set to RestrictPublicBuckets.
+	RestrictPublicBuckets *bool
 }
 
 // Contains information about the bucket level permissions for the S3 bucket.
@@ -129,12 +129,12 @@ type BucketLevelPermissions struct {
 	// Contains information on how Access Control Policies are applied to the bucket.
 	AccessControlList *AccessControlList
 
-	// Contains information on the bucket policies for the S3 bucket.
-	BucketPolicy *BucketPolicy
-
 	// Contains information on which account level S3 Block Public Access settings are
 	// applied to the S3 bucket.
 	BlockPublicAccess *BlockPublicAccess
+
+	// Contains information on the bucket policies for the S3 bucket.
+	BucketPolicy *BucketPolicy
 }
 
 // Contains information on the current bucket policies for the S3 bucket.
@@ -169,26 +169,6 @@ type CloudTrailConfigurationResult struct {
 // Contains information about the condition.
 type Condition struct {
 
-	// Represents a greater than or equal condition to be applied to a single field
-	// when querying for findings.
-	Gte *int32
-
-	// Represents a less than condition to be applied to a single field when querying
-	// for findings.
-	Lt *int32
-
-	// Represents a greater than or equal condition to be applied to a single field
-	// when querying for findings.
-	GreaterThanOrEqual *int64
-
-	// Represents the not equal condition to be applied to a single field when querying
-	// for findings.
-	Neq []*string
-
-	// Represents a less than or equal condition to be applied to a single field when
-	// querying for findings.
-	LessThanOrEqual *int64
-
 	// Represents the equal condition to be applied to a single field when querying for
 	// findings.
 	Eq []*string
@@ -199,33 +179,53 @@ type Condition struct {
 
 	// Represents a greater than condition to be applied to a single field when
 	// querying for findings.
+	GreaterThan *int64
+
+	// Represents a greater than or equal condition to be applied to a single field
+	// when querying for findings.
+	GreaterThanOrEqual *int64
+
+	// Represents a greater than condition to be applied to a single field when
+	// querying for findings.
 	Gt *int32
 
-	// Represents a not equal condition to be applied to a single field when querying
+	// Represents a greater than or equal condition to be applied to a single field
+	// when querying for findings.
+	Gte *int32
+
+	// Represents a less than condition to be applied to a single field when querying
 	// for findings.
-	NotEquals []*string
+	LessThan *int64
+
+	// Represents a less than or equal condition to be applied to a single field when
+	// querying for findings.
+	LessThanOrEqual *int64
+
+	// Represents a less than condition to be applied to a single field when querying
+	// for findings.
+	Lt *int32
 
 	// Represents a less than or equal condition to be applied to a single field when
 	// querying for findings.
 	Lte *int32
 
-	// Represents a greater than condition to be applied to a single field when
-	// querying for findings.
-	GreaterThan *int64
-
-	// Represents a less than condition to be applied to a single field when querying
+	// Represents the not equal condition to be applied to a single field when querying
 	// for findings.
-	LessThan *int64
+	Neq []*string
+
+	// Represents a not equal condition to be applied to a single field when querying
+	// for findings.
+	NotEquals []*string
 }
 
 // Contains information about the country where the remote IP address is located.
 type Country struct {
 
-	// The country name of the remote IP address.
-	CountryName *string
-
 	// The country code of the remote IP address.
 	CountryCode *string
+
+	// The country name of the remote IP address.
+	CountryName *string
 }
 
 // Contains information about which data sources are enabled.
@@ -268,22 +268,22 @@ type DataSourceConfigurationsResult struct {
 // more information.
 type DefaultServerSideEncryption struct {
 
+	// The type of encryption used for objects within the S3 bucket.
+	EncryptionType *string
+
 	// The Amazon Resource Name (ARN) of the KMS encryption key. Only available if the
 	// bucket EncryptionType is aws:kms.
 	KmsMasterKeyArn *string
-
-	// The type of encryption used for objects within the S3 bucket.
-	EncryptionType *string
 }
 
 // Contains information about the publishing destination, including the ID, type,
 // and status.
 type Destination struct {
 
-	// The status of the publishing destination.
+	// The unique ID of the publishing destination.
 	//
 	// This member is required.
-	Status PublishingStatus
+	DestinationId *string
 
 	// The type of resource used for the publishing destination. Currently, only Amazon
 	// S3 buckets are supported.
@@ -291,10 +291,10 @@ type Destination struct {
 	// This member is required.
 	DestinationType DestinationType
 
-	// The unique ID of the publishing destination.
+	// The status of the publishing destination.
 	//
 	// This member is required.
-	DestinationId *string
+	Status PublishingStatus
 }
 
 // Contains the Amazon Resource Name (ARN) of the resource to publish to, such as
@@ -342,53 +342,10 @@ type Evidence struct {
 // suspicious activity is detected.
 type Finding struct {
 
-	// The type of finding.
-	//
-	// This member is required.
-	Type *string
-
-	// Contains additional information about the generated finding.
-	Service *Service
-
 	// The ID of the account in which the finding was generated.
 	//
 	// This member is required.
 	AccountId *string
-
-	// The confidence score for the finding.
-	Confidence *float64
-
-	// The version of the schema used for the finding.
-	//
-	// This member is required.
-	SchemaVersion *string
-
-	// The severity of the finding.
-	//
-	// This member is required.
-	Severity *float64
-
-	// The title of the finding.
-	Title *string
-
-	// The Region where the finding was generated.
-	//
-	// This member is required.
-	Region *string
-
-	// The time and date when the finding was last updated.
-	//
-	// This member is required.
-	UpdatedAt *string
-
-	// Contains information about the AWS resource associated with the activity that
-	// prompted GuardDuty to generate a finding.
-	//
-	// This member is required.
-	Resource *Resource
-
-	// The partition associated with the finding.
-	Partition *string
 
 	// The ARN of the finding.
 	//
@@ -400,13 +357,56 @@ type Finding struct {
 	// This member is required.
 	CreatedAt *string
 
-	// The description of the finding.
-	Description *string
-
 	// The ID of the finding.
 	//
 	// This member is required.
 	Id *string
+
+	// The Region where the finding was generated.
+	//
+	// This member is required.
+	Region *string
+
+	// Contains information about the AWS resource associated with the activity that
+	// prompted GuardDuty to generate a finding.
+	//
+	// This member is required.
+	Resource *Resource
+
+	// The version of the schema used for the finding.
+	//
+	// This member is required.
+	SchemaVersion *string
+
+	// The severity of the finding.
+	//
+	// This member is required.
+	Severity *float64
+
+	// The type of finding.
+	//
+	// This member is required.
+	Type *string
+
+	// The time and date when the finding was last updated.
+	//
+	// This member is required.
+	UpdatedAt *string
+
+	// The confidence score for the finding.
+	Confidence *float64
+
+	// The description of the finding.
+	Description *string
+
+	// The partition associated with the finding.
+	Partition *string
+
+	// Contains additional information about the generated finding.
+	Service *Service
+
+	// The title of the finding.
+	Title *string
 }
 
 // Contains information about the criteria used for querying findings.
@@ -436,72 +436,69 @@ type FlowLogsConfigurationResult struct {
 // Contains information about the location of the remote IP address.
 type GeoLocation struct {
 
-	// The longitude information of the remote IP address.
-	Lon *float64
-
 	// The latitude information of the remote IP address.
 	Lat *float64
+
+	// The longitude information of the remote IP address.
+	Lon *float64
 }
 
 // Contains information about the EC2 instance profile.
 type IamInstanceProfile struct {
 
-	// The profile ID of the EC2 instance.
-	Id *string
-
 	// The profile ARN of the EC2 instance.
 	Arn *string
+
+	// The profile ID of the EC2 instance.
+	Id *string
 }
 
 // Contains information about the details of an instance.
 type InstanceDetails struct {
 
-	// The product code of the EC2 instance.
-	ProductCodes []*ProductCode
+	// The Availability Zone of the EC2 instance.
+	AvailabilityZone *string
+
+	// The profile information of the EC2 instance.
+	IamInstanceProfile *IamInstanceProfile
 
 	// The image description of the EC2 instance.
 	ImageDescription *string
 
-	// The profile information of the EC2 instance.
-	IamInstanceProfile *IamInstanceProfile
+	// The image ID of the EC2 instance.
+	ImageId *string
+
+	// The ID of the EC2 instance.
+	InstanceId *string
+
+	// The state of the EC2 instance.
+	InstanceState *string
+
+	// The type of the EC2 instance.
+	InstanceType *string
+
+	// The launch time of the EC2 instance.
+	LaunchTime *string
+
+	// The elastic network interface information of the EC2 instance.
+	NetworkInterfaces []*NetworkInterface
 
 	// The Amazon Resource Name (ARN) of the AWS Outpost. Only applicable to AWS
 	// Outposts instances.
 	OutpostArn *string
 
-	// The Availability Zone of the EC2 instance.
-	AvailabilityZone *string
-
-	// The tags of the EC2 instance.
-	Tags []*Tag
-
-	// The type of the EC2 instance.
-	InstanceType *string
-
 	// The platform of the EC2 instance.
 	Platform *string
 
-	// The launch time of the EC2 instance.
-	LaunchTime *string
+	// The product code of the EC2 instance.
+	ProductCodes []*ProductCode
 
-	// The state of the EC2 instance.
-	InstanceState *string
-
-	// The image ID of the EC2 instance.
-	ImageId *string
-
-	// The elastic network interface information of the EC2 instance.
-	NetworkInterfaces []*NetworkInterface
-
-	// The ID of the EC2 instance.
-	InstanceId *string
+	// The tags of the EC2 instance.
+	Tags []*Tag
 }
 
 // Contains information about the invitation to become a member account.
 type Invitation struct {
-
-	// The timestamp when the invitation was sent.
-	InvitedAt *string
 
 	// The ID of the account that the invitation was sent from.
 	AccountId *string
@@ -509,6 +506,9 @@ type Invitation struct {
 	// The ID of the invitation. This value is used to validate the inviter account to
 	// the member account.
 	InvitationId *string
+
+	// The timestamp when the invitation was sent.
+	InvitedAt *string
 
 	// The status of the relationship between the inviter and invitee accounts.
 	RelationshipStatus *string
@@ -537,33 +537,38 @@ type Master struct {
 	// The ID of the account used as the master account.
 	AccountId *string
 
+	// The value used to validate the master account to the member account.
+	InvitationId *string
+
 	// The timestamp when the invitation was sent.
 	InvitedAt *string
 
 	// The status of the relationship between the master and member accounts.
 	RelationshipStatus *string
-
-	// The value used to validate the master account to the member account.
-	InvitationId *string
 }
 
 // Contains information about the member account.
 type Member struct {
 
-	// The status of the relationship between the member and the master.
+	// The ID of the member account.
 	//
 	// This member is required.
-	RelationshipStatus *string
+	AccountId *string
+
+	// The email address of the member account.
+	//
+	// This member is required.
+	Email *string
 
 	// The master account ID.
 	//
 	// This member is required.
 	MasterId *string
 
-	// The ID of the member account.
+	// The status of the relationship between the member and the master.
 	//
 	// This member is required.
-	AccountId *string
+	RelationshipStatus *string
 
 	// The last-updated timestamp of the member.
 	//
@@ -575,25 +580,20 @@ type Member struct {
 
 	// The timestamp when the invitation was sent.
 	InvitedAt *string
-
-	// The email address of the member account.
-	//
-	// This member is required.
-	Email *string
 }
 
 // Contains information on which data sources are enabled for a member account.
 type MemberDataSourceConfiguration struct {
 
-	// Contains information on the status of data sources for the account.
-	//
-	// This member is required.
-	DataSources *DataSourceConfigurationsResult
-
 	// The account ID for the member account.
 	//
 	// This member is required.
 	AccountId *string
+
+	// Contains information on the status of data sources for the account.
+	//
+	// This member is required.
+	DataSources *DataSourceConfigurationsResult
 }
 
 // Contains information about the NETWORK_CONNECTION action described in the
@@ -603,74 +603,74 @@ type NetworkConnectionAction struct {
 	// Indicates whether EC2 blocked the network connection to your instance.
 	Blocked *bool
 
-	// The local IP information of the connection.
-	LocalIpDetails *LocalIpDetails
-
-	// The network connection protocol.
-	Protocol *string
-
 	// The network connection direction.
 	ConnectionDirection *string
+
+	// The local IP information of the connection.
+	LocalIpDetails *LocalIpDetails
 
 	// The local port information of the connection.
 	LocalPortDetails *LocalPortDetails
 
-	// The remote port information of the connection.
-	RemotePortDetails *RemotePortDetails
+	// The network connection protocol.
+	Protocol *string
 
 	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails
+
+	// The remote port information of the connection.
+	RemotePortDetails *RemotePortDetails
 }
 
 // Contains information about the elastic network interface of the EC2 instance.
 type NetworkInterface struct {
 
-	// The subnet ID of the EC2 instance.
-	SubnetId *string
-
-	// The public DNS name of the EC2 instance.
-	PublicDnsName *string
-
-	// The VPC ID of the EC2 instance.
-	VpcId *string
-
-	// The private IP address of the EC2 instance.
-	PrivateIpAddress *string
+	// A list of IPv6 addresses for the EC2 instance.
+	Ipv6Addresses []*string
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// A list of IPv6 addresses for the EC2 instance.
-	Ipv6Addresses []*string
-
 	// The private DNS name of the EC2 instance.
 	PrivateDnsName *string
 
-	// The public IP address of the EC2 instance.
-	PublicIp *string
+	// The private IP address of the EC2 instance.
+	PrivateIpAddress *string
 
 	// Other private IP address information of the EC2 instance.
 	PrivateIpAddresses []*PrivateIpAddressDetails
 
+	// The public DNS name of the EC2 instance.
+	PublicDnsName *string
+
+	// The public IP address of the EC2 instance.
+	PublicIp *string
+
 	// The security groups associated with the EC2 instance.
 	SecurityGroups []*SecurityGroup
+
+	// The subnet ID of the EC2 instance.
+	SubnetId *string
+
+	// The VPC ID of the EC2 instance.
+	VpcId *string
 }
 
 // Contains information about the ISP organization of the remote IP address.
 type Organization struct {
 
-	// The name of the internet provider.
-	Org *string
-
-	// The ISP information for the internet provider.
-	Isp *string
+	// The Autonomous System Number (ASN) of the internet provider of the remote IP
+	// address.
+	Asn *string
 
 	// The organization that registered this ASN.
 	AsnOrg *string
 
-	// The Autonomous System Number (ASN) of the internet provider of the remote IP
-	// address.
-	Asn *string
+	// The ISP information for the internet provider.
+	Isp *string
+
+	// The name of the internet provider.
+	Org *string
 }
 
 // An object that contains information on which data sources will be configured to
@@ -736,22 +736,22 @@ type PermissionConfiguration struct {
 // Contains information about the PORT_PROBE action described in the finding.
 type PortProbeAction struct {
 
-	// A list of objects related to port probe details.
-	PortProbeDetails []*PortProbeDetail
-
 	// Indicates whether EC2 blocked the port probe to the instance, such as with an
 	// ACL.
 	Blocked *bool
+
+	// A list of objects related to port probe details.
+	PortProbeDetails []*PortProbeDetail
 }
 
 // Contains information about the port probe details.
 type PortProbeDetail struct {
 
-	// The local port information of the connection.
-	LocalPortDetails *LocalPortDetails
-
 	// The local IP information of the connection.
 	LocalIpDetails *LocalIpDetails
+
+	// The local port information of the connection.
+	LocalPortDetails *LocalPortDetails
 
 	// The remote IP information of the connection.
 	RemoteIpDetails *RemoteIpDetails
@@ -780,16 +780,22 @@ type ProductCode struct {
 // Describes the public access policies that apply to the S3 bucket.
 type PublicAccess struct {
 
-	// Contains information about how permissions are configured for the S3 bucket.
-	PermissionConfiguration *PermissionConfiguration
-
 	// Describes the effective permission on this bucket after factoring all attached
 	// policies.
 	EffectivePermission *string
+
+	// Contains information about how permissions are configured for the S3 bucket.
+	PermissionConfiguration *PermissionConfiguration
 }
 
 // Contains information about the remote IP address of the connection.
 type RemoteIpDetails struct {
+
+	// The city information of the remote IP address.
+	City *City
+
+	// The country code of the remote IP address.
+	Country *Country
 
 	// The location information of the remote IP address.
 	GeoLocation *GeoLocation
@@ -799,33 +805,21 @@ type RemoteIpDetails struct {
 
 	// The ISP organization information of the remote IP address.
 	Organization *Organization
-
-	// The country code of the remote IP address.
-	Country *Country
-
-	// The city information of the remote IP address.
-	City *City
 }
 
 // Contains information about the remote port.
 type RemotePortDetails struct {
 
-	// The port name of the remote connection.
-	PortName *string
-
 	// The port number of the remote connection.
 	Port *int32
+
+	// The port name of the remote connection.
+	PortName *string
 }
 
 // Contains information about the AWS resource associated with the activity that
 // prompted GuardDuty to generate a finding.
 type Resource struct {
-
-	// The type of AWS resource.
-	ResourceType *string
-
-	// Contains information on the S3 bucket.
-	S3BucketDetails []*S3BucketDetail
 
 	// The IAM access key details (IAM user information) of a user that engaged in the
 	// activity that prompted GuardDuty to generate a finding.
@@ -834,6 +828,12 @@ type Resource struct {
 	// The information about the EC2 instance associated with the activity that
 	// prompted GuardDuty to generate a finding.
 	InstanceDetails *InstanceDetails
+
+	// The type of AWS resource.
+	ResourceType *string
+
+	// Contains information on the S3 bucket.
+	S3BucketDetails []*S3BucketDetail
 }
 
 // Contains information on the S3 bucket.
@@ -845,23 +845,23 @@ type S3BucketDetail struct {
 	// The date and time the bucket was created at.
 	CreatedAt *time.Time
 
-	// Describes the public access policies that apply to the S3 bucket.
-	PublicAccess *PublicAccess
-
-	// The owner of the S3 bucket.
-	Owner *Owner
-
 	// Describes the server side encryption method used in the S3 bucket.
 	DefaultServerSideEncryption *DefaultServerSideEncryption
 
 	// The name of the S3 bucket.
 	Name *string
 
-	// Describes whether the bucket is a source or destination bucket.
-	Type *string
+	// The owner of the S3 bucket.
+	Owner *Owner
+
+	// Describes the public access policies that apply to the S3 bucket.
+	PublicAccess *PublicAccess
 
 	// All tags attached to the S3 bucket
 	Tags []*Tag
+
+	// Describes whether the bucket is a source or destination bucket.
+	Type *string
 }
 
 // Describes whether S3 data event logs will be enabled as a data source.
@@ -886,37 +886,15 @@ type S3LogsConfigurationResult struct {
 // Contains information about the security groups associated with the EC2 instance.
 type SecurityGroup struct {
 
-	// The security group name of the EC2 instance.
-	GroupName *string
-
 	// The security group ID of the EC2 instance.
 	GroupId *string
+
+	// The security group name of the EC2 instance.
+	GroupName *string
 }
 
 // Contains additional information about the generated finding.
 type Service struct {
-
-	// The detector ID for the GuardDuty service.
-	DetectorId *string
-
-	// The name of the AWS service (GuardDuty) that generated a finding.
-	ServiceName *string
-
-	// The total count of the occurrences of this finding type.
-	Count *int32
-
-	// An evidence object associated with the service.
-	Evidence *Evidence
-
-	// The last-seen timestamp of the activity that prompted GuardDuty to generate this
-	// finding.
-	EventLastSeen *string
-
-	// The resource role information for this finding.
-	ResourceRole *string
-
-	// Feedback that was submitted about the finding.
-	UserFeedback *string
 
 	// Information about the activity that is described in a finding.
 	Action *Action
@@ -924,9 +902,31 @@ type Service struct {
 	// Indicates whether this finding is archived.
 	Archived *bool
 
+	// The total count of the occurrences of this finding type.
+	Count *int32
+
+	// The detector ID for the GuardDuty service.
+	DetectorId *string
+
 	// The first-seen timestamp of the activity that prompted GuardDuty to generate
 	// this finding.
 	EventFirstSeen *string
+
+	// The last-seen timestamp of the activity that prompted GuardDuty to generate this
+	// finding.
+	EventLastSeen *string
+
+	// An evidence object associated with the service.
+	Evidence *Evidence
+
+	// The resource role information for this finding.
+	ResourceRole *string
+
+	// The name of the AWS service (GuardDuty) that generated a finding.
+	ServiceName *string
+
+	// Feedback that was submitted about the finding.
+	UserFeedback *string
 }
 
 // Contains information about the criteria used for sorting findings.
@@ -942,47 +942,47 @@ type SortCriteria struct {
 // Contains information about a tag associated with the EC2 instance.
 type Tag struct {
 
-	// The EC2 instance tag value.
-	Value *string
-
 	// The EC2 instance tag key.
 	Key *string
+
+	// The EC2 instance tag value.
+	Value *string
 }
 
 // An instance of a threat intelligence detail that constitutes evidence for the
 // finding.
 type ThreatIntelligenceDetail struct {
 
+	// The name of the threat intelligence list that triggered the finding.
+	ThreatListName *string
+
 	// A list of names of the threats in the threat intelligence list that triggered
 	// the finding.
 	ThreatNames []*string
-
-	// The name of the threat intelligence list that triggered the finding.
-	ThreatListName *string
 }
 
 // Contains the total usage with the corresponding currency unit for that value.
 type Total struct {
 
-	// The currency unit that the amount is given in.
-	Unit *string
-
 	// The total usage.
 	Amount *string
+
+	// The currency unit that the amount is given in.
+	Unit *string
 }
 
 // Contains information about the accounts that weren't processed.
 type UnprocessedAccount struct {
 
-	// A reason why the account hasn't been processed.
-	//
-	// This member is required.
-	Result *string
-
 	// The AWS account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// A reason why the account hasn't been processed.
+	//
+	// This member is required.
+	Result *string
 }
 
 // Contains information on the total of usage based on account IDs.
@@ -1014,30 +1014,29 @@ type UsageCriteria struct {
 // Contains information on the result of usage based on data source type.
 type UsageDataSourceResult struct {
 
-	// Represents the total of usage for the specified data source.
-	Total *Total
-
 	// The data source type that generated usage.
 	DataSource DataSource
+
+	// Represents the total of usage for the specified data source.
+	Total *Total
 }
 
 // Contains information on the sum of usage based on an AWS resource.
 type UsageResourceResult struct {
 
-	// Represents the sum total of usage for the specified resource type.
-	Total *Total
-
 	// The AWS resource that generated usage.
 	Resource *string
+
+	// Represents the sum total of usage for the specified resource type.
+	Total *Total
 }
 
 // Contains the result of GuardDuty usage. If a UsageStatisticType is provided the
 // result for other types will be null.
 type UsageStatistics struct {
 
-	// Lists the top 50 resources that have generated the most GuardDuty usage, in
-	// order from most to least expensive.
-	TopResources []*UsageResourceResult
+	// The usage statistic sum organized by account ID.
+	SumByAccount []*UsageAccountResult
 
 	// The usage statistic sum organized by on data source.
 	SumByDataSource []*UsageDataSourceResult
@@ -1045,6 +1044,7 @@ type UsageStatistics struct {
 	// The usage statistic sum organized by resource.
 	SumByResource []*UsageResourceResult
 
-	// The usage statistic sum organized by account ID.
-	SumByAccount []*UsageAccountResult
+	// Lists the top 50 resources that have generated the most GuardDuty usage, in
+	// order from most to least expensive.
+	TopResources []*UsageResourceResult
 }

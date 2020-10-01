@@ -63,20 +63,15 @@ func (c *Client) DescribeImages(ctx context.Context, params *DescribeImagesInput
 
 type DescribeImagesInput struct {
 
-	// Scopes the results to images with the specified owners. You can specify a
-	// combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit
-	// this parameter, the results include all images for which you have launch
-	// permissions, regardless of ownership.
-	Owners []*string
-
-	// The image IDs. Default: Describes all images available to you.
-	ImageIds []*string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// Scopes the images by users with explicit launch permissions. Specify an AWS
+	// account ID, self (the sender of the request), or all (public AMIs).
+	ExecutableUsers []*string
 
 	// The filters.
 	//
@@ -181,9 +176,14 @@ type DescribeImagesInput struct {
 	// virtualization-type - The virtualization type (paravirtual | hvm).
 	Filters []*types.Filter
 
-	// Scopes the images by users with explicit launch permissions. Specify an AWS
-	// account ID, self (the sender of the request), or all (public AMIs).
-	ExecutableUsers []*string
+	// The image IDs. Default: Describes all images available to you.
+	ImageIds []*string
+
+	// Scopes the results to images with the specified owners. You can specify a
+	// combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit
+	// this parameter, the results include all images for which you have launch
+	// permissions, regardless of ownership.
+	Owners []*string
 }
 
 type DescribeImagesOutput struct {

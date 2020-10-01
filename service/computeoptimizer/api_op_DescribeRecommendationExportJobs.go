@@ -60,9 +60,6 @@ func (c *Client) DescribeRecommendationExportJobs(ctx context.Context, params *D
 
 type DescribeRecommendationExportJobsInput struct {
 
-	// The token to advance to the next page of export jobs.
-	NextToken *string
-
 	// An array of objects that describe a filter to return a more specific list of
 	// export jobs.
 	Filters []*types.JobFilter
@@ -77,6 +74,9 @@ type DescribeRecommendationExportJobsInput struct {
 	// The maximum number of export jobs to return with a single request. To retrieve
 	// the remaining results, make another request with the returned NextToken value.
 	MaxResults *int32
+
+	// The token to advance to the next page of export jobs.
+	NextToken *string
 }
 
 type DescribeRecommendationExportJobsOutput struct {

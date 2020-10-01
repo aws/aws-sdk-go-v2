@@ -82,13 +82,13 @@ type ListScriptsInput struct {
 
 type ListScriptsOutput struct {
 
-	// A set of properties describing the requested script.
-	Scripts []*types.Script
-
 	// A token that indicates where to resume retrieving results on the next call to
 	// this action. If no token is returned, these results represent the end of the
 	// list.
 	NextToken *string
+
+	// A set of properties describing the requested script.
+	Scripts []*types.Script
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

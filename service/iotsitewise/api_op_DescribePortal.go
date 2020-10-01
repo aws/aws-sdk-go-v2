@@ -66,16 +66,6 @@ type DescribePortalInput struct {
 
 type DescribePortalOutput struct {
 
-	// The date the portal was created, in Unix epoch time.
-	//
-	// This member is required.
-	PortalCreationDate *time.Time
-
-	// The date the portal was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	PortalLastUpdateDate *time.Time
-
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the portal, which has the following format.
@@ -83,9 +73,6 @@ type DescribePortalOutput struct {
 	//
 	// This member is required.
 	PortalArn *string
-
-	// The portal's logo image, which is available at a URL.
-	PortalLogoImageLocation *types.ImageLocation
 
 	// The AWS SSO application generated client ID (used with AWS SSO APIs).
 	//
@@ -97,15 +84,41 @@ type DescribePortalOutput struct {
 	// This member is required.
 	PortalContactEmail *string
 
+	// The date the portal was created, in Unix epoch time.
+	//
+	// This member is required.
+	PortalCreationDate *time.Time
+
 	// The ID of the portal.
 	//
 	// This member is required.
 	PortalId *string
 
+	// The date the portal was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	PortalLastUpdateDate *time.Time
+
+	// The name of the portal.
+	//
+	// This member is required.
+	PortalName *string
+
 	// The public root URL for the AWS IoT AWS IoT SiteWise Monitor application portal.
 	//
 	// This member is required.
 	PortalStartUrl *string
+
+	// The current status of the portal, which contains a state and any error message.
+	//
+	// This member is required.
+	PortalStatus *types.PortalStatus
+
+	// The portal's description.
+	PortalDescription *string
+
+	// The portal's logo image, which is available at a URL.
+	PortalLogoImageLocation *types.ImageLocation
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -115,19 +128,6 @@ type DescribePortalOutput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the AWS IoT SiteWise User Guide.
 	RoleArn *string
-
-	// The name of the portal.
-	//
-	// This member is required.
-	PortalName *string
-
-	// The current status of the portal, which contains a state and any error message.
-	//
-	// This member is required.
-	PortalStatus *types.PortalStatus
-
-	// The portal's description.
-	PortalDescription *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

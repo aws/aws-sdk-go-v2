@@ -56,20 +56,20 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 type CreateAliasInput struct {
 
-	// The organization under which the member (user or group) exists.
+	// The alias to add to the member set.
 	//
 	// This member is required.
-	OrganizationId *string
+	Alias *string
 
 	// The member (user or group) to which this alias is added.
 	//
 	// This member is required.
 	EntityId *string
 
-	// The alias to add to the member set.
+	// The organization under which the member (user or group) exists.
 	//
 	// This member is required.
-	Alias *string
+	OrganizationId *string
 }
 
 type CreateAliasOutput struct {

@@ -67,13 +67,13 @@ type PutEventsInput struct {
 
 type PutEventsOutput struct {
 
-	// The number of failed entries.
-	FailedEntryCount *int32
-
 	// The successfully and unsuccessfully ingested events results. If the ingestion
 	// was successful, the entry has the event ID in it. Otherwise, you can use the
 	// error code and error message to identify the problem with the entry.
 	Entries []*types.PutEventsResultEntry
+
+	// The number of failed entries.
+	FailedEntryCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,37 +58,38 @@ func (c *Client) UpdateMethodResponse(ctx context.Context, params *UpdateMethodR
 
 // A request to update an existing MethodResponse () resource.
 type UpdateMethodResponseInput struct {
-	Template *bool
-
-	Title *string
-
-	TemplateSkipList []*string
-
-	// [Required] The Resource () identifier for the MethodResponse () resource.
-	//
-	// This member is required.
-	ResourceId *string
 
 	// [Required] The HTTP verb of the Method () resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	Name *string
-
-	// [Required] The status code for the MethodResponse () resource.
+	// [Required] The Resource () identifier for the MethodResponse () resource.
 	//
 	// This member is required.
-	StatusCode *string
+	ResourceId *string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	// [Required] The status code for the MethodResponse () resource.
+	//
+	// This member is required.
+	StatusCode *string
+
+	Name *string
+
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []*types.PatchOperation
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -129,9 +130,6 @@ type UpdateMethodResponseOutput struct {
 	// Model () name as the value.
 	ResponseModels map[string]*string
 
-	// The method response's status code.
-	StatusCode *string
-
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or
@@ -146,6 +144,9 @@ type UpdateMethodResponseOutput struct {
 	// the form of integration.response.body.{JSON-expression}, where JSON-expression
 	// is a valid JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
+
+	// The method response's status code.
+	StatusCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

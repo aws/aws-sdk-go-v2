@@ -73,14 +73,14 @@ type ListPoliciesInput struct {
 
 type ListPoliciesOutput struct {
 
-	// An array of PolicySummary objects.
-	PolicyList []*types.PolicySummary
-
 	// If you have more PolicySummary objects than the number that you specified for
 	// MaxResults in the request, the response includes a NextToken value. To list more
 	// PolicySummary objects, submit another ListPolicies request, and specify the
 	// NextToken value from the response in the NextToken value in the next request.
 	NextToken *string
+
+	// An array of PolicySummary objects.
+	PolicyList []*types.PolicySummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

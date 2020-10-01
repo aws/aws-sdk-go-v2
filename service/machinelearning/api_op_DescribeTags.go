@@ -71,14 +71,14 @@ type DescribeTagsInput struct {
 // Amazon ML returns the following elements.
 type DescribeTagsOutput struct {
 
-	// A list of tags associated with the ML object.
-	Tags []*types.Tag
+	// The ID of the tagged ML object.
+	ResourceId *string
 
 	// The type of the tagged ML object.
 	ResourceType types.TaggableResourceType
 
-	// The ID of the tagged ML object.
-	ResourceId *string
+	// A list of tags associated with the ML object.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

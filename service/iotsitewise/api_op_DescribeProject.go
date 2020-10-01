@@ -65,33 +65,10 @@ type DescribeProjectInput struct {
 
 type DescribeProjectOutput struct {
 
-	// The date the project was last updated, in Unix epoch time.
-	//
-	// This member is required.
-	ProjectLastUpdateDate *time.Time
-
 	// The ID of the portal that the project is in.
 	//
 	// This member is required.
 	PortalId *string
-
-	// The project's description.
-	ProjectDescription *string
-
-	// The date the project was created, in Unix epoch time.
-	//
-	// This member is required.
-	ProjectCreationDate *time.Time
-
-	// The name of the project.
-	//
-	// This member is required.
-	ProjectName *string
-
-	// The ID of the project.
-	//
-	// This member is required.
-	ProjectId *string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -100,6 +77,29 @@ type DescribeProjectOutput struct {
 	//
 	// This member is required.
 	ProjectArn *string
+
+	// The date the project was created, in Unix epoch time.
+	//
+	// This member is required.
+	ProjectCreationDate *time.Time
+
+	// The ID of the project.
+	//
+	// This member is required.
+	ProjectId *string
+
+	// The date the project was last updated, in Unix epoch time.
+	//
+	// This member is required.
+	ProjectLastUpdateDate *time.Time
+
+	// The name of the project.
+	//
+	// This member is required.
+	ProjectName *string
+
+	// The project's description.
+	ProjectDescription *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

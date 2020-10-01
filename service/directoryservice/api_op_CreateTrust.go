@@ -83,25 +83,25 @@ type CreateTrustInput struct {
 	// This member is required.
 	RemoteDomainName *string
 
-	// Optional parameter to enable selective authentication for the trust.
-	SelectiveAuth types.SelectiveAuth
-
-	// The trust relationship type. Forest is the default.
-	TrustType types.TrustType
-
 	// The direction of the trust relationship.
 	//
 	// This member is required.
 	TrustDirection types.TrustDirection
-
-	// The IP addresses of the remote DNS server associated with RemoteDomainName.
-	ConditionalForwarderIpAddrs []*string
 
 	// The trust password. The must be the same password that was used when creating
 	// the trust relationship on the external domain.
 	//
 	// This member is required.
 	TrustPassword *string
+
+	// The IP addresses of the remote DNS server associated with RemoteDomainName.
+	ConditionalForwarderIpAddrs []*string
+
+	// Optional parameter to enable selective authentication for the trust.
+	SelectiveAuth types.SelectiveAuth
+
+	// The trust relationship type. Forest is the default.
+	TrustType types.TrustType
 }
 
 // The result of a CreateTrust request.

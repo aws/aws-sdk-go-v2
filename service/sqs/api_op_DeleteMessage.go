@@ -73,16 +73,16 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 //
 type DeleteMessageInput struct {
 
-	// The receipt handle associated with the message to delete.
-	//
-	// This member is required.
-	ReceiptHandle *string
-
 	// The URL of the Amazon SQS queue from which messages are deleted. Queue URLs and
 	// names are case-sensitive.
 	//
 	// This member is required.
 	QueueUrl *string
+
+	// The receipt handle associated with the message to delete.
+	//
+	// This member is required.
+	ReceiptHandle *string
 }
 
 type DeleteMessageOutput struct {

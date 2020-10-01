@@ -85,6 +85,12 @@ func (c *Client) GetContentModeration(ctx context.Context, params *GetContentMod
 
 type GetContentModerationInput struct {
 
+	// The identifier for the unsafe content job. Use JobId to identify the job in a
+	// subsequent call to GetContentModeration.
+	//
+	// This member is required.
+	JobId *string
+
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
 	// results is returned. The default value is 1000.
@@ -101,12 +107,6 @@ type GetContentModerationInput struct {
 	// array element are sorted by detection confidence. The default sort is by
 	// TIMESTAMP.
 	SortBy types.ContentModerationSortBy
-
-	// The identifier for the unsafe content job. Use JobId to identify the job in a
-	// subsequent call to GetContentModeration.
-	//
-	// This member is required.
-	JobId *string
 }
 
 type GetContentModerationOutput struct {
@@ -117,21 +117,21 @@ type GetContentModerationOutput struct {
 	// The detected unsafe content labels and the time(s) they were detected.
 	ModerationLabels []*types.ContentModerationDetection
 
+	// Version number of the moderation detection model that was used to detect unsafe
+	// content.
+	ModerationModelVersion *string
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of unsafe content
 	// labels.
 	NextToken *string
 
-	// Version number of the moderation detection model that was used to detect unsafe
-	// content.
-	ModerationModelVersion *string
+	// If the job fails, StatusMessage provides a descriptive error message.
+	StatusMessage *string
 
 	// Information about a video that Amazon Rekognition analyzed. Videometadata is
 	// returned in every page of paginated responses from GetContentModeration.
 	VideoMetadata *types.VideoMetadata
-
-	// If the job fails, StatusMessage provides a descriptive error message.
-	StatusMessage *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

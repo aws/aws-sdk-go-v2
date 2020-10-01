@@ -58,14 +58,14 @@ func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListR
 
 type ListRecoveryPointsByResourceInput struct {
 
-	// The maximum number of items to be returned.
-	MaxResults *int32
-
 	// An ARN that uniquely identifies a resource. The format of the ARN depends on the
 	// resource type.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The maximum number of items to be returned.
+	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
@@ -76,15 +76,15 @@ type ListRecoveryPointsByResourceInput struct {
 
 type ListRecoveryPointsByResourceOutput struct {
 
-	// An array of objects that contain detailed information about recovery points of
-	// the specified resource type.
-	RecoveryPoints []*types.RecoveryPointByResource
-
 	// The next item following a partial list of returned items. For example, if a
 	// request is made to return maxResults number of items, NextToken allows you to
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
+	// An array of objects that contain detailed information about recovery points of
+	// the specified resource type.
+	RecoveryPoints []*types.RecoveryPointByResource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

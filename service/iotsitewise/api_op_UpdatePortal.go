@@ -59,10 +59,36 @@ func (c *Client) UpdatePortal(ctx context.Context, params *UpdatePortalInput, op
 
 type UpdatePortalInput struct {
 
+	// The AWS administrator's contact email address.
+	//
+	// This member is required.
+	PortalContactEmail *string
+
+	// The ID of the portal to update.
+	//
+	// This member is required.
+	PortalId *string
+
 	// A new friendly name for the portal.
 	//
 	// This member is required.
 	PortalName *string
+
+	// The ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
+	// a service role that allows the portal's users to access your AWS IoT SiteWise
+	// resources on your behalf. For more information, see Using service roles for AWS
+	// IoT SiteWise Monitor
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
+	// in the AWS IoT SiteWise User Guide.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A unique case-sensitive identifier that you can provide to ensure the
+	// idempotency of the request. Don't reuse this client token if a new idempotent
+	// request is required.
+	ClientToken *string
 
 	// A new description for the portal.
 	PortalDescription *string
@@ -75,32 +101,6 @@ type UpdatePortalInput struct {
 	//     * The ID of an existing image. Choose
 	// this option to keep an existing image.
 	PortalLogoImage *types.Image
-
-	// A unique case-sensitive identifier that you can provide to ensure the
-	// idempotency of the request. Don't reuse this client token if a new idempotent
-	// request is required.
-	ClientToken *string
-
-	// The ID of the portal to update.
-	//
-	// This member is required.
-	PortalId *string
-
-	// The AWS administrator's contact email address.
-	//
-	// This member is required.
-	PortalContactEmail *string
-
-	// The ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// a service role that allows the portal's users to access your AWS IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for AWS
-	// IoT SiteWise Monitor
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the AWS IoT SiteWise User Guide.
-	//
-	// This member is required.
-	RoleArn *string
 }
 
 type UpdatePortalOutput struct {

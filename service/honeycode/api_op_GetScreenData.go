@@ -59,28 +59,10 @@ func (c *Client) GetScreenData(ctx context.Context, params *GetScreenDataInput, 
 
 type GetScreenDataInput struct {
 
-	// Variables are optional and are needed only if the screen requires them to render
-	// correctly. Variables are specified as a map where the key is the name of the
-	// variable as defined on the screen. The value is an object which currently has
-	// only one property, rawValue, which holds the value of the variable to be passed
-	// to the screen.
-	Variables map[string]*types.VariableValue
-
-	// This parameter is optional. If a nextToken is not specified, the API returns the
-	// first page of data. Pagination tokens expire after 1 hour. If you use a token
-	// that was returned more than an hour back, the API will throw
-	// ValidationException.
-	NextToken *string
-
 	// The ID of the app that contains the screem.
 	//
 	// This member is required.
 	AppId *string
-
-	// The number of results to be returned on a single page. Specify a number between
-	// 1 and 100. The maximum value is 100. This parameter is optional. If you don't
-	// specify this parameter, the default page size is 100.
-	MaxResults *int32
 
 	// The ID of the screen.
 	//
@@ -91,14 +73,32 @@ type GetScreenDataInput struct {
 	//
 	// This member is required.
 	WorkbookId *string
+
+	// The number of results to be returned on a single page. Specify a number between
+	// 1 and 100. The maximum value is 100. This parameter is optional. If you don't
+	// specify this parameter, the default page size is 100.
+	MaxResults *int32
+
+	// This parameter is optional. If a nextToken is not specified, the API returns the
+	// first page of data. Pagination tokens expire after 1 hour. If you use a token
+	// that was returned more than an hour back, the API will throw
+	// ValidationException.
+	NextToken *string
+
+	// Variables are optional and are needed only if the screen requires them to render
+	// correctly. Variables are specified as a map where the key is the name of the
+	// variable as defined on the screen. The value is an object which currently has
+	// only one property, rawValue, which holds the value of the variable to be passed
+	// to the screen.
+	Variables map[string]*types.VariableValue
 }
 
 type GetScreenDataOutput struct {
 
-	// Provides the pagination token to load the next page if there are more results
-	// matching the request. If a pagination token is not present in the response, it
-	// means that all data matching the query has been loaded.
-	NextToken *string
+	// A map of all the rows on the screen keyed by block name.
+	//
+	// This member is required.
+	Results map[string]*types.ResultSet
 
 	// Indicates the cursor of the workbook at which the data returned by this workbook
 	// is read. Workbook cursor keeps increasing with every update and the increments
@@ -107,10 +107,10 @@ type GetScreenDataOutput struct {
 	// This member is required.
 	WorkbookCursor *int64
 
-	// A map of all the rows on the screen keyed by block name.
-	//
-	// This member is required.
-	Results map[string]*types.ResultSet
+	// Provides the pagination token to load the next page if there are more results
+	// matching the request. If a pagination token is not present in the response, it
+	// means that all data matching the query has been loaded.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,13 +66,6 @@ func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftA
 // Creates an AWS Managed Microsoft AD directory.
 type CreateMicrosoftADInput struct {
 
-	// The tags to be assigned to the AWS Managed Microsoft AD directory.
-	Tags []*types.Tag
-
-	// A description for the directory. This label will appear on the AWS console
-	// Directory Details page after the directory is created.
-	Description *string
-
 	// The fully qualified domain name for the AWS Managed Microsoft AD directory, such
 	// as corp.example.com. This name will resolve inside your VPC only. It does not
 	// need to be publicly resolvable.
@@ -87,6 +80,16 @@ type CreateMicrosoftADInput struct {
 	// This member is required.
 	Password *string
 
+	// Contains VPC information for the CreateDirectory () or CreateMicrosoftAD ()
+	// operation.
+	//
+	// This member is required.
+	VpcSettings *types.DirectoryVpcSettings
+
+	// A description for the directory. This label will appear on the AWS console
+	// Directory Details page after the directory is created.
+	Description *string
+
 	// AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.
 	// Enterprise is the default.
 	Edition types.DirectoryEdition
@@ -96,11 +99,8 @@ type CreateMicrosoftADInput struct {
 	// for the directory DNS corp.example.com.
 	ShortName *string
 
-	// Contains VPC information for the CreateDirectory () or CreateMicrosoftAD ()
-	// operation.
-	//
-	// This member is required.
-	VpcSettings *types.DirectoryVpcSettings
+	// The tags to be assigned to the AWS Managed Microsoft AD directory.
+	Tags []*types.Tag
 }
 
 // Result of a CreateMicrosoftAD request.

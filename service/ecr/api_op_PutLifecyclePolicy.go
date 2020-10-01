@@ -58,6 +58,11 @@ func (c *Client) PutLifecyclePolicy(ctx context.Context, params *PutLifecyclePol
 
 type PutLifecyclePolicyInput struct {
 
+	// The JSON repository policy text to apply to the repository.
+	//
+	// This member is required.
+	LifecyclePolicyText *string
+
 	// The name of the repository to receive the policy.
 	//
 	// This member is required.
@@ -66,23 +71,18 @@ type PutLifecyclePolicyInput struct {
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do  not specify a registry, the default registry is assumed.
 	RegistryId *string
-
-	// The JSON repository policy text to apply to the repository.
-	//
-	// This member is required.
-	LifecyclePolicyText *string
 }
 
 type PutLifecyclePolicyOutput struct {
-
-	// The repository name associated with the request.
-	RepositoryName *string
 
 	// The JSON repository policy text.
 	LifecyclePolicyText *string
 
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,23 +66,23 @@ type GetMaintenanceWindowExecutionInput struct {
 
 type GetMaintenanceWindowExecutionOutput struct {
 
+	// The time the maintenance window finished running.
+	EndTime *time.Time
+
 	// The time the maintenance window started running.
 	StartTime *time.Time
+
+	// The status of the maintenance window execution.
+	Status types.MaintenanceWindowExecutionStatus
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string
 
-	// The ID of the maintenance window execution.
-	WindowExecutionId *string
-
 	// The ID of the task executions from the maintenance window execution.
 	TaskIds []*string
 
-	// The time the maintenance window finished running.
-	EndTime *time.Time
-
-	// The status of the maintenance window execution.
-	Status types.MaintenanceWindowExecutionStatus
+	// The ID of the maintenance window execution.
+	WindowExecutionId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

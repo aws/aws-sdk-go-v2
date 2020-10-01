@@ -58,16 +58,16 @@ func (c *Client) GetImportJob(ctx context.Context, params *GetImportJobInput, op
 
 type GetImportJobInput struct {
 
-	// The unique identifier for the job.
-	//
-	// This member is required.
-	JobId *string
-
 	// The unique identifier for the application. This identifier is displayed as the
 	// Project ID on the Amazon Pinpoint console.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The unique identifier for the job.
+	//
+	// This member is required.
+	JobId *string
 }
 
 type GetImportJobOutput struct {

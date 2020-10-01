@@ -70,13 +70,13 @@ type GroupResourcesInput struct {
 
 type GroupResourcesOutput struct {
 
-	// The ARNs of the resources that were successfully added to the group by this
-	// operation.
-	Succeeded []*string
-
 	// The ARNs of the resources that failed to be added to the group by this
 	// operation.
 	Failed []*types.FailedResource
+
+	// The ARNs of the resources that were successfully added to the group by this
+	// operation.
+	Succeeded []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

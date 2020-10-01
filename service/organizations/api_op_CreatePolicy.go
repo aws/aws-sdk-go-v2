@@ -61,6 +61,24 @@ func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, op
 
 type CreatePolicyInput struct {
 
+	// The policy text content to add to the new policy. The text that you supply must
+	// adhere to the rules of the policy type you specify in the Type parameter.
+	//
+	// This member is required.
+	Content *string
+
+	// An optional description to assign to the policy.
+	//
+	// This member is required.
+	Description *string
+
+	// The friendly name to assign to the policy. The regex pattern
+	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
+	// string of any of the characters in the ASCII character range.
+	//
+	// This member is required.
+	Name *string
+
 	// The type of policy to create. You can specify one of the following values:
 	//
 	//
@@ -81,24 +99,6 @@ type CreatePolicyInput struct {
 	//
 	// This member is required.
 	Type types.PolicyType
-
-	// An optional description to assign to the policy.
-	//
-	// This member is required.
-	Description *string
-
-	// The policy text content to add to the new policy. The text that you supply must
-	// adhere to the rules of the policy type you specify in the Type parameter.
-	//
-	// This member is required.
-	Content *string
-
-	// The friendly name to assign to the policy. The regex pattern
-	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
-	// string of any of the characters in the ASCII character range.
-	//
-	// This member is required.
-	Name *string
 }
 
 type CreatePolicyOutput struct {

@@ -58,15 +58,15 @@ func (c *Client) CreateInvalidation(ctx context.Context, params *CreateInvalidat
 // The request to create an invalidation.
 type CreateInvalidationInput struct {
 
-	// The batch information for the invalidation.
-	//
-	// This member is required.
-	InvalidationBatch *types.InvalidationBatch
-
 	// The distribution's id.
 	//
 	// This member is required.
 	DistributionId *string
+
+	// The batch information for the invalidation.
+	//
+	// This member is required.
+	InvalidationBatch *types.InvalidationBatch
 }
 
 // The returned result of the corresponding request.

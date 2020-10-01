@@ -60,15 +60,15 @@ func (c *Client) PutApplicationPolicy(ctx context.Context, params *PutApplicatio
 
 type PutApplicationPolicyInput struct {
 
-	// An array of policy statements applied to the application.
-	//
-	// This member is required.
-	Statements []*types.ApplicationPolicyStatement
-
 	// The Amazon Resource Name (ARN) of the application.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// An array of policy statements applied to the application.
+	//
+	// This member is required.
+	Statements []*types.ApplicationPolicyStatement
 }
 
 type PutApplicationPolicyOutput struct {

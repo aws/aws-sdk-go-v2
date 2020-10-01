@@ -64,14 +64,6 @@ func (c *Client) UpdateConfigurationTemplate(ctx context.Context, params *Update
 // The result message containing the options for the specified solution stack.
 type UpdateConfigurationTemplateInput struct {
 
-	// A list of configuration option settings to update with the new specified option
-	// value.
-	OptionSettings []*types.ConfigurationOptionSetting
-
-	// A list of configuration options to remove from the configuration set.
-	// Constraint: You can remove only UserDefined configuration options.
-	OptionsToRemove []*types.OptionSpecification
-
 	// The name of the application associated with the configuration template to
 	// update. If no application is found with this name, UpdateConfigurationTemplate
 	// returns an InvalidParameterValue error.
@@ -88,6 +80,14 @@ type UpdateConfigurationTemplateInput struct {
 
 	// A new description for the configuration.
 	Description *string
+
+	// A list of configuration option settings to update with the new specified option
+	// value.
+	OptionSettings []*types.ConfigurationOptionSetting
+
+	// A list of configuration options to remove from the configuration set.
+	// Constraint: You can remove only UserDefined configuration options.
+	OptionsToRemove []*types.OptionSpecification
 }
 
 // Describes the settings for a configuration set.
@@ -96,26 +96,11 @@ type UpdateConfigurationTemplateOutput struct {
 	// The name of the application associated with this configuration set.
 	ApplicationName *string
 
-	// If not null, the name of the environment for this configuration set.
-	EnvironmentName *string
-
-	// The ARN of the platform version.
-	PlatformArn *string
-
-	// The date (in UTC time) when this configuration set was last modified.
-	DateUpdated *time.Time
-
 	// The date (in UTC time) when this configuration set was created.
 	DateCreated *time.Time
 
-	// The name of the solution stack this configuration set uses.
-	SolutionStackName *string
-
-	// Describes this configuration set.
-	Description *string
-
-	// A list of the configuration options and their values in this configuration set.
-	OptionSettings []*types.ConfigurationOptionSetting
+	// The date (in UTC time) when this configuration set was last modified.
+	DateUpdated *time.Time
 
 	// If this configuration set is associated with an environment, the
 	// DeploymentStatus parameter indicates the deployment status of this configuration
@@ -134,6 +119,21 @@ type UpdateConfigurationTemplateOutput struct {
 	//     * failed: This is a draft configuration that failed to
 	// successfully deploy.
 	DeploymentStatus types.ConfigurationDeploymentStatus
+
+	// Describes this configuration set.
+	Description *string
+
+	// If not null, the name of the environment for this configuration set.
+	EnvironmentName *string
+
+	// A list of the configuration options and their values in this configuration set.
+	OptionSettings []*types.ConfigurationOptionSetting
+
+	// The ARN of the platform version.
+	PlatformArn *string
+
+	// The name of the solution stack this configuration set uses.
+	SolutionStackName *string
 
 	// If not null, the name of the configuration template for this configuration set.
 	TemplateName *string

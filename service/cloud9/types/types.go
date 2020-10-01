@@ -12,8 +12,20 @@ type Environment struct {
 	// The Amazon Resource Name (ARN) of the environment.
 	Arn *string
 
+	// The description for the environment.
+	Description *string
+
+	// The ID of the environment.
+	Id *string
+
 	// The state of the environment in its creation or deletion lifecycle.
 	Lifecycle *EnvironmentLifecycle
+
+	// The name of the environment.
+	Name *string
+
+	// The Amazon Resource Name (ARN) of the environment owner.
+	OwnerArn *string
 
 	// The type of environment. Valid values include the following:
 	//
@@ -23,23 +35,18 @@ type Environment struct {
 	//
 	//     * ssh: Your own server connects to the environment.
 	Type EnvironmentType
-
-	// The description for the environment.
-	Description *string
-
-	// The name of the environment.
-	Name *string
-
-	// The Amazon Resource Name (ARN) of the environment owner.
-	OwnerArn *string
-
-	// The ID of the environment.
-	Id *string
 }
 
 // Information about the current creation or deletion lifecycle state of an AWS
 // Cloud9 development environment.
 type EnvironmentLifecycle struct {
+
+	// If the environment failed to delete, the Amazon Resource Name (ARN) of the
+	// related AWS resource.
+	FailureResource *string
+
+	// Any informational message about the lifecycle state of the environment.
+	Reason *string
 
 	// The current creation or deletion lifecycle state of the environment.
 	//
@@ -57,32 +64,18 @@ type EnvironmentLifecycle struct {
 	//
 	//     * DELETE_FAILED: The environment failed to delete.
 	Status EnvironmentLifecycleStatus
-
-	// If the environment failed to delete, the Amazon Resource Name (ARN) of the
-	// related AWS resource.
-	FailureResource *string
-
-	// Any informational message about the lifecycle state of the environment.
-	Reason *string
 }
 
 // Information about an environment member for an AWS Cloud9 development
 // environment.
 type EnvironmentMember struct {
 
-	// The user ID in AWS Identity and Access Management (AWS IAM) of the environment
-	// member.
-	UserId *string
+	// The ID of the environment for the environment member.
+	EnvironmentId *string
 
 	// The time, expressed in epoch time format, when the environment member last
 	// opened the environment.
 	LastAccess *time.Time
-
-	// The ID of the environment for the environment member.
-	EnvironmentId *string
-
-	// The Amazon Resource Name (ARN) of the environment member.
-	UserArn *string
 
 	// The type of environment member permissions associated with this environment
 	// member. Available values include:
@@ -95,6 +88,13 @@ type EnvironmentMember struct {
 	//     * read-write: Has
 	// read-write access to the environment.
 	Permissions Permissions
+
+	// The Amazon Resource Name (ARN) of the environment member.
+	UserArn *string
+
+	// The user ID in AWS Identity and Access Management (AWS IAM) of the environment
+	// member.
+	UserId *string
 }
 
 // Metadata that is associated with AWS resources. In particular, a name-value pair
@@ -104,13 +104,13 @@ type EnvironmentMember struct {
 // with "aws:" and cannot be modified by the user.
 type Tag struct {
 
-	// The value part of a tag.
-	//
-	// This member is required.
-	Value *string
-
 	// The name part of a tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value part of a tag.
+	//
+	// This member is required.
+	Value *string
 }

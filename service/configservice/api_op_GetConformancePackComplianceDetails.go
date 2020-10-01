@@ -58,28 +58,24 @@ func (c *Client) GetConformancePackComplianceDetails(ctx context.Context, params
 
 type GetConformancePackComplianceDetailsInput struct {
 
-	// The maximum number of evaluation results returned on each page. If you do no
-	// specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
-
 	// Name of the conformance pack.
 	//
 	// This member is required.
 	ConformancePackName *string
 
+	// A ConformancePackEvaluationFilters object.
+	Filters *types.ConformancePackEvaluationFilters
+
+	// The maximum number of evaluation results returned on each page. If you do no
+	// specify a number, AWS Config uses the default. The default is 100.
+	Limit *int32
+
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
-
-	// A ConformancePackEvaluationFilters object.
-	Filters *types.ConformancePackEvaluationFilters
 }
 
 type GetConformancePackComplianceDetailsOutput struct {
-
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
-	NextToken *string
 
 	// Name of the conformance pack.
 	//
@@ -88,6 +84,10 @@ type GetConformancePackComplianceDetailsOutput struct {
 
 	// Returns a list of ConformancePackEvaluationResult objects.
 	ConformancePackRuleEvaluationResults []*types.ConformancePackEvaluationResult
+
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

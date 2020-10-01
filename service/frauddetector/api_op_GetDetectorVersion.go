@@ -57,21 +57,42 @@ func (c *Client) GetDetectorVersion(ctx context.Context, params *GetDetectorVers
 
 type GetDetectorVersionInput struct {
 
-	// The detector version ID.
-	//
-	// This member is required.
-	DetectorVersionId *string
-
 	// The detector ID.
 	//
 	// This member is required.
 	DetectorId *string
+
+	// The detector version ID.
+	//
+	// This member is required.
+	DetectorVersionId *string
 }
 
 type GetDetectorVersionOutput struct {
 
+	// The detector version ARN.
+	Arn *string
+
+	// The timestamp when the detector version was created.
+	CreatedTime *string
+
+	// The detector version description.
+	Description *string
+
+	// The detector ID.
+	DetectorId *string
+
+	// The detector version ID.
+	DetectorVersionId *string
+
 	// The Amazon SageMaker model endpoints included in the detector version.
 	ExternalModelEndpoints []*string
+
+	// The timestamp when the detector version was last updated.
+	LastUpdatedTime *string
+
+	// The model versions included in the detector version.
+	ModelVersions []*types.ModelVersion
 
 	// The execution mode of the rule in the dectector FIRST_MATCHED indicates that
 	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at
@@ -81,32 +102,11 @@ type GetDetectorVersionOutput struct {
 	// the rule mode at the detector version level, when it is in draft status.
 	RuleExecutionMode types.RuleExecutionMode
 
-	// The detector version ID.
-	DetectorVersionId *string
-
-	// The detector version description.
-	Description *string
-
-	// The detector version ARN.
-	Arn *string
-
-	// The status of the detector version.
-	Status types.DetectorVersionStatus
-
 	// The rules included in the detector version.
 	Rules []*types.Rule
 
-	// The timestamp when the detector version was last updated.
-	LastUpdatedTime *string
-
-	// The timestamp when the detector version was created.
-	CreatedTime *string
-
-	// The model versions included in the detector version.
-	ModelVersions []*types.ModelVersion
-
-	// The detector ID.
-	DetectorId *string
+	// The status of the detector version.
+	Status types.DetectorVersionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

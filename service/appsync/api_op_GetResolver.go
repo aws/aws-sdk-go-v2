@@ -57,20 +57,20 @@ func (c *Client) GetResolver(ctx context.Context, params *GetResolverInput, optF
 
 type GetResolverInput struct {
 
-	// The resolver type name.
+	// The API ID.
 	//
 	// This member is required.
-	TypeName *string
+	ApiId *string
 
 	// The resolver field name.
 	//
 	// This member is required.
 	FieldName *string
 
-	// The API ID.
+	// The resolver type name.
 	//
 	// This member is required.
-	ApiId *string
+	TypeName *string
 }
 
 type GetResolverOutput struct {

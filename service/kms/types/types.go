@@ -9,24 +9,22 @@ import (
 // Contains information about an alias.
 type AliasListEntry struct {
 
+	// String that contains the key ARN.
+	AliasArn *string
+
 	// String that contains the alias. This value begins with alias/.
 	AliasName *string
 
 	// String that contains the key identifier referred to by the alias.
 	TargetKeyId *string
-
-	// String that contains the key ARN.
-	AliasArn *string
 }
 
 // Contains information about each custom key store in the custom key store list.
 type CustomKeyStoresListEntry struct {
 
-	// The date and time when the custom key store was created.
-	CreationDate *time.Time
-
-	// The user-specified friendly name for the custom key store.
-	CustomKeyStoreName *string
+	// A unique identifier for the AWS CloudHSM cluster that is associated with the
+	// custom key store.
+	CloudHsmClusterId *string
 
 	// Describes the connection error. This field appears in the response only when the
 	// ConnectionState is FAILED. For help resolving these errors, see How to Fix a
@@ -90,15 +88,6 @@ type CustomKeyStoresListEntry struct {
 	// password value for the custom key store.
 	ConnectionErrorCode ConnectionErrorCodeType
 
-	// A unique identifier for the custom key store.
-	CustomKeyStoreId *string
-
-	// The trust anchor certificate of the associated AWS CloudHSM cluster. When you
-	// initialize the cluster
-	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
-	// you create this certificate and save it in the customerCA.crt file.
-	TrustAnchorCertificate *string
-
 	// Indicates whether the custom key store is connected to its AWS CloudHSM cluster.
 	// You can create and use CMKs in your custom key stores only when its connection
 	// state is CONNECTED. The value is DISCONNECTED if the key store has never been
@@ -113,9 +102,20 @@ type CustomKeyStoresListEntry struct {
 	// AWS Key Management Service Developer Guide.
 	ConnectionState ConnectionStateType
 
-	// A unique identifier for the AWS CloudHSM cluster that is associated with the
-	// custom key store.
-	CloudHsmClusterId *string
+	// The date and time when the custom key store was created.
+	CreationDate *time.Time
+
+	// A unique identifier for the custom key store.
+	CustomKeyStoreId *string
+
+	// The user-specified friendly name for the custom key store.
+	CustomKeyStoreName *string
+
+	// The trust anchor certificate of the associated AWS CloudHSM cluster. When you
+	// initialize the cluster
+	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
+	// you create this certificate and save it in the customerCA.crt file.
+	TrustAnchorCertificate *string
 }
 
 // Use this structure to allow cryptographic operations
@@ -162,8 +162,15 @@ type GrantConstraints struct {
 // Contains information about a grant.
 type GrantListEntry struct {
 
-	// The AWS account under which the grant was issued.
-	IssuingAccount *string
+	// A list of key-value pairs that must be present in the encryption context of
+	// certain subsequent operations that the grant allows.
+	Constraints *GrantConstraints
+
+	// The date and time when the grant was created.
+	CreationDate *time.Time
+
+	// The unique identifier for the grant.
+	GrantId *string
 
 	// The identity that gets the permissions in the grant. The GranteePrincipal field
 	// in the ListGrants response usually contains the user or role designated as the
@@ -173,29 +180,22 @@ type GrantListEntry struct {
 	// which might represent several different grantee principals.
 	GranteePrincipal *string
 
-	// The list of operations permitted by the grant.
-	Operations []GrantOperation
-
-	// The friendly name that identifies the grant. If a name was provided in the
-	// CreateGrant () request, that name is returned. Otherwise this value is null.
-	Name *string
-
-	// The principal that can retire the grant.
-	RetiringPrincipal *string
+	// The AWS account under which the grant was issued.
+	IssuingAccount *string
 
 	// The unique identifier for the customer master key (CMK) to which the grant
 	// applies.
 	KeyId *string
 
-	// The unique identifier for the grant.
-	GrantId *string
+	// The friendly name that identifies the grant. If a name was provided in the
+	// CreateGrant () request, that name is returned. Otherwise this value is null.
+	Name *string
 
-	// A list of key-value pairs that must be present in the encryption context of
-	// certain subsequent operations that the grant allows.
-	Constraints *GrantConstraints
+	// The list of operations permitted by the grant.
+	Operations []GrantOperation
 
-	// The date and time when the grant was created.
-	CreationDate *time.Time
+	// The principal that can retire the grant.
+	RetiringPrincipal *string
 }
 
 // Contains information about each entry in the key list.
@@ -212,17 +212,19 @@ type KeyListEntry struct {
 // response element for the CreateKey () and DescribeKey () operations.
 type KeyMetadata struct {
 
-	// Specifies whether the CMK's key material expires. This value is present only
-	// when Origin is EXTERNAL, otherwise this value is omitted.
-	ExpirationModel ExpirationModelType
-
 	// The globally unique identifier for the CMK.
 	//
 	// This member is required.
 	KeyId *string
 
-	// The date and time when the CMK was created.
-	CreationDate *time.Time
+	// The twelve-digit account ID of the AWS account that owns the CMK.
+	AWSAccountId *string
+
+	// The Amazon Resource Name (ARN) of the CMK. For examples, see AWS Key Management
+	// Service (AWS KMS)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
+	// in the Example ARNs section of the AWS General Reference.
+	Arn *string
 
 	// The cluster ID of the AWS CloudHSM cluster that contains the key material for
 	// the CMK. When you create a CMK in a custom key store
@@ -232,11 +234,37 @@ type KeyMetadata struct {
 	// store.
 	CloudHsmClusterId *string
 
-	// The Amazon Resource Name (ARN) of the CMK. For examples, see AWS Key Management
-	// Service (AWS KMS)
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
-	// in the Example ARNs section of the AWS General Reference.
-	Arn *string
+	// The date and time when the CMK was created.
+	CreationDate *time.Time
+
+	// A unique identifier for the custom key store
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
+	// that contains the CMK. This value is present only when the CMK is created in a
+	// custom key store.
+	CustomKeyStoreId *string
+
+	// Describes the type of key material in the CMK.
+	CustomerMasterKeySpec CustomerMasterKeySpec
+
+	// The date and time after which AWS KMS deletes the CMK. This value is present
+	// only when KeyState is PendingDeletion.
+	DeletionDate *time.Time
+
+	// The description of the CMK.
+	Description *string
+
+	// Specifies whether the CMK is enabled. When KeyState is Enabled this value is
+	// true, otherwise it is false.
+	Enabled *bool
+
+	// The encryption algorithms that the CMK supports. You cannot use the CMK with
+	// other encryption algorithms within AWS KMS. This field appears only when the
+	// KeyUsage of the CMK is ENCRYPT_DECRYPT.
+	EncryptionAlgorithms []EncryptionAlgorithmSpec
+
+	// Specifies whether the CMK's key material expires. This value is present only
+	// when Origin is EXTERNAL, otherwise this value is omitted.
+	ExpirationModel ExpirationModelType
 
 	// The manager of the CMK. CMKs in your AWS account are either customer managed or
 	// AWS managed. For more information about the difference, see Customer Master Keys
@@ -255,41 +283,6 @@ type KeyMetadata struct {
 	// for which you can use the CMK.
 	KeyUsage KeyUsageType
 
-	// A unique identifier for the custom key store
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-	// that contains the CMK. This value is present only when the CMK is created in a
-	// custom key store.
-	CustomKeyStoreId *string
-
-	// The twelve-digit account ID of the AWS account that owns the CMK.
-	AWSAccountId *string
-
-	// The description of the CMK.
-	Description *string
-
-	// The encryption algorithms that the CMK supports. You cannot use the CMK with
-	// other encryption algorithms within AWS KMS. This field appears only when the
-	// KeyUsage of the CMK is ENCRYPT_DECRYPT.
-	EncryptionAlgorithms []EncryptionAlgorithmSpec
-
-	// The time at which the imported key material expires. When the key material
-	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
-	// value is present only for CMKs whose Origin is EXTERNAL and whose
-	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
-	ValidTo *time.Time
-
-	// Specifies whether the CMK is enabled. When KeyState is Enabled this value is
-	// true, otherwise it is false.
-	Enabled *bool
-
-	// The signing algorithms that the CMK supports. You cannot use the CMK with other
-	// signing algorithms within AWS KMS. This field appears only when the KeyUsage of
-	// the CMK is SIGN_VERIFY.
-	SigningAlgorithms []SigningAlgorithmSpec
-
-	// Describes the type of key material in the CMK.
-	CustomerMasterKeySpec CustomerMasterKeySpec
-
 	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
 	// created the key material. When this value is EXTERNAL, the key material was
 	// imported from your existing key management infrastructure or the CMK lacks key
@@ -297,9 +290,16 @@ type KeyMetadata struct {
 	// AWS CloudHSM cluster associated with a custom key store.
 	Origin OriginType
 
-	// The date and time after which AWS KMS deletes the CMK. This value is present
-	// only when KeyState is PendingDeletion.
-	DeletionDate *time.Time
+	// The signing algorithms that the CMK supports. You cannot use the CMK with other
+	// signing algorithms within AWS KMS. This field appears only when the KeyUsage of
+	// the CMK is SIGN_VERIFY.
+	SigningAlgorithms []SigningAlgorithmSpec
+
+	// The time at which the imported key material expires. When the key material
+	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
+	// value is present only for CMKs whose Origin is EXTERNAL and whose
+	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
+	ValidTo *time.Time
 }
 
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag

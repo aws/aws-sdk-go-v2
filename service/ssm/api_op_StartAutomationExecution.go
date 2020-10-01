@@ -57,25 +57,22 @@ func (c *Client) StartAutomationExecution(ctx context.Context, params *StartAuto
 
 type StartAutomationExecutionInput struct {
 
-	// Optional metadata that you assign to a resource. You can specify a maximum of
-	// five tags for an automation. Tags enable you to categorize a resource in
-	// different ways, such as by purpose, owner, or environment. For example, you
-	// might want to tag an automation to identify an environment or operating system.
-	// In this case, you could specify the following key name/value pairs:
-	//
-	//     *
-	// Key=environment,Value=test
-	//
-	//     * Key=OS,Value=Windows
-	//
-	// To add tags to an
-	// existing patch baseline, use the AddTagsToResource () action.
-	Tags []*types.Tag
-
 	// The name of the Automation document to use for this execution.
 	//
 	// This member is required.
 	DocumentName *string
+
+	// User-provided idempotency token. The token must be unique, is case insensitive,
+	// enforces the UUID format, and can't be reused.
+	ClientToken *string
+
+	// The version of the Automation document to use for this execution.
+	DocumentVersion *string
+
+	// The maximum number of targets allowed to run this task in parallel. You can
+	// specify a number, such as 10, or a percentage, such as 10%. The default value is
+	// 10.
+	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops running the
 	// automation on additional targets. You can specify either an absolute number of
@@ -91,6 +88,29 @@ type StartAutomationExecutionInput struct {
 	// executions, set max-concurrency to 1 so the executions proceed one at a time.
 	MaxErrors *string
 
+	// The execution mode of the automation. Valid modes include the following: Auto
+	// and Interactive. The default mode is Auto.
+	Mode types.ExecutionMode
+
+	// A key-value map of execution parameters, which match the declared parameters in
+	// the Automation document.
+	Parameters map[string][]*string
+
+	// Optional metadata that you assign to a resource. You can specify a maximum of
+	// five tags for an automation. Tags enable you to categorize a resource in
+	// different ways, such as by purpose, owner, or environment. For example, you
+	// might want to tag an automation to identify an environment or operating system.
+	// In this case, you could specify the following key name/value pairs:
+	//
+	//     *
+	// Key=environment,Value=test
+	//
+	//     * Key=OS,Value=Windows
+	//
+	// To add tags to an
+	// existing patch baseline, use the AddTagsToResource () action.
+	Tags []*types.Tag
+
 	// A location is a combination of AWS Regions and/or AWS accounts where you want to
 	// run the Automation. Use this action to start an Automation in multiple Regions
 	// and multiple accounts. For more information, see Running Automation workflows in
@@ -99,37 +119,17 @@ type StartAutomationExecutionInput struct {
 	// in the AWS Systems Manager User Guide.
 	TargetLocations []*types.TargetLocation
 
-	// A key-value mapping to target resources. Required if you specify
-	// TargetParameterName.
-	Targets []*types.Target
-
-	// User-provided idempotency token. The token must be unique, is case insensitive,
-	// enforces the UUID format, and can't be reused.
-	ClientToken *string
-
 	// A key-value mapping of document parameters to target resources. Both Targets and
 	// TargetMaps cannot be specified together.
 	TargetMaps []map[string][]*string
 
-	// The version of the Automation document to use for this execution.
-	DocumentVersion *string
-
-	// The execution mode of the automation. Valid modes include the following: Auto
-	// and Interactive. The default mode is Auto.
-	Mode types.ExecutionMode
-
-	// The maximum number of targets allowed to run this task in parallel. You can
-	// specify a number, such as 10, or a percentage, such as 10%. The default value is
-	// 10.
-	MaxConcurrency *string
-
-	// A key-value map of execution parameters, which match the declared parameters in
-	// the Automation document.
-	Parameters map[string][]*string
-
 	// The name of the parameter used as the target resource for the rate-controlled
 	// execution. Required if you specify targets.
 	TargetParameterName *string
+
+	// A key-value mapping to target resources. Required if you specify
+	// TargetParameterName.
+	Targets []*types.Target
 }
 
 type StartAutomationExecutionOutput struct {

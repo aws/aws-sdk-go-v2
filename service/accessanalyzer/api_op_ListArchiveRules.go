@@ -62,11 +62,11 @@ type ListArchiveRulesInput struct {
 	// This member is required.
 	AnalyzerName *string
 
-	// A token used for pagination of results returned.
-	NextToken *string
-
 	// The maximum number of results to return in the request.
 	MaxResults *int32
+
+	// A token used for pagination of results returned.
+	NextToken *string
 }
 
 // The response to the request.

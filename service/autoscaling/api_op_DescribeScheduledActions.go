@@ -59,29 +59,29 @@ func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeS
 
 type DescribeScheduledActionsInput struct {
 
-	// The names of one or more scheduled actions. You can specify up to 50 actions. If
-	// you omit this parameter, all scheduled actions are described. If you specify an
-	// unknown scheduled action, it is ignored with no error.
-	ScheduledActionNames []*string
-
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
-	// The maximum number of items to return with this call. The default value is 50
-	// and the maximum value is 100.
-	MaxRecords *int32
-
-	// The earliest scheduled start time to return. If scheduled action names are
-	// provided, this parameter is ignored.
-	StartTime *time.Time
-
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
 	// The latest scheduled start time to return. If scheduled action names are
 	// provided, this parameter is ignored.
 	EndTime *time.Time
+
+	// The maximum number of items to return with this call. The default value is 50
+	// and the maximum value is 100.
+	MaxRecords *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
+
+	// The names of one or more scheduled actions. You can specify up to 50 actions. If
+	// you omit this parameter, all scheduled actions are described. If you specify an
+	// unknown scheduled action, it is ignored with no error.
+	ScheduledActionNames []*string
+
+	// The earliest scheduled start time to return. If scheduled action names are
+	// provided, this parameter is ignored.
+	StartTime *time.Time
 }
 
 type DescribeScheduledActionsOutput struct {

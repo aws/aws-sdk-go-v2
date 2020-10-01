@@ -57,14 +57,31 @@ func (c *Client) ListMonitoringSchedules(ctx context.Context, params *ListMonito
 
 type ListMonitoringSchedulesInput struct {
 
-	// The maximum number of jobs to return in the response. The default value is 10.
-	MaxResults *int32
+	// A filter that returns only monitoring schedules created after a specified time.
+	CreationTimeAfter *time.Time
+
+	// A filter that returns only monitoring schedules created before a specified time.
+	CreationTimeBefore *time.Time
+
+	// Name of a specific endpoint to fetch schedules for.
+	EndpointName *string
 
 	// A filter that returns only monitoring schedules modified after a specified time.
 	LastModifiedTimeAfter *time.Time
 
-	// Name of a specific endpoint to fetch schedules for.
-	EndpointName *string
+	// A filter that returns only monitoring schedules modified before a specified
+	// time.
+	LastModifiedTimeBefore *time.Time
+
+	// The maximum number of jobs to return in the response. The default value is 10.
+	MaxResults *int32
+
+	// Filter for monitoring schedules whose name contains a specified string.
+	NameContains *string
+
+	// The token returned if the response is truncated. To retrieve the next set of job
+	// executions, use it in the next request.
+	NextToken *string
 
 	// Whether to sort results by Status, CreationTime, ScheduledTime field. The
 	// default is CreationTime.
@@ -74,26 +91,9 @@ type ListMonitoringSchedulesInput struct {
 	// Descending.
 	SortOrder types.SortOrder
 
-	// The token returned if the response is truncated. To retrieve the next set of job
-	// executions, use it in the next request.
-	NextToken *string
-
-	// A filter that returns only monitoring schedules created after a specified time.
-	CreationTimeAfter *time.Time
-
-	// Filter for monitoring schedules whose name contains a specified string.
-	NameContains *string
-
-	// A filter that returns only monitoring schedules created before a specified time.
-	CreationTimeBefore *time.Time
-
 	// A filter that returns only monitoring schedules modified before a specified
 	// time.
 	StatusEquals types.ScheduleStatus
-
-	// A filter that returns only monitoring schedules modified before a specified
-	// time.
-	LastModifiedTimeBefore *time.Time
 }
 
 type ListMonitoringSchedulesOutput struct {

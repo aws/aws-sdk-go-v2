@@ -65,11 +65,11 @@ type GetImageRecipeInput struct {
 
 type GetImageRecipeOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The image recipe object.
 	ImageRecipe *types.ImageRecipe
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

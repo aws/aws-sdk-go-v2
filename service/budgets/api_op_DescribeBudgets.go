@@ -66,24 +66,24 @@ type DescribeBudgetsInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The pagination token that you include in your request to indicate the next set
-	// of results that you want to retrieve.
-	NextToken *string
-
 	// An optional integer that represents how many entries a paginated response
 	// contains. The maximum is 100.
 	MaxResults *int32
+
+	// The pagination token that you include in your request to indicate the next set
+	// of results that you want to retrieve.
+	NextToken *string
 }
 
 // Response of DescribeBudgets
 type DescribeBudgetsOutput struct {
 
+	// A list of budgets.
+	Budgets []*types.Budget
+
 	// The pagination token in the service response that indicates the next set of
 	// results that you can retrieve.
 	NextToken *string
-
-	// A list of budgets.
-	Budgets []*types.Budget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

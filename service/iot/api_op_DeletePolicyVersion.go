@@ -60,15 +60,15 @@ func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVe
 // The input for the DeletePolicyVersion operation.
 type DeletePolicyVersionInput struct {
 
-	// The policy version ID.
-	//
-	// This member is required.
-	PolicyVersionId *string
-
 	// The name of the policy.
 	//
 	// This member is required.
 	PolicyName *string
+
+	// The policy version ID.
+	//
+	// This member is required.
+	PolicyVersionId *string
 }
 
 type DeletePolicyVersionOutput struct {

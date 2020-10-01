@@ -56,28 +56,28 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
+	// The application ID.
+	//
+	// This member is required.
+	ApplicationId *string
+
 	// A description of the application.
 	Description *string
 
 	// The name of the application.
 	Name *string
-
-	// The application ID.
-	//
-	// This member is required.
-	ApplicationId *string
 }
 
 type UpdateApplicationOutput struct {
 
-	// The application name.
-	Name *string
+	// The description of the application.
+	Description *string
 
 	// The application ID.
 	Id *string
 
-	// The description of the application.
-	Description *string
+	// The application name.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

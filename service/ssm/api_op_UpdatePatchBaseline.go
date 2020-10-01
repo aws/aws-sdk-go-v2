@@ -61,15 +61,13 @@ func (c *Client) UpdatePatchBaseline(ctx context.Context, params *UpdatePatchBas
 
 type UpdatePatchBaselineInput struct {
 
-	// A list of explicitly rejected patches for the baseline. For information about
-	// accepted formats for lists of approved patches and rejected patches, see About
-	// package name formats for approved and rejected patch lists
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
-	// in the AWS Systems Manager User Guide.
-	RejectedPatches []*string
+	// The ID of the patch baseline to update.
+	//
+	// This member is required.
+	BaselineId *string
 
-	// A set of global filters used to include patches in the baseline.
-	GlobalFilters *types.PatchFilterGroup
+	// A set of rules used to include patches in the baseline.
+	ApprovalRules *types.PatchRuleGroup
 
 	// A list of explicitly approved patches for the baseline. For information about
 	// accepted formats for lists of approved patches and rejected patches, see About
@@ -78,9 +76,29 @@ type UpdatePatchBaselineInput struct {
 	// in the AWS Systems Manager User Guide.
 	ApprovedPatches []*string
 
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
+	// Assigns a new compliance severity level to an existing patch baseline.
+	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
+
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool
+
+	// A description of the patch baseline.
+	Description *string
+
+	// A set of global filters used to include patches in the baseline.
+	GlobalFilters *types.PatchFilterGroup
+
+	// The name of the patch baseline.
+	Name *string
+
+	// A list of explicitly rejected patches for the baseline. For information about
+	// accepted formats for lists of approved patches and rejected patches, see About
+	// package name formats for approved and rejected patch lists
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// in the AWS Systems Manager User Guide.
+	RejectedPatches []*string
 
 	// The action for Patch Manager to take on patches included in the RejectedPackages
 	// list.
@@ -97,15 +115,26 @@ type UpdatePatchBaselineInput struct {
 	// patch baseline, and its status is reported as InstalledRejected.
 	RejectedPatchesAction types.PatchAction
 
-	// A description of the patch baseline.
-	Description *string
-
 	// If True, then all fields that are required by the CreatePatchBaseline action are
 	// also required for this API request. Optional fields that are not specified are
 	// set to null.
 	Replace *bool
 
-	// Assigns a new compliance severity level to an existing patch baseline.
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []*types.PatchSource
+}
+
+type UpdatePatchBaselineOutput struct {
+
+	// A set of rules used to include patches in the baseline.
+	ApprovalRules *types.PatchRuleGroup
+
+	// A list of explicitly approved patches for the baseline.
+	ApprovedPatches []*string
+
+	// The compliance severity level assigned to the patch baseline after the update
+	// completed.
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
 	// Indicates whether the list of approved patches includes non-security updates
@@ -113,67 +142,38 @@ type UpdatePatchBaselineInput struct {
 	// to Linux instances only.
 	ApprovedPatchesEnableNonSecurity *bool
 
-	// A set of rules used to include patches in the baseline.
-	ApprovalRules *types.PatchRuleGroup
-
-	// The ID of the patch baseline to update.
-	//
-	// This member is required.
+	// The ID of the deleted patch baseline.
 	BaselineId *string
 
-	// The name of the patch baseline.
-	Name *string
-}
+	// The date when the patch baseline was created.
+	CreatedDate *time.Time
 
-type UpdatePatchBaselineOutput struct {
+	// A description of the Patch Baseline.
+	Description *string
 
-	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is 'false'. Applies
-	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	// A set of global filters used to exclude patches from the baseline.
+	GlobalFilters *types.PatchFilterGroup
 
 	// The date when the patch baseline was last modified.
 	ModifiedDate *time.Time
 
+	// The name of the patch baseline.
+	Name *string
+
+	// The operating system rule used by the updated patch baseline.
+	OperatingSystem types.OperatingSystem
+
 	// A list of explicitly rejected patches for the baseline.
 	RejectedPatches []*string
-
-	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string
-
-	// A set of rules used to include patches in the baseline.
-	ApprovalRules *types.PatchRuleGroup
-
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
 
 	// The action specified to take on patches included in the RejectedPatches list. A
 	// patch can be allowed only if it is a dependency of another package, or blocked
 	// entirely along with packages that include it as a dependency.
 	RejectedPatchesAction types.PatchAction
 
-	// The compliance severity level assigned to the patch baseline after the update
-	// completed.
-	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
-
-	// The name of the patch baseline.
-	Name *string
-
-	// The date when the patch baseline was created.
-	CreatedDate *time.Time
-
-	// A set of global filters used to exclude patches from the baseline.
-	GlobalFilters *types.PatchFilterGroup
-
-	// The ID of the deleted patch baseline.
-	BaselineId *string
-
-	// The operating system rule used by the updated patch baseline.
-	OperatingSystem types.OperatingSystem
-
-	// A description of the Patch Baseline.
-	Description *string
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []*types.PatchSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

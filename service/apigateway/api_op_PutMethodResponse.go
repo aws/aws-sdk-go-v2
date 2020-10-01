@@ -57,33 +57,33 @@ func (c *Client) PutMethodResponse(ctx context.Context, params *PutMethodRespons
 
 // Request to add a MethodResponse () to an existing Method () resource.
 type PutMethodResponseInput struct {
-	Name *string
 
-	// [Required] The string identifier of the associated RestApi ().
+	// [Required] The HTTP verb of the Method () resource.
 	//
 	// This member is required.
-	RestApiId *string
+	HttpMethod *string
 
 	// [Required] The Resource () identifier for the Method () resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	Template *bool
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
 
 	// [Required] The method response's status code.
 	//
 	// This member is required.
 	StatusCode *string
 
-	Title *string
+	Name *string
 
-	TemplateSkipList []*string
-
-	// [Required] The HTTP verb of the Method () resource.
-	//
-	// This member is required.
-	HttpMethod *string
+	// Specifies the Model () resources used for the response's content type. Response
+	// models are represented as a key/value map, with a content type as the key and a
+	// Model () name as the value.
+	ResponseModels map[string]*string
 
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header name
@@ -99,10 +99,11 @@ type PutMethodResponseInput struct {
 	// JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
 
-	// Specifies the Model () resources used for the response's content type. Response
-	// models are represented as a key/value map, with a content type as the key and a
-	// Model () name as the value.
-	ResponseModels map[string]*string
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -143,9 +144,6 @@ type PutMethodResponseOutput struct {
 	// Model () name as the value.
 	ResponseModels map[string]*string
 
-	// The method response's status code.
-	StatusCode *string
-
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or
@@ -160,6 +158,9 @@ type PutMethodResponseOutput struct {
 	// the form of integration.response.body.{JSON-expression}, where JSON-expression
 	// is a valid JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
+
+	// The method response's status code.
+	StatusCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

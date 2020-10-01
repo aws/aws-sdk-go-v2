@@ -66,16 +66,16 @@ func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *A
 
 type AttachLoadBalancerTlsCertificateInput struct {
 
+	// The name of your SSL/TLS certificate.
+	//
+	// This member is required.
+	CertificateName *string
+
 	// The name of the load balancer to which you want to associate the SSL/TLS
 	// certificate.
 	//
 	// This member is required.
 	LoadBalancerName *string
-
-	// The name of your SSL/TLS certificate.
-	//
-	// This member is required.
-	CertificateName *string
 }
 
 type AttachLoadBalancerTlsCertificateOutput struct {

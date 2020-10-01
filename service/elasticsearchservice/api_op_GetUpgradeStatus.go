@@ -71,19 +71,6 @@ type GetUpgradeStatusInput struct {
 // Container for response returned by GetUpgradeStatus () operation.
 type GetUpgradeStatusOutput struct {
 
-	// A string that describes the update briefly
-	UpgradeName *string
-
-	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
-	// through:
-	//
-	//     * PreUpgradeCheck
-	//
-	//     * Snapshot
-	//
-	//     * Upgrade
-	UpgradeStep types.UpgradeStep
-
 	// One of 4 statuses that a step can go through returned as part of the
 	// GetUpgradeStatusResponse () object. The status can take one of the following
 	// values:
@@ -97,6 +84,19 @@ type GetUpgradeStatusOutput struct {
 	//     *
 	// Failed
 	StepStatus types.UpgradeStatus
+
+	// A string that describes the update briefly
+	UpgradeName *string
+
+	// Represents one of 3 steps that an Upgrade or Upgrade Eligibility Check does
+	// through:
+	//
+	//     * PreUpgradeCheck
+	//
+	//     * Snapshot
+	//
+	//     * Upgrade
+	UpgradeStep types.UpgradeStep
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,8 +58,15 @@ func (c *Client) CreateFunction(ctx context.Context, params *CreateFunctionInput
 
 type CreateFunctionInput struct {
 
-	// The Function response mapping template.
-	ResponseMappingTemplate *string
+	// The GraphQL API ID.
+	//
+	// This member is required.
+	ApiId *string
+
+	// The FunctionDataSource name.
+	//
+	// This member is required.
+	DataSourceName *string
 
 	// The version of the request mapping template. Currently the supported value is
 	// 2018-05-29.
@@ -67,29 +74,22 @@ type CreateFunctionInput struct {
 	// This member is required.
 	FunctionVersion *string
 
-	// The FunctionDataSource name.
-	//
-	// This member is required.
-	DataSourceName *string
-
 	// The Function name. The function name does not have to be unique.
 	//
 	// This member is required.
 	Name *string
-
-	// The Function description.
-	Description *string
-
-	// The GraphQL API ID.
-	//
-	// This member is required.
-	ApiId *string
 
 	// The Function request mapping template. Functions support only the 2018-05-29
 	// version of the request mapping template.
 	//
 	// This member is required.
 	RequestMappingTemplate *string
+
+	// The Function description.
+	Description *string
+
+	// The Function response mapping template.
+	ResponseMappingTemplate *string
 }
 
 type CreateFunctionOutput struct {

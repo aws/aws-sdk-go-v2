@@ -69,17 +69,17 @@ type TranslateTextInput struct {
 	// This member is required.
 	SourceLanguageCode *string
 
-	// The text to translate. The text string can be a maximum of 5,000 bytes long.
-	// Depending on your character set, this may be fewer than 5,000 characters.
-	//
-	// This member is required.
-	Text *string
-
 	// The language code requested for the language of the target text. The language
 	// must be a language supported by Amazon Translate.
 	//
 	// This member is required.
 	TargetLanguageCode *string
+
+	// The text to translate. The text string can be a maximum of 5,000 bytes long.
+	// Depending on your character set, this may be fewer than 5,000 characters.
+	//
+	// This member is required.
+	Text *string
 
 	// The name of the terminology list file to be used in the TranslateText request.
 	// You can use 1 terminology list at most in a TranslateText request. Terminology

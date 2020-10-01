@@ -56,18 +56,18 @@ func (c *Client) ListHarvestJobs(ctx context.Context, params *ListHarvestJobsInp
 
 type ListHarvestJobsInput struct {
 
-	// The upper bound on the number of records to return.
-	MaxResults *int32
+	// When specified, the request will return only HarvestJobs associated with the
+	// given Channel ID.
+	IncludeChannelId *string
 
 	// When specified, the request will return only HarvestJobs in the given status.
 	IncludeStatus *string
 
+	// The upper bound on the number of records to return.
+	MaxResults *int32
+
 	// A token used to resume pagination from the end of a previous request.
 	NextToken *string
-
-	// When specified, the request will return only HarvestJobs associated with the
-	// given Channel ID.
-	IncludeChannelId *string
 }
 
 type ListHarvestJobsOutput struct {

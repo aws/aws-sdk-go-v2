@@ -66,6 +66,18 @@ type UpdateChannelInput struct {
 	// A list of output destinations for this channel.
 	Destinations []*types.OutputDestination
 
+	// The encoder settings for this channel.
+	EncoderSettings *types.EncoderSettings
+
+	// Placeholder documentation for __listOfInputAttachment
+	InputAttachments []*types.InputAttachment
+
+	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
+	InputSpecification *types.InputSpecification
+
+	// The log level to write to CloudWatch Logs.
+	LogLevel types.LogLevel
+
 	// The name of the channel.
 	Name *string
 
@@ -73,18 +85,6 @@ type UpdateChannelInput struct {
 	// Channel. If you do not specify this on an update call but the role was
 	// previously set that role will be removed.
 	RoleArn *string
-
-	// Placeholder documentation for __listOfInputAttachment
-	InputAttachments []*types.InputAttachment
-
-	// The log level to write to CloudWatch Logs.
-	LogLevel types.LogLevel
-
-	// Specification of input for this channel (max. bitrate, resolution, codec, etc.)
-	InputSpecification *types.InputSpecification
-
-	// The encoder settings for this channel.
-	EncoderSettings *types.EncoderSettings
 }
 
 // Placeholder documentation for UpdateChannelResponse

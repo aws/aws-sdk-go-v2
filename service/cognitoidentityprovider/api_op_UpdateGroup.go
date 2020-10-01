@@ -69,6 +69,9 @@ type UpdateGroupInput struct {
 	// This member is required.
 	UserPoolId *string
 
+	// A string containing the new description of the group.
+	Description *string
+
 	// The new precedence value for the group. For more information about this
 	// parameter, see .
 	Precedence *int32
@@ -76,9 +79,6 @@ type UpdateGroupInput struct {
 	// The new role ARN for the group. This is used for setting the cognito:roles and
 	// cognito:preferred_role claims in the token.
 	RoleArn *string
-
-	// A string containing the new description of the group.
-	Description *string
 }
 
 type UpdateGroupOutput struct {

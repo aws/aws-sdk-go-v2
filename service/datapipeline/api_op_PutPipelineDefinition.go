@@ -77,16 +77,16 @@ func (c *Client) PutPipelineDefinition(ctx context.Context, params *PutPipelineD
 // Contains the parameters for PutPipelineDefinition.
 type PutPipelineDefinitionInput struct {
 
+	// The ID of the pipeline.
+	//
+	// This member is required.
+	PipelineId *string
+
 	// The objects that define the pipeline. These objects overwrite the existing
 	// pipeline definition.
 	//
 	// This member is required.
 	PipelineObjects []*types.PipelineObject
-
-	// The ID of the pipeline.
-	//
-	// This member is required.
-	PipelineId *string
 
 	// The parameter objects used with the pipeline.
 	ParameterObjects []*types.ParameterObject

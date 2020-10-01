@@ -56,15 +56,15 @@ func (c *Client) DeleteNotificationSubscription(ctx context.Context, params *Del
 
 type DeleteNotificationSubscriptionInput struct {
 
-	// The ID of the subscription.
-	//
-	// This member is required.
-	SubscriptionId *string
-
 	// The ID of the organization.
 	//
 	// This member is required.
 	OrganizationId *string
+
+	// The ID of the subscription.
+	//
+	// This member is required.
+	SubscriptionId *string
 }
 
 type DeleteNotificationSubscriptionOutput struct {

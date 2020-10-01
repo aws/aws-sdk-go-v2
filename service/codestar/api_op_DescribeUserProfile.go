@@ -71,6 +71,16 @@ type DescribeUserProfileOutput struct {
 	// This member is required.
 	CreatedTimestamp *time.Time
 
+	// The date and time when the user profile was last modified, in timestamp format.
+	//
+	// This member is required.
+	LastModifiedTimestamp *time.Time
+
+	// The Amazon Resource Name (ARN) of the user.
+	//
+	// This member is required.
+	UserArn *string
+
 	// The display name shown for the user in AWS CodeStar projects. For example, this
 	// could be set to both first and last name ("Mary Major") or a single name
 	// ("Mary"). The display name is also used to generate the initial icon associated
@@ -82,18 +92,8 @@ type DescribeUserProfileOutput struct {
 	// first character after the space ("MJ", not "MM").
 	DisplayName *string
 
-	// The date and time when the user profile was last modified, in timestamp format.
-	//
-	// This member is required.
-	LastModifiedTimestamp *time.Time
-
 	// The email address for the user. Optional.
 	EmailAddress *string
-
-	// The Amazon Resource Name (ARN) of the user.
-	//
-	// This member is required.
-	UserArn *string
 
 	// The SSH public key associated with the user. This SSH public key is associated
 	// with the user profile, and can be used in conjunction with the associated

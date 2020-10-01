@@ -86,14 +86,14 @@ type UpdateVocabularyFilterInput struct {
 
 type UpdateVocabularyFilterOutput struct {
 
-	// The name of the updated vocabulary filter.
-	VocabularyFilterName *string
+	// The language code of the words in the vocabulary filter.
+	LanguageCode types.LanguageCode
 
 	// The date and time that the vocabulary filter was updated.
 	LastModifiedTime *time.Time
 
-	// The language code of the words in the vocabulary filter.
-	LanguageCode types.LanguageCode
+	// The name of the updated vocabulary filter.
+	VocabularyFilterName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

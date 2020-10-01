@@ -62,11 +62,6 @@ func (c *Client) DeleteApplicationCloudWatchLoggingOption(ctx context.Context, p
 
 type DeleteApplicationCloudWatchLoggingOptionInput struct {
 
-	// The version ID of the Kinesis Analytics application.
-	//
-	// This member is required.
-	CurrentApplicationVersionId *int64
-
 	// The Kinesis Analytics application name.
 	//
 	// This member is required.
@@ -79,6 +74,11 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	//
 	// This member is required.
 	CloudWatchLoggingOptionId *string
+
+	// The version ID of the Kinesis Analytics application.
+	//
+	// This member is required.
+	CurrentApplicationVersionId *int64
 }
 
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {

@@ -59,6 +59,16 @@ func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotI
 
 type CompleteSnapshotInput struct {
 
+	// The number of blocks that were written to the snapshot.
+	//
+	// This member is required.
+	ChangedBlocksCount *int32
+
+	// The ID of the snapshot.
+	//
+	// This member is required.
+	SnapshotId *string
+
 	// An aggregated Base-64 SHA256 checksum based on the checksums of each written
 	// block. To generate the aggregated checksum using the linear aggregation method,
 	// arrange the checksums for each written block in ascending order of their block
@@ -66,19 +76,9 @@ type CompleteSnapshotInput struct {
 	// on the entire string using the SHA256 algorithm.
 	Checksum *string
 
-	// The ID of the snapshot.
-	//
-	// This member is required.
-	SnapshotId *string
-
 	// The aggregation method used to generate the checksum. Currently, the only
 	// supported aggregation method is LINEAR.
 	ChecksumAggregationMethod types.ChecksumAggregationMethod
-
-	// The number of blocks that were written to the snapshot.
-	//
-	// This member is required.
-	ChangedBlocksCount *int32
 
 	// The algorithm used to generate the checksum. Currently, the only supported
 	// algorithm is SHA256.

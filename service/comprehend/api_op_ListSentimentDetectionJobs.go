@@ -56,9 +56,6 @@ func (c *Client) ListSentimentDetectionJobs(ctx context.Context, params *ListSen
 
 type ListSentimentDetectionJobsInput struct {
 
-	// Identifies the next page of results to return.
-	NextToken *string
-
 	// Filters the jobs that are returned. You can filter jobs on their name, status,
 	// or the date and time that they were submitted. You can only set one filter at a
 	// time.
@@ -66,15 +63,18 @@ type ListSentimentDetectionJobsInput struct {
 
 	// The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
+
+	// Identifies the next page of results to return.
+	NextToken *string
 }
 
 type ListSentimentDetectionJobsOutput struct {
 
-	// A list containing the properties of each job that is returned.
-	SentimentDetectionJobPropertiesList []*types.SentimentDetectionJobProperties
-
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	// A list containing the properties of each job that is returned.
+	SentimentDetectionJobPropertiesList []*types.SentimentDetectionJobProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

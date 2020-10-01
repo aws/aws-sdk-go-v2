@@ -58,28 +58,29 @@ func (c *Client) CreateResource(ctx context.Context, params *CreateResourceInput
 
 // Requests API Gateway to create a Resource () resource.
 type CreateResourceInput struct {
-	Template *bool
 
 	// [Required] The parent resource's identifier.
 	//
 	// This member is required.
 	ParentId *string
 
-	Name *string
-
-	Title *string
+	// The last path segment for this resource.
+	//
+	// This member is required.
+	PathPart *string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	Name *string
+
+	Template *bool
+
 	TemplateSkipList []*string
 
-	// The last path segment for this resource.
-	//
-	// This member is required.
-	PathPart *string
+	Title *string
 }
 
 // Represents an API resource. Create an API
@@ -88,6 +89,15 @@ type CreateResourceOutput struct {
 
 	// The resource's identifier.
 	Id *string
+
+	// The parent resource's identifier.
+	ParentId *string
+
+	// The full path for this resource.
+	Path *string
+
+	// The last path segment for this resource.
+	PathPart *string
 
 	// Gets an API resource's method of a given HTTP verb. The resource methods are a
 	// map of methods indexed by methods' HTTP verbs enabled on the resource. This
@@ -169,15 +179,6 @@ type CreateResourceOutput struct {
 	// method. Just replace the GET of the last path segment in the request URL with
 	// OPTIONS.
 	ResourceMethods map[string]*types.Method
-
-	// The parent resource's identifier.
-	ParentId *string
-
-	// The full path for this resource.
-	Path *string
-
-	// The last path segment for this resource.
-	PathPart *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

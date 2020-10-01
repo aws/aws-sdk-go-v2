@@ -61,14 +61,14 @@ func (c *Client) PurchaseOffering(ctx context.Context, params *PurchaseOfferingI
 // Represents a request for a purchase offering.
 type PurchaseOfferingInput struct {
 
-	// The number of device slots to purchase in an offering request.
-	Quantity *int32
-
 	// The ID of the offering.
 	OfferingId *string
 
 	// The ID of the offering promotion to be applied to the purchase.
 	OfferingPromotionId *string
+
+	// The number of device slots to purchase in an offering request.
+	Quantity *int32
 }
 
 // The result of the purchase offering (for example, success or failure).

@@ -57,9 +57,6 @@ func (c *Client) DescribeResourcePermissions(ctx context.Context, params *Descri
 
 type DescribeResourcePermissionsInput struct {
 
-	// The ID of the principal to filter permissions by.
-	PrincipalId *string
-
 	// The ID of the resource.
 	//
 	// This member is required.
@@ -75,16 +72,19 @@ type DescribeResourcePermissionsInput struct {
 	// The marker for the next set of results. (You received this marker from a
 	// previous call)
 	Marker *string
+
+	// The ID of the principal to filter permissions by.
+	PrincipalId *string
 }
 
 type DescribeResourcePermissionsOutput struct {
 
-	// The principals.
-	Principals []*types.Principal
-
 	// The marker to use when requesting the next set of results. If there are no
 	// additional results, the string is empty.
 	Marker *string
+
+	// The principals.
+	Principals []*types.Principal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -56,22 +56,6 @@ func (c *Client) UpdateNetworkProfile(ctx context.Context, params *UpdateNetwork
 
 type UpdateNetworkProfileInput struct {
 
-	// The root certificate(s) of your authentication server that will be installed on
-	// your devices and used to trust your authentication server during EAP
-	// negotiation.
-	TrustAnchors []*string
-
-	// The next, or subsequent, password of the Wi-Fi network. This password is
-	// asynchronously transmitted to the device and is used when the password of the
-	// network changes to NextPassword.
-	NextPassword *string
-
-	// Detailed information about a device's network profile.
-	Description *string
-
-	// The name of the network profile associated with a device.
-	NetworkProfileName *string
-
 	// The ARN of the network profile associated with a device.
 	//
 	// This member is required.
@@ -83,6 +67,22 @@ type UpdateNetworkProfileInput struct {
 
 	// The current password of the Wi-Fi network.
 	CurrentPassword *string
+
+	// Detailed information about a device's network profile.
+	Description *string
+
+	// The name of the network profile associated with a device.
+	NetworkProfileName *string
+
+	// The next, or subsequent, password of the Wi-Fi network. This password is
+	// asynchronously transmitted to the device and is used when the password of the
+	// network changes to NextPassword.
+	NextPassword *string
+
+	// The root certificate(s) of your authentication server that will be installed on
+	// your devices and used to trust your authentication server during EAP
+	// negotiation.
+	TrustAnchors []*string
 }
 
 type UpdateNetworkProfileOutput struct {

@@ -65,23 +65,23 @@ type DescribeDiscovererInput struct {
 
 type DescribeDiscovererOutput struct {
 
-	// The state of the discoverer.
-	State types.DiscovererState
-
 	// The description of the discoverer.
 	Description *string
 
 	// The ARN of the discoverer.
 	DiscovererArn *string
 
-	// Tags associated with the resource.
-	Tags map[string]*string
-
 	// The ID of the discoverer.
 	DiscovererId *string
 
 	// The ARN of the event bus.
 	SourceArn *string
+
+	// The state of the discoverer.
+	State types.DiscovererState
+
+	// Tags associated with the resource.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

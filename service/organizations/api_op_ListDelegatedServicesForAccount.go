@@ -85,14 +85,14 @@ type ListDelegatedServicesForAccountInput struct {
 
 type ListDelegatedServicesForAccountOutput struct {
 
+	// The services for which the account is a delegated administrator.
+	DelegatedServices []*types.DelegatedService
+
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
-
-	// The services for which the account is a delegated administrator.
-	DelegatedServices []*types.DelegatedService
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

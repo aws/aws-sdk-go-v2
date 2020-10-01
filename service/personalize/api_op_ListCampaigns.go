@@ -62,23 +62,23 @@ type ListCampaignsInput struct {
 	// The maximum number of campaigns to return.
 	MaxResults *int32
 
+	// A token returned from the previous call to ListCampaigns for getting the next
+	// set of campaigns (if they exist).
+	NextToken *string
+
 	// The Amazon Resource Name (ARN) of the solution to list the campaigns for. When a
 	// solution is not specified, all the campaigns associated with the account are
 	// listed.
 	SolutionArn *string
-
-	// A token returned from the previous call to ListCampaigns for getting the next
-	// set of campaigns (if they exist).
-	NextToken *string
 }
 
 type ListCampaignsOutput struct {
 
-	// A token for getting the next set of campaigns (if they exist).
-	NextToken *string
-
 	// A list of the campaigns.
 	Campaigns []*types.CampaignSummary
+
+	// A token for getting the next set of campaigns (if they exist).
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

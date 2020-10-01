@@ -56,10 +56,6 @@ func (c *Client) ListProtections(ctx context.Context, params *ListProtectionsInp
 
 type ListProtectionsInput struct {
 
-	// The ListProtectionsRequest.NextToken value from a previous call to
-	// ListProtections. Pass null if this is the first call.
-	NextToken *string
-
 	// The maximum number of Protection () objects to be returned. If this is left
 	// blank the first 20 results will be returned. This is a maximum value; it is
 	// possible that AWS WAF will return the results in smaller batches. That is, the
@@ -67,6 +63,10 @@ type ListProtectionsInput struct {
 	// there are still more Protection () objects yet to return. If there are more
 	// Protection () objects to return, AWS WAF will always also return a NextToken.
 	MaxResults *int32
+
+	// The ListProtectionsRequest.NextToken value from a previous call to
+	// ListProtections. Pass null if this is the first call.
+	NextToken *string
 }
 
 type ListProtectionsOutput struct {

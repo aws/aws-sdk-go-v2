@@ -62,9 +62,6 @@ func (c *Client) InvokeEndpoint(ctx context.Context, params *InvokeEndpointInput
 
 type InvokeEndpointInput struct {
 
-	// The MIME type of the input data in the request body.
-	ContentType *string
-
 	// Provides input data, in the format specified in the ContentType request header.
 	// Amazon SageMaker passes all of the data in the body to the model.
 	//
@@ -80,6 +77,9 @@ type InvokeEndpointInput struct {
 
 	// The desired MIME type of the inference in the response.
 	Accept *string
+
+	// The MIME type of the input data in the request body.
+	ContentType *string
 }
 
 type InvokeEndpointOutput struct {
@@ -89,11 +89,11 @@ type InvokeEndpointOutput struct {
 	// This member is required.
 	Body []byte
 
-	// Identifies the production variant that was invoked.
-	InvokedProductionVariant *string
-
 	// The MIME type of the inference returned in the response body.
 	ContentType *string
+
+	// Identifies the production variant that was invoked.
+	InvokedProductionVariant *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -66,18 +66,11 @@ type DescribeRestoreJobInput struct {
 
 type DescribeRestoreJobOutput struct {
 
-	// Specifies the IAM role ARN used to create the target recovery point; for
-	// example, arn:aws:iam::123456789012:role/S3Access.
-	IamRoleArn *string
+	// Returns the account ID that owns the restore job.
+	AccountId *string
 
-	// Returns metadata associated with a restore job listed by resource type.
-	ResourceType *string
-
-	// The date and time that a restore job is created, in Unix format and Coordinated
-	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
-	CreationDate *time.Time
+	// The size, in bytes, of the restored resource.
+	BackupSizeInBytes *int64
 
 	// The date and time that a job to restore a recovery point is completed, in Unix
 	// format and Coordinated Universal Time (UTC). The value of CompletionDate is
@@ -85,38 +78,45 @@ type DescribeRestoreJobOutput struct {
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
-	// Status code specifying the state of the job that is initiated by AWS Backup to
-	// restore a recovery point.
-	Status types.RestoreJobStatus
-
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource whose recovery
 	// point is being restored. The format of the ARN depends on the resource type of
 	// the backed-up resource.
 	CreatedResourceArn *string
 
-	// The size, in bytes, of the restored resource.
-	BackupSizeInBytes *int64
+	// The date and time that a restore job is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CreationDate *time.Time
 
-	// An ARN that uniquely identifies a recovery point; for example,
-	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
-	RecoveryPointArn *string
+	// The amount of time in minutes that a job restoring a recovery point is expected
+	// to take.
+	ExpectedCompletionTimeMinutes *int64
+
+	// Specifies the IAM role ARN used to create the target recovery point; for
+	// example, arn:aws:iam::123456789012:role/S3Access.
+	IamRoleArn *string
 
 	// Contains an estimated percentage that is complete of a job at the time the job
 	// status was queried.
 	PercentDone *string
 
-	// Returns the account ID that owns the restore job.
-	AccountId *string
+	// An ARN that uniquely identifies a recovery point; for example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	RecoveryPointArn *string
+
+	// Returns metadata associated with a restore job listed by resource type.
+	ResourceType *string
 
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string
 
+	// Status code specifying the state of the job that is initiated by AWS Backup to
+	// restore a recovery point.
+	Status types.RestoreJobStatus
+
 	// A message showing the status of a job to restore a recovery point.
 	StatusMessage *string
-
-	// The amount of time in minutes that a job restoring a recovery point is expected
-	// to take.
-	ExpectedCompletionTimeMinutes *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

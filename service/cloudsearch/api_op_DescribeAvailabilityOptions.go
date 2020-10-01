@@ -65,14 +65,14 @@ func (c *Client) DescribeAvailabilityOptions(ctx context.Context, params *Descri
 // configuration and exclude any pending changes, set the Deployed option to true.
 type DescribeAvailabilityOptionsInput struct {
 
-	// Whether to display the deployed configuration (true) or include any pending
-	// changes (false). Defaults to false.
-	Deployed *bool
-
 	// The name of the domain you want to describe.
 	//
 	// This member is required.
 	DomainName *string
+
+	// Whether to display the deployed configuration (true) or include any pending
+	// changes (false). Defaults to false.
+	Deployed *bool
 }
 
 // The result of a DescribeAvailabilityOptions request. Indicates whether or not

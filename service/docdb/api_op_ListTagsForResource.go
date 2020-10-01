@@ -58,14 +58,14 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 // Represents the input to ListTagsForResource ().
 type ListTagsForResourceInput struct {
 
-	// This parameter is not currently supported.
-	Filters []*types.Filter
-
 	// The Amazon DocumentDB resource with tags to be listed. This value is an Amazon
 	// Resource Name (ARN).
 	//
 	// This member is required.
 	ResourceName *string
+
+	// This parameter is not currently supported.
+	Filters []*types.Filter
 }
 
 // Represents the output of ListTagsForResource ().

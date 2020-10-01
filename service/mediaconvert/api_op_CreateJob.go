@@ -60,33 +60,6 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// Optional. Accelerated transcoding can significantly speed up jobs with long,
-	// visually complex content. Outputs that use this feature incur pro-tier pricing.
-	// For information about feature limitations, see the AWS Elemental MediaConvert
-	// User Guide.
-	AccelerationSettings *types.AccelerationSettings
-
-	// Optional. Use queue hopping to avoid overly long waits in the backlog of the
-	// queue that you submit your job to. Specify an alternate queue and the maximum
-	// time that your job will wait in the initial queue before hopping. For more
-	// information about this feature, see the AWS Elemental MediaConvert User Guide.
-	HopDestinations []*types.HopDestination
-
-	// Optional. Enable this setting when you run a test job to estimate how many
-	// reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert
-	// runs your job from an on-demand queue with similar performance to what you will
-	// see with one RTS in a reserved queue. This setting is disabled by default.
-	SimulateReservedQueue types.SimulateReservedQueue
-
-	// Optional. The tags that you want to add to the resource. You can tag resources
-	// with a key-value pair or with only a key.
-	Tags map[string]*string
-
-	// JobSettings contains all the transcode settings for a job.
-	//
-	// This member is required.
-	Settings *types.JobSettings
-
 	// Required. The IAM role you use for creating this job. For details about
 	// permissions, see the User Guide topic at the User Guide at
 	// http://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html.
@@ -94,18 +67,16 @@ type CreateJobInput struct {
 	// This member is required.
 	Role *string
 
-	// Optional. Idempotency token for CreateJob operation.
-	ClientRequestToken *string
+	// JobSettings contains all the transcode settings for a job.
+	//
+	// This member is required.
+	Settings *types.JobSettings
 
-	// Optional. When you create a job, you can specify a queue to send it to. If you
-	// don't specify, the job will go to the default queue. For more about queues, see
-	// the User Guide topic at
-	// http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
-	Queue *string
-
-	// Optional. When you create a job, you can either specify a job template or
-	// specify the transcoding settings individually.
-	JobTemplate *string
+	// Optional. Accelerated transcoding can significantly speed up jobs with long,
+	// visually complex content. Outputs that use this feature incur pro-tier pricing.
+	// For information about feature limitations, see the AWS Elemental MediaConvert
+	// User Guide.
+	AccelerationSettings *types.AccelerationSettings
 
 	// Optional. Choose a tag type that AWS Billing and Cost Management will use to
 	// sort your AWS Elemental MediaConvert costs on any billing report that you set
@@ -114,6 +85,19 @@ type CreateJobInput struct {
 	// your job outputs will appear on the billing report unsorted.
 	BillingTagsSource types.BillingTagsSource
 
+	// Optional. Idempotency token for CreateJob operation.
+	ClientRequestToken *string
+
+	// Optional. Use queue hopping to avoid overly long waits in the backlog of the
+	// queue that you submit your job to. Specify an alternate queue and the maximum
+	// time that your job will wait in the initial queue before hopping. For more
+	// information about this feature, see the AWS Elemental MediaConvert User Guide.
+	HopDestinations []*types.HopDestination
+
+	// Optional. When you create a job, you can either specify a job template or
+	// specify the transcoding settings individually.
+	JobTemplate *string
+
 	// Optional. Specify the relative priority for this job. In any given queue, the
 	// service begins processing the job with the highest value first. When more than
 	// one job has the same priority, the service begins processing the job that you
@@ -121,9 +105,17 @@ type CreateJobInput struct {
 	// value 0.
 	Priority *int32
 
-	// Optional. User-defined metadata that you want to associate with an MediaConvert
-	// job. You specify metadata in key/value pairs.
-	UserMetadata map[string]*string
+	// Optional. When you create a job, you can specify a queue to send it to. If you
+	// don't specify, the job will go to the default queue. For more about queues, see
+	// the User Guide topic at
+	// http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html.
+	Queue *string
+
+	// Optional. Enable this setting when you run a test job to estimate how many
+	// reserved transcoding slots (RTS) you need. When this is enabled, MediaConvert
+	// runs your job from an on-demand queue with similar performance to what you will
+	// see with one RTS in a reserved queue. This setting is disabled by default.
+	SimulateReservedQueue types.SimulateReservedQueue
 
 	// Optional. Specify how often MediaConvert sends STATUS_UPDATE events to Amazon
 	// CloudWatch Events. Set the interval, in seconds, between status updates.
@@ -131,6 +123,14 @@ type CreateJobInput struct {
 	// processing your job to the time it completes the transcode or encounters an
 	// error.
 	StatusUpdateInterval types.StatusUpdateInterval
+
+	// Optional. The tags that you want to add to the resource. You can tag resources
+	// with a key-value pair or with only a key.
+	Tags map[string]*string
+
+	// Optional. User-defined metadata that you want to associate with an MediaConvert
+	// job. You specify metadata in key/value pairs.
+	UserMetadata map[string]*string
 }
 
 type CreateJobOutput struct {

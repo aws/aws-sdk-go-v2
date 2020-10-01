@@ -56,22 +56,22 @@ func (c *Client) ListResourceTypes(ctx context.Context, params *ListResourceType
 
 type ListResourceTypesInput struct {
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type ListResourceTypesOutput struct {
 
-	// The shareable resource types supported by AWS RAM.
-	ResourceTypes []*types.ServiceNameAndResourceType
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// The shareable resource types supported by AWS RAM.
+	ResourceTypes []*types.ServiceNameAndResourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

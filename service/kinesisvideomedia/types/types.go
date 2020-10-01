@@ -23,20 +23,6 @@ import (
 // then starts returning chunks starting where the last API ended.
 type StartSelector struct {
 
-	// Continuation token that Kinesis Video Streams returned in the previous GetMedia
-	// response. The GetMedia API then starts with the chunk identified by the
-	// continuation token.
-	ContinuationToken *string
-
-	// A timestamp value. This value is required if you choose the PRODUCER_TIMESTAMP
-	// or the SERVER_TIMESTAMP as the startSelectorType. The GetMedia API then starts
-	// with the chunk containing the fragment that has the specified timestamp.
-	StartTimestamp *time.Time
-
-	// Specifies the fragment number from where you want the GetMedia API to start
-	// returning the fragments.
-	AfterFragmentNumber *string
-
 	// Identifies the fragment on the Kinesis video stream where you want to start
 	// getting the data from.
 	//
@@ -63,4 +49,18 @@ type StartSelector struct {
 	//
 	// This member is required.
 	StartSelectorType StartSelectorType
+
+	// Specifies the fragment number from where you want the GetMedia API to start
+	// returning the fragments.
+	AfterFragmentNumber *string
+
+	// Continuation token that Kinesis Video Streams returned in the previous GetMedia
+	// response. The GetMedia API then starts with the chunk identified by the
+	// continuation token.
+	ContinuationToken *string
+
+	// A timestamp value. This value is required if you choose the PRODUCER_TIMESTAMP
+	// or the SERVER_TIMESTAMP as the startSelectorType. The GetMedia API then starts
+	// with the chunk containing the fragment that has the specified timestamp.
+	StartTimestamp *time.Time
 }

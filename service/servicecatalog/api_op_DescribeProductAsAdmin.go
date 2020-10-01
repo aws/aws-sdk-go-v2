@@ -57,12 +57,6 @@ func (c *Client) DescribeProductAsAdmin(ctx context.Context, params *DescribePro
 
 type DescribeProductAsAdminInput struct {
 
-	// The product identifier.
-	Id *string
-
-	// The product name.
-	Name *string
-
 	// The language code.
 	//
 	//     * en - English (default)
@@ -72,6 +66,12 @@ type DescribeProductAsAdminInput struct {
 	//     * zh
 	// - Chinese
 	AcceptLanguage *string
+
+	// The product identifier.
+	Id *string
+
+	// The product name.
+	Name *string
 }
 
 type DescribeProductAsAdminOutput struct {
@@ -79,18 +79,18 @@ type DescribeProductAsAdminOutput struct {
 	// Information about the associated budgets.
 	Budgets []*types.BudgetDetail
 
+	// Information about the product view.
+	ProductViewDetail *types.ProductViewDetail
+
 	// Information about the provisioning artifacts (also known as versions) for the
 	// specified product.
 	ProvisioningArtifactSummaries []*types.ProvisioningArtifactSummary
 
-	// Information about the tags associated with the product.
-	Tags []*types.Tag
-
 	// Information about the TagOptions associated with the product.
 	TagOptions []*types.TagOptionDetail
 
-	// Information about the product view.
-	ProductViewDetail *types.ProductViewDetail
+	// Information about the tags associated with the product.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

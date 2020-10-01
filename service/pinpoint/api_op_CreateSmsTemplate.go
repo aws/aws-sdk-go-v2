@@ -57,6 +57,12 @@ func (c *Client) CreateSmsTemplate(ctx context.Context, params *CreateSmsTemplat
 
 type CreateSmsTemplateInput struct {
 
+	// Specifies the content and settings for a message template that can be used in
+	// text messages that are sent through the SMS channel.
+	//
+	// This member is required.
+	SMSTemplateRequest *types.SMSTemplateRequest
+
 	// The name of the message template. A template name must start with an
 	// alphanumeric character and can contain a maximum of 128 characters. The
 	// characters can be alphanumeric characters, underscores (_), or hyphens (-).
@@ -64,12 +70,6 @@ type CreateSmsTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
-
-	// Specifies the content and settings for a message template that can be used in
-	// text messages that are sent through the SMS channel.
-	//
-	// This member is required.
-	SMSTemplateRequest *types.SMSTemplateRequest
 }
 
 type CreateSmsTemplateOutput struct {

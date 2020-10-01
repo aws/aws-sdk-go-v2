@@ -57,19 +57,19 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 
 type GetFindingsInput struct {
 
-	// Represents the criteria used for sorting findings.
-	SortCriteria *types.SortCriteria
+	// The ID of the detector that specifies the GuardDuty service whose findings you
+	// want to retrieve.
+	//
+	// This member is required.
+	DetectorId *string
 
 	// The IDs of the findings that you want to retrieve.
 	//
 	// This member is required.
 	FindingIds []*string
 
-	// The ID of the detector that specifies the GuardDuty service whose findings you
-	// want to retrieve.
-	//
-	// This member is required.
-	DetectorId *string
+	// Represents the criteria used for sorting findings.
+	SortCriteria *types.SortCriteria
 }
 
 type GetFindingsOutput struct {

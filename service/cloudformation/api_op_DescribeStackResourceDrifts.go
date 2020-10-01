@@ -68,6 +68,20 @@ func (c *Client) DescribeStackResourceDrifts(ctx context.Context, params *Descri
 
 type DescribeStackResourceDriftsInput struct {
 
+	// The name of the stack for which you want drift information.
+	//
+	// This member is required.
+	StackName *string
+
+	// The maximum number of results to be returned with a single call. If the number
+	// of available results exceeds this maximum, the response includes a NextToken
+	// value that you can assign to the NextToken request parameter to get the next set
+	// of results.
+	MaxResults *int32
+
+	// A string that identifies the next page of stack resource drift results.
+	NextToken *string
+
 	// The resource drift status values to use as filters for the resource drift
 	// results returned.
 	//
@@ -84,20 +98,6 @@ type DescribeStackResourceDriftsInput struct {
 	//     * NOT_CHECKED: AWS CloudFormation does not currently return
 	// this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
-
-	// A string that identifies the next page of stack resource drift results.
-	NextToken *string
-
-	// The maximum number of results to be returned with a single call. If the number
-	// of available results exceeds this maximum, the response includes a NextToken
-	// value that you can assign to the NextToken request parameter to get the next set
-	// of results.
-	MaxResults *int32
-
-	// The name of the stack for which you want drift information.
-	//
-	// This member is required.
-	StackName *string
 }
 
 type DescribeStackResourceDriftsOutput struct {

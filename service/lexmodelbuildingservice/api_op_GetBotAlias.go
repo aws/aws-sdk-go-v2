@@ -73,27 +73,27 @@ type GetBotAliasInput struct {
 
 type GetBotAliasOutput struct {
 
-	// A description of the bot alias.
-	Description *string
-
 	// The name of the bot that the alias points to.
 	BotName *string
 
-	// The date that the bot alias was updated. When you create a resource, the
-	// creation date and the last updated date are the same.
-	LastUpdatedDate *time.Time
-
 	// The version of the bot that the alias points to.
 	BotVersion *string
-
-	// The date that the bot alias was created.
-	CreatedDate *time.Time
 
 	// Checksum of the bot alias.
 	Checksum *string
 
 	// The settings that determine how Amazon Lex uses conversation logs for the alias.
 	ConversationLogs *types.ConversationLogsResponse
+
+	// The date that the bot alias was created.
+	CreatedDate *time.Time
+
+	// A description of the bot alias.
+	Description *string
+
+	// The date that the bot alias was updated. When you create a resource, the
+	// creation date and the last updated date are the same.
+	LastUpdatedDate *time.Time
 
 	// The name of the bot alias.
 	Name *string

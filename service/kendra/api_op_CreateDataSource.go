@@ -63,17 +63,22 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// A description for the data source.
-	Description *string
-
-	// The type of repository that contains the data source.
+	// The connector configuration information that is required to access the
+	// repository.
 	//
 	// This member is required.
-	Type types.DataSourceType
+	Configuration *types.DataSourceConfiguration
 
-	// A list of key-value pairs that identify the data source. You can use the tags to
-	// identify and organize your resources and to control access to resources.
-	Tags []*types.Tag
+	// The identifier of the index that should be associated with this data source.
+	//
+	// This member is required.
+	IndexId *string
+
+	// A unique name for the data source. A data source name can't be changed without
+	// deleting and recreating the data source.
+	//
+	// This member is required.
+	Name *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source. For more information, see IAM Roles for Amazon Kendra
@@ -82,11 +87,13 @@ type CreateDataSourceInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// A unique name for the data source. A data source name can't be changed without
-	// deleting and recreating the data source.
+	// The type of repository that contains the data source.
 	//
 	// This member is required.
-	Name *string
+	Type types.DataSourceType
+
+	// A description for the data source.
+	Description *string
 
 	// Sets the frequency that Amazon Kendra will check the documents in your
 	// repository and update the index. If you don't set a schedule Amazon Kendra will
@@ -94,16 +101,9 @@ type CreateDataSourceInput struct {
 	// operation to update the index.
 	Schedule *string
 
-	// The identifier of the index that should be associated with this data source.
-	//
-	// This member is required.
-	IndexId *string
-
-	// The connector configuration information that is required to access the
-	// repository.
-	//
-	// This member is required.
-	Configuration *types.DataSourceConfiguration
+	// A list of key-value pairs that identify the data source. You can use the tags to
+	// identify and organize your resources and to control access to resources.
+	Tags []*types.Tag
 }
 
 type CreateDataSourceOutput struct {

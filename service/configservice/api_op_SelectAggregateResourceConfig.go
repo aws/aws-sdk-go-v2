@@ -63,32 +63,29 @@ func (c *Client) SelectAggregateResourceConfig(ctx context.Context, params *Sele
 
 type SelectAggregateResourceConfigInput struct {
 
-	// The maximum number of query results returned on each page. AWS Config also
-	// allows the Limit request parameter.
-	MaxResults *int32
-
-	// The maximum number of query results returned on each page.
-	Limit *int32
-
 	// The name of the configuration aggregator.
 	//
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// The nextToken string returned in a previous request that you use to request the
-	// next page of results in a paginated response.
-	NextToken *string
-
 	// The SQL query SELECT command.
 	//
 	// This member is required.
 	Expression *string
+
+	// The maximum number of query results returned on each page.
+	Limit *int32
+
+	// The maximum number of query results returned on each page. AWS Config also
+	// allows the Limit request parameter.
+	MaxResults *int32
+
+	// The nextToken string returned in a previous request that you use to request the
+	// next page of results in a paginated response.
+	NextToken *string
 }
 
 type SelectAggregateResourceConfigOutput struct {
-
-	// Returns the results for the SQL query.
-	Results []*string
 
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
@@ -96,6 +93,9 @@ type SelectAggregateResourceConfigOutput struct {
 
 	// Details about the query.
 	QueryInfo *types.QueryInfo
+
+	// Returns the results for the SQL query.
+	Results []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

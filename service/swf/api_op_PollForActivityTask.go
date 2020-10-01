@@ -114,30 +114,30 @@ type PollForActivityTaskOutput struct {
 	// This member is required.
 	ActivityId *string
 
-	// The inputs provided when the activity task was scheduled. The form of the input
-	// is user defined and should be meaningful to the activity implementation.
-	Input *string
-
-	// The workflow execution that started this activity task.
+	// The type of this activity task.
 	//
 	// This member is required.
-	WorkflowExecution *types.WorkflowExecution
+	ActivityType *types.ActivityType
 
 	// The ID of the ActivityTaskStarted event recorded in the history.
 	//
 	// This member is required.
 	StartedEventId *int64
 
-	// The type of this activity task.
-	//
-	// This member is required.
-	ActivityType *types.ActivityType
-
 	// The opaque string used as a handle on the task. This token is used by workers to
 	// communicate progress and response information back to the system about the task.
 	//
 	// This member is required.
 	TaskToken *string
+
+	// The workflow execution that started this activity task.
+	//
+	// This member is required.
+	WorkflowExecution *types.WorkflowExecution
+
+	// The inputs provided when the activity task was scheduled. The form of the input
+	// is user defined and should be meaningful to the activity implementation.
+	Input *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

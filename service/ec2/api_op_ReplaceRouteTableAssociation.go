@@ -64,12 +64,6 @@ func (c *Client) ReplaceRouteTableAssociation(ctx context.Context, params *Repla
 
 type ReplaceRouteTableAssociationInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
-
 	// The association ID.
 	//
 	// This member is required.
@@ -79,15 +73,21 @@ type ReplaceRouteTableAssociationInput struct {
 	//
 	// This member is required.
 	RouteTableId *string
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type ReplaceRouteTableAssociationOutput struct {
 
-	// The ID of the new association.
-	NewAssociationId *string
-
 	// The state of the association.
 	AssociationState *types.RouteTableAssociationState
+
+	// The ID of the new association.
+	NewAssociationId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

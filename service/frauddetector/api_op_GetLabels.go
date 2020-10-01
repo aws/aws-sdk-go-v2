@@ -61,11 +61,11 @@ func (c *Client) GetLabels(ctx context.Context, params *GetLabelsInput, optFns .
 
 type GetLabelsInput struct {
 
-	// The name of the label or labels to get.
-	Name *string
-
 	// The maximum number of objects to return for the request.
 	MaxResults *int32
+
+	// The name of the label or labels to get.
+	Name *string
 
 	// The next token for the subsequent request.
 	NextToken *string
@@ -73,11 +73,11 @@ type GetLabelsInput struct {
 
 type GetLabelsOutput struct {
 
-	// The next page token.
-	NextToken *string
-
 	// An array of labels.
 	Labels []*types.Label
+
+	// The next page token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

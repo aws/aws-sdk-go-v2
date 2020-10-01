@@ -66,16 +66,16 @@ type ConfirmSubscriptionInput struct {
 	// This member is required.
 	Token *string
 
+	// The ARN of the topic for which you wish to confirm a subscription.
+	//
+	// This member is required.
+	TopicArn *string
+
 	// Disallows unauthenticated unsubscribes of the subscription. If the value of this
 	// parameter is true and the request has an AWS signature, then only the topic
 	// owner and the subscription owner can unsubscribe the endpoint. The unsubscribe
 	// action requires AWS authentication.
 	AuthenticateOnUnsubscribe *string
-
-	// The ARN of the topic for which you wish to confirm a subscription.
-	//
-	// This member is required.
-	TopicArn *string
 }
 
 // Response for ConfirmSubscriptions action.

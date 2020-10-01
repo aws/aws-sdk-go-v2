@@ -62,24 +62,11 @@ func (c *Client) DescribeSecurityGroups(ctx context.Context, params *DescribeSec
 
 type DescribeSecurityGroupsInput struct {
 
-	// The IDs of the security groups. Required for security groups in a nondefault
-	// VPC. Default: Describes all your security groups.
-	GroupIds []*string
-
-	// [EC2-Classic and default VPC only] The names of the security groups. You can
-	// specify either the security group name or the security group ID. For security
-	// groups in a nondefault VPC, use the group-name filter to describe security
-	// groups by name. Default: Describes all your security groups.
-	GroupNames []*string
-
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another request with the returned NextToken value. This
-	// value can be between 5 and 1000. If this parameter is not specified, then all
-	// results are returned.
-	MaxResults *int32
-
-	// The token to request the next page of results.
-	NextToken *string
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 
 	// The filters. If using multiple filters for rules, the results include security
 	// groups for which any combination of rules - not necessarily a single rule -
@@ -174,21 +161,34 @@ type DescribeSecurityGroupsInput struct {
 	// the VPC specified when the security group was created.
 	Filters []*types.Filter
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The IDs of the security groups. Required for security groups in a nondefault
+	// VPC. Default: Describes all your security groups.
+	GroupIds []*string
+
+	// [EC2-Classic and default VPC only] The names of the security groups. You can
+	// specify either the security group name or the security group ID. For security
+	// groups in a nondefault VPC, use the group-name filter to describe security
+	// groups by name. Default: Describes all your security groups.
+	GroupNames []*string
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another request with the returned NextToken value. This
+	// value can be between 5 and 1000. If this parameter is not specified, then all
+	// results are returned.
+	MaxResults *int32
+
+	// The token to request the next page of results.
+	NextToken *string
 }
 
 type DescribeSecurityGroupsOutput struct {
 
-	// Information about the security groups.
-	SecurityGroups []*types.SecurityGroup
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the security groups.
+	SecurityGroups []*types.SecurityGroup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

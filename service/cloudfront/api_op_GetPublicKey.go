@@ -65,11 +65,11 @@ type GetPublicKeyInput struct {
 
 type GetPublicKeyOutput struct {
 
-	// Return the public key.
-	PublicKey *types.PublicKey
-
 	// The current version of the public key. For example: E2QWRUHAPOMQZL.
 	ETag *string
+
+	// Return the public key.
+	PublicKey *types.PublicKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

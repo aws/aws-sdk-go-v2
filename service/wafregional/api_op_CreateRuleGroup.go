@@ -78,8 +78,10 @@ func (c *Client) CreateRuleGroup(ctx context.Context, params *CreateRuleGroupInp
 
 type CreateRuleGroupInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
 	//
-	Tags []*types.Tag
+	// This member is required.
+	ChangeToken *string
 
 	// A friendly name or description for the metrics for this RuleGroup. The name can
 	// contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length 128
@@ -96,10 +98,8 @@ type CreateRuleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// The value returned by the most recent call to GetChangeToken ().
 	//
-	// This member is required.
-	ChangeToken *string
+	Tags []*types.Tag
 }
 
 type CreateRuleGroupOutput struct {

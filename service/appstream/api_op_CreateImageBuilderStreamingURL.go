@@ -69,11 +69,11 @@ type CreateImageBuilderStreamingURLInput struct {
 
 type CreateImageBuilderStreamingURLOutput struct {
 
-	// The URL to start the AppStream 2.0 streaming session.
-	StreamingURL *string
-
 	// The elapsed time, in seconds after the Unix epoch, when this URL expires.
 	Expires *time.Time
+
+	// The URL to start the AppStream 2.0 streaming session.
+	StreamingURL *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

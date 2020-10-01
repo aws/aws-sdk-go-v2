@@ -61,21 +61,21 @@ func (c *Client) DeleteLoadBalancerTlsCertificate(ctx context.Context, params *D
 
 type DeleteLoadBalancerTlsCertificateInput struct {
 
-	// When true, forces the deletion of an SSL/TLS certificate. There can be two
-	// certificates associated with a Lightsail load balancer: the primary and the
-	// backup. The force parameter is required when the primary SSL/TLS certificate is
-	// in use by an instance attached to the load balancer.
-	Force *bool
+	// The SSL/TLS certificate name.
+	//
+	// This member is required.
+	CertificateName *string
 
 	// The load balancer name.
 	//
 	// This member is required.
 	LoadBalancerName *string
 
-	// The SSL/TLS certificate name.
-	//
-	// This member is required.
-	CertificateName *string
+	// When true, forces the deletion of an SSL/TLS certificate. There can be two
+	// certificates associated with a Lightsail load balancer: the primary and the
+	// backup. The force parameter is required when the primary SSL/TLS certificate is
+	// in use by an instance attached to the load balancer.
+	Force *bool
 }
 
 type DeleteLoadBalancerTlsCertificateOutput struct {

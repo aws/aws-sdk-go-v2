@@ -93,6 +93,11 @@ func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *Ge
 
 type GetBucketLifecycleConfigurationInput struct {
 
+	// The AWS account ID of the Outposts bucket.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The Amazon Resource Name (ARN) of the bucket. For Amazon S3 on Outposts specify
 	// the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
@@ -103,11 +108,6 @@ type GetBucketLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	Bucket *string
-
-	// The AWS account ID of the Outposts bucket.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type GetBucketLifecycleConfigurationOutput struct {

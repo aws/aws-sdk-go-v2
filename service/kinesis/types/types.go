@@ -18,39 +18,24 @@ type Consumer struct {
 	// This member is required.
 	ConsumerARN *string
 
-	// A consumer can't read data while in the CREATING or DELETING states.
+	//
 	//
 	// This member is required.
-	ConsumerStatus ConsumerStatus
+	ConsumerCreationTimestamp *time.Time
 
 	// The name of the consumer is something you choose when you register the consumer.
 	//
 	// This member is required.
 	ConsumerName *string
 
-	//
-	//
-	// This member is required.
-	ConsumerCreationTimestamp *time.Time
-}
-
-// An object that represents the details of a registered consumer.
-type ConsumerDescription struct {
-
-	//
-	//
-	// This member is required.
-	ConsumerCreationTimestamp *time.Time
-
-	// The ARN of the stream with which you registered the consumer.
-	//
-	// This member is required.
-	StreamARN *string
-
 	// A consumer can't read data while in the CREATING or DELETING states.
 	//
 	// This member is required.
 	ConsumerStatus ConsumerStatus
+}
+
+// An object that represents the details of a registered consumer.
+type ConsumerDescription struct {
 
 	// When you register a consumer, Kinesis Data Streams generates an ARN for it. You
 	// need this ARN to be able to call SubscribeToShard (). If you delete a consumer
@@ -61,10 +46,25 @@ type ConsumerDescription struct {
 	// This member is required.
 	ConsumerARN *string
 
+	//
+	//
+	// This member is required.
+	ConsumerCreationTimestamp *time.Time
+
 	// The name of the consumer is something you choose when you register the consumer.
 	//
 	// This member is required.
 	ConsumerName *string
+
+	// A consumer can't read data while in the CREATING or DELETING states.
+	//
+	// This member is required.
+	ConsumerStatus ConsumerStatus
+
+	// The ARN of the stream with which you registered the consumer.
+	//
+	// This member is required.
+	StreamARN *string
 }
 
 // Represents enhanced metrics types.
@@ -117,6 +117,14 @@ type HashKeyRange struct {
 // Represents the output for PutRecords.
 type PutRecordsRequestEntry struct {
 
+	// The data blob to put into the record, which is base64-encoded when the blob is
+	// serialized. When the data blob (the payload before base64-encoding) is added to
+	// the partition key size, the total size must not exceed the maximum record size
+	// (1 MB).
+	//
+	// This member is required.
+	Data []byte
+
 	// Determines which shard in the stream the data record is assigned to. Partition
 	// keys are Unicode strings with a maximum length limit of 256 characters for each
 	// key. Amazon Kinesis Data Streams uses the partition key as input to a hash
@@ -129,14 +137,6 @@ type PutRecordsRequestEntry struct {
 	// This member is required.
 	PartitionKey *string
 
-	// The data blob to put into the record, which is base64-encoded when the blob is
-	// serialized. When the data blob (the payload before base64-encoding) is added to
-	// the partition key size, the total size must not exceed the maximum record size
-	// (1 MB).
-	//
-	// This member is required.
-	Data []byte
-
 	// The hash value used to determine explicitly the shard that the data record is
 	// assigned to by overriding the partition key hash.
 	ExplicitHashKey *string
@@ -148,12 +148,6 @@ type PutRecordsRequestEntry struct {
 // ErrorCode and ErrorMessage in the result.
 type PutRecordsResultEntry struct {
 
-	// The shard ID for an individual record result.
-	ShardId *string
-
-	// The sequence number for an individual record result.
-	SequenceNumber *string
-
 	// The error code for an individual record result. ErrorCodes can be either
 	// ProvisionedThroughputExceededException or InternalFailure.
 	ErrorCode *string
@@ -163,16 +157,17 @@ type PutRecordsResultEntry struct {
 	// account ID, stream name, and shard ID. An ErrorCode value of InternalFailure has
 	// the error message "Internal Service Failure".
 	ErrorMessage *string
+
+	// The sequence number for an individual record result.
+	SequenceNumber *string
+
+	// The shard ID for an individual record result.
+	ShardId *string
 }
 
 // The unit of data of the Kinesis data stream, which is composed of a sequence
 // number, a partition key, and a data blob.
 type Record struct {
-
-	// Identifies which shard in the stream the data record is assigned to.
-	//
-	// This member is required.
-	PartitionKey *string
 
 	// The data blob. The data in the blob is both opaque and immutable to Kinesis Data
 	// Streams, which does not inspect, interpret, or change the data in the blob in
@@ -183,10 +178,18 @@ type Record struct {
 	// This member is required.
 	Data []byte
 
+	// Identifies which shard in the stream the data record is assigned to.
+	//
+	// This member is required.
+	PartitionKey *string
+
 	// The unique identifier of the record within its shard.
 	//
 	// This member is required.
 	SequenceNumber *string
+
+	// The approximate time that the record was inserted into the stream.
+	ApproximateArrivalTimestamp *time.Time
 
 	// The encryption type used on the record. This parameter can be one of the
 	// following values:
@@ -197,37 +200,23 @@ type Record struct {
 	// KMS: Use server-side encryption on the records in the stream using a
 	// customer-managed AWS KMS key.
 	EncryptionType EncryptionType
-
-	// The approximate time that the record was inserted into the stream.
-	ApproximateArrivalTimestamp *time.Time
 }
 
 // The range of possible sequence numbers for the shard.
 type SequenceNumberRange struct {
 
-	// The ending sequence number for the range. Shards that are in the OPEN state have
-	// an ending sequence number of null.
-	EndingSequenceNumber *string
-
 	// The starting sequence number for the range.
 	//
 	// This member is required.
 	StartingSequenceNumber *string
+
+	// The ending sequence number for the range. Shards that are in the OPEN state have
+	// an ending sequence number of null.
+	EndingSequenceNumber *string
 }
 
 // A uniquely identified group of data records in a Kinesis data stream.
 type Shard struct {
-
-	// The shard ID of the shard's parent.
-	ParentShardId *string
-
-	// The shard ID of the shard adjacent to the shard's parent.
-	AdjacentParentShardId *string
-
-	// The range of possible sequence numbers for the shard.
-	//
-	// This member is required.
-	SequenceNumberRange *SequenceNumberRange
 
 	// The range of possible hash key values for the shard, which is a set of ordered
 	// contiguous positive integers.
@@ -235,22 +224,89 @@ type Shard struct {
 	// This member is required.
 	HashKeyRange *HashKeyRange
 
+	// The range of possible sequence numbers for the shard.
+	//
+	// This member is required.
+	SequenceNumberRange *SequenceNumberRange
+
 	// The unique identifier of the shard within the stream.
 	//
 	// This member is required.
 	ShardId *string
+
+	// The shard ID of the shard adjacent to the shard's parent.
+	AdjacentParentShardId *string
+
+	// The shard ID of the shard's parent.
+	ParentShardId *string
 }
 
 type StartingPosition struct {
-	SequenceNumber *string
-
 	Type ShardIteratorType
+
+	SequenceNumber *string
 
 	Timestamp *time.Time
 }
 
 // Represents the output for DescribeStream ().
 type StreamDescription struct {
+
+	// Represents the current enhanced monitoring settings of the stream.
+	//
+	// This member is required.
+	EnhancedMonitoring []*EnhancedMetrics
+
+	// If set to true, more shards in the stream are available to describe.
+	//
+	// This member is required.
+	HasMoreShards *bool
+
+	// The current retention period, in hours.
+	//
+	// This member is required.
+	RetentionPeriodHours *int32
+
+	// The shards that comprise the stream.
+	//
+	// This member is required.
+	Shards []*Shard
+
+	// The Amazon Resource Name (ARN) for the stream being described.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The approximate time that the stream was created.
+	//
+	// This member is required.
+	StreamCreationTimestamp *time.Time
+
+	// The name of the stream being described.
+	//
+	// This member is required.
+	StreamName *string
+
+	// The current status of the stream being described. The stream status is one of
+	// the following states:
+	//
+	//     * CREATING - The stream is being created. Kinesis
+	// Data Streams immediately returns and sets StreamStatus to CREATING.
+	//
+	//     *
+	// DELETING - The stream is being deleted. The specified stream is in the DELETING
+	// state until Kinesis Data Streams completes the deletion.
+	//
+	//     * ACTIVE - The
+	// stream exists and is ready for read and write operations or deletion. You should
+	// perform read and write operations only on an ACTIVE stream.
+	//
+	//     * UPDATING -
+	// Shards in the stream are being merged or split. Read and write operations
+	// continue to work while the stream is in the UPDATING state.
+	//
+	// This member is required.
+	StreamStatus StreamStatus
 
 	// The server-side encryption type used on the stream. This parameter can be one of
 	// the following values:
@@ -261,21 +317,6 @@ type StreamDescription struct {
 	// * KMS: Use server-side encryption on the records in the stream using a
 	// customer-managed AWS KMS key.
 	EncryptionType EncryptionType
-
-	// The name of the stream being described.
-	//
-	// This member is required.
-	StreamName *string
-
-	// The approximate time that the stream was created.
-	//
-	// This member is required.
-	StreamCreationTimestamp *time.Time
-
-	// If set to true, more shards in the stream are available to describe.
-	//
-	// This member is required.
-	HasMoreShards *bool
 
 	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
 	// can be a globally unique identifier, a fully specified ARN to either an alias or
@@ -298,6 +339,40 @@ type StreamDescription struct {
 	//     * Master key owned by Kinesis Data
 	// Streams: alias/aws/kinesis
 	KeyId *string
+}
+
+// Represents the output for DescribeStreamSummary ()
+type StreamDescriptionSummary struct {
+
+	// Represents the current enhanced monitoring settings of the stream.
+	//
+	// This member is required.
+	EnhancedMonitoring []*EnhancedMetrics
+
+	// The number of open shards in the stream.
+	//
+	// This member is required.
+	OpenShardCount *int32
+
+	// The current retention period, in hours.
+	//
+	// This member is required.
+	RetentionPeriodHours *int32
+
+	// The Amazon Resource Name (ARN) for the stream being described.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The approximate time that the stream was created.
+	//
+	// This member is required.
+	StreamCreationTimestamp *time.Time
+
+	// The name of the stream being described.
+	//
+	// This member is required.
+	StreamName *string
 
 	// The current status of the stream being described. The stream status is one of
 	// the following states:
@@ -320,29 +395,16 @@ type StreamDescription struct {
 	// This member is required.
 	StreamStatus StreamStatus
 
-	// The shards that comprise the stream.
-	//
-	// This member is required.
-	Shards []*Shard
+	// The number of enhanced fan-out consumers registered with the stream.
+	ConsumerCount *int32
 
-	// The Amazon Resource Name (ARN) for the stream being described.
+	// The encryption type used. This value is one of the following:
 	//
-	// This member is required.
-	StreamARN *string
-
-	// The current retention period, in hours.
+	//     * KMS
 	//
-	// This member is required.
-	RetentionPeriodHours *int32
-
-	// Represents the current enhanced monitoring settings of the stream.
-	//
-	// This member is required.
-	EnhancedMonitoring []*EnhancedMetrics
-}
-
-// Represents the output for DescribeStreamSummary ()
-type StreamDescriptionSummary struct {
+	//     *
+	// NONE
+	EncryptionType EncryptionType
 
 	// The GUID for the customer-managed AWS KMS key to use for encryption. This value
 	// can be a globally unique identifier, a fully specified ARN to either an alias or
@@ -365,73 +427,16 @@ type StreamDescriptionSummary struct {
 	//     * Master key owned by Kinesis Data
 	// Streams: alias/aws/kinesis
 	KeyId *string
-
-	// The current status of the stream being described. The stream status is one of
-	// the following states:
-	//
-	//     * CREATING - The stream is being created. Kinesis
-	// Data Streams immediately returns and sets StreamStatus to CREATING.
-	//
-	//     *
-	// DELETING - The stream is being deleted. The specified stream is in the DELETING
-	// state until Kinesis Data Streams completes the deletion.
-	//
-	//     * ACTIVE - The
-	// stream exists and is ready for read and write operations or deletion. You should
-	// perform read and write operations only on an ACTIVE stream.
-	//
-	//     * UPDATING -
-	// Shards in the stream are being merged or split. Read and write operations
-	// continue to work while the stream is in the UPDATING state.
-	//
-	// This member is required.
-	StreamStatus StreamStatus
-
-	// The Amazon Resource Name (ARN) for the stream being described.
-	//
-	// This member is required.
-	StreamARN *string
-
-	// The current retention period, in hours.
-	//
-	// This member is required.
-	RetentionPeriodHours *int32
-
-	// Represents the current enhanced monitoring settings of the stream.
-	//
-	// This member is required.
-	EnhancedMonitoring []*EnhancedMetrics
-
-	// The encryption type used. This value is one of the following:
-	//
-	//     * KMS
-	//
-	//     *
-	// NONE
-	EncryptionType EncryptionType
-
-	// The name of the stream being described.
-	//
-	// This member is required.
-	StreamName *string
-
-	// The approximate time that the stream was created.
-	//
-	// This member is required.
-	StreamCreationTimestamp *time.Time
-
-	// The number of enhanced fan-out consumers registered with the stream.
-	ConsumerCount *int32
-
-	// The number of open shards in the stream.
-	//
-	// This member is required.
-	OpenShardCount *int32
 }
 
 // After you call SubscribeToShard (), Kinesis Data Streams sends events of this
 // type to your consumer.
 type SubscribeToShardEvent struct {
+
+	// Use this as StartingSequenceNumber in the next call to SubscribeToShard ().
+	//
+	// This member is required.
+	ContinuationSequenceNumber *string
 
 	// The number of milliseconds the read records are from the tip of the stream,
 	// indicating how far behind current time the consumer is. A value of zero
@@ -445,11 +450,6 @@ type SubscribeToShardEvent struct {
 	//
 	// This member is required.
 	Records []*Record
-
-	// Use this as StartingSequenceNumber in the next call to SubscribeToShard ().
-	//
-	// This member is required.
-	ContinuationSequenceNumber *string
 }
 
 type SubscribeToShardEventStream interface {

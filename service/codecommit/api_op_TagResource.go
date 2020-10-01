@@ -59,16 +59,16 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The key-value pair to use when tagging this repository.
-	//
-	// This member is required.
-	Tags map[string]*string
-
 	// The Amazon Resource Name (ARN) of the resource to which you want to add or
 	// update tags.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The key-value pair to use when tagging this repository.
+	//
+	// This member is required.
+	Tags map[string]*string
 }
 
 type TagResourceOutput struct {

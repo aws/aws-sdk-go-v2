@@ -63,9 +63,6 @@ type CreateReplicationSubnetGroupInput struct {
 	// This member is required.
 	ReplicationSubnetGroupDescription *string
 
-	// One or more tags to be assigned to the subnet group.
-	Tags []*types.Tag
-
 	// The name for the replication subnet group. This value is stored as a lowercase
 	// string. Constraints: Must contain no more than 255 alphanumeric characters,
 	// periods, spaces, underscores, or hyphens. Must not be "default". Example:
@@ -78,6 +75,9 @@ type CreateReplicationSubnetGroupInput struct {
 	//
 	// This member is required.
 	SubnetIds []*string
+
+	// One or more tags to be assigned to the subnet group.
+	Tags []*types.Tag
 }
 
 //

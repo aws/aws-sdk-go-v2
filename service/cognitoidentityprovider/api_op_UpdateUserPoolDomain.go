@@ -76,6 +76,13 @@ func (c *Client) UpdateUserPoolDomain(ctx context.Context, params *UpdateUserPoo
 // The UpdateUserPoolDomain request input.
 type UpdateUserPoolDomainInput struct {
 
+	// The configuration for a custom domain that hosts the sign-up and sign-in pages
+	// for your application. Use this object to specify an SSL certificate that is
+	// managed by ACM.
+	//
+	// This member is required.
+	CustomDomainConfig *types.CustomDomainConfigType
+
 	// The domain name for the custom domain that hosts the sign-up and sign-in pages
 	// for your application. For example: auth.example.com. This string can include
 	// only lowercase letters, numbers, and hyphens. Do not use a hyphen for the first
@@ -83,13 +90,6 @@ type UpdateUserPoolDomainInput struct {
 	//
 	// This member is required.
 	Domain *string
-
-	// The configuration for a custom domain that hosts the sign-up and sign-in pages
-	// for your application. Use this object to specify an SSL certificate that is
-	// managed by ACM.
-	//
-	// This member is required.
-	CustomDomainConfig *types.CustomDomainConfigType
 
 	// The ID of the user pool that is associated with the custom domain that you are
 	// updating the certificate for.

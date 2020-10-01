@@ -60,18 +60,14 @@ func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInp
 
 type ListCollectionsInput struct {
 
-	// Pagination token from the previous response.
-	NextToken *string
-
 	// Maximum number of collection IDs to return.
 	MaxResults *int32
+
+	// Pagination token from the previous response.
+	NextToken *string
 }
 
 type ListCollectionsOutput struct {
-
-	// If the result is truncated, the response provides a NextToken that you can use
-	// in the subsequent request to fetch the next set of collection IDs.
-	NextToken *string
 
 	// An array of collection IDs.
 	CollectionIds []*string
@@ -81,6 +77,10 @@ type ListCollectionsOutput struct {
 	// version number for the face detection model used by the collection in
 	// CollectionId[2].
 	FaceModelVersions []*string
+
+	// If the result is truncated, the response provides a NextToken that you can use
+	// in the subsequent request to fetch the next set of collection IDs.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

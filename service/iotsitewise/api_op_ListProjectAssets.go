@@ -57,13 +57,13 @@ func (c *Client) ListProjectAssets(ctx context.Context, params *ListProjectAsset
 
 type ListProjectAssetsInput struct {
 
-	// The maximum number of results to be returned per paginated request.
-	MaxResults *int32
-
 	// The ID of the project.
 	//
 	// This member is required.
 	ProjectId *string
+
+	// The maximum number of results to be returned per paginated request.
+	MaxResults *int32
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
@@ -71,14 +71,14 @@ type ListProjectAssetsInput struct {
 
 type ListProjectAssetsOutput struct {
 
-	// The token for the next set of results, or null if there are no additional
-	// results.
-	NextToken *string
-
 	// A list that contains the IDs of each asset associated with the project.
 	//
 	// This member is required.
 	AssetIds []*string
+
+	// The token for the next set of results, or null if there are no additional
+	// results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

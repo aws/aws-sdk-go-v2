@@ -61,6 +61,15 @@ func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersi
 
 type ListPolicyVersionsInput struct {
 
+	// The Amazon Resource Name (ARN) of the IAM policy for which you want the
+	// versions. For more information about ARNs, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	//
+	// This member is required.
+	PolicyArn *string
+
 	// Use this parameter only when paginating results and only after you receive a
 	// response indicating that the results are truncated. Set it to the value of the
 	// Marker element in the response that you received to indicate where the next call
@@ -75,15 +84,6 @@ type ListPolicyVersionsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// The Amazon Resource Name (ARN) of the IAM policy for which you want the
-	// versions. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
-	//
-	// This member is required.
-	PolicyArn *string
 }
 
 // Contains the response to a successful ListPolicyVersions () request.
@@ -97,15 +97,15 @@ type ListPolicyVersionsOutput struct {
 	// all your results.
 	IsTruncated *bool
 
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
+
 	// A list of policy versions. For more information about managed policy versions,
 	// see Versioning for Managed Policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	Versions []*types.PolicyVersion
-
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

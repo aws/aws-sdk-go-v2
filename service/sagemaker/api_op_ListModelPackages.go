@@ -57,15 +57,6 @@ func (c *Client) ListModelPackages(ctx context.Context, params *ListModelPackage
 
 type ListModelPackagesInput struct {
 
-	// The maximum number of model packages to return in the response.
-	MaxResults *int32
-
-	// The sort order for the results. The default is Ascending.
-	SortOrder types.SortOrder
-
-	// The parameter by which to sort the results. The default is CreationTime.
-	SortBy types.ModelPackageSortBy
-
 	// A filter that returns only model packages created after the specified time
 	// (timestamp).
 	CreationTimeAfter *time.Time
@@ -74,14 +65,23 @@ type ListModelPackagesInput struct {
 	// (timestamp).
 	CreationTimeBefore *time.Time
 
+	// The maximum number of model packages to return in the response.
+	MaxResults *int32
+
+	// A string in the model package name. This filter returns only model packages
+	// whose name contains the specified string.
+	NameContains *string
+
 	// If the response to a previous ListModelPackages request was truncated, the
 	// response includes a NextToken. To retrieve the next set of model packages, use
 	// the token in the next request.
 	NextToken *string
 
-	// A string in the model package name. This filter returns only model packages
-	// whose name contains the specified string.
-	NameContains *string
+	// The parameter by which to sort the results. The default is CreationTime.
+	SortBy types.ModelPackageSortBy
+
+	// The sort order for the results. The default is Ascending.
+	SortOrder types.SortOrder
 }
 
 type ListModelPackagesOutput struct {

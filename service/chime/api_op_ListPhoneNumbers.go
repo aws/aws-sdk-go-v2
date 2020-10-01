@@ -57,32 +57,32 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 
 type ListPhoneNumbersInput struct {
 
-	// The value to use for the filter.
-	FilterValue *string
-
 	// The filter to use to limit the number of results.
 	FilterName types.PhoneNumberAssociationName
 
-	// The phone number product type.
-	ProductType types.PhoneNumberProductType
-
-	// The phone number status.
-	Status types.PhoneNumberStatus
+	// The value to use for the filter.
+	FilterValue *string
 
 	// The maximum number of results to return in a single call.
 	MaxResults *int32
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	// The phone number product type.
+	ProductType types.PhoneNumberProductType
+
+	// The phone number status.
+	Status types.PhoneNumberStatus
 }
 
 type ListPhoneNumbersOutput struct {
 
-	// The phone number details.
-	PhoneNumbers []*types.PhoneNumber
-
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	// The phone number details.
+	PhoneNumbers []*types.PhoneNumber
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

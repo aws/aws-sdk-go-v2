@@ -90,21 +90,13 @@ func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns .
 // Represents the input for PutRecord.
 type PutRecordInput struct {
 
-	// Guarantees strictly increasing sequence numbers, for puts from the same client
-	// and to the same partition key. Usage: set the SequenceNumberForOrdering of
-	// record n to the sequence number of record n-1 (as returned in the result when
-	// putting record n-1). If this parameter is not set, records are coarsely ordered
-	// based on arrival time.
-	SequenceNumberForOrdering *string
-
-	// The name of the stream to put the data record into.
+	// The data blob to put into the record, which is base64-encoded when the blob is
+	// serialized. When the data blob (the payload before base64-encoding) is added to
+	// the partition key size, the total size must not exceed the maximum record size
+	// (1 MB).
 	//
 	// This member is required.
-	StreamName *string
-
-	// The hash value used to explicitly determine the shard the data record is
-	// assigned to by overriding the partition key hash.
-	ExplicitHashKey *string
+	Data []byte
 
 	// Determines which shard in the stream the data record is assigned to. Partition
 	// keys are Unicode strings with a maximum length limit of 256 characters for each
@@ -118,17 +110,38 @@ type PutRecordInput struct {
 	// This member is required.
 	PartitionKey *string
 
-	// The data blob to put into the record, which is base64-encoded when the blob is
-	// serialized. When the data blob (the payload before base64-encoding) is added to
-	// the partition key size, the total size must not exceed the maximum record size
-	// (1 MB).
+	// The name of the stream to put the data record into.
 	//
 	// This member is required.
-	Data []byte
+	StreamName *string
+
+	// The hash value used to explicitly determine the shard the data record is
+	// assigned to by overriding the partition key hash.
+	ExplicitHashKey *string
+
+	// Guarantees strictly increasing sequence numbers, for puts from the same client
+	// and to the same partition key. Usage: set the SequenceNumberForOrdering of
+	// record n to the sequence number of record n-1 (as returned in the result when
+	// putting record n-1). If this parameter is not set, records are coarsely ordered
+	// based on arrival time.
+	SequenceNumberForOrdering *string
 }
 
 // Represents the output for PutRecord.
 type PutRecordOutput struct {
+
+	// The sequence number identifier that was assigned to the put data record. The
+	// sequence number for the record is unique across all records in the stream. A
+	// sequence number is the identifier associated with every record put into the
+	// stream.
+	//
+	// This member is required.
+	SequenceNumber *string
+
+	// The shard ID of the shard where the data record was placed.
+	//
+	// This member is required.
+	ShardId *string
 
 	// The encryption type to use on the record. This parameter can be one of the
 	// following values:
@@ -139,19 +152,6 @@ type PutRecordOutput struct {
 	// KMS: Use server-side encryption on the records in the stream using a
 	// customer-managed AWS KMS key.
 	EncryptionType types.EncryptionType
-
-	// The shard ID of the shard where the data record was placed.
-	//
-	// This member is required.
-	ShardId *string
-
-	// The sequence number identifier that was assigned to the put data record. The
-	// sequence number for the record is unique across all records in the stream. A
-	// sequence number is the identifier associated with every record put into the
-	// stream.
-	//
-	// This member is required.
-	SequenceNumber *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

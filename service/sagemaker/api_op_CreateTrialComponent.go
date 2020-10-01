@@ -69,8 +69,32 @@ func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialCo
 
 type CreateTrialComponentInput struct {
 
+	// The name of the component. The name must be unique in your AWS account and is
+	// not case-sensitive.
+	//
+	// This member is required.
+	TrialComponentName *string
+
+	// The name of the component as displayed. The name doesn't need to be unique. If
+	// DisplayName isn't specified, TrialComponentName is displayed.
+	DisplayName *string
+
+	// When the component ended.
+	EndTime *time.Time
+
+	// The input artifacts for the component. Examples of input artifacts are datasets,
+	// algorithms, hyperparameters, source code, and instance types.
+	InputArtifacts map[string]*types.TrialComponentArtifact
+
+	// The output artifacts for the component. Examples of output artifacts are
+	// metrics, snapshots, logs, and images.
+	OutputArtifacts map[string]*types.TrialComponentArtifact
+
 	// The hyperparameters for the component.
 	Parameters map[string]*types.TrialComponentParameterValue
+
+	// When the component started.
+	StartTime *time.Time
 
 	// The status of the component. States include:
 	//
@@ -82,33 +106,9 @@ type CreateTrialComponentInput struct {
 	//     * Failed
 	Status *types.TrialComponentStatus
 
-	// When the component ended.
-	EndTime *time.Time
-
-	// The name of the component. The name must be unique in your AWS account and is
-	// not case-sensitive.
-	//
-	// This member is required.
-	TrialComponentName *string
-
 	// A list of tags to associate with the component. You can use Search () API to
 	// search on the tags.
 	Tags []*types.Tag
-
-	// The output artifacts for the component. Examples of output artifacts are
-	// metrics, snapshots, logs, and images.
-	OutputArtifacts map[string]*types.TrialComponentArtifact
-
-	// The name of the component as displayed. The name doesn't need to be unique. If
-	// DisplayName isn't specified, TrialComponentName is displayed.
-	DisplayName *string
-
-	// When the component started.
-	StartTime *time.Time
-
-	// The input artifacts for the component. Examples of input artifacts are datasets,
-	// algorithms, hyperparameters, source code, and instance types.
-	InputArtifacts map[string]*types.TrialComponentArtifact
 }
 
 type CreateTrialComponentOutput struct {

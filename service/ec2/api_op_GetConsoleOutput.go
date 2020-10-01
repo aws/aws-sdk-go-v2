@@ -69,10 +69,6 @@ func (c *Client) GetConsoleOutput(ctx context.Context, params *GetConsoleOutputI
 
 type GetConsoleOutputInput struct {
 
-	// When enabled, retrieves the latest console output for the instance. Default:
-	// disabled (false)
-	Latest *bool
-
 	// The ID of the instance.
 	//
 	// This member is required.
@@ -83,16 +79,20 @@ type GetConsoleOutputInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// When enabled, retrieves the latest console output for the instance. Default:
+	// disabled (false)
+	Latest *bool
 }
 
 type GetConsoleOutputOutput struct {
 
+	// The ID of the instance.
+	InstanceId *string
+
 	// The console output, base64-encoded. If you are using a command line tool, the
 	// tool decodes the output for you.
 	Output *string
-
-	// The ID of the instance.
-	InstanceId *string
 
 	// The time at which the output was last updated.
 	Timestamp *time.Time

@@ -60,21 +60,20 @@ func (c *Client) CreateImageRecipe(ctx context.Context, params *CreateImageRecip
 
 type CreateImageRecipeInput struct {
 
-	// The components of the image recipe.
-	//
-	// This member is required.
-	Components []*types.ComponentConfiguration
-
 	// The idempotency token used to make this request idempotent.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// The working directory to be used during build and test workflows.
-	WorkingDirectory *string
+	// The components of the image recipe.
+	//
+	// This member is required.
+	Components []*types.ComponentConfiguration
 
-	// The block device mappings of the image recipe.
-	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
+	// The name of the image recipe.
+	//
+	// This member is required.
+	Name *string
 
 	// The parent image of the image recipe. The value of the string can be the ARN of
 	// the parent image or an AMI ID. The format for the ARN follows this example:
@@ -88,10 +87,13 @@ type CreateImageRecipeInput struct {
 	// This member is required.
 	ParentImage *string
 
-	// The name of the image recipe.
+	// The semantic version of the image recipe.
 	//
 	// This member is required.
-	Name *string
+	SemanticVersion *string
+
+	// The block device mappings of the image recipe.
+	BlockDeviceMappings []*types.InstanceBlockDeviceMapping
 
 	// The description of the image recipe.
 	Description *string
@@ -99,23 +101,21 @@ type CreateImageRecipeInput struct {
 	// The tags of the image recipe.
 	Tags map[string]*string
 
-	// The semantic version of the image recipe.
-	//
-	// This member is required.
-	SemanticVersion *string
+	// The working directory to be used during build and test workflows.
+	WorkingDirectory *string
 }
 
 type CreateImageRecipeOutput struct {
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
+	// The idempotency token used to make this request idempotent.
+	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the image recipe that was created by this
 	// request.
 	ImageRecipeArn *string
 
-	// The idempotency token used to make this request idempotent.
-	ClientToken *string
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

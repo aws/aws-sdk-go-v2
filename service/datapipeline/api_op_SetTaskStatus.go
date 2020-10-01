@@ -62,11 +62,11 @@ func (c *Client) SetTaskStatus(ctx context.Context, params *SetTaskStatusInput, 
 // Contains the parameters for SetTaskStatus.
 type SetTaskStatusInput struct {
 
-	// If an error occurred during the task, this value specifies the stack trace
-	// associated with the error. This value is set on the physical attempt object. It
-	// is used to display error information to the user. The web service does not parse
-	// this value.
-	ErrorStackTrace *string
+	// The ID of the task assigned to the task runner. This value is provided in the
+	// response for PollForTask ().
+	//
+	// This member is required.
+	TaskId *string
 
 	// If FINISHED, the task successfully completed. If FAILED, the task ended
 	// unsuccessfully. Preconditions use false.
@@ -80,17 +80,17 @@ type SetTaskStatusInput struct {
 	// reserved by the system.
 	ErrorId *string
 
-	// The ID of the task assigned to the task runner. This value is provided in the
-	// response for PollForTask ().
-	//
-	// This member is required.
-	TaskId *string
-
 	// If an error occurred during the task, this value specifies a text description of
 	// the error. This value is set on the physical attempt object. It is used to
 	// display error information to the user. The web service does not parse this
 	// value.
 	ErrorMessage *string
+
+	// If an error occurred during the task, this value specifies the stack trace
+	// associated with the error. This value is set on the physical attempt object. It
+	// is used to display error information to the user. The web service does not parse
+	// this value.
+	ErrorStackTrace *string
 }
 
 // Contains the output of SetTaskStatus.

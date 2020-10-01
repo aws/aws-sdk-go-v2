@@ -23,16 +23,16 @@ type AbortCriteria struct {
 	// This member is required.
 	Action AbortAction
 
+	// The type of job execution failures that can initiate a job abort.
+	//
+	// This member is required.
+	FailureType JobExecutionFailureType
+
 	// The minimum number of things which must receive job execution notifications
 	// before the job can be aborted.
 	//
 	// This member is required.
 	MinNumberOfExecutedThings *int32
-
-	// The type of job execution failures that can initiate a job abort.
-	//
-	// This member is required.
-	FailureType JobExecutionFailureType
 
 	// The minimum percentage of job execution failures that must occur to initiate the
 	// job abort. AWS IoT supports up to two digits after the decimal (for example,
@@ -45,46 +45,34 @@ type AbortCriteria struct {
 // Describes the actions associated with a rule.
 type Action struct {
 
-	// Starts execution of a Step Functions state machine.
-	StepFunctions *StepFunctionsAction
+	// Change the state of a CloudWatch alarm.
+	CloudwatchAlarm *CloudwatchAlarmAction
 
-	// Write data to an Amazon Kinesis stream.
-	Kinesis *KinesisAction
+	// Send data to CloudWatch Logs.
+	CloudwatchLogs *CloudwatchLogsAction
 
-	// Write to an Amazon Kinesis Firehose stream.
-	Firehose *FirehoseAction
+	// Capture a CloudWatch metric.
+	CloudwatchMetric *CloudwatchMetricAction
 
-	// Write to an Amazon S3 bucket.
-	S3 *S3Action
+	// Write to a DynamoDB table.
+	DynamoDB *DynamoDBAction
 
 	// Write to a DynamoDB table. This is a new version of the DynamoDB action. It
 	// allows you to write each attribute in an MQTT message payload into a separate
 	// DynamoDB column.
 	DynamoDBv2 *DynamoDBv2Action
 
-	// Capture a CloudWatch metric.
-	CloudwatchMetric *CloudwatchMetricAction
+	// Write data to an Amazon Elasticsearch Service domain.
+	Elasticsearch *ElasticsearchAction
 
-	// Publish to another MQTT topic.
-	Republish *RepublishAction
-
-	// Publish to an Amazon SNS topic.
-	Sns *SnsAction
+	// Write to an Amazon Kinesis Firehose stream.
+	Firehose *FirehoseAction
 
 	// Send data to an HTTPS endpoint.
 	Http *HttpAction
 
-	// Publish to an Amazon SQS queue.
-	Sqs *SqsAction
-
-	// Write data to an Amazon Elasticsearch Service domain.
-	Elasticsearch *ElasticsearchAction
-
-	// Invoke a Lambda function.
-	Lambda *LambdaAction
-
-	// Change the state of a CloudWatch alarm.
-	CloudwatchAlarm *CloudwatchAlarmAction
+	// Sends message data to an AWS IoT Analytics channel.
+	IotAnalytics *IotAnalyticsAction
 
 	// Sends an input to an AWS IoT Events detector.
 	IotEvents *IotEventsAction
@@ -93,52 +81,60 @@ type Action struct {
 	// asset properties.
 	IotSiteWise *IotSiteWiseAction
 
-	// Send data to CloudWatch Logs.
-	CloudwatchLogs *CloudwatchLogsAction
+	// Write data to an Amazon Kinesis stream.
+	Kinesis *KinesisAction
+
+	// Invoke a Lambda function.
+	Lambda *LambdaAction
+
+	// Publish to another MQTT topic.
+	Republish *RepublishAction
+
+	// Write to an Amazon S3 bucket.
+	S3 *S3Action
 
 	// Send a message to a Salesforce IoT Cloud Input Stream.
 	Salesforce *SalesforceAction
 
-	// Write to a DynamoDB table.
-	DynamoDB *DynamoDBAction
+	// Publish to an Amazon SNS topic.
+	Sns *SnsAction
 
-	// Sends message data to an AWS IoT Analytics channel.
-	IotAnalytics *IotAnalyticsAction
+	// Publish to an Amazon SQS queue.
+	Sqs *SqsAction
+
+	// Starts execution of a Step Functions state machine.
+	StepFunctions *StepFunctionsAction
 }
 
 // Information about an active Device Defender security profile behavior violation.
 type ActiveViolation struct {
 
-	// The name of the thing responsible for the active violation.
-	ThingName *string
-
-	// The time the violation started.
-	ViolationStartTime *time.Time
-
 	// The behavior which is being violated.
 	Behavior *Behavior
 
-	// The ID of the active violation.
-	ViolationId *string
-
-	// The security profile whose behavior is in violation.
-	SecurityProfileName *string
+	// The time the most recent violation occurred.
+	LastViolationTime *time.Time
 
 	// The value of the metric (the measurement) which caused the most recent
 	// violation.
 	LastViolationValue *MetricValue
 
-	// The time the most recent violation occurred.
-	LastViolationTime *time.Time
+	// The security profile whose behavior is in violation.
+	SecurityProfileName *string
+
+	// The name of the thing responsible for the active violation.
+	ThingName *string
+
+	// The ID of the active violation.
+	ViolationId *string
+
+	// The time the violation started.
+	ViolationStartTime *time.Time
 }
 
 // Parameters used when defining a mitigation action that move a set of things to a
 // thing group.
 type AddThingsToThingGroupParams struct {
-
-	// Specifies if this mitigation action can move the things that triggered the
-	// mitigation action even if they are part of one or more dynamic things groups.
-	OverrideDynamicGroups *bool
 
 	// The list of groups to which you want to add the things that triggered the
 	// mitigation action. You can add a thing to a maximum of 10 groups, but you cannot
@@ -146,6 +142,10 @@ type AddThingsToThingGroupParams struct {
 	//
 	// This member is required.
 	ThingGroupNames []*string
+
+	// Specifies if this mitigation action can move the things that triggered the
+	// mitigation action even if they are part of one or more dynamic things groups.
+	OverrideDynamicGroups *bool
 }
 
 // A structure containing the alert target ARN and the role ARN.
@@ -187,10 +187,6 @@ type AssetPropertyTimestamp struct {
 // An asset property value entry containing the following information.
 type AssetPropertyValue struct {
 
-	// Optional. A string that describes the quality of the value. Accepts substitution
-	// templates. Must be GOOD, BAD, or UNCERTAIN.
-	Quality *string
-
 	// The asset property value timestamp.
 	//
 	// This member is required.
@@ -200,25 +196,29 @@ type AssetPropertyValue struct {
 	//
 	// This member is required.
 	Value *AssetPropertyVariant
+
+	// Optional. A string that describes the quality of the value. Accepts substitution
+	// templates. Must be GOOD, BAD, or UNCERTAIN.
+	Quality *string
 }
 
 // Contains an asset property value (of a single type).
 type AssetPropertyVariant struct {
 
-	// Optional. The string value of the value entry. Accepts substitution templates.
-	StringValue *string
-
-	// Optional. A string that contains the integer value of the value entry. Accepts
-	// substitution templates.
-	IntegerValue *string
+	// Optional. A string that contains the boolean value (true or false) of the value
+	// entry. Accepts substitution templates.
+	BooleanValue *string
 
 	// Optional. A string that contains the double value of the value entry. Accepts
 	// substitution templates.
 	DoubleValue *string
 
-	// Optional. A string that contains the boolean value (true or false) of the value
-	// entry. Accepts substitution templates.
-	BooleanValue *string
+	// Optional. A string that contains the integer value of the value entry. Accepts
+	// substitution templates.
+	IntegerValue *string
+
+	// Optional. The string value of the value entry. Accepts substitution templates.
+	StringValue *string
 }
 
 // The attribute payload.
@@ -245,24 +245,24 @@ type AuditCheckConfiguration struct {
 // Information about the audit check.
 type AuditCheckDetails struct {
 
-	// The number of resources that were found noncompliant during the check.
-	NonCompliantResourcesCount *int64
-
-	// The message associated with any error encountered when this check is performed
-	// during this audit.
-	Message *string
-
 	// True if the check is complete and found all resources compliant.
 	CheckCompliant *bool
-
-	// The code of any error encountered when this check is performed during this
-	// audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
-	ErrorCode *string
 
 	// The completion status of this check. One of "IN_PROGRESS",
 	// "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT",
 	// "COMPLETED_NON_COMPLIANT", or "FAILED".
 	CheckRunStatus AuditCheckRunStatus
+
+	// The code of any error encountered when this check is performed during this
+	// audit. One of "INSUFFICIENT_PERMISSIONS" or "AUDIT_CHECK_DISABLED".
+	ErrorCode *string
+
+	// The message associated with any error encountered when this check is performed
+	// during this audit.
+	Message *string
+
+	// The number of resources that were found noncompliant during the check.
+	NonCompliantResourcesCount *int64
 
 	// The number of resources on which the check was performed.
 	TotalResourcesCount *int64
@@ -274,60 +274,41 @@ type AuditFinding struct {
 	// The audit check that generated this result.
 	CheckName *string
 
-	// The time the audit started.
-	TaskStartTime *time.Time
-
-	// The list of related resources.
-	RelatedResources []*RelatedResource
-
-	// The reason the resource was noncompliant.
-	ReasonForNonCompliance *string
-
-	// The severity of the result (finding).
-	Severity AuditFindingSeverity
-
-	// The time the result (finding) was discovered.
-	FindingTime *time.Time
-
-	// A code that indicates the reason that the resource was noncompliant.
-	ReasonForNonComplianceCode *string
-
-	// The ID of the audit that generated this result (finding).
-	TaskId *string
-
 	// A unique identifier for this set of audit findings. This identifier is used to
 	// apply mitigation tasks to one or more sets of findings.
 	FindingId *string
 
+	// The time the result (finding) was discovered.
+	FindingTime *time.Time
+
 	// The resource that was found to be noncompliant with the audit check.
 	NonCompliantResource *NonCompliantResource
+
+	// The reason the resource was noncompliant.
+	ReasonForNonCompliance *string
+
+	// A code that indicates the reason that the resource was noncompliant.
+	ReasonForNonComplianceCode *string
+
+	// The list of related resources.
+	RelatedResources []*RelatedResource
+
+	// The severity of the result (finding).
+	Severity AuditFindingSeverity
+
+	// The ID of the audit that generated this result (finding).
+	TaskId *string
+
+	// The time the audit started.
+	TaskStartTime *time.Time
 }
 
 // Returned by ListAuditMitigationActionsTask, this object contains information
 // that describes a mitigation action that has been started.
 type AuditMitigationActionExecutionMetadata struct {
 
-	// The unique identifier for the findings to which the task and associated
-	// mitigation action are applied.
-	FindingId *string
-
 	// The unique identifier for the mitigation action being applied by the task.
 	ActionId *string
-
-	// If an error occurred, the code that indicates which type of error occurred.
-	ErrorCode *string
-
-	// The current status of the task being executed.
-	Status AuditMitigationActionsExecutionStatus
-
-	// If an error occurred, a message that describes the error.
-	Message *string
-
-	// The date and time when the task was started.
-	StartTime *time.Time
-
-	// The unique identifier for the task that applies the mitigation action.
-	TaskId *string
 
 	// The friendly name of the mitigation action being applied by the task.
 	ActionName *string
@@ -335,17 +316,36 @@ type AuditMitigationActionExecutionMetadata struct {
 	// The date and time when the task was completed or canceled. Blank if the task is
 	// still running.
 	EndTime *time.Time
+
+	// If an error occurred, the code that indicates which type of error occurred.
+	ErrorCode *string
+
+	// The unique identifier for the findings to which the task and associated
+	// mitigation action are applied.
+	FindingId *string
+
+	// If an error occurred, a message that describes the error.
+	Message *string
+
+	// The date and time when the task was started.
+	StartTime *time.Time
+
+	// The current status of the task being executed.
+	Status AuditMitigationActionsExecutionStatus
+
+	// The unique identifier for the task that applies the mitigation action.
+	TaskId *string
 }
 
 // Information about an audit mitigation actions task that is returned by
 // ListAuditMitigationActionsTasks.
 type AuditMitigationActionsTaskMetadata struct {
 
-	// The unique identifier for the task.
-	TaskId *string
-
 	// The time at which the audit mitigation actions task was started.
 	StartTime *time.Time
+
+	// The unique identifier for the task.
+	TaskId *string
 
 	// The current state of the audit mitigation actions task.
 	TaskStatus AuditMitigationActionsTaskStatus
@@ -355,10 +355,6 @@ type AuditMitigationActionsTaskMetadata struct {
 // to which the mitigation actions are applied. Only one entry appears.
 type AuditMitigationActionsTaskTarget struct {
 
-	// If the task will apply a mitigation action to one or more listed findings, this
-	// value uniquely identifies those findings.
-	FindingIds []*string
-
 	// Specifies a filter in the form of an audit check and set of reason codes that
 	// identify the findings from the audit to which the audit mitigation actions task
 	// apply.
@@ -367,30 +363,34 @@ type AuditMitigationActionsTaskTarget struct {
 	// If the task will apply a mitigation action to findings from a specific audit,
 	// this value uniquely identifies the audit.
 	AuditTaskId *string
+
+	// If the task will apply a mitigation action to one or more listed findings, this
+	// value uniquely identifies those findings.
+	FindingIds []*string
 }
 
 // Information about the targets to which audit notifications are sent.
 type AuditNotificationTarget struct {
+
+	// True if notifications to the target are enabled.
+	Enabled *bool
 
 	// The ARN of the role that grants permission to send notifications to the target.
 	RoleArn *string
 
 	// The ARN of the target (SNS topic) to which audit notifications are sent.
 	TargetArn *string
-
-	// True if notifications to the target are enabled.
-	Enabled *bool
 }
 
 // The audits that were performed.
 type AuditTaskMetadata struct {
 
+	// The ID of this audit.
+	TaskId *string
+
 	// The status of this audit. One of "IN_PROGRESS", "COMPLETED", "FAILED", or
 	// "CANCELED".
 	TaskStatus AuditTaskStatus
-
-	// The ID of this audit.
-	TaskId *string
 
 	// The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
 	TaskType AuditTaskType
@@ -399,38 +399,32 @@ type AuditTaskMetadata struct {
 // A collection of authorization information.
 type AuthInfo struct {
 
-	// The type of action for which the principal is being authorized.
-	ActionType ActionType
-
 	// The resources for which the principal is being authorized to perform the
 	// specified action.
 	//
 	// This member is required.
 	Resources []*string
+
+	// The type of action for which the principal is being authorized.
+	ActionType ActionType
 }
 
 // An object that specifies the authorization service for a domain.
 type AuthorizerConfig struct {
 
-	// The name of the authorization service for a domain configuration.
-	DefaultAuthorizerName *string
-
 	// A Boolean that specifies whether the domain configuration's authorization
 	// service can be overridden.
 	AllowAuthorizerOverride *bool
+
+	// The name of the authorization service for a domain configuration.
+	DefaultAuthorizerName *string
 }
 
 // The authorizer description.
 type AuthorizerDescription struct {
 
-	// The status of the authorizer.
-	Status AuthorizerStatus
-
 	// The authorizer ARN.
 	AuthorizerArn *string
-
-	// The UNIX timestamp of when the authorizer was last updated.
-	LastModifiedDate *time.Time
 
 	// The authorizer's Lambda function ARN.
 	AuthorizerFunctionArn *string
@@ -438,19 +432,25 @@ type AuthorizerDescription struct {
 	// The authorizer name.
 	AuthorizerName *string
 
-	// The public keys used to validate the token signature returned by your custom
-	// authentication service.
-	TokenSigningPublicKeys map[string]*string
-
 	// The UNIX timestamp of when the authorizer was created.
 	CreationDate *time.Time
 
-	// The key used to extract the token from the HTTP headers.
-	TokenKeyName *string
+	// The UNIX timestamp of when the authorizer was last updated.
+	LastModifiedDate *time.Time
 
 	// Specifies whether AWS IoT validates the token signature in an authorization
 	// request.
 	SigningDisabled *bool
+
+	// The status of the authorizer.
+	Status AuthorizerStatus
+
+	// The key used to extract the token from the HTTP headers.
+	TokenKeyName *string
+
+	// The public keys used to validate the token signature returned by your custom
+	// authentication service.
+	TokenSigningPublicKeys map[string]*string
 }
 
 // The authorizer summary.
@@ -466,8 +466,8 @@ type AuthorizerSummary struct {
 // The authorizer result.
 type AuthResult struct {
 
-	// The policies and statements that denied the specified action.
-	Denied *Denied
+	// The policies and statements that allowed the specified action.
+	Allowed *Allowed
 
 	// The final authorization decision of this scenario. Multiple statements are taken
 	// into account when determining the authorization decision. An explicit deny
@@ -477,11 +477,11 @@ type AuthResult struct {
 	// Authorization information.
 	AuthInfo *AuthInfo
 
+	// The policies and statements that denied the specified action.
+	Denied *Denied
+
 	// Contains any missing context values found while evaluating policy.
 	MissingContextValues []*string
-
-	// The policies and statements that allowed the specified action.
-	Allowed *Allowed
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -506,40 +506,40 @@ type AwsJobAbortCriteria struct {
 	// This member is required.
 	FailureType AwsJobAbortCriteriaFailureType
 
+	// The minimum number of things which must receive job execution notifications
+	// before the job can be aborted.
+	//
+	// This member is required.
+	MinNumberOfExecutedThings *int32
+
 	// The minimum percentage of job execution failures that must occur to initiate the
 	// job abort. AWS IoT supports up to two digits after the decimal (for example,
 	// 10.9 and 10.99, but not 10.999).
 	//
 	// This member is required.
 	ThresholdPercentage *float64
-
-	// The minimum number of things which must receive job execution notifications
-	// before the job can be aborted.
-	//
-	// This member is required.
-	MinNumberOfExecutedThings *int32
 }
 
 // Configuration for the rollout of OTA updates.
 type AwsJobExecutionsRolloutConfig struct {
 
-	// The maximum number of OTA update job executions started per minute.
-	MaximumPerMinute *int32
-
 	// The rate of increase for a job rollout. This parameter allows you to define an
 	// exponential rate increase for a job rollout.
 	ExponentialRate *AwsJobExponentialRolloutRate
+
+	// The maximum number of OTA update job executions started per minute.
+	MaximumPerMinute *int32
 }
 
 // The rate of increase for a job rollout. This parameter allows you to define an
 // exponential rate increase for a job rollout.
 type AwsJobExponentialRolloutRate struct {
 
-	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
-	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+	// The minimum number of things that will be notified of a pending job, per minute,
+	// at the start of the job rollout. This is the initial rate of the rollout.
 	//
 	// This member is required.
-	RateIncreaseCriteria *AwsJobRateIncreaseCriteria
+	BaseRatePerMinute *int32
 
 	// The rate of increase for a job rollout. The number of things notified is
 	// multiplied by this factor.
@@ -547,11 +547,11 @@ type AwsJobExponentialRolloutRate struct {
 	// This member is required.
 	IncrementFactor *float64
 
-	// The minimum number of things that will be notified of a pending job, per minute,
-	// at the start of the job rollout. This is the initial rate of the rollout.
+	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
+	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
 	//
 	// This member is required.
-	BaseRatePerMinute *int32
+	RateIncreaseCriteria *AwsJobRateIncreaseCriteria
 }
 
 // Configuration information for pre-signed URLs. Valid when protocols contains
@@ -567,13 +567,13 @@ type AwsJobPresignedUrlConfig struct {
 // The criteria to initiate the increase in rate of rollout for a job.
 type AwsJobRateIncreaseCriteria struct {
 
-	// When this number of things have succeeded in their job execution, it will
-	// initiate an increase in the rollout rate.
-	NumberOfSucceededThings *int32
-
 	// When this number of things have been notified, it will initiate an increase in
 	// the rollout rate.
 	NumberOfNotifiedThings *int32
+
+	// When this number of things have succeeded in their job execution, it will
+	// initiate an increase in the rollout rate.
+	NumberOfSucceededThings *int32
 }
 
 // Specifies the amount of time each device has to finish its execution of the job.
@@ -594,26 +594,30 @@ type AwsJobTimeoutConfig struct {
 // A Device Defender security profile behavior.
 type Behavior struct {
 
-	// The criteria that determine if a device is behaving normally in regard to the
-	// metric.
-	Criteria *BehaviorCriteria
-
 	// The name you have given to the behavior.
 	//
 	// This member is required.
 	Name *string
 
+	// The criteria that determine if a device is behaving normally in regard to the
+	// metric.
+	Criteria *BehaviorCriteria
+
+	// What is measured by the behavior.
+	Metric *string
+
 	// The dimension for a metric in your behavior. For example, using a TOPIC_FILTER
 	// dimension, you can narrow down the scope of the metric only to MQTT topics whose
 	// name match the pattern specified in the dimension.
 	MetricDimension *MetricDimension
-
-	// What is measured by the behavior.
-	Metric *string
 }
 
 // The criteria by which the behavior is determined to be normal.
 type BehaviorCriteria struct {
+
+	// The operator that relates the thing measured (metric) to the criteria
+	// (containing a value or statisticalThreshold).
+	ComparisonOperator ComparisonOperator
 
 	// If a device is in violation of the behavior for the specified number of
 	// consecutive datapoints, an alarm occurs. If not specified, the default is 1.
@@ -632,16 +636,12 @@ type BehaviorCriteria struct {
 	// time duration before being given a percentile rank.
 	DurationSeconds *int32
 
-	// The value to be compared with the metric.
-	Value *MetricValue
-
-	// The operator that relates the thing measured (metric) to the criteria
-	// (containing a value or statisticalThreshold).
-	ComparisonOperator ComparisonOperator
-
 	// A statistical ranking (percentile) which indicates a threshold value by which a
 	// behavior is determined to be in compliance or in violation of the behavior.
 	StatisticalThreshold *StatisticalThreshold
+
+	// The value to be compared with the metric.
+	Value *MetricValue
 }
 
 // Additional information about the billing group.
@@ -661,14 +661,14 @@ type BillingGroupProperties struct {
 // A CA certificate.
 type CACertificate struct {
 
+	// The ARN of the CA certificate.
+	CertificateArn *string
+
 	// The ID of the CA certificate.
 	CertificateId *string
 
 	// The date the CA certificate was created.
 	CreationDate *time.Time
-
-	// The ARN of the CA certificate.
-	CertificateArn *string
 
 	// The status of the CA certificate. The status value REGISTER_INACTIVE is
 	// deprecated and should not be used.
@@ -678,21 +678,6 @@ type CACertificate struct {
 // Describes a CA certificate.
 type CACertificateDescription struct {
 
-	// When the CA certificate is valid.
-	Validity *CertificateValidity
-
-	// The status of a CA certificate.
-	Status CACertificateStatus
-
-	// The date the CA certificate was created.
-	CreationDate *time.Time
-
-	// The owner of the CA certificate.
-	OwnedBy *string
-
-	// The customer version of the CA certificate.
-	CustomerVersion *int32
-
 	// Whether the CA certificate configured for auto registration of device
 	// certificates. Valid values are "ENABLE" and "DISABLE"
 	AutoRegistrationStatus AutoRegistrationStatus
@@ -700,17 +685,32 @@ type CACertificateDescription struct {
 	// The CA certificate ARN.
 	CertificateArn *string
 
+	// The CA certificate ID.
+	CertificateId *string
+
 	// The CA certificate data, in PEM format.
 	CertificatePem *string
 
-	// The CA certificate ID.
-	CertificateId *string
+	// The date the CA certificate was created.
+	CreationDate *time.Time
+
+	// The customer version of the CA certificate.
+	CustomerVersion *int32
+
+	// The generation ID of the CA certificate.
+	GenerationId *string
 
 	// The date the CA certificate was last modified.
 	LastModifiedDate *time.Time
 
-	// The generation ID of the CA certificate.
-	GenerationId *string
+	// The owner of the CA certificate.
+	OwnedBy *string
+
+	// The status of a CA certificate.
+	Status CACertificateStatus
+
+	// When the CA certificate is valid.
+	Validity *CertificateValidity
 }
 
 // Information about a certificate.
@@ -719,23 +719,32 @@ type Certificate struct {
 	// The ARN of the certificate.
 	CertificateArn *string
 
-	// The status of the certificate. The status value REGISTER_INACTIVE is deprecated
-	// and should not be used.
-	Status CertificateStatus
-
-	// The date and time the certificate was created.
-	CreationDate *time.Time
-
 	// The ID of the certificate. (The last part of the certificate ARN contains the
 	// certificate ID.)
 	CertificateId *string
 
 	// The mode of the certificate.
 	CertificateMode CertificateMode
+
+	// The date and time the certificate was created.
+	CreationDate *time.Time
+
+	// The status of the certificate. The status value REGISTER_INACTIVE is deprecated
+	// and should not be used.
+	Status CertificateStatus
 }
 
 // Describes a certificate.
 type CertificateDescription struct {
+
+	// The certificate ID of the CA certificate used to sign this certificate.
+	CaCertificateId *string
+
+	// The ARN of the certificate.
+	CertificateArn *string
+
+	// The ID of the certificate.
+	CertificateId *string
 
 	// The mode of the certificate.
 	CertificateMode CertificateMode
@@ -743,41 +752,32 @@ type CertificateDescription struct {
 	// The certificate data, in PEM format.
 	CertificatePem *string
 
-	// The certificate ID of the CA certificate used to sign this certificate.
-	CaCertificateId *string
-
 	// The date and time the certificate was created.
 	CreationDate *time.Time
-
-	// The ID of the certificate.
-	CertificateId *string
-
-	// The transfer data.
-	TransferData *TransferData
-
-	// The ID of the AWS account of the previous owner of the certificate.
-	PreviousOwnedBy *string
-
-	// The date and time the certificate was last modified.
-	LastModifiedDate *time.Time
-
-	// The generation ID of the certificate.
-	GenerationId *string
 
 	// The customer version of the certificate.
 	CustomerVersion *int32
 
-	// The status of the certificate.
-	Status CertificateStatus
+	// The generation ID of the certificate.
+	GenerationId *string
+
+	// The date and time the certificate was last modified.
+	LastModifiedDate *time.Time
 
 	// The ID of the AWS account that owns the certificate.
 	OwnedBy *string
 
+	// The ID of the AWS account of the previous owner of the certificate.
+	PreviousOwnedBy *string
+
+	// The status of the certificate.
+	Status CertificateStatus
+
+	// The transfer data.
+	TransferData *TransferData
+
 	// When the certificate is valid.
 	Validity *CertificateValidity
-
-	// The ARN of the certificate.
-	CertificateArn *string
 }
 
 // When the certificate is valid.
@@ -818,19 +818,24 @@ type CloudwatchAlarmAction struct {
 // Describes an action that sends data to CloudWatch Logs.
 type CloudwatchLogsAction struct {
 
-	// The IAM role that allows access to the CloudWatch log.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// The CloudWatch log group to which the action sends data.
 	//
 	// This member is required.
 	LogGroupName *string
+
+	// The IAM role that allows access to the CloudWatch log.
+	//
+	// This member is required.
+	RoleArn *string
 }
 
 // Describes an action that captures a CloudWatch metric.
 type CloudwatchMetricAction struct {
+
+	// The CloudWatch metric name.
+	//
+	// This member is required.
+	MetricName *string
 
 	// The CloudWatch metric namespace name.
 	//
@@ -844,10 +849,10 @@ type CloudwatchMetricAction struct {
 	// This member is required.
 	MetricUnit *string
 
-	// The CloudWatch metric name.
+	// The CloudWatch metric value.
 	//
 	// This member is required.
-	MetricName *string
+	MetricValue *string
 
 	// The IAM role that allows access to the CloudWatch metric.
 	//
@@ -857,24 +862,19 @@ type CloudwatchMetricAction struct {
 	// An optional Unix timestamp
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
 	MetricTimestamp *string
-
-	// The CloudWatch metric value.
-	//
-	// This member is required.
-	MetricValue *string
 }
 
 // Describes the method to use when code signing a file.
 type CodeSigning struct {
+
+	// The ID of the AWSSignerJob which was created to sign the file.
+	AwsSignerJobId *string
 
 	// A custom method for code signing a file.
 	CustomCodeSigning *CustomCodeSigning
 
 	// Describes the code-signing job.
 	StartSigningJobParameter *StartSigningJobParameter
-
-	// The ID of the AWSSignerJob which was created to sign the file.
-	AwsSignerJobId *string
 }
 
 // Describes the certificate chain being used when code signing a file.
@@ -904,9 +904,6 @@ type Configuration struct {
 // Describes a custom method used to code sign a file.
 type CustomCodeSigning struct {
 
-	// The signature algorithm used to code sign the file.
-	SignatureAlgorithm *string
-
 	// The certificate chain.
 	CertificateChain *CodeSigningCertificateChain
 
@@ -915,6 +912,9 @@ type CustomCodeSigning struct {
 
 	// The signature for the file.
 	Signature *CodeSigningSignature
+
+	// The signature algorithm used to code sign the file.
+	SignatureAlgorithm *string
 }
 
 // Contains information that denied the authorization.
@@ -952,14 +952,14 @@ type Destination struct {
 // configuration feature is in public preview and is subject to change.
 type DomainConfigurationSummary struct {
 
-	// The type of service delivered by the endpoint.
-	ServiceType ServiceType
+	// The ARN of the domain configuration.
+	DomainConfigurationArn *string
 
 	// The name of the domain configuration. This value must be unique to a region.
 	DomainConfigurationName *string
 
-	// The ARN of the domain configuration.
-	DomainConfigurationArn *string
+	// The type of service delivered by the endpoint.
+	ServiceType ServiceType
 }
 
 // Describes an action to write to a DynamoDB table. The tableName, hashKeyField,
@@ -973,26 +973,20 @@ type DomainConfigurationSummary struct {
 // "${timestamp()}"
 type DynamoDBAction struct {
 
+	// The hash key name.
+	//
+	// This member is required.
+	HashKeyField *string
+
 	// The hash key value.
 	//
 	// This member is required.
 	HashKeyValue *string
 
-	// The range key name.
-	RangeKeyField *string
-
-	// The type of operation to be performed. This follows the substitution template,
-	// so it can be ${operation}, but the substitution must result in one of the
-	// following: INSERT, UPDATE, or DELETE.
-	Operation *string
-
 	// The ARN of the IAM role that grants access to the DynamoDB table.
 	//
 	// This member is required.
 	RoleArn *string
-
-	// The action payload. This name can be customized.
-	PayloadField *string
 
 	// The name of the DynamoDB table.
 	//
@@ -1002,16 +996,22 @@ type DynamoDBAction struct {
 	// The hash key type. Valid values are "STRING" or "NUMBER"
 	HashKeyType DynamoKeyType
 
-	// The hash key name.
-	//
-	// This member is required.
-	HashKeyField *string
+	// The type of operation to be performed. This follows the substitution template,
+	// so it can be ${operation}, but the substitution must result in one of the
+	// following: INSERT, UPDATE, or DELETE.
+	Operation *string
 
-	// The range key value.
-	RangeKeyValue *string
+	// The action payload. This name can be customized.
+	PayloadField *string
+
+	// The range key name.
+	RangeKeyField *string
 
 	// The range key type. Valid values are "STRING" or "NUMBER"
 	RangeKeyType DynamoKeyType
+
+	// The range key value.
+	RangeKeyValue *string
 }
 
 // Describes an action to write to a DynamoDB table. This DynamoDB action writes
@@ -1036,23 +1036,18 @@ type DynamoDBv2Action struct {
 // The policy that has the effect on the authorization results.
 type EffectivePolicy struct {
 
-	// The policy name.
-	PolicyName *string
-
 	// The policy ARN.
 	PolicyArn *string
 
 	// The IAM policy document.
 	PolicyDocument *string
+
+	// The policy name.
+	PolicyName *string
 }
 
 // Describes an action that writes data to an Amazon Elasticsearch Service domain.
 type ElasticsearchAction struct {
-
-	// The Elasticsearch index where you want to store your data.
-	//
-	// This member is required.
-	Index *string
 
 	// The endpoint of your Elasticsearch domain.
 	//
@@ -1064,29 +1059,34 @@ type ElasticsearchAction struct {
 	// This member is required.
 	Id *string
 
-	// The type of document you are storing.
+	// The Elasticsearch index where you want to store your data.
 	//
 	// This member is required.
-	Type *string
+	Index *string
 
 	// The IAM role ARN that has access to Elasticsearch.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The type of document you are storing.
+	//
+	// This member is required.
+	Type *string
 }
 
 // Parameters used when defining a mitigation action that enable AWS IoT logging.
 type EnableIoTLoggingParams struct {
 
-	// The ARN of the IAM role used for logging.
-	//
-	// This member is required.
-	RoleArnForLogging *string
-
 	// Specifies the types of information to be logged.
 	//
 	// This member is required.
 	LogLevel LogLevel
+
+	// The ARN of the IAM role used for logging.
+	//
+	// This member is required.
+	RoleArnForLogging *string
 }
 
 // Error information.
@@ -1109,12 +1109,6 @@ type ExplicitDeny struct {
 // Allows you to create an exponential rate of rollout for a job.
 type ExponentialRolloutRate struct {
 
-	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
-	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
-	//
-	// This member is required.
-	RateIncreaseCriteria *RateIncreaseCriteria
-
 	// The minimum number of things that will be notified of a pending job, per minute
 	// at the start of job rollout. This parameter allows you to define the initial
 	// rate of rollout.
@@ -1126,16 +1120,22 @@ type ExponentialRolloutRate struct {
 	//
 	// This member is required.
 	IncrementFactor *float64
+
+	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
+	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+	//
+	// This member is required.
+	RateIncreaseCriteria *RateIncreaseCriteria
 }
 
 // Describes the name and data type at a field.
 type Field struct {
 
-	// The datatype of the field.
-	Type FieldType
-
 	// The name of the field.
 	Name *string
+
+	// The datatype of the field.
+	Type FieldType
 }
 
 // The location of the OTA update.
@@ -1151,6 +1151,11 @@ type FileLocation struct {
 // Describes an action that writes data to an Amazon Kinesis Firehose stream.
 type FirehoseAction struct {
 
+	// The delivery stream name.
+	//
+	// This member is required.
+	DeliveryStreamName *string
+
 	// The IAM role that grants access to the Amazon Kinesis Firehose stream.
 	//
 	// This member is required.
@@ -1160,11 +1165,6 @@ type FirehoseAction struct {
 	// Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows
 	// newline), ',' (comma).
 	Separator *string
-
-	// The delivery stream name.
-	//
-	// This member is required.
-	DeliveryStreamName *string
 }
 
 // The name and ARN of a group.
@@ -1179,9 +1179,6 @@ type GroupNameAndArn struct {
 
 // Send data to an HTTPS endpoint.
 type HttpAction struct {
-
-	// The HTTP headers to send with the message data.
-	Headers []*HttpActionHeader
 
 	// The endpoint URL. If substitution templates are used in the URL, you must also
 	// specify a confirmationUrl. If this is a new destination, a new
@@ -1200,20 +1197,23 @@ type HttpAction struct {
 	// topic rule destinations that match each possible value of the substitution
 	// template before traffic is allowed to your endpoint URL.
 	ConfirmationUrl *string
+
+	// The HTTP headers to send with the message data.
+	Headers []*HttpActionHeader
 }
 
 // The HTTP action header.
 type HttpActionHeader struct {
 
-	// The HTTP header value. Substitution templates are supported.
-	//
-	// This member is required.
-	Value *string
-
 	// The HTTP header key.
 	//
 	// This member is required.
 	Key *string
+
+	// The HTTP header value. Substitution templates are supported.
+	//
+	// This member is required.
+	Value *string
 }
 
 // The authorization method used to send messages.
@@ -1272,20 +1272,25 @@ type ImplicitDeny struct {
 // Sends message data to an AWS IoT Analytics channel.
 type IotAnalyticsAction struct {
 
+	// (deprecated) The ARN of the IoT Analytics channel to which message data will be
+	// sent.
+	ChannelArn *string
+
 	// The name of the IoT Analytics channel to which message data will be sent.
 	ChannelName *string
 
 	// The ARN of the role which has a policy that grants IoT Analytics permission to
 	// send message data via IoT Analytics (iotanalytics:BatchPutMessage).
 	RoleArn *string
-
-	// (deprecated) The ARN of the IoT Analytics channel to which message data will be
-	// sent.
-	ChannelArn *string
 }
 
 // Sends an input to an AWS IoT Events detector.
 type IotEventsAction struct {
+
+	// The name of the AWS IoT Events input.
+	//
+	// This member is required.
+	InputName *string
 
 	// The ARN of the role that grants AWS IoT permission to send an input to an AWS
 	// IoT Events detector. ("Action":"iotevents:BatchPutMessage").
@@ -1296,16 +1301,16 @@ type IotEventsAction struct {
 	// [Optional] Use this to ensure that only one input (message) with a given
 	// messageId will be processed by an AWS IoT Events detector.
 	MessageId *string
-
-	// The name of the AWS IoT Events input.
-	//
-	// This member is required.
-	InputName *string
 }
 
 // Describes an action to send data from an MQTT message that triggered the rule to
 // AWS IoT SiteWise asset properties.
 type IotSiteWiseAction struct {
+
+	// A list of asset property value entries.
+	//
+	// This member is required.
+	PutAssetPropertyValueEntries []*PutAssetPropertyValueEntry
 
 	// The ARN of the role that grants AWS IoT permission to send an asset property
 	// value to AWS IoTSiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue").
@@ -1313,33 +1318,54 @@ type IotSiteWiseAction struct {
 	//
 	// This member is required.
 	RoleArn *string
-
-	// A list of asset property value entries.
-	//
-	// This member is required.
-	PutAssetPropertyValueEntries []*PutAssetPropertyValueEntry
 }
 
 // The Job object contains details about a job.
 type Job struct {
 
-	// Configuration for pre-signed S3 URLs.
-	PresignedUrlConfig *PresignedUrlConfig
+	// Configuration for criteria to abort the job.
+	AbortConfig *AbortConfig
+
+	// If the job was updated, describes the reason for the update.
+	Comment *string
+
+	// The time, in seconds since the epoch, when the job was completed.
+	CompletedAt *time.Time
+
+	// The time, in seconds since the epoch, when the job was created.
+	CreatedAt *time.Time
+
+	// A short text description of the job.
+	Description *string
+
+	// Will be true if the job was canceled with the optional force parameter set to
+	// true.
+	ForceCanceled *bool
+
+	// An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
+	JobArn *string
 
 	// Allows you to create a staged rollout of a job.
 	JobExecutionsRolloutConfig *JobExecutionsRolloutConfig
 
-	// If the job was updated, provides the reason code for the update.
-	ReasonCode *string
-
-	// A list of IoT things and thing groups to which the job should be sent.
-	Targets []*string
+	// The unique identifier you assigned to this job when it was created.
+	JobId *string
 
 	// Details about the job process.
 	JobProcessDetails *JobProcessDetails
 
-	// A short text description of the job.
-	Description *string
+	// The time, in seconds since the epoch, when the job was last updated.
+	LastUpdatedAt *time.Time
+
+	// Configuration for pre-signed S3 URLs.
+	PresignedUrlConfig *PresignedUrlConfig
+
+	// If the job was updated, provides the reason code for the update.
+	ReasonCode *string
+
+	// The status of the job, one of IN_PROGRESS, CANCELED, DELETION_IN_PROGRESS or
+	// COMPLETED.
+	Status JobStatus
 
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
 	// after all those things specified as targets have completed the job (SNAPSHOT).
@@ -1349,77 +1375,19 @@ type Job struct {
 	// things originally in the group.
 	TargetSelection TargetSelection
 
-	// If the job was updated, describes the reason for the update.
-	Comment *string
-
-	// The time, in seconds since the epoch, when the job was last updated.
-	LastUpdatedAt *time.Time
-
-	// An ARN identifying the job with format "arn:aws:iot:region:account:job/jobId".
-	JobArn *string
+	// A list of IoT things and thing groups to which the job should be sent.
+	Targets []*string
 
 	// Specifies the amount of time each device has to finish its execution of the job.
 	// A timer is started when the job execution status is set to IN_PROGRESS. If the
 	// job execution status is not set to another terminal state before the timer
 	// expires, it will be automatically set to TIMED_OUT.
 	TimeoutConfig *TimeoutConfig
-
-	// The time, in seconds since the epoch, when the job was created.
-	CreatedAt *time.Time
-
-	// The time, in seconds since the epoch, when the job was completed.
-	CompletedAt *time.Time
-
-	// The unique identifier you assigned to this job when it was created.
-	JobId *string
-
-	// Will be true if the job was canceled with the optional force parameter set to
-	// true.
-	ForceCanceled *bool
-
-	// The status of the job, one of IN_PROGRESS, CANCELED, DELETION_IN_PROGRESS or
-	// COMPLETED.
-	Status JobStatus
-
-	// Configuration for criteria to abort the job.
-	AbortConfig *AbortConfig
 }
 
 // The job execution object represents the execution of a job on a particular
 // device.
 type JobExecution struct {
-
-	// The version of the job execution. Job execution versions are incremented each
-	// time they are updated by a device.
-	VersionNumber *int64
-
-	// The unique identifier you assigned to the job when it was created.
-	JobId *string
-
-	// The time, in seconds since the epoch, when the job execution was last updated.
-	LastUpdatedAt *time.Time
-
-	// Will be true if the job execution was canceled with the optional force parameter
-	// set to true.
-	ForceCanceled *bool
-
-	// A collection of name/value pairs that describe the status of the job execution.
-	StatusDetails *JobExecutionStatusDetails
-
-	// The time, in seconds since the epoch, when the job execution started.
-	StartedAt *time.Time
-
-	// A string (consisting of the digits "0" through "9") which identifies this
-	// particular job execution on this particular device. It can be used in commands
-	// which return or update job execution information.
-	ExecutionNumber *int64
-
-	// The ARN of the thing on which the job execution is running.
-	ThingArn *string
-
-	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
-	// TIMED_OUT, CANCELED, or REJECTED).
-	Status JobExecutionStatus
 
 	// The estimated number of seconds that remain before the job execution status will
 	// be changed to TIMED_OUT. The timeout interval can be anywhere between 1 minute
@@ -1428,8 +1396,40 @@ type JobExecution struct {
 	// if the job execution has reached a terminal status.
 	ApproximateSecondsBeforeTimedOut *int64
 
+	// A string (consisting of the digits "0" through "9") which identifies this
+	// particular job execution on this particular device. It can be used in commands
+	// which return or update job execution information.
+	ExecutionNumber *int64
+
+	// Will be true if the job execution was canceled with the optional force parameter
+	// set to true.
+	ForceCanceled *bool
+
+	// The unique identifier you assigned to the job when it was created.
+	JobId *string
+
+	// The time, in seconds since the epoch, when the job execution was last updated.
+	LastUpdatedAt *time.Time
+
 	// The time, in seconds since the epoch, when the job execution was queued.
 	QueuedAt *time.Time
+
+	// The time, in seconds since the epoch, when the job execution started.
+	StartedAt *time.Time
+
+	// The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED,
+	// TIMED_OUT, CANCELED, or REJECTED).
+	Status JobExecutionStatus
+
+	// A collection of name/value pairs that describe the status of the job execution.
+	StatusDetails *JobExecutionStatusDetails
+
+	// The ARN of the thing on which the job execution is running.
+	ThingArn *string
+
+	// The version of the job execution. Job execution versions are incremented each
+	// time they are updated by a device.
+	VersionNumber *int64
 }
 
 // Allows you to create a staged rollout of a job.
@@ -1454,16 +1454,16 @@ type JobExecutionStatusDetails struct {
 // The job execution summary.
 type JobExecutionSummary struct {
 
-	// The time, in seconds since the epoch, when the job execution was queued.
-	QueuedAt *time.Time
-
-	// The time, in seconds since the epoch, when the job execution was last updated.
-	LastUpdatedAt *time.Time
-
 	// A string (consisting of the digits "0" through "9") which identifies this
 	// particular job execution on this particular device. It can be used later in
 	// commands which return or update job execution information.
 	ExecutionNumber *int64
+
+	// The time, in seconds since the epoch, when the job execution was last updated.
+	LastUpdatedAt *time.Time
+
+	// The time, in seconds since the epoch, when the job execution was queued.
+	QueuedAt *time.Time
 
 	// The time, in seconds since the epoch, when the job execution started.
 	StartedAt *time.Time
@@ -1475,31 +1475,31 @@ type JobExecutionSummary struct {
 // Contains a summary of information about job executions for a specific job.
 type JobExecutionSummaryForJob struct {
 
-	// The ARN of the thing on which the job execution is running.
-	ThingArn *string
-
 	// Contains a subset of information about a job execution.
 	JobExecutionSummary *JobExecutionSummary
+
+	// The ARN of the thing on which the job execution is running.
+	ThingArn *string
 }
 
 // The job execution summary for a thing.
 type JobExecutionSummaryForThing struct {
 
-	// The unique identifier you assigned to this job when it was created.
-	JobId *string
-
 	// Contains a subset of information about a job execution.
 	JobExecutionSummary *JobExecutionSummary
+
+	// The unique identifier you assigned to this job when it was created.
+	JobId *string
 }
 
 // The job process details.
 type JobProcessDetails struct {
 
-	// The number of things that rejected the job.
-	NumberOfRejectedThings *int32
+	// The number of things that cancelled the job.
+	NumberOfCanceledThings *int32
 
-	// The number of things whose job execution status is TIMED_OUT.
-	NumberOfTimedOutThings *int32
+	// The number of things that failed executing the job.
+	NumberOfFailedThings *int32
 
 	// The number of things currently executing the job.
 	NumberOfInProgressThings *int32
@@ -1507,28 +1507,46 @@ type JobProcessDetails struct {
 	// The number of things that are awaiting execution of the job.
 	NumberOfQueuedThings *int32
 
-	// The target devices to which the job execution is being rolled out. This value
-	// will be null after the job execution has finished rolling out to all the target
-	// devices.
-	ProcessingTargets []*string
+	// The number of things that rejected the job.
+	NumberOfRejectedThings *int32
 
 	// The number of things that are no longer scheduled to execute the job because
 	// they have been deleted or have been removed from the group that was a target of
 	// the job.
 	NumberOfRemovedThings *int32
 
-	// The number of things that failed executing the job.
-	NumberOfFailedThings *int32
-
 	// The number of things which successfully completed the job.
 	NumberOfSucceededThings *int32
 
-	// The number of things that cancelled the job.
-	NumberOfCanceledThings *int32
+	// The number of things whose job execution status is TIMED_OUT.
+	NumberOfTimedOutThings *int32
+
+	// The target devices to which the job execution is being rolled out. This value
+	// will be null after the job execution has finished rolling out to all the target
+	// devices.
+	ProcessingTargets []*string
 }
 
 // The job summary.
 type JobSummary struct {
+
+	// The time, in seconds since the epoch, when the job completed.
+	CompletedAt *time.Time
+
+	// The time, in seconds since the epoch, when the job was created.
+	CreatedAt *time.Time
+
+	// The job ARN.
+	JobArn *string
+
+	// The unique identifier you assigned to this job when it was created.
+	JobId *string
+
+	// The time, in seconds since the epoch, when the job was last updated.
+	LastUpdatedAt *time.Time
+
+	// The job summary status.
+	Status JobStatus
 
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
 	// after all those things specified as targets have completed the job (SNAPSHOT).
@@ -1538,26 +1556,8 @@ type JobSummary struct {
 	// group.
 	TargetSelection TargetSelection
 
-	// The time, in seconds since the epoch, when the job was last updated.
-	LastUpdatedAt *time.Time
-
-	// The job summary status.
-	Status JobStatus
-
 	// The ID of the thing group.
 	ThingGroupId *string
-
-	// The unique identifier you assigned to this job when it was created.
-	JobId *string
-
-	// The time, in seconds since the epoch, when the job was created.
-	CreatedAt *time.Time
-
-	// The job ARN.
-	JobArn *string
-
-	// The time, in seconds since the epoch, when the job completed.
-	CompletedAt *time.Time
 }
 
 // Describes a key pair.
@@ -1573,15 +1573,15 @@ type KeyPair struct {
 // Describes an action to write data to an Amazon Kinesis stream.
 type KinesisAction struct {
 
-	// The name of the Amazon Kinesis stream.
-	//
-	// This member is required.
-	StreamName *string
-
 	// The ARN of the IAM role that grants access to the Amazon Kinesis stream.
 	//
 	// This member is required.
 	RoleArn *string
+
+	// The name of the Amazon Kinesis stream.
+	//
+	// This member is required.
+	StreamName *string
 
 	// The partition key.
 	PartitionKey *string
@@ -1611,13 +1611,13 @@ type LoggingOptionsPayload struct {
 // A log target.
 type LogTarget struct {
 
-	// The target name.
-	TargetName *string
-
 	// The target type.
 	//
 	// This member is required.
 	TargetType LogTargetType
+
+	// The target name.
+	TargetName *string
 }
 
 // The target configuration.
@@ -1633,17 +1633,17 @@ type LogTargetConfiguration struct {
 // The dimension of a metric.
 type MetricDimension struct {
 
+	// A unique identifier for the dimension.
+	//
+	// This member is required.
+	DimensionName *string
+
 	// Defines how the dimensionValues of a dimension are interpreted. For example, for
 	// dimension type TOPIC_FILTER, the IN operator, a message will be counted only if
 	// its topic matches one of the topic filters. With NOT_IN operator, a message will
 	// be counted only if it doesn't match any of the topic filters. The operator is
 	// optional: if it's not provided (is null), it will be interpreted as IN.
 	Operator DimensionValueOperator
-
-	// A unique identifier for the dimension.
-	//
-	// This member is required.
-	DimensionName *string
 }
 
 // The metric you want to retain. Dimensions are optional.
@@ -1661,10 +1661,6 @@ type MetricToRetain struct {
 // The value to be compared with the metric.
 type MetricValue struct {
 
-	// If the comparisonOperator calls for a set of ports, use this to specify that set
-	// to be compared with the metric.
-	Ports []*int32
-
 	// If the comparisonOperator calls for a set of CIDRs, use this to specify that set
 	// to be compared with the metric.
 	Cidrs []*string
@@ -1672,6 +1668,10 @@ type MetricValue struct {
 	// If the comparisonOperator calls for a numeric value, use this to specify that
 	// numeric value to be compared with the metric.
 	Count *int64
+
+	// If the comparisonOperator calls for a set of ports, use this to specify that set
+	// to be compared with the metric.
+	Ports []*int32
 }
 
 // Describes which changes should be applied as part of a mitigation action.
@@ -1684,22 +1684,22 @@ type MitigationAction struct {
 	// A unique identifier for the mitigation action.
 	Id *string
 
-	// The IAM role ARN used to apply this mitigation action.
-	RoleArn *string
-
 	// A user-friendly name for the mitigation action.
 	Name *string
+
+	// The IAM role ARN used to apply this mitigation action.
+	RoleArn *string
 }
 
 // Information that identifies a mitigation action. This information is returned by
 // ListMitigationActions.
 type MitigationActionIdentifier struct {
 
-	// The friendly name of the mitigation action.
-	ActionName *string
-
 	// The IAM role ARN used to apply this mitigation action.
 	ActionArn *string
+
+	// The friendly name of the mitigation action.
+	ActionName *string
 
 	// The date when this mitigation action was created.
 	CreationDate *time.Time
@@ -1714,10 +1714,6 @@ type MitigationActionParams struct {
 	// certificate to one or more specified thing groups, typically for quarantine.
 	AddThingsToThingGroupParams *AddThingsToThingGroupParams
 
-	// Parameters to define a mitigation action that changes the state of the device
-	// certificate to inactive.
-	UpdateDeviceCertificateParams *UpdateDeviceCertificateParams
-
 	// Parameters to define a mitigation action that enables AWS IoT logging at a
 	// specified level of detail.
 	EnableIoTLoggingParams *EnableIoTLoggingParams
@@ -1727,26 +1723,30 @@ type MitigationActionParams struct {
 	// messages.
 	PublishFindingToSnsParams *PublishFindingToSnsParams
 
+	// Parameters to define a mitigation action that adds a blank policy to restrict
+	// permissions.
+	ReplaceDefaultPolicyVersionParams *ReplaceDefaultPolicyVersionParams
+
 	// Parameters to define a mitigation action that changes the state of the CA
 	// certificate to inactive.
 	UpdateCACertificateParams *UpdateCACertificateParams
 
-	// Parameters to define a mitigation action that adds a blank policy to restrict
-	// permissions.
-	ReplaceDefaultPolicyVersionParams *ReplaceDefaultPolicyVersionParams
+	// Parameters to define a mitigation action that changes the state of the device
+	// certificate to inactive.
+	UpdateDeviceCertificateParams *UpdateDeviceCertificateParams
 }
 
 // Specifies the MQTT context to use for the test authorizer request
 type MqttContext struct {
-
-	// The value of the username key in an MQTT authorization request.
-	Username *string
 
 	// The value of the clientId key in an MQTT authorization request.
 	ClientId *string
 
 	// The value of the password key in an MQTT authorization request.
 	Password []byte
+
+	// The value of the username key in an MQTT authorization request.
+	Username *string
 }
 
 // Information about the resource that was noncompliant with the audit check.
@@ -1768,8 +1768,8 @@ type OTAUpdateFile struct {
 	// A list of name/attribute pairs.
 	Attributes map[string]*string
 
-	// The file version.
-	FileVersion *string
+	// The code signing method of the file.
+	CodeSigning *CodeSigning
 
 	// The location of the updated firmware.
 	FileLocation *FileLocation
@@ -1777,60 +1777,57 @@ type OTAUpdateFile struct {
 	// The name of the file.
 	FileName *string
 
-	// The code signing method of the file.
-	CodeSigning *CodeSigning
+	// The file version.
+	FileVersion *string
 }
 
 // Information about an OTA update.
 type OTAUpdateInfo struct {
 
-	// The AWS IoT job ID associated with the OTA update.
-	AwsIotJobId *string
-
-	// A list of files associated with the OTA update.
-	OtaUpdateFiles []*OTAUpdateFile
-
-	// A description of the OTA update.
-	Description *string
-
-	// The OTA update ARN.
-	OtaUpdateArn *string
-
-	// The date when the OTA update was last updated.
-	LastModifiedDate *time.Time
-
 	// A collection of name/value pairs
 	AdditionalParameters map[string]*string
-
-	// Error information associated with the OTA update.
-	ErrorInfo *ErrorInfo
-
-	// Configuration for the rollout of OTA updates.
-	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig
 
 	// The AWS IoT job ARN associated with the OTA update.
 	AwsIotJobArn *string
 
-	// The status of the OTA update.
-	OtaUpdateStatus OTAUpdateStatus
+	// The AWS IoT job ID associated with the OTA update.
+	AwsIotJobId *string
+
+	// Configuration for the rollout of OTA updates.
+	AwsJobExecutionsRolloutConfig *AwsJobExecutionsRolloutConfig
 
 	// Configuration information for pre-signed URLs. Valid when protocols contains
 	// HTTP.
 	AwsJobPresignedUrlConfig *AwsJobPresignedUrlConfig
 
+	// The date when the OTA update was created.
+	CreationDate *time.Time
+
+	// A description of the OTA update.
+	Description *string
+
+	// Error information associated with the OTA update.
+	ErrorInfo *ErrorInfo
+
+	// The date when the OTA update was last updated.
+	LastModifiedDate *time.Time
+
+	// The OTA update ARN.
+	OtaUpdateArn *string
+
+	// A list of files associated with the OTA update.
+	OtaUpdateFiles []*OTAUpdateFile
+
 	// The OTA update ID.
 	OtaUpdateId *string
+
+	// The status of the OTA update.
+	OtaUpdateStatus OTAUpdateStatus
 
 	// The protocol used to transfer the OTA update image. Valid values are [HTTP],
 	// [MQTT], [HTTP, MQTT]. When both HTTP and MQTT are specified, the target device
 	// can choose the protocol.
 	Protocols []Protocol
-
-	// The date when the OTA update was created.
-	CreationDate *time.Time
-
-	// The targets of the OTA update.
-	Targets []*string
 
 	// Specifies whether the OTA update will continue to run (CONTINUOUS), or will be
 	// complete after all those things specified as targets have completed the OTA
@@ -1839,16 +1836,19 @@ type OTAUpdateInfo struct {
 	// when the thing is added to a target group, even after the OTA update was
 	// completed by all things originally in the group.
 	TargetSelection TargetSelection
+
+	// The targets of the OTA update.
+	Targets []*string
 }
 
 // An OTA update summary.
 type OTAUpdateSummary struct {
 
-	// The OTA update ARN.
-	OtaUpdateArn *string
-
 	// The date when the OTA update was created.
 	CreationDate *time.Time
+
+	// The OTA update ARN.
+	OtaUpdateArn *string
 
 	// The OTA update ID.
 	OtaUpdateId *string
@@ -1863,9 +1863,6 @@ type OutgoingCertificate struct {
 	// The certificate ID.
 	CertificateId *string
 
-	// The AWS account to which the transfer was made.
-	TransferredTo *string
-
 	// The certificate creation date.
 	CreationDate *time.Time
 
@@ -1874,6 +1871,9 @@ type OutgoingCertificate struct {
 
 	// The transfer message.
 	TransferMessage *string
+
+	// The AWS account to which the transfer was made.
+	TransferredTo *string
 }
 
 // Describes the percentile and percentile value.
@@ -1889,11 +1889,11 @@ type PercentPair struct {
 // Describes an AWS IoT policy.
 type Policy struct {
 
-	// The policy name.
-	PolicyName *string
-
 	// The policy ARN.
 	PolicyArn *string
+
+	// The policy name.
+	PolicyName *string
 }
 
 // Describes a policy version.
@@ -1936,51 +1936,51 @@ type PresignedUrlConfig struct {
 // Structure that contains payloadVersion and targetArn.
 type ProvisioningHook struct {
 
-	// The payload that was sent to the target function. Note: Only Lambda functions
-	// are currently supported.
-	PayloadVersion *string
-
 	// The ARN of the target function. Note: Only Lambda functions are currently
 	// supported.
 	//
 	// This member is required.
 	TargetArn *string
+
+	// The payload that was sent to the target function. Note: Only Lambda functions
+	// are currently supported.
+	PayloadVersion *string
 }
 
 // A summary of information about a fleet provisioning template.
 type ProvisioningTemplateSummary struct {
 
-	// True if the fleet provision template is enabled, otherwise false.
-	Enabled *bool
-
 	// The date when the fleet provisioning template summary was created.
 	CreationDate *time.Time
-
-	// The ARN of the fleet provisioning template.
-	TemplateArn *string
 
 	// The description of the fleet provisioning template.
 	Description *string
 
-	// The name of the fleet provisioning template.
-	TemplateName *string
+	// True if the fleet provision template is enabled, otherwise false.
+	Enabled *bool
 
 	// The date when the fleet provisioning template summary was last modified.
 	LastModifiedDate *time.Time
+
+	// The ARN of the fleet provisioning template.
+	TemplateArn *string
+
+	// The name of the fleet provisioning template.
+	TemplateName *string
 }
 
 // A summary of information about a fleet provision template version.
 type ProvisioningTemplateVersionSummary struct {
 
-	// The ID of the fleet privisioning template version.
-	VersionId *int32
+	// The date when the fleet provisioning template version was created
+	CreationDate *time.Time
 
 	// True if the fleet provisioning template version is the default version,
 	// otherwise false.
 	IsDefaultVersion *bool
 
-	// The date when the fleet provisioning template version was created
-	CreationDate *time.Time
+	// The ID of the fleet privisioning template version.
+	VersionId *int32
 }
 
 // Parameters to define a mitigation action that publishes findings to Amazon SNS.
@@ -2003,14 +2003,14 @@ type PutAssetPropertyValueEntry struct {
 	// This member is required.
 	PropertyValues []*AssetPropertyValue
 
+	// The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or
+	// both an aliasId and a propertyId. Accepts substitution templates.
+	AssetId *string
+
 	// Optional. A unique identifier for this entry that you can define to better track
 	// which message caused an error in case of failure. Accepts substitution
 	// templates. Defaults to a new UUID.
 	EntryId *string
-
-	// The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or
-	// both an aliasId and a propertyId. Accepts substitution templates.
-	AssetId *string
 
 	// The name of the property alias associated with your asset property. You must
 	// specify either a propertyAlias or both an aliasId and a propertyId. Accepts
@@ -2048,21 +2048,21 @@ type RateIncreaseCriteria struct {
 // The registration configuration.
 type RegistrationConfig struct {
 
-	// The template body.
-	TemplateBody *string
-
 	// The ARN of the role.
 	RoleArn *string
+
+	// The template body.
+	TemplateBody *string
 }
 
 // Information about a related resource.
 type RelatedResource struct {
 
-	// Information that identifies the resource.
-	ResourceIdentifier *ResourceIdentifier
-
 	// Other information about the resource.
 	AdditionalInfo map[string]*string
+
+	// Information that identifies the resource.
+	ResourceIdentifier *ResourceIdentifier
 
 	// The type of resource.
 	ResourceType ResourceType
@@ -2087,24 +2087,30 @@ type RepublishAction struct {
 	// This member is required.
 	RoleArn *string
 
-	// The Quality of Service (QoS) level to use when republishing messages. The
-	// default value is 0.
-	Qos *int32
-
 	// The name of the MQTT topic.
 	//
 	// This member is required.
 	Topic *string
+
+	// The Quality of Service (QoS) level to use when republishing messages. The
+	// default value is 0.
+	Qos *int32
 }
 
 // Information that identifies the noncompliant resource.
 type ResourceIdentifier struct {
 
-	// The version of the policy associated with the resource.
-	PolicyVersionIdentifier *PolicyVersionIdentifier
-
 	// The account with which the resource is associated.
 	Account *string
+
+	// The ID of the CA certificate used to authorize the certificate.
+	CaCertificateId *string
+
+	// The client ID.
+	ClientId *string
+
+	// The ID of the Amazon Cognito identity pool.
+	CognitoIdentityPoolId *string
 
 	// The ID of the certificate attached to the resource.
 	DeviceCertificateId *string
@@ -2112,24 +2118,21 @@ type ResourceIdentifier struct {
 	// The ARN of the IAM role that has overly permissive actions.
 	IamRoleArn *string
 
+	// The version of the policy associated with the resource.
+	PolicyVersionIdentifier *PolicyVersionIdentifier
+
 	// The ARN of the role alias that has overly permissive actions.
 	RoleAliasArn *string
-
-	// The client ID.
-	ClientId *string
-
-	// The ID of the CA certificate used to authorize the certificate.
-	CaCertificateId *string
-
-	// The ID of the Amazon Cognito identity pool.
-	CognitoIdentityPoolId *string
 }
 
 // Role alias description.
 type RoleAliasDescription struct {
 
-	// The role ARN.
-	RoleArn *string
+	// The UNIX timestamp of when the role alias was created.
+	CreationDate *time.Time
+
+	// The number of seconds for which the credential is valid.
+	CredentialDurationSeconds *int32
 
 	// The UNIX timestamp of when the role alias was last modified.
 	LastModifiedDate *time.Time
@@ -2140,18 +2143,20 @@ type RoleAliasDescription struct {
 	// The role alias.
 	RoleAlias *string
 
-	// The number of seconds for which the credential is valid.
-	CredentialDurationSeconds *int32
-
-	// The UNIX timestamp of when the role alias was created.
-	CreationDate *time.Time
-
 	// The ARN of the role alias.
 	RoleAliasArn *string
+
+	// The role ARN.
+	RoleArn *string
 }
 
 // Describes an action to write data to an Amazon S3 bucket.
 type S3Action struct {
+
+	// The Amazon S3 bucket.
+	//
+	// This member is required.
+	BucketName *string
 
 	// The object key.
 	//
@@ -2167,21 +2172,16 @@ type S3Action struct {
 	// object key. For more information, see S3 canned ACLs
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
 	CannedAcl CannedAccessControlList
-
-	// The Amazon S3 bucket.
-	//
-	// This member is required.
-	BucketName *string
 }
 
 // Describes the location of updated firmware in S3.
 type S3Destination struct {
 
-	// The S3 prefix.
-	Prefix *string
-
 	// The S3 bucket that contains the updated firmware.
 	Bucket *string
+
+	// The S3 prefix.
+	Prefix *string
 }
 
 // The S3 location.
@@ -2190,11 +2190,11 @@ type S3Location struct {
 	// The S3 bucket.
 	Bucket *string
 
-	// The S3 bucket version.
-	Version *string
-
 	// The S3 key.
 	Key *string
+
+	// The S3 bucket version.
+	Version *string
 }
 
 // Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
@@ -2226,14 +2226,14 @@ type ScheduledAuditMetadata struct {
 	// "WEEKLY" or "BIWEEKLY").
 	DayOfWeek DayOfWeek
 
+	// How often the scheduled audit occurs.
+	Frequency AuditFrequency
+
 	// The ARN of the scheduled audit.
 	ScheduledAuditArn *string
 
 	// The name of the scheduled audit.
 	ScheduledAuditName *string
-
-	// How often the scheduled audit occurs.
-	Frequency AuditFrequency
 }
 
 // Identifying information for a Device Defender security profile.
@@ -2262,24 +2262,24 @@ type SecurityProfileTarget struct {
 // Information about a security profile and the target associated with it.
 type SecurityProfileTargetMapping struct {
 
-	// Information about the target (thing group) associated with the security profile.
-	Target *SecurityProfileTarget
-
 	// Information that identifies the security profile.
 	SecurityProfileIdentifier *SecurityProfileIdentifier
+
+	// Information about the target (thing group) associated with the security profile.
+	Target *SecurityProfileTarget
 }
 
 // An object that contains information about a server certificate.
 type ServerCertificateSummary struct {
 
-	// Details that explain the status of the server certificate.
-	ServerCertificateStatusDetail *string
+	// The ARN of the server certificate.
+	ServerCertificateArn *string
 
 	// The status of the server certificate.
 	ServerCertificateStatus ServerCertificateStatus
 
-	// The ARN of the server certificate.
-	ServerCertificateArn *string
+	// Details that explain the status of the server certificate.
+	ServerCertificateStatusDetail *string
 }
 
 // Describes the code-signing profile.
@@ -2298,6 +2298,11 @@ type SigningProfileParameter struct {
 // Use Sig V4 authorization.
 type SigV4Authorization struct {
 
+	// The ARN of the signing role.
+	//
+	// This member is required.
+	RoleArn *string
+
 	// The service name to use while signing with Sig V4.
 	//
 	// This member is required.
@@ -2307,11 +2312,6 @@ type SigV4Authorization struct {
 	//
 	// This member is required.
 	SigningRegion *string
-
-	// The ARN of the signing role.
-	//
-	// This member is required.
-	RoleArn *string
 }
 
 // Describes an action to publish to an Amazon SNS topic.
@@ -2322,6 +2322,11 @@ type SnsAction struct {
 	// This member is required.
 	RoleArn *string
 
+	// The ARN of the SNS topic.
+	//
+	// This member is required.
+	TargetArn *string
+
 	// (Optional) The message format of the message to publish. Accepted values are
 	// "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this
 	// setting to determine if the payload should be parsed and relevant
@@ -2331,15 +2336,15 @@ type SnsAction struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/json-formats.html) refer to their
 	// official documentation.
 	MessageFormat MessageFormat
-
-	// The ARN of the SNS topic.
-	//
-	// This member is required.
-	TargetArn *string
 }
 
 // Describes an action to publish data to an Amazon SQS queue.
 type SqsAction struct {
+
+	// The URL of the Amazon SQS queue.
+	//
+	// This member is required.
+	QueueUrl *string
 
 	// The ARN of the IAM role that grants access.
 	//
@@ -2348,24 +2353,19 @@ type SqsAction struct {
 
 	// Specifies whether to use Base64 encoding.
 	UseBase64 *bool
-
-	// The URL of the Amazon SQS queue.
-	//
-	// This member is required.
-	QueueUrl *string
 }
 
 // Information required to start a signing job.
 type StartSigningJobParameter struct {
 
-	// Describes the code-signing profile.
-	SigningProfileParameter *SigningProfileParameter
+	// The location to write the code-signed file.
+	Destination *Destination
 
 	// The code-signing profile name.
 	SigningProfileName *string
 
-	// The location to write the code-signed file.
-	Destination *Destination
+	// Describes the code-signing profile.
+	SigningProfileParameter *SigningProfileParameter
 }
 
 // A statistical ranking (percentile) which indicates a threshold value by which a
@@ -2387,11 +2387,17 @@ type StatisticalThreshold struct {
 // supported.
 type Statistics struct {
 
-	// The maximum aggregated field value.
-	Maximum *float64
+	// The average of the aggregated field values.
+	Average *float64
 
 	// The count of things that match the query.
 	Count *int32
+
+	// The maximum aggregated field value.
+	Maximum *float64
+
+	// The minimum aggregated field value.
+	Minimum *float64
 
 	// The standard deviation of the aggregated field values.
 	StdDeviation *float64
@@ -2402,23 +2408,12 @@ type Statistics struct {
 	// The sum of the squares of the aggregated field values.
 	SumOfSquares *float64
 
-	// The average of the aggregated field values.
-	Average *float64
-
-	// The minimum aggregated field value.
-	Minimum *float64
-
 	// The variance of the aggregated field values.
 	Variance *float64
 }
 
 // Starts execution of a Step Functions state machine.
 type StepFunctionsAction struct {
-
-	// (Optional) A name will be given to the state machine execution consisting of
-	// this prefix followed by a UUID. Step Functions automatically creates a unique
-	// name for each state machine execution if one is not provided.
-	ExecutionNamePrefix *string
 
 	// The ARN of the role that grants IoT permission to start execution of a state
 	// machine ("Action":"states:StartExecution").
@@ -2430,6 +2425,11 @@ type StepFunctionsAction struct {
 	//
 	// This member is required.
 	StateMachineName *string
+
+	// (Optional) A name will be given to the state machine execution consisting of
+	// this prefix followed by a UUID. Step Functions automatically creates a unique
+	// name for each state machine execution if one is not provided.
+	ExecutionNamePrefix *string
 }
 
 // Describes a group of files that can be streamed.
@@ -2455,26 +2455,26 @@ type StreamFile struct {
 // Information about a stream.
 type StreamInfo struct {
 
-	// The date when the stream was last updated.
-	LastUpdatedAt *time.Time
+	// The date when the stream was created.
+	CreatedAt *time.Time
+
+	// The description of the stream.
+	Description *string
 
 	// The files to stream.
 	Files []*StreamFile
 
-	// The stream ID.
-	StreamId *string
+	// The date when the stream was last updated.
+	LastUpdatedAt *time.Time
 
 	// An IAM role AWS IoT assumes to access your S3 files.
 	RoleArn *string
 
-	// The date when the stream was created.
-	CreatedAt *time.Time
-
 	// The stream ARN.
 	StreamArn *string
 
-	// The description of the stream.
-	Description *string
+	// The stream ID.
+	StreamId *string
 
 	// The stream version.
 	StreamVersion *int32
@@ -2483,14 +2483,14 @@ type StreamInfo struct {
 // A summary of a stream.
 type StreamSummary struct {
 
-	// The stream ID.
-	StreamId *string
-
 	// A description of the stream.
 	Description *string
 
 	// The stream ARN.
 	StreamArn *string
+
+	// The stream ID.
+	StreamId *string
 
 	// The stream version.
 	StreamVersion *int32
@@ -2511,26 +2511,26 @@ type Tag struct {
 // Statistics for the checks performed during the audit.
 type TaskStatistics struct {
 
-	// The number of checks in this audit.
-	TotalChecks *int32
+	// The number of checks that did not run because the audit was canceled.
+	CanceledChecks *int32
 
 	// The number of checks that found compliant resources.
 	CompliantChecks *int32
 
-	// The number of checks that found noncompliant resources.
-	NonCompliantChecks *int32
-
 	// The number of checks.
 	FailedChecks *int32
-
-	// The number of checks waiting for data collection.
-	WaitingForDataCollectionChecks *int32
 
 	// The number of checks in progress.
 	InProgressChecks *int32
 
-	// The number of checks that did not run because the audit was canceled.
-	CanceledChecks *int32
+	// The number of checks that found noncompliant resources.
+	NonCompliantChecks *int32
+
+	// The number of checks in this audit.
+	TotalChecks *int32
+
+	// The number of checks waiting for data collection.
+	WaitingForDataCollectionChecks *int32
 }
 
 // Provides summary counts of how many tasks for findings are in a particular
@@ -2538,20 +2538,20 @@ type TaskStatistics struct {
 // DescribeAuditMitigationActionsTask.
 type TaskStatisticsForAuditCheck struct {
 
-	// The number of findings for which at least one of the actions failed when
-	// applied.
-	FailedFindingsCount *int64
-
 	// The number of findings to which the mitigation action task was canceled when
 	// applied.
 	CanceledFindingsCount *int64
 
-	// The number of findings for which all mitigation actions succeeded when applied.
-	SucceededFindingsCount *int64
+	// The number of findings for which at least one of the actions failed when
+	// applied.
+	FailedFindingsCount *int64
 
 	// The number of findings skipped because of filter conditions provided in the
 	// parameters to the command.
 	SkippedFindingsCount *int64
+
+	// The number of findings for which all mitigation actions succeeded when applied.
+	SucceededFindingsCount *int64
 
 	// The total number of findings to which a task is being applied.
 	TotalFindingsCount *int64
@@ -2561,8 +2561,11 @@ type TaskStatisticsForAuditCheck struct {
 // of thing attributes.
 type ThingAttribute struct {
 
-	// The version of the thing record in the registry.
-	Version *int64
+	// A list of thing attributes which are name-value pairs.
+	Attributes map[string]*string
+
+	// The thing ARN.
+	ThingArn *string
 
 	// The name of the thing.
 	ThingName *string
@@ -2570,11 +2573,8 @@ type ThingAttribute struct {
 	// The name of the thing type, if the thing has been associated with a type.
 	ThingTypeName *string
 
-	// The thing ARN.
-	ThingArn *string
-
-	// A list of thing attributes which are name-value pairs.
-	Attributes map[string]*string
+	// The version of the thing record in the registry.
+	Version *int64
 }
 
 // The connectivity status of the thing.
@@ -2593,42 +2593,42 @@ type ThingConnectivity struct {
 // The thing search index document.
 type ThingDocument struct {
 
-	// Thing group names.
-	ThingGroupNames []*string
-
-	// The shadow.
-	Shadow *string
+	// The attributes.
+	Attributes map[string]*string
 
 	// Indicates whether the thing is connected to the AWS IoT service.
 	Connectivity *ThingConnectivity
 
-	// The thing type name.
-	ThingTypeName *string
+	// The shadow.
+	Shadow *string
+
+	// Thing group names.
+	ThingGroupNames []*string
+
+	// The thing ID.
+	ThingId *string
 
 	// The thing name.
 	ThingName *string
 
-	// The attributes.
-	Attributes map[string]*string
-
-	// The thing ID.
-	ThingId *string
+	// The thing type name.
+	ThingTypeName *string
 }
 
 // The thing group search index document.
 type ThingGroupDocument struct {
 
-	// The thing group ID.
-	ThingGroupId *string
-
 	// The thing group attributes.
 	Attributes map[string]*string
+
+	// Parent group names.
+	ParentGroupNames []*string
 
 	// The thing group description.
 	ThingGroupDescription *string
 
-	// Parent group names.
-	ParentGroupNames []*string
+	// The thing group ID.
+	ThingGroupId *string
 
 	// The thing group name.
 	ThingGroupName *string
@@ -2637,19 +2637,19 @@ type ThingGroupDocument struct {
 // Thing group indexing configuration.
 type ThingGroupIndexingConfiguration struct {
 
-	// Contains fields that are indexed and whose types are already known by the Fleet
-	// Indexing service.
-	ManagedFields []*Field
+	// Thing group indexing mode.
+	//
+	// This member is required.
+	ThingGroupIndexingMode ThingGroupIndexingMode
 
 	// A list of thing group fields to index. This list cannot contain any managed
 	// fields. Use the GetIndexingConfiguration API to get a list of managed fields.
 	// Contains custom field names and their data type.
 	CustomFields []*Field
 
-	// Thing group indexing mode.
-	//
-	// This member is required.
-	ThingGroupIndexingMode ThingGroupIndexingMode
+	// Contains fields that are indexed and whose types are already known by the Fleet
+	// Indexing service.
+	ManagedFields []*Field
 }
 
 // Thing group metadata.
@@ -2668,21 +2668,17 @@ type ThingGroupMetadata struct {
 // Thing group properties.
 type ThingGroupProperties struct {
 
-	// The thing group description.
-	ThingGroupDescription *string
-
 	// The thing group attributes in JSON format.
 	AttributePayload *AttributePayload
+
+	// The thing group description.
+	ThingGroupDescription *string
 }
 
 // The thing indexing configuration. For more information, see Managing Thing
 // Indexing
 // (https://docs.aws.amazon.com/iot/latest/developerguide/managing-index.html).
 type ThingIndexingConfiguration struct {
-
-	// Contains fields that are indexed and whose types are already known by the Fleet
-	// Indexing service.
-	ManagedFields []*Field
 
 	// Thing indexing mode. Valid values are:
 	//
@@ -2697,6 +2693,13 @@ type ThingIndexingConfiguration struct {
 	// This member is required.
 	ThingIndexingMode ThingIndexingMode
 
+	// Contains custom field names and their data type.
+	CustomFields []*Field
+
+	// Contains fields that are indexed and whose types are already known by the Fleet
+	// Indexing service.
+	ManagedFields []*Field
+
 	// Thing connectivity indexing mode. Valid values are:
 	//
 	//     * STATUS – Your thing
@@ -2706,24 +2709,21 @@ type ThingIndexingConfiguration struct {
 	//     * OFF - Thing connectivity status
 	// indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode
-
-	// Contains custom field names and their data type.
-	CustomFields []*Field
 }
 
 // The definition of the thing type, including thing type name and description.
 type ThingTypeDefinition struct {
 
-	// The name of the thing type.
-	ThingTypeName *string
+	// The thing type ARN.
+	ThingTypeArn *string
 
 	// The ThingTypeMetadata contains additional information about the thing type
 	// including: creation date and time, a value indicating whether the thing type is
 	// deprecated, and a date and time when it was deprecated.
 	ThingTypeMetadata *ThingTypeMetadata
 
-	// The thing type ARN.
-	ThingTypeArn *string
+	// The name of the thing type.
+	ThingTypeName *string
 
 	// The ThingTypeProperties for the thing type.
 	ThingTypeProperties *ThingTypeProperties
@@ -2734,12 +2734,12 @@ type ThingTypeDefinition struct {
 // deprecated, and a date and time when time was deprecated.
 type ThingTypeMetadata struct {
 
+	// The date and time when the thing type was created.
+	CreationDate *time.Time
+
 	// Whether the thing type is deprecated. If true, no new things could be associated
 	// with this type.
 	Deprecated *bool
-
-	// The date and time when the thing type was created.
-	CreationDate *time.Time
 
 	// The date and time when the thing type was deprecated.
 	DeprecationDate *time.Time
@@ -2749,11 +2749,11 @@ type ThingTypeMetadata struct {
 // thing type description, and a list of searchable thing attribute names.
 type ThingTypeProperties struct {
 
-	// The description of the thing type.
-	ThingTypeDescription *string
-
 	// A list of searchable thing attribute names.
 	SearchableAttributes []*string
+
+	// The description of the thing type.
+	ThingTypeDescription *string
 }
 
 // Specifies the amount of time each device has to finish its execution of the job.
@@ -2781,30 +2781,30 @@ type TlsContext struct {
 // Describes a rule.
 type TopicRule struct {
 
-	// Specifies whether the rule is disabled.
-	RuleDisabled *bool
-
-	// The SQL statement used to query the topic. When using a SQL query with multiple
-	// lines, be sure to escape the newline characters.
-	Sql *string
-
 	// The actions associated with the rule.
 	Actions []*Action
 
-	// The description of the rule.
-	Description *string
+	// The version of the SQL rules engine to use when evaluating the rule.
+	AwsIotSqlVersion *string
 
 	// The date and time the rule was created.
 	CreatedAt *time.Time
 
+	// The description of the rule.
+	Description *string
+
 	// The action to perform when an error occurs.
 	ErrorAction *Action
+
+	// Specifies whether the rule is disabled.
+	RuleDisabled *bool
 
 	// The name of the rule.
 	RuleName *string
 
-	// The version of the SQL rules engine to use when evaluating the rule.
-	AwsIotSqlVersion *string
+	// The SQL statement used to query the topic. When using a SQL query with multiple
+	// lines, be sure to escape the newline characters.
+	Sql *string
 }
 
 // A topic rule destination.
@@ -2813,9 +2813,8 @@ type TopicRuleDestination struct {
 	// The topic rule destination URL.
 	Arn *string
 
-	// Additional details or reason why the topic rule destination is in the current
-	// status.
-	StatusReason *string
+	// Properties of the HTTP URL.
+	HttpUrlProperties *HttpUrlDestinationProperties
 
 	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
 	// rule destination was created but has not been confirmed. You can set status to
@@ -2832,8 +2831,9 @@ type TopicRuleDestination struct {
 	// confirmation challenge to be sent to your confirmation endpoint.
 	Status TopicRuleDestinationStatus
 
-	// Properties of the HTTP URL.
-	HttpUrlProperties *HttpUrlDestinationProperties
+	// Additional details or reason why the topic rule destination is in the current
+	// status.
+	StatusReason *string
 }
 
 // Configuration of the topic rule destination.
@@ -2846,6 +2846,12 @@ type TopicRuleDestinationConfiguration struct {
 // Information about the topic rule destination.
 type TopicRuleDestinationSummary struct {
 
+	// The topic rule destination ARN.
+	Arn *string
+
+	// Information about the HTTP URL.
+	HttpUrlSummary *HttpUrlDestinationSummary
+
 	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
 	// rule destination was created but has not been confirmed. You can set status to
 	// IN_PROGRESS by calling UpdateTopicRuleDestination. Calling
@@ -2861,12 +2867,6 @@ type TopicRuleDestinationSummary struct {
 	// confirmation challenge to be sent to your confirmation endpoint.
 	Status TopicRuleDestinationStatus
 
-	// The topic rule destination ARN.
-	Arn *string
-
-	// Information about the HTTP URL.
-	HttpUrlSummary *HttpUrlDestinationSummary
-
 	// The reason the topic rule destination is in the current status.
 	StatusReason *string
 }
@@ -2874,24 +2874,29 @@ type TopicRuleDestinationSummary struct {
 // Describes a rule.
 type TopicRuleListItem struct {
 
+	// The date and time the rule was created.
+	CreatedAt *time.Time
+
+	// The rule ARN.
+	RuleArn *string
+
 	// Specifies whether the rule is disabled.
 	RuleDisabled *bool
 
 	// The name of the rule.
 	RuleName *string
 
-	// The date and time the rule was created.
-	CreatedAt *time.Time
-
 	// The pattern for the topic names that apply.
 	TopicPattern *string
-
-	// The rule ARN.
-	RuleArn *string
 }
 
 // Describes a rule.
 type TopicRulePayload struct {
+
+	// The actions associated with the rule.
+	//
+	// This member is required.
+	Actions []*Action
 
 	// The SQL statement used to query the topic. For more information, see AWS IoT SQL
 	// Reference
@@ -2904,26 +2909,21 @@ type TopicRulePayload struct {
 	// The version of the SQL rules engine to use when evaluating the rule.
 	AwsIotSqlVersion *string
 
-	// Specifies whether the rule is disabled.
-	RuleDisabled *bool
-
-	// The actions associated with the rule.
-	//
-	// This member is required.
-	Actions []*Action
+	// The description of the rule.
+	Description *string
 
 	// The action to take when an error occurs.
 	ErrorAction *Action
 
-	// The description of the rule.
-	Description *string
+	// Specifies whether the rule is disabled.
+	RuleDisabled *bool
 }
 
 // Data used to transfer a certificate to an AWS account.
 type TransferData struct {
 
-	// The date the transfer took place.
-	TransferDate *time.Time
+	// The date the transfer was accepted.
+	AcceptDate *time.Time
 
 	// The date the transfer was rejected.
 	RejectDate *time.Time
@@ -2931,8 +2931,8 @@ type TransferData struct {
 	// The reason why the transfer was rejected.
 	RejectReason *string
 
-	// The date the transfer was accepted.
-	AcceptDate *time.Time
+	// The date the transfer took place.
+	TransferDate *time.Time
 
 	// The transfer message.
 	TransferMessage *string
@@ -2970,12 +2970,6 @@ type ValidationError struct {
 // Information about a Device Defender security profile behavior violation.
 type ViolationEvent struct {
 
-	// The time the violation event occurred.
-	ViolationEventTime *time.Time
-
-	// The ID of the violation event.
-	ViolationId *string
-
 	// The behavior which was violated.
 	Behavior *Behavior
 
@@ -2988,6 +2982,12 @@ type ViolationEvent struct {
 	// The name of the thing responsible for the violation event.
 	ThingName *string
 
+	// The time the violation event occurred.
+	ViolationEventTime *time.Time
+
 	// The type of violation event.
 	ViolationEventType ViolationEventType
+
+	// The ID of the violation event.
+	ViolationId *string
 }

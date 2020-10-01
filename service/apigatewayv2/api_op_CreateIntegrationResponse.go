@@ -58,19 +58,15 @@ func (c *Client) CreateIntegrationResponse(ctx context.Context, params *CreateIn
 // Creates a new IntegrationResponse resource to represent an integration response.
 type CreateIntegrationResponseInput struct {
 
-	// The template selection expression for the integration response. Supported only
-	// for WebSocket APIs.
-	TemplateSelectionExpression *string
-
 	// The API identifier.
 	//
 	// This member is required.
 	ApiId *string
 
-	// The collection of response templates for the integration response as a
-	// string-to-string map of key-value pairs. Response templates are represented as a
-	// key/value map, with a content-type as the key and a template as the value.
-	ResponseTemplates map[string]*string
+	// The integration ID.
+	//
+	// This member is required.
+	IntegrationId *string
 
 	// The integration response key.
 	//
@@ -86,11 +82,6 @@ type CreateIntegrationResponseInput struct {
 	// route response or method response without modification.
 	ContentHandlingStrategy types.ContentHandlingStrategy
 
-	// The integration ID.
-	//
-	// This member is required.
-	IntegrationId *string
-
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter name
 	// and the mapped value is an integration response header value, a static value
@@ -103,15 +94,34 @@ type CreateIntegrationResponseInput struct {
 	// response header name and {JSON-expression} is a valid JSON expression without
 	// the $ prefix.
 	ResponseParameters map[string]*string
+
+	// The collection of response templates for the integration response as a
+	// string-to-string map of key-value pairs. Response templates are represented as a
+	// key/value map, with a content-type as the key and a template as the value.
+	ResponseTemplates map[string]*string
+
+	// The template selection expression for the integration response. Supported only
+	// for WebSocket APIs.
+	TemplateSelectionExpression *string
 }
 
 type CreateIntegrationResponseOutput struct {
 
+	// Supported only for WebSocket APIs. Specifies how to handle response payload
+	// content type conversions. Supported values are CONVERT_TO_BINARY and
+	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
+	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+	// Base64-encoded string. If this property is not defined, the response payload
+	// will be passed through from the integration response to the route response or
+	// method response without modification.
+	ContentHandlingStrategy types.ContentHandlingStrategy
+
+	// The integration response ID.
+	IntegrationResponseId *string
+
 	// The integration response key.
 	IntegrationResponseKey *string
-
-	// The template selection expressions for the integration response.
-	TemplateSelectionExpression *string
 
 	// A key-value map specifying response parameters that are passed to the method
 	// response from the backend. The key is a method response header parameter name
@@ -126,23 +136,13 @@ type CreateIntegrationResponseOutput struct {
 	// $ prefix.
 	ResponseParameters map[string]*string
 
-	// The integration response ID.
-	IntegrationResponseId *string
-
 	// The collection of response templates for the integration response as a
 	// string-to-string map of key-value pairs. Response templates are represented as a
 	// key/value map, with a content-type as the key and a template as the value.
 	ResponseTemplates map[string]*string
 
-	// Supported only for WebSocket APIs. Specifies how to handle response payload
-	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
-	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
-	ContentHandlingStrategy types.ContentHandlingStrategy
+	// The template selection expressions for the integration response.
+	TemplateSelectionExpression *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

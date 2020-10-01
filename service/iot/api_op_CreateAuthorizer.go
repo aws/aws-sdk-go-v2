@@ -57,35 +57,35 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 
 type CreateAuthorizerInput struct {
 
-	// The public keys used to verify the digital signature returned by your custom
-	// authentication service.
-	TokenSigningPublicKeys map[string]*string
-
-	// The name of the token key used to extract the token from the HTTP headers.
-	TokenKeyName *string
-
-	// Specifies whether AWS IoT validates the token signature in an authorization
-	// request.
-	SigningDisabled *bool
+	// The ARN of the authorizer's Lambda function.
+	//
+	// This member is required.
+	AuthorizerFunctionArn *string
 
 	// The authorizer name.
 	//
 	// This member is required.
 	AuthorizerName *string
 
+	// Specifies whether AWS IoT validates the token signature in an authorization
+	// request.
+	SigningDisabled *bool
+
 	// The status of the create authorizer request.
 	Status types.AuthorizerStatus
-
-	// The ARN of the authorizer's Lambda function.
-	//
-	// This member is required.
-	AuthorizerFunctionArn *string
 
 	// Metadata which can be used to manage the custom authorizer. For URI Request
 	// parameters use format: ...key1=value1&key2=value2... For the CLI command-line
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []*types.Tag
+
+	// The name of the token key used to extract the token from the HTTP headers.
+	TokenKeyName *string
+
+	// The public keys used to verify the digital signature returned by your custom
+	// authentication service.
+	TokenSigningPublicKeys map[string]*string
 }
 
 type CreateAuthorizerOutput struct {

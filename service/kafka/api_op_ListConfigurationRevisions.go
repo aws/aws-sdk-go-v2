@@ -57,20 +57,20 @@ func (c *Client) ListConfigurationRevisions(ctx context.Context, params *ListCon
 
 type ListConfigurationRevisionsInput struct {
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
-	// token in your next request.
-	NextToken *string
-
-	// The maximum number of results to return in the response. If there are more
-	// results, the response includes a NextToken parameter.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and
 	// all of its revisions.
 	//
 	// This member is required.
 	Arn *string
+
+	// The maximum number of results to return in the response. If there are more
+	// results, the response includes a NextToken parameter.
+	MaxResults *int32
+
+	// The paginated results marker. When the result of the operation is truncated, the
+	// call returns NextToken in the response. To get the next batch, provide this
+	// token in your next request.
+	NextToken *string
 }
 
 type ListConfigurationRevisionsOutput struct {

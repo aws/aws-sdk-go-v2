@@ -69,39 +69,39 @@ type DescribeStreamProcessorInput struct {
 
 type DescribeStreamProcessorOutput struct {
 
-	// ARN of the IAM role that allows access to the stream processor.
-	RoleArn *string
+	// Date and time the stream processor was created
+	CreationTimestamp *time.Time
+
+	// Kinesis video stream that provides the source streaming video.
+	Input *types.StreamProcessorInput
 
 	// The time, in Unix format, the stream processor was last updated. For example,
 	// when the stream processor moves from a running state to a failed state, or when
 	// the user starts or stops the stream processor.
 	LastUpdateTimestamp *time.Time
 
-	// Current status of the stream processor.
-	Status types.StreamProcessorStatus
+	// Name of the stream processor.
+	Name *string
 
-	// Kinesis video stream that provides the source streaming video.
-	Input *types.StreamProcessorInput
+	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
+	Output *types.StreamProcessorOutput
 
-	// Detailed status message about the stream processor.
-	StatusMessage *string
+	// ARN of the IAM role that allows access to the stream processor.
+	RoleArn *string
 
 	// Face recognition input parameters that are being used by the stream processor.
 	// Includes the collection to use for face recognition and the face attributes to
 	// detect.
 	Settings *types.StreamProcessorSettings
 
-	// Name of the stream processor.
-	Name *string
+	// Current status of the stream processor.
+	Status types.StreamProcessorStatus
 
-	// Date and time the stream processor was created
-	CreationTimestamp *time.Time
+	// Detailed status message about the stream processor.
+	StatusMessage *string
 
 	// ARN of the stream processor.
 	StreamProcessorArn *string
-
-	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
-	Output *types.StreamProcessorOutput
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -69,13 +69,13 @@ type TransferCertificateInput struct {
 	// This member is required.
 	CertificateId *string
 
-	// The transfer message.
-	TransferMessage *string
-
 	// The AWS account.
 	//
 	// This member is required.
 	TargetAwsAccount *string
+
+	// The transfer message.
+	TransferMessage *string
 }
 
 // The output from the TransferCertificate operation.

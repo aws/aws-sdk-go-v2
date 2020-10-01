@@ -58,15 +58,15 @@ func (c *Client) AddCustomAttributes(ctx context.Context, params *AddCustomAttri
 // Represents the request to add custom attributes.
 type AddCustomAttributesInput struct {
 
-	// The user pool ID for the user pool where you want to add custom attributes.
-	//
-	// This member is required.
-	UserPoolId *string
-
 	// An array of custom attributes, such as Mutable and Name.
 	//
 	// This member is required.
 	CustomAttributes []*types.SchemaAttributeType
+
+	// The user pool ID for the user pool where you want to add custom attributes.
+	//
+	// This member is required.
+	UserPoolId *string
 }
 
 // Represents the response from the server for the request to add custom

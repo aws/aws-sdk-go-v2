@@ -66,14 +66,6 @@ func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optF
 
 type UpdateGroupInput struct {
 
-	// New path for the IAM group. Only include this if changing the group's path. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
-	// string of characters consisting of either a forward slash (/) by itself or a
-	// string that must begin and end with forward slashes. In addition, it can contain
-	// any ASCII character from the ! (\u0021) through the DEL character (\u007F),
-	// including most punctuation characters, digits, and upper and lowercased letters.
-	NewPath *string
-
 	// Name of the IAM group to update. If you're changing the name of the group, this
 	// is the original name. This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -88,6 +80,14 @@ type UpdateGroupInput struct {
 	// not distinguished by case. For example, you cannot create resources named both
 	// "MyResource" and "myresource".
 	NewGroupName *string
+
+	// New path for the IAM group. Only include this if changing the group's path. This
+	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)) a
+	// string of characters consisting of either a forward slash (/) by itself or a
+	// string that must begin and end with forward slashes. In addition, it can contain
+	// any ASCII character from the ! (\u0021) through the DEL character (\u007F),
+	// including most punctuation characters, digits, and upper and lowercased letters.
+	NewPath *string
 }
 
 type UpdateGroupOutput struct {

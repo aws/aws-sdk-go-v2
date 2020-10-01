@@ -72,12 +72,12 @@ type GetStagesInput struct {
 
 type GetStagesOutput struct {
 
+	// The elements from this collection.
+	Items []*types.Stage
+
 	// The next page of elements from this collection. Not valid for the last element
 	// of the collection.
 	NextToken *string
-
-	// The elements from this collection.
-	Items []*types.Stage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

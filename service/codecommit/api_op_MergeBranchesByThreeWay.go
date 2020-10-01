@@ -61,12 +61,31 @@ type MergeBranchesByThreeWayInput struct {
 	// commit (for example, a branch name or a full commit ID).
 	//
 	// This member is required.
-	SourceCommitSpecifier *string
+	DestinationCommitSpecifier *string
 
 	// The name of the repository where you want to merge two branches.
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The branch, tag, HEAD, or other fully qualified reference used to identify a
+	// commit (for example, a branch name or a full commit ID).
+	//
+	// This member is required.
+	SourceCommitSpecifier *string
+
+	// The name of the author who created the commit. This information is used as both
+	// the author and committer for the commit.
+	AuthorName *string
+
+	// The commit message to include in the commit information for the merge.
+	CommitMessage *string
+
+	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
+	// used, which returns a not-mergeable result if the same file has differences in
+	// both branches. If LINE_LEVEL is specified, a conflict is considered not
+	// mergeable if the same file in both branches has differences on the same line.
+	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
 
 	// If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
 	// resolving conflicts during a merge.
@@ -78,45 +97,26 @@ type MergeBranchesByThreeWayInput struct {
 	// successful.
 	ConflictResolutionStrategy types.ConflictResolutionStrategyTypeEnum
 
+	// The email address of the person merging the branches. This information is used
+	// in the commit information for the merge.
+	Email *string
+
 	// If the commit contains deletions, whether to keep a folder or folder structure
 	// if the changes leave the folders empty. If true, a .gitkeep file is created for
 	// empty folders. The default is false.
 	KeepEmptyFolders *bool
 
-	// The email address of the person merging the branches. This information is used
-	// in the commit information for the merge.
-	Email *string
-
-	// The level of conflict detail to use. If unspecified, the default FILE_LEVEL is
-	// used, which returns a not-mergeable result if the same file has differences in
-	// both branches. If LINE_LEVEL is specified, a conflict is considered not
-	// mergeable if the same file in both branches has differences on the same line.
-	ConflictDetailLevel types.ConflictDetailLevelTypeEnum
-
-	// The branch, tag, HEAD, or other fully qualified reference used to identify a
-	// commit (for example, a branch name or a full commit ID).
-	//
-	// This member is required.
-	DestinationCommitSpecifier *string
-
 	// The branch where the merge is applied.
 	TargetBranch *string
-
-	// The name of the author who created the commit. This information is used as both
-	// the author and committer for the commit.
-	AuthorName *string
-
-	// The commit message to include in the commit information for the merge.
-	CommitMessage *string
 }
 
 type MergeBranchesByThreeWayOutput struct {
 
-	// The tree ID of the merge in the destination or target branch.
-	TreeId *string
-
 	// The commit ID of the merge in the destination or target branch.
 	CommitId *string
+
+	// The tree ID of the merge in the destination or target branch.
+	TreeId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

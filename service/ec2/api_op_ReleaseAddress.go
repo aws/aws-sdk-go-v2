@@ -66,6 +66,9 @@ func (c *Client) ReleaseAddress(ctx context.Context, params *ReleaseAddressInput
 
 type ReleaseAddressInput struct {
 
+	// [EC2-VPC] The allocation ID. Required for EC2-VPC.
+	AllocationId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -84,9 +87,6 @@ type ReleaseAddressInput struct {
 
 	// [EC2-Classic] The Elastic IP address. Required for EC2-Classic.
 	PublicIp *string
-
-	// [EC2-VPC] The allocation ID. Required for EC2-VPC.
-	AllocationId *string
 }
 
 type ReleaseAddressOutput struct {

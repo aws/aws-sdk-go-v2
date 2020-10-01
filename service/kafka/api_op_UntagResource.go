@@ -56,6 +56,12 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
+	// The Amazon Resource Name (ARN) that uniquely identifies the resource that's
+	// associated with the tags.
+	//
+	// This member is required.
+	ResourceArn *string
+
 	// Tag keys must be unique for a given cluster. In addition, the following
 	// restrictions apply:
 	//
@@ -76,12 +82,6 @@ type UntagResourceInput struct {
 	//
 	// This member is required.
 	TagKeys []*string
-
-	// The Amazon Resource Name (ARN) that uniquely identifies the resource that's
-	// associated with the tags.
-	//
-	// This member is required.
-	ResourceArn *string
 }
 
 type UntagResourceOutput struct {

@@ -69,14 +69,14 @@ type DescribeIdentityInput struct {
 // A description of the identity.
 type DescribeIdentityOutput struct {
 
-	// Date on which the identity was last modified.
-	LastModifiedDate *time.Time
-
 	// Date on which the identity was created.
 	CreationDate *time.Time
 
 	// A unique identifier in the format REGION:GUID.
 	IdentityId *string
+
+	// Date on which the identity was last modified.
+	LastModifiedDate *time.Time
 
 	// The provider names.
 	Logins []*string

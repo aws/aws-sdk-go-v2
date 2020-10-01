@@ -56,16 +56,16 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// New name of the application to be updated.
-	Name *string
-
-	// New description of the application to be updated.
-	Description *string
-
 	// Configuration ID of the application to be updated.
 	//
 	// This member is required.
 	ConfigurationId *string
+
+	// New description of the application to be updated.
+	Description *string
+
+	// New name of the application to be updated.
+	Name *string
 }
 
 type UpdateApplicationOutput struct {

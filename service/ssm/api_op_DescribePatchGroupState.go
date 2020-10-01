@@ -64,13 +64,16 @@ type DescribePatchGroupStateInput struct {
 
 type DescribePatchGroupStateOutput struct {
 
-	// The number of instances with NotApplicable patches beyond the supported limit,
-	// which are not reported by name to Systems Manager Inventory.
-	InstancesWithUnreportedNotApplicablePatches *int32
+	// The number of instances in the patch group.
+	Instances *int32
 
 	// The number of instances with patches from the patch baseline that failed to
 	// install.
 	InstancesWithFailedPatches *int32
+
+	// The number of instances with patches installed that aren't defined in the patch
+	// baseline.
+	InstancesWithInstalledOtherPatches *int32
 
 	// The number of instances with installed patches.
 	InstancesWithInstalledPatches *int32
@@ -87,18 +90,15 @@ type DescribePatchGroupStateOutput struct {
 	// of InstancesWithInstalledRejectedPatches will always be 0 (zero).
 	InstancesWithInstalledRejectedPatches *int32
 
-	// The number of instances with patches that aren't applicable.
-	InstancesWithNotApplicablePatches *int32
-
-	// The number of instances with patches installed that aren't defined in the patch
-	// baseline.
-	InstancesWithInstalledOtherPatches *int32
-
 	// The number of instances with missing patches from the patch baseline.
 	InstancesWithMissingPatches *int32
 
-	// The number of instances in the patch group.
-	Instances *int32
+	// The number of instances with patches that aren't applicable.
+	InstancesWithNotApplicablePatches *int32
+
+	// The number of instances with NotApplicable patches beyond the supported limit,
+	// which are not reported by name to Systems Manager Inventory.
+	InstancesWithUnreportedNotApplicablePatches *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

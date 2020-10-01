@@ -99,13 +99,13 @@ type BatchImportFindingsOutput struct {
 	// This member is required.
 	FailedCount *int32
 
-	// The list of findings that failed to import.
-	FailedFindings []*types.ImportFindingsError
-
 	// The number of findings that were successfully imported.
 	//
 	// This member is required.
 	SuccessCount *int32
+
+	// The list of findings that failed to import.
+	FailedFindings []*types.ImportFindingsError
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

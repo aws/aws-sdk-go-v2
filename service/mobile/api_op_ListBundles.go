@@ -69,12 +69,12 @@ type ListBundlesInput struct {
 // Result structure contains a list of all available bundles with details.
 type ListBundlesOutput struct {
 
+	// A list of bundles.
+	BundleList []*types.BundleDetails
+
 	// Pagination token. If non-null pagination token is returned in a result, then
 	// pass its value in another request to fetch more entries.
 	NextToken *string
-
-	// A list of bundles.
-	BundleList []*types.BundleDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

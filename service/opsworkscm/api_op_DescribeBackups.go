@@ -63,14 +63,14 @@ type DescribeBackupsInput struct {
 	// Describes a single backup.
 	BackupId *string
 
-	// Returns backups for the server with the specified ServerName.
-	ServerName *string
+	// This is not currently implemented for DescribeBackups requests.
+	MaxResults *int32
 
 	// This is not currently implemented for DescribeBackups requests.
 	NextToken *string
 
-	// This is not currently implemented for DescribeBackups requests.
-	MaxResults *int32
+	// Returns backups for the server with the specified ServerName.
+	ServerName *string
 }
 
 type DescribeBackupsOutput struct {

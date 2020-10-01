@@ -72,15 +72,15 @@ type GetBlockInput struct {
 	// This member is required.
 	BlockAddress *types.ValueHolder
 
-	// The latest block location covered by the digest for which to request a proof. An
-	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
-	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
-	DigestTipAddress *types.ValueHolder
-
 	// The name of the ledger.
 	//
 	// This member is required.
 	Name *string
+
+	// The latest block location covered by the digest for which to request a proof. An
+	// address is an Amazon Ion structure that has two fields: strandId and sequenceNo.
+	// For example: {strandId:"BlFTjlSXze9BIh1KOszcE3",sequenceNo:49}
+	DigestTipAddress *types.ValueHolder
 }
 
 type GetBlockOutput struct {

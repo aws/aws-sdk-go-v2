@@ -65,16 +65,16 @@ func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListene
 
 type AddListenerCertificatesInput struct {
 
-	// The Amazon Resource Name (ARN) of the listener.
-	//
-	// This member is required.
-	ListenerArn *string
-
 	// The certificate to add. You can specify one certificate per call. Set
 	// CertificateArn to the certificate ARN but do not set IsDefault.
 	//
 	// This member is required.
 	Certificates []*types.Certificate
+
+	// The Amazon Resource Name (ARN) of the listener.
+	//
+	// This member is required.
+	ListenerArn *string
 }
 
 type AddListenerCertificatesOutput struct {

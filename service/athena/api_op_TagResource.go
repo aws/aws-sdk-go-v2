@@ -69,17 +69,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// A collection of one or more tags, separated by commas, to be added to an Athena
-	// workgroup or data catalog resource.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// Specifies the ARN of the Athena resource (workgroup or data catalog) to which
 	// tags are to be added.
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// A collection of one or more tags, separated by commas, to be added to an Athena
+	// workgroup or data catalog resource.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

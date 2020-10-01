@@ -57,26 +57,26 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 // The input for the ListPolicies operation.
 type ListPoliciesInput struct {
 
-	// The result page size.
-	PageSize *int32
+	// Specifies the order for results. If true, the results are returned in ascending
+	// creation order.
+	AscendingOrder *bool
 
 	// The marker for the next set of results.
 	Marker *string
 
-	// Specifies the order for results. If true, the results are returned in ascending
-	// creation order.
-	AscendingOrder *bool
+	// The result page size.
+	PageSize *int32
 }
 
 // The output from the ListPolicies operation.
 type ListPoliciesOutput struct {
 
-	// The descriptions of the policies.
-	Policies []*types.Policy
-
 	// The marker for the next set of results, or null if there are no additional
 	// results.
 	NextMarker *string
+
+	// The descriptions of the policies.
+	Policies []*types.Policy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

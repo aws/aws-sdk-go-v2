@@ -110,22 +110,22 @@ type DescribeReservedInstancesModificationsInput struct {
 	// update-date - The time when the modification request was last updated.
 	Filters []*types.Filter
 
-	// IDs for the submitted modification request.
-	ReservedInstancesModificationIds []*string
-
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	// IDs for the submitted modification request.
+	ReservedInstancesModificationIds []*string
 }
 
 // Contains the output of DescribeReservedInstancesModifications.
 type DescribeReservedInstancesModificationsOutput struct {
 
-	// The Reserved Instance modification information.
-	ReservedInstancesModifications []*types.ReservedInstancesModification
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// The Reserved Instance modification information.
+	ReservedInstancesModifications []*types.ReservedInstancesModification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

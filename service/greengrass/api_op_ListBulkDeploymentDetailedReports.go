@@ -58,17 +58,17 @@ func (c *Client) ListBulkDeploymentDetailedReports(ctx context.Context, params *
 
 type ListBulkDeploymentDetailedReportsInput struct {
 
-	// The token for the next set of results, or ''null'' if there are no additional
-	// results.
-	NextToken *string
-
-	// The maximum number of results to be returned per request.
-	MaxResults *string
-
 	// The ID of the bulk deployment.
 	//
 	// This member is required.
 	BulkDeploymentId *string
+
+	// The maximum number of results to be returned per request.
+	MaxResults *string
+
+	// The token for the next set of results, or ''null'' if there are no additional
+	// results.
+	NextToken *string
 }
 
 type ListBulkDeploymentDetailedReportsOutput struct {

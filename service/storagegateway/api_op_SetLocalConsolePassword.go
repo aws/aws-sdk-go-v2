@@ -60,16 +60,16 @@ func (c *Client) SetLocalConsolePassword(ctx context.Context, params *SetLocalCo
 // SetLocalConsolePasswordInput
 type SetLocalConsolePasswordInput struct {
 
-	// The password you want to set for your VM local console.
-	//
-	// This member is required.
-	LocalConsolePassword *string
-
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways () operation
 	// to return a list of gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
+
+	// The password you want to set for your VM local console.
+	//
+	// This member is required.
+	LocalConsolePassword *string
 }
 
 type SetLocalConsolePasswordOutput struct {

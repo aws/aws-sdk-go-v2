@@ -58,10 +58,6 @@ func (c *Client) DeleteSecurityGroup(ctx context.Context, params *DeleteSecurity
 
 type DeleteSecurityGroupInput struct {
 
-	// [EC2-Classic, default VPC] The name of the security group. You can specify
-	// either the security group name or the security group ID.
-	GroupName *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -70,6 +66,10 @@ type DeleteSecurityGroupInput struct {
 
 	// The ID of the security group. Required for a nondefault VPC.
 	GroupId *string
+
+	// [EC2-Classic, default VPC] The name of the security group. You can specify
+	// either the security group name or the security group ID.
+	GroupName *string
 }
 
 type DeleteSecurityGroupOutput struct {

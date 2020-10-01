@@ -64,14 +64,14 @@ type ListAnalyzedResourcesInput struct {
 	// This member is required.
 	AnalyzerArn *string
 
-	// The type of resource.
-	ResourceType types.ResourceType
+	// The maximum number of results to return in the response.
+	MaxResults *int32
 
 	// A token used for pagination of results returned.
 	NextToken *string
 
-	// The maximum number of results to return in the response.
-	MaxResults *int32
+	// The type of resource.
+	ResourceType types.ResourceType
 }
 
 // The response to the request.

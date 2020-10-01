@@ -93,15 +93,6 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// A list of one or more tags to assign to the specified GameLift resource. Tags
-	// are developer-defined and structured as key-value pairs. The maximum tag limit
-	// may be lower than stated. See  Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for actual
-	// tagging limits.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
 	// assigned to and uniquely identifies the GameLift resource that you want to
@@ -111,6 +102,15 @@ type TagResourceInput struct {
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// A list of one or more tags to assign to the specified GameLift resource. Tags
+	// are developer-defined and structured as key-value pairs. The maximum tag limit
+	// may be lower than stated. See  Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) for actual
+	// tagging limits.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

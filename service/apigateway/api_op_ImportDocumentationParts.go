@@ -57,27 +57,28 @@ func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDoc
 
 // Import documentation parts from an external (e.g., OpenAPI) definition file.
 type ImportDocumentationPartsInput struct {
-	Name *string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
-	Title *string
-
 	// A query parameter to specify whether to rollback the documentation importation
 	// (true) or not (false) when a warning is encountered. The default value is false.
 	FailOnWarnings *bool
-
-	TemplateSkipList []*string
-
-	Template *bool
 
 	// A query parameter to indicate whether to overwrite (OVERWRITE) any existing
 	// DocumentationParts () definition or to merge (MERGE) the new definition into the
 	// existing one. The default value is MERGE.
 	Mode types.PutMode
+
+	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A collection of the imported DocumentationPart () identifiers. This is used to

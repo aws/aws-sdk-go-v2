@@ -58,19 +58,19 @@ func (c *Client) UpdateWorkGroup(ctx context.Context, params *UpdateWorkGroupInp
 
 type UpdateWorkGroupInput struct {
 
-	// The workgroup state that will be updated for the given workgroup.
-	State types.WorkGroupState
-
-	// The workgroup description.
-	Description *string
-
-	// The workgroup configuration that will be updated for the given workgroup.
-	ConfigurationUpdates *types.WorkGroupConfigurationUpdates
-
 	// The specified workgroup that will be updated.
 	//
 	// This member is required.
 	WorkGroup *string
+
+	// The workgroup configuration that will be updated for the given workgroup.
+	ConfigurationUpdates *types.WorkGroupConfigurationUpdates
+
+	// The workgroup description.
+	Description *string
+
+	// The workgroup state that will be updated for the given workgroup.
+	State types.WorkGroupState
 }
 
 type UpdateWorkGroupOutput struct {

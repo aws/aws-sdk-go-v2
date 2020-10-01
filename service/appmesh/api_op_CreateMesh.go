@@ -67,6 +67,10 @@ type CreateMeshInput struct {
 	// This member is required.
 	MeshName *string
 
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+	ClientToken *string
+
 	// The service mesh specification to apply.
 	Spec *types.MeshSpec
 
@@ -75,10 +79,6 @@ type CreateMeshInput struct {
 	// value, both of which you define. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags []*types.TagRef
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-	ClientToken *string
 }
 
 //

@@ -63,15 +63,15 @@ type AdminForgetDeviceInput struct {
 	// This member is required.
 	DeviceKey *string
 
-	// The user name.
-	//
-	// This member is required.
-	Username *string
-
 	// The user pool ID.
 	//
 	// This member is required.
 	UserPoolId *string
+
+	// The user name.
+	//
+	// This member is required.
+	Username *string
 }
 
 type AdminForgetDeviceOutput struct {

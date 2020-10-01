@@ -57,13 +57,13 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The maximum number of tags to return.
-	MaxResults *int32
-
 	// The Amazon Resource Name (ARN) of the resource whose tags are to be returned.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The maximum number of tags to return.
+	MaxResults *int32
 
 	// The token that specifies the next page of results to return.
 	NextToken *string

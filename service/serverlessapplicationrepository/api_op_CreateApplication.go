@@ -58,10 +58,64 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
+	// The name of the author publishing the app.Minimum length=1. Maximum
+	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	//
+	// This member is required.
+	Author *string
+
 	// The description of the application.Minimum length=1. Maximum length=256
 	//
 	// This member is required.
 	Description *string
+
+	// The name of the application that you want to publish.Minimum length=1. Maximum
+	// length=140Pattern: "[a-zA-Z0-9\\-]+";
+	//
+	// This member is required.
+	Name *string
+
+	// A URL with more information about the application, for example the location of
+	// your GitHub repository for the application.
+	HomePageUrl *string
+
+	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
+	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	Labels []*string
+
+	// A local text file that contains the license of the app that matches the
+	// spdxLicenseID value of your application. The file has the format
+	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of
+	// licenseBody and licenseUrl; otherwise, an error results.
+	LicenseBody *string
+
+	// A link to the S3 object that contains the license of the app that matches the
+	// spdxLicenseID value of your application.Maximum size 5 MBYou can specify only
+	// one of licenseBody and licenseUrl; otherwise, an error results.
+	LicenseUrl *string
+
+	// A local text readme file in Markdown language that contains a more detailed
+	// description of the application and how it works. The file has the format
+	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of readmeBody
+	// and readmeUrl; otherwise, an error results.
+	ReadmeBody *string
+
+	// A link to the S3 object in Markdown language that contains a more detailed
+	// description of the application and how it works.Maximum size 5 MBYou can specify
+	// only one of readmeBody and readmeUrl; otherwise, an error results.
+	ReadmeUrl *string
+
+	// The semantic version of the application: https://semver.org/
+	// (https://semver.org/)
+	SemanticVersion *string
+
+	// A link to the S3 object that contains the ZIP archive of the source code for
+	// this version of your application.Maximum size 50 MB
+	SourceCodeArchiveUrl *string
+
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
+	SourceCodeUrl *string
 
 	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
 	SpdxLicenseId *string
@@ -71,95 +125,30 @@ type CreateApplicationInput struct {
 	// templateUrl; otherwise an error results.
 	TemplateBody *string
 
-	// The name of the author publishing the app.Minimum length=1. Maximum
-	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
-	//
-	// This member is required.
-	Author *string
-
 	// A link to the S3 object containing the packaged AWS SAM template of your
 	// application.You can specify only one of templateBody and templateUrl; otherwise
 	// an error results.
 	TemplateUrl *string
-
-	// A URL with more information about the application, for example the location of
-	// your GitHub repository for the application.
-	HomePageUrl *string
-
-	// A link to the S3 object in Markdown language that contains a more detailed
-	// description of the application and how it works.Maximum size 5 MBYou can specify
-	// only one of readmeBody and readmeUrl; otherwise, an error results.
-	ReadmeUrl *string
-
-	// A link to the S3 object that contains the license of the app that matches the
-	// spdxLicenseID value of your application.Maximum size 5 MBYou can specify only
-	// one of licenseBody and licenseUrl; otherwise, an error results.
-	LicenseUrl *string
-
-	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
-	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-	Labels []*string
-
-	// The semantic version of the application: https://semver.org/
-	// (https://semver.org/)
-	SemanticVersion *string
-
-	// The name of the application that you want to publish.Minimum length=1. Maximum
-	// length=140Pattern: "[a-zA-Z0-9\\-]+";
-	//
-	// This member is required.
-	Name *string
-
-	// A local text file that contains the license of the app that matches the
-	// spdxLicenseID value of your application. The file has the format
-	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of
-	// licenseBody and licenseUrl; otherwise, an error results.
-	LicenseBody *string
-
-	// A local text readme file in Markdown language that contains a more detailed
-	// description of the application and how it works. The file has the format
-	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of readmeBody
-	// and readmeUrl; otherwise, an error results.
-	ReadmeBody *string
-
-	// A link to a public repository for the source code of your application, for
-	// example the URL of a specific GitHub commit.
-	SourceCodeUrl *string
-
-	// A link to the S3 object that contains the ZIP archive of the source code for
-	// this version of your application.Maximum size 50 MB
-	SourceCodeArchiveUrl *string
 }
 
 type CreateApplicationOutput struct {
 
-	// The description of the application.Minimum length=1. Maximum length=256
-	Description *string
+	// The application Amazon Resource Name (ARN).
+	ApplicationId *string
 
 	// The name of the author publishing the app.Minimum length=1. Maximum
 	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
 	Author *string
 
-	// The application Amazon Resource Name (ARN).
-	ApplicationId *string
-
 	// The date and time this resource was created.
 	CreationTime *string
 
-	// Version information about the application.
-	Version *types.Version
+	// The description of the application.Minimum length=1. Maximum length=256
+	Description *string
 
-	// A link to a license file of the app that matches the spdxLicenseID value of your
-	// application.Maximum size 5 MB
-	LicenseUrl *string
-
-	// A link to the readme file in Markdown language that contains a more detailed
-	// description of the application and how it works.Maximum size 5 MB
-	ReadmeUrl *string
-
-	// The URL to the public profile of a verified author. This URL is submitted by the
-	// author.
-	VerifiedAuthorUrl *string
+	// A URL with more information about the application, for example the location of
+	// your GitHub repository for the application.
+	HomePageUrl *string
 
 	// Whether the author of this application has been verified. This means means that
 	// AWS has made a good faith review, as a reasonable and prudent service provider,
@@ -167,20 +156,31 @@ type CreateApplicationOutput struct {
 	// requester's identity is as claimed.
 	IsVerifiedAuthor *bool
 
-	// The name of the application.Minimum length=1. Maximum length=140Pattern:
-	// "[a-zA-Z0-9\\-]+";
-	Name *string
-
-	// A URL with more information about the application, for example the location of
-	// your GitHub repository for the application.
-	HomePageUrl *string
-
 	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
 	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []*string
 
+	// A link to a license file of the app that matches the spdxLicenseID value of your
+	// application.Maximum size 5 MB
+	LicenseUrl *string
+
+	// The name of the application.Minimum length=1. Maximum length=140Pattern:
+	// "[a-zA-Z0-9\\-]+";
+	Name *string
+
+	// A link to the readme file in Markdown language that contains a more detailed
+	// description of the application and how it works.Maximum size 5 MB
+	ReadmeUrl *string
+
 	// A valid identifier from https://spdx.org/licenses/.
 	SpdxLicenseId *string
+
+	// The URL to the public profile of a verified author. This URL is submitted by the
+	// author.
+	VerifiedAuthorUrl *string
+
+	// Version information about the application.
+	Version *types.Version
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,20 +57,20 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 // Request structure used to request a project be created.
 type CreateProjectInput struct {
 
-	// Default region where project resources should be created.
-	Region *string
-
 	// ZIP or YAML file which contains configuration settings to be used when creating
 	// the project. This may be the contents of the file downloaded from the URL
 	// provided in an export project operation.
 	Contents []byte
 
+	// Name of the project.
+	Name *string
+
+	// Default region where project resources should be created.
+	Region *string
+
 	// Unique identifier for an exported snapshot of project configuration. This
 	// snapshot identifier is included in the share URL when a project is exported.
 	SnapshotId *string
-
-	// Name of the project.
-	Name *string
 }
 
 // Result structure used in response to a request to create a project.

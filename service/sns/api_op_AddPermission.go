@@ -57,17 +57,6 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 
 type AddPermissionInput struct {
 
-	// The action you want to allow for the specified principal(s). Valid values: Any
-	// Amazon SNS action name, for example Publish.
-	//
-	// This member is required.
-	ActionName []*string
-
-	// The ARN of the topic whose access control policy you wish to modify.
-	//
-	// This member is required.
-	TopicArn *string
-
 	// The AWS account IDs of the users (principals) who will be given access to the
 	// specified actions. The users must have AWS accounts, but do not need to be
 	// signed up for this service.
@@ -75,10 +64,21 @@ type AddPermissionInput struct {
 	// This member is required.
 	AWSAccountId []*string
 
+	// The action you want to allow for the specified principal(s). Valid values: Any
+	// Amazon SNS action name, for example Publish.
+	//
+	// This member is required.
+	ActionName []*string
+
 	// A unique identifier for the new policy statement.
 	//
 	// This member is required.
 	Label *string
+
+	// The ARN of the topic whose access control policy you wish to modify.
+	//
+	// This member is required.
+	TopicArn *string
 }
 
 type AddPermissionOutput struct {

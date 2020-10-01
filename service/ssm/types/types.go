@@ -22,83 +22,105 @@ type AccountSharingInfo struct {
 // A server or VM that has been registered with AWS is called a managed instance.
 type Activation struct {
 
-	// A user defined description of the activation.
-	Description *string
-
-	// The maximum number of managed instances that can be registered using this
-	// activation.
-	RegistrationLimit *int32
+	// The ID created by Systems Manager when you submitted the activation.
+	ActivationId *string
 
 	// The date the activation was created.
 	CreatedDate *time.Time
+
+	// A name for the managed instance when it is created.
+	DefaultInstanceName *string
+
+	// A user defined description of the activation.
+	Description *string
 
 	// The date when this activation can no longer be used to register managed
 	// instances.
 	ExpirationDate *time.Time
 
-	// A name for the managed instance when it is created.
-	DefaultInstanceName *string
-
 	// Whether or not the activation is expired.
 	Expired *bool
-
-	// The ID created by Systems Manager when you submitted the activation.
-	ActivationId *string
-
-	// Tags assigned to the activation.
-	Tags []*Tag
-
-	// The number of managed instances already registered with this activation.
-	RegistrationsCount *int32
 
 	// The Amazon Identity and Access Management (IAM) role to assign to the managed
 	// instance.
 	IamRole *string
+
+	// The maximum number of managed instances that can be registered using this
+	// activation.
+	RegistrationLimit *int32
+
+	// The number of managed instances already registered with this activation.
+	RegistrationsCount *int32
+
+	// Tags assigned to the activation.
+	Tags []*Tag
 }
 
 // Describes an association of a Systems Manager document and an instance.
 type Association struct {
 
-	// The instances targeted by the request to create an association.
-	Targets []*Target
-
-	// The ID of the instance.
-	InstanceId *string
-
-	// The association version.
-	AssociationVersion *string
-
 	// The ID created by the system when you create an association. An association is a
 	// binding between a document and a set of targets with a schedule.
 	AssociationId *string
 
-	// The name of the Systems Manager document.
-	Name *string
+	// The association name.
+	AssociationName *string
+
+	// The association version.
+	AssociationVersion *string
 
 	// The version of the document used in the association.
 	DocumentVersion *string
 
-	// A cron expression that specifies a schedule when the association runs.
-	ScheduleExpression *string
-
-	// The association name.
-	AssociationName *string
+	// The ID of the instance.
+	InstanceId *string
 
 	// The date on which the association was last run.
 	LastExecutionDate *time.Time
 
+	// The name of the Systems Manager document.
+	Name *string
+
 	// Information about the association.
 	Overview *AssociationOverview
+
+	// A cron expression that specifies a schedule when the association runs.
+	ScheduleExpression *string
+
+	// The instances targeted by the request to create an association.
+	Targets []*Target
 }
 
 // Describes the parameters for a document.
 type AssociationDescription struct {
 
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you create
+	// it.
+	ApplyOnlyAtCronInterval *bool
+
+	// The association ID.
+	AssociationId *string
+
+	// The association name.
+	AssociationName *string
+
+	// The association version.
+	AssociationVersion *string
+
+	// Specify the target for the association. This target is required for associations
+	// that use an Automation document and target resources by using rate controls.
+	AutomationTargetParameterName *string
+
+	// The severity level that is assigned to the association.
+	ComplianceSeverity AssociationComplianceSeverity
+
+	// The date when the association was made.
+	Date *time.Time
+
 	// The document version.
 	DocumentVersion *string
-
-	// An S3 bucket where you want to store the output details of the request.
-	OutputLocation *InstanceAssociationOutputLocation
 
 	// The ID of the instance.
 	InstanceId *string
@@ -106,8 +128,21 @@ type AssociationDescription struct {
 	// The date on which the association was last run.
 	LastExecutionDate *time.Time
 
-	// The association ID.
-	AssociationId *string
+	// The last date on which the association was successfully run.
+	LastSuccessfulExecutionDate *time.Time
+
+	// The date when the association was last updated.
+	LastUpdateAssociationDate *time.Time
+
+	// The maximum number of targets allowed to run the association at the same time.
+	// You can specify a number, for example 10, or a percentage of the target set, for
+	// example 10%. The default value is 100%, which means all targets run the
+	// association at the same time. If a new instance starts and attempts to run an
+	// association while Systems Manager is running MaxConcurrency associations, the
+	// association is allowed to run. During the next association interval, the new
+	// instance will process its association within the limit specified for
+	// MaxConcurrency.
+	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops sending requests
 	// to run the association on additional targets. You can specify either an absolute
@@ -123,49 +158,23 @@ type AssociationDescription struct {
 	// one at a time.
 	MaxErrors *string
 
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
-	AutomationTargetParameterName *string
-
-	// A cron expression that specifies a schedule when the association runs.
-	ScheduleExpression *string
-
 	// The name of the Systems Manager document.
 	Name *string
 
-	// The severity level that is assigned to the association.
-	ComplianceSeverity AssociationComplianceSeverity
+	// An S3 bucket where you want to store the output details of the request.
+	OutputLocation *InstanceAssociationOutputLocation
 
-	// The association name.
-	AssociationName *string
-
-	// The maximum number of targets allowed to run the association at the same time.
-	// You can specify a number, for example 10, or a percentage of the target set, for
-	// example 10%. The default value is 100%, which means all targets run the
-	// association at the same time. If a new instance starts and attempts to run an
-	// association while Systems Manager is running MaxConcurrency associations, the
-	// association is allowed to run. During the next association interval, the new
-	// instance will process its association within the limit specified for
-	// MaxConcurrency.
-	MaxConcurrency *string
-
-	// The association status.
-	Status *AssociationStatus
-
-	// The association version.
-	AssociationVersion *string
+	// Information about the association.
+	Overview *AssociationOverview
 
 	// A description of the parameters for a document.
 	Parameters map[string][]*string
 
-	// The date when the association was last updated.
-	LastUpdateAssociationDate *time.Time
+	// A cron expression that specifies a schedule when the association runs.
+	ScheduleExpression *string
 
-	// By default, when you create a new associations, the system runs it immediately
-	// after it is created and then according to the schedule you specified. Specify
-	// this option if you don't want an association to run immediately after you create
-	// it.
-	ApplyOnlyAtCronInterval *bool
+	// The association status.
+	Status *AssociationStatus
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
@@ -180,47 +189,43 @@ type AssociationDescription struct {
 
 	// The instances targeted by the request.
 	Targets []*Target
-
-	// The last date on which the association was successfully run.
-	LastSuccessfulExecutionDate *time.Time
-
-	// Information about the association.
-	Overview *AssociationOverview
-
-	// The date when the association was made.
-	Date *time.Time
 }
 
 // Includes information about the specified association.
 type AssociationExecution struct {
 
-	// An aggregate status of the resources in the execution based on the status type.
-	ResourceCountByStatus *string
-
-	// Detailed status information about the execution.
-	DetailedStatus *string
+	// The association ID.
+	AssociationId *string
 
 	// The association version.
 	AssociationVersion *string
 
-	// The status of the association execution.
-	Status *string
-
 	// The time the execution started.
 	CreatedTime *time.Time
+
+	// Detailed status information about the execution.
+	DetailedStatus *string
+
+	// The execution ID for the association.
+	ExecutionId *string
 
 	// The date of the last execution.
 	LastExecutionDate *time.Time
 
-	// The association ID.
-	AssociationId *string
+	// An aggregate status of the resources in the execution based on the status type.
+	ResourceCountByStatus *string
 
-	// The execution ID for the association.
-	ExecutionId *string
+	// The status of the association execution.
+	Status *string
 }
 
 // Filters used in the request.
 type AssociationExecutionFilter struct {
+
+	// The key value used in the request.
+	//
+	// This member is required.
+	Key AssociationExecutionFilterKey
 
 	// The filter type specified in the request.
 	//
@@ -231,18 +236,10 @@ type AssociationExecutionFilter struct {
 	//
 	// This member is required.
 	Value *string
-
-	// The key value used in the request.
-	//
-	// This member is required.
-	Key AssociationExecutionFilterKey
 }
 
 // Includes information about the specified association execution.
 type AssociationExecutionTarget struct {
-
-	// Detailed information about the execution status.
-	DetailedStatus *string
 
 	// The association ID.
 	AssociationId *string
@@ -250,23 +247,26 @@ type AssociationExecutionTarget struct {
 	// The association version.
 	AssociationVersion *string
 
-	// The resource ID, for example, the instance ID where the association ran.
-	ResourceId *string
-
-	// The association execution status.
-	Status *string
-
-	// The date of the last execution.
-	LastExecutionDate *time.Time
-
-	// The resource type, for example, instance.
-	ResourceType *string
+	// Detailed information about the execution status.
+	DetailedStatus *string
 
 	// The execution ID.
 	ExecutionId *string
 
+	// The date of the last execution.
+	LastExecutionDate *time.Time
+
 	// The location where the association details are saved.
 	OutputSource *OutputSource
+
+	// The resource ID, for example, the instance ID where the association ran.
+	ResourceId *string
+
+	// The resource type, for example, instance.
+	ResourceType *string
+
+	// The association execution status.
+	Status *string
 }
 
 // Filters for the association execution.
@@ -305,49 +305,73 @@ type AssociationOverview struct {
 	// would return the count of instances by status.
 	AssociationStatusAggregatedCount map[string]*int32
 
-	// The status of the association. Status can be: Pending, Success, or Failed.
-	Status *string
-
 	// A detailed status of the association.
 	DetailedStatus *string
+
+	// The status of the association. Status can be: Pending, Success, or Failed.
+	Status *string
 }
 
 // Describes an association status.
 type AssociationStatus struct {
-
-	// The status.
-	//
-	// This member is required.
-	Name AssociationStatusName
 
 	// The date when the status changed.
 	//
 	// This member is required.
 	Date *time.Time
 
-	// A user-defined string.
-	AdditionalInfo *string
-
 	// The reason for the status.
 	//
 	// This member is required.
 	Message *string
+
+	// The status.
+	//
+	// This member is required.
+	Name AssociationStatusName
+
+	// A user-defined string.
+	AdditionalInfo *string
 }
 
 // Information about the association version.
 type AssociationVersionInfo struct {
 
-	// The name specified when the association was created.
-	Name *string
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you create
+	// it.
+	ApplyOnlyAtCronInterval *bool
+
+	// The ID created by the system when the association was created.
+	AssociationId *string
+
+	// The name specified for the association version when the association version was
+	// created.
+	AssociationName *string
 
 	// The association version.
 	AssociationVersion *string
 
+	// The severity level that is assigned to the association.
+	ComplianceSeverity AssociationComplianceSeverity
+
 	// The date the association version was created.
 	CreatedDate *time.Time
 
-	// The severity level that is assigned to the association.
-	ComplianceSeverity AssociationComplianceSeverity
+	// The version of a Systems Manager document used when the association version was
+	// created.
+	DocumentVersion *string
+
+	// The maximum number of targets allowed to run the association at the same time.
+	// You can specify a number, for example 10, or a percentage of the target set, for
+	// example 10%. The default value is 100%, which means all targets run the
+	// association at the same time. If a new instance starts and attempts to run an
+	// association while Systems Manager is running MaxConcurrency associations, the
+	// association is allowed to run. During the next association interval, the new
+	// instance will process its association within the limit specified for
+	// MaxConcurrency.
+	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops sending requests
 	// to run the association on additional targets. You can specify either an absolute
@@ -363,44 +387,19 @@ type AssociationVersionInfo struct {
 	// one at a time.
 	MaxErrors *string
 
-	// The cron or rate schedule specified for the association when the association
-	// version was created.
-	ScheduleExpression *string
-
-	// The name specified for the association version when the association version was
-	// created.
-	AssociationName *string
-
-	// Parameters specified when the association version was created.
-	Parameters map[string][]*string
-
-	// By default, when you create a new associations, the system runs it immediately
-	// after it is created and then according to the schedule you specified. Specify
-	// this option if you don't want an association to run immediately after you create
-	// it.
-	ApplyOnlyAtCronInterval *bool
-
-	// The maximum number of targets allowed to run the association at the same time.
-	// You can specify a number, for example 10, or a percentage of the target set, for
-	// example 10%. The default value is 100%, which means all targets run the
-	// association at the same time. If a new instance starts and attempts to run an
-	// association while Systems Manager is running MaxConcurrency associations, the
-	// association is allowed to run. During the next association interval, the new
-	// instance will process its association within the limit specified for
-	// MaxConcurrency.
-	MaxConcurrency *string
-
-	// The version of a Systems Manager document used when the association version was
-	// created.
-	DocumentVersion *string
+	// The name specified when the association was created.
+	Name *string
 
 	// The location in Amazon S3 specified for the association when the association
 	// version was created.
 	OutputLocation *InstanceAssociationOutputLocation
 
-	// The targets specified for the association when the association version was
-	// created.
-	Targets []*Target
+	// Parameters specified when the association version was created.
+	Parameters map[string][]*string
+
+	// The cron or rate schedule specified for the association when the association
+	// version was created.
+	ScheduleExpression *string
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
@@ -413,27 +412,28 @@ type AssociationVersionInfo struct {
 	// associations use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
-	// The ID created by the system when the association was created.
-	AssociationId *string
+	// The targets specified for the association when the association version was
+	// created.
+	Targets []*Target
 }
 
 // A structure that includes attributes that describe a document attachment.
 type AttachmentContent struct {
 
-	// The name of an attachment.
-	Name *string
-
 	// The cryptographic hash value of the document content.
 	Hash *string
-
-	// The URL location of the attachment content.
-	Url *string
 
 	// The hash algorithm used to calculate the hash value.
 	HashType AttachmentHashType
 
+	// The name of an attachment.
+	Name *string
+
 	// The size of an attachment in bytes.
 	Size *int64
+
+	// The URL location of the attachment content.
+	Url *string
 }
 
 // An attribute of an attachment, such as the attachment name.
@@ -447,12 +447,12 @@ type AttachmentInformation struct {
 // a key-value pair that identifies the location of an attachment to a document.
 type AttachmentsSource struct {
 
-	// The name of the document attachment file.
-	Name *string
-
 	// The key of a key-value pair that identifies the location of an attachment to a
 	// document.
 	Key AttachmentsSourceKey
+
+	// The name of the document attachment file.
+	Name *string
 
 	// The value of a key-value pair that identifies the location of an attachment to a
 	// document. The format for Value depends on the type of key you specify.
@@ -481,88 +481,88 @@ type AttachmentsSource struct {
 // execution.
 type AutomationExecution struct {
 
-	// The MaxErrors value specified by the user when the execution started.
-	MaxErrors *string
+	// The execution ID.
+	AutomationExecutionId *string
 
-	// A list of resolved targets in the rate control execution.
-	ResolvedTargets *ResolvedTargets
-
-	// The time the execution started.
-	ExecutionStartTime *time.Time
+	// The execution status of the Automation.
+	AutomationExecutionStatus AutomationExecutionStatus
 
 	// The action of the step that is currently running.
 	CurrentAction *string
 
-	// The combination of AWS Regions and/or AWS accounts where you want to run the
-	// Automation.
-	TargetLocations []*TargetLocation
+	// The name of the step that is currently running.
+	CurrentStepName *string
+
+	// The name of the Automation document used during the execution.
+	DocumentName *string
 
 	// The version of the document to use during execution.
 	DocumentVersion *string
+
+	// The Amazon Resource Name (ARN) of the user who ran the automation.
+	ExecutedBy *string
+
+	// The time the execution finished.
+	ExecutionEndTime *time.Time
+
+	// The time the execution started.
+	ExecutionStartTime *time.Time
 
 	// A message describing why an execution has failed, if the status is set to
 	// Failed.
 	FailureMessage *string
 
-	// The specified targets.
-	Targets []*Target
+	// The MaxConcurrency value specified by the user when the execution started.
+	MaxConcurrency *string
 
-	// The parameter name.
-	TargetParameterName *string
+	// The MaxErrors value specified by the user when the execution started.
+	MaxErrors *string
 
-	// The specified key-value mapping of document parameters to target resources.
-	TargetMaps []map[string][]*string
+	// The automation execution mode.
+	Mode ExecutionMode
+
+	// The list of execution outputs as defined in the automation document.
+	Outputs map[string][]*string
 
 	// The key-value map of execution parameters, which were supplied when calling
 	// StartAutomationExecution.
 	Parameters map[string][]*string
 
-	// The list of execution outputs as defined in the automation document.
-	Outputs map[string][]*string
-
-	// The name of the step that is currently running.
-	CurrentStepName *string
-
-	// The MaxConcurrency value specified by the user when the execution started.
-	MaxConcurrency *string
-
-	// The automation execution mode.
-	Mode ExecutionMode
-
 	// The AutomationExecutionId of the parent automation.
 	ParentAutomationExecutionId *string
 
-	// The name of the Automation document used during the execution.
-	DocumentName *string
+	// An aggregate of step execution statuses displayed in the AWS Console for a
+	// multi-Region and multi-account Automation execution.
+	ProgressCounters *ProgressCounters
 
-	// The Amazon Resource Name (ARN) of the user who ran the automation.
-	ExecutedBy *string
-
-	// A boolean value that indicates if the response contains the full list of the
-	// Automation step executions. If true, use the DescribeAutomationStepExecutions
-	// API action to get the full list of step executions.
-	StepExecutionsTruncated *bool
-
-	// The execution status of the Automation.
-	AutomationExecutionStatus AutomationExecutionStatus
-
-	// The execution ID.
-	AutomationExecutionId *string
-
-	// The target of the execution.
-	Target *string
+	// A list of resolved targets in the rate control execution.
+	ResolvedTargets *ResolvedTargets
 
 	// A list of details about the current state of all steps that comprise an
 	// execution. An Automation document contains a list of steps that are run in
 	// order.
 	StepExecutions []*StepExecution
 
-	// The time the execution finished.
-	ExecutionEndTime *time.Time
+	// A boolean value that indicates if the response contains the full list of the
+	// Automation step executions. If true, use the DescribeAutomationStepExecutions
+	// API action to get the full list of step executions.
+	StepExecutionsTruncated *bool
 
-	// An aggregate of step execution statuses displayed in the AWS Console for a
-	// multi-Region and multi-account Automation execution.
-	ProgressCounters *ProgressCounters
+	// The target of the execution.
+	Target *string
+
+	// The combination of AWS Regions and/or AWS accounts where you want to run the
+	// Automation.
+	TargetLocations []*TargetLocation
+
+	// The specified key-value mapping of document parameters to target resources.
+	TargetMaps []map[string][]*string
+
+	// The parameter name.
+	TargetParameterName *string
+
+	// The specified targets.
+	Targets []*Target
 }
 
 // A filter used to match specific automation executions. This is used to limit the
@@ -586,14 +586,11 @@ type AutomationExecutionFilter struct {
 // Details about a specific Automation execution.
 type AutomationExecutionMetadata struct {
 
-	// The ExecutionId of the parent Automation.
-	ParentAutomationExecutionId *string
-
 	// The execution ID.
 	AutomationExecutionId *string
 
-	// A list of targets that resolved during the execution.
-	ResolvedTargets *ResolvedTargets
+	// The status of the execution.
+	AutomationExecutionStatus AutomationExecutionStatus
 
 	// Use this filter with DescribeAutomationExecutions (). Specify either Local or
 	// CrossAccount. CrossAccount is an Automation that runs in multiple AWS Regions
@@ -603,8 +600,8 @@ type AutomationExecutionMetadata struct {
 	// in the AWS Systems Manager User Guide.
 	AutomationType AutomationType
 
-	// The IAM role ARN of the user who ran the Automation.
-	ExecutedBy *string
+	// The action of the step that is currently running.
+	CurrentAction *string
 
 	// The name of the step that is currently running.
 	CurrentStepName *string
@@ -612,30 +609,27 @@ type AutomationExecutionMetadata struct {
 	// The name of the Automation document used during execution.
 	DocumentName *string
 
-	// The MaxConcurrency value specified by the user when starting the Automation.
-	MaxConcurrency *string
+	// The document version used during the execution.
+	DocumentVersion *string
 
-	// The list of execution outputs as defined in the Automation document.
-	TargetParameterName *string
-
-	// An S3 bucket where execution information is stored.
-	LogFile *string
+	// The IAM role ARN of the user who ran the Automation.
+	ExecutedBy *string
 
 	// The time the execution finished. This is not populated if the execution is still
 	// in progress.
 	ExecutionEndTime *time.Time
 
-	// The list of execution outputs as defined in the Automation document.
-	Target *string
-
-	// The status of the execution.
-	AutomationExecutionStatus AutomationExecutionStatus
+	// The time the execution started.
+	ExecutionStartTime *time.Time
 
 	// The list of execution outputs as defined in the Automation document.
-	Outputs map[string][]*string
+	FailureMessage *string
 
-	// The action of the step that is currently running.
-	CurrentAction *string
+	// An S3 bucket where execution information is stored.
+	LogFile *string
+
+	// The MaxConcurrency value specified by the user when starting the Automation.
+	MaxConcurrency *string
 
 	// The MaxErrors value specified by the user when starting the Automation.
 	MaxErrors *string
@@ -643,17 +637,23 @@ type AutomationExecutionMetadata struct {
 	// The Automation execution mode.
 	Mode ExecutionMode
 
+	// The list of execution outputs as defined in the Automation document.
+	Outputs map[string][]*string
+
+	// The ExecutionId of the parent Automation.
+	ParentAutomationExecutionId *string
+
+	// A list of targets that resolved during the execution.
+	ResolvedTargets *ResolvedTargets
+
+	// The list of execution outputs as defined in the Automation document.
+	Target *string
+
 	// The specified key-value mapping of document parameters to target resources.
 	TargetMaps []map[string][]*string
 
 	// The list of execution outputs as defined in the Automation document.
-	FailureMessage *string
-
-	// The document version used during the execution.
-	DocumentVersion *string
-
-	// The time the execution started.
-	ExecutionStartTime *time.Time
+	TargetParameterName *string
 
 	// The targets defined by the user when starting the Automation.
 	Targets []*Target
@@ -675,65 +675,49 @@ type CloudWatchOutputConfig struct {
 // Describes a command request.
 type Command struct {
 
-	// A unique identifier for this command.
-	CommandId *string
-
-	// The S3 directory path inside the bucket where the responses to the command
-	// executions should be stored. This was requested when issuing the command.
-	OutputS3KeyPrefix *string
-
-	// The TimeoutSeconds value specified for a command.
-	TimeoutSeconds *int32
-
-	// The name of the document requested for execution.
-	DocumentName *string
-
-	// The S3 bucket where the responses to the command executions should be stored.
-	// This was requested when issuing the command.
-	OutputS3BucketName *string
-
 	// CloudWatch Logs information where you want Systems Manager to send the command
 	// output.
 	CloudWatchOutputConfig *CloudWatchOutputConfig
 
-	// The IAM service role that Run Command uses to act on your behalf when sending
-	// notifications about command status changes.
-	ServiceRole *string
+	// A unique identifier for this command.
+	CommandId *string
+
+	// User-specified information about the command, such as a brief description of
+	// what the command should do.
+	Comment *string
+
+	// The number of targets for which the command invocation reached a terminal state.
+	// Terminal states include the following: Success, Failed, Execution Timed Out,
+	// Delivery Timed Out, Canceled, Terminated, or Undeliverable.
+	CompletedCount *int32
+
+	// The number of targets for which the status is Delivery Timed Out.
+	DeliveryTimedOutCount *int32
+
+	// The name of the document requested for execution.
+	DocumentName *string
+
+	// The SSM document version.
+	DocumentVersion *string
+
+	// The number of targets for which the status is Failed or Execution Timed Out.
+	ErrorCount *int32
 
 	// If this time is reached and the command has not already started running, it will
 	// not run. Calculated based on the ExpiresAfter user input provided as part of the
 	// SendCommand API.
 	ExpiresAfter *time.Time
 
-	// The date and time the command was requested.
-	RequestedDateTime *time.Time
-
 	// The instance IDs against which this command was requested.
 	InstanceIds []*string
 
-	// The SSM document version.
-	DocumentVersion *string
-
-	// The status of the command.
-	Status CommandStatus
-
-	// An array of search criteria that targets instances using a Key,Value combination
-	// that you specify. Targets is required if you don't provide one or more instance
-	// IDs in the call.
-	Targets []*Target
-
-	// Configurations for sending notifications about command status changes.
-	NotificationConfig *NotificationConfig
-
-	// The number of targets for which the status is Failed or Execution Timed Out.
-	ErrorCount *int32
-
-	// User-specified information about the command, such as a brief description of
-	// what the command should do.
-	Comment *string
-
-	// The number of targets for which the status is Delivery Timed Out.
-	DeliveryTimedOutCount *int32
+	// The maximum number of instances that are allowed to run the command at the same
+	// time. You can specify a number of instances, such as 10, or a percentage of
+	// instances, such as 10%. The default value is 50. For more information about how
+	// to use MaxConcurrency, see Running commands using Systems Manager Run Command
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
+	// in the AWS Systems Manager User Guide.
+	MaxConcurrency *string
 
 	// The maximum number of errors allowed before the system stops sending the command
 	// to additional targets. You can specify a number of errors, such as 10, or a
@@ -744,16 +728,33 @@ type Command struct {
 	// in the AWS Systems Manager User Guide.
 	MaxErrors *string
 
+	// Configurations for sending notifications about command status changes.
+	NotificationConfig *NotificationConfig
+
+	// The S3 bucket where the responses to the command executions should be stored.
+	// This was requested when issuing the command.
+	OutputS3BucketName *string
+
+	// The S3 directory path inside the bucket where the responses to the command
+	// executions should be stored. This was requested when issuing the command.
+	OutputS3KeyPrefix *string
+
+	// (Deprecated) You can no longer specify this parameter. The system ignores it.
+	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
+	OutputS3Region *string
+
 	// The parameter values to be inserted in the document when running the command.
 	Parameters map[string][]*string
 
-	// The number of targets for the command.
-	TargetCount *int32
+	// The date and time the command was requested.
+	RequestedDateTime *time.Time
 
-	// The number of targets for which the command invocation reached a terminal state.
-	// Terminal states include the following: Success, Failed, Execution Timed Out,
-	// Delivery Timed Out, Canceled, Terminated, or Undeliverable.
-	CompletedCount *int32
+	// The IAM service role that Run Command uses to act on your behalf when sending
+	// notifications about command status changes.
+	ServiceRole *string
+
+	// The status of the command.
+	Status CommandStatus
 
 	// A detailed status of the command execution. StatusDetails includes more
 	// information than Status because it includes states resulting from error and
@@ -798,17 +799,16 @@ type Command struct {
 	// before running it on any instance. This is a terminal state.
 	StatusDetails *string
 
-	// (Deprecated) You can no longer specify this parameter. The system ignores it.
-	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
-	OutputS3Region *string
+	// The number of targets for the command.
+	TargetCount *int32
 
-	// The maximum number of instances that are allowed to run the command at the same
-	// time. You can specify a number of instances, such as 10, or a percentage of
-	// instances, such as 10%. The default value is 50. For more information about how
-	// to use MaxConcurrency, see Running commands using Systems Manager Run Command
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/run-command.html)
-	// in the AWS Systems Manager User Guide.
-	MaxConcurrency *string
+	// An array of search criteria that targets instances using a Key,Value combination
+	// that you specify. Targets is required if you don't provide one or more instance
+	// IDs in the call.
+	Targets []*Target
+
+	// The TimeoutSeconds value specified for a command.
+	TimeoutSeconds *int32
 }
 
 // Describes a command filter. An instance ID can't be specified when a command
@@ -876,21 +876,35 @@ type CommandFilter struct {
 // returns status and detail information about a command you ran.
 type CommandInvocation struct {
 
+	// CloudWatch Logs information where you want Systems Manager to send the command
+	// output.
+	CloudWatchOutputConfig *CloudWatchOutputConfig
+
 	// The command against which this invocation was requested.
 	CommandId *string
+
+	CommandPlugins []*CommandPlugin
+
+	// User-specified information about the command, such as a brief description of
+	// what the command should do.
+	Comment *string
+
+	// The document name that was requested for execution.
+	DocumentName *string
+
+	// The SSM document version.
+	DocumentVersion *string
+
+	// The instance ID in which this invocation was requested.
+	InstanceId *string
 
 	// The name of the invocation target. For EC2 instances this is the value for the
 	// aws:Name tag. For on-premises instances, this is the name of the instance.
 	InstanceName *string
 
-	// The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined
-	// for the parent command. For an invocation, StandardErrorUrl is populated if
-	// there is just one plugin defined for the command, and the S3 bucket was defined
-	// for the command.
-	StandardErrorUrl *string
-
-	// The document name that was requested for execution.
-	DocumentName *string
+	// Configurations for sending notifications about command status changes on a per
+	// instance basis.
+	NotificationConfig *NotificationConfig
 
 	// The time and date the request was sent to this instance.
 	RequestedDateTime *time.Time
@@ -899,37 +913,20 @@ type CommandInvocation struct {
 	// notifications about command status changes on a per instance basis.
 	ServiceRole *string
 
-	CommandPlugins []*CommandPlugin
-
-	// Whether or not the invocation succeeded, failed, or is pending.
-	Status CommandInvocationStatus
-
-	// CloudWatch Logs information where you want Systems Manager to send the command
-	// output.
-	CloudWatchOutputConfig *CloudWatchOutputConfig
-
-	// The instance ID in which this invocation was requested.
-	InstanceId *string
-
-	// Configurations for sending notifications about command status changes on a per
-	// instance basis.
-	NotificationConfig *NotificationConfig
-
-	// Gets the trace output sent by the agent.
-	TraceOutput *string
-
-	// The SSM document version.
-	DocumentVersion *string
-
-	// User-specified information about the command, such as a brief description of
-	// what the command should do.
-	Comment *string
+	// The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined
+	// for the parent command. For an invocation, StandardErrorUrl is populated if
+	// there is just one plugin defined for the command, and the S3 bucket was defined
+	// for the command.
+	StandardErrorUrl *string
 
 	// The URL to the plugin's StdOut file in Amazon S3, if the S3 bucket was defined
 	// for the parent command. For an invocation, StandardOutputUrl is populated if
 	// there is just one plugin defined for the command, and the S3 bucket was defined
 	// for the command.
 	StandardOutputUrl *string
+
+	// Whether or not the invocation succeeded, failed, or is pending.
+	Status CommandInvocationStatus
 
 	// A detailed status of the command execution for each invocation (each instance
 	// targeted by the command). StatusDetails includes more information than Status
@@ -980,10 +977,64 @@ type CommandInvocation struct {
 	// subsequent command invocations were canceled by the system. This is a terminal
 	// state.
 	StatusDetails *string
+
+	// Gets the trace output sent by the agent.
+	TraceOutput *string
 }
 
 // Describes plugin details.
 type CommandPlugin struct {
+
+	// The name of the plugin. Must be one of the following: aws:updateAgent,
+	// aws:domainjoin, aws:applications, aws:runPowerShellScript, aws:psmodule,
+	// aws:cloudWatch, aws:runShellScript, or aws:updateSSMAgent.
+	Name *string
+
+	// Output of the plugin execution.
+	Output *string
+
+	// The S3 bucket where the responses to the command executions should be stored.
+	// This was requested when issuing the command. For example, in the following
+	// response:
+	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+	// test_folder is the name of the S3 bucket;
+	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
+	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
+	OutputS3BucketName *string
+
+	// The S3 directory path inside the bucket where the responses to the command
+	// executions should be stored. This was requested when issuing the command. For
+	// example, in the following response:
+	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
+	// test_folder is the name of the S3 bucket;
+	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
+	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
+	OutputS3KeyPrefix *string
+
+	// (Deprecated) You can no longer specify this parameter. The system ignores it.
+	// Instead, Systems Manager automatically determines the S3 bucket region.
+	OutputS3Region *string
+
+	// A numeric response code generated after running the plugin.
+	ResponseCode *int32
+
+	// The time the plugin stopped running. Could stop prematurely if, for example, a
+	// cancel command was sent.
+	ResponseFinishDateTime *time.Time
+
+	// The time the plugin started running.
+	ResponseStartDateTime *time.Time
+
+	// The URL for the complete text written by the plugin to stderr. If execution is
+	// not yet complete, then this string is empty.
+	StandardErrorUrl *string
+
+	// The URL for the complete text written by the plugin to stdout in Amazon S3. If
+	// the S3 bucket for the command was not specified, then this string is empty.
+	StandardOutputUrl *string
+
+	// The status of this plugin. You can run a document with multiple plugins.
+	Status CommandPluginStatus
 
 	// A detailed status of the plugin execution. StatusDetails includes more
 	// information than Status because it includes states resulting from error and
@@ -1034,57 +1085,6 @@ type CommandPlugin struct {
 	// MaxErrors limit and subsequent command invocations were canceled by the system.
 	// This is a terminal state.
 	StatusDetails *string
-
-	// The status of this plugin. You can run a document with multiple plugins.
-	Status CommandPluginStatus
-
-	// The time the plugin stopped running. Could stop prematurely if, for example, a
-	// cancel command was sent.
-	ResponseFinishDateTime *time.Time
-
-	// Output of the plugin execution.
-	Output *string
-
-	// The time the plugin started running.
-	ResponseStartDateTime *time.Time
-
-	// A numeric response code generated after running the plugin.
-	ResponseCode *int32
-
-	// (Deprecated) You can no longer specify this parameter. The system ignores it.
-	// Instead, Systems Manager automatically determines the S3 bucket region.
-	OutputS3Region *string
-
-	// The URL for the complete text written by the plugin to stdout in Amazon S3. If
-	// the S3 bucket for the command was not specified, then this string is empty.
-	StandardOutputUrl *string
-
-	// The S3 directory path inside the bucket where the responses to the command
-	// executions should be stored. This was requested when issuing the command. For
-	// example, in the following response:
-	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
-	// test_folder is the name of the S3 bucket;
-	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
-	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
-	OutputS3KeyPrefix *string
-
-	// The name of the plugin. Must be one of the following: aws:updateAgent,
-	// aws:domainjoin, aws:applications, aws:runPowerShellScript, aws:psmodule,
-	// aws:cloudWatch, aws:runShellScript, or aws:updateSSMAgent.
-	Name *string
-
-	// The S3 bucket where the responses to the command executions should be stored.
-	// This was requested when issuing the command. For example, in the following
-	// response:
-	// test_folder/ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix/i-1234567876543/awsrunShellScript
-	// test_folder is the name of the S3 bucket;
-	// ab19cb99-a030-46dd-9dfc-8eSAMPLEPre-Fix is the name of the S3 prefix;
-	// i-1234567876543 is the instance ID; awsrunShellScript is the name of the plugin.
-	OutputS3BucketName *string
-
-	// The URL for the complete text written by the plugin to stderr. If execution is
-	// not yet complete, then this string is empty.
-	StandardErrorUrl *string
 }
 
 // A summary of the call execution that includes an execution ID, the type of
@@ -1092,18 +1092,18 @@ type CommandPlugin struct {
 // datetime object that is saved in the following format: yyyy-MM-dd'T'HH:mm:ss'Z'.
 type ComplianceExecutionSummary struct {
 
+	// The time the execution ran as a datetime object that is saved in the following
+	// format: yyyy-MM-dd'T'HH:mm:ss'Z'.
+	//
+	// This member is required.
+	ExecutionTime *time.Time
+
 	// An ID created by the system when PutComplianceItems was called. For example,
 	// CommandID is a valid execution ID. You can use this ID in subsequent calls.
 	ExecutionId *string
 
 	// The type of execution. For example, Command is a valid execution type.
 	ExecutionType *string
-
-	// The time the execution ran as a datetime object that is saved in the following
-	// format: yyyy-MM-dd'T'HH:mm:ss'Z'.
-	//
-	// This member is required.
-	ExecutionTime *time.Time
 }
 
 // Information about the compliance as defined by the resource type. For example,
@@ -1111,8 +1111,12 @@ type ComplianceExecutionSummary struct {
 // Classification, and so on.
 type ComplianceItem struct {
 
-	// An ID for the resource. For a managed instance, this is the instance ID.
-	ResourceId *string
+	// The compliance type. For example, Association (for a State Manager association),
+	// Patch, or Custom:string are all valid compliance types.
+	ComplianceType *string
+
+	// A "Key": "Value" tag combination for the compliance item.
+	Details map[string]*string
 
 	// A summary for the compliance item. The summary includes an execution ID, the
 	// execution type (for example, command), and the execution time.
@@ -1122,66 +1126,62 @@ type ComplianceItem struct {
 	// patch, the ID could be the number of the KB article; for example: KB4010320.
 	Id *string
 
-	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string
+	// An ID for the resource. For a managed instance, this is the instance ID.
+	ResourceId *string
+
+	// The type of resource. ManagedInstance is currently the only supported resource
+	// type.
+	ResourceType *string
+
+	// The severity of the compliance status. Severity can be one of the following:
+	// Critical, High, Medium, Low, Informational, Unspecified.
+	Severity ComplianceSeverity
+
+	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+	Status ComplianceStatus
 
 	// A title for the compliance item. For example, if the compliance item is a
 	// Windows patch, the title could be the title of the KB article for the patch; for
 	// example: Security Update for Active Directory Federation Services.
 	Title *string
-
-	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
-	Status ComplianceStatus
-
-	// The compliance type. For example, Association (for a State Manager association),
-	// Patch, or Custom:string are all valid compliance types.
-	ComplianceType *string
-
-	// The severity of the compliance status. Severity can be one of the following:
-	// Critical, High, Medium, Low, Informational, Unspecified.
-	Severity ComplianceSeverity
-
-	// The type of resource. ManagedInstance is currently the only supported resource
-	// type.
-	ResourceType *string
 }
 
 // Information about a compliance item.
 type ComplianceItemEntry struct {
 
-	// A "Key": "Value" tag combination for the compliance item.
-	Details map[string]*string
-
-	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
-	//
-	// This member is required.
-	Status ComplianceStatus
-
 	// The severity of the compliance status. Severity can be one of the following:
 	// Critical, High, Medium, Low, Informational, Unspecified.
 	//
 	// This member is required.
 	Severity ComplianceSeverity
 
-	// The title of the compliance item. For example, if the compliance item is a
-	// Windows patch, the title could be the title of the KB article for the patch; for
-	// example: Security Update for Active Directory Federation Services.
-	Title *string
+	// The status of the compliance item. An item is either COMPLIANT or NON_COMPLIANT.
+	//
+	// This member is required.
+	Status ComplianceStatus
+
+	// A "Key": "Value" tag combination for the compliance item.
+	Details map[string]*string
 
 	// The compliance item ID. For example, if the compliance item is a Windows patch,
 	// the ID could be the number of the KB article.
 	Id *string
+
+	// The title of the compliance item. For example, if the compliance item is a
+	// Windows patch, the title could be the title of the KB article for the patch; for
+	// example: Security Update for Active Directory Federation Services.
+	Title *string
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
 type ComplianceStringFilter struct {
 
+	// The name of the filter.
+	Key *string
+
 	// The type of comparison that should be performed for the value: Equal, NotEqual,
 	// BeginWith, LessThan, or GreaterThan.
 	Type ComplianceQueryOperatorType
-
-	// The name of the filter.
-	Key *string
 
 	// The value for which to search.
 	Values []*string
@@ -1194,39 +1194,26 @@ type ComplianceSummaryItem struct {
 	// Association, Patch, or Custom:string.
 	ComplianceType *string
 
-	// A list of NON_COMPLIANT items for the specified compliance type.
-	NonCompliantSummary *NonCompliantSummary
-
 	// A list of COMPLIANT items for the specified compliance type.
 	CompliantSummary *CompliantSummary
+
+	// A list of NON_COMPLIANT items for the specified compliance type.
+	NonCompliantSummary *NonCompliantSummary
 }
 
 // A summary of resources that are compliant. The summary is organized according to
 // the resource count for each compliance type.
 type CompliantSummary struct {
 
-	// A summary of the compliance severity by compliance type.
-	SeveritySummary *SeveritySummary
-
 	// The total number of resources that are compliant.
 	CompliantCount *int32
+
+	// A summary of the compliance severity by compliance type.
+	SeveritySummary *SeveritySummary
 }
 
 // Describes the association of a Systems Manager SSM document and an instance.
 type CreateAssociationBatchRequestEntry struct {
-
-	// The instances targeted by the request.
-	Targets []*Target
-
-	// The ID of the instance.
-	InstanceId *string
-
-	// Specify the target for the association. This target is required for associations
-	// that use an Automation document and target resources by using rate controls.
-	AutomationTargetParameterName *string
-
-	// The document version.
-	DocumentVersion *string
 
 	// The name of the SSM document that contains the configuration information for the
 	// instance. You can specify Command or Automation documents. You can specify
@@ -1242,14 +1229,37 @@ type CreateAssociationBatchRequestEntry struct {
 	// This member is required.
 	Name *string
 
-	// The severity level to assign to the association.
-	ComplianceSeverity AssociationComplianceSeverity
+	// By default, when you create a new associations, the system runs it immediately
+	// after it is created and then according to the schedule you specified. Specify
+	// this option if you don't want an association to run immediately after you create
+	// it.
+	ApplyOnlyAtCronInterval *bool
 
 	// Specify a descriptive name for the association.
 	AssociationName *string
 
-	// A cron expression that specifies a schedule when the association runs.
-	ScheduleExpression *string
+	// Specify the target for the association. This target is required for associations
+	// that use an Automation document and target resources by using rate controls.
+	AutomationTargetParameterName *string
+
+	// The severity level to assign to the association.
+	ComplianceSeverity AssociationComplianceSeverity
+
+	// The document version.
+	DocumentVersion *string
+
+	// The ID of the instance.
+	InstanceId *string
+
+	// The maximum number of targets allowed to run the association at the same time.
+	// You can specify a number, for example 10, or a percentage of the target set, for
+	// example 10%. The default value is 100%, which means all targets run the
+	// association at the same time. If a new instance starts and attempts to run an
+	// association while Systems Manager is running MaxConcurrency associations, the
+	// association is allowed to run. During the next association interval, the new
+	// instance will process its association within the limit specified for
+	// MaxConcurrency.
+	MaxConcurrency *string
 
 	// The number of errors that are allowed before the system stops sending requests
 	// to run the association on additional targets. You can specify either an absolute
@@ -1265,15 +1275,14 @@ type CreateAssociationBatchRequestEntry struct {
 	// one at a time.
 	MaxErrors *string
 
-	// The maximum number of targets allowed to run the association at the same time.
-	// You can specify a number, for example 10, or a percentage of the target set, for
-	// example 10%. The default value is 100%, which means all targets run the
-	// association at the same time. If a new instance starts and attempts to run an
-	// association while Systems Manager is running MaxConcurrency associations, the
-	// association is allowed to run. During the next association interval, the new
-	// instance will process its association within the limit specified for
-	// MaxConcurrency.
-	MaxConcurrency *string
+	// An S3 bucket where you want to store the results of this request.
+	OutputLocation *InstanceAssociationOutputLocation
+
+	// A description of the parameters for a document.
+	Parameters map[string][]*string
+
+	// A cron expression that specifies a schedule when the association runs.
+	ScheduleExpression *string
 
 	// The mode for generating association compliance. You can specify AUTO or MANUAL.
 	// In AUTO mode, the system uses the status of the association execution to
@@ -1286,17 +1295,8 @@ type CreateAssociationBatchRequestEntry struct {
 	// associations use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
-	// A description of the parameters for a document.
-	Parameters map[string][]*string
-
-	// An S3 bucket where you want to store the results of this request.
-	OutputLocation *InstanceAssociationOutputLocation
-
-	// By default, when you create a new associations, the system runs it immediately
-	// after it is created and then according to the schedule you specified. Specify
-	// this option if you don't want an association to run immediately after you create
-	// it.
-	ApplyOnlyAtCronInterval *bool
+	// The instances targeted by the request.
+	Targets []*Target
 }
 
 // Filter for the DescribeActivation API.
@@ -1312,24 +1312,18 @@ type DescribeActivationsFilter struct {
 // A default version of a document.
 type DocumentDefaultVersionDescription struct {
 
-	// The name of the document.
-	Name *string
+	// The default version of the document.
+	DefaultVersion *string
 
 	// The default version of the artifact associated with the document.
 	DefaultVersionName *string
 
-	// The default version of the document.
-	DefaultVersion *string
+	// The name of the document.
+	Name *string
 }
 
 // Describes a Systems Manager document.
 type DocumentDescription struct {
-
-	// The schema version.
-	SchemaVersion *string
-
-	// The AWS user account that created the document.
-	Owner *string
 
 	// Details about the document attachments, including names, locations, sizes, and
 	// so on.
@@ -1341,22 +1335,63 @@ type DocumentDescription struct {
 	// The default version.
 	DefaultVersion *string
 
+	// A description of the document.
+	Description *string
+
+	// The document format, either JSON or YAML.
+	DocumentFormat DocumentFormat
+
+	// The type of document.
+	DocumentType DocumentType
+
+	// The document version.
+	DocumentVersion *string
+
+	// The Sha256 or Sha1 hash created by the system when the document was created.
+	// Sha1 hashes have been deprecated.
+	Hash *string
+
+	// The hash type of the document. Valid values include Sha256 or Sha1. Sha1 hashes
+	// have been deprecated.
+	HashType DocumentHashType
+
+	// The latest version of the document.
+	LatestVersion *string
+
+	// The name of the Systems Manager document.
+	Name *string
+
+	// The AWS user account that created the document.
+	Owner *string
+
+	// A description of the parameters for a document.
+	Parameters []*DocumentParameter
+
+	// The list of OS platforms compatible with this Systems Manager document.
+	PlatformTypes []PlatformType
+
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
 	Requires []*DocumentRequires
 
-	// The list of OS platforms compatible with this Systems Manager document.
-	PlatformTypes []PlatformType
+	// The schema version.
+	SchemaVersion *string
 
-	// A description of the document.
-	Description *string
+	// The SHA1 hash of the document, which you can use for verification.
+	Sha1 *string
 
 	// The status of the Systems Manager document.
 	Status DocumentStatus
 
-	// The version of the artifact associated with the document.
-	VersionName *string
+	// A message returned by AWS Systems Manager that explains the Status value. For
+	// example, a Failed status might be explained by the StatusInformation message,
+	// "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is
+	// correct."
+	StatusInformation *string
+
+	// The tags, or metadata, that have been applied to the document.
+	Tags []*Tag
 
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
@@ -1365,43 +1400,8 @@ type DocumentDescription struct {
 	// in the AWS CloudFormation User Guide.
 	TargetType *string
 
-	// The document version.
-	DocumentVersion *string
-
-	// The document format, either JSON or YAML.
-	DocumentFormat DocumentFormat
-
-	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag
-
-	// The hash type of the document. Valid values include Sha256 or Sha1. Sha1 hashes
-	// have been deprecated.
-	HashType DocumentHashType
-
-	// The Sha256 or Sha1 hash created by the system when the document was created.
-	// Sha1 hashes have been deprecated.
-	Hash *string
-
-	// A message returned by AWS Systems Manager that explains the Status value. For
-	// example, a Failed status might be explained by the StatusInformation message,
-	// "The specified S3 bucket does not exist. Verify that the URL of the S3 bucket is
-	// correct."
-	StatusInformation *string
-
-	// The SHA1 hash of the document, which you can use for verification.
-	Sha1 *string
-
-	// The latest version of the document.
-	LatestVersion *string
-
-	// A description of the parameters for a document.
-	Parameters []*DocumentParameter
-
-	// The name of the Systems Manager document.
-	Name *string
-
-	// The type of document.
-	DocumentType DocumentType
+	// The version of the artifact associated with the document.
+	VersionName *string
 }
 
 // This data type is deprecated. Instead, use DocumentKeyValuesFilter ().
@@ -1421,19 +1421,34 @@ type DocumentFilter struct {
 // Describes the name of a Systems Manager document.
 type DocumentIdentifier struct {
 
-	// The AWS user account that created the document.
-	Owner *string
-
 	// The document format, either JSON or YAML.
 	DocumentFormat DocumentFormat
 
-	// The schema version.
-	SchemaVersion *string
+	// The document type.
+	DocumentType DocumentType
+
+	// The document version.
+	DocumentVersion *string
+
+	// The name of the Systems Manager document.
+	Name *string
+
+	// The AWS user account that created the document.
+	Owner *string
+
+	// The operating system platform.
+	PlatformTypes []PlatformType
 
 	// A list of SSM documents required by a document. For example, an
 	// ApplicationConfiguration document requires an ApplicationConfigurationSchema
 	// document.
 	Requires []*DocumentRequires
+
+	// The schema version.
+	SchemaVersion *string
+
+	// The tags, or metadata, that have been applied to the document.
+	Tags []*Tag
 
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
@@ -1442,25 +1457,10 @@ type DocumentIdentifier struct {
 	// in the AWS CloudFormation User Guide.
 	TargetType *string
 
-	// The document type.
-	DocumentType DocumentType
-
 	// An optional field specifying the version of the artifact associated with the
 	// document. For example, "Release 12, Update 6". This value is unique across all
 	// versions of a document, and cannot be changed.
 	VersionName *string
-
-	// The document version.
-	DocumentVersion *string
-
-	// The operating system platform.
-	PlatformTypes []PlatformType
-
-	// The tags, or metadata, that have been applied to the document.
-	Tags []*Tag
-
-	// The name of the Systems Manager document.
-	Name *string
 }
 
 // One or more filters. Use a filter to return a more specific list of documents.
@@ -1480,16 +1480,20 @@ type DocumentIdentifier struct {
 // Key=Owner,Values=Self
 type DocumentKeyValuesFilter struct {
 
-	// The value for the filter key.
-	Values []*string
-
 	// The name of the filter key.
 	Key *string
+
+	// The value for the filter key.
+	Values []*string
 }
 
 // Parameters specified in a System Manager document that run on the server when
 // the command is run.
 type DocumentParameter struct {
+
+	// If specified, the default values for the parameters. Parameters without a
+	// default value are required. Parameters with a default value are optional.
+	DefaultValue *string
 
 	// A description of what the parameter does, how to use it, the default value, and
 	// whether or not the parameter is optional.
@@ -1500,10 +1504,6 @@ type DocumentParameter struct {
 
 	// The type of parameter. The type can be either String or StringList.
 	Type DocumentParameterType
-
-	// If specified, the default values for the parameters. Parameters without a
-	// default value are required. Parameters with a default value are optional.
-	DefaultValue *string
 }
 
 // An SSM document required by the current document.
@@ -1522,17 +1522,20 @@ type DocumentRequires struct {
 // Version information about the document.
 type DocumentVersionInfo struct {
 
-	// The document version.
-	DocumentVersion *string
-
-	// The document name.
-	Name *string
-
 	// The date the document was created.
 	CreatedDate *time.Time
 
 	// The document format, either JSON or YAML.
 	DocumentFormat DocumentFormat
+
+	// The document version.
+	DocumentVersion *string
+
+	// An identifier for the default version of the document.
+	IsDefaultVersion *bool
+
+	// The document name.
+	Name *string
 
 	// The status of the Systems Manager document, such as Creating, Active, Failed,
 	// and Deleting.
@@ -1548,9 +1551,6 @@ type DocumentVersionInfo struct {
 	// 12, Update 6". This value is unique across all versions of a document, and
 	// cannot be changed.
 	VersionName *string
-
-	// An identifier for the default version of the document.
-	IsDefaultVersion *bool
 }
 
 // The EffectivePatch structure defines metadata about a patch along with the
@@ -1560,29 +1560,29 @@ type DocumentVersionInfo struct {
 // patch was or will be approved.
 type EffectivePatch struct {
 
+	// Provides metadata for a patch, including information such as the KB ID,
+	// severity, classification and a URL for where more information can be obtained
+	// about the patch.
+	Patch *Patch
+
 	// The status of the patch in a patch baseline. This includes information about
 	// whether the patch is currently approved, due to be approved by a rule,
 	// explicitly approved, or explicitly rejected and the date the patch was or will
 	// be approved.
 	PatchStatus *PatchStatus
-
-	// Provides metadata for a patch, including information such as the KB ID,
-	// severity, classification and a URL for where more information can be obtained
-	// about the patch.
-	Patch *Patch
 }
 
 // Describes a failed association.
 type FailedCreateAssociation struct {
-
-	// A description of the failure.
-	Message *string
 
 	// The association.
 	Entry *CreateAssociationBatchRequestEntry
 
 	// The source of the failure.
 	Fault Fault
+
+	// A description of the failure.
+	Message *string
 }
 
 // Information about an Automation failure.
@@ -1591,40 +1591,40 @@ type FailureDetails struct {
 	// Detailed information about the Automation step failure.
 	Details map[string][]*string
 
-	// The type of Automation failure. Failure types include the following: Action,
-	// Permission, Throttling, Verification, Internal.
-	FailureType *string
-
 	// The stage of the Automation execution when the failure occurred. The stages
 	// include the following: InputValidation, PreVerification, Invocation,
 	// PostVerification.
 	FailureStage *string
+
+	// The type of Automation failure. Failure types include the following: Action,
+	// Permission, Throttling, Verification, Internal.
+	FailureType *string
 }
 
 // Status information about the aggregated associations.
 type InstanceAggregatedAssociationOverview struct {
 
-	// The number of associations for the instance(s).
-	InstanceAssociationStatusAggregatedCount map[string]*int32
-
 	// Detailed status information about the aggregated associations.
 	DetailedStatus *string
+
+	// The number of associations for the instance(s).
+	InstanceAssociationStatusAggregatedCount map[string]*int32
 }
 
 // One or more association documents on the instance.
 type InstanceAssociation struct {
 
-	// The instance ID.
-	InstanceId *string
-
 	// The association ID.
 	AssociationId *string
+
+	// Version information for the association on the instance.
+	AssociationVersion *string
 
 	// The content of the association document for the instance(s).
 	Content *string
 
-	// Version information for the association on the instance.
-	AssociationVersion *string
+	// The instance ID.
+	InstanceId *string
 }
 
 // An S3 bucket where you want to store the results of this request.
@@ -1644,48 +1644,64 @@ type InstanceAssociationOutputUrl struct {
 // Status information about the instance association.
 type InstanceAssociationStatusInfo struct {
 
-	// The instance ID where the association was created.
-	InstanceId *string
-
-	// A URL for an S3 bucket where you want to store the results of this request.
-	OutputUrl *InstanceAssociationOutputUrl
+	// The association ID.
+	AssociationId *string
 
 	// The name of the association applied to the instance.
 	AssociationName *string
 
-	// Detailed status information about the instance association.
-	DetailedStatus *string
-
-	// The name of the association.
-	Name *string
-
 	// The version of the association applied to the instance.
 	AssociationVersion *string
 
-	// The date the instance association ran.
-	ExecutionDate *time.Time
-
-	// The association ID.
-	AssociationId *string
-
-	// Status information about the instance association.
-	Status *string
-
-	// An error code returned by the request to create the association.
-	ErrorCode *string
+	// Detailed status information about the instance association.
+	DetailedStatus *string
 
 	// The association document versions.
 	DocumentVersion *string
 
+	// An error code returned by the request to create the association.
+	ErrorCode *string
+
+	// The date the instance association ran.
+	ExecutionDate *time.Time
+
 	// Summary information about association execution.
 	ExecutionSummary *string
+
+	// The instance ID where the association was created.
+	InstanceId *string
+
+	// The name of the association.
+	Name *string
+
+	// A URL for an S3 bucket where you want to store the results of this request.
+	OutputUrl *InstanceAssociationOutputUrl
+
+	// Status information about the instance association.
+	Status *string
 }
 
 // Describes a filter for a specific list of instances.
 type InstanceInformation struct {
 
-	// The date the association was last run.
-	LastAssociationExecutionDate *time.Time
+	// The activation ID created by Systems Manager when the server or VM was
+	// registered.
+	ActivationId *string
+
+	// The version of SSM Agent running on your Linux instance.
+	AgentVersion *string
+
+	// Information about the association.
+	AssociationOverview *InstanceAggregatedAssociationOverview
+
+	// The status of the association.
+	AssociationStatus *string
+
+	// The fully qualified host name of the managed instance.
+	ComputerName *string
+
+	// The IP address of the managed instance.
+	IPAddress *string
 
 	// The Amazon Identity and Access Management (IAM) role assigned to the on-premises
 	// Systems Manager managed instance. This call does not return the IAM role for EC2
@@ -1697,15 +1713,8 @@ type InstanceInformation struct {
 	// the AWS CLI Command Reference.
 	IamRole *string
 
-	// The activation ID created by Systems Manager when the server or VM was
-	// registered.
-	ActivationId *string
-
 	// The instance ID.
 	InstanceId *string
-
-	// The version of SSM Agent running on your Linux instance.
-	AgentVersion *string
 
 	// Indicates whether the latest version of SSM Agent is running on your Linux
 	// Managed Instance. This field does not indicate whether or not the latest version
@@ -1713,41 +1722,14 @@ type InstanceInformation struct {
 	// Windows Server use the EC2Config service to process SSM requests.
 	IsLatestVersion *bool
 
-	// The operating system platform type.
-	PlatformType PlatformType
-
-	// The status of the association.
-	AssociationStatus *string
-
-	// The IP address of the managed instance.
-	IPAddress *string
-
-	// Connection status of SSM Agent.
-	PingStatus PingStatus
-
-	// The fully qualified host name of the managed instance.
-	ComputerName *string
-
-	// The date the server or VM was registered with AWS as a managed instance.
-	RegistrationDate *time.Time
-
-	// The type of instance. Instances are either EC2 instances or managed instances.
-	ResourceType ResourceType
-
-	// The last date the association was successfully run.
-	LastSuccessfulAssociationExecutionDate *time.Time
-
-	// Information about the association.
-	AssociationOverview *InstanceAggregatedAssociationOverview
-
-	// The version of the OS platform running on your instance.
-	PlatformVersion *string
-
-	// The name of the operating system platform running on your instance.
-	PlatformName *string
+	// The date the association was last run.
+	LastAssociationExecutionDate *time.Time
 
 	// The date and time when agent last pinged Systems Manager service.
 	LastPingDateTime *time.Time
+
+	// The last date the association was successfully run.
+	LastSuccessfulAssociationExecutionDate *time.Time
 
 	// The name assigned to an on-premises server or virtual machine (VM) when it is
 	// activated as a Systems Manager managed instance. The name is specified as the
@@ -1765,6 +1747,24 @@ type InstanceInformation struct {
 	// (http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html) in
 	// the AWS CLI Command Reference.
 	Name *string
+
+	// Connection status of SSM Agent.
+	PingStatus PingStatus
+
+	// The name of the operating system platform running on your instance.
+	PlatformName *string
+
+	// The operating system platform type.
+	PlatformType PlatformType
+
+	// The version of the OS platform running on your instance.
+	PlatformVersion *string
+
+	// The date the server or VM was registered with AWS as a managed instance.
+	RegistrationDate *time.Time
+
+	// The type of instance. Instances are either EC2 instances or managed instances.
+	ResourceType ResourceType
 }
 
 // Describes a filter for a specific list of instances. You can filter instances
@@ -1775,24 +1775,19 @@ type InstanceInformation struct {
 // tags.
 type InstanceInformationFilter struct {
 
-	// The filter values.
-	//
-	// This member is required.
-	ValueSet []*string
-
 	// The name of the filter.
 	//
 	// This member is required.
 	Key InstanceInformationFilterKey
-}
-
-// The filters to describe or get information about your managed instances.
-type InstanceInformationStringFilter struct {
 
 	// The filter values.
 	//
 	// This member is required.
-	Values []*string
+	ValueSet []*string
+}
+
+// The filters to describe or get information about your managed instances.
+type InstanceInformationStringFilter struct {
 
 	// The filter key name to describe your instances. For example:
 	// "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag
@@ -1800,6 +1795,11 @@ type InstanceInformationStringFilter struct {
 	//
 	// This member is required.
 	Key *string
+
+	// The filter values.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // Defines the high-level patch compliance state for a managed instance, providing
@@ -1808,9 +1808,41 @@ type InstanceInformationStringFilter struct {
 // gathered for the instance.
 type InstancePatchState struct {
 
-	// The number of patches from the patch baseline that are applicable for the
-	// instance but aren't currently installed.
-	MissingCount *int32
+	// The ID of the patch baseline used to patch the instance.
+	//
+	// This member is required.
+	BaselineId *string
+
+	// The ID of the managed instance the high-level patch compliance information was
+	// collected for.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The type of patching operation that was performed: SCAN (assess patch compliance
+	// state) or INSTALL (install missing patches).
+	//
+	// This member is required.
+	Operation PatchOperationType
+
+	// The time the most recent patching operation completed on the instance.
+	//
+	// This member is required.
+	OperationEndTime *time.Time
+
+	// The time the most recent patching operation was started on the instance.
+	//
+	// This member is required.
+	OperationStartTime *time.Time
+
+	// The name of the patch group the managed instance belongs to.
+	//
+	// This member is required.
+	PatchGroup *string
+
+	// The number of patches from the patch baseline that were attempted to be
+	// installed during the last patching operation, but failed to install.
+	FailedCount *int32
 
 	// An https URL or an Amazon S3 path-style URL to a list of patches to be
 	// installed. This patch installation list, which you maintain in an S3 bucket in
@@ -1821,43 +1853,42 @@ type InstancePatchState struct {
 	// in the AWS Systems Manager User Guide.
 	InstallOverrideList *string
 
-	// The ID of the patch baseline used to patch the instance.
-	//
-	// This member is required.
-	BaselineId *string
-
-	// The time the most recent patching operation completed on the instance.
-	//
-	// This member is required.
-	OperationEndTime *time.Time
-
-	// The time of the last attempt to patch the instance with NoReboot specified as
-	// the reboot option.
-	LastNoRebootInstallOperationTime *time.Time
-
-	// The ID of the managed instance the high-level patch compliance information was
-	// collected for.
-	//
-	// This member is required.
-	InstanceId *string
+	// The number of patches from the patch baseline that are installed on the
+	// instance.
+	InstalledCount *int32
 
 	// The number of patches not specified in the patch baseline that are installed on
 	// the instance.
 	InstalledOtherCount *int32
 
-	// Placeholder information. This field will always be empty in the current release
-	// of the service.
-	OwnerInformation *string
-
-	// The type of patching operation that was performed: SCAN (assess patch compliance
-	// state) or INSTALL (install missing patches).
-	//
-	// This member is required.
-	Operation PatchOperationType
-
 	// The number of patches installed by Patch Manager since the last time the
 	// instance was rebooted.
 	InstalledPendingRebootCount *int32
+
+	// The number of instances with patches installed that are specified in a
+	// RejectedPatches list. Patches with a status of InstalledRejected were typically
+	// installed before they were added to a RejectedPatches list. If
+	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
+	// of InstalledRejectedCount will always be 0 (zero).
+	InstalledRejectedCount *int32
+
+	// The time of the last attempt to patch the instance with NoReboot specified as
+	// the reboot option.
+	LastNoRebootInstallOperationTime *time.Time
+
+	// The number of patches from the patch baseline that are applicable for the
+	// instance but aren't currently installed.
+	MissingCount *int32
+
+	// The number of patches from the patch baseline that aren't applicable for the
+	// instance and therefore aren't installed on the instance. This number may be
+	// truncated if the list of patch names is very large. The number of patches beyond
+	// this limit are reported in UnreportedNotApplicableCount.
+	NotApplicableCount *int32
+
+	// Placeholder information. This field will always be empty in the current release
+	// of the service.
+	OwnerInformation *string
 
 	// Indicates the reboot option specified in the patch baseline. Reboot options
 	// apply to Install operations only. Reboots are not attempted for Patch Manager
@@ -1877,40 +1908,9 @@ type InstancePatchState struct {
 	// this compliance data was collected.
 	SnapshotId *string
 
-	// The name of the patch group the managed instance belongs to.
-	//
-	// This member is required.
-	PatchGroup *string
-
-	// The number of instances with patches installed that are specified in a
-	// RejectedPatches list. Patches with a status of InstalledRejected were typically
-	// installed before they were added to a RejectedPatches list. If
-	// ALLOW_AS_DEPENDENCY is the specified option for RejectedPatchesAction, the value
-	// of InstalledRejectedCount will always be 0 (zero).
-	InstalledRejectedCount *int32
-
-	// The number of patches from the patch baseline that aren't applicable for the
-	// instance and therefore aren't installed on the instance. This number may be
-	// truncated if the list of patch names is very large. The number of patches beyond
-	// this limit are reported in UnreportedNotApplicableCount.
-	NotApplicableCount *int32
-
-	// The time the most recent patching operation was started on the instance.
-	//
-	// This member is required.
-	OperationStartTime *time.Time
-
-	// The number of patches from the patch baseline that were attempted to be
-	// installed during the last patching operation, but failed to install.
-	FailedCount *int32
-
 	// The number of patches beyond the supported limit of NotApplicableCount that are
 	// not reported by name to Systems Manager Inventory.
 	UnreportedNotApplicableCount *int32
-
-	// The number of patches from the patch baseline that are installed on the
-	// instance.
-	InstalledCount *int32
 }
 
 // Defines a filter used in DescribeInstancePatchStatesForPatchGroup used to scope
@@ -1938,11 +1938,11 @@ type InstancePatchStateFilter struct {
 // Specifies the inventory type and attribute for the aggregation execution.
 type InventoryAggregator struct {
 
-	// The inventory type and attribute name for aggregation.
-	Expression *string
-
 	// Nested aggregators to further refine aggregation for an inventory type.
 	Aggregators []*InventoryAggregator
+
+	// The inventory type and attribute name for aggregation.
+	Expression *string
 
 	// A user-defined set of one or more filters on which to aggregate inventory data.
 	// Groups return a count of resources that match and don't match the specified
@@ -1953,67 +1953,61 @@ type InventoryAggregator struct {
 // Status information returned by the DeleteInventory action.
 type InventoryDeletionStatusItem struct {
 
-	// Information about the status.
-	LastStatusMessage *string
-
 	// The deletion ID returned by the DeleteInventory action.
 	DeletionId *string
 
-	// The name of the inventory data type.
-	TypeName *string
-
-	// The status of the operation. Possible values are InProgress and Complete.
-	LastStatus InventoryDeletionStatus
-
 	// The UTC timestamp when the delete operation started.
 	DeletionStartTime *time.Time
-
-	// The UTC timestamp of when the last status report.
-	LastStatusUpdateTime *time.Time
 
 	// Information about the delete operation. For more information about this summary,
 	// see Understanding the delete inventory summary
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-custom.html#sysman-inventory-delete)
 	// in the AWS Systems Manager User Guide.
 	DeletionSummary *InventoryDeletionSummary
+
+	// The status of the operation. Possible values are InProgress and Complete.
+	LastStatus InventoryDeletionStatus
+
+	// Information about the status.
+	LastStatusMessage *string
+
+	// The UTC timestamp of when the last status report.
+	LastStatusUpdateTime *time.Time
+
+	// The name of the inventory data type.
+	TypeName *string
 }
 
 // Information about the delete operation.
 type InventoryDeletionSummary struct {
-
-	// The total number of items to delete. This count does not change during the
-	// delete operation.
-	TotalCount *int32
 
 	// Remaining number of items to delete.
 	RemainingCount *int32
 
 	// A list of counts and versions for deleted items.
 	SummaryItems []*InventoryDeletionSummaryItem
+
+	// The total number of items to delete. This count does not change during the
+	// delete operation.
+	TotalCount *int32
 }
 
 // Either a count, remaining count, or a version number in a delete inventory
 // summary.
 type InventoryDeletionSummaryItem struct {
 
-	// The inventory type version.
-	Version *string
+	// A count of the number of deleted items.
+	Count *int32
 
 	// The remaining number of items to delete.
 	RemainingCount *int32
 
-	// A count of the number of deleted items.
-	Count *int32
+	// The inventory type version.
+	Version *string
 }
 
 // One or more filters. Use a filter to return a more specific list of results.
 type InventoryFilter struct {
-
-	// The type of filter. The Exists filter must be used with aggregators. For more
-	// information, see Aggregating inventory data
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html)
-	// in the AWS Systems Manager User Guide.
-	Type InventoryQueryOperatorType
 
 	// The name of the filter key.
 	//
@@ -2026,6 +2020,12 @@ type InventoryFilter struct {
 	//
 	// This member is required.
 	Values []*string
+
+	// The type of filter. The Exists filter must be used with aggregators. For more
+	// information, see Aggregating inventory data
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-aggregate.html)
+	// in the AWS Systems Manager User Guide.
+	Type InventoryQueryOperatorType
 }
 
 // A user-defined set of one or more filters on which to aggregate inventory data.
@@ -2033,32 +2033,32 @@ type InventoryFilter struct {
 // criteria.
 type InventoryGroup struct {
 
-	// The name of the group.
-	//
-	// This member is required.
-	Name *string
-
 	// Filters define the criteria for the group. The matchingCount field displays the
 	// number of resources that match the criteria. The notMatchingCount field displays
 	// the number of resources that don't match the criteria.
 	//
 	// This member is required.
 	Filters []*InventoryFilter
+
+	// The name of the group.
+	//
+	// This member is required.
+	Name *string
 }
 
 // Information collected from managed instances based on your inventory policy
 // document
 type InventoryItem struct {
 
-	// The schema version for the inventory item.
-	//
-	// This member is required.
-	SchemaVersion *string
-
 	// The time the inventory information was collected.
 	//
 	// This member is required.
 	CaptureTime *string
+
+	// The schema version for the inventory item.
+	//
+	// This member is required.
+	SchemaVersion *string
 
 	// The name of the inventory type. Default inventory item type names start with
 	// AWS. Custom inventory type names will start with Custom. Default inventory item
@@ -2068,11 +2068,6 @@ type InventoryItem struct {
 	// This member is required.
 	TypeName *string
 
-	// A map of associated properties for a specified inventory type. For example, with
-	// this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType
-	// properties of the AWS:ComplianceItem type.
-	Context map[string]*string
-
 	// The inventory data of the inventory type.
 	Content []map[string]*string
 
@@ -2081,6 +2076,11 @@ type InventoryItem struct {
 	// update the inventory item type contents if the MD5 hash has not changed since
 	// last update.
 	ContentHash *string
+
+	// A map of associated properties for a specified inventory type. For example, with
+	// this attribute, you can specify the ExecutionId, ExecutionType, ComplianceType
+	// properties of the AWS:ComplianceItem type.
+	Context map[string]*string
 }
 
 // Attributes are the entries within the inventory item content. It contains name
@@ -2102,13 +2102,6 @@ type InventoryItemAttribute struct {
 // query filters.
 type InventoryItemSchema struct {
 
-	// The alias name of the inventory type. The alias name is used for display
-	// purposes.
-	DisplayName *string
-
-	// The schema version for the inventory item.
-	Version *string
-
 	// The schema attributes for inventory. This contains data type and attribute name.
 	//
 	// This member is required.
@@ -2121,30 +2114,29 @@ type InventoryItemSchema struct {
 	//
 	// This member is required.
 	TypeName *string
+
+	// The alias name of the inventory type. The alias name is used for display
+	// purposes.
+	DisplayName *string
+
+	// The schema version for the inventory item.
+	Version *string
 }
 
 // Inventory query results.
 type InventoryResultEntity struct {
 
+	// The data section in the inventory result entity JSON.
+	Data map[string]*InventoryResultItem
+
 	// ID of the inventory result entity. For example, for managed instance inventory
 	// the result will be the managed instance ID. For EC2 instance inventory, the
 	// result will be the instance ID.
 	Id *string
-
-	// The data section in the inventory result entity JSON.
-	Data map[string]*InventoryResultItem
 }
 
 // The inventory result item.
 type InventoryResultItem struct {
-
-	// The time inventory item data was captured.
-	CaptureTime *string
-
-	// The name of the inventory result item type.
-	//
-	// This member is required.
-	TypeName *string
 
 	// Contains all the inventory data of the item type. Results include attribute
 	// names and values.
@@ -2156,6 +2148,14 @@ type InventoryResultItem struct {
 	//
 	// This member is required.
 	SchemaVersion *string
+
+	// The name of the inventory result item type.
+	//
+	// This member is required.
+	TypeName *string
+
+	// The time inventory item data was captured.
+	CaptureTime *string
 
 	// MD5 hash of the inventory item type contents. The content hash is used to
 	// determine whether to update inventory information. The PutInventory API does not
@@ -2172,22 +2172,25 @@ type InventoryResultItem struct {
 // MaintenanceWindowTaskInvocationParameters ().
 type LoggingInfo struct {
 
-	// (Optional) The S3 bucket subfolder.
-	S3KeyPrefix *string
+	// The name of an S3 bucket where execution logs are stored .
+	//
+	// This member is required.
+	S3BucketName *string
 
 	// The Region where the S3 bucket is located.
 	//
 	// This member is required.
 	S3Region *string
 
-	// The name of an S3 bucket where execution logs are stored .
-	//
-	// This member is required.
-	S3BucketName *string
+	// (Optional) The S3 bucket subfolder.
+	S3KeyPrefix *string
 }
 
 // The parameters for an AUTOMATION task type.
 type MaintenanceWindowAutomationParameters struct {
+
+	// The version of an Automation document to use during task execution.
+	DocumentVersion *string
 
 	// The parameters for the AUTOMATION task.  <p>For information about specifying and
 	// updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and
@@ -2205,13 +2208,19 @@ type MaintenanceWindowAutomationParameters struct {
 	// AUTOMATION task types, Systems Manager ignores any values specified for these
 	// parameters.</p> </note>
 	Parameters map[string][]*string
-
-	// The version of an Automation document to use during task execution.
-	DocumentVersion *string
 }
 
 // Describes the information about an execution of a maintenance window.
 type MaintenanceWindowExecution struct {
+
+	// The time the execution finished.
+	EndTime *time.Time
+
+	// The time the execution started.
+	StartTime *time.Time
+
+	// The status of the execution.
+	Status MaintenanceWindowExecutionStatus
 
 	// The details explaining the Status. Only available for certain status values.
 	StatusDetails *string
@@ -2219,22 +2228,26 @@ type MaintenanceWindowExecution struct {
 	// The ID of the maintenance window execution.
 	WindowExecutionId *string
 
-	// The status of the execution.
-	Status MaintenanceWindowExecutionStatus
-
 	// The ID of the maintenance window.
 	WindowId *string
-
-	// The time the execution finished.
-	EndTime *time.Time
-
-	// The time the execution started.
-	StartTime *time.Time
 }
 
 // Information about a task execution performed as part of a maintenance window
 // execution.
 type MaintenanceWindowExecutionTaskIdentity struct {
+
+	// The time the task execution finished.
+	EndTime *time.Time
+
+	// The time the task execution started.
+	StartTime *time.Time
+
+	// The status of the task execution.
+	Status MaintenanceWindowExecutionStatus
+
+	// The details explaining the status of the task execution. Only available for
+	// certain status values.
+	StatusDetails *string
 
 	// The ARN of the task that ran.
 	TaskArn *string
@@ -2242,80 +2255,67 @@ type MaintenanceWindowExecutionTaskIdentity struct {
 	// The ID of the specific task execution in the maintenance window execution.
 	TaskExecutionId *string
 
-	// The ID of the maintenance window execution that ran the task.
-	WindowExecutionId *string
-
-	// The details explaining the status of the task execution. Only available for
-	// certain status values.
-	StatusDetails *string
-
-	// The time the task execution finished.
-	EndTime *time.Time
-
-	// The status of the task execution.
-	Status MaintenanceWindowExecutionStatus
-
 	// The type of task that ran.
 	TaskType MaintenanceWindowTaskType
 
-	// The time the task execution started.
-	StartTime *time.Time
+	// The ID of the maintenance window execution that ran the task.
+	WindowExecutionId *string
 }
 
 // Describes the information about a task invocation for a particular target as
 // part of a task execution performed as part of a maintenance window execution.
 type MaintenanceWindowExecutionTaskInvocationIdentity struct {
 
-	// The parameters that were provided for the invocation when it was run.
-	Parameters *string
-
-	// The ID of the specific task execution in the maintenance window execution.
-	TaskExecutionId *string
+	// The time the invocation finished.
+	EndTime *time.Time
 
 	// The ID of the action performed in the service that actually handled the task
 	// invocation. If the task type is RUN_COMMAND, this value is the command ID.
 	ExecutionId *string
 
-	// The ID of the target definition in this maintenance window the invocation was
-	// performed for.
-	WindowTargetId *string
-
 	// The ID of the task invocation.
 	InvocationId *string
-
-	// The ID of the maintenance window execution that ran the task.
-	WindowExecutionId *string
-
-	// The details explaining the status of the task invocation. Only available for
-	// certain Status values.
-	StatusDetails *string
 
 	// User-provided value that was specified when the target was registered with the
 	// maintenance window. This was also included in any CloudWatch events raised
 	// during the task invocation.
 	OwnerInformation *string
 
-	// The time the invocation finished.
-	EndTime *time.Time
+	// The parameters that were provided for the invocation when it was run.
+	Parameters *string
 
 	// The time the invocation started.
 	StartTime *time.Time
 
+	// The status of the task invocation.
+	Status MaintenanceWindowExecutionStatus
+
+	// The details explaining the status of the task invocation. Only available for
+	// certain Status values.
+	StatusDetails *string
+
+	// The ID of the specific task execution in the maintenance window execution.
+	TaskExecutionId *string
+
 	// The task type.
 	TaskType MaintenanceWindowTaskType
 
-	// The status of the task invocation.
-	Status MaintenanceWindowExecutionStatus
+	// The ID of the maintenance window execution that ran the task.
+	WindowExecutionId *string
+
+	// The ID of the target definition in this maintenance window the invocation was
+	// performed for.
+	WindowTargetId *string
 }
 
 // Filter used in the request. Supported filter keys are Name and Enabled.
 type MaintenanceWindowFilter struct {
 
-	// The filter values.
-	Values []*string
-
 	// The name of the filter.
 	Key *string
+
+	// The filter values.
+	Values []*string
 }
 
 // Information about the maintenance window.
@@ -2325,13 +2325,21 @@ type MaintenanceWindowIdentity struct {
 	// Manager stops scheduling new tasks for execution.
 	Cutoff *int32
 
+	// A description of the maintenance window.
+	Description *string
+
+	// The duration of the maintenance window in hours.
+	Duration *int32
+
+	// Indicates whether the maintenance window is enabled.
+	Enabled *bool
+
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become inactive.
 	EndDate *string
 
-	// The time zone that the scheduled maintenance window executions are based on, in
-	// Internet Assigned Numbers Authority (IANA) format.
-	ScheduleTimezone *string
+	// The name of the maintenance window.
+	Name *string
 
 	// The next time the maintenance window will actually run, taking into account any
 	// specified times for the maintenance window to become active or inactive.
@@ -2340,28 +2348,20 @@ type MaintenanceWindowIdentity struct {
 	// The schedule of the maintenance window in the form of a cron or rate expression.
 	Schedule *string
 
-	// Indicates whether the maintenance window is enabled.
-	Enabled *bool
-
-	// A description of the maintenance window.
-	Description *string
-
 	// The number of days to wait to run a maintenance window after the scheduled CRON
 	// expression date and time.
 	ScheduleOffset *int32
 
-	// The ID of the maintenance window.
-	WindowId *string
-
-	// The name of the maintenance window.
-	Name *string
+	// The time zone that the scheduled maintenance window executions are based on, in
+	// Internet Assigned Numbers Authority (IANA) format.
+	ScheduleTimezone *string
 
 	// The date and time, in ISO-8601 Extended format, for when the maintenance window
 	// is scheduled to become active.
 	StartDate *string
 
-	// The duration of the maintenance window in hours.
-	Duration *int32
+	// The ID of the maintenance window.
+	WindowId *string
 }
 
 // The maintenance window to which the specified target belongs.
@@ -2420,33 +2420,18 @@ type MaintenanceWindowLambdaParameters struct {
 // values are specified for TaskInvocationParameters.
 type MaintenanceWindowRunCommandParameters struct {
 
-	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
-	DocumentHashType DocumentHashType
-
-	// The ARN of the IAM service role to use to publish Amazon Simple Notification
-	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
-	ServiceRoleArn *string
-
-	// The name of the S3 bucket.
-	OutputS3BucketName *string
-
-	// If this time is reached and the command has not already started running, it
-	// doesn't run.
-	TimeoutSeconds *int32
-
 	// Configuration options for sending command output to CloudWatch Logs.
 	CloudWatchOutputConfig *CloudWatchOutputConfig
+
+	// Information about the commands to run.
+	Comment *string
 
 	// The SHA-256 or SHA-1 hash created by the system when the document was created.
 	// SHA-1 hashes have been deprecated.
 	DocumentHash *string
 
-	// Information about the commands to run.
-	Comment *string
-
-	// Configurations for sending notifications about command status changes on a
-	// per-instance basis.
-	NotificationConfig *NotificationConfig
+	// SHA-256 or SHA-1. SHA-1 hashes have been deprecated.
+	DocumentHashType DocumentHashType
 
 	// The SSM document version to use in the request. You can specify $DEFAULT,
 	// $LATEST, or a specific version number. If you run commands by using the AWS CLI,
@@ -2456,11 +2441,26 @@ type MaintenanceWindowRunCommandParameters struct {
 	// "3"
 	DocumentVersion *string
 
-	// The parameters for the RUN_COMMAND task execution.
-	Parameters map[string][]*string
+	// Configurations for sending notifications about command status changes on a
+	// per-instance basis.
+	NotificationConfig *NotificationConfig
+
+	// The name of the S3 bucket.
+	OutputS3BucketName *string
 
 	// The S3 bucket subfolder.
 	OutputS3KeyPrefix *string
+
+	// The parameters for the RUN_COMMAND task execution.
+	Parameters map[string][]*string
+
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+	ServiceRoleArn *string
+
+	// If this time is reached and the command has not already started running, it
+	// doesn't run.
+	TimeoutSeconds *int32
 }
 
 // The parameters for a STEP_FUNCTIONS task. For information about specifying and
@@ -2488,6 +2488,19 @@ type MaintenanceWindowStepFunctionsParameters struct {
 // The target registered with the maintenance window.
 type MaintenanceWindowTarget struct {
 
+	// A description for the target.
+	Description *string
+
+	// The name for the maintenance window target.
+	Name *string
+
+	// A user-provided value that will be included in any CloudWatch events that are
+	// raised while running tasks for these targets in this maintenance window.
+	OwnerInformation *string
+
+	// The type of target that is being registered with the maintenance window.
+	ResourceType MaintenanceWindowResourceType
+
 	// The targets, either instances or tags. Specify instances using the following
 	// format: Key=instanceids,Values=, Tags are specified using the following format:
 	// Key=,Values=.
@@ -2496,21 +2509,8 @@ type MaintenanceWindowTarget struct {
 	// The ID of the maintenance window to register the target with.
 	WindowId *string
 
-	// The type of target that is being registered with the maintenance window.
-	ResourceType MaintenanceWindowResourceType
-
-	// A description for the target.
-	Description *string
-
-	// The name for the maintenance window target.
-	Name *string
-
 	// The ID of the target.
 	WindowTargetId *string
-
-	// A user-provided value that will be included in any CloudWatch events that are
-	// raised while running tasks for these targets in this maintenance window.
-	OwnerInformation *string
 }
 
 // Information about a task defined for a maintenance window.
@@ -2527,39 +2527,33 @@ type MaintenanceWindowTask struct {
 	// MaintenanceWindowTaskInvocationParameters ().
 	LoggingInfo *LoggingInfo
 
-	// The maximum number of errors allowed before this task stops being scheduled.
-	MaxErrors *string
-
-	// The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION
-	// task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA
-	// tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the state
-	// machine ARN.
-	TaskArn *string
-
-	// The task name.
-	Name *string
-
 	// The maximum number of targets this task can be run for, in parallel.
 	MaxConcurrency *string
 
-	// The task ID.
-	WindowTaskId *string
+	// The maximum number of errors allowed before this task stops being scheduled.
+	MaxErrors *string
 
-	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
-	// LAMBDA, or STEP_FUNCTIONS.
-	Type MaintenanceWindowTaskType
+	// The task name.
+	Name *string
 
 	// The priority of the task in the maintenance window. The lower the number, the
 	// higher the priority. Tasks that have the same priority are scheduled in
 	// parallel.
 	Priority *int32
 
+	// The ARN of the IAM service role to use to publish Amazon Simple Notification
+	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
+	ServiceRoleArn *string
+
 	// The targets (either instances or tags). Instances are specified using
 	// Key=instanceids,Values=,. Tags are specified using Key=,Values=.
 	Targets []*Target
 
-	// The ID of the maintenance window where the task is registered.
-	WindowId *string
+	// The resource that the task uses during execution. For RUN_COMMAND and AUTOMATION
+	// task types, TaskArn is the Systems Manager document name or ARN. For LAMBDA
+	// tasks, it's the function name or ARN. For STEP_FUNCTIONS tasks, it's the state
+	// machine ARN.
+	TaskArn *string
 
 	// The parameters that should be passed to the task when it is run. TaskParameters
 	// has been deprecated. To specify parameters to pass to a task when it runs,
@@ -2568,9 +2562,15 @@ type MaintenanceWindowTask struct {
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
 	TaskParameters map[string]*MaintenanceWindowTaskParameterValueExpression
 
-	// The ARN of the IAM service role to use to publish Amazon Simple Notification
-	// Service (Amazon SNS) notifications for maintenance window Run Command tasks.
-	ServiceRoleArn *string
+	// The type of task. The type can be one of the following: RUN_COMMAND, AUTOMATION,
+	// LAMBDA, or STEP_FUNCTIONS.
+	Type MaintenanceWindowTaskType
+
+	// The ID of the maintenance window where the task is registered.
+	WindowId *string
+
+	// The task ID.
+	WindowTaskId *string
 }
 
 // The parameters for task execution.
@@ -2579,14 +2579,14 @@ type MaintenanceWindowTaskInvocationParameters struct {
 	// The parameters for an AUTOMATION task type.
 	Automation *MaintenanceWindowAutomationParameters
 
+	// The parameters for a LAMBDA task type.
+	Lambda *MaintenanceWindowLambdaParameters
+
 	// The parameters for a RUN_COMMAND task type.
 	RunCommand *MaintenanceWindowRunCommandParameters
 
 	// The parameters for a STEP_FUNCTIONS task type.
 	StepFunctions *MaintenanceWindowStepFunctionsParameters
-
-	// The parameters for a LAMBDA task type.
-	Lambda *MaintenanceWindowLambdaParameters
 }
 
 // Defines the values for a task parameter.
@@ -2616,11 +2616,6 @@ type NotificationConfig struct {
 	// this topic.
 	NotificationArn *string
 
-	// Command: Receive notification when the status of a command changes. Invocation:
-	// For commands sent to multiple instances, receive notification on a per-instance
-	// basis when the status of a command changes.
-	NotificationType NotificationType
-
 	// The different events for which you can receive notifications. These events
 	// include the following: All (events), InProgress, Success, TimedOut, Cancelled,
 	// Failed. To learn more about these events, see Monitoring Systems Manager status
@@ -2628,18 +2623,17 @@ type NotificationConfig struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/monitoring-sns-notifications.html)
 	// in the AWS Systems Manager User Guide.
 	NotificationEvents []NotificationEvent
+
+	// Command: Receive notification when the status of a command changes. Invocation:
+	// For commands sent to multiple instances, receive notification on a per-instance
+	// basis when the status of a command changes.
+	NotificationType NotificationType
 }
 
 // One or more aggregators for viewing counts of OpsItems using different
 // dimensions such as Source, CreatedTime, or Source and CreatedTime, to name a
 // few.
 type OpsAggregator struct {
-
-	// The data type name to use for viewing counts of OpsItems.
-	TypeName *string
-
-	// The aggregator value.
-	Values map[string]*string
 
 	// Either a Range or Count aggregator for limiting an OpsItem summary.
 	AggregatorType *string
@@ -2652,6 +2646,12 @@ type OpsAggregator struct {
 
 	// The aggregator filters.
 	Filters []*OpsFilter
+
+	// The data type name to use for viewing counts of OpsItems.
+	TypeName *string
+
+	// The aggregator value.
+	Values map[string]*string
 }
 
 // The result of the query.
@@ -2677,9 +2677,6 @@ type OpsEntityItem struct {
 // A filter for viewing OpsItem summaries.
 type OpsFilter struct {
 
-	// The type of filter.
-	Type OpsFilterOperatorType
-
 	// The name of the filter.
 	//
 	// This member is required.
@@ -2689,6 +2686,9 @@ type OpsFilter struct {
 	//
 	// This member is required.
 	Values []*string
+
+	// The type of filter.
+	Type OpsFilterOperatorType
 }
 
 // Operations engineers and IT professionals use OpsCenter to view, investigate,
@@ -2698,50 +2698,28 @@ type OpsFilter struct {
 // the AWS Systems Manager User Guide.
 type OpsItem struct {
 
-	// One or more OpsItems that share something in common with the current OpsItem.
-	// For example, related OpsItems can include OpsItems with similar error messages,
-	// impacted resources, or statuses for the impacted resource.
-	RelatedOpsItems []*RelatedOpsItem
+	// An OpsItem category. Category options include: Availability, Cost, Performance,
+	// Recovery, Security.
+	Category *string
 
-	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
-	// this OpsItem is edited or changed.
-	Notifications []*OpsItemNotification
-
-	// The date and time the OpsItem was last updated.
-	LastModifiedTime *time.Time
-
-	// The ARN of the AWS account that last updated the OpsItem.
-	LastModifiedBy *string
-
-	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
-	// information, see Editing OpsItem details
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
-	// in the AWS Systems Manager User Guide.
-	Status OpsItemStatus
+	// The ARN of the AWS account that created the OpsItem.
+	CreatedBy *string
 
 	// The date and time the OpsItem was created.
 	CreatedTime *time.Time
 
-	// The version of this OpsItem. Each time the OpsItem is edited the version number
-	// increments by one.
-	Version *string
+	// The OpsItem description.
+	Description *string
 
-	// The importance of this OpsItem in relation to other OpsItems in the system.
-	Priority *int32
+	// The ARN of the AWS account that last updated the OpsItem.
+	LastModifiedBy *string
 
-	// A short heading that describes the nature of the OpsItem and the impacted
-	// resource.
-	Title *string
+	// The date and time the OpsItem was last updated.
+	LastModifiedTime *time.Time
 
-	// The origin of the OpsItem, such as Amazon EC2 or Systems Manager. The impacted
-	// resource is a subset of source.
-	Source *string
-
-	// The severity of the OpsItem. Severity options range from 1 to 4.
-	Severity *string
-
-	// The ARN of the AWS account that created the OpsItem.
-	CreatedBy *string
+	// The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when
+	// this OpsItem is edited or changed.
+	Notifications []*OpsItemNotification
 
 	// Operational data is custom data that provides useful reference details about the
 	// OpsItem. For example, you can specify log files, error strings, license keys,
@@ -2762,26 +2740,48 @@ type OpsItem struct {
 	// in the AWS Systems Manager User Guide.
 	OperationalData map[string]*OpsItemDataValue
 
-	// The OpsItem description.
-	Description *string
-
 	// The ID of the OpsItem.
 	OpsItemId *string
 
-	// An OpsItem category. Category options include: Availability, Cost, Performance,
-	// Recovery, Security.
-	Category *string
+	// The importance of this OpsItem in relation to other OpsItems in the system.
+	Priority *int32
+
+	// One or more OpsItems that share something in common with the current OpsItem.
+	// For example, related OpsItems can include OpsItems with similar error messages,
+	// impacted resources, or statuses for the impacted resource.
+	RelatedOpsItems []*RelatedOpsItem
+
+	// The severity of the OpsItem. Severity options range from 1 to 4.
+	Severity *string
+
+	// The origin of the OpsItem, such as Amazon EC2 or Systems Manager. The impacted
+	// resource is a subset of source.
+	Source *string
+
+	// The OpsItem status. Status can be Open, In Progress, or Resolved. For more
+	// information, see Editing OpsItem details
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html)
+	// in the AWS Systems Manager User Guide.
+	Status OpsItemStatus
+
+	// A short heading that describes the nature of the OpsItem and the impacted
+	// resource.
+	Title *string
+
+	// The version of this OpsItem. Each time the OpsItem is edited the version number
+	// increments by one.
+	Version *string
 }
 
 // An object that defines the value of the key and its type in the OperationalData
 // map.
 type OpsItemDataValue struct {
 
-	// The value of the OperationalData key.
-	Value *string
-
 	// The type of key-value pair. Valid types include SearchableString and String.
 	Type OpsItemDataType
+
+	// The value of the OperationalData key.
+	Value *string
 }
 
 // Describes an OpsItem filter.
@@ -2792,15 +2792,15 @@ type OpsItemFilter struct {
 	// This member is required.
 	Key OpsItemFilterKey
 
-	// The filter value.
-	//
-	// This member is required.
-	Values []*string
-
 	// The operator used by the filter call.
 	//
 	// This member is required.
 	Operator OpsItemFilterOperator
+
+	// The filter value.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // A notification about the OpsItem.
@@ -2814,9 +2814,17 @@ type OpsItemNotification struct {
 // A count of OpsItems.
 type OpsItemSummary struct {
 
-	// A short heading that describes the nature of the OpsItem and the impacted
-	// resource.
-	Title *string
+	// A list of OpsItems by category.
+	Category *string
+
+	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+	CreatedBy *string
+
+	// The date and time the OpsItem was created.
+	CreatedTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+	LastModifiedBy *string
 
 	// The date and time the OpsItem was last updated.
 	LastModifiedTime *time.Time
@@ -2825,32 +2833,24 @@ type OpsItemSummary struct {
 	// OpsItem.
 	OperationalData map[string]*OpsItemDataValue
 
-	// The impacted AWS resource.
-	Source *string
-
-	// A list of OpsItems by severity.
-	Severity *string
-
 	// The ID of the OpsItem.
 	OpsItemId *string
-
-	// The OpsItem status. Status can be Open, In Progress, or Resolved.
-	Status OpsItemStatus
 
 	// The importance of this OpsItem in relation to other OpsItems in the system.
 	Priority *int32
 
-	// A list of OpsItems by category.
-	Category *string
+	// A list of OpsItems by severity.
+	Severity *string
 
-	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
-	LastModifiedBy *string
+	// The impacted AWS resource.
+	Source *string
 
-	// The date and time the OpsItem was created.
-	CreatedTime *time.Time
+	// The OpsItem status. Status can be Open, In Progress, or Resolved.
+	Status OpsItemStatus
 
-	// The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
-	CreatedBy *string
+	// A short heading that describes the nature of the OpsItem and the impacted
+	// resource.
+	Title *string
 }
 
 // The OpsItem data type to return.
@@ -2877,22 +2877,19 @@ type OutputSource struct {
 // An Systems Manager parameter in Parameter Store.
 type Parameter struct {
 
-	// The parameter value.
-	Value *string
+	// The Amazon Resource Name (ARN) of the parameter.
+	ARN *string
 
-	// The parameter version.
-	Version *int64
+	// The data type of the parameter, such as text or aws:ec2:image. The default is
+	// text.
+	DataType *string
 
 	// Date the parameter was last changed or updated and the parameter version was
 	// created.
 	LastModifiedDate *time.Time
 
-	// The Amazon Resource Name (ARN) of the parameter.
-	ARN *string
-
-	// The type of parameter. Valid values include the following: String, StringList,
-	// and SecureString.
-	Type ParameterType
+	// The name of the parameter.
+	Name *string
 
 	// Either the version number or the label used to retrieve the parameter value.
 	// Specify selectors by using one of the following formats: parameter_name:version
@@ -2903,50 +2900,44 @@ type Parameter struct {
 	// SourceResult is the raw result or response from the source.
 	SourceResult *string
 
-	// The data type of the parameter, such as text or aws:ec2:image. The default is
-	// text.
-	DataType *string
+	// The type of parameter. Valid values include the following: String, StringList,
+	// and SecureString.
+	Type ParameterType
 
-	// The name of the parameter.
-	Name *string
+	// The parameter value.
+	Value *string
+
+	// The parameter version.
+	Version *int64
 }
 
 // Information about parameter usage.
 type ParameterHistory struct {
 
-	// Information about the parameter.
-	Description *string
-
-	// The parameter tier.
-	Tier ParameterTier
-
-	// Date the parameter was last changed or updated.
-	LastModifiedDate *time.Time
-
-	// The name of the parameter.
-	Name *string
-
-	// Labels assigned to the parameter version.
-	Labels []*string
-
-	// The ID of the query key used for this parameter.
-	KeyId *string
-
-	// The parameter value.
-	Value *string
+	// Parameter names can include the following letters and symbols. a-zA-Z0-9_.-
+	AllowedPattern *string
 
 	// The data type of the parameter, such as text or aws:ec2:image. The default is
 	// text.
 	DataType *string
 
+	// Information about the parameter.
+	Description *string
+
+	// The ID of the query key used for this parameter.
+	KeyId *string
+
+	// Labels assigned to the parameter version.
+	Labels []*string
+
+	// Date the parameter was last changed or updated.
+	LastModifiedDate *time.Time
+
 	// Amazon Resource Name (ARN) of the AWS user who last changed the parameter.
 	LastModifiedUser *string
 
-	// The parameter version.
-	Version *int64
-
-	// Parameter names can include the following letters and symbols. a-zA-Z0-9_.-
-	AllowedPattern *string
+	// The name of the parameter.
+	Name *string
 
 	// Information about the policies assigned to a parameter. Assigning parameter
 	// policies
@@ -2954,80 +2945,89 @@ type ParameterHistory struct {
 	// in the AWS Systems Manager User Guide.
 	Policies []*ParameterInlinePolicy
 
+	// The parameter tier.
+	Tier ParameterTier
+
 	// The type of parameter used.
 	Type ParameterType
+
+	// The parameter value.
+	Value *string
+
+	// The parameter version.
+	Version *int64
 }
 
 // One or more policies assigned to a parameter.
 type ParameterInlinePolicy struct {
-
-	// The type of policy. Parameter Store supports the following policy types:
-	// Expiration, ExpirationNotification, and NoChangeNotification.
-	PolicyType *string
-
-	// The JSON text of the policy.
-	PolicyText *string
 
 	// The status of the policy. Policies report the following statuses: Pending (the
 	// policy has not been enforced or applied yet), Finished (the policy was applied),
 	// Failed (the policy was not applied), or InProgress (the policy is being applied
 	// now).
 	PolicyStatus *string
+
+	// The JSON text of the policy.
+	PolicyText *string
+
+	// The type of policy. Parameter Store supports the following policy types:
+	// Expiration, ExpirationNotification, and NoChangeNotification.
+	PolicyType *string
 }
 
 // Metadata includes information like the ARN of the last user and the date/time
 // the parameter was last used.
 type ParameterMetadata struct {
 
-	// A list of policies associated with a parameter.
-	Policies []*ParameterInlinePolicy
-
-	// Description of the parameter actions.
-	Description *string
-
 	// A parameter name can include only the following letters and symbols.
 	// a-zA-Z0-9_.-
 	AllowedPattern *string
-
-	// The type of parameter. Valid parameter types include the following: String,
-	// StringList, and SecureString.
-	Type ParameterType
 
 	// The data type of the parameter, such as text or aws:ec2:image. The default is
 	// text.
 	DataType *string
 
-	// The parameter name.
-	Name *string
-
-	// Amazon Resource Name (ARN) of the AWS user who last changed the parameter.
-	LastModifiedUser *string
-
-	// The parameter tier.
-	Tier ParameterTier
-
-	// The parameter version.
-	Version *int64
+	// Description of the parameter actions.
+	Description *string
 
 	// The ID of the query key used for this parameter.
 	KeyId *string
 
 	// Date the parameter was last changed or updated.
 	LastModifiedDate *time.Time
+
+	// Amazon Resource Name (ARN) of the AWS user who last changed the parameter.
+	LastModifiedUser *string
+
+	// The parameter name.
+	Name *string
+
+	// A list of policies associated with a parameter.
+	Policies []*ParameterInlinePolicy
+
+	// The parameter tier.
+	Tier ParameterTier
+
+	// The type of parameter. Valid parameter types include the following: String,
+	// StringList, and SecureString.
+	Type ParameterType
+
+	// The parameter version.
+	Version *int64
 }
 
 // This data type is deprecated. Instead, use ParameterStringFilter ().
 type ParametersFilter struct {
 
-	// The filter values.
-	//
-	// This member is required.
-	Values []*string
-
 	// The name of the filter.
 	//
 	// This member is required.
 	Key ParametersFilterKey
+
+	// The filter values.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // One or more filters. Use a filter to return a more specific list of results. The
@@ -3042,9 +3042,6 @@ type ParametersFilter struct {
 // in the AWS Systems Manager User Guide.
 type ParameterStringFilter struct {
 
-	// The value you want to search for.
-	Values []*string
-
 	// The name of the filter.
 	//
 	// This member is required.
@@ -3057,55 +3054,64 @@ type ParameterStringFilter struct {
 	// Equals and BeginsWith. (Exception: For filters using the key Label, the only
 	// valid option is Equals.)
 	Option *string
+
+	// The value you want to search for.
+	Values []*string
 }
 
 // Represents metadata about a patch.
 type Patch struct {
 
+	// The classification of the patch (for example, SecurityUpdates, Updates,
+	// CriticalUpdates).
+	Classification *string
+
 	// The URL where more information can be obtained about the patch.
 	ContentUrl *string
-
-	// The product family the patch is applicable for (for example, Windows).
-	ProductFamily *string
-
-	// The ID of the MSRC bulletin the patch is related to.
-	MsrcNumber *string
 
 	// The description of the patch.
 	Description *string
 
-	// The name of the vendor providing the patch.
-	Vendor *string
-
-	// The date the patch was released.
-	ReleaseDate *time.Time
+	// The ID of the patch (this is different than the Microsoft Knowledge Base ID).
+	Id *string
 
 	// The Microsoft Knowledge Base ID of the patch.
 	KbNumber *string
+
+	// The language of the patch if it's language-specific.
+	Language *string
+
+	// The ID of the MSRC bulletin the patch is related to.
+	MsrcNumber *string
+
+	// The severity of the patch (for example Critical, Important, Moderate).
+	MsrcSeverity *string
 
 	// The specific product the patch is applicable for (for example,
 	// WindowsServer2016).
 	Product *string
 
-	// The ID of the patch (this is different than the Microsoft Knowledge Base ID).
-	Id *string
+	// The product family the patch is applicable for (for example, Windows).
+	ProductFamily *string
 
-	// The classification of the patch (for example, SecurityUpdates, Updates,
-	// CriticalUpdates).
-	Classification *string
+	// The date the patch was released.
+	ReleaseDate *time.Time
 
 	// The title of the patch.
 	Title *string
 
-	// The severity of the patch (for example Critical, Important, Moderate).
-	MsrcSeverity *string
-
-	// The language of the patch if it's language-specific.
-	Language *string
+	// The name of the vendor providing the patch.
+	Vendor *string
 }
 
 // Defines the basic information about a patch baseline.
 type PatchBaselineIdentity struct {
+
+	// The description of the patch baseline.
+	BaselineDescription *string
+
+	// The ID of the patch baseline.
+	BaselineId *string
 
 	// The name of the patch baseline.
 	BaselineName *string
@@ -3114,12 +3120,6 @@ type PatchBaselineIdentity struct {
 	// creating multiple default patch baselines. For example, you can create a default
 	// patch baseline for each operating system.
 	DefaultBaseline *bool
-
-	// The description of the patch baseline.
-	BaselineDescription *string
-
-	// The ID of the patch baseline.
-	BaselineId *string
 
 	// Defines the operating system the patch baseline applies to. The Default value is
 	// WINDOWS.
@@ -3130,30 +3130,17 @@ type PatchBaselineIdentity struct {
 // the patch baseline used to patch the instance.
 type PatchComplianceData struct {
 
-	// The title of the patch.
+	// The classification of the patch (for example, SecurityUpdates, Updates,
+	// CriticalUpdates).
 	//
 	// This member is required.
-	Title *string
-
-	// The state of the patch on the instance, such as INSTALLED or FAILED. For
-	// descriptions of each patch state, see About patch compliance
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch)
-	// in the AWS Systems Manager User Guide.
-	//
-	// This member is required.
-	State PatchComplianceDataState
+	Classification *string
 
 	// The date/time the patch was installed on the instance. Note that not all
 	// operating systems provide this level of information.
 	//
 	// This member is required.
 	InstalledTime *time.Time
-
-	// The classification of the patch (for example, SecurityUpdates, Updates,
-	// CriticalUpdates).
-	//
-	// This member is required.
-	Classification *string
 
 	// The operating system-specific ID of the patch.
 	//
@@ -3164,6 +3151,19 @@ type PatchComplianceData struct {
 	//
 	// This member is required.
 	Severity *string
+
+	// The state of the patch on the instance, such as INSTALLED or FAILED. For
+	// descriptions of each patch state, see About patch compliance
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-compliance-about.html#sysman-compliance-monitor-patch)
+	// in the AWS Systems Manager User Guide.
+	//
+	// This member is required.
+	State PatchComplianceDataState
+
+	// The title of the patch.
+	//
+	// This member is required.
+	Title *string
 }
 
 // Defines which patches should be included in a patch baseline. A patch filter
@@ -3206,11 +3206,11 @@ type PatchFilterGroup struct {
 // registered with.
 type PatchGroupPatchBaselineMapping struct {
 
-	// The name of the patch group registered with the patch baseline.
-	PatchGroup *string
-
 	// The patch baseline the patch group is registered with.
 	BaselineIdentity *PatchBaselineIdentity
+
+	// The name of the patch group registered with the patch baseline.
+	PatchGroup *string
 }
 
 // Defines a filter used in Patch Manager APIs.
@@ -3225,11 +3225,6 @@ type PatchOrchestratorFilter struct {
 
 // Defines an approval rule for a patch baseline.
 type PatchRule struct {
-
-	// For instances identified by the approval rule filters, enables a patch baseline
-	// to apply non-security updates available in the specified repository. The default
-	// value is 'false'. Applies to Linux instances only.
-	EnableNonSecurity *bool
 
 	// The patch filter group that defines the criteria for the rule.
 	//
@@ -3249,6 +3244,11 @@ type PatchRule struct {
 
 	// A compliance severity level for all approved patches in a patch baseline.
 	ComplianceLevel PatchComplianceLevel
+
+	// For instances identified by the approval rule filters, enables a patch baseline
+	// to apply non-security updates available in the specified repository. The default
+	// value is 'false'. Applies to Linux instances only.
+	EnableNonSecurity *bool
 }
 
 // A set of rules defining the approval rules for a patch baseline.
@@ -3264,18 +3264,6 @@ type PatchRuleGroup struct {
 // operating systems and source repository. Applies to Linux instances only.
 type PatchSource struct {
 
-	// The name specified to identify the patch source.
-	//
-	// This member is required.
-	Name *string
-
-	// The specific operating system versions a patch repository applies to, such as
-	// "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
-	// For lists of supported product values, see PatchFilter ().
-	//
-	// This member is required.
-	Products []*string
-
 	// The value of the yum repo configuration. For example: [main]
 	//
 	// cachedir=/var/cache/yum/$basesearch$releasever
@@ -3287,14 +3275,22 @@ type PatchSource struct {
 	//
 	// This member is required.
 	Configuration *string
+
+	// The name specified to identify the patch source.
+	//
+	// This member is required.
+	Name *string
+
+	// The specific operating system versions a patch repository applies to, such as
+	// "Ubuntu16.04", "AmazonLinux2016.09", "RedhatEnterpriseLinux7.2" or "Suse12.7".
+	// For lists of supported product values, see PatchFilter ().
+	//
+	// This member is required.
+	Products []*string
 }
 
 // Information about the approval status of a patch.
 type PatchStatus struct {
-
-	// The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED,
-	// EXPLICIT_REJECTED).
-	DeploymentStatus PatchDeploymentStatus
 
 	// The date the patch was approved (or will be approved if the status is
 	// PENDING_APPROVAL).
@@ -3302,31 +3298,35 @@ type PatchStatus struct {
 
 	// The compliance severity level for a patch.
 	ComplianceLevel PatchComplianceLevel
+
+	// The approval status of a patch (APPROVED, PENDING_APPROVAL, EXPLICIT_APPROVED,
+	// EXPLICIT_REJECTED).
+	DeploymentStatus PatchDeploymentStatus
 }
 
 // An aggregate of step execution statuses displayed in the AWS Console for a
 // multi-Region and multi-account Automation execution.
 type ProgressCounters struct {
 
-	// The total number of steps that successfully completed in all specified AWS
-	// Regions and accounts for the current Automation execution.
-	SuccessSteps *int32
+	// The total number of steps that the system cancelled in all specified AWS Regions
+	// and accounts for the current Automation execution.
+	CancelledSteps *int32
 
 	// The total number of steps that failed to run in all specified AWS Regions and
 	// accounts for the current Automation execution.
 	FailedSteps *int32
 
-	// The total number of steps run in all specified AWS Regions and accounts for the
-	// current Automation execution.
-	TotalSteps *int32
-
-	// The total number of steps that the system cancelled in all specified AWS Regions
-	// and accounts for the current Automation execution.
-	CancelledSteps *int32
+	// The total number of steps that successfully completed in all specified AWS
+	// Regions and accounts for the current Automation execution.
+	SuccessSteps *int32
 
 	// The total number of steps that timed out in all specified AWS Regions and
 	// accounts for the current Automation execution.
 	TimedOutSteps *int32
+
+	// The total number of steps run in all specified AWS Regions and accounts for the
+	// current Automation execution.
+	TotalSteps *int32
 }
 
 // An OpsItems that shares something in common with the current OpsItem. For
@@ -3354,39 +3354,36 @@ type ResolvedTargets struct {
 // Compliance summary information for a specific resource.
 type ResourceComplianceSummaryItem struct {
 
-	// The resource ID.
-	ResourceId *string
+	// The compliance type.
+	ComplianceType *string
+
+	// A list of items that are compliant for the resource.
+	CompliantSummary *CompliantSummary
+
+	// Information about the execution.
+	ExecutionSummary *ComplianceExecutionSummary
 
 	// A list of items that aren't compliant for the resource.
 	NonCompliantSummary *NonCompliantSummary
-
-	// The compliance status for the resource.
-	Status ComplianceStatus
 
 	// The highest severity item found for the resource. The resource is compliant for
 	// this item.
 	OverallSeverity ComplianceSeverity
 
-	// Information about the execution.
-	ExecutionSummary *ComplianceExecutionSummary
+	// The resource ID.
+	ResourceId *string
 
 	// The resource type.
 	ResourceType *string
 
-	// A list of items that are compliant for the resource.
-	CompliantSummary *CompliantSummary
-
-	// The compliance type.
-	ComplianceType *string
+	// The compliance status for the resource.
+	Status ComplianceStatus
 }
 
 // Information about the AwsOrganizationsSource resource data sync source. A sync
 // source of this type can synchronize data from AWS Organizations or, if an AWS
 // Organization is not present, from multiple AWS Regions.
 type ResourceDataSyncAwsOrganizationsSource struct {
-
-	// The AWS Organizations organization units included in the sync.
-	OrganizationalUnits []*ResourceDataSyncOrganizationalUnit
 
 	// If an AWS Organization is present, this is either OrganizationalUnits or
 	// EntireOrganization. For OrganizationalUnits, the data is aggregated from a set
@@ -3395,6 +3392,9 @@ type ResourceDataSyncAwsOrganizationsSource struct {
 	//
 	// This member is required.
 	OrganizationSourceType *string
+
+	// The AWS Organizations organization units included in the sync.
+	OrganizationalUnits []*ResourceDataSyncOrganizationalUnit
 }
 
 // Synchronize Systems Manager Inventory data from multiple AWS accounts defined in
@@ -3411,38 +3411,38 @@ type ResourceDataSyncDestinationDataSharing struct {
 // status and last successful sync.
 type ResourceDataSyncItem struct {
 
+	// The status reported by the last sync.
+	LastStatus LastResourceDataSyncStatus
+
 	// The last time the sync operations returned a status of SUCCESSFUL (UTC).
 	LastSuccessfulSyncTime *time.Time
 
-	// The name of the Resource Data Sync.
-	SyncName *string
+	// The status message details reported by the last sync.
+	LastSyncStatusMessage *string
 
 	// The last time the configuration attempted to sync (UTC).
 	LastSyncTime *time.Time
 
+	// Configuration information for the target S3 bucket.
+	S3Destination *ResourceDataSyncS3Destination
+
 	// The date and time the configuration was created (UTC).
 	SyncCreatedTime *time.Time
+
+	// The date and time the resource data sync was changed.
+	SyncLastModifiedTime *time.Time
+
+	// The name of the Resource Data Sync.
+	SyncName *string
+
+	// Information about the source where the data was synchronized.
+	SyncSource *ResourceDataSyncSourceWithState
 
 	// The type of resource data sync. If SyncType is SyncToDestination, then the
 	// resource data sync synchronizes data to an S3 bucket. If the SyncType is
 	// SyncFromSource then the resource data sync synchronizes data from AWS
 	// Organizations or from multiple AWS Regions.
 	SyncType *string
-
-	// The date and time the resource data sync was changed.
-	SyncLastModifiedTime *time.Time
-
-	// Configuration information for the target S3 bucket.
-	S3Destination *ResourceDataSyncS3Destination
-
-	// Information about the source where the data was synchronized.
-	SyncSource *ResourceDataSyncSourceWithState
-
-	// The status message details reported by the last sync.
-	LastSyncStatusMessage *string
-
-	// The status reported by the last sync.
-	LastStatus LastResourceDataSyncStatus
 }
 
 // The AWS Organizations organizational unit data source for the sync.
@@ -3455,30 +3455,30 @@ type ResourceDataSyncOrganizationalUnit struct {
 // Information about the target S3 bucket for the Resource Data Sync.
 type ResourceDataSyncS3Destination struct {
 
-	// The ARN of an encryption key for a destination in Amazon S3. Must belong to the
-	// same Region as the destination S3 bucket.
-	AWSKMSKeyARN *string
-
 	// The name of the S3 bucket where the aggregated data is stored.
 	//
 	// This member is required.
 	BucketName *string
+
+	// The AWS Region with the S3 bucket targeted by the Resource Data Sync.
+	//
+	// This member is required.
+	Region *string
 
 	// A supported sync format. The following format is currently supported: JsonSerDe
 	//
 	// This member is required.
 	SyncFormat ResourceDataSyncS3Format
 
+	// The ARN of an encryption key for a destination in Amazon S3. Must belong to the
+	// same Region as the destination S3 bucket.
+	AWSKMSKeyARN *string
+
 	// Enables destination data sharing. By default, this field is null.
 	DestinationDataSharing *ResourceDataSyncDestinationDataSharing
 
 	// An Amazon S3 prefix for the bucket.
 	Prefix *string
-
-	// The AWS Region with the S3 bucket targeted by the Resource Data Sync.
-	//
-	// This member is required.
-	Region *string
 }
 
 // Information about the source of the data included in the resource data sync.
@@ -3489,20 +3489,20 @@ type ResourceDataSyncSource struct {
 	// This member is required.
 	SourceRegions []*string
 
-	// Whether to automatically synchronize and aggregate data from new AWS Regions
-	// when those Regions come online.
-	IncludeFutureRegions *bool
-
-	// Information about the AwsOrganizationsSource resource data sync source. A sync
-	// source of this type can synchronize data from AWS Organizations.
-	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource
-
 	// The type of data source for the resource data sync. SourceType is either
 	// AwsOrganizations (if an organization is present in AWS Organizations) or
 	// singleAccountMultiRegions.
 	//
 	// This member is required.
 	SourceType *string
+
+	// Information about the AwsOrganizationsSource resource data sync source. A sync
+	// source of this type can synchronize data from AWS Organizations.
+	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource
+
+	// Whether to automatically synchronize and aggregate data from new AWS Regions
+	// when those Regions come online.
+	IncludeFutureRegions *bool
 }
 
 // The data type name for including resource data sync state. There are four sync
@@ -3515,11 +3515,6 @@ type ResourceDataSyncSource struct {
 // in AWS Organizations.)
 type ResourceDataSyncSourceWithState struct {
 
-	// The type of data source for the resource data sync. SourceType is either
-	// AwsOrganizations (if an organization is present in AWS Organizations) or
-	// singleAccountMultiRegions.
-	SourceType *string
-
 	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
 	// type.
 	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource
@@ -3530,6 +3525,11 @@ type ResourceDataSyncSourceWithState struct {
 
 	// The SyncSource AWS Regions included in the resource data sync.
 	SourceRegions []*string
+
+	// The type of data source for the resource data sync. SourceType is either
+	// AwsOrganizations (if an organization is present in AWS Organizations) or
+	// singleAccountMultiRegions.
+	SourceType *string
 
 	// The data type name for including resource data sync state. There are four sync
 	// states:  <p> <code>OrganizationNotExists</code>: Your organization doesn't
@@ -3555,11 +3555,11 @@ type ResultAttribute struct {
 // An S3 bucket where you want to store the results of this request.
 type S3OutputLocation struct {
 
-	// The S3 bucket subfolder.
-	OutputS3KeyPrefix *string
-
 	// The name of the S3 bucket.
 	OutputS3BucketName *string
+
+	// The S3 bucket subfolder.
+	OutputS3KeyPrefix *string
 
 	// (Deprecated) You can no longer specify this parameter. The system ignores it.
 	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
@@ -3580,11 +3580,11 @@ type ScheduledWindowExecution struct {
 	// to be run.
 	ExecutionTime *string
 
-	// The ID of the maintenance window to be run.
-	WindowId *string
-
 	// The name of the maintenance window to be run.
 	Name *string
+
+	// The ID of the maintenance window to be run.
+	WindowId *string
 }
 
 // The service setting data structure.  <p> <code>ServiceSetting</code> is an
@@ -3602,12 +3602,18 @@ type ScheduledWindowExecution struct {
 // the AWS service team.
 type ServiceSetting struct {
 
-	// The ID of the service setting.
-	SettingId *string
+	// The ARN of the service setting.
+	ARN *string
+
+	// The last time the service setting was modified.
+	LastModifiedDate *time.Time
 
 	// The ARN of the last modified user. This field is populated only if the setting
 	// value was overwritten.
 	LastModifiedUser *string
+
+	// The ID of the service setting.
+	SettingId *string
 
 	// The value of the service setting.
 	SettingValue *string
@@ -3625,19 +3631,26 @@ type ServiceSetting struct {
 	// setting uses a default or custom value, but a setting change request is pending
 	// approval.
 	Status *string
-
-	// The ARN of the service setting.
-	ARN *string
-
-	// The last time the service setting was modified.
-	LastModifiedDate *time.Time
 }
 
 // Information about a Session Manager connection to an instance.
 type Session struct {
 
+	// Reserved for future use.
+	Details *string
+
+	// The name of the Session Manager SSM document used to define the parameters and
+	// plugin settings for the session. For example, SSM-SessionManagerRunShell.
+	DocumentName *string
+
 	// The date and time, in ISO-8601 Extended format, when the session was terminated.
 	EndDate *time.Time
+
+	// Reserved for future use.
+	OutputUrl *SessionManagerOutputUrl
+
+	// The ID of the AWS user account that started the session.
+	Owner *string
 
 	// The ID of the session.
 	SessionId *string
@@ -3645,28 +3658,20 @@ type Session struct {
 	// The date and time, in ISO-8601 Extended format, when the session began.
 	StartDate *time.Time
 
-	// Reserved for future use.
-	OutputUrl *SessionManagerOutputUrl
-
-	// The name of the Session Manager SSM document used to define the parameters and
-	// plugin settings for the session. For example, SSM-SessionManagerRunShell.
-	DocumentName *string
-
-	// The instance that the Session Manager session connected to.
-	Target *string
-
-	// Reserved for future use.
-	Details *string
-
 	// The status of the session. For example, "Connected" or "Terminated".
 	Status SessionStatus
 
-	// The ID of the AWS user account that started the session.
-	Owner *string
+	// The instance that the Session Manager session connected to.
+	Target *string
 }
 
 // Describes a filter for Session Manager information.
 type SessionFilter struct {
+
+	// The name of the filter.
+	//
+	// This member is required.
+	Key SessionFilterKey
 
 	// The filter value. Valid values for each filter key are as follows:
 	//
@@ -3704,11 +3709,6 @@ type SessionFilter struct {
 	//
 	// This member is required.
 	Value *string
-
-	// The name of the filter.
-	//
-	// This member is required.
-	Key SessionFilterKey
 }
 
 // Reserved for future use.
@@ -3726,6 +3726,21 @@ type SessionManagerOutputUrl struct {
 type SeveritySummary struct {
 
 	// The total number of resources or compliance items that have a severity level of
+	// critical. Critical severity is determined by the organization that published the
+	// compliance items.
+	CriticalCount *int32
+
+	// The total number of resources or compliance items that have a severity level of
+	// high. High severity is determined by the organization that published the
+	// compliance items.
+	HighCount *int32
+
+	// The total number of resources or compliance items that have a severity level of
+	// informational. Informational severity is determined by the organization that
+	// published the compliance items.
+	InformationalCount *int32
+
+	// The total number of resources or compliance items that have a severity level of
 	// low. Low severity is determined by the organization that published the
 	// compliance items.
 	LowCount *int32
@@ -3736,21 +3751,6 @@ type SeveritySummary struct {
 	MediumCount *int32
 
 	// The total number of resources or compliance items that have a severity level of
-	// high. High severity is determined by the organization that published the
-	// compliance items.
-	HighCount *int32
-
-	// The total number of resources or compliance items that have a severity level of
-	// critical. Critical severity is determined by the organization that published the
-	// compliance items.
-	CriticalCount *int32
-
-	// The total number of resources or compliance items that have a severity level of
-	// informational. Informational severity is determined by the organization that
-	// published the compliance items.
-	InformationalCount *int32
-
-	// The total number of resources or compliance items that have a severity level of
 	// unspecified. Unspecified severity is determined by the organization that
 	// published the compliance items.
 	UnspecifiedCount *int32
@@ -3759,60 +3759,37 @@ type SeveritySummary struct {
 // Detailed information about an the execution state of an Automation step.
 type StepExecution struct {
 
-	// The execution status for this step.
-	StepStatus AutomationExecutionStatus
-
-	// A user-specified list of parameters to override when running a step.
-	OverriddenParameters map[string][]*string
-
-	// Returned values from the execution of the step.
-	Outputs map[string][]*string
-
-	// The maximum number of tries to run the action of the step. The default value is
-	// 1.
-	MaxAttempts *int32
-
-	// The unique ID of a step execution.
-	StepExecutionId *string
-
-	// Information about the Automation failure.
-	FailureDetails *FailureDetails
-
-	// The flag which can be used to help decide whether the failure of current step
-	// leads to the Automation failure.
-	IsCritical *bool
-
-	// The timeout seconds of the step.
-	TimeoutSeconds *int64
-
 	// The action this step performs. The action determines the behavior of the step.
 	Action *string
 
-	// Strategies used when step fails, we support Continue and Abort. Abort will fail
-	// the automation when the step fails. Continue will ignore the failure of current
-	// step and allow automation to run the next step. With conditional branching, we
-	// add step:stepName to support the automation to go to another specific step.
-	ValidNextSteps []*string
+	// If a step has finished execution, this contains the time the execution ended. If
+	// the step has not yet concluded, this field is not populated.
+	ExecutionEndTime *time.Time
 
 	// If a step has begun execution, this contains the time the step started. If the
 	// step is in Pending status, this field is not populated.
 	ExecutionStartTime *time.Time
 
+	// Information about the Automation failure.
+	FailureDetails *FailureDetails
+
 	// If a step failed, this message explains why the execution failed.
 	FailureMessage *string
 
-	// The name of this execution step.
-	StepName *string
+	// Fully-resolved values passed into the step before execution.
+	Inputs map[string]*string
+
+	// The flag which can be used to help decide whether the failure of current step
+	// leads to the Automation failure.
+	IsCritical *bool
 
 	// The flag which can be used to end automation no matter whether the step succeeds
 	// or fails.
 	IsEnd *bool
 
-	// The targets for the step execution.
-	Targets []*Target
-
-	// Fully-resolved values passed into the step before execution.
-	Inputs map[string]*string
+	// The maximum number of tries to run the action of the step. The default value is
+	// 1.
+	MaxAttempts *int32
 
 	// The next step after the step succeeds.
 	NextStep *string
@@ -3820,9 +3797,11 @@ type StepExecution struct {
 	// The action to take if the step fails. The default value is Abort.
 	OnFailure *string
 
-	// If a step has finished execution, this contains the time the execution ended. If
-	// the step has not yet concluded, this field is not populated.
-	ExecutionEndTime *time.Time
+	// Returned values from the execution of the step.
+	Outputs map[string][]*string
+
+	// A user-specified list of parameters to override when running a step.
+	OverriddenParameters map[string][]*string
 
 	// A message associated with the response code for an execution.
 	Response *string
@@ -3830,9 +3809,30 @@ type StepExecution struct {
 	// The response code returned by the execution of the step.
 	ResponseCode *string
 
+	// The unique ID of a step execution.
+	StepExecutionId *string
+
+	// The name of this execution step.
+	StepName *string
+
+	// The execution status for this step.
+	StepStatus AutomationExecutionStatus
+
 	// The combination of AWS Regions and accounts targeted by the current Automation
 	// execution.
 	TargetLocation *TargetLocation
+
+	// The targets for the step execution.
+	Targets []*Target
+
+	// The timeout seconds of the step.
+	TimeoutSeconds *int64
+
+	// Strategies used when step fails, we support Continue and Abort. Abort will fail
+	// the automation when the step fails. Continue will ignore the failure of current
+	// step and allow automation to run the next step. With conditional branching, we
+	// add step:stepName to support the automation to go to another specific step.
+	ValidNextSteps []*string
 }
 
 // A filter to limit the amount of step execution information returned by the call.
@@ -3942,20 +3942,20 @@ type Target struct {
 // execution.
 type TargetLocation struct {
 
+	// The AWS accounts targeted by the current Automation execution.
+	Accounts []*string
+
 	// The Automation execution role used by the currently running Automation.
 	ExecutionRoleName *string
 
 	// The AWS Regions targeted by the current Automation execution.
 	Regions []*string
 
-	// The maximum number of errors allowed before the system stops queueing additional
-	// Automation executions for the currently running Automation.
-	TargetLocationMaxErrors *string
-
 	// The maximum number of AWS accounts and AWS regions allowed to run the Automation
 	// concurrently
 	TargetLocationMaxConcurrency *string
 
-	// The AWS accounts targeted by the current Automation execution.
-	Accounts []*string
+	// The maximum number of errors allowed before the system stops queueing additional
+	// Automation executions for the currently running Automation.
+	TargetLocationMaxErrors *string
 }

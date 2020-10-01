@@ -64,9 +64,6 @@ type DescribeNetworkAclsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// One or more network ACL IDs. Default: Describes all your network ACLs.
-	NetworkAclIds []*string
-
 	// One or more filters.
 	//
 	//     * association.association-id - The ID of an
@@ -127,12 +124,15 @@ type DescribeNetworkAclsInput struct {
 	//     * vpc-id - The ID of the VPC for the network ACL.
 	Filters []*types.Filter
 
-	// The token for the next page of results.
-	NextToken *string
-
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
+
+	// One or more network ACL IDs. Default: Describes all your network ACLs.
+	NetworkAclIds []*string
+
+	// The token for the next page of results.
+	NextToken *string
 }
 
 type DescribeNetworkAclsOutput struct {

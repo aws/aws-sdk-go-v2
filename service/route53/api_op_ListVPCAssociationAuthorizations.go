@@ -63,6 +63,12 @@ func (c *Client) ListVPCAssociationAuthorizations(ctx context.Context, params *L
 // hosted zone.
 type ListVPCAssociationAuthorizationsInput struct {
 
+	// The ID of the hosted zone for which you want a list of VPCs that can be
+	// associated with the hosted zone.
+	//
+	// This member is required.
+	HostedZoneId *string
+
 	// Optional: An integer that specifies the maximum number of VPCs that you want
 	// Amazon Route 53 to return. If you don't specify a value for MaxResults, Route 53
 	// returns up to 50 VPCs per page.
@@ -74,12 +80,6 @@ type ListVPCAssociationAuthorizationsInput struct {
 	// response in the nexttoken parameter in another ListVPCAssociationAuthorizations
 	// request.
 	NextToken *string
-
-	// The ID of the hosted zone for which you want a list of VPCs that can be
-	// associated with the hosted zone.
-	//
-	// This member is required.
-	HostedZoneId *string
 }
 
 // A complex type that contains the response information for the request.
@@ -90,17 +90,17 @@ type ListVPCAssociationAuthorizationsOutput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// When the response includes a NextToken element, there are more VPCs that can be
-	// associated with the specified hosted zone. To get the next page of VPCs, submit
-	// another ListVPCAssociationAuthorizations request, and include the value of the
-	// NextToken element from the response in the nexttoken request parameter.
-	NextToken *string
-
 	// The list of VPCs that are authorized to be associated with the specified hosted
 	// zone.
 	//
 	// This member is required.
 	VPCs []*types.VPC
+
+	// When the response includes a NextToken element, there are more VPCs that can be
+	// associated with the specified hosted zone. To get the next page of VPCs, submit
+	// another ListVPCAssociationAuthorizations request, and include the value of the
+	// NextToken element from the response in the nexttoken request parameter.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

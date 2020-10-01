@@ -79,15 +79,15 @@ type ListOperationsInput struct {
 // The ListOperations response includes the following elements.
 type ListOperationsOutput struct {
 
-	// If there are more operations than you specified for MaxItems in the request,
-	// submit another request and include the value of NextPageMarker in the value of
-	// Marker.
-	NextPageMarker *string
-
 	// Lists summaries of the operations.
 	//
 	// This member is required.
 	Operations []*types.OperationSummary
+
+	// If there are more operations than you specified for MaxItems in the request,
+	// submit another request and include the value of NextPageMarker in the value of
+	// Marker.
+	NextPageMarker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

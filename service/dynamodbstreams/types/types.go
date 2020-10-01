@@ -13,20 +13,23 @@ import (
 // multi-valued attribute is a set; duplicate values are not allowed.
 type AttributeValue struct {
 
+	// A Binary data type.
+	B []byte
+
 	// A Boolean data type.
 	BOOL *bool
 
-	// A Map data type.
-	M map[string]*AttributeValue
+	// A Binary Set data type.
+	BS [][]byte
 
 	// A List data type.
 	L []*AttributeValue
 
-	// A String data type.
-	S *string
+	// A Map data type.
+	M map[string]*AttributeValue
 
-	// A Binary data type.
-	B []byte
+	// A Number data type.
+	N *string
 
 	// A Number Set data type.
 	NS []*string
@@ -34,11 +37,8 @@ type AttributeValue struct {
 	// A Null data type.
 	NULL *bool
 
-	// A Number data type.
-	N *string
-
-	// A Binary Set data type.
-	BS [][]byte
+	// A String data type.
+	S *string
 
 	// A String Set data type.
 	SS []*string
@@ -47,12 +47,12 @@ type AttributeValue struct {
 // Contains details about the type of identity that made the request.
 type Identity struct {
 
-	// The type of the identity. For Time To Live, the type is "Service".
-	Type *string
-
 	// A unique identifier for the entity that made the call. For Time To Live, the
 	// principalId is "dynamodb.amazonaws.com".
 	PrincipalId *string
+
+	// The type of the identity. For Time To Live, the type is "Service".
+	Type *string
 }
 
 // Represents a single element of a key schema. A key schema specifies the
@@ -70,26 +70,30 @@ type Identity struct {
 // the sort key value.
 type KeySchemaElement struct {
 
-	// The attribute data, consisting of the data type and the attribute value itself.
-	//
-	// This member is required.
-	KeyType KeyType
-
 	// The name of a key attribute.
 	//
 	// This member is required.
 	AttributeName *string
+
+	// The attribute data, consisting of the data type and the attribute value itself.
+	//
+	// This member is required.
+	KeyType KeyType
 }
 
 // A description of a unique event within a stream.
 type Record struct {
 
+	// The region in which the GetRecords request was received.
+	AwsRegion *string
+
 	// The main body of the stream record, containing all of the DynamoDB-specific
 	// fields.
 	Dynamodb *StreamRecord
 
-	// The region in which the GetRecords request was received.
-	AwsRegion *string
+	// A globally unique identifier for the event that was recorded in this stream
+	// record.
+	EventID *string
 
 	// The type of data modification that was performed on the DynamoDB table:
 	//
@@ -107,6 +111,13 @@ type Record struct {
 	// this is aws:dynamodb.
 	EventSource *string
 
+	// The version number of the stream record format. This number is updated whenever
+	// the structure of Record is modified. Client applications must not assume that
+	// eventVersion will remain at a particular value, as this number is subject to
+	// change at any time. In general, eventVersion will only increase as the low-level
+	// DynamoDB Streams API evolves.
+	EventVersion *string
+
 	// Items that are deleted by the Time to Live process after expiration have the
 	// following fields:
 	//
@@ -115,17 +126,6 @@ type Record struct {
 	//     *
 	// Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity
-
-	// The version number of the stream record format. This number is updated whenever
-	// the structure of Record is modified. Client applications must not assume that
-	// eventVersion will remain at a particular value, as this number is subject to
-	// change at any time. In general, eventVersion will only increase as the low-level
-	// DynamoDB Streams API evolves.
-	EventVersion *string
-
-	// A globally unique identifier for the event that was recorded in this stream
-	// record.
-	EventID *string
 }
 
 // The beginning and ending sequence numbers for the stream records contained
@@ -145,15 +145,18 @@ type Shard struct {
 	// The shard ID of the current shard's parent.
 	ParentShardId *string
 
-	// The system-generated identifier for this shard.
-	ShardId *string
-
 	// The range of possible sequence numbers for the shard.
 	SequenceNumberRange *SequenceNumberRange
+
+	// The system-generated identifier for this shard.
+	ShardId *string
 }
 
 // Represents all of the data describing a particular stream.
 type Stream struct {
+
+	// The Amazon Resource Name (ARN) for the stream.
+	StreamArn *string
 
 	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
 	// not a unique identifier for the stream, because it is possible that a stream
@@ -170,13 +173,16 @@ type Stream struct {
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string
-
-	// The Amazon Resource Name (ARN) for the stream.
-	StreamArn *string
 }
 
 // Represents all of the data describing a particular stream.
 type StreamDescription struct {
+
+	// The date and time when the request to create this stream was issued.
+	CreationRequestDateTime *time.Time
+
+	// The key attribute(s) of the stream's DynamoDB table.
+	KeySchema []*KeySchemaElement
 
 	// The shard ID of the item where the operation stopped, inclusive of the previous
 	// result set. Use this value to start a new operation, excluding this value in the
@@ -187,8 +193,38 @@ type StreamDescription struct {
 	// of the result set is when LastEvaluatedShardId is empty.
 	LastEvaluatedShardId *string
 
-	// The key attribute(s) of the stream's DynamoDB table.
-	KeySchema []*KeySchemaElement
+	// The shards that comprise the stream.
+	Shards []*Shard
+
+	// The Amazon Resource Name (ARN) for the stream.
+	StreamArn *string
+
+	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
+	// not a unique identifier for the stream, because it is possible that a stream
+	// from another table might have the same timestamp. However, the combination of
+	// the following three elements is guaranteed to be unique:
+	//
+	//     * the AWS customer
+	// ID.
+	//
+	//     * the table name
+	//
+	//     * the StreamLabel
+	StreamLabel *string
+
+	// Indicates the current status of the stream:
+	//
+	//     * ENABLING - Streams is
+	// currently being enabled on the DynamoDB table.
+	//
+	//     * ENABLED - the stream is
+	// enabled.
+	//
+	//     * DISABLING - Streams is currently being disabled on the DynamoDB
+	// table.
+	//
+	//     * DISABLED - the stream is disabled.
+	StreamStatus StreamStatus
 
 	// Indicates the format of the records within this stream:
 	//
@@ -206,42 +242,6 @@ type StreamDescription struct {
 	// images of the items from the table.
 	StreamViewType StreamViewType
 
-	// The Amazon Resource Name (ARN) for the stream.
-	StreamArn *string
-
-	// The shards that comprise the stream.
-	Shards []*Shard
-
-	// A timestamp, in ISO 8601 format, for this stream. Note that LatestStreamLabel is
-	// not a unique identifier for the stream, because it is possible that a stream
-	// from another table might have the same timestamp. However, the combination of
-	// the following three elements is guaranteed to be unique:
-	//
-	//     * the AWS customer
-	// ID.
-	//
-	//     * the table name
-	//
-	//     * the StreamLabel
-	StreamLabel *string
-
-	// The date and time when the request to create this stream was issued.
-	CreationRequestDateTime *time.Time
-
-	// Indicates the current status of the stream:
-	//
-	//     * ENABLING - Streams is
-	// currently being enabled on the DynamoDB table.
-	//
-	//     * ENABLED - the stream is
-	// enabled.
-	//
-	//     * DISABLING - Streams is currently being disabled on the DynamoDB
-	// table.
-	//
-	//     * DISABLED - the stream is disabled.
-	StreamStatus StreamStatus
-
 	// The DynamoDB table with which the stream is associated.
 	TableName *string
 }
@@ -250,8 +250,24 @@ type StreamDescription struct {
 // DynamoDB table.
 type StreamRecord struct {
 
+	// The approximate date and time when the stream record was created, in UNIX epoch
+	// time (http://www.epochconverter.com/) format.
+	ApproximateCreationDateTime *time.Time
+
+	// The primary key attribute(s) for the DynamoDB item that was modified.
+	Keys map[string]*AttributeValue
+
+	// The item in the DynamoDB table as it appeared after it was modified.
+	NewImage map[string]*AttributeValue
+
+	// The item in the DynamoDB table as it appeared before it was modified.
+	OldImage map[string]*AttributeValue
+
 	// The sequence number of the stream record.
 	SequenceNumber *string
+
+	// The size of the stream record, in bytes.
+	SizeBytes *int64
 
 	// The type of data from the modified DynamoDB item that was captured in this
 	// stream record:
@@ -268,20 +284,4 @@ type StreamRecord struct {
 	//     * NEW_AND_OLD_IMAGES - both the new and the old item images of
 	// the item.
 	StreamViewType StreamViewType
-
-	// The item in the DynamoDB table as it appeared before it was modified.
-	OldImage map[string]*AttributeValue
-
-	// The approximate date and time when the stream record was created, in UNIX epoch
-	// time (http://www.epochconverter.com/) format.
-	ApproximateCreationDateTime *time.Time
-
-	// The primary key attribute(s) for the DynamoDB item that was modified.
-	Keys map[string]*AttributeValue
-
-	// The size of the stream record, in bytes.
-	SizeBytes *int64
-
-	// The item in the DynamoDB table as it appeared after it was modified.
-	NewImage map[string]*AttributeValue
 }

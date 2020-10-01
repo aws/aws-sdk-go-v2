@@ -67,6 +67,16 @@ type DeleteInventoryInput struct {
 	// This member is required.
 	TypeName *string
 
+	// User-provided idempotency token.
+	ClientToken *string
+
+	// Use this option to view a summary of the deletion request without deleting any
+	// data or the data type. This option is useful when you only want to understand
+	// what will be deleted. Once you validate that the data to be deleted is what you
+	// intend to delete, you can run the same command without specifying the DryRun
+	// option.
+	DryRun *bool
+
 	// Use the SchemaDeleteOption to delete a custom inventory type (schema). If you
 	// don't choose this option, the system only deletes existing inventory data
 	// associated with the custom inventory type. Choose one of the following options:
@@ -76,16 +86,6 @@ type DeleteInventoryInput struct {
 	// disabled version. DeleteSchema: This option deletes the specified custom type
 	// from the Inventory service. You can recreate the schema later, if you want.
 	SchemaDeleteOption types.InventorySchemaDeleteOption
-
-	// Use this option to view a summary of the deletion request without deleting any
-	// data or the data type. This option is useful when you only want to understand
-	// what will be deleted. Once you validate that the data to be deleted is what you
-	// intend to delete, you can run the same command without specifying the DryRun
-	// option.
-	DryRun *bool
-
-	// User-provided idempotency token.
-	ClientToken *string
 }
 
 type DeleteInventoryOutput struct {

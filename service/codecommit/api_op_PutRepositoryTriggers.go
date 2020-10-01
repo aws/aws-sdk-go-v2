@@ -58,15 +58,15 @@ func (c *Client) PutRepositoryTriggers(ctx context.Context, params *PutRepositor
 // Represents the input of a put repository triggers operation.
 type PutRepositoryTriggersInput struct {
 
-	// The JSON block of configuration information for each trigger.
-	//
-	// This member is required.
-	Triggers []*types.RepositoryTrigger
-
 	// The name of the repository where you want to create or update the trigger.
 	//
 	// This member is required.
 	RepositoryName *string
+
+	// The JSON block of configuration information for each trigger.
+	//
+	// This member is required.
+	Triggers []*types.RepositoryTrigger
 }
 
 // Represents the output of a put repository triggers operation.

@@ -58,15 +58,15 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 // Specifies a list of trail tags to return.
 type ListTagsInput struct {
 
-	// Reserved for future use.
-	NextToken *string
-
 	// Specifies a list of trail ARNs whose tags will be listed. The list has a limit
 	// of 20 ARNs. The format of a trail ARN is:
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	ResourceIdList []*string
+
+	// Reserved for future use.
+	NextToken *string
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an

@@ -73,10 +73,13 @@ type ListJobsInput struct {
 	// lists all child jobs from within the specified array.
 	ArrayJobId *string
 
-	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
-	// ID with this parameter lists all nodes that are associated with the specified
-	// job.
-	MultiNodeJobId *string
+	// The name or full Amazon Resource Name (ARN) of the job queue with which to list
+	// jobs.
+	JobQueue *string
+
+	// The job status with which to filter jobs in the specified queue. If you do not
+	// specify a status, only RUNNING jobs are returned.
+	JobStatus types.JobStatus
 
 	// The maximum number of results returned by ListJobs in paginated output. When
 	// this parameter is used, ListJobs only returns maxResults results in a single
@@ -87,13 +90,10 @@ type ListJobsInput struct {
 	// applicable.
 	MaxResults *int32
 
-	// The job status with which to filter jobs in the specified queue. If you do not
-	// specify a status, only RUNNING jobs are returned.
-	JobStatus types.JobStatus
-
-	// The name or full Amazon Resource Name (ARN) of the job queue with which to list
-	// jobs.
-	JobQueue *string
+	// The job ID for a multi-node parallel job. Specifying a multi-node parallel job
+	// ID with this parameter lists all nodes that are associated with the specified
+	// job.
+	MultiNodeJobId *string
 
 	// The nextToken value returned from a previous paginated ListJobs request where
 	// maxResults was used and the results exceeded the value of that parameter.

@@ -10,30 +10,35 @@ import (
 // object is part of the ParameterRanges () object.
 type CategoricalParameterRange struct {
 
-	// A list of the tunable categories for the hyperparameter.
-	//
-	// This member is required.
-	Values []*string
-
 	// The name of the categorical hyperparameter to tune.
 	//
 	// This member is required.
 	Name *string
+
+	// A list of the tunable categories for the hyperparameter.
+	//
+	// This member is required.
+	Values []*string
 }
 
 // Specifies a continuous hyperparameter and it's range of tunable values. This
 // object is part of the ParameterRanges () object.
 type ContinuousParameterRange struct {
 
-	// The name of the hyperparameter to tune.
+	// The maximum tunable value of the hyperparameter.
 	//
 	// This member is required.
-	Name *string
+	MaxValue *float64
 
 	// The minimum tunable value of the hyperparameter.
 	//
 	// This member is required.
 	MinValue *float64
+
+	// The name of the hyperparameter to tune.
+	//
+	// This member is required.
+	Name *string
 
 	// The scale that hyperparameter tuning uses to search the hyperparameter range.
 	// Valid values: Auto Amazon Forecast hyperparameter tuning chooses the best scale
@@ -49,11 +54,6 @@ type ContinuousParameterRange struct {
 	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
 	// One of the following values:
 	ScalingType ScalingType
-
-	// The maximum tunable value of the hyperparameter.
-	//
-	// This member is required.
-	MaxValue *float64
 }
 
 // The destination for an exported forecast, an AWS Identity and Access Management
@@ -77,11 +77,11 @@ type DatasetGroupSummary struct {
 	// When the dataset group was created.
 	CreationTime *time.Time
 
-	// The name of the dataset group.
-	DatasetGroupName *string
-
 	// The Amazon Resource Name (ARN) of the dataset group.
 	DatasetGroupArn *string
+
+	// The name of the dataset group.
+	DatasetGroupName *string
 
 	// When the dataset group was created or last updated from a call to the
 	// UpdateDatasetGroup () operation. While the dataset group is being updated,
@@ -94,11 +94,20 @@ type DatasetGroupSummary struct {
 // the DescribeDatasetImportJob () operation, and provide the DatasetImportJobArn.
 type DatasetImportJobSummary struct {
 
-	// If an error occurred, an informational message about the error.
-	Message *string
-
 	// When the dataset import job was created.
 	CreationTime *time.Time
+
+	// The location of the training data to import and an AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the data. The
+	// training data must be stored in an Amazon S3 bucket. If encryption is used,
+	// DataSource includes an AWS Key Management Service (KMS) key.
+	DataSource *DataSource
+
+	// The Amazon Resource Name (ARN) of the dataset import job.
+	DatasetImportJobArn *string
+
+	// The name of the dataset import job.
+	DatasetImportJobName *string
 
 	// The last time that the dataset was modified. The time depends on the status of
 	// the job, as follows:
@@ -112,17 +121,8 @@ type DatasetImportJobSummary struct {
 	// When the job finished or failed.
 	LastModificationTime *time.Time
 
-	// The name of the dataset import job.
-	DatasetImportJobName *string
-
-	// The location of the training data to import and an AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the data. The
-	// training data must be stored in an Amazon S3 bucket. If encryption is used,
-	// DataSource includes an AWS Key Management Service (KMS) key.
-	DataSource *DataSource
-
-	// The Amazon Resource Name (ARN) of the dataset import job.
-	DatasetImportJobArn *string
+	// If an error occurred, an informational message about the error.
+	Message *string
 
 	// The status of the dataset import job. The status is reflected in the status of
 	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
@@ -146,17 +146,17 @@ type DatasetSummary struct {
 	// When the dataset was created.
 	CreationTime *time.Time
 
+	// The Amazon Resource Name (ARN) of the dataset.
+	DatasetArn *string
+
+	// The name of the dataset.
+	DatasetName *string
+
 	// The dataset type.
 	DatasetType DatasetType
 
 	// The domain associated with the dataset.
 	Domain Domain
-
-	// The name of the dataset.
-	DatasetName *string
-
-	// The Amazon Resource Name (ARN) of the dataset.
-	DatasetArn *string
 
 	// When you create a dataset, LastModificationTime is the same as CreationTime.
 	// While data is being imported to the dataset, LastModificationTime is the current
@@ -184,17 +184,17 @@ type DataSource struct {
 // requests.
 type EncryptionConfig struct {
 
+	// The Amazon Resource Name (ARN) of the KMS key.
+	//
+	// This member is required.
+	KMSKeyArn *string
+
 	// The ARN of the IAM role that Amazon Forecast can assume to access the AWS KMS
 	// key. Passing a role across AWS accounts is not allowed. If you pass a role that
 	// isn't in your account, you get an InvalidInputException error.
 	//
 	// This member is required.
 	RoleArn *string
-
-	// The Amazon Resource Name (ARN) of the KMS key.
-	//
-	// This member is required.
-	KMSKeyArn *string
 }
 
 // Parameters that define how to split a dataset into training data and testing
@@ -221,13 +221,13 @@ type EvaluationParameters struct {
 // GetAccuracyMetrics () response.
 type EvaluationResult struct {
 
+	// The Amazon Resource Name (ARN) of the algorithm that was evaluated.
+	AlgorithmArn *string
+
 	// The array of test windows used for evaluating the algorithm. The
 	// NumberOfBacktestWindows from the EvaluationParameters () object determines the
 	// number of windows in the array.
 	TestWindows []*WindowSummary
-
-	// The Amazon Resource Name (ARN) of the algorithm that was evaluated.
-	AlgorithmArn *string
 }
 
 // Provides featurization (transformation) information for a dataset field. This
@@ -270,16 +270,6 @@ type Featurization struct {
 // configurations.
 type FeaturizationConfig struct {
 
-	// An array of dimension (field) names that specify how to group the generated
-	// forecast. For example, suppose that you are generating a forecast for item sales
-	// across all of your stores, and your dataset contains a store_id field. If you
-	// want the sales forecast for each item by store, you would specify store_id as
-	// the dimension. All forecast dimensions specified in the TARGET_TIME_SERIES
-	// dataset don't need to be specified in the CreatePredictor request. All forecast
-	// dimensions specified in the RELATED_TIME_SERIES dataset must be specified in the
-	// CreatePredictor request.
-	ForecastDimensions []*string
-
 	// The frequency of predictions in a forecast. Valid intervals are Y (Year), M
 	// (Month), W (Week), D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes),
 	// 10min (10 minutes), 5min (5 minutes), and 1min (1 minute). For example, "Y"
@@ -294,6 +284,16 @@ type FeaturizationConfig struct {
 	// An array of featurization (transformation) information for the fields of a
 	// dataset.
 	Featurizations []*Featurization
+
+	// An array of dimension (field) names that specify how to group the generated
+	// forecast. For example, suppose that you are generating a forecast for item sales
+	// across all of your stores, and your dataset contains a store_id field. If you
+	// want the sales forecast for each item by store, you would specify store_id as
+	// the dimension. All forecast dimensions specified in the TARGET_TIME_SERIES
+	// dataset don't need to be specified in the CreatePredictor request. All forecast
+	// dimensions specified in the RELATED_TIME_SERIES dataset must be specified in the
+	// CreatePredictor request.
+	ForecastDimensions []*string
 }
 
 // Provides information about the method that featurizes (transforms) a dataset
@@ -349,16 +349,16 @@ type FeaturizationMethod struct {
 // respectively. The match statement consists of a key and a value.
 type Filter struct {
 
-	// The name of the parameter to filter on.
-	//
-	// This member is required.
-	Key *string
-
 	// The condition to apply. To include the objects that match the statement, specify
 	// IS. To exclude matching objects, specify IS_NOT.
 	//
 	// This member is required.
 	Condition FilterConditionString
+
+	// The name of the parameter to filter on.
+	//
+	// This member is required.
+	Key *string
 
 	// The value to match.
 	//
@@ -375,11 +375,21 @@ type ForecastExportJobSummary struct {
 	// When the forecast export job was created.
 	CreationTime *time.Time
 
-	// The name of the forecast export job.
-	ForecastExportJobName *string
+	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
+	// forecast is exported.
+	Destination *DataDestination
 
 	// The Amazon Resource Name (ARN) of the forecast export job.
 	ForecastExportJobArn *string
+
+	// The name of the forecast export job.
+	ForecastExportJobName *string
+
+	// When the last successful export job finished.
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
 
 	// The status of the forecast export job. States include:
 	//
@@ -394,16 +404,6 @@ type ForecastExportJobSummary struct {
 	// The Status of the forecast export job must be
 	// ACTIVE before you can access the forecast in your S3 bucket.
 	Status *string
-
-	// When the last successful export job finished.
-	LastModificationTime *time.Time
-
-	// If an error occurred, an informational message about the error.
-	Message *string
-
-	// The path to the Amazon Simple Storage Service (Amazon S3) bucket where the
-	// forecast is exported.
-	Destination *DataDestination
 }
 
 // Provides a summary of the forecast properties used in the ListForecasts ()
@@ -411,15 +411,30 @@ type ForecastExportJobSummary struct {
 // operation, and provide the ForecastArn that is listed in the summary.
 type ForecastSummary struct {
 
-	// If an error occurred, an informational message about the error.
-	Message *string
+	// When the forecast creation task was created.
+	CreationTime *time.Time
 
 	// The Amazon Resource Name (ARN) of the dataset group that provided the data used
 	// to train the predictor.
 	DatasetGroupArn *string
 
-	// When the forecast creation task was created.
-	CreationTime *time.Time
+	// The ARN of the forecast.
+	ForecastArn *string
+
+	// The name of the forecast.
+	ForecastName *string
+
+	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
+	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
+	// and when inference is complete (status changed to ACTIVE) or fails (status
+	// changed to CREATE_FAILED).
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The ARN of the predictor used to generate the forecast.
+	PredictorArn *string
 
 	// The status of the forecast. States include:
 	//
@@ -434,21 +449,6 @@ type ForecastSummary struct {
 	// The Status of the forecast must be ACTIVE before you can query or
 	// export the forecast.
 	Status *string
-
-	// The ARN of the forecast.
-	ForecastArn *string
-
-	// The name of the forecast.
-	ForecastName *string
-
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
-	// and when inference is complete (status changed to ACTIVE) or fails (status
-	// changed to CREATE_FAILED).
-	LastModificationTime *time.Time
-
-	// The ARN of the predictor used to generate the forecast.
-	PredictorArn *string
 }
 
 // Configuration information for a hyperparameter tuning job. You specify this
@@ -486,20 +486,6 @@ type InputDataConfig struct {
 // object is part of the ParameterRanges () object.
 type IntegerParameterRange struct {
 
-	// The scale that hyperparameter tuning uses to search the hyperparameter range.
-	// Valid values: Auto Amazon Forecast hyperparameter tuning chooses the best scale
-	// for the hyperparameter. Linear Hyperparameter tuning searches the values in the
-	// hyperparameter range by using a linear scale. Logarithmic Hyperparameter tuning
-	// searches the values in the hyperparameter range by using a logarithmic scale.
-	// Logarithmic scaling works only for ranges that have values greater than 0.
-	// ReverseLogarithmic Not supported for IntegerParameterRange. Reverse logarithmic
-	// scaling works only for ranges that are entirely within the range 0 <= x < 1.0.
-	// For information about choosing a hyperparameter scale, see Hyperparameter
-	// Scaling
-	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
-	// One of the following values:
-	ScalingType ScalingType
-
 	// The maximum tunable value of the hyperparameter.
 	//
 	// This member is required.
@@ -514,6 +500,20 @@ type IntegerParameterRange struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The scale that hyperparameter tuning uses to search the hyperparameter range.
+	// Valid values: Auto Amazon Forecast hyperparameter tuning chooses the best scale
+	// for the hyperparameter. Linear Hyperparameter tuning searches the values in the
+	// hyperparameter range by using a linear scale. Logarithmic Hyperparameter tuning
+	// searches the values in the hyperparameter range by using a logarithmic scale.
+	// Logarithmic scaling works only for ranges that have values greater than 0.
+	// ReverseLogarithmic Not supported for IntegerParameterRange. Reverse logarithmic
+	// scaling works only for ranges that are entirely within the range 0 <= x < 1.0.
+	// For information about choosing a hyperparameter scale, see Hyperparameter
+	// Scaling
+	// (http://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-define-ranges.html#scaling-type).
+	// One of the following values:
+	ScalingType ScalingType
 }
 
 // Provides metrics that are used to evaluate the performance of a predictor. This
@@ -535,11 +535,11 @@ type Metrics struct {
 // This object is part of the HyperParameterTuningJobConfig () object.
 type ParameterRanges struct {
 
-	// Specifies the tunable range for each continuous hyperparameter.
-	ContinuousParameterRanges []*ContinuousParameterRange
-
 	// Specifies the tunable range for each categorical hyperparameter.
 	CategoricalParameterRanges []*CategoricalParameterRange
+
+	// Specifies the tunable range for each continuous hyperparameter.
+	ContinuousParameterRanges []*ContinuousParameterRange
 
 	// Specifies the tunable range for each integer hyperparameter.
 	IntegerParameterRanges []*IntegerParameterRange
@@ -548,13 +548,13 @@ type ParameterRanges struct {
 // The algorithm used to perform a backtest and the status of those tests.
 type PredictorExecution struct {
 
+	// The ARN of the algorithm used to test the predictor.
+	AlgorithmArn *string
+
 	// An array of test windows used to evaluate the algorithm. The
 	// NumberOfBacktestWindows from the object determines the number of windows in the
 	// array.
 	TestWindows []*TestWindowSummary
-
-	// The ARN of the algorithm used to test the predictor.
-	AlgorithmArn *string
 }
 
 // Contains details on the backtests performed to evaluate the accuracy of the
@@ -581,6 +581,20 @@ type PredictorSummary struct {
 	// to train the predictor.
 	DatasetGroupArn *string
 
+	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
+	// training starts (status changed to CREATE_IN_PROGRESS), and when training is
+	// complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+	LastModificationTime *time.Time
+
+	// If an error occurred, an informational message about the error.
+	Message *string
+
+	// The ARN of the predictor.
+	PredictorArn *string
+
+	// The name of the predictor.
+	PredictorName *string
+
 	// The status of the predictor. States include:
 	//
 	//     * ACTIVE
@@ -597,20 +611,6 @@ type PredictorSummary struct {
 	// The Status of the predictor must be ACTIVE before you can use the
 	// predictor to create a forecast.
 	Status *string
-
-	// The name of the predictor.
-	PredictorName *string
-
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// training starts (status changed to CREATE_IN_PROGRESS), and when training is
-	// complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
-	LastModificationTime *time.Time
-
-	// The ARN of the predictor.
-	PredictorArn *string
-
-	// If an error occurred, an informational message about the error.
-	Message *string
 }
 
 // The path to the file(s) in an Amazon Simple Storage Service (Amazon S3) bucket,
@@ -620,6 +620,12 @@ type PredictorSummary struct {
 // the CreateDatasetImportJob () request, and part of the DataDestination () object
 // that is submitted in the CreateForecastExportJob () request.
 type S3Config struct {
+
+	// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an
+	// Amazon S3 bucket.
+	//
+	// This member is required.
+	Path *string
 
 	// The ARN of the AWS Identity and Access Management (IAM) role that Amazon
 	// Forecast can assume to access the Amazon S3 bucket or files. If you provide a
@@ -632,12 +638,6 @@ type S3Config struct {
 
 	// The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key.
 	KMSKeyArn *string
-
-	// The path to an Amazon Simple Storage Service (Amazon S3) bucket or file(s) in an
-	// Amazon S3 bucket.
-	//
-	// This member is required.
-	Path *string
 }
 
 // Defines the fields of a dataset. You specify this object in the CreateDataset ()
@@ -664,29 +664,29 @@ type SchemaAttribute struct {
 // dataset with the CreateDatasetImportJob () operation.
 type Statistics struct {
 
-	// The number of NAN (not a number) values in the field.
-	CountNan *int32
-
-	// For a numeric field, the standard deviation.
-	Stddev *float64
-
-	// For a numeric field, the minimum value in the field.
-	Min *string
-
 	// For a numeric field, the average value in the field.
 	Avg *float64
-
-	// For a numeric field, the maximum value in the field.
-	Max *string
-
-	// The number of null values in the field.
-	CountNull *int32
 
 	// The number of values in the field.
 	Count *int32
 
 	// The number of distinct values in the field.
 	CountDistinct *int32
+
+	// The number of NAN (not a number) values in the field.
+	CountNan *int32
+
+	// The number of null values in the field.
+	CountNull *int32
+
+	// For a numeric field, the maximum value in the field.
+	Max *string
+
+	// For a numeric field, the minimum value in the field.
+	Min *string
+
+	// For a numeric field, the standard deviation.
+	Stddev *float64
 }
 
 // Describes a supplementary feature of a dataset group. This object is part of the
@@ -861,8 +861,8 @@ type Tag struct {
 // if applicable.
 type TestWindowSummary struct {
 
-	// The time at which the test ended.
-	TestWindowEnd *time.Time
+	// If the test failed, the reason why it failed.
+	Message *string
 
 	// The status of the test. Possible status values are:
 	//
@@ -874,11 +874,11 @@ type TestWindowSummary struct {
 	//     * CREATE_FAILED
 	Status *string
 
+	// The time at which the test ended.
+	TestWindowEnd *time.Time
+
 	// The time at which the test began.
 	TestWindowStart *time.Time
-
-	// If the test failed, the reason why it failed.
-	Message *string
 }
 
 // The weighted loss value for a quantile. This object is part of the Metrics ()
@@ -909,15 +909,15 @@ type WindowSummary struct {
 	//     * COMPUTED - The metrics for the specified window.
 	EvaluationType EvaluationType
 
+	// The number of data points within the window.
+	ItemCount *int32
+
 	// Provides metrics used to evaluate the performance of a predictor.
 	Metrics *Metrics
-
-	// The timestamp that defines the start of the window.
-	TestWindowStart *time.Time
 
 	// The timestamp that defines the end of the window.
 	TestWindowEnd *time.Time
 
-	// The number of data points within the window.
-	ItemCount *int32
+	// The timestamp that defines the start of the window.
+	TestWindowStart *time.Time
 }

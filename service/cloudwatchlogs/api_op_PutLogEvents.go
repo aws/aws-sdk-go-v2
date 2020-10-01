@@ -95,11 +95,6 @@ func (c *Client) PutLogEvents(ctx context.Context, params *PutLogEventsInput, op
 
 type PutLogEventsInput struct {
 
-	// The name of the log stream.
-	//
-	// This member is required.
-	LogStreamName *string
-
 	// The log events.
 	//
 	// This member is required.
@@ -109,6 +104,11 @@ type PutLogEventsInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	// The name of the log stream.
+	//
+	// This member is required.
+	LogStreamName *string
 
 	// The sequence token obtained from the response of the previous PutLogEvents call.
 	// An upload in a newly created log stream does not require a sequence token. You
@@ -121,11 +121,11 @@ type PutLogEventsInput struct {
 
 type PutLogEventsOutput struct {
 
-	// The rejected events.
-	RejectedLogEventsInfo *types.RejectedLogEventsInfo
-
 	// The next sequence token.
 	NextSequenceToken *string
+
+	// The rejected events.
+	RejectedLogEventsInfo *types.RejectedLogEventsInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

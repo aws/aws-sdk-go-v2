@@ -57,14 +57,14 @@ func (c *Client) SearchRooms(ctx context.Context, params *SearchRoomsInput, optF
 
 type SearchRoomsInput struct {
 
+	// The filters to use to list a specified set of rooms. The supported filter keys
+	// are RoomName and ProfileName.
+	Filters []*types.Filter
+
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
-
-	// The filters to use to list a specified set of rooms. The supported filter keys
-	// are RoomName and ProfileName.
-	Filters []*types.Filter
 
 	// An optional token returned from a prior request. Use this token for pagination
 	// of results from this action. If this parameter is specified, the response
@@ -81,11 +81,11 @@ type SearchRoomsOutput struct {
 	// The token returned to indicate that there is more data available.
 	NextToken *string
 
-	// The total number of rooms returned.
-	TotalCount *int32
-
 	// The rooms that meet the specified set of filter criteria, in sort order.
 	Rooms []*types.RoomData
+
+	// The total number of rooms returned.
+	TotalCount *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

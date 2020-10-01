@@ -58,18 +58,6 @@ func (c *Client) UpdateAcceleratorAttributes(ctx context.Context, params *Update
 
 type UpdateAcceleratorAttributesInput struct {
 
-	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix,
-	// the flow logs are stored in the root of the bucket. If you specify slash (/) for
-	// the S3 bucket prefix, the log file bucket folder structure will include a double
-	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
-	FlowLogsS3Prefix *string
-
-	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
-	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
-	// grants AWS Global Accelerator permission to write to the bucket.
-	FlowLogsS3Bucket *string
-
 	// The Amazon Resource Name (ARN) of the accelerator that you want to update.
 	//
 	// This member is required.
@@ -81,6 +69,18 @@ type UpdateAcceleratorAttributesInput struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
 	// in the AWS Global Accelerator Developer Guide.
 	FlowLogsEnabled *bool
+
+	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
+	// FlowLogsEnabled is true. The bucket must exist and have a bucket policy that
+	// grants AWS Global Accelerator permission to write to the bucket.
+	FlowLogsS3Bucket *string
+
+	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
+	// Attribute is required if FlowLogsEnabled is true. If you don’t specify a prefix,
+	// the flow logs are stored in the root of the bucket. If you specify slash (/) for
+	// the S3 bucket prefix, the log file bucket folder structure will include a double
+	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+	FlowLogsS3Prefix *string
 }
 
 type UpdateAcceleratorAttributesOutput struct {

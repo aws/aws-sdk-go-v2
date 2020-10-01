@@ -69,11 +69,6 @@ func (c *Client) UntagResources(ctx context.Context, params *UntagResourcesInput
 
 type UntagResourcesInput struct {
 
-	// A list of the tag keys that you want to remove from the specified resources.
-	//
-	// This member is required.
-	TagKeys []*string
-
 	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
 	// For more information, see Amazon Resource Names (ARNs) and AWS Service
 	// Namespaces
@@ -82,6 +77,11 @@ type UntagResourcesInput struct {
 	//
 	// This member is required.
 	ResourceARNList []*string
+
+	// A list of the tag keys that you want to remove from the specified resources.
+	//
+	// This member is required.
+	TagKeys []*string
 }
 
 type UntagResourcesOutput struct {

@@ -59,6 +59,14 @@ func (c *Client) DescribeEnvironments(ctx context.Context, params *DescribeEnvir
 type DescribeEnvironmentsInput struct {
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// include only those that are associated with this application.
+	ApplicationName *string
+
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	// include only those that have the specified IDs.
+	EnvironmentIds []*string
+
+	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// include only those that have the specified names.
 	EnvironmentNames []*string
 
@@ -67,22 +75,14 @@ type DescribeEnvironmentsInput struct {
 	// deleted environments.
 	IncludeDeleted *bool
 
-	// For a paginated request. Specify a maximum number of environments to include in
-	// each response. If no MaxRecords is specified, all available environments are
-	// retrieved in a single response.
-	MaxRecords *int32
-
 	// If specified when IncludeDeleted is set to true, then environments deleted after
 	// this date are displayed.
 	IncludedDeletedBackTo *time.Time
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that have the specified IDs.
-	EnvironmentIds []*string
-
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
-	// include only those that are associated with this application.
-	ApplicationName *string
+	// For a paginated request. Specify a maximum number of environments to include in
+	// each response. If no MaxRecords is specified, all available environments are
+	// retrieved in a single response.
+	MaxRecords *int32
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to

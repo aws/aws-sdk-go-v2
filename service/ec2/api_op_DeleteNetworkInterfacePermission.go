@@ -65,15 +65,15 @@ type DeleteNetworkInterfacePermissionInput struct {
 	// This member is required.
 	NetworkInterfacePermissionId *string
 
-	// Specify true to remove the permission even if the network interface is attached
-	// to an instance.
-	Force *bool
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// Specify true to remove the permission even if the network interface is attached
+	// to an instance.
+	Force *bool
 }
 
 // Contains the output for DeleteNetworkInterfacePermission.

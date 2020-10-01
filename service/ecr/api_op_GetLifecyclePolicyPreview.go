@@ -63,6 +63,13 @@ type GetLifecyclePolicyPreviewInput struct {
 	// This member is required.
 	RepositoryName *string
 
+	// An optional parameter that filters results based on image tag status and all
+	// tags, if tagged.
+	Filter *types.LifecyclePolicyPreviewFilter
+
+	// The list of imageIDs to be included.
+	ImageIds []*types.ImageIdentifier
+
 	// The maximum number of repository results returned by
 	// GetLifecyclePolicyPreviewRequest in  paginated output. When this parameter is
 	// used, GetLifecyclePolicyPreviewRequest only returns  maxResults results in a
@@ -74,13 +81,6 @@ type GetLifecyclePolicyPreviewInput struct {
 	// value, if  applicable. This option cannot be used when you specify images with
 	// imageIds.
 	MaxResults *int32
-
-	// An optional parameter that filters results based on image tag status and all
-	// tags, if tagged.
-	Filter *types.LifecyclePolicyPreviewFilter
-
-	// The list of imageIDs to be included.
-	ImageIds []*types.ImageIdentifier
 
 	// The nextToken value returned from a previous paginated
 	// GetLifecyclePolicyPreviewRequest request where maxResults was used and the
@@ -97,12 +97,6 @@ type GetLifecyclePolicyPreviewInput struct {
 
 type GetLifecyclePolicyPreviewOutput struct {
 
-	// The results of the lifecycle policy preview request.
-	PreviewResults []*types.LifecyclePolicyPreviewResult
-
-	// The repository name associated with the request.
-	RepositoryName *string
-
 	// The JSON lifecycle policy text.
 	LifecyclePolicyText *string
 
@@ -112,8 +106,14 @@ type GetLifecyclePolicyPreviewOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
+	// The results of the lifecycle policy preview request.
+	PreviewResults []*types.LifecyclePolicyPreviewResult
+
 	// The registry ID associated with the request.
 	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// The status of the lifecycle policy preview request.
 	Status types.LifecyclePolicyPreviewStatus

@@ -68,6 +68,15 @@ func (c *Client) DeleteDBInstance(ctx context.Context, params *DeleteDBInstanceI
 
 type DeleteDBInstanceInput struct {
 
+	// The DB instance identifier for the DB instance to be deleted. This parameter
+	// isn't case-sensitive. Constraints:
+	//
+	//     * Must match the name of an existing DB
+	// instance.
+	//
+	// This member is required.
+	DBInstanceIdentifier *string
+
 	// The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is
 	// set to false. Specifying this parameter and also setting the SkipFinalShapshot
 	// parameter to true results in an error. Constraints:
@@ -93,15 +102,6 @@ type DeleteDBInstanceInput struct {
 	// Read Replica. The FinalDBSnapshotIdentifier parameter must be specified if
 	// SkipFinalSnapshot is false. Default: false
 	SkipFinalSnapshot *bool
-
-	// The DB instance identifier for the DB instance to be deleted. This parameter
-	// isn't case-sensitive. Constraints:
-	//
-	//     * Must match the name of an existing DB
-	// instance.
-	//
-	// This member is required.
-	DBInstanceIdentifier *string
 }
 
 type DeleteDBInstanceOutput struct {

@@ -63,31 +63,31 @@ func (c *Client) UpdateLicenseConfiguration(ctx context.Context, params *UpdateL
 
 type UpdateLicenseConfigurationInput struct {
 
-	// New hard limit of the number of available licenses.
-	LicenseCountHardLimit *bool
-
-	// New product information.
-	ProductInformationList []*types.ProductInformation
-
-	// New description of the license configuration.
-	Description *string
-
 	// Amazon Resource Name (ARN) of the license configuration.
 	//
 	// This member is required.
 	LicenseConfigurationArn *string
 
-	// New license rules.
-	LicenseRules []*string
-
-	// New number of licenses managed by the license configuration.
-	LicenseCount *int64
+	// New description of the license configuration.
+	Description *string
 
 	// New status of the license configuration.
 	LicenseConfigurationStatus types.LicenseConfigurationStatus
 
+	// New number of licenses managed by the license configuration.
+	LicenseCount *int64
+
+	// New hard limit of the number of available licenses.
+	LicenseCountHardLimit *bool
+
+	// New license rules.
+	LicenseRules []*string
+
 	// New name of the license configuration.
 	Name *string
+
+	// New product information.
+	ProductInformationList []*types.ProductInformation
 }
 
 type UpdateLicenseConfigurationOutput struct {

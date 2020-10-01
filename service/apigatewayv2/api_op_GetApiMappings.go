@@ -57,17 +57,17 @@ func (c *Client) GetApiMappings(ctx context.Context, params *GetApiMappingsInput
 
 type GetApiMappingsInput struct {
 
-	// The next page of elements from this collection. Not valid for the last element
-	// of the collection.
-	NextToken *string
-
-	// The maximum number of elements to be returned for this resource.
-	MaxResults *string
-
 	// The domain name.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The maximum number of elements to be returned for this resource.
+	MaxResults *string
+
+	// The next page of elements from this collection. Not valid for the last element
+	// of the collection.
+	NextToken *string
 }
 
 type GetApiMappingsOutput struct {

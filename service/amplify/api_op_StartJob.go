@@ -59,23 +59,10 @@ func (c *Client) StartJob(ctx context.Context, params *StartJobInput, optFns ...
 // The request structure for the start job request.
 type StartJobInput struct {
 
-	// The unique ID for an existing job. This is required if the value of jobType is
-	// RETRY.
-	JobId *string
-
 	// The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
-
-	// A descriptive reason for starting this job.
-	JobReason *string
-
-	// The commit message from a third-party repository provider for the job.
-	CommitMessage *string
-
-	// The commit date and time for the job.
-	CommitTime *time.Time
 
 	// The branch name for the job.
 	//
@@ -92,6 +79,19 @@ type StartJobInput struct {
 
 	// The commit ID from a third-party repository provider for the job.
 	CommitId *string
+
+	// The commit message from a third-party repository provider for the job.
+	CommitMessage *string
+
+	// The commit date and time for the job.
+	CommitTime *time.Time
+
+	// The unique ID for an existing job. This is required if the value of jobType is
+	// RETRY.
+	JobId *string
+
+	// A descriptive reason for starting this job.
+	JobReason *string
 }
 
 // The result structure for the run job request.

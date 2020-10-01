@@ -56,9 +56,6 @@ func (c *Client) ListLogSubscriptions(ctx context.Context, params *ListLogSubscr
 
 type ListLogSubscriptionsInput struct {
 
-	// The token for the next set of items to return.
-	NextToken *string
-
 	// If a DirectoryID is provided, lists only the log subscription associated with
 	// that directory. If no DirectoryId is provided, lists all log subscriptions
 	// associated with your AWS account. If there are no log subscriptions for the AWS
@@ -67,15 +64,18 @@ type ListLogSubscriptionsInput struct {
 
 	// The maximum number of items returned.
 	Limit *int32
+
+	// The token for the next set of items to return.
+	NextToken *string
 }
 
 type ListLogSubscriptionsOutput struct {
 
-	// The token for the next set of items to return.
-	NextToken *string
-
 	// A list of active LogSubscription () objects for calling the AWS account.
 	LogSubscriptions []*types.LogSubscription
+
+	// The token for the next set of items to return.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

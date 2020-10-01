@@ -59,11 +59,11 @@ func (c *Client) GetAuthorizers(ctx context.Context, params *GetAuthorizersInput
 
 // Request to describe an existing Authorizers () resource.
 type GetAuthorizersInput struct {
-	TemplateSkipList []*string
 
-	Title *string
-
-	Template *bool
+	// [Required] The string identifier of the associated RestApi ().
+	//
+	// This member is required.
+	RestApiId *string
 
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
@@ -74,10 +74,11 @@ type GetAuthorizersInput struct {
 	// The current pagination position in the paged result set.
 	Position *string
 
-	// [Required] The string identifier of the associated RestApi ().
-	//
-	// This member is required.
-	RestApiId *string
+	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection of Authorizer () resources. Use Lambda Function as

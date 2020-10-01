@@ -61,8 +61,29 @@ func (c *Client) UpdateApp(ctx context.Context, params *UpdateAppInput, optFns .
 
 type UpdateAppInput struct {
 
+	// The app ID.
+	//
+	// This member is required.
+	AppId *string
+
 	// A Source object that specifies the app repository.
 	AppSource *types.Source
+
+	// One or more user-defined key/value pairs to be added to the stack attributes.
+	Attributes map[string]*string
+
+	// The app's data sources.
+	DataSources []*types.DataSource
+
+	// A description of the app.
+	Description *string
+
+	// The app's virtual host settings, with multiple domains separated by commas. For
+	// example: 'www.example.com, example.com'
+	Domains []*string
+
+	// Whether SSL is enabled for the app.
+	EnableSsl *bool
 
 	// An array of EnvironmentVariable objects that specify environment variables to be
 	// associated with the app. After you deploy the app, these variables are defined
@@ -78,35 +99,14 @@ type UpdateAppInput struct {
 	// version.
 	Environment []*types.EnvironmentVariable
 
-	// One or more user-defined key/value pairs to be added to the stack attributes.
-	Attributes map[string]*string
-
-	// Whether SSL is enabled for the app.
-	EnableSsl *bool
-
 	// The app name.
 	Name *string
 
-	// The app type.
-	Type types.AppType
-
-	// The app's data sources.
-	DataSources []*types.DataSource
-
-	// The app ID.
-	//
-	// This member is required.
-	AppId *string
-
-	// The app's virtual host settings, with multiple domains separated by commas. For
-	// example: 'www.example.com, example.com'
-	Domains []*string
-
-	// A description of the app.
-	Description *string
-
 	// An SslConfiguration object with the SSL configuration.
 	SslConfiguration *types.SslConfiguration
+
+	// The app type.
+	Type types.AppType
 }
 
 type UpdateAppOutput struct {

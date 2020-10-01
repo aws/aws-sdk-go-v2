@@ -59,10 +59,6 @@ func (c *Client) CreateEventBus(ctx context.Context, params *CreateEventBusInput
 
 type CreateEventBusInput struct {
 
-	// If you are creating a partner event bus, this specifies the partner event source
-	// that the new event bus will be matched with.
-	EventSourceName *string
-
 	// The name of the new event bus. Event bus names cannot contain the / character.
 	// You can't use the name default for a custom event bus, as this name is already
 	// used for your account's default event bus. If this is a partner event bus, the
@@ -71,6 +67,10 @@ type CreateEventBusInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// If you are creating a partner event bus, this specifies the partner event source
+	// that the new event bus will be matched with.
+	EventSourceName *string
 
 	// Tags to associate with the event bus.
 	Tags []*types.Tag

@@ -57,26 +57,26 @@ func (c *Client) DeleteNetworkAclEntry(ctx context.Context, params *DeleteNetwor
 
 type DeleteNetworkAclEntryInput struct {
 
+	// Indicates whether the rule is an egress rule.
+	//
+	// This member is required.
+	Egress *bool
+
 	// The ID of the network ACL.
 	//
 	// This member is required.
 	NetworkAclId *string
 
-	// Indicates whether the rule is an egress rule.
+	// The rule number of the entry to delete.
 	//
 	// This member is required.
-	Egress *bool
+	RuleNumber *int32
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The rule number of the entry to delete.
-	//
-	// This member is required.
-	RuleNumber *int32
 }
 
 type DeleteNetworkAclEntryOutput struct {

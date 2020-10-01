@@ -65,10 +65,6 @@ func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *De
 //
 type DescribeOrderableClusterOptionsInput struct {
 
-	// The node type filter value. Specify this parameter to show only the available
-	// offerings matching the specified node type.
-	NodeType *string
-
 	// The version filter value. Specify this parameter to show only the available
 	// offerings matching the specified version. Default: All versions. Constraints:
 	// Must be one of the version returned from DescribeClusterVersions ().
@@ -88,14 +84,14 @@ type DescribeOrderableClusterOptionsInput struct {
 	// records by retrying the command with the returned marker value. Default: 100
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
+	// The node type filter value. Specify this parameter to show only the available
+	// offerings matching the specified node type.
+	NodeType *string
 }
 
 // Contains the output from the DescribeOrderableClusterOptions () action.
 type DescribeOrderableClusterOptionsOutput struct {
-
-	// An OrderableClusterOption structure containing information about orderable
-	// options for the cluster.
-	OrderableClusterOptions []*types.OrderableClusterOption
 
 	// A value that indicates the starting point for the next set of response records
 	// in a subsequent request. If a value is returned in a response, you can retrieve
@@ -103,6 +99,10 @@ type DescribeOrderableClusterOptionsOutput struct {
 	// parameter and retrying the command. If the Marker field is empty, all response
 	// records have been retrieved for the request.
 	Marker *string
+
+	// An OrderableClusterOption structure containing information about orderable
+	// options for the cluster.
+	OrderableClusterOptions []*types.OrderableClusterOption
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

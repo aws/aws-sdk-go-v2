@@ -58,19 +58,6 @@ func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInp
 
 type UpdateDashboardInput struct {
 
-	// A new friendly name for the dashboard.
-	//
-	// This member is required.
-	DashboardName *string
-
-	// The ID of the dashboard to update.
-	//
-	// This member is required.
-	DashboardId *string
-
-	// A new description for the dashboard.
-	DashboardDescription *string
-
 	// The new dashboard definition, as specified in a JSON literal. For detailed
 	// information, see Creating Dashboards (CLI)
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
@@ -79,10 +66,23 @@ type UpdateDashboardInput struct {
 	// This member is required.
 	DashboardDefinition *string
 
+	// The ID of the dashboard to update.
+	//
+	// This member is required.
+	DashboardId *string
+
+	// A new friendly name for the dashboard.
+	//
+	// This member is required.
+	DashboardName *string
+
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	// A new description for the dashboard.
+	DashboardDescription *string
 }
 
 type UpdateDashboardOutput struct {

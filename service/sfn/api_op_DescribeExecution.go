@@ -68,18 +68,30 @@ type DescribeExecutionInput struct {
 
 type DescribeExecutionOutput struct {
 
-	// The current status of the execution.
+	// The Amazon Resource Name (ARN) that id entifies the execution.
 	//
 	// This member is required.
-	Status types.ExecutionStatus
+	ExecutionArn *string
 
-	// If the execution has already ended, the date the execution stopped.
-	StopDate *time.Time
+	// The string that contains the JSON input data of the execution.
+	//
+	// This member is required.
+	Input *string
 
 	// The date the execution is started.
 	//
 	// This member is required.
 	StartDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the executed stated machine.
+	//
+	// This member is required.
+	StateMachineArn *string
+
+	// The current status of the execution.
+	//
+	// This member is required.
+	Status types.ExecutionStatus
 
 	// The name of the execution. A name must not contain:
 	//
@@ -104,20 +116,8 @@ type DescribeExecutionOutput struct {
 	// succeeds. If the execution fails, this field is null.
 	Output *string
 
-	// The Amazon Resource Name (ARN) of the executed stated machine.
-	//
-	// This member is required.
-	StateMachineArn *string
-
-	// The string that contains the JSON input data of the execution.
-	//
-	// This member is required.
-	Input *string
-
-	// The Amazon Resource Name (ARN) that id entifies the execution.
-	//
-	// This member is required.
-	ExecutionArn *string
+	// If the execution has already ended, the date the execution stopped.
+	StopDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

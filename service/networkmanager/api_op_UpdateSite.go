@@ -68,6 +68,10 @@ type UpdateSiteInput struct {
 	// This member is required.
 	SiteId *string
 
+	// A description of your site. Length Constraints: Maximum length of 256
+	// characters.
+	Description *string
+
 	// The site location:
 	//
 	//     * Address: The physical address of the site.
@@ -77,10 +81,6 @@ type UpdateSiteInput struct {
 	//
 	//     * Longitude: The longitude of the site.
 	Location *types.Location
-
-	// A description of your site. Length Constraints: Maximum length of 256
-	// characters.
-	Description *string
 }
 
 type UpdateSiteOutput struct {

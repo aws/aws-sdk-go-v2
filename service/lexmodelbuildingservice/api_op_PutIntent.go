@@ -96,52 +96,6 @@ func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns .
 
 type PutIntentInput struct {
 
-	// Identifies a specific revision of the $LATEST version. When you create a new
-	// intent, leave the checksum field blank. If you specify a checksum you get a
-	// BadRequestException exception. When you want to update a intent, set the
-	// checksum field to the checksum of the most recent revision of the $LATEST
-	// version. If you don't specify the  checksum field, or if the checksum does not
-	// match the $LATEST version, you get a PreconditionFailedException exception.
-	Checksum *string
-
-	// Configuration information required to use the AMAZON.KendraSearchIntent intent
-	// to connect to an Amazon Kendra index. For more information, see
-	// AMAZON.KendraSearchIntent
-	// (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
-	KendraConfiguration *types.KendraConfiguration
-
-	// A description of the intent.
-	Description *string
-
-	// Required. Describes how the intent is fulfilled. For example, after a user
-	// provides all of the information for a pizza order, fulfillmentActivity defines
-	// how the bot places an order with a local pizza store. You might configure Amazon
-	// Lex to return all of the intent information to the client application, or direct
-	// it to invoke a Lambda function that can process the intent (for example, place
-	// an order with a pizzeria).
-	FulfillmentActivity *types.FulfillmentActivity
-
-	// When set to true a new numbered version of the intent is created. This is the
-	// same as calling the CreateIntentVersion operation. If you do not specify
-	// createVersion, the default is false.
-	CreateVersion *bool
-
-	// An array of utterances (strings) that a user might say to signal the intent. For
-	// example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
-	// <p>In each utterance, a slot name is enclosed in curly braces. </p>
-	SampleUtterances []*string
-
-	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
-	// from the user using prompts defined in the slots. For more information, see
-	// how-it-works ().
-	Slots []*types.Slot
-
-	// When the user answers "no" to the question defined in confirmationPrompt, Amazon
-	// Lex responds with this statement to acknowledge that the intent was canceled.
-	// You must provide both the rejectionStatement and the confirmationPrompt, or
-	// neither.
-	RejectionStatement *types.Statement
-
 	// The name of the intent. The name is not case sensitive. The name can't match a
 	// built-in intent name, or a built-in intent name with "AMAZON." removed. For
 	// example, because there is a built-in intent called AMAZON.HelpIntent, you can't
@@ -152,6 +106,39 @@ type PutIntentInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// Identifies a specific revision of the $LATEST version. When you create a new
+	// intent, leave the checksum field blank. If you specify a checksum you get a
+	// BadRequestException exception. When you want to update a intent, set the
+	// checksum field to the checksum of the most recent revision of the $LATEST
+	// version. If you don't specify the  checksum field, or if the checksum does not
+	// match the $LATEST version, you get a PreconditionFailedException exception.
+	Checksum *string
+
+	// The statement that you want Amazon Lex to convey to the user after the intent is
+	// successfully fulfilled by the Lambda function. This element is relevant only if
+	// you provide a Lambda function in the fulfillmentActivity. If you return the
+	// intent to the client application, you can't specify this element. The
+	// followUpPrompt and conclusionStatement are mutually exclusive. You can specify
+	// only one.
+	ConclusionStatement *types.Statement
+
+	// Prompts the user to confirm the intent. This question should have a yes or no
+	// answer. Amazon Lex uses this prompt to ensure that the user acknowledges that
+	// the intent is ready for fulfillment. For example, with the OrderPizza intent,
+	// you might want to confirm that the order is correct before placing it. For other
+	// intents, such as intents that simply respond to user questions, you might not
+	// need to ask the user for confirmation before providing the information. You you
+	// must provide both the rejectionStatement and the confirmationPrompt, or neither.
+	ConfirmationPrompt *types.Prompt
+
+	// When set to true a new numbered version of the intent is created. This is the
+	// same as calling the CreateIntentVersion operation. If you do not specify
+	// createVersion, the default is false.
+	CreateVersion *bool
+
+	// A description of the intent.
+	Description *string
 
 	// Specifies a Lambda function to invoke for each user input. You can invoke this
 	// Lambda function to personalize user interaction. For example, suppose your bot
@@ -186,50 +173,70 @@ type PutIntentInput struct {
 	// only one. </p>
 	FollowUpPrompt *types.FollowUpPrompt
 
+	// Required. Describes how the intent is fulfilled. For example, after a user
+	// provides all of the information for a pizza order, fulfillmentActivity defines
+	// how the bot places an order with a local pizza store. You might configure Amazon
+	// Lex to return all of the intent information to the client application, or direct
+	// it to invoke a Lambda function that can process the intent (for example, place
+	// an order with a pizzeria).
+	FulfillmentActivity *types.FulfillmentActivity
+
+	// Configuration information required to use the AMAZON.KendraSearchIntent intent
+	// to connect to an Amazon Kendra index. For more information, see
+	// AMAZON.KendraSearchIntent
+	// (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html).
+	KendraConfiguration *types.KendraConfiguration
+
 	// A unique identifier for the built-in intent to base this intent on. To find the
 	// signature for an intent, see Standard Built-in Intents
 	// (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
 	// in the Alexa Skills Kit.
 	ParentIntentSignature *string
 
-	// The statement that you want Amazon Lex to convey to the user after the intent is
-	// successfully fulfilled by the Lambda function. This element is relevant only if
-	// you provide a Lambda function in the fulfillmentActivity. If you return the
-	// intent to the client application, you can't specify this element. The
-	// followUpPrompt and conclusionStatement are mutually exclusive. You can specify
-	// only one.
-	ConclusionStatement *types.Statement
+	// When the user answers "no" to the question defined in confirmationPrompt, Amazon
+	// Lex responds with this statement to acknowledge that the intent was canceled.
+	// You must provide both the rejectionStatement and the confirmationPrompt, or
+	// neither.
+	RejectionStatement *types.Statement
 
-	// Prompts the user to confirm the intent. This question should have a yes or no
-	// answer. Amazon Lex uses this prompt to ensure that the user acknowledges that
-	// the intent is ready for fulfillment. For example, with the OrderPizza intent,
-	// you might want to confirm that the order is correct before placing it. For other
-	// intents, such as intents that simply respond to user questions, you might not
-	// need to ask the user for confirmation before providing the information. You you
-	// must provide both the rejectionStatement and the confirmationPrompt, or neither.
-	ConfirmationPrompt *types.Prompt
+	// An array of utterances (strings) that a user might say to signal the intent. For
+	// example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
+	// <p>In each utterance, a slot name is enclosed in curly braces. </p>
+	SampleUtterances []*string
+
+	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
+	// from the user using prompts defined in the slots. For more information, see
+	// how-it-works ().
+	Slots []*types.Slot
 }
 
 type PutIntentOutput struct {
 
+	// Checksum of the $LATESTversion of the intent created or updated.
+	Checksum *string
+
 	// After the Lambda function specified in thefulfillmentActivityintent fulfills the
 	// intent, Amazon Lex conveys this statement to the user.
 	ConclusionStatement *types.Statement
+
+	// If defined in the intent, Amazon Lex prompts the user to confirm the intent
+	// before fulfilling it.
+	ConfirmationPrompt *types.Prompt
 
 	// True if a new version of the intent was created. If the createVersion field was
 	// not specified in the request, the createVersion field is set to false in the
 	// response.
 	CreateVersion *bool
 
-	// An array of sample utterances that are configured for the intent.
-	SampleUtterances []*string
+	// The date that the intent was created.
+	CreatedDate *time.Time
 
-	// The version of the intent. For a new intent, the version is always $LATEST.
-	Version *string
+	// A description of the intent.
+	Description *string
 
-	// The date that the intent was updated. When you create a resource, the creation
-	// date and last update dates are the same.
-	LastUpdatedDate *time.Time
+	// If defined in the intent, Amazon Lex invokes this Lambda function for each user
+	// input.
+	DialogCodeHook *types.CodeHook
 
 	// If defined in the intent, Amazon Lex uses this prompt to solicit additional user
 	// activity after the intent is fulfilled.
@@ -239,39 +246,32 @@ type PutIntentOutput struct {
 	// intent after the user provides all of the information required by the intent.
 	FulfillmentActivity *types.FulfillmentActivity
 
-	// A description of the intent.
-	Description *string
+	// Configuration information, if any, required to connect to an Amazon Kendra index
+	// and use the AMAZON.KendraSearchIntent intent.
+	KendraConfiguration *types.KendraConfiguration
 
-	// An array of intent slots that are configured for the intent.
-	Slots []*types.Slot
+	// The date that the intent was updated. When you create a resource, the creation
+	// date and last update dates are the same.
+	LastUpdatedDate *time.Time
+
+	// The name of the intent.
+	Name *string
+
+	// A unique identifier for the built-in intent that this intent is based on.
+	ParentIntentSignature *string
 
 	// If the user answers "no" to the question defined in confirmationPrompt Amazon
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
 
-	// The date that the intent was created.
-	CreatedDate *time.Time
+	// An array of sample utterances that are configured for the intent.
+	SampleUtterances []*string
 
-	// If defined in the intent, Amazon Lex prompts the user to confirm the intent
-	// before fulfilling it.
-	ConfirmationPrompt *types.Prompt
+	// An array of intent slots that are configured for the intent.
+	Slots []*types.Slot
 
-	// If defined in the intent, Amazon Lex invokes this Lambda function for each user
-	// input.
-	DialogCodeHook *types.CodeHook
-
-	// The name of the intent.
-	Name *string
-
-	// Checksum of the $LATESTversion of the intent created or updated.
-	Checksum *string
-
-	// Configuration information, if any, required to connect to an Amazon Kendra index
-	// and use the AMAZON.KendraSearchIntent intent.
-	KendraConfiguration *types.KendraConfiguration
-
-	// A unique identifier for the built-in intent that this intent is based on.
-	ParentIntentSignature *string
+	// The version of the intent. For a new intent, the version is always $LATEST.
+	Version *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

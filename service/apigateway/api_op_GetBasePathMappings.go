@@ -59,25 +59,25 @@ func (c *Client) GetBasePathMappings(ctx context.Context, params *GetBasePathMap
 // A request to get information about a collection of BasePathMapping () resources.
 type GetBasePathMappingsInput struct {
 
+	// [Required] The domain name of a BasePathMapping () resource.
+	//
+	// This member is required.
+	DomainName *string
+
 	// The maximum number of returned results per page. The default value is 25 and the
 	// maximum value is 500.
 	Limit *int32
 
 	Name *string
 
-	// [Required] The domain name of a BasePathMapping () resource.
-	//
-	// This member is required.
-	DomainName *string
+	// The current pagination position in the paged result set.
+	Position *string
 
 	Template *bool
 
-	Title *string
-
 	TemplateSkipList []*string
 
-	// The current pagination position in the paged result set.
-	Position *string
+	Title *string
 }
 
 // Represents a collection of BasePathMapping () resources. Use Custom Domain Names

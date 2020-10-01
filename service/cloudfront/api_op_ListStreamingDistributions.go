@@ -57,11 +57,11 @@ func (c *Client) ListStreamingDistributions(ctx context.Context, params *ListStr
 // The request to list your streaming distributions.
 type ListStreamingDistributionsInput struct {
 
-	// The value that you provided for the MaxItems request parameter.
-	MaxItems *string
-
 	// The value that you provided for the Marker request parameter.
 	Marker *string
+
+	// The value that you provided for the MaxItems request parameter.
+	MaxItems *string
 }
 
 // The returned result of the corresponding request.

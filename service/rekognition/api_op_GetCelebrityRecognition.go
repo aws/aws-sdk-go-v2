@@ -93,10 +93,11 @@ func (c *Client) GetCelebrityRecognition(ctx context.Context, params *GetCelebri
 
 type GetCelebrityRecognitionInput struct {
 
-	// Sort to use for celebrities returned in Celebrities field. Specify ID to sort by
-	// the celebrity identifier, specify TIMESTAMP to sort by the time the celebrity
-	// was recognized.
-	SortBy types.CelebrityRecognitionSortBy
+	// Job identifier for the required celebrity recognition analysis. You can get the
+	// job identifer from a call to StartCelebrityRecognition.
+	//
+	// This member is required.
+	JobId *string
 
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000
@@ -109,11 +110,10 @@ type GetCelebrityRecognitionInput struct {
 	// celebrities.
 	NextToken *string
 
-	// Job identifier for the required celebrity recognition analysis. You can get the
-	// job identifer from a call to StartCelebrityRecognition.
-	//
-	// This member is required.
-	JobId *string
+	// Sort to use for celebrities returned in Celebrities field. Specify ID to sort by
+	// the celebrity identifier, specify TIMESTAMP to sort by the time the celebrity
+	// was recognized.
+	SortBy types.CelebrityRecognitionSortBy
 }
 
 type GetCelebrityRecognitionOutput struct {
@@ -121,12 +121,12 @@ type GetCelebrityRecognitionOutput struct {
 	// Array of celebrities recognized in the video.
 	Celebrities []*types.CelebrityRecognition
 
+	// The current status of the celebrity recognition job.
+	JobStatus types.VideoJobStatus
+
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of celebrities.
 	NextToken *string
-
-	// The current status of the celebrity recognition job.
-	JobStatus types.VideoJobStatus
 
 	// If the job fails, StatusMessage provides a descriptive error message.
 	StatusMessage *string

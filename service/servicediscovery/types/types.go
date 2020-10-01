@@ -10,6 +10,15 @@ import (
 // that you want AWS Cloud Map to create when you register an instance.
 type DnsConfig struct {
 
+	// An array that contains one DnsRecord object for each Route 53 DNS record that
+	// you want AWS Cloud Map to create when you register an instance.
+	//
+	// This member is required.
+	DnsRecords []*DnsRecord
+
+	// The ID of the namespace to use for DNS configuration.
+	NamespaceId *string
+
 	// The routing policy that you want to apply to all Route 53 DNS records that AWS
 	// Cloud Map creates when you register an instance and specify this service. If you
 	// want to use this service to register instances that create alias records,
@@ -40,15 +49,6 @@ type DnsConfig struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
 	// in the Route 53 Developer Guide.
 	RoutingPolicy RoutingPolicy
-
-	// The ID of the namespace to use for DNS configuration.
-	NamespaceId *string
-
-	// An array that contains one DnsRecord object for each Route 53 DNS record that
-	// you want AWS Cloud Map to create when you register an instance.
-	//
-	// This member is required.
-	DnsRecords []*DnsRecord
 }
 
 // A complex type that contains information about changes to the Route 53 DNS
@@ -331,15 +331,6 @@ type HealthCheckCustomConfig struct {
 // matches the values that you specified in the request.
 type HttpInstanceSummary struct {
 
-	// The name of the namespace that you specified when you registered the instance.
-	NamespaceName *string
-
-	// The ID of an instance that matches the values that you specified in the request.
-	InstanceId *string
-
-	// The name of the service that you specified when you registered the instance.
-	ServiceName *string
-
 	// If you included any attributes when you registered the instance, the values of
 	// those attributes.
 	Attributes map[string]*string
@@ -347,6 +338,15 @@ type HttpInstanceSummary struct {
 	// If you configured health checking in the service, the current health status of
 	// the service instance.
 	HealthStatus HealthStatus
+
+	// The ID of an instance that matches the values that you specified in the request.
+	InstanceId *string
+
+	// The name of the namespace that you specified when you registered the instance.
+	NamespaceName *string
+
+	// The name of the service that you specified when you registered the instance.
+	ServiceName *string
 }
 
 // A complex type that contains the name of an HTTP namespace.
@@ -360,13 +360,29 @@ type HttpProperties struct {
 // creates when you submit a RegisterInstance request.
 type Instance struct {
 
-	// A unique string that identifies the request and that allows failed
-	// RegisterInstance requests to be retried without the risk of executing the
-	// operation twice. You must use a unique CreatorRequestId string every time you
-	// submit a RegisterInstance request if you're registering additional instances for
-	// the same namespace and service. CreatorRequestId can be any unique string, for
-	// example, a date/time stamp.
-	CreatorRequestId *string
+	// An identifier that you want to associate with the instance. Note the
+	// following:
+	//
+	//     * If the service that is specified by ServiceId includes
+	// settings for an SRV record, the value of InstanceId is automatically included as
+	// part of the value for the SRV record. For more information, see DnsRecord > Type
+	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
+	//
+	//
+	// * You can use this value to update an existing instance.
+	//
+	//     * To register a
+	// new instance, you must specify a value that is unique among instances that you
+	// register by using the same service.
+	//
+	//     * If you specify an existing InstanceId
+	// and ServiceId, AWS Cloud Map updates the existing DNS records. If there's also
+	// an existing health check, AWS Cloud Map deletes the old health check and creates
+	// a new one. The health check isn't deleted immediately, so it will still appear
+	// for a while if you submit a ListHealthChecks request, for example.
+	//
+	// This member is required.
+	Id *string
 
 	// A string map that contains the following information for the service that you
 	// specify in ServiceId:
@@ -426,37 +442,18 @@ type Instance struct {
 	// service.
 	Attributes map[string]*string
 
-	// An identifier that you want to associate with the instance. Note the
-	// following:
-	//
-	//     * If the service that is specified by ServiceId includes
-	// settings for an SRV record, the value of InstanceId is automatically included as
-	// part of the value for the SRV record. For more information, see DnsRecord > Type
-	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_DnsRecord.html#cloudmap-Type-DnsRecord-Type).
-	//
-	//
-	// * You can use this value to update an existing instance.
-	//
-	//     * To register a
-	// new instance, you must specify a value that is unique among instances that you
-	// register by using the same service.
-	//
-	//     * If you specify an existing InstanceId
-	// and ServiceId, AWS Cloud Map updates the existing DNS records. If there's also
-	// an existing health check, AWS Cloud Map deletes the old health check and creates
-	// a new one. The health check isn't deleted immediately, so it will still appear
-	// for a while if you submit a ListHealthChecks request, for example.
-	//
-	// This member is required.
-	Id *string
+	// A unique string that identifies the request and that allows failed
+	// RegisterInstance requests to be retried without the risk of executing the
+	// operation twice. You must use a unique CreatorRequestId string every time you
+	// submit a RegisterInstance request if you're registering additional instances for
+	// the same namespace and service. CreatorRequestId can be any unique string, for
+	// example, a date/time stamp.
+	CreatorRequestId *string
 }
 
 // A complex type that contains information about the instances that you registered
 // by using a specified service.
 type InstanceSummary struct {
-
-	// The ID for an instance that you created by using a specified service.
-	Id *string
 
 	// A string map that contains the following information:
 	//
@@ -489,20 +486,43 @@ type InstanceSummary struct {
 	// port. In addition, if the service includes HealthCheckConfig, the port on the
 	// endpoint that Route 53 sends requests to.
 	Attributes map[string]*string
+
+	// The ID for an instance that you created by using a specified service.
+	Id *string
 }
 
 // A complex type that contains information about a specified namespace.
 type Namespace struct {
 
-	// A complex type that contains information that's specific to the type of the
-	// namespace.
-	Properties *NamespaceProperties
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when
+	// you create it.
+	Arn *string
 
 	// The date that the namespace was created, in Unix date/time format and
 	// Coordinated Universal Time (UTC). The value of CreateDate is accurate to
 	// milliseconds. For example, the value 1516925490.087 represents Friday, January
 	// 26, 2018 12:11:30.087 AM.
 	CreateDate *time.Time
+
+	// A unique string that identifies the request and that allows failed requests to
+	// be retried without the risk of executing an operation twice.
+	CreatorRequestId *string
+
+	// The description that you specify for the namespace when you create it.
+	Description *string
+
+	// The ID of a namespace.
+	Id *string
+
+	// The name of the namespace, such as example.com.
+	Name *string
+
+	// A complex type that contains information that's specific to the type of the
+	// namespace.
+	Properties *NamespaceProperties
+
+	// The number of services that are associated with the namespace.
+	ServiceCount *int32
 
 	// The type of the namespace. The methods for discovering instances depends on the
 	// value that you specify:
@@ -517,26 +537,6 @@ type Namespace struct {
 	//     * DNS_PRIVATE: Instances can be discovered using DNS
 	// queries in VPCs and using the DiscoverInstances API.
 	Type NamespaceType
-
-	// The number of services that are associated with the namespace.
-	ServiceCount *int32
-
-	// The name of the namespace, such as example.com.
-	Name *string
-
-	// The ID of a namespace.
-	Id *string
-
-	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of executing an operation twice.
-	CreatorRequestId *string
-
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when
-	// you create it.
-	Arn *string
-
-	// The description that you specify for the namespace when you create it.
-	Description *string
 }
 
 // A complex type that identifies the namespaces that you want to list. You can
@@ -583,32 +583,32 @@ type NamespaceProperties struct {
 // A complex type that contains information about a namespace.
 type NamespaceSummary struct {
 
-	// The date and time that the namespace was created.
-	CreateDate *time.Time
-
-	// The type of the namespace, either public or private.
-	Type NamespaceType
-
-	// A complex type that contains information that is specific to the namespace type.
-	Properties *NamespaceProperties
-
-	// The name of the namespace. When you create a namespace, AWS Cloud Map
-	// automatically creates a Route 53 hosted zone that has the same name as the
-	// namespace.
-	Name *string
-
-	// The number of services that were created using the namespace.
-	ServiceCount *int32
-
 	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when
 	// you create it.
 	Arn *string
+
+	// The date and time that the namespace was created.
+	CreateDate *time.Time
 
 	// A description for the namespace.
 	Description *string
 
 	// The ID of the namespace.
 	Id *string
+
+	// The name of the namespace. When you create a namespace, AWS Cloud Map
+	// automatically creates a Route 53 hosted zone that has the same name as the
+	// namespace.
+	Name *string
+
+	// A complex type that contains information that is specific to the namespace type.
+	Properties *NamespaceProperties
+
+	// The number of services that were created using the namespace.
+	ServiceCount *int32
+
+	// The type of the namespace, either public or private.
+	Type NamespaceType
 }
 
 // A complex type that contains information about a specified operation.
@@ -619,12 +619,6 @@ type Operation struct {
 	// milliseconds. For example, the value 1516925490.087 represents Friday, January
 	// 26, 2018 12:11:30.087 AM.
 	CreateDate *time.Time
-
-	// The name of the operation that is associated with the specified ID.
-	Type OperationType
-
-	// If the value of Status is FAIL, the reason that the operation failed.
-	ErrorMessage *string
 
 	// The code associated with ErrorMessage. Values for ErrorCode include the
 	// following:
@@ -646,6 +640,12 @@ type Operation struct {
 	//     * THROTTLED_REQUEST
 	ErrorCode *string
 
+	// If the value of Status is FAIL, the reason that the operation failed.
+	ErrorMessage *string
+
+	// The ID of the operation that you want to get information about.
+	Id *string
+
 	// The status of the operation. Values include the following:
 	//
 	//     * SUBMITTED:
@@ -661,15 +661,6 @@ type Operation struct {
 	// see ErrorMessage.
 	Status OperationStatus
 
-	// The date and time that the value of Status changed to the current value, in Unix
-	// date/time format and Coordinated Universal Time (UTC). The value of UpdateDate
-	// is accurate to milliseconds. For example, the value 1516925490.087 represents
-	// Friday, January 26, 2018 12:11:30.087 AM.
-	UpdateDate *time.Time
-
-	// The ID of the operation that you want to get information about.
-	Id *string
-
 	// The name of the target entity that is associated with the operation:
 	//
 	//     *
@@ -681,28 +672,39 @@ type Operation struct {
 	//     * INSTANCE:
 	// The instance ID is returned in the ResourceId property.
 	Targets map[string]*string
+
+	// The name of the operation that is associated with the specified ID.
+	Type OperationType
+
+	// The date and time that the value of Status changed to the current value, in Unix
+	// date/time format and Coordinated Universal Time (UTC). The value of UpdateDate
+	// is accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
+	UpdateDate *time.Time
 }
 
 // A complex type that lets you select the operations that you want to list.
 type OperationFilter struct {
 
-	// The operator that you want to use to determine whether an operation matches the
-	// specified value. Valid values for condition include:
+	// Specify the operations that you want to get:
 	//
-	//     * EQ: When you specify
-	// EQ for the condition, you can specify only one value. EQ is supported for
-	// NAMESPACE_ID, SERVICE_ID, STATUS, and TYPE. EQ is the default condition and can
-	// be omitted.
+	//     * NAMESPACE_ID: Gets
+	// operations related to specified namespaces.
 	//
-	//     * IN: When you specify IN for the condition, you can specify a
-	// list of one or more values. IN is supported for STATUS and TYPE. An operation
-	// must match one of the specified values to be returned in the response.
+	//     * SERVICE_ID: Gets operations
+	// related to specified services.
 	//
-	//     *
-	// BETWEEN: Specify a start date and an end date in Unix date/time format and
-	// Coordinated Universal Time (UTC). The start date must be the first value.
-	// BETWEEN is supported for UPDATE_DATE.
-	Condition FilterCondition
+	//     * STATUS: Gets operations based on the
+	// status of the operations: SUBMITTED, PENDING, SUCCEED, or FAIL.
+	//
+	//     * TYPE:
+	// Gets specified types of operation.
+	//
+	//     * UPDATE_DATE: Gets operations that
+	// changed status during a specified date/time range.
+	//
+	// This member is required.
+	Name OperationFilterName
 
 	// Specify values that are applicable to the value that you specify for Name:
 	//
@@ -725,25 +727,23 @@ type OperationFilter struct {
 	// This member is required.
 	Values []*string
 
-	// Specify the operations that you want to get:
+	// The operator that you want to use to determine whether an operation matches the
+	// specified value. Valid values for condition include:
 	//
-	//     * NAMESPACE_ID: Gets
-	// operations related to specified namespaces.
+	//     * EQ: When you specify
+	// EQ for the condition, you can specify only one value. EQ is supported for
+	// NAMESPACE_ID, SERVICE_ID, STATUS, and TYPE. EQ is the default condition and can
+	// be omitted.
 	//
-	//     * SERVICE_ID: Gets operations
-	// related to specified services.
+	//     * IN: When you specify IN for the condition, you can specify a
+	// list of one or more values. IN is supported for STATUS and TYPE. An operation
+	// must match one of the specified values to be returned in the response.
 	//
-	//     * STATUS: Gets operations based on the
-	// status of the operations: SUBMITTED, PENDING, SUCCEED, or FAIL.
-	//
-	//     * TYPE:
-	// Gets specified types of operation.
-	//
-	//     * UPDATE_DATE: Gets operations that
-	// changed status during a specified date/time range.
-	//
-	// This member is required.
-	Name OperationFilterName
+	//     *
+	// BETWEEN: Specify a start date and an end date in Unix date/time format and
+	// Coordinated Universal Time (UTC). The start date must be the first value.
+	// BETWEEN is supported for UPDATE_DATE.
+	Condition FilterCondition
 }
 
 // A complex type that contains information about an operation that matches the
@@ -774,14 +774,9 @@ type OperationSummary struct {
 // A complex type that contains information about the specified service.
 type Service struct {
 
-	// The number of instances that are currently associated with the service.
-	// Instances that were previously associated with the service but that have been
-	// deleted are not included in the count. The count might not reflect pending
-	// registrations and deregistrations.
-	InstanceCount *int32
-
-	// The description of the service.
-	Description *string
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when
+	// you create it.
+	Arn *string
 
 	// The date and time that the service was created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreateDate is accurate to milliseconds. For
@@ -794,15 +789,12 @@ type Service struct {
 	// can be any unique string, for example, a date/time stamp.
 	CreatorRequestId *string
 
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when
-	// you create it.
-	Arn *string
+	// The description of the service.
+	Description *string
 
-	// The name of the service.
-	Name *string
-
-	// The ID of the namespace that was used to create the service.
-	NamespaceId *string
+	// A complex type that contains information about the Route 53 DNS records that you
+	// want AWS Cloud Map to create when you register an instance.
+	DnsConfig *DnsConfig
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional health check. If you specify settings for a health check, AWS Cloud
@@ -811,17 +803,25 @@ type Service struct {
 	// (http://aws.amazon.com/route53/pricing/).
 	HealthCheckConfig *HealthCheckConfig
 
-	// The ID that AWS Cloud Map assigned to the service when you created it.
-	Id *string
-
-	// A complex type that contains information about the Route 53 DNS records that you
-	// want AWS Cloud Map to create when you register an instance.
-	DnsConfig *DnsConfig
-
 	// A complex type that contains information about an optional custom health check.
 	// If you specify a health check configuration, you can specify either
 	// HealthCheckCustomConfig or HealthCheckConfig but not both.
 	HealthCheckCustomConfig *HealthCheckCustomConfig
+
+	// The ID that AWS Cloud Map assigned to the service when you created it.
+	Id *string
+
+	// The number of instances that are currently associated with the service.
+	// Instances that were previously associated with the service but that have been
+	// deleted are not included in the count. The count might not reflect pending
+	// registrations and deregistrations.
+	InstanceCount *int32
+
+	// The name of the service.
+	Name *string
+
+	// The ID of the namespace that was used to create the service.
+	NamespaceId *string
 }
 
 // A complex type that contains changes to an existing service.
@@ -829,6 +829,10 @@ type ServiceChange struct {
 
 	// A description for the service.
 	Description *string
+
+	// A complex type that contains information about the Route 53 DNS records that you
+	// want AWS Cloud Map to create when you register an instance.
+	DnsConfig *DnsConfigChange
 
 	// Public DNS and HTTP namespaces only. A complex type that contains settings for
 	// an optional health check. If you specify settings for a health check, AWS Cloud
@@ -872,10 +876,6 @@ type ServiceChange struct {
 	// that monitor an AWS endpoint. For information about pricing for health checks,
 	// see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
 	HealthCheckConfig *HealthCheckConfig
-
-	// A complex type that contains information about the Route 53 DNS records that you
-	// want AWS Cloud Map to create when you register an instance.
-	DnsConfig *DnsConfigChange
 }
 
 // A complex type that lets you specify the namespaces that you want to list
@@ -910,6 +910,63 @@ type ServiceFilter struct {
 
 // A complex type that contains information about a specified service.
 type ServiceSummary struct {
+
+	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when
+	// you create it.
+	Arn *string
+
+	// The date and time that the service was created.
+	CreateDate *time.Time
+
+	// The description that you specify when you create the service.
+	Description *string
+
+	// A complex type that contains information about the Amazon Route 53 DNS records
+	// that you want AWS Cloud Map to create when you register an instance.
+	DnsConfig *DnsConfig
+
+	// Public DNS and HTTP namespaces only. A complex type that contains settings for
+	// an optional health check. If you specify settings for a health check, AWS Cloud
+	// Map associates the health check with the records that you specify in DnsConfig.
+	// If you specify a health check configuration, you can specify either
+	// HealthCheckCustomConfig or HealthCheckConfig but not both. Health checks are
+	// basic Route 53 health checks that monitor an AWS endpoint. For information about
+	// pricing for health checks, see Amazon Route 53 Pricing
+	// (http://aws.amazon.com/route53/pricing/). Note the following about configuring
+	// health checks. A and AAAA records If DnsConfig includes configurations for both
+	// A and AAAA records, AWS Cloud Map creates a health check that uses the IPv4
+	// address to check the health of the resource. If the endpoint that is specified
+	// by the IPv4 address is unhealthy, Route 53 considers both the A and AAAA records
+	// to be unhealthy. CNAME records You can't specify settings for HealthCheckConfig
+	// when the DNSConfig includes CNAME for the value of Type. If you do, the
+	// CreateService request will fail with an InvalidInput error. Request interval A
+	// Route 53 health checker in each health-checking region sends a health check
+	// request to an endpoint every 30 seconds. On average, your endpoint receives a
+	// health check request about every two seconds. However, health checkers don't
+	// coordinate with one another, so you'll sometimes see several requests per second
+	// followed by a few seconds with no health checks at all. Health checking regions
+	// Health checkers perform checks from all Route 53 health-checking regions. For a
+	// list of the current regions, see Regions
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
+	// Alias records When you register an instance, if you include the
+	// AWS_ALIAS_DNS_NAME attribute, AWS Cloud Map creates a Route 53 alias record.
+	// Note the following:
+	//
+	//     * Route 53 automatically sets EvaluateTargetHealth to
+	// true for alias records. When EvaluateTargetHealth is true, the alias record
+	// inherits the health of the referenced AWS resource. such as an ELB load
+	// balancer. For more information, see EvaluateTargetHealth
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
+	//
+	//
+	// * If you include HealthCheckConfig and then use the service to register an
+	// instance that creates an alias record, Route 53 doesn't create the health
+	// check.
+	//
+	// Charges for health checks Health checks are basic Route 53 health checks
+	// that monitor an AWS endpoint. For information about pricing for health checks,
+	// see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
+	HealthCheckConfig *HealthCheckConfig
 
 	// A complex type that contains information about an optional custom health check.
 	// A custom health check, which requires that you use a third-party health checker
@@ -963,8 +1020,8 @@ type ServiceSummary struct {
 	// resource.
 	HealthCheckCustomConfig *HealthCheckCustomConfig
 
-	// The date and time that the service was created.
-	CreateDate *time.Time
+	// The ID that AWS Cloud Map assigned to the service when you created it.
+	Id *string
 
 	// The number of instances that are currently associated with the service.
 	// Instances that were previously associated with the service but that have been
@@ -972,78 +1029,21 @@ type ServiceSummary struct {
 	// registrations and deregistrations.
 	InstanceCount *int32
 
-	// Public DNS and HTTP namespaces only. A complex type that contains settings for
-	// an optional health check. If you specify settings for a health check, AWS Cloud
-	// Map associates the health check with the records that you specify in DnsConfig.
-	// If you specify a health check configuration, you can specify either
-	// HealthCheckCustomConfig or HealthCheckConfig but not both. Health checks are
-	// basic Route 53 health checks that monitor an AWS endpoint. For information about
-	// pricing for health checks, see Amazon Route 53 Pricing
-	// (http://aws.amazon.com/route53/pricing/). Note the following about configuring
-	// health checks. A and AAAA records If DnsConfig includes configurations for both
-	// A and AAAA records, AWS Cloud Map creates a health check that uses the IPv4
-	// address to check the health of the resource. If the endpoint that is specified
-	// by the IPv4 address is unhealthy, Route 53 considers both the A and AAAA records
-	// to be unhealthy. CNAME records You can't specify settings for HealthCheckConfig
-	// when the DNSConfig includes CNAME for the value of Type. If you do, the
-	// CreateService request will fail with an InvalidInput error. Request interval A
-	// Route 53 health checker in each health-checking region sends a health check
-	// request to an endpoint every 30 seconds. On average, your endpoint receives a
-	// health check request about every two seconds. However, health checkers don't
-	// coordinate with one another, so you'll sometimes see several requests per second
-	// followed by a few seconds with no health checks at all. Health checking regions
-	// Health checkers perform checks from all Route 53 health-checking regions. For a
-	// list of the current regions, see Regions
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_HealthCheckConfig.html#Route53-Type-HealthCheckConfig-Regions).
-	// Alias records When you register an instance, if you include the
-	// AWS_ALIAS_DNS_NAME attribute, AWS Cloud Map creates a Route 53 alias record.
-	// Note the following:
-	//
-	//     * Route 53 automatically sets EvaluateTargetHealth to
-	// true for alias records. When EvaluateTargetHealth is true, the alias record
-	// inherits the health of the referenced AWS resource. such as an ELB load
-	// balancer. For more information, see EvaluateTargetHealth
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_AliasTarget.html#Route53-Type-AliasTarget-EvaluateTargetHealth).
-	//
-	//
-	// * If you include HealthCheckConfig and then use the service to register an
-	// instance that creates an alias record, Route 53 doesn't create the health
-	// check.
-	//
-	// Charges for health checks Health checks are basic Route 53 health checks
-	// that monitor an AWS endpoint. For information about pricing for health checks,
-	// see Amazon Route 53 Pricing (http://aws.amazon.com/route53/pricing/).
-	HealthCheckConfig *HealthCheckConfig
-
-	// The ID that AWS Cloud Map assigned to the service when you created it.
-	Id *string
-
-	// A complex type that contains information about the Amazon Route 53 DNS records
-	// that you want AWS Cloud Map to create when you register an instance.
-	DnsConfig *DnsConfig
-
-	// The description that you specify when you create the service.
-	Description *string
-
 	// The name of the service.
 	Name *string
-
-	// The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when
-	// you create it.
-	Arn *string
 }
 
 // A custom key-value pair associated with a resource.
 type Tag struct {
+
+	// The key identifier, or name, of the tag.
+	//
+	// This member is required.
+	Key *string
 
 	// The string value that's associated with the key of the tag. You can set the
 	// value of a tag to an empty string, but you can't set the value of a tag to null.
 	//
 	// This member is required.
 	Value *string
-
-	// The key identifier, or name, of the tag.
-	//
-	// This member is required.
-	Key *string
 }

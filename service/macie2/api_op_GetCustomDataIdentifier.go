@@ -67,24 +67,32 @@ type GetCustomDataIdentifierInput struct {
 
 type GetCustomDataIdentifierOutput struct {
 
+	// The Amazon Resource Name (ARN) of the custom data identifier.
+	Arn *string
+
 	// The date and time, in UTC and extended ISO 8601 format, when the custom data
 	// identifier was created.
 	CreatedAt *time.Time
-
-	// The regular expression (regex) that defines the pattern to match.
-	Regex *string
-
-	// A map of key-value pairs that identifies the tags (keys and values) that are
-	// associated with the custom data identifier.
-	Tags map[string]*string
-
-	// The custom description of the custom data identifier.
-	Description *string
 
 	// Specifies whether the custom data identifier was deleted. If you delete a custom
 	// data identifier, Amazon Macie doesn't delete it permanently. Instead, it soft
 	// deletes the identifier.
 	Deleted *bool
+
+	// The custom description of the custom data identifier.
+	Description *string
+
+	// The unique identifier for the custom data identifier.
+	Id *string
+
+	// An array that lists specific character sequences (ignore words) to exclude from
+	// the results. If the text matched by the regular expression is the same as any
+	// string in this array, Amazon Macie ignores it.
+	IgnoreWords []*string
+
+	// An array that lists specific character sequences (keywords), one of which must
+	// be within proximity (maximumMatchDistance) of the regular expression to match.
+	Keywords []*string
 
 	// The maximum number of characters that can exist between text that matches the
 	// regex pattern and the character sequences specified by the keywords array. Macie
@@ -95,20 +103,12 @@ type GetCustomDataIdentifierOutput struct {
 	// The custom name of the custom data identifier.
 	Name *string
 
-	// An array that lists specific character sequences (keywords), one of which must
-	// be within proximity (maximumMatchDistance) of the regular expression to match.
-	Keywords []*string
+	// The regular expression (regex) that defines the pattern to match.
+	Regex *string
 
-	// The Amazon Resource Name (ARN) of the custom data identifier.
-	Arn *string
-
-	// An array that lists specific character sequences (ignore words) to exclude from
-	// the results. If the text matched by the regular expression is the same as any
-	// string in this array, Amazon Macie ignores it.
-	IgnoreWords []*string
-
-	// The unique identifier for the custom data identifier.
-	Id *string
+	// A map of key-value pairs that identifies the tags (keys and values) that are
+	// associated with the custom data identifier.
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

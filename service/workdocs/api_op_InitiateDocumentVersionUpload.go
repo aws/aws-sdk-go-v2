@@ -63,12 +63,6 @@ func (c *Client) InitiateDocumentVersionUpload(ctx context.Context, params *Init
 
 type InitiateDocumentVersionUploadInput struct {
 
-	// The content type of the document.
-	ContentType *string
-
-	// The ID of the document.
-	Id *string
-
 	// The ID of the parent folder.
 	//
 	// This member is required.
@@ -78,26 +72,32 @@ type InitiateDocumentVersionUploadInput struct {
 	// credentials to access the API.
 	AuthenticationToken *string
 
+	// The timestamp when the content of the document was originally created.
+	ContentCreatedTimestamp *time.Time
+
 	// The timestamp when the content of the document was modified.
 	ContentModifiedTimestamp *time.Time
 
-	// The name of the document.
-	Name *string
+	// The content type of the document.
+	ContentType *string
 
 	// The size of the document, in bytes.
 	DocumentSizeInBytes *int64
 
-	// The timestamp when the content of the document was originally created.
-	ContentCreatedTimestamp *time.Time
+	// The ID of the document.
+	Id *string
+
+	// The name of the document.
+	Name *string
 }
 
 type InitiateDocumentVersionUploadOutput struct {
 
-	// The upload metadata.
-	UploadMetadata *types.UploadMetadata
-
 	// The document metadata.
 	Metadata *types.DocumentMetadata
+
+	// The upload metadata.
+	UploadMetadata *types.UploadMetadata
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

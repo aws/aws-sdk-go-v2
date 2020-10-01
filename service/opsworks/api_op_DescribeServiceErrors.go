@@ -61,6 +61,10 @@ func (c *Client) DescribeServiceErrors(ctx context.Context, params *DescribeServ
 
 type DescribeServiceErrorsInput struct {
 
+	// The instance ID. If you use this parameter, DescribeServiceErrors returns
+	// descriptions of the errors associated with the specified instance.
+	InstanceId *string
+
 	// An array of service error IDs. If you use this parameter, DescribeServiceErrors
 	// returns descriptions of the specified errors. Otherwise, it returns a
 	// description of every error.
@@ -69,10 +73,6 @@ type DescribeServiceErrorsInput struct {
 	// The stack ID. If you use this parameter, DescribeServiceErrors returns
 	// descriptions of the errors associated with the specified stack.
 	StackId *string
-
-	// The instance ID. If you use this parameter, DescribeServiceErrors returns
-	// descriptions of the errors associated with the specified instance.
-	InstanceId *string
 }
 
 // Contains the response to a DescribeServiceErrors request.

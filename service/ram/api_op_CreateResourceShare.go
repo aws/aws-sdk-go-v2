@@ -57,13 +57,6 @@ func (c *Client) CreateResourceShare(ctx context.Context, params *CreateResource
 
 type CreateResourceShareInput struct {
 
-	// One or more tags.
-	Tags []*types.Tag
-
-	// The Amazon Resource Names (ARN) of the resources to associate with the resource
-	// share.
-	ResourceArns []*string
-
 	// The name of the resource share.
 	//
 	// This member is required.
@@ -73,28 +66,35 @@ type CreateResourceShareInput struct {
 	// with a resource share.
 	AllowExternalPrincipals *bool
 
-	// The principals to associate with the resource share. The possible values are IDs
-	// of AWS accounts, the ARN of an OU or organization from AWS Organizations.
-	Principals []*string
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
 
 	// The ARNs of the permissions to associate with the resource share. If you do not
 	// specify an ARN for the permission, AWS RAM automatically attaches the default
 	// version of the permission for each resource type.
 	PermissionArns []*string
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string
+	// The principals to associate with the resource share. The possible values are IDs
+	// of AWS accounts, the ARN of an OU or organization from AWS Organizations.
+	Principals []*string
+
+	// The Amazon Resource Names (ARN) of the resources to associate with the resource
+	// share.
+	ResourceArns []*string
+
+	// One or more tags.
+	Tags []*types.Tag
 }
 
 type CreateResourceShareOutput struct {
 
-	// Information about the resource share.
-	ResourceShare *types.ResourceShare
-
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Information about the resource share.
+	ResourceShare *types.ResourceShare
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

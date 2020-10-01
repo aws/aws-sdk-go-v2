@@ -77,15 +77,15 @@ type StartContactRecordingInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// Who is being recorded.
-	//
-	// This member is required.
-	VoiceRecordingConfiguration *types.VoiceRecordingConfiguration
-
 	// The identifier of the Amazon Connect instance.
 	//
 	// This member is required.
 	InstanceId *string
+
+	// Who is being recorded.
+	//
+	// This member is required.
+	VoiceRecordingConfiguration *types.VoiceRecordingConfiguration
 }
 
 type StartContactRecordingOutput struct {

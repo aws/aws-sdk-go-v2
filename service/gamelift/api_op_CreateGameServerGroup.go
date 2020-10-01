@@ -114,17 +114,12 @@ func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameSe
 
 type CreateGameServerGroupInput struct {
 
-	// The maximum number of instances allowed in the EC2 Auto Scaling group. During
-	// autoscaling events, GameLift FleetIQ and EC2 do not scale up the group above
-	// this maximum.
+	// An identifier for the new game server group. This value is used to generate
+	// unique ARN identifiers for the EC2 Auto Scaling group and the GameLift FleetIQ
+	// game server group. The name must be unique per Region per AWS account.
 	//
 	// This member is required.
-	MaxSize *int32
-
-	// A list of virtual private cloud (VPC) subnets to use with instances in the game
-	// server group. By default, all GameLift FleetIQ-supported availability zones are
-	// used; this parameter allows you to specify VPCs that you've set up.
-	VpcSubnets []*string
+	GameServerGroupName *string
 
 	// A set of EC2 instance types to use when creating instances in the group. The
 	// instance definitions must specify at least two different instance types that are
@@ -136,16 +131,29 @@ type CreateGameServerGroupInput struct {
 	// This member is required.
 	InstanceDefinitions []*types.InstanceDefinition
 
-	// A list of labels to assign to the new game server group resource. Tags are
-	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
-	// management, access management, and cost allocation. For more information, see
-	// Tagging AWS Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
-	// General Reference. Once the resource is created, you can use TagResource (),
-	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
-	// maximum tag limit may be lower than stated. See the AWS General Reference for
-	// actual tagging limits.
-	Tags []*types.Tag
+	// The EC2 launch template that contains configuration settings and game server
+	// code to be deployed to all instances in the game server group. You can specify
+	// the template using either the template name or ID. For help with creating a
+	// launch template, see Creating a Launch Template for an Auto Scaling Group
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// This member is required.
+	LaunchTemplate *types.LaunchTemplateSpecification
+
+	// The maximum number of instances allowed in the EC2 Auto Scaling group. During
+	// autoscaling events, GameLift FleetIQ and EC2 do not scale up the group above
+	// this maximum.
+	//
+	// This member is required.
+	MaxSize *int32
+
+	// The minimum number of instances allowed in the EC2 Auto Scaling group. During
+	// autoscaling events, GameLift FleetIQ and EC2 do not scale down the group below
+	// this minimum. In production, this value should be set to at least 1.
+	//
+	// This member is required.
+	MinSize *int32
 
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
@@ -155,6 +163,14 @@ type CreateGameServerGroupInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	// Configuration settings to define a scaling policy for the Auto Scaling group
+	// that is optimized for game hosting. The scaling policy uses the metric
+	// "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can
+	// immediately accommodate new games and players. Once the game server and Auto
+	// Scaling groups are created, you can update the scaling policy settings directly
+	// in Auto Scaling Groups.
+	AutoScalingPolicy *types.GameServerGroupAutoScalingPolicy
 
 	// The fallback balancing method to use for the game server group when Spot
 	// instances in a Region become unavailable or are not viable for game hosting.
@@ -173,38 +189,6 @@ type CreateGameServerGroupInput struct {
 	// instances.
 	BalancingStrategy types.BalancingStrategy
 
-	// An identifier for the new game server group. This value is used to generate
-	// unique ARN identifiers for the EC2 Auto Scaling group and the GameLift FleetIQ
-	// game server group. The name must be unique per Region per AWS account.
-	//
-	// This member is required.
-	GameServerGroupName *string
-
-	// The minimum number of instances allowed in the EC2 Auto Scaling group. During
-	// autoscaling events, GameLift FleetIQ and EC2 do not scale down the group below
-	// this minimum. In production, this value should be set to at least 1.
-	//
-	// This member is required.
-	MinSize *int32
-
-	// Configuration settings to define a scaling policy for the Auto Scaling group
-	// that is optimized for game hosting. The scaling policy uses the metric
-	// "PercentUtilizedGameServers" to maintain a buffer of idle game servers that can
-	// immediately accommodate new games and players. Once the game server and Auto
-	// Scaling groups are created, you can update the scaling policy settings directly
-	// in Auto Scaling Groups.
-	AutoScalingPolicy *types.GameServerGroupAutoScalingPolicy
-
-	// The EC2 launch template that contains configuration settings and game server
-	// code to be deployed to all instances in the game server group. You can specify
-	// the template using either the template name or ID. For help with creating a
-	// launch template, see Creating a Launch Template for an Auto Scaling Group
-	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
-	// in the Amazon EC2 Auto Scaling User Guide.
-	//
-	// This member is required.
-	LaunchTemplate *types.LaunchTemplateSpecification
-
 	// A flag that indicates whether instances in the game server group are protected
 	// from early termination. Unprotected instances that have active game servers
 	// running may by terminated during a scale-down event, causing players to be
@@ -213,6 +197,22 @@ type CreateGameServerGroupInput struct {
 	// be terminated by AWS regardless of protection status. This property is set to
 	// NO_PROTECTION by default.
 	GameServerProtectionPolicy types.GameServerProtectionPolicy
+
+	// A list of labels to assign to the new game server group resource. Tags are
+	// developer-defined key-value pairs. Tagging AWS resources are useful for resource
+	// management, access management, and cost allocation. For more information, see
+	// Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the AWS
+	// General Reference. Once the resource is created, you can use TagResource (),
+	// UntagResource (), and ListTagsForResource () to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the AWS General Reference for
+	// actual tagging limits.
+	Tags []*types.Tag
+
+	// A list of virtual private cloud (VPC) subnets to use with instances in the game
+	// server group. By default, all GameLift FleetIQ-supported availability zones are
+	// used; this parameter allows you to specify VPCs that you've set up.
+	VpcSubnets []*string
 }
 
 type CreateGameServerGroupOutput struct {

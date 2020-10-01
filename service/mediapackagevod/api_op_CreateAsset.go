@@ -58,40 +58,43 @@ func (c *Client) CreateAsset(ctx context.Context, params *CreateAssetInput, optF
 // A new MediaPackage VOD Asset configuration.
 type CreateAssetInput struct {
 
-	// A collection of tags associated with a resource
-	Tags map[string]*string
-
-	// The resource ID to include in SPEKE key requests.
-	ResourceId *string
-
-	// ARN of the source object in S3.
+	// The unique identifier for the Asset.
 	//
 	// This member is required.
-	SourceArn *string
+	Id *string
 
 	// The ID of the PackagingGroup for the Asset.
 	//
 	// This member is required.
 	PackagingGroupId *string
+
+	// ARN of the source object in S3.
+	//
+	// This member is required.
+	SourceArn *string
 
 	// The IAM role ARN used to access the source S3 bucket.
 	//
 	// This member is required.
 	SourceRoleArn *string
 
-	// The unique identifier for the Asset.
-	//
-	// This member is required.
-	Id *string
+	// The resource ID to include in SPEKE key requests.
+	ResourceId *string
+
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 }
 
 type CreateAssetOutput struct {
 
+	// The ARN of the Asset.
+	Arn *string
+
 	// The time the Asset was initially submitted for Ingest.
 	CreatedAt *string
 
-	// ARN of the source object in S3.
-	SourceArn *string
+	// The list of egress endpoints available for the Asset.
+	EgressEndpoints []*types.EgressEndpoint
 
 	// The unique identifier for the Asset.
 	Id *string
@@ -102,17 +105,14 @@ type CreateAssetOutput struct {
 	// The resource ID to include in SPEKE key requests.
 	ResourceId *string
 
-	// A collection of tags associated with a resource
-	Tags map[string]*string
-
-	// The list of egress endpoints available for the Asset.
-	EgressEndpoints []*types.EgressEndpoint
+	// ARN of the source object in S3.
+	SourceArn *string
 
 	// The IAM role_arn used to access the source S3 bucket.
 	SourceRoleArn *string
 
-	// The ARN of the Asset.
-	Arn *string
+	// A collection of tags associated with a resource
+	Tags map[string]*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

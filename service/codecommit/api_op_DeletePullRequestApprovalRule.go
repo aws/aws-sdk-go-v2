@@ -61,16 +61,16 @@ func (c *Client) DeletePullRequestApprovalRule(ctx context.Context, params *Dele
 
 type DeletePullRequestApprovalRuleInput struct {
 
+	// The name of the approval rule you want to delete.
+	//
+	// This member is required.
+	ApprovalRuleName *string
+
 	// The system-generated ID of the pull request that contains the approval rule you
 	// want to delete.
 	//
 	// This member is required.
 	PullRequestId *string
-
-	// The name of the approval rule you want to delete.
-	//
-	// This member is required.
-	ApprovalRuleName *string
 }
 
 type DeletePullRequestApprovalRuleOutput struct {

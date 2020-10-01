@@ -87,13 +87,6 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 //
 type AddPermissionInput struct {
 
-	// The unique identification of the permission you're setting (for example,
-	// AliceSendMessage). Maximum 80 characters. Allowed characters include
-	// alphanumeric characters, hyphens (-), and underscores (_).
-	//
-	// This member is required.
-	Label *string
-
 	// The AWS account number of the principal
 	// (https://docs.aws.amazon.com/general/latest/gr/glos-chap.html#P) who is given
 	// permission. The principal must have an AWS account, but does not need to be
@@ -104,12 +97,6 @@ type AddPermissionInput struct {
 	//
 	// This member is required.
 	AWSAccountIds []*string
-
-	// The URL of the Amazon SQS queue to which permissions are added. Queue URLs and
-	// names are case-sensitive.
-	//
-	// This member is required.
-	QueueUrl *string
 
 	// The action the client wants to allow for the specified principal. Valid values:
 	// the name of any action or *. For more information about these actions, see
@@ -123,6 +110,19 @@ type AddPermissionInput struct {
 	//
 	// This member is required.
 	Actions []*string
+
+	// The unique identification of the permission you're setting (for example,
+	// AliceSendMessage). Maximum 80 characters. Allowed characters include
+	// alphanumeric characters, hyphens (-), and underscores (_).
+	//
+	// This member is required.
+	Label *string
+
+	// The URL of the Amazon SQS queue to which permissions are added. Queue URLs and
+	// names are case-sensitive.
+	//
+	// This member is required.
+	QueueUrl *string
 }
 
 type AddPermissionOutput struct {

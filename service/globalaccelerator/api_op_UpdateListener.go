@@ -58,6 +58,11 @@ func (c *Client) UpdateListener(ctx context.Context, params *UpdateListenerInput
 
 type UpdateListenerInput struct {
 
+	// The Amazon Resource Name (ARN) of the listener to update.
+	//
+	// This member is required.
+	ListenerArn *string
+
 	// Client affinity lets you direct all requests from a user to the same endpoint,
 	// if you have stateful applications, regardless of the port and protocol of the
 	// client request. Clienty affinity gives you control over whether to always route
@@ -75,17 +80,12 @@ type UpdateListenerInput struct {
 	// select the hash value. The default value is NONE.
 	ClientAffinity types.ClientAffinity
 
-	// The updated protocol for the connections from clients to the accelerator.
-	Protocol types.Protocol
-
-	// The Amazon Resource Name (ARN) of the listener to update.
-	//
-	// This member is required.
-	ListenerArn *string
-
 	// The updated list of port ranges for the connections from clients to the
 	// accelerator.
 	PortRanges []*types.PortRange
+
+	// The updated protocol for the connections from clients to the accelerator.
+	Protocol types.Protocol
 }
 
 type UpdateListenerOutput struct {

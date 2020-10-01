@@ -58,18 +58,18 @@ func (c *Client) CreateWebhook(ctx context.Context, params *CreateWebhookInput, 
 // The request structure for the create webhook request.
 type CreateWebhookInput struct {
 
-	// The description for a webhook.
-	Description *string
+	// The unique ID for an Amplify app.
+	//
+	// This member is required.
+	AppId *string
 
 	// The name for a branch that is part of an Amplify app.
 	//
 	// This member is required.
 	BranchName *string
 
-	// The unique ID for an Amplify app.
-	//
-	// This member is required.
-	AppId *string
+	// The description for a webhook.
+	Description *string
 }
 
 // The result structure for the create webhook request.

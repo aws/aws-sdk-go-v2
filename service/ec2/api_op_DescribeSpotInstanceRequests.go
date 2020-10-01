@@ -70,23 +70,11 @@ func (c *Client) DescribeSpotInstanceRequests(ctx context.Context, params *Descr
 // Contains the parameters for DescribeSpotInstanceRequests.
 type DescribeSpotInstanceRequestsInput struct {
 
-	// The token to request the next set of results. This value is null when there are
-	// no more results to return.
-	NextToken *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// One or more Spot Instance request IDs.
-	SpotInstanceRequestIds []*string
-
-	// The maximum number of results to return in a single call. Specify a value
-	// between 5 and 1000. To retrieve the remaining results, make another call with
-	// the returned NextToken value.
-	MaxResults *int32
 
 	// One or more filters.
 	//
@@ -221,17 +209,29 @@ type DescribeSpotInstanceRequestsInput struct {
 	//     *
 	// valid-until - The end date of the request.
 	Filters []*types.Filter
+
+	// The maximum number of results to return in a single call. Specify a value
+	// between 5 and 1000. To retrieve the remaining results, make another call with
+	// the returned NextToken value.
+	MaxResults *int32
+
+	// The token to request the next set of results. This value is null when there are
+	// no more results to return.
+	NextToken *string
+
+	// One or more Spot Instance request IDs.
+	SpotInstanceRequestIds []*string
 }
 
 // Contains the output of DescribeSpotInstanceRequests.
 type DescribeSpotInstanceRequestsOutput struct {
 
-	// One or more Spot Instance requests.
-	SpotInstanceRequests []*types.SpotInstanceRequest
-
 	// The token to use to retrieve the next set of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// One or more Spot Instance requests.
+	SpotInstanceRequests []*types.SpotInstanceRequest
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -63,10 +63,6 @@ type ListArtifactsInput struct {
 	// This member is required.
 	Arn *string
 
-	// An identifier that was returned from the previous call to this operation, which
-	// can be used to return the next set of items in the list.
-	NextToken *string
-
 	// The artifacts' type. Allowed values include:
 	//
 	//     * FILE
@@ -78,6 +74,10 @@ type ListArtifactsInput struct {
 	//
 	// This member is required.
 	Type types.ArtifactCategory
+
+	// An identifier that was returned from the previous call to this operation, which
+	// can be used to return the next set of items in the list.
+	NextToken *string
 }
 
 // Represents the result of a list artifacts operation.

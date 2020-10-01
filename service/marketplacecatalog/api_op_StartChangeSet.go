@@ -68,6 +68,11 @@ func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput
 
 type StartChangeSetInput struct {
 
+	// The catalog related to the request. Fixed value: AWSMarketplace
+	//
+	// This member is required.
+	Catalog *string
+
 	// Array of change object.
 	//
 	// This member is required.
@@ -79,20 +84,15 @@ type StartChangeSetInput struct {
 
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string
-
-	// The catalog related to the request. Fixed value: AWSMarketplace
-	//
-	// This member is required.
-	Catalog *string
 }
 
 type StartChangeSetOutput struct {
 
-	// Unique identifier generated for the request.
-	ChangeSetId *string
-
 	// The ARN associated to the unique identifier generated for the request.
 	ChangeSetArn *string
+
+	// Unique identifier generated for the request.
+	ChangeSetId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

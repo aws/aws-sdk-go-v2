@@ -62,6 +62,12 @@ type TestCustomDataIdentifierInput struct {
 	// This member is required.
 	Regex *string
 
+	// The sample text to inspect by using the custom data identifier. The text can
+	// contain as many as 1,000 characters.
+	//
+	// This member is required.
+	SampleText *string
+
 	// An array that lists specific character sequences (ignore words) to exclude from
 	// the results. If the text matched by the regular expression is the same as any
 	// string in this array, Amazon Macie ignores it. The array can contain as many as
@@ -80,12 +86,6 @@ type TestCustomDataIdentifierInput struct {
 	// matches the regex pattern. The distance can be 1 - 300 characters. The default
 	// value is 50.
 	MaximumMatchDistance *int32
-
-	// The sample text to inspect by using the custom data identifier. The text can
-	// contain as many as 1,000 characters.
-	//
-	// This member is required.
-	SampleText *string
 }
 
 type TestCustomDataIdentifierOutput struct {

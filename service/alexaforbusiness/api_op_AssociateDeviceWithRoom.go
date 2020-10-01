@@ -58,11 +58,11 @@ func (c *Client) AssociateDeviceWithRoom(ctx context.Context, params *AssociateD
 
 type AssociateDeviceWithRoomInput struct {
 
-	// The ARN of the room with which to associate the device. Required.
-	RoomArn *string
-
 	// The ARN of the device to associate to a room. Required.
 	DeviceArn *string
+
+	// The ARN of the room with which to associate the device. Required.
+	RoomArn *string
 }
 
 type AssociateDeviceWithRoomOutput struct {

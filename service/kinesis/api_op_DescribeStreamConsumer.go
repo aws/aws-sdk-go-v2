@@ -63,6 +63,9 @@ func (c *Client) DescribeStreamConsumer(ctx context.Context, params *DescribeStr
 
 type DescribeStreamConsumerInput struct {
 
+	// The ARN returned by Kinesis Data Streams when you registered the consumer.
+	ConsumerARN *string
+
 	// The name that you gave to the consumer.
 	ConsumerName *string
 
@@ -70,9 +73,6 @@ type DescribeStreamConsumerInput struct {
 	// more information, see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
 	StreamARN *string
-
-	// The ARN returned by Kinesis Data Streams when you registered the consumer.
-	ConsumerARN *string
 }
 
 type DescribeStreamConsumerOutput struct {

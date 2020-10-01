@@ -64,17 +64,17 @@ type GetApiKeyInput struct {
 	// This member is required.
 	ApiKey *string
 
-	TemplateSkipList []*string
-
-	Title *string
-
-	Name *string
-
 	// A boolean flag to specify whether (true) or not (false) the result contains the
 	// key value.
 	IncludeValue *bool
 
+	Name *string
+
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // A resource that can be distributed to callers for executing Method () resources
@@ -84,33 +84,33 @@ type GetApiKeyInput struct {
 // (https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html)
 type GetApiKeyOutput struct {
 
+	// The timestamp when the API Key was created.
+	CreatedDate *time.Time
+
+	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
+	// Marketplace.
+	CustomerId *string
+
+	// The description of the API Key.
+	Description *string
+
+	// Specifies whether the API Key can be used by callers.
+	Enabled *bool
+
+	// The identifier of the API Key.
+	Id *string
+
+	// The timestamp when the API Key was last updated.
+	LastUpdatedDate *time.Time
+
 	// The name of the API Key.
 	Name *string
 
 	// A list of Stage () resources that are associated with the ApiKey () resource.
 	StageKeys []*string
 
-	// The timestamp when the API Key was created.
-	CreatedDate *time.Time
-
-	// The identifier of the API Key.
-	Id *string
-
-	// An AWS Marketplace customer identifier , when integrating with the AWS SaaS
-	// Marketplace.
-	CustomerId *string
-
-	// The timestamp when the API Key was last updated.
-	LastUpdatedDate *time.Time
-
-	// Specifies whether the API Key can be used by callers.
-	Enabled *bool
-
 	// The collection of tags. Each tag element is associated with a given resource.
 	Tags map[string]*string
-
-	// The description of the API Key.
-	Description *string
 
 	// The value of the API Key.
 	Value *string

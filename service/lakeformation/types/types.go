@@ -9,15 +9,23 @@ import (
 // A list of failures when performing a batch grant or batch revoke operation.
 type BatchPermissionsFailureEntry struct {
 
-	// An identifier for an entry of the batch request.
-	RequestEntry *BatchPermissionsRequestEntry
-
 	// An error message that applies to the failure of the entry.
 	Error *ErrorDetail
+
+	// An identifier for an entry of the batch request.
+	RequestEntry *BatchPermissionsRequestEntry
 }
 
 // A permission to a resource granted by batch operation to the principal.
 type BatchPermissionsRequestEntry struct {
+
+	// A unique identifier for the batch permissions request entry.
+	//
+	// This member is required.
+	Id *string
+
+	// The permissions to be granted.
+	Permissions []Permission
 
 	// Indicates if the option to pass permissions is granted.
 	PermissionsWithGrantOption []Permission
@@ -25,16 +33,8 @@ type BatchPermissionsRequestEntry struct {
 	// The principal to be granted a permission.
 	Principal *DataLakePrincipal
 
-	// A unique identifier for the batch permissions request entry.
-	//
-	// This member is required.
-	Id *string
-
 	// The resource to which the principal is to be granted a permission.
 	Resource *Resource
-
-	// The permissions to be granted.
-	Permissions []Permission
 }
 
 // A structure for the catalog object.
@@ -76,12 +76,12 @@ type DataLakePrincipal struct {
 type DataLakeSettings struct {
 
 	// A structure representing a list of up to three principal permissions entries for
-	// default create table permissions.
-	CreateTableDefaultPermissions []*PrincipalPermissions
-
-	// A structure representing a list of up to three principal permissions entries for
 	// default create database permissions.
 	CreateDatabaseDefaultPermissions []*PrincipalPermissions
+
+	// A structure representing a list of up to three principal permissions entries for
+	// default create table permissions.
+	CreateTableDefaultPermissions []*PrincipalPermissions
 
 	// A list of AWS Lake Formation principals. Supported principals are IAM users or
 	// IAM roles.
@@ -97,15 +97,15 @@ type DataLakeSettings struct {
 // A structure for a data location object where permissions are granted or revoked.
 type DataLocationResource struct {
 
-	// The identifier for the Data Catalog where the location is registered with AWS
-	// Lake Formation. By default, it is the account ID of the caller.
-	CatalogId *string
-
 	// The Amazon Resource Name (ARN) that uniquely identifies the data location
 	// resource.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The identifier for the Data Catalog where the location is registered with AWS
+	// Lake Formation. By default, it is the account ID of the caller.
+	CatalogId *string
 }
 
 // Contains details about an error.
@@ -122,11 +122,11 @@ type ErrorDetail struct {
 // condition.
 type FilterCondition struct {
 
-	// The field to filter in the filter condition.
-	Field FieldNameString
-
 	// The comparison operator used in the filter condition.
 	ComparisonOperator ComparisonOperator
+
+	// The field to filter in the filter condition.
+	Field FieldNameString
 
 	// A string with values used in evaluating the filter condition.
 	StringValueList []*string
@@ -145,9 +145,6 @@ type PrincipalPermissions struct {
 // The permissions granted or revoked on a resource.
 type PrincipalResourcePermissions struct {
 
-	// The resource where permissions are to be granted or revoked.
-	Resource *Resource
-
 	// The permissions to be granted or revoked on the resource.
 	Permissions []Permission
 
@@ -157,56 +154,54 @@ type PrincipalResourcePermissions struct {
 
 	// The Data Lake principal to be granted or revoked permissions.
 	Principal *DataLakePrincipal
+
+	// The resource where permissions are to be granted or revoked.
+	Resource *Resource
 }
 
 // A structure for the resource.
 type Resource struct {
-
-	// The table with columns for the resource. A principal with permissions to this
-	// resource can select metadata from the columns of a table in the Data Catalog and
-	// the underlying data in Amazon S3.
-	TableWithColumns *TableWithColumnsResource
-
-	// The location of an Amazon S3 path where permissions are granted or revoked.
-	DataLocation *DataLocationResource
-
-	// The table for the resource. A table is a metadata definition that represents
-	// your data. You can Grant and Revoke table privileges to a principal.
-	Table *TableResource
-
-	// The database for the resource. Unique to the Data Catalog. A database is a set
-	// of associated table definitions organized into a logical group. You can Grant
-	// and Revoke database permissions to a principal.
-	Database *DatabaseResource
 
 	// The identifier for the Data Catalog. By default, the account ID. The Data
 	// Catalog is the persistent metadata store. It contains database definitions,
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	Catalog *CatalogResource
+
+	// The location of an Amazon S3 path where permissions are granted or revoked.
+	DataLocation *DataLocationResource
+
+	// The database for the resource. Unique to the Data Catalog. A database is a set
+	// of associated table definitions organized into a logical group. You can Grant
+	// and Revoke database permissions to a principal.
+	Database *DatabaseResource
+
+	// The table for the resource. A table is a metadata definition that represents
+	// your data. You can Grant and Revoke table privileges to a principal.
+	Table *TableResource
+
+	// The table with columns for the resource. A principal with permissions to this
+	// resource can select metadata from the columns of a table in the Data Catalog and
+	// the underlying data in Amazon S3.
+	TableWithColumns *TableWithColumnsResource
 }
 
 // A structure containing information about an AWS Lake Formation resource.
 type ResourceInfo struct {
-
-	// The IAM role that registered a resource.
-	RoleArn *string
 
 	// The date and time the resource was last modified.
 	LastModified *time.Time
 
 	// The Amazon Resource Name (ARN) of the resource.
 	ResourceArn *string
+
+	// The IAM role that registered a resource.
+	RoleArn *string
 }
 
 // A structure for the table object. A table is a metadata definition that
 // represents your data. You can Grant and Revoke table privileges to a principal.
 type TableResource struct {
-
-	// A wildcard object representing every table under a database.  <p>At least one of
-	// <code>TableResource$Name</code> or <code>TableResource$TableWildcard</code> is
-	// required.</p>
-	TableWildcard *TableWildcard
 
 	// The name of the database for the table. Unique to a Data Catalog. A database is
 	// a set of associated table definitions organized into a logical group. You can
@@ -215,12 +210,17 @@ type TableResource struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The name of the table.
-	Name *string
-
 	// The identifier for the Data Catalog. By default, it is the account ID of the
 	// caller.
 	CatalogId *string
+
+	// The name of the table.
+	Name *string
+
+	// A wildcard object representing every table under a database.  <p>At least one of
+	// <code>TableResource$Name</code> or <code>TableResource$TableWildcard</code> is
+	// required.</p>
+	TableWildcard *TableWildcard
 }
 
 // A wildcard object representing every table under a database.
@@ -239,14 +239,6 @@ type TableWithColumnsResource struct {
 	// This member is required.
 	DatabaseName *string
 
-	// The list of column names for the table. At least one of ColumnNames or
-	// ColumnWildcard is required.
-	ColumnNames []*string
-
-	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
-	// ColumnWildcard is required.
-	ColumnWildcard *ColumnWildcard
-
 	// The name of the table resource. A table is a metadata definition that represents
 	// your data. You can Grant and Revoke table privileges to a principal.
 	//
@@ -256,4 +248,12 @@ type TableWithColumnsResource struct {
 	// The identifier for the Data Catalog. By default, it is the account ID of the
 	// caller.
 	CatalogId *string
+
+	// The list of column names for the table. At least one of ColumnNames or
+	// ColumnWildcard is required.
+	ColumnNames []*string
+
+	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
+	// ColumnWildcard is required.
+	ColumnWildcard *ColumnWildcard
 }

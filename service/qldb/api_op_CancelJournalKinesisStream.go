@@ -59,15 +59,15 @@ func (c *Client) CancelJournalKinesisStream(ctx context.Context, params *CancelJ
 
 type CancelJournalKinesisStreamInput struct {
 
-	// The unique ID that QLDB assigns to each QLDB journal stream.
-	//
-	// This member is required.
-	StreamId *string
-
 	// The name of the ledger.
 	//
 	// This member is required.
 	LedgerName *string
+
+	// The unique ID that QLDB assigns to each QLDB journal stream.
+	//
+	// This member is required.
+	StreamId *string
 }
 
 type CancelJournalKinesisStreamOutput struct {

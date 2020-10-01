@@ -58,15 +58,31 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 // Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
 
-	// An Amazon S3 bucket name to limit the search for revisions. If set to null, all
-	// of the user's buckets are searched.
-	S3Bucket *string
-
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// Whether to list revisions based on whether the revision is the target revision
+	// of a deployment group:
+	//
+	//     * include: List revisions that are target revisions
+	// of a deployment group.
+	//
+	//     * exclude: Do not list revisions that are target
+	// revisions of a deployment group.
+	//
+	//     * ignore: List all revisions.
+	Deployed types.ListStateFilterAction
+
+	// An identifier returned from the previous ListApplicationRevisions call. It can
+	// be used to return the next set of applications in the list.
+	NextToken *string
+
+	// An Amazon S3 bucket name to limit the search for revisions. If set to null, all
+	// of the user's buckets are searched.
+	S3Bucket *string
 
 	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
 	S3KeyPrefix *string
@@ -86,22 +102,6 @@ type ListApplicationRevisionsInput struct {
 	// If not specified or set to null, the results are returned in an
 	// arbitrary order.
 	SortBy types.ApplicationRevisionSortBy
-
-	// Whether to list revisions based on whether the revision is the target revision
-	// of a deployment group:
-	//
-	//     * include: List revisions that are target revisions
-	// of a deployment group.
-	//
-	//     * exclude: Do not list revisions that are target
-	// revisions of a deployment group.
-	//
-	//     * ignore: List all revisions.
-	Deployed types.ListStateFilterAction
-
-	// An identifier returned from the previous ListApplicationRevisions call. It can
-	// be used to return the next set of applications in the list.
-	NextToken *string
 
 	// The order in which to sort the list results:
 	//

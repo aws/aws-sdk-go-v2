@@ -57,11 +57,6 @@ func (c *Client) UpdateObjectAttributes(ctx context.Context, params *UpdateObjec
 
 type UpdateObjectAttributesInput struct {
 
-	// The reference that identifies the object.
-	//
-	// This member is required.
-	ObjectReference *types.ObjectReference
-
 	// The attributes update structure.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type UpdateObjectAttributesInput struct {
 	//
 	// This member is required.
 	DirectoryArn *string
+
+	// The reference that identifies the object.
+	//
+	// This member is required.
+	ObjectReference *types.ObjectReference
 }
 
 type UpdateObjectAttributesOutput struct {

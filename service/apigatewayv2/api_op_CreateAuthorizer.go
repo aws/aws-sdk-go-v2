@@ -58,20 +58,17 @@ func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerI
 // Creates a new Authorizer resource to represent an authorizer.
 type CreateAuthorizerInput struct {
 
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
+
 	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
 	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
 	// Tokens.
 	//
 	// This member is required.
 	AuthorizerType types.AuthorizerType
-
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
-
-	// This parameter is not used.
-	IdentityValidationExpression *string
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -92,14 +89,16 @@ type CreateAuthorizerInput struct {
 	// This member is required.
 	IdentitySource []*string
 
-	// Represents the configuration of a JWT authorizer. Required for the JWT
-	// authorizer type. Supported only for HTTP APIs.
-	JwtConfiguration *types.JWTConfiguration
-
 	// The name of the authorizer.
 	//
 	// This member is required.
 	Name *string
+
+	// Specifies the required credentials as an IAM role for API Gateway to invoke the
+	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
+	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
+	// function, specify null. Supported only for REQUEST authorizers.
+	AuthorizerCredentialsArn *string
 
 	// Authorizer caching is not currently supported. Don't specify this value for
 	// authorizers.
@@ -117,17 +116,21 @@ type CreateAuthorizerInput struct {
 	// authorizers.
 	AuthorizerUri *string
 
+	// This parameter is not used.
+	IdentityValidationExpression *string
+
+	// Represents the configuration of a JWT authorizer. Required for the JWT
+	// authorizer type. Supported only for HTTP APIs.
+	JwtConfiguration *types.JWTConfiguration
+}
+
+type CreateAuthorizerOutput struct {
+
 	// Specifies the required credentials as an IAM role for API Gateway to invoke the
 	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
 	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
 	// function, specify null. Supported only for REQUEST authorizers.
 	AuthorizerCredentialsArn *string
-}
-
-type CreateAuthorizerOutput struct {
-
-	// The validation expression does not apply to the REQUEST authorizer.
-	IdentityValidationExpression *string
 
 	// The authorizer identifier.
 	AuthorizerId *string
@@ -135,6 +138,11 @@ type CreateAuthorizerOutput struct {
 	// Authorizer caching is not currently supported. Don't specify this value for
 	// authorizers.
 	AuthorizerResultTtlInSeconds *int32
+
+	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
+	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
+	// Tokens.
+	AuthorizerType types.AuthorizerType
 
 	// The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this
 	// must be a well-formed Lambda function URI, for example,
@@ -147,15 +155,6 @@ type CreateAuthorizerOutput struct {
 	// /2015-03-31/functions/[FunctionARN]/invocations. Supported only for REQUEST
 	// authorizers.
 	AuthorizerUri *string
-
-	// Specifies the required credentials as an IAM role for API Gateway to invoke the
-	// authorizer. To specify an IAM role for API Gateway to assume, use the role's
-	// Amazon Resource Name (ARN). To use resource-based permissions on the Lambda
-	// function, specify null. Supported only for REQUEST authorizers.
-	AuthorizerCredentialsArn *string
-
-	// The name of the authorizer.
-	Name *string
 
 	// The identity source for which authorization is requested. For a REQUEST
 	// authorizer, this is optional. The value is a set of one or more mapping
@@ -174,14 +173,15 @@ type CreateAuthorizerOutput struct {
 	// "$request.header.Authorization".
 	IdentitySource []*string
 
+	// The validation expression does not apply to the REQUEST authorizer.
+	IdentityValidationExpression *string
+
 	// Represents the configuration of a JWT authorizer. Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	JwtConfiguration *types.JWTConfiguration
 
-	// The authorizer type. For WebSocket APIs, specify REQUEST for a Lambda function
-	// using incoming request parameters. For HTTP APIs, specify JWT to use JSON Web
-	// Tokens.
-	AuthorizerType types.AuthorizerType
+	// The name of the authorizer.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

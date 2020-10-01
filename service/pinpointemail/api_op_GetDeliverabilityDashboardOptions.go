@@ -79,33 +79,33 @@ type GetDeliverabilityDashboardOptionsInput struct {
 // Pinpoint account.
 type GetDeliverabilityDashboardOptionsOutput struct {
 
-	// The date, in Unix time format, when your current subscription to the
-	// Deliverability dashboard is scheduled to expire, if your subscription is
-	// scheduled to expire at the end of the current calendar month. This value is null
-	// if you have an active subscription that isn’t due to expire at the end of the
-	// month.
-	SubscriptionExpiryDate *time.Time
-
-	// An array of objects, one for each verified domain that you use to send email and
-	// currently has an active Deliverability dashboard subscription that's scheduled
-	// to expire at the end of the current calendar month.
-	PendingExpirationSubscribedDomains []*types.DomainDeliverabilityTrackingOption
-
 	// Specifies whether the Deliverability dashboard is enabled for your Amazon
 	// Pinpoint account. If this value is true, the dashboard is enabled.
 	//
 	// This member is required.
 	DashboardEnabled *bool
 
+	// The current status of your Deliverability dashboard subscription. If this value
+	// is PENDING_EXPIRATION, your subscription is scheduled to expire at the end of
+	// the current calendar month.
+	AccountStatus types.DeliverabilityDashboardAccountStatus
+
 	// An array of objects, one for each verified domain that you use to send email and
 	// currently has an active Deliverability dashboard subscription that isn’t
 	// scheduled to expire at the end of the current calendar month.
 	ActiveSubscribedDomains []*types.DomainDeliverabilityTrackingOption
 
-	// The current status of your Deliverability dashboard subscription. If this value
-	// is PENDING_EXPIRATION, your subscription is scheduled to expire at the end of
-	// the current calendar month.
-	AccountStatus types.DeliverabilityDashboardAccountStatus
+	// An array of objects, one for each verified domain that you use to send email and
+	// currently has an active Deliverability dashboard subscription that's scheduled
+	// to expire at the end of the current calendar month.
+	PendingExpirationSubscribedDomains []*types.DomainDeliverabilityTrackingOption
+
+	// The date, in Unix time format, when your current subscription to the
+	// Deliverability dashboard is scheduled to expire, if your subscription is
+	// scheduled to expire at the end of the current calendar month. This value is null
+	// if you have an active subscription that isn’t due to expire at the end of the
+	// month.
+	SubscriptionExpiryDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

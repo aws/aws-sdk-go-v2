@@ -70,29 +70,18 @@ func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskI
 
 type CreateExportTaskInput struct {
 
-	// The start time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier
-	// than this time are not exported.
-	//
-	// This member is required.
-	From *int64
-
 	// The name of S3 bucket for the exported log data. The bucket must be in the same
 	// AWS region.
 	//
 	// This member is required.
 	Destination *string
 
-	// The prefix used as the start of the key for every object exported. If you don't
-	// specify a value, the default is exportedlogs.
-	DestinationPrefix *string
-
-	// Export only log streams that match the provided prefix. If you don't specify a
-	// value, no prefix filter is applied.
-	LogStreamNamePrefix *string
-
-	// The name of the export task.
-	TaskName *string
+	// The start time of the range for the request, expressed as the number of
+	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier
+	// than this time are not exported.
+	//
+	// This member is required.
+	From *int64
 
 	// The name of the log group.
 	//
@@ -105,6 +94,17 @@ type CreateExportTaskInput struct {
 	//
 	// This member is required.
 	To *int64
+
+	// The prefix used as the start of the key for every object exported. If you don't
+	// specify a value, the default is exportedlogs.
+	DestinationPrefix *string
+
+	// Export only log streams that match the provided prefix. If you don't specify a
+	// value, no prefix filter is applied.
+	LogStreamNamePrefix *string
+
+	// The name of the export task.
+	TaskName *string
 }
 
 type CreateExportTaskOutput struct {

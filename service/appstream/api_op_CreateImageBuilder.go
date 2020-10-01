@@ -59,9 +59,6 @@ func (c *Client) CreateImageBuilder(ctx context.Context, params *CreateImageBuil
 
 type CreateImageBuilderInput struct {
 
-	// Enables or disables default internet access for the image builder.
-	EnableDefaultInternetAccess *bool
-
 	// The instance type to use when launching the image builder. The following
 	// instance types are available:
 	//
@@ -117,8 +114,31 @@ type CreateImageBuilderInput struct {
 	// This member is required.
 	InstanceType *string
 
-	// The VPC configuration for the image builder. You can specify only one subnet.
-	VpcConfig *types.VpcConfig
+	// A unique name for the image builder.
+	//
+	// This member is required.
+	Name *string
+
+	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
+	// can connect to the image builder only through the specified endpoints.
+	AccessEndpoints []*types.AccessEndpoint
+
+	// The version of the AppStream 2.0 agent to use for this image builder. To use the
+	// latest version of the AppStream 2.0 agent, specify [LATEST].
+	AppstreamAgentVersion *string
+
+	// The description to display.
+	Description *string
+
+	// The image builder name to display.
+	DisplayName *string
+
+	// The name of the directory and organizational unit (OU) to use to join the image
+	// builder to a Microsoft Active Directory domain.
+	DomainJoinInfo *types.DomainJoinInfo
+
+	// Enables or disables default internet access for the image builder.
+	EnableDefaultInternetAccess *bool
 
 	// The Amazon Resource Name (ARN) of the IAM role to apply to the image builder. To
 	// assume a role, the image builder calls the AWS Security Token Service (STS)
@@ -132,11 +152,11 @@ type CreateImageBuilderInput struct {
 	// Administration Guide</i>.</p>
 	IamRoleArn *string
 
-	// The description to display.
-	Description *string
+	// The ARN of the public, private, or shared image to use.
+	ImageArn *string
 
-	// The image builder name to display.
-	DisplayName *string
+	// The name of the image used to create the image builder.
+	ImageName *string
 
 	// The tags to associate with the image builder. A tag is a key-value pair, and the
 	// value is optional. For example, Environment=Test. If you do not specify a value,
@@ -148,28 +168,8 @@ type CreateImageBuilderInput struct {
 	// Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>
 	Tags map[string]*string
 
-	// The name of the image used to create the image builder.
-	ImageName *string
-
-	// The list of interface VPC endpoint (interface endpoint) objects. Administrators
-	// can connect to the image builder only through the specified endpoints.
-	AccessEndpoints []*types.AccessEndpoint
-
-	// The ARN of the public, private, or shared image to use.
-	ImageArn *string
-
-	// The version of the AppStream 2.0 agent to use for this image builder. To use the
-	// latest version of the AppStream 2.0 agent, specify [LATEST].
-	AppstreamAgentVersion *string
-
-	// The name of the directory and organizational unit (OU) to use to join the image
-	// builder to a Microsoft Active Directory domain.
-	DomainJoinInfo *types.DomainJoinInfo
-
-	// A unique name for the image builder.
-	//
-	// This member is required.
-	Name *string
+	// The VPC configuration for the image builder. You can specify only one subnet.
+	VpcConfig *types.VpcConfig
 }
 
 type CreateImageBuilderOutput struct {

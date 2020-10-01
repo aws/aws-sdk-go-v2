@@ -60,6 +60,11 @@ func (c *Client) RegisterDevice(ctx context.Context, params *RegisterDeviceInput
 // A request to RegisterDevice.
 type RegisterDeviceInput struct {
 
+	// The unique ID for this identity.
+	//
+	// This member is required.
+	IdentityId *string
+
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. Here, the ID of the pool that the identity belongs
 	// to.
@@ -71,11 +76,6 @@ type RegisterDeviceInput struct {
 	//
 	// This member is required.
 	Platform types.Platform
-
-	// The unique ID for this identity.
-	//
-	// This member is required.
-	IdentityId *string
 
 	// The push token.
 	//

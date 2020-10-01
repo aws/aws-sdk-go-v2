@@ -63,11 +63,11 @@ type ListWorkersWithQualificationTypeInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// Pagination Token
-	NextToken *string
-
 	// Limit the number of results returned.
 	MaxResults *int32
+
+	// Pagination Token
+	NextToken *string
 
 	// The status of the Qualifications to return. Can be Granted | Revoked.
 	Status types.QualificationStatus

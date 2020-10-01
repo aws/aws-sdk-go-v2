@@ -65,12 +65,12 @@ type DescribeDirectoryConfigsInput struct {
 	// The directory names.
 	DirectoryNames []*string
 
+	// The maximum size of each page of results.
+	MaxResults *int32
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
-
-	// The maximum size of each page of results.
-	MaxResults *int32
 }
 
 type DescribeDirectoryConfigsOutput struct {

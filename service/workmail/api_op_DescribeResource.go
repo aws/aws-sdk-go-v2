@@ -72,15 +72,22 @@ type DescribeResourceInput struct {
 
 type DescribeResourceOutput struct {
 
-	// The type of the described resource.
-	Type types.ResourceType
-
-	// The name of the described resource.
-	Name *string
+	// The booking options for the described resource.
+	BookingOptions *types.BookingOptions
 
 	// The date and time when a resource was disabled from WorkMail, in UNIX epoch time
 	// format.
 	DisabledDate *time.Time
+
+	// The email of the described resource.
+	Email *string
+
+	// The date and time when a resource was enabled for WorkMail, in UNIX epoch time
+	// format.
+	EnabledDate *time.Time
+
+	// The name of the described resource.
+	Name *string
 
 	// The identifier of the described resource.
 	ResourceId *string
@@ -89,15 +96,8 @@ type DescribeResourceOutput struct {
 	// (deregistered or never registered to WorkMail).
 	State types.EntityState
 
-	// The booking options for the described resource.
-	BookingOptions *types.BookingOptions
-
-	// The date and time when a resource was enabled for WorkMail, in UNIX epoch time
-	// format.
-	EnabledDate *time.Time
-
-	// The email of the described resource.
-	Email *string
+	// The type of the described resource.
+	Type types.ResourceType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

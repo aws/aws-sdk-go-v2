@@ -84,27 +84,27 @@ func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexP
 
 type CreateRegexPatternSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// A friendly name or description of the RegexPatternSet (). You can't change Name
 	// after you create a RegexPatternSet.
 	//
 	// This member is required.
 	Name *string
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type CreateRegexPatternSetOutput struct {
-
-	// A RegexPatternSet () that contains no objects.
-	RegexPatternSet *types.RegexPatternSet
 
 	// The ChangeToken that you used to submit the CreateRegexPatternSet request. You
 	// can also use this value to query the status of the request. For more
 	// information, see GetChangeTokenStatus ().
 	ChangeToken *string
+
+	// A RegexPatternSet () that contains no objects.
+	RegexPatternSet *types.RegexPatternSet
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

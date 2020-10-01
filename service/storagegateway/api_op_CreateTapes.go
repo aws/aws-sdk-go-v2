@@ -62,12 +62,44 @@ func (c *Client) CreateTapes(ctx context.Context, params *CreateTapesInput, optF
 // CreateTapesInput
 type CreateTapesInput struct {
 
+	// A unique identifier that you use to retry a request. If you retry a request, use
+	// the same ClientToken you specified in the initial request.  <note> <p>Using the
+	// same <code>ClientToken</code> prevents creating the tape multiple times.</p>
+	// </note>
+	//
+	// This member is required.
+	ClientToken *string
+
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
 	// the virtual tapes with. Use the ListGateways () operation to return a list of
 	// gateways for your account and AWS Region.
 	//
 	// This member is required.
 	GatewayARN *string
+
+	// The number of virtual tapes that you want to create.
+	//
+	// This member is required.
+	NumTapesToCreate *int32
+
+	// A prefix that you append to the barcode of the virtual tape you are creating.
+	// This prefix makes the barcode unique.  <note> <p>The prefix must be 1 to 4
+	// characters in length and must be one of the uppercase letters from A to Z.</p>
+	// </note>
+	//
+	// This member is required.
+	TapeBarcodePrefix *string
+
+	// The size, in bytes, of the virtual tapes that you want to create.  <note> <p>The
+	// size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>
+	//
+	// This member is required.
+	TapeSizeInBytes *int64
+
+	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
+	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
+	// <code>true</code> | <code>false</code> </p>
+	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for
 	// Amazon S3 server-side encryption. Storage Gateway does not support asymmetric
@@ -81,38 +113,6 @@ type CreateTapesInput struct {
 	// corresponds to the pool.  <p>Valid Values: <code>GLACIER</code> |
 	// <code>DEEP_ARCHIVE</code> </p>
 	PoolId *string
-
-	// A prefix that you append to the barcode of the virtual tape you are creating.
-	// This prefix makes the barcode unique.  <note> <p>The prefix must be 1 to 4
-	// characters in length and must be one of the uppercase letters from A to Z.</p>
-	// </note>
-	//
-	// This member is required.
-	TapeBarcodePrefix *string
-
-	// Set to true to use Amazon S3 server-side encryption with your own AWS KMS key,
-	// or false to use a key managed by Amazon S3. Optional.  <p>Valid Values:
-	// <code>true</code> | <code>false</code> </p>
-	KMSEncrypted *bool
-
-	// The number of virtual tapes that you want to create.
-	//
-	// This member is required.
-	NumTapesToCreate *int32
-
-	// The size, in bytes, of the virtual tapes that you want to create.  <note> <p>The
-	// size must be aligned by gigabyte (1024*1024*1024 bytes).</p> </note>
-	//
-	// This member is required.
-	TapeSizeInBytes *int64
-
-	// A unique identifier that you use to retry a request. If you retry a request, use
-	// the same ClientToken you specified in the initial request.  <note> <p>Using the
-	// same <code>ClientToken</code> prevents creating the tape multiple times.</p>
-	// </note>
-	//
-	// This member is required.
-	ClientToken *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape. Each tag is a
 	// key-value pair.  <note> <p>Valid characters for key and value are letters,

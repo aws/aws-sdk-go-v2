@@ -16,117 +16,8 @@ type AvailabilityZone struct {
 // Contains all of the attributes of a specific cluster.
 type CacheCluster struct {
 
-	// The URL of the web page where you can download the latest ElastiCache client
-	// library.
-	ClientDownloadLandingPage *string
-
-	// Represents a Memcached cluster endpoint which, if Automatic Discovery is enabled
-	// on the cluster, can be used by an application to connect to any node in the
-	// cluster. The configuration endpoint will always have .cfg in it. Example:
-	// mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211
-	ConfigurationEndpoint *Endpoint
-
-	// A group of settings that are applied to the cluster in the future, or that are
-	// currently being applied.
-	PendingModifiedValues *PendingModifiedValues
-
-	// The number of days for which ElastiCache retains automatic cluster snapshots
-	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
-	// snapshot that was taken today is retained for 5 days before being deleted. If
-	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
-	SnapshotRetentionLimit *int32
-
-	// The date and time when the cluster was created.
-	CacheClusterCreateTime *time.Time
-
 	// The ARN (Amazon Resource Name) of the cache cluster.
 	ARN *string
-
-	// A flag that enables using an AuthToken (password) when issuing Redis commands.
-	// Default: false
-	AuthTokenEnabled *bool
-
-	// The replication group to which this cluster belongs. If this field is empty, the
-	// cluster is not associated with any replication group.
-	ReplicationGroupId *string
-
-	// The current state of this cluster, one of the following values: available,
-	// creating, deleted, deleting, incompatible-network, modifying, rebooting cluster
-	// nodes, restore-failed, or snapshotting.
-	CacheClusterStatus *string
-
-	// A list of VPC Security Groups associated with the cluster.
-	SecurityGroups []*SecurityGroupMembership
-
-	// The user-supplied identifier of the cluster. This identifier is a unique key
-	// that identifies a cluster.
-	CacheClusterId *string
-
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
-	TransitEncryptionEnabled *bool
-
-	// A list of cache security group elements, composed of name and status
-	// sub-elements.
-	CacheSecurityGroups []*CacheSecurityGroupMembership
-
-	// The number of cache nodes in the cluster. For clusters running Redis, this value
-	// must be 1. For clusters running Memcached, this value must be between 1 and 20.
-	NumCacheNodes *int32
-
-	// Specifies the weekly time range during which maintenance on the cluster is
-	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:
-	//
-	//     * sun
-	//
-	//     * mon
-	//
-	//     * tue
-	//
-	//     * wed
-	//
-	//     * thu
-	//
-	//     * fri
-	//
-	//
-	// * sat
-	//
-	// Example: sun:23:00-mon:01:30
-	PreferredMaintenanceWindow *string
-
-	// The name of the Availability Zone in which the cluster is located or "Multiple"
-	// if the cache nodes are located in different Availability Zones.
-	PreferredAvailabilityZone *string
-
-	// This parameter is currently disabled.
-	AutoMinorVersionUpgrade *bool
-
-	// Describes a notification topic and its status. Notification topics are used for
-	// publishing ElastiCache events to subscribers using Amazon Simple Notification
-	// Service (SNS).
-	NotificationConfiguration *NotificationConfiguration
-
-	// The date the auth token was last modified
-	AuthTokenLastModifiedDate *time.Time
-
-	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your cluster. Example: 05:00-09:00
-	SnapshotWindow *string
-
-	// The name of the cache subnet group associated with the cluster.
-	CacheSubnetGroupName *string
-
-	// The name of the cache engine (memcached or redis) to be used for this cluster.
-	Engine *string
-
-	// Status of the cache parameter group.
-	CacheParameterGroup *CacheParameterGroupStatus
 
 	// A flag that enables encryption at-rest when set to true. You cannot modify the
 	// value of AtRestEncryptionEnabled after the cluster is created. To enable at-rest
@@ -134,6 +25,28 @@ type CacheCluster struct {
 	// create a cluster. Required: Only available when creating a replication group in
 	// an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
 	AtRestEncryptionEnabled *bool
+
+	// A flag that enables using an AuthToken (password) when issuing Redis commands.
+	// Default: false
+	AuthTokenEnabled *bool
+
+	// The date the auth token was last modified
+	AuthTokenLastModifiedDate *time.Time
+
+	// This parameter is currently disabled.
+	AutoMinorVersionUpgrade *bool
+
+	// The date and time when the cluster was created.
+	CacheClusterCreateTime *time.Time
+
+	// The user-supplied identifier of the cluster. This identifier is a unique key
+	// that identifies a cluster.
+	CacheClusterId *string
+
+	// The current state of this cluster, one of the following values: available,
+	// creating, deleted, deleting, incompatible-network, modifying, rebooting cluster
+	// nodes, restore-failed, or snapshotting.
+	CacheClusterStatus *string
 
 	// The name of the compute and memory capacity node type for the cluster.  <p>The
 	// following node types are supported by ElastiCache. Generally speaking, the
@@ -180,29 +93,116 @@ type CacheCluster struct {
 	// later.</p> </li> </ul>
 	CacheNodeType *string
 
+	// A list of cache nodes that are members of the cluster.
+	CacheNodes []*CacheNode
+
+	// Status of the cache parameter group.
+	CacheParameterGroup *CacheParameterGroupStatus
+
+	// A list of cache security group elements, composed of name and status
+	// sub-elements.
+	CacheSecurityGroups []*CacheSecurityGroupMembership
+
+	// The name of the cache subnet group associated with the cluster.
+	CacheSubnetGroupName *string
+
+	// The URL of the web page where you can download the latest ElastiCache client
+	// library.
+	ClientDownloadLandingPage *string
+
+	// Represents a Memcached cluster endpoint which, if Automatic Discovery is enabled
+	// on the cluster, can be used by an application to connect to any node in the
+	// cluster. The configuration endpoint will always have .cfg in it. Example:
+	// mem-3.9dvc4r.cfg.usw2.cache.amazonaws.com:11211
+	ConfigurationEndpoint *Endpoint
+
+	// The name of the cache engine (memcached or redis) to be used for this cluster.
+	Engine *string
+
 	// The version of the cache engine that is used in this cluster.
 	EngineVersion *string
 
-	// A list of cache nodes that are members of the cluster.
-	CacheNodes []*CacheNode
+	// Describes a notification topic and its status. Notification topics are used for
+	// publishing ElastiCache events to subscribers using Amazon Simple Notification
+	// Service (SNS).
+	NotificationConfiguration *NotificationConfiguration
+
+	// The number of cache nodes in the cluster. For clusters running Redis, this value
+	// must be 1. For clusters running Memcached, this value must be between 1 and 20.
+	NumCacheNodes *int32
+
+	// A group of settings that are applied to the cluster in the future, or that are
+	// currently being applied.
+	PendingModifiedValues *PendingModifiedValues
+
+	// The name of the Availability Zone in which the cluster is located or "Multiple"
+	// if the cache nodes are located in different Availability Zones.
+	PreferredAvailabilityZone *string
+
+	// Specifies the weekly time range during which maintenance on the cluster is
+	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
+	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
+	// for ddd are:
+	//
+	//     * sun
+	//
+	//     * mon
+	//
+	//     * tue
+	//
+	//     * wed
+	//
+	//     * thu
+	//
+	//     * fri
+	//
+	//
+	// * sat
+	//
+	// Example: sun:23:00-mon:01:30
+	PreferredMaintenanceWindow *string
+
+	// The replication group to which this cluster belongs. If this field is empty, the
+	// cluster is not associated with any replication group.
+	ReplicationGroupId *string
+
+	// A list of VPC Security Groups associated with the cluster.
+	SecurityGroups []*SecurityGroupMembership
+
+	// The number of days for which ElastiCache retains automatic cluster snapshots
+	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
+	// snapshot that was taken today is retained for 5 days before being deleted. If
+	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
+	SnapshotRetentionLimit *int32
+
+	// The daily time range (in UTC) during which ElastiCache begins taking a daily
+	// snapshot of your cluster. Example: 05:00-09:00
+	SnapshotWindow *string
+
+	// A flag that enables in-transit encryption when set to true. You cannot modify
+	// the value of TransitEncryptionEnabled after the cluster is created. To enable
+	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
+	// when you create a cluster. Required: Only available when creating a replication
+	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
+	TransitEncryptionEnabled *bool
 }
 
 // Provides all of the details about a particular cache engine version.
 type CacheEngineVersion struct {
 
-	// The name of the cache engine.
-	Engine *string
-
 	// The description of the cache engine.
 	CacheEngineDescription *string
+
+	// The description of the cache engine version.
+	CacheEngineVersionDescription *string
 
 	// The name of the cache parameter group family associated with this cache engine.
 	// Valid values are: memcached1.4 | memcached1.5 | redis2.6 | redis2.8 | redis3.2 |
 	// redis4.0 | redis5.0 |
 	CacheParameterGroupFamily *string
 
-	// The description of the cache engine version.
-	CacheEngineVersionDescription *string
+	// The name of the cache engine.
+	Engine *string
 
 	// The version number of the cache engine.
 	EngineVersion *string
@@ -255,15 +255,8 @@ type CacheEngineVersion struct {
 // later.</p> </li> </ul>
 type CacheNode struct {
 
-	// The ID of the primary node to which this read replica node is synchronized. If
-	// this field is empty, this node is not associated with a primary cluster.
-	SourceCacheNodeId *string
-
 	// The date and time when the cache node was created.
 	CacheNodeCreateTime *time.Time
-
-	// The status of the parameter group applied to this cache node.
-	ParameterGroupStatus *string
 
 	// The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.).
 	// The combination of cluster ID and node ID uniquely identifies every cache node
@@ -274,11 +267,18 @@ type CacheNode struct {
 	// creating, rebooting, or deleting.
 	CacheNodeStatus *string
 
+	// The Availability Zone where this node was created and now resides.
+	CustomerAvailabilityZone *string
+
 	// The hostname for connecting to this cache node.
 	Endpoint *Endpoint
 
-	// The Availability Zone where this node was created and now resides.
-	CustomerAvailabilityZone *string
+	// The status of the parameter group applied to this cache node.
+	ParameterGroupStatus *string
+
+	// The ID of the primary node to which this read replica node is synchronized. If
+	// this field is empty, this node is not associated with a primary cluster.
+	SourceCacheNodeId *string
 }
 
 // A parameter that has a different value for each cache node type it is applied
@@ -286,8 +286,11 @@ type CacheNode struct {
 // a larger maxmemory value than a cache.m1.small type.
 type CacheNodeTypeSpecificParameter struct {
 
-	// A description of the parameter.
-	Description *string
+	// The valid range of values for the parameter.
+	AllowedValues *string
+
+	// A list of cache node types and their corresponding values for this parameter.
+	CacheNodeTypeSpecificValues []*CacheNodeTypeSpecificValue
 
 	// Indicates whether a change to the parameter is applied immediately or requires a
 	// reboot for the change to be applied. You can force a reboot or wait until the
@@ -295,28 +298,25 @@ type CacheNodeTypeSpecificParameter struct {
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html).
 	ChangeType ChangeType
 
+	// The valid data type for the parameter.
+	DataType *string
+
+	// A description of the parameter.
+	Description *string
+
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable *bool
+
+	// The earliest cache engine version to which the parameter can apply.
+	MinimumEngineVersion *string
 
 	// The name of the parameter.
 	ParameterName *string
 
 	// The source of the parameter value.
 	Source *string
-
-	// The valid data type for the parameter.
-	DataType *string
-
-	// The earliest cache engine version to which the parameter can apply.
-	MinimumEngineVersion *string
-
-	// A list of cache node types and their corresponding values for this parameter.
-	CacheNodeTypeSpecificValues []*CacheNodeTypeSpecificValue
-
-	// The valid range of values for the parameter.
-	AllowedValues *string
 }
 
 // A value that applies only to a certain cache node type.
@@ -332,17 +332,14 @@ type CacheNodeTypeSpecificValue struct {
 // The status of the service update on the cache node
 type CacheNodeUpdateStatus struct {
 
-	// The date when the NodeUpdateStatus was last modified>
-	NodeUpdateStatusModifiedDate *time.Time
+	// The node ID of the cache cluster
+	CacheNodeId *string
 
-	// The update status of the node
-	NodeUpdateStatus NodeUpdateStatus
+	// The deletion date of the node
+	NodeDeletionDate *time.Time
 
 	// The end date of the update for a node
 	NodeUpdateEndDate *time.Time
-
-	// The start date of the update for a node
-	NodeUpdateStartDate *time.Time
 
 	// Reflects whether the update was initiated by the customer or automatically
 	// applied
@@ -351,46 +348,49 @@ type CacheNodeUpdateStatus struct {
 	// The date when the update is triggered
 	NodeUpdateInitiatedDate *time.Time
 
-	// The node ID of the cache cluster
-	CacheNodeId *string
+	// The start date of the update for a node
+	NodeUpdateStartDate *time.Time
 
-	// The deletion date of the node
-	NodeDeletionDate *time.Time
+	// The update status of the node
+	NodeUpdateStatus NodeUpdateStatus
+
+	// The date when the NodeUpdateStatus was last modified>
+	NodeUpdateStatusModifiedDate *time.Time
 }
 
 // Represents the output of a CreateCacheParameterGroup operation.
 type CacheParameterGroup struct {
 
-	// The description for this cache parameter group.
-	Description *string
-
-	// The name of the cache parameter group.
-	CacheParameterGroupName *string
-
-	// Indicates whether the parameter group is associated with a Global Datastore
-	IsGlobal *bool
+	// The ARN (Amazon Resource Name) of the cache parameter group.
+	ARN *string
 
 	// The name of the cache parameter group family that this cache parameter group is
 	// compatible with. Valid values are: memcached1.4 | memcached1.5 | redis2.6 |
 	// redis2.8 | redis3.2 | redis4.0 | redis5.0 |
 	CacheParameterGroupFamily *string
 
-	// The ARN (Amazon Resource Name) of the cache parameter group.
-	ARN *string
+	// The name of the cache parameter group.
+	CacheParameterGroupName *string
+
+	// The description for this cache parameter group.
+	Description *string
+
+	// Indicates whether the parameter group is associated with a Global Datastore
+	IsGlobal *bool
 }
 
 // Status of the cache parameter group.
 type CacheParameterGroupStatus struct {
+
+	// A list of the cache node IDs which need to be rebooted for parameter changes to
+	// be applied. A node ID is a numeric identifier (0001, 0002, etc.).
+	CacheNodeIdsToReboot []*string
 
 	// The name of the cache parameter group.
 	CacheParameterGroupName *string
 
 	// The status of parameter updates.
 	ParameterApplyStatus *string
-
-	// A list of the cache node IDs which need to be rebooted for parameter changes to
-	// be applied. A node ID is a numeric identifier (0001, 0002, etc.).
-	CacheNodeIdsToReboot []*string
 }
 
 // Represents the output of one of the following operations:
@@ -404,14 +404,11 @@ type CacheParameterGroupStatus struct {
 // RevokeCacheSecurityGroupIngress
 type CacheSecurityGroup struct {
 
-	// The name of the cache security group.
-	CacheSecurityGroupName *string
-
 	// The ARN (Amazon Resource Name) of the cache security group.
 	ARN *string
 
-	// The AWS account ID of the cache security group owner.
-	OwnerId *string
+	// The name of the cache security group.
+	CacheSecurityGroupName *string
 
 	// The description of the cache security group.
 	Description *string
@@ -419,18 +416,21 @@ type CacheSecurityGroup struct {
 	// A list of Amazon EC2 security groups that are associated with this cache
 	// security group.
 	EC2SecurityGroups []*EC2SecurityGroup
+
+	// The AWS account ID of the cache security group owner.
+	OwnerId *string
 }
 
 // Represents a cluster's status within a particular cache security group.
 type CacheSecurityGroupMembership struct {
 
+	// The name of the cache security group.
+	CacheSecurityGroupName *string
+
 	// The membership status in the cache security group. The status changes when a
 	// cache security group is modified, or when the cache security groups assigned to
 	// a cluster are modified.
 	Status *string
-
-	// The name of the cache security group.
-	CacheSecurityGroupName *string
 }
 
 // Represents the output of one of the following operations:
@@ -441,17 +441,17 @@ type CacheSecurityGroupMembership struct {
 //     * ModifyCacheSubnetGroup
 type CacheSubnetGroup struct {
 
-	// A list of subnets associated with the cache subnet group.
-	Subnets []*Subnet
-
-	// The name of the cache subnet group.
-	CacheSubnetGroupName *string
-
 	// The ARN (Amazon Resource Name) of the cache subnet group.
 	ARN *string
 
 	// The description of the cache subnet group.
 	CacheSubnetGroupDescription *string
+
+	// The name of the cache subnet group.
+	CacheSubnetGroupName *string
+
+	// A list of subnets associated with the cache subnet group.
+	Subnets []*Subnet
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group.
 	VpcId *string
@@ -461,14 +461,6 @@ type CacheSubnetGroup struct {
 // node group (shard) configuration has the following members: NodeGroupId,
 // NewReplicaCount, and PreferredAvailabilityZones.
 type ConfigureShard struct {
-
-	// A list of PreferredAvailabilityZone strings that specify which availability
-	// zones the replication group's nodes are to be in. The nummber of
-	// PreferredAvailabilityZone values must equal the value of NewReplicaCount plus 1
-	// to account for the primary node. If this member of ReplicaConfiguration is
-	// omitted, ElastiCache for Redis selects the availability zone for each of the
-	// replicas.
-	PreferredAvailabilityZones []*string
 
 	// The number of replicas you want in this node group at the end of this operation.
 	// The maximum value for NewReplicaCount is 5. The minimum value depends upon the
@@ -496,6 +488,14 @@ type ConfigureShard struct {
 	//
 	// This member is required.
 	NodeGroupId *string
+
+	// A list of PreferredAvailabilityZone strings that specify which availability
+	// zones the replication group's nodes are to be in. The nummber of
+	// PreferredAvailabilityZone values must equal the value of NewReplicaCount plus 1
+	// to account for the primary node. If this member of ReplicaConfiguration is
+	// omitted, ElastiCache for Redis selects the availability zone for each of the
+	// replicas.
+	PreferredAvailabilityZones []*string
 }
 
 // The endpoint from which data should be migrated.
@@ -514,26 +514,30 @@ type EC2SecurityGroup struct {
 	// The name of the Amazon EC2 security group.
 	EC2SecurityGroupName *string
 
-	// The status of the Amazon EC2 security group.
-	Status *string
-
 	// The AWS account ID of the Amazon EC2 security group owner.
 	EC2SecurityGroupOwnerId *string
+
+	// The status of the Amazon EC2 security group.
+	Status *string
 }
 
 // Represents the information required for client programs to connect to a cache
 // node.
 type Endpoint struct {
 
-	// The port number that the cache engine is listening on.
-	Port *int32
-
 	// The DNS hostname of the cache node.
 	Address *string
+
+	// The port number that the cache engine is listening on.
+	Port *int32
 }
 
 // Represents the output of a DescribeEngineDefaultParameters operation.
 type EngineDefaults struct {
+
+	// A list of parameters specific to a particular cache node type. Each element in
+	// the list contains detailed information about one parameter.
+	CacheNodeTypeSpecificParameters []*CacheNodeTypeSpecificParameter
 
 	// Specifies the name of the cache parameter group family to which the engine
 	// default parameters apply. Valid values are: memcached1.4 | memcached1.5 |
@@ -542,10 +546,6 @@ type EngineDefaults struct {
 
 	// Provides an identifier to allow retrieval of paginated results.
 	Marker *string
-
-	// A list of parameters specific to a particular cache node type. Each element in
-	// the list contains detailed information about one parameter.
-	CacheNodeTypeSpecificParameters []*CacheNodeTypeSpecificParameter
 
 	// Contains a list of engine default parameters.
 	Parameters []*Parameter
@@ -559,6 +559,9 @@ type Event struct {
 	// The date and time when the event occurred.
 	Date *time.Time
 
+	// The text of the event.
+	Message *string
+
 	// The identifier for the source of the event. For example, if the event occurred
 	// at the cluster level, the identifier would be the name of the cluster.
 	SourceIdentifier *string
@@ -566,19 +569,16 @@ type Event struct {
 	// Specifies the origin of this event - a cluster, a parameter group, a security
 	// group, etc.
 	SourceType SourceType
-
-	// The text of the event.
-	Message *string
 }
 
 // Indicates the slot configuration and global identifier for a slice group.
 type GlobalNodeGroup struct {
 
-	// The keyspace for this node group
-	Slots *string
-
 	// The name of the global node group
 	GlobalNodeGroupId *string
+
+	// The keyspace for this node group
+	Slots *string
 }
 
 // Consists of a primary cluster that accepts writes and an associated secondary
@@ -589,29 +589,8 @@ type GlobalNodeGroup struct {
 // a secondary cluster.</p> </li> </ul>
 type GlobalReplicationGroup struct {
 
-	// A flag that enables in-transit encryption when set to true.  You cannot modify
-	// the value of <code>TransitEncryptionEnabled</code> after the cluster is created.
-	// To enable in-transit encryption on a cluster you must set
-	// <code>TransitEncryptionEnabled</code> to true when you create a cluster. </p>
-	TransitEncryptionEnabled *bool
-
-	// A flag that indicates whether the Global Datastore is cluster enabled.
-	ClusterEnabled *bool
-
-	// The optional description of the Global Datastore
-	GlobalReplicationGroupDescription *string
-
-	// The replication groups that comprise the Global Datastore.
-	Members []*GlobalReplicationGroupMember
-
-	// The name of the Global Datastore
-	GlobalReplicationGroupId *string
-
 	// The ARN (Amazon Resource Name) of the global replication group.
 	ARN *string
-
-	// The Elasticache engine. For Redis only.
-	Engine *string
 
 	// A flag that enables encryption at rest when set to true. You cannot modify the
 	// value of AtRestEncryptionEnabled after the replication group is created. To
@@ -625,70 +604,77 @@ type GlobalReplicationGroup struct {
 	// Default: false
 	AuthTokenEnabled *bool
 
-	// The status of the Global Datastore
-	Status *string
+	// The cache node type of the Global Datastore
+	CacheNodeType *string
 
-	// Indicates the slot configuration and global identifier for each slice group.
-	GlobalNodeGroups []*GlobalNodeGroup
+	// A flag that indicates whether the Global Datastore is cluster enabled.
+	ClusterEnabled *bool
+
+	// The Elasticache engine. For Redis only.
+	Engine *string
 
 	// The Elasticache Redis engine version. For preview, it is Redis version 5.0.5
 	// only.
 	EngineVersion *string
 
-	// The cache node type of the Global Datastore
-	CacheNodeType *string
+	// Indicates the slot configuration and global identifier for each slice group.
+	GlobalNodeGroups []*GlobalNodeGroup
+
+	// The optional description of the Global Datastore
+	GlobalReplicationGroupDescription *string
+
+	// The name of the Global Datastore
+	GlobalReplicationGroupId *string
+
+	// The replication groups that comprise the Global Datastore.
+	Members []*GlobalReplicationGroupMember
+
+	// The status of the Global Datastore
+	Status *string
+
+	// A flag that enables in-transit encryption when set to true.  You cannot modify
+	// the value of <code>TransitEncryptionEnabled</code> after the cluster is created.
+	// To enable in-transit encryption on a cluster you must set
+	// <code>TransitEncryptionEnabled</code> to true when you create a cluster. </p>
+	TransitEncryptionEnabled *bool
 }
 
 // The name of the Global Datastore and role of this replication group in the
 // Global Datastore.
 type GlobalReplicationGroupInfo struct {
 
+	// The name of the Global Datastore
+	GlobalReplicationGroupId *string
+
 	// The role of the replication group in a Global Datastore. Can be primary or
 	// secondary.
 	GlobalReplicationGroupMemberRole *string
-
-	// The name of the Global Datastore
-	GlobalReplicationGroupId *string
 }
 
 // A member of a Global Datastore. It contains the Replication Group Id, the AWS
 // region and the role of the replication group.
 type GlobalReplicationGroupMember struct {
 
-	// Indicates the role of the replication group, primary or secondary.
-	Role *string
-
-	// The AWS region of the Global Datastore member.
-	ReplicationGroupRegion *string
-
-	// The status of the membership of the replication group.
-	Status *string
+	// Indicates whether automatic failover is enabled for the replication group.
+	AutomaticFailover AutomaticFailoverStatus
 
 	// The replication group id of the Global Datastore member.
 	ReplicationGroupId *string
 
-	// Indicates whether automatic failover is enabled for the replication group.
-	AutomaticFailover AutomaticFailoverStatus
+	// The AWS region of the Global Datastore member.
+	ReplicationGroupRegion *string
+
+	// Indicates the role of the replication group, primary or secondary.
+	Role *string
+
+	// The status of the membership of the replication group.
+	Status *string
 }
 
 // Represents a collection of cache nodes in a replication group. One node in the
 // node group is the read/write primary node. All the other nodes are read-only
 // Replica nodes.
 type NodeGroup struct {
-
-	// A list containing information about individual nodes within the node group
-	// (shard).
-	NodeGroupMembers []*NodeGroupMember
-
-	// The endpoint of the primary node in this node group (shard).
-	PrimaryEndpoint *Endpoint
-
-	// The keyspace for this node group (shard).
-	Slots *string
-
-	// The current state of this replication group - creating, available, modifying,
-	// deleting.
-	Status *string
 
 	// The identifier for the node group (shard). A Redis (cluster mode disabled)
 	// replication group contains only 1 node group; therefore, the node group ID is
@@ -697,8 +683,22 @@ type NodeGroup struct {
 	// group.
 	NodeGroupId *string
 
+	// A list containing information about individual nodes within the node group
+	// (shard).
+	NodeGroupMembers []*NodeGroupMember
+
+	// The endpoint of the primary node in this node group (shard).
+	PrimaryEndpoint *Endpoint
+
 	// The endpoint of the replica nodes in this node group (shard).
 	ReaderEndpoint *Endpoint
+
+	// The keyspace for this node group (shard).
+	Slots *string
+
+	// The current state of this replication group - creating, available, modifying,
+	// deleting.
+	Status *string
 }
 
 // Node group (shard) configuration options. Each node group (shard) configuration
@@ -710,6 +710,10 @@ type NodeGroupConfiguration struct {
 	// the node group these configuration values apply to.
 	NodeGroupId *string
 
+	// The Availability Zone where the primary node of this node group (shard) is
+	// launched.
+	PrimaryAvailabilityZone *string
+
 	// A list of Availability Zones to be used for the read replicas. The number of
 	// Availability Zones in this list must match the value of ReplicaCount or
 	// ReplicasPerNodeGroup if not specified.
@@ -717,10 +721,6 @@ type NodeGroupConfiguration struct {
 
 	// The number of read replica nodes in this node group (shard).
 	ReplicaCount *int32
-
-	// The Availability Zone where the primary node of this node group (shard) is
-	// launched.
-	PrimaryAvailabilityZone *string
 
 	// A string that specifies the keyspace for a particular node group. Keyspaces
 	// range from 0 to 16,383. The string is in the format startkey-endkey. Example:
@@ -731,13 +731,16 @@ type NodeGroupConfiguration struct {
 // Represents a single node within a node group (shard).
 type NodeGroupMember struct {
 
-	// The role that is currently assigned to the node - primary or replica. This
-	// member is only applicable for Redis (cluster mode disabled) replication groups.
-	CurrentRole *string
+	// The ID of the cluster to which the node belongs.
+	CacheClusterId *string
 
 	// The ID of the node within its cluster. A node ID is a numeric identifier (0001,
 	// 0002, etc.).
 	CacheNodeId *string
+
+	// The role that is currently assigned to the node - primary or replica. This
+	// member is only applicable for Redis (cluster mode disabled) replication groups.
+	CurrentRole *string
 
 	// The name of the Availability Zone in which the node is located.
 	PreferredAvailabilityZone *string
@@ -746,41 +749,38 @@ type NodeGroupMember struct {
 	// operations. The read endpoint is only applicable on Redis (cluster mode
 	// disabled) clusters.
 	ReadEndpoint *Endpoint
-
-	// The ID of the cluster to which the node belongs.
-	CacheClusterId *string
 }
 
 // The status of the service update on the node group member
 type NodeGroupMemberUpdateStatus struct {
 
-	// The update status of the node
-	NodeUpdateStatus NodeUpdateStatus
-
-	// The start date of the update for a node
-	NodeUpdateStartDate *time.Time
-
 	// The cache cluster ID
 	CacheClusterId *string
+
+	// The node ID of the cache cluster
+	CacheNodeId *string
 
 	// The deletion date of the node
 	NodeDeletionDate *time.Time
 
-	// The date when the NodeUpdateStatus was last modified
-	NodeUpdateStatusModifiedDate *time.Time
+	// The end date of the update for a node
+	NodeUpdateEndDate *time.Time
 
 	// Reflects whether the update was initiated by the customer or automatically
 	// applied
 	NodeUpdateInitiatedBy NodeUpdateInitiatedBy
 
-	// The node ID of the cache cluster
-	CacheNodeId *string
-
 	// The date when the update is triggered
 	NodeUpdateInitiatedDate *time.Time
 
-	// The end date of the update for a node
-	NodeUpdateEndDate *time.Time
+	// The start date of the update for a node
+	NodeUpdateStartDate *time.Time
+
+	// The update status of the node
+	NodeUpdateStatus NodeUpdateStatus
+
+	// The date when the NodeUpdateStatus was last modified
+	NodeUpdateStatusModifiedDate *time.Time
 }
 
 // The status of the service update on the node group
@@ -796,27 +796,27 @@ type NodeGroupUpdateStatus struct {
 // Represents an individual cache node in a snapshot of a cluster.
 type NodeSnapshot struct {
 
-	// The cache node identifier for the node in the source cluster.
-	CacheNodeId *string
-
-	// The date and time when the source node's metadata and cache data set was
-	// obtained for the snapshot.
-	SnapshotCreateTime *time.Time
-
-	// The configuration for the source node group (shard).
-	NodeGroupConfiguration *NodeGroupConfiguration
+	// A unique identifier for the source cluster.
+	CacheClusterId *string
 
 	// The date and time when the cache node was created in the source cluster.
 	CacheNodeCreateTime *time.Time
 
-	// A unique identifier for the source cluster.
-	CacheClusterId *string
+	// The cache node identifier for the node in the source cluster.
+	CacheNodeId *string
+
+	// The size of the cache on the source cache node.
+	CacheSize *string
+
+	// The configuration for the source node group (shard).
+	NodeGroupConfiguration *NodeGroupConfiguration
 
 	// A unique identifier for the source node group (shard).
 	NodeGroupId *string
 
-	// The size of the cache on the source cache node.
-	CacheSize *string
+	// The date and time when the source node's metadata and cache data set was
+	// obtained for the snapshot.
+	SnapshotCreateTime *time.Time
 }
 
 // Describes a notification topic and its status. Notification topics are used for
@@ -824,19 +824,19 @@ type NodeSnapshot struct {
 // Service (SNS).
 type NotificationConfiguration struct {
 
-	// The current state of the topic.
-	TopicStatus *string
-
 	// The Amazon Resource Name (ARN) that identifies the topic.
 	TopicArn *string
+
+	// The current state of the topic.
+	TopicStatus *string
 }
 
 // Describes an individual setting that controls some aspect of ElastiCache
 // behavior.
 type Parameter struct {
 
-	// A description of the parameter.
-	Description *string
+	// The valid range of values for the parameter.
+	AllowedValues *string
 
 	// Indicates whether a change to the parameter is applied immediately or requires a
 	// reboot for the change to be applied. You can force a reboot or wait until the
@@ -844,74 +844,74 @@ type Parameter struct {
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Clusters.Rebooting.html).
 	ChangeType ChangeType
 
+	// The valid data type for the parameter.
+	DataType *string
+
+	// A description of the parameter.
+	Description *string
+
 	// Indicates whether (true) or not (false) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable *bool
 
-	// The name of the parameter.
-	ParameterName *string
-
-	// The source of the parameter.
-	Source *string
-
-	// The valid data type for the parameter.
-	DataType *string
-
 	// The earliest cache engine version to which the parameter can apply.
 	MinimumEngineVersion *string
 
-	// The valid range of values for the parameter.
-	AllowedValues *string
+	// The name of the parameter.
+	ParameterName *string
 
 	// The value of the parameter.
 	ParameterValue *string
+
+	// The source of the parameter.
+	Source *string
 }
 
 // Describes a name-value pair that is used to update the value of a parameter.
 type ParameterNameValue struct {
 
-	// The value of the parameter.
-	ParameterValue *string
-
 	// The name of the parameter.
 	ParameterName *string
+
+	// The value of the parameter.
+	ParameterValue *string
 }
 
 // A group of settings that are applied to the cluster in the future, or that are
 // currently being applied.
 type PendingModifiedValues struct {
 
-	// The new number of cache nodes for the cluster. For clusters running Redis, this
-	// value must be 1. For clusters running Memcached, this value must be between 1
-	// and 20.
-	NumCacheNodes *int32
+	// The auth token status
+	AuthTokenStatus AuthTokenUpdateStatus
 
 	// A list of cache node IDs that are being removed (or will be removed) from the
 	// cluster. A node ID is a 4-digit numeric identifier (0001, 0002, etc.).
 	CacheNodeIdsToRemove []*string
 
-	// The new cache engine version that the cluster runs.
-	EngineVersion *string
-
 	// The cache node type that this cluster or replication group is scaled to.
 	CacheNodeType *string
 
-	// The auth token status
-	AuthTokenStatus AuthTokenUpdateStatus
+	// The new cache engine version that the cluster runs.
+	EngineVersion *string
+
+	// The new number of cache nodes for the cluster. For clusters running Redis, this
+	// value must be 1. For clusters running Memcached, this value must be between 1
+	// and 20.
+	NumCacheNodes *int32
 }
 
 // Update action that has been processed for the corresponding apply/stop request
 type ProcessedUpdateAction struct {
-
-	// The unique ID of the service update
-	ServiceUpdateName *string
 
 	// The ID of the cache cluster
 	CacheClusterId *string
 
 	// The ID of the replication group
 	ReplicationGroupId *string
+
+	// The unique ID of the service update
+	ServiceUpdateName *string
 
 	// The status of the update action on the Redis cluster
 	UpdateActionStatus UpdateActionStatus
@@ -931,6 +931,11 @@ type RecurringCharge struct {
 // A list of the replication groups
 type RegionalConfiguration struct {
 
+	// The name of the secondary cluster
+	//
+	// This member is required.
+	ReplicationGroupId *string
+
 	// The AWS region where the cluster is stored
 	//
 	// This member is required.
@@ -941,55 +946,13 @@ type RegionalConfiguration struct {
 	//
 	// This member is required.
 	ReshardingConfiguration []*ReshardingConfiguration
-
-	// The name of the secondary cluster
-	//
-	// This member is required.
-	ReplicationGroupId *string
 }
 
 // Contains all of the attributes of a specific Redis replication group.
 type ReplicationGroup struct {
 
-	// Indicates the status of automatic failover for this Redis replication group.
-	AutomaticFailover AutomaticFailoverStatus
-
-	// The date the auth token was last modified
-	AuthTokenLastModifiedDate *time.Time
-
-	// The configuration endpoint for this replication group. Use the configuration
-	// endpoint to connect to this replication group.
-	ConfigurationEndpoint *Endpoint
-
-	// The names of all the cache clusters that are part of this replication group.
-	MemberClusters []*string
-
-	// The name of the Global Datastore and role of this replication group in the
-	// Global Datastore.
-	GlobalReplicationGroupInfo *GlobalReplicationGroupInfo
-
-	// The current state of this replication group - creating, available, modifying,
-	// deleting, create-failed, snapshotting.
-	Status *string
-
-	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
-	// more information, see Minimizing Downtime: Multi-AZ
-	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
-	MultiAZ MultiAZStatus
-
-	// The name of the compute and memory capacity node type for each node in the
-	// replication group.
-	CacheNodeType *string
-
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
-	TransitEncryptionEnabled *bool
-
-	// The identifier for the replication group.
-	ReplicationGroupId *string
+	// The ARN (Amazon Resource Name) of the replication group.
+	ARN *string
 
 	// A flag that enables encryption at-rest when set to true. You cannot modify the
 	// value of AtRestEncryptionEnabled after the cluster is created. To enable
@@ -1002,8 +965,42 @@ type ReplicationGroup struct {
 	// Default: false
 	AuthTokenEnabled *bool
 
+	// The date the auth token was last modified
+	AuthTokenLastModifiedDate *time.Time
+
+	// Indicates the status of automatic failover for this Redis replication group.
+	AutomaticFailover AutomaticFailoverStatus
+
+	// The name of the compute and memory capacity node type for each node in the
+	// replication group.
+	CacheNodeType *string
+
+	// A flag indicating whether or not this replication group is cluster enabled;
+	// i.e., whether its data can be partitioned across multiple shards (API/CLI: node
+	// groups). Valid values: true | false
+	ClusterEnabled *bool
+
+	// The configuration endpoint for this replication group. Use the configuration
+	// endpoint to connect to this replication group.
+	ConfigurationEndpoint *Endpoint
+
 	// The user supplied description of the replication group.
 	Description *string
+
+	// The name of the Global Datastore and role of this replication group in the
+	// Global Datastore.
+	GlobalReplicationGroupInfo *GlobalReplicationGroupInfo
+
+	// The ID of the KMS key used to encrypt the disk in the cluster.
+	KmsKeyId *string
+
+	// The names of all the cache clusters that are part of this replication group.
+	MemberClusters []*string
+
+	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
+	// more information, see Minimizing Downtime: Multi-AZ
+	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html)
+	MultiAZ MultiAZStatus
 
 	// A list of node groups in this replication group. For Redis (cluster mode
 	// disabled) replication groups, this is a single-element list. For Redis (cluster
@@ -1011,23 +1008,12 @@ type ReplicationGroup struct {
 	// (shard).
 	NodeGroups []*NodeGroup
 
-	// The ARN (Amazon Resource Name) of the replication group.
-	ARN *string
-
-	// The daily time range (in UTC) during which ElastiCache begins taking a daily
-	// snapshot of your node group (shard). Example: 05:00-09:00 If you do not specify
-	// this parameter, ElastiCache automatically chooses an appropriate time range.
-	// This parameter is only valid if the Engine parameter is redis.
-	SnapshotWindow *string
-
-	// A flag indicating whether or not this replication group is cluster enabled;
-	// i.e., whether its data can be partitioned across multiple shards (API/CLI: node
-	// groups). Valid values: true | false
-	ClusterEnabled *bool
-
 	// A group of settings to be applied to the replication group, either immediately
 	// or during the next maintenance window.
 	PendingModifiedValues *ReplicationGroupPendingModifiedValues
+
+	// The identifier for the replication group.
+	ReplicationGroupId *string
 
 	// The number of days for which ElastiCache retains automatic cluster snapshots
 	// before deleting them. For example, if you set SnapshotRetentionLimit to 5, a
@@ -1035,47 +1021,51 @@ type ReplicationGroup struct {
 	// the value of SnapshotRetentionLimit is set to zero (0), backups are turned off.
 	SnapshotRetentionLimit *int32
 
+	// The daily time range (in UTC) during which ElastiCache begins taking a daily
+	// snapshot of your node group (shard). Example: 05:00-09:00 If you do not specify
+	// this parameter, ElastiCache automatically chooses an appropriate time range.
+	// This parameter is only valid if the Engine parameter is redis.
+	SnapshotWindow *string
+
 	// The cluster ID that is used as the daily snapshot source for the replication
 	// group.
 	SnapshottingClusterId *string
 
-	// The ID of the KMS key used to encrypt the disk in the cluster.
-	KmsKeyId *string
+	// The current state of this replication group - creating, available, modifying,
+	// deleting, create-failed, snapshotting.
+	Status *string
+
+	// A flag that enables in-transit encryption when set to true. You cannot modify
+	// the value of TransitEncryptionEnabled after the cluster is created. To enable
+	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
+	// when you create a cluster. Required: Only available when creating a replication
+	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
+	TransitEncryptionEnabled *bool
 }
 
 // The settings to be applied to the Redis replication group, either immediately or
 // during the next maintenance window.
 type ReplicationGroupPendingModifiedValues struct {
 
-	// The status of an online resharding operation.
-	Resharding *ReshardingStatus
+	// The auth token status
+	AuthTokenStatus AuthTokenUpdateStatus
+
+	// Indicates the status of automatic failover for this Redis replication group.
+	AutomaticFailoverStatus PendingAutomaticFailoverStatus
 
 	// The primary cluster ID that is applied immediately (if --apply-immediately was
 	// specified), or during the next maintenance window.
 	PrimaryClusterId *string
 
-	// Indicates the status of automatic failover for this Redis replication group.
-	AutomaticFailoverStatus PendingAutomaticFailoverStatus
-
-	// The auth token status
-	AuthTokenStatus AuthTokenUpdateStatus
+	// The status of an online resharding operation.
+	Resharding *ReshardingStatus
 }
 
 // Represents the output of a PurchaseReservedCacheNodesOffering operation.
 type ReservedCacheNode struct {
 
-	// The fixed price charged for this reserved cache node.
-	FixedPrice *float64
-
-	// The Amazon Resource Name (ARN) of the reserved cache node. Example:
-	// arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582
-	ReservationARN *string
-
-	// The time the reservation started.
-	StartTime *time.Time
-
-	// The state of the reserved cache node.
-	State *string
+	// The number of cache nodes that have been reserved.
+	CacheNodeCount *int32
 
 	// The cache node type for the reserved cache nodes.  <p>The following node types
 	// are supported by ElastiCache. Generally speaking, the current generation types
@@ -1122,29 +1112,39 @@ type ReservedCacheNode struct {
 	// later.</p> </li> </ul>
 	CacheNodeType *string
 
-	// The offering type of this reserved cache node.
-	OfferingType *string
-
-	// The offering identifier.
-	ReservedCacheNodesOfferingId *string
-
 	// The duration of the reservation in seconds.
 	Duration *int32
 
-	// The hourly price charged for this reserved cache node.
-	UsagePrice *float64
+	// The fixed price charged for this reserved cache node.
+	FixedPrice *float64
 
-	// The number of cache nodes that have been reserved.
-	CacheNodeCount *int32
+	// The offering type of this reserved cache node.
+	OfferingType *string
 
-	// The unique identifier for the reservation.
-	ReservedCacheNodeId *string
+	// The description of the reserved cache node.
+	ProductDescription *string
 
 	// The recurring price charged to run this reserved cache node.
 	RecurringCharges []*RecurringCharge
 
-	// The description of the reserved cache node.
-	ProductDescription *string
+	// The Amazon Resource Name (ARN) of the reserved cache node. Example:
+	// arn:aws:elasticache:us-east-1:123456789012:reserved-instance:ri-2017-03-27-08-33-25-582
+	ReservationARN *string
+
+	// The unique identifier for the reservation.
+	ReservedCacheNodeId *string
+
+	// The offering identifier.
+	ReservedCacheNodesOfferingId *string
+
+	// The time the reservation started.
+	StartTime *time.Time
+
+	// The state of the reserved cache node.
+	State *string
+
+	// The hourly price charged for this reserved cache node.
+	UsagePrice *float64
 }
 
 // Describes all of the attributes of a reserved cache node offering.
@@ -1202,17 +1202,17 @@ type ReservedCacheNodesOffering struct {
 	// The duration of the offering. in seconds.
 	Duration *int32
 
+	// The fixed price charged for this offering.
+	FixedPrice *float64
+
+	// The offering type.
+	OfferingType *string
+
 	// The cache engine used by the offering.
 	ProductDescription *string
 
 	// The recurring price charged to run this reserved cache node.
 	RecurringCharges []*RecurringCharge
-
-	// The offering type.
-	OfferingType *string
-
-	// The fixed price charged for this offering.
-	FixedPrice *float64
 
 	// A unique identifier for the reserved cache node offering.
 	ReservedCacheNodesOfferingId *string
@@ -1259,41 +1259,41 @@ type ServiceUpdate struct {
 	// recommended apply-by date has expired.
 	AutoUpdateAfterRecommendedApplyByDate *bool
 
-	// The severity of the service update
-	ServiceUpdateSeverity ServiceUpdateSeverity
-
-	// The date after which the service update is no longer available
-	ServiceUpdateEndDate *time.Time
-
 	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string
-
-	// The unique ID of the service update
-	ServiceUpdateName *string
 
 	// The Elasticache engine version to which the update applies. Either Redis or
 	// Memcached engine version
 	EngineVersion *string
 
-	// The status of the service update
-	ServiceUpdateStatus ServiceUpdateStatus
-
-	// The date when the service update is initially available
-	ServiceUpdateReleaseDate *time.Time
-
-	// Reflects the nature of the service update
-	ServiceUpdateType ServiceUpdateType
+	// The estimated length of time the service update will take
+	EstimatedUpdateTime *string
 
 	// Provides details of the service update
 	ServiceUpdateDescription *string
+
+	// The date after which the service update is no longer available
+	ServiceUpdateEndDate *time.Time
+
+	// The unique ID of the service update
+	ServiceUpdateName *string
 
 	// The recommendend date to apply the service update in order to ensure compliance.
 	// For information on compliance, see Self-Service Security Updates for Compliance
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service).
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
-	// The estimated length of time the service update will take
-	EstimatedUpdateTime *string
+	// The date when the service update is initially available
+	ServiceUpdateReleaseDate *time.Time
+
+	// The severity of the service update
+	ServiceUpdateSeverity ServiceUpdateSeverity
+
+	// The status of the service update
+	ServiceUpdateStatus ServiceUpdateStatus
+
+	// Reflects the nature of the service update
+	ServiceUpdateType ServiceUpdateType
 }
 
 // Represents the progress of an online resharding operation.
@@ -1307,69 +1307,21 @@ type SlotMigration struct {
 // was taken.
 type Snapshot struct {
 
-	// The name of the cache subnet group associated with the source cluster.
-	CacheSubnetGroupName *string
-
-	// The ID of the KMS key used to encrypt the snapshot.
-	KmsKeyId *string
-
-	// The version of the cache engine version that is used by the source cluster.
-	EngineVersion *string
-
-	// Indicates whether the snapshot is from an automatic backup (automated) or was
-	// created manually (manual).
-	SnapshotSource *string
-
-	// The name of the Availability Zone in which the source cluster is located.
-	PreferredAvailabilityZone *string
-
-	// Specifies the weekly time range during which maintenance on the cluster is
-	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
-	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
-	// for ddd are:
-	//
-	//     * sun
-	//
-	//     * mon
-	//
-	//     * tue
-	//
-	//     * wed
-	//
-	//     * thu
-	//
-	//     * fri
-	//
-	//
-	// * sat
-	//
-	// Example: sun:23:00-mon:01:30
-	PreferredMaintenanceWindow *string
+	// The ARN (Amazon Resource Name) of the snapshot.
+	ARN *string
 
 	// This parameter is currently disabled.
 	AutoMinorVersionUpgrade *bool
 
-	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group
-	// for the source cluster.
-	VpcId *string
-
-	// The cache parameter group that is associated with the source cluster.
-	CacheParameterGroupName *string
+	// Indicates the status of automatic failover for the source Redis replication
+	// group.
+	AutomaticFailover AutomaticFailoverStatus
 
 	// The date and time when the source cluster was created.
 	CacheClusterCreateTime *time.Time
 
-	// For an automatic snapshot, the number of days for which ElastiCache retains the
-	// snapshot before deleting it. For manual snapshots, this field reflects the
-	// SnapshotRetentionLimit for the source cluster when the snapshot was created.
-	// This field is otherwise ignored: Manual snapshots do not expire, and can only be
-	// deleted using the DeleteSnapshot operation. Important If the value of
-	// SnapshotRetentionLimit is set to zero (0), backups are turned off.
-	SnapshotRetentionLimit *int32
-
-	// The status of the snapshot. Valid values: creating | available | restoring |
-	// copying | deleting.
-	SnapshotStatus *string
+	// The user-supplied identifier of the source cluster.
+	CacheClusterId *string
 
 	// The name of the compute and memory capacity node type for the source cluster.
 	// <p>The following node types are supported by ElastiCache. Generally speaking,
@@ -1417,9 +1369,20 @@ type Snapshot struct {
 	// later.</p> </li> </ul>
 	CacheNodeType *string
 
-	// The daily time range during which ElastiCache takes daily snapshots of the
-	// source cluster.
-	SnapshotWindow *string
+	// The cache parameter group that is associated with the source cluster.
+	CacheParameterGroupName *string
+
+	// The name of the cache subnet group associated with the source cluster.
+	CacheSubnetGroupName *string
+
+	// The name of the cache engine (memcached or redis) used by the source cluster.
+	Engine *string
+
+	// The version of the cache engine version that is used by the source cluster.
+	EngineVersion *string
+
+	// The ID of the KMS key used to encrypt the snapshot.
+	KmsKeyId *string
 
 	// A list of the cache nodes in the source cluster.
 	NodeSnapshots []*NodeSnapshot
@@ -1429,40 +1392,77 @@ type Snapshot struct {
 	// 1 and 20.
 	NumCacheNodes *int32
 
-	// The ARN (Amazon Resource Name) of the snapshot.
-	ARN *string
-
-	// The user-supplied identifier of the source cluster.
-	CacheClusterId *string
-
-	// The Amazon Resource Name (ARN) for the topic used by the source cluster for
-	// publishing notifications.
-	TopicArn *string
-
-	// The port number used by each cache nodes in the source cluster.
-	Port *int32
-
 	// The number of node groups (shards) in this snapshot. When restoring from a
 	// snapshot, the number of node groups (shards) in the snapshot and in the restored
 	// replication group must be the same.
 	NumNodeGroups *int32
 
-	// Indicates the status of automatic failover for the source Redis replication
-	// group.
-	AutomaticFailover AutomaticFailoverStatus
+	// The port number used by each cache nodes in the source cluster.
+	Port *int32
+
+	// The name of the Availability Zone in which the source cluster is located.
+	PreferredAvailabilityZone *string
+
+	// Specifies the weekly time range during which maintenance on the cluster is
+	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
+	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
+	// for ddd are:
+	//
+	//     * sun
+	//
+	//     * mon
+	//
+	//     * tue
+	//
+	//     * wed
+	//
+	//     * thu
+	//
+	//     * fri
+	//
+	//
+	// * sat
+	//
+	// Example: sun:23:00-mon:01:30
+	PreferredMaintenanceWindow *string
 
 	// A description of the source replication group.
 	ReplicationGroupDescription *string
+
+	// The unique identifier of the source replication group.
+	ReplicationGroupId *string
 
 	// The name of a snapshot. For an automatic snapshot, the name is system-generated.
 	// For a manual snapshot, this is the user-provided name.
 	SnapshotName *string
 
-	// The name of the cache engine (memcached or redis) used by the source cluster.
-	Engine *string
+	// For an automatic snapshot, the number of days for which ElastiCache retains the
+	// snapshot before deleting it. For manual snapshots, this field reflects the
+	// SnapshotRetentionLimit for the source cluster when the snapshot was created.
+	// This field is otherwise ignored: Manual snapshots do not expire, and can only be
+	// deleted using the DeleteSnapshot operation. Important If the value of
+	// SnapshotRetentionLimit is set to zero (0), backups are turned off.
+	SnapshotRetentionLimit *int32
 
-	// The unique identifier of the source replication group.
-	ReplicationGroupId *string
+	// Indicates whether the snapshot is from an automatic backup (automated) or was
+	// created manually (manual).
+	SnapshotSource *string
+
+	// The status of the snapshot. Valid values: creating | available | restoring |
+	// copying | deleting.
+	SnapshotStatus *string
+
+	// The daily time range during which ElastiCache takes daily snapshots of the
+	// source cluster.
+	SnapshotWindow *string
+
+	// The Amazon Resource Name (ARN) for the topic used by the source cluster for
+	// publishing notifications.
+	TopicArn *string
+
+	// The Amazon Virtual Private Cloud identifier (VPC ID) of the cache subnet group
+	// for the source cluster.
+	VpcId *string
 }
 
 // Represents the subnet associated with a cluster. This parameter refers to
@@ -1470,11 +1470,11 @@ type Snapshot struct {
 // ElastiCache.
 type Subnet struct {
 
-	// The unique identifier for the subnet.
-	SubnetIdentifier *string
-
 	// The Availability Zone associated with the subnet.
 	SubnetAvailabilityZone *AvailabilityZone
+
+	// The unique identifier for the subnet.
+	SubnetIdentifier *string
 }
 
 // A cost allocation Tag that can be added to an ElastiCache cluster or replication
@@ -1493,22 +1493,16 @@ type Tag struct {
 // during the time range.
 type TimeRangeFilter struct {
 
-	// The start time of the time range filter
-	StartTime *time.Time
-
 	// The end time of the time range filter
 	EndTime *time.Time
+
+	// The start time of the time range filter
+	StartTime *time.Time
 }
 
 // Update action that has failed to be processed for the corresponding apply/stop
 // request
 type UnprocessedUpdateAction struct {
-
-	// The replication group ID
-	ReplicationGroupId *string
-
-	// The unique ID of the service update
-	ServiceUpdateName *string
 
 	// The ID of the cache cluster
 	CacheClusterId *string
@@ -1518,54 +1512,57 @@ type UnprocessedUpdateAction struct {
 
 	// The error type for requests that are not processed
 	ErrorType *string
+
+	// The replication group ID
+	ReplicationGroupId *string
+
+	// The unique ID of the service update
+	ServiceUpdateName *string
 }
 
 // The status of the service update for a specific replication group
 type UpdateAction struct {
 
-	// Reflects the nature of the service update
-	ServiceUpdateType ServiceUpdateType
-
-	// The date when the UpdateActionStatus was last modified
-	UpdateActionStatusModifiedDate *time.Time
-
-	// The severity of the service update
-	ServiceUpdateSeverity ServiceUpdateSeverity
-
-	// The unique ID of the service update
-	ServiceUpdateName *string
+	// The ID of the cache cluster
+	CacheClusterId *string
 
 	// The status of the service update on the cache node
 	CacheNodeUpdateStatus []*CacheNodeUpdateStatus
 
-	// The date that the service update is available to a replication group
-	UpdateActionAvailableDate *time.Time
+	// The Elasticache engine to which the update applies. Either Redis or Memcached
+	Engine *string
+
+	// The estimated length of time for the update to complete
+	EstimatedUpdateTime *string
+
+	// The status of the service update on the node group
+	NodeGroupUpdateStatus []*NodeGroupUpdateStatus
 
 	// The progress of the service update on the replication group
 	NodesUpdated *string
 
-	// The status of the service update
-	ServiceUpdateStatus ServiceUpdateStatus
+	// The ID of the replication group
+	ReplicationGroupId *string
 
-	// The ID of the cache cluster
-	CacheClusterId *string
+	// The unique ID of the service update
+	ServiceUpdateName *string
 
 	// The recommended date to apply the service update to ensure compliance. For
 	// information on compliance, see Self-Service Security Updates for Compliance
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/elasticache-compliance.html#elasticache-compliance-self-service).
 	ServiceUpdateRecommendedApplyByDate *time.Time
 
-	// The status of the update action
-	UpdateActionStatus UpdateActionStatus
-
 	// The date the update is first available
 	ServiceUpdateReleaseDate *time.Time
 
-	// The ID of the replication group
-	ReplicationGroupId *string
+	// The severity of the service update
+	ServiceUpdateSeverity ServiceUpdateSeverity
 
-	// The estimated length of time for the update to complete
-	EstimatedUpdateTime *string
+	// The status of the service update
+	ServiceUpdateStatus ServiceUpdateStatus
+
+	// Reflects the nature of the service update
+	ServiceUpdateType ServiceUpdateType
 
 	// If yes, all nodes in the replication group have been updated by the recommended
 	// apply-by date. If no, at least one node in the replication group have not been
@@ -1573,9 +1570,12 @@ type UpdateAction struct {
 	// created after the recommended apply-by date.
 	SlaMet SlaMet
 
-	// The Elasticache engine to which the update applies. Either Redis or Memcached
-	Engine *string
+	// The date that the service update is available to a replication group
+	UpdateActionAvailableDate *time.Time
 
-	// The status of the service update on the node group
-	NodeGroupUpdateStatus []*NodeGroupUpdateStatus
+	// The status of the update action
+	UpdateActionStatus UpdateActionStatus
+
+	// The date when the UpdateActionStatus was last modified
+	UpdateActionStatusModifiedDate *time.Time
 }

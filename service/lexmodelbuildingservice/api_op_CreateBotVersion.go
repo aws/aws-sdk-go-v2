@@ -81,11 +81,12 @@ type CreateBotVersionInput struct {
 
 type CreateBotVersionOutput struct {
 
-	// The version of the bot.
-	Version *string
+	// The message that Amazon Lex uses to abort a conversation. For more information,
+	// see PutBot ().
+	AbortStatement *types.Statement
 
-	// An array of Intent objects. For more information, see PutBot ().
-	Intents []*types.Intent
+	// Checksum identifying the version of the bot that was created.
+	Checksum *string
 
 	// For each Amazon Lex bot created with the Amazon Lex Model Building Service, you
 	// must specify whether your use of Amazon Lex is related to a website, program, or
@@ -110,22 +111,39 @@ type CreateBotVersionOutput struct {
 	// (https://aws.amazon.com/lex/faqs#data-security)
 	ChildDirected *bool
 
-	// Checksum identifying the version of the bot that was created.
-	Checksum *string
+	// The message that Amazon Lex uses when it doesn't understand the user's request.
+	// For more information, see PutBot ().
+	ClarificationPrompt *types.Prompt
+
+	// The date when the bot version was created.
+	CreatedDate *time.Time
+
+	// A description of the bot.
+	Description *string
 
 	// Indicates whether utterances entered by the user should be sent to Amazon
 	// Comprehend for sentiment analysis.
 	DetectSentiment *bool
 
-	// A description of the bot.
-	Description *string
+	// If status is FAILED, Amazon Lex provides the reason that it failed to build the
+	// bot.
+	FailureReason *string
 
-	// The message that Amazon Lex uses to abort a conversation. For more information,
-	// see PutBot ().
-	AbortStatement *types.Statement
+	// The maximum time in seconds that Amazon Lex retains the data gathered in a
+	// conversation. For more information, see PutBot ().
+	IdleSessionTTLInSeconds *int32
+
+	// An array of Intent objects. For more information, see PutBot ().
+	Intents []*types.Intent
+
+	// The date when the $LATEST version of this bot was updated.
+	LastUpdatedDate *time.Time
 
 	// Specifies the target locale for the bot.
 	Locale types.Locale
+
+	// The name of the bot.
+	Name *string
 
 	// When you send a request to create or update a bot, Amazon Lex sets the status
 	// response element to BUILDING. After Amazon Lex builds the bot, it sets status to
@@ -133,30 +151,12 @@ type CreateBotVersionOutput struct {
 	// returns the reason for the failure in the failureReason response element.
 	Status types.Status
 
-	// The message that Amazon Lex uses when it doesn't understand the user's request.
-	// For more information, see PutBot ().
-	ClarificationPrompt *types.Prompt
+	// The version of the bot.
+	Version *string
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interactions with the
 	// user.
 	VoiceId *string
-
-	// If status is FAILED, Amazon Lex provides the reason that it failed to build the
-	// bot.
-	FailureReason *string
-
-	// The date when the $LATEST version of this bot was updated.
-	LastUpdatedDate *time.Time
-
-	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot ().
-	IdleSessionTTLInSeconds *int32
-
-	// The date when the bot version was created.
-	CreatedDate *time.Time
-
-	// The name of the bot.
-	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

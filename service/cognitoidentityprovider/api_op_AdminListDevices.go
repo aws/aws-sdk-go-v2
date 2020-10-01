@@ -69,21 +69,21 @@ type AdminListDevicesInput struct {
 	// This member is required.
 	Username *string
 
-	// The pagination token.
-	PaginationToken *string
-
 	// The limit of the devices request.
 	Limit *int32
+
+	// The pagination token.
+	PaginationToken *string
 }
 
 // Lists the device's response, as an administrator.
 type AdminListDevicesOutput struct {
 
-	// The pagination token.
-	PaginationToken *string
-
 	// The devices in the list of devices response.
 	Devices []*types.DeviceType
+
+	// The pagination token.
+	PaginationToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

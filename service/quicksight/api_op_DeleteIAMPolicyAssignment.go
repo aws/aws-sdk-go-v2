@@ -56,11 +56,6 @@ func (c *Client) DeleteIAMPolicyAssignment(ctx context.Context, params *DeleteIA
 
 type DeleteIAMPolicyAssignmentInput struct {
 
-	// The namespace that contains the assignment.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The name of the assignment.
 	//
 	// This member is required.
@@ -70,15 +65,20 @@ type DeleteIAMPolicyAssignmentInput struct {
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	// The namespace that contains the assignment.
+	//
+	// This member is required.
+	Namespace *string
 }
 
 type DeleteIAMPolicyAssignmentOutput struct {
 
-	// The AWS request ID for this operation.
-	RequestId *string
-
 	// The name of the assignment.
 	AssignmentName *string
+
+	// The AWS request ID for this operation.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

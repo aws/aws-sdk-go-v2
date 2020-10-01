@@ -43,9 +43,9 @@ type StructureListMember struct {
 }
 
 type XmlAttributesInputOutput struct {
-	Foo *string
-
 	Attr *string
+
+	Foo *string
 }
 
 type XmlNamespaceNested struct {

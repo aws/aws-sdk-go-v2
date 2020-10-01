@@ -60,15 +60,15 @@ func (c *Client) BatchDisassociateProjectAssets(ctx context.Context, params *Bat
 
 type BatchDisassociateProjectAssetsInput struct {
 
-	// The ID of the project from which to disassociate the assets.
-	//
-	// This member is required.
-	ProjectId *string
-
 	// The IDs of the assets to be disassociated from the project.
 	//
 	// This member is required.
 	AssetIds []*string
+
+	// The ID of the project from which to disassociate the assets.
+	//
+	// This member is required.
+	ProjectId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent

@@ -58,28 +58,28 @@ func (c *Client) CreateCoreDefinitionVersion(ctx context.Context, params *Create
 
 type CreateCoreDefinitionVersionInput struct {
 
+	// The ID of the core definition.
+	//
+	// This member is required.
+	CoreDefinitionId *string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 
 	// A list of cores in the core definition version.
 	Cores []*types.Core
-
-	// The ID of the core definition.
-	//
-	// This member is required.
-	CoreDefinitionId *string
 }
 
 type CreateCoreDefinitionVersionOutput struct {
-
-	// The ID of the parent definition that the version is associated with.
-	Id *string
 
 	// The ARN of the version.
 	Arn *string
 
 	// The time, in milliseconds since the epoch, when the version was created.
 	CreationTimestamp *string
+
+	// The ID of the parent definition that the version is associated with.
+	Id *string
 
 	// The ID of the version.
 	Version *string

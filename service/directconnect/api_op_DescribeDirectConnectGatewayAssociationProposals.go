@@ -57,11 +57,11 @@ func (c *Client) DescribeDirectConnectGatewayAssociationProposals(ctx context.Co
 
 type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 
+	// The ID of the associated gateway.
+	AssociatedGatewayId *string
+
 	// The ID of the Direct Connect gateway.
 	DirectConnectGatewayId *string
-
-	// The ID of the proposal.
-	ProposalId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. If
@@ -71,18 +71,18 @@ type DescribeDirectConnectGatewayAssociationProposalsInput struct {
 	// The token for the next page of results.
 	NextToken *string
 
-	// The ID of the associated gateway.
-	AssociatedGatewayId *string
+	// The ID of the proposal.
+	ProposalId *string
 }
 
 type DescribeDirectConnectGatewayAssociationProposalsOutput struct {
 
+	// Describes the Direct Connect gateway association proposals.
+	DirectConnectGatewayAssociationProposals []*types.DirectConnectGatewayAssociationProposal
+
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
-
-	// Describes the Direct Connect gateway association proposals.
-	DirectConnectGatewayAssociationProposals []*types.DirectConnectGatewayAssociationProposal
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

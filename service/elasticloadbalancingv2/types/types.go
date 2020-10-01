@@ -9,6 +9,23 @@ import (
 // Information about an action.
 type Action struct {
 
+	// The type of action.
+	//
+	// This member is required.
+	Type ActionTypeEnum
+
+	// [HTTPS listeners] Information for using Amazon Cognito to authenticate users.
+	// Specify only when Type is authenticate-cognito.
+	AuthenticateCognitoConfig *AuthenticateCognitoActionConfig
+
+	// [HTTPS listeners] Information about an identity provider that is compliant with
+	// OpenID Connect (OIDC). Specify only when Type is authenticate-oidc.
+	AuthenticateOidcConfig *AuthenticateOidcActionConfig
+
+	// [Application Load Balancer] Information for creating an action that returns a
+	// custom HTTP response. Specify only when Type is fixed-response.
+	FixedResponseConfig *FixedResponseActionConfig
+
 	// Information for creating an action that distributes requests among one or more
 	// target groups. For Network Load Balancers, you can specify a single target
 	// group. Specify only when Type is forward. If you specify both ForwardConfig and
@@ -16,46 +33,25 @@ type Action struct {
 	// must be the same target group specified in TargetGroupArn.
 	ForwardConfig *ForwardActionConfig
 
-	// [Application Load Balancer] Information for creating a redirect action. Specify
-	// only when Type is redirect.
-	RedirectConfig *RedirectActionConfig
-
-	// [Application Load Balancer] Information for creating an action that returns a
-	// custom HTTP response. Specify only when Type is fixed-response.
-	FixedResponseConfig *FixedResponseActionConfig
-
-	// The Amazon Resource Name (ARN) of the target group. Specify only when Type is
-	// forward and you want to route to a single target group. To route to one or more
-	// target groups, use ForwardConfig instead.
-	TargetGroupArn *string
-
 	// The order for the action. This value is required for rules with multiple
 	// actions. The action with the lowest value for order is performed first. The last
 	// action to be performed must be one of the following types of actions: a forward,
 	// fixed-response, or redirect.
 	Order *int32
 
-	// [HTTPS listeners] Information for using Amazon Cognito to authenticate users.
-	// Specify only when Type is authenticate-cognito.
-	AuthenticateCognitoConfig *AuthenticateCognitoActionConfig
+	// [Application Load Balancer] Information for creating a redirect action. Specify
+	// only when Type is redirect.
+	RedirectConfig *RedirectActionConfig
 
-	// The type of action.
-	//
-	// This member is required.
-	Type ActionTypeEnum
-
-	// [HTTPS listeners] Information about an identity provider that is compliant with
-	// OpenID Connect (OIDC). Specify only when Type is authenticate-oidc.
-	AuthenticateOidcConfig *AuthenticateOidcActionConfig
+	// The Amazon Resource Name (ARN) of the target group. Specify only when Type is
+	// forward and you want to route to a single target group. To route to one or more
+	// target groups, use ForwardConfig instead.
+	TargetGroupArn *string
 }
 
 // Request parameters to use when integrating with Amazon Cognito to authenticate
 // users.
 type AuthenticateCognitoActionConfig struct {
-
-	// The query parameters (up to 10) to include in the redirect request to the
-	// authorization endpoint.
-	AuthenticationRequestExtraParams map[string]*string
 
 	// The Amazon Resource Name (ARN) of the Amazon Cognito user pool.
 	//
@@ -67,24 +63,15 @@ type AuthenticateCognitoActionConfig struct {
 	// This member is required.
 	UserPoolClientId *string
 
-	// The maximum duration of the authentication session, in seconds. The default is
-	// 604800 seconds (7 days).
-	SessionTimeout *int64
-
-	// The set of user claims to be requested from the IdP. The default is openid. To
-	// verify which scope values your IdP supports and how to separate multiple values,
-	// see the documentation for your IdP.
-	Scope *string
-
 	// The domain prefix or fully-qualified domain name of the Amazon Cognito user
 	// pool.
 	//
 	// This member is required.
 	UserPoolDomain *string
 
-	// The name of the cookie used to maintain session information. The default is
-	// AWSELBAuthSessionCookie.
-	SessionCookieName *string
+	// The query parameters (up to 10) to include in the redirect request to the
+	// authorization endpoint.
+	AuthenticationRequestExtraParams map[string]*string
 
 	// The behavior if the user is not authenticated. The following are possible
 	// values:
@@ -97,28 +84,24 @@ type AuthenticateCognitoActionConfig struct {
 	//     * authenticate - Redirect
 	// the request to the IdP authorization endpoint. This is the default value.
 	OnUnauthenticatedRequest AuthenticateCognitoActionConditionalBehaviorEnum
+
+	// The set of user claims to be requested from the IdP. The default is openid. To
+	// verify which scope values your IdP supports and how to separate multiple values,
+	// see the documentation for your IdP.
+	Scope *string
+
+	// The name of the cookie used to maintain session information. The default is
+	// AWSELBAuthSessionCookie.
+	SessionCookieName *string
+
+	// The maximum duration of the authentication session, in seconds. The default is
+	// 604800 seconds (7 days).
+	SessionTimeout *int64
 }
 
 // Request parameters when using an identity provider (IdP) that is compliant with
 // OpenID Connect (OIDC) to authenticate users.
 type AuthenticateOidcActionConfig struct {
-
-	// The OAuth 2.0 client secret. This parameter is required if you are creating a
-	// rule. If you are modifying a rule, you can omit this parameter if you set
-	// UseExistingClientSecret to true.
-	ClientSecret *string
-
-	// The token endpoint of the IdP. This must be a full URL, including the HTTPS
-	// protocol, the domain, and the path.
-	//
-	// This member is required.
-	TokenEndpoint *string
-
-	// The OIDC issuer identifier of the IdP. This must be a full URL, including the
-	// HTTPS protocol, the domain, and the path.
-	//
-	// This member is required.
-	Issuer *string
 
 	// The authorization endpoint of the IdP. This must be a full URL, including the
 	// HTTPS protocol, the domain, and the path.
@@ -126,13 +109,37 @@ type AuthenticateOidcActionConfig struct {
 	// This member is required.
 	AuthorizationEndpoint *string
 
-	// The maximum duration of the authentication session, in seconds. The default is
-	// 604800 seconds (7 days).
-	SessionTimeout *int64
+	// The OAuth 2.0 client identifier.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The OIDC issuer identifier of the IdP. This must be a full URL, including the
+	// HTTPS protocol, the domain, and the path.
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token endpoint of the IdP. This must be a full URL, including the HTTPS
+	// protocol, the domain, and the path.
+	//
+	// This member is required.
+	TokenEndpoint *string
+
+	// The user info endpoint of the IdP. This must be a full URL, including the HTTPS
+	// protocol, the domain, and the path.
+	//
+	// This member is required.
+	UserInfoEndpoint *string
 
 	// The query parameters (up to 10) to include in the redirect request to the
 	// authorization endpoint.
 	AuthenticationRequestExtraParams map[string]*string
+
+	// The OAuth 2.0 client secret. This parameter is required if you are creating a
+	// rule. If you are modifying a rule, you can omit this parameter if you set
+	// UseExistingClientSecret to true.
+	ClientSecret *string
 
 	// The behavior if the user is not authenticated. The following are possible
 	// values:
@@ -146,25 +153,18 @@ type AuthenticateOidcActionConfig struct {
 	// the request to the IdP authorization endpoint. This is the default value.
 	OnUnauthenticatedRequest AuthenticateOidcActionConditionalBehaviorEnum
 
-	// The name of the cookie used to maintain session information. The default is
-	// AWSELBAuthSessionCookie.
-	SessionCookieName *string
-
 	// The set of user claims to be requested from the IdP. The default is openid. To
 	// verify which scope values your IdP supports and how to separate multiple values,
 	// see the documentation for your IdP.
 	Scope *string
 
-	// The user info endpoint of the IdP. This must be a full URL, including the HTTPS
-	// protocol, the domain, and the path.
-	//
-	// This member is required.
-	UserInfoEndpoint *string
+	// The name of the cookie used to maintain session information. The default is
+	// AWSELBAuthSessionCookie.
+	SessionCookieName *string
 
-	// The OAuth 2.0 client identifier.
-	//
-	// This member is required.
-	ClientId *string
+	// The maximum duration of the authentication session, in seconds. The default is
+	// 604800 seconds (7 days).
+	SessionTimeout *int64
 
 	// Indicates whether to use the existing client secret when modifying a rule. If
 	// you are creating a rule, you can omit this parameter or set it to false.
@@ -190,14 +190,14 @@ type AvailabilityZone struct {
 // Information about an SSL server certificate.
 type Certificate struct {
 
+	// The Amazon Resource Name (ARN) of the certificate.
+	CertificateArn *string
+
 	// Indicates whether the certificate is the default certificate. Do not set this
 	// value when specifying a certificate as an input. This value is not included in
 	// the output when describing a listener, but is included when describing listener
 	// certificates.
 	IsDefault *bool
-
-	// The Amazon Resource Name (ARN) of the certificate.
-	CertificateArn *string
 }
 
 // Information about a cipher used in a policy.
@@ -218,12 +218,12 @@ type FixedResponseActionConfig struct {
 	// This member is required.
 	StatusCode *string
 
-	// The message.
-	MessageBody *string
-
 	// The content type. Valid Values: text/plain | text/css | text/html |
 	// application/javascript | application/json
 	ContentType *string
+
+	// The message.
+	MessageBody *string
 }
 
 // Information about a forward action.
@@ -333,8 +333,21 @@ type Limit struct {
 // Information about a listener.
 type Listener struct {
 
+	// [TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN)
+	// policy.
+	AlpnPolicy []*string
+
 	// [HTTPS or TLS listener] The default certificate for the listener.
 	Certificates []*Certificate
+
+	// The default actions for the listener.
+	DefaultActions []*Action
+
+	// The Amazon Resource Name (ARN) of the listener.
+	ListenerArn *string
+
+	// The Amazon Resource Name (ARN) of the load balancer.
+	LoadBalancerArn *string
 
 	// The port on which the load balancer is listening.
 	Port *int32
@@ -345,35 +358,33 @@ type Listener struct {
 	// [HTTPS or TLS listener] The security policy that defines which protocols and
 	// ciphers are supported.
 	SslPolicy *string
-
-	// The default actions for the listener.
-	DefaultActions []*Action
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	LoadBalancerArn *string
-
-	// [TLS listener] The name of the Application-Layer Protocol Negotiation (ALPN)
-	// policy.
-	AlpnPolicy []*string
-
-	// The Amazon Resource Name (ARN) of the listener.
-	ListenerArn *string
 }
 
 // Information about a load balancer.
 type LoadBalancer struct {
 
-	// The state of the load balancer.
-	State *LoadBalancerState
+	// The Availability Zones for the load balancer.
+	AvailabilityZones []*AvailabilityZone
 
 	// The ID of the Amazon Route 53 hosted zone associated with the load balancer.
 	CanonicalHostedZoneId *string
 
-	// The name of the load balancer.
-	LoadBalancerName *string
+	// The date and time the load balancer was created.
+	CreatedTime *time.Time
 
 	// The public DNS name of the load balancer.
 	DNSName *string
+
+	// The type of IP addresses used by the subnets for your load balancer. The
+	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
+	// addresses).
+	IpAddressType IpAddressType
+
+	// The Amazon Resource Name (ARN) of the load balancer.
+	LoadBalancerArn *string
+
+	// The name of the load balancer.
+	LoadBalancerName *string
 
 	// The nodes of an Internet-facing load balancer have public IP addresses. The DNS
 	// name of an Internet-facing load balancer is publicly resolvable to the public IP
@@ -385,25 +396,14 @@ type LoadBalancer struct {
 	// VPC for the load balancer.
 	Scheme LoadBalancerSchemeEnum
 
-	// The date and time the load balancer was created.
-	CreatedTime *time.Time
-
 	// The IDs of the security groups for the load balancer.
 	SecurityGroups []*string
 
-	// The type of IP addresses used by the subnets for your load balancer. The
-	// possible values are ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6
-	// addresses).
-	IpAddressType IpAddressType
-
-	// The Availability Zones for the load balancer.
-	AvailabilityZones []*AvailabilityZone
+	// The state of the load balancer.
+	State *LoadBalancerState
 
 	// The type of load balancer.
 	Type LoadBalancerTypeEnum
-
-	// The Amazon Resource Name (ARN) of the load balancer.
-	LoadBalancerArn *string
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string
@@ -412,12 +412,12 @@ type LoadBalancer struct {
 // Information about a static IP address for a load balancer.
 type LoadBalancerAddress struct {
 
-	// The static IP address.
-	IpAddress *string
-
 	// [Network Load Balancers] The allocation ID of the Elastic IP address for an
 	// internal-facing load balancer.
 	AllocationId *string
+
+	// The static IP address.
+	IpAddress *string
 
 	// [Network Load Balancers] The private IPv4 address for an internal load balancer.
 	PrivateIPv4Address *string
@@ -561,23 +561,11 @@ type QueryStringKeyValuePair struct {
 // "#{query}&value=xyz".
 type RedirectActionConfig struct {
 
-	// The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP
-	// to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.
-	Protocol *string
-
 	// The HTTP redirect code. The redirect is either permanent (HTTP 301) or temporary
 	// (HTTP 302).
 	//
 	// This member is required.
 	StatusCode RedirectActionStatusCodeEnum
-
-	// The query parameters, URL-encoded when necessary, but not percent-encoded. Do
-	// not include the leading "?", as it is automatically added. You can specify any
-	// of the reserved keywords.
-	Query *string
-
-	// The port. You can specify a value from 1 to 65535 or #{port}.
-	Port *string
 
 	// The hostname. This component is not percent-encoded. The hostname can contain
 	// #{host}.
@@ -586,19 +574,22 @@ type RedirectActionConfig struct {
 	// The absolute path, starting with the leading "/". This component is not
 	// percent-encoded. The path can contain #{host}, #{path}, and #{port}.
 	Path *string
+
+	// The port. You can specify a value from 1 to 65535 or #{port}.
+	Port *string
+
+	// The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP
+	// to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.
+	Protocol *string
+
+	// The query parameters, URL-encoded when necessary, but not percent-encoded. Do
+	// not include the leading "?", as it is automatically added. You can specify any
+	// of the reserved keywords.
+	Query *string
 }
 
 // Information about a rule.
 type Rule struct {
-
-	// Indicates whether this is the default rule.
-	IsDefault *bool
-
-	// The Amazon Resource Name (ARN) of the rule.
-	RuleArn *string
-
-	// The priority.
-	Priority *string
 
 	// The actions. Each rule must include exactly one of the following types of
 	// actions: forward, redirect, or fixed-response, and it must be the last action to
@@ -609,10 +600,39 @@ type Rule struct {
 	// http-request-method, host-header, path-pattern, and source-ip, and zero or more
 	// of the following conditions: http-header and query-string.
 	Conditions []*RuleCondition
+
+	// Indicates whether this is the default rule.
+	IsDefault *bool
+
+	// The priority.
+	Priority *string
+
+	// The Amazon Resource Name (ARN) of the rule.
+	RuleArn *string
 }
 
 // Information about a condition for a rule.
 type RuleCondition struct {
+
+	// The field in the HTTP request. The following are the possible values:
+	//
+	//     *
+	// http-header
+	//
+	//     * http-request-method
+	//
+	//     * host-header
+	//
+	//     * path-pattern
+	//
+	//
+	// * query-string
+	//
+	//     * source-ip
+	Field *string
+
+	// Information for a host header condition. Specify only when Field is host-header.
+	HostHeaderConfig *HostHeaderConditionConfig
 
 	// Information for an HTTP header condition. Specify only when Field is
 	// http-header.
@@ -621,6 +641,17 @@ type RuleCondition struct {
 	// Information for an HTTP method condition. Specify only when Field is
 	// http-request-method.
 	HttpRequestMethodConfig *HttpRequestMethodConditionConfig
+
+	// Information for a path pattern condition. Specify only when Field is
+	// path-pattern.
+	PathPatternConfig *PathPatternConditionConfig
+
+	// Information for a query string condition. Specify only when Field is
+	// query-string.
+	QueryStringConfig *QueryStringConditionConfig
+
+	// Information for a source IP condition. Specify only when Field is source-ip.
+	SourceIpConfig *SourceIpConditionConfig
 
 	// The condition value. You can use Values if the rule contains only host-header
 	// and path-pattern conditions. Otherwise, you can use HostHeaderConfig for
@@ -655,37 +686,6 @@ type RuleCondition struct {
 	//
 	//     * ? (matches exactly 1 character)
 	Values []*string
-
-	// Information for a source IP condition. Specify only when Field is source-ip.
-	SourceIpConfig *SourceIpConditionConfig
-
-	// Information for a query string condition. Specify only when Field is
-	// query-string.
-	QueryStringConfig *QueryStringConditionConfig
-
-	// Information for a path pattern condition. Specify only when Field is
-	// path-pattern.
-	PathPatternConfig *PathPatternConditionConfig
-
-	// The field in the HTTP request. The following are the possible values:
-	//
-	//     *
-	// http-header
-	//
-	//     * http-request-method
-	//
-	//     * host-header
-	//
-	//     * path-pattern
-	//
-	//
-	// * query-string
-	//
-	//     * source-ip
-	Field *string
-
-	// Information for a host header condition. Specify only when Field is host-header.
-	HostHeaderConfig *HostHeaderConditionConfig
 }
 
 // Information about the priorities for the rules for a listener.
@@ -719,11 +719,11 @@ type SslPolicy struct {
 	// The ciphers.
 	Ciphers []*Cipher
 
-	// The protocols.
-	SslProtocols []*string
-
 	// The name of the policy.
 	Name *string
+
+	// The protocols.
+	SslProtocols []*string
 }
 
 // Information about a subnet mapping.
@@ -733,23 +733,23 @@ type SubnetMapping struct {
 	// internet-facing load balancer.
 	AllocationId *string
 
-	// The ID of the subnet.
-	SubnetId *string
-
 	// [Network Load Balancers] The private IPv4 address for an internal load balancer.
 	PrivateIPv4Address *string
+
+	// The ID of the subnet.
+	SubnetId *string
 }
 
 // Information about a tag.
 type Tag struct {
 
-	// The value of the tag.
-	Value *string
-
 	// The key of the tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value of the tag.
+	Value *string
 }
 
 // The tags associated with a resource.
@@ -772,10 +772,6 @@ type TargetDescription struct {
 	// This member is required.
 	Id *string
 
-	// The port on which the target is listening. Not used if the target is a Lambda
-	// function.
-	Port *int32
-
 	// An Availability Zone or all. This determines whether the target receives traffic
 	// from the load balancer nodes in the specified Availability Zone or from all
 	// enabled Availability Zones for the load balancer. This parameter is not
@@ -788,14 +784,30 @@ type TargetDescription struct {
 	// target type is lambda, this parameter is optional and the only supported value
 	// is all.
 	AvailabilityZone *string
+
+	// The port on which the target is listening. Not used if the target is a Lambda
+	// function.
+	Port *int32
 }
 
 // Information about a target group.
 type TargetGroup struct {
 
-	// The number of consecutive health check failures required before considering the
-	// target unhealthy.
-	UnhealthyThresholdCount *int32
+	// Indicates whether health checks are enabled.
+	HealthCheckEnabled *bool
+
+	// The approximate amount of time, in seconds, between health checks of an
+	// individual target.
+	HealthCheckIntervalSeconds *int32
+
+	// The destination for the health check request.
+	HealthCheckPath *string
+
+	// The port to use to connect with the target.
+	HealthCheckPort *string
+
+	// The protocol to use to connect with the target.
+	HealthCheckProtocol ProtocolEnum
 
 	// The amount of time, in seconds, during which no response means a failed health
 	// check.
@@ -805,18 +817,22 @@ type TargetGroup struct {
 	// unhealthy target healthy.
 	HealthyThresholdCount *int32
 
-	// The approximate amount of time, in seconds, between health checks of an
-	// individual target.
-	HealthCheckIntervalSeconds *int32
+	// The Amazon Resource Names (ARN) of the load balancers that route traffic to this
+	// target group.
+	LoadBalancerArns []*string
 
-	// Indicates whether health checks are enabled.
-	HealthCheckEnabled *bool
+	// The HTTP codes to use when checking for a successful response from a target.
+	Matcher *Matcher
 
-	// The ID of the VPC for the targets.
-	VpcId *string
+	// The port on which the targets are listening. Not used if the target is a Lambda
+	// function.
+	Port *int32
 
 	// The protocol to use for routing traffic to the targets.
 	Protocol ProtocolEnum
+
+	// The Amazon Resource Name (ARN) of the target group.
+	TargetGroupArn *string
 
 	// The name of the target group.
 	TargetGroupName *string
@@ -826,35 +842,16 @@ type TargetGroup struct {
 	// instance ID) or ip (targets are specified by IP address).
 	TargetType TargetTypeEnum
 
-	// The HTTP codes to use when checking for a successful response from a target.
-	Matcher *Matcher
+	// The number of consecutive health check failures required before considering the
+	// target unhealthy.
+	UnhealthyThresholdCount *int32
 
-	// The destination for the health check request.
-	HealthCheckPath *string
-
-	// The Amazon Resource Name (ARN) of the target group.
-	TargetGroupArn *string
-
-	// The port on which the targets are listening. Not used if the target is a Lambda
-	// function.
-	Port *int32
-
-	// The protocol to use to connect with the target.
-	HealthCheckProtocol ProtocolEnum
-
-	// The port to use to connect with the target.
-	HealthCheckPort *string
-
-	// The Amazon Resource Names (ARN) of the load balancers that route traffic to this
-	// target group.
-	LoadBalancerArns []*string
+	// The ID of the VPC for the targets.
+	VpcId *string
 }
 
 // Information about a target group attribute.
 type TargetGroupAttribute struct {
-
-	// The value of the attribute.
-	Value *string
 
 	// The name of the attribute.  <p>The following attributes are supported by both
 	// Application Load Balancers and Network Load Balancers:</p> <ul> <li> <p>
@@ -899,17 +896,20 @@ type TargetGroupAttribute struct {
 	// <code>true</code> or <code>false</code>. The default is <code>false</code>.</p>
 	// </li> </ul>
 	Key *string
+
+	// The value of the attribute.
+	Value *string
 }
 
 // Information about the target group stickiness for a rule.
 type TargetGroupStickinessConfig struct {
 
-	// Indicates whether target group stickiness is enabled.
-	Enabled *bool
-
 	// The time period, in seconds, during which requests from a client should be
 	// routed to the same target group. The range is 1-604800 seconds (7 days).
 	DurationSeconds *int32
+
+	// Indicates whether target group stickiness is enabled.
+	Enabled *bool
 }
 
 // Information about how traffic will be distributed between multiple target groups
@@ -925,6 +925,10 @@ type TargetGroupTuple struct {
 
 // Information about the current health of a target.
 type TargetHealth struct {
+
+	// A description of the target health that provides additional details. If the
+	// state is healthy, a description is not provided.
+	Description *string
 
 	// The reason code.  <p>If the target state is <code>healthy</code>, a reason code
 	// is not provided.</p> <p>If the target state is <code>initial</code>, the reason
@@ -962,10 +966,6 @@ type TargetHealth struct {
 	// <code>Elb.InternalError</code> - Target health is unavailable due to an internal
 	// error. Applies only to Network Load Balancers.</p> </li> </ul>
 	Reason TargetHealthReasonEnum
-
-	// A description of the target health that provides additional details. If the
-	// state is healthy, a description is not provided.
-	Description *string
 
 	// The state of the target.
 	State TargetHealthStateEnum

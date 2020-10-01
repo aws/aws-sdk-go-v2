@@ -58,6 +58,14 @@ func (c *Client) CreateUpload(ctx context.Context, params *CreateUploadInput, op
 // Represents a request to the create upload operation.
 type CreateUploadInput struct {
 
+	// The upload's file name. The name should not contain any forward slashes (/). If
+	// you are uploading an iOS app, the file name must end with the .ipa extension. If
+	// you are uploading an Android app, the file name must end with the .apk
+	// extension. For all others, the file name must end with the .zip file extension.
+	//
+	// This member is required.
+	Name *string
+
 	// The ARN of the project for the upload.
 	//
 	// This member is required.
@@ -152,14 +160,6 @@ type CreateUploadInput struct {
 
 	// The upload's content type (for example, application/octet-stream).
 	ContentType *string
-
-	// The upload's file name. The name should not contain any forward slashes (/). If
-	// you are uploading an iOS app, the file name must end with the .ipa extension. If
-	// you are uploading an Android app, the file name must end with the .apk
-	// extension. For all others, the file name must end with the .zip file extension.
-	//
-	// This member is required.
-	Name *string
 }
 
 // Represents the result of a create upload request.

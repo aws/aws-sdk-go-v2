@@ -58,6 +58,11 @@ func (c *Client) UpdateEndpointGroup(ctx context.Context, params *UpdateEndpoint
 
 type UpdateEndpointGroupInput struct {
 
+	// The Amazon Resource Name (ARN) of the endpoint group.
+	//
+	// This member is required.
+	EndpointGroupArn *string
+
 	// The list of endpoint objects.
 	EndpointConfigurations []*types.EndpointConfiguration
 
@@ -65,19 +70,9 @@ type UpdateEndpointGroupInput struct {
 	// default value is 30.
 	HealthCheckIntervalSeconds *int32
 
-	// The number of consecutive health checks required to set the state of a healthy
-	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
-	// value is 3.
-	ThresholdCount *int32
-
-	// The protocol that AWS Global Accelerator uses to check the health of endpoints
-	// that are part of this endpoint group. The default value is TCP.
-	HealthCheckProtocol types.HealthCheckProtocol
-
-	// The Amazon Resource Name (ARN) of the endpoint group.
-	//
-	// This member is required.
-	EndpointGroupArn *string
+	// If the protocol is HTTP/S, then this specifies the path that is the destination
+	// for health check targets. The default value is slash (/).
+	HealthCheckPath *string
 
 	// The port that AWS Global Accelerator uses to check the health of endpoints that
 	// are part of this endpoint group. The default port is the listener port that this
@@ -85,16 +80,21 @@ type UpdateEndpointGroupInput struct {
 	// Global Accelerator uses the first port in the list.
 	HealthCheckPort *int32
 
+	// The protocol that AWS Global Accelerator uses to check the health of endpoints
+	// that are part of this endpoint group. The default value is TCP.
+	HealthCheckProtocol types.HealthCheckProtocol
+
+	// The number of consecutive health checks required to set the state of a healthy
+	// endpoint to unhealthy, or to set an unhealthy endpoint to healthy. The default
+	// value is 3.
+	ThresholdCount *int32
+
 	// The percentage of traffic to send to an AWS Region. Additional traffic is
 	// distributed to other endpoint groups for this listener. Use this action to
 	// increase (dial up) or decrease (dial down) traffic to a specific Region. The
 	// percentage is applied to the traffic that would otherwise have been routed to
 	// the Region based on optimal routing. The default value is 100.
 	TrafficDialPercentage *float32
-
-	// If the protocol is HTTP/S, then this specifies the path that is the destination
-	// for health check targets. The default value is slash (/).
-	HealthCheckPath *string
 }
 
 type UpdateEndpointGroupOutput struct {

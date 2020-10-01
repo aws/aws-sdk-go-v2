@@ -60,16 +60,16 @@ func (c *Client) DeleteCachePolicy(ctx context.Context, params *DeleteCachePolic
 
 type DeleteCachePolicyInput struct {
 
-	// The version of the cache policy that you are deleting. The version is the cache
-	// policy’s ETag value, which you can get using ListCachePolicies, GetCachePolicy,
-	// or GetCachePolicyConfig.
-	IfMatch *string
-
 	// The unique identifier for the cache policy that you are deleting. To get the
 	// identifier, you can use ListCachePolicies.
 	//
 	// This member is required.
 	Id *string
+
+	// The version of the cache policy that you are deleting. The version is the cache
+	// policy’s ETag value, which you can get using ListCachePolicies, GetCachePolicy,
+	// or GetCachePolicyConfig.
+	IfMatch *string
 }
 
 type DeleteCachePolicyOutput struct {

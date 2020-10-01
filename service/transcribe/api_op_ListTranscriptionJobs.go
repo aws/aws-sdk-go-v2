@@ -60,19 +60,19 @@ type ListTranscriptionJobsInput struct {
 	// contains the specified string.
 	JobNameContains *string
 
-	// When specified, returns only transcription jobs with the specified status. Jobs
-	// are ordered by creation date, with the newest jobs returned first. If you don’t
-	// specify a status, Amazon Transcribe returns all transcription jobs ordered by
-	// creation date.
-	Status types.TranscriptionJobStatus
+	// The maximum number of jobs to return in the response. If there are fewer results
+	// in the list, this response contains only the actual results.
+	MaxResults *int32
 
 	// If the result of the previous request to ListTranscriptionJobs was truncated,
 	// include the NextToken to fetch the next set of jobs.
 	NextToken *string
 
-	// The maximum number of jobs to return in the response. If there are fewer results
-	// in the list, this response contains only the actual results.
-	MaxResults *int32
+	// When specified, returns only transcription jobs with the specified status. Jobs
+	// are ordered by creation date, with the newest jobs returned first. If you don’t
+	// specify a status, Amazon Transcribe returns all transcription jobs ordered by
+	// creation date.
+	Status types.TranscriptionJobStatus
 }
 
 type ListTranscriptionJobsOutput struct {

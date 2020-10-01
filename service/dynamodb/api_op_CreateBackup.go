@@ -82,15 +82,15 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 
 type CreateBackupInput struct {
 
-	// The name of the table.
-	//
-	// This member is required.
-	TableName *string
-
 	// Specified name for the backup.
 	//
 	// This member is required.
 	BackupName *string
+
+	// The name of the table.
+	//
+	// This member is required.
+	TableName *string
 }
 
 type CreateBackupOutput struct {

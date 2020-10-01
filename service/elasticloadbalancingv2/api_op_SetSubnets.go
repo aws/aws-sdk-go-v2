@@ -66,11 +66,6 @@ type SetSubnetsInput struct {
 	// This member is required.
 	LoadBalancerArn *string
 
-	// The IDs of the public subnets. You must specify subnets from at least two
-	// Availability Zones. You can specify only one subnet per Availability Zone. You
-	// must specify either subnets or subnet mappings.
-	Subnets []*string
-
 	// The IDs of the public subnets. You can specify only one subnet per Availability
 	// Zone. You must specify either subnets or subnet mappings. [Application Load
 	// Balancers] You must specify subnets from at least two Availability Zones. You
@@ -80,6 +75,11 @@ type SetSubnetsInput struct {
 	// IP address per subnet. For internal load balancers, you can specify one private
 	// IP address per subnet from the IPv4 range of the subnet.
 	SubnetMappings []*types.SubnetMapping
+
+	// The IDs of the public subnets. You must specify subnets from at least two
+	// Availability Zones. You can specify only one subnet per Availability Zone. You
+	// must specify either subnets or subnet mappings.
+	Subnets []*string
 }
 
 type SetSubnetsOutput struct {

@@ -69,17 +69,17 @@ type CreateApplicationInput struct {
 	// This member is required.
 	RuntimeEnvironment types.RuntimeEnvironment
 
-	// A summary description of the application.
-	ApplicationDescription *string
-
-	// Use this parameter to configure the application.
-	ApplicationConfiguration *types.ApplicationConfiguration
-
 	// The IAM role used by the application to access Kinesis data streams, Kinesis
 	// Data Firehose delivery streams, Amazon S3 objects, and other external resources.
 	//
 	// This member is required.
 	ServiceExecutionRole *string
+
+	// Use this parameter to configure the application.
+	ApplicationConfiguration *types.ApplicationConfiguration
+
+	// A summary description of the application.
+	ApplicationDescription *string
 
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
 	// application configuration errors.

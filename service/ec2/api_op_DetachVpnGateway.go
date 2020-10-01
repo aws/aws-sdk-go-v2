@@ -63,15 +63,15 @@ func (c *Client) DetachVpnGateway(ctx context.Context, params *DetachVpnGatewayI
 // Contains the parameters for DetachVpnGateway.
 type DetachVpnGatewayInput struct {
 
-	// The ID of the virtual private gateway.
-	//
-	// This member is required.
-	VpnGatewayId *string
-
 	// The ID of the VPC.
 	//
 	// This member is required.
 	VpcId *string
+
+	// The ID of the virtual private gateway.
+	//
+	// This member is required.
+	VpnGatewayId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

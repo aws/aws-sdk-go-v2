@@ -56,26 +56,17 @@ func (c *Client) DescribeUpdateActions(ctx context.Context, params *DescribeUpda
 
 type DescribeUpdateActionsInput struct {
 
-	// Dictates whether to include node level update status in the response
-	ShowNodeLevelUpdateStatus *bool
+	// The cache cluster IDs
+	CacheClusterIds []*string
 
 	// The Elasticache engine to which the update applies. Either Redis or Memcached
 	Engine *string
-
-	// The status of the update action.
-	UpdateActionStatus []types.UpdateActionStatus
-
-	// The cache cluster IDs
-	CacheClusterIds []*string
 
 	// An optional marker returned from a prior request. Use this marker for pagination
 	// of results from this operation. If this parameter is specified, the response
 	// includes only records beyond the marker, up to the value specified by
 	// MaxRecords.
 	Marker *string
-
-	// The status of the service update
-	ServiceUpdateStatus []types.ServiceUpdateStatus
 
 	// The maximum number of records to include in the response
 	MaxRecords *int32
@@ -86,9 +77,18 @@ type DescribeUpdateActionsInput struct {
 	// The unique ID of the service update
 	ServiceUpdateName *string
 
+	// The status of the service update
+	ServiceUpdateStatus []types.ServiceUpdateStatus
+
 	// The range of time specified to search for service updates that are in available
 	// status
 	ServiceUpdateTimeRange *types.TimeRangeFilter
+
+	// Dictates whether to include node level update status in the response
+	ShowNodeLevelUpdateStatus *bool
+
+	// The status of the update action.
+	UpdateActionStatus []types.UpdateActionStatus
 }
 
 type DescribeUpdateActionsOutput struct {

@@ -58,16 +58,16 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// Specifies the number of tags to return as a response to the ListTagsForResource
-	// request.
-	MaxResults *int32
-
 	// Requests the tags associated with a particular Amazon Resource Name (ARN). An
 	// ARN is an identifier for a specific AWS resource, such as a server, user, or
 	// role.
 	//
 	// This member is required.
 	Arn *string
+
+	// Specifies the number of tags to return as a response to the ListTagsForResource
+	// request.
+	MaxResults *int32
 
 	// When you request additional results from the ListTagsForResource operation, a
 	// NextToken parameter is returned in the input. You can then pass in a subsequent
@@ -77,6 +77,9 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
+	// The ARN you specified to list the tags of.
+	Arn *string
+
 	// When you can get additional results from the ListTagsForResource call, a
 	// NextToken parameter is returned in the output. You can then pass in a subsequent
 	// command to the NextToken parameter to continue listing additional tags.
@@ -85,9 +88,6 @@ type ListTagsForResourceOutput struct {
 	// Key-value pairs that are assigned to a resource, usually for the purpose of
 	// grouping and searching for items. Tags are metadata that you define.
 	Tags []*types.Tag
-
-	// The ARN you specified to list the tags of.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

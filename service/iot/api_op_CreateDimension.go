@@ -62,16 +62,6 @@ func (c *Client) CreateDimension(ctx context.Context, params *CreateDimensionInp
 
 type CreateDimensionInput struct {
 
-	// Specifies the value or list of values for the dimension. For TOPIC_FILTER
-	// dimensions, this is a pattern used to match the MQTT topic (for example,
-	// "admin/#").
-	//
-	// This member is required.
-	StringValues []*string
-
-	// Metadata that can be used to manage the dimension.
-	Tags []*types.Tag
-
 	// Each dimension must have a unique client request token. If you try to create a
 	// new dimension with the same token as a dimension that already exists, an
 	// exception occurs. If you omit this value, AWS SDKs will automatically generate a
@@ -80,25 +70,35 @@ type CreateDimensionInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// Specifies the type of dimension. Supported types: TOPIC_FILTER.
-	//
-	// This member is required.
-	Type types.DimensionType
-
 	// A unique identifier for the dimension. Choose something that describes the type
 	// and value to make it easy to remember what it does.
 	//
 	// This member is required.
 	Name *string
+
+	// Specifies the value or list of values for the dimension. For TOPIC_FILTER
+	// dimensions, this is a pattern used to match the MQTT topic (for example,
+	// "admin/#").
+	//
+	// This member is required.
+	StringValues []*string
+
+	// Specifies the type of dimension. Supported types: TOPIC_FILTER.
+	//
+	// This member is required.
+	Type types.DimensionType
+
+	// Metadata that can be used to manage the dimension.
+	Tags []*types.Tag
 }
 
 type CreateDimensionOutput struct {
 
-	// A unique identifier for the dimension.
-	Name *string
-
 	// The ARN (Amazon resource name) of the created dimension.
 	Arn *string
+
+	// A unique identifier for the dimension.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

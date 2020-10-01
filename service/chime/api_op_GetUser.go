@@ -60,15 +60,15 @@ func (c *Client) GetUser(ctx context.Context, params *GetUserInput, optFns ...fu
 
 type GetUserInput struct {
 
-	// The user ID.
-	//
-	// This member is required.
-	UserId *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The user ID.
+	//
+	// This member is required.
+	UserId *string
 }
 
 type GetUserOutput struct {

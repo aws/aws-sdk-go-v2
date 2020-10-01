@@ -62,11 +62,6 @@ func (c *Client) Subscribe(ctx context.Context, params *SubscribeInput, optFns .
 // Input for Subscribe action.
 type SubscribeInput struct {
 
-	// The ARN of the topic you want to subscribe to.
-	//
-	// This member is required.
-	TopicArn *string
-
 	// The protocol you want to use. Supported protocols include:
 	//
 	//     * http –
@@ -94,6 +89,36 @@ type SubscribeInput struct {
 	//
 	// This member is required.
 	Protocol *string
+
+	// The ARN of the topic you want to subscribe to.
+	//
+	// This member is required.
+	TopicArn *string
+
+	// A map of attributes with their corresponding values. The following lists the
+	// names, descriptions, and values of the special request parameters that the
+	// SetTopicAttributes action uses:
+	//
+	//     * DeliveryPolicy – The policy that defines
+	// how Amazon SNS retries failed deliveries to HTTP/S endpoints.
+	//
+	//     *
+	// FilterPolicy – The simple JSON object that lets your subscriber receive only a
+	// subset of messages, rather than receiving every message published to the
+	// topic.
+	//
+	//     * RawMessageDelivery – When set to true, enables raw message
+	// delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the
+	// endpoints to process JSON formatting, which is otherwise created for Amazon SNS
+	// metadata.
+	//
+	//     * RedrivePolicy – When specified, sends undeliverable messages to
+	// the specified Amazon SQS dead-letter queue. Messages that can't be delivered due
+	// to client errors (for example, when the subscribed endpoint is unreachable) or
+	// server errors (for example, when the service that powers the subscribed endpoint
+	// becomes unavailable) are held in the dead-letter queue for further analysis or
+	// reprocessing.
+	Attributes map[string]*string
 
 	// The endpoint that you want to receive notifications. Endpoints vary by
 	// protocol:
@@ -136,31 +161,6 @@ type SubscribeInput struct {
 	//
 	// The default value is false.
 	ReturnSubscriptionArn *bool
-
-	// A map of attributes with their corresponding values. The following lists the
-	// names, descriptions, and values of the special request parameters that the
-	// SetTopicAttributes action uses:
-	//
-	//     * DeliveryPolicy – The policy that defines
-	// how Amazon SNS retries failed deliveries to HTTP/S endpoints.
-	//
-	//     *
-	// FilterPolicy – The simple JSON object that lets your subscriber receive only a
-	// subset of messages, rather than receiving every message published to the
-	// topic.
-	//
-	//     * RawMessageDelivery – When set to true, enables raw message
-	// delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the
-	// endpoints to process JSON formatting, which is otherwise created for Amazon SNS
-	// metadata.
-	//
-	//     * RedrivePolicy – When specified, sends undeliverable messages to
-	// the specified Amazon SQS dead-letter queue. Messages that can't be delivered due
-	// to client errors (for example, when the subscribed endpoint is unreachable) or
-	// server errors (for example, when the service that powers the subscribed endpoint
-	// becomes unavailable) are held in the dead-letter queue for further analysis or
-	// reprocessing.
-	Attributes map[string]*string
 }
 
 // Response for Subscribe action.

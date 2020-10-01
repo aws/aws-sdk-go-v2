@@ -57,15 +57,15 @@ func (c *Client) DisassociatePhoneNumberFromUser(ctx context.Context, params *Di
 
 type DisassociatePhoneNumberFromUserInput struct {
 
-	// The user ID.
-	//
-	// This member is required.
-	UserId *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The user ID.
+	//
+	// This member is required.
+	UserId *string
 }
 
 type DisassociatePhoneNumberFromUserOutput struct {

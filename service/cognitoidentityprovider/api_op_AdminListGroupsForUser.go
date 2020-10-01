@@ -68,22 +68,22 @@ type AdminListGroupsForUserInput struct {
 	// This member is required.
 	Username *string
 
+	// The limit of the request to list groups.
+	Limit *int32
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
-
-	// The limit of the request to list groups.
-	Limit *int32
 }
 
 type AdminListGroupsForUserOutput struct {
 
+	// The groups that the user belongs to.
+	Groups []*types.GroupType
+
 	// An identifier that was returned from the previous call to this operation, which
 	// can be used to return the next set of items in the list.
 	NextToken *string
-
-	// The groups that the user belongs to.
-	Groups []*types.GroupType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -67,14 +67,14 @@ func (c *Client) StopTask(ctx context.Context, params *StopTaskInput, optFns ...
 
 type StopTaskInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// task to stop. If you do not specify a cluster, the default cluster is assumed.
-	Cluster *string
-
 	// The task ID or full Amazon Resource Name (ARN) of the task to stop.
 	//
 	// This member is required.
 	Task *string
+
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// task to stop. If you do not specify a cluster, the default cluster is assumed.
+	Cluster *string
 
 	// An optional message specified when a task is stopped. For example, if you are
 	// using a custom scheduler, you can use this parameter to specify the reason for

@@ -60,15 +60,15 @@ func (c *Client) AcceptVpcPeeringConnection(ctx context.Context, params *AcceptV
 
 type AcceptVpcPeeringConnectionInput struct {
 
-	// The ID of the VPC peering connection. You must specify this parameter in the
-	// request.
-	VpcPeeringConnectionId *string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The ID of the VPC peering connection. You must specify this parameter in the
+	// request.
+	VpcPeeringConnectionId *string
 }
 
 type AcceptVpcPeeringConnectionOutput struct {

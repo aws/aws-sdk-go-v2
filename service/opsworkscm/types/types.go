@@ -9,6 +9,9 @@ import (
 // Stores account attributes.
 type AccountAttribute struct {
 
+	// The maximum allowed value.
+	Maximum *int32
+
 	// The attribute name. The following are supported attribute names.
 	//
 	//     *
@@ -20,9 +23,6 @@ type AccountAttribute struct {
 	// you can have a maximum of 50 manual backups saved.
 	Name *string
 
-	// The maximum allowed value.
-	Maximum *int32
-
 	// The current usage, such as the current number of servers that are associated
 	// with the account.
 	Used *int32
@@ -31,87 +31,87 @@ type AccountAttribute struct {
 // Describes a single backup.
 type Backup struct {
 
+	// The ARN of the backup.
+	BackupArn *string
+
 	// The generated ID of the backup. Example: myServerName-yyyyMMddHHmmssSSS
 	BackupId *string
 
-	// An informational message about backup status.
-	StatusDescription *string
-
-	// The Amazon S3 URL of the backup's log file.
-	S3LogUrl *string
-
-	// The status of a backup while in progress.
-	Status BackupStatus
-
-	// The version of AWS OpsWorks CM-specific tools that is obtained from the server
-	// when the backup is created.
-	ToolsVersion *string
-
-	// The engine type that is obtained from the server when the backup is created.
-	Engine *string
-
 	// The backup type. Valid values are automated or manual.
 	BackupType BackupType
-
-	// The engine model that is obtained from the server when the backup is created.
-	EngineModel *string
-
-	// The instance type that is obtained from the server when the backup is created.
-	InstanceType *string
-
-	// A user-provided description for a manual backup. This field is empty for
-	// automated backups.
-	Description *string
-
-	// The key pair that is obtained from the server when the backup is created.
-	KeyPair *string
-
-	// The IAM user ARN of the requester for manual backups. This field is empty for
-	// automated backups.
-	UserArn *string
-
-	// This field is deprecated and is no longer used.
-	S3DataSize *int32
-
-	// The service role ARN that is obtained from the server when the backup is
-	// created.
-	ServiceRoleArn *string
-
-	// The name of the server from which the backup was made.
-	ServerName *string
 
 	// The time stamp when the backup was created in the database. Example:
 	// 2016-07-29T13:38:47.520Z
 	CreatedAt *time.Time
 
-	// The ARN of the backup.
-	BackupArn *string
+	// A user-provided description for a manual backup. This field is empty for
+	// automated backups.
+	Description *string
+
+	// The engine type that is obtained from the server when the backup is created.
+	Engine *string
+
+	// The engine model that is obtained from the server when the backup is created.
+	EngineModel *string
 
 	// The engine version that is obtained from the server when the backup is created.
 	EngineVersion *string
-
-	// The security group IDs that are obtained from the server when the backup is
-	// created.
-	SecurityGroupIds []*string
-
-	// The subnet IDs that are obtained from the server when the backup is created.
-	SubnetIds []*string
-
-	// The preferred maintenance period that is obtained from the server when the
-	// backup is created.
-	PreferredMaintenanceWindow *string
-
-	// The preferred backup period that is obtained from the server when the backup is
-	// created.
-	PreferredBackupWindow *string
-
-	// This field is deprecated and is no longer used.
-	S3DataUrl *string
 
 	// The EC2 instance profile ARN that is obtained from the server when the backup is
 	// created. Because this value is stored, you are not required to provide the
 	// InstanceProfileArn again if you restore a backup.
 	InstanceProfileArn *string
+
+	// The instance type that is obtained from the server when the backup is created.
+	InstanceType *string
+
+	// The key pair that is obtained from the server when the backup is created.
+	KeyPair *string
+
+	// The preferred backup period that is obtained from the server when the backup is
+	// created.
+	PreferredBackupWindow *string
+
+	// The preferred maintenance period that is obtained from the server when the
+	// backup is created.
+	PreferredMaintenanceWindow *string
+
+	// This field is deprecated and is no longer used.
+	S3DataSize *int32
+
+	// This field is deprecated and is no longer used.
+	S3DataUrl *string
+
+	// The Amazon S3 URL of the backup's log file.
+	S3LogUrl *string
+
+	// The security group IDs that are obtained from the server when the backup is
+	// created.
+	SecurityGroupIds []*string
+
+	// The name of the server from which the backup was made.
+	ServerName *string
+
+	// The service role ARN that is obtained from the server when the backup is
+	// created.
+	ServiceRoleArn *string
+
+	// The status of a backup while in progress.
+	Status BackupStatus
+
+	// An informational message about backup status.
+	StatusDescription *string
+
+	// The subnet IDs that are obtained from the server when the backup is created.
+	SubnetIds []*string
+
+	// The version of AWS OpsWorks CM-specific tools that is obtained from the server
+	// when the backup is created.
+	ToolsVersion *string
+
+	// The IAM user ARN of the requester for manual backups. This field is empty for
+	// automated backups.
+	UserArn *string
 }
 
 // A name and value pair that is specific to the engine of the server.
@@ -127,17 +127,35 @@ type EngineAttribute struct {
 // Describes a configuration management server.
 type Server struct {
 
+	// Associate a public IP address with a server that you are launching.
+	AssociatePublicIpAddress *bool
+
+	// The number of automated backups to keep.
+	BackupRetentionCount *int32
+
+	// The ARN of the CloudFormation stack that was used to create the server.
+	CloudFormationStackArn *string
+
+	// Time stamp of server creation. Example 2016-07-29T13:38:47.520Z
+	CreatedAt *time.Time
+
+	// An optional public endpoint of a server, such as https://aws.my-company.com. You
+	// cannot access the server by using the Endpoint value if the server has a
+	// CustomDomain specified.
+	CustomDomain *string
+
+	// Disables automated backups. The number of stored backups is dependent on the
+	// value of PreferredBackupCount.
+	DisableAutomatedBackup *bool
+
 	// A DNS name that can be used to access the engine. Example:
 	// myserver-asdfghjkl.us-east-1.opsworks.io. You cannot access the server by using
 	// the Endpoint value if the server has a CustomDomain specified.
 	Endpoint *string
 
-	// The engine model of the server. Valid values in this release include Monolithic
-	// for Puppet and Single for Chef.
-	EngineModel *string
-
-	// The preferred maintenance period specified for the server.
-	PreferredMaintenanceWindow *string
+	// The engine type of the server. Valid values in this release include ChefAutomate
+	// and Puppet.
+	Engine *string
 
 	// The response of a createServer() request returns the master credential to access
 	// the server in EngineAttributes. These credentials are not stored by AWS OpsWorks
@@ -167,76 +185,58 @@ type Server struct {
 	// use to sign in to the Puppet Enterprise console after the server is online.
 	EngineAttributes []*EngineAttribute
 
-	// The name of the server.
-	ServerName *string
-
-	// Disables automated backups. The number of stored backups is dependent on the
-	// value of PreferredBackupCount.
-	DisableAutomatedBackup *bool
-
-	// The service role ARN used to create the server.
-	ServiceRoleArn *string
-
-	// Time stamp of server creation. Example 2016-07-29T13:38:47.520Z
-	CreatedAt *time.Time
-
-	// The key pair associated with the server.
-	KeyPair *string
-
-	// The instance profile ARN of the server.
-	InstanceProfileArn *string
-
-	// Associate a public IP address with a server that you are launching.
-	AssociatePublicIpAddress *bool
-
-	// The subnet IDs specified in a CreateServer request.
-	SubnetIds []*string
-
-	// The preferred backup period specified for the server.
-	PreferredBackupWindow *string
-
-	// Depending on the server status, this field has either a human-readable message
-	// (such as a create or backup error), or an escaped block of JSON (used for health
-	// check results).
-	StatusReason *string
-
-	// The engine type of the server. Valid values in this release include ChefAutomate
-	// and Puppet.
-	Engine *string
-
-	// The number of automated backups to keep.
-	BackupRetentionCount *int32
-
-	// The security group IDs for the server, as specified in the CloudFormation stack.
-	// These might not be the same security groups that are shown in the EC2 console.
-	SecurityGroupIds []*string
+	// The engine model of the server. Valid values in this release include Monolithic
+	// for Puppet and Single for Chef.
+	EngineModel *string
 
 	// The engine version of the server. For a Chef server, the valid value for
 	// EngineVersion is currently 2. For a Puppet server, the valid value is 2017.
 	EngineVersion *string
 
-	// An optional public endpoint of a server, such as https://aws.my-company.com. You
-	// cannot access the server by using the Endpoint value if the server has a
-	// CustomDomain specified.
-	CustomDomain *string
+	// The instance profile ARN of the server.
+	InstanceProfileArn *string
+
+	// The instance type for the server, as specified in the CloudFormation stack. This
+	// might not be the same instance type that is shown in the EC2 console.
+	InstanceType *string
+
+	// The key pair associated with the server.
+	KeyPair *string
+
+	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED.
+	MaintenanceStatus MaintenanceStatus
+
+	// The preferred backup period specified for the server.
+	PreferredBackupWindow *string
+
+	// The preferred maintenance period specified for the server.
+	PreferredMaintenanceWindow *string
+
+	// The security group IDs for the server, as specified in the CloudFormation stack.
+	// These might not be the same security groups that are shown in the EC2 console.
+	SecurityGroupIds []*string
 
 	// The ARN of the server.
 	ServerArn *string
 
-	// The ARN of the CloudFormation stack that was used to create the server.
-	CloudFormationStackArn *string
+	// The name of the server.
+	ServerName *string
+
+	// The service role ARN used to create the server.
+	ServiceRoleArn *string
 
 	// The server's status. This field displays the states of actions in progress, such
 	// as creating, running, or backing up the server, as well as the server's health
 	// state.
 	Status ServerStatus
 
-	// The status of the most recent server maintenance run. Shows SUCCESS or FAILED.
-	MaintenanceStatus MaintenanceStatus
+	// Depending on the server status, this field has either a human-readable message
+	// (such as a create or backup error), or an escaped block of JSON (used for health
+	// check results).
+	StatusReason *string
 
-	// The instance type for the server, as specified in the CloudFormation stack. This
-	// might not be the same instance type that is shown in the EC2 console.
-	InstanceType *string
+	// The subnet IDs specified in a CreateServer request.
+	SubnetIds []*string
 }
 
 // An event that is related to the server, such as the start of maintenance or
@@ -246,11 +246,11 @@ type ServerEvent struct {
 	// The time when the event occurred.
 	CreatedAt *time.Time
 
-	// A human-readable informational or status message.
-	Message *string
-
 	// The Amazon S3 URL of the event's log file.
 	LogUrl *string
+
+	// A human-readable informational or status message.
+	Message *string
 
 	// The name of the server on or for which the event occurred.
 	ServerName *string

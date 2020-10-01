@@ -58,19 +58,19 @@ func (c *Client) GenerateAccessLogs(ctx context.Context, params *GenerateAccessL
 // The request structure for the generate access logs request.
 type GenerateAccessLogsInput struct {
 
-	// The time at which the logs should end. The time range specified is inclusive of
-	// the end time.
-	EndTime *time.Time
+	// The unique ID for an Amplify app.
+	//
+	// This member is required.
+	AppId *string
 
 	// The name of the domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The unique ID for an Amplify app.
-	//
-	// This member is required.
-	AppId *string
+	// The time at which the logs should end. The time range specified is inclusive of
+	// the end time.
+	EndTime *time.Time
 
 	// The time at which the logs should start. The time range specified is inclusive
 	// of the start time.

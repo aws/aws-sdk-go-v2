@@ -87,16 +87,16 @@ type ClientPolicy struct {
 // An object that represents a Transport Layer Security (TLS) client policy.
 type ClientPolicyTls struct {
 
+	// A reference to an object that represents a TLS validation context.
+	//
+	// This member is required.
+	Validation *TlsValidationContext
+
 	// Whether the policy is enforced. The default is True, if a value isn't specified.
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
 	Ports []*int32
-
-	// A reference to an object that represents a TLS validation context.
-	//
-	// This member is required.
-	Validation *TlsValidationContext
 }
 
 // An object that represents the DNS service discovery information for your virtual
@@ -112,11 +112,11 @@ type DnsServiceDiscovery struct {
 // An object that represents a duration of time.
 type Duration struct {
 
-	// A number of time units.
-	Value *int64
-
 	// A unit of time.
 	Unit DurationUnit
+
+	// A number of time units.
+	Value *int64
 }
 
 // An object that represents the egress filter rules for a service mesh.
@@ -150,54 +150,64 @@ type FileAccessLog struct {
 // An object that represents a gateway route returned by a describe operation.
 type GatewayRouteData struct {
 
-	// The name of the service mesh that the resource resides in.
-	//
-	// This member is required.
-	MeshName *string
-
 	// The name of the gateway route.
 	//
 	// This member is required.
 	GatewayRouteName *string
 
-	// The virtual gateway that the gateway route is associated with.
+	// The name of the service mesh that the resource resides in.
 	//
 	// This member is required.
-	VirtualGatewayName *string
-
-	// The specifications of the gateway route.
-	//
-	// This member is required.
-	Spec *GatewayRouteSpec
+	MeshName *string
 
 	// An object that represents metadata for a resource.
 	//
 	// This member is required.
 	Metadata *ResourceMetadata
 
+	// The specifications of the gateway route.
+	//
+	// This member is required.
+	Spec *GatewayRouteSpec
+
 	// The status of the gateway route.
 	//
 	// This member is required.
 	Status *GatewayRouteStatus
+
+	// The virtual gateway that the gateway route is associated with.
+	//
+	// This member is required.
+	VirtualGatewayName *string
 }
 
 // An object that represents a gateway route returned by a list operation.
 type GatewayRouteRef struct {
 
-	// The name of the service mesh that the resource resides in.
+	// The full Amazon Resource Name (ARN) for the gateway route.
 	//
 	// This member is required.
-	MeshName *string
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
 
 	// The name of the gateway route.
 	//
 	// This member is required.
 	GatewayRouteName *string
 
-	// The virtual gateway that the gateway route is associated with.
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
 	//
 	// This member is required.
-	VirtualGatewayName *string
+	LastUpdatedAt *time.Time
+
+	// The name of the service mesh that the resource resides in.
+	//
+	// This member is required.
+	MeshName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -215,40 +225,30 @@ type GatewayRouteRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the gateway route.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The virtual gateway that the gateway route is associated with.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualGatewayName *string
 }
 
 // An object that represents a gateway route specification. Specify one gateway
 // route type.
 type GatewayRouteSpec struct {
 
-	// An object that represents the specification of an HTTP gateway route.
-	HttpRoute *HttpGatewayRoute
+	// An object that represents the specification of a gRPC gateway route.
+	GrpcRoute *GrpcGatewayRoute
 
 	// An object that represents the specification of an HTTP/2 gateway route.
 	Http2Route *HttpGatewayRoute
 
-	// An object that represents the specification of a gRPC gateway route.
-	GrpcRoute *GrpcGatewayRoute
+	// An object that represents the specification of an HTTP gateway route.
+	HttpRoute *HttpGatewayRoute
 }
 
 // An object that represents the current status of a gateway route.
@@ -281,15 +281,15 @@ type GatewayRouteVirtualService struct {
 // An object that represents a gRPC gateway route.
 type GrpcGatewayRoute struct {
 
-	// An object that represents the criteria for determining a request match.
-	//
-	// This member is required.
-	Match *GrpcGatewayRouteMatch
-
 	// An object that represents the action to take if a match is determined.
 	//
 	// This member is required.
 	Action *GrpcGatewayRouteAction
+
+	// An object that represents the criteria for determining a request match.
+	//
+	// This member is required.
+	Match *GrpcGatewayRouteMatch
 }
 
 // An object that represents the action to take if a match is determined.
@@ -314,15 +314,18 @@ type GrpcGatewayRouteMatch struct {
 // perRetryTimeout.
 type GrpcRetryPolicy struct {
 
+	// The maximum number of retry attempts.
+	//
+	// This member is required.
+	MaxRetries *int64
+
 	// An object that represents a duration of time.
 	//
 	// This member is required.
 	PerRetryTimeout *Duration
 
-	// The maximum number of retry attempts.
-	//
-	// This member is required.
-	MaxRetries *int64
+	// Specify at least one of the valid values.
+	GrpcRetryEvents []GrpcRetryPolicyEvent
 
 	// Specify at least one of the following values.
 	//
@@ -340,9 +343,6 @@ type GrpcRetryPolicy struct {
 
 	// Specify a valid value.
 	TcpRetryEvents []TcpRetryPolicyEvent
-
-	// Specify at least one of the valid values.
-	GrpcRetryEvents []GrpcRetryPolicyEvent
 }
 
 // An object that represents a gRPC route type.
@@ -378,15 +378,15 @@ type GrpcRouteAction struct {
 // An object that represents the criteria for determining a request match.
 type GrpcRouteMatch struct {
 
-	// The fully qualified domain name for the service to match from the request.
-	ServiceName *string
+	// An object that represents the data to match from the request.
+	Metadata []*GrpcRouteMetadata
 
 	// The method name to match from the request. If you specify a name, you must also
 	// specify a serviceName.
 	MethodName *string
 
-	// An object that represents the data to match from the request.
-	Metadata []*GrpcRouteMetadata
+	// The fully qualified domain name for the service to match from the request.
+	ServiceName *string
 }
 
 // An object that represents the match metadata for the route.
@@ -448,6 +448,10 @@ func (*GrpcRouteMetadataMatchMethodMemberSuffix) isGrpcRouteMetadataMatchMethod(
 // An object that represents types of timeouts.
 type GrpcTimeout struct {
 
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
+	Idle *Duration
+
 	// An object that represents a per request timeout. The default value is 15
 	// seconds. If you set a higher timeout, then make sure that the higher value is
 	// set for each App Mesh resource in a conversation. For example, if a virtual node
@@ -455,10 +459,6 @@ type GrpcTimeout struct {
 	// the timeout should be greater than 15 seconds for the source and destination
 	// virtual node and the route.
 	PerRequest *Duration
-
-	// An object that represents an idle timeout. An idle timeout bounds the amount of
-	// time that a connection may be idle. The default value is none.
-	Idle *Duration
 }
 
 // An object that represents the method and value to match with the header value
@@ -505,11 +505,11 @@ func (*HeaderMatchMethodMemberSuffix) isHeaderMatchMethod() {}
 // An object that represents the health check policy for a virtual node's listener.
 type HealthCheckPolicy struct {
 
-	// The amount of time to wait when receiving a response from the health check, in
-	// milliseconds.
+	// The number of consecutive successful health checks that must occur before
+	// declaring listener healthy.
 	//
 	// This member is required.
-	TimeoutMillis *int64
+	HealthyThreshold *int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -523,40 +523,40 @@ type HealthCheckPolicy struct {
 	// This member is required.
 	Protocol PortProtocol
 
-	// The destination port for the health check request. This port must match the port
-	// defined in the PortMapping () for the listener.
-	Port *int32
-
-	// The destination path for the health check request. This value is only used if
-	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
-	// ignored.
-	Path *string
-
-	// The number of consecutive successful health checks that must occur before
-	// declaring listener healthy.
+	// The amount of time to wait when receiving a response from the health check, in
+	// milliseconds.
 	//
 	// This member is required.
-	HealthyThreshold *int32
+	TimeoutMillis *int64
 
 	// The number of consecutive failed health checks that must occur before declaring
 	// a virtual node unhealthy.
 	//
 	// This member is required.
 	UnhealthyThreshold *int32
+
+	// The destination path for the health check request. This value is only used if
+	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
+	// ignored.
+	Path *string
+
+	// The destination port for the health check request. This port must match the port
+	// defined in the PortMapping () for the listener.
+	Port *int32
 }
 
 // An object that represents an HTTP gateway route.
 type HttpGatewayRoute struct {
 
-	// An object that represents the criteria for determining a request match.
-	//
-	// This member is required.
-	Match *HttpGatewayRouteMatch
-
 	// An object that represents the action to take if a match is determined.
 	//
 	// This member is required.
 	Action *HttpGatewayRouteAction
+
+	// An object that represents the criteria for determining a request match.
+	//
+	// This member is required.
+	Match *HttpGatewayRouteMatch
 }
 
 // An object that represents the action to take if a match is determined.
@@ -587,15 +587,15 @@ type HttpGatewayRouteMatch struct {
 // perRetryTimeout.
 type HttpRetryPolicy struct {
 
-	// An object that represents a duration of time.
-	//
-	// This member is required.
-	PerRetryTimeout *Duration
-
 	// The maximum number of retry attempts.
 	//
 	// This member is required.
 	MaxRetries *int64
+
+	// An object that represents a duration of time.
+	//
+	// This member is required.
+	PerRetryTimeout *Duration
 
 	// Specify at least one of the following values.
 	//
@@ -618,15 +618,15 @@ type HttpRetryPolicy struct {
 // An object that represents an HTTP or HTTP/2 route type.
 type HttpRoute struct {
 
-	// An object that represents the criteria for determining a request match.
-	//
-	// This member is required.
-	Match *HttpRouteMatch
-
 	// An object that represents the action to take if a match is determined.
 	//
 	// This member is required.
 	Action *HttpRouteAction
+
+	// An object that represents the criteria for determining a request match.
+	//
+	// This member is required.
+	Match *HttpRouteMatch
 
 	// An object that represents a retry policy.
 	RetryPolicy *HttpRetryPolicy
@@ -674,24 +674,24 @@ type HttpRouteMatch struct {
 	// This member is required.
 	Prefix *string
 
+	// An object that represents the client request headers to match on.
+	Headers []*HttpRouteHeader
+
 	// The client request method to match on. Specify only one.
 	Method HttpMethod
 
 	// The client request scheme to match on. Specify only one.
 	Scheme HttpScheme
-
-	// An object that represents the client request headers to match on.
-	Headers []*HttpRouteHeader
 }
 
 // An object that represents types of timeouts.
 type HttpTimeout struct {
 
 	// An object that represents a duration of time.
-	PerRequest *Duration
+	Idle *Duration
 
 	// An object that represents a duration of time.
-	Idle *Duration
+	PerRequest *Duration
 }
 
 // An object that represents a listener for a virtual node.
@@ -702,15 +702,15 @@ type Listener struct {
 	// This member is required.
 	PortMapping *PortMapping
 
-	// A reference to an object that represents the Transport Layer Security (TLS)
-	// properties for a listener.
-	Tls *ListenerTls
-
 	// The health check information for the listener.
 	HealthCheck *HealthCheckPolicy
 
 	// An object that represents timeouts for different protocols.
 	Timeout ListenerTimeout
+
+	// A reference to an object that represents the Transport Layer Security (TLS)
+	// properties for a listener.
+	Tls *ListenerTls
 }
 
 // An object that represents timeouts for different protocols.
@@ -750,6 +750,11 @@ func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
 // listener.
 type ListenerTls struct {
 
+	// A reference to an object that represents a listener's TLS certificate.
+	//
+	// This member is required.
+	Certificate ListenerTlsCertificate
+
 	// Specify one of the following modes.
 	//
 	//     * STRICT – Listener only accepts
@@ -763,11 +768,6 @@ type ListenerTls struct {
 	//
 	// This member is required.
 	Mode ListenerTlsMode
-
-	// A reference to an object that represents a listener's TLS certificate.
-	//
-	// This member is required.
-	Certificate ListenerTlsCertificate
 }
 
 // An object that represents an AWS Certicate Manager (ACM) certificate.
@@ -833,15 +833,15 @@ type Logging struct {
 // example, if the range specified were 1-100, only values 1-99 would be matched.
 type MatchRange struct {
 
-	// The start of the range.
-	//
-	// This member is required.
-	Start *int64
-
 	// The end of the range.
 	//
 	// This member is required.
 	End *int64
+
+	// The start of the range.
+	//
+	// This member is required.
+	Start *int64
 }
 
 // An object that represents a service mesh returned by a describe operation.
@@ -852,15 +852,15 @@ type MeshData struct {
 	// This member is required.
 	MeshName *string
 
-	// The associated specification for the service mesh.
-	//
-	// This member is required.
-	Spec *MeshSpec
-
 	// The associated metadata for the service mesh.
 	//
 	// This member is required.
 	Metadata *ResourceMetadata
+
+	// The associated specification for the service mesh.
+	//
+	// This member is required.
+	Spec *MeshSpec
 
 	// The status of the service mesh.
 	//
@@ -870,6 +870,21 @@ type MeshData struct {
 
 // An object that represents a service mesh returned by a list operation.
 type MeshRef struct {
+
+	// The full Amazon Resource Name (ARN) of the service mesh.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
 
 	// The name of the service mesh.
 	//
@@ -892,26 +907,11 @@ type MeshRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) of the service mesh.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
-
-	// The Unix epoch timestamp in seconds for when the resource was created.
-	//
-	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
 }
 
 // An object that represents the specification of a service mesh.
@@ -950,17 +950,6 @@ type ResourceMetadata struct {
 	// This member is required.
 	Arn *string
 
-	// The version of the resource. Resources are created at version 1, and this
-	// version is incremented each time that they're updated.
-	//
-	// This member is required.
-	Version *int64
-
-	// The unique identifier for the resource.
-	//
-	// This member is required.
-	Uid *string
-
 	// The Unix epoch timestamp in seconds for when the resource was created.
 	//
 	// This member is required.
@@ -986,6 +975,17 @@ type ResourceMetadata struct {
 	//
 	// This member is required.
 	ResourceOwner *string
+
+	// The unique identifier for the resource.
+	//
+	// This member is required.
+	Uid *string
+
+	// The version of the resource. Resources are created at version 1, and this
+	// version is incremented each time that they're updated.
+	//
+	// This member is required.
+	Version *int64
 }
 
 // An object that represents a route returned by a describe operation.
@@ -996,10 +996,10 @@ type RouteData struct {
 	// This member is required.
 	MeshName *string
 
-	// The virtual router that the route is associated with.
+	// The associated metadata for the route.
 	//
 	// This member is required.
-	VirtualRouterName *string
+	Metadata *ResourceMetadata
 
 	// The name of the route.
 	//
@@ -1011,34 +1011,39 @@ type RouteData struct {
 	// This member is required.
 	Spec *RouteSpec
 
-	// The associated metadata for the route.
-	//
-	// This member is required.
-	Metadata *ResourceMetadata
-
 	// The status of the route.
 	//
 	// This member is required.
 	Status *RouteStatus
-}
-
-// An object that represents a route returned by a list operation.
-type RouteRef struct {
-
-	// The name of the service mesh that the route resides in.
-	//
-	// This member is required.
-	MeshName *string
 
 	// The virtual router that the route is associated with.
 	//
 	// This member is required.
 	VirtualRouterName *string
+}
 
-	// The name of the route.
+// An object that represents a route returned by a list operation.
+type RouteRef struct {
+
+	// The full Amazon Resource Name (ARN) for the route.
 	//
 	// This member is required.
-	RouteName *string
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the service mesh that the route resides in.
+	//
+	// This member is required.
+	MeshName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -1056,10 +1061,10 @@ type RouteRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the route.
+	// The name of the route.
 	//
 	// This member is required.
-	Arn *string
+	RouteName *string
 
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
@@ -1067,35 +1072,30 @@ type RouteRef struct {
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The virtual router that the route is associated with.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualRouterName *string
 }
 
 // An object that represents a route specification. Specify one route type.
 type RouteSpec struct {
 
-	// The priority for the route. Routes are matched based on the specified value,
-	// where 0 is the highest priority.
-	Priority *int32
-
-	// An object that represents the specification of an HTTP route.
-	HttpRoute *HttpRoute
-
-	// An object that represents the specification of a TCP route.
-	TcpRoute *TcpRoute
+	// An object that represents the specification of a gRPC route.
+	GrpcRoute *GrpcRoute
 
 	// An object that represents the specification of an HTTP/2 route.
 	Http2Route *HttpRoute
 
-	// An object that represents the specification of a gRPC route.
-	GrpcRoute *GrpcRoute
+	// An object that represents the specification of an HTTP route.
+	HttpRoute *HttpRoute
+
+	// The priority for the route. Routes are matched based on the specified value,
+	// where 0 is the highest priority.
+	Priority *int32
+
+	// An object that represents the specification of a TCP route.
+	TcpRoute *TcpRoute
 }
 
 // An object that represents the current status of a route.
@@ -1253,16 +1253,16 @@ type VirtualGatewayClientPolicy struct {
 // An object that represents a Transport Layer Security (TLS) client policy.
 type VirtualGatewayClientPolicyTls struct {
 
+	// A reference to an object that represents a TLS validation context.
+	//
+	// This member is required.
+	Validation *VirtualGatewayTlsValidationContext
+
 	// Whether the policy is enforced. The default is True, if a value isn't specified.
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
 	Ports []*int32
-
-	// A reference to an object that represents a TLS validation context.
-	//
-	// This member is required.
-	Validation *VirtualGatewayTlsValidationContext
 }
 
 // An object that represents a virtual gateway returned by a describe operation.
@@ -1273,25 +1273,25 @@ type VirtualGatewayData struct {
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual gateway.
+	// An object that represents metadata for a resource.
 	//
 	// This member is required.
-	VirtualGatewayName *string
+	Metadata *ResourceMetadata
 
 	// The specifications of the virtual gateway.
 	//
 	// This member is required.
 	Spec *VirtualGatewaySpec
 
-	// An object that represents metadata for a resource.
-	//
-	// This member is required.
-	Metadata *ResourceMetadata
-
 	// The current status of the virtual gateway.
 	//
 	// This member is required.
 	Status *VirtualGatewayStatus
+
+	// The name of the virtual gateway.
+	//
+	// This member is required.
+	VirtualGatewayName *string
 }
 
 // An object that represents an access log file.
@@ -1311,11 +1311,11 @@ type VirtualGatewayFileAccessLog struct {
 // listener.
 type VirtualGatewayHealthCheckPolicy struct {
 
-	// The amount of time to wait when receiving a response from the health check, in
-	// milliseconds.
+	// The number of consecutive successful health checks that must occur before
+	// declaring the listener healthy.
 	//
 	// This member is required.
-	TimeoutMillis *int64
+	HealthyThreshold *int32
 
 	// The time period in milliseconds between each health check execution.
 	//
@@ -1329,38 +1329,38 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// This member is required.
 	Protocol VirtualGatewayPortProtocol
 
-	// The destination port for the health check request. This port must match the port
-	// defined in the PortMapping () for the listener.
-	Port *int32
-
-	// The destination path for the health check request. This value is only used if
-	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
-	// ignored.
-	Path *string
-
-	// The number of consecutive successful health checks that must occur before
-	// declaring the listener healthy.
+	// The amount of time to wait when receiving a response from the health check, in
+	// milliseconds.
 	//
 	// This member is required.
-	HealthyThreshold *int32
+	TimeoutMillis *int64
 
 	// The number of consecutive failed health checks that must occur before declaring
 	// a virtual gateway unhealthy.
 	//
 	// This member is required.
 	UnhealthyThreshold *int32
+
+	// The destination path for the health check request. This value is only used if
+	// the specified protocol is HTTP or HTTP/2. For any other protocol, this value is
+	// ignored.
+	Path *string
+
+	// The destination port for the health check request. This port must match the port
+	// defined in the PortMapping () for the listener.
+	Port *int32
 }
 
 // An object that represents a listener for a virtual gateway.
 type VirtualGatewayListener struct {
 
-	// The health check information for the listener.
-	HealthCheck *VirtualGatewayHealthCheckPolicy
-
 	// The port mapping information for the listener.
 	//
 	// This member is required.
 	PortMapping *VirtualGatewayPortMapping
+
+	// The health check information for the listener.
+	HealthCheck *VirtualGatewayHealthCheckPolicy
 
 	// A reference to an object that represents the Transport Layer Security (TLS)
 	// properties for the listener.
@@ -1370,6 +1370,11 @@ type VirtualGatewayListener struct {
 // An object that represents the Transport Layer Security (TLS) properties for a
 // listener.
 type VirtualGatewayListenerTls struct {
+
+	// An object that represents a Transport Layer Security (TLS) certificate.
+	//
+	// This member is required.
+	Certificate VirtualGatewayListenerTlsCertificate
 
 	// Specify one of the following modes.
 	//
@@ -1384,11 +1389,6 @@ type VirtualGatewayListenerTls struct {
 	//
 	// This member is required.
 	Mode VirtualGatewayListenerTlsMode
-
-	// An object that represents a Transport Layer Security (TLS) certificate.
-	//
-	// This member is required.
-	Certificate VirtualGatewayListenerTlsCertificate
 }
 
 // An object that represents an AWS Certicate Manager (ACM) certificate.
@@ -1466,15 +1466,25 @@ type VirtualGatewayPortMapping struct {
 // An object that represents a virtual gateway returned by a list operation.
 type VirtualGatewayRef struct {
 
+	// The full Amazon Resource Name (ARN) for the resource.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
 	// The name of the service mesh that the resource resides in.
 	//
 	// This member is required.
 	MeshName *string
-
-	// The name of the resource.
-	//
-	// This member is required.
-	VirtualGatewayName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -1492,39 +1502,29 @@ type VirtualGatewayRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the resource.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The name of the resource.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualGatewayName *string
 }
 
 // An object that represents the specification of a service mesh resource.
 type VirtualGatewaySpec struct {
-
-	// A reference to an object that represents the defaults for backends.
-	BackendDefaults *VirtualGatewayBackendDefaults
 
 	// The listeners that the mesh endpoint is expected to receive inbound traffic
 	// from. You can specify one listener.
 	//
 	// This member is required.
 	Listeners []*VirtualGatewayListener
+
+	// A reference to an object that represents the defaults for backends.
+	BackendDefaults *VirtualGatewayBackendDefaults
 
 	// An object that represents logging information.
 	Logging *VirtualGatewayLogging
@@ -1600,39 +1600,49 @@ type VirtualNodeData struct {
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual node.
+	// The associated metadata for the virtual node.
 	//
 	// This member is required.
-	VirtualNodeName *string
+	Metadata *ResourceMetadata
 
 	// The specifications of the virtual node.
 	//
 	// This member is required.
 	Spec *VirtualNodeSpec
 
-	// The associated metadata for the virtual node.
-	//
-	// This member is required.
-	Metadata *ResourceMetadata
-
 	// The current status for the virtual node.
 	//
 	// This member is required.
 	Status *VirtualNodeStatus
-}
-
-// An object that represents a virtual node returned by a list operation.
-type VirtualNodeRef struct {
-
-	// The name of the service mesh that the virtual node resides in.
-	//
-	// This member is required.
-	MeshName *string
 
 	// The name of the virtual node.
 	//
 	// This member is required.
 	VirtualNodeName *string
+}
+
+// An object that represents a virtual node returned by a list operation.
+type VirtualNodeRef struct {
+
+	// The full Amazon Resource Name (ARN) for the virtual node.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
+	// The name of the service mesh that the virtual node resides in.
+	//
+	// This member is required.
+	MeshName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -1650,26 +1660,16 @@ type VirtualNodeRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the virtual node.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The name of the virtual node.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualNodeName *string
 }
 
 // An object that represents a virtual node service provider.
@@ -1684,23 +1684,23 @@ type VirtualNodeServiceProvider struct {
 // An object that represents the specification of a virtual node.
 type VirtualNodeSpec struct {
 
-	// The service discovery information for the virtual node. If your virtual node
-	// does not expect ingress traffic, you can omit this parameter. If you specify a
-	// listener, then you must specify service discovery information.
-	ServiceDiscovery ServiceDiscovery
+	// A reference to an object that represents the defaults for backends.
+	BackendDefaults *BackendDefaults
+
+	// The backends that the virtual node is expected to send outbound traffic to.
+	Backends []Backend
 
 	// The listener that the virtual node is expected to receive inbound traffic from.
 	// You can specify one listener.
 	Listeners []*Listener
 
-	// The backends that the virtual node is expected to send outbound traffic to.
-	Backends []Backend
-
-	// A reference to an object that represents the defaults for backends.
-	BackendDefaults *BackendDefaults
-
 	// The inbound and outbound access logging information for the virtual node.
 	Logging *Logging
+
+	// The service discovery information for the virtual node. If your virtual node
+	// does not expect ingress traffic, you can omit this parameter. If you specify a
+	// listener, then you must specify service discovery information.
+	ServiceDiscovery ServiceDiscovery
 }
 
 // An object that represents the current status of the virtual node.
@@ -1720,25 +1720,25 @@ type VirtualRouterData struct {
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual router.
+	// The associated metadata for the virtual router.
 	//
 	// This member is required.
-	VirtualRouterName *string
+	Metadata *ResourceMetadata
 
 	// The specifications of the virtual router.
 	//
 	// This member is required.
 	Spec *VirtualRouterSpec
 
-	// The associated metadata for the virtual router.
-	//
-	// This member is required.
-	Metadata *ResourceMetadata
-
 	// The current status of the virtual router.
 	//
 	// This member is required.
 	Status *VirtualRouterStatus
+
+	// The name of the virtual router.
+	//
+	// This member is required.
+	VirtualRouterName *string
 }
 
 // An object that represents a virtual router listener.
@@ -1753,15 +1753,25 @@ type VirtualRouterListener struct {
 // An object that represents a virtual router returned by a list operation.
 type VirtualRouterRef struct {
 
+	// The full Amazon Resource Name (ARN) for the virtual router.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
 	// The name of the service mesh that the virtual router resides in.
 	//
 	// This member is required.
 	MeshName *string
-
-	// The name of the virtual router.
-	//
-	// This member is required.
-	VirtualRouterName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -1779,26 +1789,16 @@ type VirtualRouterRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the virtual router.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The name of the virtual router.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualRouterName *string
 }
 
 // An object that represents a virtual node service provider.
@@ -1847,25 +1847,25 @@ type VirtualServiceData struct {
 	// This member is required.
 	MeshName *string
 
-	// The name of the virtual service.
+	// An object that represents metadata for a resource.
 	//
 	// This member is required.
-	VirtualServiceName *string
+	Metadata *ResourceMetadata
 
 	// The specifications of the virtual service.
 	//
 	// This member is required.
 	Spec *VirtualServiceSpec
 
-	// An object that represents metadata for a resource.
-	//
-	// This member is required.
-	Metadata *ResourceMetadata
-
 	// The current status of the virtual service.
 	//
 	// This member is required.
 	Status *VirtualServiceStatus
+
+	// The name of the virtual service.
+	//
+	// This member is required.
+	VirtualServiceName *string
 }
 
 // An object that represents the provider for a virtual service.
@@ -1890,15 +1890,25 @@ func (*VirtualServiceProviderMemberVirtualRouter) isVirtualServiceProvider() {}
 // An object that represents a virtual service returned by a list operation.
 type VirtualServiceRef struct {
 
+	// The full Amazon Resource Name (ARN) for the virtual service.
+	//
+	// This member is required.
+	Arn *string
+
+	// The Unix epoch timestamp in seconds for when the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The Unix epoch timestamp in seconds for when the resource was last updated.
+	//
+	// This member is required.
+	LastUpdatedAt *time.Time
+
 	// The name of the service mesh that the virtual service resides in.
 	//
 	// This member is required.
 	MeshName *string
-
-	// The name of the virtual service.
-	//
-	// This member is required.
-	VirtualServiceName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For
@@ -1916,26 +1926,16 @@ type VirtualServiceRef struct {
 	// This member is required.
 	ResourceOwner *string
 
-	// The full Amazon Resource Name (ARN) for the virtual service.
-	//
-	// This member is required.
-	Arn *string
-
 	// The version of the resource. Resources are created at version 1, and this
 	// version is incremented each time that they're updated.
 	//
 	// This member is required.
 	Version *int64
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The name of the virtual service.
 	//
 	// This member is required.
-	CreatedAt *time.Time
-
-	// The Unix epoch timestamp in seconds for when the resource was last updated.
-	//
-	// This member is required.
-	LastUpdatedAt *time.Time
+	VirtualServiceName *string
 }
 
 // An object that represents the specification of a virtual service.

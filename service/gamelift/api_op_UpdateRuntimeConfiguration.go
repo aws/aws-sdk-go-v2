@@ -95,6 +95,12 @@ func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateR
 // Represents the input for a request action.
 type UpdateRuntimeConfigurationInput struct {
 
+	// A unique identifier for a fleet to update runtime configuration for. You can use
+	// either the fleet ID or ARN value.
+	//
+	// This member is required.
+	FleetId *string
+
 	// Instructions for launching server processes on each instance in the fleet.
 	// Server processes run either a custom game build executable or a Realtime Servers
 	// script. The runtime configuration lists the types of server processes to run on
@@ -105,12 +111,6 @@ type UpdateRuntimeConfigurationInput struct {
 	//
 	// This member is required.
 	RuntimeConfiguration *types.RuntimeConfiguration
-
-	// A unique identifier for a fleet to update runtime configuration for. You can use
-	// either the fleet ID or ARN value.
-	//
-	// This member is required.
-	FleetId *string
 }
 
 // Represents the returned data in response to a request action.

@@ -71,17 +71,17 @@ func (c *Client) CreateConfigurationSetEventDestination(ctx context.Context, par
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type CreateConfigurationSetEventDestinationInput struct {
 
-	// An object that describes the AWS service that email sending event information
-	// will be published to.
-	//
-	// This member is required.
-	EventDestination *types.EventDestination
-
 	// The name of the configuration set that the event destination should be
 	// associated with.
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	// An object that describes the AWS service that email sending event information
+	// will be published to.
+	//
+	// This member is required.
+	EventDestination *types.EventDestination
 }
 
 // An empty element returned on a successful request.

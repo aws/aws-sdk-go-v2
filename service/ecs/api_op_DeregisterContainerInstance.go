@@ -76,6 +76,11 @@ type DeregisterContainerInstanceInput struct {
 	// This member is required.
 	ContainerInstance *string
 
+	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
+	// container instance to deregister. If you do not specify a cluster, the default
+	// cluster is assumed.
+	Cluster *string
+
 	// Forces the deregistration of the container instance. If you have tasks running
 	// on the container instance when you deregister it with the force option, these
 	// tasks remain running until you terminate the instance or the tasks stop through
@@ -87,11 +92,6 @@ type DeregisterContainerInstanceInput struct {
 	// Balancer target group are deregistered. They begin connection draining according
 	// to the settings on the load balancer or target group.
 	Force *bool
-
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// container instance to deregister. If you do not specify a cluster, the default
-	// cluster is assumed.
-	Cluster *string
 }
 
 type DeregisterContainerInstanceOutput struct {

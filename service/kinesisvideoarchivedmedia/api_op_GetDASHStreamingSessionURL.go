@@ -163,9 +163,22 @@ func (c *Client) GetDASHStreamingSessionURL(ctx context.Context, params *GetDASH
 
 type GetDASHStreamingSessionURLInput struct {
 
-	// The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH
-	// manifest URL. You must specify either the StreamName or the StreamARN.
-	StreamARN *string
+	// The time range of the requested fragment and the source of the timestamps. This
+	// parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
+	// parameter is optional if PlaybackMode isLIVE. If PlaybackMode is LIVE, the
+	// FragmentSelectorType can be set, but the TimestampRange should not be set. If
+	// PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
+	// TimestampRange must be set.
+	DASHFragmentSelector *types.DASHFragmentSelector
+
+	// Fragments are identified in the manifest file based on their sequence number in
+	// the session. If DisplayFragmentNumber is set to ALWAYS, the Kinesis Video
+	// Streams fragment number is added to each S element in the manifest file with the
+	// attribute name “kvs:fn”. These fragment numbers can be used for logging or for
+	// use with other APIs (e.g. GetMedia and GetMediaForFragmentList). A custom
+	// MPEG-DASH media player is necessary to leverage these this custom attribute. The
+	// default value is NEVER.
+	DisplayFragmentNumber types.DASHDisplayFragmentNumber
 
 	// Per the MPEG-DASH specification, the wall-clock time of fragments in the
 	// manifest file can be derived using attributes in the manifest itself. However,
@@ -181,27 +194,6 @@ type GetDASHStreamingSessionURLInput struct {
 	// DASHFragmentSelector () is PRODUCER_TIMESTAMP, the timestamps will be the
 	// producer start timestamps.
 	DisplayFragmentTimestamp types.DASHDisplayFragmentTimestamp
-
-	// The time range of the requested fragment and the source of the timestamps. This
-	// parameter is required if PlaybackMode is ON_DEMAND or LIVE_REPLAY. This
-	// parameter is optional if PlaybackMode isLIVE. If PlaybackMode is LIVE, the
-	// FragmentSelectorType can be set, but the TimestampRange should not be set. If
-	// PlaybackMode is ON_DEMAND or LIVE_REPLAY, both FragmentSelectorType and
-	// TimestampRange must be set.
-	DASHFragmentSelector *types.DASHFragmentSelector
-
-	// The name of the stream for which to retrieve the MPEG-DASH manifest URL. You
-	// must specify either the StreamName or the StreamARN.
-	StreamName *string
-
-	// Fragments are identified in the manifest file based on their sequence number in
-	// the session. If DisplayFragmentNumber is set to ALWAYS, the Kinesis Video
-	// Streams fragment number is added to each S element in the manifest file with the
-	// attribute name “kvs:fn”. These fragment numbers can be used for logging or for
-	// use with other APIs (e.g. GetMedia and GetMediaForFragmentList). A custom
-	// MPEG-DASH media player is necessary to leverage these this custom attribute. The
-	// default value is NEVER.
-	DisplayFragmentNumber types.DASHDisplayFragmentNumber
 
 	// The time in seconds until the requested session expires. This value can be
 	// between 300 (5 minutes) and 43200 (12 hours). When a session expires, no new
@@ -269,6 +261,14 @@ type GetDASHStreamingSessionURLInput struct {
 	// durations are still included in the MPEG-DASH manifest. This can lead to
 	// unexpected behavior in the media player. The default is LIVE.
 	PlaybackMode types.DASHPlaybackMode
+
+	// The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH
+	// manifest URL. You must specify either the StreamName or the StreamARN.
+	StreamARN *string
+
+	// The name of the stream for which to retrieve the MPEG-DASH manifest URL. You
+	// must specify either the StreamName or the StreamARN.
+	StreamName *string
 }
 
 type GetDASHStreamingSessionURLOutput struct {

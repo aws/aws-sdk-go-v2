@@ -19,11 +19,6 @@ type ApplicationDependencySummary struct {
 // Policy statement applied to the application.
 type ApplicationPolicyStatement struct {
 
-	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
-	// global condition key.
-	PrincipalOrgIDs []*string
-
 	// For the list of actions supported for this operation, see Application
 	// Permissions
 	// (https://docs.aws.amazon.com/serverlessrepo/latest/devguide/access-control-resource-based.html#application-permissions).
@@ -35,6 +30,11 @@ type ApplicationPolicyStatement struct {
 	//
 	// This member is required.
 	Principals []*string
+
+	// An array of PrinciplalOrgIDs, which corresponds to AWS IAM aws:PrincipalOrgID
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#principal-org-id)
+	// global condition key.
+	PrincipalOrgIDs []*string
 
 	// A unique ID for the statement.
 	StatementId *string
@@ -48,17 +48,6 @@ type ApplicationSummary struct {
 	// This member is required.
 	ApplicationId *string
 
-	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
-	SpdxLicenseId *string
-
-	// A URL with more information about the application, for example the location of
-	// your GitHub repository for the application.
-	HomePageUrl *string
-
-	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
-	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
-	Labels []*string
-
 	// The name of the author publishing the app.Minimum length=1. Maximum
 	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
 	//
@@ -70,43 +59,45 @@ type ApplicationSummary struct {
 	// This member is required.
 	Description *string
 
-	// The date and time this resource was created.
-	CreationTime *string
-
 	// The name of the application.Minimum length=1. Maximum length=140Pattern:
 	// "[a-zA-Z0-9\\-]+";
 	//
 	// This member is required.
 	Name *string
+
+	// The date and time this resource was created.
+	CreationTime *string
+
+	// A URL with more information about the application, for example the location of
+	// your GitHub repository for the application.
+	HomePageUrl *string
+
+	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
+	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	Labels []*string
+
+	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/).
+	SpdxLicenseId *string
 }
 
 // Parameters supported by the application.
 type ParameterDefinition struct {
-
-	// An integer value that determines the smallest number of characters that you want
-	// to allow for String types.
-	MinLength *int32
 
 	// The name of the parameter.
 	//
 	// This member is required.
 	Name *string
 
-	// A value of the appropriate type for the template to use if no value is specified
-	// when a stack is created. If you define constraints for the parameter, you must
-	// specify a value that adheres to those constraints.
-	DefaultValue *string
-
-	// A numeric value that determines the largest numeric value that you want to allow
-	// for Number types.
-	MaxValue *int32
+	// A list of AWS SAM resources that use this parameter.
+	//
+	// This member is required.
+	ReferencedByResources []*string
 
 	// A regular expression that represents the patterns to allow for String types.
 	AllowedPattern *string
 
-	// An integer value that determines the largest number of characters that you want
-	// to allow for String types.
-	MaxLength *int32
+	// An array containing the list of values allowed for the parameter.
+	AllowedValues []*string
 
 	// A string that explains a constraint when the constraint is violated. For
 	// example, without a constraint description, a parameter that has an allowed
@@ -118,12 +109,34 @@ type ParameterDefinition struct {
 	// only uppercase and lowercase letters and numbers.
 	ConstraintDescription *string
 
+	// A value of the appropriate type for the template to use if no value is specified
+	// when a stack is created. If you define constraints for the parameter, you must
+	// specify a value that adheres to those constraints.
+	DefaultValue *string
+
+	// A string of up to 4,000 characters that describes the parameter.
+	Description *string
+
+	// An integer value that determines the largest number of characters that you want
+	// to allow for String types.
+	MaxLength *int32
+
+	// A numeric value that determines the largest numeric value that you want to allow
+	// for Number types.
+	MaxValue *int32
+
+	// An integer value that determines the smallest number of characters that you want
+	// to allow for String types.
+	MinLength *int32
+
 	// A numeric value that determines the smallest numeric value that you want to
 	// allow for Number types.
 	MinValue *int32
 
-	// An array containing the list of values allowed for the parameter.
-	AllowedValues []*string
+	// Whether to mask the parameter value whenever anyone makes a call that describes
+	// the stack. If you set the value to true, the parameter value is masked with
+	// asterisks (*****).
+	NoEcho *bool
 
 	// The type of the parameter.Valid values: String | Number | List<Number> |
 	// CommaDelimitedList String: A literal string.For example, users can specify
@@ -141,19 +154,6 @@ type ParameterDefinition struct {
 	// space-trimmed.For example, users might specify "test,dev,prod", and then Ref
 	// results in ["test","dev","prod"].
 	Type *string
-
-	// A string of up to 4,000 characters that describes the parameter.
-	Description *string
-
-	// A list of AWS SAM resources that use this parameter.
-	//
-	// This member is required.
-	ReferencedByResources []*string
-
-	// Whether to mask the parameter value whenever anyone makes a call that describes
-	// the stack. If you set the value to true, the parameter value is masked with
-	// asterisks (*****).
-	NoEcho *bool
 }
 
 // Parameter value of the application.
@@ -237,6 +237,21 @@ type Tag struct {
 // Application version details.
 type Version struct {
 
+	// The application Amazon Resource Name (ARN).
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The date and time this resource was created.
+	//
+	// This member is required.
+	CreationTime *string
+
+	// An array of parameter types supported by the application.
+	//
+	// This member is required.
+	ParameterDefinitions []*ParameterDefinition
+
 	// A list of values that you must specify before you can deploy certain
 	// applications. Some applications might include resources that can affect
 	// permissions in your AWS account, for example, by creating new AWS Identity and
@@ -276,30 +291,17 @@ type Version struct {
 	// This member is required.
 	RequiredCapabilities []Capability
 
+	// Whether all of the AWS resources contained in this application are supported in
+	// the region in which it is being retrieved.
+	//
+	// This member is required.
+	ResourcesSupported *bool
+
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	//
 	// This member is required.
 	SemanticVersion *string
-
-	// The application Amazon Resource Name (ARN).
-	//
-	// This member is required.
-	ApplicationId *string
-
-	// An array of parameter types supported by the application.
-	//
-	// This member is required.
-	ParameterDefinitions []*ParameterDefinition
-
-	// A link to a public repository for the source code of your application, for
-	// example the URL of a specific GitHub commit.
-	SourceCodeUrl *string
-
-	// The date and time this resource was created.
-	//
-	// This member is required.
-	CreationTime *string
 
 	// A link to the packaged AWS SAM template of your application.
 	//
@@ -310,19 +312,13 @@ type Version struct {
 	// this version of your application.Maximum size 50 MB
 	SourceCodeArchiveUrl *string
 
-	// Whether all of the AWS resources contained in this application are supported in
-	// the region in which it is being retrieved.
-	//
-	// This member is required.
-	ResourcesSupported *bool
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
+	SourceCodeUrl *string
 }
 
 // An application version summary.
 type VersionSummary struct {
-
-	// A link to a public repository for the source code of your application, for
-	// example the URL of a specific GitHub commit.
-	SourceCodeUrl *string
 
 	// The application Amazon Resource Name (ARN).
 	//
@@ -339,4 +335,8 @@ type VersionSummary struct {
 	//
 	// This member is required.
 	SemanticVersion *string
+
+	// A link to a public repository for the source code of your application, for
+	// example the URL of a specific GitHub commit.
+	SourceCodeUrl *string
 }

@@ -66,11 +66,6 @@ type CreateDBSnapshotInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
-	// the Amazon RDS User Guide.
-	Tags []*types.Tag
-
 	// The identifier for the DB snapshot. Constraints:
 	//
 	//     * Can't be null, empty, or
@@ -88,6 +83,11 @@ type CreateDBSnapshotInput struct {
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	Tags []*types.Tag
 }
 
 type CreateDBSnapshotOutput struct {

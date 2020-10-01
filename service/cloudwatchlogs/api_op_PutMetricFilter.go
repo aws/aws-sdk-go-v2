@@ -62,6 +62,11 @@ func (c *Client) PutMetricFilter(ctx context.Context, params *PutMetricFilterInp
 
 type PutMetricFilterInput struct {
 
+	// A name for the metric filter.
+	//
+	// This member is required.
+	FilterName *string
+
 	// A filter pattern for extracting metric data out of ingested log events.
 	//
 	// This member is required.
@@ -71,11 +76,6 @@ type PutMetricFilterInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
-
-	// A name for the metric filter.
-	//
-	// This member is required.
-	FilterName *string
 
 	// A collection of information that defines how metric data gets emitted.
 	//

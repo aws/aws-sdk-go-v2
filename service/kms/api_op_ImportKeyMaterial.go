@@ -104,6 +104,14 @@ func (c *Client) ImportKeyMaterial(ctx context.Context, params *ImportKeyMateria
 
 type ImportKeyMaterialInput struct {
 
+	// The encrypted key material to import. The key material must be encrypted with
+	// the public wrapping key that GetParametersForImport () returned, using the
+	// wrapping algorithm that you specified in the same GetParametersForImport
+	// request.
+	//
+	// This member is required.
+	EncryptedKeyMaterial []byte
+
 	// The import token that you received in the response to a previous
 	// GetParametersForImport () request. It must be from the same response that
 	// contained the public key that you used to encrypt the key material.
@@ -127,14 +135,6 @@ type ImportKeyMaterialInput struct {
 	//
 	// This member is required.
 	KeyId *string
-
-	// The encrypted key material to import. The key material must be encrypted with
-	// the public wrapping key that GetParametersForImport () returned, using the
-	// wrapping algorithm that you specified in the same GetParametersForImport
-	// request.
-	//
-	// This member is required.
-	EncryptedKeyMaterial []byte
 
 	// Specifies whether the key material expires. The default is KEY_MATERIAL_EXPIRES,
 	// in which case you must include the ValidTo parameter. When this parameter is set

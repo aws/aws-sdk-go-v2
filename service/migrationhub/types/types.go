@@ -10,15 +10,15 @@ import (
 // Agentless Discovery Connector, or the AWS Application Discovery Agent.
 type ApplicationState struct {
 
+	// The configurationId from the Application Discovery Service that uniquely
+	// identifies an application.
+	ApplicationId *string
+
 	// The current status of an application.
 	ApplicationStatus ApplicationStatus
 
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time
-
-	// The configurationId from the Application Discovery Service that uniquely
-	// identifies an application.
-	ApplicationId *string
 }
 
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
@@ -38,15 +38,15 @@ type CreatedArtifact struct {
 // Object representing the on-premises resource being migrated.
 type DiscoveredResource struct {
 
-	// A description that can be free-form text to record additional detail about the
-	// discovered resource for clarity or later reference.
-	Description *string
-
 	// The configurationId in Application Discovery Service that uniquely identifies
 	// the on-premise resource.
 	//
 	// This member is required.
 	ConfigurationId *string
+
+	// A description that can be free-form text to record additional detail about the
+	// discovered resource for clarity or later reference.
+	Description *string
 }
 
 // Represents a migration task in a migration tool.
@@ -56,43 +56,43 @@ type MigrationTask struct {
 	// in this field.
 	MigrationTaskName *string
 
-	// Task object encapsulating task information.
-	Task *Task
-
-	// The timestamp when the task was gathered.
-	UpdateDateTime *time.Time
-
 	// A name that identifies the vendor of the migration tool being used.
 	ProgressUpdateStream *string
 
 	// Information about the resource that is being migrated. This data will be used to
 	// map the task to a resource in the Application Discovery Service repository.
 	ResourceAttributeList []*ResourceAttribute
+
+	// Task object encapsulating task information.
+	Task *Task
+
+	// The timestamp when the task was gathered.
+	UpdateDateTime *time.Time
 }
 
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent,
 // ProgressUpdateStream, Status, and UpdateDateTime for each task.
 type MigrationTaskSummary struct {
 
-	// Detail information of what is being done within the overall status state.
-	StatusDetail *string
-
-	// Status of the task.
-	Status Status
-
 	// Unique identifier that references the migration task. Do not store personal data
 	// in this field.
 	MigrationTaskName *string
 
-	// The timestamp when the task was gathered.
-	UpdateDateTime *time.Time
+	// Indication of the percentage completion of the task.
+	ProgressPercent *int32
 
 	// An AWS resource used for access control. It should uniquely identify the
 	// migration tool as it is used for all updates made by the tool.
 	ProgressUpdateStream *string
 
-	// Indication of the percentage completion of the task.
-	ProgressPercent *int32
+	// Status of the task.
+	Status Status
+
+	// Detail information of what is being done within the overall status state.
+	StatusDetail *string
+
+	// The timestamp when the task was gathered.
+	UpdateDateTime *time.Time
 }
 
 // Summary of the AWS resource used for access control that is implicitly linked to
@@ -127,6 +127,11 @@ type ResourceAttribute struct {
 // Task object encapsulating task information.
 type Task struct {
 
+	// Status of the task - Not Started, In-Progress, Complete.
+	//
+	// This member is required.
+	Status Status
+
 	// Indication of the percentage completion of the task.
 	ProgressPercent *int32
 
@@ -134,9 +139,4 @@ type Task struct {
 	// field to provide clarifying information about the status that is unique to that
 	// tool or that explains an error state.
 	StatusDetail *string
-
-	// Status of the task - Not Started, In-Progress, Complete.
-	//
-	// This member is required.
-	Status Status
 }

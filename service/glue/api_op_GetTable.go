@@ -57,9 +57,11 @@ func (c *Client) GetTable(ctx context.Context, params *GetTableInput, optFns ...
 
 type GetTableInput struct {
 
-	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
-	// account ID is used by default.
-	CatalogId *string
+	// The name of the database in the catalog in which the table resides. For Hive
+	// compatibility, this name is entirely lowercase.
+	//
+	// This member is required.
+	DatabaseName *string
 
 	// The name of the table for which to retrieve the definition. For Hive
 	// compatibility, this name is entirely lowercase.
@@ -67,11 +69,9 @@ type GetTableInput struct {
 	// This member is required.
 	Name *string
 
-	// The name of the database in the catalog in which the table resides. For Hive
-	// compatibility, this name is entirely lowercase.
-	//
-	// This member is required.
-	DatabaseName *string
+	// The ID of the Data Catalog where the table resides. If none is provided, the AWS
+	// account ID is used by default.
+	CatalogId *string
 }
 
 type GetTableOutput struct {

@@ -59,13 +59,13 @@ func (c *Client) TerminateClientVpnConnections(ctx context.Context, params *Term
 
 type TerminateClientVpnConnectionsInput struct {
 
-	// The ID of the client connection to be terminated.
-	ConnectionId *string
-
 	// The ID of the Client VPN endpoint to which the client is connected.
 	//
 	// This member is required.
 	ClientVpnEndpointId *string
+
+	// The ID of the client connection to be terminated.
+	ConnectionId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -81,11 +81,11 @@ type TerminateClientVpnConnectionsInput struct {
 
 type TerminateClientVpnConnectionsOutput struct {
 
-	// The current state of the client connections.
-	ConnectionStatuses []*types.TerminateConnectionStatus
-
 	// The ID of the Client VPN endpoint.
 	ClientVpnEndpointId *string
+
+	// The current state of the client connections.
+	ConnectionStatuses []*types.TerminateConnectionStatus
 
 	// The user who established the terminated client connections.
 	Username *string

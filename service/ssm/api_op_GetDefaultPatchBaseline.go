@@ -65,11 +65,11 @@ type GetDefaultPatchBaselineInput struct {
 
 type GetDefaultPatchBaselineOutput struct {
 
-	// The operating system for the returned patch baseline.
-	OperatingSystem types.OperatingSystem
-
 	// The ID of the default patch baseline.
 	BaselineId *string
+
+	// The operating system for the returned patch baseline.
+	OperatingSystem types.OperatingSystem
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

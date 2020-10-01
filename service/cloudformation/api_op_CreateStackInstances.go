@@ -74,15 +74,6 @@ type CreateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// The unique identifier for this stack set operation. The operation ID also
-	// functions as an idempotency token, to ensure that AWS CloudFormation performs
-	// the stack set operation only once, even if you retry the request multiple times.
-	// You might retry stack set operation requests to ensure that AWS CloudFormation
-	// successfully received them. If you don't specify an operation ID, the SDK
-	// generates one automatically. Repeating this stack set operation with a new
-	// operation ID retries all stack instances whose status is OUTDATED.
-	OperationId *string
-
 	// [Self-managed permissions] The names of one or more AWS accounts that you want
 	// to create stack instances in the specified Region(s) for. You can specify
 	// Accounts or DeploymentTargets, but not both.
@@ -92,6 +83,15 @@ type CreateStackInstancesInput struct {
 	// stack instances in the specified Regions. You can specify Accounts or
 	// DeploymentTargets, but not both.
 	DeploymentTargets *types.DeploymentTargets
+
+	// The unique identifier for this stack set operation. The operation ID also
+	// functions as an idempotency token, to ensure that AWS CloudFormation performs
+	// the stack set operation only once, even if you retry the request multiple times.
+	// You might retry stack set operation requests to ensure that AWS CloudFormation
+	// successfully received them. If you don't specify an operation ID, the SDK
+	// generates one automatically. Repeating this stack set operation with a new
+	// operation ID retries all stack instances whose status is OUTDATED.
+	OperationId *string
 
 	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences

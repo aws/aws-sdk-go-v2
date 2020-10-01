@@ -59,20 +59,20 @@ func (c *Client) GetStatistics(ctx context.Context, params *GetStatisticsInput, 
 
 type GetStatisticsInput struct {
 
-	// The name of the index to search. The default value is AWS_Things.
-	IndexName *string
-
 	// The query used to search. You can specify "*" for the query string to get the
 	// count of all indexed things in your AWS account.
 	//
 	// This member is required.
 	QueryString *string
 
-	// The version of the query used to search.
-	QueryVersion *string
-
 	// The aggregation field name.
 	AggregationField *string
+
+	// The name of the index to search. The default value is AWS_Things.
+	IndexName *string
+
+	// The version of the query used to search.
+	QueryVersion *string
 }
 
 type GetStatisticsOutput struct {

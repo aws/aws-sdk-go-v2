@@ -57,9 +57,11 @@ func (c *Client) CreateInvitations(ctx context.Context, params *CreateInvitation
 
 type CreateInvitationsInput struct {
 
-	// A custom message to include in the invitation. Amazon Macie adds this message to
-	// the standard content that it sends for an invitation.
-	Message *string
+	// An array that lists AWS account IDs, one for each account to send the invitation
+	// to.
+	//
+	// This member is required.
+	AccountIds []*string
 
 	// Specifies whether to send an email notification to the root user of each account
 	// that the invitation will be sent to. This notification is in addition to an
@@ -67,11 +69,9 @@ type CreateInvitationsInput struct {
 	// email notification to the root user of each account, set this value to true.
 	DisableEmailNotification *bool
 
-	// An array that lists AWS account IDs, one for each account to send the invitation
-	// to.
-	//
-	// This member is required.
-	AccountIds []*string
+	// A custom message to include in the invitation. Amazon Macie adds this message to
+	// the standard content that it sends for an invitation.
+	Message *string
 }
 
 type CreateInvitationsOutput struct {

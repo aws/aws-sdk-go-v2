@@ -57,22 +57,13 @@ func (c *Client) ModifyDBProxy(ctx context.Context, params *ModifyDBProxyInput, 
 
 type ModifyDBProxyInput struct {
 
-	// Whether Transport Layer Security (TLS) encryption is required for connections to
-	// the proxy. By enabling this setting, you can enforce encrypted TLS connections
-	// to the proxy, even if the associated database doesn't use TLS.
-	RequireTLS *bool
+	// The identifier for the DBProxy to modify.
+	//
+	// This member is required.
+	DBProxyName *string
 
-	// The new list of security groups for the DBProxy.
-	SecurityGroups []*string
-
-	// The new identifier for the DBProxy. An identifier must begin with a letter and
-	// must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen
-	// or contain two consecutive hyphens.
-	NewDBProxyName *string
-
-	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
-	// secrets in AWS Secrets Manager.
-	RoleArn *string
+	// The new authentication settings for the DBProxy.
+	Auth []*types.UserAuthConfig
 
 	// Whether the proxy includes detailed information about SQL statements in its
 	// logs. This information helps you to debug issues involving SQL behavior or the
@@ -88,13 +79,22 @@ type ModifyDBProxyInput struct {
 	// timeout limit for the associated database.
 	IdleClientTimeout *int32
 
-	// The identifier for the DBProxy to modify.
-	//
-	// This member is required.
-	DBProxyName *string
+	// The new identifier for the DBProxy. An identifier must begin with a letter and
+	// must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen
+	// or contain two consecutive hyphens.
+	NewDBProxyName *string
 
-	// The new authentication settings for the DBProxy.
-	Auth []*types.UserAuthConfig
+	// Whether Transport Layer Security (TLS) encryption is required for connections to
+	// the proxy. By enabling this setting, you can enforce encrypted TLS connections
+	// to the proxy, even if the associated database doesn't use TLS.
+	RequireTLS *bool
+
+	// The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access
+	// secrets in AWS Secrets Manager.
+	RoleArn *string
+
+	// The new list of security groups for the DBProxy.
+	SecurityGroups []*string
 }
 
 type ModifyDBProxyOutput struct {

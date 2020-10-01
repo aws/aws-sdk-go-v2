@@ -57,10 +57,6 @@ func (c *Client) DescribeLoadBalancerTargetGroups(ctx context.Context, params *D
 
 type DescribeLoadBalancerTargetGroupsInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
@@ -69,6 +65,10 @@ type DescribeLoadBalancerTargetGroupsInput struct {
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100.
 	MaxRecords *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeLoadBalancerTargetGroupsOutput struct {

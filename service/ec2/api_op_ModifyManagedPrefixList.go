@@ -60,13 +60,13 @@ func (c *Client) ModifyManagedPrefixList(ctx context.Context, params *ModifyMana
 
 type ModifyManagedPrefixListInput struct {
 
-	// One or more entries to add to the prefix list.
-	AddEntries []*types.AddPrefixListEntry
-
 	// The ID of the prefix list.
 	//
 	// This member is required.
 	PrefixListId *string
+
+	// One or more entries to add to the prefix list.
+	AddEntries []*types.AddPrefixListEntry
 
 	// The current version of the prefix list.
 	CurrentVersion *int64

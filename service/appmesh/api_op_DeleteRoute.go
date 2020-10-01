@@ -57,15 +57,15 @@ func (c *Client) DeleteRoute(ctx context.Context, params *DeleteRouteInput, optF
 //
 type DeleteRouteInput struct {
 
-	// The name of the route to delete.
-	//
-	// This member is required.
-	RouteName *string
-
 	// The name of the service mesh to delete the route in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the route to delete.
+	//
+	// This member is required.
+	RouteName *string
 
 	// The name of the virtual router to delete the route in.
 	//

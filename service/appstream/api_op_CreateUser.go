@@ -57,8 +57,10 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The first name, or given name, of the user.
-	FirstName *string
+	// The authentication type for the user. You must specify USERPOOL.
+	//
+	// This member is required.
+	AuthenticationType types.AuthenticationType
 
 	// The email address of the user.  <note> <p>Users' email addresses are
 	// case-sensitive. During login, if they specify an email address that doesn't use
@@ -68,10 +70,8 @@ type CreateUserInput struct {
 	// This member is required.
 	UserName *string
 
-	// The authentication type for the user. You must specify USERPOOL.
-	//
-	// This member is required.
-	AuthenticationType types.AuthenticationType
+	// The first name, or given name, of the user.
+	FirstName *string
 
 	// The last name, or surname, of the user.
 	LastName *string

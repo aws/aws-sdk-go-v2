@@ -66,14 +66,14 @@ type ListFindingsInput struct {
 	// A filter to match for the findings to return.
 	Filter map[string]*types.Criterion
 
-	// The sort order for the findings returned.
-	Sort *types.SortCriteria
+	// The maximum number of results to return in the response.
+	MaxResults *int32
 
 	// A token used for pagination of results returned.
 	NextToken *string
 
-	// The maximum number of results to return in the response.
-	MaxResults *int32
+	// The sort order for the findings returned.
+	Sort *types.SortCriteria
 }
 
 // The response to the request.

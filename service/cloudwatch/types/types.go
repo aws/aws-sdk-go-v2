@@ -9,23 +9,23 @@ import (
 // Represents the history of a specific alarm.
 type AlarmHistoryItem struct {
 
-	// Data about the alarm, in JSON format.
-	HistoryData *string
-
-	// The time stamp for the alarm history item.
-	Timestamp *time.Time
-
-	// A summary of the alarm history, in text format.
-	HistorySummary *string
-
-	// The type of alarm history item.
-	HistoryItemType HistoryItemType
-
 	// The descriptive name for the alarm.
 	AlarmName *string
 
 	// The type of alarm, either metric alarm or composite alarm.
 	AlarmType AlarmType
+
+	// Data about the alarm, in JSON format.
+	HistoryData *string
+
+	// The type of alarm history item.
+	HistoryItemType HistoryItemType
+
+	// A summary of the alarm history, in text format.
+	HistorySummary *string
+
+	// The time stamp for the alarm history item.
+	Timestamp *time.Time
 }
 
 // An anomaly detection model associated with a particular CloudWatch metric and
@@ -33,26 +33,26 @@ type AlarmHistoryItem struct {
 // when the metric is graphed.
 type AnomalyDetector struct {
 
-	// The current status of the anomaly detector's training. The possible values are
-	// TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA
-	StateValue AnomalyDetectorStateValue
-
-	// The metric dimensions associated with the anomaly detection model.
-	Dimensions []*Dimension
-
-	// The namespace of the metric associated with the anomaly detection model.
-	Namespace *string
-
-	// The name of the metric associated with the anomaly detection model.
-	MetricName *string
-
-	// The statistic associated with the anomaly detection model.
-	Stat *string
-
 	// The configuration specifies details about how the anomaly detection model is to
 	// be trained, including time ranges to exclude from use for training the model,
 	// and the time zone to use for the metric.
 	Configuration *AnomalyDetectorConfiguration
+
+	// The metric dimensions associated with the anomaly detection model.
+	Dimensions []*Dimension
+
+	// The name of the metric associated with the anomaly detection model.
+	MetricName *string
+
+	// The namespace of the metric associated with the anomaly detection model.
+	Namespace *string
+
+	// The statistic associated with the anomaly detection model.
+	Stat *string
+
+	// The current status of the anomaly detector's training. The possible values are
+	// TRAINED | PENDING_TRAINING | TRAINED_INSUFFICIENT_DATA
+	StateValue AnomalyDetectorStateValue
 }
 
 // The configuration specifies details about how the anomaly detection model is to
@@ -60,103 +60,113 @@ type AnomalyDetector struct {
 // the time zone to use for the metric.
 type AnomalyDetectorConfiguration struct {
 
+	// An array of time ranges to exclude from use when the anomaly detection model is
+	// trained. Use this to make sure that events that could cause unusual values for
+	// the metric, such as deployments, aren't used when CloudWatch creates the model.
+	ExcludedTimeRanges []*Range
+
 	// The time zone to use for the metric. This is useful to enable the model to
 	// automatically account for daylight savings time changes if the metric is
 	// sensitive to such time changes. To specify a time zone, use the name of the time
 	// zone as specified in the standard tz database. For more information, see tz
 	// database (https://en.wikipedia.org/wiki/Tz_database).
 	MetricTimezone *string
-
-	// An array of time ranges to exclude from use when the anomaly detection model is
-	// trained. Use this to make sure that events that could cause unusual values for
-	// the metric, such as deployments, aren't used when CloudWatch creates the model.
-	ExcludedTimeRanges []*Range
 }
 
 // The details about a composite alarm.
 type CompositeAlarm struct {
 
-	// The rule that this alarm uses to evaluate its alarm state.
-	AlarmRule *string
+	// Indicates whether actions should be executed during any changes to the alarm
+	// state.
+	ActionsEnabled *bool
 
-	// An explanation for the alarm state, in JSON format.
-	StateReasonData *string
-
-	// The state value for the alarm.
-	StateValue StateValue
+	// The actions to execute when this alarm transitions to the ALARM state from any
+	// other state. Each action is specified as an Amazon Resource Name (ARN).
+	AlarmActions []*string
 
 	// The Amazon Resource Name (ARN) of the alarm.
 	AlarmArn *string
+
+	// The time stamp of the last update to the alarm configuration.
+	AlarmConfigurationUpdatedTimestamp *time.Time
+
+	// The description of the alarm.
+	AlarmDescription *string
+
+	// The name of the alarm.
+	AlarmName *string
+
+	// The rule that this alarm uses to evaluate its alarm state.
+	AlarmRule *string
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
 	// (ARN).
 	InsufficientDataActions []*string
 
-	// Indicates whether actions should be executed during any changes to the alarm
-	// state.
-	ActionsEnabled *bool
-
-	// An explanation for the alarm state, in text format.
-	StateReason *string
-
-	// The name of the alarm.
-	AlarmName *string
-
 	// The actions to execute when this alarm transitions to the OK state from any
 	// other state. Each action is specified as an Amazon Resource Name (ARN).
 	OKActions []*string
 
-	// The time stamp of the last update to the alarm configuration.
-	AlarmConfigurationUpdatedTimestamp *time.Time
+	// An explanation for the alarm state, in text format.
+	StateReason *string
+
+	// An explanation for the alarm state, in JSON format.
+	StateReasonData *string
 
 	// The time stamp of the last update to the alarm state.
 	StateUpdatedTimestamp *time.Time
 
-	// The actions to execute when this alarm transitions to the ALARM state from any
-	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	AlarmActions []*string
-
-	// The description of the alarm.
-	AlarmDescription *string
+	// The state value for the alarm.
+	StateValue StateValue
 }
 
 // Represents a specific dashboard.
 type DashboardEntry struct {
 
-	// The size of the dashboard, in bytes.
-	Size *int64
+	// The Amazon Resource Name (ARN) of the dashboard.
+	DashboardArn *string
+
+	// The name of the dashboard.
+	DashboardName *string
 
 	// The time stamp of when the dashboard was last modified, either by an API call or
 	// through the console. This number is expressed as the number of milliseconds
 	// since Jan 1, 1970 00:00:00 UTC.
 	LastModified *time.Time
 
-	// The name of the dashboard.
-	DashboardName *string
-
-	// The Amazon Resource Name (ARN) of the dashboard.
-	DashboardArn *string
+	// The size of the dashboard, in bytes.
+	Size *int64
 }
 
 // An error or warning for the operation.
 type DashboardValidationMessage struct {
 
-	// A message describing the error or warning.
-	Message *string
-
 	// The data path related to the message.
 	DataPath *string
+
+	// A message describing the error or warning.
+	Message *string
 }
 
 // Encapsulates the statistical data that CloudWatch computes from metric data.
 type Datapoint struct {
 
+	// The average of the metric values that correspond to the data point.
+	Average *float64
+
+	// The percentile statistic for the data point.
+	ExtendedStatistics map[string]*float64
+
+	// The maximum metric value for the data point.
+	Maximum *float64
+
 	// The minimum metric value for the data point.
 	Minimum *float64
 
-	// The standard unit for the data point.
-	Unit StandardUnit
+	// The number of metric values that contributed to the aggregate value of this data
+	// point.
+	SampleCount *float64
 
 	// The sum of the metric values for the data point.
 	Sum *float64
@@ -164,18 +174,8 @@ type Datapoint struct {
 	// The time stamp used for the data point.
 	Timestamp *time.Time
 
-	// The percentile statistic for the data point.
-	ExtendedStatistics map[string]*float64
-
-	// The number of metric values that contributed to the aggregate value of this data
-	// point.
-	SampleCount *float64
-
-	// The maximum metric value for the data point.
-	Maximum *float64
-
-	// The average of the metric values that correspond to the data point.
-	Average *float64
+	// The standard unit for the data point.
+	Unit StandardUnit
 }
 
 // A dimension is a name/value pair that is part of the identity of a metric. You
@@ -184,49 +184,32 @@ type Datapoint struct {
 // of your metrics, you are creating a new variation of that metric.
 type Dimension struct {
 
-	// The value of the dimension.
-	//
-	// This member is required.
-	Value *string
-
 	// The name of the dimension. Dimension names cannot contain blank spaces or
 	// non-ASCII characters.
 	//
 	// This member is required.
 	Name *string
+
+	// The value of the dimension.
+	//
+	// This member is required.
+	Value *string
 }
 
 // Represents filters for a dimension.
 type DimensionFilter struct {
 
-	// The value of the dimension to be matched.
-	Value *string
-
 	// The dimension name to be matched.
 	//
 	// This member is required.
 	Name *string
+
+	// The value of the dimension to be matched.
+	Value *string
 }
 
 // This structure contains the definition for a Contributor Insights rule.
 type InsightRule struct {
-
-	// Indicates whether the rule is enabled or disabled.
-	//
-	// This member is required.
-	State *string
-
-	// For rules that you create, this is always {"Name": "CloudWatchLogRule",
-	// "Version": 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version":
-	// 1}
-	//
-	// This member is required.
-	Schema *string
-
-	// The name of the rule.
-	//
-	// This member is required.
-	Name *string
 
 	// The definition of the rule, as a JSON object. The definition contains the
 	// keywords used to define contributors, the value to aggregate on if this rule
@@ -236,6 +219,23 @@ type InsightRule struct {
 	//
 	// This member is required.
 	Definition *string
+
+	// The name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// For rules that you create, this is always {"Name": "CloudWatchLogRule",
+	// "Version": 1}. For built-in rules, this is {"Name": "ServiceLogRule", "Version":
+	// 1}
+	//
+	// This member is required.
+	Schema *string
+
+	// Indicates whether the rule is enabled or disabled.
+	//
+	// This member is required.
+	State *string
 }
 
 // One of the unique contributors found by a Contributor Insights rule. If the rule
@@ -246,11 +246,10 @@ type InsightRule struct {
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html).
 type InsightRuleContributor struct {
 
-	// One of the log entry field keywords that is used to define contributors for this
-	// rule.
+	// An approximation of the aggregate value that comes from this contributor.
 	//
 	// This member is required.
-	Keys []*string
+	ApproximateAggregateValue *float64
 
 	// An array of the data points where this contributor is present. Only the data
 	// points when this contributor appeared are included in the array.
@@ -258,10 +257,11 @@ type InsightRuleContributor struct {
 	// This member is required.
 	Datapoints []*InsightRuleContributorDatapoint
 
-	// An approximation of the aggregate value that comes from this contributor.
+	// One of the log entry field keywords that is used to define contributors for this
+	// rule.
 	//
 	// This member is required.
-	ApproximateAggregateValue *float64
+	Keys []*string
 }
 
 // One data point related to one contributor. For more information, see
@@ -287,6 +287,27 @@ type InsightRuleContributorDatapoint struct {
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetInsightRuleReport.html).
 type InsightRuleMetricDatapoint struct {
 
+	// The timestamp of the data point.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The average value from all contributors during the time period represented by
+	// that data point. This statistic is returned only if you included it in the
+	// Metrics array in your request.
+	Average *float64
+
+	// The maximum value provided by one contributor during this timestamp. Each
+	// timestamp is evaluated separately, so the identity of the max contributor could
+	// be different for each timestamp. This statistic is returned only if you included
+	// it in the Metrics array in your request.
+	MaxContributorValue *float64
+
+	// The maximum value from a single occurence from a single contributor during the
+	// time period represented by that data point. This statistic is returned only if
+	// you included it in the Metrics array in your request.
+	Maximum *float64
+
 	// The minimum value from a single contributor during the time period represented
 	// by that data point. This statistic is returned only if you included it in the
 	// Metrics array in your request.
@@ -297,69 +318,85 @@ type InsightRuleMetricDatapoint struct {
 	// request.
 	SampleCount *float64
 
-	// The number of unique contributors who published data during this timestamp. This
-	// statistic is returned only if you included it in the Metrics array in your
-	// request.
-	UniqueContributors *float64
-
-	// The maximum value from a single occurence from a single contributor during the
-	// time period represented by that data point. This statistic is returned only if
-	// you included it in the Metrics array in your request.
-	Maximum *float64
-
-	// The average value from all contributors during the time period represented by
-	// that data point. This statistic is returned only if you included it in the
-	// Metrics array in your request.
-	Average *float64
-
-	// The timestamp of the data point.
-	//
-	// This member is required.
-	Timestamp *time.Time
-
 	// The sum of the values from all contributors during the time period represented
 	// by that data point. This statistic is returned only if you included it in the
 	// Metrics array in your request.
 	Sum *float64
 
-	// The maximum value provided by one contributor during this timestamp. Each
-	// timestamp is evaluated separately, so the identity of the max contributor could
-	// be different for each timestamp. This statistic is returned only if you included
-	// it in the Metrics array in your request.
-	MaxContributorValue *float64
+	// The number of unique contributors who published data during this timestamp. This
+	// statistic is returned only if you included it in the Metrics array in your
+	// request.
+	UniqueContributors *float64
 }
 
 // A message returned by the GetMetricDataAPI, including a code and a description.
 type MessageData struct {
 
-	// The message text.
-	Value *string
-
 	// The error code or status code associated with the message.
 	Code *string
+
+	// The message text.
+	Value *string
 }
 
 // Represents a specific metric.
 type Metric struct {
 
-	// The namespace of the metric.
-	Namespace *string
+	// The dimensions for the metric.
+	Dimensions []*Dimension
 
 	// The name of the metric. This is a required field.
 	MetricName *string
 
-	// The dimensions for the metric.
-	Dimensions []*Dimension
+	// The namespace of the metric.
+	Namespace *string
 }
 
 // The details about a metric alarm.
 type MetricAlarm struct {
 
+	// Indicates whether actions should be executed during any changes to the alarm
+	// state.
+	ActionsEnabled *bool
+
+	// The actions to execute when this alarm transitions to the ALARM state from any
+	// other state. Each action is specified as an Amazon Resource Name (ARN).
+	AlarmActions []*string
+
+	// The Amazon Resource Name (ARN) of the alarm.
+	AlarmArn *string
+
+	// The time stamp of the last update to the alarm configuration.
+	AlarmConfigurationUpdatedTimestamp *time.Time
+
 	// The description of the alarm.
 	AlarmDescription *string
 
-	// The state value for the alarm.
-	StateValue StateValue
+	// The name of the alarm.
+	AlarmName *string
+
+	// The arithmetic operation to use when comparing the specified statistic and
+	// threshold. The specified statistic value is used as the first operand.
+	ComparisonOperator ComparisonOperator
+
+	// The number of data points that must be breaching to trigger the alarm.
+	DatapointsToAlarm *int32
+
+	// The dimensions for the metric associated with the alarm.
+	Dimensions []*Dimension
+
+	// Used only for alarms based on percentiles. If ignore, the alarm state does not
+	// change during periods with too few data points to be statistically significant.
+	// If evaluate or this parameter is not used, the alarm is always evaluated and
+	// possibly changes state no matter how many data points are available.
+	EvaluateLowSampleCountPercentile *string
+
+	// The number of periods over which data is compared to the specified threshold.
+	EvaluationPeriods *int32
+
+	// The percentile statistic for the metric associated with the alarm. Specify a
+	// value between p0.0 and p100.
+	ExtendedStatistic *string
 
 	// The actions to execute when this alarm transitions to the INSUFFICIENT_DATA
 	// state from any other state. Each action is specified as an Amazon Resource Name
@@ -370,79 +407,6 @@ type MetricAlarm struct {
 	// single metric.
 	MetricName *string
 
-	// In an alarm based on an anomaly detection model, this is the ID of the
-	// ANOMALY_DETECTION_BAND function used as the threshold for the alarm.
-	ThresholdMetricId *string
-
-	// The actions to execute when this alarm transitions to the ALARM state from any
-	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	AlarmActions []*string
-
-	// The name of the alarm.
-	AlarmName *string
-
-	// The period, in seconds, over which the statistic is applied.
-	Period *int32
-
-	// The number of periods over which data is compared to the specified threshold.
-	EvaluationPeriods *int32
-
-	// An explanation for the alarm state, in JSON format.
-	StateReasonData *string
-
-	// The time stamp of the last update to the alarm configuration.
-	AlarmConfigurationUpdatedTimestamp *time.Time
-
-	// An explanation for the alarm state, in text format.
-	StateReason *string
-
-	// The Amazon Resource Name (ARN) of the alarm.
-	AlarmArn *string
-
-	// The dimensions for the metric associated with the alarm.
-	Dimensions []*Dimension
-
-	// Indicates whether actions should be executed during any changes to the alarm
-	// state.
-	ActionsEnabled *bool
-
-	// The namespace of the metric associated with the alarm.
-	Namespace *string
-
-	// The percentile statistic for the metric associated with the alarm. Specify a
-	// value between p0.0 and p100.
-	ExtendedStatistic *string
-
-	// Used only for alarms based on percentiles. If ignore, the alarm state does not
-	// change during periods with too few data points to be statistically significant.
-	// If evaluate or this parameter is not used, the alarm is always evaluated and
-	// possibly changes state no matter how many data points are available.
-	EvaluateLowSampleCountPercentile *string
-
-	// Sets how this alarm is to handle missing data points. If this parameter is
-	// omitted, the default behavior of missing is used.
-	TreatMissingData *string
-
-	// The time stamp of the last update to the alarm state.
-	StateUpdatedTimestamp *time.Time
-
-	// The number of data points that must be breaching to trigger the alarm.
-	DatapointsToAlarm *int32
-
-	// The unit of the metric associated with the alarm.
-	Unit StandardUnit
-
-	// The arithmetic operation to use when comparing the specified statistic and
-	// threshold. The specified statistic value is used as the first operand.
-	ComparisonOperator ComparisonOperator
-
-	// The value to compare with the specified statistic.
-	Threshold *float64
-
-	// The actions to execute when this alarm transitions to the OK state from any
-	// other state. Each action is specified as an Amazon Resource Name (ARN).
-	OKActions []*string
-
 	// An array of MetricDataQuery structures, used in an alarm based on a metric math
 	// expression. Each structure either retrieves a metric or performs a math
 	// expression.  One item in the Metrics array is the math expression that the alarm
@@ -450,9 +414,45 @@ type MetricAlarm struct {
 	// true.</p>
 	Metrics []*MetricDataQuery
 
+	// The namespace of the metric associated with the alarm.
+	Namespace *string
+
+	// The actions to execute when this alarm transitions to the OK state from any
+	// other state. Each action is specified as an Amazon Resource Name (ARN).
+	OKActions []*string
+
+	// The period, in seconds, over which the statistic is applied.
+	Period *int32
+
+	// An explanation for the alarm state, in text format.
+	StateReason *string
+
+	// An explanation for the alarm state, in JSON format.
+	StateReasonData *string
+
+	// The time stamp of the last update to the alarm state.
+	StateUpdatedTimestamp *time.Time
+
+	// The state value for the alarm.
+	StateValue StateValue
+
 	// The statistic for the metric associated with the alarm, other than percentile.
 	// For percentile statistics, use ExtendedStatistic.
 	Statistic Statistic
+
+	// The value to compare with the specified statistic.
+	Threshold *float64
+
+	// In an alarm based on an anomaly detection model, this is the ID of the
+	// ANOMALY_DETECTION_BAND function used as the threshold for the alarm.
+	ThresholdMetricId *string
+
+	// Sets how this alarm is to handle missing data points. If this parameter is
+	// omitted, the default behavior of missing is used.
+	TreatMissingData *string
+
+	// The unit of the metric associated with the alarm.
+	Unit StandardUnit
 }
 
 // This structure is used in both GetMetricData and PutMetricAlarm. The supported
@@ -479,6 +479,15 @@ type MetricAlarm struct {
 // following parameter list.</p>
 type MetricDataQuery struct {
 
+	// A short name used to tie this object to the results in the response. This name
+	// must be unique within a single call to GetMetricData. If you are performing math
+	// expressions on this set of data, this name represents that data and can serve as
+	// a variable in the mathematical expression. The valid characters are letters,
+	// numbers, and underscore. The first character must be a lowercase letter.
+	//
+	// This member is required.
+	Id *string
+
 	// The math expression to be performed on the returned data, if this object is
 	// performing a math expression. This expression can use the Id of the other
 	// metrics to refer to those metrics, and can also use the Id of other expressions
@@ -488,6 +497,18 @@ type MetricDataQuery struct {
 	// in the Amazon CloudWatch User Guide. Within each MetricDataQuery object, you
 	// must specify either Expression or MetricStat but not both.
 	Expression *string
+
+	// A human-readable label for this metric or expression. This is especially useful
+	// if this is an expression, so that you know what the value represents. If the
+	// metric or expression is shown in a CloudWatch dashboard widget, the label is
+	// shown. If Label is omitted, CloudWatch generates a default.
+	Label *string
+
+	// The metric to be returned, along with statistics, period, and units. Use this
+	// parameter only if this object is retrieving a metric and not performing a math
+	// expression on returned data. Within one MetricDataQuery object, you must specify
+	// either Expression or MetricStat but not both.
+	MetricStat *MetricStat
 
 	// The granularity, in seconds, of the returned data points. For metrics with
 	// regular resolution, a period can be as short as one minute (60 seconds) and must
@@ -505,33 +526,21 @@ type MetricDataQuery struct {
 	// For all other metrics and expressions in the same PutMetricAlarm operation,
 	// specify ReturnData as False.
 	ReturnData *bool
-
-	// A short name used to tie this object to the results in the response. This name
-	// must be unique within a single call to GetMetricData. If you are performing math
-	// expressions on this set of data, this name represents that data and can serve as
-	// a variable in the mathematical expression. The valid characters are letters,
-	// numbers, and underscore. The first character must be a lowercase letter.
-	//
-	// This member is required.
-	Id *string
-
-	// The metric to be returned, along with statistics, period, and units. Use this
-	// parameter only if this object is retrieving a metric and not performing a math
-	// expression on returned data. Within one MetricDataQuery object, you must specify
-	// either Expression or MetricStat but not both.
-	MetricStat *MetricStat
-
-	// A human-readable label for this metric or expression. This is especially useful
-	// if this is an expression, so that you know what the value represents. If the
-	// metric or expression is shown in a CloudWatch dashboard widget, the label is
-	// shown. If Label is omitted, CloudWatch generates a default.
-	Label *string
 }
 
 // A GetMetricData call returns an array of MetricDataResult structures. Each of
 // these structures includes the data points for that metric, along with the
 // timestamps of those data points and other identifying information.
 type MetricDataResult struct {
+
+	// The short name you specified to represent this metric.
+	Id *string
+
+	// The human-readable label associated with the data.
+	Label *string
+
+	// A list of messages with additional information about the data returned.
+	Messages []*MessageData
 
 	// The status of the returned data. Complete indicates that all data points in the
 	// requested time range were returned. PartialData means that an incomplete set of
@@ -541,19 +550,10 @@ type MetricDataResult struct {
 	// occurred. Retry your request using NextToken, if present.
 	StatusCode StatusCode
 
-	// A list of messages with additional information about the data returned.
-	Messages []*MessageData
-
 	// The timestamps for the data points, formatted in Unix timestamp format. The
 	// number of timestamps always matches the number of values and the value for
 	// Timestamps[x] is Values[x].
 	Timestamps []*time.Time
-
-	// The short name you specified to represent this metric.
-	Id *string
-
-	// The human-readable label associated with the data.
-	Label *string
 
 	// The data points for the metric corresponding to Timestamps. The number of values
 	// always matches the number of timestamps and the timestamp for Values[x] is
@@ -565,20 +565,23 @@ type MetricDataResult struct {
 // be aggregated into an existing metric.
 type MetricDatum struct {
 
-	// When you are using a Put operation, this defines what unit you want to use when
-	// storing the metric. In a Get operation, this displays the unit that is used for
-	// the metric.
-	Unit StandardUnit
+	// The name of the metric.
+	//
+	// This member is required.
+	MetricName *string
 
-	// Array of numbers representing the values for the metric during the period. Each
-	// unique value is listed just once in this array, and the corresponding number in
-	// the Counts array specifies the number of times that value occurred during the
-	// period. You can include up to 150 unique values in each PutMetricData action
-	// that specifies a Values array. Although the Values array accepts numbers of type
-	// Double, CloudWatch rejects values that are either too small or too large. Values
-	// must be in the range of -2^360 to 2^360. In addition, special values (for
-	// example, NaN, +Infinity, -Infinity) are not supported.
-	Values []*float64
+	// Array of numbers that is used along with the Values array. Each number in the
+	// Count array is the number of times the corresponding value in the Values array
+	// occurred during the period. If you omit the Counts array, the default of 1 is
+	// used as the value for each count. If you include a Counts array, it must include
+	// the same amount of values as the Values array.
+	Counts []*float64
+
+	// The dimensions associated with the metric.
+	Dimensions []*Dimension
+
+	// The statistical values for the metric.
+	StatisticValues *StatisticSet
 
 	// Valid values are 1 and 60. Setting this to 1 specifies this metric as a
 	// high-resolution metric, so that CloudWatch stores the metric with sub-minute
@@ -591,33 +594,30 @@ type MetricDatum struct {
 	// specify it the default of 60 is used.
 	StorageResolution *int32
 
-	// The dimensions associated with the metric.
-	Dimensions []*Dimension
-
 	// The time the metric data was received, expressed as the number of milliseconds
 	// since Jan 1, 1970 00:00:00 UTC.
 	Timestamp *time.Time
 
-	// The name of the metric.
-	//
-	// This member is required.
-	MetricName *string
-
-	// The statistical values for the metric.
-	StatisticValues *StatisticSet
-
-	// Array of numbers that is used along with the Values array. Each number in the
-	// Count array is the number of times the corresponding value in the Values array
-	// occurred during the period. If you omit the Counts array, the default of 1 is
-	// used as the value for each count. If you include a Counts array, it must include
-	// the same amount of values as the Values array.
-	Counts []*float64
+	// When you are using a Put operation, this defines what unit you want to use when
+	// storing the metric. In a Get operation, this displays the unit that is used for
+	// the metric.
+	Unit StandardUnit
 
 	// The value for the metric. Although the parameter accepts numbers of type Double,
 	// CloudWatch rejects values that are either too small or too large. Values must be
 	// in the range of -2^360 to 2^360. In addition, special values (for example, NaN,
 	// +Infinity, -Infinity) are not supported.
 	Value *float64
+
+	// Array of numbers representing the values for the metric during the period. Each
+	// unique value is listed just once in this array, and the corresponding number in
+	// the Counts array specifies the number of times that value occurred during the
+	// period. You can include up to 150 unique values in each PutMetricData action
+	// that specifies a Values array. Although the Values array accepts numbers of type
+	// Double, CloudWatch rejects values that are either too small or too large. Values
+	// must be in the range of -2^360 to 2^360. In addition, special values (for
+	// example, NaN, +Infinity, -Infinity) are not supported.
+	Values []*float64
 }
 
 // This structure defines the metric to be returned, along with the statistics,
@@ -651,6 +651,12 @@ type MetricStat struct {
 	// This member is required.
 	Period *int32
 
+	// The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic.
+	//
+	// This member is required.
+	Stat *string
+
 	// When you are using a Put operation, this defines what unit you want to use when
 	// storing the metric. In a Get operation, if you omit Unit then all data that was
 	// collected with any unit is returned, along with the corresponding units that
@@ -659,12 +665,6 @@ type MetricStat struct {
 	// you specify a unit that does not match the data collected, the results of the
 	// operation are null. CloudWatch does not perform unit conversions.
 	Unit StandardUnit
-
-	// The statistic to return. It can include any CloudWatch statistic or extended
-	// statistic.
-	//
-	// This member is required.
-	Stat *string
 }
 
 // This array is empty if the API operation was successful for all the rules
@@ -675,14 +675,14 @@ type PartialFailure struct {
 	// The type of error.
 	ExceptionType *string
 
-	// The specified rule that could not be deleted.
-	FailureResource *string
+	// The code of the error.
+	FailureCode *string
 
 	// A description of the error.
 	FailureDescription *string
 
-	// The code of the error.
-	FailureCode *string
+	// The specified rule that could not be deleted.
+	FailureResource *string
 }
 
 // Specifies one range of days or times to exclude from use for training an anomaly
@@ -705,15 +705,15 @@ type Range struct {
 // Represents a set of statistics that describes a specific metric.
 type StatisticSet struct {
 
-	// The minimum value of the sample set.
-	//
-	// This member is required.
-	Minimum *float64
-
 	// The maximum value of the sample set.
 	//
 	// This member is required.
 	Maximum *float64
+
+	// The minimum value of the sample set.
+	//
+	// This member is required.
+	Minimum *float64
 
 	// The number of samples used for the statistic set.
 	//

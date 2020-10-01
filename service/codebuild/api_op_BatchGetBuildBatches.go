@@ -65,11 +65,11 @@ type BatchGetBuildBatchesInput struct {
 
 type BatchGetBuildBatchesOutput struct {
 
-	// An array that contains the identifiers of any batch builds that are not found.
-	BuildBatchesNotFound []*string
-
 	// An array of BuildBatch objects that represent the retrieved batch builds.
 	BuildBatches []*types.BuildBatch
+
+	// An array that contains the identifiers of any batch builds that are not found.
+	BuildBatchesNotFound []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

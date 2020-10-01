@@ -71,13 +71,13 @@ type CreateCollectionInput struct {
 
 type CreateCollectionOutput struct {
 
-	// Version number of the face detection model associated with the collection you
-	// are creating.
-	FaceModelVersion *string
-
 	// Amazon Resource Name (ARN) of the collection. You can use this to manage
 	// permissions on your resources.
 	CollectionArn *string
+
+	// Version number of the face detection model associated with the collection you
+	// are creating.
+	FaceModelVersion *string
 
 	// HTTP status code indicating the result of the operation.
 	StatusCode *int32

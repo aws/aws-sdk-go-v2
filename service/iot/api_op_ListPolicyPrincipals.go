@@ -58,9 +58,6 @@ func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPri
 // The input for the ListPolicyPrincipals operation.
 type ListPolicyPrincipalsInput struct {
 
-	// The result page size.
-	PageSize *int32
-
 	// The policy name.
 	//
 	// This member is required.
@@ -72,6 +69,9 @@ type ListPolicyPrincipalsInput struct {
 
 	// The marker for the next set of results.
 	Marker *string
+
+	// The result page size.
+	PageSize *int32
 }
 
 // The output from the ListPolicyPrincipals operation.

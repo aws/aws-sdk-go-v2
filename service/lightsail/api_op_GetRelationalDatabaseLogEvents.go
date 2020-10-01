@@ -58,6 +58,17 @@ func (c *Client) GetRelationalDatabaseLogEvents(ctx context.Context, params *Get
 
 type GetRelationalDatabaseLogEventsInput struct {
 
+	// The name of the log stream. Use the get relational database log streams
+	// operation to get a list of available log streams.
+	//
+	// This member is required.
+	LogStreamName *string
+
+	// The name of your database for which to get log events.
+	//
+	// This member is required.
+	RelationalDatabaseName *string
+
 	// The end of the time interval from which to get log events. Constraints:
 	//
 	//     *
@@ -67,21 +78,6 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// format. For example, if you wish to use an end time of October 1, 2018, at 8 PM
 	// UTC, then you input 1538424000 as the end time.  </li> </ul>
 	EndTime *time.Time
-
-	// The name of your database for which to get log events.
-	//
-	// This member is required.
-	RelationalDatabaseName *string
-
-	// The start of the time interval from which to get log events. Constraints:
-	//
-	//     *
-	// Specified in Coordinated Universal Time (UTC).
-	//
-	//     * Specified in the Unix time
-	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
-	// UTC, then you input 1538424000 as the start time.
-	StartTime *time.Time
 
 	// The token to advance to the next or previous page of results from your request.
 	// To get a page token, perform an initial GetRelationalDatabaseLogEvents request.
@@ -96,18 +92,18 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// of false is the only option available.
 	StartFromHead *bool
 
-	// The name of the log stream. Use the get relational database log streams
-	// operation to get a list of available log streams.
+	// The start of the time interval from which to get log events. Constraints:
 	//
-	// This member is required.
-	LogStreamName *string
+	//     *
+	// Specified in Coordinated Universal Time (UTC).
+	//
+	//     * Specified in the Unix time
+	// format. For example, if you wish to use a start time of October 1, 2018, at 8 PM
+	// UTC, then you input 1538424000 as the start time.
+	StartTime *time.Time
 }
 
 type GetRelationalDatabaseLogEventsOutput struct {
-
-	// An object describing the result of your get relational database log events
-	// request.
-	ResourceLogEvents []*types.LogEvent
 
 	// A token used for advancing to the previous page of results from your get
 	// relational database log events request.
@@ -116,6 +112,10 @@ type GetRelationalDatabaseLogEventsOutput struct {
 	// A token used for advancing to the next page of results from your get relational
 	// database log events request.
 	NextForwardToken *string
+
+	// An object describing the result of your get relational database log events
+	// request.
+	ResourceLogEvents []*types.LogEvent
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

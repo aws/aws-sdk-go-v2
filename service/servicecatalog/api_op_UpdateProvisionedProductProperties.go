@@ -59,15 +59,16 @@ func (c *Client) UpdateProvisionedProductProperties(ctx context.Context, params 
 
 type UpdateProvisionedProductPropertiesInput struct {
 
-	// The language code.
+	// The idempotency token that uniquely identifies the provisioning product update
+	// request.
 	//
-	//     * en - English (default)
+	// This member is required.
+	IdempotencyToken *string
+
+	// The identifier of the provisioned product.
 	//
-	//     * jp - Japanese
-	//
-	//     * zh
-	// - Chinese
-	AcceptLanguage *string
+	// This member is required.
+	ProvisionedProductId *string
 
 	// A map that contains the provisioned product properties to be updated. The OWNER
 	// key accepts user ARNs and role ARNs. The owner is the user that is allowed to
@@ -88,25 +89,24 @@ type UpdateProvisionedProductPropertiesInput struct {
 	// This member is required.
 	ProvisionedProductProperties map[string]*string
 
-	// The identifier of the provisioned product.
+	// The language code.
 	//
-	// This member is required.
-	ProvisionedProductId *string
-
-	// The idempotency token that uniquely identifies the provisioning product update
-	// request.
+	//     * en - English (default)
 	//
-	// This member is required.
-	IdempotencyToken *string
+	//     * jp - Japanese
+	//
+	//     * zh
+	// - Chinese
+	AcceptLanguage *string
 }
 
 type UpdateProvisionedProductPropertiesOutput struct {
 
-	// A map that contains the properties updated.
-	ProvisionedProductProperties map[string]*string
-
 	// The provisioned product identifier.
 	ProvisionedProductId *string
+
+	// A map that contains the properties updated.
+	ProvisionedProductProperties map[string]*string
 
 	// The identifier of the record.
 	RecordId *string

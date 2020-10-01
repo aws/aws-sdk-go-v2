@@ -57,8 +57,10 @@ func (c *Client) UpdateServiceAction(ctx context.Context, params *UpdateServiceA
 
 type UpdateServiceActionInput struct {
 
-	// The self-service action name.
-	Name *string
+	// The self-service action identifier.
+	//
+	// This member is required.
+	Id *string
 
 	// The language code.
 	//
@@ -70,16 +72,14 @@ type UpdateServiceActionInput struct {
 	// - Chinese
 	AcceptLanguage *string
 
-	// The self-service action description.
-	Description *string
-
 	// A map that defines the self-service action.
 	Definition map[string]*string
 
-	// The self-service action identifier.
-	//
-	// This member is required.
-	Id *string
+	// The self-service action description.
+	Description *string
+
+	// The self-service action name.
+	Name *string
 }
 
 type UpdateServiceActionOutput struct {

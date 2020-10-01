@@ -57,25 +57,29 @@ func (c *Client) ListResolverEndpointIpAddresses(ctx context.Context, params *Li
 
 type ListResolverEndpointIpAddressesInput struct {
 
-	// For the first ListResolverEndpointIpAddresses request, omit this value. If the
-	// specified resolver endpoint has more than MaxResults IP addresses, you can
-	// submit another ListResolverEndpointIpAddresses request to get the next group of
-	// IP addresses. In the next request, specify the value of NextToken from the
-	// previous response.
-	NextToken *string
+	// The ID of the resolver endpoint that you want to get IP addresses for.
+	//
+	// This member is required.
+	ResolverEndpointId *string
 
 	// The maximum number of IP addresses that you want to return in the response to a
 	// ListResolverEndpointIpAddresses request. If you don't specify a value for
 	// MaxResults, Resolver returns up to 100 IP addresses.
 	MaxResults *int32
 
-	// The ID of the resolver endpoint that you want to get IP addresses for.
-	//
-	// This member is required.
-	ResolverEndpointId *string
+	// For the first ListResolverEndpointIpAddresses request, omit this value. If the
+	// specified resolver endpoint has more than MaxResults IP addresses, you can
+	// submit another ListResolverEndpointIpAddresses request to get the next group of
+	// IP addresses. In the next request, specify the value of NextToken from the
+	// previous response.
+	NextToken *string
 }
 
 type ListResolverEndpointIpAddressesOutput struct {
+
+	// The IP addresses that DNS queries pass through on their way to your network
+	// (outbound endpoint) or on the way to Resolver (inbound endpoint).
+	IpAddresses []*types.IpAddressResponse
 
 	// The value that you specified for MaxResults in the request.
 	MaxResults *int32
@@ -85,10 +89,6 @@ type ListResolverEndpointIpAddressesOutput struct {
 	// addresses. In the next request, specify the value of NextToken from the previous
 	// response.
 	NextToken *string
-
-	// The IP addresses that DNS queries pass through on their way to your network
-	// (outbound endpoint) or on the way to Resolver (inbound endpoint).
-	IpAddresses []*types.IpAddressResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

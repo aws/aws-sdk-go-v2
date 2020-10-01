@@ -63,50 +63,6 @@ func (c *Client) CreateRole(ctx context.Context, params *CreateRoleInput, optFns
 
 type CreateRoleInput struct {
 
-	// A list of tags that you want to attach to the newly created role. Each tag
-	// consists of a key name and an associated value. For more information about
-	// tagging, see Tagging IAM Identities
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
-	// tags per role, then the entire request fails and the role is not created.
-	Tags []*types.Tag
-
-	// The path to the role. For more information about paths, see IAM Identifiers
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
-	// IAM User Guide. This parameter is optional. If it is not included, it defaults
-	// to a slash (/). This parameter allows (through its regex pattern
-	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
-	// forward slash (/) by itself or a string that must begin and end with forward
-	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
-	// through the DEL character (\u007F), including most punctuation characters,
-	// digits, and upper and lowercased letters.
-	Path *string
-
-	// The maximum session duration (in seconds) that you want to set for the specified
-	// role. If you do not specify a value for this setting, the default maximum of one
-	// hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone
-	// who assumes the role from the AWS CLI or API can use the DurationSeconds API
-	// parameter or the duration-seconds CLI parameter to request a longer session. The
-	// MaxSessionDuration setting determines the maximum duration that can be requested
-	// using the DurationSeconds parameter. If users don't specify a value for the
-	// DurationSeconds parameter, their security credentials are valid for one hour by
-	// default. This applies when you use the AssumeRole* API operations or the
-	// assume-role* CLI operations but does not apply when you use those operations to
-	// create a console URL. For more information, see Using IAM Roles
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
-	// User Guide.
-	MaxSessionDuration *int32
-
-	// The name of the role to create. IAM user, group, role, and policy names must be
-	// unique within the account. Names are not distinguished by case. For example, you
-	// cannot create resources named both "MyResource" and "myresource".
-	//
-	// This member is required.
-	RoleName *string
-
-	// A description of the role.
-	Description *string
-
 	// The trust relationship policy document that grants an entity permission to
 	// assume the role.  <p>In IAM, you must provide a JSON policy that has been
 	// converted to a string. However, for AWS CloudFormation templates formatted in
@@ -125,8 +81,52 @@ type CreateRoleInput struct {
 	// This member is required.
 	AssumeRolePolicyDocument *string
 
+	// The name of the role to create. IAM user, group, role, and policy names must be
+	// unique within the account. Names are not distinguished by case. For example, you
+	// cannot create resources named both "MyResource" and "myresource".
+	//
+	// This member is required.
+	RoleName *string
+
+	// A description of the role.
+	Description *string
+
+	// The maximum session duration (in seconds) that you want to set for the specified
+	// role. If you do not specify a value for this setting, the default maximum of one
+	// hour is applied. This setting can have a value from 1 hour to 12 hours. Anyone
+	// who assumes the role from the AWS CLI or API can use the DurationSeconds API
+	// parameter or the duration-seconds CLI parameter to request a longer session. The
+	// MaxSessionDuration setting determines the maximum duration that can be requested
+	// using the DurationSeconds parameter. If users don't specify a value for the
+	// DurationSeconds parameter, their security credentials are valid for one hour by
+	// default. This applies when you use the AssumeRole* API operations or the
+	// assume-role* CLI operations but does not apply when you use those operations to
+	// create a console URL. For more information, see Using IAM Roles
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
+	// User Guide.
+	MaxSessionDuration *int32
+
+	// The path to the role. For more information about paths, see IAM Identifiers
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
+	// IAM User Guide. This parameter is optional. If it is not included, it defaults
+	// to a slash (/). This parameter allows (through its regex pattern
+	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of either a
+	// forward slash (/) by itself or a string that must begin and end with forward
+	// slashes. In addition, it can contain any ASCII character from the ! (\u0021)
+	// through the DEL character (\u007F), including most punctuation characters,
+	// digits, and upper and lowercased letters.
+	Path *string
+
 	// The ARN of the policy that is used to set the permissions boundary for the role.
 	PermissionsBoundary *string
+
+	// A list of tags that you want to attach to the newly created role. Each tag
+	// consists of a key name and an associated value. For more information about
+	// tagging, see Tagging IAM Identities
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
+	// tags per role, then the entire request fails and the role is not created.
+	Tags []*types.Tag
 }
 
 // Contains the response to a successful CreateRole () request.

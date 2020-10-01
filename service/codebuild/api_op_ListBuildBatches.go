@@ -56,6 +56,17 @@ func (c *Client) ListBuildBatches(ctx context.Context, params *ListBuildBatchesI
 
 type ListBuildBatchesInput struct {
 
+	// A BuildBatchFilter object that specifies the filters for the search.
+	Filter *types.BuildBatchFilter
+
+	// The maximum number of results to return.
+	MaxResults *int32
+
+	// The nextToken value returned from a previous call to ListBuildBatches. This
+	// specifies the next item to return. To return the beginning of the list, exclude
+	// this parameter.
+	NextToken *string
+
 	// Specifies the sort order of the returned items. Valid values include:
 	//
 	//     *
@@ -65,27 +76,16 @@ type ListBuildBatchesInput struct {
 	// * DESCENDING: List the batch build identifiers in descending order by
 	// identifier.
 	SortOrder types.SortOrderType
-
-	// The nextToken value returned from a previous call to ListBuildBatches. This
-	// specifies the next item to return. To return the beginning of the list, exclude
-	// this parameter.
-	NextToken *string
-
-	// A BuildBatchFilter object that specifies the filters for the search.
-	Filter *types.BuildBatchFilter
-
-	// The maximum number of results to return.
-	MaxResults *int32
 }
 
 type ListBuildBatchesOutput struct {
 
+	// An array of strings that contains the batch build identifiers.
+	Ids []*string
+
 	// If there are more items to return, this contains a token that is passed to a
 	// subsequent call to ListBuildBatches to retrieve the next set of items.
 	NextToken *string
-
-	// An array of strings that contains the batch build identifiers.
-	Ids []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

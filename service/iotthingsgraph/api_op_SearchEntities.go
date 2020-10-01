@@ -58,6 +58,11 @@ func (c *Client) SearchEntities(ctx context.Context, params *SearchEntitiesInput
 
 type SearchEntitiesInput struct {
 
+	// The entity types for which to search.
+	//
+	// This member is required.
+	EntityTypes []types.EntityType
+
 	// Optional filter to apply to the search. Valid filters are NAMENAMESPACE,
 	// SEMANTIC_TYPE_PATH and REFERENCED_ENTITY_ID. REFERENCED_ENTITY_ID filters on
 	// entities that are used by the entity in the result set. For example, you can
@@ -66,17 +71,12 @@ type SearchEntitiesInput struct {
 	// function as AND criteria.
 	Filters []*types.EntityFilter
 
-	// The entity types for which to search.
-	//
-	// This member is required.
-	EntityTypes []types.EntityType
+	// The maximum number of results to return in the response.
+	MaxResults *int32
 
 	// The version of the user's namespace. Defaults to the latest version of the
 	// user's namespace.
 	NamespaceVersion *int64
-
-	// The maximum number of results to return in the response.
-	MaxResults *int32
 
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
@@ -85,11 +85,11 @@ type SearchEntitiesInput struct {
 
 type SearchEntitiesOutput struct {
 
-	// The string to specify as nextToken when you request the next page of results.
-	NextToken *string
-
 	// An array of descriptions for each entity returned in the search result.
 	Descriptions []*types.EntityDescription
+
+	// The string to specify as nextToken when you request the next page of results.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -59,6 +59,44 @@ func (c *Client) RegisterTaskWithMaintenanceWindow(ctx context.Context, params *
 
 type RegisterTaskWithMaintenanceWindowInput struct {
 
+	// The maximum number of targets this task can be run for in parallel.
+	//
+	// This member is required.
+	MaxConcurrency *string
+
+	// The maximum number of errors allowed before this task stops being scheduled.
+	//
+	// This member is required.
+	MaxErrors *string
+
+	// The targets (either instances or maintenance window targets). Specify instances
+	// using the following format: Key=InstanceIds,Values=, Specify maintenance window
+	// targets using the following format: Key=WindowTargetIds;,Values=,
+	//
+	// This member is required.
+	Targets []*types.Target
+
+	// The ARN of the task to run.
+	//
+	// This member is required.
+	TaskArn *string
+
+	// The type of task being registered.
+	//
+	// This member is required.
+	TaskType types.MaintenanceWindowTaskType
+
+	// The ID of the maintenance window the task should be added to.
+	//
+	// This member is required.
+	WindowId *string
+
+	// User-provided idempotency token.
+	ClientToken *string
+
+	// An optional description for the task.
+	Description *string
+
 	// A structure containing information about an S3 bucket to write instance-level
 	// logs to. LoggingInfo has been deprecated. To specify an S3 bucket to contain
 	// logs, instead use the OutputS3BucketName and OutputS3KeyPrefix options in the
@@ -67,8 +105,13 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// MaintenanceWindowTaskInvocationParameters ().
 	LoggingInfo *types.LoggingInfo
 
-	// User-provided idempotency token.
-	ClientToken *string
+	// An optional name for the task.
+	Name *string
+
+	// The priority of the task in the maintenance window, the lower the number the
+	// higher the priority. Tasks in a maintenance window are scheduled in priority
+	// order with tasks that have the same priority scheduled in parallel.
+	Priority *int32
 
 	// The ARN of the IAM service role for Systems Manager to assume when running a
 	// maintenance window task. If you do not specify a service role ARN, Systems
@@ -87,42 +130,9 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role)
 	ServiceRoleArn *string
 
-	// The targets (either instances or maintenance window targets). Specify instances
-	// using the following format: Key=InstanceIds,Values=, Specify maintenance window
-	// targets using the following format: Key=WindowTargetIds;,Values=,
-	//
-	// This member is required.
-	Targets []*types.Target
-
-	// An optional description for the task.
-	Description *string
-
-	// The ARN of the task to run.
-	//
-	// This member is required.
-	TaskArn *string
-
-	// The maximum number of errors allowed before this task stops being scheduled.
-	//
-	// This member is required.
-	MaxErrors *string
-
-	// The maximum number of targets this task can be run for in parallel.
-	//
-	// This member is required.
-	MaxConcurrency *string
-
-	// The ID of the maintenance window the task should be added to.
-	//
-	// This member is required.
-	WindowId *string
-
 	// The parameters that the task should use during execution. Populate only the
 	// fields that match the task type. All other fields should be empty.
 	TaskInvocationParameters *types.MaintenanceWindowTaskInvocationParameters
-
-	// An optional name for the task.
-	Name *string
 
 	// The parameters that should be passed to the task when it is run. TaskParameters
 	// has been deprecated. To specify parameters to pass to a task when it runs,
@@ -130,16 +140,6 @@ type RegisterTaskWithMaintenanceWindowInput struct {
 	// information about how Systems Manager handles these options for the supported
 	// maintenance window task types, see MaintenanceWindowTaskInvocationParameters ().
 	TaskParameters map[string]*types.MaintenanceWindowTaskParameterValueExpression
-
-	// The priority of the task in the maintenance window, the lower the number the
-	// higher the priority. Tasks in a maintenance window are scheduled in priority
-	// order with tasks that have the same priority scheduled in parallel.
-	Priority *int32
-
-	// The type of task being registered.
-	//
-	// This member is required.
-	TaskType types.MaintenanceWindowTaskType
 }
 
 type RegisterTaskWithMaintenanceWindowOutput struct {

@@ -11,34 +11,34 @@ import (
 // specify both.
 type CreateRule struct {
 
-	// The time, in UTC, to start the operation. The supported format is hh:mm. The
-	// operation occurs within a one-hour window following the specified time. If you
-	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
-	Times []*string
-
 	// The schedule, as a Cron expression. The schedule interval must be between 1 hour
 	// and 1 year. For more information, see Cron expressions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
 	// in the Amazon CloudWatch User Guide.
 	CronExpression *string
 
-	// The interval unit.
-	IntervalUnit IntervalUnitValues
-
 	// The interval between snapshots. The supported values are 1, 2, 3, 4, 6, 8, 12,
 	// and 24.
 	Interval *int32
+
+	// The interval unit.
+	IntervalUnit IntervalUnitValues
+
+	// The time, in UTC, to start the operation. The supported format is hh:mm. The
+	// operation occurs within a one-hour window following the specified time. If you
+	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
+	Times []*string
 }
 
 // Specifies the retention rule for cross-Region snapshot copies.
 type CrossRegionCopyRetainRule struct {
 
-	// The unit of time for time-based retention.
-	IntervalUnit RetentionIntervalUnitValues
-
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval *int32
+
+	// The unit of time for time-based retention.
+	IntervalUnit RetentionIntervalUnitValues
 }
 
 // Specifies a rule for cross-Region snapshot copies.
@@ -52,76 +52,76 @@ type CrossRegionCopyRule struct {
 	// This member is required.
 	Encrypted *bool
 
-	// The retention rule.
-	RetainRule *CrossRegionCopyRetainRule
-
 	// The target Region.
 	//
 	// This member is required.
 	TargetRegion *string
 
-	// Copy all user-defined tags from the source snapshot to the copied snapshot.
-	CopyTags *bool
-
 	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
 	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
 	// EBS is used.
 	CmkArn *string
+
+	// Copy all user-defined tags from the source snapshot to the copied snapshot.
+	CopyTags *bool
+
+	// The retention rule.
+	RetainRule *CrossRegionCopyRetainRule
 }
 
 // Specifies a rule for enabling fast snapshot restore. You can enable fast
 // snapshot restore based on either a count or a time interval.
 type FastRestoreRule struct {
 
+	// The Availability Zones in which to enable fast snapshot restore.
+	//
+	// This member is required.
+	AvailabilityZones []*string
+
 	// The number of snapshots to be enabled with fast snapshot restore.
 	Count *int32
-
-	// The unit of time for enabling fast snapshot restore.
-	IntervalUnit RetentionIntervalUnitValues
 
 	// The amount of time to enable fast snapshot restore. The maximum is 100 years.
 	// This is equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval *int32
 
-	// The Availability Zones in which to enable fast snapshot restore.
-	//
-	// This member is required.
-	AvailabilityZones []*string
+	// The unit of time for enabling fast snapshot restore.
+	IntervalUnit RetentionIntervalUnitValues
 }
 
 // Detailed information about a lifecycle policy.
 type LifecyclePolicy struct {
 
+	// The local date and time when the lifecycle policy was created.
+	DateCreated *time.Time
+
+	// The local date and time when the lifecycle policy was last modified.
+	DateModified *time.Time
+
+	// The description of the lifecycle policy.
+	Description *string
+
+	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
+	// specified by the lifecycle policy.
+	ExecutionRoleArn *string
+
 	// The Amazon Resource Name (ARN) of the policy.
 	PolicyArn *string
+
+	// The configuration of the lifecycle policy
+	PolicyDetails *PolicyDetails
 
 	// The identifier of the lifecycle policy.
 	PolicyId *string
 
-	// The local date and time when the lifecycle policy was last modified.
-	DateModified *time.Time
+	// The activation state of the lifecycle policy.
+	State GettablePolicyStateValues
 
 	// The description of the status.
 	StatusMessage *string
 
 	// The tags.
 	Tags map[string]*string
-
-	// The Amazon Resource Name (ARN) of the IAM role used to run the operations
-	// specified by the lifecycle policy.
-	ExecutionRoleArn *string
-
-	// The activation state of the lifecycle policy.
-	State GettablePolicyStateValues
-
-	// The local date and time when the lifecycle policy was created.
-	DateCreated *time.Time
-
-	// The configuration of the lifecycle policy
-	PolicyDetails *PolicyDetails
-
-	// The description of the lifecycle policy.
-	Description *string
 }
 
 // Summary information about a lifecycle policy.
@@ -130,14 +130,14 @@ type LifecyclePolicySummary struct {
 	// The description of the lifecycle policy.
 	Description *string
 
-	// The tags.
-	Tags map[string]*string
-
 	// The identifier of the lifecycle policy.
 	PolicyId *string
 
 	// The activation state of the lifecycle policy.
 	State GettablePolicyStateValues
+
+	// The tags.
+	Tags map[string]*string
 }
 
 // Specifies optional parameters to add to a policy. The set of valid parameters
@@ -157,13 +157,13 @@ type PolicyDetails struct {
 	// A set of optional parameters for the policy.
 	Parameters *Parameters
 
-	// The resource type. Use VOLUME to create snapshots of individual volumes or use
-	// INSTANCE to create multi-volume snapshots from the volumes for an instance.
-	ResourceTypes []ResourceTypeValues
-
 	// The valid target resource types and actions a policy can manage. The default is
 	// EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues
+
+	// The resource type. Use VOLUME to create snapshots of individual volumes or use
+	// INSTANCE to create multi-volume snapshots from the volumes for an instance.
+	ResourceTypes []ResourceTypeValues
 
 	// The schedule of policy-defined actions.
 	Schedules []*Schedule
@@ -176,32 +176,35 @@ type PolicyDetails struct {
 // based on either a count or a time interval.
 type RetainRule struct {
 
-	// The unit of time for time-based retention.
-	IntervalUnit RetentionIntervalUnitValues
-
 	// The number of snapshots to retain for each volume, up to a maximum of 1000.
 	Count *int32
 
 	// The amount of time to retain each snapshot. The maximum is 100 years. This is
 	// equivalent to 1200 months, 5200 weeks, or 36500 days.
 	Interval *int32
+
+	// The unit of time for time-based retention.
+	IntervalUnit RetentionIntervalUnitValues
 }
 
 // Specifies a backup schedule.
 type Schedule struct {
 
-	// The rule for cross-Region snapshot copies.
-	CrossRegionCopyRules []*CrossRegionCopyRule
-
 	// Copy all user-defined tags on a source volume to snapshots of the volume created
 	// by this policy.
 	CopyTags *bool
 
-	// The name of the schedule.
-	Name *string
+	// The creation rule.
+	CreateRule *CreateRule
+
+	// The rule for cross-Region snapshot copies.
+	CrossRegionCopyRules []*CrossRegionCopyRule
 
 	// The rule for enabling fast snapshot restore.
 	FastRestoreRule *FastRestoreRule
+
+	// The name of the schedule.
+	Name *string
 
 	// The retention rule.
 	RetainRule *RetainRule
@@ -215,9 +218,6 @@ type Schedule struct {
 	// one of the two following formats: $(instance-id) or $(timestamp). Variable tags
 	// are only valid for EBS Snapshot Management – Instance policies.
 	VariableTags []*Tag
-
-	// The creation rule.
-	CreateRule *CreateRule
 }
 
 // Specifies a tag for a resource.

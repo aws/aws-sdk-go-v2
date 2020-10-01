@@ -57,6 +57,24 @@ func (c *Client) UpdateConstraint(ctx context.Context, params *UpdateConstraintI
 
 type UpdateConstraintInput struct {
 
+	// The identifier of the constraint.
+	//
+	// This member is required.
+	Id *string
+
+	// The language code.
+	//
+	//     * en - English (default)
+	//
+	//     * jp - Japanese
+	//
+	//     * zh
+	// - Chinese
+	AcceptLanguage *string
+
+	// The updated description of the constraint.
+	Description *string
+
 	// The constraint parameters, in JSON format. The syntax depends on the constraint
 	// type as follows: LAUNCH You are required to specify either the RoleArn or the
 	// LocalRoleName but can't use both. Specify the RoleArn property as follows:
@@ -83,24 +101,6 @@ type UpdateConstraintInput struct {
 	// more information, see Template Constraint Rules
 	// (http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html).
 	Parameters *string
-
-	// The identifier of the constraint.
-	//
-	// This member is required.
-	Id *string
-
-	// The language code.
-	//
-	//     * en - English (default)
-	//
-	//     * jp - Japanese
-	//
-	//     * zh
-	// - Chinese
-	AcceptLanguage *string
-
-	// The updated description of the constraint.
-	Description *string
 }
 
 type UpdateConstraintOutput struct {

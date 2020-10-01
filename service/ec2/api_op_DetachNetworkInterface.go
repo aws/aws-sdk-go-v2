@@ -57,6 +57,11 @@ func (c *Client) DetachNetworkInterface(ctx context.Context, params *DetachNetwo
 // Contains the parameters for DetachNetworkInterface.
 type DetachNetworkInterfaceInput struct {
 
+	// The ID of the attachment.
+	//
+	// This member is required.
+	AttachmentId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -80,11 +85,6 @@ type DetachNetworkInterfaceInput struct {
 	// detached network interface might still be visible. The instance metadata will
 	// get updated when you stop and start the instance.
 	Force *bool
-
-	// The ID of the attachment.
-	//
-	// This member is required.
-	AttachmentId *string
 }
 
 type DetachNetworkInterfaceOutput struct {

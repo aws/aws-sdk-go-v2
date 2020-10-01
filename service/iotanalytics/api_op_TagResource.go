@@ -58,15 +58,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The new or modified tags for the resource.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The ARN of the resource whose tags you want to modify.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The new or modified tags for the resource.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

@@ -72,22 +72,22 @@ type GetMedicalVocabularyOutput struct {
 	// limited time.
 	DownloadUri *string
 
-	// The processing state of the vocabulary.
-	VocabularyState types.VocabularyState
-
-	// The valid name that Amazon Transcribe Medical returns.
-	VocabularyName *string
-
-	// The date and time the vocabulary was last modified with a text file different
-	// from what was previously used.
-	LastModifiedTime *time.Time
-
 	// If the VocabularyState is FAILED, this field contains information about why the
 	// job failed.
 	FailureReason *string
 
 	// The valid language code returned for your vocabulary entries.
 	LanguageCode types.LanguageCode
+
+	// The date and time the vocabulary was last modified with a text file different
+	// from what was previously used.
+	LastModifiedTime *time.Time
+
+	// The valid name that Amazon Transcribe Medical returns.
+	VocabularyName *string
+
+	// The processing state of the vocabulary.
+	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

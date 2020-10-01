@@ -73,11 +73,11 @@ type GetExternalModelsInput struct {
 
 type GetExternalModelsOutput struct {
 
-	// The next page token to be used in subsequent requests.
-	NextToken *string
-
 	// Gets the Amazon SageMaker models.
 	ExternalModels []*types.ExternalModel
+
+	// The next page token to be used in subsequent requests.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

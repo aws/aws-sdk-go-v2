@@ -80,17 +80,17 @@ type GetQueryResultsOutput struct {
 	// pairs.
 	Results [][]*types.ResultField
 
+	// Includes the number of log events scanned by the query, the number of log events
+	// that matched the query criteria, and the total number of bytes in the log events
+	// that were scanned.
+	Statistics *types.QueryStatistics
+
 	// The status of the most recent running of the query. Possible values are
 	// Cancelled, Complete, Failed, Running, Scheduled, Timeout, and Unknown. Queries
 	// time out after 15 minutes of execution. To avoid having your queries time out,
 	// reduce the time range being searched, or partition your query into a number of
 	// queries.
 	Status types.QueryStatus
-
-	// Includes the number of log events scanned by the query, the number of log events
-	// that matched the query criteria, and the total number of bytes in the log events
-	// that were scanned.
-	Statistics *types.QueryStatistics
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

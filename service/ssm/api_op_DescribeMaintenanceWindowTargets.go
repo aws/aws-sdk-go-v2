@@ -57,23 +57,23 @@ func (c *Client) DescribeMaintenanceWindowTargets(ctx context.Context, params *D
 
 type DescribeMaintenanceWindowTargetsInput struct {
 
+	// The ID of the maintenance window whose targets should be retrieved.
+	//
+	// This member is required.
+	WindowId *string
+
 	// Optional filters that can be used to narrow down the scope of the returned
 	// window targets. The supported filter keys are Type, WindowTargetId and
 	// OwnerInformation.
 	Filters []*types.MaintenanceWindowFilter
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
 
-	// The ID of the maintenance window whose targets should be retrieved.
-	//
-	// This member is required.
-	WindowId *string
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeMaintenanceWindowTargetsOutput struct {

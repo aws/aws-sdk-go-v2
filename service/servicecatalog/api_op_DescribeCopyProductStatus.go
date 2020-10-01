@@ -76,14 +76,14 @@ type DescribeCopyProductStatusInput struct {
 
 type DescribeCopyProductStatusOutput struct {
 
-	// The identifier of the copied product.
-	TargetProductId *string
-
 	// The status of the copy product operation.
 	CopyProductStatus types.CopyProductStatus
 
 	// The status message.
 	StatusDetail *string
+
+	// The identifier of the copied product.
+	TargetProductId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

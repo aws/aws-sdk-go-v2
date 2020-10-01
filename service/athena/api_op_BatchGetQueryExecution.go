@@ -70,11 +70,11 @@ type BatchGetQueryExecutionInput struct {
 
 type BatchGetQueryExecutionOutput struct {
 
-	// Information about the query executions that failed to run.
-	UnprocessedQueryExecutionIds []*types.UnprocessedQueryExecutionId
-
 	// Information about a query execution.
 	QueryExecutions []*types.QueryExecution
+
+	// Information about the query executions that failed to run.
+	UnprocessedQueryExecutionIds []*types.UnprocessedQueryExecutionId
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

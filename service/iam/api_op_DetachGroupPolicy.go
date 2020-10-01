@@ -61,15 +61,6 @@ func (c *Client) DetachGroupPolicy(ctx context.Context, params *DetachGroupPolic
 
 type DetachGroupPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
-	//
-	// This member is required.
-	PolicyArn *string
-
 	// The name (friendly name, not ARN) of the IAM group to detach the policy from.
 	// This parameter allows (through its regex pattern
 	// (http://wikipedia.org/wiki/regex)) a string of characters consisting of upper
@@ -78,6 +69,15 @@ type DetachGroupPolicyInput struct {
 	//
 	// This member is required.
 	GroupName *string
+
+	// The Amazon Resource Name (ARN) of the IAM policy you want to detach. For more
+	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
+	// Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	//
+	// This member is required.
+	PolicyArn *string
 }
 
 type DetachGroupPolicyOutput struct {

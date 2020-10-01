@@ -59,9 +59,6 @@ type CreateUsageReportSubscriptionInput struct {
 
 type CreateUsageReportSubscriptionOutput struct {
 
-	// The schedule for generating usage reports.
-	Schedule types.UsageReportSchedule
-
 	// The Amazon S3 bucket where generated reports are stored.  <p>If you enabled
 	// on-instance session scripts and Amazon S3 logging for your session script
 	// configuration, AppStream 2.0 created an S3 bucket to store the script output.
@@ -70,6 +67,9 @@ type CreateUsageReportSubscriptionOutput struct {
 	// you haven't already enabled on-instance session scripts, when you enable usage
 	// reports, AppStream 2.0 creates a new S3 bucket.</p>
 	S3BucketName *string
+
+	// The schedule for generating usage reports.
+	Schedule types.UsageReportSchedule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

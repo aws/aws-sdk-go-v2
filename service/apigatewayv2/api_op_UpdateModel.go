@@ -67,37 +67,37 @@ type UpdateModelInput struct {
 	// This member is required.
 	ModelId *string
 
-	// The schema for the model. For application/json models, this should be JSON
-	// schema draft 4 model.
-	Schema *string
+	// The content-type for the model, for example, "application/json".
+	ContentType *string
+
+	// The description of the model.
+	Description *string
 
 	// The name of the model.
 	Name *string
 
-	// The content-type for the model, for example, "application/json".
-	ContentType *string
-
-	// The description of the model.
-	Description *string
+	// The schema for the model. For application/json models, this should be JSON
+	// schema draft 4 model.
+	Schema *string
 }
 
 type UpdateModelOutput struct {
 
-	// The schema for the model. For application/json models, this should be JSON
-	// schema draft 4 model.
-	Schema *string
+	// The content-type for the model, for example, "application/json".
+	ContentType *string
 
 	// The description of the model.
 	Description *string
 
-	// The content-type for the model, for example, "application/json".
-	ContentType *string
+	// The model identifier.
+	ModelId *string
 
 	// The name of the model. Must be alphanumeric.
 	Name *string
 
-	// The model identifier.
-	ModelId *string
+	// The schema for the model. For application/json models, this should be JSON
+	// schema draft 4 model.
+	Schema *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

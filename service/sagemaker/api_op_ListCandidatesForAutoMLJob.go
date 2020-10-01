@@ -57,8 +57,20 @@ func (c *Client) ListCandidatesForAutoMLJob(ctx context.Context, params *ListCan
 
 type ListCandidatesForAutoMLJobInput struct {
 
-	// List the Candidates for the job and filter by status.
-	StatusEquals types.CandidateStatus
+	// List the Candidates created for the job by providing the job's name.
+	//
+	// This member is required.
+	AutoMLJobName *string
+
+	// List the Candidates for the job and filter by candidate name.
+	CandidateNameEquals *string
+
+	// List the job's Candidates up to a specified limit.
+	MaxResults *int32
+
+	// If the previous response was truncated, you will receive this token. Use it in
+	// your next request to receive the next set of results.
+	NextToken *string
 
 	// The parameter by which to sort the results. The default is Descending.
 	SortBy types.CandidateSortBy
@@ -66,20 +78,8 @@ type ListCandidatesForAutoMLJobInput struct {
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.AutoMLSortOrder
 
-	// List the job's Candidates up to a specified limit.
-	MaxResults *int32
-
-	// List the Candidates created for the job by providing the job's name.
-	//
-	// This member is required.
-	AutoMLJobName *string
-
-	// If the previous response was truncated, you will receive this token. Use it in
-	// your next request to receive the next set of results.
-	NextToken *string
-
-	// List the Candidates for the job and filter by candidate name.
-	CandidateNameEquals *string
+	// List the Candidates for the job and filter by status.
+	StatusEquals types.CandidateStatus
 }
 
 type ListCandidatesForAutoMLJobOutput struct {

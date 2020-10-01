@@ -59,21 +59,21 @@ func (c *Client) DecreaseReplicationFactor(ctx context.Context, params *Decrease
 
 type DecreaseReplicationFactorInput struct {
 
-	// The new number of nodes for the DAX cluster.
-	//
-	// This member is required.
-	NewReplicationFactor *int32
-
-	// The unique identifiers of the nodes to be removed from the cluster.
-	NodeIdsToRemove []*string
-
 	// The name of the DAX cluster from which you want to remove nodes.
 	//
 	// This member is required.
 	ClusterName *string
 
+	// The new number of nodes for the DAX cluster.
+	//
+	// This member is required.
+	NewReplicationFactor *int32
+
 	// The Availability Zone(s) from which to remove nodes.
 	AvailabilityZones []*string
+
+	// The unique identifiers of the nodes to be removed from the cluster.
+	NodeIdsToRemove []*string
 }
 
 type DecreaseReplicationFactorOutput struct {

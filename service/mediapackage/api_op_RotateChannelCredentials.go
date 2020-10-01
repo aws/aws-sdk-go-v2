@@ -66,20 +66,20 @@ type RotateChannelCredentialsInput struct {
 
 type RotateChannelCredentialsOutput struct {
 
+	// The Amazon Resource Name (ARN) assigned to the Channel.
+	Arn *string
+
 	// A short text description of the Channel.
 	Description *string
+
+	// An HTTP Live Streaming (HLS) ingest resource configuration.
+	HlsIngest *types.HlsIngest
 
 	// The ID of the Channel.
 	Id *string
 
 	// A collection of tags associated with a resource
 	Tags map[string]*string
-
-	// An HTTP Live Streaming (HLS) ingest resource configuration.
-	HlsIngest *types.HlsIngest
-
-	// The Amazon Resource Name (ARN) assigned to the Channel.
-	Arn *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

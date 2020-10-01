@@ -64,10 +64,6 @@ type GetSegmentVersionsInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// The NextToken string that specifies which page of results to return in a
-	// paginated response.
-	Token *string
-
 	// The unique identifier for the segment.
 	//
 	// This member is required.
@@ -76,6 +72,10 @@ type GetSegmentVersionsInput struct {
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
+	// The NextToken string that specifies which page of results to return in a
+	// paginated response.
+	Token *string
 }
 
 type GetSegmentVersionsOutput struct {

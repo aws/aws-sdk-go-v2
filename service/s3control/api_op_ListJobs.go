@@ -78,6 +78,11 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
+	//
+	//
+	// This member is required.
+	AccountId *string
+
 	// The List Jobs request returns jobs that match the statuses listed in this
 	// element.
 	JobStatuses []types.JobStatus
@@ -92,11 +97,6 @@ type ListJobsInput struct {
 	// Amazon S3 returned in the NextToken element of the ListJobsResult from the
 	// previous List Jobs request.
 	NextToken *string
-
-	//
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type ListJobsOutput struct {

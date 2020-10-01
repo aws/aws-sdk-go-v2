@@ -58,15 +58,15 @@ func (c *Client) GetInvalidation(ctx context.Context, params *GetInvalidationInp
 // The request to get an invalidation's information.
 type GetInvalidationInput struct {
 
-	// The identifier for the invalidation request, for example, IDFDVBD632BHDS5.
-	//
-	// This member is required.
-	Id *string
-
 	// The distribution's ID.
 	//
 	// This member is required.
 	DistributionId *string
+
+	// The identifier for the invalidation request, for example, IDFDVBD632BHDS5.
+	//
+	// This member is required.
+	Id *string
 }
 
 // The returned result of the corresponding request.

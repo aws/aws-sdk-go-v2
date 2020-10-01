@@ -57,26 +57,26 @@ func (c *Client) DescribeImportTasks(ctx context.Context, params *DescribeImport
 
 type DescribeImportTasksInput struct {
 
-	// The token to request a specific page of results.
-	NextToken *string
-
-	// The maximum number of results that you want this request to return, up to 100.
-	MaxResults *int32
-
 	// An array of name-value pairs that you provide to filter the results for the
 	// DescribeImportTask request to a specific subset of results. Currently, wildcard
 	// values aren't supported for filters.
 	Filters []*types.ImportTaskFilter
+
+	// The maximum number of results that you want this request to return, up to 100.
+	MaxResults *int32
+
+	// The token to request a specific page of results.
+	NextToken *string
 }
 
 type DescribeImportTasksOutput struct {
 
+	// The token to request the next page of results.
+	NextToken *string
+
 	// A returned array of import tasks that match any applied filters, up to the
 	// specified number of maximum results.
 	Tasks []*types.ImportTask
-
-	// The token to request the next page of results.
-	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

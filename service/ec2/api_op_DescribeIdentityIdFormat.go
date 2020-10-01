@@ -72,6 +72,11 @@ func (c *Client) DescribeIdentityIdFormat(ctx context.Context, params *DescribeI
 
 type DescribeIdentityIdFormatInput struct {
 
+	// The ARN of the principal, which can be an IAM role, IAM user, or the root user.
+	//
+	// This member is required.
+	PrincipalArn *string
+
 	// The type of resource: bundle | conversion-task | customer-gateway | dhcp-options
 	// | elastic-ip-allocation | elastic-ip-association | export-task | flow-log |
 	// image | import-task | instance | internet-gateway | network-acl |
@@ -81,11 +86,6 @@ type DescribeIdentityIdFormatInput struct {
 	// vpc | vpc-cidr-block-association | vpc-endpoint | vpc-peering-connection |
 	// vpn-connection | vpn-gateway
 	Resource *string
-
-	// The ARN of the principal, which can be an IAM role, IAM user, or the root user.
-	//
-	// This member is required.
-	PrincipalArn *string
 }
 
 type DescribeIdentityIdFormatOutput struct {

@@ -60,25 +60,25 @@ func (c *Client) ListRepositoriesInDomain(ctx context.Context, params *ListRepos
 
 type ListRepositoriesInDomainInput struct {
 
-	// The token for the next set of results. Use the value returned in the previous
-	// response in the next request to retrieve the next set of results.
-	NextToken *string
+	// The name of the domain that contains the returned list of repositories.
+	//
+	// This member is required.
+	Domain *string
 
 	// Filter the list of repositories to only include those that are managed by the
 	// AWS account ID.
 	AdministratorAccount *string
 
-	// The maximum number of results to return per page.
-	MaxResults *int32
-
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
 
-	// The name of the domain that contains the returned list of repositories.
-	//
-	// This member is required.
-	Domain *string
+	// The maximum number of results to return per page.
+	MaxResults *int32
+
+	// The token for the next set of results. Use the value returned in the previous
+	// response in the next request to retrieve the next set of results.
+	NextToken *string
 
 	// A prefix used to filter returned repositories. Only repositories with names that
 	// start with repositoryPrefix are returned.

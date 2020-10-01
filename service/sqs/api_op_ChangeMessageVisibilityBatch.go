@@ -86,15 +86,15 @@ type ChangeMessageVisibilityBatchInput struct {
 // BatchResultErrorEntry () tag if the message fails.
 type ChangeMessageVisibilityBatchOutput struct {
 
-	// A list of ChangeMessageVisibilityBatchResultEntry () items.
-	//
-	// This member is required.
-	Successful []*types.ChangeMessageVisibilityBatchResultEntry
-
 	// A list of BatchResultErrorEntry () items.
 	//
 	// This member is required.
 	Failed []*types.BatchResultErrorEntry
+
+	// A list of ChangeMessageVisibilityBatchResultEntry () items.
+	//
+	// This member is required.
+	Successful []*types.ChangeMessageVisibilityBatchResultEntry
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

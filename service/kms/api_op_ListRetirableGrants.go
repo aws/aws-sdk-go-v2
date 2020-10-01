@@ -59,18 +59,6 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 
 type ListRetirableGrantsInput struct {
 
-	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 100, inclusive. If you do not include a value,
-	// it defaults to 50.
-	Limit *int32
-
-	// Use this parameter in a subsequent request after you receive a response with
-	// truncated results. Set it to the value of NextMarker from the truncated response
-	// you just received.
-	Marker *string
-
 	// The retiring principal for which to list grants. To specify the retiring
 	// principal, use the Amazon Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
@@ -82,6 +70,18 @@ type ListRetirableGrantsInput struct {
 	//
 	// This member is required.
 	RetiringPrincipal *string
+
+	// Use this parameter to specify the maximum number of items to return. When this
+	// value is present, AWS KMS does not return more than the specified number of
+	// items, but it might return fewer. This value is optional. If you include a
+	// value, it must be between 1 and 100, inclusive. If you do not include a value,
+	// it defaults to 50.
+	Limit *int32
+
+	// Use this parameter in a subsequent request after you receive a response with
+	// truncated results. Set it to the value of NextMarker from the truncated response
+	// you just received.
+	Marker *string
 }
 
 type ListRetirableGrantsOutput struct {

@@ -68,11 +68,9 @@ type RecordHandlerProgressInput struct {
 
 	// Reserved for use by the CloudFormation CLI
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-	CurrentOperationStatus types.OperationStatus
-
-	// Reserved for use by the CloudFormation CLI
-	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-	ErrorCode types.HandlerErrorCode
+	//
+	// This member is required.
+	OperationStatus types.OperationStatus
 
 	// Reserved for use by the CloudFormation CLI
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
@@ -80,9 +78,11 @@ type RecordHandlerProgressInput struct {
 
 	// Reserved for use by the CloudFormation CLI
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
-	//
-	// This member is required.
-	OperationStatus types.OperationStatus
+	CurrentOperationStatus types.OperationStatus
+
+	// Reserved for use by the CloudFormation CLI
+	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).
+	ErrorCode types.HandlerErrorCode
 
 	// Reserved for use by the CloudFormation CLI
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html).

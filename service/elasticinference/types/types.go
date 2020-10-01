@@ -5,14 +5,14 @@ package types
 // The details of an Elastic Inference Accelerator type.
 type AcceleratorType struct {
 
-	// The throughput information of the Elastic Inference Accelerator type.
-	ThroughputInfo []*KeyValuePair
-
 	// The name of the Elastic Inference Accelerator type.
 	AcceleratorTypeName *string
 
 	// The memory information of the Elastic Inference Accelerator type.
 	MemoryInfo *MemoryInfo
+
+	// The throughput information of the Elastic Inference Accelerator type.
+	ThroughputInfo []*KeyValuePair
 }
 
 // The offering for an Elastic Inference Accelerator type.
@@ -37,20 +37,20 @@ type AcceleratorTypeOffering struct {
 // The details of an Elastic Inference Accelerator.
 type ElasticInferenceAccelerator struct {
 
-	// The type of the Elastic Inference Accelerator.
-	AcceleratorType *string
-
-	// The availability zone where the Elastic Inference Accelerator is present.
-	AvailabilityZone *string
+	// The health of the Elastic Inference Accelerator.
+	AcceleratorHealth *ElasticInferenceAcceleratorHealth
 
 	// The ID of the Elastic Inference Accelerator.
 	AcceleratorId *string
 
+	// The type of the Elastic Inference Accelerator.
+	AcceleratorType *string
+
 	// The ARN of the resource that the Elastic Inference Accelerator is attached to.
 	AttachedResource *string
 
-	// The health of the Elastic Inference Accelerator.
-	AcceleratorHealth *ElasticInferenceAcceleratorHealth
+	// The availability zone where the Elastic Inference Accelerator is present.
+	AvailabilityZone *string
 }
 
 // The health details of an Elastic Inference Accelerator.
@@ -63,13 +63,13 @@ type ElasticInferenceAcceleratorHealth struct {
 // A filter expression for the Elastic Inference Accelerator list.
 type Filter struct {
 
-	// The values for the filter of the Elastic Inference Accelerator list.
-	Values []*string
-
 	// The filter name for the Elastic Inference Accelerator list. It can assume the
 	// following values: accelerator-type: the type of Elastic Inference Accelerator to
 	// filter for. instance-id: an EC2 instance id to filter for.
 	Name *string
+
+	// The values for the filter of the Elastic Inference Accelerator list.
+	Values []*string
 }
 
 // A throughput entry for an Elastic Inference Accelerator type.

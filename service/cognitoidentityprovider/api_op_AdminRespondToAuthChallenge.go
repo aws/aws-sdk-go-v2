@@ -59,6 +59,50 @@ func (c *Client) AdminRespondToAuthChallenge(ctx context.Context, params *AdminR
 // The request to respond to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeInput struct {
 
+	// The challenge name. For more information, see .
+	//
+	// This member is required.
+	ChallengeName types.ChallengeNameType
+
+	// The app client ID.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The ID of the Amazon Cognito user pool.
+	//
+	// This member is required.
+	UserPoolId *string
+
+	// The analytics metadata for collecting Amazon Pinpoint metrics for
+	// AdminRespondToAuthChallenge calls.
+	AnalyticsMetadata *types.AnalyticsMetadataType
+
+	// The challenge responses. These are inputs corresponding to the value of
+	// ChallengeName, for example:
+	//
+	//     * SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH
+	// (if app client is configured with client secret).
+	//
+	//     * PASSWORD_VERIFIER:
+	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME,
+	// SECRET_HASH (if app client is configured with client secret).
+	//
+	//     *
+	// ADMIN_NO_SRP_AUTH: PASSWORD, USERNAME, SECRET_HASH (if app client is configured
+	// with client secret).
+	//
+	//     * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other
+	// required attributes, USERNAME, SECRET_HASH (if app client is configured with
+	// client secret).
+	//
+	// The value of the USERNAME attribute must be the user's actual
+	// username, not an alias (such as email address or phone number). To make this
+	// easier, the AdminInitiateAuth response includes the actual username value in the
+	// USERNAMEUSER_ID_FOR_SRP attribute, even if you specified an alias in your call
+	// to AdminInitiateAuth.
+	ChallengeResponses map[string]*string
+
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
 	// AWS Lambda functions to user pool triggers. When you use the
@@ -90,44 +134,10 @@ type AdminRespondToAuthChallengeInput struct {
 	// ClientMetadata value, so don't use it to provide sensitive information.
 	ClientMetadata map[string]*string
 
-	// The challenge responses. These are inputs corresponding to the value of
-	// ChallengeName, for example:
-	//
-	//     * SMS_MFA: SMS_MFA_CODE, USERNAME, SECRET_HASH
-	// (if app client is configured with client secret).
-	//
-	//     * PASSWORD_VERIFIER:
-	// PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, TIMESTAMP, USERNAME,
-	// SECRET_HASH (if app client is configured with client secret).
-	//
-	//     *
-	// ADMIN_NO_SRP_AUTH: PASSWORD, USERNAME, SECRET_HASH (if app client is configured
-	// with client secret).
-	//
-	//     * NEW_PASSWORD_REQUIRED: NEW_PASSWORD, any other
-	// required attributes, USERNAME, SECRET_HASH (if app client is configured with
-	// client secret).
-	//
-	// The value of the USERNAME attribute must be the user's actual
-	// username, not an alias (such as email address or phone number). To make this
-	// easier, the AdminInitiateAuth response includes the actual username value in the
-	// USERNAMEUSER_ID_FOR_SRP attribute, even if you specified an alias in your call
-	// to AdminInitiateAuth.
-	ChallengeResponses map[string]*string
-
 	// Contextual data such as the user's device fingerprint, IP address, or location
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	ContextData *types.ContextDataType
-
-	// The challenge name. For more information, see .
-	//
-	// This member is required.
-	ChallengeName types.ChallengeNameType
-
-	// The analytics metadata for collecting Amazon Pinpoint metrics for
-	// AdminRespondToAuthChallenge calls.
-	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If InitiateAuth or RespondToAuthChallenge API call determines that the
@@ -135,29 +145,19 @@ type AdminRespondToAuthChallengeInput struct {
 	// challenge parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
-
-	// The ID of the Amazon Cognito user pool.
-	//
-	// This member is required.
-	UserPoolId *string
-
-	// The app client ID.
-	//
-	// This member is required.
-	ClientId *string
 }
 
 // Responds to the authentication challenge, as an administrator.
 type AdminRespondToAuthChallengeOutput struct {
-
-	// The challenge parameters. For more information, see .
-	ChallengeParameters map[string]*string
 
 	// The result returned by the server in response to the authentication request.
 	AuthenticationResult *types.AuthenticationResultType
 
 	// The name of the challenge. For more information, see .
 	ChallengeName types.ChallengeNameType
+
+	// The challenge parameters. For more information, see .
+	ChallengeParameters map[string]*string
 
 	// The session which should be passed both ways in challenge-response calls to the
 	// service. If the or API call determines that the caller needs to go through

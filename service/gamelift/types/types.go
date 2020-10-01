@@ -23,20 +23,15 @@ import (
 //     * ResolveAlias ()
 type Alias struct {
 
-	// The routing configuration, including routing type and fleet target, for the
-	// alias.
-	RoutingStrategy *RoutingStrategy
-
-	// The time that this data object was last modified. Format is a number expressed
-	// in Unix time as milliseconds (for example "1469498468.057").
-	LastUpdatedTime *time.Time
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift alias resource and uniquely identifies it. ARNs
+	// are unique across all Regions. In a GameLift alias ARN, the resource ID matches
+	// the alias ID value.
+	AliasArn *string
 
 	// A unique identifier for an alias. Alias IDs are unique within a Region.
 	AliasId *string
-
-	// A descriptive label that is associated with an alias. Alias names do not need to
-	// be unique.
-	Name *string
 
 	// A time stamp indicating when this data object was created. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
@@ -45,12 +40,17 @@ type Alias struct {
 	// A human-readable description of an alias.
 	Description *string
 
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift alias resource and uniquely identifies it. ARNs
-	// are unique across all Regions. In a GameLift alias ARN, the resource ID matches
-	// the alias ID value.
-	AliasArn *string
+	// The time that this data object was last modified. Format is a number expressed
+	// in Unix time as milliseconds (for example "1469498468.057").
+	LastUpdatedTime *time.Time
+
+	// A descriptive label that is associated with an alias. Alias names do not need to
+	// be unique.
+	Name *string
+
+	// The routing configuration, including routing type and fleet target, for the
+	// alias.
+	RoutingStrategy *RoutingStrategy
 }
 
 // Values for use in Player () attribute key-value pairs. This object lets you
@@ -59,20 +59,20 @@ type Alias struct {
 // available properties.
 type AttributeValue struct {
 
-	// For a list of up to 10 strings. Maximum length for each string is 100
-	// characters. Duplicate values are not recognized; all occurrences of the repeated
-	// value after the first of a repeated value are ignored.
-	SL []*string
+	// For number values, expressed as double.
+	N *float64
+
+	// For single string values. Maximum string length is 100 characters.
+	S *string
 
 	// For a map of up to 10 data type:value pairs. Maximum length for each string
 	// value is 100 characters.
 	SDM map[string]*float64
 
-	// For single string values. Maximum string length is 100 characters.
-	S *string
-
-	// For number values, expressed as double.
-	N *float64
+	// For a list of up to 10 strings. Maximum length for each string is 100
+	// characters. Duplicate values are not recognized; all occurrences of the repeated
+	// value after the first of a repeated value are ignored.
+	SL []*string
 }
 
 // Temporary access credentials used for uploading game build files to Amazon
@@ -83,12 +83,12 @@ type AwsCredentials struct {
 	// Temporary key allowing access to the Amazon GameLift S3 account.
 	AccessKeyId *string
 
+	// Temporary secret key allowing access to the Amazon GameLift S3 account.
+	SecretAccessKey *string
+
 	// Token used to associate a specific build ID with the files uploaded using these
 	// credentials.
 	SessionToken *string
-
-	// Temporary secret key allowing access to the Amazon GameLift S3 account.
-	SecretAccessKey *string
 }
 
 // Properties describing a custom game build. Related operations
@@ -106,8 +106,31 @@ type AwsCredentials struct {
 // DeleteBuild ()
 type Build struct {
 
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift build resource and uniquely identifies it. ARNs
+	// are unique across all Regions. In a GameLift build ARN, the resource ID matches
+	// the BuildId value.
+	BuildArn *string
+
 	// A unique identifier for a build.
 	BuildId *string
+
+	// Time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
+
+	// A descriptive label that is associated with a build. Build names do not need to
+	// be unique. It can be set using CreateBuild () or UpdateBuild ().
+	Name *string
+
+	// Operating system that the game server binaries are built to run on. This value
+	// determines the type of fleet resources that you can use for this build.
+	OperatingSystem OperatingSystem
+
+	// File size of the uploaded game build, expressed in bytes. When the build status
+	// is INITIALIZED, this value is 0.
+	SizeOnDisk *int64
 
 	// Current status of the build. Possible build statuses include the following:
 	//
@@ -128,29 +151,6 @@ type Build struct {
 	// do not need to be unique. This value can be set using CreateBuild () or
 	// UpdateBuild ().
 	Version *string
-
-	// A descriptive label that is associated with a build. Build names do not need to
-	// be unique. It can be set using CreateBuild () or UpdateBuild ().
-	Name *string
-
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift build resource and uniquely identifies it. ARNs
-	// are unique across all Regions. In a GameLift build ARN, the resource ID matches
-	// the BuildId value.
-	BuildArn *string
-
-	// Time stamp indicating when this data object was created. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
-
-	// File size of the uploaded game build, expressed in bytes. When the build status
-	// is INITIALIZED, this value is 0.
-	SizeOnDisk *int64
-
-	// Operating system that the game server binaries are built to run on. This value
-	// determines the type of fleet resources that you can use for this build.
-	OperatingSystem OperatingSystem
 }
 
 // Information about the use of a TLS/SSL certificate for a fleet. TLS certificate
@@ -201,12 +201,11 @@ type DesiredPlayerSession struct {
 // StartFleetActions () or StopFleetActions ()
 type EC2InstanceCounts struct {
 
-	// Number of instances in the fleet that are no longer active but haven't yet been
-	// terminated.
-	TERMINATING *int32
-
 	// Actual number of active instances in the fleet.
 	ACTIVE *int32
+
+	// Ideal number of active instances in the fleet.
+	DESIRED *int32
 
 	// Number of active instances in the fleet that are not currently hosting a game
 	// session.
@@ -215,14 +214,15 @@ type EC2InstanceCounts struct {
 	// The maximum value allowed for the fleet's instance count.
 	MAXIMUM *int32
 
+	// The minimum value allowed for the fleet's instance count.
+	MINIMUM *int32
+
 	// Number of instances in the fleet that are starting but not yet active.
 	PENDING *int32
 
-	// Ideal number of active instances in the fleet.
-	DESIRED *int32
-
-	// The minimum value allowed for the fleet's instance count.
-	MINIMUM *int32
+	// Number of instances in the fleet that are no longer active but haven't yet been
+	// terminated.
+	TERMINATING *int32
 }
 
 // The maximum number of instances allowed based on the Amazon Elastic Compute
@@ -249,24 +249,6 @@ type EC2InstanceLimit struct {
 // fleet). In addition to tracking activity, event codes and messages can provide
 // additional information for troubleshooting and debugging problems.
 type Event struct {
-
-	// A unique identifier for a fleet event.
-	EventId *string
-
-	// Location of stored logs with additional detail that is related to the event.
-	// This is useful for debugging issues. The URL is valid for 15 minutes. You can
-	// also access fleet creation logs through the Amazon GameLift console.
-	PreSignedLogUrl *string
-
-	// A unique identifier for an event resource, such as a fleet ID.
-	ResourceId *string
-
-	// Additional information related to the event.
-	Message *string
-
-	// Time stamp indicating when this event occurred. Format is a number expressed in
-	// Unix time as milliseconds (for example "1469498468.057").
-	EventTime *time.Time
 
 	// The type of event being logged. Fleet creation events (ordered by fleet creation
 	// activity):
@@ -346,6 +328,24 @@ type Event struct {
 	// delete a fleet was initiated.</p> </li> <li> <p> GENERIC_EVENT -- An unspecified
 	// event has occurred.</p> </li> </ul>
 	EventCode EventCode
+
+	// A unique identifier for a fleet event.
+	EventId *string
+
+	// Time stamp indicating when this event occurred. Format is a number expressed in
+	// Unix time as milliseconds (for example "1469498468.057").
+	EventTime *time.Time
+
+	// Additional information related to the event.
+	Message *string
+
+	// Location of stored logs with additional detail that is related to the event.
+	// This is useful for debugging issues. The URL is valid for 15 minutes. You can
+	// also access fleet creation logs through the Amazon GameLift console.
+	PreSignedLogUrl *string
+
+	// A unique identifier for an event resource, such as a fleet ID.
+	ResourceId *string
 }
 
 // General properties describing a fleet.
@@ -365,9 +365,114 @@ type Event struct {
 //     * StartFleetActions () or StopFleetActions ()
 type FleetAttributes struct {
 
-	// List of fleet actions that have been suspended using StopFleetActions (). This
-	// includes auto-scaling.
-	StoppedActions []FleetAction
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift build resource that is deployed on instances in
+	// this fleet. In a GameLift build ARN, the resource ID matches the BuildId value.
+	BuildArn *string
+
+	// A unique identifier for a build.
+	BuildId *string
+
+	// Indicates whether a TLS/SSL certificate was generated for the fleet.
+	CertificateConfiguration *CertificateConfiguration
+
+	// Time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
+
+	// Human-readable description of the fleet.
+	Description *string
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
+	// are unique across all Regions. In a GameLift fleet ARN, the resource ID matches
+	// the FleetId value.
+	FleetArn *string
+
+	// A unique identifier for a fleet.
+	FleetId *string
+
+	// Indicates whether the fleet uses on-demand or spot instances. A spot instance in
+	// use may be interrupted with a two-minute notification.
+	FleetType FleetType
+
+	// A unique identifier for an AWS IAM role that manages access to your AWS
+	// services. With an instance role ARN set, any application that runs on an
+	// instance in this fleet can assume the role, including install scripts, server
+	// processes, and daemons (background processes). Create a role or look up a role's
+	// ARN from the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS
+	// Management Console. Learn more about using on-box credentials for your game
+	// servers at  Access external resources from a game server
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
+	InstanceRoleArn *string
+
+	// EC2 instance type indicating the computing resources of each instance in the
+	// fleet, including CPU, memory, storage, and networking capacity. See Amazon EC2
+	// Instance Types (http://aws.amazon.com/ec2/instance-types/) for detailed
+	// descriptions.
+	InstanceType EC2InstanceType
+
+	// Location of default log files. When a server process is shut down, Amazon
+	// GameLift captures and stores any log files in this location. These logs are in
+	// addition to game session logs; see more on game session logs in the Amazon
+	// GameLift Developer Guide
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code).
+	// If no default log path for a fleet is specified, Amazon GameLift automatically
+	// uploads logs that are stored on each instance at C:\game\logs (for Windows) or
+	// /local/game/logs (for Linux). Use the Amazon GameLift console to access stored
+	// logs.
+	LogPaths []*string
+
+	// Names of metric groups that this fleet is included in. In Amazon CloudWatch, you
+	// can view metrics for an individual fleet or aggregated metrics for fleets that
+	// are in a fleet metric group. A fleet can be included in only one metric group at
+	// a time.
+	MetricGroups []*string
+
+	// A descriptive label that is associated with a fleet. Fleet names do not need to
+	// be unique.
+	Name *string
+
+	// The type of game session protection to set for all new instances started in the
+	// fleet.
+	//
+	//     * NoProtection -- The game session can be terminated during a
+	// scale-down event.
+	//
+	//     * FullProtection -- If the game session is in an ACTIVE
+	// status, it cannot be terminated during a scale-down event.
+	NewGameSessionProtectionPolicy ProtectionPolicy
+
+	// Operating system of the fleet's computing resources. A fleet's operating system
+	// depends on the OS specified for the build that is deployed on this fleet.
+	OperatingSystem OperatingSystem
+
+	// Fleet policy to limit the number of game sessions an individual player can
+	// create over a span of time.
+	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift script resource that is deployed on instances in
+	// this fleet. In a GameLift script ARN, the resource ID matches the ScriptId
+	// value.
+	ScriptArn *string
+
+	// A unique identifier for a Realtime script.
+	ScriptId *string
+
+	// Game server launch parameters specified for fleets created before 2016-08-04 (or
+	// AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date
+	// are specified in the fleet's RuntimeConfiguration ().
+	ServerLaunchParameters *string
+
+	// Path to a game server executable in the fleet's build, specified for fleets
+	// created before 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for
+	// fleets created after this date are specified in the fleet's RuntimeConfiguration
+	// ().
+	ServerLaunchPath *string
 
 	// Current status of the fleet. Possible fleet statuses include the following:
 	//
@@ -391,118 +496,13 @@ type FleetAttributes struct {
 	//     * TERMINATED -- The fleet no longer exists.
 	Status FleetStatus
 
-	// Human-readable description of the fleet.
-	Description *string
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// associated with the GameLift script resource that is deployed on instances in
-	// this fleet. In a GameLift script ARN, the resource ID matches the ScriptId
-	// value.
-	ScriptArn *string
-
-	// Indicates whether the fleet uses on-demand or spot instances. A spot instance in
-	// use may be interrupted with a two-minute notification.
-	FleetType FleetType
-
-	// The type of game session protection to set for all new instances started in the
-	// fleet.
-	//
-	//     * NoProtection -- The game session can be terminated during a
-	// scale-down event.
-	//
-	//     * FullProtection -- If the game session is in an ACTIVE
-	// status, it cannot be terminated during a scale-down event.
-	NewGameSessionProtectionPolicy ProtectionPolicy
-
-	// Fleet policy to limit the number of game sessions an individual player can
-	// create over a span of time.
-	ResourceCreationLimitPolicy *ResourceCreationLimitPolicy
-
-	// A unique identifier for a Realtime script.
-	ScriptId *string
-
-	// Location of default log files. When a server process is shut down, Amazon
-	// GameLift captures and stores any log files in this location. These logs are in
-	// addition to game session logs; see more on game session logs in the Amazon
-	// GameLift Developer Guide
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-api-server-code).
-	// If no default log path for a fleet is specified, Amazon GameLift automatically
-	// uploads logs that are stored on each instance at C:\game\logs (for Windows) or
-	// /local/game/logs (for Linux). Use the Amazon GameLift console to access stored
-	// logs.
-	LogPaths []*string
+	// List of fleet actions that have been suspended using StopFleetActions (). This
+	// includes auto-scaling.
+	StoppedActions []FleetAction
 
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time
-
-	// Path to a game server executable in the fleet's build, specified for fleets
-	// created before 2016-08-04 (or AWS SDK v. 0.12.16). Server launch paths for
-	// fleets created after this date are specified in the fleet's RuntimeConfiguration
-	// ().
-	ServerLaunchPath *string
-
-	// A descriptive label that is associated with a fleet. Fleet names do not need to
-	// be unique.
-	Name *string
-
-	// Names of metric groups that this fleet is included in. In Amazon CloudWatch, you
-	// can view metrics for an individual fleet or aggregated metrics for fleets that
-	// are in a fleet metric group. A fleet can be included in only one metric group at
-	// a time.
-	MetricGroups []*string
-
-	// A unique identifier for a build.
-	BuildId *string
-
-	// A unique identifier for a fleet.
-	FleetId *string
-
-	// A unique identifier for an AWS IAM role that manages access to your AWS
-	// services. With an instance role ARN set, any application that runs on an
-	// instance in this fleet can assume the role, including install scripts, server
-	// processes, and daemons (background processes). Create a role or look up a role's
-	// ARN from the IAM dashboard (https://console.aws.amazon.com/iam/) in the AWS
-	// Management Console. Learn more about using on-box credentials for your game
-	// servers at  Access external resources from a game server
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-resources.html).
-	InstanceRoleArn *string
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// associated with the GameLift build resource that is deployed on instances in
-	// this fleet. In a GameLift build ARN, the resource ID matches the BuildId value.
-	BuildArn *string
-
-	// Indicates whether a TLS/SSL certificate was generated for the fleet.
-	CertificateConfiguration *CertificateConfiguration
-
-	// Game server launch parameters specified for fleets created before 2016-08-04 (or
-	// AWS SDK v. 0.12.16). Server launch parameters for fleets created after this date
-	// are specified in the fleet's RuntimeConfiguration ().
-	ServerLaunchParameters *string
-
-	// EC2 instance type indicating the computing resources of each instance in the
-	// fleet, including CPU, memory, storage, and networking capacity. See Amazon EC2
-	// Instance Types (http://aws.amazon.com/ec2/instance-types/) for detailed
-	// descriptions.
-	InstanceType EC2InstanceType
-
-	// Operating system of the fleet's computing resources. A fleet's operating system
-	// depends on the OS specified for the build that is deployed on this fleet.
-	OperatingSystem OperatingSystem
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift fleet resource and uniquely identifies it. ARNs
-	// are unique across all Regions. In a GameLift fleet ARN, the resource ID matches
-	// the FleetId value.
-	FleetArn *string
-
-	// Time stamp indicating when this data object was created. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
 }
 
 // Information about the fleet's capacity. Fleet capacity is measured in EC2
@@ -525,6 +525,9 @@ type FleetAttributes struct {
 //     * StartFleetActions () or StopFleetActions ()
 type FleetCapacity struct {
 
+	// A unique identifier for a fleet.
+	FleetId *string
+
 	// Current status of fleet capacity.
 	InstanceCounts *EC2InstanceCounts
 
@@ -534,9 +537,6 @@ type FleetCapacity struct {
 	// supports the following EC2 instance types. See Amazon EC2 Instance Types
 	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions.
 	InstanceType EC2InstanceType
-
-	// A unique identifier for a fleet.
-	FleetId *string
 }
 
 // Current status of fleet utilization, including the number of game and player
@@ -557,9 +557,13 @@ type FleetCapacity struct {
 //     * StartFleetActions () or StopFleetActions ()
 type FleetUtilization struct {
 
-	// The maximum number of players allowed across all game sessions currently being
-	// hosted on all instances in the fleet.
-	MaximumPlayerSessionCount *int32
+	// Number of active game sessions currently being hosted on all instances in the
+	// fleet.
+	ActiveGameSessionCount *int32
+
+	// Number of server processes in an ACTIVE status currently running across all
+	// instances in the fleet
+	ActiveServerProcessCount *int32
 
 	// Number of active player sessions currently being hosted on all instances in the
 	// fleet.
@@ -568,13 +572,9 @@ type FleetUtilization struct {
 	// A unique identifier for a fleet.
 	FleetId *string
 
-	// Number of active game sessions currently being hosted on all instances in the
-	// fleet.
-	ActiveGameSessionCount *int32
-
-	// Number of server processes in an ACTIVE status currently running across all
-	// instances in the fleet
-	ActiveServerProcessCount *int32
+	// The maximum number of players allowed across all game sessions currently being
+	// hosted on all instances in the fleet.
+	MaximumPlayerSessionCount *int32
 }
 
 // Set of key-value pairs that contain information about a game session. When
@@ -586,15 +586,15 @@ type FleetUtilization struct {
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-create).
 type GameProperty struct {
 
-	// The game property value.
-	//
-	// This member is required.
-	Value *string
-
 	// The game property identifier.
 	//
 	// This member is required.
 	Key *string
+
+	// The game property value.
+	//
+	// This member is required.
+	Value *string
 }
 
 // This data type is part of Amazon GameLift FleetIQ with game server groups, which
@@ -603,8 +603,55 @@ type GameProperty struct {
 // RegisterGameServer () and deleted by calling DeregisterGameServer ().
 type GameServer struct {
 
+	// Indicates when an available game server has been reserved but has not yet
+	// started hosting a game. Once it is claimed, game server remains in CLAIMED
+	// status for a maximum of one minute. During this time, game clients must connect
+	// to the game server and start the game, which triggers the game server to update
+	// its utilization status. After one minute, the game server claim status reverts
+	// to null.
+	ClaimStatus GameServerClaimStatus
+
+	// The port and IP address that must be used to establish a client connection to
+	// the game server.
+	ConnectionInfo *string
+
+	// A game server tag that can be used to request sorted lists of game servers when
+	// calling ListGameServers (). Custom sort keys are developer-defined. This
+	// property can be updated using UpdateGameServer ().
+	CustomSortKey *string
+
+	// A set of custom game server properties, formatted as a single string value. This
+	// data is passed to a game client or service in response to requests
+	// ListGameServers () or ClaimGameServer (). This property can be updated using
+	// UpdateGameServer ().
+	GameServerData *string
+
+	// The ARN identifier for the game server group where the game server is located.
+	GameServerGroupArn *string
+
+	// The name identifier for the game server group where the game server is located.
+	GameServerGroupName *string
+
+	// A custom string that uniquely identifies the game server. Game server IDs are
+	// developer-defined and are unique across all game server groups in an AWS
+	// account.
+	GameServerId *string
+
 	// The unique identifier for the instance where the game server is located.
 	InstanceId *string
+
+	// Time stamp indicating the last time the game server was claimed with a
+	// ClaimGameServer () request. Format is a number expressed in Unix time as
+	// milliseconds (for example "1469498468.057"). This value is used to calculate
+	// when the game server's claim status.
+	LastClaimTime *time.Time
+
+	// Time stamp indicating the last time the game server was updated with health
+	// status using an UpdateGameServer () request. Format is a number expressed in
+	// Unix time as milliseconds (for example "1469498468.057"). After game server
+	// registration, this property is only changed when a game server update specifies
+	// a health check value.
+	LastHealthCheckTime *time.Time
 
 	// Time stamp indicating when the game server resource was created with a
 	// RegisterGameServer () request. Format is a number expressed in Unix time as
@@ -621,53 +668,6 @@ type GameServer struct {
 	//     * IN_USE - The game server is currently
 	// hosting a game session with players.
 	UtilizationStatus GameServerUtilizationStatus
-
-	// A custom string that uniquely identifies the game server. Game server IDs are
-	// developer-defined and are unique across all game server groups in an AWS
-	// account.
-	GameServerId *string
-
-	// The ARN identifier for the game server group where the game server is located.
-	GameServerGroupArn *string
-
-	// Time stamp indicating the last time the game server was updated with health
-	// status using an UpdateGameServer () request. Format is a number expressed in
-	// Unix time as milliseconds (for example "1469498468.057"). After game server
-	// registration, this property is only changed when a game server update specifies
-	// a health check value.
-	LastHealthCheckTime *time.Time
-
-	// Indicates when an available game server has been reserved but has not yet
-	// started hosting a game. Once it is claimed, game server remains in CLAIMED
-	// status for a maximum of one minute. During this time, game clients must connect
-	// to the game server and start the game, which triggers the game server to update
-	// its utilization status. After one minute, the game server claim status reverts
-	// to null.
-	ClaimStatus GameServerClaimStatus
-
-	// The port and IP address that must be used to establish a client connection to
-	// the game server.
-	ConnectionInfo *string
-
-	// A set of custom game server properties, formatted as a single string value. This
-	// data is passed to a game client or service in response to requests
-	// ListGameServers () or ClaimGameServer (). This property can be updated using
-	// UpdateGameServer ().
-	GameServerData *string
-
-	// The name identifier for the game server group where the game server is located.
-	GameServerGroupName *string
-
-	// Time stamp indicating the last time the game server was claimed with a
-	// ClaimGameServer () request. Format is a number expressed in Unix time as
-	// milliseconds (for example "1469498468.057"). This value is used to calculate
-	// when the game server's claim status.
-	LastClaimTime *time.Time
-
-	// A game server tag that can be used to request sorted lists of game servers when
-	// calling ListGameServers (). Custom sort keys are developer-defined. This
-	// property can be updated using UpdateGameServer ().
-	CustomSortKey *string
 }
 
 // This data type is part of Amazon GameLift FleetIQ with game server groups, which
@@ -680,19 +680,9 @@ type GameServer struct {
 // ResumeGameServerGroup ().
 type GameServerGroup struct {
 
-	// A time stamp indicating when this game server group was last updated.
-	LastUpdatedTime *time.Time
-
-	// Additional information about the current game server group status. This
-	// information may provide additional insight on groups that in ERROR status.
-	StatusReason *string
-
-	// A generated unique ID for the game server group.
-	GameServerGroupArn *string
-
-	// A developer-defined identifier for the game server group. The name is unique per
-	// Region per AWS account.
-	GameServerGroupName *string
+	// A generated unique ID for the EC2 Auto Scaling group with is associated with
+	// this game server group.
+	AutoScalingGroupArn *string
 
 	// The fallback balancing method to use for the game server group when Spot
 	// instances in a Region become unavailable or are not viable for game hosting.
@@ -711,9 +701,16 @@ type GameServerGroup struct {
 	// instances.
 	BalancingStrategy BalancingStrategy
 
-	// A generated unique ID for the EC2 Auto Scaling group with is associated with
-	// this game server group.
-	AutoScalingGroupArn *string
+	// A time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
+
+	// A generated unique ID for the game server group.
+	GameServerGroupArn *string
+
+	// A developer-defined identifier for the game server group. The name is unique per
+	// Region per AWS account.
+	GameServerGroupName *string
 
 	// A flag that indicates whether instances in the game server group are protected
 	// from early termination. Unprotected instances that have active game servers
@@ -723,6 +720,20 @@ type GameServerGroup struct {
 	// deletion (see DeleteGameServerGroup ()). An exception to this is Spot Instances,
 	// which may be terminated by AWS regardless of protection status.
 	GameServerProtectionPolicy GameServerProtectionPolicy
+
+	// The set of EC2 instance types that GameLift FleetIQ can use when rebalancing and
+	// autoscaling instances in the group.
+	InstanceDefinitions []*InstanceDefinition
+
+	// A time stamp indicating when this game server group was last updated.
+	LastUpdatedTime *time.Time
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
+	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
+	// submitted role is validated to ensure that it contains the necessary permissions
+	// for game server groups.
+	RoleArn *string
 
 	// The current status of the game server group. Possible statuses include:
 	//
@@ -752,24 +763,13 @@ type GameServerGroup struct {
 	// state.
 	Status GameServerGroupStatus
 
+	// Additional information about the current game server group status. This
+	// information may provide additional insight on groups that in ERROR status.
+	StatusReason *string
+
 	// A list of activities that are currently suspended for this game server group. If
 	// this property is empty, all activities are occurring.
 	SuspendedActions []GameServerGroupAction
-
-	// The set of EC2 instance types that GameLift FleetIQ can use when rebalancing and
-	// autoscaling instances in the group.
-	InstanceDefinitions []*InstanceDefinition
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access your EC2 Auto Scaling groups. The
-	// submitted role is validated to ensure that it contains the necessary permissions
-	// for game server groups.
-	RoleArn *string
-
-	// A time stamp indicating when this data object was created. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
 }
 
 // This data type is part of Amazon GameLift FleetIQ with game server groups, which
@@ -828,23 +828,17 @@ type GameServerGroupAutoScalingPolicy struct {
 //         * StopGameSessionPlacement ()
 type GameSession struct {
 
-	// Set of custom game session properties, formatted as a single string value. This
-	// data is passed to a game server process in the GameSession () object with a
-	// request to start a new game session (see Start a Game Session
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameSessionData *string
+	// Time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
 
-	// Current status of the game session. A game session must have an ACTIVE status to
-	// have player sessions.
-	Status GameSessionStatus
+	// A unique identifier for a player. This ID is used to enforce a resource
+	// protection policy (if one exists), that limits the number of game sessions a
+	// player can create.
+	CreatorId *string
 
-	// Set of custom properties for a game session, formatted as key:value pairs. These
-	// properties are passed to a game server process in the GameSession () object with
-	// a request to start a new game session (see Start a Game Session
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// You can search for active game sessions based on this custom data with
-	// SearchGameSessions ().
-	GameProperties []*GameProperty
+	// Number of players currently in the game session.
+	CurrentPlayerSessionCount *int32
 
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
@@ -866,6 +860,32 @@ type GameSession struct {
 	// associated with the GameLift fleet that this game session is running on.
 	FleetArn *string
 
+	// A unique identifier for a fleet that the game session is running on.
+	FleetId *string
+
+	// Set of custom properties for a game session, formatted as key:value pairs. These
+	// properties are passed to a game server process in the GameSession () object with
+	// a request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	// You can search for active game sessions based on this custom data with
+	// SearchGameSessions ().
+	GameProperties []*GameProperty
+
+	// Set of custom game session properties, formatted as a single string value. This
+	// data is passed to a game server process in the GameSession () object with a
+	// request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	GameSessionData *string
+
+	// A unique identifier for the game session. A game session ARN has the following
+	// format: arn:aws:gamelift:::gamesession//.
+	GameSessionId *string
+
+	// IP address of the instance that is running the game session. When connecting to
+	// a Amazon GameLift game server, a client needs to reference an IP address (or DNS
+	// name) and port number.
+	IpAddress *string
+
 	// Information about the matchmaking process that was used to create the game
 	// session. It is in JSON syntax, formatted as a string. In addition the
 	// matchmaking configuration used, it contains data on all players assigned to the
@@ -877,53 +897,33 @@ type GameSession struct {
 	// StartMatchBackfill ()).
 	MatchmakerData *string
 
+	// The maximum number of players that can be connected simultaneously to the game
+	// session.
+	MaximumPlayerSessionCount *int32
+
 	// A descriptive label that is associated with a game session. Session names do not
 	// need to be unique.
 	Name *string
 
-	// Number of players currently in the game session.
-	CurrentPlayerSessionCount *int32
+	// Indicates whether or not the game session is accepting new players.
+	PlayerSessionCreationPolicy PlayerSessionCreationPolicy
 
-	// A unique identifier for the game session. A game session ARN has the following
-	// format: arn:aws:gamelift:::gamesession//.
-	GameSessionId *string
+	// Port number for the game session. To connect to a Amazon GameLift game server,
+	// an app needs both the IP address and port number.
+	Port *int32
 
-	// Time stamp indicating when this data object was terminated. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	TerminationTime *time.Time
+	// Current status of the game session. A game session must have an ACTIVE status to
+	// have player sessions.
+	Status GameSessionStatus
 
 	// Provides additional information about game session status. INTERRUPTED indicates
 	// that the game session was hosted on a spot instance that was reclaimed, causing
 	// the active game session to be terminated.
 	StatusReason GameSessionStatusReason
 
-	// Indicates whether or not the game session is accepting new players.
-	PlayerSessionCreationPolicy PlayerSessionCreationPolicy
-
-	// The maximum number of players that can be connected simultaneously to the game
-	// session.
-	MaximumPlayerSessionCount *int32
-
-	// Time stamp indicating when this data object was created. Format is a number
+	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
-
-	// A unique identifier for a player. This ID is used to enforce a resource
-	// protection policy (if one exists), that limits the number of game sessions a
-	// player can create.
-	CreatorId *string
-
-	// Port number for the game session. To connect to a Amazon GameLift game server,
-	// an app needs both the IP address and port number.
-	Port *int32
-
-	// A unique identifier for a fleet that the game session is running on.
-	FleetId *string
-
-	// IP address of the instance that is running the game session. When connecting to
-	// a Amazon GameLift game server, a client needs to reference an IP address (or DNS
-	// name) and port number.
-	IpAddress *string
+	TerminationTime *time.Time
 }
 
 // Connection information for the new game session that is created with
@@ -933,10 +933,6 @@ type GameSession struct {
 // original matchmaking request, is added to the MatchmakingTicket (), which can be
 // retrieved by calling DescribeMatchmaking ().
 type GameSessionConnectionInfo struct {
-
-	// Port number for the game session. To connect to a Amazon GameLift game server,
-	// an app needs both the IP address and port number.
-	Port *int32
 
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
@@ -953,10 +949,6 @@ type GameSessionConnectionInfo struct {
 	// use the DNS name, not the IP address.
 	DnsName *string
 
-	// A collection of player session IDs, one for each player ID that was included in
-	// the original matchmaking request.
-	MatchedPlayerSessions []*MatchedPlayerSession
-
 	// Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// that is assigned to a game session and uniquely identifies it.
@@ -966,6 +958,14 @@ type GameSessionConnectionInfo struct {
 	// a Amazon GameLift game server, a client needs to reference an IP address (or DNS
 	// name) and port number.
 	IpAddress *string
+
+	// A collection of player session IDs, one for each player ID that was included in
+	// the original matchmaking request.
+	MatchedPlayerSessions []*MatchedPlayerSession
+
+	// Port number for the game session. To connect to a Amazon GameLift game server,
+	// an app needs both the IP address and port number.
+	Port *int32
 }
 
 // A game session's properties plus the protection policy currently in force.
@@ -998,35 +998,6 @@ type GameSessionDetail struct {
 // StopGameSessionPlacement ()
 type GameSessionPlacement struct {
 
-	// A descriptive label that is associated with game session queue. Queue names must
-	// be unique within each Region.
-	GameSessionQueueName *string
-
-	// Identifier for the game session created by this placement request. This value is
-	// set once the new game session is placed (placement status is FULFILLED). This
-	// identifier is unique across all Regions. You can use this value as a
-	// GameSessionId value as needed.
-	GameSessionArn *string
-
-	// The maximum number of players that can be connected simultaneously to the game
-	// session.
-	MaximumPlayerSessionCount *int32
-
-	// A unique identifier for a game session placement.
-	PlacementId *string
-
-	// Information on the matchmaking process for this game. Data is in JSON syntax,
-	// formatted as a string. It identifies the matchmaking configuration used to
-	// create the match, and contains data on all players assigned to the match,
-	// including player attributes and team assignments. For more details on matchmaker
-	// data, see Match Data
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
-	MatchmakerData *string
-
-	// A unique identifier for the game session. This value is set once the new game
-	// session is placed (placement status is FULFILLED).
-	GameSessionId *string
-
 	// DNS identifier assigned to the instance that is running the game session. Values
 	// have the following format:
 	//
@@ -1042,14 +1013,38 @@ type GameSessionPlacement struct {
 	// use the DNS name, not the IP address.
 	DnsName *string
 
+	// Time stamp indicating when this request was completed, canceled, or timed out.
+	EndTime *time.Time
+
+	// Set of custom properties for a game session, formatted as key:value pairs. These
+	// properties are passed to a game server process in the GameSession () object with
+	// a request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	GameProperties []*GameProperty
+
+	// Identifier for the game session created by this placement request. This value is
+	// set once the new game session is placed (placement status is FULFILLED). This
+	// identifier is unique across all Regions. You can use this value as a
+	// GameSessionId value as needed.
+	GameSessionArn *string
+
+	// Set of custom game session properties, formatted as a single string value. This
+	// data is passed to a game server process in the GameSession () object with a
+	// request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	GameSessionData *string
+
+	// A unique identifier for the game session. This value is set once the new game
+	// session is placed (placement status is FULFILLED).
+	GameSessionId *string
+
 	// A descriptive label that is associated with a game session. Session names do not
 	// need to be unique.
 	GameSessionName *string
 
-	// Port number for the game session. To connect to a Amazon GameLift game server,
-	// an app needs both the IP address and port number. This value is set once the new
-	// game session is placed (placement status is FULFILLED).
-	Port *int32
+	// A descriptive label that is associated with game session queue. Queue names must
+	// be unique within each Region.
+	GameSessionQueueName *string
 
 	// Name of the Region where the game session created by this placement request is
 	// running. This value is set once the new game session is placed (placement status
@@ -1061,6 +1056,42 @@ type GameSessionPlacement struct {
 	// name) and port number. This value is set once the new game session is placed
 	// (placement status is FULFILLED).
 	IpAddress *string
+
+	// Information on the matchmaking process for this game. Data is in JSON syntax,
+	// formatted as a string. It identifies the matchmaking configuration used to
+	// create the match, and contains data on all players assigned to the match,
+	// including player attributes and team assignments. For more details on matchmaker
+	// data, see Match Data
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-server.html#match-server-data).
+	MatchmakerData *string
+
+	// The maximum number of players that can be connected simultaneously to the game
+	// session.
+	MaximumPlayerSessionCount *int32
+
+	// A collection of information on player sessions created in response to the game
+	// session placement request. These player sessions are created only once a new
+	// game session is successfully placed (placement status is FULFILLED). This
+	// information includes the player ID (as provided in the placement request) and
+	// the corresponding player session ID. Retrieve full player sessions by calling
+	// DescribePlayerSessions () with the player session ID.
+	PlacedPlayerSessions []*PlacedPlayerSession
+
+	// A unique identifier for a game session placement.
+	PlacementId *string
+
+	// Set of values, expressed in milliseconds, indicating the amount of latency that
+	// a player experiences when connected to AWS Regions.
+	PlayerLatencies []*PlayerLatency
+
+	// Port number for the game session. To connect to a Amazon GameLift game server,
+	// an app needs both the IP address and port number. This value is set once the new
+	// game session is placed (placement status is FULFILLED).
+	Port *int32
+
+	// Time stamp indicating when this request was placed in the queue. Format is a
+	// number expressed in Unix time as milliseconds (for example "1469498468.057").
+	StartTime *time.Time
 
 	// Current status of the game session placement request.
 	//
@@ -1084,37 +1115,6 @@ type GameSessionPlacement struct {
 	// terminated before the placement process was completed, or an unexpected internal
 	// error.
 	Status GameSessionPlacementState
-
-	// Set of custom properties for a game session, formatted as key:value pairs. These
-	// properties are passed to a game server process in the GameSession () object with
-	// a request to start a new game session (see Start a Game Session
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameProperties []*GameProperty
-
-	// Set of custom game session properties, formatted as a single string value. This
-	// data is passed to a game server process in the GameSession () object with a
-	// request to start a new game session (see Start a Game Session
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	GameSessionData *string
-
-	// Time stamp indicating when this request was placed in the queue. Format is a
-	// number expressed in Unix time as milliseconds (for example "1469498468.057").
-	StartTime *time.Time
-
-	// A collection of information on player sessions created in response to the game
-	// session placement request. These player sessions are created only once a new
-	// game session is successfully placed (placement status is FULFILLED). This
-	// information includes the player ID (as provided in the placement request) and
-	// the corresponding player session ID. Retrieve full player sessions by calling
-	// DescribePlayerSessions () with the player session ID.
-	PlacedPlayerSessions []*PlacedPlayerSession
-
-	// Set of values, expressed in milliseconds, indicating the amount of latency that
-	// a player experiences when connected to AWS Regions.
-	PlayerLatencies []*PlayerLatency
-
-	// Time stamp indicating when this request was completed, canceled, or timed out.
-	EndTime *time.Time
 }
 
 // Configuration of a queue that is used to process game session placement
@@ -1146,6 +1146,18 @@ type GameSessionPlacement struct {
 // DeleteGameSessionQueue ()
 type GameSessionQueue struct {
 
+	// A list of fleets that can be used to fulfill game session placement requests in
+	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
+	// Destinations are listed in default preference order.
+	Destinations []*GameSessionQueueDestination
+
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift game session queue resource and uniquely
+	// identifies it. ARNs are unique across all Regions. In a GameLift game session
+	// queue ARN, the resource ID matches the Name value.
+	GameSessionQueueArn *string
+
 	// A descriptive label that is associated with game session queue. Queue names must
 	// be unique within each Region.
 	Name *string
@@ -1159,18 +1171,6 @@ type GameSessionQueue struct {
 	// might enforce a 60-second policy followed by a 120-second policy, and then no
 	// policy for the remainder of the placement.
 	PlayerLatencyPolicies []*PlayerLatencyPolicy
-
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. In a GameLift game session
-	// queue ARN, the resource ID matches the Name value.
-	GameSessionQueueArn *string
-
-	// A list of fleets that can be used to fulfill game session placement requests in
-	// the queue. Fleets are identified by either a fleet ARN or a fleet alias ARN.
-	// Destinations are listed in default preference order.
-	Destinations []*GameSessionQueueDestination
 
 	// The maximum time, in seconds, that a new game session placement request remains
 	// in the queue. When a request exceeds this time, the game session placement
@@ -1203,8 +1203,36 @@ type GameSessionQueueDestination struct {
 // one or more game servers. A fleet may contain zero or more instances.
 type Instance struct {
 
-	// EC2 instance type that defines the computing resources of this instance.
-	Type EC2InstanceType
+	// Time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
+
+	// DNS identifier assigned to the instance that is running the game session. Values
+	// have the following format:
+	//
+	//     * TLS-enabled fleets: ..amazongamelift.com.
+	//
+	//
+	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
+	// IP Addressing
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
+	//
+	// When
+	// connecting to a game session that is running on a TLS-enabled fleet, you must
+	// use the DNS name, not the IP address.
+	DnsName *string
+
+	// A unique identifier for a fleet that the instance is in.
+	FleetId *string
+
+	// A unique identifier for an instance.
+	InstanceId *string
+
+	// IP address that is assigned to the instance.
+	IpAddress *string
+
+	// Operating system that is running on this instance.
+	OperatingSystem OperatingSystem
 
 	// Current status of the instance. Possible statuses include the following:
 	//
@@ -1223,47 +1251,19 @@ type Instance struct {
 	// resources in the event of a problem.
 	Status InstanceStatus
 
-	// DNS identifier assigned to the instance that is running the game session. Values
-	// have the following format:
-	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
-	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
-	//
-	// When
-	// connecting to a game session that is running on a TLS-enabled fleet, you must
-	// use the DNS name, not the IP address.
-	DnsName *string
-
-	// IP address that is assigned to the instance.
-	IpAddress *string
-
-	// A unique identifier for a fleet that the instance is in.
-	FleetId *string
-
-	// A unique identifier for an instance.
-	InstanceId *string
-
-	// Operating system that is running on this instance.
-	OperatingSystem OperatingSystem
-
-	// Time stamp indicating when this data object was created. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
+	// EC2 instance type that defines the computing resources of this instance.
+	Type EC2InstanceType
 }
 
 // Information required to remotely connect to a fleet instance. Access is
 // requested by calling GetInstanceAccess ().
 type InstanceAccess struct {
 
-	// Operating system that is running on the instance.
-	OperatingSystem OperatingSystem
-
 	// Credentials required to access the instance.
 	Credentials *InstanceCredentials
+
+	// A unique identifier for a fleet containing the instance being accessed.
+	FleetId *string
 
 	// A unique identifier for an instance being accessed.
 	InstanceId *string
@@ -1271,8 +1271,8 @@ type InstanceAccess struct {
 	// IP address that is assigned to the instance.
 	IpAddress *string
 
-	// A unique identifier for a fleet containing the instance being accessed.
-	FleetId *string
+	// Operating system that is running on the instance.
+	OperatingSystem OperatingSystem
 }
 
 // Set of credentials required to remotely access a fleet instance. Access
@@ -1280,13 +1280,13 @@ type InstanceAccess struct {
 // InstanceAccess () object.
 type InstanceCredentials struct {
 
-	// User login string.
-	UserName *string
-
 	// Secret string. For Windows instances, the secret is a password for use with
 	// Windows Remote Desktop. For Linux instances, it is a private key (which must be
 	// saved as a .pem file) for use with SSH.
 	Secret *string
+
+	// User login string.
+	UserName *string
 }
 
 // This data type is part of Amazon GameLift FleetIQ with game server groups, which
@@ -1296,6 +1296,11 @@ type InstanceCredentials struct {
 // list of viable instance types.
 type InstanceDefinition struct {
 
+	// An EC2 instance type designation.
+	//
+	// This member is required.
+	InstanceType GameServerGroupInstanceType
+
 	// Instance weighting that indicates how much this instance type contributes to the
 	// total capacity of a game server group. Instance weights are used by GameLift
 	// FleetIQ to calculate the instance type's cost per unit hour and better identify
@@ -1304,11 +1309,6 @@ type InstanceDefinition struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-weighting.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Default value is "1".
 	WeightedCapacity *string
-
-	// An EC2 instance type designation.
-	//
-	// This member is required.
-	InstanceType GameServerGroupInstanceType
 }
 
 // A range of IP addresses and port settings that allow inbound traffic to connect
@@ -1321,6 +1321,11 @@ type InstanceDefinition struct {
 // servers.
 type IpPermission struct {
 
+	// A starting value for a range of allowed port numbers.
+	//
+	// This member is required.
+	FromPort *int32
+
 	// A range of allowed IP addresses. This value must be expressed in CIDR notation.
 	// Example: "000.000.000.000/[subnet mask]" or optionally the shortened version
 	// "0.0.0.0/[subnet mask]".
@@ -1328,21 +1333,16 @@ type IpPermission struct {
 	// This member is required.
 	IpRange *string
 
-	// An ending value for a range of allowed port numbers. Port numbers are
-	// end-inclusive. This value must be higher than FromPort.
-	//
-	// This member is required.
-	ToPort *int32
-
 	// The network communication protocol used by the fleet.
 	//
 	// This member is required.
 	Protocol IpProtocol
 
-	// A starting value for a range of allowed port numbers.
+	// An ending value for a range of allowed port numbers. Port numbers are
+	// end-inclusive. This value must be higher than FromPort.
 	//
 	// This member is required.
-	FromPort *int32
+	ToPort *int32
 }
 
 // This data type is part of Amazon GameLift FleetIQ with game server groups, which
@@ -1351,6 +1351,9 @@ type IpPermission struct {
 // instances in a game server group.
 type LaunchTemplateSpecification struct {
 
+	// A unique identifier for an existing EC2 launch template.
+	LaunchTemplateId *string
+
 	// A readable identifier for an existing EC2 launch template.
 	LaunchTemplateName *string
 
@@ -1358,9 +1361,6 @@ type LaunchTemplateSpecification struct {
 	// default version will be used. EC2 allows you to specify a default version for a
 	// launch template, if none is set, the default is the first version created.
 	Version *string
-
-	// A unique identifier for an existing EC2 launch template.
-	LaunchTemplateId *string
 }
 
 // Represents a new player session that is created as a result of a successful
@@ -1381,6 +1381,21 @@ type MatchedPlayerSession struct {
 // requests must specify a matchmaking configuration.
 type MatchmakingConfiguration struct {
 
+	// A flag that indicates whether a match that was created with this configuration
+	// must be accepted by the matched players. To require acceptance, set to TRUE.
+	AcceptanceRequired *bool
+
+	// The length of time (in seconds) to wait for players to accept a proposed match.
+	// If any player rejects the match or fails to accept before the timeout, the
+	// ticket continues to look for an acceptable match.
+	AcceptanceTimeoutSeconds *int32
+
+	// The number of player slots in a match to keep open for future players. For
+	// example, assume that the configuration's rule set specifies a match for a single
+	// 12-person team. If the additional player count is set to 2, only 10 players are
+	// initially selected for the match.
+	AdditionalPlayerCount *int32
+
 	// The method used to backfill game sessions created with this matchmaking
 	// configuration. MANUAL indicates that the game makes backfill requests or does
 	// not use the match backfill feature. AUTOMATIC indicates that GameLift creates
@@ -1389,10 +1404,6 @@ type MatchmakingConfiguration struct {
 	// with FlexMatch
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/match-backfill.html).
 	BackfillMode BackfillMode
-
-	// A flag that indicates whether a match that was created with this configuration
-	// must be accepted by the matched players. To require acceptance, set to TRUE.
-	AcceptanceRequired *bool
 
 	// Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
@@ -1405,41 +1416,11 @@ type MatchmakingConfiguration struct {
 	// number expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time
 
+	// Information to attach to all events related to the matchmaking configuration.
+	CustomEventData *string
+
 	// A descriptive label that is associated with matchmaking configuration.
 	Description *string
-
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. GameLift uses the listed
-	// queues when placing game sessions for matches that are created with this
-	// matchmaking configuration. Queues can be located in any Region.
-	GameSessionQueueArns []*string
-
-	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession () object with a
-	// request to start a new game session (see Start a Game Session
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession () object that is created for a
-	// successful match.
-	GameSessionData *string
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// associated with the GameLift matchmaking rule set resource that this
-	// configuration uses.
-	RuleSetArn *string
-
-	// The number of player slots in a match to keep open for future players. For
-	// example, assume that the configuration's rule set specifies a match for a single
-	// 12-person team. If the additional player count is set to 2, only 10 players are
-	// initially selected for the match.
-	AdditionalPlayerCount *int32
-
-	// A unique identifier for a matchmaking rule set to use with this configuration. A
-	// matchmaking configuration can only use rule sets that are defined in the same
-	// Region.
-	RuleSetName *string
 
 	// A set of custom properties for a game session, formatted as key-value pairs.
 	// These properties are passed to a game server process in the GameSession ()
@@ -1449,10 +1430,25 @@ type MatchmakingConfiguration struct {
 	// successful match.
 	GameProperties []*GameProperty
 
-	// The length of time (in seconds) to wait for players to accept a proposed match.
-	// If any player rejects the match or fails to accept before the timeout, the
-	// ticket continues to look for an acceptable match.
-	AcceptanceTimeoutSeconds *int32
+	// A set of custom game session properties, formatted as a single string value.
+	// This data is passed to a game server process in the GameSession () object with a
+	// request to start a new game session (see Start a Game Session
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
+	// This information is added to the new GameSession () object that is created for a
+	// successful match.
+	GameSessionData *string
+
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift game session queue resource and uniquely
+	// identifies it. ARNs are unique across all Regions. GameLift uses the listed
+	// queues when placing game sessions for matches that are created with this
+	// matchmaking configuration. Queues can be located in any Region.
+	GameSessionQueueArns []*string
+
+	// A unique identifier for a matchmaking configuration. This name is used to
+	// identify the configuration associated with a matchmaking request or ticket.
+	Name *string
 
 	// An SNS topic ARN that is set up to receive matchmaking notifications.
 	NotificationTarget *string
@@ -1462,12 +1458,16 @@ type MatchmakingConfiguration struct {
 	// resubmitted as needed.
 	RequestTimeoutSeconds *int32
 
-	// Information to attach to all events related to the matchmaking configuration.
-	CustomEventData *string
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift matchmaking rule set resource that this
+	// configuration uses.
+	RuleSetArn *string
 
-	// A unique identifier for a matchmaking configuration. This name is used to
-	// identify the configuration associated with a matchmaking request or ticket.
-	Name *string
+	// A unique identifier for a matchmaking rule set to use with this configuration. A
+	// matchmaking configuration can only use rule sets that are defined in the same
+	// Region.
+	RuleSetName *string
 }
 
 // Set of rule statements, used with FlexMatch, that determine how to build your
@@ -1506,9 +1506,6 @@ type MatchmakingConfiguration struct {
 // between players after 30 seconds.
 type MatchmakingRuleSet struct {
 
-	// A unique identifier for a matchmaking rule set
-	RuleSetName *string
-
 	// A collection of matchmaking rules, formatted as a JSON string. Comments are not
 	// allowed in JSON, but most elements support a description field.
 	//
@@ -1525,6 +1522,9 @@ type MatchmakingRuleSet struct {
 	// identifies it. ARNs are unique across all Regions. In a GameLift rule set ARN,
 	// the resource ID matches the RuleSetName value.
 	RuleSetArn *string
+
+	// A unique identifier for a matchmaking rule set
+	RuleSetName *string
 }
 
 // Ticket generated to track the progress of a matchmaking request. Each ticket is
@@ -1533,13 +1533,21 @@ type MatchmakingRuleSet struct {
 // calling DescribeMatchmaking () with the ticket ID.
 type MatchmakingTicket struct {
 
-	// A unique identifier for a matchmaking ticket.
-	TicketId *string
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift matchmaking configuration resource that is used
+	// with this ticket.
+	ConfigurationArn *string
 
 	// Name of the MatchmakingConfiguration () that is used with this ticket.
 	// Matchmaking configurations determine how players are grouped into a match and
 	// how a new game session is created for the match.
 	ConfigurationName *string
+
+	// Time stamp indicating when this matchmaking request stopped being processed due
+	// to success, failure, or cancellation. Format is a number expressed in Unix time
+	// as milliseconds (for example "1469498468.057").
+	EndTime *time.Time
 
 	// Average amount of time (in seconds) that players are currently waiting for a
 	// match. If there is not enough recent data, this property may be empty.
@@ -1549,6 +1557,16 @@ type MatchmakingTicket struct {
 	// This information is added to the ticket only after the matchmaking request has
 	// been successfully completed.
 	GameSessionConnectionInfo *GameSessionConnectionInfo
+
+	// A set of Player objects, each representing a player to find matches for. Players
+	// are identified by a unique player ID and may include latency data for use during
+	// matchmaking. If the ticket is in status COMPLETED, the Player objects include
+	// the team the players were assigned to in the resulting match.
+	Players []*Player
+
+	// Time stamp indicating when this matchmaking request was received. Format is a
+	// number expressed in Unix time as milliseconds (for example "1469498468.057").
+	StartTime *time.Time
 
 	// Current status of the matchmaking request.
 	//
@@ -1587,34 +1605,16 @@ type MatchmakingTicket struct {
 	// requests with new ticket IDs.
 	Status MatchmakingConfigurationStatus
 
-	// Time stamp indicating when this matchmaking request was received. Format is a
-	// number expressed in Unix time as milliseconds (for example "1469498468.057").
-	StartTime *time.Time
+	// Additional information about the current status.
+	StatusMessage *string
 
 	// Code to explain the current status. For example, a status reason may indicate
 	// when a ticket has returned to SEARCHING status after a proposed match fails to
 	// receive player acceptances.
 	StatusReason *string
 
-	// Additional information about the current status.
-	StatusMessage *string
-
-	// Time stamp indicating when this matchmaking request stopped being processed due
-	// to success, failure, or cancellation. Format is a number expressed in Unix time
-	// as milliseconds (for example "1469498468.057").
-	EndTime *time.Time
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// associated with the GameLift matchmaking configuration resource that is used
-	// with this ticket.
-	ConfigurationArn *string
-
-	// A set of Player objects, each representing a player to find matches for. Players
-	// are identified by a unique player ID and may include latency data for use during
-	// matchmaking. If the ticket is in status COMPLETED, the Player objects include
-	// the team the players were assigned to in the resulting match.
-	Players []*Player
+	// A unique identifier for a matchmaking ticket.
+	TicketId *string
 }
 
 // Information about a player session that was created as part of a
@@ -1667,12 +1667,12 @@ type Player struct {
 	// "gameMode": {"S": "deathmatch"}}.
 	PlayerAttributes map[string]*AttributeValue
 
+	// A unique identifier for a player
+	PlayerId *string
+
 	// Name of the team that the player is assigned to in a match. Team names are
 	// defined in a matchmaking rule set.
 	Team *string
-
-	// A unique identifier for a player
-	PlayerId *string
 }
 
 // Regional latency information for a player, used when requesting a new game
@@ -1683,12 +1683,12 @@ type Player struct {
 // session for the player.
 type PlayerLatency struct {
 
-	// A unique identifier for a player associated with the latency data.
-	PlayerId *string
-
 	// Amount of time that represents the time lag experienced by the player when
 	// connected to the specified Region.
 	LatencyInMilliseconds *float32
+
+	// A unique identifier for a player associated with the latency data.
+	PlayerId *string
 
 	// Name of the Region that is associated with the latency value.
 	RegionIdentifier *string
@@ -1749,9 +1749,55 @@ type PlayerLatencyPolicy struct {
 //         * StopGameSessionPlacement ()
 type PlayerSession struct {
 
+	// Time stamp indicating when this data object was created. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
+
+	// DNS identifier assigned to the instance that is running the game session. Values
+	// have the following format:
+	//
+	//     * TLS-enabled fleets: ..amazongamelift.com.
+	//
+	//
+	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
+	// IP Addressing
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
+	//
+	// When
+	// connecting to a game session that is running on a TLS-enabled fleet, you must
+	// use the DNS name, not the IP address.
+	DnsName *string
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// associated with the GameLift fleet that the player's game session is running on.
+	FleetArn *string
+
+	// A unique identifier for a fleet that the player's game session is running on.
+	FleetId *string
+
 	// A unique identifier for the game session that the player session is connected
 	// to.
 	GameSessionId *string
+
+	// IP address of the instance that is running the game session. When connecting to
+	// a Amazon GameLift game server, a client needs to reference an IP address (or DNS
+	// name) and port number.
+	IpAddress *string
+
+	// Developer-defined information related to a player. Amazon GameLift does not use
+	// this data, so it can be formatted as needed for use in the game.
+	PlayerData *string
+
+	// A unique identifier for a player that is associated with this player session.
+	PlayerId *string
+
+	// A unique identifier for a player session.
+	PlayerSessionId *string
+
+	// Port number for the game session. To connect to a Amazon GameLift server
+	// process, an app needs both the IP address and port number.
+	Port *int32
 
 	// Current status of the player session. Possible player session statuses include
 	// the following:
@@ -1771,55 +1817,9 @@ type PlayerSession struct {
 	// seconds).
 	Status PlayerSessionStatus
 
-	// Port number for the game session. To connect to a Amazon GameLift server
-	// process, an app needs both the IP address and port number.
-	Port *int32
-
-	// A unique identifier for a player that is associated with this player session.
-	PlayerId *string
-
-	// A unique identifier for a fleet that the player's game session is running on.
-	FleetId *string
-
-	// DNS identifier assigned to the instance that is running the game session. Values
-	// have the following format:
-	//
-	//     * TLS-enabled fleets: ..amazongamelift.com.
-	//
-	//
-	// * Non-TLS-enabled fleets: ec2-.compute.amazonaws.com. (See Amazon EC2 Instance
-	// IP Addressing
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).)
-	//
-	// When
-	// connecting to a game session that is running on a TLS-enabled fleet, you must
-	// use the DNS name, not the IP address.
-	DnsName *string
-
-	// A unique identifier for a player session.
-	PlayerSessionId *string
-
-	// Time stamp indicating when this data object was created. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
-
 	// Time stamp indicating when this data object was terminated. Format is a number
 	// expressed in Unix time as milliseconds (for example "1469498468.057").
 	TerminationTime *time.Time
-
-	// IP address of the instance that is running the game session. When connecting to
-	// a Amazon GameLift game server, a client needs to reference an IP address (or DNS
-	// name) and port number.
-	IpAddress *string
-
-	// Developer-defined information related to a player. Amazon GameLift does not use
-	// this data, so it can be formatted as needed for use in the game.
-	PlayerData *string
-
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// associated with the GameLift fleet that the player's game session is running on.
-	FleetArn *string
 }
 
 // A policy that limits the number of game sessions a player can create on the same
@@ -1858,6 +1858,13 @@ type ResourceCreationLimitPolicy struct {
 //     * ResolveAlias ()
 type RoutingStrategy struct {
 
+	// The unique identifier for a fleet that the alias points to. This value is the
+	// fleet ID, not the fleet ARN.
+	FleetId *string
+
+	// The message text to be used with a terminal routing strategy.
+	Message *string
+
 	// The type of routing strategy for the alias. Possible routing types include the
 	// following:
 	//
@@ -1869,13 +1876,6 @@ type RoutingStrategy struct {
 	// alias throws a TerminalRoutingStrategyException with the RoutingStrategy ()
 	// message embedded.
 	Type RoutingStrategyType
-
-	// The unique identifier for a fleet that the alias points to. This value is the
-	// fleet ID, not the fleet ARN.
-	FleetId *string
-
-	// The message text to be used with a terminal routing strategy.
-	Message *string
 }
 
 // A collection of server process configurations that describe what processes to
@@ -1907,6 +1907,11 @@ type RoutingStrategy struct {
 // StartFleetActions () or StopFleetActions ()
 type RuntimeConfiguration struct {
 
+	// The maximum amount of time (in seconds) that a game session can remain in status
+	// ACTIVATING. If the game session is not active before the timeout, activation is
+	// terminated and the game session status is changed to TERMINATED.
+	GameSessionActivationTimeoutSeconds *int32
+
 	// The maximum number of game sessions with status ACTIVATING to allow on an
 	// instance simultaneously. This setting limits the amount of instance resources
 	// that can be used for new game activations at any one time.
@@ -1915,11 +1920,6 @@ type RuntimeConfiguration struct {
 	// A collection of server process configurations that describe which server
 	// processes to run on each instance in a fleet.
 	ServerProcesses []*ServerProcess
-
-	// The maximum amount of time (in seconds) that a game session can remain in status
-	// ACTIVATING. If the game session is not active before the timeout, activation is
-	// terminated and the game session status is changed to TERMINATED.
-	GameSessionActivationTimeoutSeconds *int32
 }
 
 // The location in S3 where build or script files are stored for access by Amazon
@@ -1933,16 +1933,16 @@ type S3Location struct {
 	// The name of the zip file that contains the build files or script files.
 	Key *string
 
-	// The Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
-	// role that allows Amazon GameLift to access the S3 bucket.
-	RoleArn *string
-
 	// The version of the file, if object versioning is turned on for the bucket.
 	// Amazon GameLift uses this information when retrieving files from an S3 bucket
 	// that you own. Use this parameter to specify a specific version of the file. If
 	// not set, the latest version of the file is retrieved.
 	ObjectVersion *string
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM
+	// role that allows Amazon GameLift to access the S3 bucket.
+	RoleArn *string
 }
 
 // Rule that controls how a fleet is scaled. Scaling policies are uniquely
@@ -1973,6 +1973,16 @@ type S3Location struct {
 //
 // * StopFleetActions ()
 type ScalingPolicy struct {
+
+	// Comparison operator to use when measuring a metric against the threshold value.
+	ComparisonOperator ComparisonOperatorType
+
+	// Length of time (in minutes) the metric must be at or beyond the threshold before
+	// a scaling event is triggered.
+	EvaluationPeriods *int32
+
+	// A unique identifier for a fleet that is associated with this scaling policy.
+	FleetId *string
 
 	// Name of the Amazon GameLift-defined metric that is used to trigger a scaling
 	// adjustment. For detailed descriptions of fleet metrics, see Monitor Amazon
@@ -2021,8 +2031,34 @@ type ScalingPolicy struct {
 	// destination.
 	MetricName MetricName
 
+	// A descriptive label that is associated with a scaling policy. Policy names do
+	// not need to be unique.
+	Name *string
+
+	// The type of scaling policy to create. For a target-based policy, set the
+	// parameter MetricName to 'PercentAvailableGameSessions' and specify a
+	// TargetConfiguration. For a rule-based policy set the following parameters:
+	// MetricName, ComparisonOperator, Threshold, EvaluationPeriods,
+	// ScalingAdjustmentType, and ScalingAdjustment.
+	PolicyType PolicyType
+
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment *int32
+
+	// The type of adjustment to make to a fleet's instance count (see FleetCapacity
+	// ()):
+	//
+	//     * ChangeInCapacity -- add (or subtract) the scaling adjustment value
+	// from the current instance count. Positive values scale up while negative values
+	// scale down.
+	//
+	//     * ExactCapacity -- set the instance count to the scaling
+	// adjustment value.
+	//
+	//     * PercentChangeInCapacity -- increase or reduce the
+	// current instance count by the scaling adjustment, read as a percentage. Positive
+	// values scale up while negative values scale down.
+	ScalingAdjustmentType ScalingAdjustmentType
 
 	// Current status of the scaling policy. The scaling policy can be in force only
 	// when in an ACTIVE status. Scaling policies can be suspended for individual
@@ -2054,44 +2090,8 @@ type ScalingPolicy struct {
 	// The settings for a target-based scaling policy.
 	TargetConfiguration *TargetConfiguration
 
-	// Comparison operator to use when measuring a metric against the threshold value.
-	ComparisonOperator ComparisonOperatorType
-
-	// A descriptive label that is associated with a scaling policy. Policy names do
-	// not need to be unique.
-	Name *string
-
 	// Metric value used to trigger a scaling event.
 	Threshold *float64
-
-	// The type of adjustment to make to a fleet's instance count (see FleetCapacity
-	// ()):
-	//
-	//     * ChangeInCapacity -- add (or subtract) the scaling adjustment value
-	// from the current instance count. Positive values scale up while negative values
-	// scale down.
-	//
-	//     * ExactCapacity -- set the instance count to the scaling
-	// adjustment value.
-	//
-	//     * PercentChangeInCapacity -- increase or reduce the
-	// current instance count by the scaling adjustment, read as a percentage. Positive
-	// values scale up while negative values scale down.
-	ScalingAdjustmentType ScalingAdjustmentType
-
-	// Length of time (in minutes) the metric must be at or beyond the threshold before
-	// a scaling event is triggered.
-	EvaluationPeriods *int32
-
-	// The type of scaling policy to create. For a target-based policy, set the
-	// parameter MetricName to 'PercentAvailableGameSessions' and specify a
-	// TargetConfiguration. For a rule-based policy set the following parameters:
-	// MetricName, ComparisonOperator, Threshold, EvaluationPeriods,
-	// ScalingAdjustmentType, and ScalingAdjustment.
-	PolicyType PolicyType
-
-	// A unique identifier for a fleet that is associated with this scaling policy.
-	FleetId *string
 }
 
 // Properties describing a Realtime script. Related operations
@@ -2109,26 +2109,6 @@ type ScalingPolicy struct {
 // DeleteScript ()
 type Script struct {
 
-	// The location in S3 where build or script files are stored for access by Amazon
-	// GameLift. This location is specified in CreateBuild (), CreateScript (), and
-	// UpdateScript () requests.
-	StorageLocation *S3Location
-
-	// The file size of the uploaded Realtime script, expressed in bytes. When files
-	// are uploaded from an S3 location, this value remains at "0".
-	SizeOnDisk *int64
-
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift script resource and uniquely identifies it. ARNs
-	// are unique across all Regions. In a GameLift script ARN, the resource ID matches
-	// the ScriptId value.
-	ScriptArn *string
-
-	// The version that is associated with a build or script. Version strings do not
-	// need to be unique.
-	Version *string
-
 	// A time stamp indicating when this data object was created. The format is a
 	// number expressed in Unix time as milliseconds (for example "1469498468.057").
 	CreationTime *time.Time
@@ -2137,8 +2117,28 @@ type Script struct {
 	// to be unique.
 	Name *string
 
+	// Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
+	// that is assigned to a GameLift script resource and uniquely identifies it. ARNs
+	// are unique across all Regions. In a GameLift script ARN, the resource ID matches
+	// the ScriptId value.
+	ScriptArn *string
+
 	// A unique identifier for a Realtime script
 	ScriptId *string
+
+	// The file size of the uploaded Realtime script, expressed in bytes. When files
+	// are uploaded from an S3 location, this value remains at "0".
+	SizeOnDisk *int64
+
+	// The location in S3 where build or script files are stored for access by Amazon
+	// GameLift. This location is specified in CreateBuild (), CreateScript (), and
+	// UpdateScript () requests.
+	StorageLocation *S3Location
+
+	// The version that is associated with a build or script. Version strings do not
+	// need to be unique.
+	Version *string
 }
 
 // A set of instructions for launching server processes on each instance in a
@@ -2156,10 +2156,6 @@ type ServerProcess struct {
 	// This member is required.
 	ConcurrentExecutions *int32
 
-	// An optional list of parameters to pass to the server executable or Realtime
-	// script on launch.
-	Parameters *string
-
 	// The location of the server executable in a custom game build or the name of the
 	// Realtime script file that contains the Init() function. Game builds and Realtime
 	// scripts are installed on instances at the root:
@@ -2173,6 +2169,10 @@ type ServerProcess struct {
 	//
 	// This member is required.
 	LaunchPath *string
+
+	// An optional list of parameters to pass to the server executable or Realtime
+	// script on launch.
+	Parameters *string
 }
 
 // A label that can be assigned to a GameLift resource. Learn more Tagging AWS
@@ -2278,17 +2278,22 @@ type TargetTrackingConfiguration struct {
 //     * DeleteVpcPeeringConnection ()
 type VpcPeeringAuthorization struct {
 
-	//
-	PeerVpcAwsAccountId *string
+	// Time stamp indicating when this authorization was issued. Format is a number
+	// expressed in Unix time as milliseconds (for example "1469498468.057").
+	CreationTime *time.Time
 
 	// Time stamp indicating when this authorization expires (24 hours after issuance).
 	// Format is a number expressed in Unix time as milliseconds (for example
 	// "1469498468.057").
 	ExpirationTime *time.Time
 
-	// Time stamp indicating when this authorization was issued. Format is a number
-	// expressed in Unix time as milliseconds (for example "1469498468.057").
-	CreationTime *time.Time
+	// A unique identifier for the AWS account that you use to manage your Amazon
+	// GameLift fleet. You can find your Account ID in the AWS Management Console under
+	// account settings.
+	GameLiftAwsAccountId *string
+
+	//
+	PeerVpcAwsAccountId *string
 
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
@@ -2297,11 +2302,6 @@ type VpcPeeringAuthorization struct {
 	// Amazon GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
-
-	// A unique identifier for the AWS account that you use to manage your Amazon
-	// GameLift fleet. You can find your Account ID in the AWS Management Console under
-	// account settings.
-	GameLiftAwsAccountId *string
 }
 
 // Represents a peering connection between a VPC on one of your AWS accounts and
@@ -2324,33 +2324,24 @@ type VpcPeeringAuthorization struct {
 //     * DeleteVpcPeeringConnection ()
 type VpcPeeringConnection struct {
 
-	// The status information about the connection. Status indicates if a connection is
-	// pending, successful, or failed.
-	Status *VpcPeeringConnectionStatus
-
-	// A unique identifier that is automatically assigned to the connection record.
-	// This ID is referenced in VPC peering connection events, and is used when
-	// deleting a connection with DeleteVpcPeeringConnection ().
-	VpcPeeringConnectionId *string
-
 	// The Amazon Resource Name (ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
 	// associated with the GameLift fleet resource for this connection.
 	FleetArn *string
 
-	// CIDR block of IPv4 addresses assigned to the VPC peering connection for the
-	// GameLift VPC. The peered VPC also has an IPv4 CIDR block associated with it;
-	// these blocks cannot overlap or the peering connection cannot be created.
-	IpV4CidrBlock *string
+	// A unique identifier for a fleet. This ID determines the ID of the Amazon
+	// GameLift VPC for your fleet.
+	FleetId *string
 
 	// A unique identifier for the VPC that contains the Amazon GameLift fleet for this
 	// connection. This VPC is managed by Amazon GameLift and does not appear in your
 	// AWS account.
 	GameLiftVpcId *string
 
-	// A unique identifier for a fleet. This ID determines the ID of the Amazon
-	// GameLift VPC for your fleet.
-	FleetId *string
+	// CIDR block of IPv4 addresses assigned to the VPC peering connection for the
+	// GameLift VPC. The peered VPC also has an IPv4 CIDR block associated with it;
+	// these blocks cannot overlap or the peering connection cannot be created.
+	IpV4CidrBlock *string
 
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
@@ -2359,6 +2350,15 @@ type VpcPeeringConnection struct {
 	// Amazon GameLift Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	PeerVpcId *string
+
+	// The status information about the connection. Status indicates if a connection is
+	// pending, successful, or failed.
+	Status *VpcPeeringConnectionStatus
+
+	// A unique identifier that is automatically assigned to the connection record.
+	// This ID is referenced in VPC peering connection events, and is used when
+	// deleting a connection with DeleteVpcPeeringConnection ().
+	VpcPeeringConnectionId *string
 }
 
 // Represents status information for a VPC peering connection. Status is associated

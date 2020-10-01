@@ -60,45 +60,6 @@ func (c *Client) CreateElasticsearchDomain(ctx context.Context, params *CreateEl
 
 type CreateElasticsearchDomainInput struct {
 
-	// IAM access policy as a JSON-formatted string.
-	AccessPolicies *string
-
-	// Options to specify configuration that will be applied to the domain endpoint.
-	DomainEndpointOptions *types.DomainEndpointOptions
-
-	// Options to enable, disable and specify the type and size of EBS storage volumes.
-	EBSOptions *types.EBSOptions
-
-	// String of format X.Y to specify version for the Elasticsearch domain eg. "1.5"
-	// or "2.3". For more information, see Creating Elasticsearch Domains
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
-	// in the Amazon Elasticsearch Service Developer Guide.
-	ElasticsearchVersion *string
-
-	// Configuration options for an Elasticsearch domain. Specifies the instance type
-	// and number of instances in the domain cluster.
-	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
-
-	// Option to set time, in UTC format, of the daily automated snapshot. Default
-	// value is 0 hours.
-	SnapshotOptions *types.SnapshotOptions
-
-	// Specifies advanced security options.
-	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
-
-	// Map of LogType and LogPublishingOption, each containing options to publish a
-	// given type of Elasticsearch log.
-	LogPublishingOptions map[string]*types.LogPublishingOption
-
-	// Specifies the Encryption At Rest Options.
-	EncryptionAtRestOptions *types.EncryptionAtRestOptions
-
-	// Options to specify the Cognito user and identity pools for Kibana
-	// authentication. For more information, see Amazon Cognito Authentication for
-	// Kibana
-	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
-	CognitoOptions *types.CognitoOptions
-
 	// The name of the Elasticsearch domain that you are creating. Domain names are
 	// unique across the domains owned by an account within an AWS region. Domain names
 	// must start with a lowercase letter and can contain the following characters: a-z
@@ -107,6 +68,9 @@ type CreateElasticsearchDomainInput struct {
 	// This member is required.
 	DomainName *string
 
+	// IAM access policy as a JSON-formatted string.
+	AccessPolicies *string
+
 	// Option to allow references to indices in an HTTP request body. Must be false
 	// when configuring access to individual sub-resources. By default, the value is
 	// true. See Configuration Advanced Options
@@ -114,8 +78,44 @@ type CreateElasticsearchDomainInput struct {
 	// for more information.
 	AdvancedOptions map[string]*string
 
+	// Specifies advanced security options.
+	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
+
+	// Options to specify the Cognito user and identity pools for Kibana
+	// authentication. For more information, see Amazon Cognito Authentication for
+	// Kibana
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
+	CognitoOptions *types.CognitoOptions
+
+	// Options to specify configuration that will be applied to the domain endpoint.
+	DomainEndpointOptions *types.DomainEndpointOptions
+
+	// Options to enable, disable and specify the type and size of EBS storage volumes.
+	EBSOptions *types.EBSOptions
+
+	// Configuration options for an Elasticsearch domain. Specifies the instance type
+	// and number of instances in the domain cluster.
+	ElasticsearchClusterConfig *types.ElasticsearchClusterConfig
+
+	// String of format X.Y to specify version for the Elasticsearch domain eg. "1.5"
+	// or "2.3". For more information, see Creating Elasticsearch Domains
+	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomains)
+	// in the Amazon Elasticsearch Service Developer Guide.
+	ElasticsearchVersion *string
+
+	// Specifies the Encryption At Rest Options.
+	EncryptionAtRestOptions *types.EncryptionAtRestOptions
+
+	// Map of LogType and LogPublishingOption, each containing options to publish a
+	// given type of Elasticsearch log.
+	LogPublishingOptions map[string]*types.LogPublishingOption
+
 	// Specifies the NodeToNodeEncryptionOptions.
 	NodeToNodeEncryptionOptions *types.NodeToNodeEncryptionOptions
+
+	// Option to set time, in UTC format, of the daily automated snapshot. Default
+	// value is 0 hours.
+	SnapshotOptions *types.SnapshotOptions
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
 	// information, see Creating a VPC

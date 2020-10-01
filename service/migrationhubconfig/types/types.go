@@ -11,22 +11,22 @@ import (
 // ACCOUNT), an ID, and a time at which the home region was set.
 type HomeRegionControl struct {
 
-	// The target parameter specifies the identifier to which the home region is
-	// applied, which is always an ACCOUNT. It applies the home region to the current
-	// ACCOUNT.
-	Target *Target
-
 	// A unique identifier that's generated for each home region control. It's always a
 	// string that begins with "hrc-" followed by 12 lowercase letters and numbers.
 	ControlId *string
+
+	// The AWS Region that's been set as home region. For example, "us-west-2" or
+	// "eu-central-1" are valid home regions.
+	HomeRegion *string
 
 	// A timestamp representing the time when the customer called
 	// CreateHomeregionControl and set the home region for the account.
 	RequestedTime *time.Time
 
-	// The AWS Region that's been set as home region. For example, "us-west-2" or
-	// "eu-central-1" are valid home regions.
-	HomeRegion *string
+	// The target parameter specifies the identifier to which the home region is
+	// applied, which is always an ACCOUNT. It applies the home region to the current
+	// ACCOUNT.
+	Target *Target
 }
 
 // The target parameter specifies the identifier to which the home region is

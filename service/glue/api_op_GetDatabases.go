@@ -56,6 +56,13 @@ func (c *Client) GetDatabases(ctx context.Context, params *GetDatabasesInput, op
 
 type GetDatabasesInput struct {
 
+	// The ID of the Data Catalog from which to retrieve Databases. If none is
+	// provided, the AWS account ID is used by default.
+	CatalogId *string
+
+	// The maximum number of databases to return in one response.
+	MaxResults *int32
+
 	// A continuation token, if this is a continuation call.
 	NextToken *string
 
@@ -65,13 +72,6 @@ type GetDatabasesInput struct {
 	// </li> <li> <p>If set to <code>ALL</code>, will list the databases shared with
 	// your account, as well as the databases in yor local account. </p> </li> </ul>
 	ResourceShareType types.ResourceShareType
-
-	// The maximum number of databases to return in one response.
-	MaxResults *int32
-
-	// The ID of the Data Catalog from which to retrieve Databases. If none is
-	// provided, the AWS account ID is used by default.
-	CatalogId *string
 }
 
 type GetDatabasesOutput struct {

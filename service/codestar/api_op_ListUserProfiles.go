@@ -66,14 +66,14 @@ type ListUserProfilesInput struct {
 
 type ListUserProfilesOutput struct {
 
-	// The continuation token to use when requesting the next set of results, if there
-	// are more results to be returned.
-	NextToken *string
-
 	// All the user profiles configured in AWS CodeStar for an AWS account.
 	//
 	// This member is required.
 	UserProfiles []*types.UserProfileSummary
+
+	// The continuation token to use when requesting the next set of results, if there
+	// are more results to be returned.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

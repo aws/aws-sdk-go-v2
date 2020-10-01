@@ -58,6 +58,27 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 
 type CopyDBClusterParameterGroupInput struct {
 
+	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
+	// group. For information about creating an ARN, see  Constructing an ARN for
+	// Amazon RDS
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
+	// in the Amazon Aurora User Guide. Constraints:
+	//
+	//     * Must specify a valid DB
+	// cluster parameter group.
+	//
+	//     * If the source DB cluster parameter group is in
+	// the same AWS Region as the copy, specify a valid DB parameter group identifier,
+	// for example my-db-cluster-param-group, or a valid ARN.
+	//
+	//     * If the source DB
+	// parameter group is in a different AWS Region than the copy, specify a valid DB
+	// cluster parameter group ARN, for example
+	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
+	//
+	// This member is required.
+	SourceDBClusterParameterGroupIdentifier *string
+
 	// A description for the copied DB cluster parameter group.
 	//
 	// This member is required.
@@ -81,27 +102,6 @@ type CopyDBClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	TargetDBClusterParameterGroupIdentifier *string
-
-	// The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter
-	// group. For information about creating an ARN, see  Constructing an ARN for
-	// Amazon RDS
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing)
-	// in the Amazon Aurora User Guide. Constraints:
-	//
-	//     * Must specify a valid DB
-	// cluster parameter group.
-	//
-	//     * If the source DB cluster parameter group is in
-	// the same AWS Region as the copy, specify a valid DB parameter group identifier,
-	// for example my-db-cluster-param-group, or a valid ARN.
-	//
-	//     * If the source DB
-	// parameter group is in a different AWS Region than the copy, specify a valid DB
-	// cluster parameter group ARN, for example
-	// arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1.
-	//
-	// This member is required.
-	SourceDBClusterParameterGroupIdentifier *string
 
 	// A list of tags. For more information, see Tagging Amazon RDS Resources
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in

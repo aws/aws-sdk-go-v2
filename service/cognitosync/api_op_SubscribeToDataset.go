@@ -64,15 +64,15 @@ type SubscribeToDatasetInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// Unique ID for this identity.
-	//
-	// This member is required.
-	IdentityId *string
-
 	// The unique ID generated for this device by Cognito.
 	//
 	// This member is required.
 	DeviceId *string
+
+	// Unique ID for this identity.
+	//
+	// This member is required.
+	IdentityId *string
 
 	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
 	// created by Amazon Cognito. The ID of the pool to which the identity belongs.

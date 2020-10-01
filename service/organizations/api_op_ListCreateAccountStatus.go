@@ -63,16 +63,6 @@ func (c *Client) ListCreateAccountStatus(ctx context.Context, params *ListCreate
 
 type ListCreateAccountStatusInput struct {
 
-	// A list of one or more states that you want included in the response. If this
-	// parameter isn't present, all requests are included in the response.
-	States []types.CreateAccountState
-
-	// The parameter for receiving additional results if you receive a NextToken
-	// response in a previous request. A NextToken response indicates that more output
-	// is available. Set this parameter to the value of the previous call's NextToken
-	// response to indicate where the output should continue from.
-	NextToken *string
-
 	// The total number of results that you want included on each page of the response.
 	// If you do not include this parameter, it defaults to a value that is specific to
 	// the operation. If additional items exist beyond the maximum you specify, the
@@ -83,20 +73,30 @@ type ListCreateAccountStatusInput struct {
 	// check NextToken after every operation to ensure that you receive all of the
 	// results.
 	MaxResults *int32
+
+	// The parameter for receiving additional results if you receive a NextToken
+	// response in a previous request. A NextToken response indicates that more output
+	// is available. Set this parameter to the value of the previous call's NextToken
+	// response to indicate where the output should continue from.
+	NextToken *string
+
+	// A list of one or more states that you want included in the response. If this
+	// parameter isn't present, all requests are included in the response.
+	States []types.CreateAccountState
 }
 
 type ListCreateAccountStatusOutput struct {
+
+	// A list of objects with details about the requests. Certain elements, such as the
+	// accountId number, are present in the output only after the account has been
+	// successfully created.
+	CreateAccountStatuses []*types.CreateAccountStatus
 
 	// If present, indicates that more output is available than is included in the
 	// current response. Use this value in the NextToken request parameter in a
 	// subsequent call to the operation to get the next part of the output. You should
 	// repeat this until the NextToken response element comes back as null.
 	NextToken *string
-
-	// A list of objects with details about the requests. Certain elements, such as the
-	// accountId number, are present in the output only after the account has been
-	// successfully created.
-	CreateAccountStatuses []*types.CreateAccountStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

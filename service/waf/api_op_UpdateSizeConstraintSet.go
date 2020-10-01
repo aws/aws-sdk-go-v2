@@ -109,6 +109,11 @@ func (c *Client) UpdateSizeConstraintSet(ctx context.Context, params *UpdateSize
 
 type UpdateSizeConstraintSetInput struct {
 
+	// The value returned by the most recent call to GetChangeToken ().
+	//
+	// This member is required.
+	ChangeToken *string
+
 	// The SizeConstraintSetId of the SizeConstraintSet () that you want to update.
 	// SizeConstraintSetId is returned by CreateSizeConstraintSet () and by
 	// ListSizeConstraintSets ().
@@ -131,11 +136,6 @@ type UpdateSizeConstraintSetInput struct {
 	//
 	// This member is required.
 	Updates []*types.SizeConstraintSetUpdate
-
-	// The value returned by the most recent call to GetChangeToken ().
-	//
-	// This member is required.
-	ChangeToken *string
 }
 
 type UpdateSizeConstraintSetOutput struct {

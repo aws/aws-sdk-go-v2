@@ -61,6 +61,11 @@ func (c *Client) CreateTransitGatewayMulticastDomain(ctx context.Context, params
 
 type CreateTransitGatewayMulticastDomainInput struct {
 
+	// The ID of the transit gateway.
+	//
+	// This member is required.
+	TransitGatewayId *string
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -69,11 +74,6 @@ type CreateTransitGatewayMulticastDomainInput struct {
 
 	// The tags for the transit gateway multicast domain.
 	TagSpecifications []*types.TagSpecification
-
-	// The ID of the transit gateway.
-	//
-	// This member is required.
-	TransitGatewayId *string
 }
 
 type CreateTransitGatewayMulticastDomainOutput struct {

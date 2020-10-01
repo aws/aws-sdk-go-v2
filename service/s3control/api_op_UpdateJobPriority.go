@@ -76,15 +76,15 @@ func (c *Client) UpdateJobPriority(ctx context.Context, params *UpdateJobPriorit
 
 type UpdateJobPriorityInput struct {
 
-	// The ID for the job whose priority you want to update.
-	//
-	// This member is required.
-	JobId *string
-
 	//
 	//
 	// This member is required.
 	AccountId *string
+
+	// The ID for the job whose priority you want to update.
+	//
+	// This member is required.
+	JobId *string
 
 	// The priority you want to assign to this job.
 	//

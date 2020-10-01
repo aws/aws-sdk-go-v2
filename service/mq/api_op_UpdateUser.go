@@ -57,12 +57,10 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 // Updates the information for an ActiveMQ user.
 type UpdateUserInput struct {
 
-	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-	ConsoleAccess *bool
-
-	// The password of the user. This value must be at least 12 characters long, must
-	// contain at least 4 unique characters, and must not contain commas.
-	Password *string
+	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
+	BrokerId *string
 
 	// Required. The username of the ActiveMQ user. This value can contain only
 	// alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~).
@@ -71,15 +69,17 @@ type UpdateUserInput struct {
 	// This member is required.
 	Username *string
 
+	// Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+	ConsoleAccess *bool
+
 	// The list of groups (20 maximum) to which the ActiveMQ user belongs. This value
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []*string
 
-	// The unique ID that Amazon MQ generates for the broker.
-	//
-	// This member is required.
-	BrokerId *string
+	// The password of the user. This value must be at least 12 characters long, must
+	// contain at least 4 unique characters, and must not contain commas.
+	Password *string
 }
 
 type UpdateUserOutput struct {

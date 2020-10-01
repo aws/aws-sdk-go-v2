@@ -57,15 +57,15 @@ func (c *Client) DescribeVirtualNode(ctx context.Context, params *DescribeVirtua
 //
 type DescribeVirtualNodeInput struct {
 
-	// The name of the virtual node to describe.
-	//
-	// This member is required.
-	VirtualNodeName *string
-
 	// The name of the service mesh that the virtual node resides in.
 	//
 	// This member is required.
 	MeshName *string
+
+	// The name of the virtual node to describe.
+	//
+	// This member is required.
+	VirtualNodeName *string
 
 	// The AWS IAM account ID of the service mesh owner. If the account ID is not your
 	// own, then it's the ID of the account that shared the mesh with your account. For

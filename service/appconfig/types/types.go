@@ -8,14 +8,14 @@ import (
 
 type Application struct {
 
-	// The application name.
-	Name *string
+	// The description of the application.
+	Description *string
 
 	// The application ID.
 	Id *string
 
-	// The description of the application.
-	Description *string
+	// The application name.
+	Name *string
 }
 
 // A summary of a configuration profile.
@@ -24,24 +24,21 @@ type ConfigurationProfileSummary struct {
 	// The application ID.
 	ApplicationId *string
 
-	// The types of validators in the configuration profile.
-	ValidatorTypes []ValidatorType
-
-	// The name of the configuration profile.
-	Name *string
+	// The ID of the configuration profile.
+	Id *string
 
 	// The URI location of the configuration.
 	LocationUri *string
 
-	// The ID of the configuration profile.
-	Id *string
+	// The name of the configuration profile.
+	Name *string
+
+	// The types of validators in the configuration profile.
+	ValidatorTypes []ValidatorType
 }
 
 // An object that describes a deployment event.
 type DeploymentEvent struct {
-
-	// The date and time the event occurred.
-	OccurredAt *time.Time
 
 	// A description of the deployment event. Descriptions include, but are not limited
 	// to, the user account or the CloudWatch alarm ARN that initiated a rollback, the
@@ -49,29 +46,23 @@ type DeploymentEvent struct {
 	// error, a recommendation to attempt a new deployment.
 	Description *string
 
-	// The entity that triggered the deployment event. Events can be triggered by a
-	// user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
-	TriggeredBy TriggeredBy
-
 	// The type of deployment event. Deployment event types include the start, stop, or
 	// completion of a deployment; a percentage update; the start or stop of a bake
 	// period; the start or completion of a rollback.
 	EventType DeploymentEventType
+
+	// The date and time the event occurred.
+	OccurredAt *time.Time
+
+	// The entity that triggered the deployment event. Events can be triggered by a
+	// user, AWS AppConfig, an Amazon CloudWatch alarm, or an internal error.
+	TriggeredBy TriggeredBy
 }
 
 type DeploymentStrategy struct {
 
-	// The algorithm used to define how percentage grew over time.
-	GrowthType GrowthType
-
 	// Total amount of time the deployment lasted.
 	DeploymentDurationInMinutes *int32
-
-	// Save the deployment strategy to a Systems Manager (SSM) document.
-	ReplicateTo ReplicateTo
-
-	// The deployment strategy ID.
-	Id *string
 
 	// The description of the deployment strategy.
 	Description *string
@@ -80,16 +71,40 @@ type DeploymentStrategy struct {
 	// deployment to be complete and no longer eligible for automatic roll back.
 	FinalBakeTimeInMinutes *int32
 
-	// The name of the deployment strategy.
-	Name *string
-
 	// The percentage of targets that received a deployed configuration during each
 	// interval.
 	GrowthFactor *float32
+
+	// The algorithm used to define how percentage grew over time.
+	GrowthType GrowthType
+
+	// The deployment strategy ID.
+	Id *string
+
+	// The name of the deployment strategy.
+	Name *string
+
+	// Save the deployment strategy to a Systems Manager (SSM) document.
+	ReplicateTo ReplicateTo
 }
 
 // Information about the deployment.
 type DeploymentSummary struct {
+
+	// Time the deployment completed.
+	CompletedAt *time.Time
+
+	// The name of the configuration.
+	ConfigurationName *string
+
+	// The version of the configuration.
+	ConfigurationVersion *string
+
+	// Total amount of time the deployment lasted.
+	DeploymentDurationInMinutes *int32
+
+	// The sequence number of the deployment.
+	DeploymentNumber *int32
 
 	// The amount of time AppConfig monitors for alarms before considering the
 	// deployment to be complete and no longer eligible for automatic roll back.
@@ -98,15 +113,6 @@ type DeploymentSummary struct {
 	// The percentage of targets to receive a deployed configuration during each
 	// interval.
 	GrowthFactor *float32
-
-	// The sequence number of the deployment.
-	DeploymentNumber *int32
-
-	// Time the deployment completed.
-	CompletedAt *time.Time
-
-	// Total amount of time the deployment lasted.
-	DeploymentDurationInMinutes *int32
 
 	// The algorithm used to define how percentage grows over time.
 	GrowthType GrowthType
@@ -117,20 +123,11 @@ type DeploymentSummary struct {
 	// Time the deployment started.
 	StartedAt *time.Time
 
-	// The name of the configuration.
-	ConfigurationName *string
-
-	// The version of the configuration.
-	ConfigurationVersion *string
-
 	// The state of the deployment.
 	State DeploymentState
 }
 
 type Environment struct {
-
-	// The name of the environment.
-	Name *string
 
 	// The application ID.
 	ApplicationId *string
@@ -138,36 +135,39 @@ type Environment struct {
 	// The description of the environment.
 	Description *string
 
-	// The state of the environment. An environment can be in one of the following
-	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
-	State EnvironmentState
-
 	// The environment ID.
 	Id *string
 
 	// Amazon CloudWatch alarms monitored during the deployment.
 	Monitors []*Monitor
+
+	// The name of the environment.
+	Name *string
+
+	// The state of the environment. An environment can be in one of the following
+	// states: READY_FOR_DEPLOYMENT, DEPLOYING, ROLLING_BACK, or ROLLED_BACK
+	State EnvironmentState
 }
 
 // Information about the configuration.
 type HostedConfigurationVersionSummary struct {
 
-	// A description of the configuration.
-	Description *string
-
 	// The application ID.
 	ApplicationId *string
 
-	// The configuration version.
-	VersionNumber *int32
+	// The configuration profile ID.
+	ConfigurationProfileId *string
 
 	// A standard MIME type describing the format of the configuration content. For
 	// more information, see Content-Type
 	// (https://docs.aws.amazon.com/https:/www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17).
 	ContentType *string
 
-	// The configuration profile ID.
-	ConfigurationProfileId *string
+	// A description of the configuration.
+	Description *string
+
+	// The configuration version.
+	VersionNumber *int32
 }
 
 // Amazon CloudWatch alarms to monitor during the deployment process.

@@ -58,31 +58,32 @@ func (c *Client) SubmitJob(ctx context.Context, params *SubmitJobInput, optFns .
 
 type SubmitJobInput struct {
 
+	// The job definition used by this job. This value can be one of name,
+	// name:revision, or the Amazon Resource Name (ARN) for the job definition. If name
+	// is specified without a revision then the latest active revision is used.
+	//
+	// This member is required.
+	JobDefinition *string
+
+	// The name of the job. The first character must be alphanumeric, and up to 128
+	// letters (uppercase and lowercase), numbers, hyphens, and underscores are
+	// allowed.
+	//
+	// This member is required.
+	JobName *string
+
+	// The job queue into which the job is submitted. You can specify either the name
+	// or the Amazon Resource Name (ARN) of the queue.
+	//
+	// This member is required.
+	JobQueue *string
+
 	// The array properties for the submitted job, such as the size of the array. The
 	// array size can be between 2 and 10,000. If you specify array properties for a
 	// job, it becomes an array job. For more information, see Array Jobs
 	// (https://docs.aws.amazon.com/batch/latest/userguide/array_jobs.html) in the AWS
 	// Batch User Guide.
 	ArrayProperties *types.ArrayProperties
-
-	// The retry strategy to use for failed jobs from this SubmitJob () operation. When
-	// a retry strategy is specified here, it overrides the retry strategy defined in
-	// the job definition.
-	RetryStrategy *types.RetryStrategy
-
-	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.
-	// You can specify a SEQUENTIAL type dependency without specifying a job ID for
-	// array jobs so that each child array job completes sequentially, starting at
-	// index 0. You can also specify an N_TO_N type dependency with a job ID for array
-	// jobs. In that case, each index child of this job must wait for the corresponding
-	// index child of each dependency to complete before it can begin.
-	DependsOn []*types.JobDependency
-
-	// Additional parameters passed to the job that replace parameter substitution
-	// placeholders that are set in the job definition. Parameters are specified as a
-	// key and value pair mapping. Parameters in a SubmitJob request override any
-	// corresponding parameter defaults from the job definition.
-	Parameters map[string]*string
 
 	// A list of container overrides in JSON format that specify the name of a
 	// container in the specified job definition and the overrides it should receive.
@@ -93,22 +94,28 @@ type SubmitJobInput struct {
 	// it with an environment override.
 	ContainerOverrides *types.ContainerOverrides
 
+	// A list of dependencies for the job. A job can depend upon a maximum of 20 jobs.
+	// You can specify a SEQUENTIAL type dependency without specifying a job ID for
+	// array jobs so that each child array job completes sequentially, starting at
+	// index 0. You can also specify an N_TO_N type dependency with a job ID for array
+	// jobs. In that case, each index child of this job must wait for the corresponding
+	// index child of each dependency to complete before it can begin.
+	DependsOn []*types.JobDependency
+
 	// A list of node overrides in JSON format that specify the node range to target
 	// and the container overrides for that node range.
 	NodeOverrides *types.NodeOverrides
 
-	// The job queue into which the job is submitted. You can specify either the name
-	// or the Amazon Resource Name (ARN) of the queue.
-	//
-	// This member is required.
-	JobQueue *string
+	// Additional parameters passed to the job that replace parameter substitution
+	// placeholders that are set in the job definition. Parameters are specified as a
+	// key and value pair mapping. Parameters in a SubmitJob request override any
+	// corresponding parameter defaults from the job definition.
+	Parameters map[string]*string
 
-	// The name of the job. The first character must be alphanumeric, and up to 128
-	// letters (uppercase and lowercase), numbers, hyphens, and underscores are
-	// allowed.
-	//
-	// This member is required.
-	JobName *string
+	// The retry strategy to use for failed jobs from this SubmitJob () operation. When
+	// a retry strategy is specified here, it overrides the retry strategy defined in
+	// the job definition.
+	RetryStrategy *types.RetryStrategy
 
 	// The timeout configuration for this SubmitJob () operation. You can specify a
 	// timeout duration after which AWS Batch terminates your jobs if they have not
@@ -120,13 +127,6 @@ type SubmitJobInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/job_timeouts.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Timeout *types.JobTimeout
-
-	// The job definition used by this job. This value can be one of name,
-	// name:revision, or the Amazon Resource Name (ARN) for the job definition. If name
-	// is specified without a revision then the latest active revision is used.
-	//
-	// This member is required.
-	JobDefinition *string
 }
 
 type SubmitJobOutput struct {

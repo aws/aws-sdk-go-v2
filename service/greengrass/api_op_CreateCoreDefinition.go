@@ -60,32 +60,20 @@ func (c *Client) CreateCoreDefinition(ctx context.Context, params *CreateCoreDef
 // Information needed to create a core definition.
 type CreateCoreDefinitionInput struct {
 
+	// A client token used to correlate requests and responses.
+	AmznClientToken *string
+
 	// Information about the initial version of the core definition.
 	InitialVersion *types.CoreDefinitionVersion
-
-	// Tag(s) to add to the new resource.
-	Tags map[string]*string
 
 	// The name of the core definition.
 	Name *string
 
-	// A client token used to correlate requests and responses.
-	AmznClientToken *string
+	// Tag(s) to add to the new resource.
+	Tags map[string]*string
 }
 
 type CreateCoreDefinitionOutput struct {
-
-	// The ARN of the latest version associated with the definition.
-	LatestVersionArn *string
-
-	// The time, in milliseconds since the epoch, when the definition was last updated.
-	LastUpdatedTimestamp *string
-
-	// The ID of the latest version associated with the definition.
-	LatestVersion *string
-
-	// The name of the definition.
-	Name *string
 
 	// The ARN of the definition.
 	Arn *string
@@ -95,6 +83,18 @@ type CreateCoreDefinitionOutput struct {
 
 	// The ID of the definition.
 	Id *string
+
+	// The time, in milliseconds since the epoch, when the definition was last updated.
+	LastUpdatedTimestamp *string
+
+	// The ID of the latest version associated with the definition.
+	LatestVersion *string
+
+	// The ARN of the latest version associated with the definition.
+	LatestVersionArn *string
+
+	// The name of the definition.
+	Name *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

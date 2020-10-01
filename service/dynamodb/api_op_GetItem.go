@@ -66,15 +66,14 @@ func (c *Client) GetItem(ctx context.Context, params *GetItemInput, optFns ...fu
 // Represents the input of a GetItem operation.
 type GetItemInput struct {
 
-	// A string that identifies one or more attributes to retrieve from the table.
-	// These attributes can include scalars, sets, or elements of a JSON document. The
-	// attributes in the expression must be separated by commas. If no attribute names
-	// are specified, then all attributes are returned. If any of the requested
-	// attributes are not found, they do not appear in the result. For more
-	// information, see Specifying Item Attributes
-	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
-	// in the Amazon DynamoDB Developer Guide.
-	ProjectionExpression *string
+	// A map of attribute names to AttributeValue objects, representing the primary key
+	// of the item to retrieve. For the primary key, you must provide all of the
+	// attributes. For example, with a simple primary key, you only need to provide a
+	// value for the partition key. For a composite primary key, you must provide
+	// values for both the partition key and the sort key.
+	//
+	// This member is required.
+	Key map[string]*types.AttributeValue
 
 	// The name of the table containing the requested item.
 	//
@@ -86,6 +85,11 @@ type GetItemInput struct {
 	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.AttributesToGet.html)
 	// in the Amazon DynamoDB Developer Guide.
 	AttributesToGet []*string
+
+	// Determines the read consistency model: If set to true, then the operation uses
+	// strongly consistent reads; otherwise, the operation uses eventually consistent
+	// reads.
+	ConsistentRead *bool
 
 	// One or more substitution tokens for attribute names in an expression. The
 	// following are some use cases for using ExpressionAttributeNames:
@@ -128,6 +132,16 @@ type GetItemInput struct {
 	// in the Amazon DynamoDB Developer Guide.
 	ExpressionAttributeNames map[string]*string
 
+	// A string that identifies one or more attributes to retrieve from the table.
+	// These attributes can include scalars, sets, or elements of a JSON document. The
+	// attributes in the expression must be separated by commas. If no attribute names
+	// are specified, then all attributes are returned. If any of the requested
+	// attributes are not found, they do not appear in the result. For more
+	// information, see Specifying Item Attributes
+	// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.AccessingItemAttributes.html)
+	// in the Amazon DynamoDB Developer Guide.
+	ProjectionExpression *string
+
 	// Determines the level of detail about provisioned throughput consumption that is
 	// returned in the response:
 	//
@@ -144,20 +158,6 @@ type GetItemInput struct {
 	//     * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
-
-	// A map of attribute names to AttributeValue objects, representing the primary key
-	// of the item to retrieve. For the primary key, you must provide all of the
-	// attributes. For example, with a simple primary key, you only need to provide a
-	// value for the partition key. For a composite primary key, you must provide
-	// values for both the partition key and the sort key.
-	//
-	// This member is required.
-	Key map[string]*types.AttributeValue
-
-	// Determines the read consistency model: If set to true, then the operation uses
-	// strongly consistent reads; otherwise, the operation uses eventually consistent
-	// reads.
-	ConsistentRead *bool
 }
 
 // Represents the output of a GetItem operation.

@@ -60,12 +60,6 @@ func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotCha
 
 type GetBotChannelAssociationInput struct {
 
-	// The name of the association between the bot and the channel. The name is case
-	// sensitive.
-	//
-	// This member is required.
-	Name *string
-
 	// An alias pointing to the specific version of the Amazon Lex bot to which this
 	// association is being made.
 	//
@@ -76,6 +70,12 @@ type GetBotChannelAssociationInput struct {
 	//
 	// This member is required.
 	BotName *string
+
+	// The name of the association between the bot and the channel. The name is case
+	// sensitive.
+	//
+	// This member is required.
+	Name *string
 }
 
 type GetBotChannelAssociationOutput struct {
@@ -84,25 +84,25 @@ type GetBotChannelAssociationOutput struct {
 	// association is being made.
 	BotAlias *string
 
-	// A description of the association between the bot and the channel.
-	Description *string
+	// Provides information that the messaging platform needs to communicate with the
+	// Amazon Lex bot.
+	BotConfiguration map[string]*string
 
 	// The name of the Amazon Lex bot.
 	BotName *string
+
+	// The date that the association between the bot and the channel was created.
+	CreatedDate *time.Time
+
+	// A description of the association between the bot and the channel.
+	Description *string
 
 	// If status is FAILED, Amazon Lex provides the reason that it failed to create the
 	// association.
 	FailureReason *string
 
-	// The date that the association between the bot and the channel was created.
-	CreatedDate *time.Time
-
-	// The type of the messaging platform.
-	Type types.ChannelType
-
-	// Provides information that the messaging platform needs to communicate with the
-	// Amazon Lex bot.
-	BotConfiguration map[string]*string
+	// The name of the association between the bot and the channel.
+	Name *string
 
 	// The status of the bot channel.
 	//
@@ -116,8 +116,8 @@ type GetBotChannelAssociationOutput struct {
 	// reason for the failure, see the failureReason field.
 	Status types.ChannelStatus
 
-	// The name of the association between the bot and the channel.
-	Name *string
+	// The type of the messaging platform.
+	Type types.ChannelType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

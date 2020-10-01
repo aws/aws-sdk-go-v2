@@ -56,6 +56,12 @@ func (c *Client) DescribeTrafficMirrorFilters(ctx context.Context, params *Descr
 
 type DescribeTrafficMirrorFiltersInput struct {
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// One or more filters. The possible values are:
 	//
 	//     * description: The Traffic
@@ -65,31 +71,25 @@ type DescribeTrafficMirrorFiltersInput struct {
 	// Traffic Mirror filter.
 	Filters []*types.Filter
 
-	// The ID of the Traffic Mirror filter.
-	TrafficMirrorFilterIds []*string
-
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
+	MaxResults *int32
 
 	// The token for the next page of results.
 	NextToken *string
 
-	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value.
-	MaxResults *int32
+	// The ID of the Traffic Mirror filter.
+	TrafficMirrorFilterIds []*string
 }
 
 type DescribeTrafficMirrorFiltersOutput struct {
 
-	// Information about one or more Traffic Mirror filters.
-	TrafficMirrorFilters []*types.TrafficMirrorFilter
-
 	// The token to use to retrieve the next page of results. The value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about one or more Traffic Mirror filters.
+	TrafficMirrorFilters []*types.TrafficMirrorFilter
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

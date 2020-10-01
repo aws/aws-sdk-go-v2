@@ -58,6 +58,11 @@ func (c *Client) DeleteThemeAlias(ctx context.Context, params *DeleteThemeAliasI
 
 type DeleteThemeAliasInput struct {
 
+	// The unique name for the theme alias to delete.
+	//
+	// This member is required.
+	AliasName *string
+
 	// The ID of the AWS account that contains the theme alias to delete.
 	//
 	// This member is required.
@@ -67,17 +72,12 @@ type DeleteThemeAliasInput struct {
 	//
 	// This member is required.
 	ThemeId *string
-
-	// The unique name for the theme alias to delete.
-	//
-	// This member is required.
-	AliasName *string
 }
 
 type DeleteThemeAliasOutput struct {
 
-	// An ID for the theme associated with the deletion.
-	ThemeId *string
+	// The name for the theme alias.
+	AliasName *string
 
 	// The Amazon Resource Name (ARN) of the theme resource using the deleted alias.
 	Arn *string
@@ -85,8 +85,8 @@ type DeleteThemeAliasOutput struct {
 	// The AWS request ID for this operation.
 	RequestId *string
 
-	// The name for the theme alias.
-	AliasName *string
+	// An ID for the theme associated with the deletion.
+	ThemeId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

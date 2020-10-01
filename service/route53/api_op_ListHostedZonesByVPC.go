@@ -71,23 +71,16 @@ func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZon
 // regardless of which AWS account created the hosted zones.
 type ListHostedZonesByVPCInput struct {
 
-	// For the Amazon VPC that you specified for VPCId, the AWS Region that you created
-	// the VPC in.
-	//
-	// This member is required.
-	VPCRegion types.VPCRegion
-
 	// The ID of the Amazon VPC that you want to list hosted zones for.
 	//
 	// This member is required.
 	VPCId *string
 
-	// If the previous response included a NextToken element, the specified VPC is
-	// associated with more hosted zones. To get more hosted zones, submit another
-	// ListHostedZonesByVPC request. For the value of NextToken, specify the value of
-	// NextToken from the previous response. If the previous response didn't include a
-	// NextToken element, there are no more hosted zones to get.
-	NextToken *string
+	// For the Amazon VPC that you specified for VPCId, the AWS Region that you created
+	// the VPC in.
+	//
+	// This member is required.
+	VPCRegion types.VPCRegion
 
 	// (Optional) The maximum number of hosted zones that you want Amazon Route 53 to
 	// return. If the specified VPC is associated with more than MaxItems hosted zones,
@@ -95,9 +88,23 @@ type ListHostedZonesByVPCInput struct {
 	// of the first hosted zone that Route 53 will return if you submit another
 	// request.
 	MaxItems *string
+
+	// If the previous response included a NextToken element, the specified VPC is
+	// associated with more hosted zones. To get more hosted zones, submit another
+	// ListHostedZonesByVPC request. For the value of NextToken, specify the value of
+	// NextToken from the previous response. If the previous response didn't include a
+	// NextToken element, there are no more hosted zones to get.
+	NextToken *string
 }
 
 type ListHostedZonesByVPCOutput struct {
+
+	// A list that contains one HostedZoneSummary element for each hosted zone that the
+	// specified Amazon VPC is associated with. Each HostedZoneSummary element contains
+	// the hosted zone name and ID, and information about who owns the hosted zone.
+	//
+	// This member is required.
+	HostedZoneSummaries []*types.HostedZoneSummary
 
 	// The value that you specified for MaxItems in the most recent
 	// ListHostedZonesByVPC request.
@@ -108,13 +115,6 @@ type ListHostedZonesByVPCOutput struct {
 	// The value that you specified for NextToken in the most recent
 	// ListHostedZonesByVPC request.
 	NextToken *string
-
-	// A list that contains one HostedZoneSummary element for each hosted zone that the
-	// specified Amazon VPC is associated with. Each HostedZoneSummary element contains
-	// the hosted zone name and ID, and information about who owns the hosted zone.
-	//
-	// This member is required.
-	HostedZoneSummaries []*types.HostedZoneSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

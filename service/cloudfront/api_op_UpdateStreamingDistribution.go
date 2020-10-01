@@ -58,29 +58,29 @@ func (c *Client) UpdateStreamingDistribution(ctx context.Context, params *Update
 // The request to update a streaming distribution.
 type UpdateStreamingDistributionInput struct {
 
-	// The value of the ETag header that you received when retrieving the streaming
-	// distribution's configuration. For example: E2QWRUHAPOMQZL.
-	IfMatch *string
+	// The streaming distribution's id.
+	//
+	// This member is required.
+	Id *string
 
 	// The streaming distribution's configuration information.
 	//
 	// This member is required.
 	StreamingDistributionConfig *types.StreamingDistributionConfig
 
-	// The streaming distribution's id.
-	//
-	// This member is required.
-	Id *string
+	// The value of the ETag header that you received when retrieving the streaming
+	// distribution's configuration. For example: E2QWRUHAPOMQZL.
+	IfMatch *string
 }
 
 // The returned result of the corresponding request.
 type UpdateStreamingDistributionOutput struct {
 
-	// The streaming distribution's information.
-	StreamingDistribution *types.StreamingDistribution
-
 	// The current version of the configuration. For example: E2QWRUHAPOMQZL.
 	ETag *string
+
+	// The streaming distribution's information.
+	StreamingDistribution *types.StreamingDistribution
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

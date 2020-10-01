@@ -57,15 +57,15 @@ func (c *Client) UnshareApplication(ctx context.Context, params *UnshareApplicat
 
 type UnshareApplicationInput struct {
 
-	// The AWS Organization ID to unshare the application from.
-	//
-	// This member is required.
-	OrganizationId *string
-
 	// The Amazon Resource Name (ARN) of the application.
 	//
 	// This member is required.
 	ApplicationId *string
+
+	// The AWS Organization ID to unshare the application from.
+	//
+	// This member is required.
+	OrganizationId *string
 }
 
 type UnshareApplicationOutput struct {

@@ -75,11 +75,11 @@ type StartImagePipelineExecutionOutput struct {
 	// The idempotency token used to make this request idempotent.
 	ClientToken *string
 
-	// The request ID that uniquely identifies this request.
-	RequestId *string
-
 	// The Amazon Resource Name (ARN) of the image that was created by this request.
 	ImageBuildVersionArn *string
+
+	// The request ID that uniquely identifies this request.
+	RequestId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

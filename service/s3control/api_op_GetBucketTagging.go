@@ -82,6 +82,11 @@ func (c *Client) GetBucketTagging(ctx context.Context, params *GetBucketTaggingI
 
 type GetBucketTaggingInput struct {
 
+	// The AWS account ID of the Outposts bucket.
+	//
+	// This member is required.
+	AccountId *string
+
 	// The ARN of the bucket. For Amazon S3 on Outposts specify the ARN of the bucket
 	// accessed in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to
 	// access the bucket reports through outpost my-outpost owned by account
@@ -91,11 +96,6 @@ type GetBucketTaggingInput struct {
 	//
 	// This member is required.
 	Bucket *string
-
-	// The AWS account ID of the Outposts bucket.
-	//
-	// This member is required.
-	AccountId *string
 }
 
 type GetBucketTaggingOutput struct {

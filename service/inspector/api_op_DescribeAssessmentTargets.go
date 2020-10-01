@@ -66,16 +66,16 @@ type DescribeAssessmentTargetsInput struct {
 
 type DescribeAssessmentTargetsOutput struct {
 
+	// Information about the assessment targets.
+	//
+	// This member is required.
+	AssessmentTargets []*types.AssessmentTarget
+
 	// Assessment target details that cannot be described. An error code is provided
 	// for each failed item.
 	//
 	// This member is required.
 	FailedItems map[string]*types.FailedItemDetails
-
-	// Information about the assessment targets.
-	//
-	// This member is required.
-	AssessmentTargets []*types.AssessmentTarget
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

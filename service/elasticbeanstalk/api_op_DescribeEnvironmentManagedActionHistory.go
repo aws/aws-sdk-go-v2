@@ -63,11 +63,11 @@ type DescribeEnvironmentManagedActionHistoryInput struct {
 	// The name of the target environment.
 	EnvironmentName *string
 
-	// The pagination token returned by a previous request.
-	NextToken *string
-
 	// The maximum number of items to return for a single request.
 	MaxItems *int32
+
+	// The pagination token returned by a previous request.
+	NextToken *string
 }
 
 // A result message containing a list of completed and failed managed actions.

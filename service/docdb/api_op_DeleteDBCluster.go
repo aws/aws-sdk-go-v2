@@ -60,12 +60,13 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 // Represents the input to DeleteDBCluster ().
 type DeleteDBClusterInput struct {
 
-	// Determines whether a final cluster snapshot is created before the cluster is
-	// deleted. If true is specified, no cluster snapshot is created. If false is
-	// specified, a cluster snapshot is created before the DB cluster is deleted. If
-	// SkipFinalSnapshot is false, you must specify a FinalDBSnapshotIdentifier
-	// parameter. Default: false
-	SkipFinalSnapshot *bool
+	// The cluster identifier for the cluster to be deleted. This parameter isn't case
+	// sensitive. Constraints:
+	//
+	//     * Must match an existing DBClusterIdentifier.
+	//
+	// This member is required.
+	DBClusterIdentifier *string
 
 	// The cluster snapshot identifier of the new cluster snapshot created when
 	// SkipFinalSnapshot is set to false. Specifying this parameter and also setting
@@ -81,13 +82,12 @@ type DeleteDBClusterInput struct {
 	// hyphens.
 	FinalDBSnapshotIdentifier *string
 
-	// The cluster identifier for the cluster to be deleted. This parameter isn't case
-	// sensitive. Constraints:
-	//
-	//     * Must match an existing DBClusterIdentifier.
-	//
-	// This member is required.
-	DBClusterIdentifier *string
+	// Determines whether a final cluster snapshot is created before the cluster is
+	// deleted. If true is specified, no cluster snapshot is created. If false is
+	// specified, a cluster snapshot is created before the DB cluster is deleted. If
+	// SkipFinalSnapshot is false, you must specify a FinalDBSnapshotIdentifier
+	// parameter. Default: false
+	SkipFinalSnapshot *bool
 }
 
 type DeleteDBClusterOutput struct {

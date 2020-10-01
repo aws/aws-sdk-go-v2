@@ -59,14 +59,14 @@ func (c *Client) EnableRule(ctx context.Context, params *EnableRuleInput, optFns
 
 type EnableRuleInput struct {
 
-	// The event bus associated with the rule. If you omit this, the default event bus
-	// is used.
-	EventBusName *string
-
 	// The name of the rule.
 	//
 	// This member is required.
 	Name *string
+
+	// The event bus associated with the rule. If you omit this, the default event bus
+	// is used.
+	EventBusName *string
 }
 
 type EnableRuleOutput struct {

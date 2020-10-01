@@ -60,15 +60,15 @@ func (c *Client) GetServiceQuota(ctx context.Context, params *GetServiceQuotaInp
 
 type GetServiceQuotaInput struct {
 
-	// Specifies the service that you want to use.
-	//
-	// This member is required.
-	ServiceCode *string
-
 	// Identifies the service quota you want to select.
 	//
 	// This member is required.
 	QuotaCode *string
+
+	// Specifies the service that you want to use.
+	//
+	// This member is required.
+	ServiceCode *string
 }
 
 type GetServiceQuotaOutput struct {

@@ -59,15 +59,15 @@ func (c *Client) GetCommit(ctx context.Context, params *GetCommitInput, optFns .
 // Represents the input of a get commit operation.
 type GetCommitInput struct {
 
-	// The name of the repository to which the commit was made.
-	//
-	// This member is required.
-	RepositoryName *string
-
 	// The commit ID. Commit IDs are the full SHA ID of the commit.
 	//
 	// This member is required.
 	CommitId *string
+
+	// The name of the repository to which the commit was made.
+	//
+	// This member is required.
+	RepositoryName *string
 }
 
 // Represents the output of a get commit operation.

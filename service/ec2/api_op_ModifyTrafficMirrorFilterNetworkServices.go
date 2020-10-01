@@ -73,14 +73,14 @@ type ModifyTrafficMirrorFilterNetworkServicesInput struct {
 	// The network service, for example Amazon DNS, that you want to mirror.
 	AddNetworkServices []types.TrafficMirrorNetworkService
 
-	// The network service, for example Amazon DNS, that you no longer want to mirror.
-	RemoveNetworkServices []types.TrafficMirrorNetworkService
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The network service, for example Amazon DNS, that you no longer want to mirror.
+	RemoveNetworkServices []types.TrafficMirrorNetworkService
 }
 
 type ModifyTrafficMirrorFilterNetworkServicesOutput struct {

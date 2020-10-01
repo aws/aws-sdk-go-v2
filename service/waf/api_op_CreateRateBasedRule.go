@@ -111,14 +111,12 @@ func (c *Client) CreateRateBasedRule(ctx context.Context, params *CreateRateBase
 
 type CreateRateBasedRuleInput struct {
 
-	// A friendly name or description of the RateBasedRule (). You can't change the
-	// name of a RateBasedRule after you create it.
+	// The ChangeToken that you used to submit the CreateRateBasedRule request. You can
+	// also use this value to query the status of the request. For more information,
+	// see GetChangeTokenStatus ().
 	//
 	// This member is required.
-	Name *string
-
-	//
-	Tags []*types.Tag
+	ChangeToken *string
 
 	// A friendly name or description for the metrics for this RateBasedRule. The name
 	// can contain only alphanumeric characters (A-Z, a-z, 0-9), with maximum length
@@ -129,13 +127,11 @@ type CreateRateBasedRuleInput struct {
 	// This member is required.
 	MetricName *string
 
-	// The maximum number of requests, which have an identical value in the field that
-	// is specified by RateKey, allowed in a five-minute period. If the number of
-	// requests exceeds the RateLimit and the other predicates specified in the rule
-	// are also met, AWS WAF triggers the action that is specified for this rule.
+	// A friendly name or description of the RateBasedRule (). You can't change the
+	// name of a RateBasedRule after you create it.
 	//
 	// This member is required.
-	RateLimit *int64
+	Name *string
 
 	// The field that AWS WAF uses to determine if requests are likely arriving from a
 	// single source and thus subject to rate monitoring. The only valid value for
@@ -145,23 +141,27 @@ type CreateRateBasedRuleInput struct {
 	// This member is required.
 	RateKey types.RateKey
 
-	// The ChangeToken that you used to submit the CreateRateBasedRule request. You can
-	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus ().
+	// The maximum number of requests, which have an identical value in the field that
+	// is specified by RateKey, allowed in a five-minute period. If the number of
+	// requests exceeds the RateLimit and the other predicates specified in the rule
+	// are also met, AWS WAF triggers the action that is specified for this rule.
 	//
 	// This member is required.
-	ChangeToken *string
+	RateLimit *int64
+
+	//
+	Tags []*types.Tag
 }
 
 type CreateRateBasedRuleOutput struct {
 
-	// The RateBasedRule () that is returned in the CreateRateBasedRule response.
-	Rule *types.RateBasedRule
-
 	// The ChangeToken that you used to submit the CreateRateBasedRule request. You can
 	// also use this value to query the status of the request. For more information,
 	// see GetChangeTokenStatus ().
 	ChangeToken *string
+
+	// The RateBasedRule () that is returned in the CreateRateBasedRule response.
+	Rule *types.RateBasedRule
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

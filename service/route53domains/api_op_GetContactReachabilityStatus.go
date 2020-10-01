@@ -66,14 +66,14 @@ type GetContactReachabilityStatusInput struct {
 
 type GetContactReachabilityStatusOutput struct {
 
+	// The domain name for which you requested the reachability status.
+	DomainName *string
+
 	// Whether the registrant contact has responded. Values include the following:
 	// PENDING We sent the confirmation email and haven't received a response yet. DONE
 	// We sent the email and got confirmation from the registrant contact. EXPIRED The
 	// time limit expired before the registrant contact responded.
 	Status types.ReachabilityStatus
-
-	// The domain name for which you requested the reachability status.
-	DomainName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -64,27 +64,27 @@ type DescribeNetworkInterfaceAttributeInput struct {
 	// This member is required.
 	NetworkInterfaceId *string
 
+	// The attribute of the network interface. This parameter is required.
+	Attribute types.NetworkInterfaceAttribute
+
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
-
-	// The attribute of the network interface. This parameter is required.
-	Attribute types.NetworkInterfaceAttribute
 }
 
 // Contains the output of DescribeNetworkInterfaceAttribute.
 type DescribeNetworkInterfaceAttributeOutput struct {
 
-	// The security groups associated with the network interface.
-	Groups []*types.GroupIdentifier
+	// The attachment (if any) of the network interface.
+	Attachment *types.NetworkInterfaceAttachment
 
 	// The description of the network interface.
 	Description *types.AttributeValue
 
-	// The attachment (if any) of the network interface.
-	Attachment *types.NetworkInterfaceAttachment
+	// The security groups associated with the network interface.
+	Groups []*types.GroupIdentifier
 
 	// The ID of the network interface.
 	NetworkInterfaceId *string

@@ -64,76 +64,11 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 
 type DescribeScalingPoliciesInput struct {
 
-	// The token for the next set of results.
-	NextToken *string
-
 	// The namespace of the AWS service that provides the resource. For a resource
 	// provided by your own application or service, use custom-resource instead.
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
-
-	// The scalable dimension. This string consists of the service namespace, resource
-	// type, and scaling property. If you specify a scalable dimension, you must also
-	// specify a resource ID.
-	//
-	//     * ecs:service:DesiredCount - The desired task count
-	// of an ECS service.
-	//
-	//     * ec2:spot-fleet-request:TargetCapacity - The target
-	// capacity of a Spot Fleet request.
-	//
-	//     *
-	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
-	// Instance Group.
-	//
-	//     * appstream:fleet:DesiredCapacity - The desired capacity of
-	// an AppStream 2.0 fleet.
-	//
-	//     * dynamodb:table:ReadCapacityUnits - The
-	// provisioned read capacity for a DynamoDB table.
-	//
-	//     *
-	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB table.
-	//
-	//     * dynamodb:index:ReadCapacityUnits - The provisioned read
-	// capacity for a DynamoDB global secondary index.
-	//
-	//     *
-	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
-	// DynamoDB global secondary index.
-	//
-	//     * rds:cluster:ReadReplicaCount - The count
-	// of Aurora Replicas in an Aurora DB cluster. Available for Aurora
-	// MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
-	//
-	//     *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
-	// Amazon SageMaker model endpoint variant.
-	//
-	//     *
-	// custom-resource:ResourceType:Property - The scalable dimension for a custom
-	// resource provided by your own application or service.
-	//
-	//     *
-	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
-	// inference units for an Amazon Comprehend document classification endpoint.
-	//
-	//
-	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
-	// Lambda function.
-	//
-	//     * cassandra:table:ReadCapacityUnits - The provisioned read
-	// capacity for an Amazon Keyspaces table.
-	//
-	//     *
-	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
-	// Amazon Keyspaces table.
-	ScalableDimension types.ScalableDimension
-
-	// The names of the scaling policies to describe.
-	PolicyNames []*string
 
 	// The maximum number of scalable targets. This value can be between 1 and 50. The
 	// default value is 50. If this parameter is used, the operation returns up to
@@ -142,6 +77,12 @@ type DescribeScalingPoliciesInput struct {
 	// is not used, the operation returns up to 50 results and a NextToken value, if
 	// applicable.
 	MaxResults *int32
+
+	// The token for the next set of results.
+	NextToken *string
+
+	// The names of the scaling policies to describe.
+	PolicyNames []*string
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier. If you specify a scalable
@@ -202,6 +143,65 @@ type DescribeScalingPoliciesInput struct {
 	// table and the unique identifier is the table name. Example:
 	// keyspace/mykeyspace/table/mytable.
 	ResourceId *string
+
+	// The scalable dimension. This string consists of the service namespace, resource
+	// type, and scaling property. If you specify a scalable dimension, you must also
+	// specify a resource ID.
+	//
+	//     * ecs:service:DesiredCount - The desired task count
+	// of an ECS service.
+	//
+	//     * ec2:spot-fleet-request:TargetCapacity - The target
+	// capacity of a Spot Fleet request.
+	//
+	//     *
+	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
+	// Instance Group.
+	//
+	//     * appstream:fleet:DesiredCapacity - The desired capacity of
+	// an AppStream 2.0 fleet.
+	//
+	//     * dynamodb:table:ReadCapacityUnits - The
+	// provisioned read capacity for a DynamoDB table.
+	//
+	//     *
+	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB table.
+	//
+	//     * dynamodb:index:ReadCapacityUnits - The provisioned read
+	// capacity for a DynamoDB global secondary index.
+	//
+	//     *
+	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB global secondary index.
+	//
+	//     * rds:cluster:ReadReplicaCount - The count
+	// of Aurora Replicas in an Aurora DB cluster. Available for Aurora
+	// MySQL-compatible edition and Aurora PostgreSQL-compatible edition.
+	//
+	//     *
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// Amazon SageMaker model endpoint variant.
+	//
+	//     *
+	// custom-resource:ResourceType:Property - The scalable dimension for a custom
+	// resource provided by your own application or service.
+	//
+	//     *
+	// comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number of
+	// inference units for an Amazon Comprehend document classification endpoint.
+	//
+	//
+	// * lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
+	// Lambda function.
+	//
+	//     * cassandra:table:ReadCapacityUnits - The provisioned read
+	// capacity for an Amazon Keyspaces table.
+	//
+	//     *
+	// cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
+	// Amazon Keyspaces table.
+	ScalableDimension types.ScalableDimension
 }
 
 type DescribeScalingPoliciesOutput struct {

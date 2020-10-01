@@ -64,9 +64,9 @@ type BatchGetStreamKeyInput struct {
 }
 
 type BatchGetStreamKeyOutput struct {
-	StreamKeys []*types.StreamKey
-
 	Errors []*types.BatchError
+
+	StreamKeys []*types.StreamKey
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

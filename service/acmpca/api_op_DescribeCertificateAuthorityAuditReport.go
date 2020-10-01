@@ -81,14 +81,14 @@ type DescribeCertificateAuthorityAuditReportOutput struct {
 	// Specifies whether report creation is in progress, has succeeded, or has failed.
 	AuditReportStatus types.AuditReportStatus
 
+	// The date and time at which the report was created.
+	CreatedAt *time.Time
+
 	// Name of the S3 bucket that contains the report.
 	S3BucketName *string
 
 	// S3 key that uniquely identifies the report file in your S3 bucket.
 	S3Key *string
-
-	// The date and time at which the report was created.
-	CreatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

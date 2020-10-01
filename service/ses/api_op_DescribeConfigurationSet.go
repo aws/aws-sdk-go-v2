@@ -79,22 +79,22 @@ type DescribeConfigurationSetInput struct {
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type DescribeConfigurationSetOutput struct {
 
+	// The configuration set object associated with the specified configuration set.
+	ConfigurationSet *types.ConfigurationSet
+
+	// Specifies whether messages that use the configuration set are required to use
+	// Transport Layer Security (TLS).
+	DeliveryOptions *types.DeliveryOptions
+
+	// A list of event destinations associated with the configuration set.
+	EventDestinations []*types.EventDestination
+
 	// An object that represents the reputation settings for the configuration set.
 	ReputationOptions *types.ReputationOptions
 
 	// The name of the custom open and click tracking domain associated with the
 	// configuration set.
 	TrackingOptions *types.TrackingOptions
-
-	// The configuration set object associated with the specified configuration set.
-	ConfigurationSet *types.ConfigurationSet
-
-	// A list of event destinations associated with the configuration set.
-	EventDestinations []*types.EventDestination
-
-	// Specifies whether messages that use the configuration set are required to use
-	// Transport Layer Security (TLS).
-	DeliveryOptions *types.DeliveryOptions
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

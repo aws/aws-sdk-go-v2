@@ -58,21 +58,6 @@ func (c *Client) RevokePermissions(ctx context.Context, params *RevokePermission
 
 type RevokePermissionsInput struct {
 
-	// The identifier for the Data Catalog. By default, the account ID. The Data
-	// Catalog is the persistent metadata store. It contains database definitions,
-	// table definitions, and other control information to manage your AWS Lake
-	// Formation environment.
-	CatalogId *string
-
-	// The principal to be revoked permissions on the resource.
-	//
-	// This member is required.
-	Principal *types.DataLakePrincipal
-
-	// Indicates a list of permissions for which to revoke the grant option allowing
-	// the principal to pass permissions to other principals.
-	PermissionsWithGrantOption []types.Permission
-
 	// The permissions revoked to the principal on the resource. For information about
 	// permissions, see Security and Access Control to Metadata and Data
 	// (https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html).
@@ -80,10 +65,25 @@ type RevokePermissionsInput struct {
 	// This member is required.
 	Permissions []types.Permission
 
+	// The principal to be revoked permissions on the resource.
+	//
+	// This member is required.
+	Principal *types.DataLakePrincipal
+
 	// The resource to which permissions are to be revoked.
 	//
 	// This member is required.
 	Resource *types.Resource
+
+	// The identifier for the Data Catalog. By default, the account ID. The Data
+	// Catalog is the persistent metadata store. It contains database definitions,
+	// table definitions, and other control information to manage your AWS Lake
+	// Formation environment.
+	CatalogId *string
+
+	// Indicates a list of permissions for which to revoke the grant option allowing
+	// the principal to pass permissions to other principals.
+	PermissionsWithGrantOption []types.Permission
 }
 
 type RevokePermissionsOutput struct {

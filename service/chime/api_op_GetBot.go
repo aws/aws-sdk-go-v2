@@ -58,15 +58,15 @@ func (c *Client) GetBot(ctx context.Context, params *GetBotInput, optFns ...func
 
 type GetBotInput struct {
 
-	// The bot ID.
-	//
-	// This member is required.
-	BotId *string
-
 	// The Amazon Chime account ID.
 	//
 	// This member is required.
 	AccountId *string
+
+	// The bot ID.
+	//
+	// This member is required.
+	BotId *string
 }
 
 type GetBotOutput struct {

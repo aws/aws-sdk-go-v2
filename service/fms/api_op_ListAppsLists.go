@@ -57,16 +57,6 @@ func (c *Client) ListAppsLists(ctx context.Context, params *ListAppsListsInput, 
 
 type ListAppsListsInput struct {
 
-	// If you specify a value for MaxResults in your list request, and you have more
-	// objects than the maximum, AWS Firewall Manager returns this token in the
-	// response. For all but the first request, you provide the token returned by the
-	// prior request in the request parameters, to retrieve the next batch of objects.
-	NextToken *string
-
-	// Specifies whether the lists to retrieve are default lists owned by AWS Firewall
-	// Manager.
-	DefaultLists *bool
-
 	// The maximum number of objects that you want AWS Firewall Manager to return for
 	// this request. If more objects are available, in the response, AWS Firewall
 	// Manager provides a NextToken value that you can use in a subsequent call to get
@@ -75,6 +65,16 @@ type ListAppsListsInput struct {
 	//
 	// This member is required.
 	MaxResults *int32
+
+	// Specifies whether the lists to retrieve are default lists owned by AWS Firewall
+	// Manager.
+	DefaultLists *bool
+
+	// If you specify a value for MaxResults in your list request, and you have more
+	// objects than the maximum, AWS Firewall Manager returns this token in the
+	// response. For all but the first request, you provide the token returned by the
+	// prior request in the request parameters, to retrieve the next batch of objects.
+	NextToken *string
 }
 
 type ListAppsListsOutput struct {

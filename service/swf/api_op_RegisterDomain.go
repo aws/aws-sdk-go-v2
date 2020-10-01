@@ -76,6 +76,16 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 
 type RegisterDomainInput struct {
 
+	// Name of the domain to register. The name must be unique in the region that the
+	// domain is registered in.  <p>The specified string must not start or end with
+	// whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
+	// (slash), <code>|</code> (vertical bar), or any control characters
+	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
+	// <i>be</i> the literal string <code>arn</code>.</p>
+	//
+	// This member is required.
+	Name *string
+
 	// The duration (in days) that records and histories of workflow executions on the
 	// domain should be kept by the service. After the retention period, the workflow
 	// execution isn't available in the results of visibility calls. If you pass the
@@ -89,22 +99,12 @@ type RegisterDomainInput struct {
 	// This member is required.
 	WorkflowExecutionRetentionPeriodInDays *string
 
-	// Tags to be added when registering a domain. Tags may only contain unicode
-	// letters, digits, whitespace, or these symbols: _ . : / = + - @.
-	Tags []*types.ResourceTag
-
 	// A text description of the domain.
 	Description *string
 
-	// Name of the domain to register. The name must be unique in the region that the
-	// domain is registered in.  <p>The specified string must not start or end with
-	// whitespace. It must not contain a <code>:</code> (colon), <code>/</code>
-	// (slash), <code>|</code> (vertical bar), or any control characters
-	// (<code>\u0000-\u001f</code> | <code>\u007f-\u009f</code>). Also, it must not
-	// <i>be</i> the literal string <code>arn</code>.</p>
-	//
-	// This member is required.
-	Name *string
+	// Tags to be added when registering a domain. Tags may only contain unicode
+	// letters, digits, whitespace, or these symbols: _ . : / = + - @.
+	Tags []*types.ResourceTag
 }
 
 type RegisterDomainOutput struct {

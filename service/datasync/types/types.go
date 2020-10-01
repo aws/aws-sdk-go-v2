@@ -6,11 +6,11 @@ package types
 // that contains a list of agents when the ListAgents () operation is called.
 type AgentListEntry struct {
 
-	// The name of the agent.
-	Name *string
-
 	// The Amazon Resource Name (ARN) of the agent.
 	AgentArn *string
+
+	// The name of the agent.
+	Name *string
 
 	// The status of the agent.
 	Status AgentStatus
@@ -39,13 +39,13 @@ type Ec2Config struct {
 // transferring files from source to destination.
 type FilterRule struct {
 
-	// A single filter string that consists of the patterns to include or exclude. The
-	// patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
-	Value *string
-
 	// The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN
 	// rule type.
 	FilterType FilterType
+
+	// A single filter string that consists of the patterns to include or exclude. The
+	// patterns are delimited by "|" (that is, a pipe), for example: /folder1|/folder2
+	Value *string
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
@@ -113,64 +113,6 @@ type OnPremConfig struct {
 // StartTaskExecution ().
 type Options struct {
 
-	// A value that determines whether a data integrity verification should be
-	// performed at the end of a task execution after all data and metadata have been
-	// transferred. For more information, see create-task () Default value:
-	// POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform
-	// verification only on files that were transferred.  <p>POINT_IN_TIME_CONSISTENT:
-	// Scan the entire source and entire destination at the end of the transfer to
-	// verify that source and destination are fully synchronized. This option isn't
-	// supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage
-	// classes.</p> <p>NONE: No additional verification is done at the end of the
-	// transfer, but all data transmissions are integrity-checked with checksum
-	// verification during the transfer.</p>
-	VerifyMode VerifyMode
-
-	// The group ID (GID) of the file's owners. Default value: INT_VALUE. This
-	// preserves the integer value of the ID. INT_VALUE: Preserve the integer value of
-	// user ID (UID) and GID (recommended). NONE: Ignore UID and GID.
-	Gid Gid
-
-	// A value that specifies whether files in the destination that don't exist in the
-	// source file system should be preserved. This option can affect your storage
-	// cost. If your task deletes objects, you might incur minimum storage duration
-	// charges for certain storage classes. For detailed information, see
-	// using-storage-classes () in the AWS DataSync User Guide. Default value:
-	// PRESERVE. PRESERVE: Ignore such destination files (recommended). REMOVE: Delete
-	// destination files that aren’t present in the source.
-	PreserveDeletedFiles PreserveDeletedFiles
-
-	// A value that determines whether tasks should be queued before executing the
-	// tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If
-	// you use the same agent to run multiple tasks, you can enable the tasks to run in
-	// series. For more information, see queue-task-execution ().
-	TaskQueueing TaskQueueing
-
-	// A value that determines which users or groups can access a file for a specific
-	// purpose such as reading, writing, or execution of the file. Default value:
-	// PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore
-	// permissions. AWS DataSync can preserve extant permissions of a source location.
-	PosixPermissions PosixPermissions
-
-	// TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental"
-	// or "delta sync", it compares file modification time between source and
-	// destination to determine which files need to be transferred. ALL skips
-	// destination inventory and transfers all files discovered on the source.
-	TransferMode TransferMode
-
-	// A value that limits the bandwidth used by AWS DataSync. For example, if you want
-	// AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
-	BytesPerSecond *int64
-
-	// A value that determines whether files at the destination should be overwritten
-	// or preserved when copying files. If set to NEVER a destination file will not be
-	// replaced by a source file, even if the destination file differs from the source
-	// file. If you modify files in the destination and you sync the files, you can use
-	// this value to protect against overwriting those changes. Some storage classes
-	// have specific behaviors that can affect your S3 storage cost. For detailed
-	// information, see using-storage-classes () in the AWS DataSync User Guide.
-	OverwriteMode OverwriteMode
-
 	// A file metadata value that shows the last time a file was accessed (that is,
 	// when the file was read or written to). If you set Atime to BEST_EFFORT, DataSync
 	// attempts to preserve the original Atime attribute on all source files (that is,
@@ -181,10 +123,14 @@ type Options struct {
 	// Mtime must be set to PRESERVE. If Atime is set to NONE, Mtime must also be NONE.
 	Atime Atime
 
-	// The user ID (UID) of the file's owner. Default value: INT_VALUE. This preserves
-	// the integer value of the ID. INT_VALUE: Preserve the integer value of UID and
-	// group ID (GID) (recommended). NONE: Ignore UID and GID.
-	Uid Uid
+	// A value that limits the bandwidth used by AWS DataSync. For example, if you want
+	// AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
+	BytesPerSecond *int64
+
+	// The group ID (GID) of the file's owners. Default value: INT_VALUE. This
+	// preserves the integer value of the ID. INT_VALUE: Preserve the integer value of
+	// user ID (UID) and GID (recommended). NONE: Ignore UID and GID.
+	Gid Gid
 
 	// A value that determines the type of logs that DataSync publishes to a log stream
 	// in the Amazon CloudWatch log group that you provide. For more information about
@@ -202,6 +148,30 @@ type Options struct {
 	// also be set to NONE.
 	Mtime Mtime
 
+	// A value that determines whether files at the destination should be overwritten
+	// or preserved when copying files. If set to NEVER a destination file will not be
+	// replaced by a source file, even if the destination file differs from the source
+	// file. If you modify files in the destination and you sync the files, you can use
+	// this value to protect against overwriting those changes. Some storage classes
+	// have specific behaviors that can affect your S3 storage cost. For detailed
+	// information, see using-storage-classes () in the AWS DataSync User Guide.
+	OverwriteMode OverwriteMode
+
+	// A value that determines which users or groups can access a file for a specific
+	// purpose such as reading, writing, or execution of the file. Default value:
+	// PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore
+	// permissions. AWS DataSync can preserve extant permissions of a source location.
+	PosixPermissions PosixPermissions
+
+	// A value that specifies whether files in the destination that don't exist in the
+	// source file system should be preserved. This option can affect your storage
+	// cost. If your task deletes objects, you might incur minimum storage duration
+	// charges for certain storage classes. For detailed information, see
+	// using-storage-classes () in the AWS DataSync User Guide. Default value:
+	// PRESERVE. PRESERVE: Ignore such destination files (recommended). REMOVE: Delete
+	// destination files that aren’t present in the source.
+	PreserveDeletedFiles PreserveDeletedFiles
+
 	// A value that determines whether AWS DataSync should preserve the metadata of
 	// block and character devices in the source file system, and recreate the files
 	// with that device name and metadata on the destination. AWS DataSync can't sync
@@ -210,19 +180,41 @@ type Options struct {
 	// devices (recommended). PRESERVE: Preserve character and block device metadata.
 	// This option isn't currently supported for Amazon EFS.
 	PreserveDevices PreserveDevices
+
+	// A value that determines whether tasks should be queued before executing the
+	// tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If
+	// you use the same agent to run multiple tasks, you can enable the tasks to run in
+	// series. For more information, see queue-task-execution ().
+	TaskQueueing TaskQueueing
+
+	// TransferMode has two values: CHANGED and ALL. CHANGED performs an "incremental"
+	// or "delta sync", it compares file modification time between source and
+	// destination to determine which files need to be transferred. ALL skips
+	// destination inventory and transfers all files discovered on the source.
+	TransferMode TransferMode
+
+	// The user ID (UID) of the file's owner. Default value: INT_VALUE. This preserves
+	// the integer value of the ID. INT_VALUE: Preserve the integer value of UID and
+	// group ID (GID) (recommended). NONE: Ignore UID and GID.
+	Uid Uid
+
+	// A value that determines whether a data integrity verification should be
+	// performed at the end of a task execution after all data and metadata have been
+	// transferred. For more information, see create-task () Default value:
+	// POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform
+	// verification only on files that were transferred.  <p>POINT_IN_TIME_CONSISTENT:
+	// Scan the entire source and entire destination at the end of the transfer to
+	// verify that source and destination are fully synchronized. This option isn't
+	// supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage
+	// classes.</p> <p>NONE: No additional verification is done at the end of the
+	// transfer, but all data transmissions are integrity-checked with checksum
+	// verification during the transfer.</p>
+	VerifyMode VerifyMode
 }
 
 // The VPC endpoint, subnet, and security group that an agent uses to access IP
 // addresses in a VPC (Virtual Private Cloud).
 type PrivateLinkConfig struct {
-
-	// The ID of the VPC endpoint that is configured for an agent. An agent that is
-	// configured with a VPC endpoint will not be accessible over the public internet.
-	VpcEndpointId *string
-
-	// The Amazon Resource Names (ARNs) of the subnets that are configured for an agent
-	// activated in a VPC or an agent that has access to a VPC endpoint.
-	SubnetArns []*string
 
 	// The private endpoint that is configured for an agent that has access to IP
 	// addresses in a PrivateLink
@@ -235,6 +227,14 @@ type PrivateLinkConfig struct {
 	// the EC2 resource that hosts an agent activated in a VPC or an agent that has
 	// access to a VPC endpoint.
 	SecurityGroupArns []*string
+
+	// The Amazon Resource Names (ARNs) of the subnets that are configured for an agent
+	// activated in a VPC or an agent that has access to a VPC endpoint.
+	SubnetArns []*string
+
+	// The ID of the VPC endpoint that is configured for an agent. An agent that is
+	// configured with a VPC endpoint will not be accessible over the public internet.
+	VpcEndpointId *string
 }
 
 // The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
@@ -266,13 +266,13 @@ type SmbMountOptions struct {
 // is called.
 type TagListEntry struct {
 
-	// The value for an AWS resource tag.
-	Value *string
-
 	// The key for an AWS resource tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value for an AWS resource tag.
+	Value *string
 }
 
 // Represents a single entry in a list of task executions. TaskExecutionListEntry
@@ -280,17 +280,25 @@ type TagListEntry struct {
 // ListTaskExecutions () operation is called.
 type TaskExecutionListEntry struct {
 
-	// The Amazon Resource Name (ARN) of the task that was executed.
-	TaskExecutionArn *string
-
 	// The status of a task execution.
 	Status TaskExecutionStatus
+
+	// The Amazon Resource Name (ARN) of the task that was executed.
+	TaskExecutionArn *string
 }
 
 // Describes the detailed result of a TaskExecution operation. This result includes
 // the time in milliseconds spent in each phase, the status of the task execution,
 // and the errors encountered.
 type TaskExecutionResultDetail struct {
+
+	// Errors that AWS DataSync encountered during execution of the task. You can use
+	// this error code to help troubleshoot issues.
+	ErrorCode *string
+
+	// Detailed description of an error that was encountered during the task execution.
+	// You can use this information to help troubleshoot issues.
+	ErrorDetail *string
 
 	// The total time in milliseconds that AWS DataSync spent in the PREPARING phase.
 	PrepareDuration *int64
@@ -302,26 +310,18 @@ type TaskExecutionResultDetail struct {
 	// the source to the destination location.
 	TotalDuration *int64
 
-	// Errors that AWS DataSync encountered during execution of the task. You can use
-	// this error code to help troubleshoot issues.
-	ErrorCode *string
-
-	// The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.
-	VerifyDuration *int64
-
-	// Detailed description of an error that was encountered during the task execution.
-	// You can use this information to help troubleshoot issues.
-	ErrorDetail *string
-
 	// The total time in milliseconds that AWS DataSync spent in the TRANSFERRING
 	// phase.
 	TransferDuration *int64
 
-	// The status of the VERIFYING Phase.
-	VerifyStatus PhaseStatus
-
 	// The status of the TRANSFERRING Phase.
 	TransferStatus PhaseStatus
+
+	// The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.
+	VerifyDuration *int64
+
+	// The status of the VERIFYING Phase.
+	VerifyStatus PhaseStatus
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array
@@ -330,14 +330,14 @@ type TaskExecutionResultDetail struct {
 // for the tasks.
 type TaskListEntry struct {
 
-	// The Amazon Resource Name (ARN) of the task.
-	TaskArn *string
-
 	// The name of the task.
 	Name *string
 
 	// The status of the task.
 	Status TaskStatus
+
+	// The Amazon Resource Name (ARN) of the task.
+	TaskArn *string
 }
 
 // Specifies the schedule you want your task to use for repeated executions. For

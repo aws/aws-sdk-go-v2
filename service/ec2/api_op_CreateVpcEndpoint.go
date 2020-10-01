@@ -71,20 +71,17 @@ func (c *Client) CreateVpcEndpoint(ctx context.Context, params *CreateVpcEndpoin
 // Contains the parameters for CreateVpcEndpoint.
 type CreateVpcEndpointInput struct {
 
-	// (Interface endpoint) The ID of one or more subnets in which to create an
-	// endpoint network interface.
-	SubnetIds []*string
-
-	// (Interface endpoint) The ID of one or more security groups to associate with the
-	// endpoint network interface.
-	SecurityGroupIds []*string
-
 	// The service name. To get a list of available services, use the
 	// DescribeVpcEndpointServices () request, or get the name from the service
 	// provider.
 	//
 	// This member is required.
 	ServiceName *string
+
+	// The ID of the VPC in which the endpoint will be used.
+	//
+	// This member is required.
+	VpcId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
@@ -97,24 +94,10 @@ type CreateVpcEndpointInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The tags to associate with the endpoint.
-	TagSpecifications []*types.TagSpecification
-
-	// The type of endpoint. Default: Gateway
-	VpcEndpointType types.VpcEndpointType
-
-	// (Gateway endpoint) One or more route table IDs.
-	RouteTableIds []*string
-
 	// A policy to attach to the endpoint that controls access to the service. The
 	// policy must be in valid JSON format. If this parameter is not specified, we
 	// attach a default policy that allows full access to the service.
 	PolicyDocument *string
-
-	// The ID of the VPC in which the endpoint will be used.
-	//
-	// This member is required.
-	VpcId *string
 
 	// (Interface endpoint) Indicates whether to associate a private hosted zone with
 	// the specified VPC. The private hosted zone contains a record set for the default
@@ -127,6 +110,23 @@ type CreateVpcEndpointInput struct {
 	// enableDnsSupport. Use ModifyVpcAttribute () to set the VPC attributes. Default:
 	// true
 	PrivateDnsEnabled *bool
+
+	// (Gateway endpoint) One or more route table IDs.
+	RouteTableIds []*string
+
+	// (Interface endpoint) The ID of one or more security groups to associate with the
+	// endpoint network interface.
+	SecurityGroupIds []*string
+
+	// (Interface endpoint) The ID of one or more subnets in which to create an
+	// endpoint network interface.
+	SubnetIds []*string
+
+	// The tags to associate with the endpoint.
+	TagSpecifications []*types.TagSpecification
+
+	// The type of endpoint. Default: Gateway
+	VpcEndpointType types.VpcEndpointType
 }
 
 // Contains the output of CreateVpcEndpoint.

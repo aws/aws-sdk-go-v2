@@ -56,15 +56,15 @@ func (c *Client) RegisterCertificate(ctx context.Context, params *RegisterCertif
 
 type RegisterCertificateInput struct {
 
-	// The identifier of the directory.
-	//
-	// This member is required.
-	DirectoryId *string
-
 	// The certificate PEM string that needs to be registered.
 	//
 	// This member is required.
 	CertificateData *string
+
+	// The identifier of the directory.
+	//
+	// This member is required.
+	DirectoryId *string
 }
 
 type RegisterCertificateOutput struct {

@@ -61,18 +61,6 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 
 type DescribeBackupsInput struct {
 
-	// The NextToken value that you received in the previous response. Use this value
-	// to get more backups.
-	NextToken *string
-
-	// The maximum number of backups to return in the response. When there are more
-	// backups than the number you specify, the response contains a NextToken value.
-	MaxResults *int32
-
-	// Designates whether or not to sort the return backups by ascending chronological
-	// order of generation.
-	SortAscending *bool
-
 	// One or more filters to limit the items returned in the response. Use the
 	// backupIds filter to return only the specified backups. Specify backups by their
 	// backup identifier (ID). Use the sourceBackupIds filter to return only the
@@ -82,17 +70,29 @@ type DescribeBackupsInput struct {
 	// cluster identifier (ID). Use the states filter to return only backups that match
 	// the specified state.
 	Filters map[string][]*string
+
+	// The maximum number of backups to return in the response. When there are more
+	// backups than the number you specify, the response contains a NextToken value.
+	MaxResults *int32
+
+	// The NextToken value that you received in the previous response. Use this value
+	// to get more backups.
+	NextToken *string
+
+	// Designates whether or not to sort the return backups by ascending chronological
+	// order of generation.
+	SortAscending *bool
 }
 
 type DescribeBackupsOutput struct {
+
+	// A list of backups.
+	Backups []*types.Backup
 
 	// An opaque string that indicates that the response contains only a subset of
 	// backups. Use this value in a subsequent DescribeBackups request to get more
 	// backups.
 	NextToken *string
-
-	// A list of backups.
-	Backups []*types.Backup
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

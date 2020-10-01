@@ -58,13 +58,13 @@ func (c *Client) DescribeAddresses(ctx context.Context, params *DescribeAddresse
 
 type DescribeAddressesInput struct {
 
+	// The number of ADDRESS objects to return.
+	MaxResults *int32
+
 	// HTTP requests are stateless. To identify what object comes "next" in the list of
 	// ADDRESS objects, you have the option of specifying a value for NextToken as the
 	// starting point for your list of returned addresses.
 	NextToken *string
-
-	// The number of ADDRESS objects to return.
-	MaxResults *int32
 }
 
 type DescribeAddressesOutput struct {

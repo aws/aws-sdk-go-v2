@@ -59,16 +59,6 @@ func (c *Client) UpdateAuthEventFeedback(ctx context.Context, params *UpdateAuth
 
 type UpdateAuthEventFeedbackInput struct {
 
-	// The user pool ID.
-	//
-	// This member is required.
-	UserPoolId *string
-
-	// The authentication event feedback value.
-	//
-	// This member is required.
-	FeedbackValue types.FeedbackValueType
-
 	// The event ID.
 	//
 	// This member is required.
@@ -78,6 +68,16 @@ type UpdateAuthEventFeedbackInput struct {
 	//
 	// This member is required.
 	FeedbackToken *string
+
+	// The authentication event feedback value.
+	//
+	// This member is required.
+	FeedbackValue types.FeedbackValueType
+
+	// The user pool ID.
+	//
+	// This member is required.
+	UserPoolId *string
 
 	// The user pool username.
 	//

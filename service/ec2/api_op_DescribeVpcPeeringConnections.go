@@ -56,10 +56,6 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 
 type DescribeVpcPeeringConnectionsInput struct {
 
-	// One or more VPC peering connection IDs. Default: Describes all your VPC peering
-	// connections.
-	VpcPeeringConnectionIds []*string
-
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
@@ -116,16 +112,20 @@ type DescribeVpcPeeringConnectionsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// One or more VPC peering connection IDs. Default: Describes all your VPC peering
+	// connections.
+	VpcPeeringConnectionIds []*string
 }
 
 type DescribeVpcPeeringConnectionsOutput struct {
 
-	// Information about the VPC peering connections.
-	VpcPeeringConnections []*types.VpcPeeringConnection
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the VPC peering connections.
+	VpcPeeringConnections []*types.VpcPeeringConnection
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

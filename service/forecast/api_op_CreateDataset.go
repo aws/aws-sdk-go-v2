@@ -81,6 +81,48 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
+	// A name for the dataset.
+	//
+	// This member is required.
+	DatasetName *string
+
+	// The dataset type. Valid values depend on the chosen Domain.
+	//
+	// This member is required.
+	DatasetType types.DatasetType
+
+	// The domain associated with the dataset. When you add a dataset to a dataset
+	// group, this value and the value specified for the Domain parameter of the
+	// CreateDatasetGroup () operation must match. The Domain and DatasetType that you
+	// choose determine the fields that must be present in the training data that you
+	// import to the dataset. For example, if you choose the RETAIL domain and
+	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id,
+	// timestamp, and demand fields to be present in your data. For more information,
+	// see howitworks-datasets-groups ().
+	//
+	// This member is required.
+	Domain types.Domain
+
+	// The schema for the dataset. The schema attributes and their order must match the
+	// fields in your data. The dataset Domain and DatasetType that you choose
+	// determine the minimum required fields in your training data. For information
+	// about the required fields for a specific dataset domain and type, see
+	// howitworks-domains-ds-types ().
+	//
+	// This member is required.
+	Schema *types.Schema
+
+	// The frequency of data collection. This parameter is required for
+	// RELATED_TIME_SERIES datasets. Valid intervals are Y (Year), M (Month), W (Week),
+	// D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
+	// 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and
+	// "15min" indicates every 15 minutes.
+	DataFrequency *string
+
+	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
+	// Management (IAM) role that Amazon Forecast can assume to access the key.
+	EncryptionConfig *types.EncryptionConfig
+
 	// The optional metadata that you apply to the dataset to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define. The following basic restrictions apply to tags:
@@ -113,48 +155,6 @@ type CreateDatasetInput struct {
 	// 50 tags. Tags with only the key prefix of aws do not count against your tags per
 	// resource limit.
 	Tags []*types.Tag
-
-	// An AWS Key Management Service (KMS) key and the AWS Identity and Access
-	// Management (IAM) role that Amazon Forecast can assume to access the key.
-	EncryptionConfig *types.EncryptionConfig
-
-	// The domain associated with the dataset. When you add a dataset to a dataset
-	// group, this value and the value specified for the Domain parameter of the
-	// CreateDatasetGroup () operation must match. The Domain and DatasetType that you
-	// choose determine the fields that must be present in the training data that you
-	// import to the dataset. For example, if you choose the RETAIL domain and
-	// TARGET_TIME_SERIES as the DatasetType, Amazon Forecast requires item_id,
-	// timestamp, and demand fields to be present in your data. For more information,
-	// see howitworks-datasets-groups ().
-	//
-	// This member is required.
-	Domain types.Domain
-
-	// A name for the dataset.
-	//
-	// This member is required.
-	DatasetName *string
-
-	// The schema for the dataset. The schema attributes and their order must match the
-	// fields in your data. The dataset Domain and DatasetType that you choose
-	// determine the minimum required fields in your training data. For information
-	// about the required fields for a specific dataset domain and type, see
-	// howitworks-domains-ds-types ().
-	//
-	// This member is required.
-	Schema *types.Schema
-
-	// The frequency of data collection. This parameter is required for
-	// RELATED_TIME_SERIES datasets. Valid intervals are Y (Year), M (Month), W (Week),
-	// D (Day), H (Hour), 30min (30 minutes), 15min (15 minutes), 10min (10 minutes),
-	// 5min (5 minutes), and 1min (1 minute). For example, "D" indicates every day and
-	// "15min" indicates every 15 minutes.
-	DataFrequency *string
-
-	// The dataset type. Valid values depend on the chosen Domain.
-	//
-	// This member is required.
-	DatasetType types.DatasetType
 }
 
 type CreateDatasetOutput struct {

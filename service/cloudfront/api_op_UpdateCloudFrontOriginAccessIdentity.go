@@ -58,19 +58,19 @@ func (c *Client) UpdateCloudFrontOriginAccessIdentity(ctx context.Context, param
 // The request to update an origin access identity.
 type UpdateCloudFrontOriginAccessIdentityInput struct {
 
-	// The value of the ETag header that you received when retrieving the identity's
-	// configuration. For example: E2QWRUHAPOMQZL.
-	IfMatch *string
+	// The identity's configuration information.
+	//
+	// This member is required.
+	CloudFrontOriginAccessIdentityConfig *types.CloudFrontOriginAccessIdentityConfig
 
 	// The identity's id.
 	//
 	// This member is required.
 	Id *string
 
-	// The identity's configuration information.
-	//
-	// This member is required.
-	CloudFrontOriginAccessIdentityConfig *types.CloudFrontOriginAccessIdentityConfig
+	// The value of the ETag header that you received when retrieving the identity's
+	// configuration. For example: E2QWRUHAPOMQZL.
+	IfMatch *string
 }
 
 // The returned result of the corresponding request.

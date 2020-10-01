@@ -67,8 +67,14 @@ type DescribeFleetMetadataInput struct {
 
 type DescribeFleetMetadataOutput struct {
 
+	// The identifier used by users to sign in to the Amazon WorkLink app.
+	CompanyCode *string
+
 	// The time that the fleet was created.
 	CreatedTime *time.Time
+
+	// The name to display.
+	DisplayName *string
 
 	// The name of the fleet.
 	FleetName *string
@@ -83,14 +89,8 @@ type DescribeFleetMetadataOutput struct {
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
 
-	// The name to display.
-	DisplayName *string
-
 	// The tags attached to the resource. A tag is a key-value pair.
 	Tags map[string]*string
-
-	// The identifier used by users to sign in to the Amazon WorkLink app.
-	CompanyCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

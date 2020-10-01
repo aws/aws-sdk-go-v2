@@ -63,21 +63,21 @@ type BatchUpdateScheduleInput struct {
 	// This member is required.
 	ChannelId *string
 
-	// Schedule actions to delete from the schedule.
-	Deletes *types.BatchScheduleActionDeleteRequest
-
 	// Schedule actions to create in the schedule.
 	Creates *types.BatchScheduleActionCreateRequest
+
+	// Schedule actions to delete from the schedule.
+	Deletes *types.BatchScheduleActionDeleteRequest
 }
 
 // Placeholder documentation for BatchUpdateScheduleResponse
 type BatchUpdateScheduleOutput struct {
 
-	// Schedule actions deleted from the schedule.
-	Deletes *types.BatchScheduleActionDeleteResult
-
 	// Schedule actions created in the schedule.
 	Creates *types.BatchScheduleActionCreateResult
+
+	// Schedule actions deleted from the schedule.
+	Deletes *types.BatchScheduleActionDeleteResult
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

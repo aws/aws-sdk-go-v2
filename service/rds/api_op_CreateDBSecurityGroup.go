@@ -60,9 +60,6 @@ func (c *Client) CreateDBSecurityGroup(ctx context.Context, params *CreateDBSecu
 //
 type CreateDBSecurityGroupInput struct {
 
-	// Tags to assign to the DB security group.
-	Tags []*types.Tag
-
 	// The description for the DB security group.
 	//
 	// This member is required.
@@ -85,6 +82,9 @@ type CreateDBSecurityGroupInput struct {
 	//
 	// This member is required.
 	DBSecurityGroupName *string
+
+	// Tags to assign to the DB security group.
+	Tags []*types.Tag
 }
 
 type CreateDBSecurityGroupOutput struct {

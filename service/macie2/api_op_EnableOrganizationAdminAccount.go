@@ -59,14 +59,14 @@ func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *Ena
 
 type EnableOrganizationAdminAccountInput struct {
 
-	// A unique, case-sensitive token that you provide to ensure the idempotency of the
-	// request.
-	ClientToken *string
-
 	// The AWS account ID for the account.
 	//
 	// This member is required.
 	AdminAccountId *string
+
+	// A unique, case-sensitive token that you provide to ensure the idempotency of the
+	// request.
+	ClientToken *string
 }
 
 type EnableOrganizationAdminAccountOutput struct {

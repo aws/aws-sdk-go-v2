@@ -56,11 +56,14 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
-	// An optional filter that lets you search for jobs that have the specified status.
-	Status types.JobStatus
+	// The maximum number of results to return per request.
+	MaxResults *int32
 
 	// The token to retrieve the next set of results.
 	NextToken *string
+
+	// An optional filter that lets you search for jobs that have the specified status.
+	Status types.JobStatus
 
 	// Specifies whether the job will continue to run (CONTINUOUS), or will be complete
 	// after all those things specified as targets have completed the job (SNAPSHOT).
@@ -70,24 +73,21 @@ type ListJobsInput struct {
 	// group.
 	TargetSelection types.TargetSelection
 
-	// The maximum number of results to return per request.
-	MaxResults *int32
+	// A filter that limits the returned jobs to those for the specified group.
+	ThingGroupId *string
 
 	// A filter that limits the returned jobs to those for the specified group.
 	ThingGroupName *string
-
-	// A filter that limits the returned jobs to those for the specified group.
-	ThingGroupId *string
 }
 
 type ListJobsOutput struct {
 
+	// A list of jobs.
+	Jobs []*types.JobSummary
+
 	// The token for the next set of results, or null if there are no additional
 	// results.
 	NextToken *string
-
-	// A list of jobs.
-	Jobs []*types.JobSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

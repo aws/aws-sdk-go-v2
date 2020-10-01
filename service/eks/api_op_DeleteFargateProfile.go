@@ -64,16 +64,16 @@ func (c *Client) DeleteFargateProfile(ctx context.Context, params *DeleteFargate
 
 type DeleteFargateProfileInput struct {
 
-	// The name of the Fargate profile to delete.
-	//
-	// This member is required.
-	FargateProfileName *string
-
 	// The name of the Amazon EKS cluster associated with the Fargate profile to
 	// delete.
 	//
 	// This member is required.
 	ClusterName *string
+
+	// The name of the Fargate profile to delete.
+	//
+	// This member is required.
+	FargateProfileName *string
 }
 
 type DeleteFargateProfileOutput struct {

@@ -67,11 +67,11 @@ type ListChannelsInput struct {
 // Placeholder documentation for ListChannelsResponse
 type ListChannelsOutput struct {
 
-	// Placeholder documentation for __string
-	NextToken *string
-
 	// Placeholder documentation for __listOfChannelSummary
 	Channels []*types.ChannelSummary
+
+	// Placeholder documentation for __string
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

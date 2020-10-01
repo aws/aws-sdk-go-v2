@@ -56,15 +56,15 @@ func (c *Client) RevokeDomainAccess(ctx context.Context, params *RevokeDomainAcc
 
 type RevokeDomainAccessInput struct {
 
-	// The ARN of the fleet.
-	//
-	// This member is required.
-	FleetArn *string
-
 	// The name of the domain.
 	//
 	// This member is required.
 	DomainName *string
+
+	// The ARN of the fleet.
+	//
+	// This member is required.
+	FleetArn *string
 }
 
 type RevokeDomainAccessOutput struct {

@@ -68,16 +68,28 @@ type DescribeTaskExecutionInput struct {
 // DescribeTaskExecutionResponse
 type DescribeTaskExecutionOutput struct {
 
-	// A list of filter rules that determines which files to include when running a
-	// task. The list should contain a single filter string that consists of the
-	// patterns to include. The patterns are delimited by "|" (that is, a pipe), for
-	// example: "/folder1|/folder2"
-	Includes []*types.FilterRule
+	// The physical number of bytes transferred over the network.
+	BytesTransferred *int64
 
-	// The status of the task execution.  <p>For detailed information about task
-	// execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User
-	// Guide.</i> </p>
-	Status types.TaskExecutionStatus
+	// The number of logical bytes written to the destination AWS storage resource.
+	BytesWritten *int64
+
+	// The estimated physical number of bytes that is to be transferred over the
+	// network.
+	EstimatedBytesToTransfer *int64
+
+	// The expected number of files that is to be transferred over the network. This
+	// value is calculated during the PREPARING phase, before the TRANSFERRING phase.
+	// This value is the expected number of files to be transferred. It's calculated
+	// based on comparing the content of the source and destination locations and
+	// finding the delta that needs to be transferred.
+	EstimatedFilesToTransfer *int64
+
+	// A list of filter rules that determines which files to exclude from a task. The
+	// list should contain a single filter string that consists of the patterns to
+	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
+	// "/folder1|/folder2"
+	Excludes []*types.FilterRule
 
 	// The actual number of files that was transferred over the network. This value is
 	// calculated and updated on an ongoing basis during the TRANSFERRING phase. It's
@@ -89,6 +101,12 @@ type DescribeTaskExecutionOutput struct {
 	// number or to monitor your task execution.
 	FilesTransferred *int64
 
+	// A list of filter rules that determines which files to include when running a
+	// task. The list should contain a single filter string that consists of the
+	// patterns to include. The patterns are delimited by "|" (that is, a pipe), for
+	// example: "/folder1|/folder2"
+	Includes []*types.FilterRule
+
 	// Represents the options that are available to control the behavior of a
 	// StartTaskExecution () operation. Behavior includes preserving metadata such as
 	// user ID (UID), group ID (GID), and file permissions, and also overwriting files
@@ -99,21 +117,16 @@ type DescribeTaskExecutionOutput struct {
 	// StartTaskExecution ().
 	Options *types.Options
 
-	// The expected number of files that is to be transferred over the network. This
-	// value is calculated during the PREPARING phase, before the TRANSFERRING phase.
-	// This value is the expected number of files to be transferred. It's calculated
-	// based on comparing the content of the source and destination locations and
-	// finding the delta that needs to be transferred.
-	EstimatedFilesToTransfer *int64
-
-	// The number of logical bytes written to the destination AWS storage resource.
-	BytesWritten *int64
-
-	// The physical number of bytes transferred over the network.
-	BytesTransferred *int64
+	// The result of the task execution.
+	Result *types.TaskExecutionResultDetail
 
 	// The time that the task execution was started.
 	StartTime *time.Time
+
+	// The status of the task execution.  <p>For detailed information about task
+	// execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User
+	// Guide.</i> </p>
+	Status types.TaskExecutionStatus
 
 	// The Amazon Resource Name (ARN) of the task execution that was described.
 	// TaskExecutionArn is hierarchical and includes TaskArn for the task that was
@@ -122,19 +135,6 @@ type DescribeTaskExecutionOutput struct {
 	// executed the task with the ARN
 	// arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2.
 	TaskExecutionArn *string
-
-	// The estimated physical number of bytes that is to be transferred over the
-	// network.
-	EstimatedBytesToTransfer *int64
-
-	// A list of filter rules that determines which files to exclude from a task. The
-	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
-	// "/folder1|/folder2"
-	Excludes []*types.FilterRule
-
-	// The result of the task execution.
-	Result *types.TaskExecutionResultDetail
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

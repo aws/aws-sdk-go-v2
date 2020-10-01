@@ -59,24 +59,6 @@ func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionC
 
 type UpdateFunctionCodeInput struct {
 
-	// An Amazon S3 bucket in the same AWS Region as your function. The bucket can be
-	// in a different AWS account.
-	S3Bucket *string
-
-	// The Amazon S3 key of the deployment package.
-	S3Key *string
-
-	// For versioned objects, the version of the deployment package object to use.
-	S3ObjectVersion *string
-
-	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
-	// clients handle the encoding for you.
-	ZipFile []byte
-
-	// Set to true to validate the request parameters and access permissions without
-	// modifying the function code.
-	DryRun *bool
-
 	// The name of the Lambda function. Name formats
 	//
 	//     * Function name -
@@ -95,106 +77,124 @@ type UpdateFunctionCodeInput struct {
 	// This member is required.
 	FunctionName *string
 
+	// Set to true to validate the request parameters and access permissions without
+	// modifying the function code.
+	DryRun *bool
+
+	// Set to true to publish a new version of the function after updating the code.
+	// This has the same effect as calling PublishVersion () separately.
+	Publish *bool
+
 	// Only update the function if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a function that has changed since you last read
 	// it.
 	RevisionId *string
 
-	// Set to true to publish a new version of the function after updating the code.
-	// This has the same effect as calling PublishVersion () separately.
-	Publish *bool
+	// An Amazon S3 bucket in the same AWS Region as your function. The bucket can be
+	// in a different AWS account.
+	S3Bucket *string
+
+	// The Amazon S3 key of the deployment package.
+	S3Key *string
+
+	// For versioned objects, the version of the deployment package object to use.
+	S3ObjectVersion *string
+
+	// The base64-encoded contents of the deployment package. AWS SDK and AWS CLI
+	// clients handle the encoding for you.
+	ZipFile []byte
 }
 
 // Details about a function's configuration.
 type UpdateFunctionCodeOutput struct {
 
-	// The name of the function.
-	FunctionName *string
-
-	// The latest updated revision of the function or alias.
-	RevisionId *string
-
-	// For Lambda@Edge functions, the ARN of the master function.
-	MasterArn *string
-
-	// The status of the last update that was performed on the function. This is first
-	// set to Successful after function creation completes.
-	LastUpdateStatus types.LastUpdateStatus
-
-	// The function's  layers
-	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
-	Layers []*types.Layer
-
-	// Connection settings for an Amazon EFS file system.
-	FileSystemConfigs []*types.FileSystemConfig
-
-	// The function's networking configuration.
-	VpcConfig *types.VpcConfigResponse
-
-	// The runtime environment for the Lambda function.
-	Runtime types.Runtime
-
 	// The SHA256 hash of the function's deployment package.
 	CodeSha256 *string
-
-	// The date and time that the function was last updated, in ISO-8601 format
-	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
-	LastModified *string
-
-	// The memory that's allocated to the function.
-	MemorySize *int32
-
-	// The version of the Lambda function.
-	Version *string
-
-	// The amount of time in seconds that Lambda allows a function to run before
-	// stopping it.
-	Timeout *int32
 
 	// The size of the function's deployment package, in bytes.
 	CodeSize *int64
 
-	// The function's Amazon Resource Name (ARN).
-	FunctionArn *string
-
-	// The function's environment variables.
-	Environment *types.EnvironmentResponse
-
-	// The reason for the last update that was performed on the function.
-	LastUpdateStatusReason *string
-
-	// The function that Lambda calls to begin executing your function.
-	Handler *string
-
-	// The function's AWS X-Ray tracing configuration.
-	TracingConfig *types.TracingConfigResponse
-
-	// The reason code for the function's current state. When the code is Creating, you
-	// can't invoke or modify the function.
-	StateReasonCode types.StateReasonCode
-
-	// The reason code for the last update that was performed on the function.
-	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
+	// The function's dead letter queue.
+	DeadLetterConfig *types.DeadLetterConfig
 
 	// The function's description.
 	Description *string
 
-	// The function's execution role.
-	Role *string
+	// The function's environment variables.
+	Environment *types.EnvironmentResponse
+
+	// Connection settings for an Amazon EFS file system.
+	FileSystemConfigs []*types.FileSystemConfig
+
+	// The function's Amazon Resource Name (ARN).
+	FunctionArn *string
+
+	// The name of the function.
+	FunctionName *string
+
+	// The function that Lambda calls to begin executing your function.
+	Handler *string
 
 	// The KMS key that's used to encrypt the function's environment variables. This
 	// key is only returned if you've configured a customer managed CMK.
 	KMSKeyArn *string
 
-	// The function's dead letter queue.
-	DeadLetterConfig *types.DeadLetterConfig
+	// The date and time that the function was last updated, in ISO-8601 format
+	// (https://www.w3.org/TR/NOTE-datetime) (YYYY-MM-DDThh:mm:ss.sTZD).
+	LastModified *string
 
-	// The reason for the function's current state.
-	StateReason *string
+	// The status of the last update that was performed on the function. This is first
+	// set to Successful after function creation completes.
+	LastUpdateStatus types.LastUpdateStatus
+
+	// The reason for the last update that was performed on the function.
+	LastUpdateStatusReason *string
+
+	// The reason code for the last update that was performed on the function.
+	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
+
+	// The function's  layers
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
+	Layers []*types.Layer
+
+	// For Lambda@Edge functions, the ARN of the master function.
+	MasterArn *string
+
+	// The memory that's allocated to the function.
+	MemorySize *int32
+
+	// The latest updated revision of the function or alias.
+	RevisionId *string
+
+	// The function's execution role.
+	Role *string
+
+	// The runtime environment for the Lambda function.
+	Runtime types.Runtime
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.
 	State types.State
+
+	// The reason for the function's current state.
+	StateReason *string
+
+	// The reason code for the function's current state. When the code is Creating, you
+	// can't invoke or modify the function.
+	StateReasonCode types.StateReasonCode
+
+	// The amount of time in seconds that Lambda allows a function to run before
+	// stopping it.
+	Timeout *int32
+
+	// The function's AWS X-Ray tracing configuration.
+	TracingConfig *types.TracingConfigResponse
+
+	// The version of the Lambda function.
+	Version *string
+
+	// The function's networking configuration.
+	VpcConfig *types.VpcConfigResponse
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

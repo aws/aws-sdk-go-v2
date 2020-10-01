@@ -71,6 +71,13 @@ type GetBulkPublishDetailsInput struct {
 // The output for the GetBulkPublishDetails operation.
 type GetBulkPublishDetailsOutput struct {
 
+	// If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation
+	// completed.
+	BulkPublishCompleteTime *time.Time
+
+	// The date/time at which the last bulk publish was initiated.
+	BulkPublishStartTime *time.Time
+
 	// Status of the last bulk publish operation, valid values are:
 	//
 	//     * NOT_STARTED
@@ -87,20 +94,13 @@ type GetBulkPublishDetailsOutput struct {
 	// cause.
 	BulkPublishStatus types.BulkPublishStatus
 
-	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
-	// created by Amazon Cognito. GUID generation is unique within a region.
-	IdentityPoolId *string
-
 	// If BulkPublishStatus is FAILED this field will contain the error message that
 	// caused the bulk publish to fail.
 	FailureMessage *string
 
-	// If BulkPublishStatus is SUCCEEDED, the time the last bulk publish operation
-	// completed.
-	BulkPublishCompleteTime *time.Time
-
-	// The date/time at which the last bulk publish was initiated.
-	BulkPublishStartTime *time.Time
+	// A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE)
+	// created by Amazon Cognito. GUID generation is unique within a region.
+	IdentityPoolId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

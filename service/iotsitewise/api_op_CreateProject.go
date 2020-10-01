@@ -58,29 +58,29 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 
 type CreateProjectInput struct {
 
-	// A list of key-value pairs that contain metadata for the project. For more
-	// information, see Tagging your AWS IoT SiteWise resources
-	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the AWS IoT SiteWise User Guide.
-	Tags map[string]*string
-
-	// A description for the project.
-	ProjectDescription *string
+	// The ID of the portal in which to create the project.
+	//
+	// This member is required.
+	PortalId *string
 
 	// A friendly name for the project.
 	//
 	// This member is required.
 	ProjectName *string
 
-	// The ID of the portal in which to create the project.
-	//
-	// This member is required.
-	PortalId *string
-
 	// A unique case-sensitive identifier that you can provide to ensure the
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	// A description for the project.
+	ProjectDescription *string
+
+	// A list of key-value pairs that contain metadata for the project. For more
+	// information, see Tagging your AWS IoT SiteWise resources
+	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
+	// in the AWS IoT SiteWise User Guide.
+	Tags map[string]*string
 }
 
 type CreateProjectOutput struct {

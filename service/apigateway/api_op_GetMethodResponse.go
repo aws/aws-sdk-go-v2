@@ -58,33 +58,33 @@ func (c *Client) GetMethodResponse(ctx context.Context, params *GetMethodRespons
 // Request to describe a MethodResponse () resource.
 type GetMethodResponseInput struct {
 
-	// [Required] The Resource () identifier for the MethodResponse () resource.
-	//
-	// This member is required.
-	ResourceId *string
-
-	// [Required] The status code for the MethodResponse () resource.
-	//
-	// This member is required.
-	StatusCode *string
-
-	Title *string
-
 	// [Required] The HTTP verb of the Method () resource.
 	//
 	// This member is required.
 	HttpMethod *string
 
-	Name *string
-
-	TemplateSkipList []*string
+	// [Required] The Resource () identifier for the MethodResponse () resource.
+	//
+	// This member is required.
+	ResourceId *string
 
 	// [Required] The string identifier of the associated RestApi ().
 	//
 	// This member is required.
 	RestApiId *string
 
+	// [Required] The status code for the MethodResponse () resource.
+	//
+	// This member is required.
+	StatusCode *string
+
+	Name *string
+
 	Template *bool
+
+	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -125,9 +125,6 @@ type GetMethodResponseOutput struct {
 	// Model () name as the value.
 	ResponseModels map[string]*string
 
-	// The method response's status code.
-	StatusCode *string
-
 	// A key-value map specifying required or optional response parameters that API
 	// Gateway can send back to the caller. A key defines a method response header and
 	// the value specifies whether the associated method response header is required or
@@ -142,6 +139,9 @@ type GetMethodResponseOutput struct {
 	// the form of integration.response.body.{JSON-expression}, where JSON-expression
 	// is a valid JSON expression without the $ prefix.)
 	ResponseParameters map[string]*bool
+
+	// The method response's status code.
+	StatusCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

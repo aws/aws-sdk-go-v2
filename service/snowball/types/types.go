@@ -13,33 +13,21 @@ import (
 // invalid or unsupported, then an exception is thrown.
 type Address struct {
 
-	// The second line in a street address that a Snowball is to be delivered to.
-	Street2 *string
+	// The unique ID for an address.
+	AddressId *string
 
-	// The third line in a street address that a Snowball is to be delivered to.
-	Street3 *string
+	// The city in an address that a Snowball is to be delivered to.
+	City *string
+
+	// The name of the company to receive a Snowball at an address.
+	Company *string
 
 	// The country in an address that a Snowball is to be delivered to.
 	Country *string
 
-	// The first line in a street address that a Snowball is to be delivered to.
-	Street1 *string
-
-	// The state or province in an address that a Snowball is to be delivered to.
-	StateOrProvince *string
-
-	// This field is no longer used and the value is ignored.
-	PrefectureOrDistrict *string
-
 	// If the address you are creating is a primary address, then set this option to
 	// true. This field is not supported in most regions.
 	IsRestricted *bool
-
-	// The postal code in an address that a Snowball is to be delivered to.
-	PostalCode *string
-
-	// The city in an address that a Snowball is to be delivered to.
-	City *string
 
 	// This field is no longer used and the value is ignored.
 	Landmark *string
@@ -47,55 +35,69 @@ type Address struct {
 	// The name of a person to receive a Snowball at an address.
 	Name *string
 
-	// The name of the company to receive a Snowball at an address.
-	Company *string
-
 	// The phone number associated with an address that a Snowball is to be delivered
 	// to.
 	PhoneNumber *string
 
-	// The unique ID for an address.
-	AddressId *string
+	// The postal code in an address that a Snowball is to be delivered to.
+	PostalCode *string
+
+	// This field is no longer used and the value is ignored.
+	PrefectureOrDistrict *string
+
+	// The state or province in an address that a Snowball is to be delivered to.
+	StateOrProvince *string
+
+	// The first line in a street address that a Snowball is to be delivered to.
+	Street1 *string
+
+	// The second line in a street address that a Snowball is to be delivered to.
+	Street2 *string
+
+	// The third line in a street address that a Snowball is to be delivered to.
+	Street3 *string
 }
 
 // Contains a cluster's state, a cluster's ID, and other important information.
 type ClusterListEntry struct {
 
-	// Defines an optional description of the cluster, for example Environmental Data
-	// Cluster-01.
-	Description *string
-
 	// The 39-character ID for the cluster that you want to list, for example
 	// CID123e4567-e89b-12d3-a456-426655440000.
 	ClusterId *string
 
-	// The creation date for this cluster.
-	CreationDate *time.Time
-
 	// The current state of this cluster. For information about the state of a specific
 	// node, see JobListEntry$JobState ().
 	ClusterState ClusterState
+
+	// The creation date for this cluster.
+	CreationDate *time.Time
+
+	// Defines an optional description of the cluster, for example Environmental Data
+	// Cluster-01.
+	Description *string
 }
 
 // Contains metadata about a specific cluster.
 type ClusterMetadata struct {
-
-	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
-	// this cluster.
-	Notification *Notification
-
-	// The arrays of JobResource () objects that can include updated S3Resource ()
-	// objects or LambdaResource () objects.
-	Resources *JobResource
-
-	// The current status of the cluster.
-	ClusterState ClusterState
 
 	// The automatically generated ID for a specific address.
 	AddressId *string
 
 	// The automatically generated ID for a cluster.
 	ClusterId *string
+
+	// The current status of the cluster.
+	ClusterState ClusterState
+
+	// The creation date for this cluster.
+	CreationDate *time.Time
+
+	// The optional description of the cluster.
+	Description *string
+
+	// The ID of the address that you want a cluster shipped to, after it will be
+	// shipped to its primary address. This field is not supported in most regions.
+	ForwardingAddressId *string
 
 	// The type of job for this cluster. Currently, the only job type supported for
 	// clusters is LOCAL_USE.
@@ -107,24 +109,19 @@ type ClusterMetadata struct {
 	// action in AWS Key Management Service (AWS KMS).
 	KmsKeyARN *string
 
-	// The optional description of the cluster.
-	Description *string
+	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
+	// this cluster.
+	Notification *Notification
+
+	// The arrays of JobResource () objects that can include updated S3Resource ()
+	// objects or LambdaResource () objects.
+	Resources *JobResource
 
 	// The role ARN associated with this cluster. This ARN was created using the
 	// CreateRole
 	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
 	// action in AWS Identity and Access Management (IAM).
 	RoleARN *string
-
-	// The tax documents required in your AWS Region.
-	TaxDocuments *TaxDocuments
-
-	// The creation date for this cluster.
-	CreationDate *time.Time
-
-	// The ID of the address that you want a cluster shipped to, after it will be
-	// shipped to its primary address. This field is not supported in most regions.
-	ForwardingAddressId *string
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate how
 	// soon you'll get each Snowball Edge device, rather it represents how quickly each
@@ -142,6 +139,9 @@ type ClusterMetadata struct {
 	// The type of AWS Snowball device to use for this cluster. For cluster jobs, AWS
 	// Snowball currently supports only the EDGE device type.
 	SnowballType SnowballType
+
+	// The tax documents required in your AWS Region.
+	TaxDocuments *TaxDocuments
 }
 
 // A JSON-formatted object that describes a compatible Amazon Machine Image (AMI),
@@ -150,11 +150,11 @@ type ClusterMetadata struct {
 // an SBE1 instance on the device.
 type CompatibleImage struct {
 
-	// The optional name of a compatible image.
-	Name *string
-
 	// The unique identifier for an individual Snowball Edge AMI.
 	AmiId *string
+
+	// The optional name of a compatible image.
+	Name *string
 }
 
 // Defines the real-time status of a Snowball's data transfer while the device is
@@ -162,11 +162,11 @@ type CompatibleImage struct {
 // InProgress, for both import and export jobs.
 type DataTransfer struct {
 
-	// The number of objects transferred between a Snowball and Amazon S3.
-	ObjectsTransferred *int64
-
 	// The number of bytes transferred between a Snowball and Amazon S3.
 	BytesTransferred *int64
+
+	// The number of objects transferred between a Snowball and Amazon S3.
+	ObjectsTransferred *int64
 
 	// The total bytes of data for a transfer between a Snowball and Amazon S3. This
 	// value is set to 0 (zero) until all the keys that will be transferred have been
@@ -219,12 +219,12 @@ type INDTaxDocuments struct {
 // indicates whether the job is a job part, in the case of an export job.
 type JobListEntry struct {
 
-	// The current state of this job.
-	JobState JobState
+	// The creation date for this job.
+	CreationDate *time.Time
 
-	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	JobId *string
+	// The optional description of this specific job, for example Important Photos
+	// 2016-08-11.
+	Description *string
 
 	// A value that indicates that this job is a master job. A master job represents a
 	// successful request to create an export job. Master jobs aren't associated with
@@ -234,18 +234,18 @@ type JobListEntry struct {
 	// created after the master job is created.
 	IsMaster *bool
 
-	// The optional description of this specific job, for example Important Photos
-	// 2016-08-11.
-	Description *string
+	// The automatically generated ID for a job, for example
+	// JID123e4567-e89b-12d3-a456-426655440000.
+	JobId *string
 
-	// The type of device used with this job.
-	SnowballType SnowballType
+	// The current state of this job.
+	JobState JobState
 
 	// The type of job.
 	JobType JobType
 
-	// The creation date for this job.
-	CreationDate *time.Time
+	// The type of device used with this job.
+	SnowballType SnowballType
 }
 
 // Contains job logs. Whenever Snowball is used to import data into or export data
@@ -268,11 +268,11 @@ type JobLogs struct {
 	// A link to an Amazon S3 presigned URL where the job completion report is located.
 	JobCompletionReportURI *string
 
-	// A link to an Amazon S3 presigned URL where the job success log is located.
-	JobSuccessLogURI *string
-
 	// A link to an Amazon S3 presigned URL where the job failure log is located.
 	JobFailureLogURI *string
+
+	// A link to an Amazon S3 presigned URL where the job success log is located.
+	JobSuccessLogURI *string
 }
 
 // Contains information about a specific job including shipping information, job
@@ -280,14 +280,34 @@ type JobLogs struct {
 // the response syntax of the DescribeJob action.
 type JobMetadata struct {
 
+	// The ID for the address that you want the Snowball shipped to.
+	AddressId *string
+
+	// The 39-character ID for the cluster, for example
+	// CID123e4567-e89b-12d3-a456-426655440000.
+	ClusterId *string
+
+	// The creation date for this job.
+	CreationDate *time.Time
+
 	// A value that defines the real-time status of a Snowball's data transfer while
 	// the device is at AWS. This data is only available while a job has a JobState
 	// value of InProgress, for both import and export jobs.
 	DataTransferProgress *DataTransfer
 
-	// An array of S3Resource objects. Each S3Resource object represents an Amazon S3
-	// bucket that your transferred data will be exported from or imported into.
-	Resources *JobResource
+	// The description of the job, provided at job creation.
+	Description *string
+
+	// The container for SnowconeDeviceConfiguration.
+	DeviceConfiguration *DeviceConfiguration
+
+	// The ID of the address that you want a job shipped to, after it will be shipped
+	// to its primary address. This field is not supported in most regions.
+	ForwardingAddressId *string
+
+	// The automatically generated ID for a job, for example
+	// JID123e4567-e89b-12d3-a456-426655440000.
+	JobId *string
 
 	// Links to Amazon S3 presigned URLs for the job report and logs. For import jobs,
 	// the PDF job report becomes available at the end of the import process. For
@@ -295,66 +315,46 @@ type JobMetadata struct {
 	// your job part is being delivered to you.
 	JobLogInfo *JobLogs
 
-	// The Amazon Simple Notification Service (Amazon SNS) notification settings
-	// associated with a specific job. The Notification object is returned as a part of
-	// the response syntax of the DescribeJob action in the JobMetadata data type.
-	Notification *Notification
-
 	// The current status of the jobs.
 	JobState JobState
 
-	// The type of device used with this job.
-	SnowballType SnowballType
-
-	// The 39-character ID for the cluster, for example
-	// CID123e4567-e89b-12d3-a456-426655440000.
-	ClusterId *string
-
-	// The metadata associated with the tax documents required in your AWS Region.
-	TaxDocuments *TaxDocuments
-
-	// The Snowball capacity preference for this job, specified at job creation. In US
-	// regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use
-	// 80 TB capacity Snowballs.
-	SnowballCapacityPreference SnowballCapacity
-
-	// The ID for the address that you want the Snowball shipped to.
-	AddressId *string
-
-	// The creation date for this job.
-	CreationDate *time.Time
-
 	// The type of job.
 	JobType JobType
-
-	// The description of the job, provided at job creation.
-	Description *string
-
-	// The automatically generated ID for a job, for example
-	// JID123e4567-e89b-12d3-a456-426655440000.
-	JobId *string
-
-	// The container for SnowconeDeviceConfiguration.
-	DeviceConfiguration *DeviceConfiguration
-
-	// A job's shipping information, including inbound and outbound tracking numbers
-	// and shipping speed options.
-	ShippingDetails *ShippingDetails
-
-	// The role ARN associated with this job. This ARN was created using the CreateRole
-	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
-	// action in AWS Identity and Access Management (IAM).
-	RoleARN *string
-
-	// The ID of the address that you want a job shipped to, after it will be shipped
-	// to its primary address. This field is not supported in most regions.
-	ForwardingAddressId *string
 
 	// The Amazon Resource Name (ARN) for the AWS Key Management Service (AWS KMS) key
 	// associated with this job. This ARN was created using the CreateKey
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) API
 	// action in AWS KMS.
 	KmsKeyARN *string
+
+	// The Amazon Simple Notification Service (Amazon SNS) notification settings
+	// associated with a specific job. The Notification object is returned as a part of
+	// the response syntax of the DescribeJob action in the JobMetadata data type.
+	Notification *Notification
+
+	// An array of S3Resource objects. Each S3Resource object represents an Amazon S3
+	// bucket that your transferred data will be exported from or imported into.
+	Resources *JobResource
+
+	// The role ARN associated with this job. This ARN was created using the CreateRole
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html) API
+	// action in AWS Identity and Access Management (IAM).
+	RoleARN *string
+
+	// A job's shipping information, including inbound and outbound tracking numbers
+	// and shipping speed options.
+	ShippingDetails *ShippingDetails
+
+	// The Snowball capacity preference for this job, specified at job creation. In US
+	// regions, you can choose between 50 TB and 80 TB Snowballs. All other regions use
+	// 80 TB capacity Snowballs.
+	SnowballCapacityPreference SnowballCapacity
+
+	// The type of device used with this job.
+	SnowballType SnowballType
+
+	// The metadata associated with the tax documents required in your AWS Region.
+	TaxDocuments *TaxDocuments
 }
 
 // Contains an array of AWS resource objects. Each object represents an Amazon S3
@@ -362,11 +362,11 @@ type JobMetadata struct {
 // EC2 that is associated with a particular job.
 type JobResource struct {
 
-	// The Python-language Lambda functions for this job.
-	LambdaResources []*LambdaResource
-
 	// The Amazon Machine Images (AMIs) associated with this job.
 	Ec2AmiResources []*Ec2AmiResource
+
+	// The Python-language Lambda functions for this job.
+	LambdaResources []*LambdaResource
 
 	// An array of S3Resource objects.
 	S3Resources []*S3Resource
@@ -378,13 +378,13 @@ type JobResource struct {
 // UTF-8 binary sorted.
 type KeyRange struct {
 
-	// The key that ends an optional key range for an export job. Ranges are inclusive
-	// and UTF-8 binary sorted.
-	EndMarker *string
-
 	// The key that starts an optional key range for an export job. Ranges are
 	// inclusive and UTF-8 binary sorted.
 	BeginMarker *string
+
+	// The key that ends an optional key range for an export job. Ranges are inclusive
+	// and UTF-8 binary sorted.
+	EndMarker *string
 }
 
 // Identifies
@@ -409,6 +409,12 @@ type LambdaResource struct {
 // <code>NotifyAll</code> set to true.</p>
 type Notification struct {
 
+	// The list of job states that will trigger a notification for this job.
+	JobStatesToNotify []JobState
+
+	// Any change in job state will trigger a notification for this job.
+	NotifyAll *bool
+
 	// The new SNS TopicArn that you want to associate with this job. You can create
 	// Amazon Resource Names (ARNs) for topics by using the CreateTopic
 	// (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html) Amazon SNS API
@@ -417,12 +423,6 @@ type Notification struct {
 	// href="https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html">Subscribe</a>
 	// AWS Simple Notification Service (SNS) API action.</p>
 	SnsTopicARN *string
-
-	// The list of job states that will trigger a notification for this job.
-	JobStatesToNotify []JobState
-
-	// Any change in job state will trigger a notification for this job.
-	NotifyAll *bool
 }
 
 // Each S3Resource object represents an Amazon S3 bucket that your transferred data
@@ -432,27 +432,27 @@ type Notification struct {
 // UTF-8 binary sorted.
 type S3Resource struct {
 
+	// The Amazon Resource Name (ARN) of an Amazon S3 bucket.
+	BucketArn *string
+
 	// For export jobs, you can provide an optional KeyRange within a specific Amazon
 	// S3 bucket. The length of the range is defined at job creation, and has either an
 	// inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are UTF-8 binary
 	// sorted.
 	KeyRange *KeyRange
-
-	// The Amazon Resource Name (ARN) of an Amazon S3 bucket.
-	BucketArn *string
 }
 
 // The Status and TrackingNumber information for an inbound or outbound shipment.
 type Shipment struct {
+
+	// Status information for a shipment.
+	Status *string
 
 	// The tracking number for this job. Using this tracking number with your region's
 	// carrier's website, you can track a Snowball as the carrier transports it. For
 	// India, the carrier is Amazon Logistics. For all other regions, UPS is the
 	// carrier.
 	TrackingNumber *string
-
-	// Status information for a shipment.
-	Status *string
 }
 
 // A job's shipping information, including inbound and outbound tracking numbers

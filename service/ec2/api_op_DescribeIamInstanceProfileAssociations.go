@@ -59,13 +59,6 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	// The IAM instance profile associations.
 	AssociationIds []*string
 
-	// The maximum number of results to return in a single call. To retrieve the
-	// remaining results, make another call with the returned NextToken value.
-	MaxResults *int32
-
-	// The token to request the next page of results.
-	NextToken *string
-
 	// The filters.
 	//
 	//     * instance-id - The ID of the instance.
@@ -73,6 +66,13 @@ type DescribeIamInstanceProfileAssociationsInput struct {
 	//     * state - The
 	// state of the association (associating | associated | disassociating).
 	Filters []*types.Filter
+
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value.
+	MaxResults *int32
+
+	// The token to request the next page of results.
+	NextToken *string
 }
 
 type DescribeIamInstanceProfileAssociationsOutput struct {

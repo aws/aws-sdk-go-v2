@@ -58,15 +58,15 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The tags to be assigned to the DAX resource.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The name of the DAX resource to which tags should be added.
 	//
 	// This member is required.
 	ResourceName *string
+
+	// The tags to be assigned to the DAX resource.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

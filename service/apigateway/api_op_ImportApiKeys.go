@@ -59,7 +59,6 @@ func (c *Client) ImportApiKeys(ctx context.Context, params *ImportApiKeysInput, 
 // The POST request to import API keys from an external source, such as a
 // CSV-formatted file.
 type ImportApiKeysInput struct {
-	Name *string
 
 	// A query parameter to specify the input format to imported API keys. Currently,
 	// only the csv format is supported.
@@ -67,13 +66,15 @@ type ImportApiKeysInput struct {
 	// This member is required.
 	Format types.ApiKeysFormat
 
-	Template *bool
-
-	TemplateSkipList []*string
-
 	// A query parameter to indicate whether to rollback ApiKey () importation (true)
 	// or not (false) when error is encountered.
 	FailOnWarnings *bool
+
+	Name *string
+
+	Template *bool
+
+	TemplateSkipList []*string
 
 	Title *string
 }

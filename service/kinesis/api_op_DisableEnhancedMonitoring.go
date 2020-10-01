@@ -58,11 +58,6 @@ func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableE
 // Represents the input for DisableEnhancedMonitoring ().
 type DisableEnhancedMonitoringInput struct {
 
-	// The name of the Kinesis data stream for which to disable enhanced monitoring.
-	//
-	// This member is required.
-	StreamName *string
-
 	// List of shard-level metrics to disable. The following are the valid shard-level
 	// metrics. The value "ALL" disables every metric.
 	//
@@ -92,14 +87,16 @@ type DisableEnhancedMonitoringInput struct {
 	//
 	// This member is required.
 	ShardLevelMetrics []types.MetricsName
+
+	// The name of the Kinesis data stream for which to disable enhanced monitoring.
+	//
+	// This member is required.
+	StreamName *string
 }
 
 // Represents the output for EnableEnhancedMonitoring () and
 // DisableEnhancedMonitoring ().
 type DisableEnhancedMonitoringOutput struct {
-
-	// The name of the Kinesis data stream.
-	StreamName *string
 
 	// Represents the current state of the metrics that are in the enhanced state
 	// before the operation.
@@ -108,6 +105,9 @@ type DisableEnhancedMonitoringOutput struct {
 	// Represents the list of all the metrics that would be in the enhanced state after
 	// the operation.
 	DesiredShardLevelMetrics []types.MetricsName
+
+	// The name of the Kinesis data stream.
+	StreamName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

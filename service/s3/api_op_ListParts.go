@@ -80,31 +80,6 @@ func (c *Client) ListParts(ctx context.Context, params *ListPartsInput, optFns .
 
 type ListPartsInput struct {
 
-	// Specifies the part after which listing should begin. Only parts with higher part
-	// numbers will be listed.
-	PartNumberMarker *int32
-
-	// Sets the maximum number of parts to return.
-	MaxParts *int32
-
-	// Upload ID identifying the multipart upload whose parts are being listed.
-	//
-	// This member is required.
-	UploadId *string
-
-	// Object key for which the multipart upload was initiated.
-	//
-	// This member is required.
-	Key *string
-
-	// Confirms that the requester knows that they will be charged for the request.
-	// Bucket owners need not specify this parameter in their requests. For information
-	// about downloading objects from requester pays buckets, see Downloading Objects
-	// in Requestor Pays Buckets
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
-	RequestPayer types.RequestPayer
-
 	// Name of the bucket to which the parts are being uploaded. When using this API
 	// with an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
@@ -117,50 +92,34 @@ type ListPartsInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	// Object key for which the multipart upload was initiated.
+	//
+	// This member is required.
+	Key *string
+
+	// Upload ID identifying the multipart upload whose parts are being listed.
+	//
+	// This member is required.
+	UploadId *string
+
+	// Sets the maximum number of parts to return.
+	MaxParts *int32
+
+	// Specifies the part after which listing should begin. Only parts with higher part
+	// numbers will be listed.
+	PartNumberMarker *int32
+
+	// Confirms that the requester knows that they will be charged for the request.
+	// Bucket owners need not specify this parameter in their requests. For information
+	// about downloading objects from requester pays buckets, see Downloading Objects
+	// in Requestor Pays Buckets
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
+	// in the Amazon S3 Developer Guide.
+	RequestPayer types.RequestPayer
 }
 
 type ListPartsOutput struct {
-
-	// Container element that identifies who initiated the multipart upload. If the
-	// initiator is an AWS account, this element provides the same information as the
-	// Owner element. If the initiator is an IAM User, this element provides the user
-	// ARN and display name.
-	Initiator *types.Initiator
-
-	// Container element that identifies the object owner, after the object is created.
-	// If multipart upload is initiated by an IAM user, this element provides the
-	// parent account ID and display name.
-	Owner *types.Owner
-
-	// When a list is truncated, this element specifies the last part in the list, as
-	// well as the value to use for the part-number-marker request parameter in a
-	// subsequent request.
-	PartNumberMarker *int32
-
-	// Object key for which the multipart upload was initiated.
-	Key *string
-
-	// Maximum number of parts that were allowed in the response.
-	MaxParts *int32
-
-	// Container for elements related to a particular part. A response can contain zero
-	// or more Part elements.
-	Parts []*types.Part
-
-	// Upload ID identifying the multipart upload whose parts are being listed.
-	UploadId *string
-
-	// Name of the bucket to which the multipart upload was initiated.
-	Bucket *string
-
-	// This header is returned along with the x-amz-abort-date header. It identifies
-	// applicable lifecycle configuration rule that defines the action to abort
-	// incomplete multipart uploads.
-	AbortRuleId *string
-
-	// Class of storage (STANDARD or REDUCED_REDUNDANCY) used to store the uploaded
-	// object.
-	StorageClass types.StorageClass
 
 	// If the bucket has a lifecycle rule configured with an action to abort incomplete
 	// multipart uploads and the prefix in the lifecycle rule matches the object name
@@ -174,19 +133,60 @@ type ListPartsOutput struct {
 	// action.</p>
 	AbortDate *time.Time
 
-	// When a list is truncated, this element specifies the last part in the list, as
-	// well as the value to use for the part-number-marker request parameter in a
-	// subsequent request.
-	NextPartNumberMarker *int32
+	// This header is returned along with the x-amz-abort-date header. It identifies
+	// applicable lifecycle configuration rule that defines the action to abort
+	// incomplete multipart uploads.
+	AbortRuleId *string
 
-	// If present, indicates that the requester was successfully charged for the
-	// request.
-	RequestCharged types.RequestCharged
+	// Name of the bucket to which the multipart upload was initiated.
+	Bucket *string
+
+	// Container element that identifies who initiated the multipart upload. If the
+	// initiator is an AWS account, this element provides the same information as the
+	// Owner element. If the initiator is an IAM User, this element provides the user
+	// ARN and display name.
+	Initiator *types.Initiator
 
 	// Indicates whether the returned list of parts is truncated. A true value
 	// indicates that the list was truncated. A list can be truncated if the number of
 	// parts exceeds the limit returned in the MaxParts element.
 	IsTruncated *bool
+
+	// Object key for which the multipart upload was initiated.
+	Key *string
+
+	// Maximum number of parts that were allowed in the response.
+	MaxParts *int32
+
+	// When a list is truncated, this element specifies the last part in the list, as
+	// well as the value to use for the part-number-marker request parameter in a
+	// subsequent request.
+	NextPartNumberMarker *int32
+
+	// Container element that identifies the object owner, after the object is created.
+	// If multipart upload is initiated by an IAM user, this element provides the
+	// parent account ID and display name.
+	Owner *types.Owner
+
+	// When a list is truncated, this element specifies the last part in the list, as
+	// well as the value to use for the part-number-marker request parameter in a
+	// subsequent request.
+	PartNumberMarker *int32
+
+	// Container for elements related to a particular part. A response can contain zero
+	// or more Part elements.
+	Parts []*types.Part
+
+	// If present, indicates that the requester was successfully charged for the
+	// request.
+	RequestCharged types.RequestCharged
+
+	// Class of storage (STANDARD or REDUCED_REDUNDANCY) used to store the uploaded
+	// object.
+	StorageClass types.StorageClass
+
+	// Upload ID identifying the multipart upload whose parts are being listed.
+	UploadId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

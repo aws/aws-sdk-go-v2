@@ -61,13 +61,14 @@ func (c *Client) CreateHyperParameterTuningJob(ctx context.Context, params *Crea
 
 type CreateHyperParameterTuningJobInput struct {
 
-	// An array of key-value pairs. You can use tags to categorize your AWS resources
-	// in different ways, for example, by purpose, owner, or environment. For more
-	// information, see AWS Tagging Strategies
-	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
-	// Tags that you specify for the tuning job are also added to all training jobs
-	// that the tuning job launches.
-	Tags []*types.Tag
+	// The HyperParameterTuningJobConfig () object that describes the tuning job,
+	// including the search strategy, the objective metric used to evaluate training
+	// jobs, ranges of parameters to search, and resource limits for the tuning job.
+	// For more information, see How Hyperparameter Tuning Works
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
+	//
+	// This member is required.
+	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
 
 	// The name of the tuning job. This name is the prefix for the names of all
 	// training jobs that this tuning job launches. The name must be unique within the
@@ -78,9 +79,13 @@ type CreateHyperParameterTuningJobInput struct {
 	// This member is required.
 	HyperParameterTuningJobName *string
 
-	// A list of the HyperParameterTrainingJobDefinition () objects launched for this
-	// tuning job.
-	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
+	// An array of key-value pairs. You can use tags to categorize your AWS resources
+	// in different ways, for example, by purpose, owner, or environment. For more
+	// information, see AWS Tagging Strategies
+	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
+	// Tags that you specify for the tuning job are also added to all training jobs
+	// that the tuning job launches.
+	Tags []*types.Tag
 
 	// The HyperParameterTrainingJobDefinition () object that describes the training
 	// jobs that this tuning job launches, including static hyperparameters, input data
@@ -88,14 +93,9 @@ type CreateHyperParameterTuningJobInput struct {
 	// condition.
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
-	// The HyperParameterTuningJobConfig () object that describes the tuning job,
-	// including the search strategy, the objective metric used to evaluate training
-	// jobs, ranges of parameters to search, and resource limits for the tuning job.
-	// For more information, see How Hyperparameter Tuning Works
-	// (https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning-how-it-works.html).
-	//
-	// This member is required.
-	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
+	// A list of the HyperParameterTrainingJobDefinition () objects launched for this
+	// tuning job.
+	TrainingJobDefinitions []*types.HyperParameterTrainingJobDefinition
 
 	// Specifies the configuration for starting the hyperparameter tuning job using one
 	// or more previous tuning jobs as a starting point. The results of previous tuning

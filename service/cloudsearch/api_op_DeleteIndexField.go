@@ -63,12 +63,6 @@ func (c *Client) DeleteIndexField(ctx context.Context, params *DeleteIndexFieldI
 // to delete.
 type DeleteIndexFieldInput struct {
 
-	// The name of the index field your want to remove from the domain's indexing
-	// options.
-	//
-	// This member is required.
-	IndexFieldName *string
-
 	// A string that represents the name of a domain. Domain names are unique across
 	// the domains owned by an account within an AWS region. Domain names start with a
 	// letter or number and can contain the following characters: a-z (lowercase), 0-9,
@@ -76,6 +70,12 @@ type DeleteIndexFieldInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	// The name of the index field your want to remove from the domain's indexing
+	// options.
+	//
+	// This member is required.
+	IndexFieldName *string
 }
 
 // The result of a DeleteIndexField () request.

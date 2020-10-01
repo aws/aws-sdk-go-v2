@@ -95,30 +95,20 @@ type ListOpenWorkflowExecutionsInput struct {
 	// This member is required.
 	Domain *string
 
-	// When set to true, returns the results in reverse order. By default the results
-	// are returned in descending order of the start time of the executions.
-	ReverseOrder *bool
-
-	// If specified, only executions that have the matching tag are listed.
-	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
-	// specify at most one of these in a request.
-	TagFilter *types.TagFilter
-
 	// Workflow executions are included in the returned results based on whether their
 	// start times are within the range specified by this filter.
 	//
 	// This member is required.
 	StartTimeFilter *types.ExecutionTimeFilter
 
-	// If specified, only executions of the type specified in the filter are returned.
-	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
-	// specify at most one of these in a request.
-	TypeFilter *types.WorkflowTypeFilter
-
 	// If specified, only workflow executions matching the workflow ID specified in the
 	// filter are returned. executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	ExecutionFilter *types.WorkflowExecutionFilter
+
+	// The maximum number of results that are returned per call. Use nextPageToken to
+	// obtain further pages of results.
+	MaximumPageSize *int32
 
 	// If NextPageToken is returned there are more results available. The value of
 	// NextPageToken is a unique pagination token for each page. Make the call again
@@ -129,9 +119,19 @@ type ListOpenWorkflowExecutionsInput struct {
 	// how many results can be returned in a single call. </p>
 	NextPageToken *string
 
-	// The maximum number of results that are returned per call. Use nextPageToken to
-	// obtain further pages of results.
-	MaximumPageSize *int32
+	// When set to true, returns the results in reverse order. By default the results
+	// are returned in descending order of the start time of the executions.
+	ReverseOrder *bool
+
+	// If specified, only executions that have the matching tag are listed.
+	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
+	// specify at most one of these in a request.
+	TagFilter *types.TagFilter
+
+	// If specified, only executions of the type specified in the filter are returned.
+	// executionFilter, typeFilter and tagFilter are mutually exclusive. You can
+	// specify at most one of these in a request.
+	TypeFilter *types.WorkflowTypeFilter
 }
 
 // Contains a paginated list of information about workflow executions.

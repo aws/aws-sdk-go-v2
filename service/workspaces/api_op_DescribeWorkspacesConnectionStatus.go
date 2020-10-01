@@ -66,12 +66,12 @@ type DescribeWorkspacesConnectionStatusInput struct {
 
 type DescribeWorkspacesConnectionStatusOutput struct {
 
-	// Information about the connection status of the WorkSpace.
-	WorkspacesConnectionStatus []*types.WorkspaceConnectionStatus
-
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
+
+	// Information about the connection status of the WorkSpace.
+	WorkspacesConnectionStatus []*types.WorkspaceConnectionStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

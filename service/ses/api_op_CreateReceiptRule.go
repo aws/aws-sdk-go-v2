@@ -63,11 +63,6 @@ func (c *Client) CreateReceiptRule(ctx context.Context, params *CreateReceiptRul
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type CreateReceiptRuleInput struct {
 
-	// The name of an existing rule after which the new rule will be placed. If this
-	// parameter is null, the new rule will be inserted at the beginning of the rule
-	// list.
-	After *string
-
 	// A data structure that contains the specified rule's name, actions, recipients,
 	// domains, enabled status, scan status, and TLS policy.
 	//
@@ -78,6 +73,11 @@ type CreateReceiptRuleInput struct {
 	//
 	// This member is required.
 	RuleSetName *string
+
+	// The name of an existing rule after which the new rule will be placed. If this
+	// parameter is null, the new rule will be inserted at the beginning of the rule
+	// list.
+	After *string
 }
 
 // An empty element returned on a successful request.

@@ -66,69 +66,45 @@ type DescribeAutoMLJobInput struct {
 
 type DescribeAutoMLJobOutput struct {
 
-	// Returns the job's creation time.
+	// Returns the job's ARN.
 	//
 	// This member is required.
-	CreationTime *time.Time
-
-	// Returns the job's last modified time.
-	//
-	// This member is required.
-	LastModifiedTime *time.Time
-
-	// Returns the job's BestCandidate.
-	BestCandidate *types.AutoMLCandidate
-
-	// Returns the job's end time.
-	EndTime *time.Time
+	AutoMLJobArn *string
 
 	// Returns the name of a job.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// Returns the job's ARN.
-	//
-	// This member is required.
-	AutoMLJobArn *string
-
-	// Returns the job's output from GenerateCandidateDefinitionsOnly.
-	GenerateCandidateDefinitionsOnly *bool
-
-	// Returns the job's FailureReason.
-	FailureReason *string
-
-	// Returns the job's objective.
-	AutoMLJobObjective *types.AutoMLJobObjective
-
-	// Returns information on the job's artifacts found in AutoMLJobArtifacts.
-	AutoMLJobArtifacts *types.AutoMLJobArtifacts
-
 	// Returns the job's AutoMLJobSecondaryStatus.
 	//
 	// This member is required.
 	AutoMLJobSecondaryStatus types.AutoMLJobSecondaryStatus
-
-	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They're
-	// auto-inferred values, if not provided by you. If you do provide them, then
-	// they'll be the same as provided.
-	ResolvedAttributes *types.ResolvedAttributes
-
-	// Returns the job's output data config.
-	//
-	// This member is required.
-	OutputDataConfig *types.AutoMLOutputDataConfig
-
-	// Returns the job's problem type.
-	ProblemType types.ProblemType
 
 	// Returns the job's AutoMLJobStatus.
 	//
 	// This member is required.
 	AutoMLJobStatus types.AutoMLJobStatus
 
-	// Returns the job's config.
-	AutoMLJobConfig *types.AutoMLJobConfig
+	// Returns the job's creation time.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Returns the job's input data config.
+	//
+	// This member is required.
+	InputDataConfig []*types.AutoMLChannel
+
+	// Returns the job's last modified time.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// Returns the job's output data config.
+	//
+	// This member is required.
+	OutputDataConfig *types.AutoMLOutputDataConfig
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that has read permission to the input data location and write permission to
@@ -137,10 +113,34 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Returns the job's input data config.
-	//
-	// This member is required.
-	InputDataConfig []*types.AutoMLChannel
+	// Returns information on the job's artifacts found in AutoMLJobArtifacts.
+	AutoMLJobArtifacts *types.AutoMLJobArtifacts
+
+	// Returns the job's config.
+	AutoMLJobConfig *types.AutoMLJobConfig
+
+	// Returns the job's objective.
+	AutoMLJobObjective *types.AutoMLJobObjective
+
+	// Returns the job's BestCandidate.
+	BestCandidate *types.AutoMLCandidate
+
+	// Returns the job's end time.
+	EndTime *time.Time
+
+	// Returns the job's FailureReason.
+	FailureReason *string
+
+	// Returns the job's output from GenerateCandidateDefinitionsOnly.
+	GenerateCandidateDefinitionsOnly *bool
+
+	// Returns the job's problem type.
+	ProblemType types.ProblemType
+
+	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They're
+	// auto-inferred values, if not provided by you. If you do provide them, then
+	// they'll be the same as provided.
+	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

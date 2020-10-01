@@ -68,13 +68,13 @@ type ListOrganizationAdminAccountsInput struct {
 
 type ListOrganizationAdminAccountsOutput struct {
 
-	// The pagination parameter to be used on the next list operation to retrieve more
-	// items.
-	NextToken *string
-
 	// An AdminAccounts object that includes a list of accounts configured as GuardDuty
 	// delegated administrators.
 	AdminAccounts []*types.AdminAccount
+
+	// The pagination parameter to be used on the next list operation to retrieve more
+	// items.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -57,15 +57,15 @@ func (c *Client) CompleteMigration(ctx context.Context, params *CompleteMigratio
 
 type CompleteMigrationInput struct {
 
-	// Forces the migration to stop without ensuring that data is in sync. It is
-	// recommended to use this option only to abort the migration and not recommended
-	// when application wants to continue migration to ElastiCache.
-	Force *bool
-
 	// The ID of the replication group to which data is being migrated.
 	//
 	// This member is required.
 	ReplicationGroupId *string
+
+	// Forces the migration to stop without ensuring that data is in sync. It is
+	// recommended to use this option only to abort the migration and not recommended
+	// when application wants to continue migration to ElastiCache.
+	Force *bool
 }
 
 type CompleteMigrationOutput struct {

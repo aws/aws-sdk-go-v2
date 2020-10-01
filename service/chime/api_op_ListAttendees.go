@@ -60,13 +60,13 @@ func (c *Client) ListAttendees(ctx context.Context, params *ListAttendeesInput, 
 
 type ListAttendeesInput struct {
 
-	// The maximum number of results to return in a single call.
-	MaxResults *int32
-
 	// The Amazon Chime SDK meeting ID.
 	//
 	// This member is required.
 	MeetingId *string
+
+	// The maximum number of results to return in a single call.
+	MaxResults *int32
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string

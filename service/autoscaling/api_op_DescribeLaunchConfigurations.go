@@ -56,10 +56,6 @@ func (c *Client) DescribeLaunchConfigurations(ctx context.Context, params *Descr
 
 type DescribeLaunchConfigurationsInput struct {
 
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// The launch configuration names. If you omit this parameter, all launch
 	// configurations are described.
 	LaunchConfigurationNames []*string
@@ -67,6 +63,10 @@ type DescribeLaunchConfigurationsInput struct {
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 100.
 	MaxRecords *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 }
 
 type DescribeLaunchConfigurationsOutput struct {

@@ -59,17 +59,17 @@ func (c *Client) UpdateApprovalRuleTemplateContent(ctx context.Context, params *
 
 type UpdateApprovalRuleTemplateContentInput struct {
 
-	// The content that replaces the existing content of the rule. Content statements
-	// must be complete. You cannot provide only the changes.
-	//
-	// This member is required.
-	NewRuleContent *string
-
 	// The name of the approval rule template where you want to update the content of
 	// the rule.
 	//
 	// This member is required.
 	ApprovalRuleTemplateName *string
+
+	// The content that replaces the existing content of the rule. Content statements
+	// must be complete. You cannot provide only the changes.
+	//
+	// This member is required.
+	NewRuleContent *string
 
 	// The SHA-256 hash signature for the content of the approval rule. You can
 	// retrieve this information by using GetPullRequest ().

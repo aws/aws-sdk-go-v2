@@ -60,15 +60,15 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
-	// The identifier of the user to be deleted.
-	//
-	// This member is required.
-	UserId *string
-
 	// The organization that contains the user to be deleted.
 	//
 	// This member is required.
 	OrganizationId *string
+
+	// The identifier of the user to be deleted.
+	//
+	// This member is required.
+	UserId *string
 }
 
 type DeleteUserOutput struct {

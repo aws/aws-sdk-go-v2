@@ -58,11 +58,6 @@ func (c *Client) DeleteApplicationVersion(ctx context.Context, params *DeleteApp
 // Request to delete an application version.
 type DeleteApplicationVersionInput struct {
 
-	// Set to true to delete the source bundle from your storage bucket. Otherwise, the
-	// application version is deleted only from Elastic Beanstalk and the source bundle
-	// remains in Amazon S3.
-	DeleteSourceBundle *bool
-
 	// The name of the application to which the version belongs.
 	//
 	// This member is required.
@@ -72,6 +67,11 @@ type DeleteApplicationVersionInput struct {
 	//
 	// This member is required.
 	VersionLabel *string
+
+	// Set to true to delete the source bundle from your storage bucket. Otherwise, the
+	// application version is deleted only from Elastic Beanstalk and the source bundle
+	// remains in Amazon S3.
+	DeleteSourceBundle *bool
 }
 
 type DeleteApplicationVersionOutput struct {

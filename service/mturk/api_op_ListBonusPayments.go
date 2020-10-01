@@ -57,8 +57,10 @@ func (c *Client) ListBonusPayments(ctx context.Context, params *ListBonusPayment
 
 type ListBonusPaymentsInput struct {
 
-	// Pagination token
-	NextToken *string
+	// The ID of the assignment associated with the bonus payments to retrieve. If
+	// specified, only bonus payments for the given assignment are returned. Either the
+	// HITId parameter or the AssignmentId parameter must be specified
+	AssignmentId *string
 
 	// The ID of the HIT associated with the bonus payments to retrieve. If not
 	// specified, all bonus payments for all assignments for the given HIT are
@@ -68,10 +70,8 @@ type ListBonusPaymentsInput struct {
 
 	MaxResults *int32
 
-	// The ID of the assignment associated with the bonus payments to retrieve. If
-	// specified, only bonus payments for the given assignment are returned. Either the
-	// HITId parameter or the AssignmentId parameter must be specified
-	AssignmentId *string
+	// Pagination token
+	NextToken *string
 }
 
 type ListBonusPaymentsOutput struct {
@@ -80,14 +80,14 @@ type ListBonusPaymentsOutput struct {
 	// BonusPayment objects.
 	BonusPayments []*types.BonusPayment
 
-	// The number of bonus payments on this page in the filtered results list,
-	// equivalent to the number of bonus payments being returned by this call.
-	NumResults *int32
-
 	// If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Mechanical Turk returns a pagination token in the response.
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
+
+	// The number of bonus payments on this page in the filtered results list,
+	// equivalent to the number of bonus payments being returned by this call.
+	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

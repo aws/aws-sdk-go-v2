@@ -65,12 +65,12 @@ type CreateFieldLevelEncryptionProfileInput struct {
 
 type CreateFieldLevelEncryptionProfileOutput struct {
 
-	// Returned when you create a new field-level encryption profile.
-	FieldLevelEncryptionProfile *types.FieldLevelEncryptionProfile
-
 	// The current version of the field level encryption profile. For example:
 	// E2QWRUHAPOMQZL.
 	ETag *string
+
+	// Returned when you create a new field-level encryption profile.
+	FieldLevelEncryptionProfile *types.FieldLevelEncryptionProfile
 
 	// The fully qualified URI of the new profile resource just created.
 	Location *string

@@ -57,14 +57,15 @@ func (c *Client) DeleteClientCertificate(ctx context.Context, params *DeleteClie
 
 // A request to delete the ClientCertificate () resource.
 type DeleteClientCertificateInput struct {
-	Template *bool
-
-	Name *string
 
 	// [Required] The identifier of the ClientCertificate () resource to be deleted.
 	//
 	// This member is required.
 	ClientCertificateId *string
+
+	Name *string
+
+	Template *bool
 
 	TemplateSkipList []*string
 

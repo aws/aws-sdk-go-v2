@@ -66,10 +66,13 @@ func (c *Client) CreateWebACLMigrationStack(ctx context.Context, params *CreateW
 
 type CreateWebACLMigrationStackInput struct {
 
-	// The UUID of the WAF Classic web ACL that you want to migrate to WAF v2.
+	// Indicates whether to exclude entities that can't be migrated or to stop the
+	// migration. Set this to true to ignore unsupported entities in the web ACL during
+	// the migration. Otherwise, if AWS WAF encounters unsupported entities, it stops
+	// the process and throws an exception.
 	//
 	// This member is required.
-	WebACLId *string
+	IgnoreUnsupportedType *bool
 
 	// The name of the Amazon S3 bucket to store the CloudFormation template in. The S3
 	// bucket must be configured as follows for the migration:
@@ -89,13 +92,10 @@ type CreateWebACLMigrationStackInput struct {
 	// This member is required.
 	S3BucketName *string
 
-	// Indicates whether to exclude entities that can't be migrated or to stop the
-	// migration. Set this to true to ignore unsupported entities in the web ACL during
-	// the migration. Otherwise, if AWS WAF encounters unsupported entities, it stops
-	// the process and throws an exception.
+	// The UUID of the WAF Classic web ACL that you want to migrate to WAF v2.
 	//
 	// This member is required.
-	IgnoreUnsupportedType *bool
+	WebACLId *string
 }
 
 type CreateWebACLMigrationStackOutput struct {

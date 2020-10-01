@@ -62,17 +62,17 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// A list of tags to associate with the specified signaling channel. Each tag is a
-	// key-value pair.
-	//
-	// This member is required.
-	Tags []*types.Tag
-
 	// The Amazon Resource Name (ARN) of the signaling channel to which you want to add
 	// tags.
 	//
 	// This member is required.
 	ResourceARN *string
+
+	// A list of tags to associate with the specified signaling channel. Each tag is a
+	// key-value pair.
+	//
+	// This member is required.
+	Tags []*types.Tag
 }
 
 type TagResourceOutput struct {

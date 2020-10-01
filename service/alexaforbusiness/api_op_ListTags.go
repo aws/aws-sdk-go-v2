@@ -57,29 +57,29 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// An optional token returned from a prior request. Use this token for pagination
-	// of results from this action. If this parameter is specified, the response
-	// includes only results beyond the token, up to the value specified by MaxResults.
-	NextToken *string
+	// The ARN of the specified resource for which to list tags.
+	//
+	// This member is required.
+	Arn *string
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so that
 	// the remaining results can be retrieved.
 	MaxResults *int32
 
-	// The ARN of the specified resource for which to list tags.
-	//
-	// This member is required.
-	Arn *string
+	// An optional token returned from a prior request. Use this token for pagination
+	// of results from this action. If this parameter is specified, the response
+	// includes only results beyond the token, up to the value specified by MaxResults.
+	NextToken *string
 }
 
 type ListTagsOutput struct {
 
-	// The tags requested for the specified resource.
-	Tags []*types.Tag
-
 	// The token returned to indicate that there is more data available.
 	NextToken *string
+
+	// The tags requested for the specified resource.
+	Tags []*types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

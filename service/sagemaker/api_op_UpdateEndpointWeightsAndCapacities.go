@@ -61,15 +61,15 @@ func (c *Client) UpdateEndpointWeightsAndCapacities(ctx context.Context, params 
 
 type UpdateEndpointWeightsAndCapacitiesInput struct {
 
-	// The name of an existing Amazon SageMaker endpoint.
-	//
-	// This member is required.
-	EndpointName *string
-
 	// An object that provides new capacity and weight values for a variant.
 	//
 	// This member is required.
 	DesiredWeightsAndCapacities []*types.DesiredWeightAndCapacity
+
+	// The name of an existing Amazon SageMaker endpoint.
+	//
+	// This member is required.
+	EndpointName *string
 }
 
 type UpdateEndpointWeightsAndCapacitiesOutput struct {

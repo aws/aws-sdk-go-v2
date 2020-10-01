@@ -70,14 +70,14 @@ type GetDeploymentsInput struct {
 
 	Name *string
 
-	Title *string
-
-	Template *bool
-
 	// The current pagination position in the paged result set.
 	Position *string
 
+	Template *bool
+
 	TemplateSkipList []*string
+
+	Title *string
 }
 
 // Represents a collection resource that contains zero or more references to your

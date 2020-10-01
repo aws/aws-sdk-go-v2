@@ -75,11 +75,11 @@ type GetDatasetContentOutput struct {
 	// A list of "DatasetEntry" objects.
 	Entries []*types.DatasetEntry
 
-	// The time when the request was made.
-	Timestamp *time.Time
-
 	// The status of the data set content.
 	Status *types.DatasetContentStatus
+
+	// The time when the request was made.
+	Timestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

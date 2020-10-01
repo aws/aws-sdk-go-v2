@@ -60,11 +60,6 @@ func (c *Client) CreateOutboundCrossClusterSearchConnection(ctx context.Context,
 // () operation.
 type CreateOutboundCrossClusterSearchConnectionInput struct {
 
-	// Specifies the DomainInformation () for the source Elasticsearch domain.
-	//
-	// This member is required.
-	SourceDomainInfo *types.DomainInformation
-
 	// Specifies the connection alias that will be used by the customer for this
 	// connection.
 	//
@@ -75,17 +70,19 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	//
 	// This member is required.
 	DestinationDomainInfo *types.DomainInformation
+
+	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	//
+	// This member is required.
+	SourceDomainInfo *types.DomainInformation
 }
 
 // The result of a CreateOutboundCrossClusterSearchConnection () request. Contains
 // the details of the newly created cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
 
-	// Specifies the DomainInformation () for the source Elasticsearch domain.
-	SourceDomainInfo *types.DomainInformation
-
-	// Specifies the DomainInformation () for the destination Elasticsearch domain.
-	DestinationDomainInfo *types.DomainInformation
+	// Specifies the connection alias provided during the create connection request.
+	ConnectionAlias *string
 
 	// Specifies the OutboundCrossClusterSearchConnectionStatus () for the newly
 	// created connection.
@@ -95,8 +92,11 @@ type CreateOutboundCrossClusterSearchConnectionOutput struct {
 	// operations on connection.
 	CrossClusterSearchConnectionId *string
 
-	// Specifies the connection alias provided during the create connection request.
-	ConnectionAlias *string
+	// Specifies the DomainInformation () for the destination Elasticsearch domain.
+	DestinationDomainInfo *types.DomainInformation
+
+	// Specifies the DomainInformation () for the source Elasticsearch domain.
+	SourceDomainInfo *types.DomainInformation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

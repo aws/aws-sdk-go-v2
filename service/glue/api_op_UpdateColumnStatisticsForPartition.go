@@ -57,19 +57,15 @@ func (c *Client) UpdateColumnStatisticsForPartition(ctx context.Context, params 
 
 type UpdateColumnStatisticsForPartitionInput struct {
 
-	// The name of the catalog database where the partitions reside.
-	//
-	// This member is required.
-	DatabaseName *string
-
 	// A list of the column statistics.
 	//
 	// This member is required.
 	ColumnStatisticsList []*types.ColumnStatistics
 
-	// The ID of the Data Catalog where the partitions in question reside. If none is
-	// supplied, the AWS account ID is used by default.
-	CatalogId *string
+	// The name of the catalog database where the partitions reside.
+	//
+	// This member is required.
+	DatabaseName *string
 
 	// A list of partition values identifying the partition.
 	//
@@ -80,6 +76,10 @@ type UpdateColumnStatisticsForPartitionInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	// The ID of the Data Catalog where the partitions in question reside. If none is
+	// supplied, the AWS account ID is used by default.
+	CatalogId *string
 }
 
 type UpdateColumnStatisticsForPartitionOutput struct {

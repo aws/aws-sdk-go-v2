@@ -134,12 +134,12 @@ type DescribeScalingPoliciesInput struct {
 // Represents the returned data in response to a request action.
 type DescribeScalingPoliciesOutput struct {
 
-	// A collection of objects containing the scaling policies matching the request.
-	ScalingPolicies []*types.ScalingPolicy
-
 	// Token that indicates where to resume retrieving results on the next call to this
 	// action. If no token is returned, these results represent the end of the list.
 	NextToken *string
+
+	// A collection of objects containing the scaling policies matching the request.
+	ScalingPolicies []*types.ScalingPolicy
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

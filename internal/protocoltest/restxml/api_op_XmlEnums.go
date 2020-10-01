@@ -60,9 +60,9 @@ type XmlEnumsInput struct {
 
 	FooEnumList []types.FooEnum
 
-	FooEnumSet []types.FooEnum
-
 	FooEnumMap map[string]types.FooEnum
+
+	FooEnumSet []types.FooEnum
 }
 
 type XmlEnumsOutput struct {
@@ -74,9 +74,9 @@ type XmlEnumsOutput struct {
 
 	FooEnumList []types.FooEnum
 
-	FooEnumSet []types.FooEnum
-
 	FooEnumMap map[string]types.FooEnum
+
+	FooEnumSet []types.FooEnum
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

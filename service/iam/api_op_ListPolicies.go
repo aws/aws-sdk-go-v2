@@ -65,6 +65,12 @@ func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, op
 
 type ListPoliciesInput struct {
 
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -74,18 +80,11 @@ type ListPoliciesInput struct {
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
 
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
-
-	// The policy usage method to use for filtering the results. To list only
-	// permissions policies, set PolicyUsageFilter to PermissionsPolicy. To list only
-	// the policies used to set permissions boundaries, set the value to
-	// PermissionsBoundary. This parameter is optional. If it is not included, all
-	// policies are returned.
-	PolicyUsageFilter types.PolicyUsageType
+	// A flag to filter the results to only the attached policies. When OnlyAttached is
+	// true, the returned list contains only the policies that are attached to an IAM
+	// user, group, or role. When OnlyAttached is false, or when the parameter is not
+	// included, all policies are returned.
+	OnlyAttached *bool
 
 	// The path prefix for filtering the results. This parameter is optional. If it is
 	// not included, it defaults to a slash (/), listing all policies. This parameter
@@ -96,11 +95,12 @@ type ListPoliciesInput struct {
 	// punctuation characters, digits, and upper and lowercased letters.
 	PathPrefix *string
 
-	// A flag to filter the results to only the attached policies. When OnlyAttached is
-	// true, the returned list contains only the policies that are attached to an IAM
-	// user, group, or role. When OnlyAttached is false, or when the parameter is not
-	// included, all policies are returned.
-	OnlyAttached *bool
+	// The policy usage method to use for filtering the results. To list only
+	// permissions policies, set PolicyUsageFilter to PermissionsPolicy. To list only
+	// the policies used to set permissions boundaries, set the value to
+	// PermissionsBoundary. This parameter is optional. If it is not included, all
+	// policies are returned.
+	PolicyUsageFilter types.PolicyUsageType
 
 	// The scope to use for filtering the results. To list only AWS managed policies,
 	// set Scope to AWS. To list only the customer managed policies in your AWS
@@ -112,10 +112,6 @@ type ListPoliciesInput struct {
 // Contains the response to a successful ListPolicies () request.
 type ListPoliciesOutput struct {
 
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
-
 	// A flag that indicates whether there are more items to return. If your results
 	// were truncated, you can make a subsequent pagination request using the Marker
 	// request parameter to retrieve more items. Note that IAM might return fewer than
@@ -123,6 +119,10 @@ type ListPoliciesOutput struct {
 	// recommend that you check IsTruncated after every call to ensure that you receive
 	// all your results.
 	IsTruncated *bool
+
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
 
 	// A list of policies.
 	Policies []*types.Policy

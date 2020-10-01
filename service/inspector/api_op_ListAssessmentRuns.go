@@ -57,6 +57,10 @@ func (c *Client) ListAssessmentRuns(ctx context.Context, params *ListAssessmentR
 
 type ListAssessmentRunsInput struct {
 
+	// The ARNs that specify the assessment templates whose assessment runs you want to
+	// list.
+	AssessmentTemplateArns []*string
+
 	// You can use this parameter to specify a subset of data to be included in the
 	// action's response. For a record to match a filter, all specified filter
 	// attributes must match. When multiple values are specified for a filter
@@ -72,25 +76,21 @@ type ListAssessmentRunsInput struct {
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// NextToken from the previous response to continue listing data.
 	NextToken *string
-
-	// The ARNs that specify the assessment templates whose assessment runs you want to
-	// list.
-	AssessmentTemplateArns []*string
 }
 
 type ListAssessmentRunsOutput struct {
-
-	// When a response is generated, if there is more data to be listed, this parameter
-	// is present in the response and contains the value to use for the nextToken
-	// parameter in a subsequent pagination request. If there is no more data to be
-	// listed, this parameter is set to null.
-	NextToken *string
 
 	// A list of ARNs that specifies the assessment runs that are returned by the
 	// action.
 	//
 	// This member is required.
 	AssessmentRunArns []*string
+
+	// When a response is generated, if there is more data to be listed, this parameter
+	// is present in the response and contains the value to use for the nextToken
+	// parameter in a subsequent pagination request. If there is no more data to be
+	// listed, this parameter is set to null.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

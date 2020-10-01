@@ -62,16 +62,16 @@ func (c *Client) UpdateDomainContact(ctx context.Context, params *UpdateDomainCo
 // The UpdateDomainContact request includes the following elements.
 type UpdateDomainContactInput struct {
 
+	// The name of the domain that you want to update contact information for.
+	//
+	// This member is required.
+	DomainName *string
+
 	// Provides detailed contact information.
 	AdminContact *types.ContactDetail
 
 	// Provides detailed contact information.
 	RegistrantContact *types.ContactDetail
-
-	// The name of the domain that you want to update contact information for.
-	//
-	// This member is required.
-	DomainName *string
 
 	// Provides detailed contact information.
 	TechContact *types.ContactDetail

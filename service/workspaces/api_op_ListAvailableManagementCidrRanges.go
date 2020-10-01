@@ -68,22 +68,22 @@ type ListAvailableManagementCidrRangesInput struct {
 	// This member is required.
 	ManagementCidrRangeConstraint *string
 
+	// The maximum number of items to return.
+	MaxResults *int32
+
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
-
-	// The maximum number of items to return.
-	MaxResults *int32
 }
 
 type ListAvailableManagementCidrRangesOutput struct {
 
+	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
+	ManagementCidrRanges []*string
+
 	// The token to use to retrieve the next set of results, or null if no more results
 	// are available.
 	NextToken *string
-
-	// The list of available IP address ranges, specified as IPv4 CIDR blocks.
-	ManagementCidrRanges []*string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

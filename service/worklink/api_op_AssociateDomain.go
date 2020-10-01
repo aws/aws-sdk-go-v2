@@ -56,16 +56,16 @@ func (c *Client) AssociateDomain(ctx context.Context, params *AssociateDomainInp
 
 type AssociateDomainInput struct {
 
-	// The fully qualified domain name (FQDN).
-	//
-	// This member is required.
-	DomainName *string
-
 	// The ARN of an issued ACM certificate that is valid for the domain being
 	// associated.
 	//
 	// This member is required.
 	AcmCertificateArn *string
+
+	// The fully qualified domain name (FQDN).
+	//
+	// This member is required.
+	DomainName *string
 
 	// The Amazon Resource Name (ARN) of the fleet.
 	//

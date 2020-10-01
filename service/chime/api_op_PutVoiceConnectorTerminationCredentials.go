@@ -57,13 +57,13 @@ func (c *Client) PutVoiceConnectorTerminationCredentials(ctx context.Context, pa
 
 type PutVoiceConnectorTerminationCredentialsInput struct {
 
-	// The termination SIP credentials.
-	Credentials []*types.Credential
-
 	// The Amazon Chime Voice Connector ID.
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	// The termination SIP credentials.
+	Credentials []*types.Credential
 }
 
 type PutVoiceConnectorTerminationCredentialsOutput struct {

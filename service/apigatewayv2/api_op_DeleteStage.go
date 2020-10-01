@@ -56,16 +56,16 @@ func (c *Client) DeleteStage(ctx context.Context, params *DeleteStageInput, optF
 
 type DeleteStageInput struct {
 
+	// The API identifier.
+	//
+	// This member is required.
+	ApiId *string
+
 	// The stage name. Stage names can only contain alphanumeric characters, hyphens,
 	// and underscores. Maximum length is 128 characters.
 	//
 	// This member is required.
 	StageName *string
-
-	// The API identifier.
-	//
-	// This member is required.
-	ApiId *string
 }
 
 type DeleteStageOutput struct {

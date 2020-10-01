@@ -65,18 +65,18 @@ func (c *Client) DescribeOrganizationConfigRuleStatuses(ctx context.Context, par
 
 type DescribeOrganizationConfigRuleStatusesInput struct {
 
-	// The names of organization config rules for which you want status details. If you
-	// do not specify any names, AWS Config returns details for all your organization
-	// AWS Confg rules.
-	OrganizationConfigRuleNames []*string
+	// The maximum number of OrganizationConfigRuleStatuses returned on each page. If
+	// you do no specify a number, AWS Config uses the default. The default is 100.
+	Limit *int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The maximum number of OrganizationConfigRuleStatuses returned on each page. If
-	// you do no specify a number, AWS Config uses the default. The default is 100.
-	Limit *int32
+	// The names of organization config rules for which you want status details. If you
+	// do not specify any names, AWS Config returns details for all your organization
+	// AWS Confg rules.
+	OrganizationConfigRuleNames []*string
 }
 
 type DescribeOrganizationConfigRuleStatusesOutput struct {

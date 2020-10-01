@@ -71,17 +71,17 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html).
 type UpdateConfigurationSetEventDestinationInput struct {
 
-	// The event destination object that you want to apply to the specified
-	// configuration set.
-	//
-	// This member is required.
-	EventDestination *types.EventDestination
-
 	// The name of the configuration set that contains the event destination that you
 	// want to update.
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	// The event destination object that you want to apply to the specified
+	// configuration set.
+	//
+	// This member is required.
+	EventDestination *types.EventDestination
 }
 
 // An empty element returned on a successful request.

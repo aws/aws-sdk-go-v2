@@ -57,11 +57,6 @@ func (c *Client) ListNodes(ctx context.Context, params *ListNodesInput, optFns .
 
 type ListNodesInput struct {
 
-	// The paginated results marker. When the result of the operation is truncated, the
-	// call returns NextToken in the response. To get the next batch, provide this
-	// token in your next request.
-	NextToken *string
-
 	// The Amazon Resource Name (ARN) that uniquely identifies the cluster.
 	//
 	// This member is required.
@@ -70,17 +65,22 @@ type ListNodesInput struct {
 	// The maximum number of results to return in the response. If there are more
 	// results, the response includes a NextToken parameter.
 	MaxResults *int32
+
+	// The paginated results marker. When the result of the operation is truncated, the
+	// call returns NextToken in the response. To get the next batch, provide this
+	// token in your next request.
+	NextToken *string
 }
 
 type ListNodesOutput struct {
-
-	// List containing a NodeInfo object.
-	NodeInfoList []*types.NodeInfo
 
 	// The paginated results marker. When the result of a ListNodes operation is
 	// truncated, the call returns NextToken in the response. To get another batch of
 	// nodes, provide this token in your next request.
 	NextToken *string
+
+	// List containing a NodeInfo object.
+	NodeInfoList []*types.NodeInfo
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

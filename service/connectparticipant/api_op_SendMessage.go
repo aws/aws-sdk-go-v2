@@ -59,15 +59,6 @@ func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optF
 
 type SendMessageInput struct {
 
-	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
-	ClientToken *string
-
-	// The type of the content. Supported types are text/plain.
-	//
-	// This member is required.
-	ContentType *string
-
 	// The authentication token associated with the connection.
 	//
 	// This member is required.
@@ -77,16 +68,25 @@ type SendMessageInput struct {
 	//
 	// This member is required.
 	Content *string
+
+	// The type of the content. Supported types are text/plain.
+	//
+	// This member is required.
+	ContentType *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
 }
 
 type SendMessageOutput struct {
 
-	// The ID of the message.
-	Id *string
-
 	// The time when the message was sent. It's specified in ISO 8601 format:
 	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
+
+	// The ID of the message.
+	Id *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

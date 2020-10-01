@@ -61,8 +61,15 @@ type CopyFpgaImageInput struct {
 	// This member is required.
 	SourceFpgaImageId *string
 
-	// The name for the new AFI. The default is the name of the source AFI.
-	Name *string
+	// The Region that contains the source AFI.
+	//
+	// This member is required.
+	SourceRegion *string
+
+	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
+	// the request. For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
+	ClientToken *string
 
 	// The description for the new AFI.
 	Description *string
@@ -73,15 +80,8 @@ type CopyFpgaImageInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Region that contains the source AFI.
-	//
-	// This member is required.
-	SourceRegion *string
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
-	ClientToken *string
+	// The name for the new AFI. The default is the name of the source AFI.
+	Name *string
 }
 
 type CopyFpgaImageOutput struct {

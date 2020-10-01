@@ -62,6 +62,19 @@ func (c *Client) CreateConfigurationSet(ctx context.Context, params *CreateConfi
 // A request to create a configuration set.
 type CreateConfigurationSetInput struct {
 
+	// The name of the configuration set.
+	//
+	// This member is required.
+	ConfigurationSetName *string
+
+	// An object that defines the dedicated IP pool that is used to send emails that
+	// you send using the configuration set.
+	DeliveryOptions *types.DeliveryOptions
+
+	// An object that defines whether or not Amazon SES collects reputation metrics for
+	// the emails that you send that use the configuration set.
+	ReputationOptions *types.ReputationOptions
+
 	// An object that defines whether or not Amazon SES can send email that you send
 	// using the configuration set.
 	SendingOptions *types.SendingOptions
@@ -70,22 +83,9 @@ type CreateConfigurationSetInput struct {
 	// your account.
 	SuppressionOptions *types.SuppressionOptions
 
-	// An object that defines the dedicated IP pool that is used to send emails that
-	// you send using the configuration set.
-	DeliveryOptions *types.DeliveryOptions
-
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the configuration set.
 	Tags []*types.Tag
-
-	// An object that defines whether or not Amazon SES collects reputation metrics for
-	// the emails that you send that use the configuration set.
-	ReputationOptions *types.ReputationOptions
-
-	// The name of the configuration set.
-	//
-	// This member is required.
-	ConfigurationSetName *string
 
 	// An object that defines the open and click tracking options for emails that you
 	// send using the configuration set.

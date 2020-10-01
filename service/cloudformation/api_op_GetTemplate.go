@@ -60,6 +60,11 @@ func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optF
 // The input for a GetTemplate () action.
 type GetTemplateInput struct {
 
+	// The name or Amazon Resource Name (ARN) of a change set for which AWS
+	// CloudFormation returns the associated template. If you specify a name, you must
+	// also specify the StackName.
+	ChangeSetName *string
+
 	// The name or the unique stack ID that is associated with the stack, which are not
 	// always interchangeable:
 	//
@@ -78,15 +83,16 @@ type GetTemplateInput struct {
 	// Processed. If the template doesn't include transforms, Original and Processed
 	// return the same template. By default, AWS CloudFormation specifies Original.
 	TemplateStage types.TemplateStage
-
-	// The name or Amazon Resource Name (ARN) of a change set for which AWS
-	// CloudFormation returns the associated template. If you specify a name, you must
-	// also specify the StackName.
-	ChangeSetName *string
 }
 
 // The output for GetTemplate () action.
 type GetTemplateOutput struct {
+
+	// The stage of the template that you can retrieve. For stacks, the Original and
+	// Processed templates are always available. For change sets, the Original template
+	// is always available. After AWS CloudFormation finishes creating the change set,
+	// the Processed template becomes available.
+	StagesAvailable []types.TemplateStage
 
 	// Structure containing the template body. (For more information, go to Template
 	// Anatomy
@@ -94,12 +100,6 @@ type GetTemplateOutput struct {
 	// in the AWS CloudFormation User Guide.) AWS CloudFormation returns the same
 	// template that was used when the stack was created.
 	TemplateBody *string
-
-	// The stage of the template that you can retrieve. For stacks, the Original and
-	// Processed templates are always available. For change sets, the Original template
-	// is always available. After AWS CloudFormation finishes creating the change set,
-	// the Processed template becomes available.
-	StagesAvailable []types.TemplateStage
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

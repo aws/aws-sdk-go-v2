@@ -66,15 +66,15 @@ func (c *Client) PurchaseScheduledInstances(ctx context.Context, params *Purchas
 // Contains the parameters for PurchaseScheduledInstances.
 type PurchaseScheduledInstancesInput struct {
 
-	// Unique, case-sensitive identifier that ensures the idempotency of the request.
-	// For more information, see Ensuring Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
-
 	// The purchase requests.
 	//
 	// This member is required.
 	PurchaseRequests []*types.PurchaseRequest
+
+	// Unique, case-sensitive identifier that ensures the idempotency of the request.
+	// For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
+	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

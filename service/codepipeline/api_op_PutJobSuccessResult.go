@@ -59,19 +59,6 @@ func (c *Client) PutJobSuccessResult(ctx context.Context, params *PutJobSuccessR
 // Represents the input of a PutJobSuccessResult action.
 type PutJobSuccessResultInput struct {
 
-	// Key-value pairs produced as output by a job worker that can be made available to
-	// a downstream action configuration. outputVariables can be included only when
-	// there is no continuation token on the request.
-	OutputVariables map[string]*string
-
-	// The ID of the current revision of the artifact successfully worked on by the
-	// job.
-	CurrentRevision *types.CurrentRevision
-
-	// The execution details of the successful job, such as the actions taken by the
-	// job worker.
-	ExecutionDetails *types.ExecutionDetails
-
 	// The unique system-generated ID of the job that succeeded. This is the same ID
 	// returned from PollForJobs.
 	//
@@ -84,6 +71,19 @@ type PutJobSuccessResultInput struct {
 	// to return more information about the progress of the custom action. When the
 	// action is complete, no continuation token should be supplied.
 	ContinuationToken *string
+
+	// The ID of the current revision of the artifact successfully worked on by the
+	// job.
+	CurrentRevision *types.CurrentRevision
+
+	// The execution details of the successful job, such as the actions taken by the
+	// job worker.
+	ExecutionDetails *types.ExecutionDetails
+
+	// Key-value pairs produced as output by a job worker that can be made available to
+	// a downstream action configuration. outputVariables can be included only when
+	// there is no continuation token on the request.
+	OutputVariables map[string]*string
 }
 
 type PutJobSuccessResultOutput struct {

@@ -63,47 +63,47 @@ type CreateHarvestJobInput struct {
 	// This member is required.
 	EndTime *string
 
-	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
-	// be changed after the HarvestJob is submitted.
-	//
-	// This member is required.
-	OriginEndpointId *string
-
-	// The start of the time-window which will be harvested
-	//
-	// This member is required.
-	StartTime *string
-
 	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
 	// be changed after the HarvestJob is submitted
 	//
 	// This member is required.
 	Id *string
 
+	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
+	// be changed after the HarvestJob is submitted.
+	//
+	// This member is required.
+	OriginEndpointId *string
+
 	// Configuration parameters for where in an S3 bucket to place the harvested
 	// content
 	//
 	// This member is required.
 	S3Destination *types.S3Destination
+
+	// The start of the time-window which will be harvested
+	//
+	// This member is required.
+	StartTime *string
 }
 
 type CreateHarvestJobOutput struct {
 
-	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
-	// be changed after the HarvestJob is submitted.
-	Id *string
+	// The Amazon Resource Name (ARN) assigned to the HarvestJob.
+	Arn *string
 
-	// The start of the time-window which will be harvested.
-	StartTime *string
+	// The ID of the Channel that the HarvestJob will harvest from.
+	ChannelId *string
+
+	// The time the HarvestJob was submitted
+	CreatedAt *string
 
 	// The end of the time-window which will be harvested.
 	EndTime *string
 
-	// The Amazon Resource Name (ARN) assigned to the HarvestJob.
-	Arn *string
-
-	// The time the HarvestJob was submitted
-	CreatedAt *string
+	// The ID of the HarvestJob. The ID must be unique within the region and it cannot
+	// be changed after the HarvestJob is submitted.
+	Id *string
 
 	// The ID of the OriginEndpoint that the HarvestJob will harvest from. This cannot
 	// be changed after the HarvestJob is submitted.
@@ -113,13 +113,13 @@ type CreateHarvestJobOutput struct {
 	// content
 	S3Destination *types.S3Destination
 
+	// The start of the time-window which will be harvested.
+	StartTime *string
+
 	// The current status of the HarvestJob. Consider setting up a CloudWatch Event to
 	// listen for HarvestJobs as they succeed or fail. In the event of failure, the
 	// CloudWatch Event will include an explanation of why the HarvestJob failed.
 	Status types.Status
-
-	// The ID of the Channel that the HarvestJob will harvest from.
-	ChannelId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

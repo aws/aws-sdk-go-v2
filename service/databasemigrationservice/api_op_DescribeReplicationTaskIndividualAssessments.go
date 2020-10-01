@@ -65,28 +65,28 @@ type DescribeReplicationTaskIndividualAssessmentsInput struct {
 	// replication-task-arn, status
 	Filters []*types.Filter
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	MaxRecords *int32
-
 	// An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords.
 	Marker *string
+
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	MaxRecords *int32
 }
 
 //
 type DescribeReplicationTaskIndividualAssessmentsOutput struct {
-
-	// One or more individual assessments as specified by Filters.
-	ReplicationTaskIndividualAssessments []*types.ReplicationTaskIndividualAssessment
 
 	// A pagination token returned for you to pass to a subsequent request. If you pass
 	// this token as the Marker value in a subsequent request, the response includes
 	// only records beyond the marker, up to the value specified in the request by
 	// MaxRecords.
 	Marker *string
+
+	// One or more individual assessments as specified by Filters.
+	ReplicationTaskIndividualAssessments []*types.ReplicationTaskIndividualAssessment
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

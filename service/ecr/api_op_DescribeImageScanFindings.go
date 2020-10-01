@@ -57,6 +57,16 @@ func (c *Client) DescribeImageScanFindings(ctx context.Context, params *Describe
 
 type DescribeImageScanFindingsInput struct {
 
+	// An object with identifying information for an Amazon ECR image.
+	//
+	// This member is required.
+	ImageId *types.ImageIdentifier
+
+	// The repository for the image for which to describe the scan findings.
+	//
+	// This member is required.
+	RepositoryName *string
+
 	// The maximum number of image scan results returned by DescribeImageScanFindings
 	// in paginated output. When this parameter is used, DescribeImageScanFindings only
 	// returns maxResults results in a single page along with a nextToken response
@@ -67,39 +77,20 @@ type DescribeImageScanFindingsInput struct {
 	// applicable.
 	MaxResults *int32
 
-	// The repository for the image for which to describe the scan findings.
-	//
-	// This member is required.
-	RepositoryName *string
-
-	// An object with identifying information for an Amazon ECR image.
-	//
-	// This member is required.
-	ImageId *types.ImageIdentifier
-
-	// The AWS account ID associated with the registry that contains the repository in
-	// which to describe the image scan findings for. If you do not specify a registry,
-	// the default registry is assumed.
-	RegistryId *string
-
 	// The nextToken value returned from a previous paginated DescribeImageScanFindings
 	// request where maxResults was used and the results exceeded the value of that
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value. This value is null when there are no more results
 	// to return.
 	NextToken *string
+
+	// The AWS account ID associated with the registry that contains the repository in
+	// which to describe the image scan findings for. If you do not specify a registry,
+	// the default registry is assumed.
+	RegistryId *string
 }
 
 type DescribeImageScanFindingsOutput struct {
-
-	// The registry ID associated with the request.
-	RegistryId *string
-
-	// The current state of the scan.
-	ImageScanStatus *types.ImageScanStatus
-
-	// The repository name associated with the request.
-	RepositoryName *string
 
 	// An object with identifying information for an Amazon ECR image.
 	ImageId *types.ImageIdentifier
@@ -107,11 +98,20 @@ type DescribeImageScanFindingsOutput struct {
 	// The information contained in the image scan findings.
 	ImageScanFindings *types.ImageScanFindings
 
+	// The current state of the scan.
+	ImageScanStatus *types.ImageScanStatus
+
 	// The nextToken value to include in a future DescribeImageScanFindings request.
 	// When the results of a DescribeImageScanFindings request exceed maxResults, this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// The registry ID associated with the request.
+	RegistryId *string
+
+	// The repository name associated with the request.
+	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

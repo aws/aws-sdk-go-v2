@@ -65,16 +65,16 @@ func (c *Client) AssociateDhcpOptions(ctx context.Context, params *AssociateDhcp
 
 type AssociateDhcpOptionsInput struct {
 
-	// The ID of the VPC.
-	//
-	// This member is required.
-	VpcId *string
-
 	// The ID of the DHCP options set, or default to associate no DHCP options with the
 	// VPC.
 	//
 	// This member is required.
 	DhcpOptionsId *string
+
+	// The ID of the VPC.
+	//
+	// This member is required.
+	VpcId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the

@@ -56,9 +56,6 @@ func (c *Client) GetCardinality(ctx context.Context, params *GetCardinalityInput
 
 type GetCardinalityInput struct {
 
-	// The query version.
-	QueryVersion *string
-
 	// The search query.
 	//
 	// This member is required.
@@ -69,6 +66,9 @@ type GetCardinalityInput struct {
 
 	// The name of the index to search.
 	IndexName *string
+
+	// The query version.
+	QueryVersion *string
 }
 
 type GetCardinalityOutput struct {

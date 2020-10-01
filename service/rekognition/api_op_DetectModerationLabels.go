@@ -92,13 +92,13 @@ type DetectModerationLabelsOutput struct {
 	// Shows the results of the human in the loop evaluation.
 	HumanLoopActivationOutput *types.HumanLoopActivationOutput
 
-	// Version number of the moderation detection model that was used to detect unsafe
-	// content.
-	ModerationModelVersion *string
-
 	// Array of detected Moderation labels and the time, in milliseconds from the start
 	// of the video, they were detected.
 	ModerationLabels []*types.ModerationLabel
+
+	// Version number of the moderation detection model that was used to detect unsafe
+	// content.
+	ModerationModelVersion *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

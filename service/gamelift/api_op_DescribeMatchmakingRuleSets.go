@@ -87,6 +87,10 @@ func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *Descri
 // Represents the input for a request action.
 type DescribeMatchmakingRuleSetsInput struct {
 
+	// The maximum number of results to return. Use this parameter with NextToken to
+	// get results as a set of sequential pages.
+	Limit *int32
+
 	// A list of one or more matchmaking rule set names to retrieve details for. (Note:
 	// The rule set name is different from the optional "name" field in the rule set
 	// body.) You can use either the rule set name or ARN value.
@@ -96,10 +100,6 @@ type DescribeMatchmakingRuleSetsInput struct {
 	// token that is returned with a previous call to this action. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
-
-	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential pages.
-	Limit *int32
 }
 
 // Represents the returned data in response to a request action.

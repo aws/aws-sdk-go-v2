@@ -61,11 +61,11 @@ type UpdateProjectInput struct {
 	// This member is required.
 	Id *string
 
-	// The name of the project you want to update.
-	Name *string
-
 	// The description of the project, if any.
 	Description *string
+
+	// The name of the project you want to update.
+	Name *string
 }
 
 type UpdateProjectOutput struct {

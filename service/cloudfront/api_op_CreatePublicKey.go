@@ -66,14 +66,14 @@ type CreatePublicKeyInput struct {
 
 type CreatePublicKeyOutput struct {
 
+	// The current version of the public key. For example: E2QWRUHAPOMQZL.
+	ETag *string
+
 	// The fully qualified URI of the new public key resource just created.
 	Location *string
 
 	// Returned when you add a public key.
 	PublicKey *types.PublicKey
-
-	// The current version of the public key. For example: E2QWRUHAPOMQZL.
-	ETag *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

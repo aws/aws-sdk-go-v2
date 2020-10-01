@@ -62,22 +62,16 @@ func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, pa
 
 type CreateVpcEndpointConnectionNotificationInput struct {
 
-	// The ID of the endpoint.
-	VpcEndpointId *string
-
-	// The ARN of the SNS topic for the notifications.
-	//
-	// This member is required.
-	ConnectionNotificationArn *string
-
-	// The ID of the endpoint service.
-	ServiceId *string
-
 	// One or more endpoint events for which to receive notifications. Valid values are
 	// Accept, Connect, Delete, and Reject.
 	//
 	// This member is required.
 	ConnectionEvents []*string
+
+	// The ARN of the SNS topic for the notifications.
+	//
+	// This member is required.
+	ConnectionNotificationArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request. For more information, see How to Ensure Idempotency
@@ -89,16 +83,22 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	// The ID of the endpoint service.
+	ServiceId *string
+
+	// The ID of the endpoint.
+	VpcEndpointId *string
 }
 
 type CreateVpcEndpointConnectionNotificationOutput struct {
 
-	// Information about the notification.
-	ConnectionNotification *types.ConnectionNotification
-
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
+	// Information about the notification.
+	ConnectionNotification *types.ConnectionNotification
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

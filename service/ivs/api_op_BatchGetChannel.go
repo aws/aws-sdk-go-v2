@@ -64,11 +64,10 @@ type BatchGetChannelInput struct {
 }
 
 type BatchGetChannelOutput struct {
+	Channels []*types.Channel
 
 	// Each error object is related to a specific ARN in the request.
 	Errors []*types.BatchError
-
-	Channels []*types.Channel
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

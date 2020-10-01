@@ -59,16 +59,16 @@ func (c *Client) PutJobFailureResult(ctx context.Context, params *PutJobFailureR
 // Represents the input of a PutJobFailureResult action.
 type PutJobFailureResultInput struct {
 
+	// The details about the failure of a job.
+	//
+	// This member is required.
+	FailureDetails *types.FailureDetails
+
 	// The unique system-generated ID of the job that failed. This is the same ID
 	// returned from PollForJobs.
 	//
 	// This member is required.
 	JobId *string
-
-	// The details about the failure of a job.
-	//
-	// This member is required.
-	FailureDetails *types.FailureDetails
 }
 
 type PutJobFailureResultOutput struct {

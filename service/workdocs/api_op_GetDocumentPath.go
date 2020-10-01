@@ -66,19 +66,19 @@ type GetDocumentPathInput struct {
 	// This member is required.
 	DocumentId *string
 
-	// The maximum number of levels in the hierarchy to return.
-	Limit *int32
-
-	// This value is not supported.
-	Marker *string
+	// Amazon WorkDocs authentication token. Not required when using AWS administrator
+	// credentials to access the API.
+	AuthenticationToken *string
 
 	// A comma-separated list of values. Specify NAME to include the names of the
 	// parent folders.
 	Fields *string
 
-	// Amazon WorkDocs authentication token. Not required when using AWS administrator
-	// credentials to access the API.
-	AuthenticationToken *string
+	// The maximum number of levels in the hierarchy to return.
+	Limit *int32
+
+	// This value is not supported.
+	Marker *string
 }
 
 type GetDocumentPathOutput struct {

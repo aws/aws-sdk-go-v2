@@ -63,16 +63,16 @@ func (c *Client) UpdateConfigurationSetSendingEnabled(ctx context.Context, param
 // specific configuration set.
 type UpdateConfigurationSetSendingEnabledInput struct {
 
+	// The name of the configuration set that you want to update.
+	//
+	// This member is required.
+	ConfigurationSetName *string
+
 	// Describes whether email sending is enabled or disabled for the configuration
 	// set.
 	//
 	// This member is required.
 	Enabled *bool
-
-	// The name of the configuration set that you want to update.
-	//
-	// This member is required.
-	ConfigurationSetName *string
 }
 
 type UpdateConfigurationSetSendingEnabledOutput struct {

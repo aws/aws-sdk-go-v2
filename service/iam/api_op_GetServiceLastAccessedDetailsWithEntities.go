@@ -97,6 +97,12 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	// This member is required.
 	ServiceNamespace *string
 
+	// Use this parameter only when paginating results and only after you receive a
+	// response indicating that the results are truncated. Set it to the value of the
+	// Marker element in the response that you received to indicate where the next call
+	// should start.
+	Marker *string
+
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
 	// specify, the IsTruncated response element is true. If you do not include this
@@ -105,26 +111,16 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
-
-	// Use this parameter only when paginating results and only after you receive a
-	// response indicating that the results are truncated. Set it to the value of the
-	// Marker element in the response that you received to indicate where the next call
-	// should start.
-	Marker *string
 }
 
 type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 
-	// A flag that indicates whether there are more items to return. If your results
-	// were truncated, you can make a subsequent pagination request using the Marker
-	// request parameter to retrieve more items. Note that IAM might return fewer than
-	// the MaxItems number of results even when there are more results available. We
-	// recommend that you check IsTruncated after every call to ensure that you receive
-	// all your results.
-	IsTruncated *bool
-
-	// An object that contains details about the reason the operation failed.
-	Error *types.ErrorDetails
+	// An EntityDetailsList object that contains details about when an IAM entity (user
+	// or role) used group or policy permissions in an attempt to access the specified
+	// AWS service.
+	//
+	// This member is required.
+	EntityDetailsList []*types.EntityDetails
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the generated report job was completed or
@@ -133,10 +129,6 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	//
 	// This member is required.
 	JobCompletionDate *time.Time
-
-	// When IsTruncated is true, this element is present and contains the value to use
-	// for the Marker parameter in a subsequent pagination request.
-	Marker *string
 
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the report job was created.
@@ -149,12 +141,20 @@ type GetServiceLastAccessedDetailsWithEntitiesOutput struct {
 	// This member is required.
 	JobStatus types.JobStatusType
 
-	// An EntityDetailsList object that contains details about when an IAM entity (user
-	// or role) used group or policy permissions in an attempt to access the specified
-	// AWS service.
-	//
-	// This member is required.
-	EntityDetailsList []*types.EntityDetails
+	// An object that contains details about the reason the operation failed.
+	Error *types.ErrorDetails
+
+	// A flag that indicates whether there are more items to return. If your results
+	// were truncated, you can make a subsequent pagination request using the Marker
+	// request parameter to retrieve more items. Note that IAM might return fewer than
+	// the MaxItems number of results even when there are more results available. We
+	// recommend that you check IsTruncated after every call to ensure that you receive
+	// all your results.
+	IsTruncated *bool
+
+	// When IsTruncated is true, this element is present and contains the value to use
+	// for the Marker parameter in a subsequent pagination request.
+	Marker *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

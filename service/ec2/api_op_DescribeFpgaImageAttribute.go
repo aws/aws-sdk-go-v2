@@ -57,21 +57,21 @@ func (c *Client) DescribeFpgaImageAttribute(ctx context.Context, params *Describ
 
 type DescribeFpgaImageAttributeInput struct {
 
-	// Checks whether you have the required permissions for the action, without
-	// actually making the request, and provides an error response. If you have the
-	// required permissions, the error response is DryRunOperation. Otherwise, it is
-	// UnauthorizedOperation.
-	DryRun *bool
+	// The AFI attribute.
+	//
+	// This member is required.
+	Attribute types.FpgaImageAttributeName
 
 	// The ID of the AFI.
 	//
 	// This member is required.
 	FpgaImageId *string
 
-	// The AFI attribute.
-	//
-	// This member is required.
-	Attribute types.FpgaImageAttributeName
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
 }
 
 type DescribeFpgaImageAttributeOutput struct {

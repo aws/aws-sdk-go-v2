@@ -60,12 +60,17 @@ func (c *Client) ListStreamConsumers(ctx context.Context, params *ListStreamCons
 
 type ListStreamConsumersInput struct {
 
-	// Specify this input parameter to distinguish data streams that have the same
-	// name. For example, if you create a data stream and then delete it, and you later
-	// create another data stream with the same name, you can use this input parameter
-	// to specify which of the two streams you want to list the consumers for. You
-	// can't specify this parameter if you specify the NextToken parameter.
-	StreamCreationTimestamp *time.Time
+	// The ARN of the Kinesis data stream for which you want to list the registered
+	// consumers. For more information, see Amazon Resource Names (ARNs) and AWS
+	// Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The maximum number of consumers that you want a single call of
+	// ListStreamConsumers to return.
+	MaxResults *int32
 
 	// When the number of consumers that are registered with the data stream is greater
 	// than the default value for the MaxResults parameter, or if you explicitly
@@ -86,20 +91,18 @@ type ListStreamConsumersInput struct {
 	// ExpiredNextTokenException.
 	NextToken *string
 
-	// The maximum number of consumers that you want a single call of
-	// ListStreamConsumers to return.
-	MaxResults *int32
-
-	// The ARN of the Kinesis data stream for which you want to list the registered
-	// consumers. For more information, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kinesis-streams).
-	//
-	// This member is required.
-	StreamARN *string
+	// Specify this input parameter to distinguish data streams that have the same
+	// name. For example, if you create a data stream and then delete it, and you later
+	// create another data stream with the same name, you can use this input parameter
+	// to specify which of the two streams you want to list the consumers for. You
+	// can't specify this parameter if you specify the NextToken parameter.
+	StreamCreationTimestamp *time.Time
 }
 
 type ListStreamConsumersOutput struct {
+
+	// An array of JSON objects. Each object represents one registered consumer.
+	Consumers []*types.Consumer
 
 	// When the number of consumers that are registered with the data stream is greater
 	// than the default value for the MaxResults parameter, or if you explicitly
@@ -113,9 +116,6 @@ type ListStreamConsumersOutput struct {
 	// you have 300 seconds to use that value. If you specify an expired token in a
 	// call to ListStreamConsumers, you get ExpiredNextTokenException.
 	NextToken *string
-
-	// An array of JSON objects. Each object represents one registered consumer.
-	Consumers []*types.Consumer
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

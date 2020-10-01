@@ -134,13 +134,13 @@ type GenerateDataKeyPairWithoutPlaintextInput struct {
 
 type GenerateDataKeyPairWithoutPlaintextOutput struct {
 
-	// The type of data key pair that was generated.
-	KeyPairSpec types.DataKeyPairSpec
-
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
 	// of the CMK that encrypted the private key.
 	KeyId *string
+
+	// The type of data key pair that was generated.
+	KeyPairSpec types.DataKeyPairSpec
 
 	// The encrypted copy of the private key. When you use the HTTP API or the AWS CLI,
 	// the value is Base64-encoded. Otherwise, it is not Base64-encoded.

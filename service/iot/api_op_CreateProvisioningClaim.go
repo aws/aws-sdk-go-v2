@@ -66,14 +66,14 @@ type CreateProvisioningClaimInput struct {
 
 type CreateProvisioningClaimOutput struct {
 
+	// The ID of the certificate.
+	CertificateId *string
+
 	// The provisioning claim certificate.
 	CertificatePem *string
 
 	// The provisioning claim expiration time.
 	Expiration *time.Time
-
-	// The ID of the certificate.
-	CertificateId *string
 
 	// The provisioning claim key pair.
 	KeyPair *types.KeyPair

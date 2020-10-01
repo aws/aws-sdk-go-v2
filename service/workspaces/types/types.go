@@ -10,6 +10,16 @@ import (
 // for the specified account.
 type AccountModification struct {
 
+	// The IP address range, specified as an IPv4 CIDR block, for the management
+	// network interface used for the account.
+	DedicatedTenancyManagementCidrRange *string
+
+	// The status of BYOL (whether BYOL is being enabled or disabled).
+	DedicatedTenancySupport DedicatedTenancySupportResultEnum
+
+	// The error code that is returned if the configuration of BYOL cannot be modified.
+	ErrorCode *string
+
 	// The text of the error message that is returned if the configuration of BYOL
 	// cannot be modified.
 	ErrorMessage *string
@@ -17,18 +27,8 @@ type AccountModification struct {
 	// The state of the modification to the configuration of BYOL.
 	ModificationState DedicatedTenancyModificationStateEnum
 
-	// The IP address range, specified as an IPv4 CIDR block, for the management
-	// network interface used for the account.
-	DedicatedTenancyManagementCidrRange *string
-
-	// The error code that is returned if the configuration of BYOL cannot be modified.
-	ErrorCode *string
-
 	// The timestamp when the modification of the BYOL configuration was started.
 	StartTime *time.Time
-
-	// The status of BYOL (whether BYOL is being enabled or disabled).
-	DedicatedTenancySupport DedicatedTenancySupportResultEnum
 }
 
 // Describes an Amazon WorkSpaces client.
@@ -43,11 +43,11 @@ type ClientProperties struct {
 // Information about the Amazon WorkSpaces client.
 type ClientPropertiesResult struct {
 
-	// The resource identifier, in the form of a directory ID.
-	ResourceId *string
-
 	// Information about the Amazon WorkSpaces client.
 	ClientProperties *ClientProperties
+
+	// The resource identifier, in the form of a directory ID.
+	ResourceId *string
 }
 
 // Describes the compute type.
@@ -67,6 +67,10 @@ type DefaultWorkspaceCreationProperties struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-security-groups.html).
 	CustomSecurityGroupId *string
 
+	// The organizational unit (OU) in the directory for the WorkSpace machine
+	// accounts.
+	DefaultOu *string
+
 	// Specifies whether to automatically assign an Elastic public IP address to
 	// WorkSpaces in this directory by default. If enabled, the Elastic public IP
 	// address allows outbound internet access from your WorkSpaces when you’re using
@@ -79,17 +83,13 @@ type DefaultWorkspaceCreationProperties struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html).
 	EnableInternetAccess *bool
 
-	// Specifies whether the directory is enabled for Amazon WorkDocs.
-	EnableWorkDocs *bool
-
-	// The organizational unit (OU) in the directory for the WorkSpace machine
-	// accounts.
-	DefaultOu *string
-
 	// Specifies whether maintenance mode is enabled for WorkSpaces. For more
 	// information, see WorkSpace Maintenance
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspace-maintenance.html).
 	EnableMaintenanceMode *bool
+
+	// Specifies whether the directory is enabled for Amazon WorkDocs.
+	EnableWorkDocs *bool
 
 	// Specifies whether WorkSpace users are local administrators on their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
@@ -98,15 +98,15 @@ type DefaultWorkspaceCreationProperties struct {
 // Describes a WorkSpace that cannot be created.
 type FailedCreateWorkspaceRequest struct {
 
-	// Information about the WorkSpace.
-	WorkspaceRequest *WorkspaceRequest
+	// The error code that is returned if the WorkSpace cannot be created.
+	ErrorCode *string
 
 	// The text of the error message that is returned if the WorkSpace cannot be
 	// created.
 	ErrorMessage *string
 
-	// The error code that is returned if the WorkSpace cannot be created.
-	ErrorCode *string
+	// Information about the WorkSpace.
+	WorkspaceRequest *WorkspaceRequest
 }
 
 // Describes a WorkSpace that could not be rebooted. (RebootWorkspaces ()), rebuilt
@@ -115,12 +115,12 @@ type FailedCreateWorkspaceRequest struct {
 // (StopWorkspaces ()).
 type FailedWorkspaceChangeRequest struct {
 
+	// The error code that is returned if the WorkSpace cannot be rebooted.
+	ErrorCode *string
+
 	// The text of the error message that is returned if the WorkSpace cannot be
 	// rebooted.
 	ErrorMessage *string
-
-	// The error code that is returned if the WorkSpace cannot be rebooted.
-	ErrorCode *string
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
@@ -191,23 +191,23 @@ type RootStorage struct {
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/enable-user-self-service-workspace-management.html).
 type SelfservicePermissions struct {
 
-	// Specifies whether users can switch the running mode of their WorkSpace.
-	SwitchRunningMode ReconnectEnum
+	// Specifies whether users can change the compute type (bundle) for their
+	// WorkSpace.
+	ChangeComputeType ReconnectEnum
+
+	// Specifies whether users can increase the volume size of the drives on their
+	// WorkSpace.
+	IncreaseVolumeSize ReconnectEnum
 
 	// Specifies whether users can rebuild the operating system of a WorkSpace to its
 	// original state.
 	RebuildWorkspace ReconnectEnum
 
-	// Specifies whether users can change the compute type (bundle) for their
-	// WorkSpace.
-	ChangeComputeType ReconnectEnum
-
 	// Specifies whether users can restart their WorkSpace.
 	RestartWorkspace ReconnectEnum
 
-	// Specifies whether users can increase the volume size of the drives on their
-	// WorkSpace.
-	IncreaseVolumeSize ReconnectEnum
+	// Specifies whether users can switch the running mode of their WorkSpace.
+	SwitchRunningMode ReconnectEnum
 }
 
 // Describes a snapshot.
@@ -234,13 +234,13 @@ type StopRequest struct {
 // Describes a tag.
 type Tag struct {
 
-	// The value of the tag.
-	Value *string
-
 	// The key of the tag.
 	//
 	// This member is required.
 	Key *string
+
+	// The value of the tag.
+	Value *string
 }
 
 // Describes the information used to terminate a WorkSpace.
@@ -262,52 +262,52 @@ type UserStorage struct {
 // Describes a WorkSpace.
 type Workspace struct {
 
-	// The user for the WorkSpace.
-	UserName *string
+	// The identifier of the bundle used to create the WorkSpace.
+	BundleId *string
 
-	// The identifier of the subnet for the WorkSpace.
-	SubnetId *string
+	// The name of the WorkSpace, as seen by the operating system.
+	ComputerName *string
+
+	// The identifier of the AWS Directory Service directory for the WorkSpace.
+	DirectoryId *string
 
 	// The error code that is returned if the WorkSpace cannot be created.
 	ErrorCode *string
-
-	// Indicates whether the data stored on the user volume is encrypted.
-	UserVolumeEncryptionEnabled *bool
-
-	// The modification states of the WorkSpace.
-	ModificationStates []*ModificationState
-
-	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
-	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
-	VolumeEncryptionKey *string
-
-	// The operational state of the WorkSpace.
-	State WorkspaceState
-
-	// The properties of the WorkSpace.
-	WorkspaceProperties *WorkspaceProperties
-
-	// The IP address of the WorkSpace.
-	IpAddress *string
-
-	// Indicates whether the data stored on the root volume is encrypted.
-	RootVolumeEncryptionEnabled *bool
 
 	// The text of the error message that is returned if the WorkSpace cannot be
 	// created.
 	ErrorMessage *string
 
-	// The identifier of the bundle used to create the WorkSpace.
-	BundleId *string
+	// The IP address of the WorkSpace.
+	IpAddress *string
 
-	// The identifier of the AWS Directory Service directory for the WorkSpace.
-	DirectoryId *string
+	// The modification states of the WorkSpace.
+	ModificationStates []*ModificationState
+
+	// Indicates whether the data stored on the root volume is encrypted.
+	RootVolumeEncryptionEnabled *bool
+
+	// The operational state of the WorkSpace.
+	State WorkspaceState
+
+	// The identifier of the subnet for the WorkSpace.
+	SubnetId *string
+
+	// The user for the WorkSpace.
+	UserName *string
+
+	// Indicates whether the data stored on the user volume is encrypted.
+	UserVolumeEncryptionEnabled *bool
+
+	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
+	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+	VolumeEncryptionKey *string
 
 	// The identifier of the WorkSpace.
 	WorkspaceId *string
 
-	// The name of the WorkSpace, as seen by the operating system.
-	ComputerName *string
+	// The properties of the WorkSpace.
+	WorkspaceProperties *WorkspaceProperties
 }
 
 // The device types and operating systems that can be used to access a WorkSpace.
@@ -315,20 +315,14 @@ type Workspace struct {
 // (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-network-requirements.html).
 type WorkspaceAccessProperties struct {
 
-	// Indicates whether users can use zero client devices to access their WorkSpaces.
-	DeviceTypeZeroClient AccessPropertyValue
-
-	// Indicates whether users can use iOS devices to access their WorkSpaces.
-	DeviceTypeIos AccessPropertyValue
-
 	// Indicates whether users can use Android devices to access their WorkSpaces.
 	DeviceTypeAndroid AccessPropertyValue
 
 	// Indicates whether users can use Chromebooks to access their WorkSpaces.
 	DeviceTypeChromeOs AccessPropertyValue
 
-	// Indicates whether users can access their WorkSpaces through a web browser.
-	DeviceTypeWeb AccessPropertyValue
+	// Indicates whether users can use iOS devices to access their WorkSpaces.
+	DeviceTypeIos AccessPropertyValue
 
 	// Indicates whether users can use macOS clients to access their WorkSpaces. To
 	// restrict WorkSpaces access to trusted devices (also known as managed devices)
@@ -337,36 +331,35 @@ type WorkspaceAccessProperties struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
 	DeviceTypeOsx AccessPropertyValue
 
+	// Indicates whether users can access their WorkSpaces through a web browser.
+	DeviceTypeWeb AccessPropertyValue
+
 	// Indicates whether users can use Windows clients to access their WorkSpaces. To
 	// restrict WorkSpaces access to trusted devices (also known as managed devices)
 	// with valid certificates, specify a value of TRUST. For more information, see
 	// Restrict WorkSpaces Access to Trusted Devices
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/trusted-devices.html).
 	DeviceTypeWindows AccessPropertyValue
+
+	// Indicates whether users can use zero client devices to access their WorkSpaces.
+	DeviceTypeZeroClient AccessPropertyValue
 }
 
 // Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 
-	// The image identifier of the bundle.
-	ImageId *string
-
-	// The owner of the bundle. This is the account identifier of the owner, or AMAZON
-	// if the bundle is provided by AWS.
-	Owner *string
-
-	// A description.
-	Description *string
+	// The bundle identifier.
+	BundleId *string
 
 	// The compute type. For more information, see Amazon WorkSpaces Bundles
 	// (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeType *ComputeType
 
-	// The size of the user storage.
-	UserStorage *UserStorage
+	// A description.
+	Description *string
 
-	// The bundle identifier.
-	BundleId *string
+	// The image identifier of the bundle.
+	ImageId *string
 
 	// The last time that the bundle was updated.
 	LastUpdatedTime *time.Time
@@ -374,25 +367,32 @@ type WorkspaceBundle struct {
 	// The name of the bundle.
 	Name *string
 
+	// The owner of the bundle. This is the account identifier of the owner, or AMAZON
+	// if the bundle is provided by AWS.
+	Owner *string
+
 	// The size of the root volume.
 	RootStorage *RootStorage
+
+	// The size of the user storage.
+	UserStorage *UserStorage
 }
 
 // Describes the connection status of a WorkSpace.
 type WorkspaceConnectionStatus struct {
 
-	// The identifier of the WorkSpace.
-	WorkspaceId *string
-
 	// The connection state of the WorkSpace. The connection state is unknown if the
 	// WorkSpace is stopped.
 	ConnectionState ConnectionState
 
+	// The timestamp of the connection status check.
+	ConnectionStateCheckTimestamp *time.Time
+
 	// The timestamp of the last known user connection.
 	LastKnownUserConnectionTimestamp *time.Time
 
-	// The timestamp of the connection status check.
-	ConnectionStateCheckTimestamp *time.Time
+	// The identifier of the WorkSpace.
+	WorkspaceId *string
 }
 
 // Describes the default properties that are used for creating WorkSpaces. For more
@@ -402,6 +402,9 @@ type WorkspaceCreationProperties struct {
 
 	// The identifier of your custom security group.
 	CustomSecurityGroupId *string
+
+	// The default organizational unit (OU) for your WorkSpace directories.
+	DefaultOu *string
 
 	// Indicates whether internet access is enabled for your WorkSpaces.
 	EnableInternetAccess *bool
@@ -413,23 +416,48 @@ type WorkspaceCreationProperties struct {
 
 	// Indicates whether users are local administrators of their WorkSpaces.
 	UserEnabledAsLocalAdministrator *bool
-
-	// The default organizational unit (OU) for your WorkSpace directories.
-	DefaultOu *string
 }
 
 // Describes a directory that is used with Amazon WorkSpaces.
 type WorkspaceDirectory struct {
 
-	// The name of the directory.
-	DirectoryName *string
+	// The directory alias.
+	Alias *string
 
 	// The user name for the service account.
 	CustomerUserName *string
 
+	// The directory identifier.
+	DirectoryId *string
+
+	// The name of the directory.
+	DirectoryName *string
+
+	// The directory type.
+	DirectoryType WorkspaceDirectoryType
+
+	// The IP addresses of the DNS servers for the directory.
+	DnsIpAddresses []*string
+
 	// The identifier of the IAM role. This is the role that allows Amazon WorkSpaces
 	// to make calls to other services, such as Amazon EC2, on your behalf.
 	IamRoleId *string
+
+	// The identifiers of the IP access control groups associated with the directory.
+	IpGroupIds []*string
+
+	// The registration code for the directory. This is the code that users enter in
+	// their Amazon WorkSpaces client application to connect to the directory.
+	RegistrationCode *string
+
+	// The default self-service permissions for WorkSpaces in the directory.
+	SelfservicePermissions *SelfservicePermissions
+
+	// The state of the directory's registration with Amazon WorkSpaces.
+	State WorkspaceDirectoryState
+
+	// The identifiers of the subnets used with the directory.
+	SubnetIds []*string
 
 	// Specifies whether the directory is dedicated or shared. To use Bring Your Own
 	// License (BYOL), this value must be set to DEDICATED. For more information, see
@@ -437,55 +465,44 @@ type WorkspaceDirectory struct {
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	Tenancy Tenancy
 
-	// The directory identifier.
-	DirectoryId *string
-
 	// The devices and operating systems that users can use to access WorkSpaces.
 	WorkspaceAccessProperties *WorkspaceAccessProperties
-
-	// The default self-service permissions for WorkSpaces in the directory.
-	SelfservicePermissions *SelfservicePermissions
-
-	// The registration code for the directory. This is the code that users enter in
-	// their Amazon WorkSpaces client application to connect to the directory.
-	RegistrationCode *string
-
-	// The IP addresses of the DNS servers for the directory.
-	DnsIpAddresses []*string
-
-	// The identifier of the security group that is assigned to new WorkSpaces.
-	WorkspaceSecurityGroupId *string
-
-	// The directory type.
-	DirectoryType WorkspaceDirectoryType
 
 	// The default creation properties for all WorkSpaces in the directory.
 	WorkspaceCreationProperties *DefaultWorkspaceCreationProperties
 
-	// The state of the directory's registration with Amazon WorkSpaces.
-	State WorkspaceDirectoryState
-
-	// The identifiers of the IP access control groups associated with the directory.
-	IpGroupIds []*string
-
-	// The directory alias.
-	Alias *string
-
-	// The identifiers of the subnets used with the directory.
-	SubnetIds []*string
+	// The identifier of the security group that is assigned to new WorkSpaces.
+	WorkspaceSecurityGroupId *string
 }
 
 // Describes a WorkSpace image.
 type WorkspaceImage struct {
 
-	// The name of the image.
-	Name *string
+	// The date when the image was created. If the image has been shared, the AWS
+	// account that the image has been shared with sees the original creation date of
+	// the image.
+	Created *time.Time
+
+	// The description of the image.
+	Description *string
 
 	// The error code that is returned for the image.
 	ErrorCode *string
 
+	// The text of the error message that is returned for the image.
+	ErrorMessage *string
+
 	// The identifier of the image.
 	ImageId *string
+
+	// The name of the image.
+	Name *string
+
+	// The operating system that the image is running.
+	OperatingSystem *OperatingSystem
+
+	// The identifier of the AWS account that owns the image.
+	OwnerAccountId *string
 
 	// Specifies whether the image is running on dedicated hardware. When Bring Your
 	// Own License (BYOL) is enabled, this value is set to DEDICATED. For more
@@ -495,27 +512,23 @@ type WorkspaceImage struct {
 
 	// The status of the image.
 	State WorkspaceImageState
-
-	// The description of the image.
-	Description *string
-
-	// The identifier of the AWS account that owns the image.
-	OwnerAccountId *string
-
-	// The operating system that the image is running.
-	OperatingSystem *OperatingSystem
-
-	// The date when the image was created. If the image has been shared, the AWS
-	// account that the image has been shared with sees the original creation date of
-	// the image.
-	Created *time.Time
-
-	// The text of the error message that is returned for the image.
-	ErrorMessage *string
 }
 
 // Describes a WorkSpace.
 type WorkspaceProperties struct {
+
+	// The compute type. For more information, see Amazon WorkSpaces Bundles
+	// (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
+	ComputeTypeName Compute
+
+	// The size of the root volume. For important information about how to modify the
+	// size of the root and user volumes, see Modify a WorkSpace
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
+	RootVolumeSizeGib *int32
+
+	// The running mode. For more information, see Manage the WorkSpace Running Mode
+	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
+	RunningMode RunningMode
 
 	// The time after a user logs off when WorkSpaces are automatically stopped.
 	// Configured in 60-minute intervals.
@@ -525,36 +538,10 @@ type WorkspaceProperties struct {
 	// size of the root and user volumes, see Modify a WorkSpace
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
 	UserVolumeSizeGib *int32
-
-	// The size of the root volume. For important information about how to modify the
-	// size of the root and user volumes, see Modify a WorkSpace
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html).
-	RootVolumeSizeGib *int32
-
-	// The compute type. For more information, see Amazon WorkSpaces Bundles
-	// (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
-	ComputeTypeName Compute
-
-	// The running mode. For more information, see Manage the WorkSpace Running Mode
-	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html).
-	RunningMode RunningMode
 }
 
 // Describes the information used to create a WorkSpace.
 type WorkspaceRequest struct {
-
-	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
-	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
-	VolumeEncryptionKey *string
-
-	// Indicates whether the data stored on the root volume is encrypted.
-	RootVolumeEncryptionEnabled *bool
-
-	// The user name of the user for the WorkSpace. This user name must exist in the
-	// AWS Directory Service directory for the WorkSpace.
-	//
-	// This member is required.
-	UserName *string
 
 	// The identifier of the bundle for the WorkSpace. You can use
 	// DescribeWorkspaceBundles () to list the available bundles.
@@ -562,34 +549,47 @@ type WorkspaceRequest struct {
 	// This member is required.
 	BundleId *string
 
-	// The tags for the WorkSpace.
-	Tags []*Tag
-
-	// The WorkSpace properties.
-	WorkspaceProperties *WorkspaceProperties
-
-	// Indicates whether the data stored on the user volume is encrypted.
-	UserVolumeEncryptionEnabled *bool
-
 	// The identifier of the AWS Directory Service directory for the WorkSpace. You can
 	// use DescribeWorkspaceDirectories () to list the available directories.
 	//
 	// This member is required.
 	DirectoryId *string
+
+	// The user name of the user for the WorkSpace. This user name must exist in the
+	// AWS Directory Service directory for the WorkSpace.
+	//
+	// This member is required.
+	UserName *string
+
+	// Indicates whether the data stored on the root volume is encrypted.
+	RootVolumeEncryptionEnabled *bool
+
+	// The tags for the WorkSpace.
+	Tags []*Tag
+
+	// Indicates whether the data stored on the user volume is encrypted.
+	UserVolumeEncryptionEnabled *bool
+
+	// The symmetric AWS KMS customer master key (CMK) used to encrypt data stored on
+	// your WorkSpace. Amazon WorkSpaces does not support asymmetric CMKs.
+	VolumeEncryptionKey *string
+
+	// The WorkSpace properties.
+	WorkspaceProperties *WorkspaceProperties
 }
 
 // Describes an IP access control group.
 type WorkspacesIpGroup struct {
 
+	// The description of the group.
+	GroupDesc *string
+
 	// The identifier of the group.
 	GroupId *string
-
-	// The rules.
-	UserRules []*IpRuleItem
 
 	// The name of the group.
 	GroupName *string
 
-	// The description of the group.
-	GroupDesc *string
+	// The rules.
+	UserRules []*IpRuleItem
 }

@@ -58,11 +58,31 @@ func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput
 // The CreatePipelineRequest structure.
 type CreatePipelineInput struct {
 
+	// The Amazon S3 bucket in which you saved the media files that you want to
+	// transcode.
+	//
+	// This member is required.
+	InputBucket *string
+
 	// The name of the pipeline. We recommend that the name be unique within the AWS
 	// account, but uniqueness is not enforced. Constraints: Maximum 40 characters.
 	//
 	// This member is required.
 	Name *string
+
+	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
+	// to use to create the pipeline.
+	//
+	// This member is required.
+	Role *string
+
+	// The AWS Key Management Service (AWS KMS) key that you want to use with this
+	// pipeline. If you use either s3 or s3-aws-kms as your Encryption:Mode, you don't
+	// need to provide a key with your job because a default key, known as an AWS-KMS
+	// key, is created for you automatically. You need to provide an AWS-KMS key only
+	// if you want to use a non-default AWS-KMS key, or if you are using an
+	// Encryption:Mode of aes-cbc-pkcs7, aes-ctr, or aes-gcm.
+	AwsKmsKeyArn *string
 
 	// The optional ContentConfig object specifies information about the Amazon S3
 	// bucket in which you want Elastic Transcoder to save transcoded files and
@@ -158,11 +178,29 @@ type CreatePipelineInput struct {
 	// pipeline. This is the ARN that Amazon SNS returned when you created the topic.
 	Notifications *types.Notifications
 
-	// The IAM Amazon Resource Name (ARN) for the role that you want Elastic Transcoder
-	// to use to create the pipeline.
+	// The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded
+	// files. (Use this, or use ContentConfig:Bucket plus ThumbnailConfig:Bucket.)
+	// Specify this value when all of the following are true:
 	//
-	// This member is required.
-	Role *string
+	//     * You want to save
+	// transcoded files, thumbnails (if any), and playlists (if any) together in one
+	// bucket.
+	//
+	//     * You do not want to specify the users or groups who have access to
+	// the transcoded files, thumbnails, and playlists.
+	//
+	//     * You do not want to
+	// specify the permissions that Elastic Transcoder grants to the  files. </p>
+	// <important> <p>When Elastic Transcoder saves files in <code>OutputBucket</code>,
+	// it grants full control over the files only to the AWS account that owns the role
+	// that is specified by <code>Role</code>.</p> </important> </li> <li> <p>You want
+	// to associate the transcoded files and thumbnails with the Amazon S3 Standard
+	// storage class.</p> </li> </ul> <p>If you want to save transcoded files and
+	// playlists in one bucket and thumbnails in another bucket, specify which users
+	// can access the transcoded files or the permissions the users have, or change the
+	// Amazon S3 storage class, omit <code>OutputBucket</code> and specify values for
+	// <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead.</p>
+	OutputBucket *string
 
 	// The ThumbnailConfig object specifies several values, including the Amazon S3
 	// bucket in which you want Elastic Transcoder to save thumbnail files, which users
@@ -226,44 +264,6 @@ type CreatePipelineInput struct {
 	// storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder
 	// to assign to the thumbnails that it stores in your Amazon S3 bucket.
 	ThumbnailConfig *types.PipelineOutputConfig
-
-	// The Amazon S3 bucket in which you want Elastic Transcoder to save the transcoded
-	// files. (Use this, or use ContentConfig:Bucket plus ThumbnailConfig:Bucket.)
-	// Specify this value when all of the following are true:
-	//
-	//     * You want to save
-	// transcoded files, thumbnails (if any), and playlists (if any) together in one
-	// bucket.
-	//
-	//     * You do not want to specify the users or groups who have access to
-	// the transcoded files, thumbnails, and playlists.
-	//
-	//     * You do not want to
-	// specify the permissions that Elastic Transcoder grants to the  files. </p>
-	// <important> <p>When Elastic Transcoder saves files in <code>OutputBucket</code>,
-	// it grants full control over the files only to the AWS account that owns the role
-	// that is specified by <code>Role</code>.</p> </important> </li> <li> <p>You want
-	// to associate the transcoded files and thumbnails with the Amazon S3 Standard
-	// storage class.</p> </li> </ul> <p>If you want to save transcoded files and
-	// playlists in one bucket and thumbnails in another bucket, specify which users
-	// can access the transcoded files or the permissions the users have, or change the
-	// Amazon S3 storage class, omit <code>OutputBucket</code> and specify values for
-	// <code>ContentConfig</code> and <code>ThumbnailConfig</code> instead.</p>
-	OutputBucket *string
-
-	// The Amazon S3 bucket in which you saved the media files that you want to
-	// transcode.
-	//
-	// This member is required.
-	InputBucket *string
-
-	// The AWS Key Management Service (AWS KMS) key that you want to use with this
-	// pipeline. If you use either s3 or s3-aws-kms as your Encryption:Mode, you don't
-	// need to provide a key with your job because a default key, known as an AWS-KMS
-	// key, is created for you automatically. You need to provide an AWS-KMS key only
-	// if you want to use a non-default AWS-KMS key, or if you are using an
-	// Encryption:Mode of aes-cbc-pkcs7, aes-ctr, or aes-gcm.
-	AwsKmsKeyArn *string
 }
 
 // When you create a pipeline, Elastic Transcoder returns the values that you

@@ -64,34 +64,34 @@ type ListSnapshotBlocksInput struct {
 	// This member is required.
 	SnapshotId *string
 
-	// The block index from which the list should start. The list in the response will
-	// start from this block index or the next valid block index in the snapshot.
-	StartingBlockIndex *int32
+	// The number of results to return.
+	MaxResults *int32
 
 	// The token to request the next page of results.
 	NextToken *string
 
-	// The number of results to return.
-	MaxResults *int32
+	// The block index from which the list should start. The list in the response will
+	// start from this block index or the next valid block index in the snapshot.
+	StartingBlockIndex *int32
 }
 
 type ListSnapshotBlocksOutput struct {
 
-	// The size of the volume in GB.
-	VolumeSize *int64
+	// The size of the block.
+	BlockSize *int32
+
+	// An array of objects containing information about the blocks.
+	Blocks []*types.Block
+
+	// The time when the BlockToken expires.
+	ExpiryTime *time.Time
 
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
 
-	// An array of objects containing information about the blocks.
-	Blocks []*types.Block
-
-	// The size of the block.
-	BlockSize *int32
-
-	// The time when the BlockToken expires.
-	ExpiryTime *time.Time
+	// The size of the volume in GB.
+	VolumeSize *int64
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

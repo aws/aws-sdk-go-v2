@@ -56,6 +56,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
+	// Channel latency mode. Default: LOW.
+	LatencyMode types.ChannelLatencyMode
+
 	// Channel name.
 	Name *string
 
@@ -78,9 +81,6 @@ type CreateChannelInput struct {
 	//
 	// Default: STANDARD.
 	Type types.ChannelType
-
-	// Channel latency mode. Default: LOW.
-	LatencyMode types.ChannelLatencyMode
 }
 
 type CreateChannelOutput struct {

@@ -72,15 +72,15 @@ type ResolveCustomerInput struct {
 // product code.
 type ResolveCustomerOutput struct {
 
-	// The product code is returned to confirm that the buyer is registering for your
-	// product. Subsequent BatchMeterUsage calls should be made using this product
-	// code.
-	ProductCode *string
-
 	// The CustomerIdentifier is used to identify an individual customer in your
 	// application. Calls to BatchMeterUsage require CustomerIdentifiers for each
 	// UsageRecord.
 	CustomerIdentifier *string
+
+	// The product code is returned to confirm that the buyer is registering for your
+	// product. Subsequent BatchMeterUsage calls should be made using this product
+	// code.
+	ProductCode *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

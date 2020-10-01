@@ -56,6 +56,11 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
+	// The IDs of the instances. You can specify up to MaxRecords IDs. If you omit this
+	// parameter, all Auto Scaling instances are described. If you specify an ID that
+	// does not exist, it is ignored with no error.
+	InstanceIds []*string
+
 	// The maximum number of items to return with this call. The default value is 50
 	// and the maximum value is 50.
 	MaxRecords *int32
@@ -63,11 +68,6 @@ type DescribeAutoScalingInstancesInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
-
-	// The IDs of the instances. You can specify up to MaxRecords IDs. If you omit this
-	// parameter, all Auto Scaling instances are described. If you specify an ID that
-	// does not exist, it is ignored with no error.
-	InstanceIds []*string
 }
 
 type DescribeAutoScalingInstancesOutput struct {

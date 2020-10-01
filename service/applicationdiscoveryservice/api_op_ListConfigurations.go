@@ -59,22 +59,6 @@ func (c *Client) ListConfigurations(ctx context.Context, params *ListConfigurati
 
 type ListConfigurationsInput struct {
 
-	// The total number of items to return. The maximum value is 100.
-	MaxResults *int32
-
-	// Certain filter criteria return output that can be sorted in ascending or
-	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action
-	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the AWS Application Discovery Service User Guide.
-	OrderBy []*types.OrderByElement
-
-	// Token to retrieve the next set of results. For example, if a previous call to
-	// ListConfigurations returned 100 items, but you set
-	// ListConfigurationsRequest$maxResults to 10, you received a set of 10 results
-	// along with a token. Use that token in this query to get the next set of 10.
-	NextToken *string
-
 	// A valid configuration identified by Application Discovery Service.
 	//
 	// This member is required.
@@ -87,6 +71,22 @@ type ListConfigurationsInput struct {
 	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
 	// in the AWS Application Discovery Service User Guide.
 	Filters []*types.Filter
+
+	// The total number of items to return. The maximum value is 100.
+	MaxResults *int32
+
+	// Token to retrieve the next set of results. For example, if a previous call to
+	// ListConfigurations returned 100 items, but you set
+	// ListConfigurationsRequest$maxResults to 10, you received a set of 10 results
+	// along with a token. Use that token in this query to get the next set of 10.
+	NextToken *string
+
+	// Certain filter criteria return output that can be sorted in ascending or
+	// descending order. For a list of output characteristics for each filter, see
+	// Using the ListConfigurations Action
+	// (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
+	// in the AWS Application Discovery Service User Guide.
+	OrderBy []*types.OrderByElement
 }
 
 type ListConfigurationsOutput struct {

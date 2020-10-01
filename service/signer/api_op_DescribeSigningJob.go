@@ -67,46 +67,46 @@ type DescribeSigningJobInput struct {
 
 type DescribeSigningJobOutput struct {
 
-	// The object that contains the name of your S3 bucket or your raw code.
-	Source *types.Source
+	// Date and time that the signing job was completed.
+	CompletedAt *time.Time
+
+	// Date and time that the signing job was created.
+	CreatedAt *time.Time
 
 	// The ID of the signing job on output.
 	JobId *string
 
-	// The Amazon Resource Name (ARN) of your code signing certificate.
-	SigningMaterial *types.SigningMaterial
+	// A list of any overrides that were applied to the signing operation.
+	Overrides *types.SigningPlatformOverrides
 
 	// The microcontroller platform to which your signed code image will be
 	// distributed.
 	PlatformId *string
 
-	// Status of the signing job.
-	Status types.SigningStatus
-
-	// Name of the S3 bucket where the signed code image is saved by code signing.
-	SignedObject *types.SignedObject
-
-	// String value that contains the status reason.
-	StatusReason *string
+	// The name of the profile that initiated the signing operation.
+	ProfileName *string
 
 	// The IAM principal that requested the signing job.
 	RequestedBy *string
 
-	// Date and time that the signing job was completed.
-	CompletedAt *time.Time
+	// Name of the S3 bucket where the signed code image is saved by code signing.
+	SignedObject *types.SignedObject
 
-	// A list of any overrides that were applied to the signing operation.
-	Overrides *types.SigningPlatformOverrides
+	// The Amazon Resource Name (ARN) of your code signing certificate.
+	SigningMaterial *types.SigningMaterial
 
 	// Map of user-assigned key-value pairs used during signing. These values contain
 	// any information that you specified for use in your signing job.
 	SigningParameters map[string]*string
 
-	// Date and time that the signing job was created.
-	CreatedAt *time.Time
+	// The object that contains the name of your S3 bucket or your raw code.
+	Source *types.Source
 
-	// The name of the profile that initiated the signing operation.
-	ProfileName *string
+	// Status of the signing job.
+	Status types.SigningStatus
+
+	// String value that contains the status reason.
+	StatusReason *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

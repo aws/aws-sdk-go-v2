@@ -65,6 +65,18 @@ func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminolog
 
 type ImportTerminologyInput struct {
 
+	// The merge strategy of the custom terminology being imported. Currently, only the
+	// OVERWRITE merge strategy is supported. In this case, the imported terminology
+	// will overwrite an existing terminology of the same name.
+	//
+	// This member is required.
+	MergeStrategy types.MergeStrategy
+
+	// The name of the custom terminology being imported.
+	//
+	// This member is required.
+	Name *string
+
 	// The terminology data for the custom terminology being imported.
 	//
 	// This member is required.
@@ -73,20 +85,8 @@ type ImportTerminologyInput struct {
 	// The description of the custom terminology being imported.
 	Description *string
 
-	// The name of the custom terminology being imported.
-	//
-	// This member is required.
-	Name *string
-
 	// The encryption key for the custom terminology being imported.
 	EncryptionKey *types.EncryptionKey
-
-	// The merge strategy of the custom terminology being imported. Currently, only the
-	// OVERWRITE merge strategy is supported. In this case, the imported terminology
-	// will overwrite an existing terminology of the same name.
-	//
-	// This member is required.
-	MergeStrategy types.MergeStrategy
 }
 
 type ImportTerminologyOutput struct {

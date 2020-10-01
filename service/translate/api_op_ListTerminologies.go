@@ -66,12 +66,12 @@ type ListTerminologiesInput struct {
 
 type ListTerminologiesOutput struct {
 
-	// The properties list of the custom terminologies returned on the list request.
-	TerminologyPropertiesList []*types.TerminologyProperties
-
 	// If the response to the ListTerminologies was truncated, the NextToken fetches
 	// the next group of custom terminologies.
 	NextToken *string
+
+	// The properties list of the custom terminologies returned on the list request.
+	TerminologyPropertiesList []*types.TerminologyProperties
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

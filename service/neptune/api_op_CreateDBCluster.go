@@ -63,22 +63,6 @@ func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInp
 
 type CreateDBClusterInput struct {
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
-	// database accounts, and otherwise false. Default: false
-	EnableIAMDatabaseAuthentication *bool
-
-	// The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this
-	// DB cluster is created as a Read Replica.
-	ReplicationSourceIdentifier *string
-
-	// The tags to assign to the new DB cluster.
-	Tags []*types.Tag
-
-	// The password for the master database user. This password can contain any
-	// printable ASCII character except "/", """, or "@". Constraints: Must contain
-	// from 8 to 41 characters.
-	MasterUserPassword *string
-
 	// The DB cluster identifier. This parameter is stored as a lowercase string.
 	// Constraints:
 	//
@@ -95,6 +79,16 @@ type CreateDBClusterInput struct {
 	// This member is required.
 	DBClusterIdentifier *string
 
+	// The name of the database engine to be used for this DB cluster. Valid Values:
+	// neptune
+	//
+	// This member is required.
+	Engine *string
+
+	// A list of EC2 Availability Zones that instances in the DB cluster can be created
+	// in.
+	AvailabilityZones []*string
+
 	// The number of days for which automated backups are retained. You must specify a
 	// minimum value of 1. Default: 1 Constraints:
 	//
@@ -102,7 +96,7 @@ type CreateDBClusterInput struct {
 	BackupRetentionPeriod *int32
 
 	// (Not supported by Neptune)
-	OptionGroupName *string
+	CharacterSetName *string
 
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default is used. Constraints:
@@ -111,39 +105,9 @@ type CreateDBClusterInput struct {
 	// must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
-	// The port number on which the instances in the DB cluster accept connections.
-	// Default: 8182
-	Port *int32
-
-	// The version number of the database engine to use. Currently, setting this
-	// parameter has no effect. Example: 1.0.1
-	EngineVersion *string
-
-	// Specifies whether the DB cluster is encrypted.
-	StorageEncrypted *bool
-
-	// (Not supported by Neptune)
-	CharacterSetName *string
-
 	// A DB subnet group to associate with this DB cluster. Constraints: Must match the
 	// name of an existing DBSubnetGroup. Must not be default. Example: mySubnetgroup
 	DBSubnetGroupName *string
-
-	// A list of EC2 VPC security groups to associate with this DB cluster.
-	VpcSecurityGroupIds []*string
-
-	// A list of EC2 Availability Zones that instances in the DB cluster can be created
-	// in.
-	AvailabilityZones []*string
-
-	// The name of the database engine to be used for this DB cluster. Valid Values:
-	// neptune
-	//
-	// This member is required.
-	Engine *string
-
-	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
-	EnableCloudwatchLogsExports []*string
 
 	// The name for your database of up to 64 alpha-numeric characters. If you do not
 	// provide a name, Amazon Neptune will not create a database in the DB cluster you
@@ -155,19 +119,16 @@ type CreateDBClusterInput struct {
 	// deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The name of the master user for the DB cluster. Constraints:
-	//
-	//     * Must be 1 to
-	// 16 letters or numbers.
-	//
-	//     * First character must be a letter.
-	//
-	//     * Cannot be
-	// a reserved word for the chosen database engine.
-	MasterUsername *string
+	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
+	EnableCloudwatchLogsExports []*string
 
-	// This parameter is not currently supported.
-	PreSignedUrl *string
+	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
+	// database accounts, and otherwise false. Default: false
+	EnableIAMDatabaseAuthentication *bool
+
+	// The version number of the database engine to use. Currently, setting this
+	// parameter has no effect. Example: 1.0.1
+	EngineVersion *string
 
 	// The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier
 	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
@@ -191,6 +152,32 @@ type CreateDBClusterInput struct {
 	// to a KMS key ID that is valid in the destination AWS Region. This key is used to
 	// encrypt the Read Replica in that AWS Region.
 	KmsKeyId *string
+
+	// The password for the master database user. This password can contain any
+	// printable ASCII character except "/", """, or "@". Constraints: Must contain
+	// from 8 to 41 characters.
+	MasterUserPassword *string
+
+	// The name of the master user for the DB cluster. Constraints:
+	//
+	//     * Must be 1 to
+	// 16 letters or numbers.
+	//
+	//     * First character must be a letter.
+	//
+	//     * Cannot be
+	// a reserved word for the chosen database engine.
+	MasterUsername *string
+
+	// (Not supported by Neptune)
+	OptionGroupName *string
+
+	// The port number on which the instances in the DB cluster accept connections.
+	// Default: 8182
+	Port *int32
+
+	// This parameter is not currently supported.
+	PreSignedUrl *string
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
@@ -221,6 +208,19 @@ type CreateDBClusterInput struct {
 	// in the Amazon Neptune User Guide. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
 	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
+
+	// The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this
+	// DB cluster is created as a Read Replica.
+	ReplicationSourceIdentifier *string
+
+	// Specifies whether the DB cluster is encrypted.
+	StorageEncrypted *bool
+
+	// The tags to assign to the new DB cluster.
+	Tags []*types.Tag
+
+	// A list of EC2 VPC security groups to associate with this DB cluster.
+	VpcSecurityGroupIds []*string
 }
 
 type CreateDBClusterOutput struct {

@@ -61,12 +61,10 @@ func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params 
 // Represents the input of an AuthorizeCacheSecurityGroupIngress operation.
 type AuthorizeCacheSecurityGroupIngressInput struct {
 
-	// The AWS account number of the Amazon EC2 security group owner. Note that this is
-	// not the same thing as an AWS access key ID - you must provide a valid AWS
-	// account number for this parameter.
+	// The cache security group that allows network ingress.
 	//
 	// This member is required.
-	EC2SecurityGroupOwnerId *string
+	CacheSecurityGroupName *string
 
 	// The Amazon EC2 security group to be authorized for ingress to the cache security
 	// group.
@@ -74,10 +72,12 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	// This member is required.
 	EC2SecurityGroupName *string
 
-	// The cache security group that allows network ingress.
+	// The AWS account number of the Amazon EC2 security group owner. Note that this is
+	// not the same thing as an AWS access key ID - you must provide a valid AWS
+	// account number for this parameter.
 	//
 	// This member is required.
-	CacheSecurityGroupName *string
+	EC2SecurityGroupOwnerId *string
 }
 
 type AuthorizeCacheSecurityGroupIngressOutput struct {

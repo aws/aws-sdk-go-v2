@@ -61,19 +61,6 @@ func (c *Client) DescribeConfigurationOptions(ctx context.Context, params *Descr
 // Result message containing a list of application version descriptions.
 type DescribeConfigurationOptionsInput struct {
 
-	// If specified, restricts the descriptions to only the specified options.
-	Options []*types.OptionSpecification
-
-	// The ARN of the custom platform.
-	PlatformArn *string
-
-	// The name of the configuration template whose configuration options you want to
-	// describe.
-	TemplateName *string
-
-	// The name of the solution stack whose configuration options you want to describe.
-	SolutionStackName *string
-
 	// The name of the application associated with the configuration template or
 	// environment. Only needed if you want to describe the configuration options
 	// associated with either the configuration template or environment.
@@ -81,19 +68,32 @@ type DescribeConfigurationOptionsInput struct {
 
 	// The name of the environment whose configuration options you want to describe.
 	EnvironmentName *string
+
+	// If specified, restricts the descriptions to only the specified options.
+	Options []*types.OptionSpecification
+
+	// The ARN of the custom platform.
+	PlatformArn *string
+
+	// The name of the solution stack whose configuration options you want to describe.
+	SolutionStackName *string
+
+	// The name of the configuration template whose configuration options you want to
+	// describe.
+	TemplateName *string
 }
 
 // Describes the settings for a specified configuration set.
 type DescribeConfigurationOptionsOutput struct {
-
-	// The name of the solution stack these configuration options belong to.
-	SolutionStackName *string
 
 	// A list of ConfigurationOptionDescription ().
 	Options []*types.ConfigurationOptionDescription
 
 	// The ARN of the platform version.
 	PlatformArn *string
+
+	// The name of the solution stack these configuration options belong to.
+	SolutionStackName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

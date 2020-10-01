@@ -66,42 +66,20 @@ type GetPatchBaselineInput struct {
 
 type GetPatchBaselineOutput struct {
 
-	// A set of global filters used to exclude patches from the baseline.
-	GlobalFilters *types.PatchFilterGroup
+	// A set of rules used to include patches in the baseline.
+	ApprovalRules *types.PatchRuleGroup
+
+	// A list of explicitly approved patches for the baseline.
+	ApprovedPatches []*string
 
 	// Returns the specified compliance severity level for approved patches in the
 	// patch baseline.
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 
-	// The date the patch baseline was last modified.
-	ModifiedDate *time.Time
-
-	// Patch groups included in the patch baseline.
-	PatchGroups []*string
-
-	// A list of explicitly approved patches for the baseline.
-	ApprovedPatches []*string
-
-	// The action specified to take on patches included in the RejectedPatches list. A
-	// patch can be allowed only if it is a dependency of another package, or blocked
-	// entirely along with packages that include it as a dependency.
-	RejectedPatchesAction types.PatchAction
-
-	// A set of rules used to include patches in the baseline.
-	ApprovalRules *types.PatchRuleGroup
-
-	// Information about the patches to use to update the instances, including target
-	// operating systems and source repositories. Applies to Linux instances only.
-	Sources []*types.PatchSource
-
-	// A list of explicitly rejected patches for the baseline.
-	RejectedPatches []*string
-
-	// The name of the patch baseline.
-	Name *string
-
-	// Returns the operating system specified for the patch baseline.
-	OperatingSystem types.OperatingSystem
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity *bool
 
 	// The ID of the retrieved patch baseline.
 	BaselineId *string
@@ -112,10 +90,32 @@ type GetPatchBaselineOutput struct {
 	// A description of the patch baseline.
 	Description *string
 
-	// Indicates whether the list of approved patches includes non-security updates
-	// that should be applied to the instances. The default value is 'false'. Applies
-	// to Linux instances only.
-	ApprovedPatchesEnableNonSecurity *bool
+	// A set of global filters used to exclude patches from the baseline.
+	GlobalFilters *types.PatchFilterGroup
+
+	// The date the patch baseline was last modified.
+	ModifiedDate *time.Time
+
+	// The name of the patch baseline.
+	Name *string
+
+	// Returns the operating system specified for the patch baseline.
+	OperatingSystem types.OperatingSystem
+
+	// Patch groups included in the patch baseline.
+	PatchGroups []*string
+
+	// A list of explicitly rejected patches for the baseline.
+	RejectedPatches []*string
+
+	// The action specified to take on patches included in the RejectedPatches list. A
+	// patch can be allowed only if it is a dependency of another package, or blocked
+	// entirely along with packages that include it as a dependency.
+	RejectedPatchesAction types.PatchAction
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []*types.PatchSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

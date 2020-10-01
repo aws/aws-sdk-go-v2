@@ -76,11 +76,6 @@ func (c *Client) CreateReservedInstancesListing(ctx context.Context, params *Cre
 // Contains the parameters for CreateReservedInstancesListing.
 type CreateReservedInstancesListingInput struct {
 
-	// The ID of the active Standard Reserved Instance.
-	//
-	// This member is required.
-	ReservedInstancesId *string
-
 	// Unique, case-sensitive identifier you provide to ensure idempotency of your
 	// listings. This helps avoid duplicate listings. For more information, see
 	// Ensuring Idempotency
@@ -89,12 +84,6 @@ type CreateReservedInstancesListingInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// A list specifying the price of the Standard Reserved Instance for each month
-	// remaining in the Reserved Instance term.
-	//
-	// This member is required.
-	PriceSchedules []*types.PriceScheduleSpecification
-
 	// The number of instances that are a part of a Reserved Instance account to be
 	// listed in the Reserved Instance Marketplace. This number should be less than or
 	// equal to the instance count associated with the Reserved Instance ID specified
@@ -102,6 +91,17 @@ type CreateReservedInstancesListingInput struct {
 	//
 	// This member is required.
 	InstanceCount *int32
+
+	// A list specifying the price of the Standard Reserved Instance for each month
+	// remaining in the Reserved Instance term.
+	//
+	// This member is required.
+	PriceSchedules []*types.PriceScheduleSpecification
+
+	// The ID of the active Standard Reserved Instance.
+	//
+	// This member is required.
+	ReservedInstancesId *string
 }
 
 // Contains the output of CreateReservedInstancesListing.

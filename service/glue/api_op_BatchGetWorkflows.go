@@ -73,11 +73,11 @@ type BatchGetWorkflowsInput struct {
 
 type BatchGetWorkflowsOutput struct {
 
-	// A list of workflow resource metadata.
-	Workflows []*types.Workflow
-
 	// A list of names of workflows not found.
 	MissingWorkflows []*string
+
+	// A list of workflow resource metadata.
+	Workflows []*types.Workflow
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

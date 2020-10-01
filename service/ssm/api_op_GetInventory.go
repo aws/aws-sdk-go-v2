@@ -57,22 +57,22 @@ func (c *Client) GetInventory(ctx context.Context, params *GetInventoryInput, op
 
 type GetInventoryInput struct {
 
-	// One or more filters. Use a filter to return a more specific list of results.
-	Filters []*types.InventoryFilter
-
-	// The token for the next set of items to return. (You received this token from a
-	// previous call.)
-	NextToken *string
-
 	// Returns counts of inventory types based on one or more expressions. For example,
 	// if you aggregate by using an expression that uses the
 	// AWS:InstanceInformation.PlatformType type, you can see a count of how many
 	// Windows and Linux instances exist in your inventoried fleet.
 	Aggregators []*types.InventoryAggregator
 
+	// One or more filters. Use a filter to return a more specific list of results.
+	Filters []*types.InventoryFilter
+
 	// The maximum number of items to return for this call. The call also returns a
 	// token that you can specify in a subsequent call to get the next set of results.
 	MaxResults *int32
+
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
+	NextToken *string
 
 	// The list of inventory item types to return.
 	ResultAttributes []*types.ResultAttribute

@@ -64,11 +64,10 @@ func (c *Client) AssociateRouteTable(ctx context.Context, params *AssociateRoute
 
 type AssociateRouteTableInput struct {
 
-	// The ID of the subnet.
-	SubnetId *string
-
-	// The ID of the internet gateway or virtual private gateway.
-	GatewayId *string
+	// The ID of the route table.
+	//
+	// This member is required.
+	RouteTableId *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -76,20 +75,21 @@ type AssociateRouteTableInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The ID of the route table.
-	//
-	// This member is required.
-	RouteTableId *string
+	// The ID of the internet gateway or virtual private gateway.
+	GatewayId *string
+
+	// The ID of the subnet.
+	SubnetId *string
 }
 
 type AssociateRouteTableOutput struct {
 
-	// The state of the association.
-	AssociationState *types.RouteTableAssociationState
-
 	// The route table association ID. This ID is required for disassociating the route
 	// table.
 	AssociationId *string
+
+	// The state of the association.
+	AssociationState *types.RouteTableAssociationState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

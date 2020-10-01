@@ -57,14 +57,14 @@ func (c *Client) UpdateDirectConnectGatewayAssociation(ctx context.Context, para
 
 type UpdateDirectConnectGatewayAssociationInput struct {
 
-	// The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
-	RemoveAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
+	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+	AddAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
 
 	// The ID of the Direct Connect gateway association.
 	AssociationId *string
 
-	// The Amazon VPC prefixes to advertise to the Direct Connect gateway.
-	AddAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
+	// The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
+	RemoveAllowedPrefixesToDirectConnectGateway []*types.RouteFilterPrefix
 }
 
 type UpdateDirectConnectGatewayAssociationOutput struct {

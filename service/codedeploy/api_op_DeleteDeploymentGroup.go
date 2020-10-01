@@ -58,16 +58,16 @@ func (c *Client) DeleteDeploymentGroup(ctx context.Context, params *DeleteDeploy
 // Represents the input of a DeleteDeploymentGroup operation.
 type DeleteDeploymentGroupInput struct {
 
-	// The name of a deployment group for the specified application.
-	//
-	// This member is required.
-	DeploymentGroupName *string
-
 	// The name of an AWS CodeDeploy application associated with the IAM user or AWS
 	// account.
 	//
 	// This member is required.
 	ApplicationName *string
+
+	// The name of a deployment group for the specified application.
+	//
+	// This member is required.
+	DeploymentGroupName *string
 }
 
 // Represents the output of a DeleteDeploymentGroup operation.

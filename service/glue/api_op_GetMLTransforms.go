@@ -61,11 +61,11 @@ func (c *Client) GetMLTransforms(ctx context.Context, params *GetMLTransformsInp
 
 type GetMLTransformsInput struct {
 
-	// The maximum number of results to return.
-	MaxResults *int32
-
 	// The filter transformation criteria.
 	Filter *types.TransformFilterCriteria
+
+	// The maximum number of results to return.
+	MaxResults *int32
 
 	// A paginated token to offset the results.
 	NextToken *string

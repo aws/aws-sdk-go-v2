@@ -64,9 +64,6 @@ type CancelJobInput struct {
 	// An optional comment string describing why the job was canceled.
 	Comment *string
 
-	// (Optional)A reason code string that explains why the job was canceled.
-	ReasonCode *string
-
 	// (Optional) If true job executions with status "IN_PROGRESS" and "QUEUED" are
 	// canceled, otherwise only job executions with status "QUEUED" are canceled. The
 	// default is false. Canceling a job which is "IN_PROGRESS", will cause a device
@@ -74,18 +71,21 @@ type CancelJobInput struct {
 	// caution and ensure that each device executing a job which is canceled is able to
 	// recover to a valid state.
 	Force *bool
+
+	// (Optional)A reason code string that explains why the job was canceled.
+	ReasonCode *string
 }
 
 type CancelJobOutput struct {
 
-	// The unique identifier you assigned to this job when it was created.
-	JobId *string
+	// A short text description of the job.
+	Description *string
 
 	// The job ARN.
 	JobArn *string
 
-	// A short text description of the job.
-	Description *string
+	// The unique identifier you assigned to this job when it was created.
+	JobId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

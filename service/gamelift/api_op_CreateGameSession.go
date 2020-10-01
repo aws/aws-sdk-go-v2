@@ -119,9 +119,10 @@ type CreateGameSessionInput struct {
 	// number of concurrent active game sessions one player can have.
 	CreatorId *string
 
-	// A descriptive label that is associated with a game session. Session names do not
-	// need to be unique.
-	Name *string
+	// A unique identifier for a fleet to create a game session in. You can use either
+	// the fleet ID or ARN value. Each request must reference either a fleet ID or
+	// alias ID, but not both.
+	FleetId *string
 
 	// Set of custom properties for a game session, formatted as key:value pairs. These
 	// properties are passed to a game server process in the GameSession () object with
@@ -142,11 +143,6 @@ type CreateGameSessionInput struct {
 	// arn:aws:gamelift:::gamesession//.)
 	GameSessionId *string
 
-	// A unique identifier for a fleet to create a game session in. You can use either
-	// the fleet ID or ARN value. Each request must reference either a fleet ID or
-	// alias ID, but not both.
-	FleetId *string
-
 	// Custom string that uniquely identifies a request for a new game session. Maximum
 	// token length is 48 characters. If provided, this string is included in the new
 	// game session's ID. (A game session ARN has the following format:
@@ -154,6 +150,10 @@ type CreateGameSessionInput struct {
 	// after a game session has ended; game session objects are retained for this time
 	// period and then deleted.
 	IdempotencyToken *string
+
+	// A descriptive label that is associated with a game session. Session names do not
+	// need to be unique.
+	Name *string
 }
 
 // Represents the returned data in response to a request action.

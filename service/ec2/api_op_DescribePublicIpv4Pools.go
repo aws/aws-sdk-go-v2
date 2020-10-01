@@ -56,9 +56,6 @@ func (c *Client) DescribePublicIpv4Pools(ctx context.Context, params *DescribePu
 
 type DescribePublicIpv4PoolsInput struct {
 
-	// The IDs of the address pools.
-	PoolIds []*string
-
 	// One or more filters.
 	//
 	//     * tag: - The key/value combination of a tag assigned
@@ -78,16 +75,19 @@ type DescribePublicIpv4PoolsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	// The IDs of the address pools.
+	PoolIds []*string
 }
 
 type DescribePublicIpv4PoolsOutput struct {
 
-	// Information about the address pools.
-	PublicIpv4Pools []*types.PublicIpv4Pool
-
 	// The token to use to retrieve the next page of results. This value is null when
 	// there are no more results to return.
 	NextToken *string
+
+	// Information about the address pools.
+	PublicIpv4Pools []*types.PublicIpv4Pool
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

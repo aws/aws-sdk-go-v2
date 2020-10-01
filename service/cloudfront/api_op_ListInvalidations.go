@@ -58,8 +58,10 @@ func (c *Client) ListInvalidations(ctx context.Context, params *ListInvalidation
 // The request to list invalidations.
 type ListInvalidationsInput struct {
 
-	// The maximum number of invalidation batches that you want in the response body.
-	MaxItems *string
+	// The distribution's ID.
+	//
+	// This member is required.
+	DistributionId *string
 
 	// Use this parameter when paginating results to indicate where to begin in your
 	// list of invalidation batches. Because the results are returned in decreasing
@@ -70,10 +72,8 @@ type ListInvalidationsInput struct {
 	// that page.
 	Marker *string
 
-	// The distribution's ID.
-	//
-	// This member is required.
-	DistributionId *string
+	// The maximum number of invalidation batches that you want in the response body.
+	MaxItems *string
 }
 
 // The returned result of the corresponding request.

@@ -60,11 +60,6 @@ func (c *Client) SetEndpointAttributes(ctx context.Context, params *SetEndpointA
 // Input for SetEndpointAttributes action.
 type SetEndpointAttributesInput struct {
 
-	// EndpointArn used for SetEndpointAttributes action.
-	//
-	// This member is required.
-	EndpointArn *string
-
 	// A map of the endpoint attributes. Attributes in this map include the
 	// following:
 	//
@@ -84,6 +79,11 @@ type SetEndpointAttributesInput struct {
 	//
 	// This member is required.
 	Attributes map[string]*string
+
+	// EndpointArn used for SetEndpointAttributes action.
+	//
+	// This member is required.
+	EndpointArn *string
 }
 
 type SetEndpointAttributesOutput struct {

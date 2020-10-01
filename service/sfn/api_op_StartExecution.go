@@ -61,6 +61,16 @@ func (c *Client) StartExecution(ctx context.Context, params *StartExecutionInput
 
 type StartExecutionInput struct {
 
+	// The Amazon Resource Name (ARN) of the state machine to execute.
+	//
+	// This member is required.
+	StateMachineArn *string
+
+	// The string that contains the JSON input data for the execution, for example:
+	// "input": "{\"first_name\" : \"test\"}" If you don't include any JSON input data,
+	// you still must include the two braces, for example: "input": "{}"
+	Input *string
+
 	// The name of the execution. This name must be unique for your AWS account,
 	// region, and state machine for 90 days. For more information, see  Limits Related
 	// to State Machine Executions
@@ -83,29 +93,19 @@ type StartExecutionInput struct {
 	// To enable logging with CloudWatch Logs, the name should only
 	// contain 0-9, A-Z, a-z, - and _.
 	Name *string
-
-	// The Amazon Resource Name (ARN) of the state machine to execute.
-	//
-	// This member is required.
-	StateMachineArn *string
-
-	// The string that contains the JSON input data for the execution, for example:
-	// "input": "{\"first_name\" : \"test\"}" If you don't include any JSON input data,
-	// you still must include the two braces, for example: "input": "{}"
-	Input *string
 }
 
 type StartExecutionOutput struct {
-
-	// The date the execution is started.
-	//
-	// This member is required.
-	StartDate *time.Time
 
 	// The Amazon Resource Name (ARN) that id entifies the execution.
 	//
 	// This member is required.
 	ExecutionArn *string
+
+	// The date the execution is started.
+	//
+	// This member is required.
+	StartDate *time.Time
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

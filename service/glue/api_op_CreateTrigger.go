@@ -57,12 +57,27 @@ func (c *Client) CreateTrigger(ctx context.Context, params *CreateTriggerInput, 
 
 type CreateTriggerInput struct {
 
+	// The actions initiated by this trigger when it fires.
+	//
+	// This member is required.
+	Actions []*types.Action
+
+	// The name of the trigger.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the new trigger.
+	//
+	// This member is required.
+	Type types.TriggerType
+
 	// A description of the new trigger.
 	Description *string
 
-	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is
-	// not supported for ON_DEMAND triggers.
-	StartOnCreation *bool
+	// A predicate to specify when the new trigger should fire. This field is required
+	// when the trigger type is CONDITIONAL.
+	Predicate *types.Predicate
 
 	// A cron expression used to specify the schedule (see Time-Based Schedules for
 	// Jobs and Crawlers
@@ -71,18 +86,9 @@ type CreateTriggerInput struct {
 	// 12 * * ? *). This field is required when the trigger type is SCHEDULED.
 	Schedule *string
 
-	// The name of the workflow associated with the trigger.
-	WorkflowName *string
-
-	// The actions initiated by this trigger when it fires.
-	//
-	// This member is required.
-	Actions []*types.Action
-
-	// The type of the new trigger.
-	//
-	// This member is required.
-	Type types.TriggerType
+	// Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is
+	// not supported for ON_DEMAND triggers.
+	StartOnCreation *bool
 
 	// The tags to use with this trigger. You may use tags to limit access to the
 	// trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue
@@ -90,14 +96,8 @@ type CreateTriggerInput struct {
 	// guide.
 	Tags map[string]*string
 
-	// The name of the trigger.
-	//
-	// This member is required.
-	Name *string
-
-	// A predicate to specify when the new trigger should fire. This field is required
-	// when the trigger type is CONDITIONAL.
-	Predicate *types.Predicate
+	// The name of the workflow associated with the trigger.
+	WorkflowName *string
 }
 
 type CreateTriggerOutput struct {

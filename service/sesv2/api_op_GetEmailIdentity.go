@@ -69,12 +69,8 @@ type GetEmailIdentityInput struct {
 // Details about an email identity.
 type GetEmailIdentityOutput struct {
 
-	// The email identity type.
-	IdentityType types.IdentityType
-
-	// An object that contains information about the Mail-From attributes for the email
-	// identity.
-	MailFromAttributes *types.MailFromAttributes
+	// An object that contains information about the DKIM attributes for the identity.
+	DkimAttributes *types.DkimAttributes
 
 	// The feedback forwarding configuration for the identity. If the value is true,
 	// you receive email notifications when bounce or complaint events occur. These
@@ -86,15 +82,19 @@ type GetEmailIdentityOutput struct {
 	// this setting is disabled).
 	FeedbackForwardingStatus *bool
 
-	// An array of objects that define the tags (keys and values) that are associated
-	// with the email identity.
-	Tags []*types.Tag
+	// The email identity type.
+	IdentityType types.IdentityType
+
+	// An object that contains information about the Mail-From attributes for the email
+	// identity.
+	MailFromAttributes *types.MailFromAttributes
 
 	// A map of policy names to policies.
 	Policies map[string]*string
 
-	// An object that contains information about the DKIM attributes for the identity.
-	DkimAttributes *types.DkimAttributes
+	// An array of objects that define the tags (keys and values) that are associated
+	// with the email identity.
+	Tags []*types.Tag
 
 	// Specifies whether or not the identity is verified. You can only send email from
 	// verified email addresses or domains. For more information about verifying

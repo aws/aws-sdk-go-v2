@@ -64,16 +64,6 @@ func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, para
 
 type ExportAutoScalingGroupRecommendationsInput struct {
 
-	// Indicates whether to include recommendations for resources in all member
-	// accounts of the organization if your account is the master account of an
-	// organization. The member accounts must also be opted in to Compute Optimizer.
-	// Recommendations for member accounts of the organization are not included in the
-	// export file if this parameter is omitted. This parameter cannot be specified
-	// together with the account IDs parameter. The parameters are mutually exclusive.
-	// Recommendations for member accounts are not included in the export if this
-	// parameter, or the account IDs parameter, is omitted.
-	IncludeMemberAccounts *bool
-
 	// An object to specify the destination Amazon Simple Storage Service (Amazon S3)
 	// bucket name and key prefix for the export job. You must create the destination
 	// Amazon S3 bucket for your recommendations export before you create the export
@@ -89,13 +79,6 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The format of the export file. The only export file format currently supported
-	// is Csv.
-	FileFormat types.FileFormat
-
-	// The recommendations data to include in the export file.
-	FieldsToExport []types.ExportableAutoScalingGroupField
-
 	// The IDs of the AWS accounts for which to export Auto Scaling group
 	// recommendations. If your account is the master account of an organization, use
 	// this parameter to specify the member accounts for which you want to export
@@ -106,21 +89,38 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// multiple account IDs per request.
 	AccountIds []*string
 
+	// The recommendations data to include in the export file.
+	FieldsToExport []types.ExportableAutoScalingGroupField
+
+	// The format of the export file. The only export file format currently supported
+	// is Csv.
+	FileFormat types.FileFormat
+
 	// An array of objects that describe a filter to export a more specific set of Auto
 	// Scaling group recommendations.
 	Filters []*types.Filter
+
+	// Indicates whether to include recommendations for resources in all member
+	// accounts of the organization if your account is the master account of an
+	// organization. The member accounts must also be opted in to Compute Optimizer.
+	// Recommendations for member accounts of the organization are not included in the
+	// export file if this parameter is omitted. This parameter cannot be specified
+	// together with the account IDs parameter. The parameters are mutually exclusive.
+	// Recommendations for member accounts are not included in the export if this
+	// parameter, or the account IDs parameter, is omitted.
+	IncludeMemberAccounts *bool
 }
 
 type ExportAutoScalingGroupRecommendationsOutput struct {
-
-	// An object that describes the destination Amazon S3 bucket of a recommendations
-	// export file.
-	S3Destination *types.S3Destination
 
 	// The identification number of the export job. Use the
 	// DescribeRecommendationExportJobs action, and specify the job ID to view the
 	// status of an export job.
 	JobId *string
+
+	// An object that describes the destination Amazon S3 bucket of a recommendations
+	// export file.
+	S3Destination *types.S3Destination
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

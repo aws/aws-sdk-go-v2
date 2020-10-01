@@ -65,9 +65,6 @@ func (c *Client) StartSession(ctx context.Context, params *StartSessionInput, op
 
 type StartSessionInput struct {
 
-	// Reserved for future use.
-	Parameters map[string][]*string
-
 	// The instance to connect to for the session.
 	//
 	// This member is required.
@@ -79,13 +76,15 @@ type StartSessionInput struct {
 	// session. If no document name is provided, a shell to the instance is launched by
 	// default.
 	DocumentName *string
+
+	// Reserved for future use.
+	Parameters map[string][]*string
 }
 
 type StartSessionOutput struct {
 
-	// An encrypted token value containing session and caller information. Used to
-	// authenticate the connection to the instance.
-	TokenValue *string
+	// The ID of the session.
+	SessionId *string
 
 	// A URL back to SSM Agent on the instance that the Session Manager client uses to
 	// send commands and receive output from the instance. Format:
@@ -98,8 +97,9 @@ type StartSessionOutput struct {
 	// session, such as 1a2b3c4dEXAMPLE.
 	StreamUrl *string
 
-	// The ID of the session.
-	SessionId *string
+	// An encrypted token value containing session and caller information. Used to
+	// authenticate the connection to the instance.
+	TokenValue *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -58,13 +58,13 @@ func (c *Client) ListFlowExecutionMessages(ctx context.Context, params *ListFlow
 
 type ListFlowExecutionMessagesInput struct {
 
-	// The maximum number of results to return in the response.
-	MaxResults *int32
-
 	// The ID of the flow execution.
 	//
 	// This member is required.
 	FlowExecutionId *string
+
+	// The maximum number of results to return in the response.
+	MaxResults *int32
 
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.

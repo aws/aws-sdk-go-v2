@@ -58,9 +58,11 @@ func (c *Client) ListObjectChildren(ctx context.Context, params *ListObjectChild
 
 type ListObjectChildrenInput struct {
 
-	// Represents the manner and timing in which the successful write or update of an
-	// object is reflected in a subsequent read operation of that same object.
-	ConsistencyLevel types.ConsistencyLevel
+	// The Amazon Resource Name (ARN) that is associated with the Directory () where
+	// the object resides. For more information, see arns ().
+	//
+	// This member is required.
+	DirectoryArn *string
 
 	// The reference that identifies the object for which child objects are being
 	// listed.
@@ -68,28 +70,26 @@ type ListObjectChildrenInput struct {
 	// This member is required.
 	ObjectReference *types.ObjectReference
 
+	// Represents the manner and timing in which the successful write or update of an
+	// object is reflected in a subsequent read operation of that same object.
+	ConsistencyLevel types.ConsistencyLevel
+
 	// The maximum number of items to be retrieved in a single call. This is an
 	// approximate number.
 	MaxResults *int32
 
 	// The pagination token.
 	NextToken *string
-
-	// The Amazon Resource Name (ARN) that is associated with the Directory () where
-	// the object resides. For more information, see arns ().
-	//
-	// This member is required.
-	DirectoryArn *string
 }
 
 type ListObjectChildrenOutput struct {
 
-	// The pagination token.
-	NextToken *string
-
 	// Children structure, which is a map with key as the LinkName and ObjectIdentifier
 	// as the value.
 	Children map[string]*string
+
+	// The pagination token.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

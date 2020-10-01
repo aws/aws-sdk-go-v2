@@ -57,6 +57,11 @@ func (c *Client) ListUsers(ctx context.Context, params *ListUsersInput, optFns .
 
 type ListUsersInput struct {
 
+	// The unique ID that Amazon MQ generates for the broker.
+	//
+	// This member is required.
+	BrokerId *string
+
 	// The maximum number of ActiveMQ users that can be returned per page (20 by
 	// default). This value must be an integer from 5 to 100.
 	MaxResults *int32
@@ -64,20 +69,12 @@ type ListUsersInput struct {
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
-
-	// The unique ID that Amazon MQ generates for the broker.
-	//
-	// This member is required.
-	BrokerId *string
 }
 
 type ListUsersOutput struct {
 
 	// Required. The unique ID that Amazon MQ generates for the broker.
 	BrokerId *string
-
-	// Required. The list of all ActiveMQ usernames for the specified broker.
-	Users []*types.UserSummary
 
 	// Required. The maximum number of ActiveMQ users that can be returned per page (20
 	// by default). This value must be an integer from 5 to 100.
@@ -86,6 +83,9 @@ type ListUsersOutput struct {
 	// The token that specifies the next page of results Amazon MQ should return. To
 	// request the first page, leave nextToken empty.
 	NextToken *string
+
+	// Required. The list of all ActiveMQ usernames for the specified broker.
+	Users []*types.UserSummary
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
