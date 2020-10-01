@@ -1,0 +1,9 @@
+{
+ "ID": "service.internal.accept-encoding-feature-1601512463315041000",
+ "SchemaVersion": 1,
+ "Module": "service/internal/accept-encoding",
+ "Type": "feature",
+ "Description": "preview refresh",
+ "MinVersion": "",
+ "AffectedModules": null
+}
