@@ -21,3 +21,4 @@ software.amazon.smithy.aws.go.codegen.customization.BackfillS3ObjectSizeMemberSh
 software.amazon.smithy.aws.go.codegen.customization.MachineLearningCustomizations
 software.amazon.smithy.aws.go.codegen.customization.S3AcceptEncodingGzip
 software.amazon.smithy.aws.go.codegen.customization.KinesisCustomizations
+software.amazon.smithy.aws.go.codegen.customization.S3ErrorWith200Status
