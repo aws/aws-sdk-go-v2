@@ -1,3 +1,12 @@
+# Release 2020-09-30
+## Service Client Highlights
+* Service clients have been bumped to `v0.26.0` simplify the documentation experience when using [pkg.go.dev](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2).
+## Core SDK Highlights
+* SDK core module released at `v0.26.0`
+* `config` module released at `v0.1.1`
+* `credentials` module released at `v0.1.1`
+* `ec2imds` module released at `v0.1.1`
+
 # Release 2020-09-28
 ## Announcements
 We’re happy to share the updated clients for the v0.25.0 preview version of the AWS SDK for Go V2.

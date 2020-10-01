@@ -1,0 +1,1239 @@
+{
+ "ID": "2020-09-30",
+ "SchemaVersion": 1,
+ "VersionBumps": {
+  "/": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "config": {
+   "From": "v0.1.0",
+   "To": "v0.1.1"
+  },
+  "credentials": {
+   "From": "v0.1.0",
+   "To": "v0.1.1"
+  },
+  "ec2imds": {
+   "From": "v0.1.0",
+   "To": "v0.1.1"
+  },
+  "internal/protocoltest/awsrestjson": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/protocoltest/ec2query": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/protocoltest/jsonrpc": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/protocoltest/jsonrpc10": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/protocoltest/query": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/protocoltest/restxml": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/repotools": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "internal/repotools/changes": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "service/accessanalyzer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/acm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/acmpca": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/alexaforbusiness": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/amplify": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/apigateway": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/apigatewaymanagementapi": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/apigatewayv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/appconfig": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/applicationautoscaling": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/applicationdiscoveryservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/applicationinsights": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/appmesh": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/appstream": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/appsync": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/athena": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/autoscaling": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/autoscalingplans": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/backup": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/batch": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/braket": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/budgets": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/chime": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloud9": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/clouddirectory": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudformation": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudfront": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudhsm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudhsmv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudsearch": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudsearchdomain": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudtrail": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudwatch": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudwatchevents": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cloudwatchlogs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codeartifact": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codebuild": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codecommit": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codedeploy": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codeguruprofiler": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codegurureviewer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codepipeline": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codestar": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codestarconnections": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/codestarnotifications": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cognitoidentity": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cognitoidentityprovider": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/cognitosync": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/comprehend": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/comprehendmedical": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/computeoptimizer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/configservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/connect": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/connectparticipant": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/costandusagereportservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/costexplorer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/databasemigrationservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/dataexchange": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/datapipeline": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/datasync": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/dax": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/detective": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/devicefarm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/directconnect": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/directoryservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/dlm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/docdb": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/dynamodb": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/dynamodbstreams": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ebs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ec2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ec2instanceconnect": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ecr": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ecs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/efs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/eks": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticache": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticbeanstalk": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticinference": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticloadbalancing": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticloadbalancingv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elasticsearchservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/elastictranscoder": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/emr": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/eventbridge": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/firehose": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/fms": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/forecast": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/forecastquery": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/frauddetector": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/fsx": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/gamelift": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/glacier": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/globalaccelerator": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/glue": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/greengrass": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/groundstation": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/guardduty": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/health": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/honeycode": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iam": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/imagebuilder": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/inspector": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/internal/accept-encoding": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "service/internal/benchmark": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "service/internal/integrationtest": {
+   "From": "",
+   "To": "v0.1.0"
+  },
+  "service/internal/s3shared": {
+   "From": "v0.1.0",
+   "To": "v0.1.1"
+  },
+  "service/iot": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iot1clickdevicesservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iot1clickprojects": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotanalytics": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotdataplane": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotevents": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ioteventsdata": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotjobsdataplane": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotsecuretunneling": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotsitewise": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/iotthingsgraph": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ivs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kafka": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kendra": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesis": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisanalytics": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisanalyticsv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisvideo": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisvideoarchivedmedia": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisvideomedia": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kinesisvideosignaling": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/kms": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/lakeformation": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/lambda": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/lexmodelbuildingservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/lexruntimeservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/licensemanager": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/lightsail": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/machinelearning": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/macie": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/macie2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/managedblockchain": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/marketplacecatalog": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/marketplacecommerceanalytics": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/marketplaceentitlementservice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/marketplacemetering": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediaconnect": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediaconvert": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/medialive": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediapackage": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediapackagevod": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediastore": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediastoredata": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mediatailor": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/migrationhub": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/migrationhubconfig": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mobile": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mq": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/mturk": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/neptune": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/networkmanager": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/opsworks": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/opsworkscm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/organizations": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/outposts": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/personalize": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/personalizeevents": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/personalizeruntime": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/pi": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/pinpoint": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/pinpointemail": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/pinpointsmsvoice": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/polly": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/pricing": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/qldb": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/qldbsession": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/quicksight": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ram": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/rds": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/rdsdata": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/redshift": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/rekognition": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/resourcegroups": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/resourcegroupstaggingapi": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/robomaker": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/route53": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/route53domains": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/route53resolver": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/s3": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/s3/internal/configtesting": {
+   "From": "v0.1.0",
+   "To": "v0.1.1"
+  },
+  "service/s3control": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sagemaker": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sagemakera2iruntime": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sagemakerruntime": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/savingsplans": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/schemas": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/secretsmanager": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/securityhub": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/serverlessapplicationrepository": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/servicecatalog": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/servicediscovery": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/servicequotas": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ses": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sesv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sfn": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/shield": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/signer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sms": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/snowball": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sns": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sqs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ssm": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sso": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/ssooidc": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/storagegateway": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/sts": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/support": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/swf": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/synthetics": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/textract": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/transcribe": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/transfer": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/translate": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/waf": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/wafregional": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/wafv2": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/workdocs": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/worklink": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/workmail": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/workmailmessageflow": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/workspaces": {
+   "From": "",
+   "To": "v0.26.0"
+  },
+  "service/xray": {
+   "From": "",
+   "To": "v0.26.0"
+  }
+ },
+ "Changes": [
+  {
+   "ID": "sdk-feature-1601512515295528000",
+   "SchemaVersion": 1,
+   "Module": "/",
+   "Type": "feature",
+   "Description": "preview refresh",
+   "MinVersion": "",
+   "AffectedModules": null
+  },
+  {
+   "ID": "service.internal.accept-encoding-feature-1601512463315041000",
+   "SchemaVersion": 1,
+   "Module": "service/internal/accept-encoding",
+   "Type": "feature",
+   "Description": "preview refresh",
+   "MinVersion": "",
+   "AffectedModules": null
+  },
+  {
+   "ID": "service.wildcard-feature-1601512453703868000",
+   "SchemaVersion": 1,
+   "Module": "service/...",
+   "Type": "feature",
+   "Description": "preview refresh",
+   "MinVersion": "v0.26.0",
+   "AffectedModules": [
+    "service/accessanalyzer",
+    "service/acm",
+    "service/acmpca",
+    "service/alexaforbusiness",
+    "service/amplify",
+    "service/apigateway",
+    "service/apigatewaymanagementapi",
+    "service/apigatewayv2",
+    "service/appconfig",
+    "service/applicationautoscaling",
+    "service/applicationdiscoveryservice",
+    "service/applicationinsights",
+    "service/appmesh",
+    "service/appstream",
+    "service/appsync",
+    "service/athena",
+    "service/autoscaling",
+    "service/autoscalingplans",
+    "service/backup",
+    "service/batch",
+    "service/braket",
+    "service/budgets",
+    "service/chime",
+    "service/cloud9",
+    "service/clouddirectory",
+    "service/cloudformation",
+    "service/cloudfront",
+    "service/cloudhsm",
+    "service/cloudhsmv2",
+    "service/cloudsearch",
+    "service/cloudsearchdomain",
+    "service/cloudtrail",
+    "service/cloudwatch",
+    "service/cloudwatchevents",
+    "service/cloudwatchlogs",
+    "service/codeartifact",
+    "service/codebuild",
+    "service/codecommit",
+    "service/codedeploy",
+    "service/codeguruprofiler",
+    "service/codegurureviewer",
+    "service/codepipeline",
+    "service/codestar",
+    "service/codestarconnections",
+    "service/codestarnotifications",
+    "service/cognitoidentity",
+    "service/cognitoidentityprovider",
+    "service/cognitosync",
+    "service/comprehend",
+    "service/comprehendmedical",
+    "service/computeoptimizer",
+    "service/configservice",
+    "service/connect",
+    "service/connectparticipant",
+    "service/costandusagereportservice",
+    "service/costexplorer",
+    "service/databasemigrationservice",
+    "service/dataexchange",
+    "service/datapipeline",
+    "service/datasync",
+    "service/dax",
+    "service/detective",
+    "service/devicefarm",
+    "service/directconnect",
+    "service/directoryservice",
+    "service/dlm",
+    "service/docdb",
+    "service/dynamodb",
+    "service/dynamodbstreams",
+    "service/ebs",
+    "service/ec2",
+    "service/ec2instanceconnect",
+    "service/ecr",
+    "service/ecs",
+    "service/efs",
+    "service/eks",
+    "service/elasticache",
+    "service/elasticbeanstalk",
+    "service/elasticinference",
+    "service/elasticloadbalancing",
+    "service/elasticloadbalancingv2",
+    "service/elasticsearchservice",
+    "service/elastictranscoder",
+    "service/emr",
+    "service/eventbridge",
+    "service/firehose",
+    "service/fms",
+    "service/forecast",
+    "service/forecastquery",
+    "service/frauddetector",
+    "service/fsx",
+    "service/gamelift",
+    "service/glacier",
+    "service/globalaccelerator",
+    "service/glue",
+    "service/greengrass",
+    "service/groundstation",
+    "service/guardduty",
+    "service/health",
+    "service/honeycode",
+    "service/iam",
+    "service/imagebuilder",
+    "service/inspector",
+    "service/iot",
+    "service/iot1clickdevicesservice",
+    "service/iot1clickprojects",
+    "service/iotanalytics",
+    "service/iotdataplane",
+    "service/iotevents",
+    "service/ioteventsdata",
+    "service/iotjobsdataplane",
+    "service/iotsecuretunneling",
+    "service/iotsitewise",
+    "service/iotthingsgraph",
+    "service/ivs",
+    "service/kafka",
+    "service/kendra",
+    "service/kinesis",
+    "service/kinesisanalytics",
+    "service/kinesisanalyticsv2",
+    "service/kinesisvideo",
+    "service/kinesisvideoarchivedmedia",
+    "service/kinesisvideomedia",
+    "service/kinesisvideosignaling",
+    "service/kms",
+    "service/lakeformation",
+    "service/lambda",
+    "service/lexmodelbuildingservice",
+    "service/lexruntimeservice",
+    "service/licensemanager",
+    "service/lightsail",
+    "service/machinelearning",
+    "service/macie",
+    "service/macie2",
+    "service/managedblockchain",
+    "service/marketplacecatalog",
+    "service/marketplacecommerceanalytics",
+    "service/marketplaceentitlementservice",
+    "service/marketplacemetering",
+    "service/mediaconnect",
+    "service/mediaconvert",
+    "service/medialive",
+    "service/mediapackage",
+    "service/mediapackagevod",
+    "service/mediastore",
+    "service/mediastoredata",
+    "service/mediatailor",
+    "service/migrationhub",
+    "service/migrationhubconfig",
+    "service/mobile",
+    "service/mq",
+    "service/mturk",
+    "service/neptune",
+    "service/networkmanager",
+    "service/opsworks",
+    "service/opsworkscm",
+    "service/organizations",
+    "service/outposts",
+    "service/personalize",
+    "service/personalizeevents",
+    "service/personalizeruntime",
+    "service/pi",
+    "service/pinpoint",
+    "service/pinpointemail",
+    "service/pinpointsmsvoice",
+    "service/polly",
+    "service/pricing",
+    "service/qldb",
+    "service/qldbsession",
+    "service/quicksight",
+    "service/ram",
+    "service/rds",
+    "service/rdsdata",
+    "service/redshift",
+    "service/rekognition",
+    "service/resourcegroups",
+    "service/resourcegroupstaggingapi",
+    "service/robomaker",
+    "service/route53",
+    "service/route53domains",
+    "service/route53resolver",
+    "service/s3",
+    "service/s3control",
+    "service/sagemaker",
+    "service/sagemakera2iruntime",
+    "service/sagemakerruntime",
+    "service/savingsplans",
+    "service/schemas",
+    "service/secretsmanager",
+    "service/securityhub",
+    "service/serverlessapplicationrepository",
+    "service/servicecatalog",
+    "service/servicediscovery",
+    "service/servicequotas",
+    "service/ses",
+    "service/sesv2",
+    "service/sfn",
+    "service/shield",
+    "service/signer",
+    "service/sms",
+    "service/snowball",
+    "service/sns",
+    "service/sqs",
+    "service/ssm",
+    "service/sso",
+    "service/ssooidc",
+    "service/storagegateway",
+    "service/sts",
+    "service/support",
+    "service/swf",
+    "service/synthetics",
+    "service/textract",
+    "service/transcribe",
+    "service/transfer",
+    "service/translate",
+    "service/waf",
+    "service/wafregional",
+    "service/wafv2",
+    "service/workdocs",
+    "service/worklink",
+    "service/workmail",
+    "service/workmailmessageflow",
+    "service/workspaces",
+    "service/xray"
+   ]
+  },
+  {
+   "ID": "wildcard-dependency-1601512669726770000",
+   "SchemaVersion": 1,
+   "Module": "...",
+   "Type": "dependency",
+   "Description": "Updated SDK dependencies to their latest versions.",
+   "MinVersion": "",
+   "AffectedModules": [
+    "service/s3/internal/configtesting",
+    "credentials",
+    "service/internal/s3shared",
+    "ec2imds",
+    "config"
+   ]
+  }
+ ]
+}

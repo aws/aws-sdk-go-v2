@@ -1,3 +1,2279 @@
 {
- "SchemaVersion": 1
+ "SchemaVersion": 1,
+ "ModuleVersions": {
+  "/": {
+   "Module": "/",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:8m5Fy4DUskMDLF0SpgpIZcRvWsHHSVz1bZvyhOwG48s="
+  },
+  "config": {
+   "Module": "config",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/config",
+   "Version": "v0.1.1",
+   "ModuleHash": "h1:1eut2lnCnV08Eh6l91O2SDZTIKVWIcjQ8EzBuZbvgn8="
+  },
+  "credentials": {
+   "Module": "credentials",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/credentials",
+   "Version": "v0.1.1",
+   "ModuleHash": "h1:ctnE72INyoYuya2vVWMUDayFFP9M/9TmlBcKxhSdLyE="
+  },
+  "ec2imds": {
+   "Module": "ec2imds",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/ec2imds",
+   "Version": "v0.1.1",
+   "ModuleHash": "h1:tIrKTIo2E7f1MLHpZ5qGzYpLKhjCqlErSTQbIOjCK1U="
+  },
+  "internal/protocoltest/awsrestjson": {
+   "Module": "internal/protocoltest/awsrestjson",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:GZ1kKfI5I3/+GVNmllRN/GqVOO/Sg7Dx2bC9Qez9Kik="
+  },
+  "internal/protocoltest/ec2query": {
+   "Module": "internal/protocoltest/ec2query",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:1jSLMheZDL/skiJx7Xh7N2ma8TarcVFSVXwnA+xIYZE="
+  },
+  "internal/protocoltest/jsonrpc": {
+   "Module": "internal/protocoltest/jsonrpc",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:iZe2LkJulx5HFRtFJOg4Ja9dMLLJ0hoZ9qoR4WOhK2g="
+  },
+  "internal/protocoltest/jsonrpc10": {
+   "Module": "internal/protocoltest/jsonrpc10",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:Z4XxPd6a2O7l1BoIoJzPgvzKR4vVfMnHeuOLd8y3GWA="
+  },
+  "internal/protocoltest/query": {
+   "Module": "internal/protocoltest/query",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:yhL2Q3ndnexLJNbzn+6Ixem9BQeqJvr09EJVlfZJPeQ="
+  },
+  "internal/protocoltest/restxml": {
+   "Module": "internal/protocoltest/restxml",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:kFx8HtjRbj8+dIIlej25abRoCihZHizMptNjDA+uiFA="
+  },
+  "internal/repotools": {
+   "Module": "internal/repotools",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/repotools",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:MiaqArKR0W3LlFYHC5EIm4/SnA4jJCO4Wn/yzGeJjgI="
+  },
+  "internal/repotools/changes": {
+   "Module": "internal/repotools/changes",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/repotools/changes",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:PBUTqYxksKIvmWc0wtlQR2B2Gy5USmWg9LVZjigDFIw="
+  },
+  "service/accessanalyzer": {
+   "Module": "service/accessanalyzer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/accessanalyzer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:c20MIlLDPeT15kynWHg/cJQQLLIB+P9xTQxf+qfQuhg="
+  },
+  "service/acm": {
+   "Module": "service/acm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/acm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:fiF4vljYoLkwq6FXsdy0oeFtvM6wy7mZWEkGMyyW2E8="
+  },
+  "service/acmpca": {
+   "Module": "service/acmpca",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/acmpca",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0Mwqlr2MbyU8g5a+vHe27U/7L+ob1e0NIk3hnYeJy68="
+  },
+  "service/alexaforbusiness": {
+   "Module": "service/alexaforbusiness",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/alexaforbusiness",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:RKC/hzzQOZy7p0j8rdX0lStdhwGEjNQHBiX7pEwYiZY="
+  },
+  "service/amplify": {
+   "Module": "service/amplify",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/amplify",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:VUBSn51EftplPeRFTBoKCp5RZi4zV103T68zjJIAduo="
+  },
+  "service/apigateway": {
+   "Module": "service/apigateway",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigateway",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:dUpdWcGEw/BrmXYASrGyox0dIvr7acl1cj+150QtBX8="
+  },
+  "service/apigatewaymanagementapi": {
+   "Module": "service/apigatewaymanagementapi",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:wDzJEpUBF4d8iImPROevpszhDmJMyKYUkOcdO0oL9fk="
+  },
+  "service/apigatewayv2": {
+   "Module": "service/apigatewayv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigatewayv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:EclXpaaKwo89d+3JYdiY9Ar9INK1W4b++baFrVXtpxc="
+  },
+  "service/appconfig": {
+   "Module": "service/appconfig",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appconfig",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:hEb8ORSSGnTLOxIgdDTnOWvtyAChuj/p+nrJ6GxJ/8g="
+  },
+  "service/applicationautoscaling": {
+   "Module": "service/applicationautoscaling",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationautoscaling",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:tOKi5ZSQCsYoKSuObwZyZ8yKbps2SNzyToGUrShl2lE="
+  },
+  "service/applicationdiscoveryservice": {
+   "Module": "service/applicationdiscoveryservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:CU9hkhsb/3IQkLMiQYiCE5gB/AWE4wCkxj5QFFy8heY="
+  },
+  "service/applicationinsights": {
+   "Module": "service/applicationinsights",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationinsights",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:SZDnreAyNxdYbxeFt7WNbXvFEOO/pVJcYGy+mcR/jc0="
+  },
+  "service/appmesh": {
+   "Module": "service/appmesh",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appmesh",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:PARCzo6avNBOuh4L/ab7VcBNvPJ3iV+3VAGHF9PCDro="
+  },
+  "service/appstream": {
+   "Module": "service/appstream",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appstream",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:A0xy95THznLDfg8fDD+30J0egUVQuwydslimbi41JNI="
+  },
+  "service/appsync": {
+   "Module": "service/appsync",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appsync",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:eAtiu0P4DK0iynbP0luD1HeUkpZsGH5OPWChGqrUoVg="
+  },
+  "service/athena": {
+   "Module": "service/athena",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/athena",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:qwj6dRVntt2ZED+jCfZhRJd5HUL1fw1ekog/8TedccA="
+  },
+  "service/autoscaling": {
+   "Module": "service/autoscaling",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/autoscaling",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xy4DNfQKT1mRZ68Umhun9MYNJoJY/PNezXQ8hWa69Lg="
+  },
+  "service/autoscalingplans": {
+   "Module": "service/autoscalingplans",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/autoscalingplans",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xaLn6A17S0HUFWb73LWWdNknO7FU66YARI52tKwmIbI="
+  },
+  "service/backup": {
+   "Module": "service/backup",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/backup",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:QUTV7qdLVbt747ihJ1O+yo5gGDEtBGNHFIL71zkJlzM="
+  },
+  "service/batch": {
+   "Module": "service/batch",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/batch",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:qJNxbz+mti/pVCbVTubu0X923c1G1Sd0gsI7jQZnRns="
+  },
+  "service/braket": {
+   "Module": "service/braket",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/braket",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0K8gx46QYi8lqiiGSt1xKrTSWqFLMAGzk6ZeZ1coswU="
+  },
+  "service/budgets": {
+   "Module": "service/budgets",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/budgets",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:DCm/nIpqHpMRvOisEIMXKYeTP3kyQx2wyaIBQ9AQwRM="
+  },
+  "service/chime": {
+   "Module": "service/chime",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/chime",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:2rxfTpTvjkZKE5cjeO2V747vgDSoYDy0WbpjP1AE37Q="
+  },
+  "service/cloud9": {
+   "Module": "service/cloud9",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloud9",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:/b4jzpjs4KmSAF79i3ySxVeF8ESamRBgkWlfoie75VE="
+  },
+  "service/clouddirectory": {
+   "Module": "service/clouddirectory",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/clouddirectory",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0y194cYlZ7GPdWttfC4qCAJFNShcKfvoWB26rHURGKs="
+  },
+  "service/cloudformation": {
+   "Module": "service/cloudformation",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudformation",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:m49/+cJGqsMM8KESLmbVkTEsehMBQhQv6qq8OYq5ejM="
+  },
+  "service/cloudfront": {
+   "Module": "service/cloudfront",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudfront",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0oXdTeQnjcKnMLLfX7L5ksL5g3Pu31VQD90VfIeAkBQ="
+  },
+  "service/cloudhsm": {
+   "Module": "service/cloudhsm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudhsm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:YVHiSPATJp3qxPixImNc+NFSWj1HZsRP05YQrcZlqlA="
+  },
+  "service/cloudhsmv2": {
+   "Module": "service/cloudhsmv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudhsmv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:OHtT9CuoI6aRuECDkN8pHWisJuHCz6g6DGJtM3wF4WA="
+  },
+  "service/cloudsearch": {
+   "Module": "service/cloudsearch",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudsearch",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:3PGLzNm0zT6xP8vu5E1BfSWitvHsrQZg9Lw0ScFwCjo="
+  },
+  "service/cloudsearchdomain": {
+   "Module": "service/cloudsearchdomain",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:+HJ/Ii5EHOzTFR1n+8hJgZLaakEJwfIG9jEwQ5IAv/8="
+  },
+  "service/cloudtrail": {
+   "Module": "service/cloudtrail",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudtrail",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xiBAxgOk4CRSbq2VaOdW5We+CRRd/vTSlwKUz5WHXUo="
+  },
+  "service/cloudwatch": {
+   "Module": "service/cloudwatch",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatch",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:BK4GKyyeyTb/NhHjwwoeJa8f7mlabrTStkQPMLATKyk="
+  },
+  "service/cloudwatchevents": {
+   "Module": "service/cloudwatchevents",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatchevents",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:KrBd2JlGZ4kjIo/XTPUDfRuzaPrLFMRc9PNs9f/yzCU="
+  },
+  "service/cloudwatchlogs": {
+   "Module": "service/cloudwatchlogs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:+/BwPLIYSm6JzK534d27VlhMMOpw/iofIir6ZysPK58="
+  },
+  "service/codeartifact": {
+   "Module": "service/codeartifact",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codeartifact",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:uTogZIs0dNFKQeaH0wDAR2akIZ9gqAVsSHIP/nEwW3w="
+  },
+  "service/codebuild": {
+   "Module": "service/codebuild",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codebuild",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:cffK29o8ZPqt/8emp4OBS6aWsn5Gb+dOD7c1eWj0x8s="
+  },
+  "service/codecommit": {
+   "Module": "service/codecommit",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codecommit",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Xo0cQzQ5Ko/dwW+NtRyOkAYz+eQGLNQuaavNrpTyME4="
+  },
+  "service/codedeploy": {
+   "Module": "service/codedeploy",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codedeploy",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:VRXN7FJqo5LStUtQLHTUNsPRqYEzV3PAo0ER4LMvvoY="
+  },
+  "service/codeguruprofiler": {
+   "Module": "service/codeguruprofiler",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codeguruprofiler",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:APZi/k6045TSxIEI3kdg9tOgnnCVYE5DRvOsStb/KeE="
+  },
+  "service/codegurureviewer": {
+   "Module": "service/codegurureviewer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codegurureviewer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Vwdd/Bt55aZuwTuGSjySjmVasCjJa25+qA1GDLyFcO8="
+  },
+  "service/codepipeline": {
+   "Module": "service/codepipeline",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codepipeline",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:RjquAQ/2DSWF+q8Nf+ZX8YviAJGwJp+G+fyaH9z71+c="
+  },
+  "service/codestar": {
+   "Module": "service/codestar",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestar",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:D6vJlSBUtOosRqepdQzytokuKbvFZ6tN1glquwNP2wU="
+  },
+  "service/codestarconnections": {
+   "Module": "service/codestarconnections",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestarconnections",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:49gDCRLwwBZVGCLgFpY8pcWgnLoEOOXcYapwi+qcKdw="
+  },
+  "service/codestarnotifications": {
+   "Module": "service/codestarnotifications",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestarnotifications",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:5t6p+90p7aFWqdJInzEzAjCGlZYeJSwtrbSoxkNv3Nc="
+  },
+  "service/cognitoidentity": {
+   "Module": "service/cognitoidentity",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitoidentity",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ZmPJWE1fX+WP4g/guovPHJEAqBcC/CKfhL/RVbOv41A="
+  },
+  "service/cognitoidentityprovider": {
+   "Module": "service/cognitoidentityprovider",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:zWooKTxXBT9Rs+/D5rnxDVn/p54fsPM6MGe5IyAs2po="
+  },
+  "service/cognitosync": {
+   "Module": "service/cognitosync",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitosync",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:IsneyiF3082KFtqxRduqHt9kXPNLlbH+WVRXh+o/gA8="
+  },
+  "service/comprehend": {
+   "Module": "service/comprehend",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/comprehend",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xae44HhEVLSIB6WmuIjvVtIHCwHudPV/dI89JDd4fbI="
+  },
+  "service/comprehendmedical": {
+   "Module": "service/comprehendmedical",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/comprehendmedical",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:lEsKDgcc5XdBRBWGckmopMmpaw86I+c7uuWDlsoNeHU="
+  },
+  "service/computeoptimizer": {
+   "Module": "service/computeoptimizer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/computeoptimizer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:IvSYui65TCv8Uks/euidlsn9A0jLmFkRIAe7A1/8KY4="
+  },
+  "service/configservice": {
+   "Module": "service/configservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/configservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:NUhLlInkMdyedwRlzJQ/So9SO7jhcMxW5HSrj9XD/O0="
+  },
+  "service/connect": {
+   "Module": "service/connect",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/connect",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:BuRDryhlfAnmD4Aid4l8jZoXi4fioBYW1VisP3pvE1A="
+  },
+  "service/connectparticipant": {
+   "Module": "service/connectparticipant",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/connectparticipant",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:CoLMeaXDO2iCDfi3GfF1FtiqQKDQJOTg7uyhOYXe5RM="
+  },
+  "service/costandusagereportservice": {
+   "Module": "service/costandusagereportservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:gqk5aX+KlsD2tw+OrObnimISt2P3EsZ3tRWRekROB8I="
+  },
+  "service/costexplorer": {
+   "Module": "service/costexplorer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/costexplorer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ttWC56SKmTZiyaolH6A9A2GvvCOShSORBTnjGLxqEr8="
+  },
+  "service/databasemigrationservice": {
+   "Module": "service/databasemigrationservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:8jnpPOwHgEcrTuksAduvA+LQoq/r0yo9uTDlnokb374="
+  },
+  "service/dataexchange": {
+   "Module": "service/dataexchange",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dataexchange",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:9Ne1/qefF7qFSOpDaG6bdONCuu7igh+pTek8raF5S3c="
+  },
+  "service/datapipeline": {
+   "Module": "service/datapipeline",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/datapipeline",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Nbot1urxuPFkcd4Zp4fFMdlxTgTqtjMI6mWlXN+9VtM="
+  },
+  "service/datasync": {
+   "Module": "service/datasync",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/datasync",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:oHd4+xKq+9IkMJMTR2phNHuT41yYqnz5xxQg6pVo2AY="
+  },
+  "service/dax": {
+   "Module": "service/dax",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dax",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:RS/snjXTh79ks/frSmBXSJas1OuoFAgEF6FHtI3l1p8="
+  },
+  "service/detective": {
+   "Module": "service/detective",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/detective",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:qcdsUKesJSw18psWqHftZlp+bAlep/W8fa1VnKSBW+o="
+  },
+  "service/devicefarm": {
+   "Module": "service/devicefarm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/devicefarm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:BCmh/TrrM8CX4lttzubw7/LyySKlZqZySpuZQtU3Xdg="
+  },
+  "service/directconnect": {
+   "Module": "service/directconnect",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/directconnect",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:SOioyqvVfski5yjcKMZ2BhsfxjcKvO07Xj1Hr4lNxV0="
+  },
+  "service/directoryservice": {
+   "Module": "service/directoryservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/directoryservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:1LPBBk4R6qx/tDh0tQujVK9FSzIxSV0ZTug3YJlt55M="
+  },
+  "service/dlm": {
+   "Module": "service/dlm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dlm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:JaPvQGBKJqpobbjL21hfTuVqMf4ZbzIJba3jRds6q/4="
+  },
+  "service/docdb": {
+   "Module": "service/docdb",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/docdb",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:YjWXsj0eM2Vjq1yVudOU+Wn/94ObH85Ao6RqYClAWFM="
+  },
+  "service/dynamodb": {
+   "Module": "service/dynamodb",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dynamodb",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:vzt8nLl/BbWj9jeFyrJCC/YtUQFv1l+FhCqnMSYDjhk="
+  },
+  "service/dynamodbstreams": {
+   "Module": "service/dynamodbstreams",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dynamodbstreams",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:PeUZFrmLCjaIA0rPZaXO2E5nGLf4hJSs8Wa5b6+78P0="
+  },
+  "service/ebs": {
+   "Module": "service/ebs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ebs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:MzpDDYw3nDIYZULlhjCYu4abkzHzlD2DKozXZbiRd24="
+  },
+  "service/ec2": {
+   "Module": "service/ec2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ec2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:CkbqFCfVr4yNWHOujNBTUF0+lztV0cJo2kmnf6jRI60="
+  },
+  "service/ec2instanceconnect": {
+   "Module": "service/ec2instanceconnect",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ds/ImqkgitqiyeA/tQa5JMcxm8+N67w+L59txDGv2hw="
+  },
+  "service/ecr": {
+   "Module": "service/ecr",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ecr",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:eoeMpZqZguoOmznDippdc19CVXUU13mrA5b7/WVZS1g="
+  },
+  "service/ecs": {
+   "Module": "service/ecs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ecs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:FlUlQzlY/zVnb3etvCalA8D0W6ITRvF0qVbG+WBflYo="
+  },
+  "service/efs": {
+   "Module": "service/efs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/efs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:9dcpWaJ1/cJ+MYJcvRgUZusTAyB9XILVZSxyhLCU/8A="
+  },
+  "service/eks": {
+   "Module": "service/eks",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/eks",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:7MKz/jMzHaiAWmcRCbE2LL+j8XuMe1ZhMIhkPAmqf/Y="
+  },
+  "service/elasticache": {
+   "Module": "service/elasticache",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticache",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:N02uYfSHljFoNJHL1F71YmlvGyn/TaetovJU3hwx6sE="
+  },
+  "service/elasticbeanstalk": {
+   "Module": "service/elasticbeanstalk",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:J1AEO9f016C7SG5vK7G1YVJT8LX9ll2lT0KJARsGCGM="
+  },
+  "service/elasticinference": {
+   "Module": "service/elasticinference",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticinference",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:KpGRyYU7U7EH/pZBadCkjfiiZWh1OvMX3PrwIHl/qr8="
+  },
+  "service/elasticloadbalancing": {
+   "Module": "service/elasticloadbalancing",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:58msN8bxQEjt0p5E6z5oNiWt6GxORuVKo8yBu3z+/2A="
+  },
+  "service/elasticloadbalancingv2": {
+   "Module": "service/elasticloadbalancingv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:dkN4tyMG3DS8GBkVD51xYTT9eOrONCIW6jfT/Vvbh2Y="
+  },
+  "service/elasticsearchservice": {
+   "Module": "service/elasticsearchservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:46ORwuTRRGhCz2ZBBl0zl3GrEte/fYEEafVmfiRHEM8="
+  },
+  "service/elastictranscoder": {
+   "Module": "service/elastictranscoder",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elastictranscoder",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:uTGh9SOKVlbNG/PxDGLRf11tC8Aa06GPOSuHfZMUm+c="
+  },
+  "service/emr": {
+   "Module": "service/emr",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/emr",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:vui/Tyd/s4s2L/UqBxfECA3YIL6XJkXdT5fDCwnnoB4="
+  },
+  "service/eventbridge": {
+   "Module": "service/eventbridge",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/eventbridge",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:LJ3A/1ohLWveJek+Rc/3uSUklfRyWPQa7+mqfZ2pzR8="
+  },
+  "service/firehose": {
+   "Module": "service/firehose",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/firehose",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:KkUEJoXZ4KqmGsXOB8HT0EETTpog3NnAZSdxYw2nJeU="
+  },
+  "service/fms": {
+   "Module": "service/fms",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/fms",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:SKd1IKRcF0mGLW4gz9WaUmSv/28zYT07eOFPTH86h00="
+  },
+  "service/forecast": {
+   "Module": "service/forecast",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/forecast",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:cJtTyHAz5abiLsn0eY2eJxvg0KnS8SoCmL2SvRp/Ga0="
+  },
+  "service/forecastquery": {
+   "Module": "service/forecastquery",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/forecastquery",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xXU+SPeTBMsJtnBf8fMpXL3akg9sVstfmWFIAcnsjrI="
+  },
+  "service/frauddetector": {
+   "Module": "service/frauddetector",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/frauddetector",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Gonn8MggB6Of5o0nkYSWBkSFXPQhqfVXwBFRhrqOUiE="
+  },
+  "service/fsx": {
+   "Module": "service/fsx",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/fsx",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:+FQNQXjTvJd0yjjHW9AJEX1kOvCfLBKi94JjdJquDnE="
+  },
+  "service/gamelift": {
+   "Module": "service/gamelift",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/gamelift",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xDYxEvLnQ6L7wHYxq/IncEwLjx1xs7q295BSCTzS3EY="
+  },
+  "service/glacier": {
+   "Module": "service/glacier",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/glacier",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:mog7Xk2sbhf3R0ooUChIM3C9PNtL9VSgDsEw8ZJuvQQ="
+  },
+  "service/globalaccelerator": {
+   "Module": "service/globalaccelerator",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/globalaccelerator",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:KKeSqr/iclMYyZwKq9eaW6bGH2S5pXXybySCQRcUcJI="
+  },
+  "service/glue": {
+   "Module": "service/glue",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/glue",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:aI0b5/Hxd6JiMGEoKHYg9ohEtU1tHc/347/unDH1V9A="
+  },
+  "service/greengrass": {
+   "Module": "service/greengrass",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/greengrass",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:6WHrCzpXAmjjh4kZSl5HNLbIQ+aDNlRa0b7US0eu16Q="
+  },
+  "service/groundstation": {
+   "Module": "service/groundstation",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/groundstation",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:laSV2ewXiCGQMDz7hWk6cyNmO2s6s7Ujt2L7RYH8j1s="
+  },
+  "service/guardduty": {
+   "Module": "service/guardduty",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/guardduty",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:pe/HsITNmm8gMFTJ2vVUDB8jFhrJ5Ng5e/Y934ncfBc="
+  },
+  "service/health": {
+   "Module": "service/health",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/health",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:P5lt+Dd4ueRNUhaBWtkGG5u91l4/8BJZEKwvp8hx/u8="
+  },
+  "service/honeycode": {
+   "Module": "service/honeycode",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/honeycode",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Pwt4Aw4U2gGwCx28NtKy41P6rTTW8ZV8umUcSFJl3v4="
+  },
+  "service/iam": {
+   "Module": "service/iam",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iam",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:acj9SY/0diKussqsTBlMKAiAlEA3TUPcd9Ks2dWzxQ4="
+  },
+  "service/imagebuilder": {
+   "Module": "service/imagebuilder",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/imagebuilder",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:piC9sGErRdwdCXKfndhcMSG8OCk1/qzdwAf9faeR4ek="
+  },
+  "service/inspector": {
+   "Module": "service/inspector",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/inspector",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:oQb1wOYsU1R3dViVSap/cg5R66Zt8nE+1L+vBDLkDwQ="
+  },
+  "service/internal/accept-encoding": {
+   "Module": "service/internal/accept-encoding",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:inf7r2+tLWWdm6jLV6HXWyevX1+f0TaxA7d3C/0nGd8="
+  },
+  "service/internal/benchmark": {
+   "Module": "service/internal/benchmark",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/benchmark",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:RXoVffhXdKeqBlvjfbhweSLPlx1eVEzQt1KB+X68NS8="
+  },
+  "service/internal/integrationtest": {
+   "Module": "service/internal/integrationtest",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest",
+   "Version": "v0.1.0",
+   "ModuleHash": "h1:A3WSCbpdB04m1YiDz1CLzpm7UCbb+1e0gip8msx8dBI="
+  },
+  "service/internal/s3shared": {
+   "Module": "service/internal/s3shared",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
+   "Version": "v0.1.1",
+   "ModuleHash": "h1:46DYvS5n/rFuXAoLGJESGGTqRavEaHsZT++JFMe0eqc="
+  },
+  "service/iot": {
+   "Module": "service/iot",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:9xM+4amKG/ubmQMz1KOLs+StBcaT0y3PJPlSLPky4Uo="
+  },
+  "service/iot1clickdevicesservice": {
+   "Module": "service/iot1clickdevicesservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:XK6xl89JgeD3Dd9DGgsZvuc4U6abZctwVNv3uLv1wXg="
+  },
+  "service/iot1clickprojects": {
+   "Module": "service/iot1clickprojects",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:bSt6nGy1A1+zePXGY77MGC2VA5JyFBEA2X8mU5D1IQA="
+  },
+  "service/iotanalytics": {
+   "Module": "service/iotanalytics",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotanalytics",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:OoFM8uKldbdiMZ7sWTTt2Y2PJzye14C2PPIq7alrMfw="
+  },
+  "service/iotdataplane": {
+   "Module": "service/iotdataplane",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotdataplane",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:hkkQYcEU3OjJE3G/wOl2seD5dgquRdOkE64ZvJS/heU="
+  },
+  "service/iotevents": {
+   "Module": "service/iotevents",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotevents",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Op0Booh2zDKeleazoleaEU4jY0oh/GUm9UFa/flSQtw="
+  },
+  "service/ioteventsdata": {
+   "Module": "service/ioteventsdata",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ioteventsdata",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:sWDRLxXtx9DiVsOcJc2aicRPW7ZcJAuh3xaqMjB7aMY="
+  },
+  "service/iotjobsdataplane": {
+   "Module": "service/iotjobsdataplane",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Gd9eDtAoyXgd2ulRnSp9GNNlzrxhWvuv7oMJ8vqM2Mg="
+  },
+  "service/iotsecuretunneling": {
+   "Module": "service/iotsecuretunneling",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:t3afRSMcOSA7xMcdrWN0gYodL6Uj71arSBo7PdzoRBg="
+  },
+  "service/iotsitewise": {
+   "Module": "service/iotsitewise",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotsitewise",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:aSixbAQJG5sbVZ6cTcFy7AQqvHud/eCOKNa9H9VXR08="
+  },
+  "service/iotthingsgraph": {
+   "Module": "service/iotthingsgraph",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotthingsgraph",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:tKAO24N6cVWzMsUAEgeexLFQPHoaMPeC1FPuEpEMYkg="
+  },
+  "service/ivs": {
+   "Module": "service/ivs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ivs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:vB+JHMjyGRZOkMDfsk8DaCeSmU9CQ6ssrS9fmuc6ZQQ="
+  },
+  "service/kafka": {
+   "Module": "service/kafka",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kafka",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:73S6dWyKvkX0q/E1YOoq2k0udt/iaBeYj/kkqLv/U50="
+  },
+  "service/kendra": {
+   "Module": "service/kendra",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kendra",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:xulpF5Rzn/EniVBE1OQVqIodwHdP7NxIkLq2/nSd4YQ="
+  },
+  "service/kinesis": {
+   "Module": "service/kinesis",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesis",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:lSMcv3Fq+U6mclDReG9eYb9c/OCbHK4CO/T2BggCdik="
+  },
+  "service/kinesisanalytics": {
+   "Module": "service/kinesisanalytics",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisanalytics",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:B6H84fdKJUkD4Oo3/AgnG4S7yTpV7RWLXv1910zj8i0="
+  },
+  "service/kinesisanalyticsv2": {
+   "Module": "service/kinesisanalyticsv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:oddQoVlRdqIwyQS11WCvOOUYdUS8Ibs8pHgclcU2JkU="
+  },
+  "service/kinesisvideo": {
+   "Module": "service/kinesisvideo",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideo",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:C90B879uhuRsZS8aB1vImeYuGh05hnzRvpgsyrI6Dco="
+  },
+  "service/kinesisvideoarchivedmedia": {
+   "Module": "service/kinesisvideoarchivedmedia",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:wicpUT4HfWMSi7fuzzx9KYS2ZJ5NNAOpozbRvl5X7MM="
+  },
+  "service/kinesisvideomedia": {
+   "Module": "service/kinesisvideomedia",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:TZVZIPW/f3Mv/M8BepBtq4v+kr8adRQFR9149TdiyVo="
+  },
+  "service/kinesisvideosignaling": {
+   "Module": "service/kinesisvideosignaling",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:8xUuGabpuo80Xj8sFOv6S63zOWsMWI8Rfi5rT8qr4YU="
+  },
+  "service/kms": {
+   "Module": "service/kms",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kms",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Qjel75a9Lkh4hiiJhTYXeEaxENbJQh8/bSUN72N+1lY="
+  },
+  "service/lakeformation": {
+   "Module": "service/lakeformation",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lakeformation",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:zL+ZgFAYOoOi0BZLZuK17ZK+v6hPqtrfHG0pWhR8wcM="
+  },
+  "service/lambda": {
+   "Module": "service/lambda",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lambda",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:SUsx++vYshHbSisFDd6K7uBc9W2gtcPVQxV1D3tnRLM="
+  },
+  "service/lexmodelbuildingservice": {
+   "Module": "service/lexmodelbuildingservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:3mUVusvSxD0oISxsQlkOLLWcpZpbwlgbGCr3CvFLfg4="
+  },
+  "service/lexruntimeservice": {
+   "Module": "service/lexruntimeservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:k8yYvxmlSC4dHmoivcwLyWl/LqRfYHnA2dxfQMGYCKA="
+  },
+  "service/licensemanager": {
+   "Module": "service/licensemanager",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/licensemanager",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:cFlt1ppmDkQDQqAH2/3Txy60z57wLOaTOYvOFik5yoU="
+  },
+  "service/lightsail": {
+   "Module": "service/lightsail",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lightsail",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:N37IWvmPDbiSezbWceLqMK16/Y7LnFxiNUBy3FTahWw="
+  },
+  "service/machinelearning": {
+   "Module": "service/machinelearning",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/machinelearning",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:LSpv6uZUGfqle2mrO2up9L8WK/yXE83Y9NliGIXChyg="
+  },
+  "service/macie": {
+   "Module": "service/macie",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/macie",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:evNUsbOKqmyyVNVK1Bf05PtFq3NrKR4b6dNvSgEGwP0="
+  },
+  "service/macie2": {
+   "Module": "service/macie2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/macie2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:K7UM5y012xb8ttTh0I4T6e/R5d25RFDX1R9/PI+XxuA="
+  },
+  "service/managedblockchain": {
+   "Module": "service/managedblockchain",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/managedblockchain",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:pTjZ+yW9vGCc97ng/HnrQ8y9BSrojkpcg74xiK8MfMg="
+  },
+  "service/marketplacecatalog": {
+   "Module": "service/marketplacecatalog",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:m/ZJWeYcz1IEKSJGQZaJxSxWN6PUG/Vgb9g3t4J5XSw="
+  },
+  "service/marketplacecommerceanalytics": {
+   "Module": "service/marketplacecommerceanalytics",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:fajB7raOa38y8oDA7hSQEYpth1VeImn9vwzD/WiwipI="
+  },
+  "service/marketplaceentitlementservice": {
+   "Module": "service/marketplaceentitlementservice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:toVWLryEYExGZgYzi1bhYU0IJ77qk/jJbfgWSDr2lps="
+  },
+  "service/marketplacemetering": {
+   "Module": "service/marketplacemetering",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacemetering",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:zUvU0tewmXOh/JgXMzOZJftsClJBBLfU1979g71SAe4="
+  },
+  "service/mediaconnect": {
+   "Module": "service/mediaconnect",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediaconnect",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Mi5i7JigjrzphKBbakEFxLttt6XHkbtzm+43qpABho8="
+  },
+  "service/mediaconvert": {
+   "Module": "service/mediaconvert",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediaconvert",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:BZdu0/XvfUKkqzpmWl1/r9D0miiQL2uDJaoNuafFVk4="
+  },
+  "service/medialive": {
+   "Module": "service/medialive",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/medialive",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0UCuqYN5zMG0qiJdLgJi4+BuFAMZZXKxWnW4+zIq0dk="
+  },
+  "service/mediapackage": {
+   "Module": "service/mediapackage",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediapackage",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:lJy08T0WcRF5eQIsJCzby27reek7r4/CP+IU++x4DqY="
+  },
+  "service/mediapackagevod": {
+   "Module": "service/mediapackagevod",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediapackagevod",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ZsIOkTcwm01OXfbDLB7O0bXs3ip2HjYm7CNSiJvFIqE="
+  },
+  "service/mediastore": {
+   "Module": "service/mediastore",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediastore",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:dag0ITDtgsD2mf+qXhPlTYSLteiKqQ7SGfoIrY3WLKM="
+  },
+  "service/mediastoredata": {
+   "Module": "service/mediastoredata",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediastoredata",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Nh0hmxDbvGszPN0mvgOemnxRW9I5alr7j/kEm/IJ71w="
+  },
+  "service/mediatailor": {
+   "Module": "service/mediatailor",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediatailor",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:R5mRWRUUjrLjucCiE9HyoU+ITFyW6sg6B41sg8XDxVw="
+  },
+  "service/migrationhub": {
+   "Module": "service/migrationhub",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/migrationhub",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:haEeuasspwrCUBf0TLUbRx3RcfUvpNl/Fjih9JVIjzo="
+  },
+  "service/migrationhubconfig": {
+   "Module": "service/migrationhubconfig",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/migrationhubconfig",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:/QudG6B15+I32X5hqYr+VDFduN1aBoJ8uLJwmqe3pCU="
+  },
+  "service/mobile": {
+   "Module": "service/mobile",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mobile",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:c4zBFQxJB8U738YSEnpgqQdpHL39XXETm3v9mxn04h0="
+  },
+  "service/mq": {
+   "Module": "service/mq",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mq",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Q3pihiHDMiBqxo58vubcd8n1xlpiOvI2uESlMWtlvwY="
+  },
+  "service/mturk": {
+   "Module": "service/mturk",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mturk",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:4XE5H4xEfUALNeh09Uk0bVPA3XDdsEfa6Eae8lMYu+A="
+  },
+  "service/neptune": {
+   "Module": "service/neptune",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/neptune",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:mNWfwiMAGgLF3UvCNYZoFs+KVEXQxqrsDPX4NkmORls="
+  },
+  "service/networkmanager": {
+   "Module": "service/networkmanager",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/networkmanager",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:pfJQwETRFVQX9yKgDX2xg0A52/1qrPQaoW807WsJ16k="
+  },
+  "service/opsworks": {
+   "Module": "service/opsworks",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/opsworks",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:B2zV6XBbRvWuUNUnsSuzW/favJihTHsNX0IRUhw8sAs="
+  },
+  "service/opsworkscm": {
+   "Module": "service/opsworkscm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/opsworkscm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:t+rJpjaTuA9dpTAMN+Fimb94mYbZAooXIqfHuyIi55c="
+  },
+  "service/organizations": {
+   "Module": "service/organizations",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/organizations",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:WRu4ruBR1oqEPrmpQFzdK0KbEXp1GN9NqkC9vv2bZJc="
+  },
+  "service/outposts": {
+   "Module": "service/outposts",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/outposts",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:YW3LnC6u1Ml/i5N01SaXVqAD/7dQPIbj4ZYCSZmryWs="
+  },
+  "service/personalize": {
+   "Module": "service/personalize",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalize",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:7DGTbsCeH/omCIm/d1yXtyYCmd37zF6uM3SiI2Yxj8Y="
+  },
+  "service/personalizeevents": {
+   "Module": "service/personalizeevents",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalizeevents",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:mf/ghBJrc8p3ooNUloZCMn0sPR+ZiT+5ebJUt3LdUuU="
+  },
+  "service/personalizeruntime": {
+   "Module": "service/personalizeruntime",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalizeruntime",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ChHAeSqWpAKX8rBTroe4SmlJYB1GWDOAyR5k8RwZrBc="
+  },
+  "service/pi": {
+   "Module": "service/pi",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pi",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:yy1VkO07k/Q3NMJ3/xM7k5MYEDnFuUtEQBalpneKzWo="
+  },
+  "service/pinpoint": {
+   "Module": "service/pinpoint",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpoint",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:GLh9p7TxOHG7CjysvwoCO7P8QT8vPDFZiF3FoZuM26U="
+  },
+  "service/pinpointemail": {
+   "Module": "service/pinpointemail",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpointemail",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:5mWdbpgoMU8ONH+Sq7OMPzgbLdm0BC5FLZNN4ekWFvE="
+  },
+  "service/pinpointsmsvoice": {
+   "Module": "service/pinpointsmsvoice",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:PSWp6BubyGzF38NbPSHZ0O8JEpephABXfR32PcwW/L0="
+  },
+  "service/polly": {
+   "Module": "service/polly",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/polly",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:fNo+tMnlZBoq+2+wPWrsE0nvUuTWVZ1tEN3SOabdXIw="
+  },
+  "service/pricing": {
+   "Module": "service/pricing",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pricing",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:4ZOLPFal69UbfZ7CvNEJyDq0/WwdU4u9t+9b7wUjFXc="
+  },
+  "service/qldb": {
+   "Module": "service/qldb",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/qldb",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:JmCyo1Zj3SwdiJg8CVIGXCEWYv3AUPeWetbre3duMWY="
+  },
+  "service/qldbsession": {
+   "Module": "service/qldbsession",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/qldbsession",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:OYLGifYwUP49OFGjWqgmC6vDg6GFPGaElbCjeJzWwNQ="
+  },
+  "service/quicksight": {
+   "Module": "service/quicksight",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/quicksight",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:VK9r4Eox53U36QVbiW01yqbdkhv0013/umRtXcttpNs="
+  },
+  "service/ram": {
+   "Module": "service/ram",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ram",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:rZ7zrBuXJwT5PjQI8RPdTuKe1dj1Yb43mLVyI2g7w5o="
+  },
+  "service/rds": {
+   "Module": "service/rds",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rds",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:NKSmMgNzqpMe7cofqkMQLYWn6xbJKYqrl9usY8jRNck="
+  },
+  "service/rdsdata": {
+   "Module": "service/rdsdata",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rdsdata",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:dSISWREnEnbdmiUkV5ShM77FVssGvMJ4TJm///eHpsM="
+  },
+  "service/redshift": {
+   "Module": "service/redshift",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/redshift",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:rnew+ygzPCurMsz1QbKnMaXJfe2FiZ6raejgOK7aiZ0="
+  },
+  "service/rekognition": {
+   "Module": "service/rekognition",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rekognition",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:L46aKugDsHFgOxn0xov5F/CNDhSWt/hHflkqwEX8BYU="
+  },
+  "service/resourcegroups": {
+   "Module": "service/resourcegroups",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/resourcegroups",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:BOy/fli4ZNmkHgGB2jKHA6c5H3QwCrvNpB2igtj08/o="
+  },
+  "service/resourcegroupstaggingapi": {
+   "Module": "service/resourcegroupstaggingapi",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:qwRuCLLOdQNUyEphxVdNq/ql6E70TJF739mTHCyf9X8="
+  },
+  "service/robomaker": {
+   "Module": "service/robomaker",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/robomaker",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:UiTT8WQnhbkkGUMwbUnP9Kovcb+9+KD8oR6wRJUIUzI="
+  },
+  "service/route53": {
+   "Module": "service/route53",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:ZEu2sjKBAqTHLk8mLhjDxe0huHlL0UklWIG3U8SC06Y="
+  },
+  "service/route53domains": {
+   "Module": "service/route53domains",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53domains",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:GAEJtyX0Q8OslegayCyy2JsR6gbgqmF5/w1bGxtIX2s="
+  },
+  "service/route53resolver": {
+   "Module": "service/route53resolver",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53resolver",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:dBim0sJYIcSyLJjAaTE3RjEuU5DBV1Mo3wMPLNOmGZg="
+  },
+  "service/s3": {
+   "Module": "service/s3",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:fzyODvYNsQZDlFgxx8PaDHXZ17Ewmfi04DxCLYfxnuI="
+  },
+  "service/s3/internal/configtesting": {
+   "Module": "service/s3/internal/configtesting",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting",
+   "Version": "v0.1.1",
+   "ModuleHash": "h1:f1YjmxPflvEScsZBNBOvzoCwahRr3u7vA1Z2j5z5O+4="
+  },
+  "service/s3control": {
+   "Module": "service/s3control",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3control",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:r7CwU97m9htmn7POvBt10aM6xduWozCdKpMECNsmEOs="
+  },
+  "service/sagemaker": {
+   "Module": "service/sagemaker",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemaker",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Nm2JNVE6TDVXIZ/gUrQk+AzWQ/OfpK2tMWM1AsXgjeM="
+  },
+  "service/sagemakera2iruntime": {
+   "Module": "service/sagemakera2iruntime",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:wF5VElV0uuQ600FgNiDPRm/QswG59caAobBZUpukoIA="
+  },
+  "service/sagemakerruntime": {
+   "Module": "service/sagemakerruntime",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakerruntime",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:lU5xAkSmd1p9eH/lU4tspfej+L+UUtiXWKbAdwYg+64="
+  },
+  "service/savingsplans": {
+   "Module": "service/savingsplans",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/savingsplans",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:+gybTCocKn3Ipr3S5krVf3hJ2X7V5Efs+iS155rJYtk="
+  },
+  "service/schemas": {
+   "Module": "service/schemas",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/schemas",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:aOzU2Cdo3gxjb9H4VspizNNSjtI35LuhWmzs9TaZIVI="
+  },
+  "service/secretsmanager": {
+   "Module": "service/secretsmanager",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/secretsmanager",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:EP6C59ZPInnlnH2QkozRWj7X34Y5v9Lm54nJ5sE/duA="
+  },
+  "service/securityhub": {
+   "Module": "service/securityhub",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/securityhub",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:0yXZzsGPYI8lE3bFi+ScwIegeCu+hoO8exMqy49IRRs="
+  },
+  "service/serverlessapplicationrepository": {
+   "Module": "service/serverlessapplicationrepository",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:hJiBL6rNzkQv9wqOQldWdN9G4B54Pu2ixepzHJGx9BU="
+  },
+  "service/servicecatalog": {
+   "Module": "service/servicecatalog",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicecatalog",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:EZ/r9uX3gB1SXCMYy86iaFda/MQjnxxSevNmV0irbZo="
+  },
+  "service/servicediscovery": {
+   "Module": "service/servicediscovery",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicediscovery",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:6rhPaz3g9lGxGDs6nZ9DqsNNOTFLP8DmAkExPLiLpe8="
+  },
+  "service/servicequotas": {
+   "Module": "service/servicequotas",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicequotas",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:swKjKAA+jCvLBXuzZ7n2eyQ2utMWfkiVmZyJUbGA7eA="
+  },
+  "service/ses": {
+   "Module": "service/ses",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ses",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:XWKkZgX/uMFuLu9e46pOO4pWLWBRZrVvXl0pVJXVzVA="
+  },
+  "service/sesv2": {
+   "Module": "service/sesv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sesv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:/enGEKU+2e/vkVXhrf9AXXk+J/RqKkqpRwVKrjGMhd8="
+  },
+  "service/sfn": {
+   "Module": "service/sfn",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sfn",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:RqR6tiAMW3FkhY1hP7P68DQhzlJQJRjLLZ9VnryXgL0="
+  },
+  "service/shield": {
+   "Module": "service/shield",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/shield",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:lfDCZYFLRDR9jtPviwDqUXs8sI2uwdJdku0/gb4LgPg="
+  },
+  "service/signer": {
+   "Module": "service/signer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/signer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:DD238c0Y4ehhdNZeHp1tgmoJ4PpyUxih9JPa+kZK7Ro="
+  },
+  "service/sms": {
+   "Module": "service/sms",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sms",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:O+xxRwoNdRcObALIQDV6ncN1RkZbhZFoLxBPMV7B828="
+  },
+  "service/snowball": {
+   "Module": "service/snowball",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/snowball",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:VjX9gRwBGK926W2pSiyq8gqOXSri7dPDL5piXl/oiyA="
+  },
+  "service/sns": {
+   "Module": "service/sns",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sns",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:/NHkNOxZCqF08UqR49Chjq45DGiVMONgK0CX2tmPpNU="
+  },
+  "service/sqs": {
+   "Module": "service/sqs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sqs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:9888KfV8ZSheCgWBEYxOp1n7DvdgAPI3Dyhn92o8CBs="
+  },
+  "service/ssm": {
+   "Module": "service/ssm",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ssm",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:PgsttopTJArRTZxHZztIsxAYzK9Esi1bxGd5l8Ee2yc="
+  },
+  "service/sso": {
+   "Module": "service/sso",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sso",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:EQEk6TaI9d0N+iWxLmoH33aBod4OE40UCZ0OZRJvQSA="
+  },
+  "service/ssooidc": {
+   "Module": "service/ssooidc",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:pj9stUfSuWYDCo1LixaSXMS1RlDY4/r+6Q7XElBajoQ="
+  },
+  "service/storagegateway": {
+   "Module": "service/storagegateway",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/storagegateway",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:LTjY5onaH/faP9R2G8RHcmd8ILLsx0NtTSJfKnWQ6aU="
+  },
+  "service/sts": {
+   "Module": "service/sts",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sts",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:DsjO5jcJj3brvzAO8fxGVvkECtHlwXrXjcw8fC8vaSU="
+  },
+  "service/support": {
+   "Module": "service/support",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/support",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:YecaXeFZefyvp3Mloe6Q2KE7Lzu1tPas3pFsEqwQZ6U="
+  },
+  "service/swf": {
+   "Module": "service/swf",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/swf",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:OOMI8WkAPtaAXP30GA6d/a0eLCZp47szsIybzoFUZco="
+  },
+  "service/synthetics": {
+   "Module": "service/synthetics",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/synthetics",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Xl8iFHLbAidMYPivGV/4YgtCJpmdTBS7yXG0AGEPhP4="
+  },
+  "service/textract": {
+   "Module": "service/textract",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/textract",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:osdeElPp4LxIfWXXk23Gy3G6nMRnp8QuM9lnw2fy3YU="
+  },
+  "service/transcribe": {
+   "Module": "service/transcribe",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/transcribe",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:C57pd7O7yjls14MZ+fD9y236CjzPfcuAGmFZZVRpPXw="
+  },
+  "service/transfer": {
+   "Module": "service/transfer",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/transfer",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:Vd8l44FKCsZgpuqz1WJrt/wet+ZMOfL3TBo+lWdybm4="
+  },
+  "service/translate": {
+   "Module": "service/translate",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/translate",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:aXmgLJtwH2QoARU44/A1Xu5nGo+47qr4fOy8HVFzNEk="
+  },
+  "service/waf": {
+   "Module": "service/waf",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/waf",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:DweW18Yt8urSSfZUy9t7NhTeXHKP5F7pFUz5DU1qOIw="
+  },
+  "service/wafregional": {
+   "Module": "service/wafregional",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/wafregional",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:UeO/W9M03fOlYr9WMV+JV/ZtAOd9AJAEVNqkuEJIv3U="
+  },
+  "service/wafv2": {
+   "Module": "service/wafv2",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/wafv2",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:4YFqSq/SO/yQHyOPqUSV6kn6jThhG+XlQgoXBGe8vsA="
+  },
+  "service/workdocs": {
+   "Module": "service/workdocs",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workdocs",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:pWY8OaqpvxTcO1PqiXbdvWJASTZvDfeXd15JjKkyFSk="
+  },
+  "service/worklink": {
+   "Module": "service/worklink",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/worklink",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:9fUbcmfj1dhIVFuuKSEyzku15nSzkXITTgOiNP0dCxc="
+  },
+  "service/workmail": {
+   "Module": "service/workmail",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workmail",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:e7YtlRY1SBnv+GWPdzq+paOxTUFFw8uA2ZUu7JAF7nQ="
+  },
+  "service/workmailmessageflow": {
+   "Module": "service/workmailmessageflow",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workmailmessageflow",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:60rm6lCFPniE/96PIHOGwZUkqngIMPmjMF7eybtK3MU="
+  },
+  "service/workspaces": {
+   "Module": "service/workspaces",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workspaces",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:6e9rX2Pb/IX26ZdxYuGn6z10fpuuF/Qko1zvYGI9ypM="
+  },
+  "service/xray": {
+   "Module": "service/xray",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/xray",
+   "Version": "v0.26.0",
+   "ModuleHash": "h1:nBBEZCJmTunziMVCiisOS06B9BLEyOfL+PSc45gYkTc="
+  }
+ },
+ "Packages": {
+  "github.com/aws/aws-sdk-go-v2": "/",
+  "github.com/aws/aws-sdk-go-v2/aws": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/arn": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/middleware": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/protocol/ec2query": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/protocol/query": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/protocol/restjson": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/protocol/xml": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/ratelimit": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/retry": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/signer/internal/v4": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/signer/v4": "/",
+  "github.com/aws/aws-sdk-go-v2/aws/transport/http": "/",
+  "github.com/aws/aws-sdk-go-v2/config": "config",
+  "github.com/aws/aws-sdk-go-v2/config/codegen": "config",
+  "github.com/aws/aws-sdk-go-v2/credentials": "credentials",
+  "github.com/aws/aws-sdk-go-v2/credentials/ec2rolecreds": "credentials",
+  "github.com/aws/aws-sdk-go-v2/credentials/endpointcreds": "credentials",
+  "github.com/aws/aws-sdk-go-v2/credentials/endpointcreds/internal/client": "credentials",
+  "github.com/aws/aws-sdk-go-v2/credentials/processcreds": "credentials",
+  "github.com/aws/aws-sdk-go-v2/credentials/stscreds": "credentials",
+  "github.com/aws/aws-sdk-go-v2/ec2imds": "ec2imds",
+  "github.com/aws/aws-sdk-go-v2/internal/awstesting": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/awstesting/unit": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/awsutil": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/endpoints": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/ini": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson": "internal/protocoltest/awsrestjson",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/internal/endpoints": "internal/protocoltest/awsrestjson",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types": "internal/protocoltest/awsrestjson",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query": "internal/protocoltest/ec2query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/internal/endpoints": "internal/protocoltest/ec2query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types": "internal/protocoltest/ec2query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc": "internal/protocoltest/jsonrpc",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/internal/endpoints": "internal/protocoltest/jsonrpc",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types": "internal/protocoltest/jsonrpc",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10": "internal/protocoltest/jsonrpc10",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/internal/endpoints": "internal/protocoltest/jsonrpc10",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types": "internal/protocoltest/jsonrpc10",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query": "internal/protocoltest/query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/internal/endpoints": "internal/protocoltest/query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query/types": "internal/protocoltest/query",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml": "internal/protocoltest/restxml",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/internal/endpoints": "internal/protocoltest/restxml",
+  "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types": "internal/protocoltest/restxml",
+  "github.com/aws/aws-sdk-go-v2/internal/rand": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools": "internal/repotools",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/changes": "internal/repotools/changes",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/changes/cmd/changetool": "internal/repotools/changes",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/changes/git": "internal/repotools/changes",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/changes/golist": "internal/repotools/changes",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/changes/util": "internal/repotools/changes",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/cmd/eachmodule": "internal/repotools",
+  "github.com/aws/aws-sdk-go-v2/internal/repotools/cmd/makerelative": "internal/repotools",
+  "github.com/aws/aws-sdk-go-v2/internal/sdk": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/sdkio": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/shareddefaults": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/strings": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/sync/singleflight": "/",
+  "github.com/aws/aws-sdk-go-v2/internal/timeconv": "/",
+  "github.com/aws/aws-sdk-go-v2/service/accessanalyzer": "service/accessanalyzer",
+  "github.com/aws/aws-sdk-go-v2/service/accessanalyzer/internal/endpoints": "service/accessanalyzer",
+  "github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types": "service/accessanalyzer",
+  "github.com/aws/aws-sdk-go-v2/service/acm": "service/acm",
+  "github.com/aws/aws-sdk-go-v2/service/acm/internal/endpoints": "service/acm",
+  "github.com/aws/aws-sdk-go-v2/service/acm/types": "service/acm",
+  "github.com/aws/aws-sdk-go-v2/service/acmpca": "service/acmpca",
+  "github.com/aws/aws-sdk-go-v2/service/acmpca/internal/endpoints": "service/acmpca",
+  "github.com/aws/aws-sdk-go-v2/service/acmpca/types": "service/acmpca",
+  "github.com/aws/aws-sdk-go-v2/service/alexaforbusiness": "service/alexaforbusiness",
+  "github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/internal/endpoints": "service/alexaforbusiness",
+  "github.com/aws/aws-sdk-go-v2/service/alexaforbusiness/types": "service/alexaforbusiness",
+  "github.com/aws/aws-sdk-go-v2/service/amplify": "service/amplify",
+  "github.com/aws/aws-sdk-go-v2/service/amplify/internal/endpoints": "service/amplify",
+  "github.com/aws/aws-sdk-go-v2/service/amplify/types": "service/amplify",
+  "github.com/aws/aws-sdk-go-v2/service/apigateway": "service/apigateway",
+  "github.com/aws/aws-sdk-go-v2/service/apigateway/internal/customizations": "service/apigateway",
+  "github.com/aws/aws-sdk-go-v2/service/apigateway/internal/endpoints": "service/apigateway",
+  "github.com/aws/aws-sdk-go-v2/service/apigateway/types": "service/apigateway",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi": "service/apigatewaymanagementapi",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/internal/endpoints": "service/apigatewaymanagementapi",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi/types": "service/apigatewaymanagementapi",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewayv2": "service/apigatewayv2",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewayv2/internal/endpoints": "service/apigatewayv2",
+  "github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types": "service/apigatewayv2",
+  "github.com/aws/aws-sdk-go-v2/service/appconfig": "service/appconfig",
+  "github.com/aws/aws-sdk-go-v2/service/appconfig/internal/endpoints": "service/appconfig",
+  "github.com/aws/aws-sdk-go-v2/service/appconfig/types": "service/appconfig",
+  "github.com/aws/aws-sdk-go-v2/service/applicationautoscaling": "service/applicationautoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/internal/endpoints": "service/applicationautoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/applicationautoscaling/types": "service/applicationautoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice": "service/applicationdiscoveryservice",
+  "github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/internal/endpoints": "service/applicationdiscoveryservice",
+  "github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types": "service/applicationdiscoveryservice",
+  "github.com/aws/aws-sdk-go-v2/service/applicationinsights": "service/applicationinsights",
+  "github.com/aws/aws-sdk-go-v2/service/applicationinsights/internal/endpoints": "service/applicationinsights",
+  "github.com/aws/aws-sdk-go-v2/service/applicationinsights/types": "service/applicationinsights",
+  "github.com/aws/aws-sdk-go-v2/service/appmesh": "service/appmesh",
+  "github.com/aws/aws-sdk-go-v2/service/appmesh/internal/endpoints": "service/appmesh",
+  "github.com/aws/aws-sdk-go-v2/service/appmesh/types": "service/appmesh",
+  "github.com/aws/aws-sdk-go-v2/service/appstream": "service/appstream",
+  "github.com/aws/aws-sdk-go-v2/service/appstream/internal/endpoints": "service/appstream",
+  "github.com/aws/aws-sdk-go-v2/service/appstream/types": "service/appstream",
+  "github.com/aws/aws-sdk-go-v2/service/appsync": "service/appsync",
+  "github.com/aws/aws-sdk-go-v2/service/appsync/internal/endpoints": "service/appsync",
+  "github.com/aws/aws-sdk-go-v2/service/appsync/types": "service/appsync",
+  "github.com/aws/aws-sdk-go-v2/service/athena": "service/athena",
+  "github.com/aws/aws-sdk-go-v2/service/athena/internal/endpoints": "service/athena",
+  "github.com/aws/aws-sdk-go-v2/service/athena/types": "service/athena",
+  "github.com/aws/aws-sdk-go-v2/service/autoscaling": "service/autoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/autoscaling/internal/endpoints": "service/autoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/autoscaling/types": "service/autoscaling",
+  "github.com/aws/aws-sdk-go-v2/service/autoscalingplans": "service/autoscalingplans",
+  "github.com/aws/aws-sdk-go-v2/service/autoscalingplans/internal/endpoints": "service/autoscalingplans",
+  "github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types": "service/autoscalingplans",
+  "github.com/aws/aws-sdk-go-v2/service/backup": "service/backup",
+  "github.com/aws/aws-sdk-go-v2/service/backup/internal/endpoints": "service/backup",
+  "github.com/aws/aws-sdk-go-v2/service/backup/types": "service/backup",
+  "github.com/aws/aws-sdk-go-v2/service/batch": "service/batch",
+  "github.com/aws/aws-sdk-go-v2/service/batch/internal/endpoints": "service/batch",
+  "github.com/aws/aws-sdk-go-v2/service/batch/types": "service/batch",
+  "github.com/aws/aws-sdk-go-v2/service/braket": "service/braket",
+  "github.com/aws/aws-sdk-go-v2/service/braket/internal/endpoints": "service/braket",
+  "github.com/aws/aws-sdk-go-v2/service/braket/types": "service/braket",
+  "github.com/aws/aws-sdk-go-v2/service/budgets": "service/budgets",
+  "github.com/aws/aws-sdk-go-v2/service/budgets/internal/endpoints": "service/budgets",
+  "github.com/aws/aws-sdk-go-v2/service/budgets/types": "service/budgets",
+  "github.com/aws/aws-sdk-go-v2/service/chime": "service/chime",
+  "github.com/aws/aws-sdk-go-v2/service/chime/internal/endpoints": "service/chime",
+  "github.com/aws/aws-sdk-go-v2/service/chime/types": "service/chime",
+  "github.com/aws/aws-sdk-go-v2/service/cloud9": "service/cloud9",
+  "github.com/aws/aws-sdk-go-v2/service/cloud9/internal/endpoints": "service/cloud9",
+  "github.com/aws/aws-sdk-go-v2/service/cloud9/types": "service/cloud9",
+  "github.com/aws/aws-sdk-go-v2/service/clouddirectory": "service/clouddirectory",
+  "github.com/aws/aws-sdk-go-v2/service/clouddirectory/internal/endpoints": "service/clouddirectory",
+  "github.com/aws/aws-sdk-go-v2/service/clouddirectory/types": "service/clouddirectory",
+  "github.com/aws/aws-sdk-go-v2/service/cloudformation": "service/cloudformation",
+  "github.com/aws/aws-sdk-go-v2/service/cloudformation/internal/endpoints": "service/cloudformation",
+  "github.com/aws/aws-sdk-go-v2/service/cloudformation/types": "service/cloudformation",
+  "github.com/aws/aws-sdk-go-v2/service/cloudfront": "service/cloudfront",
+  "github.com/aws/aws-sdk-go-v2/service/cloudfront/internal/endpoints": "service/cloudfront",
+  "github.com/aws/aws-sdk-go-v2/service/cloudfront/sign": "service/cloudfront",
+  "github.com/aws/aws-sdk-go-v2/service/cloudfront/types": "service/cloudfront",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsm": "service/cloudhsm",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsm/internal/endpoints": "service/cloudhsm",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsm/types": "service/cloudhsm",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsmv2": "service/cloudhsmv2",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/internal/endpoints": "service/cloudhsmv2",
+  "github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types": "service/cloudhsmv2",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearch": "service/cloudsearch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearch/internal/endpoints": "service/cloudsearch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearch/types": "service/cloudsearch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain": "service/cloudsearchdomain",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/internal/endpoints": "service/cloudsearchdomain",
+  "github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types": "service/cloudsearchdomain",
+  "github.com/aws/aws-sdk-go-v2/service/cloudtrail": "service/cloudtrail",
+  "github.com/aws/aws-sdk-go-v2/service/cloudtrail/internal/endpoints": "service/cloudtrail",
+  "github.com/aws/aws-sdk-go-v2/service/cloudtrail/types": "service/cloudtrail",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatch": "service/cloudwatch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatch/internal/endpoints": "service/cloudwatch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatch/types": "service/cloudwatch",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchevents": "service/cloudwatchevents",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/internal/endpoints": "service/cloudwatchevents",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types": "service/cloudwatchevents",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs": "service/cloudwatchlogs",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/internal/endpoints": "service/cloudwatchlogs",
+  "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types": "service/cloudwatchlogs",
+  "github.com/aws/aws-sdk-go-v2/service/codeartifact": "service/codeartifact",
+  "github.com/aws/aws-sdk-go-v2/service/codeartifact/internal/endpoints": "service/codeartifact",
+  "github.com/aws/aws-sdk-go-v2/service/codeartifact/types": "service/codeartifact",
+  "github.com/aws/aws-sdk-go-v2/service/codebuild": "service/codebuild",
+  "github.com/aws/aws-sdk-go-v2/service/codebuild/internal/endpoints": "service/codebuild",
+  "github.com/aws/aws-sdk-go-v2/service/codebuild/types": "service/codebuild",
+  "github.com/aws/aws-sdk-go-v2/service/codecommit": "service/codecommit",
+  "github.com/aws/aws-sdk-go-v2/service/codecommit/internal/endpoints": "service/codecommit",
+  "github.com/aws/aws-sdk-go-v2/service/codecommit/types": "service/codecommit",
+  "github.com/aws/aws-sdk-go-v2/service/codedeploy": "service/codedeploy",
+  "github.com/aws/aws-sdk-go-v2/service/codedeploy/internal/endpoints": "service/codedeploy",
+  "github.com/aws/aws-sdk-go-v2/service/codedeploy/types": "service/codedeploy",
+  "github.com/aws/aws-sdk-go-v2/service/codeguruprofiler": "service/codeguruprofiler",
+  "github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/internal/endpoints": "service/codeguruprofiler",
+  "github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types": "service/codeguruprofiler",
+  "github.com/aws/aws-sdk-go-v2/service/codegurureviewer": "service/codegurureviewer",
+  "github.com/aws/aws-sdk-go-v2/service/codegurureviewer/internal/endpoints": "service/codegurureviewer",
+  "github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types": "service/codegurureviewer",
+  "github.com/aws/aws-sdk-go-v2/service/codepipeline": "service/codepipeline",
+  "github.com/aws/aws-sdk-go-v2/service/codepipeline/internal/endpoints": "service/codepipeline",
+  "github.com/aws/aws-sdk-go-v2/service/codepipeline/types": "service/codepipeline",
+  "github.com/aws/aws-sdk-go-v2/service/codestar": "service/codestar",
+  "github.com/aws/aws-sdk-go-v2/service/codestar/internal/endpoints": "service/codestar",
+  "github.com/aws/aws-sdk-go-v2/service/codestar/types": "service/codestar",
+  "github.com/aws/aws-sdk-go-v2/service/codestarconnections": "service/codestarconnections",
+  "github.com/aws/aws-sdk-go-v2/service/codestarconnections/internal/endpoints": "service/codestarconnections",
+  "github.com/aws/aws-sdk-go-v2/service/codestarconnections/types": "service/codestarconnections",
+  "github.com/aws/aws-sdk-go-v2/service/codestarnotifications": "service/codestarnotifications",
+  "github.com/aws/aws-sdk-go-v2/service/codestarnotifications/internal/endpoints": "service/codestarnotifications",
+  "github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types": "service/codestarnotifications",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentity": "service/cognitoidentity",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentity/internal/endpoints": "service/cognitoidentity",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types": "service/cognitoidentity",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider": "service/cognitoidentityprovider",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/internal/endpoints": "service/cognitoidentityprovider",
+  "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types": "service/cognitoidentityprovider",
+  "github.com/aws/aws-sdk-go-v2/service/cognitosync": "service/cognitosync",
+  "github.com/aws/aws-sdk-go-v2/service/cognitosync/internal/endpoints": "service/cognitosync",
+  "github.com/aws/aws-sdk-go-v2/service/cognitosync/types": "service/cognitosync",
+  "github.com/aws/aws-sdk-go-v2/service/comprehend": "service/comprehend",
+  "github.com/aws/aws-sdk-go-v2/service/comprehend/internal/endpoints": "service/comprehend",
+  "github.com/aws/aws-sdk-go-v2/service/comprehend/types": "service/comprehend",
+  "github.com/aws/aws-sdk-go-v2/service/comprehendmedical": "service/comprehendmedical",
+  "github.com/aws/aws-sdk-go-v2/service/comprehendmedical/internal/endpoints": "service/comprehendmedical",
+  "github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types": "service/comprehendmedical",
+  "github.com/aws/aws-sdk-go-v2/service/computeoptimizer": "service/computeoptimizer",
+  "github.com/aws/aws-sdk-go-v2/service/computeoptimizer/internal/endpoints": "service/computeoptimizer",
+  "github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types": "service/computeoptimizer",
+  "github.com/aws/aws-sdk-go-v2/service/configservice": "service/configservice",
+  "github.com/aws/aws-sdk-go-v2/service/configservice/internal/endpoints": "service/configservice",
+  "github.com/aws/aws-sdk-go-v2/service/configservice/types": "service/configservice",
+  "github.com/aws/aws-sdk-go-v2/service/connect": "service/connect",
+  "github.com/aws/aws-sdk-go-v2/service/connect/internal/endpoints": "service/connect",
+  "github.com/aws/aws-sdk-go-v2/service/connect/types": "service/connect",
+  "github.com/aws/aws-sdk-go-v2/service/connectparticipant": "service/connectparticipant",
+  "github.com/aws/aws-sdk-go-v2/service/connectparticipant/internal/endpoints": "service/connectparticipant",
+  "github.com/aws/aws-sdk-go-v2/service/connectparticipant/types": "service/connectparticipant",
+  "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice": "service/costandusagereportservice",
+  "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/internal/endpoints": "service/costandusagereportservice",
+  "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/types": "service/costandusagereportservice",
+  "github.com/aws/aws-sdk-go-v2/service/costexplorer": "service/costexplorer",
+  "github.com/aws/aws-sdk-go-v2/service/costexplorer/internal/endpoints": "service/costexplorer",
+  "github.com/aws/aws-sdk-go-v2/service/costexplorer/types": "service/costexplorer",
+  "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice": "service/databasemigrationservice",
+  "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/internal/endpoints": "service/databasemigrationservice",
+  "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types": "service/databasemigrationservice",
+  "github.com/aws/aws-sdk-go-v2/service/dataexchange": "service/dataexchange",
+  "github.com/aws/aws-sdk-go-v2/service/dataexchange/internal/endpoints": "service/dataexchange",
+  "github.com/aws/aws-sdk-go-v2/service/dataexchange/types": "service/dataexchange",
+  "github.com/aws/aws-sdk-go-v2/service/datapipeline": "service/datapipeline",
+  "github.com/aws/aws-sdk-go-v2/service/datapipeline/internal/endpoints": "service/datapipeline",
+  "github.com/aws/aws-sdk-go-v2/service/datapipeline/types": "service/datapipeline",
+  "github.com/aws/aws-sdk-go-v2/service/datasync": "service/datasync",
+  "github.com/aws/aws-sdk-go-v2/service/datasync/internal/endpoints": "service/datasync",
+  "github.com/aws/aws-sdk-go-v2/service/datasync/types": "service/datasync",
+  "github.com/aws/aws-sdk-go-v2/service/dax": "service/dax",
+  "github.com/aws/aws-sdk-go-v2/service/dax/internal/endpoints": "service/dax",
+  "github.com/aws/aws-sdk-go-v2/service/dax/types": "service/dax",
+  "github.com/aws/aws-sdk-go-v2/service/detective": "service/detective",
+  "github.com/aws/aws-sdk-go-v2/service/detective/internal/endpoints": "service/detective",
+  "github.com/aws/aws-sdk-go-v2/service/detective/types": "service/detective",
+  "github.com/aws/aws-sdk-go-v2/service/devicefarm": "service/devicefarm",
+  "github.com/aws/aws-sdk-go-v2/service/devicefarm/internal/endpoints": "service/devicefarm",
+  "github.com/aws/aws-sdk-go-v2/service/devicefarm/types": "service/devicefarm",
+  "github.com/aws/aws-sdk-go-v2/service/directconnect": "service/directconnect",
+  "github.com/aws/aws-sdk-go-v2/service/directconnect/internal/endpoints": "service/directconnect",
+  "github.com/aws/aws-sdk-go-v2/service/directconnect/types": "service/directconnect",
+  "github.com/aws/aws-sdk-go-v2/service/directoryservice": "service/directoryservice",
+  "github.com/aws/aws-sdk-go-v2/service/directoryservice/internal/endpoints": "service/directoryservice",
+  "github.com/aws/aws-sdk-go-v2/service/directoryservice/types": "service/directoryservice",
+  "github.com/aws/aws-sdk-go-v2/service/dlm": "service/dlm",
+  "github.com/aws/aws-sdk-go-v2/service/dlm/internal/endpoints": "service/dlm",
+  "github.com/aws/aws-sdk-go-v2/service/dlm/types": "service/dlm",
+  "github.com/aws/aws-sdk-go-v2/service/docdb": "service/docdb",
+  "github.com/aws/aws-sdk-go-v2/service/docdb/internal/endpoints": "service/docdb",
+  "github.com/aws/aws-sdk-go-v2/service/docdb/types": "service/docdb",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodb": "service/dynamodb",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/customizations": "service/dynamodb",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodb/internal/endpoints": "service/dynamodb",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodb/types": "service/dynamodb",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodbstreams": "service/dynamodbstreams",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/internal/endpoints": "service/dynamodbstreams",
+  "github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types": "service/dynamodbstreams",
+  "github.com/aws/aws-sdk-go-v2/service/ebs": "service/ebs",
+  "github.com/aws/aws-sdk-go-v2/service/ebs/internal/endpoints": "service/ebs",
+  "github.com/aws/aws-sdk-go-v2/service/ebs/types": "service/ebs",
+  "github.com/aws/aws-sdk-go-v2/service/ec2": "service/ec2",
+  "github.com/aws/aws-sdk-go-v2/service/ec2/internal/endpoints": "service/ec2",
+  "github.com/aws/aws-sdk-go-v2/service/ec2/types": "service/ec2",
+  "github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect": "service/ec2instanceconnect",
+  "github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/internal/endpoints": "service/ec2instanceconnect",
+  "github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/types": "service/ec2instanceconnect",
+  "github.com/aws/aws-sdk-go-v2/service/ecr": "service/ecr",
+  "github.com/aws/aws-sdk-go-v2/service/ecr/internal/endpoints": "service/ecr",
+  "github.com/aws/aws-sdk-go-v2/service/ecr/types": "service/ecr",
+  "github.com/aws/aws-sdk-go-v2/service/ecs": "service/ecs",
+  "github.com/aws/aws-sdk-go-v2/service/ecs/internal/endpoints": "service/ecs",
+  "github.com/aws/aws-sdk-go-v2/service/ecs/types": "service/ecs",
+  "github.com/aws/aws-sdk-go-v2/service/efs": "service/efs",
+  "github.com/aws/aws-sdk-go-v2/service/efs/internal/endpoints": "service/efs",
+  "github.com/aws/aws-sdk-go-v2/service/efs/types": "service/efs",
+  "github.com/aws/aws-sdk-go-v2/service/eks": "service/eks",
+  "github.com/aws/aws-sdk-go-v2/service/eks/internal/endpoints": "service/eks",
+  "github.com/aws/aws-sdk-go-v2/service/eks/types": "service/eks",
+  "github.com/aws/aws-sdk-go-v2/service/elasticache": "service/elasticache",
+  "github.com/aws/aws-sdk-go-v2/service/elasticache/internal/endpoints": "service/elasticache",
+  "github.com/aws/aws-sdk-go-v2/service/elasticache/types": "service/elasticache",
+  "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk": "service/elasticbeanstalk",
+  "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/internal/endpoints": "service/elasticbeanstalk",
+  "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types": "service/elasticbeanstalk",
+  "github.com/aws/aws-sdk-go-v2/service/elasticinference": "service/elasticinference",
+  "github.com/aws/aws-sdk-go-v2/service/elasticinference/internal/endpoints": "service/elasticinference",
+  "github.com/aws/aws-sdk-go-v2/service/elasticinference/types": "service/elasticinference",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing": "service/elasticloadbalancing",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/internal/endpoints": "service/elasticloadbalancing",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types": "service/elasticloadbalancing",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2": "service/elasticloadbalancingv2",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/internal/endpoints": "service/elasticloadbalancingv2",
+  "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types": "service/elasticloadbalancingv2",
+  "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice": "service/elasticsearchservice",
+  "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/internal/endpoints": "service/elasticsearchservice",
+  "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types": "service/elasticsearchservice",
+  "github.com/aws/aws-sdk-go-v2/service/elastictranscoder": "service/elastictranscoder",
+  "github.com/aws/aws-sdk-go-v2/service/elastictranscoder/internal/endpoints": "service/elastictranscoder",
+  "github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types": "service/elastictranscoder",
+  "github.com/aws/aws-sdk-go-v2/service/emr": "service/emr",
+  "github.com/aws/aws-sdk-go-v2/service/emr/internal/endpoints": "service/emr",
+  "github.com/aws/aws-sdk-go-v2/service/emr/types": "service/emr",
+  "github.com/aws/aws-sdk-go-v2/service/eventbridge": "service/eventbridge",
+  "github.com/aws/aws-sdk-go-v2/service/eventbridge/internal/endpoints": "service/eventbridge",
+  "github.com/aws/aws-sdk-go-v2/service/eventbridge/types": "service/eventbridge",
+  "github.com/aws/aws-sdk-go-v2/service/firehose": "service/firehose",
+  "github.com/aws/aws-sdk-go-v2/service/firehose/internal/endpoints": "service/firehose",
+  "github.com/aws/aws-sdk-go-v2/service/firehose/types": "service/firehose",
+  "github.com/aws/aws-sdk-go-v2/service/fms": "service/fms",
+  "github.com/aws/aws-sdk-go-v2/service/fms/internal/endpoints": "service/fms",
+  "github.com/aws/aws-sdk-go-v2/service/fms/types": "service/fms",
+  "github.com/aws/aws-sdk-go-v2/service/forecast": "service/forecast",
+  "github.com/aws/aws-sdk-go-v2/service/forecast/internal/endpoints": "service/forecast",
+  "github.com/aws/aws-sdk-go-v2/service/forecast/types": "service/forecast",
+  "github.com/aws/aws-sdk-go-v2/service/forecastquery": "service/forecastquery",
+  "github.com/aws/aws-sdk-go-v2/service/forecastquery/internal/endpoints": "service/forecastquery",
+  "github.com/aws/aws-sdk-go-v2/service/forecastquery/types": "service/forecastquery",
+  "github.com/aws/aws-sdk-go-v2/service/frauddetector": "service/frauddetector",
+  "github.com/aws/aws-sdk-go-v2/service/frauddetector/internal/endpoints": "service/frauddetector",
+  "github.com/aws/aws-sdk-go-v2/service/frauddetector/types": "service/frauddetector",
+  "github.com/aws/aws-sdk-go-v2/service/fsx": "service/fsx",
+  "github.com/aws/aws-sdk-go-v2/service/fsx/internal/endpoints": "service/fsx",
+  "github.com/aws/aws-sdk-go-v2/service/fsx/types": "service/fsx",
+  "github.com/aws/aws-sdk-go-v2/service/gamelift": "service/gamelift",
+  "github.com/aws/aws-sdk-go-v2/service/gamelift/internal/endpoints": "service/gamelift",
+  "github.com/aws/aws-sdk-go-v2/service/gamelift/types": "service/gamelift",
+  "github.com/aws/aws-sdk-go-v2/service/glacier": "service/glacier",
+  "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations": "service/glacier",
+  "github.com/aws/aws-sdk-go-v2/service/glacier/internal/endpoints": "service/glacier",
+  "github.com/aws/aws-sdk-go-v2/service/glacier/types": "service/glacier",
+  "github.com/aws/aws-sdk-go-v2/service/globalaccelerator": "service/globalaccelerator",
+  "github.com/aws/aws-sdk-go-v2/service/globalaccelerator/internal/endpoints": "service/globalaccelerator",
+  "github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types": "service/globalaccelerator",
+  "github.com/aws/aws-sdk-go-v2/service/glue": "service/glue",
+  "github.com/aws/aws-sdk-go-v2/service/glue/internal/endpoints": "service/glue",
+  "github.com/aws/aws-sdk-go-v2/service/glue/types": "service/glue",
+  "github.com/aws/aws-sdk-go-v2/service/greengrass": "service/greengrass",
+  "github.com/aws/aws-sdk-go-v2/service/greengrass/internal/endpoints": "service/greengrass",
+  "github.com/aws/aws-sdk-go-v2/service/greengrass/types": "service/greengrass",
+  "github.com/aws/aws-sdk-go-v2/service/groundstation": "service/groundstation",
+  "github.com/aws/aws-sdk-go-v2/service/groundstation/internal/endpoints": "service/groundstation",
+  "github.com/aws/aws-sdk-go-v2/service/groundstation/types": "service/groundstation",
+  "github.com/aws/aws-sdk-go-v2/service/guardduty": "service/guardduty",
+  "github.com/aws/aws-sdk-go-v2/service/guardduty/internal/endpoints": "service/guardduty",
+  "github.com/aws/aws-sdk-go-v2/service/guardduty/types": "service/guardduty",
+  "github.com/aws/aws-sdk-go-v2/service/health": "service/health",
+  "github.com/aws/aws-sdk-go-v2/service/health/internal/endpoints": "service/health",
+  "github.com/aws/aws-sdk-go-v2/service/health/types": "service/health",
+  "github.com/aws/aws-sdk-go-v2/service/honeycode": "service/honeycode",
+  "github.com/aws/aws-sdk-go-v2/service/honeycode/internal/endpoints": "service/honeycode",
+  "github.com/aws/aws-sdk-go-v2/service/honeycode/types": "service/honeycode",
+  "github.com/aws/aws-sdk-go-v2/service/iam": "service/iam",
+  "github.com/aws/aws-sdk-go-v2/service/iam/internal/endpoints": "service/iam",
+  "github.com/aws/aws-sdk-go-v2/service/iam/types": "service/iam",
+  "github.com/aws/aws-sdk-go-v2/service/imagebuilder": "service/imagebuilder",
+  "github.com/aws/aws-sdk-go-v2/service/imagebuilder/internal/endpoints": "service/imagebuilder",
+  "github.com/aws/aws-sdk-go-v2/service/imagebuilder/types": "service/imagebuilder",
+  "github.com/aws/aws-sdk-go-v2/service/inspector": "service/inspector",
+  "github.com/aws/aws-sdk-go-v2/service/inspector/internal/endpoints": "service/inspector",
+  "github.com/aws/aws-sdk-go-v2/service/inspector/types": "service/inspector",
+  "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding": "service/internal/accept-encoding",
+  "github.com/aws/aws-sdk-go-v2/service/internal/benchmark/dynamodb": "service/internal/benchmark",
+  "github.com/aws/aws-sdk-go-v2/service/internal/benchmark/lexruntimeservice": "service/internal/benchmark",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/acm": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/apigateway": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/applicationautoscaling": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/applicationdiscoveryservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/appstream": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/athena": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/autoscaling": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/batch": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudformation": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudfront": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudhsmv2": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudsearch": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudtrail": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cloudwatch": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/codebuild": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/codecommit": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/codedeploy": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/codepipeline": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/codestar": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/cognitoidentityprovider": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/configservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/costandusagereportservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/databasemigrationservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/devicefarm": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/directconnect": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/directoryservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/docdb": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/dynamodb": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/ec2": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/ecr": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/ecs": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/efs": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elasticache": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elasticbeanstalk": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elasticloadbalancing": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elasticsearchservice": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elastictranscoder": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/elbv2": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/emr": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/eventbridge": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/firehose": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/gamelift": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/glacier": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/glue": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/health": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/iam": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/inspector": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/iot": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/kinesis": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/kms": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/lambda": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/lightsail": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/marketplacecommerceanalytics": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/neptune": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/opsworks": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/pinpointemail": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/polly": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/rds": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/redshift": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/rekognition": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/route53": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/route53domains": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/route53resolver": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/s3": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/secretsmanager": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/servicecatalog": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/ses": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/sfn": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/shield": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/sms": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/snowball": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/sns": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/sqs": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/ssm": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/sts": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/support": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/waf": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/wafregional": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/wafv2": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest/workspaces": "service/internal/integrationtest",
+  "github.com/aws/aws-sdk-go-v2/service/internal/s3shared": "service/internal/s3shared",
+  "github.com/aws/aws-sdk-go-v2/service/iot": "service/iot",
+  "github.com/aws/aws-sdk-go-v2/service/iot/internal/endpoints": "service/iot",
+  "github.com/aws/aws-sdk-go-v2/service/iot/types": "service/iot",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice": "service/iot1clickdevicesservice",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/internal/endpoints": "service/iot1clickdevicesservice",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice/types": "service/iot1clickdevicesservice",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects": "service/iot1clickprojects",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/internal/endpoints": "service/iot1clickprojects",
+  "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects/types": "service/iot1clickprojects",
+  "github.com/aws/aws-sdk-go-v2/service/iotanalytics": "service/iotanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/iotanalytics/internal/endpoints": "service/iotanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/iotanalytics/types": "service/iotanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/iotdataplane": "service/iotdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotdataplane/internal/endpoints": "service/iotdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotdataplane/types": "service/iotdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotevents": "service/iotevents",
+  "github.com/aws/aws-sdk-go-v2/service/iotevents/internal/endpoints": "service/iotevents",
+  "github.com/aws/aws-sdk-go-v2/service/iotevents/types": "service/iotevents",
+  "github.com/aws/aws-sdk-go-v2/service/ioteventsdata": "service/ioteventsdata",
+  "github.com/aws/aws-sdk-go-v2/service/ioteventsdata/internal/endpoints": "service/ioteventsdata",
+  "github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types": "service/ioteventsdata",
+  "github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane": "service/iotjobsdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/internal/endpoints": "service/iotjobsdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane/types": "service/iotjobsdataplane",
+  "github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling": "service/iotsecuretunneling",
+  "github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/internal/endpoints": "service/iotsecuretunneling",
+  "github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types": "service/iotsecuretunneling",
+  "github.com/aws/aws-sdk-go-v2/service/iotsitewise": "service/iotsitewise",
+  "github.com/aws/aws-sdk-go-v2/service/iotsitewise/internal/endpoints": "service/iotsitewise",
+  "github.com/aws/aws-sdk-go-v2/service/iotsitewise/types": "service/iotsitewise",
+  "github.com/aws/aws-sdk-go-v2/service/iotthingsgraph": "service/iotthingsgraph",
+  "github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/internal/endpoints": "service/iotthingsgraph",
+  "github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types": "service/iotthingsgraph",
+  "github.com/aws/aws-sdk-go-v2/service/ivs": "service/ivs",
+  "github.com/aws/aws-sdk-go-v2/service/ivs/internal/endpoints": "service/ivs",
+  "github.com/aws/aws-sdk-go-v2/service/ivs/types": "service/ivs",
+  "github.com/aws/aws-sdk-go-v2/service/kafka": "service/kafka",
+  "github.com/aws/aws-sdk-go-v2/service/kafka/internal/endpoints": "service/kafka",
+  "github.com/aws/aws-sdk-go-v2/service/kafka/types": "service/kafka",
+  "github.com/aws/aws-sdk-go-v2/service/kendra": "service/kendra",
+  "github.com/aws/aws-sdk-go-v2/service/kendra/internal/endpoints": "service/kendra",
+  "github.com/aws/aws-sdk-go-v2/service/kendra/types": "service/kendra",
+  "github.com/aws/aws-sdk-go-v2/service/kinesis": "service/kinesis",
+  "github.com/aws/aws-sdk-go-v2/service/kinesis/internal/endpoints": "service/kinesis",
+  "github.com/aws/aws-sdk-go-v2/service/kinesis/types": "service/kinesis",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalytics": "service/kinesisanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/internal/endpoints": "service/kinesisanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types": "service/kinesisanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2": "service/kinesisanalyticsv2",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/internal/endpoints": "service/kinesisanalyticsv2",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types": "service/kinesisanalyticsv2",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideo": "service/kinesisvideo",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideo/internal/endpoints": "service/kinesisvideo",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types": "service/kinesisvideo",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia": "service/kinesisvideoarchivedmedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/internal/endpoints": "service/kinesisvideoarchivedmedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types": "service/kinesisvideoarchivedmedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia": "service/kinesisvideomedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/internal/endpoints": "service/kinesisvideomedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia/types": "service/kinesisvideomedia",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling": "service/kinesisvideosignaling",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/internal/endpoints": "service/kinesisvideosignaling",
+  "github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/types": "service/kinesisvideosignaling",
+  "github.com/aws/aws-sdk-go-v2/service/kms": "service/kms",
+  "github.com/aws/aws-sdk-go-v2/service/kms/internal/endpoints": "service/kms",
+  "github.com/aws/aws-sdk-go-v2/service/kms/types": "service/kms",
+  "github.com/aws/aws-sdk-go-v2/service/lakeformation": "service/lakeformation",
+  "github.com/aws/aws-sdk-go-v2/service/lakeformation/internal/endpoints": "service/lakeformation",
+  "github.com/aws/aws-sdk-go-v2/service/lakeformation/types": "service/lakeformation",
+  "github.com/aws/aws-sdk-go-v2/service/lambda": "service/lambda",
+  "github.com/aws/aws-sdk-go-v2/service/lambda/internal/endpoints": "service/lambda",
+  "github.com/aws/aws-sdk-go-v2/service/lambda/types": "service/lambda",
+  "github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice": "service/lexmodelbuildingservice",
+  "github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/internal/endpoints": "service/lexmodelbuildingservice",
+  "github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types": "service/lexmodelbuildingservice",
+  "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice": "service/lexruntimeservice",
+  "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/internal/endpoints": "service/lexruntimeservice",
+  "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice/types": "service/lexruntimeservice",
+  "github.com/aws/aws-sdk-go-v2/service/licensemanager": "service/licensemanager",
+  "github.com/aws/aws-sdk-go-v2/service/licensemanager/internal/endpoints": "service/licensemanager",
+  "github.com/aws/aws-sdk-go-v2/service/licensemanager/types": "service/licensemanager",
+  "github.com/aws/aws-sdk-go-v2/service/lightsail": "service/lightsail",
+  "github.com/aws/aws-sdk-go-v2/service/lightsail/internal/endpoints": "service/lightsail",
+  "github.com/aws/aws-sdk-go-v2/service/lightsail/types": "service/lightsail",
+  "github.com/aws/aws-sdk-go-v2/service/machinelearning": "service/machinelearning",
+  "github.com/aws/aws-sdk-go-v2/service/machinelearning/internal/endpoints": "service/machinelearning",
+  "github.com/aws/aws-sdk-go-v2/service/machinelearning/types": "service/machinelearning",
+  "github.com/aws/aws-sdk-go-v2/service/macie": "service/macie",
+  "github.com/aws/aws-sdk-go-v2/service/macie/internal/endpoints": "service/macie",
+  "github.com/aws/aws-sdk-go-v2/service/macie/types": "service/macie",
+  "github.com/aws/aws-sdk-go-v2/service/macie2": "service/macie2",
+  "github.com/aws/aws-sdk-go-v2/service/macie2/internal/endpoints": "service/macie2",
+  "github.com/aws/aws-sdk-go-v2/service/macie2/types": "service/macie2",
+  "github.com/aws/aws-sdk-go-v2/service/managedblockchain": "service/managedblockchain",
+  "github.com/aws/aws-sdk-go-v2/service/managedblockchain/internal/endpoints": "service/managedblockchain",
+  "github.com/aws/aws-sdk-go-v2/service/managedblockchain/types": "service/managedblockchain",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog": "service/marketplacecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/internal/endpoints": "service/marketplacecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types": "service/marketplacecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics": "service/marketplacecommerceanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/internal/endpoints": "service/marketplacecommerceanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types": "service/marketplacecommerceanalytics",
+  "github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice": "service/marketplaceentitlementservice",
+  "github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/internal/endpoints": "service/marketplaceentitlementservice",
+  "github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types": "service/marketplaceentitlementservice",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacemetering": "service/marketplacemetering",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacemetering/internal/endpoints": "service/marketplacemetering",
+  "github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types": "service/marketplacemetering",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconnect": "service/mediaconnect",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconnect/internal/endpoints": "service/mediaconnect",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconnect/types": "service/mediaconnect",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconvert": "service/mediaconvert",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconvert/internal/endpoints": "service/mediaconvert",
+  "github.com/aws/aws-sdk-go-v2/service/mediaconvert/types": "service/mediaconvert",
+  "github.com/aws/aws-sdk-go-v2/service/medialive": "service/medialive",
+  "github.com/aws/aws-sdk-go-v2/service/medialive/internal/endpoints": "service/medialive",
+  "github.com/aws/aws-sdk-go-v2/service/medialive/types": "service/medialive",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackage": "service/mediapackage",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackage/internal/endpoints": "service/mediapackage",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackage/types": "service/mediapackage",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackagevod": "service/mediapackagevod",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackagevod/internal/endpoints": "service/mediapackagevod",
+  "github.com/aws/aws-sdk-go-v2/service/mediapackagevod/types": "service/mediapackagevod",
+  "github.com/aws/aws-sdk-go-v2/service/mediastore": "service/mediastore",
+  "github.com/aws/aws-sdk-go-v2/service/mediastore/internal/endpoints": "service/mediastore",
+  "github.com/aws/aws-sdk-go-v2/service/mediastore/types": "service/mediastore",
+  "github.com/aws/aws-sdk-go-v2/service/mediastoredata": "service/mediastoredata",
+  "github.com/aws/aws-sdk-go-v2/service/mediastoredata/internal/endpoints": "service/mediastoredata",
+  "github.com/aws/aws-sdk-go-v2/service/mediastoredata/types": "service/mediastoredata",
+  "github.com/aws/aws-sdk-go-v2/service/mediatailor": "service/mediatailor",
+  "github.com/aws/aws-sdk-go-v2/service/mediatailor/internal/endpoints": "service/mediatailor",
+  "github.com/aws/aws-sdk-go-v2/service/mediatailor/types": "service/mediatailor",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhub": "service/migrationhub",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhub/internal/endpoints": "service/migrationhub",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhub/types": "service/migrationhub",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhubconfig": "service/migrationhubconfig",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/internal/endpoints": "service/migrationhubconfig",
+  "github.com/aws/aws-sdk-go-v2/service/migrationhubconfig/types": "service/migrationhubconfig",
+  "github.com/aws/aws-sdk-go-v2/service/mobile": "service/mobile",
+  "github.com/aws/aws-sdk-go-v2/service/mobile/internal/endpoints": "service/mobile",
+  "github.com/aws/aws-sdk-go-v2/service/mobile/types": "service/mobile",
+  "github.com/aws/aws-sdk-go-v2/service/mq": "service/mq",
+  "github.com/aws/aws-sdk-go-v2/service/mq/internal/endpoints": "service/mq",
+  "github.com/aws/aws-sdk-go-v2/service/mq/types": "service/mq",
+  "github.com/aws/aws-sdk-go-v2/service/mturk": "service/mturk",
+  "github.com/aws/aws-sdk-go-v2/service/mturk/internal/endpoints": "service/mturk",
+  "github.com/aws/aws-sdk-go-v2/service/mturk/types": "service/mturk",
+  "github.com/aws/aws-sdk-go-v2/service/neptune": "service/neptune",
+  "github.com/aws/aws-sdk-go-v2/service/neptune/internal/endpoints": "service/neptune",
+  "github.com/aws/aws-sdk-go-v2/service/neptune/types": "service/neptune",
+  "github.com/aws/aws-sdk-go-v2/service/networkmanager": "service/networkmanager",
+  "github.com/aws/aws-sdk-go-v2/service/networkmanager/internal/endpoints": "service/networkmanager",
+  "github.com/aws/aws-sdk-go-v2/service/networkmanager/types": "service/networkmanager",
+  "github.com/aws/aws-sdk-go-v2/service/opsworks": "service/opsworks",
+  "github.com/aws/aws-sdk-go-v2/service/opsworks/internal/endpoints": "service/opsworks",
+  "github.com/aws/aws-sdk-go-v2/service/opsworks/types": "service/opsworks",
+  "github.com/aws/aws-sdk-go-v2/service/opsworkscm": "service/opsworkscm",
+  "github.com/aws/aws-sdk-go-v2/service/opsworkscm/internal/endpoints": "service/opsworkscm",
+  "github.com/aws/aws-sdk-go-v2/service/opsworkscm/types": "service/opsworkscm",
+  "github.com/aws/aws-sdk-go-v2/service/organizations": "service/organizations",
+  "github.com/aws/aws-sdk-go-v2/service/organizations/internal/endpoints": "service/organizations",
+  "github.com/aws/aws-sdk-go-v2/service/organizations/types": "service/organizations",
+  "github.com/aws/aws-sdk-go-v2/service/outposts": "service/outposts",
+  "github.com/aws/aws-sdk-go-v2/service/outposts/internal/endpoints": "service/outposts",
+  "github.com/aws/aws-sdk-go-v2/service/outposts/types": "service/outposts",
+  "github.com/aws/aws-sdk-go-v2/service/personalize": "service/personalize",
+  "github.com/aws/aws-sdk-go-v2/service/personalize/internal/endpoints": "service/personalize",
+  "github.com/aws/aws-sdk-go-v2/service/personalize/types": "service/personalize",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeevents": "service/personalizeevents",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeevents/internal/endpoints": "service/personalizeevents",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeevents/types": "service/personalizeevents",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeruntime": "service/personalizeruntime",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeruntime/internal/endpoints": "service/personalizeruntime",
+  "github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types": "service/personalizeruntime",
+  "github.com/aws/aws-sdk-go-v2/service/pi": "service/pi",
+  "github.com/aws/aws-sdk-go-v2/service/pi/internal/endpoints": "service/pi",
+  "github.com/aws/aws-sdk-go-v2/service/pi/types": "service/pi",
+  "github.com/aws/aws-sdk-go-v2/service/pinpoint": "service/pinpoint",
+  "github.com/aws/aws-sdk-go-v2/service/pinpoint/internal/endpoints": "service/pinpoint",
+  "github.com/aws/aws-sdk-go-v2/service/pinpoint/types": "service/pinpoint",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointemail": "service/pinpointemail",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointemail/internal/endpoints": "service/pinpointemail",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointemail/types": "service/pinpointemail",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice": "service/pinpointsmsvoice",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/internal/endpoints": "service/pinpointsmsvoice",
+  "github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice/types": "service/pinpointsmsvoice",
+  "github.com/aws/aws-sdk-go-v2/service/polly": "service/polly",
+  "github.com/aws/aws-sdk-go-v2/service/polly/internal/endpoints": "service/polly",
+  "github.com/aws/aws-sdk-go-v2/service/polly/types": "service/polly",
+  "github.com/aws/aws-sdk-go-v2/service/pricing": "service/pricing",
+  "github.com/aws/aws-sdk-go-v2/service/pricing/internal/endpoints": "service/pricing",
+  "github.com/aws/aws-sdk-go-v2/service/pricing/types": "service/pricing",
+  "github.com/aws/aws-sdk-go-v2/service/qldb": "service/qldb",
+  "github.com/aws/aws-sdk-go-v2/service/qldb/internal/endpoints": "service/qldb",
+  "github.com/aws/aws-sdk-go-v2/service/qldb/types": "service/qldb",
+  "github.com/aws/aws-sdk-go-v2/service/qldbsession": "service/qldbsession",
+  "github.com/aws/aws-sdk-go-v2/service/qldbsession/internal/endpoints": "service/qldbsession",
+  "github.com/aws/aws-sdk-go-v2/service/qldbsession/types": "service/qldbsession",
+  "github.com/aws/aws-sdk-go-v2/service/quicksight": "service/quicksight",
+  "github.com/aws/aws-sdk-go-v2/service/quicksight/internal/endpoints": "service/quicksight",
+  "github.com/aws/aws-sdk-go-v2/service/quicksight/types": "service/quicksight",
+  "github.com/aws/aws-sdk-go-v2/service/ram": "service/ram",
+  "github.com/aws/aws-sdk-go-v2/service/ram/internal/endpoints": "service/ram",
+  "github.com/aws/aws-sdk-go-v2/service/ram/types": "service/ram",
+  "github.com/aws/aws-sdk-go-v2/service/rds": "service/rds",
+  "github.com/aws/aws-sdk-go-v2/service/rds/internal/endpoints": "service/rds",
+  "github.com/aws/aws-sdk-go-v2/service/rds/types": "service/rds",
+  "github.com/aws/aws-sdk-go-v2/service/rdsdata": "service/rdsdata",
+  "github.com/aws/aws-sdk-go-v2/service/rdsdata/internal/endpoints": "service/rdsdata",
+  "github.com/aws/aws-sdk-go-v2/service/rdsdata/types": "service/rdsdata",
+  "github.com/aws/aws-sdk-go-v2/service/redshift": "service/redshift",
+  "github.com/aws/aws-sdk-go-v2/service/redshift/internal/endpoints": "service/redshift",
+  "github.com/aws/aws-sdk-go-v2/service/redshift/types": "service/redshift",
+  "github.com/aws/aws-sdk-go-v2/service/rekognition": "service/rekognition",
+  "github.com/aws/aws-sdk-go-v2/service/rekognition/internal/endpoints": "service/rekognition",
+  "github.com/aws/aws-sdk-go-v2/service/rekognition/types": "service/rekognition",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroups": "service/resourcegroups",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroups/internal/endpoints": "service/resourcegroups",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroups/types": "service/resourcegroups",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi": "service/resourcegroupstaggingapi",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/internal/endpoints": "service/resourcegroupstaggingapi",
+  "github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi/types": "service/resourcegroupstaggingapi",
+  "github.com/aws/aws-sdk-go-v2/service/robomaker": "service/robomaker",
+  "github.com/aws/aws-sdk-go-v2/service/robomaker/internal/endpoints": "service/robomaker",
+  "github.com/aws/aws-sdk-go-v2/service/robomaker/types": "service/robomaker",
+  "github.com/aws/aws-sdk-go-v2/service/route53": "service/route53",
+  "github.com/aws/aws-sdk-go-v2/service/route53/internal/endpoints": "service/route53",
+  "github.com/aws/aws-sdk-go-v2/service/route53/types": "service/route53",
+  "github.com/aws/aws-sdk-go-v2/service/route53domains": "service/route53domains",
+  "github.com/aws/aws-sdk-go-v2/service/route53domains/internal/endpoints": "service/route53domains",
+  "github.com/aws/aws-sdk-go-v2/service/route53domains/types": "service/route53domains",
+  "github.com/aws/aws-sdk-go-v2/service/route53resolver": "service/route53resolver",
+  "github.com/aws/aws-sdk-go-v2/service/route53resolver/internal/endpoints": "service/route53resolver",
+  "github.com/aws/aws-sdk-go-v2/service/route53resolver/types": "service/route53resolver",
+  "github.com/aws/aws-sdk-go-v2/service/s3": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/arn": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting": "service/s3/internal/configtesting",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/external": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/internal/s3testing": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3/types": "service/s3",
+  "github.com/aws/aws-sdk-go-v2/service/s3control": "service/s3control",
+  "github.com/aws/aws-sdk-go-v2/service/s3control/internal/endpoints": "service/s3control",
+  "github.com/aws/aws-sdk-go-v2/service/s3control/types": "service/s3control",
+  "github.com/aws/aws-sdk-go-v2/service/sagemaker": "service/sagemaker",
+  "github.com/aws/aws-sdk-go-v2/service/sagemaker/internal/endpoints": "service/sagemaker",
+  "github.com/aws/aws-sdk-go-v2/service/sagemaker/types": "service/sagemaker",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime": "service/sagemakera2iruntime",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/internal/endpoints": "service/sagemakera2iruntime",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime/types": "service/sagemakera2iruntime",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakerruntime": "service/sagemakerruntime",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/internal/endpoints": "service/sagemakerruntime",
+  "github.com/aws/aws-sdk-go-v2/service/sagemakerruntime/types": "service/sagemakerruntime",
+  "github.com/aws/aws-sdk-go-v2/service/savingsplans": "service/savingsplans",
+  "github.com/aws/aws-sdk-go-v2/service/savingsplans/internal/endpoints": "service/savingsplans",
+  "github.com/aws/aws-sdk-go-v2/service/savingsplans/types": "service/savingsplans",
+  "github.com/aws/aws-sdk-go-v2/service/schemas": "service/schemas",
+  "github.com/aws/aws-sdk-go-v2/service/schemas/internal/endpoints": "service/schemas",
+  "github.com/aws/aws-sdk-go-v2/service/schemas/types": "service/schemas",
+  "github.com/aws/aws-sdk-go-v2/service/secretsmanager": "service/secretsmanager",
+  "github.com/aws/aws-sdk-go-v2/service/secretsmanager/internal/endpoints": "service/secretsmanager",
+  "github.com/aws/aws-sdk-go-v2/service/secretsmanager/types": "service/secretsmanager",
+  "github.com/aws/aws-sdk-go-v2/service/securityhub": "service/securityhub",
+  "github.com/aws/aws-sdk-go-v2/service/securityhub/internal/endpoints": "service/securityhub",
+  "github.com/aws/aws-sdk-go-v2/service/securityhub/types": "service/securityhub",
+  "github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository": "service/serverlessapplicationrepository",
+  "github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/internal/endpoints": "service/serverlessapplicationrepository",
+  "github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types": "service/serverlessapplicationrepository",
+  "github.com/aws/aws-sdk-go-v2/service/servicecatalog": "service/servicecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/servicecatalog/internal/endpoints": "service/servicecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/servicecatalog/types": "service/servicecatalog",
+  "github.com/aws/aws-sdk-go-v2/service/servicediscovery": "service/servicediscovery",
+  "github.com/aws/aws-sdk-go-v2/service/servicediscovery/internal/endpoints": "service/servicediscovery",
+  "github.com/aws/aws-sdk-go-v2/service/servicediscovery/types": "service/servicediscovery",
+  "github.com/aws/aws-sdk-go-v2/service/servicequotas": "service/servicequotas",
+  "github.com/aws/aws-sdk-go-v2/service/servicequotas/internal/endpoints": "service/servicequotas",
+  "github.com/aws/aws-sdk-go-v2/service/servicequotas/types": "service/servicequotas",
+  "github.com/aws/aws-sdk-go-v2/service/ses": "service/ses",
+  "github.com/aws/aws-sdk-go-v2/service/ses/internal/endpoints": "service/ses",
+  "github.com/aws/aws-sdk-go-v2/service/ses/types": "service/ses",
+  "github.com/aws/aws-sdk-go-v2/service/sesv2": "service/sesv2",
+  "github.com/aws/aws-sdk-go-v2/service/sesv2/internal/endpoints": "service/sesv2",
+  "github.com/aws/aws-sdk-go-v2/service/sesv2/types": "service/sesv2",
+  "github.com/aws/aws-sdk-go-v2/service/sfn": "service/sfn",
+  "github.com/aws/aws-sdk-go-v2/service/sfn/internal/endpoints": "service/sfn",
+  "github.com/aws/aws-sdk-go-v2/service/sfn/types": "service/sfn",
+  "github.com/aws/aws-sdk-go-v2/service/shield": "service/shield",
+  "github.com/aws/aws-sdk-go-v2/service/shield/internal/endpoints": "service/shield",
+  "github.com/aws/aws-sdk-go-v2/service/shield/types": "service/shield",
+  "github.com/aws/aws-sdk-go-v2/service/signer": "service/signer",
+  "github.com/aws/aws-sdk-go-v2/service/signer/internal/endpoints": "service/signer",
+  "github.com/aws/aws-sdk-go-v2/service/signer/types": "service/signer",
+  "github.com/aws/aws-sdk-go-v2/service/sms": "service/sms",
+  "github.com/aws/aws-sdk-go-v2/service/sms/internal/endpoints": "service/sms",
+  "github.com/aws/aws-sdk-go-v2/service/sms/types": "service/sms",
+  "github.com/aws/aws-sdk-go-v2/service/snowball": "service/snowball",
+  "github.com/aws/aws-sdk-go-v2/service/snowball/internal/endpoints": "service/snowball",
+  "github.com/aws/aws-sdk-go-v2/service/snowball/types": "service/snowball",
+  "github.com/aws/aws-sdk-go-v2/service/sns": "service/sns",
+  "github.com/aws/aws-sdk-go-v2/service/sns/internal/endpoints": "service/sns",
+  "github.com/aws/aws-sdk-go-v2/service/sns/types": "service/sns",
+  "github.com/aws/aws-sdk-go-v2/service/sqs": "service/sqs",
+  "github.com/aws/aws-sdk-go-v2/service/sqs/internal/endpoints": "service/sqs",
+  "github.com/aws/aws-sdk-go-v2/service/sqs/types": "service/sqs",
+  "github.com/aws/aws-sdk-go-v2/service/ssm": "service/ssm",
+  "github.com/aws/aws-sdk-go-v2/service/ssm/internal/endpoints": "service/ssm",
+  "github.com/aws/aws-sdk-go-v2/service/ssm/types": "service/ssm",
+  "github.com/aws/aws-sdk-go-v2/service/sso": "service/sso",
+  "github.com/aws/aws-sdk-go-v2/service/sso/internal/endpoints": "service/sso",
+  "github.com/aws/aws-sdk-go-v2/service/sso/types": "service/sso",
+  "github.com/aws/aws-sdk-go-v2/service/ssooidc": "service/ssooidc",
+  "github.com/aws/aws-sdk-go-v2/service/ssooidc/internal/endpoints": "service/ssooidc",
+  "github.com/aws/aws-sdk-go-v2/service/ssooidc/types": "service/ssooidc",
+  "github.com/aws/aws-sdk-go-v2/service/storagegateway": "service/storagegateway",
+  "github.com/aws/aws-sdk-go-v2/service/storagegateway/internal/endpoints": "service/storagegateway",
+  "github.com/aws/aws-sdk-go-v2/service/storagegateway/types": "service/storagegateway",
+  "github.com/aws/aws-sdk-go-v2/service/sts": "service/sts",
+  "github.com/aws/aws-sdk-go-v2/service/sts/internal/endpoints": "service/sts",
+  "github.com/aws/aws-sdk-go-v2/service/sts/types": "service/sts",
+  "github.com/aws/aws-sdk-go-v2/service/support": "service/support",
+  "github.com/aws/aws-sdk-go-v2/service/support/internal/endpoints": "service/support",
+  "github.com/aws/aws-sdk-go-v2/service/support/types": "service/support",
+  "github.com/aws/aws-sdk-go-v2/service/swf": "service/swf",
+  "github.com/aws/aws-sdk-go-v2/service/swf/internal/endpoints": "service/swf",
+  "github.com/aws/aws-sdk-go-v2/service/swf/types": "service/swf",
+  "github.com/aws/aws-sdk-go-v2/service/synthetics": "service/synthetics",
+  "github.com/aws/aws-sdk-go-v2/service/synthetics/internal/endpoints": "service/synthetics",
+  "github.com/aws/aws-sdk-go-v2/service/synthetics/types": "service/synthetics",
+  "github.com/aws/aws-sdk-go-v2/service/textract": "service/textract",
+  "github.com/aws/aws-sdk-go-v2/service/textract/internal/endpoints": "service/textract",
+  "github.com/aws/aws-sdk-go-v2/service/textract/types": "service/textract",
+  "github.com/aws/aws-sdk-go-v2/service/transcribe": "service/transcribe",
+  "github.com/aws/aws-sdk-go-v2/service/transcribe/internal/endpoints": "service/transcribe",
+  "github.com/aws/aws-sdk-go-v2/service/transcribe/types": "service/transcribe",
+  "github.com/aws/aws-sdk-go-v2/service/transfer": "service/transfer",
+  "github.com/aws/aws-sdk-go-v2/service/transfer/internal/endpoints": "service/transfer",
+  "github.com/aws/aws-sdk-go-v2/service/transfer/types": "service/transfer",
+  "github.com/aws/aws-sdk-go-v2/service/translate": "service/translate",
+  "github.com/aws/aws-sdk-go-v2/service/translate/internal/endpoints": "service/translate",
+  "github.com/aws/aws-sdk-go-v2/service/translate/types": "service/translate",
+  "github.com/aws/aws-sdk-go-v2/service/waf": "service/waf",
+  "github.com/aws/aws-sdk-go-v2/service/waf/internal/endpoints": "service/waf",
+  "github.com/aws/aws-sdk-go-v2/service/waf/types": "service/waf",
+  "github.com/aws/aws-sdk-go-v2/service/wafregional": "service/wafregional",
+  "github.com/aws/aws-sdk-go-v2/service/wafregional/internal/endpoints": "service/wafregional",
+  "github.com/aws/aws-sdk-go-v2/service/wafregional/types": "service/wafregional",
+  "github.com/aws/aws-sdk-go-v2/service/wafv2": "service/wafv2",
+  "github.com/aws/aws-sdk-go-v2/service/wafv2/internal/endpoints": "service/wafv2",
+  "github.com/aws/aws-sdk-go-v2/service/wafv2/types": "service/wafv2",
+  "github.com/aws/aws-sdk-go-v2/service/workdocs": "service/workdocs",
+  "github.com/aws/aws-sdk-go-v2/service/workdocs/internal/endpoints": "service/workdocs",
+  "github.com/aws/aws-sdk-go-v2/service/workdocs/types": "service/workdocs",
+  "github.com/aws/aws-sdk-go-v2/service/worklink": "service/worklink",
+  "github.com/aws/aws-sdk-go-v2/service/worklink/internal/endpoints": "service/worklink",
+  "github.com/aws/aws-sdk-go-v2/service/worklink/types": "service/worklink",
+  "github.com/aws/aws-sdk-go-v2/service/workmail": "service/workmail",
+  "github.com/aws/aws-sdk-go-v2/service/workmail/internal/endpoints": "service/workmail",
+  "github.com/aws/aws-sdk-go-v2/service/workmail/types": "service/workmail",
+  "github.com/aws/aws-sdk-go-v2/service/workmailmessageflow": "service/workmailmessageflow",
+  "github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/internal/endpoints": "service/workmailmessageflow",
+  "github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/types": "service/workmailmessageflow",
+  "github.com/aws/aws-sdk-go-v2/service/workspaces": "service/workspaces",
+  "github.com/aws/aws-sdk-go-v2/service/workspaces/internal/endpoints": "service/workspaces",
+  "github.com/aws/aws-sdk-go-v2/service/workspaces/types": "service/workspaces",
+  "github.com/aws/aws-sdk-go-v2/service/xray": "service/xray",
+  "github.com/aws/aws-sdk-go-v2/service/xray/internal/endpoints": "service/xray",
+  "github.com/aws/aws-sdk-go-v2/service/xray/types": "service/xray"
+ }
 }

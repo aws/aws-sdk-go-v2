@@ -1,9 +1,0 @@
-{
- "ID": "sdk-feature-1601512515295528000",
- "SchemaVersion": 1,
- "Module": "/",
- "Type": "feature",
- "Description": "preview refresh",
- "MinVersion": "",
- "AffectedModules": null
-}
